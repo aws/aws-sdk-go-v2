@@ -14,7 +14,7 @@ import (
 )
 
 // Retrieves the device position history from a tracker resource within a specified
-// range of time. Device positions are deleted after 1 year.
+// range of time. Device positions are deleted after 30 days.
 func (c *Client) GetDevicePositionHistory(ctx context.Context, params *GetDevicePositionHistoryInput, optFns ...func(*Options)) (*GetDevicePositionHistoryOutput, error) {
 	if params == nil {
 		params = &GetDevicePositionHistoryInput{}

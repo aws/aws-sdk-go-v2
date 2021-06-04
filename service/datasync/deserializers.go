@@ -4771,6 +4771,15 @@ func awsAwsjson11_deserializeDocumentOptions(v **types.Options, value interface{
 				sv.PreserveDevices = types.PreserveDevices(jtv)
 			}
 
+		case "SecurityDescriptorCopyFlags":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SmbSecurityDescriptorCopyFlags to be of type string, got %T instead", value)
+				}
+				sv.SecurityDescriptorCopyFlags = types.SmbSecurityDescriptorCopyFlags(jtv)
+			}
+
 		case "TaskQueueing":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -583,9 +583,12 @@ type DataSourceSyncJobMetricTarget struct {
 	// This member is required.
 	DataSourceId *string
 
-	// The ID of the sync job that is running on the data source.
-	//
-	// This member is required.
+	// The ID of the sync job that is running on the data source. If the ID of a sync
+	// job is not provided and there is a sync job running, then the ID of this sync
+	// job is used and metrics are generated for this sync job. If the ID of a sync job
+	// is not provided and there is no sync job running, then no metrics are generated
+	// and documents are indexed/deleted at the index level without sync job metrics
+	// included.
 	DataSourceSyncJobId *string
 }
 
@@ -1112,6 +1115,33 @@ type QueryResultItem struct {
 	Type QueryResultType
 }
 
+// Summary information on a query suggestions block list. This includes information
+// on the block list ID, block list name, when the block list was created, when the
+// block list was last updated, and the count of block words/phrases in the block
+// list. For information on the current quota limits for block lists, see Quotas
+// for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
+type QuerySuggestionsBlockListSummary struct {
+
+	// The date-time summary information for a query suggestions block list was last
+	// created.
+	CreatedAt *time.Time
+
+	// The identifier of a block list.
+	Id *string
+
+	// The number of items in the block list file.
+	ItemCount *int32
+
+	// The name of the block list.
+	Name *string
+
+	// The status of the block list.
+	Status QuerySuggestionsBlockListStatus
+
+	// The date-time the block list was last updated.
+	UpdatedAt *time.Time
+}
+
 // Provides information for manually tuning the relevance of a field in a search.
 // When a query includes terms that match the field, the results are given a boost
 // in the response based on these tuning parameters.
@@ -1192,15 +1222,35 @@ type S3DataSourceConfiguration struct {
 
 	// A list of glob patterns for documents that should not be indexed. If a document
 	// that matches an inclusion prefix or inclusion pattern also matches an exclusion
-	// pattern, the document is not indexed. For more information about glob patterns,
-	// see glob (programming) (https://en.wikipedia.org/wiki/Glob_(programming)) in
-	// Wikipedia.
+	// pattern, the document is not indexed. Some examples
+	// (https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters)
+	// are:
+	//
+	// * *.png , *.jpg will exclude all PNG and JPEG image files in a directory
+	// (files with the extensions .png and .jpg).
+	//
+	// * *internal* will exclude all files
+	// in a directory that contain 'internal' in the file name, such as 'internal',
+	// 'internal_only', 'company_internal'.
+	//
+	// * **/*internal* will exclude all
+	// internal-related files in a directory and its subdirectories.
 	ExclusionPatterns []string
 
 	// A list of glob patterns for documents that should be indexed. If a document that
 	// matches an inclusion pattern also matches an exclusion pattern, the document is
-	// not indexed. For more information about glob patterns, see glob (programming)
-	// (https://en.wikipedia.org/wiki/Glob_(programming)) in Wikipedia.
+	// not indexed. Some examples
+	// (https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters)
+	// are:
+	//
+	// * *.txt will include all text files in a directory (files with the
+	// extension .txt).
+	//
+	// * **/*.txt will include all text files in a directory and its
+	// subdirectories.
+	//
+	// * *tax* will include all files in a directory that contain
+	// 'tax' in the file name, such as 'tax', 'taxes', 'income_tax'.
 	InclusionPatterns []string
 
 	// A list of S3 prefixes for the documents that should be included in the index.
@@ -1232,7 +1282,7 @@ type SalesforceChatterFeedConfiguration struct {
 	DocumentDataFieldName *string
 
 	// The name of the column in the Salesforce FeedItem table that contains the title
-	// of the document. This is typically the Title collumn.
+	// of the document. This is typically the Title column.
 	DocumentTitleFieldName *string
 
 	// Maps fields from a Salesforce chatter feed into Amazon Kendra index fields.
@@ -1694,6 +1744,46 @@ type SqlConfiguration struct {
 	// For MySQL databases, you must enable the ansi_quotes option when you set this
 	// field to DOUBLE_QUOTES.
 	QueryIdentifiersEnclosingOption QueryIdentifiersEnclosingOption
+}
+
+// A single query suggestion.
+type Suggestion struct {
+
+	// The unique UUID (universally unique identifier) of a single query suggestion.
+	Id *string
+
+	// The value for the unique UUID (universally unique identifier) of a single query
+	// suggestion. The value is the text string of a suggestion.
+	Value *SuggestionValue
+}
+
+// The text highlights for a single query suggestion.
+type SuggestionHighlight struct {
+
+	// The zero-based location in the response string where the highlight starts.
+	BeginOffset *int32
+
+	// The zero-based location in the response string where the highlight ends.
+	EndOffset *int32
+}
+
+// Provides text and information about where to highlight the query suggestion
+// text.
+type SuggestionTextWithHighlights struct {
+
+	// The beginning and end of the query suggestion text that should be highlighted.
+	Highlights []SuggestionHighlight
+
+	// The query suggestion text to display to the user.
+	Text *string
+}
+
+// The SuggestionTextWithHighlights structure information.
+type SuggestionValue struct {
+
+	// The SuggestionTextWithHighlights structure that contains the query suggestion
+	// text and highlights.
+	Text *SuggestionTextWithHighlights
 }
 
 // A list of key/value pairs that identify an index, FAQ, or data source. Tag keys

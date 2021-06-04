@@ -2,6 +2,28 @@
 
 package types
 
+type AlarmModelVersionStatus string
+
+// Enum values for AlarmModelVersionStatus
+const (
+	AlarmModelVersionStatusActive     AlarmModelVersionStatus = "ACTIVE"
+	AlarmModelVersionStatusActivating AlarmModelVersionStatus = "ACTIVATING"
+	AlarmModelVersionStatusInactive   AlarmModelVersionStatus = "INACTIVE"
+	AlarmModelVersionStatusFailed     AlarmModelVersionStatus = "FAILED"
+)
+
+// Values returns all known values for AlarmModelVersionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AlarmModelVersionStatus) Values() []AlarmModelVersionStatus {
+	return []AlarmModelVersionStatus{
+		"ACTIVE",
+		"ACTIVATING",
+		"INACTIVE",
+		"FAILED",
+	}
+}
+
 type AnalysisResultLevel string
 
 // Enum values for AnalysisResultLevel
@@ -39,6 +61,32 @@ func (AnalysisStatus) Values() []AnalysisStatus {
 		"RUNNING",
 		"COMPLETE",
 		"FAILED",
+	}
+}
+
+type ComparisonOperator string
+
+// Enum values for ComparisonOperator
+const (
+	ComparisonOperatorGreater        ComparisonOperator = "GREATER"
+	ComparisonOperatorGreaterOrEqual ComparisonOperator = "GREATER_OR_EQUAL"
+	ComparisonOperatorLess           ComparisonOperator = "LESS"
+	ComparisonOperatorLessOrEqual    ComparisonOperator = "LESS_OR_EQUAL"
+	ComparisonOperatorEqual          ComparisonOperator = "EQUAL"
+	ComparisonOperatorNotEqual       ComparisonOperator = "NOT_EQUAL"
+)
+
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"GREATER",
+		"GREATER_OR_EQUAL",
+		"LESS",
+		"LESS_OR_EQUAL",
+		"EQUAL",
+		"NOT_EQUAL",
 	}
 }
 

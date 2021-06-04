@@ -72,12 +72,16 @@ type CreateTaskInput struct {
 	// these options to preserve metadata such as user ID (UID) and group ID (GID),
 	// file permissions, data integrity verification, and so on. For each individual
 	// task execution, you can override these options by specifying the OverrideOptions
-	// before starting the task execution. For more information, see the operation.
+	// before starting the task execution. For more information, see the
+	// StartTaskExecution
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
+	// operation.
 	Options *types.Options
 
 	// Specifies a schedule used to periodically transfer files from a source to a
 	// destination location. The schedule should be specified in UTC time. For more
-	// information, see task-scheduling.
+	// information, see Scheduling your task
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html).
 	Schedule *types.TaskSchedule
 
 	// The key-value pair that represents the tag that you want to add to the resource.

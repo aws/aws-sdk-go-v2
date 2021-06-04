@@ -39,7 +39,26 @@ type CreateLedgerInput struct {
 	// This member is required.
 	Name *string
 
-	// The permissions mode to assign to the ledger that you want to create.
+	// The permissions mode to assign to the ledger that you want to create. This
+	// parameter can have one of the following values:
+	//
+	// * ALLOW_ALL: A legacy
+	// permissions mode that enables access control with API-level granularity for
+	// ledgers. This mode allows users who have SendCommand permissions for this ledger
+	// to run all PartiQL commands (hence, ALLOW_ALL) on any tables in the specified
+	// ledger. This mode disregards any table-level or command-level IAM permissions
+	// policies that you create for the ledger.
+	//
+	// * STANDARD: (Recommended) A
+	// permissions mode that enables access control with finer granularity for ledgers,
+	// tables, and PartiQL commands. By default, this mode denies all user requests to
+	// run any PartiQL commands on any tables in this ledger. To allow PartiQL commands
+	// to run, you must create IAM permissions policies for specific table resources
+	// and PartiQL actions, in addition to SendCommand API permissions for the
+	// ledger.
+	//
+	// We strongly recommend using the STANDARD permissions mode to maximize
+	// the security of your ledger data.
 	//
 	// This member is required.
 	PermissionsMode types.PermissionsMode
@@ -79,6 +98,9 @@ type CreateLedgerOutput struct {
 
 	// The name of the ledger.
 	Name *string
+
+	// The permissions mode of the ledger that you created.
+	PermissionsMode types.PermissionsMode
 
 	// The current status of the ledger.
 	State types.LedgerState

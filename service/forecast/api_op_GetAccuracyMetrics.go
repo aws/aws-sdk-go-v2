@@ -51,6 +51,11 @@ type GetAccuracyMetricsInput struct {
 
 type GetAccuracyMetricsOutput struct {
 
+	// The AutoML strategy used to train the predictor. Unless LatencyOptimized is
+	// specified, the AutoML strategy optimizes predictor accuracy. This parameter is
+	// only valid for predictors trained using AutoML.
+	AutoMLOverrideStrategy types.AutoMLOverrideStrategy
+
 	// An array of results from evaluating the predictor.
 	PredictorEvaluationResults []types.EvaluationResult
 

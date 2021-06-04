@@ -126,7 +126,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9'()+-.?:/= ]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9'()+-.?:/= ]*$"
             }
         },
         "com.amazonaws.acmpca#ASN1Subject": {
@@ -228,7 +228,7 @@
                     "min": 1,
                     "max": 20480
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"
             }
         },
         "com.amazonaws.acmpca#AccessDescription": {
@@ -305,7 +305,7 @@
                     "min": 12,
                     "max": 12
                 },
-                "smithy.api#pattern": "[0-9]+"
+                "smithy.api#pattern": "^[0-9]+$"
             }
         },
         "com.amazonaws.acmpca#ActionList": {
@@ -363,7 +363,7 @@
                     "min": 5,
                     "max": 200
                 },
-                "smithy.api#pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"
+                "smithy.api#pattern": "^arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*$"
             }
         },
         "com.amazonaws.acmpca#AuditReportId": {
@@ -373,7 +373,7 @@
                     "min": 36,
                     "max": 36
                 },
-                "smithy.api#pattern": "[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}"
+                "smithy.api#pattern": "^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$"
             }
         },
         "com.amazonaws.acmpca#AuditReportResponseFormat": {
@@ -663,7 +663,7 @@
                     "min": 2,
                     "max": 2
                 },
-                "smithy.api#pattern": "[A-Za-z]{2}"
+                "smithy.api#pattern": "^[A-Za-z]{2}$"
             }
         },
         "com.amazonaws.acmpca#CreateCertificateAuthority": {
@@ -801,7 +801,7 @@
                 "KeyStorageSecurityStandard": {
                     "target": "com.amazonaws.acmpca#KeyStorageSecurityStandard",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a cryptographic key management compliance standard used for handling CA\n\t\t\tkeys.</p>\n\t\t       <p>Default: FIPS_140_2_LEVEL_3_OR_HIGHER</p>\n\t\t       <p>Note: AWS Region ap-northeast-3 supports only FIPS_140_2_LEVEL_2_OR_HIGHER. You must\n\t\t\texplicitly specify this parameter and value when creating a CA in that Region.\n\t\t\tSpecifying a different value (or no value) results in an\n\t\t\t\t<code>InvalidArgsException</code> with the message \"A certificate authority cannot\n\t\t\tbe created in this region with the specified security standard.\"</p>"
+                        "smithy.api#documentation": "<p>Specifies a\n\t\t\tcryptographic key management compliance standard used for handling CA keys.</p>\n\t\t       <p>Default: FIPS_140_2_LEVEL_3_OR_HIGHER</p>\n\t\t       <p>Note: <code>FIPS_140_2_LEVEL_3_OR_HIGHER</code> is not supported in Region\n\t\t\tap-northeast-3. When creating a CA in the ap-northeast-3, you must provide\n\t\t\t\t<code>FIPS_140_2_LEVEL_2_OR_HIGHER</code> as the argument for\n\t\t\t\t<code>KeyStorageSecurityStandard</code>. Failure to do this results in an\n\t\t\t\t<code>InvalidArgsException</code> with the message, \"A certificate authority cannot\n\t\t\tbe created in this region with the specified security standard.\"</p>"
                     }
                 },
                 "Tags": {
@@ -911,7 +911,13 @@
                 "S3BucketName": {
                     "target": "com.amazonaws.acmpca#String3To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the S3 bucket that contains the CRL. If you do not provide a value for the\n\t\t\t\t<b>CustomCname</b> argument, the name of your S3 bucket\n\t\t\tis placed into the <b>CRL Distribution Points</b> extension of\n\t\t\tthe issued certificate. You can change the name of your bucket by calling the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html\">UpdateCertificateAuthority</a> action. You must specify a bucket policy that\n\t\t\tallows ACM Private CA to write the CRL to your bucket.</p>"
+                        "smithy.api#documentation": "<p>Name of the S3 bucket that contains the CRL. If you do not provide a value for the\n\t\t\t\t<b>CustomCname</b> argument, the name of your S3 bucket\n\t\t\tis placed into the <b>CRL Distribution Points</b> extension of\n\t\t\tthe issued certificate. You can change the name of your bucket by calling the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html\">UpdateCertificateAuthority</a> action. You must specify a \n\t\t\t<a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-policies\">bucket policy</a> that\n\t\t\tallows ACM Private CA to write the CRL to your bucket.</p>"
+                    }
+                },
+                "S3ObjectAcl": {
+                    "target": "com.amazonaws.acmpca#S3ObjectAcl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the CRL will be publicly readable or privately held in the CRL\n\t\t\tAmazon S3 bucket. If you choose PUBLIC_READ, the CRL will be accessible over the public\n\t\t\tinternet. If you choose BUCKET_OWNER_FULL_CONTROL, only the owner of the CRL S3 bucket\n\t\t\tcan access the CRL, and your PKI clients may need an alternative method of access. </p>\n\t\t       <p>If no value is specified, the default is <code>PUBLIC_READ</code>.</p>\n\t\t       <p>\n            <i>Note:</i> This default can cause CA creation to fail in some\n\t\t\tcircumstances. If you have have enabled the Block Public Access (BPA) feature in your S3\n\t\t\taccount, then you must specify the value of this parameter as\n\t\t\t\t<code>BUCKET_OWNER_FULL_CONTROL</code>, and not doing so results in an error. If you\n\t\t\thave disabled BPA in S3, then you can specify either\n\t\t\t\t<code>BUCKET_OWNER_FULL_CONTROL</code> or <code>PUBLIC_READ</code> as the\n\t\t\tvalue.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-bpa\">Blocking public access to the S3\n\t\t\t\tbucket</a>.</p>"
                     }
                 }
             },
@@ -1707,7 +1713,7 @@
                     "min": 1,
                     "max": 36
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*$"
             }
         },
         "com.amazonaws.acmpca#ImportCertificateAuthorityCertificate": {
@@ -2822,6 +2828,21 @@
                     "min": 0,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.acmpca#S3ObjectAcl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PUBLIC_READ",
+                        "name": "PUBLIC_READ"
+                    },
+                    {
+                        "value": "BUCKET_OWNER_FULL_CONTROL",
+                        "name": "BUCKET_OWNER_FULL_CONTROL"
+                    }
+                ]
             }
         },
         "com.amazonaws.acmpca#SigningAlgorithm": {

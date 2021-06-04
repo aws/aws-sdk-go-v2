@@ -35,7 +35,7 @@ type GetMapGlyphsInput struct {
 	FontStack *string
 
 	// A Unicode range of characters to download glyphs for. Each response will contain
-	// 256 characters. For example, 0-255 includes all characters from range U+0000 to
+	// 256 characters. For example, 0–255 includes all characters from range U+0000 to
 	// 00FF. Must be aligned to multiples of 256.
 	//
 	// This member is required.

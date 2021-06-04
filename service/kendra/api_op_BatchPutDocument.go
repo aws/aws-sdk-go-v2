@@ -36,18 +36,22 @@ func (c *Client) BatchPutDocument(ctx context.Context, params *BatchPutDocumentI
 
 type BatchPutDocumentInput struct {
 
-	// One or more documents to add to the index. Documents have the following file
-	// size limits.
+	// One or more documents to add to the index. Documents can include custom
+	// attributes. For example, 'DataSourceId' and 'DataSourceSyncJobId' are custom
+	// attributes that provide information on the synchronization of documents running
+	// on a data source. Note, 'DataSourceSyncJobId' could be an optional custom
+	// attribute as Amazon Kendra will use the ID of a running sync job. Documents have
+	// the following file size limits.
 	//
 	// * 5 MB total size for inline documents
 	//
-	// * 50 MB total size for
-	// files from an S3 bucket
+	// * 50 MB
+	// total size for files from an S3 bucket
 	//
 	// * 5 MB extracted text for any file
 	//
-	// For more
-	// information about file size and transaction per second quotas, see Quotas
+	// For
+	// more information about file size and transaction per second quotas, see Quotas
 	// (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
 	//
 	// This member is required.

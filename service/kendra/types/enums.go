@@ -460,6 +460,24 @@ func (KeyLocation) Values() []KeyLocation {
 	}
 }
 
+type Mode string
+
+// Enum values for Mode
+const (
+	ModeEnabled   Mode = "ENABLED"
+	ModeLearnOnly Mode = "LEARN_ONLY"
+)
+
+// Values returns all known values for Mode. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Mode) Values() []Mode {
+	return []Mode{
+		"ENABLED",
+		"LEARN_ONLY",
+	}
+}
+
 type Order string
 
 // Enum values for Order
@@ -532,6 +550,51 @@ func (QueryResultType) Values() []QueryResultType {
 		"DOCUMENT",
 		"QUESTION_ANSWER",
 		"ANSWER",
+	}
+}
+
+type QuerySuggestionsBlockListStatus string
+
+// Enum values for QuerySuggestionsBlockListStatus
+const (
+	QuerySuggestionsBlockListStatusActive                QuerySuggestionsBlockListStatus = "ACTIVE"
+	QuerySuggestionsBlockListStatusCreating              QuerySuggestionsBlockListStatus = "CREATING"
+	QuerySuggestionsBlockListStatusDeleting              QuerySuggestionsBlockListStatus = "DELETING"
+	QuerySuggestionsBlockListStatusUpdating              QuerySuggestionsBlockListStatus = "UPDATING"
+	QuerySuggestionsBlockListStatusActiveButUpdateFailed QuerySuggestionsBlockListStatus = "ACTIVE_BUT_UPDATE_FAILED"
+	QuerySuggestionsBlockListStatusFailed                QuerySuggestionsBlockListStatus = "FAILED"
+)
+
+// Values returns all known values for QuerySuggestionsBlockListStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (QuerySuggestionsBlockListStatus) Values() []QuerySuggestionsBlockListStatus {
+	return []QuerySuggestionsBlockListStatus{
+		"ACTIVE",
+		"CREATING",
+		"DELETING",
+		"UPDATING",
+		"ACTIVE_BUT_UPDATE_FAILED",
+		"FAILED",
+	}
+}
+
+type QuerySuggestionsStatus string
+
+// Enum values for QuerySuggestionsStatus
+const (
+	QuerySuggestionsStatusActive   QuerySuggestionsStatus = "ACTIVE"
+	QuerySuggestionsStatusUpdating QuerySuggestionsStatus = "UPDATING"
+)
+
+// Values returns all known values for QuerySuggestionsStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QuerySuggestionsStatus) Values() []QuerySuggestionsStatus {
+	return []QuerySuggestionsStatus{
+		"ACTIVE",
+		"UPDATING",
 	}
 }
 

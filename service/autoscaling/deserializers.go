@@ -8391,6 +8391,23 @@ func awsAwsquery_deserializeDocumentEbs(v **types.Ebs, decoder smithyxml.NodeDec
 				sv.SnapshotId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("Throughput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Throughput = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("VolumeSize", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

@@ -349,7 +349,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "arn:[a-z\\-]+:organizations::\\d{12}:organization\\/o-[a-z0-9]{10,32}"
+                "smithy.api#pattern": "^arn:[a-z\\-]+:organizations::\\d{12}:organization\\/o-[a-z0-9]{10,32}$"
             }
         },
         "com.amazonaws.s3control#BadRequestException": {
@@ -502,7 +502,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9\\-\\_\\.]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-\\_\\.]+$"
             }
         },
         "com.amazonaws.s3control#ConfirmRemoveSelfBucketAccess": {
@@ -1536,7 +1536,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?"
+                "smithy.api#pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
             }
         },
         "com.amazonaws.s3control#GetAccessPoint": {
@@ -2415,7 +2415,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:[^:]+:iam::\\d{12}:role/.*"
+                "smithy.api#pattern": "^arn:[^:]+:iam::\\d{12}:role/"
             }
         },
         "com.amazonaws.s3control#ID": {
@@ -2502,7 +2502,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "arn:[^:]+:s3:[a-zA-Z0-9\\-]+:\\d{12}:job\\/.*"
+                "smithy.api#pattern": "^arn:[^:]+:s3:[a-zA-Z0-9\\-]+:\\d{12}:job\\/"
             }
         },
         "com.amazonaws.s3control#JobCreationTime": {
@@ -2670,7 +2670,7 @@
                     "min": 5,
                     "max": 36
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9\\-\\_]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-\\_]+$"
             }
         },
         "com.amazonaws.s3control#JobListDescriptor": {
@@ -3879,7 +3879,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:[^:]+:s3-object-lambda:[^:]*:\\d{12}:accesspoint/.*"
+                "smithy.api#pattern": "^arn:[^:]+:s3-object-lambda:[^:]*:\\d{12}:accesspoint/"
             }
         },
         "com.amazonaws.s3control#ObjectLambdaAccessPointList": {
@@ -3983,7 +3983,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:[^:]+:s3:[^:]*:\\d{12}:accesspoint/.*"
+                "smithy.api#pattern": "^arn:[^:]+:s3:[^:]*:\\d{12}:accesspoint/"
             }
         },
         "com.amazonaws.s3control#ObjectLambdaTransformationConfiguration": {
@@ -4773,7 +4773,7 @@
                     "min": 5,
                     "max": 30
                 },
-                "smithy.api#pattern": "[a-z0-9\\-]+"
+                "smithy.api#pattern": "^[a-z0-9\\-]+$"
             }
         },
         "com.amazonaws.s3control#S3AccessControlList": {
@@ -4833,7 +4833,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "arn:[^:]+:s3:.*"
+                "smithy.api#pattern": "^arn:[^:]+:s3:"
             }
         },
         "com.amazonaws.s3control#S3BucketDestination": {
@@ -5025,6 +5025,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date when the applied object retention configuration expires on all objects in\n         the Batch Operations job.</p>"
                     }
+                },
+                "BucketKeyEnabled": {
+                    "target": "com.amazonaws.s3control#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with\n         server-side encryption using AWS KMS (SSE-KMS). Setting this header to <code>true</code>\n         causes Amazon S3 to use an S3 Bucket Key for object encryption with SSE-KMS.</p>\n         <p>Specifying this header with an <i>object</i> action doesn’t affect\n         <i>bucket-level</i> settings for S3 Bucket Key.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5160,7 +5166,7 @@
                     "min": 1,
                     "max": 2000
                 },
-                "smithy.api#pattern": "arn:[^:]+:s3:.*"
+                "smithy.api#pattern": "^arn:[^:]+:s3:"
             }
         },
         "com.amazonaws.s3control#S3MetadataDirective": {
@@ -5615,7 +5621,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "arn:[a-z\\-]+:s3:[a-z0-9\\-]+:\\d{12}:storage\\-lens\\/.*"
+                "smithy.api#pattern": "^arn:[a-z\\-]+:s3:[a-z0-9\\-]+:\\d{12}:storage\\-lens\\/"
             }
         },
         "com.amazonaws.s3control#StorageLensAwsOrg": {

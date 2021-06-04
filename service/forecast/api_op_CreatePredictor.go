@@ -109,6 +109,12 @@ type CreatePredictorInput struct {
 	// * arn:aws:forecast:::algorithm/Prophet
 	AlgorithmArn *string
 
+	// Used to overide the default AutoML strategy, which is to optimize predictor
+	// accuracy. To apply an AutoML strategy that minimizes training time, use
+	// LatencyOptimized. This parameter is only valid for predictors trained using
+	// AutoML.
+	AutoMLOverrideStrategy types.AutoMLOverrideStrategy
+
 	// An AWS Key Management Service (KMS) key and the AWS Identity and Access
 	// Management (IAM) role that Amazon Forecast can assume to access the key.
 	EncryptionConfig *types.EncryptionConfig

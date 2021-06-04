@@ -35,9 +35,13 @@ func (c *Client) RenewOffering(ctx context.Context, params *RenewOfferingInput, 
 type RenewOfferingInput struct {
 
 	// The ID of a request to renew an offering.
+	//
+	// This member is required.
 	OfferingId *string
 
 	// The quantity requested in an offering renewal.
+	//
+	// This member is required.
 	Quantity *int32
 }
 
@@ -94,6 +98,9 @@ func addOperationRenewOfferingMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpRenewOfferingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRenewOffering(options.Region), middleware.Before); err != nil {

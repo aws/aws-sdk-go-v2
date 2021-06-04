@@ -5,14 +5,13 @@ package location
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Retrieves the Place index resource details.
+// Retrieves the place index resource details.
 func (c *Client) DescribePlaceIndex(ctx context.Context, params *DescribePlaceIndexInput, optFns ...func(*Options)) (*DescribePlaceIndexOutput, error) {
 	if params == nil {
 		params = &DescribePlaceIndexInput{}
@@ -30,7 +29,7 @@ func (c *Client) DescribePlaceIndex(ctx context.Context, params *DescribePlaceIn
 
 type DescribePlaceIndexInput struct {
 
-	// The name of the Place index resource.
+	// The name of the place index resource.
 	//
 	// This member is required.
 	IndexName *string
@@ -38,7 +37,7 @@ type DescribePlaceIndexInput struct {
 
 type DescribePlaceIndexOutput struct {
 
-	// The timestamp for when the Place index resource was created in ISO 8601
+	// The timestamp for when the place index resource was created in ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ.
 	//
@@ -64,35 +63,41 @@ type DescribePlaceIndexOutput struct {
 	// This member is required.
 	DataSourceConfiguration *types.DataSourceConfiguration
 
-	// The optional description for the Place index resource.
+	// The optional description for the place index resource.
 	//
 	// This member is required.
 	Description *string
 
-	// The Amazon Resource Name (ARN) for the Place index resource. Used when you need
-	// to specify a resource across all AWS.
+	// The Amazon Resource Name (ARN) for the place index resource. Used to specify a
+	// resource across all AWS.
+	//
+	// * Format example:
+	// arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex
 	//
 	// This member is required.
 	IndexArn *string
 
-	// The name of the Place index resource being described.
+	// The name of the place index resource being described.
 	//
 	// This member is required.
 	IndexName *string
 
-	// The pricing plan selected for the specified Place index resource. For additional
+	// The pricing plan selected for the specified place index resource. For additional
 	// details and restrictions on each pricing plan option, see the Amazon Location
 	// Service pricing page (https://aws.amazon.com/location/pricing/).
 	//
 	// This member is required.
 	PricingPlan types.PricingPlan
 
-	// The timestamp for when the Place index resource was last updated in ISO 8601
+	// The timestamp for when the place index resource was last updated in ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ.
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	// Tags associated with place index resource.
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -119,13 +124,7 @@ func addOperationDescribePlaceIndexMiddlewares(stack *middleware.Stack, options 
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
-		return err
-	}
 	if err = addRetryMiddlewares(stack, options); err != nil {
-		return err
-	}
-	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {

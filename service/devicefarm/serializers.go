@@ -4020,6 +4020,28 @@ func awsAwsjson11_serializeDocumentScheduleRunTest(v *types.ScheduleRunTest, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSecurityGroupIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSubnetIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4058,6 +4080,32 @@ func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTestGridVpcConfig(v *types.TestGridVpcConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecurityGroupIds != nil {
+		ok := object.Key("securityGroupIds")
+		if err := awsAwsjson11_serializeDocumentSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SubnetIds != nil {
+		ok := object.Key("subnetIds")
+		if err := awsAwsjson11_serializeDocumentSubnetIds(v.SubnetIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcId != nil {
+		ok := object.Key("vpcId")
+		ok.String(*v.VpcId)
+	}
+
 	return nil
 }
 
@@ -4305,6 +4353,13 @@ func awsAwsjson11_serializeOpDocumentCreateTestGridProjectInput(v *CreateTestGri
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.VpcConfig != nil {
+		ok := object.Key("vpcConfig")
+		if err := awsAwsjson11_serializeDocumentTestGridVpcConfig(v.VpcConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -5587,6 +5642,13 @@ func awsAwsjson11_serializeOpDocumentUpdateTestGridProjectInput(v *UpdateTestGri
 	if v.ProjectArn != nil {
 		ok := object.Key("projectArn")
 		ok.String(*v.ProjectArn)
+	}
+
+	if v.VpcConfig != nil {
+		ok := object.Key("vpcConfig")
+		if err := awsAwsjson11_serializeDocumentTestGridVpcConfig(v.VpcConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

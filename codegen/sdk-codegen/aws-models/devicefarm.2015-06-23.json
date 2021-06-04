@@ -107,7 +107,7 @@
                     "min": 32,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:.+"
+                "smithy.api#pattern": "^arn:.+$"
             }
         },
         "com.amazonaws.devicefarm#AmazonResourceNames": {
@@ -939,7 +939,13 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.devicefarm#ArgumentException"
+                },
+                {
                     "target": "com.amazonaws.devicefarm#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.devicefarm#LimitExceededException"
                 }
             ],
             "traits": {
@@ -960,6 +966,12 @@
                     "target": "com.amazonaws.devicefarm#ResourceDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>Human-readable description of the project.</p>"
+                    }
+                },
+                "vpcConfig": {
+                    "target": "com.amazonaws.devicefarm#TestGridVpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
                     }
                 }
             }
@@ -1021,7 +1033,7 @@
             "type": "structure",
             "members": {
                 "url": {
-                    "target": "com.amazonaws.devicefarm#String",
+                    "target": "com.amazonaws.devicefarm#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>A signed URL, expiring in <a>CreateTestGridUrlRequest$expiresInSeconds</a> seconds, to be passed\n         to a <code>RemoteWebDriver</code>. </p>"
                     }
@@ -1846,7 +1858,7 @@
                     "min": 32,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:aws:devicefarm:.+"
+                "smithy.api#pattern": "^arn:aws:devicefarm:.+$"
             }
         },
         "com.amazonaws.devicefarm#DeviceFarm_20150623": {
@@ -2110,19 +2122,22 @@
                 "attribute": {
                     "target": "com.amazonaws.devicefarm#DeviceFilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The aspect of a device such as platform or model used as the selection criteria in a\n            device filter.</p>\n        <p>The supported operators for each attribute are provided in the following list.</p>\n        <dl>\n            <dt>ARN</dt>\n            <dd>\n                    <p>The Amazon Resource Name (ARN) of the device (for example,\n                            <code>arn:aws:devicefarm:us-west-2::device:12345Example</code>).</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>PLATFORM</dt>\n            <dd>\n                    <p>The device platform. Valid values are ANDROID or IOS.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>OS_VERSION</dt>\n            <dd>\n                    <p>The operating system version (for example, 10.3.2).</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>GREATER_THAN</code>,\n                            <code>GREATER_THAN_OR_EQUALS</code>, <code>IN</code>,\n                            <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUALS</code>,\n                            <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>MODEL</dt>\n            <dd>\n                    <p>The device model (for example, iPad 5th Gen).</p>\n                    <p>Supported operators: <code>CONTAINS</code>, <code>EQUALS</code>,\n                            <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>AVAILABILITY</dt>\n            <dd>\n                    <p>The current availability of the device. Valid values are AVAILABLE,\n                        HIGHLY_AVAILABLE, BUSY, or TEMPORARY_NOT_AVAILABLE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>FORM_FACTOR</dt>\n            <dd>\n                    <p>The device form factor. Valid values are PHONE or TABLET.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>MANUFACTURER</dt>\n            <dd>\n                    <p>The device manufacturer (for example, Apple).</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>IN</code>,\n                            <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>REMOTE_ACCESS_ENABLED</dt>\n            <dd>\n                    <p>Whether the device is enabled for remote access. Valid values are TRUE or\n                        FALSE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>REMOTE_DEBUG_ENABLED</dt>\n            <dd>\n                    <p>Whether the device is enabled for remote debugging. Valid values are TRUE or FALSE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                    <p>Because remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no longer\n                            supported</a>, this filter is ignored.</p>\n                </dd>\n            <dt>INSTANCE_ARN</dt>\n            <dd>\n                    <p>The Amazon Resource Name (ARN) of the device instance.</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>IN</code>,\n                            <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>INSTANCE_LABELS</dt>\n            <dd>\n                    <p>The label of the device instance.</p>\n                    <p>Supported operators: <code>CONTAINS</code>\n               </p>\n                </dd>\n            <dt>FLEET_TYPE</dt>\n            <dd>\n                    <p>The fleet type. Valid values are PUBLIC or PRIVATE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The aspect of a device such as platform or model used as the selection criteria in a\n            device filter.</p>\n        <p>The supported operators for each attribute are provided in the following list.</p>\n        <dl>\n            <dt>ARN</dt>\n            <dd>\n                    <p>The Amazon Resource Name (ARN) of the device (for example,\n                            <code>arn:aws:devicefarm:us-west-2::device:12345Example</code>).</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>PLATFORM</dt>\n            <dd>\n                    <p>The device platform. Valid values are ANDROID or IOS.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>OS_VERSION</dt>\n            <dd>\n                    <p>The operating system version (for example, 10.3.2).</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>GREATER_THAN</code>,\n                            <code>GREATER_THAN_OR_EQUALS</code>, <code>IN</code>,\n                            <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUALS</code>,\n                            <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>MODEL</dt>\n            <dd>\n                    <p>The device model (for example, iPad 5th Gen).</p>\n                    <p>Supported operators: <code>CONTAINS</code>, <code>EQUALS</code>,\n                            <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>AVAILABILITY</dt>\n            <dd>\n                    <p>The current availability of the device. Valid values are AVAILABLE,\n                        HIGHLY_AVAILABLE, BUSY, or TEMPORARY_NOT_AVAILABLE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>FORM_FACTOR</dt>\n            <dd>\n                    <p>The device form factor. Valid values are PHONE or TABLET.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>MANUFACTURER</dt>\n            <dd>\n                    <p>The device manufacturer (for example, Apple).</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>IN</code>,\n                            <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>REMOTE_ACCESS_ENABLED</dt>\n            <dd>\n                    <p>Whether the device is enabled for remote access. Valid values are TRUE or\n                        FALSE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>REMOTE_DEBUG_ENABLED</dt>\n            <dd>\n                    <p>Whether the device is enabled for remote debugging. Valid values are TRUE or FALSE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                    <p>Because remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no longer\n                            supported</a>, this filter is ignored.</p>\n                </dd>\n            <dt>INSTANCE_ARN</dt>\n            <dd>\n                    <p>The Amazon Resource Name (ARN) of the device instance.</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>IN</code>,\n                            <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>INSTANCE_LABELS</dt>\n            <dd>\n                    <p>The label of the device instance.</p>\n                    <p>Supported operators: <code>CONTAINS</code>\n               </p>\n                </dd>\n            <dt>FLEET_TYPE</dt>\n            <dd>\n                    <p>The fleet type. Valid values are PUBLIC or PRIVATE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n         </dl>",
+                        "smithy.api#required": {}
                     }
                 },
                 "operator": {
                     "target": "com.amazonaws.devicefarm#RuleOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how Device Farm compares the filter's attribute to the value. See the attribute\n            descriptions.</p>"
+                        "smithy.api#documentation": "<p>Specifies how Device Farm compares the filter's attribute to the value. See the attribute\n            descriptions.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "values": {
                     "target": "com.amazonaws.devicefarm#DeviceFilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of one or more filter values used in a device filter.</p>\n        <p class=\"title\">\n            <b>Operator Values</b>\n         </p>\n         <ul>\n            <li>\n                <p>The IN and NOT_IN operators can take a values array that has more than one\n                    element.</p>\n            </li>\n            <li>\n                <p>The other operators require an array with a single element.</p>\n            </li>\n         </ul>\n        <p class=\"title\">\n            <b>Attribute Values</b>\n         </p>\n         <ul>\n            <li>\n                <p>The PLATFORM attribute can be set to ANDROID or IOS.</p>\n            </li>\n            <li>\n                <p>The AVAILABILITY attribute can be set to AVAILABLE, HIGHLY_AVAILABLE, BUSY, or\n                    TEMPORARY_NOT_AVAILABLE.</p>\n            </li>\n            <li>\n                <p>The FORM_FACTOR attribute can be set to PHONE or TABLET.</p>\n            </li>\n            <li>\n                <p>The FLEET_TYPE attribute can be set to PUBLIC or PRIVATE.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of one or more filter values used in a device filter.</p>\n        <p class=\"title\">\n            <b>Operator Values</b>\n         </p>\n         <ul>\n            <li>\n                <p>The IN and NOT_IN operators can take a values array that has more than one\n                    element.</p>\n            </li>\n            <li>\n                <p>The other operators require an array with a single element.</p>\n            </li>\n         </ul>\n        <p class=\"title\">\n            <b>Attribute Values</b>\n         </p>\n         <ul>\n            <li>\n                <p>The PLATFORM attribute can be set to ANDROID or IOS.</p>\n            </li>\n            <li>\n                <p>The AVAILABILITY attribute can be set to AVAILABLE, HIGHLY_AVAILABLE, BUSY, or\n                    TEMPORARY_NOT_AVAILABLE.</p>\n            </li>\n            <li>\n                <p>The FORM_FACTOR attribute can be set to PHONE or TABLET.</p>\n            </li>\n            <li>\n                <p>The FLEET_TYPE attribute can be set to PUBLIC or PRIVATE.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -5840,6 +5855,16 @@
                 "target": "com.amazonaws.devicefarm#NetworkProfile"
             }
         },
+        "com.amazonaws.devicefarm#NonEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
         "com.amazonaws.devicefarm#NotEligibleException": {
             "type": "structure",
             "members": {
@@ -6244,13 +6269,15 @@
                 "offeringId": {
                     "target": "com.amazonaws.devicefarm#OfferingIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the offering.</p>"
+                        "smithy.api#documentation": "<p>The ID of the offering.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "quantity": {
                     "target": "com.amazonaws.devicefarm#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of device slots to purchase in an offering request.</p>"
+                        "smithy.api#documentation": "<p>The number of device slots to purchase in an offering request.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "offeringPromotionId": {
@@ -6531,13 +6558,15 @@
                 "offeringId": {
                     "target": "com.amazonaws.devicefarm#OfferingIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of a request to renew an offering.</p>"
+                        "smithy.api#documentation": "<p>The ID of a request to renew an offering.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "quantity": {
                     "target": "com.amazonaws.devicefarm#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quantity requested in an offering renewal.</p>"
+                        "smithy.api#documentation": "<p>The quantity requested in an offering renewal.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -6586,7 +6615,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.devicefarm#ResourceId": {
@@ -6596,7 +6625,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.devicefarm#ResourceName": {
@@ -6606,7 +6635,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.devicefarm#Rule": {
@@ -7189,6 +7218,34 @@
                 "smithy.api#documentation": "<p>Represents test settings. This data structure is passed in as the test parameter to ScheduleRun. For an\n            example of the JSON request syntax, see <a>ScheduleRun</a>.</p>"
             }
         },
+        "com.amazonaws.devicefarm#SecurityGroupIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devicefarm#NonEmptyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.devicefarm#SensitiveString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.devicefarm#SensitiveURL": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.devicefarm#ServiceAccountException": {
             "type": "structure",
             "members": {
@@ -7389,6 +7446,18 @@
         },
         "com.amazonaws.devicefarm#String": {
             "type": "string"
+        },
+        "com.amazonaws.devicefarm#SubnetIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devicefarm#NonEmptyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8
+                }
+            }
         },
         "com.amazonaws.devicefarm#Suite": {
             "type": "structure",
@@ -7713,6 +7782,12 @@
                         "smithy.api#documentation": "<p>A human-readable description for the project.</p>"
                     }
                 },
+                "vpcConfig": {
+                    "target": "com.amazonaws.devicefarm#TestGridVpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
+                    }
+                },
                 "created": {
                     "target": "com.amazonaws.devicefarm#DateTime",
                     "traits": {
@@ -7834,7 +7909,7 @@
                     }
                 },
                 "url": {
-                    "target": "com.amazonaws.devicefarm#String",
+                    "target": "com.amazonaws.devicefarm#SensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>A semi-stable URL to the content of the object.</p>"
                     }
@@ -7917,6 +7992,35 @@
                     "min": 60,
                     "max": 86400
                 }
+            }
+        },
+        "com.amazonaws.devicefarm#TestGridVpcConfig": {
+            "type": "structure",
+            "members": {
+                "securityGroupIds": {
+                    "target": "com.amazonaws.devicefarm#SecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC security group IDs in your Amazon VPC.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.devicefarm#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC subnet IDs in your Amazon VPC.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vpcId": {
+                    "target": "com.amazonaws.devicefarm#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon VPC.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
             }
         },
         "com.amazonaws.devicefarm#TestParameters": {
@@ -8582,6 +8686,9 @@
                     "target": "com.amazonaws.devicefarm#InternalServiceException"
                 },
                 {
+                    "target": "com.amazonaws.devicefarm#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.devicefarm#NotFoundException"
                 }
             ],
@@ -8609,6 +8716,12 @@
                     "target": "com.amazonaws.devicefarm#ResourceDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>Human-readable description for the project.</p>"
+                    }
+                },
+                "vpcConfig": {
+                    "target": "com.amazonaws.devicefarm#TestGridVpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
                     }
                 }
             }
@@ -8798,7 +8911,7 @@
                     }
                 },
                 "url": {
-                    "target": "com.amazonaws.devicefarm#URL",
+                    "target": "com.amazonaws.devicefarm#SensitiveURL",
                     "traits": {
                         "smithy.api#documentation": "<p>The presigned Amazon S3 URL that was used to store a file using a PUT request.</p>"
                     }

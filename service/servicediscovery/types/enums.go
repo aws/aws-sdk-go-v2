@@ -84,9 +84,10 @@ type HealthStatusFilter string
 
 // Enum values for HealthStatusFilter
 const (
-	HealthStatusFilterHealthy   HealthStatusFilter = "HEALTHY"
-	HealthStatusFilterUnhealthy HealthStatusFilter = "UNHEALTHY"
-	HealthStatusFilterAll       HealthStatusFilter = "ALL"
+	HealthStatusFilterHealthy          HealthStatusFilter = "HEALTHY"
+	HealthStatusFilterUnhealthy        HealthStatusFilter = "UNHEALTHY"
+	HealthStatusFilterAll              HealthStatusFilter = "ALL"
+	HealthStatusFilterHealthyOrElseAll HealthStatusFilter = "HEALTHY_OR_ELSE_ALL"
 )
 
 // Values returns all known values for HealthStatusFilter. Note that this can be
@@ -97,6 +98,7 @@ func (HealthStatusFilter) Values() []HealthStatusFilter {
 		"HEALTHY",
 		"UNHEALTHY",
 		"ALL",
+		"HEALTHY_OR_ELSE_ALL",
 	}
 }
 

@@ -12,8 +12,9 @@ import (
 )
 
 // Creates an endpoint for a self-managed object storage bucket. For more
-// information about self-managed object storage locations, see
-// create-object-location.
+// information about self-managed object storage locations, see Creating a location
+// for object storage
+// (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html).
 func (c *Client) CreateLocationObjectStorage(ctx context.Context, params *CreateLocationObjectStorageInput, optFns ...func(*Options)) (*CreateLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &CreateLocationObjectStorageInput{}

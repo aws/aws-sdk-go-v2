@@ -295,6 +295,62 @@ func (m *awsAwsquery_serializeOpCreatePlatformEndpoint) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpCreateSMSSandboxPhoneNumber struct {
+}
+
+func (*awsAwsquery_serializeOpCreateSMSSandboxPhoneNumber) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpCreateSMSSandboxPhoneNumber) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateSMSSandboxPhoneNumberInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateSMSSandboxPhoneNumber")
+	body.Key("Version").String("2010-03-31")
+
+	if err := awsAwsquery_serializeOpDocumentCreateSMSSandboxPhoneNumberInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpCreateTopic struct {
 }
 
@@ -443,6 +499,62 @@ func (m *awsAwsquery_serializeOpDeletePlatformApplication) HandleSerialize(ctx c
 	body.Key("Version").String("2010-03-31")
 
 	if err := awsAwsquery_serializeOpDocumentDeletePlatformApplicationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDeleteSMSSandboxPhoneNumber struct {
+}
+
+func (*awsAwsquery_serializeOpDeleteSMSSandboxPhoneNumber) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDeleteSMSSandboxPhoneNumber) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteSMSSandboxPhoneNumberInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteSMSSandboxPhoneNumber")
+	body.Key("Version").String("2010-03-31")
+
+	if err := awsAwsquery_serializeOpDocumentDeleteSMSSandboxPhoneNumberInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -687,6 +799,58 @@ func (m *awsAwsquery_serializeOpGetSMSAttributes) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpGetSMSSandboxAccountStatus struct {
+}
+
+func (*awsAwsquery_serializeOpGetSMSSandboxAccountStatus) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpGetSMSSandboxAccountStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetSMSSandboxAccountStatusInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("GetSMSSandboxAccountStatus")
+	body.Key("Version").String("2010-03-31")
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpGetSubscriptionAttributes struct {
 }
 
@@ -855,6 +1019,62 @@ func (m *awsAwsquery_serializeOpListEndpointsByPlatformApplication) HandleSerial
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpListOriginationNumbers struct {
+}
+
+func (*awsAwsquery_serializeOpListOriginationNumbers) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpListOriginationNumbers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListOriginationNumbersInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ListOriginationNumbers")
+	body.Key("Version").String("2010-03-31")
+
+	if err := awsAwsquery_serializeOpDocumentListOriginationNumbersInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpListPhoneNumbersOptedOut struct {
 }
 
@@ -947,6 +1167,62 @@ func (m *awsAwsquery_serializeOpListPlatformApplications) HandleSerialize(ctx co
 	body.Key("Version").String("2010-03-31")
 
 	if err := awsAwsquery_serializeOpDocumentListPlatformApplicationsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpListSMSSandboxPhoneNumbers struct {
+}
+
+func (*awsAwsquery_serializeOpListSMSSandboxPhoneNumbers) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpListSMSSandboxPhoneNumbers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListSMSSandboxPhoneNumbersInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ListSMSSandboxPhoneNumbers")
+	body.Key("Version").String("2010-03-31")
+
+	if err := awsAwsquery_serializeOpDocumentListSMSSandboxPhoneNumbersInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1862,6 +2138,62 @@ func (m *awsAwsquery_serializeOpUntagResource) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsquery_serializeOpVerifySMSSandboxPhoneNumber struct {
+}
+
+func (*awsAwsquery_serializeOpVerifySMSSandboxPhoneNumber) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpVerifySMSSandboxPhoneNumber) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*VerifySMSSandboxPhoneNumberInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("VerifySMSSandboxPhoneNumber")
+	body.Key("Version").String("2010-03-31")
+
+	if err := awsAwsquery_serializeOpDocumentVerifySMSSandboxPhoneNumberInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsquery_serializeDocumentActionsList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -2165,6 +2497,23 @@ func awsAwsquery_serializeOpDocumentCreatePlatformEndpointInput(v *CreatePlatfor
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentCreateSMSSandboxPhoneNumberInput(v *CreateSMSSandboxPhoneNumberInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.LanguageCode) > 0 {
+		objectKey := object.Key("LanguageCode")
+		objectKey.String(string(v.LanguageCode))
+	}
+
+	if v.PhoneNumber != nil {
+		objectKey := object.Key("PhoneNumber")
+		objectKey.String(*v.PhoneNumber)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentCreateTopicInput(v *CreateTopicInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -2210,6 +2559,18 @@ func awsAwsquery_serializeOpDocumentDeletePlatformApplicationInput(v *DeletePlat
 	if v.PlatformApplicationArn != nil {
 		objectKey := object.Key("PlatformApplicationArn")
 		objectKey.String(*v.PlatformApplicationArn)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDeleteSMSSandboxPhoneNumberInput(v *DeleteSMSSandboxPhoneNumberInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.PhoneNumber != nil {
+		objectKey := object.Key("PhoneNumber")
+		objectKey.String(*v.PhoneNumber)
 	}
 
 	return nil
@@ -2265,6 +2626,13 @@ func awsAwsquery_serializeOpDocumentGetSMSAttributesInput(v *GetSMSAttributesInp
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentGetSMSSandboxAccountStatusInput(v *GetSMSSandboxAccountStatusInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentGetSubscriptionAttributesInput(v *GetSubscriptionAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -2306,6 +2674,23 @@ func awsAwsquery_serializeOpDocumentListEndpointsByPlatformApplicationInput(v *L
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentListOriginationNumbersInput(v *ListOriginationNumbersInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentListPhoneNumbersOptedOutInput(v *ListPhoneNumbersOptedOutInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -2321,6 +2706,23 @@ func awsAwsquery_serializeOpDocumentListPhoneNumbersOptedOutInput(v *ListPhoneNu
 func awsAwsquery_serializeOpDocumentListPlatformApplicationsInput(v *ListPlatformApplicationsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentListSMSSandboxPhoneNumbersInput(v *ListSMSSandboxPhoneNumbersInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
 
 	if v.NextToken != nil {
 		objectKey := object.Key("NextToken")
@@ -2641,6 +3043,23 @@ func awsAwsquery_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, va
 		if err := awsAwsquery_serializeDocumentTagKeyList(v.TagKeys, objectKey); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentVerifySMSSandboxPhoneNumberInput(v *VerifySMSSandboxPhoneNumberInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.OneTimePassword != nil {
+		objectKey := object.Key("OneTimePassword")
+		objectKey.String(*v.OneTimePassword)
+	}
+
+	if v.PhoneNumber != nil {
+		objectKey := object.Key("PhoneNumber")
+		objectKey.String(*v.PhoneNumber)
 	}
 
 	return nil

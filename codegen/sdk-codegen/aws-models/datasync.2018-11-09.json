@@ -36,7 +36,7 @@
                     "min": 0,
                     "max": 29
                 },
-                "smithy.api#pattern": "[A-Z0-9]{5}(-[A-Z0-9]{5}){4}"
+                "smithy.api#pattern": "^[A-Z0-9]{5}(-[A-Z0-9]{5}){4}$"
             }
         },
         "com.amazonaws.datasync#AgentArn": {
@@ -90,7 +90,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a single entry in a list of agents. <code>AgentListEntry</code> returns an\n      array that contains a list of agents when the <a>ListAgents</a> operation is\n      called.</p>"
+                "smithy.api#documentation": "<p>Represents a single entry in a list of agents. <code>AgentListEntry</code> returns an\n      array that contains a list of agents when the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListAgents.html\">ListAgents</a>\n      operation is\n      called.</p>"
             }
         },
         "com.amazonaws.datasync#AgentStatus": {
@@ -228,7 +228,7 @@
                 "SecurityGroupArns": {
                     "target": "com.amazonaws.datasync#PLSecurityGroupArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARNs of the security groups used to protect your data transfer task subnets. See <a>CreateAgentRequest$SubnetArns</a>.</p>"
+                        "smithy.api#documentation": "<p>The ARNs of the security groups used to protect your data transfer task subnets. See <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Ec2Config.html#DataSync-Type-Ec2Config-SecurityGroupArns\">SecurityGroupArns</a>.</p>"
                     }
                 }
             },
@@ -370,7 +370,7 @@
                 "User": {
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user who has the permissions to access files and folders in the FSx for Windows File\n      Server file system.</p>",
+                        "smithy.api#documentation": "<p>The user who has the permissions to access files and folders in the FSx for Windows File\n      Server file system.</p>\n         <p>For information about choosing a user name that ensures sufficient permissions to files,\n      folders, and metadata, see <a href=\"create-fsx-location.html#FSxWuser\">user</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -492,7 +492,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an endpoint for a self-managed object storage bucket. For more information\n      about self-managed object storage locations, see <a>create-object-location</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an endpoint for a self-managed object storage bucket. For more information\n      about self-managed object storage locations, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html\">Creating a location for object storage</a>.</p>"
             }
         },
         "com.amazonaws.datasync#CreateLocationObjectStorageRequest": {
@@ -613,7 +613,7 @@
                 "S3StorageClass": {
                     "target": "com.amazonaws.datasync#S3StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 storage class that you want to store your files in when this location is\n      used as a task destination. For buckets in AWS Regions, the storage class defaults to Standard.\n      For buckets on AWS Outposts, the storage class defaults to AWS S3 Outposts.</p>\n      \n         <p>For more information about S3 storage classes, see <a href=\"http://aws.amazon.com/s3/storage-classes/\">Amazon S3 Storage Classes</a>. Some storage classes have behaviors that\n      can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 storage class that you want to store your files in when this location is\n      used as a task destination. For buckets in AWS Regions, the storage class defaults to Standard.\n      For buckets on AWS Outposts, the storage class defaults to AWS S3 Outposts.</p>\n      \n         <p>For more information about S3 storage classes, see <a href=\"http://aws.amazon.com/s3/storage-classes/\">Amazon S3 Storage Classes</a>. Some storage classes have behaviors that\n      can affect your S3 storage cost. For detailed information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with S3 storage classes in DataSync</a>.</p>"
                     }
                 },
                 "S3Config": {
@@ -625,7 +625,7 @@
                 "AgentArns": {
                     "target": "com.amazonaws.datasync#AgentArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names (ARNs) of\n      the DataSync agents deployed on your Outpost. For more information about launching a DataSync\n      agent on an AWS Outpost, see <a>outposts-agent</a>.</p>"
+                        "smithy.api#documentation": "<p>If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names (ARNs) of\n      the DataSync agents deployed on your Outpost. For more information about launching a DataSync\n      agent on an AWS Outpost, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent\">Deploy your DataSync agent on AWS Outposts</a>.</p>"
                     }
                 },
                 "Tags": {
@@ -693,7 +693,7 @@
                 "User": {
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user who can mount the share, has the permissions to access files and folders in the\n      SMB share.</p>",
+                        "smithy.api#documentation": "<p>The user who can mount the share, has the permissions to access files and folders in the\n      SMB share.</p>\n    \n         <p>For information about choosing a user name that ensures sufficient permissions to files,\n      folders, and metadata, see <a href=\"create-smb-location.html#SMBuser\">user</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -800,7 +800,7 @@
                 "Options": {
                     "target": "com.amazonaws.datasync#Options",
                     "traits": {
-                        "smithy.api#documentation": "<p>The set of configuration options that control the behavior of a single execution of the\n      task that occurs when you call <code>StartTaskExecution</code>. You can configure these\n      options to preserve metadata such as user ID (UID) and group ID (GID), file permissions, data\n      integrity verification, and so on.</p>\n         <p>For each individual task execution, you can override these options by specifying the\n        <code>OverrideOptions</code> before starting the task execution. For more information, see\n      the  operation. </p>"
+                        "smithy.api#documentation": "<p>The set of configuration options that control the behavior of a single execution of the\n      task that occurs when you call <code>StartTaskExecution</code>. You can configure these\n      options to preserve metadata such as user ID (UID) and group ID (GID), file permissions, data\n      integrity verification, and so on.</p>\n         <p>For each individual task execution, you can override these options by specifying the\n        <code>OverrideOptions</code> before starting the task execution. For more information, see\n      the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a> operation. </p>"
                     }
                 },
                 "Excludes": {
@@ -812,7 +812,7 @@
                 "Schedule": {
                     "target": "com.amazonaws.datasync#TaskSchedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a schedule used to periodically transfer files from a source to a destination\n      location. The schedule should be specified in UTC time. For more information, see <a>task-scheduling</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies a schedule used to periodically transfer files from a source to a destination\n      location. The schedule should be specified in UTC time. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html\">Scheduling your task</a>.</p>"
                     }
                 },
                 "Tags": {
@@ -1016,7 +1016,7 @@
                 "LastConnectionTime": {
                     "target": "com.amazonaws.datasync#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time that the agent last connected to DataSyc.</p>"
+                        "smithy.api#documentation": "<p>The time that the agent last connected to DataSync.</p>"
                     }
                 },
                 "CreationTime": {
@@ -1266,7 +1266,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns metadata about a self-managed object storage server location. For more information\n      about self-managed object storage locations, see <a>create-object-location</a>.</p>"
+                "smithy.api#documentation": "<p>Returns metadata about a self-managed object storage server location. For more information\n      about self-managed object storage locations, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html\">Creating a location for object storage</a>.</p>"
             }
         },
         "com.amazonaws.datasync#DescribeLocationObjectStorageRequest": {
@@ -1387,7 +1387,7 @@
                 "S3StorageClass": {
                     "target": "com.amazonaws.datasync#S3StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 storage class that you chose to store your files in when this location is\n      used as a task destination. For more information about S3 storage classes, see <a href=\"http://aws.amazon.com/s3/storage-classes/\">Amazon S3 Storage Classes</a>. Some storage\n      classes have behaviors that can affect your S3 storage cost. For detailed information, see\n        <a>using-storage-classes</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 storage class that you chose to store your files in when this location is\n      used as a task destination. For more information about S3 storage classes, see <a href=\"http://aws.amazon.com/s3/storage-classes/\">Amazon S3 Storage Classes</a>. Some storage\n      classes have behaviors that can affect your S3 storage cost. For detailed information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when \n        working with S3 storage classes in DataSync</a>.</p>"
                     }
                 },
                 "S3Config": {
@@ -1396,7 +1396,7 @@
                 "AgentArns": {
                     "target": "com.amazonaws.datasync#AgentArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you are using DataSync on an AWS Outpost, the Amazon Resource Name (ARNs) of the EC2\n      agents deployed on your Outpost. For more information about launching a DataSync agent on an\n      AWS Outpost, see <a>outposts-agent</a>.</p>"
+                        "smithy.api#documentation": "<p>If you are using DataSync on an AWS Outpost, the Amazon Resource Name (ARNs) of the EC2\n      agents deployed on your Outpost. For more information about launching a DataSync agent on an\n      AWS Outpost, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent\">Deploy your DataSync agent on AWS Outposts</a>.</p>"
                     }
                 },
                 "CreationTime": {
@@ -1457,7 +1457,7 @@
                 "LocationUri": {
                     "target": "com.amazonaws.datasync#LocationUri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the source SBM location that was described.</p>"
+                        "smithy.api#documentation": "<p>The URL of the source SMB location that was described.</p>"
                     }
                 },
                 "AgentArns": {
@@ -1702,7 +1702,7 @@
                 "Options": {
                     "target": "com.amazonaws.datasync#Options",
                     "traits": {
-                        "smithy.api#documentation": "<p>The set of configuration options that control the behavior of a single execution of the\n      task that occurs when you call <code>StartTaskExecution</code>. You can configure these\n      options to preserve metadata such as user ID (UID) and group (GID), file permissions, data\n      integrity verification, and so on.</p>\n         <p>For each individual task execution, you can override these options by specifying the\n      overriding <code>OverrideOptions</code> value to \n      operation. </p>"
+                        "smithy.api#documentation": "<p>The set of configuration options that control the behavior of a single execution of the\n      task that occurs when you call <code>StartTaskExecution</code>. You can configure these\n      options to preserve metadata such as user ID (UID) and group (GID), file permissions, data\n      integrity verification, and so on.</p>\n         <p>For each individual task execution, you can override these options by specifying the\n      overriding <code>OverrideOptions</code> value to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a> operation. </p>"
                     }
                 },
                 "Excludes": {
@@ -1836,7 +1836,7 @@
                     "min": 7,
                     "max": 15
                 },
-                "smithy.api#pattern": "\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z"
+                "smithy.api#pattern": "^\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z$"
             }
         },
         "com.amazonaws.datasync#EndpointType": {
@@ -1897,7 +1897,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies which files, folders and objects to include or exclude when transferring files\n      from source to destination.</p>"
+                "smithy.api#documentation": "<p>Specifies which files, folders, and objects to include or exclude when transferring files\n      from source to destination.</p>"
             }
         },
         "com.amazonaws.datasync#FilterType": {
@@ -2533,7 +2533,7 @@
                 "Operator": {
                     "target": "com.amazonaws.datasync#Operator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operator that is used to compare filter values (for example, <code>Equals</code> or \n      <code>Contains</code>). For more about API filtering operators, see <a>query-resources</a>.</p>",
+                        "smithy.api#documentation": "<p>The operator that is used to compare filter values (for example, <code>Equals</code> or \n      <code>Contains</code>). For more about API filtering operators, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html\">API filters for ListTasks and ListLocations</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2585,12 +2585,12 @@
                 "LocationUri": {
                     "target": "com.amazonaws.datasync#LocationUri",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents a list of URLs of a location. <code>LocationUri</code> returns an array that\n      contains a list of locations when the <a>ListLocations</a> operation is\n      called.</p>\n         <p>Format: <code>TYPE://GLOBAL_ID/SUBDIR</code>.</p>\n         <p>TYPE designates the type of location. Valid values: NFS | EFS | S3.</p>\n         <p>GLOBAL_ID is the globally unique identifier of the resource that backs the location. An\n      example for EFS is <code>us-east-2.fs-abcd1234</code>. An example for Amazon S3 is the bucket\n      name, such as <code>myBucket</code>. An example for NFS is a valid IPv4 address or a host name\n      compliant with Domain Name Service (DNS).</p>\n         <p>SUBDIR is a valid file system path, delimited by forward slashes as is the *nix\n      convention. For NFS and Amazon EFS, it's the export path to mount the location. For\n      Amazon S3, it's the prefix path that you mount to and treat as the root of the\n      location.</p>\n         <p></p>"
+                        "smithy.api#documentation": "<p>Represents a list of URLs of a location. <code>LocationUri</code> returns an array that\n      contains a list of locations when the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html\">ListLocations</a> operation is\n      called.</p>\n         <p>Format: <code>TYPE://GLOBAL_ID/SUBDIR</code>.</p>\n         <p>TYPE designates the type of location. Valid values: NFS | EFS | S3.</p>\n         <p>GLOBAL_ID is the globally unique identifier of the resource that backs the location. An\n      example for EFS is <code>us-east-2.fs-abcd1234</code>. An example for Amazon S3 is the bucket\n      name, such as <code>myBucket</code>. An example for NFS is a valid IPv4 address or a host name\n      compliant with Domain Name Service (DNS).</p>\n         <p>SUBDIR is a valid file system path, delimited by forward slashes as is the *nix\n      convention. For NFS and Amazon EFS, it's the export path to mount the location. For\n      Amazon S3, it's the prefix path that you mount to and treat as the root of the\n      location.</p>\n         <p></p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a single entry in a list of locations. <code>LocationListEntry</code>\n      returns an array that contains a list of locations when the <a>ListLocations</a>\n      operation is called.</p>"
+                "smithy.api#documentation": "<p>Represents a single entry in a list of locations. <code>LocationListEntry</code>\n      returns an array that contains a list of locations when the \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html\">ListLocations</a>\n      operation is called.</p>"
             }
         },
         "com.amazonaws.datasync#LocationUri": {
@@ -2674,7 +2674,7 @@
                     "min": 0,
                     "max": 65535
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9=_-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9=_-]+$"
             }
         },
         "com.amazonaws.datasync#NfsMountOptions": {
@@ -2848,13 +2848,13 @@
                 "VerifyMode": {
                     "target": "com.amazonaws.datasync#VerifyMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines whether a data integrity verification should be performed at\n      the end of a task execution after all data and metadata have been transferred. \n      For more information, see \n      <a>create-task</a>\n         </p>\n         <p>Default value: POINT_IN_TIME_CONSISTENT.</p>\n         <p>ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred.\n    </p>\n    \n         <p>POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination \n      at the end of the transfer \n      to verify that source and destination are fully \n      synchronized. This option isn't supported when transferring to S3 Glacier or S3 Glacier \n      Deep Archive storage classes.</p>\n         <p>NONE: No additional verification is done at the end of the \n      transfer, but all data transmissions are integrity-checked with \n      checksum verification during the transfer.</p>"
+                        "smithy.api#documentation": "<p>A value that determines whether a data integrity verification should be performed at\n      the end of a task execution after all data and metadata have been transferred. \n      For more information, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html\">Configure task settings</a>.\n    </p>\n         <p>Default value: POINT_IN_TIME_CONSISTENT.</p>\n         <p>ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred.\n    </p>\n    \n         <p>POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination \n      at the end of the transfer \n      to verify that source and destination are fully \n      synchronized. This option isn't supported when transferring to S3 Glacier or S3 Glacier \n      Deep Archive storage classes.</p>\n         <p>NONE: No additional verification is done at the end of the \n      transfer, but all data transmissions are integrity-checked with \n      checksum verification during the transfer.</p>"
                     }
                 },
                 "OverwriteMode": {
                     "target": "com.amazonaws.datasync#OverwriteMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines whether files at the destination should be overwritten or\n      preserved when copying files. If set to <code>NEVER</code> a destination file will not be\n      replaced by a source file, even if the destination file differs from the source file. If you modify files in the destination and you sync the files, you can use this value to\n      protect against overwriting those changes. </p>\n         <p>Some storage classes have specific behaviors that can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a> in the <i>AWS DataSync\n        User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A value that determines whether files at the destination should be overwritten or\n      preserved when copying files. If set to <code>NEVER</code> a destination file will not be\n      replaced by a source file, even if the destination file differs from the source file. If you modify files in the destination and you sync the files, you can use this value to\n      protect against overwriting those changes. </p>\n         <p>Some storage classes have specific behaviors that can affect your S3 storage cost. For detailed information, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with Amazon S3 storage classes in DataSync </a>\n      in the <i>AWS DataSync\n        User Guide</i>.</p>"
                     }
                 },
                 "Atime": {
@@ -2866,37 +2866,37 @@
                 "Mtime": {
                     "target": "com.amazonaws.datasync#Mtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates the last time that a file was modified (that is, a file was\n      written to) before the PREPARING phase. </p>\n         <p>Default value: PRESERVE. </p>\n         <p>PRESERVE: Preserve original <code>Mtime</code> (recommended)</p>\n         <p> NONE: Ignore <code>Mtime</code>. </p>\n         <note>\n            <p>If <code>Mtime</code> is set to PRESERVE, <code>Atime</code> must be set to\n        BEST_EFFORT.</p>\n            <p>If <code>Mtime</code> is set to NONE, <code>Atime</code> must also be set to NONE.\n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>A value that indicates the last time that a file was modified (that is, a file was\n      written to) before the PREPARING phase. This option is required for cases when you need to run\n      the same task more than one time. </p>\n         <p>Default value: PRESERVE. </p>\n         <p>PRESERVE: Preserve original <code>Mtime</code> (recommended)</p>\n         <p> NONE: Ignore <code>Mtime</code>. </p>\n         <note>\n            <p>If <code>Mtime</code> is set to PRESERVE, <code>Atime</code> must be set to\n        BEST_EFFORT.</p>\n            <p>If <code>Mtime</code> is set to NONE, <code>Atime</code> must also be set to NONE.\n      </p>\n         </note>"
                     }
                 },
                 "Uid": {
                     "target": "com.amazonaws.datasync#Uid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user ID (UID) of the file's owner. </p>\n         <p>Default value: INT_VALUE. This preserves the integer value of the ID.</p>\n         <p>INT_VALUE: Preserve the integer value of UID and group ID (GID)\n      (recommended).</p>\n         <p>NONE: Ignore UID and GID. </p>"
+                        "smithy.api#documentation": "<p>The POSIX user ID (UID) of the file's owner. This option should only be set for NFS,\n      EFS, and S3 locations. To learn more about what metadata is copied by DataSync, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied\">Metadata Copied by DataSync</a>.</p>\n         <p>Default value: INT_VALUE. This preserves the integer value of the ID.</p>\n         <p>INT_VALUE: Preserve the integer value of UID and group ID (GID)\n      (recommended).</p>\n         <p>NONE: Ignore UID and GID. </p>"
                     }
                 },
                 "Gid": {
                     "target": "com.amazonaws.datasync#Gid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The group ID (GID) of the file's owners. </p>\n         <p>Default value: INT_VALUE. This preserves the integer value of the ID.</p>\n         <p>INT_VALUE: Preserve the integer value of user ID (UID) and GID (recommended).</p>\n         <p>NONE: Ignore UID and GID. </p>"
+                        "smithy.api#documentation": "<p>The POSIX group ID (GID) of the file's owners. This option should only be set for\n      NFS, EFS, and S3 locations. For more information about what metadata is copied by DataSync,\n      see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied\">Metadata Copied by DataSync</a>. </p>\n         <p>Default value: INT_VALUE. This preserves the integer value of the ID.</p>\n         <p>INT_VALUE: Preserve the integer value of user ID (UID) and GID (recommended).</p>\n         <p>NONE: Ignore UID and GID. </p>"
                     }
                 },
                 "PreserveDeletedFiles": {
                     "target": "com.amazonaws.datasync#PreserveDeletedFiles",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that specifies whether files in the destination that don't exist in the source\n      file system should be preserved. This option can affect your storage cost. \n      If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed\n      information, see <a>using-storage-classes</a> in the <i>AWS DataSync User\n        Guide</i>.</p>\n         <p>Default value: PRESERVE.</p>\n         <p>PRESERVE: Ignore such destination files (recommended). </p>\n         <p>REMOVE: Delete destination files that aren’t present in the source.</p>"
+                        "smithy.api#documentation": "<p>A value that specifies whether files in the destination that don't exist in the source\n      file system should be preserved. This option can affect your storage cost. \n      If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed\n      information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with Amazon S3 storage classes in DataSync </a> in the <i>AWS DataSync User\n        Guide</i>.</p>\n         <p>Default value: PRESERVE.</p>\n         <p>PRESERVE: Ignore such destination files (recommended). </p>\n         <p>REMOVE: Delete destination files that aren’t present in the source.</p>"
                     }
                 },
                 "PreserveDevices": {
                     "target": "com.amazonaws.datasync#PreserveDevices",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines whether AWS DataSync should preserve the metadata of block\n      and character devices in the source file system, and recreate the files with that device name\n      and metadata on the destination.</p>\n         <note>\n            <p>AWS DataSync can't sync the actual contents of such devices, because they are\n        nonterminal and don't return an end-of-file (EOF) marker.</p>\n         </note>\n         <p>Default value: NONE.</p>\n         <p>NONE: Ignore special devices (recommended). </p>\n         <p>PRESERVE: Preserve character and block device metadata. This option isn't currently\n      supported for Amazon EFS. </p>"
+                        "smithy.api#documentation": "<p>A value that determines whether AWS DataSync should preserve the metadata of block\n      and character devices in the source file system, and re-create the files with that device name\n      and metadata on the destination. DataSync does not copy the contents of such devices, only the\n      name and metadata. </p>\n         <note>\n            <p>AWS DataSync can't sync the actual contents of such devices, because they are\n        nonterminal and don't return an end-of-file (EOF) marker.</p>\n         </note>\n         <p>Default value: NONE.</p>\n         <p>NONE: Ignore special devices (recommended). </p>\n         <p>PRESERVE: Preserve character and block device metadata. This option isn't currently\n      supported for Amazon EFS. </p>"
                     }
                 },
                 "PosixPermissions": {
                     "target": "com.amazonaws.datasync#PosixPermissions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines which users or groups can access a file for a specific purpose\n      such as reading, writing, or execution of the file. </p>\n         <p>Default value: PRESERVE.</p>\n         <p>PRESERVE: Preserve POSIX-style permissions (recommended).</p>\n         <p>NONE: Ignore permissions. </p>\n         <note>\n            <p>AWS DataSync can preserve extant permissions of a source location.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A value that determines which users or groups can access a file for a specific purpose\n      such as reading, writing, or execution of the file. This option should only be set for NFS,\n      EFS, and S3 locations. For more information about what metadata is copied by DataSync, see\n        <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied\">Metadata Copied by DataSync</a>. </p>\n         <p>Default value: PRESERVE.</p>\n         <p>PRESERVE: Preserve POSIX-style permissions (recommended).</p>\n         <p>NONE: Ignore permissions. </p>\n         <note>\n            <p>AWS DataSync can preserve extant permissions of a source location.</p>\n         </note>"
                     }
                 },
                 "BytesPerSecond": {
@@ -2908,7 +2908,7 @@
                 "TaskQueueing": {
                     "target": "com.amazonaws.datasync#TaskQueueing",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines whether tasks should be queued before executing the tasks. If set\n      to <code>ENABLED</code>, the tasks will be queued. The default is <code>ENABLED</code>.</p>\n         <p>If you use the same agent to run multiple tasks, you can enable the tasks to run in\n      series. For more information, see <a>queue-task-execution</a>.</p>"
+                        "smithy.api#documentation": "<p>A value that determines whether tasks should be queued before executing the tasks. If set\n      to <code>ENABLED</code>, the tasks will be queued. The default is <code>ENABLED</code>.</p>\n         <p>If you use the same agent to run multiple tasks, you can enable the tasks to run in\n      series. For more information, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#queue-task-execution\">Queueing task executions</a>.</p>"
                     }
                 },
                 "LogLevel": {
@@ -2922,10 +2922,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A value that determines whether DataSync transfers only the data and metadata that differ between the source \n      and the destination location, or whether DataSync transfers all the content from the source, without comparing to \n      the destination location. </p>\n         <p>CHANGED: DataSync copies only data or metadata that is new or different content from the source location to the \n      destination location.</p>\n         <p>ALL: DataSync copies all source location content to the destination, without comparing to existing content on \n      the destination.</p>"
                     }
+                },
+                "SecurityDescriptorCopyFlags": {
+                    "target": "com.amazonaws.datasync#SmbSecurityDescriptorCopyFlags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that determines which components of the SMB security descriptor are copied from source\n      to destination objects.\n      </p>\n         <p>This value is only used for transfers \n      between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File\n      Server locations. For more information about how \n      DataSync handles metadata, see\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html\">How DataSync Handles Metadata and Special Files</a>.\n    </p>\n         <p>Default value: OWNER_DACL.</p>\n\n         <p>\n            <b>OWNER_DACL</b>: For each copied object, DataSync copies the following metadata:</p>\n         <ul>\n            <li>\n               <p>Object owner.</p>\n            </li>\n            <li>\n               <p>NTFS discretionary access control lists (DACLs), which determine whether to \n        grant access to an object.</p>\n            </li>\n         </ul>\n         <p>When choosing this option, DataSync does NOT copy the NTFS system access control lists\n      (SACLs), which are used by administrators to log attempts to access a secured object.</p>\n    \n         <p>\n            <b>OWNER_DACL_SACL</b>: For each copied object, DataSync copies the following metadata:</p> \n         <ul>\n            <li>\n               <p>Object owner.</p>\n            </li>\n            <li>\n               <p>NTFS discretionary access control lists (DACLs), which determine whether to\n          grant access to an object.</p>\n            </li>\n            <li>\n               <p>NTFS system access control lists (SACLs), which are used by administrators \n          to log attempts to access a secured object.</p>\n            </li>\n         </ul>\n         <p>Copying SACLs requires granting additional permissions to the Windows user that DataSync\n      uses to access your SMB location. For information about choosing a user that ensures\n      sufficient permissions to files, folders, and metadata, see <a href=\"create-smb-location.html#SMBuser\">user</a>.</p>\n    \n         <p>\n            <b>NONE</b>: None of the SMB security descriptor components\n      are copied. Destination objects are owned by the user that was provided for accessing the \n      destination location. DACLs and SACLs are set based on the destination server’s configuration.\n    </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the options that are available to control the behavior of a <a>StartTaskExecution</a> operation. Behavior includes preserving metadata such as user\n      ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination,\n      data integrity verification, and so on.</p>\n         <p>A task has a set of default options associated with it. If you don't specify an option\n      in <a>StartTaskExecution</a>, the default value is used. You can override the\n      defaults options on each task execution by specifying an overriding <code>Options</code> value\n      to <a>StartTaskExecution</a>.</p>"
+                "smithy.api#documentation": "<p>Represents the options that are available to control the behavior of a \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a>\n      operation. Behavior includes preserving metadata such as user\n      ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination,\n      data integrity verification, and so on.</p>\n         <p>A task has a set of default options associated with it. If you don't specify an option\n      in <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a>, \n      the default value is used. You can override the\n      defaults options on each task execution by specifying an overriding <code>Options</code> value\n      to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a>.</p>"
             }
         },
         "com.amazonaws.datasync#OutputTagList": {
@@ -3091,7 +3097,7 @@
                 "BucketAccessRoleArn": {
                     "target": "com.amazonaws.datasync#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket to access. This bucket is used as a parameter in the <a>CreateLocationS3</a> operation. </p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket to access. This bucket is used as a parameter in the \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationS3.html\">CreateLocationS3</a>\n      operation. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3198,6 +3204,25 @@
                 },
                 "smithy.api#pattern": "^.{0,104}$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.datasync#SmbSecurityDescriptorCopyFlags": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "OWNER_DACL",
+                        "name": "OWNER_DACL"
+                    },
+                    {
+                        "value": "OWNER_DACL_SACL",
+                        "name": "OWNER_DACL_SACL"
+                    }
+                ]
             }
         },
         "com.amazonaws.datasync#SmbSubdirectory": {
@@ -3343,7 +3368,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code>\n      returns an array that contains a list of tasks when the <a>ListTagsForResource</a>\n      operation is called.</p>"
+                "smithy.api#documentation": "<p>Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code>\n      returns an array that contains a list of tasks when the \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTagsForResource.html\">ListTagsForResource</a>\n      operation is called.</p>"
             }
         },
         "com.amazonaws.datasync#TagResource": {
@@ -3455,7 +3480,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a single entry in a list of task executions.\n        <code>TaskExecutionListEntry</code> returns an array that contains a list of specific\n      invocations of a task when <a>ListTaskExecutions</a> operation is called.</p>"
+                "smithy.api#documentation": "<p>Represents a single entry in a list of task executions.\n        <code>TaskExecutionListEntry</code> returns an array that contains a list of specific\n      invocations of a task when the\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTaskExecutions.html\">ListTaskExecutions</a>\n      operation is called.</p>"
             }
         },
         "com.amazonaws.datasync#TaskExecutionResultDetail": {
@@ -3575,7 +3600,7 @@
                 "Operator": {
                     "target": "com.amazonaws.datasync#Operator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operator that is used to compare filter values (for example, <code>Equals</code> or \n      <code>Contains</code>). For more about API filtering operators, see <a>query-resources</a>.</p>",
+                        "smithy.api#documentation": "<p>The operator that is used to compare filter values (for example, <code>Equals</code> or \n      <code>Contains</code>). For more about API filtering operators, see\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html\">API filters for ListTasks and ListLocations</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3634,7 +3659,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a single entry in a list of tasks. <code>TaskListEntry</code> returns an\n      array that contains a list of tasks when the <a>ListTasks</a> operation is called.\n      A task includes the source and destination file systems to sync and the options to use for the\n      tasks.</p>"
+                "smithy.api#documentation": "<p>Represents a single entry in a list of tasks. <code>TaskListEntry</code> returns an\n      array that contains a list of tasks when the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTasks.html\">ListTasks</a> operation is called.\n      A task includes the source and destination file systems to sync and the options to use for the\n      tasks.</p>"
             }
         },
         "com.amazonaws.datasync#TaskQueueing": {
@@ -3843,7 +3868,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates some of the parameters of a previously created location for Network File System (NFS) access.\n      For information about creating an NFS location, see <a>create-nfs-location</a>.</p>"
+                "smithy.api#documentation": "<p>Updates some of the parameters of a previously created location for Network File System (NFS) access.\n      For information about creating an NFS location, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html\">Creating a location for NFS</a>.</p>"
             }
         },
         "com.amazonaws.datasync#UpdateLocationNfsRequest": {
@@ -3891,7 +3916,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates some of the parameters of a previously created location for self-managed object\n      storage server access. For information about creating a self-managed object storage location,\n      see <a>create-object-location</a>.</p>"
+                "smithy.api#documentation": "<p>Updates some of the parameters of a previously created location for self-managed object\n      storage server access. For information about creating a self-managed object storage location,\n      see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html\">Creating a location for object storage</a>.</p>"
             }
         },
         "com.amazonaws.datasync#UpdateLocationObjectStorageRequest": {
@@ -3963,7 +3988,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates some of the parameters of a previously created location for Server Message Block\n      (SMB) file system access. For information about creating an SMB location, see <a>create-smb-location</a>.</p>"
+                "smithy.api#documentation": "<p>Updates some of the parameters of a previously created location for Server Message Block\n      (SMB) file system access. For information about creating an SMB location, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html\">Creating a location for SMB</a>.</p>"
             }
         },
         "com.amazonaws.datasync#UpdateLocationSmbRequest": {
@@ -4099,7 +4124,7 @@
                 "Schedule": {
                     "target": "com.amazonaws.datasync#TaskSchedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a schedule used to periodically transfer files from a source to a destination\n      location. You can configure your task to execute hourly, daily, weekly or on specific days of\n      the week. You control when in the day or hour you want the task to execute. The time you\n      specify is UTC time. For more information, see <a>task-scheduling</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies a schedule used to periodically transfer files from a source to a destination\n      location. You can configure your task to execute hourly, daily, weekly or on specific days of\n      the week. You control when in the day or hour you want the task to execute. The time you\n      specify is UTC time. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html\">Scheduling your task</a>.</p>"
                     }
                 },
                 "Name": {

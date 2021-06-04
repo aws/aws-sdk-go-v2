@@ -774,7 +774,7 @@
                 "Comment": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional comment to describe the origin access identity. The comment cannot be longer\n\t\t\tthan 128 characters.</p>",
+                        "smithy.api#documentation": "<p>A comment to describe the origin access identity. The comment cannot be longer\n\t\t\tthan 128 characters.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4801,7 +4801,7 @@
                     "min": 0,
                     "max": 108
                 },
-                "smithy.api#pattern": "arn:aws:cloudfront::[0-9]{12}:function\\/[a-zA-Z0-9-_]{1,64}$"
+                "smithy.api#pattern": "^arn:aws:cloudfront::[0-9]{12}:function\\/[a-zA-Z0-9-_]{1,64}$"
             }
         },
         "com.amazonaws.cloudfront#FunctionAlreadyExists": {
@@ -9376,7 +9376,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "[a-z]{2}-[a-z]+-\\d"
+                "smithy.api#pattern": "^[a-z]{2}-[a-z]+-\\d$"
             }
         },
         "com.amazonaws.cloudfront#OriginSslProtocols": {
@@ -10083,7 +10083,7 @@
         "com.amazonaws.cloudfront#ResourceARN": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:aws(-cn)?:cloudfront::[0-9]+:.*"
+                "smithy.api#pattern": "^arn:aws(-cn)?:cloudfront::[0-9]+:"
             }
         },
         "com.amazonaws.cloudfront#ResourceInUse": {

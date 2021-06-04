@@ -5,7 +5,6 @@ package location
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -60,6 +59,9 @@ type DescribeTrackerOutput struct {
 	// The Amazon Resource Name (ARN) for the tracker resource. Used when you need to
 	// specify a resource across all AWS.
 	//
+	// * Format example:
+	// arn:aws:geo:region:account-id:tracker/ExampleTracker
+	//
 	// This member is required.
 	TrackerArn *string
 
@@ -75,8 +77,16 @@ type DescribeTrackerOutput struct {
 	// This member is required.
 	UpdateTime *time.Time
 
-	// The data source selected for the tracker resource and associated pricing plan.
+	// A key identifier for an AWS KMS customer managed key
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
+	// assigned to the Amazon Location resource.
+	KmsKeyId *string
+
+	// The specified data provider for the tracker resource.
 	PricingPlanDataSource *string
+
+	// The tags associated with the tracker resource.
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -103,13 +113,7 @@ func addOperationDescribeTrackerMiddlewares(stack *middleware.Stack, options Opt
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
-		return err
-	}
 	if err = addRetryMiddlewares(stack, options); err != nil {
-		return err
-	}
-	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {

@@ -735,6 +735,7 @@ func (e *InvalidAutomationStatusUpdateException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
+// The specified command ID is not valid. Verify the ID and try again.
 type InvalidCommandId struct {
 	Message *string
 }
@@ -1796,9 +1797,9 @@ func (e *ParameterLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.
 // continue creating new parameters, first move the label from the oldest version
 // of the parameter to a newer one for use in your operations. For information
 // about moving parameter labels, see Move a parameter label (console)
-// (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-console-move)
+// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-console-move)
 // or Move a parameter label (CLI)
-// (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-cli-move)
+// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-cli-move)
 // in the AWS Systems Manager User Guide.
 type ParameterMaxVersionLimitExceeded struct {
 	Message *string

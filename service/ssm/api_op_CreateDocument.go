@@ -113,7 +113,7 @@ type CreateDocumentInput struct {
 	// types of resources. If you don't specify a value, the document can't run on any
 	// resources. For a list of valid resource types, see AWS resource and property
 	// types reference
-	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.
 	TargetType *string
 

@@ -37,6 +37,9 @@ type CreateTestGridProjectInput struct {
 
 	// Human-readable description of the project.
 	Description *string
+
+	// The VPC security groups and subnets that are attached to a project.
+	VpcConfig *types.TestGridVpcConfig
 }
 
 type CreateTestGridProjectOutput struct {

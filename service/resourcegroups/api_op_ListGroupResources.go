@@ -17,6 +17,14 @@ import (
 // permissions:
 //
 // * resource-groups:ListGroupResources
+//
+// *
+// cloudformation:DescribeStacks
+//
+// * cloudformation:ListStackResources
+//
+// *
+// tag:GetResources
 func (c *Client) ListGroupResources(ctx context.Context, params *ListGroupResourcesInput, optFns ...func(*Options)) (*ListGroupResourcesOutput, error) {
 	if params == nil {
 		params = &ListGroupResourcesInput{}

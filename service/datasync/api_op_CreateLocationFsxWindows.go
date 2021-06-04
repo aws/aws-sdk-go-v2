@@ -47,7 +47,8 @@ type CreateLocationFsxWindowsInput struct {
 	SecurityGroupArns []string
 
 	// The user who has the permissions to access files and folders in the FSx for
-	// Windows File Server file system.
+	// Windows File Server file system. For information about choosing a user name that
+	// ensures sufficient permissions to files, folders, and metadata, see user.
 	//
 	// This member is required.
 	User *string

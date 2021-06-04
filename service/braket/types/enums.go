@@ -26,6 +26,7 @@ type DeviceStatus string
 const (
 	DeviceStatusOnline  DeviceStatus = "ONLINE"
 	DeviceStatusOffline DeviceStatus = "OFFLINE"
+	DeviceStatusRetired DeviceStatus = "RETIRED"
 )
 
 // Values returns all known values for DeviceStatus. Note that this can be expanded
@@ -35,6 +36,7 @@ func (DeviceStatus) Values() []DeviceStatus {
 	return []DeviceStatus{
 		"ONLINE",
 		"OFFLINE",
+		"RETIRED",
 	}
 }
 

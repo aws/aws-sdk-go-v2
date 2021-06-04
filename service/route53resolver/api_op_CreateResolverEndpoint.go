@@ -37,8 +37,8 @@ func (c *Client) CreateResolverEndpoint(ctx context.Context, params *CreateResol
 type CreateResolverEndpointInput struct {
 
 	// A unique string that identifies the request and that allows failed requests to
-	// be retried without the risk of executing the operation twice. CreatorRequestId
-	// can be any unique string, for example, a date/time stamp.
+	// be retried without the risk of running the operation twice. CreatorRequestId can
+	// be any unique string, for example, a date/time stamp.
 	//
 	// This member is required.
 	CreatorRequestId *string

@@ -222,6 +222,11 @@ func awsRestjson1_serializeOpDocumentCreateEnvironmentInput(v *CreateEnvironment
 		ok.String(*v.RequirementsS3Path)
 	}
 
+	if v.Schedulers != nil {
+		ok := object.Key("Schedulers")
+		ok.Integer(*v.Schedulers)
+	}
+
 	if v.SourceBucketArn != nil {
 		ok := object.Key("SourceBucketArn")
 		ok.String(*v.SourceBucketArn)
@@ -908,6 +913,11 @@ func awsRestjson1_serializeOpDocumentUpdateEnvironmentInput(v *UpdateEnvironment
 	if v.RequirementsS3Path != nil {
 		ok := object.Key("RequirementsS3Path")
 		ok.String(*v.RequirementsS3Path)
+	}
+
+	if v.Schedulers != nil {
+		ok := object.Key("Schedulers")
+		ok.Integer(*v.Schedulers)
 	}
 
 	if v.SourceBucketArn != nil {

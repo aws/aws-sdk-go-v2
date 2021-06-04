@@ -78,6 +78,28 @@ type Aggregates struct {
 	Sum *float64
 }
 
+// Contains the configuration information of an alarm created in an AWS IoT
+// SiteWise Monitor portal. You can use the alarm to monitor an asset property and
+// get notified when the asset property value is outside a specified range. For
+// more information, see .
+type Alarms struct {
+
+	// The ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the IAM role that allows the alarm to perform actions and access AWS resources,
+	// including AWS IoT Events.
+	//
+	// This member is required.
+	AlarmRoleArn *string
+
+	// The ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the AWS Lambda function that manages alarm notifications. For more information,
+	// see Managing alarm notifications (https://docs.aws.amazon.com/) in the AWS IoT
+	// Events Developer Guide.
+	NotificationLambdaArn *string
+}
+
 // Contains information about a composite model in an asset. This object contains
 // the asset's properties that you define in the composite model.
 type AssetCompositeModel struct {

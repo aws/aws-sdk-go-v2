@@ -13,7 +13,8 @@ import (
 
 // Updates some of the parameters of a previously created location for Server
 // Message Block (SMB) file system access. For information about creating an SMB
-// location, see create-smb-location.
+// location, see Creating a location for SMB
+// (https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html).
 func (c *Client) UpdateLocationSmb(ctx context.Context, params *UpdateLocationSmbInput, optFns ...func(*Options)) (*UpdateLocationSmbOutput, error) {
 	if params == nil {
 		params = &UpdateLocationSmbInput{}

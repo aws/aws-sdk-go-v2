@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateAlarmModel struct {
+}
+
+func (*validateOpCreateAlarmModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAlarmModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAlarmModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAlarmModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDetectorModel struct {
 }
 
@@ -50,6 +70,26 @@ func (m *validateOpCreateInput) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAlarmModel struct {
+}
+
+func (*validateOpDeleteAlarmModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAlarmModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAlarmModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAlarmModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDetectorModel struct {
 }
 
@@ -85,6 +125,26 @@ func (m *validateOpDeleteInput) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteInputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAlarmModel struct {
+}
+
+func (*validateOpDescribeAlarmModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAlarmModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAlarmModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAlarmModelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -170,6 +230,26 @@ func (m *validateOpGetDetectorModelAnalysisResults) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAlarmModelVersions struct {
+}
+
+func (*validateOpListAlarmModelVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAlarmModelVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAlarmModelVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAlarmModelVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDetectorModelVersions struct {
 }
 
@@ -185,6 +265,26 @@ func (m *validateOpListDetectorModelVersions) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDetectorModelVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListInputRoutings struct {
+}
+
+func (*validateOpListInputRoutings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInputRoutings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInputRoutingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInputRoutingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -290,6 +390,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAlarmModel struct {
+}
+
+func (*validateOpUpdateAlarmModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAlarmModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAlarmModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAlarmModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDetectorModel struct {
 }
 
@@ -330,6 +450,10 @@ func (m *validateOpUpdateInput) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateAlarmModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAlarmModel{}, middleware.After)
+}
+
 func addOpCreateDetectorModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDetectorModel{}, middleware.After)
 }
@@ -338,12 +462,20 @@ func addOpCreateInputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateInput{}, middleware.After)
 }
 
+func addOpDeleteAlarmModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAlarmModel{}, middleware.After)
+}
+
 func addOpDeleteDetectorModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDetectorModel{}, middleware.After)
 }
 
 func addOpDeleteInputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteInput{}, middleware.After)
+}
+
+func addOpDescribeAlarmModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAlarmModel{}, middleware.After)
 }
 
 func addOpDescribeDetectorModelAnalysisValidationMiddleware(stack *middleware.Stack) error {
@@ -362,8 +494,16 @@ func addOpGetDetectorModelAnalysisResultsValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpGetDetectorModelAnalysisResults{}, middleware.After)
 }
 
+func addOpListAlarmModelVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAlarmModelVersions{}, middleware.After)
+}
+
 func addOpListDetectorModelVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDetectorModelVersions{}, middleware.After)
+}
+
+func addOpListInputRoutingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInputRoutings{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -386,12 +526,31 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateAlarmModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAlarmModel{}, middleware.After)
+}
+
 func addOpUpdateDetectorModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDetectorModel{}, middleware.After)
 }
 
 func addOpUpdateInputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInput{}, middleware.After)
+}
+
+func validateAcknowledgeFlow(v *types.AcknowledgeFlow) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcknowledgeFlow"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAction(v *types.Action) error {
@@ -488,6 +647,153 @@ func validateActions(v []types.Action) error {
 	}
 }
 
+func validateAlarmAction(v *types.AlarmAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AlarmAction"}
+	if v.Sns != nil {
+		if err := validateSNSTopicPublishAction(v.Sns); err != nil {
+			invalidParams.AddNested("Sns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IotTopicPublish != nil {
+		if err := validateIotTopicPublishAction(v.IotTopicPublish); err != nil {
+			invalidParams.AddNested("IotTopicPublish", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Lambda != nil {
+		if err := validateLambdaAction(v.Lambda); err != nil {
+			invalidParams.AddNested("Lambda", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IotEvents != nil {
+		if err := validateIotEventsAction(v.IotEvents); err != nil {
+			invalidParams.AddNested("IotEvents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sqs != nil {
+		if err := validateSqsAction(v.Sqs); err != nil {
+			invalidParams.AddNested("Sqs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Firehose != nil {
+		if err := validateFirehoseAction(v.Firehose); err != nil {
+			invalidParams.AddNested("Firehose", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DynamoDB != nil {
+		if err := validateDynamoDBAction(v.DynamoDB); err != nil {
+			invalidParams.AddNested("DynamoDB", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DynamoDBv2 != nil {
+		if err := validateDynamoDBv2Action(v.DynamoDBv2); err != nil {
+			invalidParams.AddNested("DynamoDBv2", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IotSiteWise != nil {
+		if err := validateIotSiteWiseAction(v.IotSiteWise); err != nil {
+			invalidParams.AddNested("IotSiteWise", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAlarmActions(v []types.AlarmAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AlarmActions"}
+	for i := range v {
+		if err := validateAlarmAction(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAlarmCapabilities(v *types.AlarmCapabilities) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AlarmCapabilities"}
+	if v.InitializationConfiguration != nil {
+		if err := validateInitializationConfiguration(v.InitializationConfiguration); err != nil {
+			invalidParams.AddNested("InitializationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AcknowledgeFlow != nil {
+		if err := validateAcknowledgeFlow(v.AcknowledgeFlow); err != nil {
+			invalidParams.AddNested("AcknowledgeFlow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAlarmEventActions(v *types.AlarmEventActions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AlarmEventActions"}
+	if v.AlarmActions != nil {
+		if err := validateAlarmActions(v.AlarmActions); err != nil {
+			invalidParams.AddNested("AlarmActions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAlarmNotification(v *types.AlarmNotification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AlarmNotification"}
+	if v.NotificationActions != nil {
+		if err := validateNotificationActions(v.NotificationActions); err != nil {
+			invalidParams.AddNested("NotificationActions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAlarmRule(v *types.AlarmRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AlarmRule"}
+	if v.SimpleRule != nil {
+		if err := validateSimpleRule(v.SimpleRule); err != nil {
+			invalidParams.AddNested("SimpleRule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssetPropertyTimestamp(v *types.AssetPropertyTimestamp) error {
 	if v == nil {
 		return nil
@@ -508,9 +814,6 @@ func validateAssetPropertyValue(v *types.AssetPropertyValue) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssetPropertyValue"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Timestamp != nil {
 		if err := validateAssetPropertyTimestamp(v.Timestamp); err != nil {
 			invalidParams.AddNested("Timestamp", err.(smithy.InvalidParamsError))
@@ -670,6 +973,62 @@ func validateDynamoDBv2Action(v *types.DynamoDBv2Action) error {
 	}
 }
 
+func validateEmailConfiguration(v *types.EmailConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmailConfiguration"}
+	if v.From == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("From"))
+	}
+	if v.Recipients == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Recipients"))
+	} else if v.Recipients != nil {
+		if err := validateEmailRecipients(v.Recipients); err != nil {
+			invalidParams.AddNested("Recipients", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmailConfigurations(v []types.EmailConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmailConfigurations"}
+	for i := range v {
+		if err := validateEmailConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmailRecipients(v *types.EmailRecipients) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmailRecipients"}
+	if v.To != nil {
+		if err := validateRecipientDetails(v.To); err != nil {
+			invalidParams.AddNested("To", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEvent(v *types.Event) error {
 	if v == nil {
 		return nil
@@ -727,6 +1086,21 @@ func validateFirehoseAction(v *types.FirehoseAction) error {
 	}
 }
 
+func validateInitializationConfiguration(v *types.InitializationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InitializationConfiguration"}
+	if v.DisabledOnInitialization == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisabledOnInitialization"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInputDefinition(v *types.InputDefinition) error {
 	if v == nil {
 		return nil
@@ -737,6 +1111,28 @@ func validateInputDefinition(v *types.InputDefinition) error {
 	} else if v.Attributes != nil {
 		if err := validateAttributes(v.Attributes); err != nil {
 			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInputIdentifier(v *types.InputIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InputIdentifier"}
+	if v.IotEventsInputIdentifier != nil {
+		if err := validateIotEventsInputIdentifier(v.IotEventsInputIdentifier); err != nil {
+			invalidParams.AddNested("IotEventsInputIdentifier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IotSiteWiseInputIdentifier != nil {
+		if err := validateIotSiteWiseInputIdentifier(v.IotSiteWiseInputIdentifier); err != nil {
+			invalidParams.AddNested("IotSiteWiseInputIdentifier", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -766,16 +1162,64 @@ func validateIotEventsAction(v *types.IotEventsAction) error {
 	}
 }
 
+func validateIotEventsInputIdentifier(v *types.IotEventsInputIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IotEventsInputIdentifier"}
+	if v.InputName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIotSiteWiseAction(v *types.IotSiteWiseAction) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IotSiteWiseAction"}
-	if v.PropertyValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PropertyValue"))
-	} else if v.PropertyValue != nil {
+	if v.PropertyValue != nil {
 		if err := validateAssetPropertyValue(v.PropertyValue); err != nil {
 			invalidParams.AddNested("PropertyValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIotSiteWiseAssetModelPropertyIdentifier(v *types.IotSiteWiseAssetModelPropertyIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IotSiteWiseAssetModelPropertyIdentifier"}
+	if v.AssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
+	}
+	if v.PropertyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PropertyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIotSiteWiseInputIdentifier(v *types.IotSiteWiseInputIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IotSiteWiseInputIdentifier"}
+	if v.IotSiteWiseAssetModelPropertyIdentifier != nil {
+		if err := validateIotSiteWiseAssetModelPropertyIdentifier(v.IotSiteWiseAssetModelPropertyIdentifier); err != nil {
+			invalidParams.AddNested("IotSiteWiseAssetModelPropertyIdentifier", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -839,6 +1283,69 @@ func validateLoggingOptions(v *types.LoggingOptions) error {
 	if v.DetectorDebugOptions != nil {
 		if err := validateDetectorDebugOptions(v.DetectorDebugOptions); err != nil {
 			invalidParams.AddNested("DetectorDebugOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotificationAction(v *types.NotificationAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationAction"}
+	if v.Action == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	} else if v.Action != nil {
+		if err := validateNotificationTargetActions(v.Action); err != nil {
+			invalidParams.AddNested("Action", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SmsConfigurations != nil {
+		if err := validateSMSConfigurations(v.SmsConfigurations); err != nil {
+			invalidParams.AddNested("SmsConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EmailConfigurations != nil {
+		if err := validateEmailConfigurations(v.EmailConfigurations); err != nil {
+			invalidParams.AddNested("EmailConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotificationActions(v []types.NotificationAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationActions"}
+	for i := range v {
+		if err := validateNotificationAction(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotificationTargetActions(v *types.NotificationTargetActions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationTargetActions"}
+	if v.LambdaAction != nil {
+		if err := validateLambdaAction(v.LambdaAction); err != nil {
+			invalidParams.AddNested("LambdaAction", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -922,6 +1429,40 @@ func validatePayload(v *types.Payload) error {
 	}
 }
 
+func validateRecipientDetail(v *types.RecipientDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecipientDetail"}
+	if v.SsoIdentity != nil {
+		if err := validateSSOIdentity(v.SsoIdentity); err != nil {
+			invalidParams.AddNested("SsoIdentity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecipientDetails(v []types.RecipientDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecipientDetails"}
+	for i := range v {
+		if err := validateRecipientDetail(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResetTimerAction(v *types.ResetTimerAction) error {
 	if v == nil {
 		return nil
@@ -970,6 +1511,63 @@ func validateSetVariableAction(v *types.SetVariableAction) error {
 	}
 }
 
+func validateSimpleRule(v *types.SimpleRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SimpleRule"}
+	if v.InputProperty == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputProperty"))
+	}
+	if len(v.ComparisonOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
+	}
+	if v.Threshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSMSConfiguration(v *types.SMSConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SMSConfiguration"}
+	if v.Recipients == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Recipients"))
+	} else if v.Recipients != nil {
+		if err := validateRecipientDetails(v.Recipients); err != nil {
+			invalidParams.AddNested("Recipients", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSMSConfigurations(v []types.SMSConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SMSConfigurations"}
+	for i := range v {
+		if err := validateSMSConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSNSTopicPublishAction(v *types.SNSTopicPublishAction) error {
 	if v == nil {
 		return nil
@@ -1002,6 +1600,21 @@ func validateSqsAction(v *types.SqsAction) error {
 		if err := validatePayload(v.Payload); err != nil {
 			invalidParams.AddNested("Payload", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSSOIdentity(v *types.SSOIdentity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SSOIdentity"}
+	if v.IdentityStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityStoreId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1135,6 +1748,51 @@ func validateTransitionEvents(v []types.TransitionEvent) error {
 	}
 }
 
+func validateOpCreateAlarmModelInput(v *CreateAlarmModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAlarmModelInput"}
+	if v.AlarmModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmModelName"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AlarmRule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmRule"))
+	} else if v.AlarmRule != nil {
+		if err := validateAlarmRule(v.AlarmRule); err != nil {
+			invalidParams.AddNested("AlarmRule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AlarmNotification != nil {
+		if err := validateAlarmNotification(v.AlarmNotification); err != nil {
+			invalidParams.AddNested("AlarmNotification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AlarmEventActions != nil {
+		if err := validateAlarmEventActions(v.AlarmEventActions); err != nil {
+			invalidParams.AddNested("AlarmEventActions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AlarmCapabilities != nil {
+		if err := validateAlarmCapabilities(v.AlarmCapabilities); err != nil {
+			invalidParams.AddNested("AlarmCapabilities", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDetectorModelInput(v *CreateDetectorModelInput) error {
 	if v == nil {
 		return nil
@@ -1192,6 +1850,21 @@ func validateOpCreateInputInput(v *CreateInputInput) error {
 	}
 }
 
+func validateOpDeleteAlarmModelInput(v *DeleteAlarmModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAlarmModelInput"}
+	if v.AlarmModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmModelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDetectorModelInput(v *DeleteDetectorModelInput) error {
 	if v == nil {
 		return nil
@@ -1214,6 +1887,21 @@ func validateOpDeleteInputInput(v *DeleteInputInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteInputInput"}
 	if v.InputName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAlarmModelInput(v *DescribeAlarmModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAlarmModelInput"}
+	if v.AlarmModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmModelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1282,6 +1970,21 @@ func validateOpGetDetectorModelAnalysisResultsInput(v *GetDetectorModelAnalysisR
 	}
 }
 
+func validateOpListAlarmModelVersionsInput(v *ListAlarmModelVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAlarmModelVersionsInput"}
+	if v.AlarmModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmModelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListDetectorModelVersionsInput(v *ListDetectorModelVersionsInput) error {
 	if v == nil {
 		return nil
@@ -1289,6 +1992,25 @@ func validateOpListDetectorModelVersionsInput(v *ListDetectorModelVersionsInput)
 	invalidParams := smithy.InvalidParamsError{Context: "ListDetectorModelVersionsInput"}
 	if v.DetectorModelName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorModelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInputRoutingsInput(v *ListInputRoutingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInputRoutingsInput"}
+	if v.InputIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputIdentifier"))
+	} else if v.InputIdentifier != nil {
+		if err := validateInputIdentifier(v.InputIdentifier); err != nil {
+			invalidParams.AddNested("InputIdentifier", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1382,6 +2104,46 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAlarmModelInput(v *UpdateAlarmModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAlarmModelInput"}
+	if v.AlarmModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmModelName"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.AlarmRule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmRule"))
+	} else if v.AlarmRule != nil {
+		if err := validateAlarmRule(v.AlarmRule); err != nil {
+			invalidParams.AddNested("AlarmRule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AlarmNotification != nil {
+		if err := validateAlarmNotification(v.AlarmNotification); err != nil {
+			invalidParams.AddNested("AlarmNotification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AlarmEventActions != nil {
+		if err := validateAlarmEventActions(v.AlarmEventActions); err != nil {
+			invalidParams.AddNested("AlarmEventActions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AlarmCapabilities != nil {
+		if err := validateAlarmCapabilities(v.AlarmCapabilities); err != nil {
+			invalidParams.AddNested("AlarmCapabilities", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

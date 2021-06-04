@@ -58,6 +58,23 @@ func (e *DeviceOfflineException) ErrorMessage() string {
 func (e *DeviceOfflineException) ErrorCode() string             { return "DeviceOfflineException" }
 func (e *DeviceOfflineException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified device has been retired.
+type DeviceRetiredException struct {
+	Message *string
+}
+
+func (e *DeviceRetiredException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DeviceRetiredException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DeviceRetiredException) ErrorCode() string             { return "DeviceRetiredException" }
+func (e *DeviceRetiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request processing has failed because of an unknown error, exception, or
 // failure.
 type InternalServiceException struct {

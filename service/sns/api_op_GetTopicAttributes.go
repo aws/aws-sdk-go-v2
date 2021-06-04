@@ -101,8 +101,7 @@ type GetTopicAttributesOutput struct {
 	// you set ContentBasedDeduplication to true, Amazon SNS uses a SHA-256 hash to
 	// generate the MessageDeduplicationId using the body of the message (but not the
 	// attributes of the message). (Optional) To override the generated value, you can
-	// specify a value for the the MessageDeduplicationId parameter for the Publish
-	// action.
+	// specify a value for the MessageDeduplicationId parameter for the Publish action.
 	Attributes map[string]string
 
 	// Metadata pertaining to the operation's result.

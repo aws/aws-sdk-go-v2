@@ -52,7 +52,7 @@ type ListFirewallDomainsInput struct {
 
 type ListFirewallDomainsOutput struct {
 
-	// A list of the domains in the firewall domain list. This might be a parital list
+	// A list of the domains in the firewall domain list. This might be a partial list
 	// of the domains that you've defined in the domain list. For information, see
 	// MaxResults.
 	Domains []string

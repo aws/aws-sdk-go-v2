@@ -13,8 +13,9 @@ import (
 )
 
 // Returns metadata about a self-managed object storage server location. For more
-// information about self-managed object storage locations, see
-// create-object-location.
+// information about self-managed object storage locations, see Creating a location
+// for object storage
+// (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html).
 func (c *Client) DescribeLocationObjectStorage(ctx context.Context, params *DescribeLocationObjectStorageInput, optFns ...func(*Options)) (*DescribeLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &DescribeLocationObjectStorageInput{}

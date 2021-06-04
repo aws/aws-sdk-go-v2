@@ -315,9 +315,25 @@ type CrlConfiguration struct {
 	// Distribution Points extension of the issued certificate. You can change the name
 	// of your bucket by calling the UpdateCertificateAuthority
 	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html)
-	// action. You must specify a bucket policy that allows ACM Private CA to write the
-	// CRL to your bucket.
+	// action. You must specify a bucket policy
+	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-policies)
+	// that allows ACM Private CA to write the CRL to your bucket.
 	S3BucketName *string
+
+	// Determines whether the CRL will be publicly readable or privately held in the
+	// CRL Amazon S3 bucket. If you choose PUBLIC_READ, the CRL will be accessible over
+	// the public internet. If you choose BUCKET_OWNER_FULL_CONTROL, only the owner of
+	// the CRL S3 bucket can access the CRL, and your PKI clients may need an
+	// alternative method of access. If no value is specified, the default is
+	// PUBLIC_READ. Note: This default can cause CA creation to fail in some
+	// circumstances. If you have have enabled the Block Public Access (BPA) feature in
+	// your S3 account, then you must specify the value of this parameter as
+	// BUCKET_OWNER_FULL_CONTROL, and not doing so results in an error. If you have
+	// disabled BPA in S3, then you can specify either BUCKET_OWNER_FULL_CONTROL or
+	// PUBLIC_READ as the value. For more information, see Blocking public access to
+	// the S3 bucket
+	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-bpa).
+	S3ObjectAcl S3ObjectAcl
 }
 
 // Describes the certificate extensions to be added to the certificate signing

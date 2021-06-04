@@ -49,8 +49,8 @@ type ListFirewallConfigsInput struct {
 
 type ListFirewallConfigsOutput struct {
 
-	// The configurations for the firewall behavior provided by DNS Firewall for Amazon
-	// virtual private clouds (VPC).
+	// The configurations for the firewall behavior provided by DNS Firewall for VPCs
+	// from Amazon Virtual Private Cloud (Amazon VPC).
 	FirewallConfigs []types.FirewallConfig
 
 	// If objects are still available for retrieval, Resolver returns this token in the

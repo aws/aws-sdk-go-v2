@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves execution information about a detector model analysis
+// Retrieves runtime information about a detector model analysis. After AWS IoT
+// Events starts analyzing your detector model, you have up to 24 hours to retrieve
+// the analysis results.
 func (c *Client) DescribeDetectorModelAnalysis(ctx context.Context, params *DescribeDetectorModelAnalysisInput, optFns ...func(*Options)) (*DescribeDetectorModelAnalysisOutput, error) {
 	if params == nil {
 		params = &DescribeDetectorModelAnalysisInput{}
@@ -44,7 +46,7 @@ type DescribeDetectorModelAnalysisOutput struct {
 	// process can take several minutes to complete.
 	//
 	// * COMPLETE - AWS IoT Events
-	// finished analyzing your detector model .
+	// finished analyzing your detector model.
 	//
 	// * FAILED - AWS IoT Events couldn't
 	// analyze your detector model. Try again later.

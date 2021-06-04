@@ -59,11 +59,11 @@ type CreateTopicInput struct {
 	// topic. By default, only the topic owner can publish or subscribe to the
 	// topic.
 	//
-	// The following attribute applies only to server-side-encryption
+	// The following attribute applies only to server-side encryption
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
 	//
 	// *
-	// KmsMasterKeyId – The ID of an AWS-managed customer master key (CMK) for Amazon
+	// KmsMasterKeyId – The ID of an AWS managed customer master key (CMK) for Amazon
 	// SNS or a custom CMK. For more information, see Key Terms
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms).
 	// For more examples, see KeyId
@@ -90,8 +90,7 @@ type CreateTopicInput struct {
 	// you set ContentBasedDeduplication to true, Amazon SNS uses a SHA-256 hash to
 	// generate the MessageDeduplicationId using the body of the message (but not the
 	// attributes of the message). (Optional) To override the generated value, you can
-	// specify a value for the the MessageDeduplicationId parameter for the Publish
-	// action.
+	// specify a value for the MessageDeduplicationId parameter for the Publish action.
 	Attributes map[string]string
 
 	// The list of tags to add to a new topic. To be able to tag a topic on creation,

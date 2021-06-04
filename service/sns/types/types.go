@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	"time"
+)
+
 // Endpoint for mobile app and device.
 type Endpoint struct {
 
@@ -43,6 +47,28 @@ type MessageAttributeValue struct {
 	StringValue *string
 }
 
+// A list of phone numbers and their metadata.
+type PhoneNumberInformation struct {
+
+	// The date and time when the phone number was created.
+	CreatedAt *time.Time
+
+	// The two-character code for the country or region, in ISO 3166-1 alpha-2 format.
+	Iso2CountryCode *string
+
+	// The capabilities of each phone number.
+	NumberCapabilities []NumberCapability
+
+	// The phone number.
+	PhoneNumber *string
+
+	// The list of supported routes.
+	RouteType RouteType
+
+	// The status of the phone number.
+	Status *string
+}
+
 // Platform application object.
 type PlatformApplication struct {
 
@@ -51,6 +77,25 @@ type PlatformApplication struct {
 
 	// PlatformApplicationArn for platform application object.
 	PlatformApplicationArn *string
+}
+
+// A verified or pending destination phone number in the SMS sandbox. When you
+// start using Amazon SNS to send SMS messages, your AWS account is in the SMS
+// sandbox. The SMS sandbox provides a safe environment for you to try Amazon SNS
+// features without risking your reputation as an SMS sender. While your account is
+// in the SMS sandbox, you can use all of the features of Amazon SNS. However, you
+// can send SMS messages only to verified destination phone numbers. For more
+// information, including how to move out of the sandbox to send messages without
+// restrictions, see SMS sandbox
+// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) in the Amazon
+// SNS Developer Guide.
+type SMSSandboxPhoneNumber struct {
+
+	// The destination phone number.
+	PhoneNumber *string
+
+	// The destination phone number's verification status.
+	Status SMSSandboxPhoneNumberVerificationStatus
 }
 
 // A wrapper type for the attributes of an Amazon SNS subscription.

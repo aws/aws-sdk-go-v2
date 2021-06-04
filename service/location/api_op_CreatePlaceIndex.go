@@ -12,13 +12,8 @@ import (
 	"time"
 )
 
-// Creates a Place index resource in your AWS account, which supports Places
-// functions with geospatial data sourced from your chosen data provider. By using
-// Places, you agree that AWS may transmit your API queries to your selected third
-// party provider for processing, which may be outside the AWS region you are
-// currently using. Because of licensing limitations, you may not use HERE to store
-// results for locations in Japan. For more information, see the AWS Service Terms
-// (https://aws.amazon.com/service-terms/) for Amazon Location Service.
+// Creates a place index resource in your AWS account, which supports functions
+// with geospatial data sourced from your chosen data provider.
 func (c *Client) CreatePlaceIndex(ctx context.Context, params *CreatePlaceIndexInput, optFns ...func(*Options)) (*CreatePlaceIndexOutput, error) {
 	if params == nil {
 		params = &CreatePlaceIndexInput{}
@@ -42,22 +37,27 @@ type CreatePlaceIndexInput struct {
 	//
 	// * Esri
 	//
-	// * Here
+	// * Here Place index resources using HERE as
+	// a data provider can't be used to store
+	// (https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html)
+	// results for locations in Japan. For more information, see the AWS Service Terms
+	// (https://aws.amazon.com/service-terms/) for Amazon Location Service.
 	//
-	// For additional details on data
-	// providers, see the Amazon Location Service data providers page
+	// For
+	// additional details on data providers, see the Amazon Location Service data
+	// providers page
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
 	DataSource *string
 
-	// The name of the Place index resource. Requirements:
+	// The name of the place index resource. Requirements:
 	//
 	// * Contain only alphanumeric
-	// characters (A-Z, a-z, 0-9) , hyphens (-), periods (.), and underscores (_).
+	// characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and underscores (_).
 	//
 	// *
-	// Must be a unique Place index resource name.
+	// Must be a unique place index resource name.
 	//
 	// * No spaces allowed. For example,
 	// ExamplePlaceIndex.
@@ -65,7 +65,7 @@ type CreatePlaceIndexInput struct {
 	// This member is required.
 	IndexName *string
 
-	// Specifies the pricing plan for your Place index resource. For additional details
+	// Specifies the pricing plan for your place index resource. For additional details
 	// and restrictions on each pricing plan option, see the Amazon Location Service
 	// pricing page (https://aws.amazon.com/location/pricing/).
 	//
@@ -75,26 +75,48 @@ type CreatePlaceIndexInput struct {
 	// Specifies the data storage option for requesting Places.
 	DataSourceConfiguration *types.DataSourceConfiguration
 
-	// The optional description for the Place index resource.
+	// The optional description for the place index resource.
 	Description *string
+
+	// Applies one or more tags to the place index resource. A tag is a key-value pair
+	// helps manage, identify, search, and filter your resources by labelling them.
+	// Format: "key" : "value" Restrictions:
+	//
+	// * Maximum 50 tags per resource
+	//
+	// * Each
+	// resource tag must be unique with a maximum of one value.
+	//
+	// * Maximum key length:
+	// 128 Unicode characters in UTF-8
+	//
+	// * Maximum value length: 256 Unicode characters
+	// in UTF-8
+	//
+	// * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+	// characters: + - = . _ : / @.
+	Tags map[string]string
 }
 
 type CreatePlaceIndexOutput struct {
 
-	// The timestamp for when the Place index resource was created in ISO 8601
+	// The timestamp for when the place index resource was created in ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ.
 	//
 	// This member is required.
 	CreateTime *time.Time
 
-	// The Amazon Resource Name (ARN) for the Place index resource. Used when you need
-	// to specify a resource across all AWS.
+	// The Amazon Resource Name (ARN) for the place index resource. Used to specify a
+	// resource across all AWS.
+	//
+	// * Format example:
+	// arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex
 	//
 	// This member is required.
 	IndexArn *string
 
-	// The name for the Place index resource.
+	// The name for the place index resource.
 	//
 	// This member is required.
 	IndexName *string

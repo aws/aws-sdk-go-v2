@@ -32,8 +32,8 @@ func (c *Client) CreateResolverRule(ctx context.Context, params *CreateResolverR
 type CreateResolverRuleInput struct {
 
 	// A unique string that identifies the request and that allows failed requests to
-	// be retried without the risk of executing the operation twice. CreatorRequestId
-	// can be any unique string, for example, a date/time stamp.
+	// be retried without the risk of running the operation twice. CreatorRequestId can
+	// be any unique string, for example, a date/time stamp.
 	//
 	// This member is required.
 	CreatorRequestId *string
@@ -70,7 +70,7 @@ type CreateResolverRuleInput struct {
 	Tags []types.Tag
 
 	// The IPs that you want Resolver to forward DNS queries to. You can specify only
-	// IPv4 addresses. Separate IP addresses with a comma. TargetIps is available only
+	// IPv4 addresses. Separate IP addresses with a space. TargetIps is available only
 	// when the value of Rule type is FORWARD.
 	TargetIps []types.TargetAddress
 }

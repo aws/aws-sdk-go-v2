@@ -42,7 +42,9 @@ import (
 // * DailyAutomaticBackupStartTime
 //
 // *
-// StorageCapacity
+// DataCompressionType
+//
+// * StorageCapacity
 //
 // * WeeklyMaintenanceStartTime
 func (c *Client) UpdateFileSystem(ctx context.Context, params *UpdateFileSystemInput, optFns ...func(*Options)) (*UpdateFileSystemOutput, error) {

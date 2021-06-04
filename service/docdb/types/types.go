@@ -146,6 +146,10 @@ type DBCluster struct {
 	// Universal Coordinated Time (UTC).
 	PreferredMaintenanceWindow *string
 
+	// Contains one or more identifiers of the secondary clusters that are associated
+	// with this cluster.
+	ReadReplicaIdentifiers []string
+
 	// The reader endpoint for the cluster. The reader endpoint for a cluster load
 	// balances connections across the Amazon DocumentDB replicas that are available in
 	// a cluster. As clients request new connections to the reader endpoint, Amazon
@@ -157,6 +161,10 @@ type DBCluster struct {
 	// read workload to other Amazon DocumentDB replicas in the cluster, you can then
 	// reconnect to the reader endpoint.
 	ReaderEndpoint *string
+
+	// Contains the identifier of the source cluster if this cluster is a secondary
+	// cluster.
+	ReplicationSourceIdentifier *string
 
 	// Specifies the current state of this cluster.
 	Status *string
@@ -608,6 +616,61 @@ type Filter struct {
 	//
 	// This member is required.
 	Values []string
+}
+
+// A data type representing an Amazon DocumentDB global cluster.
+type GlobalCluster struct {
+
+	// The default database name within the new global cluster.
+	DatabaseName *string
+
+	// The deletion protection setting for the new global cluster.
+	DeletionProtection *bool
+
+	// The Amazon DocumentDB database engine used by the global cluster.
+	Engine *string
+
+	// Indicates the database engine version.
+	EngineVersion *string
+
+	// The Amazon Resource Name (ARN) for the global cluster.
+	GlobalClusterArn *string
+
+	// Contains a user-supplied global cluster identifier. This identifier is the
+	// unique key that identifies a global cluster.
+	GlobalClusterIdentifier *string
+
+	// The list of cluster IDs for secondary clusters within the global cluster.
+	// Currently limited to one item.
+	GlobalClusterMembers []GlobalClusterMember
+
+	// The AWS Region-unique, immutable identifier for the global database cluster.
+	// This identifier is found in AWS CloudTrail log entries whenever the AWS KMS
+	// customer master key (CMK) for the cluster is accessed.
+	GlobalClusterResourceId *string
+
+	// Specifies the current state of this global cluster.
+	Status *string
+
+	// The storage encryption setting for the global cluster.
+	StorageEncrypted *bool
+}
+
+// A data structure with information about any primary and secondary clusters
+// associated with an Amazon DocumentDB global clusters.
+type GlobalClusterMember struct {
+
+	// The Amazon Resource Name (ARN) for each Amazon DocumentDB cluster.
+	DBClusterArn *string
+
+	// Specifies whether the Amazon DocumentDB cluster is the primary cluster (that is,
+	// has read-write capability) for the Amazon DocumentDB global cluster with which
+	// it is associated.
+	IsWriter bool
+
+	// The Amazon Resource Name (ARN) for each read-only secondary cluster associated
+	// with the Aurora global cluster.
+	Readers []string
 }
 
 // The options that are available for an instance.

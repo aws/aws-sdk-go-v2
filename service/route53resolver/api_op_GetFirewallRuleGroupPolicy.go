@@ -12,7 +12,7 @@ import (
 
 // Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the
 // specified rule group. You can use the policy to share the rule group using AWS
-// Resource Access Manager (RAM).
+// Resource Access Manager (AWS RAM).
 func (c *Client) GetFirewallRuleGroupPolicy(ctx context.Context, params *GetFirewallRuleGroupPolicyInput, optFns ...func(*Options)) (*GetFirewallRuleGroupPolicyOutput, error) {
 	if params == nil {
 		params = &GetFirewallRuleGroupPolicyInput{}
@@ -40,7 +40,7 @@ type GetFirewallRuleGroupPolicyOutput struct {
 
 	// The AWS Identity and Access Management (AWS IAM) policy for sharing the
 	// specified rule group. You can use the policy to share the rule group using AWS
-	// Resource Access Manager (RAM).
+	// Resource Access Manager (AWS RAM).
 	FirewallRuleGroupPolicy *string
 
 	// Metadata pertaining to the operation's result.

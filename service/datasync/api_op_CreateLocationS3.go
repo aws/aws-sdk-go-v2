@@ -48,7 +48,9 @@ type CreateLocationS3Input struct {
 
 	// If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names
 	// (ARNs) of the DataSync agents deployed on your Outpost. For more information
-	// about launching a DataSync agent on an AWS Outpost, see outposts-agent.
+	// about launching a DataSync agent on an AWS Outpost, see Deploy your DataSync
+	// agent on AWS Outposts
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent).
 	AgentArns []string
 
 	// The Amazon S3 storage class that you want to store your files in when this
@@ -57,7 +59,9 @@ type CreateLocationS3Input struct {
 	// defaults to AWS S3 Outposts. For more information about S3 storage classes, see
 	// Amazon S3 Storage Classes (http://aws.amazon.com/s3/storage-classes/). Some
 	// storage classes have behaviors that can affect your S3 storage cost. For
-	// detailed information, see using-storage-classes.
+	// detailed information, see Considerations when working with S3 storage classes in
+	// DataSync
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes).
 	S3StorageClass types.S3StorageClass
 
 	// A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used

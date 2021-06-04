@@ -162,8 +162,8 @@ type UpdateAutoScalingGroupInput struct {
 	PlacementGroup *string
 
 	// The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling
-	// group uses to call other AWS services on your behalf. For more information, see
-	// Service-linked roles
+	// group uses to call other Amazon Web Services on your behalf. For more
+	// information, see Service-linked roles
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	ServiceLinkedRoleARN *string

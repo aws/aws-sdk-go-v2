@@ -50,6 +50,26 @@ func (m *validateOpBatchPutDocument) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpClearQuerySuggestions struct {
+}
+
+func (*validateOpClearQuerySuggestions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpClearQuerySuggestions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ClearQuerySuggestionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpClearQuerySuggestionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDataSource struct {
 }
 
@@ -105,6 +125,26 @@ func (m *validateOpCreateIndex) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateIndexInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateQuerySuggestionsBlockList struct {
+}
+
+func (*validateOpCreateQuerySuggestionsBlockList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateQuerySuggestionsBlockList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateQuerySuggestionsBlockListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateQuerySuggestionsBlockListInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +230,26 @@ func (m *validateOpDeleteIndex) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteQuerySuggestionsBlockList struct {
+}
+
+func (*validateOpDeleteQuerySuggestionsBlockList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteQuerySuggestionsBlockList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteQuerySuggestionsBlockListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteQuerySuggestionsBlockListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteThesaurus struct {
 }
 
@@ -270,6 +330,46 @@ func (m *validateOpDescribeIndex) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeQuerySuggestionsBlockList struct {
+}
+
+func (*validateOpDescribeQuerySuggestionsBlockList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeQuerySuggestionsBlockList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeQuerySuggestionsBlockListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeQuerySuggestionsBlockListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeQuerySuggestionsConfig struct {
+}
+
+func (*validateOpDescribeQuerySuggestionsConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeQuerySuggestionsConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeQuerySuggestionsConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeQuerySuggestionsConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeThesaurus struct {
 }
 
@@ -285,6 +385,26 @@ func (m *validateOpDescribeThesaurus) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeThesaurusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetQuerySuggestions struct {
+}
+
+func (*validateOpGetQuerySuggestions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQuerySuggestions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQuerySuggestionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQuerySuggestionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -345,6 +465,26 @@ func (m *validateOpListFaqs) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListFaqsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListQuerySuggestionsBlockLists struct {
+}
+
+func (*validateOpListQuerySuggestionsBlockLists) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListQuerySuggestionsBlockLists) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListQuerySuggestionsBlockListsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListQuerySuggestionsBlockListsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -550,6 +690,46 @@ func (m *validateOpUpdateIndex) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateQuerySuggestionsBlockList struct {
+}
+
+func (*validateOpUpdateQuerySuggestionsBlockList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQuerySuggestionsBlockList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQuerySuggestionsBlockListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQuerySuggestionsBlockListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateQuerySuggestionsConfig struct {
+}
+
+func (*validateOpUpdateQuerySuggestionsConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQuerySuggestionsConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQuerySuggestionsConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQuerySuggestionsConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateThesaurus struct {
 }
 
@@ -578,6 +758,10 @@ func addOpBatchPutDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchPutDocument{}, middleware.After)
 }
 
+func addOpClearQuerySuggestionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpClearQuerySuggestions{}, middleware.After)
+}
+
 func addOpCreateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataSource{}, middleware.After)
 }
@@ -588,6 +772,10 @@ func addOpCreateFaqValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIndex{}, middleware.After)
+}
+
+func addOpCreateQuerySuggestionsBlockListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateQuerySuggestionsBlockList{}, middleware.After)
 }
 
 func addOpCreateThesaurusValidationMiddleware(stack *middleware.Stack) error {
@@ -606,6 +794,10 @@ func addOpDeleteIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteIndex{}, middleware.After)
 }
 
+func addOpDeleteQuerySuggestionsBlockListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteQuerySuggestionsBlockList{}, middleware.After)
+}
+
 func addOpDeleteThesaurusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteThesaurus{}, middleware.After)
 }
@@ -622,8 +814,20 @@ func addOpDescribeIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeIndex{}, middleware.After)
 }
 
+func addOpDescribeQuerySuggestionsBlockListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeQuerySuggestionsBlockList{}, middleware.After)
+}
+
+func addOpDescribeQuerySuggestionsConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeQuerySuggestionsConfig{}, middleware.After)
+}
+
 func addOpDescribeThesaurusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeThesaurus{}, middleware.After)
+}
+
+func addOpGetQuerySuggestionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQuerySuggestions{}, middleware.After)
 }
 
 func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
@@ -636,6 +840,10 @@ func addOpListDataSourceSyncJobsValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListFaqsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFaqs{}, middleware.After)
+}
+
+func addOpListQuerySuggestionsBlockListsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListQuerySuggestionsBlockLists{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -676,6 +884,14 @@ func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateIndex{}, middleware.After)
+}
+
+func addOpUpdateQuerySuggestionsBlockListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQuerySuggestionsBlockList{}, middleware.After)
+}
+
+func addOpUpdateQuerySuggestionsConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQuerySuggestionsConfig{}, middleware.After)
 }
 
 func addOpUpdateThesaurusValidationMiddleware(stack *middleware.Stack) error {
@@ -1006,9 +1222,6 @@ func validateDataSourceSyncJobMetricTarget(v *types.DataSourceSyncJobMetricTarge
 	invalidParams := smithy.InvalidParamsError{Context: "DataSourceSyncJobMetricTarget"}
 	if v.DataSourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
-	}
-	if v.DataSourceSyncJobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSourceSyncJobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1867,6 +2080,21 @@ func validateOpBatchPutDocumentInput(v *BatchPutDocumentInput) error {
 	}
 }
 
+func validateOpClearQuerySuggestionsInput(v *ClearQuerySuggestionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClearQuerySuggestionsInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 	if v == nil {
 		return nil
@@ -1950,6 +2178,39 @@ func validateOpCreateIndexInput(v *CreateIndexInput) error {
 	if v.UserTokenConfigurations != nil {
 		if err := validateUserTokenConfigurationList(v.UserTokenConfigurations); err != nil {
 			invalidParams.AddNested("UserTokenConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateQuerySuggestionsBlockListInput(v *CreateQuerySuggestionsBlockListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateQuerySuggestionsBlockListInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SourceS3Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceS3Path"))
+	} else if v.SourceS3Path != nil {
+		if err := validateS3Path(v.SourceS3Path); err != nil {
+			invalidParams.AddNested("SourceS3Path", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2043,6 +2304,24 @@ func validateOpDeleteIndexInput(v *DeleteIndexInput) error {
 	}
 }
 
+func validateOpDeleteQuerySuggestionsBlockListInput(v *DeleteQuerySuggestionsBlockListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteQuerySuggestionsBlockListInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteThesaurusInput(v *DeleteThesaurusInput) error {
 	if v == nil {
 		return nil
@@ -2112,6 +2391,39 @@ func validateOpDescribeIndexInput(v *DescribeIndexInput) error {
 	}
 }
 
+func validateOpDescribeQuerySuggestionsBlockListInput(v *DescribeQuerySuggestionsBlockListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeQuerySuggestionsBlockListInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeQuerySuggestionsConfigInput(v *DescribeQuerySuggestionsConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeQuerySuggestionsConfigInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeThesaurusInput(v *DescribeThesaurusInput) error {
 	if v == nil {
 		return nil
@@ -2122,6 +2434,24 @@ func validateOpDescribeThesaurusInput(v *DescribeThesaurusInput) error {
 	}
 	if v.IndexId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetQuerySuggestionsInput(v *GetQuerySuggestionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQuerySuggestionsInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.QueryText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryText"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2168,6 +2498,21 @@ func validateOpListFaqsInput(v *ListFaqsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListFaqsInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListQuerySuggestionsBlockListsInput(v *ListQuerySuggestionsBlockListsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListQuerySuggestionsBlockListsInput"}
 	if v.IndexId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
 	}
@@ -2390,6 +2735,44 @@ func validateOpUpdateIndexInput(v *UpdateIndexInput) error {
 		if err := validateUserTokenConfigurationList(v.UserTokenConfigurations); err != nil {
 			invalidParams.AddNested("UserTokenConfigurations", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQuerySuggestionsBlockListInput(v *UpdateQuerySuggestionsBlockListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQuerySuggestionsBlockListInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.SourceS3Path != nil {
+		if err := validateS3Path(v.SourceS3Path); err != nil {
+			invalidParams.AddNested("SourceS3Path", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQuerySuggestionsConfigInput(v *UpdateQuerySuggestionsConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQuerySuggestionsConfigInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -57,10 +57,22 @@ type CreatePortalInput struct {
 	// This member is required.
 	RoleArn *string
 
+	// Contains the configuration information of an alarm created in an AWS IoT
+	// SiteWise Monitor portal. You can use the alarm to monitor an asset property and
+	// get notified when the asset property value is outside a specified range. For
+	// more information, see .
+	Alarms *types.Alarms
+
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
 	ClientToken *string
+
+	// The email address that sends alarm notifications. If you use the AWS IoT Events
+	// managed AWS Lambda function to manage your emails, you must verify the sender
+	// email address in Amazon SES
+	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html).
+	NotificationSenderEmail *string
 
 	// The service to use to authenticate users to the portal. Choose from the
 	// following options:

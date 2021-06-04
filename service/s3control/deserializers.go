@@ -10421,6 +10421,22 @@ func awsRestxml_deserializeDocumentS3CopyObjectOperation(v **types.S3CopyObjectO
 				return err
 			}
 
+		case strings.EqualFold("BucketKeyEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.BucketKeyEnabled = xtv
+			}
+
 		case strings.EqualFold("CannedAccessControlList", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

@@ -33,7 +33,7 @@ type CreateGeofenceCollectionInput struct {
 	// A custom name for the geofence collection. Requirements:
 	//
 	// * Contain only
-	// alphanumeric characters (A–Z, a–z, 0-9), hyphens (-), periods (.), and
+	// alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and
 	// underscores (_).
 	//
 	// * Must be a unique geofence collection name.
@@ -44,7 +44,7 @@ type CreateGeofenceCollectionInput struct {
 	// This member is required.
 	CollectionName *string
 
-	// Specifies the pricing plan for your geofence collection. For additional details
+	// Specifies the pricing plan for the geofence collection. For additional details
 	// and restrictions on each pricing plan option, see the Amazon Location Service
 	// pricing page (https://aws.amazon.com/location/pricing/).
 	//
@@ -54,19 +54,53 @@ type CreateGeofenceCollectionInput struct {
 	// An optional description for the geofence collection.
 	Description *string
 
-	// Specifies the plan data source. Required if the Mobile Asset Tracking (MAT) or
-	// the Mobile Asset Management (MAM) pricing plan is selected. Billing is
-	// determined by the resource usage, the associated pricing plan, and the data
-	// source that was specified. For more information about each pricing plan option
-	// and restrictions, see the Amazon Location Service pricing page
-	// (https://aws.amazon.com/location/pricing/). Valid Values: Esri | Here
+	// A key identifier for an AWS KMS customer managed key
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html). Enter
+	// a key ID, key ARN, alias name, or alias ARN.
+	KmsKeyId *string
+
+	// Specifies the data provider for the geofence collection.
+	//
+	// * Required value for
+	// the following pricing plans: MobileAssetTracking | MobileAssetManagement
+	//
+	// For
+	// more information about Data Providers
+	// (https://aws.amazon.com/location/data-providers/), and Pricing plans
+	// (https://aws.amazon.com/location/pricing/), see the Amazon Location Service
+	// product page. Amazon Location Service only uses PricingPlanDataSource to
+	// calculate billing for your geofence collection. Your data won't be shared with
+	// the data provider, and will remain in your AWS account or Region unless you move
+	// it. Valid Values: Esri | Here
 	PricingPlanDataSource *string
+
+	// Applies one or more tags to the geofence collection. A tag is a key-value pair
+	// helps manage, identify, search, and filter your resources by labelling them.
+	// Format: "key" : "value" Restrictions:
+	//
+	// * Maximum 50 tags per resource
+	//
+	// * Each
+	// resource tag must be unique with a maximum of one value.
+	//
+	// * Maximum key length:
+	// 128 Unicode characters in UTF-8
+	//
+	// * Maximum value length: 256 Unicode characters
+	// in UTF-8
+	//
+	// * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+	// characters: + - = . _ : / @.
+	Tags map[string]string
 }
 
 type CreateGeofenceCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection resource. Used when
 	// you need to specify a resource across all AWS.
+	//
+	// * Format example:
+	// arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection
 	//
 	// This member is required.
 	CollectionArn *string

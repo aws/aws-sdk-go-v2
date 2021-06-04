@@ -40,6 +40,9 @@
                     "target": "com.amazonaws.kendra#BatchPutDocument"
                 },
                 {
+                    "target": "com.amazonaws.kendra#ClearQuerySuggestions"
+                },
+                {
                     "target": "com.amazonaws.kendra#CreateDataSource"
                 },
                 {
@@ -47,6 +50,9 @@
                 },
                 {
                     "target": "com.amazonaws.kendra#CreateIndex"
+                },
+                {
+                    "target": "com.amazonaws.kendra#CreateQuerySuggestionsBlockList"
                 },
                 {
                     "target": "com.amazonaws.kendra#CreateThesaurus"
@@ -61,6 +67,9 @@
                     "target": "com.amazonaws.kendra#DeleteIndex"
                 },
                 {
+                    "target": "com.amazonaws.kendra#DeleteQuerySuggestionsBlockList"
+                },
+                {
                     "target": "com.amazonaws.kendra#DeleteThesaurus"
                 },
                 {
@@ -73,7 +82,16 @@
                     "target": "com.amazonaws.kendra#DescribeIndex"
                 },
                 {
+                    "target": "com.amazonaws.kendra#DescribeQuerySuggestionsBlockList"
+                },
+                {
+                    "target": "com.amazonaws.kendra#DescribeQuerySuggestionsConfig"
+                },
+                {
                     "target": "com.amazonaws.kendra#DescribeThesaurus"
+                },
+                {
+                    "target": "com.amazonaws.kendra#GetQuerySuggestions"
                 },
                 {
                     "target": "com.amazonaws.kendra#ListDataSources"
@@ -86,6 +104,9 @@
                 },
                 {
                     "target": "com.amazonaws.kendra#ListIndices"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ListQuerySuggestionsBlockLists"
                 },
                 {
                     "target": "com.amazonaws.kendra#ListTagsForResource"
@@ -116,6 +137,12 @@
                 },
                 {
                     "target": "com.amazonaws.kendra#UpdateIndex"
+                },
+                {
+                    "target": "com.amazonaws.kendra#UpdateQuerySuggestionsBlockList"
+                },
+                {
+                    "target": "com.amazonaws.kendra#UpdateQuerySuggestionsConfig"
                 },
                 {
                     "target": "com.amazonaws.kendra#UpdateThesaurus"
@@ -473,7 +500,7 @@
                 "Documents": {
                     "target": "com.amazonaws.kendra#DocumentList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more documents to add to the index. </p>\n         <p>Documents have the following file size limits.</p>\n         <ul>\n            <li>\n               <p>5 MB total size for inline documents</p>\n            </li>\n            <li>\n               <p>50 MB total size for files from an S3 bucket</p>\n            </li>\n            <li>\n               <p>5 MB extracted text for any file</p>\n            </li>\n         </ul>\n         <p>For more information about file size and transaction per second\n      quotas, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas</a>.</p>",
+                        "smithy.api#documentation": "<p>One or more documents to add to the index.</p>\n         <p>Documents can include custom attributes. For example, \n      'DataSourceId' and 'DataSourceSyncJobId' are custom \n      attributes that provide information on the synchronization \n      of documents running on a data source. Note, \n      'DataSourceSyncJobId' could be an optional custom attribute \n      as Amazon Kendra will use the ID of a running sync job.</p>\n         <p>Documents have the following file size limits.</p>\n         <ul>\n            <li>\n               <p>5 MB total size for inline documents</p>\n            </li>\n            <li>\n               <p>50 MB total size for files from an S3 bucket</p>\n            </li>\n            <li>\n               <p>5 MB extracted text for any file</p>\n            </li>\n         </ul>\n         <p>For more information about file size and transaction per second\n      quotas, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -570,6 +597,47 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendra#ClearQuerySuggestions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#ClearQuerySuggestionsRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Clears existing query suggestions from an index.</p>\n        <p>This deletes existing suggestions only, not the queries \n            in the query log. After you clear suggestions, Amazon Kendra learns \n            new suggestions based on new queries added to the query log \n            from the time you cleared suggestions. If you do not see any \n            new suggestions, then please allow Amazon Kendra to collect \n            enough queries to learn new suggestions.</p>"
+            }
+        },
+        "com.amazonaws.kendra#ClearQuerySuggestionsRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index you want to clear query suggestions from.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.kendra#ClickFeedback": {
@@ -1585,6 +1653,104 @@
                 }
             }
         },
+        "com.amazonaws.kendra#CreateQuerySuggestionsBlockList": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#CreateQuerySuggestionsBlockListRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#CreateQuerySuggestionsBlockListResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a block list to exlcude certain queries from suggestions.</p>\n        <p>Any query that contains words or phrases specified in the block \n            list is blocked or filtered out from being shown as a suggestion.</p>\n        <p>You need to provide the file location of your block list text file \n            in your S3 bucket. In your text file, enter each block word or phrase \n            on a separate line.</p>\n        <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#CreateQuerySuggestionsBlockListRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index you want to create a query suggestions block list for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsBlockListName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user friendly name for the block list.</p>\n        <p>For example, the block list named 'offensive-words' includes all \n            offensive words that could appear in user queries and need to be \n            blocked from suggestions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.kendra#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-friendly description for the block list.</p>\n        <p>For example, the description \"List of all offensive words that can \n            appear in user queries and need to be blocked from suggestions.\"</p>"
+                    }
+                },
+                "SourceS3Path": {
+                    "target": "com.amazonaws.kendra#S3Path",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 path to your block list text file in your S3 bucket.</p>\n        <p>Each block word or phrase should be on a separate line in a text file.</p> \n            <p>For information on the current quota limits for block lists, see \n                <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                    for Amazon Kendra</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.kendra#ClientTokenName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that you provide to identify the request to create a \n            query suggestions block list.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.kendra#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM (Identity and Access Management) role used by Amazon Kendra to \n            access the block list text file in your S3 bucket.</p>\n        <p>You need permissions to the role ARN (Amazon Resource Name). \n            The role needs S3 read permissions to your file in S3 and needs \n            to give STS (Security Token Service) assume role permissions \n            to Amazon Kendra.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.kendra#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tag that you can assign to a block list that categorizes \n            the block list.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#CreateQuerySuggestionsBlockListResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsBlockListId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the created block list.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.kendra#CreateThesaurus": {
             "type": "operation",
             "input": {
@@ -1766,7 +1932,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings": {
@@ -1797,7 +1963,7 @@
                     "min": 1,
                     "max": 1000
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.kendra#DataSourceStatus": {
@@ -1946,7 +2112,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.kendra#DataSourceSyncJobMetricTarget": {
@@ -1962,8 +2128,7 @@
                 "DataSourceSyncJobId": {
                     "target": "com.amazonaws.kendra#DataSourceSyncJobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the sync job that is running on the data source.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the sync job that is running on the data source.</p>\n        <p>If the ID of a sync job is not provided and there is a sync job \n            running, then the ID of this sync job is used and metrics are \n            generated for this sync job.</p>\n        <p>If the ID of a sync job is not provided and there is no sync job \n            running, then no metrics are generated and documents are  \n            indexed/deleted at the index level without sync job metrics included.</p>"
                     }
                 }
             },
@@ -2377,6 +2542,54 @@
                     "target": "com.amazonaws.kendra#IndexId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the index to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#DeleteQuerySuggestionsBlockList": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#DeleteQuerySuggestionsBlockListRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a block list used for query suggestions for an index.</p>\n        <p>A deleted block list might not take effect right away. Amazon Kendra \n            needs to refresh the entire suggestions list to add back the \n            queries that were previously blocked.</p>"
+            }
+        },
+        "com.amazonaws.kendra#DeleteQuerySuggestionsBlockListRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the you want to delete a block list from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsBlockListId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the block list that needs to be deleted.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2807,6 +3020,231 @@
                 }
             }
         },
+        "com.amazonaws.kendra#DescribeQuerySuggestionsBlockList": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#DescribeQuerySuggestionsBlockListRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#DescribeQuerySuggestionsBlockListResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a block list used for query suggestions for an index.</p>\n        <p>This is used to check the current settings that are applied to a \n            block list.</p>"
+            }
+        },
+        "com.amazonaws.kendra#DescribeQuerySuggestionsBlockListRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for the block list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsBlockListId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the block list.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#DescribeQuerySuggestionsBlockListResponse": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the identifier of the index for the block list.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsBlockListId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the unique identifier of the block list.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsBlockListName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the name of the block list.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.kendra#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the description for the block list.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsBlockListStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows whether the current status of the block list is \n            <code>ACTIVE</code> or <code>INACTIVE</code>.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.kendra#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the error message with details when there are issues in \n            processing the block list.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.kendra#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the date-time a block list for query suggestions was last created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.kendra#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the date-time a block list for query suggestions was last updated.</p>"
+                    }
+                },
+                "SourceS3Path": {
+                    "target": "com.amazonaws.kendra#S3Path",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the current S3 path to your block list text file in your S3 bucket.</p>\n        <p>Each block word or phrase should be on a separate line in a text file.</p>\n        <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>"
+                    }
+                },
+                "ItemCount": {
+                    "target": "com.amazonaws.kendra#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the current number of valid, non-empty words or phrases in \n            the block list text file.</p>"
+                    }
+                },
+                "FileSizeBytes": {
+                    "target": "com.amazonaws.kendra#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the current size of the block list text file in S3.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.kendra#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the current IAM (Identity and Access Management) role used by \n            Amazon Kendra to access the block list text file in S3.</p>\n        <p>The role needs S3 read permissions to your file in S3 and needs to \n            give STS (Security Token Service) assume role permissions to \n            Amazon Kendra.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#DescribeQuerySuggestionsConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#DescribeQuerySuggestionsConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#DescribeQuerySuggestionsConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the settings of query suggestions for an index.</p>\n        <p>This is used to check the current settings applied \n            to query suggestions.</p>"
+            }
+        },
+        "com.amazonaws.kendra#DescribeQuerySuggestionsConfigRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index you want to describe query suggestions \n            settings for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#DescribeQuerySuggestionsConfigResponse": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.kendra#Mode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows whether query suggestions are currently in \n            <code>ENABLED</code> mode or <code>LEARN_ONLY</code> mode.</p>\n        <p>By default, Amazon Kendra enables query suggestions.<code>LEARN_ONLY</code> \n            turns off query suggestions for your users. You can change the mode using \n            the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html\">UpdateQuerySuggestionsConfig</a> \n            operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows whether the status of query suggestions settings is currently \n            Active or Updating.</p>\n        <p>Active means the current settings apply and Updating means your \n            changed settings are in the process of applying.</p>"
+                    }
+                },
+                "QueryLogLookBackWindowInDays": {
+                    "target": "com.amazonaws.kendra#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows how recent your queries are in your query log time \n            window (in days).</p>"
+                    }
+                },
+                "IncludeQueriesWithoutUserInformation": {
+                    "target": "com.amazonaws.kendra#ObjectBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows whether Amazon Kendra uses all queries or only uses queries that \n            include user information to generate query suggestions.</p>"
+                    }
+                },
+                "MinimumNumberOfQueryingUsers": {
+                    "target": "com.amazonaws.kendra#MinimumNumberOfQueryingUsers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the minimum number of unique users who must search a query in \n            order for the query to be eligible to suggest to your users.</p>"
+                    }
+                },
+                "MinimumQueryCount": {
+                    "target": "com.amazonaws.kendra#MinimumQueryCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the minimum number of times a query must be searched in order for \n            the query to be eligible to suggest to your users.</p>"
+                    }
+                },
+                "LastSuggestionsBuildTime": {
+                    "target": "com.amazonaws.kendra#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the date-time query suggestions for an index was last updated.</p>"
+                    }
+                },
+                "LastClearTime": {
+                    "target": "com.amazonaws.kendra#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the date-time query suggestions for an index was last cleared.</p>\n        <p>After you clear suggestions, Amazon Kendra learns new suggestions based \n            on new queries added to the query log from the time you cleared suggestions. \n            Amazon Kendra only considers re-occurences of a query from the time you cleared \n            suggestions. </p>"
+                    }
+                },
+                "TotalSuggestionsCount": {
+                    "target": "com.amazonaws.kendra#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the current total count of query suggestions for an index.</p>\n        <p>This count can change when you update your query suggestions settings, \n            if you filter out certain queries from suggestions using a block list, \n            and as the query log accumulates more queries for Amazon Kendra to learn from.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.kendra#DescribeThesaurus": {
             "type": "operation",
             "input": {
@@ -3022,7 +3460,7 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9_][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.kendra#DocumentAttributeKeyList": {
@@ -3287,7 +3725,7 @@
                     "min": 1,
                     "max": 10
                 },
-                "smithy.api#pattern": "[0-9]+[s]"
+                "smithy.api#pattern": "^[0-9]+[s]$"
             }
         },
         "com.amazonaws.kendra#ErrorCode": {
@@ -3429,7 +3867,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.kendra#FaqName": {
@@ -3439,7 +3877,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.kendra#FaqStatistics": {
@@ -3542,6 +3980,83 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^\\P{C}*.\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendra#GetQuerySuggestions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#GetQuerySuggestionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#GetQuerySuggestionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Fetches the queries that are suggested to your users.</p>"
+            }
+        },
+        "com.amazonaws.kendra#GetQuerySuggestionsRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index you want to get query suggestions from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryText": {
+                    "target": "com.amazonaws.kendra#SuggestionQueryText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of a user's query to generate query suggestions.</p>\n        <p>A query is suggested if the query prefix matches \n            what a user starts to type as their query.</p>\n        <p>Amazon Kendra does not show any suggestions if a user \n            types fewer than two characters or more than 60 characters. \n            A query must also have at least one search result and contain \n            at least one word of more than four characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxSuggestionsCount": {
+                    "target": "com.amazonaws.kendra#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of query suggestions you want to show \n            to your users.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#GetQuerySuggestionsResponse": {
+            "type": "structure",
+            "members": {
+                "QuerySuggestionsId": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for a list of query suggestions for an index.</p>"
+                    }
+                },
+                "Suggestions": {
+                    "target": "com.amazonaws.kendra#SuggestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of query suggestions for an index.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.kendra#GoogleDriveConfiguration": {
@@ -3755,7 +4270,7 @@
                     "min": 36,
                     "max": 36
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$"
             }
         },
         "com.amazonaws.kendra#IndexName": {
@@ -3765,7 +4280,7 @@
                     "min": 1,
                     "max": 1000
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.kendra#IndexStatistics": {
@@ -4279,6 +4794,76 @@
                 }
             }
         },
+        "com.amazonaws.kendra#ListQuerySuggestionsBlockLists": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#ListQuerySuggestionsBlockListsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#ListQuerySuggestionsBlockListsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the block lists used for query suggestions for an index.</p>\n        <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#ListQuerySuggestionsBlockListsRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for a list of all block lists that exist for \n            that index.</p>\n        <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kendra#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data to retrieve), \n            Amazon Kendra returns a pagination token in the response. You can use this pagination \n            token to retrieve the next set of block lists (<code>BlockListSummaryItems</code>).</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kendra#MaxResultsIntegerForListQuerySuggestionsBlockLists",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of block lists to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#ListQuerySuggestionsBlockListsResponse": {
+            "type": "structure",
+            "members": {
+                "BlockListSummaryItems": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsBlockListSummaryItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary items for a block list.</p>\n        <p>This includes summary items on the block list ID, block list name, when the \n            block list was created, when the block list was last updated, and the count \n            of block words/phrases in the block list.</p>\n        <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kendra#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra returns this token that you can use \n            in the subsequent request to retrieve the next set of block lists.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.kendra#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -4447,6 +5032,16 @@
                 }
             }
         },
+        "com.amazonaws.kendra#MaxResultsIntegerForListQuerySuggestionsBlockLists": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.kendra#MaxResultsIntegerForListThesauriRequest": {
             "type": "integer",
             "traits": {
@@ -4460,7 +5055,7 @@
         "com.amazonaws.kendra#MetricValue": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(([1-9][0-9]*)|0)"
+                "smithy.api#pattern": "^(([1-9][0-9]*)|0)$"
             }
         },
         "com.amazonaws.kendra#MimeType": {
@@ -4473,6 +5068,41 @@
                 "smithy.api#pattern": "^\\P{C}*$"
             }
         },
+        "com.amazonaws.kendra#MinimumNumberOfQueryingUsers": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.kendra#MinimumQueryCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.kendra#Mode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "LEARN_ONLY",
+                        "name": "LEARN_ONLY"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.kendra#NextToken": {
             "type": "string",
             "traits": {
@@ -4480,6 +5110,12 @@
                     "min": 1,
                     "max": 800
                 }
+            }
+        },
+        "com.amazonaws.kendra#ObjectBoolean": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.kendra#OneDriveConfiguration": {
@@ -4703,7 +5339,7 @@
                     "min": 1,
                     "max": 36
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$"
             }
         },
         "com.amazonaws.kendra#QueryIdentifiersEnclosingOption": {
@@ -4922,6 +5558,131 @@
                 ]
             }
         },
+        "com.amazonaws.kendra#QuerySuggestionsBlockListId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$"
+            }
+        },
+        "com.amazonaws.kendra#QuerySuggestionsBlockListName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+            }
+        },
+        "com.amazonaws.kendra#QuerySuggestionsBlockListStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING"
+                    },
+                    {
+                        "value": "ACTIVE_BUT_UPDATE_FAILED",
+                        "name": "ACTIVE_BUT_UPDATE_FAILED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kendra#QuerySuggestionsBlockListSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsBlockListId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a block list.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsBlockListName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the block list.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsBlockListStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the block list.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.kendra#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date-time summary information for a query suggestions \n            block list was last created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.kendra#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date-time the block list was last updated.</p>"
+                    }
+                },
+                "ItemCount": {
+                    "target": "com.amazonaws.kendra#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of items in the block list file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information on a query suggestions block list.</p>\n        <p>This includes information on the block list ID, block list name, when the \n            block list was created, when the block list was last updated, and the count \n            of block words/phrases in the block list.</p>\n        <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#QuerySuggestionsBlockListSummaryItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#QuerySuggestionsBlockListSummary"
+            }
+        },
+        "com.amazonaws.kendra#QuerySuggestionsId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
+                }
+            }
+        },
+        "com.amazonaws.kendra#QuerySuggestionsStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.kendra#QueryText": {
             "type": "string",
             "traits": {
@@ -5096,7 +5857,7 @@
                     "min": 1,
                     "max": 1284
                 },
-                "smithy.api#pattern": "arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
             }
         },
         "com.amazonaws.kendra#S3BucketName": {
@@ -5106,7 +5867,7 @@
                     "min": 3,
                     "max": 63
                 },
-                "smithy.api#pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"
+                "smithy.api#pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"
             }
         },
         "com.amazonaws.kendra#S3DataSourceConfiguration": {
@@ -5128,13 +5889,13 @@
                 "InclusionPatterns": {
                     "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of glob patterns for documents that should be indexed. If a\n            document that matches an inclusion pattern also matches an exclusion\n            pattern, the document is not indexed.</p>\n        <p>For more information about glob patterns, see <a href=\"https://en.wikipedia.org/wiki/Glob_(programming)\">glob\n                (programming)</a> in <i>Wikipedia</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of glob patterns for documents that should be indexed. If a\n            document that matches an inclusion pattern also matches an exclusion\n            pattern, the document is not indexed.</p>\n        <p>Some <a href=\"https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters\">examples</a> \n            are:</p>\n        <ul>\n            <li>\n                <p>\n                  <i>*.txt</i> will include all text files \n                    in a directory (files with the extension .txt).</p>\n            </li>\n            <li>\n                <p>\n                  <i>**/*.txt</i> will include all text \n                    files in a directory and its subdirectories.</p>\n            </li>\n            <li>\n                <p>\n                  <i>*tax*</i> will include all files in \n                    a directory that contain 'tax' in the file name, such as 'tax', \n                    'taxes', 'income_tax'.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ExclusionPatterns": {
                     "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of glob patterns for documents that should not be indexed.\n            If a document that matches an inclusion prefix or inclusion pattern\n            also matches an exclusion pattern, the document is not\n            indexed.</p>\n        <p>For more information about glob patterns, see <a href=\"https://en.wikipedia.org/wiki/Glob_(programming)\">glob\n                (programming)</a> in <i>Wikipedia</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of glob patterns for documents that should not be indexed.\n            If a document that matches an inclusion prefix or inclusion pattern\n            also matches an exclusion pattern, the document is not\n            indexed.</p>\n        <p>Some <a href=\"https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters\">examples</a> \n            are:</p>\n        <ul>\n            <li>\n                <p>\n                  <i>*.png , *.jpg</i> will exclude \n                    all PNG and JPEG image files in a directory \n                    (files with the extensions .png and .jpg).</p>\n            </li>\n            <li>\n                <p>\n                  <i>*internal*</i> will exclude all \n                    files in a directory that contain 'internal' in the file name, \n                    such as 'internal', 'internal_only', 'company_internal'.</p>\n            </li>\n            <li>\n                <p>\n                  <i>**/*internal*</i> will exclude \n                    all internal-related files in a directory and its subdirectories.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DocumentsMetadataConfiguration": {
@@ -5195,7 +5956,7 @@
                 "DocumentTitleFieldName": {
                     "target": "com.amazonaws.kendra#DataSourceFieldName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the column in the Salesforce FeedItem table that\n            contains the title of the document. This is typically the\n                <code>Title</code> collumn.</p>"
+                        "smithy.api#documentation": "<p>The name of the column in the Salesforce FeedItem table that\n            contains the title of the document. This is typically the\n                <code>Title</code> column.</p>"
                     }
                 },
                 "FieldMappings": {
@@ -5668,7 +6429,7 @@
                     "min": 1,
                     "max": 1284
                 },
-                "smithy.api#pattern": "arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
             }
         },
         "com.amazonaws.kendra#SecurityGroupIdList": {
@@ -6256,7 +7017,7 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "[\\-0-9a-zA-Z]+"
+                "smithy.api#pattern": "^[\\-0-9a-zA-Z]+$"
             }
         },
         "com.amazonaws.kendra#SubnetIdList": {
@@ -6269,6 +7030,98 @@
                     "min": 1,
                     "max": 6
                 }
+            }
+        },
+        "com.amazonaws.kendra#Suggestion": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.kendra#ResultId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique UUID (universally unique identifier) of a single \n            query suggestion.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.kendra#SuggestionValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value for the unique UUID (universally unique identifier) \n            of a single query suggestion.</p>\n        <p>The value is the text string of a suggestion.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single query suggestion.</p>"
+            }
+        },
+        "com.amazonaws.kendra#SuggestionHighlight": {
+            "type": "structure",
+            "members": {
+                "BeginOffset": {
+                    "target": "com.amazonaws.kendra#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The zero-based location in the response string where the highlight starts.</p>"
+                    }
+                },
+                "EndOffset": {
+                    "target": "com.amazonaws.kendra#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The zero-based location in the response string where the highlight ends.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The text highlights for a single query suggestion.</p>"
+            }
+        },
+        "com.amazonaws.kendra#SuggestionHighlightList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#SuggestionHighlight"
+            }
+        },
+        "com.amazonaws.kendra#SuggestionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#Suggestion"
+            }
+        },
+        "com.amazonaws.kendra#SuggestionQueryText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendra#SuggestionTextWithHighlights": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.kendra#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query suggestion text to display to the user.</p>"
+                    }
+                },
+                "Highlights": {
+                    "target": "com.amazonaws.kendra#SuggestionHighlightList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The beginning and end of the query suggestion text that should be highlighted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides text and information about where to highlight the query suggestion text.</p>"
+            }
+        },
+        "com.amazonaws.kendra#SuggestionValue": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.kendra#SuggestionTextWithHighlights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>SuggestionTextWithHighlights</code> structure that contains \n            the query suggestion text and highlights.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>SuggestionTextWithHighlights</code> structure information.</p>"
             }
         },
         "com.amazonaws.kendra#TableName": {
@@ -6456,7 +7309,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.kendra#ThesaurusName": {
@@ -6466,7 +7319,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.kendra#ThesaurusStatus": {
@@ -6806,6 +7659,149 @@
                 }
             }
         },
+        "com.amazonaws.kendra#UpdateQuerySuggestionsBlockList": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#UpdateQuerySuggestionsBlockListRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a block list used for query suggestions for an index.</p>\n        <p>Updates to a block list might not take effect right away. Amazon Kendra \n            needs to refresh the entire suggestions list to apply any updates to the \n            block list. Other changes not related to the block list apply immediately.</p>\n        <p>If a block list is updating, then you need to wait for the first update to \n            finish before submitting another update.</p>\n        <p>Amazon Kendra supports partial updates, so you only need to provide the fields \n            you want to update.</p>"
+            }
+        },
+        "com.amazonaws.kendra#UpdateQuerySuggestionsBlockListRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for a block list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsBlockListId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a block list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.kendra#QuerySuggestionsBlockListName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a block list.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.kendra#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for a block list.</p>"
+                    }
+                },
+                "SourceS3Path": {
+                    "target": "com.amazonaws.kendra#S3Path",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 path where your block list text file sits in S3.</p>\n        <p>If you update your block list and provide the same path to the \n            block list text file in S3, then Amazon Kendra reloads the file to refresh \n            the block list. Amazon Kendra does not automatically refresh your block list. \n            You need to call the <code>UpdateQuerySuggestionsBlockList</code> API \n            to refresh you block list.</p>\n        <p>If you update your block list, then Amazon Kendra asynchronously refreshes \n            all query suggestions with the latest content in the S3 file. This \n            means changes might not take effect immediately.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.kendra#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM (Identity and Access Management) role used to access the \n            block list text file in S3.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#UpdateQuerySuggestionsConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#UpdateQuerySuggestionsConfigRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the settings of query suggestions for an index.</p>\n        <p>Amazon Kendra supports partial updates, so you only need to provide \n            the fields you want to update.</p>\n        <p>If an update is currently processing (i.e. 'happening'), you \n            need to wait for the update to finish before making another update.</p>\n        <p>Updates to query suggestions settings might not take effect right away. \n            The time for your updated settings to take effect depends on the updates \n            made and the number of search queries in your index.</p>\n        <p>You can still enable/disable query suggestions at any time.</p>"
+            }
+        },
+        "com.amazonaws.kendra#UpdateQuerySuggestionsConfigRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index you want to update query suggestions settings for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.kendra#Mode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set the mode to <code>ENABLED</code> or <code>LEARN_ONLY</code>.</p>\n        <p>By default, Amazon Kendra enables query suggestions. \n            <code>LEARN_ONLY</code> mode allows you to turn off query suggestions. \n            You can to update this at any time.</p>\n        <p>In <code>LEARN_ONLY</code> mode, Amazon Kendra continues to learn from new \n            queries to keep suggestions up to date for when you are ready to \n            switch to ENABLED mode again.</p>"
+                    }
+                },
+                "QueryLogLookBackWindowInDays": {
+                    "target": "com.amazonaws.kendra#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How recent your queries are in your query log time window.</p>\n        <p>The time window is the number of days from current day to past days.</p>\n        <p>By default, Amazon Kendra sets this to 180.</p>"
+                    }
+                },
+                "IncludeQueriesWithoutUserInformation": {
+                    "target": "com.amazonaws.kendra#ObjectBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to include queries without user information (i.e. all queries, \n            irrespective of the user), otherwise <code>FALSE</code> to only include queries \n            with user information.</p>\n        <p>If you pass user information to Amazon Kendra along with the queries, you can set this \n            flag to <code>FALSE</code> and instruct Amazon Kendra to only consider queries with user \n            information.</p>\n        <p>If you set to <code>FALSE</code>, Amazon Kendra only considers queries searched at least \n            <code>MinimumQueryCount</code> times across <code>MinimumNumberOfQueryingUsers</code> \n            unique users for suggestions.</p>\n        <p>If you set to <code>TRUE</code>, Amazon Kendra ignores all user information and learns \n            from all queries.</p>"
+                    }
+                },
+                "MinimumNumberOfQueryingUsers": {
+                    "target": "com.amazonaws.kendra#MinimumNumberOfQueryingUsers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of unique users who must search a query in order for the query \n            to be eligible to suggest to your users.</p>\n        <p>Increasing this number might decrease the number of suggestions. However, this \n            ensures a query is searched by many users and is truly popular to suggest to users.</p>\n        <p>How you tune this setting depends on your specific needs.</p>"
+                    }
+                },
+                "MinimumQueryCount": {
+                    "target": "com.amazonaws.kendra#MinimumQueryCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The the minimum number of times a query must be searched in order to be \n            eligible to suggest to your users.</p>\n        <p>Decreasing this number increases the number of suggestions. However, this \n            affects the quality of suggestions as it sets a low bar for a query to be \n            considered popular to suggest to users.</p>\n        <p>How you tune this setting depends on your specific needs.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.kendra#UpdateThesaurus": {
             "type": "operation",
             "input": {
@@ -6882,7 +7878,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^(https?|ftp|file):\\/\\/([^\\s]*)"
+                "smithy.api#pattern": "^(https?|ftp|file):\\/\\/([^\\s]*)$"
             }
         },
         "com.amazonaws.kendra#UserAccount": {
@@ -7004,7 +8000,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.kendra#VpcSecurityGroupId": {
@@ -7014,7 +8010,7 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "[-0-9a-zA-Z]+"
+                "smithy.api#pattern": "^[-0-9a-zA-Z]+$"
             }
         }
     }

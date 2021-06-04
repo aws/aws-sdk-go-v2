@@ -282,6 +282,25 @@ func (e *NotFoundException) ErrorMessage() string {
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Indicates that the specified phone number opted out of receiving SMS messages
+// from your AWS account. You can't send SMS messages to phone numbers that opt
+// out.
+type OptedOutException struct {
+	Message *string
+}
+
+func (e *OptedOutException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OptedOutException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OptedOutException) ErrorCode() string             { return "OptedOutException" }
+func (e *OptedOutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Exception error indicating platform application disabled.
 type PlatformApplicationDisabledException struct {
 	Message *string
@@ -303,7 +322,8 @@ func (e *PlatformApplicationDisabledException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// Can't tag resource. Verify that the topic exists.
+// Can’t perform the action on the specified resource. Make sure that the resource
+// exists.
 type ResourceNotFoundException struct {
 	Message *string
 }
@@ -429,3 +449,57 @@ func (e *TopicLimitExceededException) ErrorMessage() string {
 }
 func (e *TopicLimitExceededException) ErrorCode() string             { return "TopicLimitExceededException" }
 func (e *TopicLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Indicates that a request parameter does not comply with the associated
+// constraints.
+type UserErrorException struct {
+	Message *string
+}
+
+func (e *UserErrorException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UserErrorException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UserErrorException) ErrorCode() string             { return "UserErrorException" }
+func (e *UserErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Indicates that a parameter in the request is invalid.
+type ValidationException struct {
+	Message *string
+}
+
+func (e *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ValidationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Indicates that the one-time password (OTP) used for verification is invalid.
+type VerificationException struct {
+	Message *string
+
+	Status *string
+}
+
+func (e *VerificationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *VerificationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *VerificationException) ErrorCode() string             { return "VerificationException" }
+func (e *VerificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

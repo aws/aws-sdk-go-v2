@@ -52,7 +52,7 @@ type DescribeAgentOutput struct {
 	// endpoint, the agent is not accessible over the public internet.
 	EndpointType types.EndpointType
 
-	// The time that the agent last connected to DataSyc.
+	// The time that the agent last connected to DataSync.
 	LastConnectionTime *time.Time
 
 	// The name of the agent.

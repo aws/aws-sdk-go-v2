@@ -33,7 +33,7 @@ func (c *Client) CreateFirewallDomainList(ctx context.Context, params *CreateFir
 type CreateFirewallDomainListInput struct {
 
 	// A unique string that identifies the request and that allows you to retry failed
-	// requests without the risk of executing the operation twice. CreatorRequestId can
+	// requests without the risk of running the operation twice. CreatorRequestId can
 	// be any unique string, for example, a date/time stamp.
 	//
 	// This member is required.

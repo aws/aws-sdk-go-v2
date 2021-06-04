@@ -42,12 +42,25 @@ func (c *Client) GetServiceSetting(ctx context.Context, params *GetServiceSettin
 // The request body of the GetServiceSetting API action.
 type GetServiceSettingInput struct {
 
-	// The ID of the service setting to get. The setting ID can be
-	// /ssm/automation/customer-script-log-destination,
-	// /ssm/automation/customer-script-log-group-name,
-	// /ssm/parameter-store/default-parameter-tier,
-	// /ssm/parameter-store/high-throughput-enabled, or
-	// /ssm/managed-instance/activation-tier.
+	// The ID of the service setting to get. The setting ID can be one of the
+	// following.
+	//
+	// * /ssm/automation/customer-script-log-destination
+	//
+	// *
+	// /ssm/automation/customer-script-log-group-name
+	//
+	// *
+	// /ssm/documents/console/public-sharing-permission
+	//
+	// *
+	// /ssm/parameter-store/default-parameter-tier
+	//
+	// *
+	// /ssm/parameter-store/high-throughput-enabled
+	//
+	// *
+	// /ssm/managed-instance/activation-tier
 	//
 	// This member is required.
 	SettingId *string

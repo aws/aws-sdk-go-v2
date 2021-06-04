@@ -1738,6 +1738,51 @@ func awsRestjson1_serializeOpHttpBindingsGetDeviceProfileInput(v *GetDeviceProfi
 	return nil
 }
 
+type awsRestjson1_serializeOpGetLogLevelsByResourceTypes struct {
+}
+
+func (*awsRestjson1_serializeOpGetLogLevelsByResourceTypes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetLogLevelsByResourceTypes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetLogLevelsByResourceTypesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/log-levels")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetLogLevelsByResourceTypesInput(v *GetLogLevelsByResourceTypesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetPartnerAccount struct {
 }
 
@@ -1795,6 +1840,68 @@ func awsRestjson1_serializeOpHttpBindingsGetPartnerAccountInput(v *GetPartnerAcc
 
 	if len(v.PartnerType) > 0 {
 		encoder.SetQuery("partnerType").String(string(v.PartnerType))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetResourceLogLevel struct {
+}
+
+func (*awsRestjson1_serializeOpGetResourceLogLevel) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetResourceLogLevel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetResourceLogLevelInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/log-levels/{ResourceIdentifier}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetResourceLogLevelInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetResourceLogLevelInput(v *GetResourceLogLevelInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ResourceIdentifier == nil || len(*v.ResourceIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceIdentifier must not be empty")}
+	}
+	if v.ResourceIdentifier != nil {
+		if err := encoder.SetURI("ResourceIdentifier").String(*v.ResourceIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceType != nil {
+		encoder.SetQuery("resourceType").String(*v.ResourceType)
 	}
 
 	return nil
@@ -2855,6 +2962,198 @@ func awsRestjson1_serializeOpHttpBindingsListWirelessGatewayTaskDefinitionsInput
 	return nil
 }
 
+type awsRestjson1_serializeOpPutResourceLogLevel struct {
+}
+
+func (*awsRestjson1_serializeOpPutResourceLogLevel) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutResourceLogLevel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutResourceLogLevelInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/log-levels/{ResourceIdentifier}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPutResourceLogLevelInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutResourceLogLevelInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutResourceLogLevelInput(v *PutResourceLogLevelInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ResourceIdentifier == nil || len(*v.ResourceIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceIdentifier must not be empty")}
+	}
+	if v.ResourceIdentifier != nil {
+		if err := encoder.SetURI("ResourceIdentifier").String(*v.ResourceIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceType != nil {
+		encoder.SetQuery("resourceType").String(*v.ResourceType)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutResourceLogLevelInput(v *PutResourceLogLevelInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.LogLevel) > 0 {
+		ok := object.Key("LogLevel")
+		ok.String(string(v.LogLevel))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpResetAllResourceLogLevels struct {
+}
+
+func (*awsRestjson1_serializeOpResetAllResourceLogLevels) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpResetAllResourceLogLevels) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ResetAllResourceLogLevelsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/log-levels")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsResetAllResourceLogLevelsInput(v *ResetAllResourceLogLevelsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpResetResourceLogLevel struct {
+}
+
+func (*awsRestjson1_serializeOpResetResourceLogLevel) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpResetResourceLogLevel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ResetResourceLogLevelInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/log-levels/{ResourceIdentifier}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsResetResourceLogLevelInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsResetResourceLogLevelInput(v *ResetResourceLogLevelInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ResourceIdentifier == nil || len(*v.ResourceIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceIdentifier must not be empty")}
+	}
+	if v.ResourceIdentifier != nil {
+		if err := encoder.SetURI("ResourceIdentifier").String(*v.ResourceIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceType != nil {
+		encoder.SetQuery("resourceType").String(*v.ResourceType)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpSendDataToWirelessDevice struct {
 }
 
@@ -3234,6 +3533,88 @@ func awsRestjson1_serializeOpDocumentUpdateDestinationInput(v *UpdateDestination
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateLogLevelsByResourceTypes struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateLogLevelsByResourceTypes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateLogLevelsByResourceTypes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateLogLevelsByResourceTypesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/log-levels")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateLogLevelsByResourceTypesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateLogLevelsByResourceTypesInput(v *UpdateLogLevelsByResourceTypesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateLogLevelsByResourceTypesInput(v *UpdateLogLevelsByResourceTypesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DefaultLogLevel) > 0 {
+		ok := object.Key("DefaultLogLevel")
+		ok.String(string(v.DefaultLogLevel))
+	}
+
+	if v.WirelessDeviceLogOptions != nil {
+		ok := object.Key("WirelessDeviceLogOptions")
+		if err := awsRestjson1_serializeDocumentWirelessDeviceLogOptionList(v.WirelessDeviceLogOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WirelessGatewayLogOptions != nil {
+		ok := object.Key("WirelessGatewayLogOptions")
+		if err := awsRestjson1_serializeDocumentWirelessGatewayLogOptionList(v.WirelessGatewayLogOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4088,6 +4469,140 @@ func awsRestjson1_serializeDocumentUpdateWirelessGatewayTaskCreate(v *types.Upda
 		ok.String(*v.UpdateDataSource)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWirelessDeviceEventLogOption(v *types.WirelessDeviceEventLogOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Event) > 0 {
+		ok := object.Key("Event")
+		ok.String(string(v.Event))
+	}
+
+	if len(v.LogLevel) > 0 {
+		ok := object.Key("LogLevel")
+		ok.String(string(v.LogLevel))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWirelessDeviceEventLogOptionList(v []types.WirelessDeviceEventLogOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentWirelessDeviceEventLogOption(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWirelessDeviceLogOption(v *types.WirelessDeviceLogOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Events != nil {
+		ok := object.Key("Events")
+		if err := awsRestjson1_serializeDocumentWirelessDeviceEventLogOptionList(v.Events, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.LogLevel) > 0 {
+		ok := object.Key("LogLevel")
+		ok.String(string(v.LogLevel))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWirelessDeviceLogOptionList(v []types.WirelessDeviceLogOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentWirelessDeviceLogOption(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWirelessGatewayEventLogOption(v *types.WirelessGatewayEventLogOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Event) > 0 {
+		ok := object.Key("Event")
+		ok.String(string(v.Event))
+	}
+
+	if len(v.LogLevel) > 0 {
+		ok := object.Key("LogLevel")
+		ok.String(string(v.LogLevel))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWirelessGatewayEventLogOptionList(v []types.WirelessGatewayEventLogOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentWirelessGatewayEventLogOption(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWirelessGatewayLogOption(v *types.WirelessGatewayLogOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Events != nil {
+		ok := object.Key("Events")
+		if err := awsRestjson1_serializeDocumentWirelessGatewayEventLogOptionList(v.Events, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.LogLevel) > 0 {
+		ok := object.Key("LogLevel")
+		ok.String(string(v.LogLevel))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWirelessGatewayLogOptionList(v []types.WirelessGatewayLogOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentWirelessGatewayLogOption(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

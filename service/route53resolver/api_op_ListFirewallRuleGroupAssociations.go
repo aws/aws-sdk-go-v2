@@ -52,7 +52,7 @@ type ListFirewallRuleGroupAssociationsInput struct {
 
 	// The setting that determines the processing order of the rule group among the
 	// rule groups that are associated with a single VPC. DNS Firewall filters VPC
-	// traffic starting from rule group with the lowest numeric priority setting.
+	// traffic starting from the rule group with the lowest numeric priority setting.
 	Priority *int32
 
 	// The association Status setting that you want DNS Firewall to filter on for the

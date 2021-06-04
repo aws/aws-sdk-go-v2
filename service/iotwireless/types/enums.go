@@ -104,6 +104,26 @@ func (ExpressionType) Values() []ExpressionType {
 	}
 }
 
+type LogLevel string
+
+// Enum values for LogLevel
+const (
+	LogLevelInfo     LogLevel = "INFO"
+	LogLevelError    LogLevel = "ERROR"
+	LogLevelDisabled LogLevel = "DISABLED"
+)
+
+// Values returns all known values for LogLevel. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LogLevel) Values() []LogLevel {
+	return []LogLevel{
+		"INFO",
+		"ERROR",
+		"DISABLED",
+	}
+}
+
 type MessageType string
 
 // Enum values for MessageType
@@ -160,6 +180,30 @@ func (SigningAlg) Values() []SigningAlg {
 	}
 }
 
+type WirelessDeviceEvent string
+
+// Enum values for WirelessDeviceEvent
+const (
+	WirelessDeviceEventJoin         WirelessDeviceEvent = "Join"
+	WirelessDeviceEventRejoin       WirelessDeviceEvent = "Rejoin"
+	WirelessDeviceEventUplinkData   WirelessDeviceEvent = "Uplink_Data"
+	WirelessDeviceEventDownlinkData WirelessDeviceEvent = "Downlink_Data"
+	WirelessDeviceEventRegistration WirelessDeviceEvent = "Registration"
+)
+
+// Values returns all known values for WirelessDeviceEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WirelessDeviceEvent) Values() []WirelessDeviceEvent {
+	return []WirelessDeviceEvent{
+		"Join",
+		"Rejoin",
+		"Uplink_Data",
+		"Downlink_Data",
+		"Registration",
+	}
+}
+
 type WirelessDeviceIdType string
 
 // Enum values for WirelessDeviceIdType
@@ -195,6 +239,24 @@ func (WirelessDeviceType) Values() []WirelessDeviceType {
 	return []WirelessDeviceType{
 		"Sidewalk",
 		"LoRaWAN",
+	}
+}
+
+type WirelessGatewayEvent string
+
+// Enum values for WirelessGatewayEvent
+const (
+	WirelessGatewayEventCupsRequest WirelessGatewayEvent = "CUPS_Request"
+	WirelessGatewayEventCertificate WirelessGatewayEvent = "Certificate"
+)
+
+// Values returns all known values for WirelessGatewayEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WirelessGatewayEvent) Values() []WirelessGatewayEvent {
+	return []WirelessGatewayEvent{
+		"CUPS_Request",
+		"Certificate",
 	}
 }
 
@@ -276,5 +338,21 @@ func (WirelessGatewayTaskStatus) Values() []WirelessGatewayTaskStatus {
 		"SECOND_RETRY",
 		"COMPLETED",
 		"FAILED",
+	}
+}
+
+type WirelessGatewayType string
+
+// Enum values for WirelessGatewayType
+const (
+	WirelessGatewayTypeLoRaWAN WirelessGatewayType = "LoRaWAN"
+)
+
+// Values returns all known values for WirelessGatewayType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WirelessGatewayType) Values() []WirelessGatewayType {
+	return []WirelessGatewayType{
+		"LoRaWAN",
 	}
 }

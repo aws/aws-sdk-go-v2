@@ -43,12 +43,25 @@ func (c *Client) ResetServiceSetting(ctx context.Context, params *ResetServiceSe
 type ResetServiceSettingInput struct {
 
 	// The Amazon Resource Name (ARN) of the service setting to reset. The setting ID
-	// can be /ssm/automation/customer-script-log-destination,
-	// /ssm/automation/customer-script-log-group-name,
-	// /ssm/parameter-store/default-parameter-tier,
-	// /ssm/parameter-store/high-throughput-enabled, or
-	// /ssm/managed-instance/activation-tier. For example,
-	// arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled.
+	// can be one of the following.
+	//
+	// *
+	// /ssm/automation/customer-script-log-destination
+	//
+	// *
+	// /ssm/automation/customer-script-log-group-name
+	//
+	// *
+	// /ssm/documents/console/public-sharing-permission
+	//
+	// *
+	// /ssm/parameter-store/default-parameter-tier
+	//
+	// *
+	// /ssm/parameter-store/high-throughput-enabled
+	//
+	// *
+	// /ssm/managed-instance/activation-tier
 	//
 	// This member is required.
 	SettingId *string

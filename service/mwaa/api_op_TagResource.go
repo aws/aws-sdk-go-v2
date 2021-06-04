@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Add tag to the MWAA environments.
+// Associates key-value tag pairs to your Amazon Managed Workflows for Apache
+// Airflow (MWAA) environment.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -29,12 +30,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The tag resource ARN of the MWAA environments.
+	// The Amazon Resource Name (ARN) of the Amazon MWAA environment. For example,
+	// arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The tag resource tag of the MWAA environments.
+	// The key-value tag pairs you want to associate to your environment. For example,
+	// "Environment": "Staging". To learn more, see Tagging AWS resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	//
 	// This member is required.
 	Tags map[string]string

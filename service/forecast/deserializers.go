@@ -8563,6 +8563,15 @@ func awsAwsjson11_deserializeOpDocumentDescribePredictorOutput(v **DescribePredi
 				return err
 			}
 
+		case "AutoMLOverrideStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoMLOverrideStrategy to be of type string, got %T instead", value)
+				}
+				sv.AutoMLOverrideStrategy = types.AutoMLOverrideStrategy(jtv)
+			}
+
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8745,6 +8754,15 @@ func awsAwsjson11_deserializeOpDocumentGetAccuracyMetricsOutput(v **GetAccuracyM
 
 	for key, value := range shape {
 		switch key {
+		case "AutoMLOverrideStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoMLOverrideStrategy to be of type string, got %T instead", value)
+				}
+				sv.AutoMLOverrideStrategy = types.AutoMLOverrideStrategy(jtv)
+			}
+
 		case "PredictorEvaluationResults":
 			if err := awsAwsjson11_deserializeDocumentPredictorEvaluationResults(&sv.PredictorEvaluationResults, value); err != nil {
 				return err

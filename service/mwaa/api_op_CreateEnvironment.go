@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// JSON blob that describes the environment to create.
+// Creates an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
 func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmentInput, optFns ...func(*Options)) (*CreateEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentInput{}
@@ -34,9 +34,9 @@ func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmen
 // (https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html).
 type CreateEnvironmentInput struct {
 
-	// The relative path to the DAG folder on your Amazon S3 storage bucket. For
-	// example, dags. For more information, see Importing DAGs on Amazon MWAA
-	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import.html).
+	// The relative path to the DAGs folder on your Amazon S3 bucket. For example,
+	// dags. To learn more, see Adding or updating DAGs
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html).
 	//
 	// This member is required.
 	DagS3Path *string
@@ -44,110 +44,123 @@ type CreateEnvironmentInput struct {
 	// The Amazon Resource Name (ARN) of the execution role for your environment. An
 	// execution role is an AWS Identity and Access Management (IAM) role that grants
 	// MWAA permission to access AWS services and resources used by your environment.
-	// For example, arn:aws:iam::123456789:role/my-execution-role. For more
-	// information, see Managing access to Amazon Managed Workflows for Apache Airflow
-	// (https://docs.aws.amazon.com/mwaa/latest/userguide/manage-access.html).
+	// For example, arn:aws:iam::123456789:role/my-execution-role. To learn more, see
+	// Amazon MWAA Execution role
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html).
 	//
 	// This member is required.
 	ExecutionRoleArn *string
 
-	// The name of your MWAA environment.
+	// The name of the Amazon MWAA environment. For example, MyMWAAEnvironment.
 	//
 	// This member is required.
 	Name *string
 
-	// The VPC networking components you want to use for your environment. At least two
-	// private subnet identifiers and one VPC security group identifier are required to
-	// create an environment. For more information, see Creating the VPC network for a
-	// MWAA environment
-	// (https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-mwaa.html).
+	// The VPC networking components used to secure and enable network traffic between
+	// the AWS resources for your environment. To learn more, see About networking on
+	// Amazon MWAA
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html).
 	//
 	// This member is required.
 	NetworkConfiguration *types.NetworkConfiguration
 
-	// The Amazon Resource Name (ARN) of your Amazon S3 storage bucket. For example,
-	// arn:aws:s3:::airflow-mybucketname.
+	// The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and
+	// supporting files are stored. For example,
+	// arn:aws:s3:::my-airflow-bucket-unique-name. To learn more, see Create an Amazon
+	// S3 bucket for Amazon MWAA
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html).
 	//
 	// This member is required.
 	SourceBucketArn *string
 
-	// The Apache Airflow configuration setting you want to override in your
-	// environment. For more information, see Environment configuration
+	// A list of key-value pairs containing the Apache Airflow configuration options
+	// you want to attach to your environment. To learn more, see Apache Airflow
+	// configuration options
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html).
 	AirflowConfigurationOptions map[string]string
 
-	// The Apache Airflow version you want to use for your environment.
+	// The Apache Airflow version for your environment. For example, v1.10.12. If no
+	// value is specified, defaults to the latest version. Valid values: v1.10.12.
 	AirflowVersion *string
 
-	// The environment class you want to use for your environment. The environment
-	// class determines the size of the containers and database used for your Apache
-	// Airflow services.
+	// The environment class type. Valid values: mw1.small, mw1.medium, mw1.large. To
+	// learn more, see Amazon MWAA environment class
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html).
 	EnvironmentClass *string
 
-	// The AWS Key Management Service (KMS) key to encrypt and decrypt the data in your
-	// environment. You can use an AWS KMS key managed by MWAA, or a custom KMS key
-	// (advanced). For more information, see Customer master keys (CMKs)
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html?icmpid=docs_console_unmapped#master_keys)
-	// in the AWS KMS developer guide.
+	// The AWS Key Management Service (KMS) key to encrypt the data in your
+	// environment. You can use an AWS owned CMK, or a Customer managed CMK (advanced).
+	// To learn more, see Get started with Amazon Managed Workflows for Apache Airflow
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html).
 	KmsKey *string
 
-	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs.
+	// Defines the Apache Airflow logs to send to CloudWatch Logs: DagProcessingLogs,
+	// SchedulerLogs, TaskLogs, WebserverLogs, WorkerLogs.
 	LoggingConfiguration *types.LoggingConfigurationInput
 
 	// The maximum number of workers that you want to run in your environment. MWAA
-	// scales the number of Apache Airflow workers and the Fargate containers that run
-	// your tasks up to the number you specify in this field. When there are no more
-	// tasks running, and no more in the queue, MWAA disposes of the extra containers
-	// leaving the one worker that is included with your environment.
+	// scales the number of Apache Airflow workers up to the number you specify in the
+	// MaxWorkers field. For example, 20. When there are no more tasks running, and no
+	// more in the queue, MWAA disposes of the extra workers leaving the one worker
+	// that is included with your environment, or the number you specify in MinWorkers.
 	MaxWorkers *int32
 
 	// The minimum number of workers that you want to run in your environment. MWAA
-	// scales the number of Apache Airflow workers and the Fargate containers that run
-	// your tasks up to the number you specify in the MaxWorkers field. When there are
-	// no more tasks running, and no more in the queue, MWAA disposes of the extra
-	// containers leaving the worker count you specify in the MinWorkers field.
+	// scales the number of Apache Airflow workers up to the number you specify in the
+	// MaxWorkers field. When there are no more tasks running, and no more in the
+	// queue, MWAA disposes of the extra workers leaving the worker count you specify
+	// in the MinWorkers field. For example, 2.
 	MinWorkers *int32
 
-	// The plugins.zip file version you want to use.
+	// The version of the plugins.zip file on your Amazon S3 bucket. A version must be
+	// specified each time a plugins.zip file is updated. To learn more, see How S3
+	// Versioning works
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html).
 	PluginsS3ObjectVersion *string
 
-	// The relative path to the plugins.zip file on your Amazon S3 storage bucket. For
-	// example, plugins.zip. If a relative path is provided in the request, then
-	// PluginsS3ObjectVersion is required. For more information, see Importing DAGs on
-	// Amazon MWAA
-	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import.html).
+	// The relative path to the plugins.zip file on your Amazon S3 bucket. For example,
+	// plugins.zip. If specified, then the plugins.zip version is required. To learn
+	// more, see Installing custom plugins
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html).
 	PluginsS3Path *string
 
-	// The requirements.txt file version you want to use.
+	// The version of the requirements.txt file on your Amazon S3 bucket. A version
+	// must be specified each time a requirements.txt file is updated. To learn more,
+	// see How S3 Versioning works
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html).
 	RequirementsS3ObjectVersion *string
 
-	// The relative path to the requirements.txt file on your Amazon S3 storage bucket.
-	// For example, requirements.txt. If a relative path is provided in the request,
-	// then RequirementsS3ObjectVersion is required. For more information, see
-	// Importing DAGs on Amazon MWAA
-	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import.html).
+	// The relative path to the requirements.txt file on your Amazon S3 bucket. For
+	// example, requirements.txt. If specified, then a file version is required. To
+	// learn more, see Installing Python dependencies
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html).
 	RequirementsS3Path *string
 
-	// The metadata tags you want to attach to your environment. For more information,
-	// see Tagging AWS resources
+	// The number of Apache Airflow schedulers to run in your environment.
+	Schedulers *int32
+
+	// The key-value tag pairs you want to associate to your environment. For example,
+	// "Environment": "Staging". To learn more, see Tagging AWS resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags map[string]string
 
-	// The networking access of your Apache Airflow web server. A public network allows
-	// your Airflow UI to be accessed over the Internet by users granted access in your
-	// IAM policy. A private network limits access of your Airflow UI to users within
-	// your VPC. For more information, see Creating the VPC network for a MWAA
-	// environment (https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-mwaa.html).
+	// The Apache Airflow Web server access mode. To learn more, see Apache Airflow
+	// access modes
+	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html).
 	WebserverAccessMode types.WebserverAccessMode
 
-	// The day and time you want MWAA to start weekly maintenance updates on your
-	// environment.
+	// The day and time of the week to start weekly maintenance updates of your
+	// environment in the following format: DAY:HH:MM. For example: TUE:03:30. You can
+	// specify a start time in 30 minute increments only. Supported input includes the
+	// following:
+	//
+	// * MON|TUE|WED|THU|FRI|SAT|SUN:([01]\\d|2[0-3]):(00|30)
 	WeeklyMaintenanceWindowStart *string
 }
 
 type CreateEnvironmentOutput struct {
 
-	// The resulting Amazon MWAA envirnonment ARN.
+	// The Amazon Resource Name (ARN) returned in the response for the environment.
 	Arn *string
 
 	// Metadata pertaining to the operation's result.

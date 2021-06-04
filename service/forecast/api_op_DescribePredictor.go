@@ -62,6 +62,11 @@ type DescribePredictorOutput struct {
 	// When PerformAutoML is specified, the ARN of the chosen algorithm.
 	AutoMLAlgorithmArns []string
 
+	// The AutoML strategy used to train the predictor. Unless LatencyOptimized is
+	// specified, the AutoML strategy optimizes predictor accuracy. This parameter is
+	// only valid for predictors trained using AutoML.
+	AutoMLOverrideStrategy types.AutoMLOverrideStrategy
+
 	// When the model training task was created.
 	CreationTime *time.Time
 

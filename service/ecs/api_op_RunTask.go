@@ -89,15 +89,20 @@ type RunTaskInput struct {
 	// family name of the task definition (for example, family:my-family-name).
 	Group *string
 
-	// The launch type on which to run your task. The accepted values are FARGATE and
-	// EC2. For more information, see Amazon ECS Launch Types
+	// The infrastructure on which to run your standalone task. For more information,
+	// see Amazon ECS launch types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
-	// in the Amazon Elastic Container Service Developer Guide. When a value of FARGATE
-	// is specified, your tasks are launched on AWS Fargate On-Demand infrastructure.
-	// To use Fargate Spot, you must use a capacity provider strategy with the
-	// FARGATE_SPOT capacity provider. When a value of EC2 is specified, your tasks are
-	// launched on Amazon EC2 instances registered to your cluster. If a launchType is
-	// specified, the capacityProviderStrategy parameter must be omitted.
+	// in the Amazon Elastic Container Service Developer Guide. The FARGATE launch type
+	// runs your tasks on AWS Fargate On-Demand infrastructure. Fargate Spot
+	// infrastructure is available for use but a capacity provider strategy must be
+	// used. For more information, see AWS Fargate capacity providers
+	// (https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html)
+	// in the Amazon ECS User Guide for AWS Fargate. The EC2 launch type runs your
+	// tasks on Amazon EC2 instances registered to your cluster. The EXTERNAL launch
+	// type runs your tasks on your on-premise server or virtual machine (VM) capacity
+	// registered to your cluster. A task can use either a launch type or a capacity
+	// provider strategy. If a launchType is specified, the capacityProviderStrategy
+	// parameter must be omitted.
 	LaunchType types.LaunchType
 
 	// The network configuration for the task. This parameter is required for task

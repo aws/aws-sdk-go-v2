@@ -631,6 +631,62 @@ func (m *awsAwsquery_serializeOpCreateEventSubscription) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpCreateGlobalCluster struct {
+}
+
+func (*awsAwsquery_serializeOpCreateGlobalCluster) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpCreateGlobalCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateGlobalClusterInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateGlobalCluster")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentCreateGlobalClusterInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpDeleteDBCluster struct {
 }
 
@@ -947,6 +1003,62 @@ func (m *awsAwsquery_serializeOpDeleteEventSubscription) HandleSerialize(ctx con
 	body.Key("Version").String("2014-10-31")
 
 	if err := awsAwsquery_serializeOpDocumentDeleteEventSubscriptionInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDeleteGlobalCluster struct {
+}
+
+func (*awsAwsquery_serializeOpDeleteGlobalCluster) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDeleteGlobalCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteGlobalClusterInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteGlobalCluster")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentDeleteGlobalClusterInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1695,6 +1807,62 @@ func (m *awsAwsquery_serializeOpDescribeEventSubscriptions) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpDescribeGlobalClusters struct {
+}
+
+func (*awsAwsquery_serializeOpDescribeGlobalClusters) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribeGlobalClusters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeGlobalClustersInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeGlobalClusters")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentDescribeGlobalClustersInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpDescribeOrderableDBInstanceOptions struct {
 }
 
@@ -2255,6 +2423,62 @@ func (m *awsAwsquery_serializeOpModifyEventSubscription) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpModifyGlobalCluster struct {
+}
+
+func (*awsAwsquery_serializeOpModifyGlobalCluster) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpModifyGlobalCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyGlobalClusterInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyGlobalCluster")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentModifyGlobalClusterInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpRebootDBInstance struct {
 }
 
@@ -2291,6 +2515,62 @@ func (m *awsAwsquery_serializeOpRebootDBInstance) HandleSerialize(ctx context.Co
 	body.Key("Version").String("2014-10-31")
 
 	if err := awsAwsquery_serializeOpDocumentRebootDBInstanceInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpRemoveFromGlobalCluster struct {
+}
+
+func (*awsAwsquery_serializeOpRemoveFromGlobalCluster) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpRemoveFromGlobalCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RemoveFromGlobalClusterInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("RemoveFromGlobalCluster")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentRemoveFromGlobalClusterInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3167,6 +3447,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.String(*v.EngineVersion)
 	}
 
+	if v.GlobalClusterIdentifier != nil {
+		objectKey := object.Key("GlobalClusterIdentifier")
+		objectKey.String(*v.GlobalClusterIdentifier)
+	}
+
 	if v.KmsKeyId != nil {
 		objectKey := object.Key("KmsKeyId")
 		objectKey.String(*v.KmsKeyId)
@@ -3410,6 +3695,48 @@ func awsAwsquery_serializeOpDocumentCreateEventSubscriptionInput(v *CreateEventS
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentCreateGlobalClusterInput(v *CreateGlobalClusterInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DatabaseName != nil {
+		objectKey := object.Key("DatabaseName")
+		objectKey.String(*v.DatabaseName)
+	}
+
+	if v.DeletionProtection != nil {
+		objectKey := object.Key("DeletionProtection")
+		objectKey.Boolean(*v.DeletionProtection)
+	}
+
+	if v.Engine != nil {
+		objectKey := object.Key("Engine")
+		objectKey.String(*v.Engine)
+	}
+
+	if v.EngineVersion != nil {
+		objectKey := object.Key("EngineVersion")
+		objectKey.String(*v.EngineVersion)
+	}
+
+	if v.GlobalClusterIdentifier != nil {
+		objectKey := object.Key("GlobalClusterIdentifier")
+		objectKey.String(*v.GlobalClusterIdentifier)
+	}
+
+	if v.SourceDBClusterIdentifier != nil {
+		objectKey := object.Key("SourceDBClusterIdentifier")
+		objectKey.String(*v.SourceDBClusterIdentifier)
+	}
+
+	if v.StorageEncrypted != nil {
+		objectKey := object.Key("StorageEncrypted")
+		objectKey.Boolean(*v.StorageEncrypted)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentDeleteDBClusterInput(v *DeleteDBClusterInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -3487,6 +3814,18 @@ func awsAwsquery_serializeOpDocumentDeleteEventSubscriptionInput(v *DeleteEventS
 	if v.SubscriptionName != nil {
 		objectKey := object.Key("SubscriptionName")
 		objectKey.String(*v.SubscriptionName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDeleteGlobalClusterInput(v *DeleteGlobalClusterInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.GlobalClusterIdentifier != nil {
+		objectKey := object.Key("GlobalClusterIdentifier")
+		objectKey.String(*v.GlobalClusterIdentifier)
 	}
 
 	return nil
@@ -3919,6 +4258,35 @@ func awsAwsquery_serializeOpDocumentDescribeEventSubscriptionsInput(v *DescribeE
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentDescribeGlobalClustersInput(v *DescribeGlobalClustersInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Filters != nil {
+		objectKey := object.Key("Filters")
+		if err := awsAwsquery_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.GlobalClusterIdentifier != nil {
+		objectKey := object.Key("GlobalClusterIdentifier")
+		objectKey.String(*v.GlobalClusterIdentifier)
+	}
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxRecords != nil {
+		objectKey := object.Key("MaxRecords")
+		objectKey.Integer(*v.MaxRecords)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentDescribeOrderableDBInstanceOptionsInput(v *DescribeOrderableDBInstanceOptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4264,6 +4632,28 @@ func awsAwsquery_serializeOpDocumentModifyEventSubscriptionInput(v *ModifyEventS
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentModifyGlobalClusterInput(v *ModifyGlobalClusterInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DeletionProtection != nil {
+		objectKey := object.Key("DeletionProtection")
+		objectKey.Boolean(*v.DeletionProtection)
+	}
+
+	if v.GlobalClusterIdentifier != nil {
+		objectKey := object.Key("GlobalClusterIdentifier")
+		objectKey.String(*v.GlobalClusterIdentifier)
+	}
+
+	if v.NewGlobalClusterIdentifier != nil {
+		objectKey := object.Key("NewGlobalClusterIdentifier")
+		objectKey.String(*v.NewGlobalClusterIdentifier)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentRebootDBInstanceInput(v *RebootDBInstanceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4276,6 +4666,23 @@ func awsAwsquery_serializeOpDocumentRebootDBInstanceInput(v *RebootDBInstanceInp
 	if v.ForceFailover != nil {
 		objectKey := object.Key("ForceFailover")
 		objectKey.Boolean(*v.ForceFailover)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentRemoveFromGlobalClusterInput(v *RemoveFromGlobalClusterInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DbClusterIdentifier != nil {
+		objectKey := object.Key("DbClusterIdentifier")
+		objectKey.String(*v.DbClusterIdentifier)
+	}
+
+	if v.GlobalClusterIdentifier != nil {
+		objectKey := object.Key("GlobalClusterIdentifier")
+		objectKey.String(*v.GlobalClusterIdentifier)
 	}
 
 	return nil

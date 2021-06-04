@@ -242,9 +242,9 @@ type SendMessageBatchRequestEntry struct {
 	// for deduplication of messages within a 5-minute minimum deduplication interval.
 	// If a message with a particular MessageDeduplicationId is sent successfully,
 	// subsequent messages with the same MessageDeduplicationId are accepted
-	// successfully but aren't delivered. For more information, see  Exactly-Once
-	// Processing
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
+	// successfully but aren't delivered. For more information, see  Exactly-once
+	// processing
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-exactly-once-processing.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
 	// * Every message must have a

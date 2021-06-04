@@ -806,7 +806,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "[A-za-z0-9_.-]{0,63}$"
+                "smithy.api#pattern": "^[A-za-z0-9_.-]{0,63}$"
             }
         },
         "com.amazonaws.fsx#CompletionReport": {
@@ -886,7 +886,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Copies an existing backup within the same AWS account to another Region\n         (cross-Region copy) or within the same Region (in-Region copy). You can have up to five\n         backup copy requests in progress to a single destination Region per account.</p>\n         <p>You can use cross-Region backup copies for cross-region disaster recovery.\n         You periodically take backups and copy them to another Region so that in the\n         event of a disaster in the primary Region, you can restore from backup and recover\n         availability quickly in the other Region. You can make cross-Region copies\n         only within your AWS partition.</p>\n         <p> You can also use backup copies to clone your file data set to another Region\n         or within the same Region.</p>\n         <p>You can use the <code>SourceRegion</code> parameter to specify the AWS Region\n         from which the backup will be copied. For example, if you make the call from the\n         <code>us-west-1</code> Region and want to copy a backup from the <code>us-east-2</code>\n         Region, you specify <code>us-east-2</code> in the <code>SourceRegion</code> parameter\n         to make a cross-Region copy. If you don't specify a Region, the backup copy is\n         created in the same Region where the request is sent from (in-Region copy).</p>\n         <p>For more information on creating backup copies, see \n         <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/copy-backups.html\">\n            Copying backups</a> in the <i>Amazon FSx for Windows User Guide</i> and \n         <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/copy-backups.html\">Copying backups</a> \n         in the <i>Amazon FSx for Lustre User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Copies an existing backup within the same AWS account to another Region\n         (cross-Region copy) or within the same Region (in-Region copy). You can have up to five\n         backup copy requests in progress to a single destination Region per account.</p>\n         <p>You can use cross-Region backup copies for cross-region disaster recovery.\n         You periodically take backups and copy them to another Region so that in the\n         event of a disaster in the primary Region, you can restore from backup and recover\n         availability quickly in the other Region. You can make cross-Region copies\n         only within your AWS partition.</p>\n         <p> You can also use backup copies to clone your file data set to another Region\n         or within the same Region.</p>\n         <p>You can use the <code>SourceRegion</code> parameter to specify the AWS Region\n         from which the backup will be copied. For example, if you make the call from the\n         <code>us-west-1</code> Region and want to copy a backup from the <code>us-east-2</code>\n         Region, you specify <code>us-east-2</code> in the <code>SourceRegion</code> parameter\n         to make a cross-Region copy. If you don't specify a Region, the backup copy is\n         created in the same Region where the request is sent from (in-Region copy).</p>\n         <p>For more information on creating backup copies, see \n         <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#copy-backups\">\n            Copying backups</a> in the <i>Amazon FSx for Windows User Guide</i> and \n         <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html#copy-backups\">Copying backups</a> \n         in the <i>Amazon FSx for Lustre User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1292,7 +1292,7 @@
                 "AutoImportPolicy": {
                     "target": "com.amazonaws.fsx#AutoImportPolicyType",
                     "traits": {
-                        "smithy.api#documentation": "<p> (Optional) When you create your file system, your existing S3 objects appear as file and directory listings. \n            Use this property to choose how Amazon FSx keeps your file and directory listings up to date \n            as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can\n            have the following values:</p>\n        \n        \n        \n        <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates \n                file and directory listings from the linked S3 bucket \n                when the file system is created. FSx does not update file and directory \n                listings for any new or changed objects after choosing this option.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports\n                directory listings of any new objects added to the linked S3 bucket that \n                do not currently exist in the FSx file system. </p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports \n                file and directory listings of any new objects added to the S3 bucket and any \n                existing objects that are changed in the S3 bucket after you choose this option. \n            </p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html\">Automatically import updates from your S3 bucket</a>.</p>"
+                        "smithy.api#documentation": "<p> (Optional) When you create your file system, your existing S3 objects appear as file and directory listings. \n            Use this property to choose how Amazon FSx keeps your file and directory listings up to date \n            as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can\n            have the following values:</p>\n        \n        <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates \n                file and directory listings from the linked S3 bucket \n                when the file system is created. FSx does not update file and directory \n                listings for any new or changed objects after choosing this option.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports\n                directory listings of any new objects added to the linked S3 bucket that \n                do not currently exist in the FSx file system. </p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports \n                file and directory listings of any new objects added to the S3 bucket and any \n                existing objects that are changed in the S3 bucket after you choose this option. \n            </p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html\">Automatically import updates from your S3 bucket</a>.</p>"
                     }
                 },
                 "PerUnitStorageThroughput": {
@@ -1317,6 +1317,12 @@
                     "target": "com.amazonaws.fsx#DriveCacheType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of drive cache used by PERSISTENT_1 file systems that are provisioned with\n            HDD storage devices. This parameter is required when storage type is HDD. Set to\n            <code>READ</code>, improve the performance for frequently accessed files and allows 20%\n            of the total storage capacity of the file system to be cached. </p>\n        <p>This parameter is required when <code>StorageType</code> is set to HDD.</p>"
+                    }
+                },
+                "DataCompressionType": {
+                    "target": "com.amazonaws.fsx#DataCompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the data compression configuration for the file system. <code>DataCompressionType</code>\n            can have the following values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - (Default) Data compression is turned off when\n                the file system is created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LZ4</code> - Data compression is turned on with the LZ4\n                algorithm.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html\">Lustre data compression</a>.</p>"
                     }
                 }
             },
@@ -1496,6 +1502,21 @@
                     "max": 5
                 },
                 "smithy.api#pattern": "^([01]\\d|2[0-3]):?([0-5]\\d)$"
+            }
+        },
+        "com.amazonaws.fsx#DataCompressionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "LZ4",
+                        "name": "LZ4"
+                    }
+                ]
             }
         },
         "com.amazonaws.fsx#DataRepositoryConfiguration": {
@@ -3213,6 +3234,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of drive cache used by PERSISTENT_1 file systems that are provisioned with\n            HDD storage devices. This parameter is required when storage type is HDD. Set to\n            <code>READ</code>, improve the performance for frequently accessed files and allows 20%\n            of the total storage capacity of the file system to be cached.  </p>\n        <p>This parameter is required when <code>StorageType</code> is set to HDD.</p>"
                     }
+                },
+                "DataCompressionType": {
+                    "target": "com.amazonaws.fsx#DataCompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data compression configuration for the file system. <code>DataCompressionType</code>\n            can have the following values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - Data compression is turned off for\n                the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LZ4</code> - Data compression is turned on with the LZ4\n                algorithm.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html\">Lustre data compression</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4010,7 +4037,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file system. \n      You can update multiple properties in a single request.</p>\n         <p>For Amazon FSx for Windows File Server file systems, you can update the following \n    properties:</p>\n         <ul>\n            <li>\n               <p>AutomaticBackupRetentionDays</p>\n            </li>\n            <li>\n               <p>DailyAutomaticBackupStartTime</p>\n            </li>\n            <li>\n               <p>SelfManagedActiveDirectoryConfiguration</p>\n            </li>\n            <li>\n               <p>StorageCapacity</p>\n            </li>\n            <li>\n               <p>ThroughputCapacity</p>\n            </li>\n            <li>\n               <p>WeeklyMaintenanceStartTime</p>\n            </li>\n         </ul>\n         <p>For Amazon FSx for Lustre file systems, you can update the following \n      properties:</p>\n         <ul>\n            <li>\n               <p>AutoImportPolicy</p>\n            </li>\n            <li>\n               <p>AutomaticBackupRetentionDays</p>\n            </li>\n            <li>\n               <p>DailyAutomaticBackupStartTime</p>\n            </li>\n            <li>\n               <p>StorageCapacity</p>\n            </li>\n            <li>\n               <p>WeeklyMaintenanceStartTime</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file system. \n      You can update multiple properties in a single request.</p>\n         <p>For Amazon FSx for Windows File Server file systems, you can update the following \n    properties:</p>\n         <ul>\n            <li>\n               <p>AutomaticBackupRetentionDays</p>\n            </li>\n            <li>\n               <p>DailyAutomaticBackupStartTime</p>\n            </li>\n            <li>\n               <p>SelfManagedActiveDirectoryConfiguration</p>\n            </li>\n            <li>\n               <p>StorageCapacity</p>\n            </li>\n            <li>\n               <p>ThroughputCapacity</p>\n            </li>\n            <li>\n               <p>WeeklyMaintenanceStartTime</p>\n            </li>\n         </ul>\n         <p>For Amazon FSx for Lustre file systems, you can update the following \n      properties:</p>\n         <ul>\n            <li>\n               <p>AutoImportPolicy</p>\n            </li>\n            <li>\n               <p>AutomaticBackupRetentionDays</p>\n            </li>\n            <li>\n               <p>DailyAutomaticBackupStartTime</p>\n            </li>\n            <li>\n               <p>DataCompressionType</p>\n            </li>\n            <li>\n               <p>StorageCapacity</p>\n            </li>\n            <li>\n               <p>WeeklyMaintenanceStartTime</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.fsx#UpdateFileSystemLustreConfiguration": {
@@ -4032,6 +4059,12 @@
                     "target": "com.amazonaws.fsx#AutoImportPolicyType",
                     "traits": {
                         "smithy.api#documentation": "<p> (Optional) When you create your file system, your existing S3 objects appear as file and directory listings. \n            Use this property to choose how Amazon FSx keeps your file and directory listing up to date \n            as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can\n            have the following values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates \n                file and directory listings from the linked S3 bucket \n                when the file system is created. FSx does not update the file and directory \n                listing for any new or changed objects after choosing this option.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports\n                directory listings of any new objects added to the linked S3 bucket that \n                do not currently exist in the FSx file system. </p>\n            </li>\n            <li>\n               <p>\n                  <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports \n                file and directory listings of any new objects added to the S3 bucket and any \n                existing objects that are changed in the S3 bucket after you choose this option. \n            </p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html\">Automatically import updates from your S3 bucket</a>.</p>"
+                    }
+                },
+                "DataCompressionType": {
+                    "target": "com.amazonaws.fsx#DataCompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the data compression configuration for the file system. <code>DataCompressionType</code>\n            can have the following values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - Data compression is turned off for\n                the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LZ4</code> - Data compression is turned on with the LZ4\n                algorithm.</p>\n            </li>\n         </ul>\n        <p>If you don't use <code>DataCompressionType</code>, the file system retains\n            its current data compression configuration.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html\">Lustre data compression</a>.</p>"
                     }
                 }
             },

@@ -874,9 +874,21 @@ func awsRestjson1_serializeOpDocumentCreatePortalInput(v *CreatePortalInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.Alarms != nil {
+		ok := object.Key("alarms")
+		if err := awsRestjson1_serializeDocumentAlarms(v.Alarms, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.NotificationSenderEmail != nil {
+		ok := object.Key("notificationSenderEmail")
+		ok.String(*v.NotificationSenderEmail)
 	}
 
 	if len(v.PortalAuthMode) > 0 {
@@ -4216,9 +4228,21 @@ func awsRestjson1_serializeOpDocumentUpdatePortalInput(v *UpdatePortalInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.Alarms != nil {
+		ok := object.Key("alarms")
+		if err := awsRestjson1_serializeDocumentAlarms(v.Alarms, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.NotificationSenderEmail != nil {
+		ok := object.Key("notificationSenderEmail")
+		ok.String(*v.NotificationSenderEmail)
 	}
 
 	if v.PortalContactEmail != nil {
@@ -4337,6 +4361,23 @@ func awsRestjson1_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, v
 	if v.ProjectName != nil {
 		ok := object.Key("projectName")
 		ok.String(*v.ProjectName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAlarms(v *types.Alarms, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AlarmRoleArn != nil {
+		ok := object.Key("alarmRoleArn")
+		ok.String(*v.AlarmRoleArn)
+	}
+
+	if v.NotificationLambdaArn != nil {
+		ok := object.Key("notificationLambdaArn")
+		ok.String(*v.NotificationLambdaArn)
 	}
 
 	return nil

@@ -35,13 +35,17 @@ func (c *Client) PurchaseOffering(ctx context.Context, params *PurchaseOfferingI
 type PurchaseOfferingInput struct {
 
 	// The ID of the offering.
+	//
+	// This member is required.
 	OfferingId *string
+
+	// The number of device slots to purchase in an offering request.
+	//
+	// This member is required.
+	Quantity *int32
 
 	// The ID of the offering promotion to be applied to the purchase.
 	OfferingPromotionId *string
-
-	// The number of device slots to purchase in an offering request.
-	Quantity *int32
 }
 
 // The result of the purchase offering (for example, success or failure).
@@ -97,6 +101,9 @@ func addOperationPurchaseOfferingMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpPurchaseOfferingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPurchaseOffering(options.Region), middleware.Before); err != nil {

@@ -14,8 +14,8 @@ import (
 // Uploads position update data for one or more devices to a tracker resource.
 // Amazon Location uses the data when reporting the last known device position and
 // position history. Only one position update is stored per sample time. Location
-// data is sampled at a fixed rate of one position per 30-second interval, and
-// retained for one year before it is deleted.
+// data is sampled at a fixed rate of one position per 30-second interval and
+// retained for 30 days before it's deleted.
 func (c *Client) BatchUpdateDevicePosition(ctx context.Context, params *BatchUpdateDevicePositionInput, optFns ...func(*Options)) (*BatchUpdateDevicePositionOutput, error) {
 	if params == nil {
 		params = &BatchUpdateDevicePositionInput{}

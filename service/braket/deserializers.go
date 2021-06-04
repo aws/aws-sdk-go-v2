@@ -461,6 +461,12 @@ func awsRestjson1_deserializeOpErrorGetDevice(response *smithyhttp.Response, met
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("DeviceOfflineException", errorCode):
+		return awsRestjson1_deserializeErrorDeviceOfflineException(response, errorBody)
+
+	case strings.EqualFold("DeviceRetiredException", errorCode):
+		return awsRestjson1_deserializeErrorDeviceRetiredException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
 
@@ -1598,6 +1604,42 @@ func awsRestjson1_deserializeErrorDeviceOfflineException(response *smithyhttp.Re
 	return output
 }
 
+func awsRestjson1_deserializeErrorDeviceRetiredException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.DeviceRetiredException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentDeviceRetiredException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorInternalServiceException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InternalServiceException{}
 	var buff [1024]byte
@@ -1874,6 +1916,46 @@ func awsRestjson1_deserializeDocumentDeviceOfflineException(v **types.DeviceOffl
 	var sv *types.DeviceOfflineException
 	if *v == nil {
 		sv = &types.DeviceOfflineException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDeviceRetiredException(v **types.DeviceRetiredException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeviceRetiredException
+	if *v == nil {
+		sv = &types.DeviceRetiredException{}
 	} else {
 		sv = *v
 	}

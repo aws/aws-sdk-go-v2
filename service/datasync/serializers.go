@@ -1865,6 +1865,11 @@ func awsAwsjson11_serializeDocumentOptions(v *types.Options, value smithyjson.Va
 		ok.String(string(v.PreserveDevices))
 	}
 
+	if len(v.SecurityDescriptorCopyFlags) > 0 {
+		ok := object.Key("SecurityDescriptorCopyFlags")
+		ok.String(string(v.SecurityDescriptorCopyFlags))
+	}
+
 	if len(v.TaskQueueing) > 0 {
 		ok := object.Key("TaskQueueing")
 		ok.String(string(v.TaskQueueing))

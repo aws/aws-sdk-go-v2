@@ -18,6 +18,14 @@ import (
 // have the following permissions:
 //
 // * resource-groups:SearchResources
+//
+// *
+// cloudformation:DescribeStacks
+//
+// * cloudformation:ListStackResources
+//
+// *
+// tag:GetResources
 func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInput, optFns ...func(*Options)) (*SearchResourcesOutput, error) {
 	if params == nil {
 		params = &SearchResourcesInput{}

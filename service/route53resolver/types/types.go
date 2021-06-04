@@ -197,8 +197,8 @@ type Filter struct {
 	Values []string
 }
 
-// Configuration of the firewall behavior provided by DNS Firewall for a single
-// Amazon virtual private cloud (VPC).
+// Configuration of the firewall behavior provided by DNS Firewall for a single VPC
+// from Amazon Virtual Private Cloud (Amazon VPC).
 type FirewallConfig struct {
 
 	// Determines how DNS Firewall operates during failures, for example when all
@@ -218,7 +218,7 @@ type FirewallConfig struct {
 	// Firewall rule group association.
 	FirewallFailOpen FirewallFailOpenStatus
 
-	// The Id of the firewall configuration.
+	// The ID of the firewall configuration.
 	Id *string
 
 	// The AWS account ID of the owner of the VPC that this firewall configuration
@@ -229,7 +229,7 @@ type FirewallConfig struct {
 	ResourceId *string
 }
 
-// High level information about a list of firewall domains for use in a
+// High-level information about a list of firewall domains for use in a
 // FirewallRule. This is returned by GetFirewallDomainList. To retrieve the domains
 // that are defined for this domain list, call ListFirewallDomains.
 type FirewallDomainList struct {
@@ -242,8 +242,8 @@ type FirewallDomainList struct {
 	CreationTime *string
 
 	// A unique string defined by you to identify the request. This allows you to retry
-	// failed requests without the risk of executing the operation twice. This can be
-	// any unique string, for example, a timestamp.
+	// failed requests without the risk of running the operation twice. This can be any
+	// unique string, for example, a timestamp.
 	CreatorRequestId *string
 
 	// The number of domain names that are specified in the domain list.
@@ -281,8 +281,8 @@ type FirewallDomainListMetadata struct {
 	Arn *string
 
 	// A unique string defined by you to identify the request. This allows you to retry
-	// failed requests without the risk of executing the operation twice. This can be
-	// any unique string, for example, a timestamp.
+	// failed requests without the risk of running the operation twice. This can be any
+	// unique string, for example, a timestamp.
 	CreatorRequestId *string
 
 	// The ID of the domain list.
@@ -382,8 +382,8 @@ type FirewallRuleGroup struct {
 	CreationTime *string
 
 	// A unique string defined by you to identify the request. This allows you to retry
-	// failed requests without the risk of executing the operation twice. This can be
-	// any unique string, for example, a timestamp.
+	// failed requests without the risk of running the operation twice. This can be any
+	// unique string, for example, a timestamp.
 	CreatorRequestId *string
 
 	// The ID of the rule group.
@@ -416,7 +416,7 @@ type FirewallRuleGroup struct {
 	StatusMessage *string
 }
 
-// An association between a firewall rul group and a VPC, which enables DNS
+// An association between a firewall rule group and a VPC, which enables DNS
 // filtering for the VPC.
 type FirewallRuleGroupAssociation struct {
 
@@ -428,8 +428,8 @@ type FirewallRuleGroupAssociation struct {
 	CreationTime *string
 
 	// A unique string defined by you to identify the request. This allows you to retry
-	// failed requests without the risk of executing the operation twice. This can be
-	// any unique string, for example, a timestamp.
+	// failed requests without the risk of running the operation twice. This can be any
+	// unique string, for example, a timestamp.
 	CreatorRequestId *string
 
 	// The unique identifier of the firewall rule group.
@@ -479,8 +479,8 @@ type FirewallRuleGroupMetadata struct {
 	Arn *string
 
 	// A unique string defined by you to identify the request. This allows you to retry
-	// failed requests without the risk of executing the operation twice. This can be
-	// any unique string, for example, a timestamp.
+	// failed requests without the risk of running the operation twice. This can be any
+	// unique string, for example, a timestamp.
 	CreatorRequestId *string
 
 	// The ID of the rule group.
@@ -619,7 +619,7 @@ type ResolverEndpoint struct {
 
 	// A unique string that identifies the request that created the Resolver endpoint.
 	// The CreatorRequestId allows failed requests to be retried without the risk of
-	// executing the operation twice.
+	// running the operation twice.
 	CreatorRequestId *string
 
 	// Indicates whether the Resolver endpoint allows inbound or outbound DNS
@@ -725,7 +725,7 @@ type ResolverQueryLogConfig struct {
 
 	// A unique string that identifies the request that created the query logging
 	// configuration. The CreatorRequestId allows failed requests to be retried without
-	// the risk of executing the operation twice.
+	// the risk of running the operation twice.
 	CreatorRequestId *string
 
 	// The ARN of the resource that you want Resolver to send query logs: an Amazon S3
@@ -855,7 +855,7 @@ type ResolverRule struct {
 
 	// A unique string that you specified when you created the Resolver rule.
 	// CreatorRequestId identifies the request and allows failed requests to be retried
-	// without the risk of executing the operation twice.
+	// without the risk of running the operation twice.
 	CreatorRequestId *string
 
 	// DNS queries for this domain name are forwarded to the IP addresses that are
@@ -892,7 +892,7 @@ type ResolverRule struct {
 	// only Resolver can create rules that have a value of RECURSIVE for RuleType.
 	RuleType RuleTypeOption
 
-	// Whether the rules is shared and, if so, whether the current account is sharing
+	// Whether the rule is shared and, if so, whether the current account is sharing
 	// the rule with another account, or another account is sharing the rule with the
 	// current account.
 	ShareStatus ShareStatus

@@ -42,8 +42,8 @@ func (c *Client) CreateResolverQueryLogConfig(ctx context.Context, params *Creat
 type CreateResolverQueryLogConfigInput struct {
 
 	// A unique string that identifies the request and that allows failed requests to
-	// be retried without the risk of executing the operation twice. CreatorRequestId
-	// can be any unique string, for example, a date/time stamp.
+	// be retried without the risk of running the operation twice. CreatorRequestId can
+	// be any unique string, for example, a date/time stamp.
 	//
 	// This member is required.
 	CreatorRequestId *string
@@ -67,7 +67,7 @@ type CreateResolverQueryLogConfigInput struct {
 	// This member is required.
 	DestinationArn *string
 
-	// The name that you want to give the query logging configuration
+	// The name that you want to give the query logging configuration.
 	//
 	// This member is required.
 	Name *string

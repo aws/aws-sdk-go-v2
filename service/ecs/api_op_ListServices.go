@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the services that are running in a specified cluster.
+// Returns a list of services. You can filter the results by cluster, launch type,
+// and scheduling strategy.
 func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, optFns ...func(*Options)) (*ListServicesOutput, error) {
 	if params == nil {
 		params = &ListServicesInput{}
@@ -30,12 +31,12 @@ func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, op
 
 type ListServicesInput struct {
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// services to list. If you do not specify a cluster, the default cluster is
-	// assumed.
+	// The short name or full Amazon Resource Name (ARN) of the cluster to use when
+	// filtering the ListServices results. If you do not specify a cluster, the default
+	// cluster is assumed.
 	Cluster *string
 
-	// The launch type for the services to list.
+	// The launch type to use when filtering the ListServices results.
 	LaunchType types.LaunchType
 
 	// The maximum number of service results returned by ListServices in paginated
@@ -55,7 +56,7 @@ type ListServicesInput struct {
 	// purposes.
 	NextToken *string
 
-	// The scheduling strategy for services to list.
+	// The scheduling strategy to use when filtering the ListServices results.
 	SchedulingStrategy types.SchedulingStrategy
 }
 

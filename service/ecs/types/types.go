@@ -1112,7 +1112,9 @@ type ContainerInstance struct {
 	// arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
 	ContainerInstanceArn *string
 
-	// The EC2 instance ID of the container instance.
+	// The ID of the container instance. For Amazon EC2 instances, this value is the
+	// Amazon EC2 instance ID. For external instances, this value is the AWS Systems
+	// Manager managed instance ID.
 	Ec2InstanceId *string
 
 	// The number of tasks on the container instance that are in the PENDING status.
@@ -2607,9 +2609,8 @@ type Service struct {
 	// started.
 	HealthCheckGracePeriodSeconds *int32
 
-	// The launch type on which your service is running. If no value is specified, it
-	// will default to EC2. Valid values include EC2 and FARGATE. For more information,
-	// see Amazon ECS Launch Types
+	// The infrastructure on which your service is running. For more information, see
+	// Amazon ECS launch types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	LaunchType LaunchType
@@ -2972,8 +2973,8 @@ type Task struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html).
 	LastStatus *string
 
-	// The launch type on which your task is running. For more information, see Amazon
-	// ECS Launch Types
+	// The infrastructure on which your task is running. For more information, see
+	// Amazon ECS launch types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	LaunchType LaunchType

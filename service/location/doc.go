@@ -3,5 +3,6 @@
 // Package location provides the API client, operations, and parameter types for
 // Amazon Location Service.
 //
-// Suite of geospatial services including Maps, Places, Tracking, and Geofencing
+// Suite of geospatial services including Maps, Places, Routes, Tracking, and
+// Geofencing
 package location

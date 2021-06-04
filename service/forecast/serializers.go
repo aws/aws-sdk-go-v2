@@ -2453,6 +2453,11 @@ func awsAwsjson11_serializeOpDocumentCreatePredictorInput(v *CreatePredictorInpu
 		ok.String(*v.AlgorithmArn)
 	}
 
+	if len(v.AutoMLOverrideStrategy) > 0 {
+		ok := object.Key("AutoMLOverrideStrategy")
+		ok.String(string(v.AutoMLOverrideStrategy))
+	}
+
 	if v.EncryptionConfig != nil {
 		ok := object.Key("EncryptionConfig")
 		if err := awsAwsjson11_serializeDocumentEncryptionConfig(v.EncryptionConfig, ok); err != nil {

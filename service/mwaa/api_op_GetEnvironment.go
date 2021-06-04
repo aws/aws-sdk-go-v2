@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get details of an existing environment.
+// Retrieves the details of an Amazon Managed Workflows for Apache Airflow (MWAA)
+// environment.
 func (c *Client) GetEnvironment(ctx context.Context, params *GetEnvironmentInput, optFns ...func(*Options)) (*GetEnvironmentOutput, error) {
 	if params == nil {
 		params = &GetEnvironmentInput{}
@@ -30,7 +31,7 @@ func (c *Client) GetEnvironment(ctx context.Context, params *GetEnvironmentInput
 
 type GetEnvironmentInput struct {
 
-	// The name of the environment to retrieve.
+	// The name of the Amazon MWAA environment. For example, MyMWAAEnvironment.
 	//
 	// This member is required.
 	Name *string
@@ -38,7 +39,7 @@ type GetEnvironmentInput struct {
 
 type GetEnvironmentOutput struct {
 
-	// A JSON blob with environment details.
+	// An object containing all available details about the environment.
 	Environment *types.Environment
 
 	// Metadata pertaining to the operation's result.

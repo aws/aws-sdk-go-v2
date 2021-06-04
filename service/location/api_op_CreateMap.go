@@ -13,11 +13,7 @@ import (
 )
 
 // Creates a map resource in your AWS account, which provides map tiles of
-// different styles sourced from global location data providers. By using Maps, you
-// agree that AWS may transmit your API queries to your selected third party
-// provider for processing, which may be outside the AWS region you are currently
-// using. For more information, see the AWS Service Terms
-// (https://aws.amazon.com/service-terms/) for Amazon Location Service.
+// different styles sourced from global location data providers.
 func (c *Client) CreateMap(ctx context.Context, params *CreateMapInput, optFns ...func(*Options)) (*CreateMapOutput, error) {
 	if params == nil {
 		params = &CreateMapInput{}
@@ -63,6 +59,25 @@ type CreateMapInput struct {
 
 	// An optional description for the map resource.
 	Description *string
+
+	// Applies one or more tags to the map resource. A tag is a key-value pair helps
+	// manage, identify, search, and filter your resources by labelling them. Format:
+	// "key" : "value" Restrictions:
+	//
+	// * Maximum 50 tags per resource
+	//
+	// * Each resource
+	// tag must be unique with a maximum of one value.
+	//
+	// * Maximum key length: 128
+	// Unicode characters in UTF-8
+	//
+	// * Maximum value length: 256 Unicode characters in
+	// UTF-8
+	//
+	// * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+	// characters: + - = . _ : / @.
+	Tags map[string]string
 }
 
 type CreateMapOutput struct {
@@ -78,7 +93,7 @@ type CreateMapOutput struct {
 	// specify a resource across all AWS.
 	//
 	// * Format example:
-	// arn:partition:service:region:account-id:resource-type:resource-id
+	// arn:aws:geo:region:account-id:maps/ExampleMap
 	//
 	// This member is required.
 	MapArn *string

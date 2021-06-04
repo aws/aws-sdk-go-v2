@@ -49,7 +49,8 @@
                 "smithy.api#length": {
                     "min": 12,
                     "max": 12
-                }
+                },
+                "smithy.api#pattern": "^\\d{12}$"
             }
         },
         "com.amazonaws.outposts#Arn": {
@@ -70,7 +71,7 @@
                     "min": 1,
                     "max": 1000
                 },
-                "smithy.api#pattern": "[a-z\\d-]+"
+                "smithy.api#pattern": "^([a-zA-Z]+-){1,3}([a-zA-Z]+)?(\\d+[a-zA-Z]?)?$"
             }
         },
         "com.amazonaws.outposts#AvailabilityZoneId": {
@@ -81,7 +82,32 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[a-z]+[0-9]+-az[0-9]+"
+                "smithy.api#pattern": "^[a-zA-Z]+\\d-[a-zA-Z]+\\d$"
+            }
+        },
+        "com.amazonaws.outposts#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.outposts#ErrorMessage"
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.outposts#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource causing the conflict.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.outposts#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource causing the conflict.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updating or deleting this resource can cause an inconsistent state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.outposts#CreateOutpost": {
@@ -95,6 +121,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.outposts#InternalServerException"
@@ -171,6 +200,9 @@
                     "target": "com.amazonaws.outposts#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.outposts#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.outposts#InternalServerException"
                 },
                 {
@@ -216,6 +248,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.outposts#InternalServerException"
@@ -663,6 +698,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Outpost tags.</p>"
                     }
+                },
+                "SiteArn": {
+                    "target": "com.amazonaws.outposts#SiteArn"
                 }
             },
             "traits": {
@@ -685,10 +723,10 @@
             "traits": {
                 "smithy.api#documentation": "<p>The description of the Outpost.</p>",
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 1000
                 },
-                "smithy.api#pattern": "^[\\S ]+$"
+                "smithy.api#pattern": "^[\\S ]*$"
             }
         },
         "com.amazonaws.outposts#OutpostId": {
@@ -772,7 +810,18 @@
                     "min": 12,
                     "max": 12
                 },
-                "smithy.api#pattern": "\\d{12}"
+                "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
+        "com.amazonaws.outposts#ResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OUTPOST",
+                        "name": "OUTPOST"
+                    }
+                ]
             }
         },
         "com.amazonaws.outposts#ServiceQuotaExceededException": {
@@ -808,10 +857,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The site tags.</p>"
                     }
+                },
+                "SiteArn": {
+                    "target": "com.amazonaws.outposts#SiteArn"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a site.</p>"
+            }
+        },
+        "com.amazonaws.outposts#SiteArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the site.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:site/(os-[a-f0-9]{17})$"
             }
         },
         "com.amazonaws.outposts#SiteDescription": {
@@ -820,7 +883,7 @@
                 "smithy.api#documentation": "<p>The description of the site.</p>",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1000
+                    "max": 1001
                 },
                 "smithy.api#pattern": "^[\\S ]+$"
             }
@@ -833,7 +896,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "os-[a-f0-9]{17}"
+                "smithy.api#pattern": "^(arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:site/)?(os-[a-f0-9]{17})$"
             }
         },
         "com.amazonaws.outposts#SiteName": {
@@ -845,6 +908,16 @@
                     "max": 1000
                 },
                 "smithy.api#pattern": "^[\\S ]+$"
+            }
+        },
+        "com.amazonaws.outposts#String": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[\\S \\n]+$"
             }
         },
         "com.amazonaws.outposts#TagKey": {
@@ -954,7 +1027,7 @@
                     "min": 1,
                     "max": 1005
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "^(\\d+)##(\\S+)$"
             }
         },
         "com.amazonaws.outposts#UntagResource": {

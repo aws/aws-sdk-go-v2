@@ -5590,6 +5590,15 @@ func awsAwsjson11_deserializeDocumentLustreFileSystemConfiguration(v **types.Lus
 				sv.DailyAutomaticBackupStartTime = ptr.String(jtv)
 			}
 
+		case "DataCompressionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataCompressionType to be of type string, got %T instead", value)
+				}
+				sv.DataCompressionType = types.DataCompressionType(jtv)
+			}
+
 		case "DataRepositoryConfiguration":
 			if err := awsAwsjson11_deserializeDocumentDataRepositoryConfiguration(&sv.DataRepositoryConfiguration, value); err != nil {
 				return err

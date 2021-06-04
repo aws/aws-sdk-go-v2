@@ -1322,6 +1322,11 @@ func awsAwsjson11_serializeDocumentCrlConfiguration(v *types.CrlConfiguration, v
 		ok.String(*v.S3BucketName)
 	}
 
+	if len(v.S3ObjectAcl) > 0 {
+		ok := object.Key("S3ObjectAcl")
+		ok.String(string(v.S3ObjectAcl))
+	}
+
 	return nil
 }
 

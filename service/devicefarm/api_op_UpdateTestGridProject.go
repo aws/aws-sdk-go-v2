@@ -39,6 +39,9 @@ type UpdateTestGridProjectInput struct {
 
 	// Human-readable name for the project.
 	Name *string
+
+	// The VPC security groups and subnets that are attached to a project.
+	VpcConfig *types.TestGridVpcConfig
 }
 
 type UpdateTestGridProjectOutput struct {

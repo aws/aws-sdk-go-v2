@@ -3978,6 +3978,15 @@ func awsAwsjson11_deserializeDocumentCrlConfiguration(v **types.CrlConfiguration
 				sv.S3BucketName = ptr.String(jtv)
 			}
 
+		case "S3ObjectAcl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3ObjectAcl to be of type string, got %T instead", value)
+				}
+				sv.S3ObjectAcl = types.S3ObjectAcl(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

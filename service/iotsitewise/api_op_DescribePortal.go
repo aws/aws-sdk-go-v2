@@ -96,6 +96,13 @@ type DescribePortalOutput struct {
 	// This member is required.
 	PortalStatus *types.PortalStatus
 
+	// Contains the configuration information of an alarm created in a AWS IoT SiteWise
+	// Monitor portal.
+	Alarms *types.Alarms
+
+	// The email address that sends alarm notifications.
+	NotificationSenderEmail *string
+
 	// The service to use to authenticate users to the portal.
 	PortalAuthMode types.AuthMode
 

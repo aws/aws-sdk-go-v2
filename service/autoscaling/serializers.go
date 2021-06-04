@@ -3582,6 +3582,11 @@ func awsAwsquery_serializeDocumentEbs(v *types.Ebs, value query.Value) error {
 		objectKey.String(*v.SnapshotId)
 	}
 
+	if v.Throughput != nil {
+		objectKey := object.Key("Throughput")
+		objectKey.Integer(*v.Throughput)
+	}
+
 	if v.VolumeSize != nil {
 		objectKey := object.Key("VolumeSize")
 		objectKey.Integer(*v.VolumeSize)

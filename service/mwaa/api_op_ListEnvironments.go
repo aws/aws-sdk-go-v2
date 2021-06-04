@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List Amazon MWAA Environments.
+// Lists the Amazon Managed Workflows for Apache Airflow (MWAA) environments.
 func (c *Client) ListEnvironments(ctx context.Context, params *ListEnvironmentsInput, optFns ...func(*Options)) (*ListEnvironmentsOutput, error) {
 	if params == nil {
 		params = &ListEnvironmentsInput{}
@@ -29,21 +29,22 @@ func (c *Client) ListEnvironments(ctx context.Context, params *ListEnvironmentsI
 
 type ListEnvironmentsInput struct {
 
-	// The maximum results when listing MWAA environments.
+	// The maximum number of results to retrieve per page. For example, 5 environments
+	// per page.
 	MaxResults *int32
 
-	// The Next Token when listing MWAA environments.
+	// Retrieves the next page of the results.
 	NextToken *string
 }
 
 type ListEnvironmentsOutput struct {
 
-	// The list of Amazon MWAA Environments.
+	// Returns the list of Amazon MWAA environments.
 	//
 	// This member is required.
 	Environments []string
 
-	// The Next Token when listing MWAA environments.
+	// Retrieves the next page of the results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -150,7 +151,8 @@ var _ ListEnvironmentsAPIClient = (*Client)(nil)
 
 // ListEnvironmentsPaginatorOptions is the paginator options for ListEnvironments
 type ListEnvironmentsPaginatorOptions struct {
-	// The maximum results when listing MWAA environments.
+	// The maximum number of results to retrieve per page. For example, 5 environments
+	// per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

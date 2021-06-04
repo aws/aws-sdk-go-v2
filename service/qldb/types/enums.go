@@ -67,6 +67,7 @@ type PermissionsMode string
 // Enum values for PermissionsMode
 const (
 	PermissionsModeAllowAll PermissionsMode = "ALLOW_ALL"
+	PermissionsModeStandard PermissionsMode = "STANDARD"
 )
 
 // Values returns all known values for PermissionsMode. Note that this can be
@@ -75,6 +76,7 @@ const (
 func (PermissionsMode) Values() []PermissionsMode {
 	return []PermissionsMode{
 		"ALLOW_ALL",
+		"STANDARD",
 	}
 }
 

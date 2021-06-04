@@ -3459,7 +3459,7 @@
                 "domainName": {
                     "target": "com.amazonaws.lightsail#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name to manage (e.g., <code>example.com</code>).</p>\n         <note>\n            <p>You cannot register a new domain name using Lightsail. You must register a domain name\n        using Amazon Route 53 or another domain name registrar. If you have already registered your\n        domain, you can enter its name in this parameter to manage the DNS records for that\n        domain.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The domain name to manage (e.g., <code>example.com</code>).</p>\n         <note>\n            <p>You cannot register a new domain name using Lightsail. You must register a domain name\n        using Amazon Route 53 or another domain name registrar. If you have already registered your\n        domain, you can enter its name in this parameter to manage the DNS records for that domain\n        using Lightsail.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6473,7 +6473,7 @@
                 "target": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target AWS name server (e.g., <code>ns-111.awsdns-22.com.</code>).</p>\n         <p>For Lightsail load balancers, the value looks like\n        <code>ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com</code>. Be sure\n      to also set <code>isAlias</code> to <code>true</code> when setting up an A record for a load\n      balancer.</p>"
+                        "smithy.api#documentation": "<p>The target IP address (e.g., <code>192.0.2.0</code>), or AWS name server (e.g.,\n        <code>ns-111.awsdns-22.com.</code>).</p>\n         <p>For Lightsail load balancers, the value looks like\n        <code>ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com</code>. For\n      Lightsail distributions, the value looks like <code>exampled1182ne.cloudfront.net</code>.\n      For Lightsail container services, the value looks like\n        <code>container-service-1.example23scljs.us-west-2.cs.amazonlightsail.com</code>. Be sure to\n      also set <code>isAlias</code> to <code>true</code> when setting up an A record for a\n      Lightsail load balancer, distribution, or container service.</p>"
                     }
                 },
                 "isAlias": {
@@ -6485,7 +6485,7 @@
                 "type": {
                     "target": "com.amazonaws.lightsail#DomainEntryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of domain entry, such as address (A), canonical name (CNAME), mail exchanger\n      (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT).</p>\n         <p>The following domain entry types can be used:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>A</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CNAME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MX</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SOA</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SRV</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TXT</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of domain entry, such as address for IPv4 (A), address for IPv6 (AAAA), canonical\n      name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator\n      (SRV), or text (TXT).</p>\n         <p>The following domain entry types can be used:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>A</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AAAA</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CNAME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MX</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SOA</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SRV</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TXT</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "options": {
@@ -12117,7 +12117,7 @@
         "com.amazonaws.lightsail#IpAddress": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "([0-9]{1,3}\\.){3}[0-9]{1,3}"
+                "smithy.api#pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}$"
             }
         },
         "com.amazonaws.lightsail#IpAddressType": {
@@ -12138,7 +12138,7 @@
         "com.amazonaws.lightsail#Ipv6Address": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "([A-F0-9]{1,4}:){7}[A-F0-9]{1,4}"
+                "smithy.api#pattern": "^([A-F0-9]{1,4}:){7}[A-F0-9]{1,4}$"
             }
         },
         "com.amazonaws.lightsail#Ipv6AddressList": {
@@ -13936,7 +13936,7 @@
         "com.amazonaws.lightsail#NonEmptyString": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.lightsail#NotFoundException": {
@@ -16139,7 +16139,7 @@
         "com.amazonaws.lightsail#ResourceName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "\\w[\\w\\-]*\\w"
+                "smithy.api#pattern": "^\\w[\\w\\-]*\\w$"
             }
         },
         "com.amazonaws.lightsail#ResourceNameList": {

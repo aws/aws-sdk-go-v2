@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a batch of geofences from a geofence collection. This action deletes the
-// resource permanently. You can't undo this action.
+// Deletes a batch of geofences from a geofence collection. This operation deletes
+// the resource permanently.
 func (c *Client) BatchDeleteGeofence(ctx context.Context, params *BatchDeleteGeofenceInput, optFns ...func(*Options)) (*BatchDeleteGeofenceOutput, error) {
 	if params == nil {
 		params = &BatchDeleteGeofenceInput{}
