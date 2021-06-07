@@ -18,6 +18,9 @@ const (
 	// Headers for Token and TTL
 	tokenHeader     = "x-aws-ec2-metadata-token"
 	defaultTokenTTL = 5 * time.Minute
+
+	// default time out for get token api call
+	defaultGetTokenTimeout = 5 * time.Second
 )
 
 type tokenProvider struct {
@@ -153,7 +156,8 @@ func (t *tokenProvider) getToken(ctx context.Context) (tok *apiToken, err error)
 	return tok, nil
 }
 
-func (t *tokenProvider) updateToken(ctx context.Context) (*apiToken, error) {
+// TODO: Update Token can use its own context with a context timeout - instead of context being passed down.
+func (t *tokenProvider) updateToken(originalContext context.Context) (*apiToken, error) {
 	t.tokenMux.Lock()
 	defer t.tokenMux.Unlock()
 
@@ -163,10 +167,21 @@ func (t *tokenProvider) updateToken(ctx context.Context) (*apiToken, error) {
 		return tok, nil
 	}
 
+	// Get a child context with timeout defaulting to 5 seconds. This child context is passed to get token api call.
+	// This is required as we do not want to cancel the originalContext that is passed down.
+	ctx, cancelFn := context.WithTimeout(originalContext, defaultGetTokenTimeout)
+	defer cancelFn()
+
 	result, err := t.client.getToken(ctx, &getTokenInput{
 		TokenTTL: t.tokenTTL,
 	})
 	if err != nil {
+		// Check if originalContext has a non-nil error (indicating it got canceled or exceeded deadline).
+		// If so, just return the error.
+		if originalContext.Err() != nil {
+			return nil, err
+		}
+
 		// change the disabled flag on token provider to true, when error is request timeout error.
 		var statusErr interface{ HTTPStatusCode() int }
 		if errors.As(err, &statusErr) {

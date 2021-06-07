@@ -3,14 +3,12 @@ package imds
 import (
 	"context"
 	"fmt"
-	"net/url"
-	"path"
-	"time"
-
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"net/url"
+	"path"
 )
 
 func addAPIRequestMiddleware(stack *middleware.Stack,
@@ -46,14 +44,6 @@ func addRequestMiddleware(stack *middleware.Stack,
 	getOutput func(*smithyhttp.Response) (interface{}, error),
 ) (err error) {
 	err = awsmiddleware.AddSDKAgentKey(awsmiddleware.FeatureMetadata, "ec2-imds")(stack)
-	if err != nil {
-		return err
-	}
-
-	// Operation timeout
-	err = stack.Initialize.Add(&operationTimeout{
-		Timeout: defaultOperationTimeout,
-	}, middleware.Before)
 	if err != nil {
 		return err
 	}
@@ -189,29 +179,6 @@ func (m *resolveEndpoint) HandleSerialize(
 	}
 
 	return next.HandleSerialize(ctx, in)
-}
-
-const (
-	defaultOperationTimeout = 5 * time.Second
-)
-
-type operationTimeout struct {
-	Timeout time.Duration
-}
-
-func (*operationTimeout) ID() string { return "OperationTimeout" }
-
-func (m *operationTimeout) HandleInitialize(
-	ctx context.Context, input middleware.InitializeInput, next middleware.InitializeHandler,
-) (
-	output middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	var cancelFn func()
-
-	ctx, cancelFn = context.WithTimeout(ctx, m.Timeout)
-	defer cancelFn()
-
-	return next.HandleInitialize(ctx, input)
 }
 
 // appendURIPath joins a URI path component to the existing path with `/`

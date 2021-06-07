@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"github.com/google/go-cmp/cmp"
@@ -39,9 +38,7 @@ func TestAddRequestMiddleware(t *testing.T) {
 					},
 				)
 			},
-			ExpectInitialize: []string{
-				(*operationTimeout)(nil).ID(),
-			},
+			ExpectInitialize: []string{},
 			ExpectSerialize: []string{
 				"ResolveEndpoint",
 				"OperationSerializer",
@@ -71,9 +68,7 @@ func TestAddRequestMiddleware(t *testing.T) {
 					},
 				)
 			},
-			ExpectInitialize: []string{
-				(*operationTimeout)(nil).ID(),
-			},
+			ExpectInitialize: []string{},
 			ExpectSerialize: []string{
 				"ResolveEndpoint",
 				"OperationSerializer",
@@ -121,32 +116,6 @@ func TestAddRequestMiddleware(t *testing.T) {
 				t.Errorf("expect deserialize middleware\n%s", diff)
 			}
 		})
-	}
-}
-
-func TestOperationTimeoutMiddleware(t *testing.T) {
-	m := &operationTimeout{
-		Timeout: time.Nanosecond,
-	}
-
-	_, _, err := m.HandleInitialize(context.Background(), middleware.InitializeInput{},
-		middleware.InitializeHandlerFunc(func(
-			ctx context.Context, input middleware.InitializeInput,
-		) (
-			out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-		) {
-			if err := sdk.SleepWithContext(ctx, time.Second); err != nil {
-				return out, metadata, err
-			}
-
-			return out, metadata, nil
-		}))
-	if err == nil {
-		t.Fatalf("expect error got none")
-	}
-
-	if e, a := "deadline exceeded", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %q error in %q", e, a)
 	}
 }
 
