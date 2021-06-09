@@ -249,7 +249,7 @@ public class AddAwsConfigFields implements GoIntegration {
 
                     List<AwsConfigField> configFields = new ArrayList<>(AWS_CONFIG_FIELDS);
                     // add client specific config fields
-                    for (AwsConfigField cfgField : ResolveClientConfig.AWS_CONFIG_FIELDS) {
+                    for (AwsConfigField cfgField : ResolveClientConfigFromSources.AWS_CONFIG_FIELDS) {
                         configFields.add(cfgField);
                     }
 

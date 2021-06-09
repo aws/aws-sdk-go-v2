@@ -237,7 +237,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
 
                     writer.openBlock("result, _, err := c.client.invokeOperation(ctx, $S, params, clientOptFns,", ")",
                             operationSymbol.getName(), () -> {
-                                writer.write("$L,", OperationGenerator
+                                writer.write("c.client.$L,", OperationGenerator
                                         .getAddOperationMiddlewareFuncName(operationSymbol));
                                 writer.write("$L(options).$L,", CONVERT_TO_PRESIGN_TYPE_NAME,
                                         CONVERT_TO_PRESIGN_MIDDLEWARE_NAME);
