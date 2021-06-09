@@ -20,7 +20,7 @@ func (c *Client) UpdateTableReplicaAutoScaling(ctx context.Context, params *Upda
 		params = &UpdateTableReplicaAutoScalingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateTableReplicaAutoScaling", params, optFns, addOperationUpdateTableReplicaAutoScalingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateTableReplicaAutoScaling", params, optFns, c.addOperationUpdateTableReplicaAutoScalingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type UpdateTableReplicaAutoScalingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateTableReplicaAutoScalingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateTableReplicaAutoScalingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateTableReplicaAutoScaling{}, middleware.After)
 	if err != nil {
 		return err

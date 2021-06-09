@@ -19,7 +19,7 @@ func (c *Client) ListContributorInsights(ctx context.Context, params *ListContri
 		params = &ListContributorInsightsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListContributorInsights", params, optFns, addOperationListContributorInsightsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListContributorInsights", params, optFns, c.addOperationListContributorInsightsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListContributorInsightsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListContributorInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListContributorInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListContributorInsights{}, middleware.After)
 	if err != nil {
 		return err
