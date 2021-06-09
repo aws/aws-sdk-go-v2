@@ -61,7 +61,8 @@ func main() {
 	}
 
 	if len(av) == 0 {
-		log.Fatalf("no build artifacts found: %v", err)
+		log.Printf("no build artifacts found: %v", err)
+		return
 	}
 
 	if err := copyBuildArtifacts(av, rootModulePath, repoRoot); err != nil {
