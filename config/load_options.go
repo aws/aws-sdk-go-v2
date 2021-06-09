@@ -122,6 +122,10 @@ type LoadOptions struct {
 	// S3UseARNRegion specifies if the S3 service should allow ARNs to direct
 	// the region, the client's requests are sent to.
 	S3UseARNRegion *bool
+
+	// EnableEndpointDiscovery specifies if endpoint discovery is enable for
+	// the client.
+	EnableEndpointDiscovery aws.EndpointDiscoveryEnableState
 }
 
 // getRegion returns Region from config's LoadOptions
@@ -594,6 +598,25 @@ func (o LoadOptions) GetS3UseARNRegion(ctx context.Context) (v bool, found bool,
 func WithS3UseARNRegion(v bool) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.S3UseARNRegion = &v
+		return nil
+	}
+}
+
+// GetEnableEndpointDiscovery returns if the EnableEndpointDiscovery flag is set.
+func (o LoadOptions) GetEnableEndpointDiscovery(ctx context.Context) (value aws.EndpointDiscoveryEnableState, ok bool, err error) {
+	if o.EnableEndpointDiscovery == aws.EndpointDiscoveryUnset {
+		return aws.EndpointDiscoveryUnset, false, nil
+	}
+	return o.EnableEndpointDiscovery, true, nil
+}
+
+// WithEndpointDiscovery is a helper function to construct functional options
+// that can be used to enable endpoint discovery on LoadOptions for supported clients.
+// If multiple WithEndpointDiscovery calls are made, the last call overrides
+// the previous call values.
+func WithEndpointDiscovery(v aws.EndpointDiscoveryEnableState) LoadOptionsFunc {
+	return func(o *LoadOptions) error {
+		o.EnableEndpointDiscovery = v
 		return nil
 	}
 }

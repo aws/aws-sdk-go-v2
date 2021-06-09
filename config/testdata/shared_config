@@ -81,9 +81,17 @@ source_profile = assume_role_wo_creds
 [profile valid_arn_region]
 s3_use_arn_region=true
 
-[profile endpoint_discovery]
+[profile endpoint_discovery_enabled]
 endpoint_discovery_enabled=true
 
+[profile endpoint_discovery_disabled]
+endpoint_discovery_enabled=false
+
+[profile endpoint_discovery_auto]
+endpoint_discovery_enabled=auto
+
+[profile endpoint_discovery_unknown]
+endpoint_discovery_enabled=unknown
 
 [profile with_mixed_case_keys]
 aWs_AcCeSs_kEy_ID = accessKey

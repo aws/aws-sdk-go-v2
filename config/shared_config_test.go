@@ -150,12 +150,36 @@ func TestNewSharedConfig(t *testing.T) {
 				S3UseARNRegion: ptr.Bool(true),
 			},
 		},
-		"EndpointDiscovery property on profile": {
-			Profile:         "endpoint_discovery",
+		"EndpointDiscovery property enabled on profile": {
+			Profile:         "endpoint_discovery_enabled",
 			ConfigFilenames: []string{testConfigFilename},
 			Expected: SharedConfig{
-				Profile:                 "endpoint_discovery",
-				EnableEndpointDiscovery: ptr.Bool(true),
+				Profile:                 "endpoint_discovery_enabled",
+				EnableEndpointDiscovery: aws.EndpointDiscoveryEnabled,
+			},
+		},
+		"EndpointDiscovery property disabled on profile": {
+			Profile:         "endpoint_discovery_disabled",
+			ConfigFilenames: []string{testConfigFilename},
+			Expected: SharedConfig{
+				Profile:                 "endpoint_discovery_disabled",
+				EnableEndpointDiscovery: aws.EndpointDiscoveryDisabled,
+			},
+		},
+		"EndpointDiscovery property set as auto on profile": {
+			Profile:         "endpoint_discovery_auto",
+			ConfigFilenames: []string{testConfigFilename},
+			Expected: SharedConfig{
+				Profile:                 "endpoint_discovery_auto",
+				EnableEndpointDiscovery: aws.EndpointDiscoveryAuto,
+			},
+		},
+		"EndpointDiscovery property set as unknown on profile": {
+			Profile:         "endpoint_discovery_unknown",
+			ConfigFilenames: []string{testConfigFilename},
+			Expected: SharedConfig{
+				Profile:                 "endpoint_discovery_unknown",
+				EnableEndpointDiscovery: aws.EndpointDiscoveryAuto,
 			},
 		},
 		"Assume role with credential source Ec2Metadata": {

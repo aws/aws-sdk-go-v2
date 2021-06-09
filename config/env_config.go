@@ -157,7 +157,7 @@ type EnvConfig struct {
 	// Enables endpoint discovery via environment variables.
 	//
 	//	AWS_ENABLE_ENDPOINT_DISCOVERY=true
-	EnableEndpointDiscovery *bool
+	EnableEndpointDiscovery aws.EndpointDiscoveryEnableState
 
 	// Specifies the WebIdentity token the SDK should use to assume a role
 	// with.
@@ -220,7 +220,7 @@ func NewEnvConfig() (EnvConfig, error) {
 	cfg.RoleARN = os.Getenv(awsRoleARNEnvKey)
 	cfg.RoleSessionName = os.Getenv(awsRoleSessionNameEnvKey)
 
-	if err := setBoolPtrFromEnvVal(&cfg.EnableEndpointDiscovery, []string{awsEnableEndpointDiscoveryEnvKey}); err != nil {
+	if err := setEndpointDiscoveryTypeFromEnvVal(&cfg.EnableEndpointDiscovery, []string{awsEnableEndpointDiscoveryEnvKey}); err != nil {
 		return cfg, err
 	}
 
@@ -338,4 +338,36 @@ func setBoolPtrFromEnvVal(dst **bool, keys []string) error {
 	}
 
 	return nil
+}
+
+func setEndpointDiscoveryTypeFromEnvVal(dst *aws.EndpointDiscoveryEnableState, keys []string) error {
+	for _, k := range keys {
+		value := os.Getenv(k)
+		if len(value) == 0 {
+			continue // skip if empty
+		}
+
+		switch {
+		case strings.EqualFold(value, endpointDiscoveryDisabled):
+			*dst = aws.EndpointDiscoveryDisabled
+		case strings.EqualFold(value, endpointDiscoveryEnabled):
+			*dst = aws.EndpointDiscoveryEnabled
+		case strings.EqualFold(value, endpointDiscoveryAuto):
+			*dst = aws.EndpointDiscoveryAuto
+		default:
+			return fmt.Errorf(
+				"invalid value for environment variable, %s=%s, need true, false or auto",
+				k, value)
+		}
+	}
+	return nil
+}
+
+// GetEnableEndpointDiscovery returns resolved value for EnableEndpointDiscovery env variable setting.
+func (c EnvConfig) GetEnableEndpointDiscovery(ctx context.Context) (value aws.EndpointDiscoveryEnableState, found bool, err error) {
+	if c.EnableEndpointDiscovery == aws.EndpointDiscoveryUnset {
+		return aws.EndpointDiscoveryUnset, false, nil
+	}
+
+	return c.EnableEndpointDiscovery, true, nil
 }
