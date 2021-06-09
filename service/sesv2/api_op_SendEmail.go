@@ -32,7 +32,7 @@ func (c *Client) SendEmail(ctx context.Context, params *SendEmailInput, optFns .
 		params = &SendEmailInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendEmail", params, optFns, addOperationSendEmailMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendEmail", params, optFns, c.addOperationSendEmailMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -123,7 +123,7 @@ type SendEmailOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendEmail{}, middleware.After)
 	if err != nil {
 		return err

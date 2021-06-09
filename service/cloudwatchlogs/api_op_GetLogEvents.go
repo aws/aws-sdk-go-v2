@@ -23,7 +23,7 @@ func (c *Client) GetLogEvents(ctx context.Context, params *GetLogEventsInput, op
 		params = &GetLogEventsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLogEvents", params, optFns, addOperationGetLogEventsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLogEvents", params, optFns, c.addOperationGetLogEventsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type GetLogEventsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLogEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLogEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLogEvents{}, middleware.After)
 	if err != nil {
 		return err

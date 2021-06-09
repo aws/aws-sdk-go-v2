@@ -18,7 +18,7 @@ func (c *Client) CreateTapePool(ctx context.Context, params *CreateTapePoolInput
 		params = &CreateTapePoolInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTapePool", params, optFns, addOperationCreateTapePoolMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTapePool", params, optFns, c.addOperationCreateTapePoolMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type CreateTapePoolOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTapePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTapePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTapePool{}, middleware.After)
 	if err != nil {
 		return err

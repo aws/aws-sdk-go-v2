@@ -17,7 +17,7 @@ func (c *Client) UpdateComputeEnvironment(ctx context.Context, params *UpdateCom
 		params = &UpdateComputeEnvironmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateComputeEnvironment", params, optFns, addOperationUpdateComputeEnvironmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateComputeEnvironment", params, optFns, c.addOperationUpdateComputeEnvironmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type UpdateComputeEnvironmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateComputeEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateComputeEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateComputeEnvironment{}, middleware.After)
 	if err != nil {
 		return err

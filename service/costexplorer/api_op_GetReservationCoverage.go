@@ -52,7 +52,7 @@ func (c *Client) GetReservationCoverage(ctx context.Context, params *GetReservat
 		params = &GetReservationCoverageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetReservationCoverage", params, optFns, addOperationGetReservationCoverageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetReservationCoverage", params, optFns, c.addOperationGetReservationCoverageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -207,7 +207,7 @@ type GetReservationCoverageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetReservationCoverageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetReservationCoverageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetReservationCoverage{}, middleware.After)
 	if err != nil {
 		return err

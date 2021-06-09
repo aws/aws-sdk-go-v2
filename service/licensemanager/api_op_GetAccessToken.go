@@ -17,7 +17,7 @@ func (c *Client) GetAccessToken(ctx context.Context, params *GetAccessTokenInput
 		params = &GetAccessTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccessToken", params, optFns, addOperationGetAccessTokenMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccessToken", params, optFns, c.addOperationGetAccessTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetAccessTokenOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccessTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccessTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAccessToken{}, middleware.After)
 	if err != nil {
 		return err

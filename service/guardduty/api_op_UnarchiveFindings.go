@@ -16,7 +16,7 @@ func (c *Client) UnarchiveFindings(ctx context.Context, params *UnarchiveFinding
 		params = &UnarchiveFindingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnarchiveFindings", params, optFns, addOperationUnarchiveFindingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnarchiveFindings", params, optFns, c.addOperationUnarchiveFindingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type UnarchiveFindingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnarchiveFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnarchiveFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUnarchiveFindings{}, middleware.After)
 	if err != nil {
 		return err

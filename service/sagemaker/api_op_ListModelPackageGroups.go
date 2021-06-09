@@ -19,7 +19,7 @@ func (c *Client) ListModelPackageGroups(ctx context.Context, params *ListModelPa
 		params = &ListModelPackageGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListModelPackageGroups", params, optFns, addOperationListModelPackageGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListModelPackageGroups", params, optFns, c.addOperationListModelPackageGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type ListModelPackageGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListModelPackageGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListModelPackageGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListModelPackageGroups{}, middleware.After)
 	if err != nil {
 		return err

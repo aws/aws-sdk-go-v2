@@ -39,7 +39,7 @@ func (c *Client) UpdateEventSourceMapping(ctx context.Context, params *UpdateEve
 		params = &UpdateEventSourceMappingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateEventSourceMapping", params, optFns, addOperationUpdateEventSourceMappingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateEventSourceMapping", params, optFns, c.addOperationUpdateEventSourceMappingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -221,7 +221,7 @@ type UpdateEventSourceMappingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateEventSourceMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateEventSourceMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEventSourceMapping{}, middleware.After)
 	if err != nil {
 		return err

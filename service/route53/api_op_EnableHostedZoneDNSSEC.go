@@ -17,7 +17,7 @@ func (c *Client) EnableHostedZoneDNSSEC(ctx context.Context, params *EnableHoste
 		params = &EnableHostedZoneDNSSECInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableHostedZoneDNSSEC", params, optFns, addOperationEnableHostedZoneDNSSECMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableHostedZoneDNSSEC", params, optFns, c.addOperationEnableHostedZoneDNSSECMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type EnableHostedZoneDNSSECOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableHostedZoneDNSSECMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableHostedZoneDNSSECMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpEnableHostedZoneDNSSEC{}, middleware.After)
 	if err != nil {
 		return err

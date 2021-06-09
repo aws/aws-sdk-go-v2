@@ -24,7 +24,7 @@ func (c *Client) StartExportLabelsTaskRun(ctx context.Context, params *StartExpo
 		params = &StartExportLabelsTaskRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartExportLabelsTaskRun", params, optFns, addOperationStartExportLabelsTaskRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartExportLabelsTaskRun", params, optFns, c.addOperationStartExportLabelsTaskRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type StartExportLabelsTaskRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartExportLabelsTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartExportLabelsTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartExportLabelsTaskRun{}, middleware.After)
 	if err != nil {
 		return err

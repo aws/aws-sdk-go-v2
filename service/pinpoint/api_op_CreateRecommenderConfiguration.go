@@ -17,7 +17,7 @@ func (c *Client) CreateRecommenderConfiguration(ctx context.Context, params *Cre
 		params = &CreateRecommenderConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRecommenderConfiguration", params, optFns, addOperationCreateRecommenderConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRecommenderConfiguration", params, optFns, c.addOperationCreateRecommenderConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type CreateRecommenderConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRecommenderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRecommenderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRecommenderConfiguration{}, middleware.After)
 	if err != nil {
 		return err

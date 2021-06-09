@@ -16,7 +16,7 @@ func (c *Client) AssociateMemberToGroup(ctx context.Context, params *AssociateMe
 		params = &AssociateMemberToGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateMemberToGroup", params, optFns, addOperationAssociateMemberToGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateMemberToGroup", params, optFns, c.addOperationAssociateMemberToGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type AssociateMemberToGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateMemberToGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateMemberToGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateMemberToGroup{}, middleware.After)
 	if err != nil {
 		return err

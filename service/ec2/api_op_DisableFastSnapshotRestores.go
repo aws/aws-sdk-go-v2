@@ -18,7 +18,7 @@ func (c *Client) DisableFastSnapshotRestores(ctx context.Context, params *Disabl
 		params = &DisableFastSnapshotRestoresInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableFastSnapshotRestores", params, optFns, addOperationDisableFastSnapshotRestoresMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableFastSnapshotRestores", params, optFns, c.addOperationDisableFastSnapshotRestoresMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DisableFastSnapshotRestoresOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableFastSnapshotRestoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableFastSnapshotRestoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDisableFastSnapshotRestores{}, middleware.After)
 	if err != nil {
 		return err

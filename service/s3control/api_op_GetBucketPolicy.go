@@ -56,7 +56,7 @@ func (c *Client) GetBucketPolicy(ctx context.Context, params *GetBucketPolicyInp
 		params = &GetBucketPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketPolicy", params, optFns, addOperationGetBucketPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketPolicy", params, optFns, c.addOperationGetBucketPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +96,7 @@ type GetBucketPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketPolicy{}, middleware.After)
 	if err != nil {
 		return err

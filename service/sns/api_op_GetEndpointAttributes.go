@@ -19,7 +19,7 @@ func (c *Client) GetEndpointAttributes(ctx context.Context, params *GetEndpointA
 		params = &GetEndpointAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEndpointAttributes", params, optFns, addOperationGetEndpointAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEndpointAttributes", params, optFns, c.addOperationGetEndpointAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetEndpointAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEndpointAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEndpointAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetEndpointAttributes{}, middleware.After)
 	if err != nil {
 		return err

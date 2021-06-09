@@ -17,7 +17,7 @@ func (c *Client) GetBlacklistReports(ctx context.Context, params *GetBlacklistRe
 		params = &GetBlacklistReportsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBlacklistReports", params, optFns, addOperationGetBlacklistReportsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBlacklistReports", params, optFns, c.addOperationGetBlacklistReportsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetBlacklistReportsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBlacklistReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBlacklistReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBlacklistReports{}, middleware.After)
 	if err != nil {
 		return err

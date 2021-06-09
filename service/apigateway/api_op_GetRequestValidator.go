@@ -16,7 +16,7 @@ func (c *Client) GetRequestValidator(ctx context.Context, params *GetRequestVali
 		params = &GetRequestValidatorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRequestValidator", params, optFns, addOperationGetRequestValidatorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRequestValidator", params, optFns, c.addOperationGetRequestValidatorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type GetRequestValidatorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRequestValidatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRequestValidatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRequestValidator{}, middleware.After)
 	if err != nil {
 		return err

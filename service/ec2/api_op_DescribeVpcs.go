@@ -22,7 +22,7 @@ func (c *Client) DescribeVpcs(ctx context.Context, params *DescribeVpcsInput, op
 		params = &DescribeVpcsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeVpcs", params, optFns, addOperationDescribeVpcsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeVpcs", params, optFns, c.addOperationDescribeVpcsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ type DescribeVpcsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeVpcsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeVpcsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeVpcs{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) ListInputDeviceTransfers(ctx context.Context, params *ListInput
 		params = &ListInputDeviceTransfersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListInputDeviceTransfers", params, optFns, addOperationListInputDeviceTransfersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListInputDeviceTransfers", params, optFns, c.addOperationListInputDeviceTransfersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListInputDeviceTransfersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListInputDeviceTransfersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListInputDeviceTransfersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInputDeviceTransfers{}, middleware.After)
 	if err != nil {
 		return err

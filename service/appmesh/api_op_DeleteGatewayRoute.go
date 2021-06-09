@@ -17,7 +17,7 @@ func (c *Client) DeleteGatewayRoute(ctx context.Context, params *DeleteGatewayRo
 		params = &DeleteGatewayRouteInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGatewayRoute", params, optFns, addOperationDeleteGatewayRouteMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGatewayRoute", params, optFns, c.addOperationDeleteGatewayRouteMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DeleteGatewayRouteOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGatewayRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGatewayRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGatewayRoute{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateDataSourcePermissions(ctx context.Context, params *Update
 		params = &UpdateDataSourcePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDataSourcePermissions", params, optFns, addOperationUpdateDataSourcePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDataSourcePermissions", params, optFns, c.addOperationUpdateDataSourcePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type UpdateDataSourcePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDataSourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDataSourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataSourcePermissions{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) AddSourceIdentifierToSubscription(ctx context.Context, params *
 		params = &AddSourceIdentifierToSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddSourceIdentifierToSubscription", params, optFns, addOperationAddSourceIdentifierToSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddSourceIdentifierToSubscription", params, optFns, c.addOperationAddSourceIdentifierToSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type AddSourceIdentifierToSubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddSourceIdentifierToSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddSourceIdentifierToSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAddSourceIdentifierToSubscription{}, middleware.After)
 	if err != nil {
 		return err

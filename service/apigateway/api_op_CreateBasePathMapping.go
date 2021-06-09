@@ -16,7 +16,7 @@ func (c *Client) CreateBasePathMapping(ctx context.Context, params *CreateBasePa
 		params = &CreateBasePathMappingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateBasePathMapping", params, optFns, addOperationCreateBasePathMappingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBasePathMapping", params, optFns, c.addOperationCreateBasePathMappingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type CreateBasePathMappingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateBasePathMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateBasePathMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBasePathMapping{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) CancelStatement(ctx context.Context, params *CancelStatementInp
 		params = &CancelStatementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelStatement", params, optFns, addOperationCancelStatementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelStatement", params, optFns, c.addOperationCancelStatementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type CancelStatementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelStatement{}, middleware.After)
 	if err != nil {
 		return err

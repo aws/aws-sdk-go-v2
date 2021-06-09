@@ -19,7 +19,7 @@ func (c *Client) AdminListUserAuthEvents(ctx context.Context, params *AdminListU
 		params = &AdminListUserAuthEventsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminListUserAuthEvents", params, optFns, addOperationAdminListUserAuthEventsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminListUserAuthEvents", params, optFns, c.addOperationAdminListUserAuthEventsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type AdminListUserAuthEventsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminListUserAuthEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminListUserAuthEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminListUserAuthEvents{}, middleware.After)
 	if err != nil {
 		return err

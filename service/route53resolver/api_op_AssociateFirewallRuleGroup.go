@@ -18,7 +18,7 @@ func (c *Client) AssociateFirewallRuleGroup(ctx context.Context, params *Associa
 		params = &AssociateFirewallRuleGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateFirewallRuleGroup", params, optFns, addOperationAssociateFirewallRuleGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateFirewallRuleGroup", params, optFns, c.addOperationAssociateFirewallRuleGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type AssociateFirewallRuleGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateFirewallRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateFirewallRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateFirewallRuleGroup{}, middleware.After)
 	if err != nil {
 		return err

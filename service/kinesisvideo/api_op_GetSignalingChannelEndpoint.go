@@ -26,7 +26,7 @@ func (c *Client) GetSignalingChannelEndpoint(ctx context.Context, params *GetSig
 		params = &GetSignalingChannelEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSignalingChannelEndpoint", params, optFns, addOperationGetSignalingChannelEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSignalingChannelEndpoint", params, optFns, c.addOperationGetSignalingChannelEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetSignalingChannelEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSignalingChannelEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSignalingChannelEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSignalingChannelEndpoint{}, middleware.After)
 	if err != nil {
 		return err

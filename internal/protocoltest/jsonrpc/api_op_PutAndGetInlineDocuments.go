@@ -17,7 +17,7 @@ func (c *Client) PutAndGetInlineDocuments(ctx context.Context, params *PutAndGet
 		params = &PutAndGetInlineDocumentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAndGetInlineDocuments", params, optFns, addOperationPutAndGetInlineDocumentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAndGetInlineDocuments", params, optFns, c.addOperationPutAndGetInlineDocumentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ type PutAndGetInlineDocumentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAndGetInlineDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAndGetInlineDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAndGetInlineDocuments{}, middleware.After)
 	if err != nil {
 		return err

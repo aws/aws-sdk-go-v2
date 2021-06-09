@@ -19,7 +19,7 @@ func (c *Client) GetAppInstanceRetentionSettings(ctx context.Context, params *Ge
 		params = &GetAppInstanceRetentionSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAppInstanceRetentionSettings", params, optFns, addOperationGetAppInstanceRetentionSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAppInstanceRetentionSettings", params, optFns, c.addOperationGetAppInstanceRetentionSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetAppInstanceRetentionSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAppInstanceRetentionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAppInstanceRetentionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAppInstanceRetentionSettings{}, middleware.After)
 	if err != nil {
 		return err

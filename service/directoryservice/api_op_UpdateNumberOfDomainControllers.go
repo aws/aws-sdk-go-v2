@@ -21,7 +21,7 @@ func (c *Client) UpdateNumberOfDomainControllers(ctx context.Context, params *Up
 		params = &UpdateNumberOfDomainControllersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateNumberOfDomainControllers", params, optFns, addOperationUpdateNumberOfDomainControllersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateNumberOfDomainControllers", params, optFns, c.addOperationUpdateNumberOfDomainControllersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type UpdateNumberOfDomainControllersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateNumberOfDomainControllersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateNumberOfDomainControllersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateNumberOfDomainControllers{}, middleware.After)
 	if err != nil {
 		return err

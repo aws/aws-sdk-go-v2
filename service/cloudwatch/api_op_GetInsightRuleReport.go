@@ -49,7 +49,7 @@ func (c *Client) GetInsightRuleReport(ctx context.Context, params *GetInsightRul
 		params = &GetInsightRuleReportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInsightRuleReport", params, optFns, addOperationGetInsightRuleReportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInsightRuleReport", params, optFns, c.addOperationGetInsightRuleReportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -156,7 +156,7 @@ type GetInsightRuleReportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInsightRuleReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInsightRuleReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetInsightRuleReport{}, middleware.After)
 	if err != nil {
 		return err

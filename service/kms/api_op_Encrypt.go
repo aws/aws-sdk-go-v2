@@ -98,7 +98,7 @@ func (c *Client) Encrypt(ctx context.Context, params *EncryptInput, optFns ...fu
 		params = &EncryptInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Encrypt", params, optFns, addOperationEncryptMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "Encrypt", params, optFns, c.addOperationEncryptMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -184,7 +184,7 @@ type EncryptOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEncryptMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEncryptMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEncrypt{}, middleware.After)
 	if err != nil {
 		return err

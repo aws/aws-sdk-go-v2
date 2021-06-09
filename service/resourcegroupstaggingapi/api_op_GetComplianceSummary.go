@@ -28,7 +28,7 @@ func (c *Client) GetComplianceSummary(ctx context.Context, params *GetCompliance
 		params = &GetComplianceSummaryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetComplianceSummary", params, optFns, addOperationGetComplianceSummaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetComplianceSummary", params, optFns, c.addOperationGetComplianceSummaryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -113,7 +113,7 @@ type GetComplianceSummaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetComplianceSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetComplianceSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceSummary{}, middleware.After)
 	if err != nil {
 		return err

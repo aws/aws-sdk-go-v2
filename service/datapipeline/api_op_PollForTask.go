@@ -53,7 +53,7 @@ func (c *Client) PollForTask(ctx context.Context, params *PollForTaskInput, optF
 		params = &PollForTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PollForTask", params, optFns, addOperationPollForTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PollForTask", params, optFns, c.addOperationPollForTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type PollForTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPollForTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPollForTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPollForTask{}, middleware.After)
 	if err != nil {
 		return err

@@ -28,7 +28,7 @@ func (c *Client) StartContentModeration(ctx context.Context, params *StartConten
 		params = &StartContentModerationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartContentModeration", params, optFns, addOperationStartContentModerationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartContentModeration", params, optFns, c.addOperationStartContentModerationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type StartContentModerationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartContentModerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartContentModerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartContentModeration{}, middleware.After)
 	if err != nil {
 		return err

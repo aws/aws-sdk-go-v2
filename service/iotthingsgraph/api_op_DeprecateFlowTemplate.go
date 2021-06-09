@@ -18,7 +18,7 @@ func (c *Client) DeprecateFlowTemplate(ctx context.Context, params *DeprecateFlo
 		params = &DeprecateFlowTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeprecateFlowTemplate", params, optFns, addOperationDeprecateFlowTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeprecateFlowTemplate", params, optFns, c.addOperationDeprecateFlowTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeprecateFlowTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeprecateFlowTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeprecateFlowTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeprecateFlowTemplate{}, middleware.After)
 	if err != nil {
 		return err

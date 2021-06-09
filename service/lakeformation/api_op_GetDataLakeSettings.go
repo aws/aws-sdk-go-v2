@@ -18,7 +18,7 @@ func (c *Client) GetDataLakeSettings(ctx context.Context, params *GetDataLakeSet
 		params = &GetDataLakeSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDataLakeSettings", params, optFns, addOperationGetDataLakeSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDataLakeSettings", params, optFns, c.addOperationGetDataLakeSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetDataLakeSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDataLakeSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDataLakeSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataLakeSettings{}, middleware.After)
 	if err != nil {
 		return err

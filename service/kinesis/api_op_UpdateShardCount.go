@@ -56,7 +56,7 @@ func (c *Client) UpdateShardCount(ctx context.Context, params *UpdateShardCountI
 		params = &UpdateShardCountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateShardCount", params, optFns, addOperationUpdateShardCountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateShardCount", params, optFns, c.addOperationUpdateShardCountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -113,7 +113,7 @@ type UpdateShardCountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateShardCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateShardCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateShardCount{}, middleware.After)
 	if err != nil {
 		return err

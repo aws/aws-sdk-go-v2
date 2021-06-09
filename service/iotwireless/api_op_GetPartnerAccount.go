@@ -18,7 +18,7 @@ func (c *Client) GetPartnerAccount(ctx context.Context, params *GetPartnerAccoun
 		params = &GetPartnerAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPartnerAccount", params, optFns, addOperationGetPartnerAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPartnerAccount", params, optFns, c.addOperationGetPartnerAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetPartnerAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPartnerAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPartnerAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPartnerAccount{}, middleware.After)
 	if err != nil {
 		return err

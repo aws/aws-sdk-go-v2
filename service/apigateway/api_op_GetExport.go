@@ -16,7 +16,7 @@ func (c *Client) GetExport(ctx context.Context, params *GetExportInput, optFns .
 		params = &GetExportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetExport", params, optFns, addOperationGetExportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetExport", params, optFns, c.addOperationGetExportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type GetExportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetExport{}, middleware.After)
 	if err != nil {
 		return err

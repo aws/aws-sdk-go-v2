@@ -18,7 +18,7 @@ func (c *Client) DeleteUserPermissionsBoundary(ctx context.Context, params *Dele
 		params = &DeleteUserPermissionsBoundaryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteUserPermissionsBoundary", params, optFns, addOperationDeleteUserPermissionsBoundaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteUserPermissionsBoundary", params, optFns, c.addOperationDeleteUserPermissionsBoundaryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteUserPermissionsBoundaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteUserPermissionsBoundaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteUserPermissionsBoundaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteUserPermissionsBoundary{}, middleware.After)
 	if err != nil {
 		return err

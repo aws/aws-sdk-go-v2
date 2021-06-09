@@ -17,7 +17,7 @@ func (c *Client) DeleteFileShare(ctx context.Context, params *DeleteFileShareInp
 		params = &DeleteFileShareInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFileShare", params, optFns, addOperationDeleteFileShareMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFileShare", params, optFns, c.addOperationDeleteFileShareMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteFileShareOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFileShare{}, middleware.After)
 	if err != nil {
 		return err

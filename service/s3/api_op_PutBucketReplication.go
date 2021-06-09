@@ -68,7 +68,7 @@ func (c *Client) PutBucketReplication(ctx context.Context, params *PutBucketRepl
 		params = &PutBucketReplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketReplication", params, optFns, addOperationPutBucketReplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketReplication", params, optFns, c.addOperationPutBucketReplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ type PutBucketReplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketReplication{}, middleware.After)
 	if err != nil {
 		return err

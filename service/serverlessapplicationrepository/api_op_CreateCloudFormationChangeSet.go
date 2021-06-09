@@ -17,7 +17,7 @@ func (c *Client) CreateCloudFormationChangeSet(ctx context.Context, params *Crea
 		params = &CreateCloudFormationChangeSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCloudFormationChangeSet", params, optFns, addOperationCreateCloudFormationChangeSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCloudFormationChangeSet", params, optFns, c.addOperationCreateCloudFormationChangeSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -153,7 +153,7 @@ type CreateCloudFormationChangeSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCloudFormationChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCloudFormationChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCloudFormationChangeSet{}, middleware.After)
 	if err != nil {
 		return err

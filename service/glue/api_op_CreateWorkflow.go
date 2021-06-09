@@ -16,7 +16,7 @@ func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput
 		params = &CreateWorkflowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateWorkflow", params, optFns, addOperationCreateWorkflowMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateWorkflow", params, optFns, c.addOperationCreateWorkflowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type CreateWorkflowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWorkflow{}, middleware.After)
 	if err != nil {
 		return err

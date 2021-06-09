@@ -16,7 +16,7 @@ func (c *Client) XmlAttributesOnPayload(ctx context.Context, params *XmlAttribut
 		params = &XmlAttributesOnPayloadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "XmlAttributesOnPayload", params, optFns, addOperationXmlAttributesOnPayloadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "XmlAttributesOnPayload", params, optFns, c.addOperationXmlAttributesOnPayloadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type XmlAttributesOnPayloadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationXmlAttributesOnPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationXmlAttributesOnPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlAttributesOnPayload{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteMobileDeviceAccessRule(ctx context.Context, params *Delet
 		params = &DeleteMobileDeviceAccessRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMobileDeviceAccessRule", params, optFns, addOperationDeleteMobileDeviceAccessRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMobileDeviceAccessRule", params, optFns, c.addOperationDeleteMobileDeviceAccessRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteMobileDeviceAccessRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMobileDeviceAccessRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMobileDeviceAccessRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMobileDeviceAccessRule{}, middleware.After)
 	if err != nil {
 		return err

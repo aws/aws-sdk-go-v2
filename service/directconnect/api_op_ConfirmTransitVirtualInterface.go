@@ -19,7 +19,7 @@ func (c *Client) ConfirmTransitVirtualInterface(ctx context.Context, params *Con
 		params = &ConfirmTransitVirtualInterfaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ConfirmTransitVirtualInterface", params, optFns, addOperationConfirmTransitVirtualInterfaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ConfirmTransitVirtualInterface", params, optFns, c.addOperationConfirmTransitVirtualInterfaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type ConfirmTransitVirtualInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationConfirmTransitVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationConfirmTransitVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmTransitVirtualInterface{}, middleware.After)
 	if err != nil {
 		return err

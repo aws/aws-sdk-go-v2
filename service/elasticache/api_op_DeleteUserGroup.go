@@ -20,7 +20,7 @@ func (c *Client) DeleteUserGroup(ctx context.Context, params *DeleteUserGroupInp
 		params = &DeleteUserGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteUserGroup", params, optFns, addOperationDeleteUserGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteUserGroup", params, optFns, c.addOperationDeleteUserGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DeleteUserGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteUserGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteUserGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteUserGroup{}, middleware.After)
 	if err != nil {
 		return err

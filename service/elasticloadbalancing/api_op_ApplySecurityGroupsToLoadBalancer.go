@@ -21,7 +21,7 @@ func (c *Client) ApplySecurityGroupsToLoadBalancer(ctx context.Context, params *
 		params = &ApplySecurityGroupsToLoadBalancerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ApplySecurityGroupsToLoadBalancer", params, optFns, addOperationApplySecurityGroupsToLoadBalancerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ApplySecurityGroupsToLoadBalancer", params, optFns, c.addOperationApplySecurityGroupsToLoadBalancerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ApplySecurityGroupsToLoadBalancerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationApplySecurityGroupsToLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationApplySecurityGroupsToLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpApplySecurityGroupsToLoadBalancer{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) PurchaseHostReservation(ctx context.Context, params *PurchaseHo
 		params = &PurchaseHostReservationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PurchaseHostReservation", params, optFns, addOperationPurchaseHostReservationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PurchaseHostReservation", params, optFns, c.addOperationPurchaseHostReservationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type PurchaseHostReservationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPurchaseHostReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPurchaseHostReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpPurchaseHostReservation{}, middleware.After)
 	if err != nil {
 		return err

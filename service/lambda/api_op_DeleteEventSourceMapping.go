@@ -22,7 +22,7 @@ func (c *Client) DeleteEventSourceMapping(ctx context.Context, params *DeleteEve
 		params = &DeleteEventSourceMappingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEventSourceMapping", params, optFns, addOperationDeleteEventSourceMappingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEventSourceMapping", params, optFns, c.addOperationDeleteEventSourceMappingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +129,7 @@ type DeleteEventSourceMappingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEventSourceMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEventSourceMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEventSourceMapping{}, middleware.After)
 	if err != nil {
 		return err

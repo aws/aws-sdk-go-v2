@@ -36,7 +36,7 @@ func (c *Client) GetPasswordData(ctx context.Context, params *GetPasswordDataInp
 		params = &GetPasswordDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPasswordData", params, optFns, addOperationGetPasswordDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPasswordData", params, optFns, c.addOperationGetPasswordDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type GetPasswordDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPasswordDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPasswordDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpGetPasswordData{}, middleware.After)
 	if err != nil {
 		return err

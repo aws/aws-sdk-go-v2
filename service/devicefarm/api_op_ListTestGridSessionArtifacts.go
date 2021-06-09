@@ -18,7 +18,7 @@ func (c *Client) ListTestGridSessionArtifacts(ctx context.Context, params *ListT
 		params = &ListTestGridSessionArtifactsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTestGridSessionArtifacts", params, optFns, addOperationListTestGridSessionArtifactsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTestGridSessionArtifacts", params, optFns, c.addOperationListTestGridSessionArtifactsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListTestGridSessionArtifactsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTestGridSessionArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTestGridSessionArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTestGridSessionArtifacts{}, middleware.After)
 	if err != nil {
 		return err

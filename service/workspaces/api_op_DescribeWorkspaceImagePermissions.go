@@ -18,7 +18,7 @@ func (c *Client) DescribeWorkspaceImagePermissions(ctx context.Context, params *
 		params = &DescribeWorkspaceImagePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkspaceImagePermissions", params, optFns, addOperationDescribeWorkspaceImagePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkspaceImagePermissions", params, optFns, c.addOperationDescribeWorkspaceImagePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeWorkspaceImagePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeWorkspaceImagePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeWorkspaceImagePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkspaceImagePermissions{}, middleware.After)
 	if err != nil {
 		return err

@@ -35,7 +35,7 @@ func (c *Client) ListSecrets(ctx context.Context, params *ListSecretsInput, optF
 		params = &ListSecretsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSecrets", params, optFns, addOperationListSecretsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSecrets", params, optFns, c.addOperationListSecretsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type ListSecretsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSecretsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSecretsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSecrets{}, middleware.After)
 	if err != nil {
 		return err

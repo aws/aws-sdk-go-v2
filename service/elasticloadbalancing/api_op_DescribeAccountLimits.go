@@ -20,7 +20,7 @@ func (c *Client) DescribeAccountLimits(ctx context.Context, params *DescribeAcco
 		params = &DescribeAccountLimitsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAccountLimits", params, optFns, addOperationDescribeAccountLimitsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAccountLimits", params, optFns, c.addOperationDescribeAccountLimitsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeAccountLimitsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAccountLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAccountLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAccountLimits{}, middleware.After)
 	if err != nil {
 		return err

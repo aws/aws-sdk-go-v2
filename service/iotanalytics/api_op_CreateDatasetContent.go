@@ -17,7 +17,7 @@ func (c *Client) CreateDatasetContent(ctx context.Context, params *CreateDataset
 		params = &CreateDatasetContentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDatasetContent", params, optFns, addOperationCreateDatasetContentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDatasetContent", params, optFns, c.addOperationCreateDatasetContentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type CreateDatasetContentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDatasetContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDatasetContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDatasetContent{}, middleware.After)
 	if err != nil {
 		return err

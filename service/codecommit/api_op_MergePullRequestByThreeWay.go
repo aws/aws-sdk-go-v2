@@ -20,7 +20,7 @@ func (c *Client) MergePullRequestByThreeWay(ctx context.Context, params *MergePu
 		params = &MergePullRequestByThreeWayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MergePullRequestByThreeWay", params, optFns, addOperationMergePullRequestByThreeWayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MergePullRequestByThreeWay", params, optFns, c.addOperationMergePullRequestByThreeWayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type MergePullRequestByThreeWayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMergePullRequestByThreeWayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMergePullRequestByThreeWayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergePullRequestByThreeWay{}, middleware.After)
 	if err != nil {
 		return err

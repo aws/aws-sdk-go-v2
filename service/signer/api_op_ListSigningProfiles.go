@@ -24,7 +24,7 @@ func (c *Client) ListSigningProfiles(ctx context.Context, params *ListSigningPro
 		params = &ListSigningProfilesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSigningProfiles", params, optFns, addOperationListSigningProfilesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSigningProfiles", params, optFns, c.addOperationListSigningProfilesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ListSigningProfilesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSigningProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSigningProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSigningProfiles{}, middleware.After)
 	if err != nil {
 		return err

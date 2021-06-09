@@ -21,7 +21,7 @@ func (c *Client) SetActiveReceiptRuleSet(ctx context.Context, params *SetActiveR
 		params = &SetActiveReceiptRuleSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetActiveReceiptRuleSet", params, optFns, addOperationSetActiveReceiptRuleSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetActiveReceiptRuleSet", params, optFns, c.addOperationSetActiveReceiptRuleSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type SetActiveReceiptRuleSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetActiveReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetActiveReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetActiveReceiptRuleSet{}, middleware.After)
 	if err != nil {
 		return err

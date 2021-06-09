@@ -24,7 +24,7 @@ func (c *Client) DescribeAssetProperty(ctx context.Context, params *DescribeAsse
 		params = &DescribeAssetPropertyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAssetProperty", params, optFns, addOperationDescribeAssetPropertyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAssetProperty", params, optFns, c.addOperationDescribeAssetPropertyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type DescribeAssetPropertyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAssetPropertyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAssetPropertyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAssetProperty{}, middleware.After)
 	if err != nil {
 		return err

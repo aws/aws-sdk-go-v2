@@ -24,7 +24,7 @@ func (c *Client) BatchDeleteImportData(ctx context.Context, params *BatchDeleteI
 		params = &BatchDeleteImportDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteImportData", params, optFns, addOperationBatchDeleteImportDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteImportData", params, optFns, c.addOperationBatchDeleteImportDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type BatchDeleteImportDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteImportDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteImportDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteImportData{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CreateDistributionWithTags(ctx context.Context, params *CreateD
 		params = &CreateDistributionWithTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDistributionWithTags", params, optFns, addOperationCreateDistributionWithTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDistributionWithTags", params, optFns, c.addOperationCreateDistributionWithTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CreateDistributionWithTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDistributionWithTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDistributionWithTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpCreateDistributionWithTags{}, middleware.After)
 	if err != nil {
 		return err

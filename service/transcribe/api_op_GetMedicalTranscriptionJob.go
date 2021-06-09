@@ -20,7 +20,7 @@ func (c *Client) GetMedicalTranscriptionJob(ctx context.Context, params *GetMedi
 		params = &GetMedicalTranscriptionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMedicalTranscriptionJob", params, optFns, addOperationGetMedicalTranscriptionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMedicalTranscriptionJob", params, optFns, c.addOperationGetMedicalTranscriptionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetMedicalTranscriptionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMedicalTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMedicalTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMedicalTranscriptionJob{}, middleware.After)
 	if err != nil {
 		return err

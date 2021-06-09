@@ -17,7 +17,7 @@ func (c *Client) StartFlow(ctx context.Context, params *StartFlowInput, optFns .
 		params = &StartFlowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartFlow", params, optFns, addOperationStartFlowMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartFlow", params, optFns, c.addOperationStartFlowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StartFlowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartFlow{}, middleware.After)
 	if err != nil {
 		return err

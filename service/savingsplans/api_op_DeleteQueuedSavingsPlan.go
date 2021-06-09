@@ -16,7 +16,7 @@ func (c *Client) DeleteQueuedSavingsPlan(ctx context.Context, params *DeleteQueu
 		params = &DeleteQueuedSavingsPlanInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteQueuedSavingsPlan", params, optFns, addOperationDeleteQueuedSavingsPlanMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteQueuedSavingsPlan", params, optFns, c.addOperationDeleteQueuedSavingsPlanMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteQueuedSavingsPlanOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteQueuedSavingsPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteQueuedSavingsPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteQueuedSavingsPlan{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) CreateAnomalySubscription(ctx context.Context, params *CreateAn
 		params = &CreateAnomalySubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAnomalySubscription", params, optFns, addOperationCreateAnomalySubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAnomalySubscription", params, optFns, c.addOperationCreateAnomalySubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type CreateAnomalySubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAnomalySubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAnomalySubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAnomalySubscription{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListSharedReportGroups(ctx context.Context, params *ListSharedR
 		params = &ListSharedReportGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSharedReportGroups", params, optFns, addOperationListSharedReportGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSharedReportGroups", params, optFns, c.addOperationListSharedReportGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type ListSharedReportGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSharedReportGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSharedReportGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSharedReportGroups{}, middleware.After)
 	if err != nil {
 		return err

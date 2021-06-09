@@ -17,7 +17,7 @@ func (c *Client) GetDestination(ctx context.Context, params *GetDestinationInput
 		params = &GetDestinationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDestination", params, optFns, addOperationGetDestinationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDestination", params, optFns, c.addOperationGetDestinationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetDestinationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDestination{}, middleware.After)
 	if err != nil {
 		return err

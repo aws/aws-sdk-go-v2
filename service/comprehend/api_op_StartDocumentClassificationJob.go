@@ -19,7 +19,7 @@ func (c *Client) StartDocumentClassificationJob(ctx context.Context, params *Sta
 		params = &StartDocumentClassificationJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDocumentClassificationJob", params, optFns, addOperationStartDocumentClassificationJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDocumentClassificationJob", params, optFns, c.addOperationStartDocumentClassificationJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type StartDocumentClassificationJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDocumentClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDocumentClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDocumentClassificationJob{}, middleware.After)
 	if err != nil {
 		return err

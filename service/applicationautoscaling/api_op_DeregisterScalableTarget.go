@@ -22,7 +22,7 @@ func (c *Client) DeregisterScalableTarget(ctx context.Context, params *Deregiste
 		params = &DeregisterScalableTargetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterScalableTarget", params, optFns, addOperationDeregisterScalableTargetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterScalableTarget", params, optFns, c.addOperationDeregisterScalableTargetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -182,7 +182,7 @@ type DeregisterScalableTargetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterScalableTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterScalableTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterScalableTarget{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) DeleteLayerVersion(ctx context.Context, params *DeleteLayerVers
 		params = &DeleteLayerVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLayerVersion", params, optFns, addOperationDeleteLayerVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLayerVersion", params, optFns, c.addOperationDeleteLayerVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteLayerVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLayerVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLayerVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLayerVersion{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) RemoveListenerCertificates(ctx context.Context, params *RemoveL
 		params = &RemoveListenerCertificatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveListenerCertificates", params, optFns, addOperationRemoveListenerCertificatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveListenerCertificates", params, optFns, c.addOperationRemoveListenerCertificatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type RemoveListenerCertificatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveListenerCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveListenerCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemoveListenerCertificates{}, middleware.After)
 	if err != nil {
 		return err

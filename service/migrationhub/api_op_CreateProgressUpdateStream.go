@@ -20,7 +20,7 @@ func (c *Client) CreateProgressUpdateStream(ctx context.Context, params *CreateP
 		params = &CreateProgressUpdateStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateProgressUpdateStream", params, optFns, addOperationCreateProgressUpdateStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateProgressUpdateStream", params, optFns, c.addOperationCreateProgressUpdateStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type CreateProgressUpdateStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateProgressUpdateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateProgressUpdateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProgressUpdateStream{}, middleware.After)
 	if err != nil {
 		return err

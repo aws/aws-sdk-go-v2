@@ -18,7 +18,7 @@ func (c *Client) DeleteForecastExportJob(ctx context.Context, params *DeleteFore
 		params = &DeleteForecastExportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteForecastExportJob", params, optFns, addOperationDeleteForecastExportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteForecastExportJob", params, optFns, c.addOperationDeleteForecastExportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteForecastExportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteForecastExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteForecastExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteForecastExportJob{}, middleware.After)
 	if err != nil {
 		return err

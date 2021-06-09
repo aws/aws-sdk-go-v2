@@ -17,7 +17,7 @@ func (c *Client) UpdateDataCatalog(ctx context.Context, params *UpdateDataCatalo
 		params = &UpdateDataCatalogInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDataCatalog", params, optFns, addOperationUpdateDataCatalogMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDataCatalog", params, optFns, c.addOperationUpdateDataCatalogMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type UpdateDataCatalogOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDataCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDataCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDataCatalog{}, middleware.After)
 	if err != nil {
 		return err

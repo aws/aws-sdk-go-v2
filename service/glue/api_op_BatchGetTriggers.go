@@ -20,7 +20,7 @@ func (c *Client) BatchGetTriggers(ctx context.Context, params *BatchGetTriggersI
 		params = &BatchGetTriggersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetTriggers", params, optFns, addOperationBatchGetTriggersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetTriggers", params, optFns, c.addOperationBatchGetTriggersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type BatchGetTriggersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetTriggers{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) GetDomainDeliverabilityCampaign(ctx context.Context, params *Ge
 		params = &GetDomainDeliverabilityCampaignInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDomainDeliverabilityCampaign", params, optFns, addOperationGetDomainDeliverabilityCampaignMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDomainDeliverabilityCampaign", params, optFns, c.addOperationGetDomainDeliverabilityCampaignMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type GetDomainDeliverabilityCampaignOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDomainDeliverabilityCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDomainDeliverabilityCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainDeliverabilityCampaign{}, middleware.After)
 	if err != nil {
 		return err

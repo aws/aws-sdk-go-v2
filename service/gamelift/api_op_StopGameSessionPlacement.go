@@ -23,7 +23,7 @@ func (c *Client) StopGameSessionPlacement(ctx context.Context, params *StopGameS
 		params = &StopGameSessionPlacementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopGameSessionPlacement", params, optFns, addOperationStopGameSessionPlacementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopGameSessionPlacement", params, optFns, c.addOperationStopGameSessionPlacementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type StopGameSessionPlacementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopGameSessionPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopGameSessionPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopGameSessionPlacement{}, middleware.After)
 	if err != nil {
 		return err

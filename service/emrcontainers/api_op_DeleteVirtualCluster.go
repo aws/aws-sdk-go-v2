@@ -20,7 +20,7 @@ func (c *Client) DeleteVirtualCluster(ctx context.Context, params *DeleteVirtual
 		params = &DeleteVirtualClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVirtualCluster", params, optFns, addOperationDeleteVirtualClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVirtualCluster", params, optFns, c.addOperationDeleteVirtualClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteVirtualClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVirtualClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVirtualClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVirtualCluster{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) CreateTaskSet(ctx context.Context, params *CreateTaskSetInput, 
 		params = &CreateTaskSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTaskSet", params, optFns, addOperationCreateTaskSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTaskSet", params, optFns, c.addOperationCreateTaskSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -152,7 +152,7 @@ type CreateTaskSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTaskSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTaskSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTaskSet{}, middleware.After)
 	if err != nil {
 		return err

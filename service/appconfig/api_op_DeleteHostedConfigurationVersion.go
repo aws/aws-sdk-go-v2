@@ -16,7 +16,7 @@ func (c *Client) DeleteHostedConfigurationVersion(ctx context.Context, params *D
 		params = &DeleteHostedConfigurationVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteHostedConfigurationVersion", params, optFns, addOperationDeleteHostedConfigurationVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteHostedConfigurationVersion", params, optFns, c.addOperationDeleteHostedConfigurationVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteHostedConfigurationVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteHostedConfigurationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteHostedConfigurationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteHostedConfigurationVersion{}, middleware.After)
 	if err != nil {
 		return err

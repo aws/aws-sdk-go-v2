@@ -25,7 +25,7 @@ func (c *Client) ListChannelMessages(ctx context.Context, params *ListChannelMes
 		params = &ListChannelMessagesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListChannelMessages", params, optFns, addOperationListChannelMessagesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListChannelMessages", params, optFns, c.addOperationListChannelMessagesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type ListChannelMessagesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListChannelMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListChannelMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChannelMessages{}, middleware.After)
 	if err != nil {
 		return err

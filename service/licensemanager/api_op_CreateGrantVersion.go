@@ -17,7 +17,7 @@ func (c *Client) CreateGrantVersion(ctx context.Context, params *CreateGrantVers
 		params = &CreateGrantVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateGrantVersion", params, optFns, addOperationCreateGrantVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateGrantVersion", params, optFns, c.addOperationCreateGrantVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type CreateGrantVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateGrantVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateGrantVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGrantVersion{}, middleware.After)
 	if err != nil {
 		return err

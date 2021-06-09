@@ -20,7 +20,7 @@ func (c *Client) DescribeScalingActivities(ctx context.Context, params *Describe
 		params = &DescribeScalingActivitiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeScalingActivities", params, optFns, addOperationDescribeScalingActivitiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeScalingActivities", params, optFns, c.addOperationDescribeScalingActivitiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -196,7 +196,7 @@ type DescribeScalingActivitiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeScalingActivitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeScalingActivitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeScalingActivities{}, middleware.After)
 	if err != nil {
 		return err

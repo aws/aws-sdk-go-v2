@@ -18,7 +18,7 @@ func (c *Client) CreateBranch(ctx context.Context, params *CreateBranchInput, op
 		params = &CreateBranchInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateBranch", params, optFns, addOperationCreateBranchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBranch", params, optFns, c.addOperationCreateBranchMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CreateBranchOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBranch{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListEngineVersions(ctx context.Context, params *ListEngineVersi
 		params = &ListEngineVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEngineVersions", params, optFns, addOperationListEngineVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEngineVersions", params, optFns, c.addOperationListEngineVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListEngineVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEngineVersions{}, middleware.After)
 	if err != nil {
 		return err

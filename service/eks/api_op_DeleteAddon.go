@@ -19,7 +19,7 @@ func (c *Client) DeleteAddon(ctx context.Context, params *DeleteAddonInput, optF
 		params = &DeleteAddonInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAddon", params, optFns, addOperationDeleteAddonMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAddon", params, optFns, c.addOperationDeleteAddonMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteAddonOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAddon{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteNetworkInsightsAnalysis(ctx context.Context, params *Dele
 		params = &DeleteNetworkInsightsAnalysisInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteNetworkInsightsAnalysis", params, optFns, addOperationDeleteNetworkInsightsAnalysisMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteNetworkInsightsAnalysis", params, optFns, c.addOperationDeleteNetworkInsightsAnalysisMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteNetworkInsightsAnalysisOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteNetworkInsightsAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteNetworkInsightsAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteNetworkInsightsAnalysis{}, middleware.After)
 	if err != nil {
 		return err

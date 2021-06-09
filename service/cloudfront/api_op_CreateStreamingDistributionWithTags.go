@@ -20,7 +20,7 @@ func (c *Client) CreateStreamingDistributionWithTags(ctx context.Context, params
 		params = &CreateStreamingDistributionWithTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateStreamingDistributionWithTags", params, optFns, addOperationCreateStreamingDistributionWithTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateStreamingDistributionWithTags", params, optFns, c.addOperationCreateStreamingDistributionWithTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type CreateStreamingDistributionWithTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateStreamingDistributionWithTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateStreamingDistributionWithTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpCreateStreamingDistributionWithTags{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) ListLoggerDefinitionVersions(ctx context.Context, params *ListL
 		params = &ListLoggerDefinitionVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLoggerDefinitionVersions", params, optFns, addOperationListLoggerDefinitionVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLoggerDefinitionVersions", params, optFns, c.addOperationListLoggerDefinitionVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListLoggerDefinitionVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLoggerDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLoggerDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLoggerDefinitionVersions{}, middleware.After)
 	if err != nil {
 		return err

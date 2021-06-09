@@ -17,7 +17,7 @@ func (c *Client) CommitTransaction(ctx context.Context, params *CommitTransactio
 		params = &CommitTransactionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CommitTransaction", params, optFns, addOperationCommitTransactionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CommitTransaction", params, optFns, c.addOperationCommitTransactionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type CommitTransactionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCommitTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCommitTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCommitTransaction{}, middleware.After)
 	if err != nil {
 		return err

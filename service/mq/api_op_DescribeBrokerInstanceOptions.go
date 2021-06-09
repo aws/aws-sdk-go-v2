@@ -17,7 +17,7 @@ func (c *Client) DescribeBrokerInstanceOptions(ctx context.Context, params *Desc
 		params = &DescribeBrokerInstanceOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeBrokerInstanceOptions", params, optFns, addOperationDescribeBrokerInstanceOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeBrokerInstanceOptions", params, optFns, c.addOperationDescribeBrokerInstanceOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DescribeBrokerInstanceOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeBrokerInstanceOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeBrokerInstanceOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBrokerInstanceOptions{}, middleware.After)
 	if err != nil {
 		return err

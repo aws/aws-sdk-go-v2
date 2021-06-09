@@ -32,7 +32,7 @@ func (c *Client) GetChangeToken(ctx context.Context, params *GetChangeTokenInput
 		params = &GetChangeTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetChangeToken", params, optFns, addOperationGetChangeTokenMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetChangeToken", params, optFns, c.addOperationGetChangeTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type GetChangeTokenOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetChangeTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetChangeTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetChangeToken{}, middleware.After)
 	if err != nil {
 		return err

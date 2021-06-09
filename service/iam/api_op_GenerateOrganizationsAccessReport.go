@@ -124,7 +124,7 @@ func (c *Client) GenerateOrganizationsAccessReport(ctx context.Context, params *
 		params = &GenerateOrganizationsAccessReportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GenerateOrganizationsAccessReport", params, optFns, addOperationGenerateOrganizationsAccessReportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GenerateOrganizationsAccessReport", params, optFns, c.addOperationGenerateOrganizationsAccessReportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -162,7 +162,7 @@ type GenerateOrganizationsAccessReportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGenerateOrganizationsAccessReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGenerateOrganizationsAccessReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGenerateOrganizationsAccessReport{}, middleware.After)
 	if err != nil {
 		return err

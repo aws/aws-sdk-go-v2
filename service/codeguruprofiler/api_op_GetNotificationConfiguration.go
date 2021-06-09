@@ -17,7 +17,7 @@ func (c *Client) GetNotificationConfiguration(ctx context.Context, params *GetNo
 		params = &GetNotificationConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetNotificationConfiguration", params, optFns, addOperationGetNotificationConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetNotificationConfiguration", params, optFns, c.addOperationGetNotificationConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetNotificationConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNotificationConfiguration{}, middleware.After)
 	if err != nil {
 		return err

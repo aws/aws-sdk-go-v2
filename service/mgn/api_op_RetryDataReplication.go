@@ -20,7 +20,7 @@ func (c *Client) RetryDataReplication(ctx context.Context, params *RetryDataRepl
 		params = &RetryDataReplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RetryDataReplication", params, optFns, addOperationRetryDataReplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RetryDataReplication", params, optFns, c.addOperationRetryDataReplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type RetryDataReplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRetryDataReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRetryDataReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRetryDataReplication{}, middleware.After)
 	if err != nil {
 		return err

@@ -30,7 +30,7 @@ func (c *Client) Suggest(ctx context.Context, params *SuggestInput, optFns ...fu
 		params = &SuggestInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Suggest", params, optFns, addOperationSuggestMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "Suggest", params, optFns, c.addOperationSuggestMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type SuggestOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSuggestMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSuggestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSuggest{}, middleware.After)
 	if err != nil {
 		return err

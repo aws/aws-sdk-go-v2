@@ -73,7 +73,7 @@ func (c *Client) PostContent(ctx context.Context, params *PostContentInput, optF
 		params = &PostContentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PostContent", params, optFns, addOperationPostContentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PostContent", params, optFns, c.addOperationPostContentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -416,7 +416,7 @@ type PostContentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPostContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPostContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPostContent{}, middleware.After)
 	if err != nil {
 		return err

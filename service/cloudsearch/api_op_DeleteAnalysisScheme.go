@@ -20,7 +20,7 @@ func (c *Client) DeleteAnalysisScheme(ctx context.Context, params *DeleteAnalysi
 		params = &DeleteAnalysisSchemeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAnalysisScheme", params, optFns, addOperationDeleteAnalysisSchemeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAnalysisScheme", params, optFns, c.addOperationDeleteAnalysisSchemeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DeleteAnalysisSchemeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAnalysisSchemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAnalysisSchemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteAnalysisScheme{}, middleware.After)
 	if err != nil {
 		return err

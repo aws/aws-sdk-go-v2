@@ -24,7 +24,7 @@ func (c *Client) CreateTrust(ctx context.Context, params *CreateTrustInput, optF
 		params = &CreateTrustInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTrust", params, optFns, addOperationCreateTrustMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTrust", params, optFns, c.addOperationCreateTrustMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type CreateTrustOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTrustMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTrustMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTrust{}, middleware.After)
 	if err != nil {
 		return err

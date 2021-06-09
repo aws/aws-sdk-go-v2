@@ -30,7 +30,7 @@ func (c *Client) DescribeStackResources(ctx context.Context, params *DescribeSta
 		params = &DescribeStackResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeStackResources", params, optFns, addOperationDescribeStackResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeStackResources", params, optFns, c.addOperationDescribeStackResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type DescribeStackResourcesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeStackResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeStackResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeStackResources{}, middleware.After)
 	if err != nil {
 		return err

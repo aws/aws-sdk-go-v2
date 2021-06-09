@@ -18,7 +18,7 @@ func (c *Client) ListAppInstanceAdmins(ctx context.Context, params *ListAppInsta
 		params = &ListAppInstanceAdminsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAppInstanceAdmins", params, optFns, addOperationListAppInstanceAdminsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAppInstanceAdmins", params, optFns, c.addOperationListAppInstanceAdminsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListAppInstanceAdminsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAppInstanceAdminsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAppInstanceAdminsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppInstanceAdmins{}, middleware.After)
 	if err != nil {
 		return err

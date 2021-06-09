@@ -17,7 +17,7 @@ func (c *Client) DeletePreparedStatement(ctx context.Context, params *DeletePrep
 		params = &DeletePreparedStatementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePreparedStatement", params, optFns, addOperationDeletePreparedStatementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePreparedStatement", params, optFns, c.addOperationDeletePreparedStatementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeletePreparedStatementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePreparedStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePreparedStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePreparedStatement{}, middleware.After)
 	if err != nil {
 		return err

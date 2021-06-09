@@ -17,7 +17,7 @@ func (c *Client) GetDeploymentStatus(ctx context.Context, params *GetDeploymentS
 		params = &GetDeploymentStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDeploymentStatus", params, optFns, addOperationGetDeploymentStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDeploymentStatus", params, optFns, c.addOperationGetDeploymentStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetDeploymentStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDeploymentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDeploymentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeploymentStatus{}, middleware.After)
 	if err != nil {
 		return err

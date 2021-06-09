@@ -20,7 +20,7 @@ func (c *Client) CreateReceiptFilter(ctx context.Context, params *CreateReceiptF
 		params = &CreateReceiptFilterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateReceiptFilter", params, optFns, addOperationCreateReceiptFilterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateReceiptFilter", params, optFns, c.addOperationCreateReceiptFilterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type CreateReceiptFilterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateReceiptFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateReceiptFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateReceiptFilter{}, middleware.After)
 	if err != nil {
 		return err

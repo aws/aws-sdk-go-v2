@@ -20,7 +20,7 @@ func (c *Client) CreateTrafficMirrorFilterRule(ctx context.Context, params *Crea
 		params = &CreateTrafficMirrorFilterRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTrafficMirrorFilterRule", params, optFns, addOperationCreateTrafficMirrorFilterRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTrafficMirrorFilterRule", params, optFns, c.addOperationCreateTrafficMirrorFilterRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +105,7 @@ type CreateTrafficMirrorFilterRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTrafficMirrorFilterRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTrafficMirrorFilterRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateTrafficMirrorFilterRule{}, middleware.After)
 	if err != nil {
 		return err

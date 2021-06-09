@@ -15,7 +15,7 @@ func (c *Client) MediaTypeHeader(ctx context.Context, params *MediaTypeHeaderInp
 		params = &MediaTypeHeaderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MediaTypeHeader", params, optFns, addOperationMediaTypeHeaderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MediaTypeHeader", params, optFns, c.addOperationMediaTypeHeaderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type MediaTypeHeaderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMediaTypeHeaderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMediaTypeHeaderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpMediaTypeHeader{}, middleware.After)
 	if err != nil {
 		return err

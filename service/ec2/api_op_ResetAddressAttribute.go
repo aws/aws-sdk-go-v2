@@ -19,7 +19,7 @@ func (c *Client) ResetAddressAttribute(ctx context.Context, params *ResetAddress
 		params = &ResetAddressAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetAddressAttribute", params, optFns, addOperationResetAddressAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetAddressAttribute", params, optFns, c.addOperationResetAddressAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ResetAddressAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetAddressAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetAddressAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpResetAddressAttribute{}, middleware.After)
 	if err != nil {
 		return err

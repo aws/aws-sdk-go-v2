@@ -20,7 +20,7 @@ func (c *Client) StartActivityStream(ctx context.Context, params *StartActivityS
 		params = &StartActivityStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartActivityStream", params, optFns, addOperationStartActivityStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartActivityStream", params, optFns, c.addOperationStartActivityStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type StartActivityStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartActivityStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartActivityStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartActivityStream{}, middleware.After)
 	if err != nil {
 		return err

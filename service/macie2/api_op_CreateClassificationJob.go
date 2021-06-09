@@ -18,7 +18,7 @@ func (c *Client) CreateClassificationJob(ctx context.Context, params *CreateClas
 		params = &CreateClassificationJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateClassificationJob", params, optFns, addOperationCreateClassificationJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateClassificationJob", params, optFns, c.addOperationCreateClassificationJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type CreateClassificationJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateClassificationJob{}, middleware.After)
 	if err != nil {
 		return err

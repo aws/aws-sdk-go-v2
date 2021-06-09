@@ -56,7 +56,7 @@ func (c *Client) GetMedia(ctx context.Context, params *GetMediaInput, optFns ...
 		params = &GetMediaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMedia", params, optFns, addOperationGetMediaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMedia", params, optFns, c.addOperationGetMediaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -153,7 +153,7 @@ type GetMediaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMedia{}, middleware.After)
 	if err != nil {
 		return err

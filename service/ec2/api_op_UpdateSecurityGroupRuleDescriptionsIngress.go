@@ -21,7 +21,7 @@ func (c *Client) UpdateSecurityGroupRuleDescriptionsIngress(ctx context.Context,
 		params = &UpdateSecurityGroupRuleDescriptionsIngressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSecurityGroupRuleDescriptionsIngress", params, optFns, addOperationUpdateSecurityGroupRuleDescriptionsIngressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSecurityGroupRuleDescriptionsIngress", params, optFns, c.addOperationUpdateSecurityGroupRuleDescriptionsIngressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type UpdateSecurityGroupRuleDescriptionsIngressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSecurityGroupRuleDescriptionsIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSecurityGroupRuleDescriptionsIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpUpdateSecurityGroupRuleDescriptionsIngress{}, middleware.After)
 	if err != nil {
 		return err

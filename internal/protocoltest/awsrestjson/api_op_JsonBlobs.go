@@ -15,7 +15,7 @@ func (c *Client) JsonBlobs(ctx context.Context, params *JsonBlobsInput, optFns .
 		params = &JsonBlobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "JsonBlobs", params, optFns, addOperationJsonBlobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "JsonBlobs", params, optFns, c.addOperationJsonBlobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ type JsonBlobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationJsonBlobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationJsonBlobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpJsonBlobs{}, middleware.After)
 	if err != nil {
 		return err

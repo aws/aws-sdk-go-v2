@@ -46,7 +46,7 @@ func (c *Client) GetKeyRotationStatus(ctx context.Context, params *GetKeyRotatio
 		params = &GetKeyRotationStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetKeyRotationStatus", params, optFns, addOperationGetKeyRotationStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetKeyRotationStatus", params, optFns, c.addOperationGetKeyRotationStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type GetKeyRotationStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetKeyRotationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetKeyRotationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetKeyRotationStatus{}, middleware.After)
 	if err != nil {
 		return err

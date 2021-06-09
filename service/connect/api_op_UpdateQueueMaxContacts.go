@@ -18,7 +18,7 @@ func (c *Client) UpdateQueueMaxContacts(ctx context.Context, params *UpdateQueue
 		params = &UpdateQueueMaxContactsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateQueueMaxContacts", params, optFns, addOperationUpdateQueueMaxContactsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateQueueMaxContacts", params, optFns, c.addOperationUpdateQueueMaxContactsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type UpdateQueueMaxContactsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateQueueMaxContactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateQueueMaxContactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQueueMaxContacts{}, middleware.After)
 	if err != nil {
 		return err

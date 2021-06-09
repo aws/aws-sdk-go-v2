@@ -31,7 +31,7 @@ func (c *Client) DeleteAccelerator(ctx context.Context, params *DeleteAccelerato
 		params = &DeleteAcceleratorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAccelerator", params, optFns, addOperationDeleteAcceleratorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAccelerator", params, optFns, c.addOperationDeleteAcceleratorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DeleteAcceleratorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAccelerator{}, middleware.After)
 	if err != nil {
 		return err

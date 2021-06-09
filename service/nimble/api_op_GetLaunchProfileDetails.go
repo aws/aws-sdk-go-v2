@@ -21,7 +21,7 @@ func (c *Client) GetLaunchProfileDetails(ctx context.Context, params *GetLaunchP
 		params = &GetLaunchProfileDetailsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLaunchProfileDetails", params, optFns, addOperationGetLaunchProfileDetailsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLaunchProfileDetails", params, optFns, c.addOperationGetLaunchProfileDetailsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetLaunchProfileDetailsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLaunchProfileDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLaunchProfileDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLaunchProfileDetails{}, middleware.After)
 	if err != nil {
 		return err

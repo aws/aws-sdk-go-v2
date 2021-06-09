@@ -18,7 +18,7 @@ func (c *Client) ListPagesByContact(ctx context.Context, params *ListPagesByCont
 		params = &ListPagesByContactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPagesByContact", params, optFns, addOperationListPagesByContactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPagesByContact", params, optFns, c.addOperationListPagesByContactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListPagesByContactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPagesByContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPagesByContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPagesByContact{}, middleware.After)
 	if err != nil {
 		return err

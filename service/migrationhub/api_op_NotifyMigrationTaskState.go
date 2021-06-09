@@ -29,7 +29,7 @@ func (c *Client) NotifyMigrationTaskState(ctx context.Context, params *NotifyMig
 		params = &NotifyMigrationTaskStateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "NotifyMigrationTaskState", params, optFns, addOperationNotifyMigrationTaskStateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "NotifyMigrationTaskState", params, optFns, c.addOperationNotifyMigrationTaskStateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type NotifyMigrationTaskStateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationNotifyMigrationTaskStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationNotifyMigrationTaskStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNotifyMigrationTaskState{}, middleware.After)
 	if err != nil {
 		return err

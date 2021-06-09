@@ -26,7 +26,7 @@ func (c *Client) TagDeliveryStream(ctx context.Context, params *TagDeliveryStrea
 		params = &TagDeliveryStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TagDeliveryStream", params, optFns, addOperationTagDeliveryStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagDeliveryStream", params, optFns, c.addOperationTagDeliveryStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type TagDeliveryStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTagDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTagDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTagDeliveryStream{}, middleware.After)
 	if err != nil {
 		return err

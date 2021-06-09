@@ -23,7 +23,7 @@ func (c *Client) ComposeEnvironments(ctx context.Context, params *ComposeEnviron
 		params = &ComposeEnvironmentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ComposeEnvironments", params, optFns, addOperationComposeEnvironmentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ComposeEnvironments", params, optFns, c.addOperationComposeEnvironmentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ComposeEnvironmentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationComposeEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationComposeEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpComposeEnvironments{}, middleware.After)
 	if err != nil {
 		return err

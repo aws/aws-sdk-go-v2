@@ -17,7 +17,7 @@ func (c *Client) ListGraphqlApis(ctx context.Context, params *ListGraphqlApisInp
 		params = &ListGraphqlApisInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListGraphqlApis", params, optFns, addOperationListGraphqlApisMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListGraphqlApis", params, optFns, c.addOperationListGraphqlApisMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ListGraphqlApisOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListGraphqlApisMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListGraphqlApisMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGraphqlApis{}, middleware.After)
 	if err != nil {
 		return err

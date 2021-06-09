@@ -17,7 +17,7 @@ func (c *Client) ListBackendEnvironments(ctx context.Context, params *ListBacken
 		params = &ListBackendEnvironmentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBackendEnvironments", params, optFns, addOperationListBackendEnvironmentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBackendEnvironments", params, optFns, c.addOperationListBackendEnvironmentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListBackendEnvironmentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBackendEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBackendEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBackendEnvironments{}, middleware.After)
 	if err != nil {
 		return err

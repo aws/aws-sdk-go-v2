@@ -17,7 +17,7 @@ func (c *Client) CreateScript(ctx context.Context, params *CreateScriptInput, op
 		params = &CreateScriptInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateScript", params, optFns, addOperationCreateScriptMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateScript", params, optFns, c.addOperationCreateScriptMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type CreateScriptOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateScript{}, middleware.After)
 	if err != nil {
 		return err

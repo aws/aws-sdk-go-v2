@@ -18,7 +18,7 @@ func (c *Client) DisableDirectory(ctx context.Context, params *DisableDirectoryI
 		params = &DisableDirectoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableDirectory", params, optFns, addOperationDisableDirectoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableDirectory", params, optFns, c.addOperationDisableDirectoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DisableDirectoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableDirectory{}, middleware.After)
 	if err != nil {
 		return err

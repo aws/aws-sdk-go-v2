@@ -18,7 +18,7 @@ func (c *Client) DescribeContext(ctx context.Context, params *DescribeContextInp
 		params = &DescribeContextInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeContext", params, optFns, addOperationDescribeContextMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeContext", params, optFns, c.addOperationDescribeContextMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type DescribeContextOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeContext{}, middleware.After)
 	if err != nil {
 		return err

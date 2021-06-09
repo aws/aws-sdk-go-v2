@@ -19,7 +19,7 @@ func (c *Client) GetContactList(ctx context.Context, params *GetContactListInput
 		params = &GetContactListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetContactList", params, optFns, addOperationGetContactListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetContactList", params, optFns, c.addOperationGetContactListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type GetContactListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetContactListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetContactListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContactList{}, middleware.After)
 	if err != nil {
 		return err

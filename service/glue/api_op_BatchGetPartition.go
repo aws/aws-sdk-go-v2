@@ -17,7 +17,7 @@ func (c *Client) BatchGetPartition(ctx context.Context, params *BatchGetPartitio
 		params = &BatchGetPartitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetPartition", params, optFns, addOperationBatchGetPartitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetPartition", params, optFns, c.addOperationBatchGetPartitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type BatchGetPartitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetPartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetPartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetPartition{}, middleware.After)
 	if err != nil {
 		return err

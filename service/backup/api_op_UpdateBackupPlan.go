@@ -19,7 +19,7 @@ func (c *Client) UpdateBackupPlan(ctx context.Context, params *UpdateBackupPlanI
 		params = &UpdateBackupPlanInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateBackupPlan", params, optFns, addOperationUpdateBackupPlanMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateBackupPlan", params, optFns, c.addOperationUpdateBackupPlanMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type UpdateBackupPlanOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateBackupPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateBackupPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBackupPlan{}, middleware.After)
 	if err != nil {
 		return err

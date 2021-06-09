@@ -18,7 +18,7 @@ func (c *Client) ListHosts(ctx context.Context, params *ListHostsInput, optFns .
 		params = &ListHostsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListHosts", params, optFns, addOperationListHostsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListHosts", params, optFns, c.addOperationListHostsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListHostsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListHostsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListHostsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListHosts{}, middleware.After)
 	if err != nil {
 		return err

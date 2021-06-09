@@ -21,7 +21,7 @@ func (c *Client) AssociateTransitGatewayConnectPeer(ctx context.Context, params 
 		params = &AssociateTransitGatewayConnectPeerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateTransitGatewayConnectPeer", params, optFns, addOperationAssociateTransitGatewayConnectPeerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateTransitGatewayConnectPeer", params, optFns, c.addOperationAssociateTransitGatewayConnectPeerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type AssociateTransitGatewayConnectPeerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateTransitGatewayConnectPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateTransitGatewayConnectPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateTransitGatewayConnectPeer{}, middleware.After)
 	if err != nil {
 		return err

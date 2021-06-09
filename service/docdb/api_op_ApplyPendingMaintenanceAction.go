@@ -18,7 +18,7 @@ func (c *Client) ApplyPendingMaintenanceAction(ctx context.Context, params *Appl
 		params = &ApplyPendingMaintenanceActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ApplyPendingMaintenanceAction", params, optFns, addOperationApplyPendingMaintenanceActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ApplyPendingMaintenanceAction", params, optFns, c.addOperationApplyPendingMaintenanceActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type ApplyPendingMaintenanceActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationApplyPendingMaintenanceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationApplyPendingMaintenanceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpApplyPendingMaintenanceAction{}, middleware.After)
 	if err != nil {
 		return err

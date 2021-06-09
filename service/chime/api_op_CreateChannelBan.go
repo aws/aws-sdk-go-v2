@@ -24,7 +24,7 @@ func (c *Client) CreateChannelBan(ctx context.Context, params *CreateChannelBanI
 		params = &CreateChannelBanInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateChannelBan", params, optFns, addOperationCreateChannelBanMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateChannelBan", params, optFns, c.addOperationCreateChannelBanMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type CreateChannelBanOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateChannelBanMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateChannelBanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChannelBan{}, middleware.After)
 	if err != nil {
 		return err

@@ -26,7 +26,7 @@ func (c *Client) DescribeInstanceHealth(ctx context.Context, params *DescribeIns
 		params = &DescribeInstanceHealthInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInstanceHealth", params, optFns, addOperationDescribeInstanceHealthMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInstanceHealth", params, optFns, c.addOperationDescribeInstanceHealthMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DescribeInstanceHealthOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInstanceHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInstanceHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeInstanceHealth{}, middleware.After)
 	if err != nil {
 		return err

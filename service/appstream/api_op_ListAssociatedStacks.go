@@ -16,7 +16,7 @@ func (c *Client) ListAssociatedStacks(ctx context.Context, params *ListAssociate
 		params = &ListAssociatedStacksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAssociatedStacks", params, optFns, addOperationListAssociatedStacksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAssociatedStacks", params, optFns, c.addOperationListAssociatedStacksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ListAssociatedStacksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAssociatedStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAssociatedStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAssociatedStacks{}, middleware.After)
 	if err != nil {
 		return err

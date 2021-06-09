@@ -17,7 +17,7 @@ func (c *Client) GetTerminology(ctx context.Context, params *GetTerminologyInput
 		params = &GetTerminologyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTerminology", params, optFns, addOperationGetTerminologyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTerminology", params, optFns, c.addOperationGetTerminologyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetTerminologyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTerminologyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTerminologyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTerminology{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) CreateDBSecurityGroup(ctx context.Context, params *CreateDBSecu
 		params = &CreateDBSecurityGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDBSecurityGroup", params, optFns, addOperationCreateDBSecurityGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDBSecurityGroup", params, optFns, c.addOperationCreateDBSecurityGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type CreateDBSecurityGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDBSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDBSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBSecurityGroup{}, middleware.After)
 	if err != nil {
 		return err

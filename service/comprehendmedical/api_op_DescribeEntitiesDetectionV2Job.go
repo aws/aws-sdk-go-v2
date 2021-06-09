@@ -18,7 +18,7 @@ func (c *Client) DescribeEntitiesDetectionV2Job(ctx context.Context, params *Des
 		params = &DescribeEntitiesDetectionV2JobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEntitiesDetectionV2Job", params, optFns, addOperationDescribeEntitiesDetectionV2JobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEntitiesDetectionV2Job", params, optFns, c.addOperationDescribeEntitiesDetectionV2JobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DescribeEntitiesDetectionV2JobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEntitiesDetectionV2Job{}, middleware.After)
 	if err != nil {
 		return err

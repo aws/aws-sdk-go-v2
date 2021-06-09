@@ -17,7 +17,7 @@ func (c *Client) DescribeUserPoolDomain(ctx context.Context, params *DescribeUse
 		params = &DescribeUserPoolDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeUserPoolDomain", params, optFns, addOperationDescribeUserPoolDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeUserPoolDomain", params, optFns, c.addOperationDescribeUserPoolDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeUserPoolDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeUserPoolDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeUserPoolDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUserPoolDomain{}, middleware.After)
 	if err != nil {
 		return err

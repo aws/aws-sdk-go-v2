@@ -27,7 +27,7 @@ func (c *Client) StartFaceDetection(ctx context.Context, params *StartFaceDetect
 		params = &StartFaceDetectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartFaceDetection", params, optFns, addOperationStartFaceDetectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartFaceDetection", params, optFns, c.addOperationStartFaceDetectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type StartFaceDetectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartFaceDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartFaceDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartFaceDetection{}, middleware.After)
 	if err != nil {
 		return err

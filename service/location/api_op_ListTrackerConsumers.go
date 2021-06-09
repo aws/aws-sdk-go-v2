@@ -17,7 +17,7 @@ func (c *Client) ListTrackerConsumers(ctx context.Context, params *ListTrackerCo
 		params = &ListTrackerConsumersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTrackerConsumers", params, optFns, addOperationListTrackerConsumersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTrackerConsumers", params, optFns, c.addOperationListTrackerConsumersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListTrackerConsumersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTrackerConsumersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTrackerConsumersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTrackerConsumers{}, middleware.After)
 	if err != nil {
 		return err

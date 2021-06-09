@@ -17,7 +17,7 @@ func (c *Client) UpdateSubnetGroup(ctx context.Context, params *UpdateSubnetGrou
 		params = &UpdateSubnetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSubnetGroup", params, optFns, addOperationUpdateSubnetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSubnetGroup", params, optFns, c.addOperationUpdateSubnetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type UpdateSubnetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSubnetGroup{}, middleware.After)
 	if err != nil {
 		return err

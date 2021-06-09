@@ -26,7 +26,7 @@ func (c *Client) CreateRecordingConfiguration(ctx context.Context, params *Creat
 		params = &CreateRecordingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRecordingConfiguration", params, optFns, addOperationCreateRecordingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRecordingConfiguration", params, optFns, c.addOperationCreateRecordingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type CreateRecordingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRecordingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRecordingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRecordingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

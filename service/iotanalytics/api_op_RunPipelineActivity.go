@@ -17,7 +17,7 @@ func (c *Client) RunPipelineActivity(ctx context.Context, params *RunPipelineAct
 		params = &RunPipelineActivityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RunPipelineActivity", params, optFns, addOperationRunPipelineActivityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RunPipelineActivity", params, optFns, c.addOperationRunPipelineActivityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type RunPipelineActivityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRunPipelineActivityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRunPipelineActivityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRunPipelineActivity{}, middleware.After)
 	if err != nil {
 		return err

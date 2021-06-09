@@ -22,7 +22,7 @@ func (c *Client) DisassociateVpcCidrBlock(ctx context.Context, params *Disassoci
 		params = &DisassociateVpcCidrBlockInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateVpcCidrBlock", params, optFns, addOperationDisassociateVpcCidrBlockMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateVpcCidrBlock", params, optFns, c.addOperationDisassociateVpcCidrBlockMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DisassociateVpcCidrBlockOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateVpcCidrBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateVpcCidrBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDisassociateVpcCidrBlock{}, middleware.After)
 	if err != nil {
 		return err

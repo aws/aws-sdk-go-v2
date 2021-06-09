@@ -55,7 +55,7 @@ func (c *Client) CompareFaces(ctx context.Context, params *CompareFacesInput, op
 		params = &CompareFacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CompareFaces", params, optFns, addOperationCompareFacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CompareFaces", params, optFns, c.addOperationCompareFacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -146,7 +146,7 @@ type CompareFacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCompareFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCompareFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCompareFaces{}, middleware.After)
 	if err != nil {
 		return err

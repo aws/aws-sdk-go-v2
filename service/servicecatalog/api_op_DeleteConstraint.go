@@ -17,7 +17,7 @@ func (c *Client) DeleteConstraint(ctx context.Context, params *DeleteConstraintI
 		params = &DeleteConstraintInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteConstraint", params, optFns, addOperationDeleteConstraintMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteConstraint", params, optFns, c.addOperationDeleteConstraintMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteConstraintOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteConstraint{}, middleware.After)
 	if err != nil {
 		return err

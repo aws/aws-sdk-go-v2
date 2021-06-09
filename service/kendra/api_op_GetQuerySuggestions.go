@@ -17,7 +17,7 @@ func (c *Client) GetQuerySuggestions(ctx context.Context, params *GetQuerySugges
 		params = &GetQuerySuggestionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetQuerySuggestions", params, optFns, addOperationGetQuerySuggestionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetQuerySuggestions", params, optFns, c.addOperationGetQuerySuggestionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetQuerySuggestionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetQuerySuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetQuerySuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetQuerySuggestions{}, middleware.After)
 	if err != nil {
 		return err

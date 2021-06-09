@@ -18,7 +18,7 @@ func (c *Client) DescribeFastSnapshotRestores(ctx context.Context, params *Descr
 		params = &DescribeFastSnapshotRestoresInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFastSnapshotRestores", params, optFns, addOperationDescribeFastSnapshotRestoresMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFastSnapshotRestores", params, optFns, c.addOperationDescribeFastSnapshotRestoresMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DescribeFastSnapshotRestoresOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFastSnapshotRestoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFastSnapshotRestoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeFastSnapshotRestores{}, middleware.After)
 	if err != nil {
 		return err

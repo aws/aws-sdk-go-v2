@@ -18,7 +18,7 @@ func (c *Client) UpdateFirewallRuleGroupAssociation(ctx context.Context, params 
 		params = &UpdateFirewallRuleGroupAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFirewallRuleGroupAssociation", params, optFns, addOperationUpdateFirewallRuleGroupAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFirewallRuleGroupAssociation", params, optFns, c.addOperationUpdateFirewallRuleGroupAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type UpdateFirewallRuleGroupAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFirewallRuleGroupAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFirewallRuleGroupAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateFirewallRuleGroupAssociation{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ListStoredQueries(ctx context.Context, params *ListStoredQuerie
 		params = &ListStoredQueriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListStoredQueries", params, optFns, addOperationListStoredQueriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListStoredQueries", params, optFns, c.addOperationListStoredQueriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListStoredQueriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListStoredQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListStoredQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStoredQueries{}, middleware.After)
 	if err != nil {
 		return err

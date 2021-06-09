@@ -16,7 +16,7 @@ func (c *Client) UpdateVariable(ctx context.Context, params *UpdateVariableInput
 		params = &UpdateVariableInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateVariable", params, optFns, addOperationUpdateVariableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateVariable", params, optFns, c.addOperationUpdateVariableMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type UpdateVariableOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateVariableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateVariableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateVariable{}, middleware.After)
 	if err != nil {
 		return err

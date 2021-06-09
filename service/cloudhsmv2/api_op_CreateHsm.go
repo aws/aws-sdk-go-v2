@@ -18,7 +18,7 @@ func (c *Client) CreateHsm(ctx context.Context, params *CreateHsmInput, optFns .
 		params = &CreateHsmInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateHsm", params, optFns, addOperationCreateHsmMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateHsm", params, optFns, c.addOperationCreateHsmMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type CreateHsmOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHsm{}, middleware.After)
 	if err != nil {
 		return err

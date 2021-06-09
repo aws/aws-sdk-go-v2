@@ -23,7 +23,7 @@ func (c *Client) CancelSpotFleetRequests(ctx context.Context, params *CancelSpot
 		params = &CancelSpotFleetRequestsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelSpotFleetRequests", params, optFns, addOperationCancelSpotFleetRequestsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelSpotFleetRequests", params, optFns, c.addOperationCancelSpotFleetRequestsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type CancelSpotFleetRequestsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelSpotFleetRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelSpotFleetRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCancelSpotFleetRequests{}, middleware.After)
 	if err != nil {
 		return err

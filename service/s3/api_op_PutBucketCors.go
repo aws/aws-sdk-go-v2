@@ -59,7 +59,7 @@ func (c *Client) PutBucketCors(ctx context.Context, params *PutBucketCorsInput, 
 		params = &PutBucketCorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketCors", params, optFns, addOperationPutBucketCorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketCors", params, optFns, c.addOperationPutBucketCorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +101,7 @@ type PutBucketCorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketCorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketCorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketCors{}, middleware.After)
 	if err != nil {
 		return err

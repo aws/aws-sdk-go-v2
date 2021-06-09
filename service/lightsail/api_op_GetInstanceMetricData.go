@@ -21,7 +21,7 @@ func (c *Client) GetInstanceMetricData(ctx context.Context, params *GetInstanceM
 		params = &GetInstanceMetricDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInstanceMetricData", params, optFns, addOperationGetInstanceMetricDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInstanceMetricData", params, optFns, c.addOperationGetInstanceMetricDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -173,7 +173,7 @@ type GetInstanceMetricDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInstanceMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInstanceMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInstanceMetricData{}, middleware.After)
 	if err != nil {
 		return err

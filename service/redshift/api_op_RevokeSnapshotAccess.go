@@ -22,7 +22,7 @@ func (c *Client) RevokeSnapshotAccess(ctx context.Context, params *RevokeSnapsho
 		params = &RevokeSnapshotAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokeSnapshotAccess", params, optFns, addOperationRevokeSnapshotAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeSnapshotAccess", params, optFns, c.addOperationRevokeSnapshotAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type RevokeSnapshotAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokeSnapshotAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokeSnapshotAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRevokeSnapshotAccess{}, middleware.After)
 	if err != nil {
 		return err

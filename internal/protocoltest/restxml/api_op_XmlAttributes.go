@@ -15,7 +15,7 @@ func (c *Client) XmlAttributes(ctx context.Context, params *XmlAttributesInput, 
 		params = &XmlAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "XmlAttributes", params, optFns, addOperationXmlAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "XmlAttributes", params, optFns, c.addOperationXmlAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type XmlAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationXmlAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationXmlAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlAttributes{}, middleware.After)
 	if err != nil {
 		return err

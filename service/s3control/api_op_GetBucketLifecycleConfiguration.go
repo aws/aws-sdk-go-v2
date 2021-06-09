@@ -66,7 +66,7 @@ func (c *Client) GetBucketLifecycleConfiguration(ctx context.Context, params *Ge
 		params = &GetBucketLifecycleConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketLifecycleConfiguration", params, optFns, addOperationGetBucketLifecycleConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketLifecycleConfiguration", params, optFns, c.addOperationGetBucketLifecycleConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type GetBucketLifecycleConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketLifecycleConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketLifecycleConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketLifecycleConfiguration{}, middleware.After)
 	if err != nil {
 		return err

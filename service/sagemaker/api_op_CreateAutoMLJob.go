@@ -20,7 +20,7 @@ func (c *Client) CreateAutoMLJob(ctx context.Context, params *CreateAutoMLJobInp
 		params = &CreateAutoMLJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAutoMLJob", params, optFns, addOperationCreateAutoMLJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAutoMLJob", params, optFns, c.addOperationCreateAutoMLJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type CreateAutoMLJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAutoMLJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAutoMLJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAutoMLJob{}, middleware.After)
 	if err != nil {
 		return err

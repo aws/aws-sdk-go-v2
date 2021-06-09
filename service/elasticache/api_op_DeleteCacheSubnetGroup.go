@@ -17,7 +17,7 @@ func (c *Client) DeleteCacheSubnetGroup(ctx context.Context, params *DeleteCache
 		params = &DeleteCacheSubnetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCacheSubnetGroup", params, optFns, addOperationDeleteCacheSubnetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCacheSubnetGroup", params, optFns, c.addOperationDeleteCacheSubnetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteCacheSubnetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCacheSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCacheSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteCacheSubnetGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) GetContainerPolicy(ctx context.Context, params *GetContainerPol
 		params = &GetContainerPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetContainerPolicy", params, optFns, addOperationGetContainerPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetContainerPolicy", params, optFns, c.addOperationGetContainerPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetContainerPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetContainerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetContainerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetContainerPolicy{}, middleware.After)
 	if err != nil {
 		return err

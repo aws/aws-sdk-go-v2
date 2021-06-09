@@ -16,7 +16,7 @@ func (c *Client) UpdateFirewallPolicyChangeProtection(ctx context.Context, param
 		params = &UpdateFirewallPolicyChangeProtectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFirewallPolicyChangeProtection", params, optFns, addOperationUpdateFirewallPolicyChangeProtectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFirewallPolicyChangeProtection", params, optFns, c.addOperationUpdateFirewallPolicyChangeProtectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type UpdateFirewallPolicyChangeProtectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFirewallPolicyChangeProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFirewallPolicyChangeProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateFirewallPolicyChangeProtection{}, middleware.After)
 	if err != nil {
 		return err

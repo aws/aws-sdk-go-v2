@@ -18,7 +18,7 @@ func (c *Client) ListPagesByEngagement(ctx context.Context, params *ListPagesByE
 		params = &ListPagesByEngagementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPagesByEngagement", params, optFns, addOperationListPagesByEngagementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPagesByEngagement", params, optFns, c.addOperationListPagesByEngagementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListPagesByEngagementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPagesByEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPagesByEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPagesByEngagement{}, middleware.After)
 	if err != nil {
 		return err

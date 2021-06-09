@@ -22,7 +22,7 @@ func (c *Client) ListPlaybackConfigurations(ctx context.Context, params *ListPla
 		params = &ListPlaybackConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPlaybackConfigurations", params, optFns, addOperationListPlaybackConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPlaybackConfigurations", params, optFns, c.addOperationListPlaybackConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListPlaybackConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPlaybackConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPlaybackConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPlaybackConfigurations{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ListBackupSelections(ctx context.Context, params *ListBackupSel
 		params = &ListBackupSelectionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBackupSelections", params, optFns, addOperationListBackupSelectionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBackupSelections", params, optFns, c.addOperationListBackupSelectionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ListBackupSelectionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBackupSelectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBackupSelectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBackupSelections{}, middleware.After)
 	if err != nil {
 		return err

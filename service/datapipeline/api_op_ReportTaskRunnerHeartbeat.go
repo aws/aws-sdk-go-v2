@@ -26,7 +26,7 @@ func (c *Client) ReportTaskRunnerHeartbeat(ctx context.Context, params *ReportTa
 		params = &ReportTaskRunnerHeartbeatInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReportTaskRunnerHeartbeat", params, optFns, addOperationReportTaskRunnerHeartbeatMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReportTaskRunnerHeartbeat", params, optFns, c.addOperationReportTaskRunnerHeartbeatMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type ReportTaskRunnerHeartbeatOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReportTaskRunnerHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReportTaskRunnerHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReportTaskRunnerHeartbeat{}, middleware.After)
 	if err != nil {
 		return err

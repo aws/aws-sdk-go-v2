@@ -17,7 +17,7 @@ func (c *Client) ImportKeyPair(ctx context.Context, params *ImportKeyPairInput, 
 		params = &ImportKeyPairInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportKeyPair", params, optFns, addOperationImportKeyPairMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportKeyPair", params, optFns, c.addOperationImportKeyPairMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ImportKeyPairOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportKeyPair{}, middleware.After)
 	if err != nil {
 		return err

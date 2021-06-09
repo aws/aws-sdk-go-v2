@@ -23,7 +23,7 @@ func (c *Client) ExportConfigurations(ctx context.Context, params *ExportConfigu
 		params = &ExportConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExportConfigurations", params, optFns, addOperationExportConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExportConfigurations", params, optFns, c.addOperationExportConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type ExportConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExportConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExportConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpExportConfigurations{}, middleware.After)
 	if err != nil {
 		return err

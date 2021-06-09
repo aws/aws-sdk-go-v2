@@ -37,7 +37,7 @@ func (c *Client) CopyBackup(ctx context.Context, params *CopyBackupInput, optFns
 		params = &CopyBackupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopyBackup", params, optFns, addOperationCopyBackupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopyBackup", params, optFns, c.addOperationCopyBackupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ type CopyBackupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopyBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopyBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopyBackup{}, middleware.After)
 	if err != nil {
 		return err

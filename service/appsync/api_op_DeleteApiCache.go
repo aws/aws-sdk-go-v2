@@ -16,7 +16,7 @@ func (c *Client) DeleteApiCache(ctx context.Context, params *DeleteApiCacheInput
 		params = &DeleteApiCacheInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteApiCache", params, optFns, addOperationDeleteApiCacheMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteApiCache", params, optFns, c.addOperationDeleteApiCacheMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteApiCacheOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApiCache{}, middleware.After)
 	if err != nil {
 		return err

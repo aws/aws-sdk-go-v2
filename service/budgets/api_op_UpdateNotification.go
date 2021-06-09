@@ -17,7 +17,7 @@ func (c *Client) UpdateNotification(ctx context.Context, params *UpdateNotificat
 		params = &UpdateNotificationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateNotification", params, optFns, addOperationUpdateNotificationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateNotification", params, optFns, c.addOperationUpdateNotificationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type UpdateNotificationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateNotification{}, middleware.After)
 	if err != nil {
 		return err

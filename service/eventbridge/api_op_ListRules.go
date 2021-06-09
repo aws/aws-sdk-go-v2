@@ -20,7 +20,7 @@ func (c *Client) ListRules(ctx context.Context, params *ListRulesInput, optFns .
 		params = &ListRulesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRules", params, optFns, addOperationListRulesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRules", params, optFns, c.addOperationListRulesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRules{}, middleware.After)
 	if err != nil {
 		return err

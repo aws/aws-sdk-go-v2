@@ -34,7 +34,7 @@ func (c *Client) UpdateContactAttributes(ctx context.Context, params *UpdateCont
 		params = &UpdateContactAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateContactAttributes", params, optFns, addOperationUpdateContactAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateContactAttributes", params, optFns, c.addOperationUpdateContactAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type UpdateContactAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateContactAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateContactAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateContactAttributes{}, middleware.After)
 	if err != nil {
 		return err

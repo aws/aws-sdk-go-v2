@@ -20,7 +20,7 @@ func (c *Client) AddUploadBuffer(ctx context.Context, params *AddUploadBufferInp
 		params = &AddUploadBufferInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddUploadBuffer", params, optFns, addOperationAddUploadBufferMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddUploadBuffer", params, optFns, c.addOperationAddUploadBufferMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type AddUploadBufferOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddUploadBufferMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddUploadBufferMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddUploadBuffer{}, middleware.After)
 	if err != nil {
 		return err

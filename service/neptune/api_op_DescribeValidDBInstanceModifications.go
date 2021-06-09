@@ -19,7 +19,7 @@ func (c *Client) DescribeValidDBInstanceModifications(ctx context.Context, param
 		params = &DescribeValidDBInstanceModificationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeValidDBInstanceModifications", params, optFns, addOperationDescribeValidDBInstanceModificationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeValidDBInstanceModifications", params, optFns, c.addOperationDescribeValidDBInstanceModificationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DescribeValidDBInstanceModificationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeValidDBInstanceModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeValidDBInstanceModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeValidDBInstanceModifications{}, middleware.After)
 	if err != nil {
 		return err

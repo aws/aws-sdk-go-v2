@@ -18,7 +18,7 @@ func (c *Client) UpdateAsset(ctx context.Context, params *UpdateAssetInput, optF
 		params = &UpdateAssetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAsset", params, optFns, addOperationUpdateAssetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAsset", params, optFns, c.addOperationUpdateAssetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type UpdateAssetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAsset{}, middleware.After)
 	if err != nil {
 		return err

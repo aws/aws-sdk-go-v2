@@ -65,7 +65,7 @@ func (c *Client) UpdateThemePermissions(ctx context.Context, params *UpdateTheme
 		params = &UpdateThemePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateThemePermissions", params, optFns, addOperationUpdateThemePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateThemePermissions", params, optFns, c.addOperationUpdateThemePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -115,7 +115,7 @@ type UpdateThemePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateThemePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateThemePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateThemePermissions{}, middleware.After)
 	if err != nil {
 		return err

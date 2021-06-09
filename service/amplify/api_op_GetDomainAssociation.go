@@ -17,7 +17,7 @@ func (c *Client) GetDomainAssociation(ctx context.Context, params *GetDomainAsso
 		params = &GetDomainAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDomainAssociation", params, optFns, addOperationGetDomainAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDomainAssociation", params, optFns, c.addOperationGetDomainAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetDomainAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDomainAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDomainAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainAssociation{}, middleware.After)
 	if err != nil {
 		return err

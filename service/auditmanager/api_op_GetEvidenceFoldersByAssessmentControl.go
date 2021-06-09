@@ -19,7 +19,7 @@ func (c *Client) GetEvidenceFoldersByAssessmentControl(ctx context.Context, para
 		params = &GetEvidenceFoldersByAssessmentControlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEvidenceFoldersByAssessmentControl", params, optFns, addOperationGetEvidenceFoldersByAssessmentControlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEvidenceFoldersByAssessmentControl", params, optFns, c.addOperationGetEvidenceFoldersByAssessmentControlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type GetEvidenceFoldersByAssessmentControlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEvidenceFoldersByAssessmentControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEvidenceFoldersByAssessmentControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEvidenceFoldersByAssessmentControl{}, middleware.After)
 	if err != nil {
 		return err

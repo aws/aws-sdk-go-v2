@@ -26,7 +26,7 @@ func (c *Client) CreatePlacementGroup(ctx context.Context, params *CreatePlaceme
 		params = &CreatePlacementGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePlacementGroup", params, optFns, addOperationCreatePlacementGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePlacementGroup", params, optFns, c.addOperationCreatePlacementGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type CreatePlacementGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePlacementGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePlacementGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreatePlacementGroup{}, middleware.After)
 	if err != nil {
 		return err

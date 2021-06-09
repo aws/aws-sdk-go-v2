@@ -16,7 +16,7 @@ func (c *Client) IsVpcPeered(ctx context.Context, params *IsVpcPeeredInput, optF
 		params = &IsVpcPeeredInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "IsVpcPeered", params, optFns, addOperationIsVpcPeeredMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "IsVpcPeered", params, optFns, c.addOperationIsVpcPeeredMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ type IsVpcPeeredOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationIsVpcPeeredMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationIsVpcPeeredMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpIsVpcPeered{}, middleware.After)
 	if err != nil {
 		return err

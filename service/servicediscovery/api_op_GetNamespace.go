@@ -17,7 +17,7 @@ func (c *Client) GetNamespace(ctx context.Context, params *GetNamespaceInput, op
 		params = &GetNamespaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetNamespace", params, optFns, addOperationGetNamespaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetNamespace", params, optFns, c.addOperationGetNamespaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetNamespaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetNamespace{}, middleware.After)
 	if err != nil {
 		return err

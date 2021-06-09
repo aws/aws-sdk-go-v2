@@ -50,7 +50,7 @@ func (c *Client) ListBucketMetricsConfigurations(ctx context.Context, params *Li
 		params = &ListBucketMetricsConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBucketMetricsConfigurations", params, optFns, addOperationListBucketMetricsConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBucketMetricsConfigurations", params, optFns, c.addOperationListBucketMetricsConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type ListBucketMetricsConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBucketMetricsConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBucketMetricsConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListBucketMetricsConfigurations{}, middleware.After)
 	if err != nil {
 		return err

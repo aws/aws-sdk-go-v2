@@ -26,7 +26,7 @@ func (c *Client) UpdateOpenIDConnectProviderThumbprint(ctx context.Context, para
 		params = &UpdateOpenIDConnectProviderThumbprintInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateOpenIDConnectProviderThumbprint", params, optFns, addOperationUpdateOpenIDConnectProviderThumbprintMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateOpenIDConnectProviderThumbprint", params, optFns, c.addOperationUpdateOpenIDConnectProviderThumbprintMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type UpdateOpenIDConnectProviderThumbprintOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateOpenIDConnectProviderThumbprintMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateOpenIDConnectProviderThumbprintMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateOpenIDConnectProviderThumbprint{}, middleware.After)
 	if err != nil {
 		return err

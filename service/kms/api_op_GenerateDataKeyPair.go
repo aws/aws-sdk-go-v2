@@ -64,7 +64,7 @@ func (c *Client) GenerateDataKeyPair(ctx context.Context, params *GenerateDataKe
 		params = &GenerateDataKeyPairInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GenerateDataKeyPair", params, optFns, addOperationGenerateDataKeyPairMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GenerateDataKeyPair", params, optFns, c.addOperationGenerateDataKeyPairMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -152,7 +152,7 @@ type GenerateDataKeyPairOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGenerateDataKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGenerateDataKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGenerateDataKeyPair{}, middleware.After)
 	if err != nil {
 		return err

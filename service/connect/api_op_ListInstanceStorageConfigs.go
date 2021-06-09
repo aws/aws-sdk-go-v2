@@ -20,7 +20,7 @@ func (c *Client) ListInstanceStorageConfigs(ctx context.Context, params *ListIns
 		params = &ListInstanceStorageConfigsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListInstanceStorageConfigs", params, optFns, addOperationListInstanceStorageConfigsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListInstanceStorageConfigs", params, optFns, c.addOperationListInstanceStorageConfigsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ListInstanceStorageConfigsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListInstanceStorageConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListInstanceStorageConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInstanceStorageConfigs{}, middleware.After)
 	if err != nil {
 		return err

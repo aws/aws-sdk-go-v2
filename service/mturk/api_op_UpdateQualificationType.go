@@ -39,7 +39,7 @@ func (c *Client) UpdateQualificationType(ctx context.Context, params *UpdateQual
 		params = &UpdateQualificationTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateQualificationType", params, optFns, addOperationUpdateQualificationTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateQualificationType", params, optFns, c.addOperationUpdateQualificationTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type UpdateQualificationTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateQualificationType{}, middleware.After)
 	if err != nil {
 		return err

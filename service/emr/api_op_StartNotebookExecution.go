@@ -17,7 +17,7 @@ func (c *Client) StartNotebookExecution(ctx context.Context, params *StartNotebo
 		params = &StartNotebookExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartNotebookExecution", params, optFns, addOperationStartNotebookExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartNotebookExecution", params, optFns, c.addOperationStartNotebookExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type StartNotebookExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartNotebookExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartNotebookExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartNotebookExecution{}, middleware.After)
 	if err != nil {
 		return err

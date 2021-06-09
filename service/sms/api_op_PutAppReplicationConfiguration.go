@@ -17,7 +17,7 @@ func (c *Client) PutAppReplicationConfiguration(ctx context.Context, params *Put
 		params = &PutAppReplicationConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAppReplicationConfiguration", params, optFns, addOperationPutAppReplicationConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAppReplicationConfiguration", params, optFns, c.addOperationPutAppReplicationConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type PutAppReplicationConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAppReplicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAppReplicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAppReplicationConfiguration{}, middleware.After)
 	if err != nil {
 		return err

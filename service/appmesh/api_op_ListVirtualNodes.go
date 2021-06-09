@@ -18,7 +18,7 @@ func (c *Client) ListVirtualNodes(ctx context.Context, params *ListVirtualNodesI
 		params = &ListVirtualNodesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListVirtualNodes", params, optFns, addOperationListVirtualNodesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListVirtualNodes", params, optFns, c.addOperationListVirtualNodesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type ListVirtualNodesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListVirtualNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListVirtualNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVirtualNodes{}, middleware.After)
 	if err != nil {
 		return err

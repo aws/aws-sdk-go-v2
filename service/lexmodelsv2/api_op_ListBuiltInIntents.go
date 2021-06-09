@@ -21,7 +21,7 @@ func (c *Client) ListBuiltInIntents(ctx context.Context, params *ListBuiltInInte
 		params = &ListBuiltInIntentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBuiltInIntents", params, optFns, addOperationListBuiltInIntentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBuiltInIntents", params, optFns, c.addOperationListBuiltInIntentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type ListBuiltInIntentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBuiltInIntentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBuiltInIntentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBuiltInIntents{}, middleware.After)
 	if err != nil {
 		return err

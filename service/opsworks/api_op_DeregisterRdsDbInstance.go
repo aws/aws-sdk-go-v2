@@ -20,7 +20,7 @@ func (c *Client) DeregisterRdsDbInstance(ctx context.Context, params *Deregister
 		params = &DeregisterRdsDbInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterRdsDbInstance", params, optFns, addOperationDeregisterRdsDbInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterRdsDbInstance", params, optFns, c.addOperationDeregisterRdsDbInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeregisterRdsDbInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterRdsDbInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterRdsDbInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterRdsDbInstance{}, middleware.After)
 	if err != nil {
 		return err

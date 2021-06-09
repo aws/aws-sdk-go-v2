@@ -18,7 +18,7 @@ func (c *Client) CreateWirelessDevice(ctx context.Context, params *CreateWireles
 		params = &CreateWirelessDeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateWirelessDevice", params, optFns, addOperationCreateWirelessDeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateWirelessDevice", params, optFns, c.addOperationCreateWirelessDeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type CreateWirelessDeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWirelessDevice{}, middleware.After)
 	if err != nil {
 		return err

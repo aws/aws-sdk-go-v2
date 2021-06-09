@@ -18,7 +18,7 @@ func (c *Client) PutJobFailureResult(ctx context.Context, params *PutJobFailureR
 		params = &PutJobFailureResultInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutJobFailureResult", params, optFns, addOperationPutJobFailureResultMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutJobFailureResult", params, optFns, c.addOperationPutJobFailureResultMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type PutJobFailureResultOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutJobFailureResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutJobFailureResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutJobFailureResult{}, middleware.After)
 	if err != nil {
 		return err

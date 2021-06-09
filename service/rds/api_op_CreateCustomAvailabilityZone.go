@@ -20,7 +20,7 @@ func (c *Client) CreateCustomAvailabilityZone(ctx context.Context, params *Creat
 		params = &CreateCustomAvailabilityZoneInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCustomAvailabilityZone", params, optFns, addOperationCreateCustomAvailabilityZoneMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCustomAvailabilityZone", params, optFns, c.addOperationCreateCustomAvailabilityZoneMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type CreateCustomAvailabilityZoneOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCustomAvailabilityZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCustomAvailabilityZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateCustomAvailabilityZone{}, middleware.After)
 	if err != nil {
 		return err

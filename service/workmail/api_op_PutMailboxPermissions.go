@@ -18,7 +18,7 @@ func (c *Client) PutMailboxPermissions(ctx context.Context, params *PutMailboxPe
 		params = &PutMailboxPermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutMailboxPermissions", params, optFns, addOperationPutMailboxPermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutMailboxPermissions", params, optFns, c.addOperationPutMailboxPermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type PutMailboxPermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutMailboxPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutMailboxPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutMailboxPermissions{}, middleware.After)
 	if err != nil {
 		return err

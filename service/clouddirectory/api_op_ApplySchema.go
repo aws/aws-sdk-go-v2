@@ -17,7 +17,7 @@ func (c *Client) ApplySchema(ctx context.Context, params *ApplySchemaInput, optF
 		params = &ApplySchemaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ApplySchema", params, optFns, addOperationApplySchemaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ApplySchema", params, optFns, c.addOperationApplySchemaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ApplySchemaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationApplySchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationApplySchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpApplySchema{}, middleware.After)
 	if err != nil {
 		return err

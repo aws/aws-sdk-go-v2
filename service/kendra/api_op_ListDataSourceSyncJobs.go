@@ -18,7 +18,7 @@ func (c *Client) ListDataSourceSyncJobs(ctx context.Context, params *ListDataSou
 		params = &ListDataSourceSyncJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDataSourceSyncJobs", params, optFns, addOperationListDataSourceSyncJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDataSourceSyncJobs", params, optFns, c.addOperationListDataSourceSyncJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type ListDataSourceSyncJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDataSourceSyncJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDataSourceSyncJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataSourceSyncJobs{}, middleware.After)
 	if err != nil {
 		return err

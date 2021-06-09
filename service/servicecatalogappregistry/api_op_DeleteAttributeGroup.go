@@ -17,7 +17,7 @@ func (c *Client) DeleteAttributeGroup(ctx context.Context, params *DeleteAttribu
 		params = &DeleteAttributeGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAttributeGroup", params, optFns, addOperationDeleteAttributeGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAttributeGroup", params, optFns, c.addOperationDeleteAttributeGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteAttributeGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAttributeGroup{}, middleware.After)
 	if err != nil {
 		return err

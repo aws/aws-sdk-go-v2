@@ -18,7 +18,7 @@ func (c *Client) ListVirtualServices(ctx context.Context, params *ListVirtualSer
 		params = &ListVirtualServicesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListVirtualServices", params, optFns, addOperationListVirtualServicesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListVirtualServices", params, optFns, c.addOperationListVirtualServicesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type ListVirtualServicesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListVirtualServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListVirtualServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVirtualServices{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteDomainAssociation(ctx context.Context, params *DeleteDoma
 		params = &DeleteDomainAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDomainAssociation", params, optFns, addOperationDeleteDomainAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDomainAssociation", params, optFns, c.addOperationDeleteDomainAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteDomainAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDomainAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDomainAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDomainAssociation{}, middleware.After)
 	if err != nil {
 		return err

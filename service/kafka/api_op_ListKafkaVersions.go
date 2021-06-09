@@ -18,7 +18,7 @@ func (c *Client) ListKafkaVersions(ctx context.Context, params *ListKafkaVersion
 		params = &ListKafkaVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListKafkaVersions", params, optFns, addOperationListKafkaVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListKafkaVersions", params, optFns, c.addOperationListKafkaVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type ListKafkaVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListKafkaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListKafkaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListKafkaVersions{}, middleware.After)
 	if err != nil {
 		return err

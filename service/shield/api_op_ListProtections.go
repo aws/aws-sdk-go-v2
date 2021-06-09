@@ -18,7 +18,7 @@ func (c *Client) ListProtections(ctx context.Context, params *ListProtectionsInp
 		params = &ListProtectionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListProtections", params, optFns, addOperationListProtectionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListProtections", params, optFns, c.addOperationListProtectionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListProtectionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListProtectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListProtectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProtections{}, middleware.After)
 	if err != nil {
 		return err

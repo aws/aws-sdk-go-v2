@@ -16,7 +16,7 @@ func (c *Client) GetServiceRoleForAccount(ctx context.Context, params *GetServic
 		params = &GetServiceRoleForAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetServiceRoleForAccount", params, optFns, addOperationGetServiceRoleForAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetServiceRoleForAccount", params, optFns, c.addOperationGetServiceRoleForAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type GetServiceRoleForAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetServiceRoleForAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetServiceRoleForAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceRoleForAccount{}, middleware.After)
 	if err != nil {
 		return err

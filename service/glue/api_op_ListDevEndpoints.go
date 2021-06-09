@@ -22,7 +22,7 @@ func (c *Client) ListDevEndpoints(ctx context.Context, params *ListDevEndpointsI
 		params = &ListDevEndpointsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDevEndpoints", params, optFns, addOperationListDevEndpointsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDevEndpoints", params, optFns, c.addOperationListDevEndpointsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListDevEndpointsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDevEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDevEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDevEndpoints{}, middleware.After)
 	if err != nil {
 		return err

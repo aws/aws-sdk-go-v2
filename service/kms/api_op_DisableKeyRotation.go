@@ -33,7 +33,7 @@ func (c *Client) DisableKeyRotation(ctx context.Context, params *DisableKeyRotat
 		params = &DisableKeyRotationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableKeyRotation", params, optFns, addOperationDisableKeyRotationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableKeyRotation", params, optFns, c.addOperationDisableKeyRotationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DisableKeyRotationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableKeyRotationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableKeyRotationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableKeyRotation{}, middleware.After)
 	if err != nil {
 		return err

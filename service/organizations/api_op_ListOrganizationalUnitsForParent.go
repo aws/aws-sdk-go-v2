@@ -24,7 +24,7 @@ func (c *Client) ListOrganizationalUnitsForParent(ctx context.Context, params *L
 		params = &ListOrganizationalUnitsForParentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListOrganizationalUnitsForParent", params, optFns, addOperationListOrganizationalUnitsForParentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListOrganizationalUnitsForParent", params, optFns, c.addOperationListOrganizationalUnitsForParentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type ListOrganizationalUnitsForParentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListOrganizationalUnitsForParentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListOrganizationalUnitsForParentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOrganizationalUnitsForParent{}, middleware.After)
 	if err != nil {
 		return err

@@ -46,7 +46,7 @@ func (c *Client) DeleteGameServerGroup(ctx context.Context, params *DeleteGameSe
 		params = &DeleteGameServerGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGameServerGroup", params, optFns, addOperationDeleteGameServerGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGameServerGroup", params, optFns, c.addOperationDeleteGameServerGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type DeleteGameServerGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteGameServerGroup{}, middleware.After)
 	if err != nil {
 		return err

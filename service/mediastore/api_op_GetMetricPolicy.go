@@ -17,7 +17,7 @@ func (c *Client) GetMetricPolicy(ctx context.Context, params *GetMetricPolicyInp
 		params = &GetMetricPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMetricPolicy", params, optFns, addOperationGetMetricPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMetricPolicy", params, optFns, c.addOperationGetMetricPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetMetricPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMetricPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMetricPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMetricPolicy{}, middleware.After)
 	if err != nil {
 		return err

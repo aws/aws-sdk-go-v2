@@ -22,7 +22,7 @@ func (c *Client) AssociateConnectionAlias(ctx context.Context, params *Associate
 		params = &AssociateConnectionAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateConnectionAlias", params, optFns, addOperationAssociateConnectionAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateConnectionAlias", params, optFns, c.addOperationAssociateConnectionAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type AssociateConnectionAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateConnectionAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateConnectionAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateConnectionAlias{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DeleteHost(ctx context.Context, params *DeleteHostInput, optFns
 		params = &DeleteHostInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteHost", params, optFns, addOperationDeleteHostMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteHost", params, optFns, c.addOperationDeleteHostMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteHostOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteHostMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteHostMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteHost{}, middleware.After)
 	if err != nil {
 		return err

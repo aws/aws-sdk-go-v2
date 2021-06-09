@@ -16,7 +16,7 @@ func (c *Client) DeleteMaintenanceWindow(ctx context.Context, params *DeleteMain
 		params = &DeleteMaintenanceWindowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMaintenanceWindow", params, optFns, addOperationDeleteMaintenanceWindowMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMaintenanceWindow", params, optFns, c.addOperationDeleteMaintenanceWindowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteMaintenanceWindowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMaintenanceWindow{}, middleware.After)
 	if err != nil {
 		return err

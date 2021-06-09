@@ -22,7 +22,7 @@ func (c *Client) UpdateWorkspaceBundle(ctx context.Context, params *UpdateWorksp
 		params = &UpdateWorkspaceBundleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateWorkspaceBundle", params, optFns, addOperationUpdateWorkspaceBundleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateWorkspaceBundle", params, optFns, c.addOperationUpdateWorkspaceBundleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type UpdateWorkspaceBundleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateWorkspaceBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateWorkspaceBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWorkspaceBundle{}, middleware.After)
 	if err != nil {
 		return err

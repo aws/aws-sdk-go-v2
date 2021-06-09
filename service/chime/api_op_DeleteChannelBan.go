@@ -19,7 +19,7 @@ func (c *Client) DeleteChannelBan(ctx context.Context, params *DeleteChannelBanI
 		params = &DeleteChannelBanInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteChannelBan", params, optFns, addOperationDeleteChannelBanMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteChannelBan", params, optFns, c.addOperationDeleteChannelBanMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteChannelBanOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteChannelBanMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteChannelBanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteChannelBan{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) PutAutoScalingPolicy(ctx context.Context, params *PutAutoScalin
 		params = &PutAutoScalingPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAutoScalingPolicy", params, optFns, addOperationPutAutoScalingPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAutoScalingPolicy", params, optFns, c.addOperationPutAutoScalingPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type PutAutoScalingPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAutoScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAutoScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAutoScalingPolicy{}, middleware.After)
 	if err != nil {
 		return err

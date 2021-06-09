@@ -24,7 +24,7 @@ func (c *Client) GetTemplateSummary(ctx context.Context, params *GetTemplateSumm
 		params = &GetTemplateSummaryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTemplateSummary", params, optFns, addOperationGetTemplateSummaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTemplateSummary", params, optFns, c.addOperationGetTemplateSummaryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +129,7 @@ type GetTemplateSummaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTemplateSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTemplateSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetTemplateSummary{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DisassociateTransitGatewayMulticastDomain(ctx context.Context, 
 		params = &DisassociateTransitGatewayMulticastDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateTransitGatewayMulticastDomain", params, optFns, addOperationDisassociateTransitGatewayMulticastDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateTransitGatewayMulticastDomain", params, optFns, c.addOperationDisassociateTransitGatewayMulticastDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DisassociateTransitGatewayMulticastDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateTransitGatewayMulticastDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateTransitGatewayMulticastDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDisassociateTransitGatewayMulticastDomain{}, middleware.After)
 	if err != nil {
 		return err

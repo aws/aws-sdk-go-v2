@@ -19,7 +19,7 @@ func (c *Client) GetOrganizationConformancePackDetailedStatus(ctx context.Contex
 		params = &GetOrganizationConformancePackDetailedStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetOrganizationConformancePackDetailedStatus", params, optFns, addOperationGetOrganizationConformancePackDetailedStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetOrganizationConformancePackDetailedStatus", params, optFns, c.addOperationGetOrganizationConformancePackDetailedStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetOrganizationConformancePackDetailedStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetOrganizationConformancePackDetailedStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetOrganizationConformancePackDetailedStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOrganizationConformancePackDetailedStatus{}, middleware.After)
 	if err != nil {
 		return err

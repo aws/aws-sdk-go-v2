@@ -19,7 +19,7 @@ func (c *Client) Subscribe(ctx context.Context, params *SubscribeInput, optFns .
 		params = &SubscribeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Subscribe", params, optFns, addOperationSubscribeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "Subscribe", params, optFns, c.addOperationSubscribeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type SubscribeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSubscribeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSubscribeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSubscribe{}, middleware.After)
 	if err != nil {
 		return err

@@ -49,7 +49,7 @@ func (c *Client) StartImportTask(ctx context.Context, params *StartImportTaskInp
 		params = &StartImportTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartImportTask", params, optFns, addOperationStartImportTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartImportTask", params, optFns, c.addOperationStartImportTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type StartImportTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartImportTask{}, middleware.After)
 	if err != nil {
 		return err

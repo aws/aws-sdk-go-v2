@@ -17,7 +17,7 @@ func (c *Client) CreateModelExplainabilityJobDefinition(ctx context.Context, par
 		params = &CreateModelExplainabilityJobDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateModelExplainabilityJobDefinition", params, optFns, addOperationCreateModelExplainabilityJobDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateModelExplainabilityJobDefinition", params, optFns, c.addOperationCreateModelExplainabilityJobDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type CreateModelExplainabilityJobDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateModelExplainabilityJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateModelExplainabilityJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelExplainabilityJobDefinition{}, middleware.After)
 	if err != nil {
 		return err

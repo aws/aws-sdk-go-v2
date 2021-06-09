@@ -25,7 +25,7 @@ func (c *Client) DeleteVPCAssociationAuthorization(ctx context.Context, params *
 		params = &DeleteVPCAssociationAuthorizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVPCAssociationAuthorization", params, optFns, addOperationDeleteVPCAssociationAuthorizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVPCAssociationAuthorization", params, optFns, c.addOperationDeleteVPCAssociationAuthorizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DeleteVPCAssociationAuthorizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVPCAssociationAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVPCAssociationAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteVPCAssociationAuthorization{}, middleware.After)
 	if err != nil {
 		return err

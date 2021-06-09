@@ -18,7 +18,7 @@ func (c *Client) ListAnomalyGroupSummaries(ctx context.Context, params *ListAnom
 		params = &ListAnomalyGroupSummariesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAnomalyGroupSummaries", params, optFns, addOperationListAnomalyGroupSummariesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAnomalyGroupSummaries", params, optFns, c.addOperationListAnomalyGroupSummariesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListAnomalyGroupSummariesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAnomalyGroupSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAnomalyGroupSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnomalyGroupSummaries{}, middleware.After)
 	if err != nil {
 		return err

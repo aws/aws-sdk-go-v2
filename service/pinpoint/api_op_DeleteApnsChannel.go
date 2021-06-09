@@ -18,7 +18,7 @@ func (c *Client) DeleteApnsChannel(ctx context.Context, params *DeleteApnsChanne
 		params = &DeleteApnsChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteApnsChannel", params, optFns, addOperationDeleteApnsChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteApnsChannel", params, optFns, c.addOperationDeleteApnsChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteApnsChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteApnsChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteApnsChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApnsChannel{}, middleware.After)
 	if err != nil {
 		return err

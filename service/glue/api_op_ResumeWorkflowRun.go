@@ -18,7 +18,7 @@ func (c *Client) ResumeWorkflowRun(ctx context.Context, params *ResumeWorkflowRu
 		params = &ResumeWorkflowRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResumeWorkflowRun", params, optFns, addOperationResumeWorkflowRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResumeWorkflowRun", params, optFns, c.addOperationResumeWorkflowRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ResumeWorkflowRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResumeWorkflowRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResumeWorkflowRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResumeWorkflowRun{}, middleware.After)
 	if err != nil {
 		return err

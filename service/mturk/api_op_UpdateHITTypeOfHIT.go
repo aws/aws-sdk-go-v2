@@ -19,7 +19,7 @@ func (c *Client) UpdateHITTypeOfHIT(ctx context.Context, params *UpdateHITTypeOf
 		params = &UpdateHITTypeOfHITInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateHITTypeOfHIT", params, optFns, addOperationUpdateHITTypeOfHITMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateHITTypeOfHIT", params, optFns, c.addOperationUpdateHITTypeOfHITMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type UpdateHITTypeOfHITOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateHITTypeOfHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateHITTypeOfHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateHITTypeOfHIT{}, middleware.After)
 	if err != nil {
 		return err

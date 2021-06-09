@@ -18,7 +18,7 @@ func (c *Client) ListApplicationDependencies(ctx context.Context, params *ListAp
 		params = &ListApplicationDependenciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListApplicationDependencies", params, optFns, addOperationListApplicationDependenciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListApplicationDependencies", params, optFns, c.addOperationListApplicationDependenciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListApplicationDependenciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListApplicationDependenciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListApplicationDependenciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApplicationDependencies{}, middleware.After)
 	if err != nil {
 		return err

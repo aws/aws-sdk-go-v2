@@ -21,7 +21,7 @@ func (c *Client) DeleteGroupPolicy(ctx context.Context, params *DeleteGroupPolic
 		params = &DeleteGroupPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGroupPolicy", params, optFns, addOperationDeleteGroupPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGroupPolicy", params, optFns, c.addOperationDeleteGroupPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeleteGroupPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteGroupPolicy{}, middleware.After)
 	if err != nil {
 		return err

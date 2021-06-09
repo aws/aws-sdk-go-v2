@@ -26,7 +26,7 @@ func (c *Client) PutInstancePublicPorts(ctx context.Context, params *PutInstance
 		params = &PutInstancePublicPortsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutInstancePublicPorts", params, optFns, addOperationPutInstancePublicPortsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutInstancePublicPorts", params, optFns, c.addOperationPutInstancePublicPortsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type PutInstancePublicPortsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutInstancePublicPortsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutInstancePublicPortsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutInstancePublicPorts{}, middleware.After)
 	if err != nil {
 		return err

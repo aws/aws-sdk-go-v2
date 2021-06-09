@@ -23,7 +23,7 @@ func (c *Client) GetRegexMatchSet(ctx context.Context, params *GetRegexMatchSetI
 		params = &GetRegexMatchSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRegexMatchSet", params, optFns, addOperationGetRegexMatchSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRegexMatchSet", params, optFns, c.addOperationGetRegexMatchSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetRegexMatchSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRegexMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRegexMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRegexMatchSet{}, middleware.After)
 	if err != nil {
 		return err

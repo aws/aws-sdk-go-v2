@@ -19,7 +19,7 @@ func (c *Client) StartPHIDetectionJob(ctx context.Context, params *StartPHIDetec
 		params = &StartPHIDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartPHIDetectionJob", params, optFns, addOperationStartPHIDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartPHIDetectionJob", params, optFns, c.addOperationStartPHIDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type StartPHIDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartPHIDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartPHIDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartPHIDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

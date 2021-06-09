@@ -16,7 +16,7 @@ func (c *Client) DeleteSourceLocation(ctx context.Context, params *DeleteSourceL
 		params = &DeleteSourceLocationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSourceLocation", params, optFns, addOperationDeleteSourceLocationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSourceLocation", params, optFns, c.addOperationDeleteSourceLocationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteSourceLocationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSourceLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSourceLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSourceLocation{}, middleware.After)
 	if err != nil {
 		return err

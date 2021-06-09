@@ -23,7 +23,7 @@ func (c *Client) DeregisterImage(ctx context.Context, params *DeregisterImageInp
 		params = &DeregisterImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterImage", params, optFns, addOperationDeregisterImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterImage", params, optFns, c.addOperationDeregisterImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeregisterImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeregisterImage{}, middleware.After)
 	if err != nil {
 		return err

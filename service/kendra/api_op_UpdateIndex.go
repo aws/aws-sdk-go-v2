@@ -17,7 +17,7 @@ func (c *Client) UpdateIndex(ctx context.Context, params *UpdateIndexInput, optF
 		params = &UpdateIndexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateIndex", params, optFns, addOperationUpdateIndexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateIndex", params, optFns, c.addOperationUpdateIndexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type UpdateIndexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateIndex{}, middleware.After)
 	if err != nil {
 		return err

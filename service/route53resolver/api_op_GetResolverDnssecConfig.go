@@ -17,7 +17,7 @@ func (c *Client) GetResolverDnssecConfig(ctx context.Context, params *GetResolve
 		params = &GetResolverDnssecConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetResolverDnssecConfig", params, optFns, addOperationGetResolverDnssecConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetResolverDnssecConfig", params, optFns, c.addOperationGetResolverDnssecConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetResolverDnssecConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetResolverDnssecConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetResolverDnssecConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResolverDnssecConfig{}, middleware.After)
 	if err != nil {
 		return err

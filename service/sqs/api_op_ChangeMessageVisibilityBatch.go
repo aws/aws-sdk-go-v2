@@ -27,7 +27,7 @@ func (c *Client) ChangeMessageVisibilityBatch(ctx context.Context, params *Chang
 		params = &ChangeMessageVisibilityBatchInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ChangeMessageVisibilityBatch", params, optFns, addOperationChangeMessageVisibilityBatchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ChangeMessageVisibilityBatch", params, optFns, c.addOperationChangeMessageVisibilityBatchMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type ChangeMessageVisibilityBatchOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationChangeMessageVisibilityBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationChangeMessageVisibilityBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpChangeMessageVisibilityBatch{}, middleware.After)
 	if err != nil {
 		return err

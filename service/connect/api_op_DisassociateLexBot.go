@@ -18,7 +18,7 @@ func (c *Client) DisassociateLexBot(ctx context.Context, params *DisassociateLex
 		params = &DisassociateLexBotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateLexBot", params, optFns, addOperationDisassociateLexBotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateLexBot", params, optFns, c.addOperationDisassociateLexBotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DisassociateLexBotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateLexBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateLexBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateLexBot{}, middleware.After)
 	if err != nil {
 		return err

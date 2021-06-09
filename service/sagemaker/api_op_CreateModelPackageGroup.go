@@ -17,7 +17,7 @@ func (c *Client) CreateModelPackageGroup(ctx context.Context, params *CreateMode
 		params = &CreateModelPackageGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateModelPackageGroup", params, optFns, addOperationCreateModelPackageGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateModelPackageGroup", params, optFns, c.addOperationCreateModelPackageGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type CreateModelPackageGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateModelPackageGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateModelPackageGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelPackageGroup{}, middleware.After)
 	if err != nil {
 		return err

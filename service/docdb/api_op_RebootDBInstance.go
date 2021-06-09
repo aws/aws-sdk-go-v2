@@ -22,7 +22,7 @@ func (c *Client) RebootDBInstance(ctx context.Context, params *RebootDBInstanceI
 		params = &RebootDBInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RebootDBInstance", params, optFns, addOperationRebootDBInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RebootDBInstance", params, optFns, c.addOperationRebootDBInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type RebootDBInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRebootDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRebootDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRebootDBInstance{}, middleware.After)
 	if err != nil {
 		return err

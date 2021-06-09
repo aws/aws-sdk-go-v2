@@ -18,7 +18,7 @@ func (c *Client) DescribeRobotApplication(ctx context.Context, params *DescribeR
 		params = &DescribeRobotApplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRobotApplication", params, optFns, addOperationDescribeRobotApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRobotApplication", params, optFns, c.addOperationDescribeRobotApplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DescribeRobotApplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRobotApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRobotApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRobotApplication{}, middleware.After)
 	if err != nil {
 		return err

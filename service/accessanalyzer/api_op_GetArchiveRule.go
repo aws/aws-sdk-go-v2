@@ -20,7 +20,7 @@ func (c *Client) GetArchiveRule(ctx context.Context, params *GetArchiveRuleInput
 		params = &GetArchiveRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetArchiveRule", params, optFns, addOperationGetArchiveRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetArchiveRule", params, optFns, c.addOperationGetArchiveRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type GetArchiveRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetArchiveRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetArchiveRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetArchiveRule{}, middleware.After)
 	if err != nil {
 		return err

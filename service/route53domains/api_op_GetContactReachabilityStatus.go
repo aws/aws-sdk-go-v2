@@ -20,7 +20,7 @@ func (c *Client) GetContactReachabilityStatus(ctx context.Context, params *GetCo
 		params = &GetContactReachabilityStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetContactReachabilityStatus", params, optFns, addOperationGetContactReachabilityStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetContactReachabilityStatus", params, optFns, c.addOperationGetContactReachabilityStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetContactReachabilityStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetContactReachabilityStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetContactReachabilityStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetContactReachabilityStatus{}, middleware.After)
 	if err != nil {
 		return err

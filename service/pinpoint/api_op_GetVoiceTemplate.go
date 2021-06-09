@@ -18,7 +18,7 @@ func (c *Client) GetVoiceTemplate(ctx context.Context, params *GetVoiceTemplateI
 		params = &GetVoiceTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetVoiceTemplate", params, optFns, addOperationGetVoiceTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetVoiceTemplate", params, optFns, c.addOperationGetVoiceTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetVoiceTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetVoiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetVoiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVoiceTemplate{}, middleware.After)
 	if err != nil {
 		return err

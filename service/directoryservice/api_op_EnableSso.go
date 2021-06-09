@@ -18,7 +18,7 @@ func (c *Client) EnableSso(ctx context.Context, params *EnableSsoInput, optFns .
 		params = &EnableSsoInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableSso", params, optFns, addOperationEnableSsoMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableSso", params, optFns, c.addOperationEnableSsoMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type EnableSsoOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableSsoMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableSsoMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableSso{}, middleware.After)
 	if err != nil {
 		return err

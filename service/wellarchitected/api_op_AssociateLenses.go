@@ -16,7 +16,7 @@ func (c *Client) AssociateLenses(ctx context.Context, params *AssociateLensesInp
 		params = &AssociateLensesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateLenses", params, optFns, addOperationAssociateLensesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateLenses", params, optFns, c.addOperationAssociateLensesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type AssociateLensesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateLensesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateLensesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateLenses{}, middleware.After)
 	if err != nil {
 		return err

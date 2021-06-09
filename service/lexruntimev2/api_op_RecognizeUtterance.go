@@ -19,7 +19,7 @@ func (c *Client) RecognizeUtterance(ctx context.Context, params *RecognizeUttera
 		params = &RecognizeUtteranceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RecognizeUtterance", params, optFns, addOperationRecognizeUtteranceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RecognizeUtterance", params, optFns, c.addOperationRecognizeUtteranceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -175,7 +175,7 @@ type RecognizeUtteranceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRecognizeUtteranceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRecognizeUtteranceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRecognizeUtterance{}, middleware.After)
 	if err != nil {
 		return err

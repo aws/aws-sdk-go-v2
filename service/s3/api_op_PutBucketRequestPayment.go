@@ -30,7 +30,7 @@ func (c *Client) PutBucketRequestPayment(ctx context.Context, params *PutBucketR
 		params = &PutBucketRequestPaymentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketRequestPayment", params, optFns, addOperationPutBucketRequestPaymentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketRequestPayment", params, optFns, c.addOperationPutBucketRequestPaymentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type PutBucketRequestPaymentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketRequestPaymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketRequestPaymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketRequestPayment{}, middleware.After)
 	if err != nil {
 		return err

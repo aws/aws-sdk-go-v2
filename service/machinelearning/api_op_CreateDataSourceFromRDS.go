@@ -27,7 +27,7 @@ func (c *Client) CreateDataSourceFromRDS(ctx context.Context, params *CreateData
 		params = &CreateDataSourceFromRDSInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDataSourceFromRDS", params, optFns, addOperationCreateDataSourceFromRDSMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDataSourceFromRDS", params, optFns, c.addOperationCreateDataSourceFromRDSMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ type CreateDataSourceFromRDSOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDataSourceFromRDSMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDataSourceFromRDSMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataSourceFromRDS{}, middleware.After)
 	if err != nil {
 		return err

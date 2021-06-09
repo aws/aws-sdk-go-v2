@@ -17,7 +17,7 @@ func (c *Client) DescribeComments(ctx context.Context, params *DescribeCommentsI
 		params = &DescribeCommentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeComments", params, optFns, addOperationDescribeCommentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeComments", params, optFns, c.addOperationDescribeCommentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DescribeCommentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCommentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCommentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeComments{}, middleware.After)
 	if err != nil {
 		return err

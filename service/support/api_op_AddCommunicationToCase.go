@@ -29,7 +29,7 @@ func (c *Client) AddCommunicationToCase(ctx context.Context, params *AddCommunic
 		params = &AddCommunicationToCaseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddCommunicationToCase", params, optFns, addOperationAddCommunicationToCaseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddCommunicationToCase", params, optFns, c.addOperationAddCommunicationToCaseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type AddCommunicationToCaseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddCommunicationToCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddCommunicationToCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddCommunicationToCase{}, middleware.After)
 	if err != nil {
 		return err

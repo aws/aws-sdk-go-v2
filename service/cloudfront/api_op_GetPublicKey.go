@@ -17,7 +17,7 @@ func (c *Client) GetPublicKey(ctx context.Context, params *GetPublicKeyInput, op
 		params = &GetPublicKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPublicKey", params, optFns, addOperationGetPublicKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPublicKey", params, optFns, c.addOperationGetPublicKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetPublicKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetPublicKey{}, middleware.After)
 	if err != nil {
 		return err

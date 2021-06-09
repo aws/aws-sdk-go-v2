@@ -52,7 +52,7 @@ func (c *Client) SendBulkTemplatedEmail(ctx context.Context, params *SendBulkTem
 		params = &SendBulkTemplatedEmailInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendBulkTemplatedEmail", params, optFns, addOperationSendBulkTemplatedEmailMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendBulkTemplatedEmail", params, optFns, c.addOperationSendBulkTemplatedEmailMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -172,7 +172,7 @@ type SendBulkTemplatedEmailOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendBulkTemplatedEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendBulkTemplatedEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSendBulkTemplatedEmail{}, middleware.After)
 	if err != nil {
 		return err

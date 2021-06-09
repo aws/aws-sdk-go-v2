@@ -16,7 +16,7 @@ func (c *Client) DeleteAnomalyMonitor(ctx context.Context, params *DeleteAnomaly
 		params = &DeleteAnomalyMonitorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAnomalyMonitor", params, optFns, addOperationDeleteAnomalyMonitorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAnomalyMonitor", params, optFns, c.addOperationDeleteAnomalyMonitorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteAnomalyMonitorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAnomalyMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAnomalyMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAnomalyMonitor{}, middleware.After)
 	if err != nil {
 		return err

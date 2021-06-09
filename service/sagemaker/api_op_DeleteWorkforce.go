@@ -21,7 +21,7 @@ func (c *Client) DeleteWorkforce(ctx context.Context, params *DeleteWorkforceInp
 		params = &DeleteWorkforceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkforce", params, optFns, addOperationDeleteWorkforceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkforce", params, optFns, c.addOperationDeleteWorkforceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteWorkforceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteWorkforceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteWorkforceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWorkforce{}, middleware.After)
 	if err != nil {
 		return err

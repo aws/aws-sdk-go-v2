@@ -32,7 +32,7 @@ func (c *Client) AssignInstance(ctx context.Context, params *AssignInstanceInput
 		params = &AssignInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssignInstance", params, optFns, addOperationAssignInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssignInstance", params, optFns, c.addOperationAssignInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type AssignInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssignInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssignInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssignInstance{}, middleware.After)
 	if err != nil {
 		return err

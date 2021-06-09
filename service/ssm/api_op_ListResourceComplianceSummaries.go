@@ -20,7 +20,7 @@ func (c *Client) ListResourceComplianceSummaries(ctx context.Context, params *Li
 		params = &ListResourceComplianceSummariesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResourceComplianceSummaries", params, optFns, addOperationListResourceComplianceSummariesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResourceComplianceSummaries", params, optFns, c.addOperationListResourceComplianceSummariesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListResourceComplianceSummariesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListResourceComplianceSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResourceComplianceSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourceComplianceSummaries{}, middleware.After)
 	if err != nil {
 		return err

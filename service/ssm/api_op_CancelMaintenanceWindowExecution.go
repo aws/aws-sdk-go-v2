@@ -18,7 +18,7 @@ func (c *Client) CancelMaintenanceWindowExecution(ctx context.Context, params *C
 		params = &CancelMaintenanceWindowExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelMaintenanceWindowExecution", params, optFns, addOperationCancelMaintenanceWindowExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelMaintenanceWindowExecution", params, optFns, c.addOperationCancelMaintenanceWindowExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type CancelMaintenanceWindowExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelMaintenanceWindowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelMaintenanceWindowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelMaintenanceWindowExecution{}, middleware.After)
 	if err != nil {
 		return err

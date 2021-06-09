@@ -16,7 +16,7 @@ func (c *Client) StopEdgePackagingJob(ctx context.Context, params *StopEdgePacka
 		params = &StopEdgePackagingJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopEdgePackagingJob", params, optFns, addOperationStopEdgePackagingJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopEdgePackagingJob", params, optFns, c.addOperationStopEdgePackagingJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type StopEdgePackagingJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopEdgePackagingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopEdgePackagingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopEdgePackagingJob{}, middleware.After)
 	if err != nil {
 		return err

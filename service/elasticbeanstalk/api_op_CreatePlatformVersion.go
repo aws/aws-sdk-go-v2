@@ -17,7 +17,7 @@ func (c *Client) CreatePlatformVersion(ctx context.Context, params *CreatePlatfo
 		params = &CreatePlatformVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePlatformVersion", params, optFns, addOperationCreatePlatformVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePlatformVersion", params, optFns, c.addOperationCreatePlatformVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type CreatePlatformVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePlatformVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePlatformVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreatePlatformVersion{}, middleware.After)
 	if err != nil {
 		return err

@@ -39,7 +39,7 @@ func (c *Client) ListGrants(ctx context.Context, params *ListGrantsInput, optFns
 		params = &ListGrantsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListGrants", params, optFns, addOperationListGrantsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListGrants", params, optFns, c.addOperationListGrantsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +107,7 @@ type ListGrantsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListGrants{}, middleware.After)
 	if err != nil {
 		return err

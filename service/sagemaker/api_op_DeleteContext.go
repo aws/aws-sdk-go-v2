@@ -16,7 +16,7 @@ func (c *Client) DeleteContext(ctx context.Context, params *DeleteContextInput, 
 		params = &DeleteContextInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteContext", params, optFns, addOperationDeleteContextMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteContext", params, optFns, c.addOperationDeleteContextMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteContextOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteContext{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ListAccountAssignments(ctx context.Context, params *ListAccount
 		params = &ListAccountAssignmentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAccountAssignments", params, optFns, addOperationListAccountAssignmentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAccountAssignments", params, optFns, c.addOperationListAccountAssignmentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ListAccountAssignmentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAccountAssignmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAccountAssignmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccountAssignments{}, middleware.After)
 	if err != nil {
 		return err

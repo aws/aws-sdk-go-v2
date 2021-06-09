@@ -37,7 +37,7 @@ func (c *Client) DescribeSecret(ctx context.Context, params *DescribeSecretInput
 		params = &DescribeSecretInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSecret", params, optFns, addOperationDescribeSecretMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSecret", params, optFns, c.addOperationDescribeSecretMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -149,7 +149,7 @@ type DescribeSecretOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSecret{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) AssociateApprovalRuleTemplateWithRepository(ctx context.Context
 		params = &AssociateApprovalRuleTemplateWithRepositoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateApprovalRuleTemplateWithRepository", params, optFns, addOperationAssociateApprovalRuleTemplateWithRepositoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateApprovalRuleTemplateWithRepository", params, optFns, c.addOperationAssociateApprovalRuleTemplateWithRepositoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type AssociateApprovalRuleTemplateWithRepositoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateApprovalRuleTemplateWithRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateApprovalRuleTemplateWithRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateApprovalRuleTemplateWithRepository{}, middleware.After)
 	if err != nil {
 		return err

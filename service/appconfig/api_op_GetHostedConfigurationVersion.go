@@ -16,7 +16,7 @@ func (c *Client) GetHostedConfigurationVersion(ctx context.Context, params *GetH
 		params = &GetHostedConfigurationVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetHostedConfigurationVersion", params, optFns, addOperationGetHostedConfigurationVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetHostedConfigurationVersion", params, optFns, c.addOperationGetHostedConfigurationVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type GetHostedConfigurationVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetHostedConfigurationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetHostedConfigurationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetHostedConfigurationVersion{}, middleware.After)
 	if err != nil {
 		return err

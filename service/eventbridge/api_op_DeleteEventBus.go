@@ -18,7 +18,7 @@ func (c *Client) DeleteEventBus(ctx context.Context, params *DeleteEventBusInput
 		params = &DeleteEventBusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEventBus", params, optFns, addOperationDeleteEventBusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEventBus", params, optFns, c.addOperationDeleteEventBusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteEventBusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEventBusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEventBusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEventBus{}, middleware.After)
 	if err != nil {
 		return err

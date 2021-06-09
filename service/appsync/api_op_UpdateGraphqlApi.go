@@ -17,7 +17,7 @@ func (c *Client) UpdateGraphqlApi(ctx context.Context, params *UpdateGraphqlApiI
 		params = &UpdateGraphqlApiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateGraphqlApi", params, optFns, addOperationUpdateGraphqlApiMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateGraphqlApi", params, optFns, c.addOperationUpdateGraphqlApiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type UpdateGraphqlApiOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateGraphqlApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateGraphqlApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGraphqlApi{}, middleware.After)
 	if err != nil {
 		return err

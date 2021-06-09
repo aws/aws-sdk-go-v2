@@ -17,7 +17,7 @@ func (c *Client) DescribeProductView(ctx context.Context, params *DescribeProduc
 		params = &DescribeProductViewInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeProductView", params, optFns, addOperationDescribeProductViewMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeProductView", params, optFns, c.addOperationDescribeProductViewMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeProductViewOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeProductViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeProductViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProductView{}, middleware.After)
 	if err != nil {
 		return err

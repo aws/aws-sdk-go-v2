@@ -18,7 +18,7 @@ func (c *Client) GetComponentVersionArtifact(ctx context.Context, params *GetCom
 		params = &GetComponentVersionArtifactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetComponentVersionArtifact", params, optFns, addOperationGetComponentVersionArtifactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetComponentVersionArtifact", params, optFns, c.addOperationGetComponentVersionArtifactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetComponentVersionArtifactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetComponentVersionArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetComponentVersionArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetComponentVersionArtifact{}, middleware.After)
 	if err != nil {
 		return err

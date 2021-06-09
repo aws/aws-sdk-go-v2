@@ -24,7 +24,7 @@ func (c *Client) DescribeSecurityGroups(ctx context.Context, params *DescribeSec
 		params = &DescribeSecurityGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSecurityGroups", params, optFns, addOperationDescribeSecurityGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSecurityGroups", params, optFns, c.addOperationDescribeSecurityGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -168,7 +168,7 @@ type DescribeSecurityGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeSecurityGroups{}, middleware.After)
 	if err != nil {
 		return err

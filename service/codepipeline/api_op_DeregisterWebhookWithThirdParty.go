@@ -18,7 +18,7 @@ func (c *Client) DeregisterWebhookWithThirdParty(ctx context.Context, params *De
 		params = &DeregisterWebhookWithThirdPartyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterWebhookWithThirdParty", params, optFns, addOperationDeregisterWebhookWithThirdPartyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterWebhookWithThirdParty", params, optFns, c.addOperationDeregisterWebhookWithThirdPartyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeregisterWebhookWithThirdPartyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterWebhookWithThirdPartyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterWebhookWithThirdPartyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterWebhookWithThirdParty{}, middleware.After)
 	if err != nil {
 		return err

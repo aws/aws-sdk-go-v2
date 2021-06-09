@@ -24,7 +24,7 @@ func (c *Client) DeleteSession(ctx context.Context, params *DeleteSessionInput, 
 		params = &DeleteSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSession", params, optFns, addOperationDeleteSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSession", params, optFns, c.addOperationDeleteSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DeleteSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSession{}, middleware.After)
 	if err != nil {
 		return err

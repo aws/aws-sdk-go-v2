@@ -19,7 +19,7 @@ func (c *Client) CreateAppImageConfig(ctx context.Context, params *CreateAppImag
 		params = &CreateAppImageConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAppImageConfig", params, optFns, addOperationCreateAppImageConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAppImageConfig", params, optFns, c.addOperationCreateAppImageConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CreateAppImageConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAppImageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAppImageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAppImageConfig{}, middleware.After)
 	if err != nil {
 		return err

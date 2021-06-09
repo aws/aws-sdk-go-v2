@@ -18,7 +18,7 @@ func (c *Client) DeleteVirtualGateway(ctx context.Context, params *DeleteVirtual
 		params = &DeleteVirtualGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVirtualGateway", params, optFns, addOperationDeleteVirtualGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVirtualGateway", params, optFns, c.addOperationDeleteVirtualGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DeleteVirtualGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVirtualGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVirtualGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVirtualGateway{}, middleware.After)
 	if err != nil {
 		return err

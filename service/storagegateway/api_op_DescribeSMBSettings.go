@@ -18,7 +18,7 @@ func (c *Client) DescribeSMBSettings(ctx context.Context, params *DescribeSMBSet
 		params = &DescribeSMBSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSMBSettings", params, optFns, addOperationDescribeSMBSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSMBSettings", params, optFns, c.addOperationDescribeSMBSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type DescribeSMBSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSMBSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSMBSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSMBSettings{}, middleware.After)
 	if err != nil {
 		return err

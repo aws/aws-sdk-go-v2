@@ -19,7 +19,7 @@ func (c *Client) BatchCreateRoomMembership(ctx context.Context, params *BatchCre
 		params = &BatchCreateRoomMembershipInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchCreateRoomMembership", params, optFns, addOperationBatchCreateRoomMembershipMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchCreateRoomMembership", params, optFns, c.addOperationBatchCreateRoomMembershipMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type BatchCreateRoomMembershipOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchCreateRoomMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchCreateRoomMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateRoomMembership{}, middleware.After)
 	if err != nil {
 		return err

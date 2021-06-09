@@ -74,7 +74,7 @@ func (c *Client) PutBucketTagging(ctx context.Context, params *PutBucketTaggingI
 		params = &PutBucketTaggingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketTagging", params, optFns, addOperationPutBucketTaggingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketTagging", params, optFns, c.addOperationPutBucketTaggingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -113,7 +113,7 @@ type PutBucketTaggingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketTagging{}, middleware.After)
 	if err != nil {
 		return err

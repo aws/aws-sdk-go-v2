@@ -17,7 +17,7 @@ func (c *Client) PutSuppressedDestination(ctx context.Context, params *PutSuppre
 		params = &PutSuppressedDestinationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutSuppressedDestination", params, optFns, addOperationPutSuppressedDestinationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutSuppressedDestination", params, optFns, c.addOperationPutSuppressedDestinationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type PutSuppressedDestinationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutSuppressedDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutSuppressedDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSuppressedDestination{}, middleware.After)
 	if err != nil {
 		return err

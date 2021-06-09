@@ -17,7 +17,7 @@ func (c *Client) DisassociateTransitGatewayConnectPeer(ctx context.Context, para
 		params = &DisassociateTransitGatewayConnectPeerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateTransitGatewayConnectPeer", params, optFns, addOperationDisassociateTransitGatewayConnectPeerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateTransitGatewayConnectPeer", params, optFns, c.addOperationDisassociateTransitGatewayConnectPeerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DisassociateTransitGatewayConnectPeerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateTransitGatewayConnectPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateTransitGatewayConnectPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateTransitGatewayConnectPeer{}, middleware.After)
 	if err != nil {
 		return err

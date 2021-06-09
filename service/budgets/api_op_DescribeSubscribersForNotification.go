@@ -18,7 +18,7 @@ func (c *Client) DescribeSubscribersForNotification(ctx context.Context, params 
 		params = &DescribeSubscribersForNotificationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSubscribersForNotification", params, optFns, addOperationDescribeSubscribersForNotificationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSubscribersForNotification", params, optFns, c.addOperationDescribeSubscribersForNotificationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DescribeSubscribersForNotificationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSubscribersForNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSubscribersForNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSubscribersForNotification{}, middleware.After)
 	if err != nil {
 		return err

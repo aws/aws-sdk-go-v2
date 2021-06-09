@@ -18,7 +18,7 @@ func (c *Client) UpdateSimulationApplication(ctx context.Context, params *Update
 		params = &UpdateSimulationApplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSimulationApplication", params, optFns, addOperationUpdateSimulationApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSimulationApplication", params, optFns, c.addOperationUpdateSimulationApplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type UpdateSimulationApplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSimulationApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSimulationApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSimulationApplication{}, middleware.After)
 	if err != nil {
 		return err

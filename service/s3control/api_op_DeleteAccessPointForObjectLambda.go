@@ -32,7 +32,7 @@ func (c *Client) DeleteAccessPointForObjectLambda(ctx context.Context, params *D
 		params = &DeleteAccessPointForObjectLambdaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAccessPointForObjectLambda", params, optFns, addOperationDeleteAccessPointForObjectLambdaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAccessPointForObjectLambda", params, optFns, c.addOperationDeleteAccessPointForObjectLambdaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DeleteAccessPointForObjectLambdaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAccessPointForObjectLambdaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAccessPointForObjectLambdaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteAccessPointForObjectLambda{}, middleware.After)
 	if err != nil {
 		return err

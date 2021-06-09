@@ -16,7 +16,7 @@ func (c *Client) DeleteApplicationVpcConfiguration(ctx context.Context, params *
 		params = &DeleteApplicationVpcConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteApplicationVpcConfiguration", params, optFns, addOperationDeleteApplicationVpcConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteApplicationVpcConfiguration", params, optFns, c.addOperationDeleteApplicationVpcConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type DeleteApplicationVpcConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteApplicationVpcConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteApplicationVpcConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteApplicationVpcConfiguration{}, middleware.After)
 	if err != nil {
 		return err

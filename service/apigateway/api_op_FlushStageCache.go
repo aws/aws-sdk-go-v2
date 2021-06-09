@@ -16,7 +16,7 @@ func (c *Client) FlushStageCache(ctx context.Context, params *FlushStageCacheInp
 		params = &FlushStageCacheInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "FlushStageCache", params, optFns, addOperationFlushStageCacheMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "FlushStageCache", params, optFns, c.addOperationFlushStageCacheMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type FlushStageCacheOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationFlushStageCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationFlushStageCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpFlushStageCache{}, middleware.After)
 	if err != nil {
 		return err

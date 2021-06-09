@@ -18,7 +18,7 @@ func (c *Client) DescribeGlobalSettings(ctx context.Context, params *DescribeGlo
 		params = &DescribeGlobalSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeGlobalSettings", params, optFns, addOperationDescribeGlobalSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeGlobalSettings", params, optFns, c.addOperationDescribeGlobalSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DescribeGlobalSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeGlobalSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeGlobalSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGlobalSettings{}, middleware.After)
 	if err != nil {
 		return err

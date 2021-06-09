@@ -20,7 +20,7 @@ func (c *Client) DeleteCustomAvailabilityZone(ctx context.Context, params *Delet
 		params = &DeleteCustomAvailabilityZoneInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomAvailabilityZone", params, optFns, addOperationDeleteCustomAvailabilityZoneMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomAvailabilityZone", params, optFns, c.addOperationDeleteCustomAvailabilityZoneMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteCustomAvailabilityZoneOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCustomAvailabilityZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCustomAvailabilityZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteCustomAvailabilityZone{}, middleware.After)
 	if err != nil {
 		return err

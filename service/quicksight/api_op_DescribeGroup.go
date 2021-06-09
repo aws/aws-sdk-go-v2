@@ -17,7 +17,7 @@ func (c *Client) DescribeGroup(ctx context.Context, params *DescribeGroupInput, 
 		params = &DescribeGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeGroup", params, optFns, addOperationDescribeGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeGroup", params, optFns, c.addOperationDescribeGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGroup{}, middleware.After)
 	if err != nil {
 		return err

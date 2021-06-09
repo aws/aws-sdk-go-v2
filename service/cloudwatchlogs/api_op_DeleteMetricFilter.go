@@ -16,7 +16,7 @@ func (c *Client) DeleteMetricFilter(ctx context.Context, params *DeleteMetricFil
 		params = &DeleteMetricFilterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMetricFilter", params, optFns, addOperationDeleteMetricFilterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMetricFilter", params, optFns, c.addOperationDeleteMetricFilterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteMetricFilterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMetricFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMetricFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMetricFilter{}, middleware.After)
 	if err != nil {
 		return err

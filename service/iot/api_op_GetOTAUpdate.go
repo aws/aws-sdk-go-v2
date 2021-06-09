@@ -17,7 +17,7 @@ func (c *Client) GetOTAUpdate(ctx context.Context, params *GetOTAUpdateInput, op
 		params = &GetOTAUpdateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetOTAUpdate", params, optFns, addOperationGetOTAUpdateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetOTAUpdate", params, optFns, c.addOperationGetOTAUpdateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetOTAUpdateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetOTAUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetOTAUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOTAUpdate{}, middleware.After)
 	if err != nil {
 		return err

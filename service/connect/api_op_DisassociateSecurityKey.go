@@ -17,7 +17,7 @@ func (c *Client) DisassociateSecurityKey(ctx context.Context, params *Disassocia
 		params = &DisassociateSecurityKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateSecurityKey", params, optFns, addOperationDisassociateSecurityKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateSecurityKey", params, optFns, c.addOperationDisassociateSecurityKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DisassociateSecurityKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateSecurityKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateSecurityKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateSecurityKey{}, middleware.After)
 	if err != nil {
 		return err

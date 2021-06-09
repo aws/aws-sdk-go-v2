@@ -18,7 +18,7 @@ func (c *Client) BatchUpdateDetector(ctx context.Context, params *BatchUpdateDet
 		params = &BatchUpdateDetectorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchUpdateDetector", params, optFns, addOperationBatchUpdateDetectorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchUpdateDetector", params, optFns, c.addOperationBatchUpdateDetectorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type BatchUpdateDetectorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchUpdateDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchUpdateDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateDetector{}, middleware.After)
 	if err != nil {
 		return err

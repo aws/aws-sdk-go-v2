@@ -17,7 +17,7 @@ func (c *Client) GetIdentityProviderByIdentifier(ctx context.Context, params *Ge
 		params = &GetIdentityProviderByIdentifierInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetIdentityProviderByIdentifier", params, optFns, addOperationGetIdentityProviderByIdentifierMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetIdentityProviderByIdentifier", params, optFns, c.addOperationGetIdentityProviderByIdentifierMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetIdentityProviderByIdentifierOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetIdentityProviderByIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIdentityProviderByIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetIdentityProviderByIdentifier{}, middleware.After)
 	if err != nil {
 		return err

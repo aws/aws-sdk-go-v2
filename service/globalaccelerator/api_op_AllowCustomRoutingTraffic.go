@@ -23,7 +23,7 @@ func (c *Client) AllowCustomRoutingTraffic(ctx context.Context, params *AllowCus
 		params = &AllowCustomRoutingTrafficInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AllowCustomRoutingTraffic", params, optFns, addOperationAllowCustomRoutingTrafficMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AllowCustomRoutingTraffic", params, optFns, c.addOperationAllowCustomRoutingTrafficMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type AllowCustomRoutingTrafficOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAllowCustomRoutingTrafficMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAllowCustomRoutingTrafficMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAllowCustomRoutingTraffic{}, middleware.After)
 	if err != nil {
 		return err

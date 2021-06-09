@@ -17,7 +17,7 @@ func (c *Client) DisableProactiveEngagement(ctx context.Context, params *Disable
 		params = &DisableProactiveEngagementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableProactiveEngagement", params, optFns, addOperationDisableProactiveEngagementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableProactiveEngagement", params, optFns, c.addOperationDisableProactiveEngagementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ type DisableProactiveEngagementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableProactiveEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableProactiveEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableProactiveEngagement{}, middleware.After)
 	if err != nil {
 		return err

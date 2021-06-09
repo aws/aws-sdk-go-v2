@@ -42,7 +42,7 @@ func (c *Client) GetBucketAnalyticsConfiguration(ctx context.Context, params *Ge
 		params = &GetBucketAnalyticsConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketAnalyticsConfiguration", params, optFns, addOperationGetBucketAnalyticsConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketAnalyticsConfiguration", params, optFns, c.addOperationGetBucketAnalyticsConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type GetBucketAnalyticsConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketAnalyticsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketAnalyticsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketAnalyticsConfiguration{}, middleware.After)
 	if err != nil {
 		return err

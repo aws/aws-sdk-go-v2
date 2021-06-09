@@ -17,7 +17,7 @@ func (c *Client) DeleteNamespace(ctx context.Context, params *DeleteNamespaceInp
 		params = &DeleteNamespaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteNamespace", params, optFns, addOperationDeleteNamespaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteNamespace", params, optFns, c.addOperationDeleteNamespaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteNamespaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteNamespace{}, middleware.After)
 	if err != nil {
 		return err

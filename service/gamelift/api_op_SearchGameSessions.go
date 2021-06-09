@@ -84,7 +84,7 @@ func (c *Client) SearchGameSessions(ctx context.Context, params *SearchGameSessi
 		params = &SearchGameSessionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchGameSessions", params, optFns, addOperationSearchGameSessionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchGameSessions", params, optFns, c.addOperationSearchGameSessionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -197,7 +197,7 @@ type SearchGameSessionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchGameSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchGameSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchGameSessions{}, middleware.After)
 	if err != nil {
 		return err

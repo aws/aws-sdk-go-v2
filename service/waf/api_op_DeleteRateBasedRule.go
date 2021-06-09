@@ -35,7 +35,7 @@ func (c *Client) DeleteRateBasedRule(ctx context.Context, params *DeleteRateBase
 		params = &DeleteRateBasedRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRateBasedRule", params, optFns, addOperationDeleteRateBasedRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRateBasedRule", params, optFns, c.addOperationDeleteRateBasedRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DeleteRateBasedRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRateBasedRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRateBasedRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRateBasedRule{}, middleware.After)
 	if err != nil {
 		return err

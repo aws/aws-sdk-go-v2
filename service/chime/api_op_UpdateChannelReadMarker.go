@@ -19,7 +19,7 @@ func (c *Client) UpdateChannelReadMarker(ctx context.Context, params *UpdateChan
 		params = &UpdateChannelReadMarkerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateChannelReadMarker", params, optFns, addOperationUpdateChannelReadMarkerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateChannelReadMarker", params, optFns, c.addOperationUpdateChannelReadMarkerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type UpdateChannelReadMarkerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateChannelReadMarkerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateChannelReadMarkerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChannelReadMarker{}, middleware.After)
 	if err != nil {
 		return err

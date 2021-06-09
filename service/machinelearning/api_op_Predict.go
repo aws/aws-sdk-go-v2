@@ -22,7 +22,7 @@ func (c *Client) Predict(ctx context.Context, params *PredictInput, optFns ...fu
 		params = &PredictInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Predict", params, optFns, addOperationPredictMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "Predict", params, optFns, c.addOperationPredictMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type PredictOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPredictMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPredictMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPredict{}, middleware.After)
 	if err != nil {
 		return err

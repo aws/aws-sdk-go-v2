@@ -22,7 +22,7 @@ func (c *Client) CreateDistribution(ctx context.Context, params *CreateDistribut
 		params = &CreateDistributionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDistribution", params, optFns, addOperationCreateDistributionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDistribution", params, optFns, c.addOperationCreateDistributionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type CreateDistributionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDistribution{}, middleware.After)
 	if err != nil {
 		return err

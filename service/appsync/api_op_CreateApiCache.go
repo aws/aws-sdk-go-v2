@@ -17,7 +17,7 @@ func (c *Client) CreateApiCache(ctx context.Context, params *CreateApiCacheInput
 		params = &CreateApiCacheInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateApiCache", params, optFns, addOperationCreateApiCacheMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateApiCache", params, optFns, c.addOperationCreateApiCacheMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ type CreateApiCacheOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApiCache{}, middleware.After)
 	if err != nil {
 		return err

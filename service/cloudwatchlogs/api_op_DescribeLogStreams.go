@@ -21,7 +21,7 @@ func (c *Client) DescribeLogStreams(ctx context.Context, params *DescribeLogStre
 		params = &DescribeLogStreamsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLogStreams", params, optFns, addOperationDescribeLogStreamsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLogStreams", params, optFns, c.addOperationDescribeLogStreamsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type DescribeLogStreamsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLogStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLogStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLogStreams{}, middleware.After)
 	if err != nil {
 		return err

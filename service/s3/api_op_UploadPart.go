@@ -114,7 +114,7 @@ func (c *Client) UploadPart(ctx context.Context, params *UploadPartInput, optFns
 		params = &UploadPartInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UploadPart", params, optFns, addOperationUploadPartMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UploadPart", params, optFns, c.addOperationUploadPartMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -239,7 +239,7 @@ type UploadPartOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUploadPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUploadPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpUploadPart{}, middleware.After)
 	if err != nil {
 		return err
@@ -358,7 +358,7 @@ func (c *PresignClient) PresignUploadPart(ctx context.Context, params *UploadPar
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
 	result, _, err := c.client.invokeOperation(ctx, "UploadPart", params, clientOptFns,
-		addOperationUploadPartMiddlewares,
+		c.client.addOperationUploadPartMiddlewares,
 		presignConverter(options).convertToPresignMiddleware,
 		func(stack *middleware.Stack, options Options) error {
 			return awshttp.RemoveContentTypeHeader(stack)

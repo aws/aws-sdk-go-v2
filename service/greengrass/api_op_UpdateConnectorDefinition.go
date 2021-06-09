@@ -16,7 +16,7 @@ func (c *Client) UpdateConnectorDefinition(ctx context.Context, params *UpdateCo
 		params = &UpdateConnectorDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateConnectorDefinition", params, optFns, addOperationUpdateConnectorDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateConnectorDefinition", params, optFns, c.addOperationUpdateConnectorDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type UpdateConnectorDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateConnectorDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateConnectorDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConnectorDefinition{}, middleware.After)
 	if err != nil {
 		return err

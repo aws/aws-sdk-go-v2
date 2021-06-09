@@ -18,7 +18,7 @@ func (c *Client) ListEventBuses(ctx context.Context, params *ListEventBusesInput
 		params = &ListEventBusesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEventBuses", params, optFns, addOperationListEventBusesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEventBuses", params, optFns, c.addOperationListEventBusesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListEventBusesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEventBusesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEventBusesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEventBuses{}, middleware.After)
 	if err != nil {
 		return err

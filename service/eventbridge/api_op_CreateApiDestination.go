@@ -19,7 +19,7 @@ func (c *Client) CreateApiDestination(ctx context.Context, params *CreateApiDest
 		params = &CreateApiDestinationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateApiDestination", params, optFns, addOperationCreateApiDestinationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateApiDestination", params, optFns, c.addOperationCreateApiDestinationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type CreateApiDestinationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateApiDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateApiDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateApiDestination{}, middleware.After)
 	if err != nil {
 		return err

@@ -41,7 +41,7 @@ func (c *Client) DeprecateDomain(ctx context.Context, params *DeprecateDomainInp
 		params = &DeprecateDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeprecateDomain", params, optFns, addOperationDeprecateDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeprecateDomain", params, optFns, c.addOperationDeprecateDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DeprecateDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeprecateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeprecateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeprecateDomain{}, middleware.After)
 	if err != nil {
 		return err

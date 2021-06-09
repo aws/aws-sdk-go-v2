@@ -17,7 +17,7 @@ func (c *Client) ListTokens(ctx context.Context, params *ListTokensInput, optFns
 		params = &ListTokensInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTokens", params, optFns, addOperationListTokensMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTokens", params, optFns, c.addOperationListTokensMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListTokensOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTokensMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTokensMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTokens{}, middleware.After)
 	if err != nil {
 		return err

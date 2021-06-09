@@ -38,7 +38,7 @@ func (c *Client) UndeprecateDomain(ctx context.Context, params *UndeprecateDomai
 		params = &UndeprecateDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UndeprecateDomain", params, optFns, addOperationUndeprecateDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UndeprecateDomain", params, optFns, c.addOperationUndeprecateDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type UndeprecateDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUndeprecateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUndeprecateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUndeprecateDomain{}, middleware.After)
 	if err != nil {
 		return err

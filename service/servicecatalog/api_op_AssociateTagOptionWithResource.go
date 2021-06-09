@@ -16,7 +16,7 @@ func (c *Client) AssociateTagOptionWithResource(ctx context.Context, params *Ass
 		params = &AssociateTagOptionWithResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateTagOptionWithResource", params, optFns, addOperationAssociateTagOptionWithResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateTagOptionWithResource", params, optFns, c.addOperationAssociateTagOptionWithResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type AssociateTagOptionWithResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateTagOptionWithResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateTagOptionWithResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateTagOptionWithResource{}, middleware.After)
 	if err != nil {
 		return err

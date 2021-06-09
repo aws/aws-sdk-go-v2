@@ -33,7 +33,7 @@ func (c *Client) RestoreDBInstanceFromDBSnapshot(ctx context.Context, params *Re
 		params = &RestoreDBInstanceFromDBSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreDBInstanceFromDBSnapshot", params, optFns, addOperationRestoreDBInstanceFromDBSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreDBInstanceFromDBSnapshot", params, optFns, c.addOperationRestoreDBInstanceFromDBSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -280,7 +280,7 @@ type RestoreDBInstanceFromDBSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreDBInstanceFromDBSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreDBInstanceFromDBSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBInstanceFromDBSnapshot{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DescribePortfolio(ctx context.Context, params *DescribePortfoli
 		params = &DescribePortfolioInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePortfolio", params, optFns, addOperationDescribePortfolioMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePortfolio", params, optFns, c.addOperationDescribePortfolioMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DescribePortfolioOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePortfolio{}, middleware.After)
 	if err != nil {
 		return err

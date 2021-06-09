@@ -21,7 +21,7 @@ func (c *Client) DescribeWorkforce(ctx context.Context, params *DescribeWorkforc
 		params = &DescribeWorkforceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkforce", params, optFns, addOperationDescribeWorkforceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkforce", params, optFns, c.addOperationDescribeWorkforceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeWorkforceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeWorkforceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeWorkforceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkforce{}, middleware.After)
 	if err != nil {
 		return err

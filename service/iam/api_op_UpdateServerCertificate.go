@@ -33,7 +33,7 @@ func (c *Client) UpdateServerCertificate(ctx context.Context, params *UpdateServ
 		params = &UpdateServerCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateServerCertificate", params, optFns, addOperationUpdateServerCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateServerCertificate", params, optFns, c.addOperationUpdateServerCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type UpdateServerCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateServerCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateServerCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateServerCertificate{}, middleware.After)
 	if err != nil {
 		return err

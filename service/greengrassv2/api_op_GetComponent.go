@@ -18,7 +18,7 @@ func (c *Client) GetComponent(ctx context.Context, params *GetComponentInput, op
 		params = &GetComponentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetComponent", params, optFns, addOperationGetComponentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetComponent", params, optFns, c.addOperationGetComponentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetComponentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetComponent{}, middleware.After)
 	if err != nil {
 		return err

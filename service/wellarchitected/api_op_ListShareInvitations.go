@@ -18,7 +18,7 @@ func (c *Client) ListShareInvitations(ctx context.Context, params *ListShareInvi
 		params = &ListShareInvitationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListShareInvitations", params, optFns, addOperationListShareInvitationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListShareInvitations", params, optFns, c.addOperationListShareInvitationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListShareInvitationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListShareInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListShareInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListShareInvitations{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribePackagingGroup(ctx context.Context, params *DescribePac
 		params = &DescribePackagingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePackagingGroup", params, optFns, addOperationDescribePackagingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePackagingGroup", params, optFns, c.addOperationDescribePackagingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribePackagingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePackagingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePackagingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePackagingGroup{}, middleware.After)
 	if err != nil {
 		return err

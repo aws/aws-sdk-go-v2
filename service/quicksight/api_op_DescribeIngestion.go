@@ -17,7 +17,7 @@ func (c *Client) DescribeIngestion(ctx context.Context, params *DescribeIngestio
 		params = &DescribeIngestionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeIngestion", params, optFns, addOperationDescribeIngestionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeIngestion", params, optFns, c.addOperationDescribeIngestionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeIngestionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeIngestion{}, middleware.After)
 	if err != nil {
 		return err

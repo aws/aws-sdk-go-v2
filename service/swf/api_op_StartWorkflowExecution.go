@@ -60,7 +60,7 @@ func (c *Client) StartWorkflowExecution(ctx context.Context, params *StartWorkfl
 		params = &StartWorkflowExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartWorkflowExecution", params, optFns, addOperationStartWorkflowExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartWorkflowExecution", params, optFns, c.addOperationStartWorkflowExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -194,7 +194,7 @@ type StartWorkflowExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartWorkflowExecution{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteDBSubnetGroup(ctx context.Context, params *DeleteDBSubnet
 		params = &DeleteDBSubnetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDBSubnetGroup", params, optFns, addOperationDeleteDBSubnetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDBSubnetGroup", params, optFns, c.addOperationDeleteDBSubnetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteDBSubnetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDBSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDBSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBSubnetGroup{}, middleware.After)
 	if err != nil {
 		return err

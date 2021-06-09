@@ -16,7 +16,7 @@ func (c *Client) DisassociateWirelessGatewayFromCertificate(ctx context.Context,
 		params = &DisassociateWirelessGatewayFromCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateWirelessGatewayFromCertificate", params, optFns, addOperationDisassociateWirelessGatewayFromCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateWirelessGatewayFromCertificate", params, optFns, c.addOperationDisassociateWirelessGatewayFromCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DisassociateWirelessGatewayFromCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateWirelessGatewayFromCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateWirelessGatewayFromCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateWirelessGatewayFromCertificate{}, middleware.After)
 	if err != nil {
 		return err

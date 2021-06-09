@@ -21,7 +21,7 @@ func (c *Client) GetCommentsForComparedCommit(ctx context.Context, params *GetCo
 		params = &GetCommentsForComparedCommitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCommentsForComparedCommit", params, optFns, addOperationGetCommentsForComparedCommitMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCommentsForComparedCommit", params, optFns, c.addOperationGetCommentsForComparedCommitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type GetCommentsForComparedCommitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCommentsForComparedCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCommentsForComparedCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCommentsForComparedCommit{}, middleware.After)
 	if err != nil {
 		return err

@@ -25,7 +25,7 @@ func (c *Client) GetRuleGroup(ctx context.Context, params *GetRuleGroupInput, op
 		params = &GetRuleGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRuleGroup", params, optFns, addOperationGetRuleGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRuleGroup", params, optFns, c.addOperationGetRuleGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetRuleGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRuleGroup{}, middleware.After)
 	if err != nil {
 		return err

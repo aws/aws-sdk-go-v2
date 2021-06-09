@@ -20,7 +20,7 @@ func (c *Client) TestEventPattern(ctx context.Context, params *TestEventPatternI
 		params = &TestEventPatternInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestEventPattern", params, optFns, addOperationTestEventPatternMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestEventPattern", params, optFns, c.addOperationTestEventPatternMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type TestEventPatternOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTestEventPatternMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestEventPatternMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTestEventPattern{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) GetDefaultCreditSpecification(ctx context.Context, params *GetD
 		params = &GetDefaultCreditSpecificationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDefaultCreditSpecification", params, optFns, addOperationGetDefaultCreditSpecificationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDefaultCreditSpecification", params, optFns, c.addOperationGetDefaultCreditSpecificationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetDefaultCreditSpecificationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDefaultCreditSpecificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDefaultCreditSpecificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpGetDefaultCreditSpecification{}, middleware.After)
 	if err != nil {
 		return err

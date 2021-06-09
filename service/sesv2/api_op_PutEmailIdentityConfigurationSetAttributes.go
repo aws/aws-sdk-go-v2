@@ -16,7 +16,7 @@ func (c *Client) PutEmailIdentityConfigurationSetAttributes(ctx context.Context,
 		params = &PutEmailIdentityConfigurationSetAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutEmailIdentityConfigurationSetAttributes", params, optFns, addOperationPutEmailIdentityConfigurationSetAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutEmailIdentityConfigurationSetAttributes", params, optFns, c.addOperationPutEmailIdentityConfigurationSetAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type PutEmailIdentityConfigurationSetAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutEmailIdentityConfigurationSetAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutEmailIdentityConfigurationSetAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEmailIdentityConfigurationSetAttributes{}, middleware.After)
 	if err != nil {
 		return err

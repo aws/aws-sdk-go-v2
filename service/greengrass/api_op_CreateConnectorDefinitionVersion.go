@@ -17,7 +17,7 @@ func (c *Client) CreateConnectorDefinitionVersion(ctx context.Context, params *C
 		params = &CreateConnectorDefinitionVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateConnectorDefinitionVersion", params, optFns, addOperationCreateConnectorDefinitionVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateConnectorDefinitionVersion", params, optFns, c.addOperationCreateConnectorDefinitionVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type CreateConnectorDefinitionVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateConnectorDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateConnectorDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnectorDefinitionVersion{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) UnassignPrivateIpAddresses(ctx context.Context, params *Unassig
 		params = &UnassignPrivateIpAddressesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnassignPrivateIpAddresses", params, optFns, addOperationUnassignPrivateIpAddressesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnassignPrivateIpAddresses", params, optFns, c.addOperationUnassignPrivateIpAddressesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type UnassignPrivateIpAddressesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnassignPrivateIpAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnassignPrivateIpAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpUnassignPrivateIpAddresses{}, middleware.After)
 	if err != nil {
 		return err

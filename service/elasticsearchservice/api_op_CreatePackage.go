@@ -17,7 +17,7 @@ func (c *Client) CreatePackage(ctx context.Context, params *CreatePackageInput, 
 		params = &CreatePackageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePackage", params, optFns, addOperationCreatePackageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePackage", params, optFns, c.addOperationCreatePackageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type CreatePackageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePackage{}, middleware.After)
 	if err != nil {
 		return err

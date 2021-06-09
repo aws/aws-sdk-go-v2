@@ -19,7 +19,7 @@ func (c *Client) GetSchemaVersion(ctx context.Context, params *GetSchemaVersionI
 		params = &GetSchemaVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSchemaVersion", params, optFns, addOperationGetSchemaVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSchemaVersion", params, optFns, c.addOperationGetSchemaVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type GetSchemaVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSchemaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSchemaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSchemaVersion{}, middleware.After)
 	if err != nil {
 		return err

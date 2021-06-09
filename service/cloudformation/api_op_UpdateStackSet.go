@@ -22,7 +22,7 @@ func (c *Client) UpdateStackSet(ctx context.Context, params *UpdateStackSetInput
 		params = &UpdateStackSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateStackSet", params, optFns, addOperationUpdateStackSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateStackSet", params, optFns, c.addOperationUpdateStackSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -294,7 +294,7 @@ type UpdateStackSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateStackSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateStackSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateStackSet{}, middleware.After)
 	if err != nil {
 		return err

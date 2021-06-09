@@ -18,7 +18,7 @@ func (c *Client) ImportComponent(ctx context.Context, params *ImportComponentInp
 		params = &ImportComponentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportComponent", params, optFns, addOperationImportComponentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportComponent", params, optFns, c.addOperationImportComponentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ type ImportComponentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportComponent{}, middleware.After)
 	if err != nil {
 		return err

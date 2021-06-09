@@ -39,7 +39,7 @@ func (c *Client) DeleteAccessPoint(ctx context.Context, params *DeleteAccessPoin
 		params = &DeleteAccessPointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAccessPoint", params, optFns, addOperationDeleteAccessPointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAccessPoint", params, optFns, c.addOperationDeleteAccessPointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DeleteAccessPointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAccessPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAccessPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteAccessPoint{}, middleware.After)
 	if err != nil {
 		return err

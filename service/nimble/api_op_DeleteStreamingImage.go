@@ -18,7 +18,7 @@ func (c *Client) DeleteStreamingImage(ctx context.Context, params *DeleteStreami
 		params = &DeleteStreamingImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteStreamingImage", params, optFns, addOperationDeleteStreamingImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteStreamingImage", params, optFns, c.addOperationDeleteStreamingImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DeleteStreamingImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteStreamingImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteStreamingImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteStreamingImage{}, middleware.After)
 	if err != nil {
 		return err

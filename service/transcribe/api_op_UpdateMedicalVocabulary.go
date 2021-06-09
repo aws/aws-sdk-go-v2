@@ -21,7 +21,7 @@ func (c *Client) UpdateMedicalVocabulary(ctx context.Context, params *UpdateMedi
 		params = &UpdateMedicalVocabularyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateMedicalVocabulary", params, optFns, addOperationUpdateMedicalVocabularyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMedicalVocabulary", params, optFns, c.addOperationUpdateMedicalVocabularyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type UpdateMedicalVocabularyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateMedicalVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateMedicalVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMedicalVocabulary{}, middleware.After)
 	if err != nil {
 		return err

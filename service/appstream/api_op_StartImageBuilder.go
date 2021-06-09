@@ -17,7 +17,7 @@ func (c *Client) StartImageBuilder(ctx context.Context, params *StartImageBuilde
 		params = &StartImageBuilderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartImageBuilder", params, optFns, addOperationStartImageBuilderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartImageBuilder", params, optFns, c.addOperationStartImageBuilderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type StartImageBuilderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartImageBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartImageBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartImageBuilder{}, middleware.After)
 	if err != nil {
 		return err

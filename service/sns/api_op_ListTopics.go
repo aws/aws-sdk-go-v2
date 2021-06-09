@@ -21,7 +21,7 @@ func (c *Client) ListTopics(ctx context.Context, params *ListTopicsInput, optFns
 		params = &ListTopicsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTopics", params, optFns, addOperationListTopicsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTopics", params, optFns, c.addOperationListTopicsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ListTopicsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTopicsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTopicsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListTopics{}, middleware.After)
 	if err != nil {
 		return err

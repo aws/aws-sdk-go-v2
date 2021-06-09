@@ -18,7 +18,7 @@ func (c *Client) UpdateRoutingProfileConcurrency(ctx context.Context, params *Up
 		params = &UpdateRoutingProfileConcurrencyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRoutingProfileConcurrency", params, optFns, addOperationUpdateRoutingProfileConcurrencyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRoutingProfileConcurrency", params, optFns, c.addOperationUpdateRoutingProfileConcurrencyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UpdateRoutingProfileConcurrencyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRoutingProfileConcurrencyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRoutingProfileConcurrencyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRoutingProfileConcurrency{}, middleware.After)
 	if err != nil {
 		return err

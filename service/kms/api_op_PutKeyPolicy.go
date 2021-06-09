@@ -29,7 +29,7 @@ func (c *Client) PutKeyPolicy(ctx context.Context, params *PutKeyPolicyInput, op
 		params = &PutKeyPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutKeyPolicy", params, optFns, addOperationPutKeyPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutKeyPolicy", params, optFns, c.addOperationPutKeyPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type PutKeyPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutKeyPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutKeyPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutKeyPolicy{}, middleware.After)
 	if err != nil {
 		return err

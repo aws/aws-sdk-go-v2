@@ -18,7 +18,7 @@ func (c *Client) DescribeAddonVersions(ctx context.Context, params *DescribeAddo
 		params = &DescribeAddonVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAddonVersions", params, optFns, addOperationDescribeAddonVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAddonVersions", params, optFns, c.addOperationDescribeAddonVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type DescribeAddonVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAddonVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAddonVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAddonVersions{}, middleware.After)
 	if err != nil {
 		return err

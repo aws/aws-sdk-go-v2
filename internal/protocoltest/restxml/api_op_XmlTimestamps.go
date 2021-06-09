@@ -17,7 +17,7 @@ func (c *Client) XmlTimestamps(ctx context.Context, params *XmlTimestampsInput, 
 		params = &XmlTimestampsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "XmlTimestamps", params, optFns, addOperationXmlTimestampsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "XmlTimestamps", params, optFns, c.addOperationXmlTimestampsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type XmlTimestampsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationXmlTimestampsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationXmlTimestampsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlTimestamps{}, middleware.After)
 	if err != nil {
 		return err

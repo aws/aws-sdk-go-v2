@@ -16,7 +16,7 @@ func (c *Client) DeleteInput(ctx context.Context, params *DeleteInputInput, optF
 		params = &DeleteInputInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteInput", params, optFns, addOperationDeleteInputMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInput", params, optFns, c.addOperationDeleteInputMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteInputOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInput{}, middleware.After)
 	if err != nil {
 		return err

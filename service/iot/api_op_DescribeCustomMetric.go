@@ -18,7 +18,7 @@ func (c *Client) DescribeCustomMetric(ctx context.Context, params *DescribeCusto
 		params = &DescribeCustomMetricInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCustomMetric", params, optFns, addOperationDescribeCustomMetricMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCustomMetric", params, optFns, c.addOperationDescribeCustomMetricMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DescribeCustomMetricOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCustomMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCustomMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCustomMetric{}, middleware.After)
 	if err != nil {
 		return err

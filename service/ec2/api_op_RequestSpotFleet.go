@@ -34,7 +34,7 @@ func (c *Client) RequestSpotFleet(ctx context.Context, params *RequestSpotFleetI
 		params = &RequestSpotFleetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RequestSpotFleet", params, optFns, addOperationRequestSpotFleetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RequestSpotFleet", params, optFns, c.addOperationRequestSpotFleetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type RequestSpotFleetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRequestSpotFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRequestSpotFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpRequestSpotFleet{}, middleware.After)
 	if err != nil {
 		return err

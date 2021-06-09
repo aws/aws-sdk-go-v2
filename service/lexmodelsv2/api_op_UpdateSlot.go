@@ -18,7 +18,7 @@ func (c *Client) UpdateSlot(ctx context.Context, params *UpdateSlotInput, optFns
 		params = &UpdateSlotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSlot", params, optFns, addOperationUpdateSlotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSlot", params, optFns, c.addOperationUpdateSlotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -125,7 +125,7 @@ type UpdateSlotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSlotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSlotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSlot{}, middleware.After)
 	if err != nil {
 		return err

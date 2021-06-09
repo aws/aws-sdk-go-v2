@@ -15,7 +15,7 @@ func (c *Client) ExportSchema(ctx context.Context, params *ExportSchemaInput, op
 		params = &ExportSchemaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExportSchema", params, optFns, addOperationExportSchemaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExportSchema", params, optFns, c.addOperationExportSchemaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ExportSchemaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExportSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExportSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportSchema{}, middleware.After)
 	if err != nil {
 		return err

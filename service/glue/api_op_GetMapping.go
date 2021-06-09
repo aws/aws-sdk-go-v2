@@ -17,7 +17,7 @@ func (c *Client) GetMapping(ctx context.Context, params *GetMappingInput, optFns
 		params = &GetMappingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMapping", params, optFns, addOperationGetMappingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMapping", params, optFns, c.addOperationGetMappingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetMappingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMapping{}, middleware.After)
 	if err != nil {
 		return err

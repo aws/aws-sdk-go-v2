@@ -17,7 +17,7 @@ func (c *Client) ListScramSecrets(ctx context.Context, params *ListScramSecretsI
 		params = &ListScramSecretsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListScramSecrets", params, optFns, addOperationListScramSecretsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListScramSecrets", params, optFns, c.addOperationListScramSecretsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListScramSecretsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListScramSecretsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListScramSecretsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListScramSecrets{}, middleware.After)
 	if err != nil {
 		return err

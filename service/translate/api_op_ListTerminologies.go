@@ -18,7 +18,7 @@ func (c *Client) ListTerminologies(ctx context.Context, params *ListTerminologie
 		params = &ListTerminologiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTerminologies", params, optFns, addOperationListTerminologiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTerminologies", params, optFns, c.addOperationListTerminologiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ListTerminologiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTerminologiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTerminologiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTerminologies{}, middleware.After)
 	if err != nil {
 		return err

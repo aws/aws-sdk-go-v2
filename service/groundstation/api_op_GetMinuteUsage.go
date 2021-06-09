@@ -16,7 +16,7 @@ func (c *Client) GetMinuteUsage(ctx context.Context, params *GetMinuteUsageInput
 		params = &GetMinuteUsageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMinuteUsage", params, optFns, addOperationGetMinuteUsageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMinuteUsage", params, optFns, c.addOperationGetMinuteUsageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type GetMinuteUsageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMinuteUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMinuteUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMinuteUsage{}, middleware.After)
 	if err != nil {
 		return err

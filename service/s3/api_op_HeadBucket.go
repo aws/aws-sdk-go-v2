@@ -35,7 +35,7 @@ func (c *Client) HeadBucket(ctx context.Context, params *HeadBucketInput, optFns
 		params = &HeadBucketInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HeadBucket", params, optFns, addOperationHeadBucketMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HeadBucket", params, optFns, c.addOperationHeadBucketMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type HeadBucketOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHeadBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHeadBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpHeadBucket{}, middleware.After)
 	if err != nil {
 		return err

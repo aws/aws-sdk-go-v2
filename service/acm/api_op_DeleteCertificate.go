@@ -22,7 +22,7 @@ func (c *Client) DeleteCertificate(ctx context.Context, params *DeleteCertificat
 		params = &DeleteCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCertificate", params, optFns, addOperationDeleteCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCertificate", params, optFns, c.addOperationDeleteCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCertificate{}, middleware.After)
 	if err != nil {
 		return err

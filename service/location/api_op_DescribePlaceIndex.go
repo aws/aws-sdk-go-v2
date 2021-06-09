@@ -17,7 +17,7 @@ func (c *Client) DescribePlaceIndex(ctx context.Context, params *DescribePlaceIn
 		params = &DescribePlaceIndexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePlaceIndex", params, optFns, addOperationDescribePlaceIndexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePlaceIndex", params, optFns, c.addOperationDescribePlaceIndexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ type DescribePlaceIndexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePlaceIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePlaceIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePlaceIndex{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) StartOnDemandReplicationRun(ctx context.Context, params *StartO
 		params = &StartOnDemandReplicationRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartOnDemandReplicationRun", params, optFns, addOperationStartOnDemandReplicationRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartOnDemandReplicationRun", params, optFns, c.addOperationStartOnDemandReplicationRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type StartOnDemandReplicationRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartOnDemandReplicationRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartOnDemandReplicationRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartOnDemandReplicationRun{}, middleware.After)
 	if err != nil {
 		return err

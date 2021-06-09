@@ -17,7 +17,7 @@ func (c *Client) ListInputRoutings(ctx context.Context, params *ListInputRouting
 		params = &ListInputRoutingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListInputRoutings", params, optFns, addOperationListInputRoutingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListInputRoutings", params, optFns, c.addOperationListInputRoutingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListInputRoutingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListInputRoutingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListInputRoutingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInputRoutings{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) BeginTransaction(ctx context.Context, params *BeginTransactionI
 		params = &BeginTransactionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BeginTransaction", params, optFns, addOperationBeginTransactionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BeginTransaction", params, optFns, c.addOperationBeginTransactionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type BeginTransactionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBeginTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBeginTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBeginTransaction{}, middleware.After)
 	if err != nil {
 		return err

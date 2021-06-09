@@ -16,7 +16,7 @@ func (c *Client) UntagAttendee(ctx context.Context, params *UntagAttendeeInput, 
 		params = &UntagAttendeeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagAttendee", params, optFns, addOperationUntagAttendeeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagAttendee", params, optFns, c.addOperationUntagAttendeeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type UntagAttendeeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUntagAttendee{}, middleware.After)
 	if err != nil {
 		return err

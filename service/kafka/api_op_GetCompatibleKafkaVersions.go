@@ -17,7 +17,7 @@ func (c *Client) GetCompatibleKafkaVersions(ctx context.Context, params *GetComp
 		params = &GetCompatibleKafkaVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCompatibleKafkaVersions", params, optFns, addOperationGetCompatibleKafkaVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCompatibleKafkaVersions", params, optFns, c.addOperationGetCompatibleKafkaVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type GetCompatibleKafkaVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCompatibleKafkaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCompatibleKafkaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCompatibleKafkaVersions{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeBundle(ctx context.Context, params *DescribeBundleInput
 		params = &DescribeBundleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeBundle", params, optFns, addOperationDescribeBundleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeBundle", params, optFns, c.addOperationDescribeBundleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DescribeBundleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBundle{}, middleware.After)
 	if err != nil {
 		return err

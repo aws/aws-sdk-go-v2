@@ -38,7 +38,7 @@ func (c *Client) GetLabelDetection(ctx context.Context, params *GetLabelDetectio
 		params = &GetLabelDetectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLabelDetection", params, optFns, addOperationGetLabelDetectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLabelDetection", params, optFns, c.addOperationGetLabelDetectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type GetLabelDetectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLabelDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLabelDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLabelDetection{}, middleware.After)
 	if err != nil {
 		return err

@@ -25,7 +25,7 @@ func (c *Client) CreateMeetingWithAttendees(ctx context.Context, params *CreateM
 		params = &CreateMeetingWithAttendeesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMeetingWithAttendees", params, optFns, addOperationCreateMeetingWithAttendeesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMeetingWithAttendees", params, optFns, c.addOperationCreateMeetingWithAttendeesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type CreateMeetingWithAttendeesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateMeetingWithAttendeesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateMeetingWithAttendeesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMeetingWithAttendees{}, middleware.After)
 	if err != nil {
 		return err

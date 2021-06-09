@@ -70,7 +70,7 @@ func (c *Client) LeaveOrganization(ctx context.Context, params *LeaveOrganizatio
 		params = &LeaveOrganizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "LeaveOrganization", params, optFns, addOperationLeaveOrganizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "LeaveOrganization", params, optFns, c.addOperationLeaveOrganizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type LeaveOrganizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationLeaveOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationLeaveOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpLeaveOrganization{}, middleware.After)
 	if err != nil {
 		return err

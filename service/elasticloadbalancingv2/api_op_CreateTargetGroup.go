@@ -34,7 +34,7 @@ func (c *Client) CreateTargetGroup(ctx context.Context, params *CreateTargetGrou
 		params = &CreateTargetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTargetGroup", params, optFns, addOperationCreateTargetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTargetGroup", params, optFns, c.addOperationCreateTargetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -162,7 +162,7 @@ type CreateTargetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateTargetGroup{}, middleware.After)
 	if err != nil {
 		return err

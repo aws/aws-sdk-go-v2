@@ -34,7 +34,7 @@ func (c *Client) UpdateLag(ctx context.Context, params *UpdateLagInput, optFns .
 		params = &UpdateLagInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLag", params, optFns, addOperationUpdateLagMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLag", params, optFns, c.addOperationUpdateLagMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -157,7 +157,7 @@ type UpdateLagOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLagMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLagMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLag{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) DescribeResize(ctx context.Context, params *DescribeResizeInput
 		params = &DescribeResizeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeResize", params, optFns, addOperationDescribeResizeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeResize", params, optFns, c.addOperationDescribeResizeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -117,7 +117,7 @@ type DescribeResizeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeResizeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeResizeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeResize{}, middleware.After)
 	if err != nil {
 		return err

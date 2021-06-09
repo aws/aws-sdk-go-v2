@@ -18,7 +18,7 @@ func (c *Client) UpdateQuickConnectConfig(ctx context.Context, params *UpdateQui
 		params = &UpdateQuickConnectConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateQuickConnectConfig", params, optFns, addOperationUpdateQuickConnectConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateQuickConnectConfig", params, optFns, c.addOperationUpdateQuickConnectConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UpdateQuickConnectConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateQuickConnectConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateQuickConnectConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQuickConnectConfig{}, middleware.After)
 	if err != nil {
 		return err

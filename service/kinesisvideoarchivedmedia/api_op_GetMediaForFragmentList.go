@@ -41,7 +41,7 @@ func (c *Client) GetMediaForFragmentList(ctx context.Context, params *GetMediaFo
 		params = &GetMediaForFragmentListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMediaForFragmentList", params, optFns, addOperationGetMediaForFragmentListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMediaForFragmentList", params, optFns, c.addOperationGetMediaForFragmentListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type GetMediaForFragmentListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMediaForFragmentListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMediaForFragmentListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMediaForFragmentList{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) CreateApi(ctx context.Context, params *CreateApiInput, optFns .
 		params = &CreateApiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateApi", params, optFns, addOperationCreateApiMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateApi", params, optFns, c.addOperationCreateApiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -173,7 +173,7 @@ type CreateApiOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApi{}, middleware.After)
 	if err != nil {
 		return err

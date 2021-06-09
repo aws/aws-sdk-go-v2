@@ -20,7 +20,7 @@ func (c *Client) DeleteVpcPeeringConnection(ctx context.Context, params *DeleteV
 		params = &DeleteVpcPeeringConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVpcPeeringConnection", params, optFns, addOperationDeleteVpcPeeringConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVpcPeeringConnection", params, optFns, c.addOperationDeleteVpcPeeringConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteVpcPeeringConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVpcPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVpcPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteVpcPeeringConnection{}, middleware.After)
 	if err != nil {
 		return err

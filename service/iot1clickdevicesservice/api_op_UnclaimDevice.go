@@ -16,7 +16,7 @@ func (c *Client) UnclaimDevice(ctx context.Context, params *UnclaimDeviceInput, 
 		params = &UnclaimDeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnclaimDevice", params, optFns, addOperationUnclaimDeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnclaimDevice", params, optFns, c.addOperationUnclaimDeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type UnclaimDeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnclaimDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnclaimDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUnclaimDevice{}, middleware.After)
 	if err != nil {
 		return err

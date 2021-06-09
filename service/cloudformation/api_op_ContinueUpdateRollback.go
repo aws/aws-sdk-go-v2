@@ -28,7 +28,7 @@ func (c *Client) ContinueUpdateRollback(ctx context.Context, params *ContinueUpd
 		params = &ContinueUpdateRollbackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ContinueUpdateRollback", params, optFns, addOperationContinueUpdateRollbackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ContinueUpdateRollback", params, optFns, c.addOperationContinueUpdateRollbackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +105,7 @@ type ContinueUpdateRollbackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationContinueUpdateRollbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationContinueUpdateRollbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpContinueUpdateRollback{}, middleware.After)
 	if err != nil {
 		return err

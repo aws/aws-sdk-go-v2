@@ -19,7 +19,7 @@ func (c *Client) CreateResolverRule(ctx context.Context, params *CreateResolverR
 		params = &CreateResolverRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateResolverRule", params, optFns, addOperationCreateResolverRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateResolverRule", params, optFns, c.addOperationCreateResolverRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type CreateResolverRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateResolverRule{}, middleware.After)
 	if err != nil {
 		return err

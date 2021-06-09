@@ -28,7 +28,7 @@ func (c *Client) SetStatus(ctx context.Context, params *SetStatusInput, optFns .
 		params = &SetStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetStatus", params, optFns, addOperationSetStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetStatus", params, optFns, c.addOperationSetStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type SetStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetStatus{}, middleware.After)
 	if err != nil {
 		return err

@@ -35,7 +35,7 @@ func (c *Client) GetObjectTagging(ctx context.Context, params *GetObjectTaggingI
 		params = &GetObjectTaggingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetObjectTagging", params, optFns, addOperationGetObjectTaggingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetObjectTagging", params, optFns, c.addOperationGetObjectTaggingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ type GetObjectTaggingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetObjectTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetObjectTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetObjectTagging{}, middleware.After)
 	if err != nil {
 		return err

@@ -57,7 +57,7 @@ func (c *Client) Sign(ctx context.Context, params *SignInput, optFns ...func(*Op
 		params = &SignInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Sign", params, optFns, addOperationSignMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "Sign", params, optFns, c.addOperationSignMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -151,7 +151,7 @@ type SignOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSignMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSignMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSign{}, middleware.After)
 	if err != nil {
 		return err

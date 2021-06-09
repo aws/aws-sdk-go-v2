@@ -34,7 +34,7 @@ func (c *Client) UnsubscribeFromDataset(ctx context.Context, params *Unsubscribe
 		params = &UnsubscribeFromDatasetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnsubscribeFromDataset", params, optFns, addOperationUnsubscribeFromDatasetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnsubscribeFromDataset", params, optFns, c.addOperationUnsubscribeFromDatasetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type UnsubscribeFromDatasetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnsubscribeFromDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnsubscribeFromDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUnsubscribeFromDataset{}, middleware.After)
 	if err != nil {
 		return err

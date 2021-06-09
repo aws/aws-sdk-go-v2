@@ -20,7 +20,7 @@ func (c *Client) UpdateLocationNfs(ctx context.Context, params *UpdateLocationNf
 		params = &UpdateLocationNfsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLocationNfs", params, optFns, addOperationUpdateLocationNfsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLocationNfs", params, optFns, c.addOperationUpdateLocationNfsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type UpdateLocationNfsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLocationNfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLocationNfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLocationNfs{}, middleware.After)
 	if err != nil {
 		return err

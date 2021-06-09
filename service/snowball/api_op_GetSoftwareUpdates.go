@@ -17,7 +17,7 @@ func (c *Client) GetSoftwareUpdates(ctx context.Context, params *GetSoftwareUpda
 		params = &GetSoftwareUpdatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSoftwareUpdates", params, optFns, addOperationGetSoftwareUpdatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSoftwareUpdates", params, optFns, c.addOperationGetSoftwareUpdatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type GetSoftwareUpdatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSoftwareUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSoftwareUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSoftwareUpdates{}, middleware.After)
 	if err != nil {
 		return err

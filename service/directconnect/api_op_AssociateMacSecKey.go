@@ -23,7 +23,7 @@ func (c *Client) AssociateMacSecKey(ctx context.Context, params *AssociateMacSec
 		params = &AssociateMacSecKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateMacSecKey", params, optFns, addOperationAssociateMacSecKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateMacSecKey", params, optFns, c.addOperationAssociateMacSecKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type AssociateMacSecKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateMacSecKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateMacSecKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateMacSecKey{}, middleware.After)
 	if err != nil {
 		return err

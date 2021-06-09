@@ -22,7 +22,7 @@ func (c *Client) DescribeConnectors(ctx context.Context, params *DescribeConnect
 		params = &DescribeConnectorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeConnectors", params, optFns, addOperationDescribeConnectorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConnectors", params, optFns, c.addOperationDescribeConnectorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeConnectorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConnectors{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) CompleteLayerUpload(ctx context.Context, params *CompleteLayerU
 		params = &CompleteLayerUploadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CompleteLayerUpload", params, optFns, addOperationCompleteLayerUploadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CompleteLayerUpload", params, optFns, c.addOperationCompleteLayerUploadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type CompleteLayerUploadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCompleteLayerUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCompleteLayerUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCompleteLayerUpload{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) PutSchemaVersionMetadata(ctx context.Context, params *PutSchema
 		params = &PutSchemaVersionMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutSchemaVersionMetadata", params, optFns, addOperationPutSchemaVersionMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutSchemaVersionMetadata", params, optFns, c.addOperationPutSchemaVersionMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type PutSchemaVersionMetadataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutSchemaVersionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutSchemaVersionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutSchemaVersionMetadata{}, middleware.After)
 	if err != nil {
 		return err

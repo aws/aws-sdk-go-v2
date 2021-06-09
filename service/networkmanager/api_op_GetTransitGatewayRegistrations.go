@@ -19,7 +19,7 @@ func (c *Client) GetTransitGatewayRegistrations(ctx context.Context, params *Get
 		params = &GetTransitGatewayRegistrationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTransitGatewayRegistrations", params, optFns, addOperationGetTransitGatewayRegistrationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTransitGatewayRegistrations", params, optFns, c.addOperationGetTransitGatewayRegistrationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetTransitGatewayRegistrationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTransitGatewayRegistrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTransitGatewayRegistrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTransitGatewayRegistrations{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) StartRemediationExecution(ctx context.Context, params *StartRem
 		params = &StartRemediationExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartRemediationExecution", params, optFns, addOperationStartRemediationExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartRemediationExecution", params, optFns, c.addOperationStartRemediationExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type StartRemediationExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartRemediationExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartRemediationExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartRemediationExecution{}, middleware.After)
 	if err != nil {
 		return err

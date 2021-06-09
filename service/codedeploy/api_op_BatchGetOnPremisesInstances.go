@@ -18,7 +18,7 @@ func (c *Client) BatchGetOnPremisesInstances(ctx context.Context, params *BatchG
 		params = &BatchGetOnPremisesInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetOnPremisesInstances", params, optFns, addOperationBatchGetOnPremisesInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetOnPremisesInstances", params, optFns, c.addOperationBatchGetOnPremisesInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type BatchGetOnPremisesInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetOnPremisesInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetOnPremisesInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetOnPremisesInstances{}, middleware.After)
 	if err != nil {
 		return err

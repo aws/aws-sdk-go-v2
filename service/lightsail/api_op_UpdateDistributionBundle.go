@@ -25,7 +25,7 @@ func (c *Client) UpdateDistributionBundle(ctx context.Context, params *UpdateDis
 		params = &UpdateDistributionBundleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDistributionBundle", params, optFns, addOperationUpdateDistributionBundleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDistributionBundle", params, optFns, c.addOperationUpdateDistributionBundleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UpdateDistributionBundleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDistributionBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDistributionBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDistributionBundle{}, middleware.After)
 	if err != nil {
 		return err

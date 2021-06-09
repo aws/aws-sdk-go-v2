@@ -17,7 +17,7 @@ func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolic
 		params = &GetResourcePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetResourcePolicy", params, optFns, addOperationGetResourcePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetResourcePolicy", params, optFns, c.addOperationGetResourcePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type GetResourcePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResourcePolicy{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) CreateTopic(ctx context.Context, params *CreateTopicInput, optF
 		params = &CreateTopicInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTopic", params, optFns, addOperationCreateTopicMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTopic", params, optFns, c.addOperationCreateTopicMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ type CreateTopicOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateTopic{}, middleware.After)
 	if err != nil {
 		return err

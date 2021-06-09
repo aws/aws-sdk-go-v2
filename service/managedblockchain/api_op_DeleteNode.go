@@ -17,7 +17,7 @@ func (c *Client) DeleteNode(ctx context.Context, params *DeleteNodeInput, optFns
 		params = &DeleteNodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteNode", params, optFns, addOperationDeleteNodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteNode", params, optFns, c.addOperationDeleteNodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DeleteNodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteNode{}, middleware.After)
 	if err != nil {
 		return err

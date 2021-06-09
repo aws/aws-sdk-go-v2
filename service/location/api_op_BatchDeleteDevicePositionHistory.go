@@ -17,7 +17,7 @@ func (c *Client) BatchDeleteDevicePositionHistory(ctx context.Context, params *B
 		params = &BatchDeleteDevicePositionHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteDevicePositionHistory", params, optFns, addOperationBatchDeleteDevicePositionHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteDevicePositionHistory", params, optFns, c.addOperationBatchDeleteDevicePositionHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type BatchDeleteDevicePositionHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteDevicePositionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteDevicePositionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteDevicePositionHistory{}, middleware.After)
 	if err != nil {
 		return err

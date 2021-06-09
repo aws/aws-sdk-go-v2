@@ -18,7 +18,7 @@ func (c *Client) SendActivationCode(ctx context.Context, params *SendActivationC
 		params = &SendActivationCodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendActivationCode", params, optFns, addOperationSendActivationCodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendActivationCode", params, optFns, c.addOperationSendActivationCodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type SendActivationCodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendActivationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendActivationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendActivationCode{}, middleware.After)
 	if err != nil {
 		return err

@@ -79,7 +79,7 @@ func (c *Client) CopySnapshot(ctx context.Context, params *CopySnapshotInput, op
 		params = &CopySnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopySnapshot", params, optFns, addOperationCopySnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopySnapshot", params, optFns, c.addOperationCopySnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -134,7 +134,7 @@ type CopySnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopySnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopySnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopySnapshot{}, middleware.After)
 	if err != nil {
 		return err

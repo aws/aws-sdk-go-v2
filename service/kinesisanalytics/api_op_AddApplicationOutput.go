@@ -40,7 +40,7 @@ func (c *Client) AddApplicationOutput(ctx context.Context, params *AddApplicatio
 		params = &AddApplicationOutputInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddApplicationOutput", params, optFns, addOperationAddApplicationOutputMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddApplicationOutput", params, optFns, c.addOperationAddApplicationOutputMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type AddApplicationOutputOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddApplicationOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddApplicationOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddApplicationOutput{}, middleware.After)
 	if err != nil {
 		return err

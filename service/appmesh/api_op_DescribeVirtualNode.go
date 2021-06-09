@@ -17,7 +17,7 @@ func (c *Client) DescribeVirtualNode(ctx context.Context, params *DescribeVirtua
 		params = &DescribeVirtualNodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeVirtualNode", params, optFns, addOperationDescribeVirtualNodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeVirtualNode", params, optFns, c.addOperationDescribeVirtualNodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeVirtualNodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeVirtualNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeVirtualNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVirtualNode{}, middleware.After)
 	if err != nil {
 		return err

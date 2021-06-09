@@ -19,7 +19,7 @@ func (c *Client) DescribeDocumentPermission(ctx context.Context, params *Describ
 		params = &DescribeDocumentPermissionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDocumentPermission", params, optFns, addOperationDescribeDocumentPermissionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDocumentPermission", params, optFns, c.addOperationDescribeDocumentPermissionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeDocumentPermissionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDocumentPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDocumentPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDocumentPermission{}, middleware.After)
 	if err != nil {
 		return err

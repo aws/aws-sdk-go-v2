@@ -16,7 +16,7 @@ func (c *Client) CloneBackend(ctx context.Context, params *CloneBackendInput, op
 		params = &CloneBackendInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CloneBackend", params, optFns, addOperationCloneBackendMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CloneBackend", params, optFns, c.addOperationCloneBackendMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type CloneBackendOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCloneBackendMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCloneBackendMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCloneBackend{}, middleware.After)
 	if err != nil {
 		return err

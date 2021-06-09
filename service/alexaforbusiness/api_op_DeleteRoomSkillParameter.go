@@ -16,7 +16,7 @@ func (c *Client) DeleteRoomSkillParameter(ctx context.Context, params *DeleteRoo
 		params = &DeleteRoomSkillParameterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRoomSkillParameter", params, optFns, addOperationDeleteRoomSkillParameterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRoomSkillParameter", params, optFns, c.addOperationDeleteRoomSkillParameterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteRoomSkillParameterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRoomSkillParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRoomSkillParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRoomSkillParameter{}, middleware.After)
 	if err != nil {
 		return err

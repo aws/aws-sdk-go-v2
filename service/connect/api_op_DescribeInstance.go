@@ -22,7 +22,7 @@ func (c *Client) DescribeInstance(ctx context.Context, params *DescribeInstanceI
 		params = &DescribeInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInstance", params, optFns, addOperationDescribeInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInstance", params, optFns, c.addOperationDescribeInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DescribeInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInstance{}, middleware.After)
 	if err != nil {
 		return err

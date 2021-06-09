@@ -22,7 +22,7 @@ func (c *Client) SetIdentityHeadersInNotificationsEnabled(ctx context.Context, p
 		params = &SetIdentityHeadersInNotificationsEnabledInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetIdentityHeadersInNotificationsEnabled", params, optFns, addOperationSetIdentityHeadersInNotificationsEnabledMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetIdentityHeadersInNotificationsEnabled", params, optFns, c.addOperationSetIdentityHeadersInNotificationsEnabledMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type SetIdentityHeadersInNotificationsEnabledOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetIdentityHeadersInNotificationsEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetIdentityHeadersInNotificationsEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetIdentityHeadersInNotificationsEnabled{}, middleware.After)
 	if err != nil {
 		return err

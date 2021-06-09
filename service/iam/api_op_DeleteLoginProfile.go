@@ -25,7 +25,7 @@ func (c *Client) DeleteLoginProfile(ctx context.Context, params *DeleteLoginProf
 		params = &DeleteLoginProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLoginProfile", params, optFns, addOperationDeleteLoginProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLoginProfile", params, optFns, c.addOperationDeleteLoginProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteLoginProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLoginProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLoginProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteLoginProfile{}, middleware.After)
 	if err != nil {
 		return err

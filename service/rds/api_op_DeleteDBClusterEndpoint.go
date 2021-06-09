@@ -17,7 +17,7 @@ func (c *Client) DeleteDBClusterEndpoint(ctx context.Context, params *DeleteDBCl
 		params = &DeleteDBClusterEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDBClusterEndpoint", params, optFns, addOperationDeleteDBClusterEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDBClusterEndpoint", params, optFns, c.addOperationDeleteDBClusterEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type DeleteDBClusterEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDBClusterEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDBClusterEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBClusterEndpoint{}, middleware.After)
 	if err != nil {
 		return err

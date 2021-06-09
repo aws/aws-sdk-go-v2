@@ -23,7 +23,7 @@ func (c *Client) ListEntitiesForPolicy(ctx context.Context, params *ListEntities
 		params = &ListEntitiesForPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEntitiesForPolicy", params, optFns, addOperationListEntitiesForPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEntitiesForPolicy", params, optFns, c.addOperationListEntitiesForPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type ListEntitiesForPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEntitiesForPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEntitiesForPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListEntitiesForPolicy{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ListMailboxPermissions(ctx context.Context, params *ListMailbox
 		params = &ListMailboxPermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListMailboxPermissions", params, optFns, addOperationListMailboxPermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListMailboxPermissions", params, optFns, c.addOperationListMailboxPermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ListMailboxPermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListMailboxPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListMailboxPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMailboxPermissions{}, middleware.After)
 	if err != nil {
 		return err

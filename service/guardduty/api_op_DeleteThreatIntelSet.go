@@ -16,7 +16,7 @@ func (c *Client) DeleteThreatIntelSet(ctx context.Context, params *DeleteThreatI
 		params = &DeleteThreatIntelSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteThreatIntelSet", params, optFns, addOperationDeleteThreatIntelSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteThreatIntelSet", params, optFns, c.addOperationDeleteThreatIntelSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteThreatIntelSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteThreatIntelSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteThreatIntelSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteThreatIntelSet{}, middleware.After)
 	if err != nil {
 		return err

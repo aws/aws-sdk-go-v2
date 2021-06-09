@@ -23,7 +23,7 @@ func (c *Client) ListQueueTags(ctx context.Context, params *ListQueueTagsInput, 
 		params = &ListQueueTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListQueueTags", params, optFns, addOperationListQueueTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListQueueTags", params, optFns, c.addOperationListQueueTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ListQueueTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListQueueTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListQueueTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListQueueTags{}, middleware.After)
 	if err != nil {
 		return err

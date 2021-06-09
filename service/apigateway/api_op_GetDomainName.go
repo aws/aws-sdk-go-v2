@@ -19,7 +19,7 @@ func (c *Client) GetDomainName(ctx context.Context, params *GetDomainNameInput, 
 		params = &GetDomainNameInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDomainName", params, optFns, addOperationGetDomainNameMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDomainName", params, optFns, c.addOperationGetDomainNameMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ type GetDomainNameOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainName{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) RemoveNotificationChannel(ctx context.Context, params *RemoveNo
 		params = &RemoveNotificationChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveNotificationChannel", params, optFns, addOperationRemoveNotificationChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveNotificationChannel", params, optFns, c.addOperationRemoveNotificationChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type RemoveNotificationChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveNotificationChannel{}, middleware.After)
 	if err != nil {
 		return err

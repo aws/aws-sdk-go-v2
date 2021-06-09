@@ -16,7 +16,7 @@ func (c *Client) UpdateMailboxQuota(ctx context.Context, params *UpdateMailboxQu
 		params = &UpdateMailboxQuotaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateMailboxQuota", params, optFns, addOperationUpdateMailboxQuotaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMailboxQuota", params, optFns, c.addOperationUpdateMailboxQuotaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type UpdateMailboxQuotaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateMailboxQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateMailboxQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMailboxQuota{}, middleware.After)
 	if err != nil {
 		return err

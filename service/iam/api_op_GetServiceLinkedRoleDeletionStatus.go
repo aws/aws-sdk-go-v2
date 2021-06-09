@@ -21,7 +21,7 @@ func (c *Client) GetServiceLinkedRoleDeletionStatus(ctx context.Context, params 
 		params = &GetServiceLinkedRoleDeletionStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetServiceLinkedRoleDeletionStatus", params, optFns, addOperationGetServiceLinkedRoleDeletionStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetServiceLinkedRoleDeletionStatus", params, optFns, c.addOperationGetServiceLinkedRoleDeletionStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetServiceLinkedRoleDeletionStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetServiceLinkedRoleDeletionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetServiceLinkedRoleDeletionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetServiceLinkedRoleDeletionStatus{}, middleware.After)
 	if err != nil {
 		return err

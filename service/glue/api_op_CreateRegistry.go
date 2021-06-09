@@ -16,7 +16,7 @@ func (c *Client) CreateRegistry(ctx context.Context, params *CreateRegistryInput
 		params = &CreateRegistryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRegistry", params, optFns, addOperationCreateRegistryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRegistry", params, optFns, c.addOperationCreateRegistryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type CreateRegistryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRegistry{}, middleware.After)
 	if err != nil {
 		return err

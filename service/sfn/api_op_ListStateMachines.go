@@ -24,7 +24,7 @@ func (c *Client) ListStateMachines(ctx context.Context, params *ListStateMachine
 		params = &ListStateMachinesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListStateMachines", params, optFns, addOperationListStateMachinesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListStateMachines", params, optFns, c.addOperationListStateMachinesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListStateMachinesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListStateMachinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListStateMachinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListStateMachines{}, middleware.After)
 	if err != nil {
 		return err

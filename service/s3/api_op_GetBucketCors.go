@@ -30,7 +30,7 @@ func (c *Client) GetBucketCors(ctx context.Context, params *GetBucketCorsInput, 
 		params = &GetBucketCorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketCors", params, optFns, addOperationGetBucketCorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketCors", params, optFns, c.addOperationGetBucketCorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type GetBucketCorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketCorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketCorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketCors{}, middleware.After)
 	if err != nil {
 		return err

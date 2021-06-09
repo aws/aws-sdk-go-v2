@@ -18,7 +18,7 @@ func (c *Client) ListBotLocales(ctx context.Context, params *ListBotLocalesInput
 		params = &ListBotLocalesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBotLocales", params, optFns, addOperationListBotLocalesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBotLocales", params, optFns, c.addOperationListBotLocalesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type ListBotLocalesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBotLocalesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBotLocalesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBotLocales{}, middleware.After)
 	if err != nil {
 		return err

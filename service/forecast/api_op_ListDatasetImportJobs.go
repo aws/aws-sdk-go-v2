@@ -22,7 +22,7 @@ func (c *Client) ListDatasetImportJobs(ctx context.Context, params *ListDatasetI
 		params = &ListDatasetImportJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDatasetImportJobs", params, optFns, addOperationListDatasetImportJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDatasetImportJobs", params, optFns, c.addOperationListDatasetImportJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type ListDatasetImportJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDatasetImportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDatasetImportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDatasetImportJobs{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) MarkAsArchived(ctx context.Context, params *MarkAsArchivedInput
 		params = &MarkAsArchivedInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MarkAsArchived", params, optFns, addOperationMarkAsArchivedMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MarkAsArchived", params, optFns, c.addOperationMarkAsArchivedMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type MarkAsArchivedOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMarkAsArchivedMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMarkAsArchivedMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpMarkAsArchived{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) BatchGetVariable(ctx context.Context, params *BatchGetVariableI
 		params = &BatchGetVariableInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetVariable", params, optFns, addOperationBatchGetVariableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetVariable", params, optFns, c.addOperationBatchGetVariableMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type BatchGetVariableOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetVariableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetVariableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetVariable{}, middleware.After)
 	if err != nil {
 		return err

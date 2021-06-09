@@ -17,7 +17,7 @@ func (c *Client) UpdateGatewayResponse(ctx context.Context, params *UpdateGatewa
 		params = &UpdateGatewayResponseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateGatewayResponse", params, optFns, addOperationUpdateGatewayResponseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateGatewayResponse", params, optFns, c.addOperationUpdateGatewayResponseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -207,7 +207,7 @@ type UpdateGatewayResponseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateGatewayResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateGatewayResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGatewayResponse{}, middleware.After)
 	if err != nil {
 		return err

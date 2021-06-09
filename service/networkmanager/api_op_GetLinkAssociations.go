@@ -19,7 +19,7 @@ func (c *Client) GetLinkAssociations(ctx context.Context, params *GetLinkAssocia
 		params = &GetLinkAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLinkAssociations", params, optFns, addOperationGetLinkAssociationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLinkAssociations", params, optFns, c.addOperationGetLinkAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type GetLinkAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLinkAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLinkAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLinkAssociations{}, middleware.After)
 	if err != nil {
 		return err

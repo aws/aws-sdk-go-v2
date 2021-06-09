@@ -125,7 +125,7 @@ func (c *Client) AssumeRoleWithSAML(ctx context.Context, params *AssumeRoleWithS
 		params = &AssumeRoleWithSAMLInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssumeRoleWithSAML", params, optFns, addOperationAssumeRoleWithSAMLMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssumeRoleWithSAML", params, optFns, c.addOperationAssumeRoleWithSAMLMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -302,7 +302,7 @@ type AssumeRoleWithSAMLOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssumeRoleWithSAMLMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssumeRoleWithSAMLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAssumeRoleWithSAML{}, middleware.After)
 	if err != nil {
 		return err

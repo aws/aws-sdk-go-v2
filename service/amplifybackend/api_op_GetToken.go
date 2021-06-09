@@ -16,7 +16,7 @@ func (c *Client) GetToken(ctx context.Context, params *GetTokenInput, optFns ...
 		params = &GetTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetToken", params, optFns, addOperationGetTokenMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetToken", params, optFns, c.addOperationGetTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetTokenOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetToken{}, middleware.After)
 	if err != nil {
 		return err

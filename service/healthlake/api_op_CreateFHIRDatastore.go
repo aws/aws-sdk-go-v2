@@ -18,7 +18,7 @@ func (c *Client) CreateFHIRDatastore(ctx context.Context, params *CreateFHIRData
 		params = &CreateFHIRDatastoreInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFHIRDatastore", params, optFns, addOperationCreateFHIRDatastoreMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFHIRDatastore", params, optFns, c.addOperationCreateFHIRDatastoreMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type CreateFHIRDatastoreOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFHIRDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFHIRDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateFHIRDatastore{}, middleware.After)
 	if err != nil {
 		return err

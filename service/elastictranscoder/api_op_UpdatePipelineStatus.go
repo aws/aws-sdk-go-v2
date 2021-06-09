@@ -22,7 +22,7 @@ func (c *Client) UpdatePipelineStatus(ctx context.Context, params *UpdatePipelin
 		params = &UpdatePipelineStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePipelineStatus", params, optFns, addOperationUpdatePipelineStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePipelineStatus", params, optFns, c.addOperationUpdatePipelineStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type UpdatePipelineStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePipelineStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePipelineStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePipelineStatus{}, middleware.After)
 	if err != nil {
 		return err

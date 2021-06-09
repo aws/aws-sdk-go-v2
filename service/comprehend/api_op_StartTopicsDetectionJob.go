@@ -19,7 +19,7 @@ func (c *Client) StartTopicsDetectionJob(ctx context.Context, params *StartTopic
 		params = &StartTopicsDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartTopicsDetectionJob", params, optFns, addOperationStartTopicsDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartTopicsDetectionJob", params, optFns, c.addOperationStartTopicsDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type StartTopicsDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartTopicsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartTopicsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTopicsDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

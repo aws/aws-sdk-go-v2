@@ -23,7 +23,7 @@ func (c *Client) GetExternalModels(ctx context.Context, params *GetExternalModel
 		params = &GetExternalModelsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetExternalModels", params, optFns, addOperationGetExternalModelsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetExternalModels", params, optFns, c.addOperationGetExternalModelsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetExternalModelsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetExternalModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetExternalModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetExternalModels{}, middleware.After)
 	if err != nil {
 		return err

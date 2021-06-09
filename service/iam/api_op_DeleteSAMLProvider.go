@@ -21,7 +21,7 @@ func (c *Client) DeleteSAMLProvider(ctx context.Context, params *DeleteSAMLProvi
 		params = &DeleteSAMLProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSAMLProvider", params, optFns, addOperationDeleteSAMLProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSAMLProvider", params, optFns, c.addOperationDeleteSAMLProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteSAMLProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSAMLProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSAMLProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteSAMLProvider{}, middleware.After)
 	if err != nil {
 		return err

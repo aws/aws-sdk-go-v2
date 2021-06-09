@@ -21,7 +21,7 @@ func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, 
 		params = &GetDataSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDataSource", params, optFns, addOperationGetDataSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDataSource", params, optFns, c.addOperationGetDataSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -142,7 +142,7 @@ type GetDataSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataSource{}, middleware.After)
 	if err != nil {
 		return err

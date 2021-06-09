@@ -27,7 +27,7 @@ func (c *Client) DeleteBot(ctx context.Context, params *DeleteBotInput, optFns .
 		params = &DeleteBotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBot", params, optFns, addOperationDeleteBotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBot", params, optFns, c.addOperationDeleteBotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteBotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBot{}, middleware.After)
 	if err != nil {
 		return err

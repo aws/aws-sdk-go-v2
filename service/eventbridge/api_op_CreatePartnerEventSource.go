@@ -31,7 +31,7 @@ func (c *Client) CreatePartnerEventSource(ctx context.Context, params *CreatePar
 		params = &CreatePartnerEventSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePartnerEventSource", params, optFns, addOperationCreatePartnerEventSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePartnerEventSource", params, optFns, c.addOperationCreatePartnerEventSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type CreatePartnerEventSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePartnerEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePartnerEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePartnerEventSource{}, middleware.After)
 	if err != nil {
 		return err

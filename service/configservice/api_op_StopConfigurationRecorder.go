@@ -17,7 +17,7 @@ func (c *Client) StopConfigurationRecorder(ctx context.Context, params *StopConf
 		params = &StopConfigurationRecorderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopConfigurationRecorder", params, optFns, addOperationStopConfigurationRecorderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopConfigurationRecorder", params, optFns, c.addOperationStopConfigurationRecorderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type StopConfigurationRecorderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopConfigurationRecorderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopConfigurationRecorderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopConfigurationRecorder{}, middleware.After)
 	if err != nil {
 		return err

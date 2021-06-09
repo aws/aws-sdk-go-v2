@@ -24,7 +24,7 @@ func (c *Client) LookupPolicy(ctx context.Context, params *LookupPolicyInput, op
 		params = &LookupPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "LookupPolicy", params, optFns, addOperationLookupPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "LookupPolicy", params, optFns, c.addOperationLookupPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type LookupPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationLookupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationLookupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpLookupPolicy{}, middleware.After)
 	if err != nil {
 		return err

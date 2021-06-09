@@ -24,7 +24,7 @@ func (c *Client) ResetInstanceAttribute(ctx context.Context, params *ResetInstan
 		params = &ResetInstanceAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetInstanceAttribute", params, optFns, addOperationResetInstanceAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetInstanceAttribute", params, optFns, c.addOperationResetInstanceAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ResetInstanceAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetInstanceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetInstanceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpResetInstanceAttribute{}, middleware.After)
 	if err != nil {
 		return err

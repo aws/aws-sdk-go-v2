@@ -21,7 +21,7 @@ func (c *Client) ListRepositoriesInDomain(ctx context.Context, params *ListRepos
 		params = &ListRepositoriesInDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRepositoriesInDomain", params, optFns, addOperationListRepositoriesInDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRepositoriesInDomain", params, optFns, c.addOperationListRepositoriesInDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type ListRepositoriesInDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRepositoriesInDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRepositoriesInDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRepositoriesInDomain{}, middleware.After)
 	if err != nil {
 		return err

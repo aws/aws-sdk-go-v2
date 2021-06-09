@@ -21,7 +21,7 @@ func (c *Client) ListOpenIDConnectProviders(ctx context.Context, params *ListOpe
 		params = &ListOpenIDConnectProvidersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListOpenIDConnectProviders", params, optFns, addOperationListOpenIDConnectProvidersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListOpenIDConnectProviders", params, optFns, c.addOperationListOpenIDConnectProvidersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type ListOpenIDConnectProvidersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListOpenIDConnectProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListOpenIDConnectProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListOpenIDConnectProviders{}, middleware.After)
 	if err != nil {
 		return err

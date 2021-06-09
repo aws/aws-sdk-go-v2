@@ -19,7 +19,7 @@ func (c *Client) ListCustomRoutingEndpointGroups(ctx context.Context, params *Li
 		params = &ListCustomRoutingEndpointGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCustomRoutingEndpointGroups", params, optFns, addOperationListCustomRoutingEndpointGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCustomRoutingEndpointGroups", params, optFns, c.addOperationListCustomRoutingEndpointGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListCustomRoutingEndpointGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCustomRoutingEndpointGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCustomRoutingEndpointGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCustomRoutingEndpointGroups{}, middleware.After)
 	if err != nil {
 		return err

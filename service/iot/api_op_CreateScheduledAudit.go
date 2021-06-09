@@ -17,7 +17,7 @@ func (c *Client) CreateScheduledAudit(ctx context.Context, params *CreateSchedul
 		params = &CreateScheduledAuditInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateScheduledAudit", params, optFns, addOperationCreateScheduledAuditMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateScheduledAudit", params, optFns, c.addOperationCreateScheduledAuditMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type CreateScheduledAuditOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateScheduledAuditMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateScheduledAuditMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateScheduledAudit{}, middleware.After)
 	if err != nil {
 		return err

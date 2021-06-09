@@ -24,7 +24,7 @@ func (c *Client) ListQueues(ctx context.Context, params *ListQueuesInput, optFns
 		params = &ListQueuesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListQueues", params, optFns, addOperationListQueuesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListQueues", params, optFns, c.addOperationListQueuesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ListQueuesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQueues{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) UpdateCustomVerificationEmailTemplate(ctx context.Context, para
 		params = &UpdateCustomVerificationEmailTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateCustomVerificationEmailTemplate", params, optFns, addOperationUpdateCustomVerificationEmailTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateCustomVerificationEmailTemplate", params, optFns, c.addOperationUpdateCustomVerificationEmailTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type UpdateCustomVerificationEmailTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateCustomVerificationEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateCustomVerificationEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateCustomVerificationEmailTemplate{}, middleware.After)
 	if err != nil {
 		return err

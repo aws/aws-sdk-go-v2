@@ -22,7 +22,7 @@ func (c *Client) UpdateS3Resources(ctx context.Context, params *UpdateS3Resource
 		params = &UpdateS3ResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateS3Resources", params, optFns, addOperationUpdateS3ResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateS3Resources", params, optFns, c.addOperationUpdateS3ResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type UpdateS3ResourcesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateS3ResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateS3ResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateS3Resources{}, middleware.After)
 	if err != nil {
 		return err

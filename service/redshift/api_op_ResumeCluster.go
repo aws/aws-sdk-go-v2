@@ -17,7 +17,7 @@ func (c *Client) ResumeCluster(ctx context.Context, params *ResumeClusterInput, 
 		params = &ResumeClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResumeCluster", params, optFns, addOperationResumeClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResumeCluster", params, optFns, c.addOperationResumeClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type ResumeClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResumeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResumeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpResumeCluster{}, middleware.After)
 	if err != nil {
 		return err

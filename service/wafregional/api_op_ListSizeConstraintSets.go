@@ -23,7 +23,7 @@ func (c *Client) ListSizeConstraintSets(ctx context.Context, params *ListSizeCon
 		params = &ListSizeConstraintSetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSizeConstraintSets", params, optFns, addOperationListSizeConstraintSetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSizeConstraintSets", params, optFns, c.addOperationListSizeConstraintSetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ListSizeConstraintSetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSizeConstraintSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSizeConstraintSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSizeConstraintSets{}, middleware.After)
 	if err != nil {
 		return err

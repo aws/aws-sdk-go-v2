@@ -26,7 +26,7 @@ func (c *Client) GetCommandInvocation(ctx context.Context, params *GetCommandInv
 		params = &GetCommandInvocationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCommandInvocation", params, optFns, addOperationGetCommandInvocationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCommandInvocation", params, optFns, c.addOperationGetCommandInvocationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -191,7 +191,7 @@ type GetCommandInvocationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCommandInvocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCommandInvocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCommandInvocation{}, middleware.After)
 	if err != nil {
 		return err

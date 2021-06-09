@@ -34,7 +34,7 @@ func (c *Client) DeleteGlobalReplicationGroup(ctx context.Context, params *Delet
 		params = &DeleteGlobalReplicationGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGlobalReplicationGroup", params, optFns, addOperationDeleteGlobalReplicationGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGlobalReplicationGroup", params, optFns, c.addOperationDeleteGlobalReplicationGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DeleteGlobalReplicationGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteGlobalReplicationGroup{}, middleware.After)
 	if err != nil {
 		return err

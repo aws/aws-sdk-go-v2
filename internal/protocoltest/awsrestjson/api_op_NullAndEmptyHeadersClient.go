@@ -15,7 +15,7 @@ func (c *Client) NullAndEmptyHeadersClient(ctx context.Context, params *NullAndE
 		params = &NullAndEmptyHeadersClientInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "NullAndEmptyHeadersClient", params, optFns, addOperationNullAndEmptyHeadersClientMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "NullAndEmptyHeadersClient", params, optFns, c.addOperationNullAndEmptyHeadersClientMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type NullAndEmptyHeadersClientOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationNullAndEmptyHeadersClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationNullAndEmptyHeadersClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpNullAndEmptyHeadersClient{}, middleware.After)
 	if err != nil {
 		return err

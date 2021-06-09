@@ -19,7 +19,7 @@ func (c *Client) BatchPutGeofence(ctx context.Context, params *BatchPutGeofenceI
 		params = &BatchPutGeofenceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchPutGeofence", params, optFns, addOperationBatchPutGeofenceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchPutGeofence", params, optFns, c.addOperationBatchPutGeofenceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type BatchPutGeofenceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchPutGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchPutGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutGeofence{}, middleware.After)
 	if err != nil {
 		return err

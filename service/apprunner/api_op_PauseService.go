@@ -21,7 +21,7 @@ func (c *Client) PauseService(ctx context.Context, params *PauseServiceInput, op
 		params = &PauseServiceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PauseService", params, optFns, addOperationPauseServiceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PauseService", params, optFns, c.addOperationPauseServiceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type PauseServiceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPauseServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPauseServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPauseService{}, middleware.After)
 	if err != nil {
 		return err

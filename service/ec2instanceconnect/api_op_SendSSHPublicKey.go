@@ -20,7 +20,7 @@ func (c *Client) SendSSHPublicKey(ctx context.Context, params *SendSSHPublicKeyI
 		params = &SendSSHPublicKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendSSHPublicKey", params, optFns, addOperationSendSSHPublicKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendSSHPublicKey", params, optFns, c.addOperationSendSSHPublicKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type SendSSHPublicKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendSSHPublicKey{}, middleware.After)
 	if err != nil {
 		return err

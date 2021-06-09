@@ -31,7 +31,7 @@ func (c *Client) GetAssetPropertyValueHistory(ctx context.Context, params *GetAs
 		params = &GetAssetPropertyValueHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAssetPropertyValueHistory", params, optFns, addOperationGetAssetPropertyValueHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAssetPropertyValueHistory", params, optFns, c.addOperationGetAssetPropertyValueHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type GetAssetPropertyValueHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAssetPropertyValueHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAssetPropertyValueHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssetPropertyValueHistory{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) DetachVolume(ctx context.Context, params *DetachVolumeInput, op
 		params = &DetachVolumeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachVolume", params, optFns, addOperationDetachVolumeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachVolume", params, optFns, c.addOperationDetachVolumeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DetachVolumeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetachVolume{}, middleware.After)
 	if err != nil {
 		return err

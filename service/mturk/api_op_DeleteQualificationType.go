@@ -25,7 +25,7 @@ func (c *Client) DeleteQualificationType(ctx context.Context, params *DeleteQual
 		params = &DeleteQualificationTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteQualificationType", params, optFns, addOperationDeleteQualificationTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteQualificationType", params, optFns, c.addOperationDeleteQualificationTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteQualificationTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteQualificationType{}, middleware.After)
 	if err != nil {
 		return err

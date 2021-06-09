@@ -29,7 +29,7 @@ func (c *Client) CreateDataRepositoryTask(ctx context.Context, params *CreateDat
 		params = &CreateDataRepositoryTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDataRepositoryTask", params, optFns, addOperationCreateDataRepositoryTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDataRepositoryTask", params, optFns, c.addOperationCreateDataRepositoryTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type CreateDataRepositoryTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDataRepositoryTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDataRepositoryTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataRepositoryTask{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) ListCampaigns(ctx context.Context, params *ListCampaignsInput, 
 		params = &ListCampaignsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCampaigns", params, optFns, addOperationListCampaignsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCampaigns", params, optFns, c.addOperationListCampaignsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListCampaignsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCampaignsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCampaignsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCampaigns{}, middleware.After)
 	if err != nil {
 		return err

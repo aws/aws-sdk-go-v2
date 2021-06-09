@@ -17,7 +17,7 @@ func (c *Client) DownloadDBLogFilePortion(ctx context.Context, params *DownloadD
 		params = &DownloadDBLogFilePortionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DownloadDBLogFilePortion", params, optFns, addOperationDownloadDBLogFilePortionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DownloadDBLogFilePortion", params, optFns, c.addOperationDownloadDBLogFilePortionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type DownloadDBLogFilePortionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDownloadDBLogFilePortionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDownloadDBLogFilePortionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDownloadDBLogFilePortion{}, middleware.After)
 	if err != nil {
 		return err

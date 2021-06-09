@@ -19,7 +19,7 @@ func (c *Client) GetTimeSeriesServiceStatistics(ctx context.Context, params *Get
 		params = &GetTimeSeriesServiceStatisticsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTimeSeriesServiceStatistics", params, optFns, addOperationGetTimeSeriesServiceStatisticsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTimeSeriesServiceStatistics", params, optFns, c.addOperationGetTimeSeriesServiceStatisticsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type GetTimeSeriesServiceStatisticsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTimeSeriesServiceStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTimeSeriesServiceStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTimeSeriesServiceStatistics{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeRefreshSchemasStatus(ctx context.Context, params *Descr
 		params = &DescribeRefreshSchemasStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRefreshSchemasStatus", params, optFns, addOperationDescribeRefreshSchemasStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRefreshSchemasStatus", params, optFns, c.addOperationDescribeRefreshSchemasStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DescribeRefreshSchemasStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRefreshSchemasStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRefreshSchemasStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRefreshSchemasStatus{}, middleware.After)
 	if err != nil {
 		return err

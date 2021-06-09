@@ -17,7 +17,7 @@ func (c *Client) ListEulas(ctx context.Context, params *ListEulasInput, optFns .
 		params = &ListEulasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEulas", params, optFns, addOperationListEulasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEulas", params, optFns, c.addOperationListEulasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type ListEulasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEulasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEulasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEulas{}, middleware.After)
 	if err != nil {
 		return err

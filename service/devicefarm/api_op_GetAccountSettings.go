@@ -18,7 +18,7 @@ func (c *Client) GetAccountSettings(ctx context.Context, params *GetAccountSetti
 		params = &GetAccountSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccountSettings", params, optFns, addOperationGetAccountSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccountSettings", params, optFns, c.addOperationGetAccountSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type GetAccountSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAccountSettings{}, middleware.After)
 	if err != nil {
 		return err

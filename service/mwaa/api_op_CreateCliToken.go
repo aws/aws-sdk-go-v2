@@ -17,7 +17,7 @@ func (c *Client) CreateCliToken(ctx context.Context, params *CreateCliTokenInput
 		params = &CreateCliTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCliToken", params, optFns, addOperationCreateCliTokenMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCliToken", params, optFns, c.addOperationCreateCliTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type CreateCliTokenOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCliTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCliTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCliToken{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListProgressUpdateStreams(ctx context.Context, params *ListProg
 		params = &ListProgressUpdateStreamsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListProgressUpdateStreams", params, optFns, addOperationListProgressUpdateStreamsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListProgressUpdateStreams", params, optFns, c.addOperationListProgressUpdateStreamsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListProgressUpdateStreamsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListProgressUpdateStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListProgressUpdateStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProgressUpdateStreams{}, middleware.After)
 	if err != nil {
 		return err

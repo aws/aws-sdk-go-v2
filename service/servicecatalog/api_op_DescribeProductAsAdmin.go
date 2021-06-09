@@ -18,7 +18,7 @@ func (c *Client) DescribeProductAsAdmin(ctx context.Context, params *DescribePro
 		params = &DescribeProductAsAdminInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeProductAsAdmin", params, optFns, addOperationDescribeProductAsAdminMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeProductAsAdmin", params, optFns, c.addOperationDescribeProductAsAdminMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type DescribeProductAsAdminOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeProductAsAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeProductAsAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProductAsAdmin{}, middleware.After)
 	if err != nil {
 		return err

@@ -24,7 +24,7 @@ func (c *Client) StartMonitoringMember(ctx context.Context, params *StartMonitor
 		params = &StartMonitoringMemberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartMonitoringMember", params, optFns, addOperationStartMonitoringMemberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartMonitoringMember", params, optFns, c.addOperationStartMonitoringMemberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type StartMonitoringMemberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartMonitoringMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartMonitoringMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMonitoringMember{}, middleware.After)
 	if err != nil {
 		return err

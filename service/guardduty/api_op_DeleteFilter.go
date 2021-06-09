@@ -16,7 +16,7 @@ func (c *Client) DeleteFilter(ctx context.Context, params *DeleteFilterInput, op
 		params = &DeleteFilterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFilter", params, optFns, addOperationDeleteFilterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFilter", params, optFns, c.addOperationDeleteFilterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteFilterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFilter{}, middleware.After)
 	if err != nil {
 		return err

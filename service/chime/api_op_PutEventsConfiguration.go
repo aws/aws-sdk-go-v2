@@ -19,7 +19,7 @@ func (c *Client) PutEventsConfiguration(ctx context.Context, params *PutEventsCo
 		params = &PutEventsConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutEventsConfiguration", params, optFns, addOperationPutEventsConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutEventsConfiguration", params, optFns, c.addOperationPutEventsConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type PutEventsConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutEventsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutEventsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEventsConfiguration{}, middleware.After)
 	if err != nil {
 		return err

@@ -24,7 +24,7 @@ func (c *Client) AddListenerCertificates(ctx context.Context, params *AddListene
 		params = &AddListenerCertificatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddListenerCertificates", params, optFns, addOperationAddListenerCertificatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddListenerCertificates", params, optFns, c.addOperationAddListenerCertificatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type AddListenerCertificatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddListenerCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddListenerCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAddListenerCertificates{}, middleware.After)
 	if err != nil {
 		return err

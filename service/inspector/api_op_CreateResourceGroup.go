@@ -20,7 +20,7 @@ func (c *Client) CreateResourceGroup(ctx context.Context, params *CreateResource
 		params = &CreateResourceGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateResourceGroup", params, optFns, addOperationCreateResourceGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateResourceGroup", params, optFns, c.addOperationCreateResourceGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type CreateResourceGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateResourceGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateResourceGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateResourceGroup{}, middleware.After)
 	if err != nil {
 		return err

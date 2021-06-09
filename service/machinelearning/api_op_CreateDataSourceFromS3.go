@@ -39,7 +39,7 @@ func (c *Client) CreateDataSourceFromS3(ctx context.Context, params *CreateDataS
 		params = &CreateDataSourceFromS3Input{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDataSourceFromS3", params, optFns, addOperationCreateDataSourceFromS3Middlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDataSourceFromS3", params, optFns, c.addOperationCreateDataSourceFromS3Middlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ type CreateDataSourceFromS3Output struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDataSourceFromS3Middlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDataSourceFromS3Middlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataSourceFromS3{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeAcceleratorAttributes(ctx context.Context, params *Desc
 		params = &DescribeAcceleratorAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAcceleratorAttributes", params, optFns, addOperationDescribeAcceleratorAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAcceleratorAttributes", params, optFns, c.addOperationDescribeAcceleratorAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DescribeAcceleratorAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAcceleratorAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAcceleratorAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAcceleratorAttributes{}, middleware.After)
 	if err != nil {
 		return err

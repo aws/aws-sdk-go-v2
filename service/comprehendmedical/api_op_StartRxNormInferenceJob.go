@@ -20,7 +20,7 @@ func (c *Client) StartRxNormInferenceJob(ctx context.Context, params *StartRxNor
 		params = &StartRxNormInferenceJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartRxNormInferenceJob", params, optFns, addOperationStartRxNormInferenceJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartRxNormInferenceJob", params, optFns, c.addOperationStartRxNormInferenceJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type StartRxNormInferenceJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartRxNormInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartRxNormInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartRxNormInferenceJob{}, middleware.After)
 	if err != nil {
 		return err

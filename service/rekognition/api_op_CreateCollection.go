@@ -25,7 +25,7 @@ func (c *Client) CreateCollection(ctx context.Context, params *CreateCollectionI
 		params = &CreateCollectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCollection", params, optFns, addOperationCreateCollectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCollection", params, optFns, c.addOperationCreateCollectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type CreateCollectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCollection{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) ReleaseStaticIp(ctx context.Context, params *ReleaseStaticIpInp
 		params = &ReleaseStaticIpInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReleaseStaticIp", params, optFns, addOperationReleaseStaticIpMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReleaseStaticIp", params, optFns, c.addOperationReleaseStaticIpMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type ReleaseStaticIpOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReleaseStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReleaseStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReleaseStaticIp{}, middleware.After)
 	if err != nil {
 		return err

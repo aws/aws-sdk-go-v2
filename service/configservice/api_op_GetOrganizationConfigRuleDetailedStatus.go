@@ -19,7 +19,7 @@ func (c *Client) GetOrganizationConfigRuleDetailedStatus(ctx context.Context, pa
 		params = &GetOrganizationConfigRuleDetailedStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetOrganizationConfigRuleDetailedStatus", params, optFns, addOperationGetOrganizationConfigRuleDetailedStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetOrganizationConfigRuleDetailedStatus", params, optFns, c.addOperationGetOrganizationConfigRuleDetailedStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetOrganizationConfigRuleDetailedStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetOrganizationConfigRuleDetailedStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetOrganizationConfigRuleDetailedStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOrganizationConfigRuleDetailedStatus{}, middleware.After)
 	if err != nil {
 		return err

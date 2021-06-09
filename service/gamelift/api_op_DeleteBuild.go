@@ -24,7 +24,7 @@ func (c *Client) DeleteBuild(ctx context.Context, params *DeleteBuildInput, optF
 		params = &DeleteBuildInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBuild", params, optFns, addOperationDeleteBuildMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBuild", params, optFns, c.addOperationDeleteBuildMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteBuildOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBuild{}, middleware.After)
 	if err != nil {
 		return err

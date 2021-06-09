@@ -18,7 +18,7 @@ func (c *Client) DescribeEndpointAuthorization(ctx context.Context, params *Desc
 		params = &DescribeEndpointAuthorizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEndpointAuthorization", params, optFns, addOperationDescribeEndpointAuthorizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEndpointAuthorization", params, optFns, c.addOperationDescribeEndpointAuthorizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DescribeEndpointAuthorizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEndpointAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEndpointAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEndpointAuthorization{}, middleware.After)
 	if err != nil {
 		return err

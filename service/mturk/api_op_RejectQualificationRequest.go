@@ -18,7 +18,7 @@ func (c *Client) RejectQualificationRequest(ctx context.Context, params *RejectQ
 		params = &RejectQualificationRequestInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RejectQualificationRequest", params, optFns, addOperationRejectQualificationRequestMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RejectQualificationRequest", params, optFns, c.addOperationRejectQualificationRequestMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type RejectQualificationRequestOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRejectQualificationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRejectQualificationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRejectQualificationRequest{}, middleware.After)
 	if err != nil {
 		return err

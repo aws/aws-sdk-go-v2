@@ -55,7 +55,7 @@ func (c *Client) DeleteBucketPolicy(ctx context.Context, params *DeleteBucketPol
 		params = &DeleteBucketPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketPolicy", params, optFns, addOperationDeleteBucketPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketPolicy", params, optFns, c.addOperationDeleteBucketPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type DeleteBucketPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBucketPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBucketPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteBucketPolicy{}, middleware.After)
 	if err != nil {
 		return err

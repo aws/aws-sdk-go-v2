@@ -17,7 +17,7 @@ func (c *Client) AttachStaticIp(ctx context.Context, params *AttachStaticIpInput
 		params = &AttachStaticIpInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachStaticIp", params, optFns, addOperationAttachStaticIpMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachStaticIp", params, optFns, c.addOperationAttachStaticIpMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type AttachStaticIpOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachStaticIp{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) ModifyClusterSnapshotSchedule(ctx context.Context, params *Modi
 		params = &ModifyClusterSnapshotScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyClusterSnapshotSchedule", params, optFns, addOperationModifyClusterSnapshotScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyClusterSnapshotSchedule", params, optFns, c.addOperationModifyClusterSnapshotScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type ModifyClusterSnapshotScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyClusterSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyClusterSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyClusterSnapshotSchedule{}, middleware.After)
 	if err != nil {
 		return err

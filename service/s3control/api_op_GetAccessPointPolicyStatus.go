@@ -25,7 +25,7 @@ func (c *Client) GetAccessPointPolicyStatus(ctx context.Context, params *GetAcce
 		params = &GetAccessPointPolicyStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccessPointPolicyStatus", params, optFns, addOperationGetAccessPointPolicyStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccessPointPolicyStatus", params, optFns, c.addOperationGetAccessPointPolicyStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetAccessPointPolicyStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccessPointPolicyStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccessPointPolicyStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetAccessPointPolicyStatus{}, middleware.After)
 	if err != nil {
 		return err

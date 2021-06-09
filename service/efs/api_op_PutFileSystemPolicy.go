@@ -25,7 +25,7 @@ func (c *Client) PutFileSystemPolicy(ctx context.Context, params *PutFileSystemP
 		params = &PutFileSystemPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutFileSystemPolicy", params, optFns, addOperationPutFileSystemPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutFileSystemPolicy", params, optFns, c.addOperationPutFileSystemPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type PutFileSystemPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutFileSystemPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutFileSystemPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFileSystemPolicy{}, middleware.After)
 	if err != nil {
 		return err

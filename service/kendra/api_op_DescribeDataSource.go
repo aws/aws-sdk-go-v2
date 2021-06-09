@@ -18,7 +18,7 @@ func (c *Client) DescribeDataSource(ctx context.Context, params *DescribeDataSou
 		params = &DescribeDataSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDataSource", params, optFns, addOperationDescribeDataSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDataSource", params, optFns, c.addOperationDescribeDataSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type DescribeDataSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDataSource{}, middleware.After)
 	if err != nil {
 		return err

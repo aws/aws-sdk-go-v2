@@ -16,7 +16,7 @@ func (c *Client) DisassociateWirelessDeviceFromThing(ctx context.Context, params
 		params = &DisassociateWirelessDeviceFromThingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateWirelessDeviceFromThing", params, optFns, addOperationDisassociateWirelessDeviceFromThingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateWirelessDeviceFromThing", params, optFns, c.addOperationDisassociateWirelessDeviceFromThingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DisassociateWirelessDeviceFromThingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateWirelessDeviceFromThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateWirelessDeviceFromThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateWirelessDeviceFromThing{}, middleware.After)
 	if err != nil {
 		return err

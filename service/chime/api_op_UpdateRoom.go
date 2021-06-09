@@ -18,7 +18,7 @@ func (c *Client) UpdateRoom(ctx context.Context, params *UpdateRoomInput, optFns
 		params = &UpdateRoomInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRoom", params, optFns, addOperationUpdateRoomMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRoom", params, optFns, c.addOperationUpdateRoomMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UpdateRoomOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRoom{}, middleware.After)
 	if err != nil {
 		return err

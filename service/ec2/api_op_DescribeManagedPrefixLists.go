@@ -19,7 +19,7 @@ func (c *Client) DescribeManagedPrefixLists(ctx context.Context, params *Describ
 		params = &DescribeManagedPrefixListsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeManagedPrefixLists", params, optFns, addOperationDescribeManagedPrefixListsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeManagedPrefixLists", params, optFns, c.addOperationDescribeManagedPrefixListsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DescribeManagedPrefixListsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeManagedPrefixListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeManagedPrefixListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeManagedPrefixLists{}, middleware.After)
 	if err != nil {
 		return err

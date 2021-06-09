@@ -18,7 +18,7 @@ func (c *Client) SetTypeDefaultVersion(ctx context.Context, params *SetTypeDefau
 		params = &SetTypeDefaultVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetTypeDefaultVersion", params, optFns, addOperationSetTypeDefaultVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetTypeDefaultVersion", params, optFns, c.addOperationSetTypeDefaultVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type SetTypeDefaultVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetTypeDefaultVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetTypeDefaultVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetTypeDefaultVersion{}, middleware.After)
 	if err != nil {
 		return err

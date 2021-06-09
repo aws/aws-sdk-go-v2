@@ -24,7 +24,7 @@ func (c *Client) DeletePackageVersions(ctx context.Context, params *DeletePackag
 		params = &DeletePackageVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePackageVersions", params, optFns, addOperationDeletePackageVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePackageVersions", params, optFns, c.addOperationDeletePackageVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -126,7 +126,7 @@ type DeletePackageVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePackageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePackageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePackageVersions{}, middleware.After)
 	if err != nil {
 		return err

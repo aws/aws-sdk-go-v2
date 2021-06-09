@@ -20,7 +20,7 @@ func (c *Client) ResetServiceSpecificCredential(ctx context.Context, params *Res
 		params = &ResetServiceSpecificCredentialInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetServiceSpecificCredential", params, optFns, addOperationResetServiceSpecificCredentialMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetServiceSpecificCredential", params, optFns, c.addOperationResetServiceSpecificCredentialMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ResetServiceSpecificCredentialOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetServiceSpecificCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetServiceSpecificCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpResetServiceSpecificCredential{}, middleware.After)
 	if err != nil {
 		return err

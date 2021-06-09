@@ -17,7 +17,7 @@ func (c *Client) GetApprovalRuleTemplate(ctx context.Context, params *GetApprova
 		params = &GetApprovalRuleTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetApprovalRuleTemplate", params, optFns, addOperationGetApprovalRuleTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetApprovalRuleTemplate", params, optFns, c.addOperationGetApprovalRuleTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetApprovalRuleTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetApprovalRuleTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetApprovalRuleTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetApprovalRuleTemplate{}, middleware.After)
 	if err != nil {
 		return err

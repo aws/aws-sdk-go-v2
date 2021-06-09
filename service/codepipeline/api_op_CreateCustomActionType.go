@@ -18,7 +18,7 @@ func (c *Client) CreateCustomActionType(ctx context.Context, params *CreateCusto
 		params = &CreateCustomActionTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCustomActionType", params, optFns, addOperationCreateCustomActionTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCustomActionType", params, optFns, c.addOperationCreateCustomActionTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type CreateCustomActionTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCustomActionTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCustomActionTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCustomActionType{}, middleware.After)
 	if err != nil {
 		return err

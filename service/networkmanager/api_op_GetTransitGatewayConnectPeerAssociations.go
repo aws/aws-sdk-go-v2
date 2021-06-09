@@ -19,7 +19,7 @@ func (c *Client) GetTransitGatewayConnectPeerAssociations(ctx context.Context, p
 		params = &GetTransitGatewayConnectPeerAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTransitGatewayConnectPeerAssociations", params, optFns, addOperationGetTransitGatewayConnectPeerAssociationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTransitGatewayConnectPeerAssociations", params, optFns, c.addOperationGetTransitGatewayConnectPeerAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetTransitGatewayConnectPeerAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTransitGatewayConnectPeerAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTransitGatewayConnectPeerAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTransitGatewayConnectPeerAssociations{}, middleware.After)
 	if err != nil {
 		return err

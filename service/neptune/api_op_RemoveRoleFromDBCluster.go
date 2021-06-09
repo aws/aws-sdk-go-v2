@@ -16,7 +16,7 @@ func (c *Client) RemoveRoleFromDBCluster(ctx context.Context, params *RemoveRole
 		params = &RemoveRoleFromDBClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveRoleFromDBCluster", params, optFns, addOperationRemoveRoleFromDBClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveRoleFromDBCluster", params, optFns, c.addOperationRemoveRoleFromDBClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type RemoveRoleFromDBClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveRoleFromDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveRoleFromDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemoveRoleFromDBCluster{}, middleware.After)
 	if err != nil {
 		return err

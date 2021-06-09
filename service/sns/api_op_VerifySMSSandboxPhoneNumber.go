@@ -25,7 +25,7 @@ func (c *Client) VerifySMSSandboxPhoneNumber(ctx context.Context, params *Verify
 		params = &VerifySMSSandboxPhoneNumberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "VerifySMSSandboxPhoneNumber", params, optFns, addOperationVerifySMSSandboxPhoneNumberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "VerifySMSSandboxPhoneNumber", params, optFns, c.addOperationVerifySMSSandboxPhoneNumberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type VerifySMSSandboxPhoneNumberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationVerifySMSSandboxPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationVerifySMSSandboxPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpVerifySMSSandboxPhoneNumber{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) InlineDocument(ctx context.Context, params *InlineDocumentInput
 		params = &InlineDocumentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InlineDocument", params, optFns, addOperationInlineDocumentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InlineDocument", params, optFns, c.addOperationInlineDocumentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type InlineDocumentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInlineDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInlineDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInlineDocument{}, middleware.After)
 	if err != nil {
 		return err

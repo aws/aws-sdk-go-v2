@@ -45,7 +45,7 @@ func (c *Client) TerminateWorkflowExecution(ctx context.Context, params *Termina
 		params = &TerminateWorkflowExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TerminateWorkflowExecution", params, optFns, addOperationTerminateWorkflowExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TerminateWorkflowExecution", params, optFns, c.addOperationTerminateWorkflowExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +104,7 @@ type TerminateWorkflowExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTerminateWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTerminateWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpTerminateWorkflowExecution{}, middleware.After)
 	if err != nil {
 		return err

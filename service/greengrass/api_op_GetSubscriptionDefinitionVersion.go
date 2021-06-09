@@ -17,7 +17,7 @@ func (c *Client) GetSubscriptionDefinitionVersion(ctx context.Context, params *G
 		params = &GetSubscriptionDefinitionVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSubscriptionDefinitionVersion", params, optFns, addOperationGetSubscriptionDefinitionVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSubscriptionDefinitionVersion", params, optFns, c.addOperationGetSubscriptionDefinitionVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type GetSubscriptionDefinitionVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSubscriptionDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSubscriptionDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSubscriptionDefinitionVersion{}, middleware.After)
 	if err != nil {
 		return err

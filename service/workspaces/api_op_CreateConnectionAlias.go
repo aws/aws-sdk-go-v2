@@ -19,7 +19,7 @@ func (c *Client) CreateConnectionAlias(ctx context.Context, params *CreateConnec
 		params = &CreateConnectionAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateConnectionAlias", params, optFns, addOperationCreateConnectionAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateConnectionAlias", params, optFns, c.addOperationCreateConnectionAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type CreateConnectionAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateConnectionAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateConnectionAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateConnectionAlias{}, middleware.After)
 	if err != nil {
 		return err

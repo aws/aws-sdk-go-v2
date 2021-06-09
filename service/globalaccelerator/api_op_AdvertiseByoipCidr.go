@@ -25,7 +25,7 @@ func (c *Client) AdvertiseByoipCidr(ctx context.Context, params *AdvertiseByoipC
 		params = &AdvertiseByoipCidrInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdvertiseByoipCidr", params, optFns, addOperationAdvertiseByoipCidrMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdvertiseByoipCidr", params, optFns, c.addOperationAdvertiseByoipCidrMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type AdvertiseByoipCidrOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdvertiseByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdvertiseByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdvertiseByoipCidr{}, middleware.After)
 	if err != nil {
 		return err

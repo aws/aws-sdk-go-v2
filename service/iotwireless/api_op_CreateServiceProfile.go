@@ -18,7 +18,7 @@ func (c *Client) CreateServiceProfile(ctx context.Context, params *CreateService
 		params = &CreateServiceProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateServiceProfile", params, optFns, addOperationCreateServiceProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateServiceProfile", params, optFns, c.addOperationCreateServiceProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type CreateServiceProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateServiceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateServiceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateServiceProfile{}, middleware.After)
 	if err != nil {
 		return err

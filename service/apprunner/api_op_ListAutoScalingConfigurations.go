@@ -21,7 +21,7 @@ func (c *Client) ListAutoScalingConfigurations(ctx context.Context, params *List
 		params = &ListAutoScalingConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAutoScalingConfigurations", params, optFns, addOperationListAutoScalingConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAutoScalingConfigurations", params, optFns, c.addOperationListAutoScalingConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type ListAutoScalingConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAutoScalingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAutoScalingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAutoScalingConfigurations{}, middleware.After)
 	if err != nil {
 		return err

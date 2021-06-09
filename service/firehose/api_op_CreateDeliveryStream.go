@@ -75,7 +75,7 @@ func (c *Client) CreateDeliveryStream(ctx context.Context, params *CreateDeliver
 		params = &CreateDeliveryStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDeliveryStream", params, optFns, addOperationCreateDeliveryStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDeliveryStream", params, optFns, c.addOperationCreateDeliveryStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -154,7 +154,7 @@ type CreateDeliveryStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDeliveryStream{}, middleware.After)
 	if err != nil {
 		return err

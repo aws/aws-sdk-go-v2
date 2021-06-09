@@ -18,7 +18,7 @@ func (c *Client) ListTypeRegistrations(ctx context.Context, params *ListTypeRegi
 		params = &ListTypeRegistrationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTypeRegistrations", params, optFns, addOperationListTypeRegistrationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTypeRegistrations", params, optFns, c.addOperationListTypeRegistrationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type ListTypeRegistrationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTypeRegistrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTypeRegistrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListTypeRegistrations{}, middleware.After)
 	if err != nil {
 		return err

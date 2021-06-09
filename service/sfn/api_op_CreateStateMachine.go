@@ -32,7 +32,7 @@ func (c *Client) CreateStateMachine(ctx context.Context, params *CreateStateMach
 		params = &CreateStateMachineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateStateMachine", params, optFns, addOperationCreateStateMachineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateStateMachine", params, optFns, c.addOperationCreateStateMachineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +118,7 @@ type CreateStateMachineOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateStateMachine{}, middleware.After)
 	if err != nil {
 		return err

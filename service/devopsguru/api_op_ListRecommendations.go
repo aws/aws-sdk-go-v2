@@ -19,7 +19,7 @@ func (c *Client) ListRecommendations(ctx context.Context, params *ListRecommenda
 		params = &ListRecommendationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRecommendations", params, optFns, addOperationListRecommendationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRecommendations", params, optFns, c.addOperationListRecommendationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListRecommendationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecommendations{}, middleware.After)
 	if err != nil {
 		return err

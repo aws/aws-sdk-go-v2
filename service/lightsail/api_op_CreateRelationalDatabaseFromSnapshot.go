@@ -25,7 +25,7 @@ func (c *Client) CreateRelationalDatabaseFromSnapshot(ctx context.Context, param
 		params = &CreateRelationalDatabaseFromSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRelationalDatabaseFromSnapshot", params, optFns, addOperationCreateRelationalDatabaseFromSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRelationalDatabaseFromSnapshot", params, optFns, c.addOperationCreateRelationalDatabaseFromSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type CreateRelationalDatabaseFromSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRelationalDatabaseFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRelationalDatabaseFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRelationalDatabaseFromSnapshot{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateSamplingRule(ctx context.Context, params *UpdateSamplingR
 		params = &UpdateSamplingRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSamplingRule", params, optFns, addOperationUpdateSamplingRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSamplingRule", params, optFns, c.addOperationUpdateSamplingRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type UpdateSamplingRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSamplingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSamplingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSamplingRule{}, middleware.After)
 	if err != nil {
 		return err

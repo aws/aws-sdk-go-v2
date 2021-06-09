@@ -16,7 +16,7 @@ func (c *Client) DeleteMetricStream(ctx context.Context, params *DeleteMetricStr
 		params = &DeleteMetricStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMetricStream", params, optFns, addOperationDeleteMetricStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMetricStream", params, optFns, c.addOperationDeleteMetricStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteMetricStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMetricStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMetricStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteMetricStream{}, middleware.After)
 	if err != nil {
 		return err

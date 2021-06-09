@@ -26,7 +26,7 @@ func (c *Client) SearchTables(ctx context.Context, params *SearchTablesInput, op
 		params = &SearchTablesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchTables", params, optFns, addOperationSearchTablesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchTables", params, optFns, c.addOperationSearchTablesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type SearchTablesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchTables{}, middleware.After)
 	if err != nil {
 		return err

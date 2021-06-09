@@ -18,7 +18,7 @@ func (c *Client) UpdateSmsTemplate(ctx context.Context, params *UpdateSmsTemplat
 		params = &UpdateSmsTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSmsTemplate", params, optFns, addOperationUpdateSmsTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSmsTemplate", params, optFns, c.addOperationUpdateSmsTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type UpdateSmsTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSmsTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSmsTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSmsTemplate{}, middleware.After)
 	if err != nil {
 		return err

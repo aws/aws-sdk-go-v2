@@ -16,7 +16,7 @@ func (c *Client) DeleteServiceProfile(ctx context.Context, params *DeleteService
 		params = &DeleteServiceProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteServiceProfile", params, optFns, addOperationDeleteServiceProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteServiceProfile", params, optFns, c.addOperationDeleteServiceProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteServiceProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteServiceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteServiceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteServiceProfile{}, middleware.After)
 	if err != nil {
 		return err

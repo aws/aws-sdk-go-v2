@@ -17,7 +17,7 @@ func (c *Client) DescribePipelineDefinitionForExecution(ctx context.Context, par
 		params = &DescribePipelineDefinitionForExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePipelineDefinitionForExecution", params, optFns, addOperationDescribePipelineDefinitionForExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePipelineDefinitionForExecution", params, optFns, c.addOperationDescribePipelineDefinitionForExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribePipelineDefinitionForExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePipelineDefinitionForExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePipelineDefinitionForExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePipelineDefinitionForExecution{}, middleware.After)
 	if err != nil {
 		return err

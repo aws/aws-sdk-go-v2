@@ -16,7 +16,7 @@ func (c *Client) DeleteSchedule(ctx context.Context, params *DeleteScheduleInput
 		params = &DeleteScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSchedule", params, optFns, addOperationDeleteScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSchedule", params, optFns, c.addOperationDeleteScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSchedule{}, middleware.After)
 	if err != nil {
 		return err

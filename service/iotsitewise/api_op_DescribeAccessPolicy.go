@@ -20,7 +20,7 @@ func (c *Client) DescribeAccessPolicy(ctx context.Context, params *DescribeAcces
 		params = &DescribeAccessPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAccessPolicy", params, optFns, addOperationDescribeAccessPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAccessPolicy", params, optFns, c.addOperationDescribeAccessPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type DescribeAccessPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAccessPolicy{}, middleware.After)
 	if err != nil {
 		return err

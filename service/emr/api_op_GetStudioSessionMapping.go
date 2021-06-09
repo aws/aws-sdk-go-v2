@@ -18,7 +18,7 @@ func (c *Client) GetStudioSessionMapping(ctx context.Context, params *GetStudioS
 		params = &GetStudioSessionMappingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetStudioSessionMapping", params, optFns, addOperationGetStudioSessionMappingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetStudioSessionMapping", params, optFns, c.addOperationGetStudioSessionMappingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type GetStudioSessionMappingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetStudioSessionMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetStudioSessionMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetStudioSessionMapping{}, middleware.After)
 	if err != nil {
 		return err

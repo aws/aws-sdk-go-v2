@@ -21,7 +21,7 @@ func (c *Client) GetResourceCollection(ctx context.Context, params *GetResourceC
 		params = &GetResourceCollectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetResourceCollection", params, optFns, addOperationGetResourceCollectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetResourceCollection", params, optFns, c.addOperationGetResourceCollectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type GetResourceCollectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetResourceCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetResourceCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceCollection{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) StopRun(ctx context.Context, params *StopRunInput, optFns ...fu
 		params = &StopRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopRun", params, optFns, addOperationStopRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopRun", params, optFns, c.addOperationStopRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type StopRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopRun{}, middleware.After)
 	if err != nil {
 		return err

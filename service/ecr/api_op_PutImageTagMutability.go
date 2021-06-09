@@ -20,7 +20,7 @@ func (c *Client) PutImageTagMutability(ctx context.Context, params *PutImageTagM
 		params = &PutImageTagMutabilityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutImageTagMutability", params, optFns, addOperationPutImageTagMutabilityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutImageTagMutability", params, optFns, c.addOperationPutImageTagMutabilityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type PutImageTagMutabilityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutImageTagMutabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutImageTagMutabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutImageTagMutability{}, middleware.After)
 	if err != nil {
 		return err

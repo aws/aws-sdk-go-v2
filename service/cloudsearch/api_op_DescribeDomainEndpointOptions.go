@@ -21,7 +21,7 @@ func (c *Client) DescribeDomainEndpointOptions(ctx context.Context, params *Desc
 		params = &DescribeDomainEndpointOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDomainEndpointOptions", params, optFns, addOperationDescribeDomainEndpointOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDomainEndpointOptions", params, optFns, c.addOperationDescribeDomainEndpointOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeDomainEndpointOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDomainEndpointOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDomainEndpointOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDomainEndpointOptions{}, middleware.After)
 	if err != nil {
 		return err

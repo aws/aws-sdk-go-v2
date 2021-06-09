@@ -27,7 +27,7 @@ func (c *Client) DescribeReservedInstancesOfferings(ctx context.Context, params 
 		params = &DescribeReservedInstancesOfferingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeReservedInstancesOfferings", params, optFns, addOperationDescribeReservedInstancesOfferingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeReservedInstancesOfferings", params, optFns, c.addOperationDescribeReservedInstancesOfferingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -156,7 +156,7 @@ type DescribeReservedInstancesOfferingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeReservedInstancesOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeReservedInstancesOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeReservedInstancesOfferings{}, middleware.After)
 	if err != nil {
 		return err

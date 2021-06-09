@@ -17,7 +17,7 @@ func (c *Client) RegisterOnPremisesInstance(ctx context.Context, params *Registe
 		params = &RegisterOnPremisesInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterOnPremisesInstance", params, optFns, addOperationRegisterOnPremisesInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterOnPremisesInstance", params, optFns, c.addOperationRegisterOnPremisesInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type RegisterOnPremisesInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterOnPremisesInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterOnPremisesInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterOnPremisesInstance{}, middleware.After)
 	if err != nil {
 		return err

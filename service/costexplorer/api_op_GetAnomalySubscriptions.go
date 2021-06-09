@@ -18,7 +18,7 @@ func (c *Client) GetAnomalySubscriptions(ctx context.Context, params *GetAnomaly
 		params = &GetAnomalySubscriptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAnomalySubscriptions", params, optFns, addOperationGetAnomalySubscriptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAnomalySubscriptions", params, optFns, c.addOperationGetAnomalySubscriptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type GetAnomalySubscriptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAnomalySubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAnomalySubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAnomalySubscriptions{}, middleware.After)
 	if err != nil {
 		return err

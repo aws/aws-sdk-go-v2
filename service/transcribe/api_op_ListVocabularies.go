@@ -19,7 +19,7 @@ func (c *Client) ListVocabularies(ctx context.Context, params *ListVocabulariesI
 		params = &ListVocabulariesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListVocabularies", params, optFns, addOperationListVocabulariesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListVocabularies", params, optFns, c.addOperationListVocabulariesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type ListVocabulariesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListVocabulariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListVocabulariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListVocabularies{}, middleware.After)
 	if err != nil {
 		return err

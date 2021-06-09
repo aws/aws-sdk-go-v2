@@ -19,7 +19,7 @@ func (c *Client) UpdateApprovalRuleTemplateContent(ctx context.Context, params *
 		params = &UpdateApprovalRuleTemplateContentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateApprovalRuleTemplateContent", params, optFns, addOperationUpdateApprovalRuleTemplateContentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateApprovalRuleTemplateContent", params, optFns, c.addOperationUpdateApprovalRuleTemplateContentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type UpdateApprovalRuleTemplateContentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateApprovalRuleTemplateContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateApprovalRuleTemplateContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateApprovalRuleTemplateContent{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetInstanceState(ctx context.Context, params *GetInstanceStateI
 		params = &GetInstanceStateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInstanceState", params, optFns, addOperationGetInstanceStateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInstanceState", params, optFns, c.addOperationGetInstanceStateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetInstanceStateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInstanceStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInstanceStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInstanceState{}, middleware.After)
 	if err != nil {
 		return err

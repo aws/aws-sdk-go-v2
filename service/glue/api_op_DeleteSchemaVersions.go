@@ -29,7 +29,7 @@ func (c *Client) DeleteSchemaVersions(ctx context.Context, params *DeleteSchemaV
 		params = &DeleteSchemaVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSchemaVersions", params, optFns, addOperationDeleteSchemaVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSchemaVersions", params, optFns, c.addOperationDeleteSchemaVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DeleteSchemaVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSchemaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSchemaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSchemaVersions{}, middleware.After)
 	if err != nil {
 		return err

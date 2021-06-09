@@ -20,7 +20,7 @@ func (c *Client) ExecuteStatement(ctx context.Context, params *ExecuteStatementI
 		params = &ExecuteStatementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExecuteStatement", params, optFns, addOperationExecuteStatementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExecuteStatement", params, optFns, c.addOperationExecuteStatementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ type ExecuteStatementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteStatement{}, middleware.After)
 	if err != nil {
 		return err

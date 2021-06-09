@@ -17,7 +17,7 @@ func (c *Client) IgnoreQueryParamsInResponse(ctx context.Context, params *Ignore
 		params = &IgnoreQueryParamsInResponseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "IgnoreQueryParamsInResponse", params, optFns, addOperationIgnoreQueryParamsInResponseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "IgnoreQueryParamsInResponse", params, optFns, c.addOperationIgnoreQueryParamsInResponseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type IgnoreQueryParamsInResponseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationIgnoreQueryParamsInResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationIgnoreQueryParamsInResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpIgnoreQueryParamsInResponse{}, middleware.After)
 	if err != nil {
 		return err

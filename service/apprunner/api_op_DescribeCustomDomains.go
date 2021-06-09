@@ -19,7 +19,7 @@ func (c *Client) DescribeCustomDomains(ctx context.Context, params *DescribeCust
 		params = &DescribeCustomDomainsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCustomDomains", params, optFns, addOperationDescribeCustomDomainsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCustomDomains", params, optFns, c.addOperationDescribeCustomDomainsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type DescribeCustomDomainsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCustomDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCustomDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeCustomDomains{}, middleware.After)
 	if err != nil {
 		return err

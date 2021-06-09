@@ -24,7 +24,7 @@ func (c *Client) ListLocalDisks(ctx context.Context, params *ListLocalDisksInput
 		params = &ListLocalDisksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLocalDisks", params, optFns, addOperationListLocalDisksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLocalDisks", params, optFns, c.addOperationListLocalDisksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListLocalDisksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLocalDisksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLocalDisksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLocalDisks{}, middleware.After)
 	if err != nil {
 		return err

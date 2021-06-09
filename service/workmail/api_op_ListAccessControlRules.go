@@ -17,7 +17,7 @@ func (c *Client) ListAccessControlRules(ctx context.Context, params *ListAccessC
 		params = &ListAccessControlRulesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAccessControlRules", params, optFns, addOperationListAccessControlRulesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAccessControlRules", params, optFns, c.addOperationListAccessControlRulesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type ListAccessControlRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAccessControlRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAccessControlRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccessControlRules{}, middleware.After)
 	if err != nil {
 		return err

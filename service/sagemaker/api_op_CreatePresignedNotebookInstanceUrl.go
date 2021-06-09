@@ -33,7 +33,7 @@ func (c *Client) CreatePresignedNotebookInstanceUrl(ctx context.Context, params 
 		params = &CreatePresignedNotebookInstanceUrlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePresignedNotebookInstanceUrl", params, optFns, addOperationCreatePresignedNotebookInstanceUrlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePresignedNotebookInstanceUrl", params, optFns, c.addOperationCreatePresignedNotebookInstanceUrlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type CreatePresignedNotebookInstanceUrlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePresignedNotebookInstanceUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePresignedNotebookInstanceUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePresignedNotebookInstanceUrl{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInp
 		params = &DescribeDatasetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDataset", params, optFns, addOperationDescribeDatasetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDataset", params, optFns, c.addOperationDescribeDatasetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DescribeDatasetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataset{}, middleware.After)
 	if err != nil {
 		return err

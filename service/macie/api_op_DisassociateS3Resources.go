@@ -21,7 +21,7 @@ func (c *Client) DisassociateS3Resources(ctx context.Context, params *Disassocia
 		params = &DisassociateS3ResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateS3Resources", params, optFns, addOperationDisassociateS3ResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateS3Resources", params, optFns, c.addOperationDisassociateS3ResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DisassociateS3ResourcesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateS3ResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateS3ResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateS3Resources{}, middleware.After)
 	if err != nil {
 		return err

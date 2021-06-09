@@ -25,7 +25,7 @@ func (c *Client) ListCreateAccountStatus(ctx context.Context, params *ListCreate
 		params = &ListCreateAccountStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCreateAccountStatus", params, optFns, addOperationListCreateAccountStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCreateAccountStatus", params, optFns, c.addOperationListCreateAccountStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type ListCreateAccountStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCreateAccountStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCreateAccountStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCreateAccountStatus{}, middleware.After)
 	if err != nil {
 		return err

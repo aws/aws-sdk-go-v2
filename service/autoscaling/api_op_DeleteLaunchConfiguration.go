@@ -18,7 +18,7 @@ func (c *Client) DeleteLaunchConfiguration(ctx context.Context, params *DeleteLa
 		params = &DeleteLaunchConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLaunchConfiguration", params, optFns, addOperationDeleteLaunchConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLaunchConfiguration", params, optFns, c.addOperationDeleteLaunchConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteLaunchConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteLaunchConfiguration{}, middleware.After)
 	if err != nil {
 		return err

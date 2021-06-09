@@ -17,7 +17,7 @@ func (c *Client) UpdateTrafficPolicyComment(ctx context.Context, params *UpdateT
 		params = &UpdateTrafficPolicyCommentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateTrafficPolicyComment", params, optFns, addOperationUpdateTrafficPolicyCommentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateTrafficPolicyComment", params, optFns, c.addOperationUpdateTrafficPolicyCommentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type UpdateTrafficPolicyCommentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateTrafficPolicyCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateTrafficPolicyCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpUpdateTrafficPolicyComment{}, middleware.After)
 	if err != nil {
 		return err

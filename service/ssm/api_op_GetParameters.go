@@ -18,7 +18,7 @@ func (c *Client) GetParameters(ctx context.Context, params *GetParametersInput, 
 		params = &GetParametersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetParameters", params, optFns, addOperationGetParametersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetParameters", params, optFns, c.addOperationGetParametersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetParametersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetParameters{}, middleware.After)
 	if err != nil {
 		return err

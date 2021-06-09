@@ -16,7 +16,7 @@ func (c *Client) DeleteVocabulary(ctx context.Context, params *DeleteVocabularyI
 		params = &DeleteVocabularyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVocabulary", params, optFns, addOperationDeleteVocabularyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVocabulary", params, optFns, c.addOperationDeleteVocabularyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteVocabularyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteVocabulary{}, middleware.After)
 	if err != nil {
 		return err

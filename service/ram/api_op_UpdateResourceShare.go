@@ -17,7 +17,7 @@ func (c *Client) UpdateResourceShare(ctx context.Context, params *UpdateResource
 		params = &UpdateResourceShareInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateResourceShare", params, optFns, addOperationUpdateResourceShareMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateResourceShare", params, optFns, c.addOperationUpdateResourceShareMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type UpdateResourceShareOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResourceShare{}, middleware.After)
 	if err != nil {
 		return err

@@ -73,7 +73,7 @@ func (c *Client) RunInstances(ctx context.Context, params *RunInstancesInput, op
 		params = &RunInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RunInstances", params, optFns, addOperationRunInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RunInstances", params, optFns, c.addOperationRunInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -349,7 +349,7 @@ type RunInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRunInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRunInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpRunInstances{}, middleware.After)
 	if err != nil {
 		return err

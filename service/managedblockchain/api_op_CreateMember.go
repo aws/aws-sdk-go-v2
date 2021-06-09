@@ -19,7 +19,7 @@ func (c *Client) CreateMember(ctx context.Context, params *CreateMemberInput, op
 		params = &CreateMemberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMember", params, optFns, addOperationCreateMemberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMember", params, optFns, c.addOperationCreateMemberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type CreateMemberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMember{}, middleware.After)
 	if err != nil {
 		return err

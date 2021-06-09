@@ -133,7 +133,7 @@ func (c *Client) CreateGovCloudAccount(ctx context.Context, params *CreateGovClo
 		params = &CreateGovCloudAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateGovCloudAccount", params, optFns, addOperationCreateGovCloudAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateGovCloudAccount", params, optFns, c.addOperationCreateGovCloudAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -216,7 +216,7 @@ type CreateGovCloudAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateGovCloudAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateGovCloudAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGovCloudAccount{}, middleware.After)
 	if err != nil {
 		return err

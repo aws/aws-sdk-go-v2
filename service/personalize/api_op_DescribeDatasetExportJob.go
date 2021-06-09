@@ -18,7 +18,7 @@ func (c *Client) DescribeDatasetExportJob(ctx context.Context, params *DescribeD
 		params = &DescribeDatasetExportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDatasetExportJob", params, optFns, addOperationDescribeDatasetExportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDatasetExportJob", params, optFns, c.addOperationDescribeDatasetExportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeDatasetExportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDatasetExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDatasetExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDatasetExportJob{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ListQuerySuggestionsBlockLists(ctx context.Context, params *Lis
 		params = &ListQuerySuggestionsBlockListsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListQuerySuggestionsBlockLists", params, optFns, addOperationListQuerySuggestionsBlockListsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListQuerySuggestionsBlockLists", params, optFns, c.addOperationListQuerySuggestionsBlockListsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ListQuerySuggestionsBlockListsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListQuerySuggestionsBlockListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListQuerySuggestionsBlockListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListQuerySuggestionsBlockLists{}, middleware.After)
 	if err != nil {
 		return err

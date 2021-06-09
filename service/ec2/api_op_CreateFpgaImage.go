@@ -22,7 +22,7 @@ func (c *Client) CreateFpgaImage(ctx context.Context, params *CreateFpgaImageInp
 		params = &CreateFpgaImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFpgaImage", params, optFns, addOperationCreateFpgaImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFpgaImage", params, optFns, c.addOperationCreateFpgaImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type CreateFpgaImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFpgaImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFpgaImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateFpgaImage{}, middleware.After)
 	if err != nil {
 		return err

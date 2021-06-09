@@ -20,7 +20,7 @@ func (c *Client) SetCognitoEvents(ctx context.Context, params *SetCognitoEventsI
 		params = &SetCognitoEventsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetCognitoEvents", params, optFns, addOperationSetCognitoEventsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetCognitoEvents", params, optFns, c.addOperationSetCognitoEventsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type SetCognitoEventsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetCognitoEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetCognitoEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSetCognitoEvents{}, middleware.After)
 	if err != nil {
 		return err

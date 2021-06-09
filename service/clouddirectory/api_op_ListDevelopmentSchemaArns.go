@@ -17,7 +17,7 @@ func (c *Client) ListDevelopmentSchemaArns(ctx context.Context, params *ListDeve
 		params = &ListDevelopmentSchemaArnsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDevelopmentSchemaArns", params, optFns, addOperationListDevelopmentSchemaArnsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDevelopmentSchemaArns", params, optFns, c.addOperationListDevelopmentSchemaArnsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type ListDevelopmentSchemaArnsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDevelopmentSchemaArnsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDevelopmentSchemaArnsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDevelopmentSchemaArns{}, middleware.After)
 	if err != nil {
 		return err

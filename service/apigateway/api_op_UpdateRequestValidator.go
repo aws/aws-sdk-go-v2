@@ -17,7 +17,7 @@ func (c *Client) UpdateRequestValidator(ctx context.Context, params *UpdateReque
 		params = &UpdateRequestValidatorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRequestValidator", params, optFns, addOperationUpdateRequestValidatorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRequestValidator", params, optFns, c.addOperationUpdateRequestValidatorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type UpdateRequestValidatorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRequestValidatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRequestValidatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRequestValidator{}, middleware.After)
 	if err != nil {
 		return err

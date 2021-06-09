@@ -17,7 +17,7 @@ func (c *Client) RegisterClient(ctx context.Context, params *RegisterClientInput
 		params = &RegisterClientInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterClient", params, optFns, addOperationRegisterClientMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterClient", params, optFns, c.addOperationRegisterClientMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type RegisterClientOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterClient{}, middleware.After)
 	if err != nil {
 		return err

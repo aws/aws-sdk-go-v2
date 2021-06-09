@@ -18,7 +18,7 @@ func (c *Client) DescribeDRTAccess(ctx context.Context, params *DescribeDRTAcces
 		params = &DescribeDRTAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDRTAccess", params, optFns, addOperationDescribeDRTAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDRTAccess", params, optFns, c.addOperationDescribeDRTAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeDRTAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDRTAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDRTAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDRTAccess{}, middleware.After)
 	if err != nil {
 		return err

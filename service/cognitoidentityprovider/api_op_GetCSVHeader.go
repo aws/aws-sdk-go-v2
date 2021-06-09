@@ -17,7 +17,7 @@ func (c *Client) GetCSVHeader(ctx context.Context, params *GetCSVHeaderInput, op
 		params = &GetCSVHeaderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCSVHeader", params, optFns, addOperationGetCSVHeaderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCSVHeader", params, optFns, c.addOperationGetCSVHeaderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetCSVHeaderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCSVHeaderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCSVHeaderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCSVHeader{}, middleware.After)
 	if err != nil {
 		return err

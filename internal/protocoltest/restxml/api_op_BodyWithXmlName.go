@@ -17,7 +17,7 @@ func (c *Client) BodyWithXmlName(ctx context.Context, params *BodyWithXmlNameInp
 		params = &BodyWithXmlNameInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BodyWithXmlName", params, optFns, addOperationBodyWithXmlNameMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BodyWithXmlName", params, optFns, c.addOperationBodyWithXmlNameMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ type BodyWithXmlNameOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBodyWithXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBodyWithXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpBodyWithXmlName{}, middleware.After)
 	if err != nil {
 		return err

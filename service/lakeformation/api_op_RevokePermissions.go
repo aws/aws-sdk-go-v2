@@ -18,7 +18,7 @@ func (c *Client) RevokePermissions(ctx context.Context, params *RevokePermission
 		params = &RevokePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokePermissions", params, optFns, addOperationRevokePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokePermissions", params, optFns, c.addOperationRevokePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type RevokePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRevokePermissions{}, middleware.After)
 	if err != nil {
 		return err

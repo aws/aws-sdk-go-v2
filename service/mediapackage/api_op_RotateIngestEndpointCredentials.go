@@ -18,7 +18,7 @@ func (c *Client) RotateIngestEndpointCredentials(ctx context.Context, params *Ro
 		params = &RotateIngestEndpointCredentialsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RotateIngestEndpointCredentials", params, optFns, addOperationRotateIngestEndpointCredentialsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RotateIngestEndpointCredentials", params, optFns, c.addOperationRotateIngestEndpointCredentialsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type RotateIngestEndpointCredentialsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRotateIngestEndpointCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRotateIngestEndpointCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRotateIngestEndpointCredentials{}, middleware.After)
 	if err != nil {
 		return err

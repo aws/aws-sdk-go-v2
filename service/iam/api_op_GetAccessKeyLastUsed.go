@@ -19,7 +19,7 @@ func (c *Client) GetAccessKeyLastUsed(ctx context.Context, params *GetAccessKeyL
 		params = &GetAccessKeyLastUsedInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccessKeyLastUsed", params, optFns, addOperationGetAccessKeyLastUsedMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccessKeyLastUsed", params, optFns, c.addOperationGetAccessKeyLastUsedMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetAccessKeyLastUsedOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccessKeyLastUsedMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccessKeyLastUsedMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetAccessKeyLastUsed{}, middleware.After)
 	if err != nil {
 		return err

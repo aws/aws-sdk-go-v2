@@ -24,7 +24,7 @@ func (c *Client) CreateNamespace(ctx context.Context, params *CreateNamespaceInp
 		params = &CreateNamespaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateNamespace", params, optFns, addOperationCreateNamespaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateNamespace", params, optFns, c.addOperationCreateNamespaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type CreateNamespaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNamespace{}, middleware.After)
 	if err != nil {
 		return err

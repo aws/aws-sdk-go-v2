@@ -21,7 +21,7 @@ func (c *Client) ListFirewallRules(ctx context.Context, params *ListFirewallRule
 		params = &ListFirewallRulesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFirewallRules", params, optFns, addOperationListFirewallRulesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFirewallRules", params, optFns, c.addOperationListFirewallRulesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type ListFirewallRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFirewallRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFirewallRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFirewallRules{}, middleware.After)
 	if err != nil {
 		return err

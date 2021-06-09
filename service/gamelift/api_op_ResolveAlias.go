@@ -19,7 +19,7 @@ func (c *Client) ResolveAlias(ctx context.Context, params *ResolveAliasInput, op
 		params = &ResolveAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResolveAlias", params, optFns, addOperationResolveAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResolveAlias", params, optFns, c.addOperationResolveAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ResolveAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResolveAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResolveAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResolveAlias{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DescribeTextTranslationJob(ctx context.Context, params *Describ
 		params = &DescribeTextTranslationJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTextTranslationJob", params, optFns, addOperationDescribeTextTranslationJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTextTranslationJob", params, optFns, c.addOperationDescribeTextTranslationJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DescribeTextTranslationJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTextTranslationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTextTranslationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTextTranslationJob{}, middleware.After)
 	if err != nil {
 		return err

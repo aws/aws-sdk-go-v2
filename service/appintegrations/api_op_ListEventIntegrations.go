@@ -18,7 +18,7 @@ func (c *Client) ListEventIntegrations(ctx context.Context, params *ListEventInt
 		params = &ListEventIntegrationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEventIntegrations", params, optFns, addOperationListEventIntegrationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEventIntegrations", params, optFns, c.addOperationListEventIntegrationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ListEventIntegrationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEventIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEventIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEventIntegrations{}, middleware.After)
 	if err != nil {
 		return err

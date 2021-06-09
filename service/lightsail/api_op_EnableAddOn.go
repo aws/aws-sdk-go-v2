@@ -19,7 +19,7 @@ func (c *Client) EnableAddOn(ctx context.Context, params *EnableAddOnInput, optF
 		params = &EnableAddOnInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableAddOn", params, optFns, addOperationEnableAddOnMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableAddOn", params, optFns, c.addOperationEnableAddOnMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type EnableAddOnOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableAddOnMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableAddOnMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableAddOn{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) SearchSkillGroups(ctx context.Context, params *SearchSkillGroup
 		params = &SearchSkillGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchSkillGroups", params, optFns, addOperationSearchSkillGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchSkillGroups", params, optFns, c.addOperationSearchSkillGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type SearchSkillGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchSkillGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchSkillGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchSkillGroups{}, middleware.After)
 	if err != nil {
 		return err

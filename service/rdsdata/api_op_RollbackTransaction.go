@@ -17,7 +17,7 @@ func (c *Client) RollbackTransaction(ctx context.Context, params *RollbackTransa
 		params = &RollbackTransactionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RollbackTransaction", params, optFns, addOperationRollbackTransactionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RollbackTransaction", params, optFns, c.addOperationRollbackTransactionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type RollbackTransactionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRollbackTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRollbackTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRollbackTransaction{}, middleware.After)
 	if err != nil {
 		return err

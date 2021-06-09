@@ -17,7 +17,7 @@ func (c *Client) CreateBot(ctx context.Context, params *CreateBotInput, optFns .
 		params = &CreateBotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateBot", params, optFns, addOperationCreateBotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBot", params, optFns, c.addOperationCreateBotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CreateBotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBot{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DescribeAccountOverview(ctx context.Context, params *DescribeAc
 		params = &DescribeAccountOverviewInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAccountOverview", params, optFns, addOperationDescribeAccountOverviewMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAccountOverview", params, optFns, c.addOperationDescribeAccountOverviewMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeAccountOverviewOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAccountOverviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAccountOverviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAccountOverview{}, middleware.After)
 	if err != nil {
 		return err

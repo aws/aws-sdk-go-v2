@@ -30,7 +30,7 @@ func (c *Client) DescribePredictorBacktestExportJob(ctx context.Context, params 
 		params = &DescribePredictorBacktestExportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePredictorBacktestExportJob", params, optFns, addOperationDescribePredictorBacktestExportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePredictorBacktestExportJob", params, optFns, c.addOperationDescribePredictorBacktestExportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +104,7 @@ type DescribePredictorBacktestExportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePredictorBacktestExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePredictorBacktestExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePredictorBacktestExportJob{}, middleware.After)
 	if err != nil {
 		return err

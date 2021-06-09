@@ -19,7 +19,7 @@ func (c *Client) ListFlows(ctx context.Context, params *ListFlowsInput, optFns .
 		params = &ListFlowsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFlows", params, optFns, addOperationListFlowsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFlows", params, optFns, c.addOperationListFlowsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ListFlowsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFlows{}, middleware.After)
 	if err != nil {
 		return err

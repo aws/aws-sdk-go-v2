@@ -21,7 +21,7 @@ func (c *Client) DeleteWorkerBlock(ctx context.Context, params *DeleteWorkerBloc
 		params = &DeleteWorkerBlockInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkerBlock", params, optFns, addOperationDeleteWorkerBlockMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkerBlock", params, optFns, c.addOperationDeleteWorkerBlockMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteWorkerBlockOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteWorkerBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteWorkerBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWorkerBlock{}, middleware.After)
 	if err != nil {
 		return err

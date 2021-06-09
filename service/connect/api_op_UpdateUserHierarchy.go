@@ -16,7 +16,7 @@ func (c *Client) UpdateUserHierarchy(ctx context.Context, params *UpdateUserHier
 		params = &UpdateUserHierarchyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateUserHierarchy", params, optFns, addOperationUpdateUserHierarchyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateUserHierarchy", params, optFns, c.addOperationUpdateUserHierarchyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type UpdateUserHierarchyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateUserHierarchyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateUserHierarchyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateUserHierarchy{}, middleware.After)
 	if err != nil {
 		return err

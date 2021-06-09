@@ -18,7 +18,7 @@ func (c *Client) DescribeSubnetGroups(ctx context.Context, params *DescribeSubne
 		params = &DescribeSubnetGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSubnetGroups", params, optFns, addOperationDescribeSubnetGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSubnetGroups", params, optFns, c.addOperationDescribeSubnetGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DescribeSubnetGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSubnetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSubnetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSubnetGroups{}, middleware.After)
 	if err != nil {
 		return err

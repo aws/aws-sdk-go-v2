@@ -17,7 +17,7 @@ func (c *Client) DeleteV2LoggingLevel(ctx context.Context, params *DeleteV2Loggi
 		params = &DeleteV2LoggingLevelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteV2LoggingLevel", params, optFns, addOperationDeleteV2LoggingLevelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteV2LoggingLevel", params, optFns, c.addOperationDeleteV2LoggingLevelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteV2LoggingLevelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteV2LoggingLevelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteV2LoggingLevelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteV2LoggingLevel{}, middleware.After)
 	if err != nil {
 		return err

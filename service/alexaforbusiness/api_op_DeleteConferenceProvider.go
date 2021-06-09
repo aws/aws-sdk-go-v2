@@ -16,7 +16,7 @@ func (c *Client) DeleteConferenceProvider(ctx context.Context, params *DeleteCon
 		params = &DeleteConferenceProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteConferenceProvider", params, optFns, addOperationDeleteConferenceProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteConferenceProvider", params, optFns, c.addOperationDeleteConferenceProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteConferenceProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteConferenceProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteConferenceProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteConferenceProvider{}, middleware.After)
 	if err != nil {
 		return err

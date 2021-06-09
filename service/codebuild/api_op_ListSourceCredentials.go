@@ -17,7 +17,7 @@ func (c *Client) ListSourceCredentials(ctx context.Context, params *ListSourceCr
 		params = &ListSourceCredentialsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSourceCredentials", params, optFns, addOperationListSourceCredentialsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSourceCredentials", params, optFns, c.addOperationListSourceCredentialsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type ListSourceCredentialsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSourceCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSourceCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSourceCredentials{}, middleware.After)
 	if err != nil {
 		return err

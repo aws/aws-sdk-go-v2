@@ -19,7 +19,7 @@ func (c *Client) DescribeDocumentVersions(ctx context.Context, params *DescribeD
 		params = &DescribeDocumentVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDocumentVersions", params, optFns, addOperationDescribeDocumentVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDocumentVersions", params, optFns, c.addOperationDescribeDocumentVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DescribeDocumentVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDocumentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDocumentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDocumentVersions{}, middleware.After)
 	if err != nil {
 		return err

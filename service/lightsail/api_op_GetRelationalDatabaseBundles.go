@@ -19,7 +19,7 @@ func (c *Client) GetRelationalDatabaseBundles(ctx context.Context, params *GetRe
 		params = &GetRelationalDatabaseBundlesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRelationalDatabaseBundles", params, optFns, addOperationGetRelationalDatabaseBundlesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRelationalDatabaseBundles", params, optFns, c.addOperationGetRelationalDatabaseBundlesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetRelationalDatabaseBundlesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRelationalDatabaseBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRelationalDatabaseBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseBundles{}, middleware.After)
 	if err != nil {
 		return err

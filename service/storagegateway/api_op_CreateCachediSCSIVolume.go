@@ -29,7 +29,7 @@ func (c *Client) CreateCachediSCSIVolume(ctx context.Context, params *CreateCach
 		params = &CreateCachediSCSIVolumeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCachediSCSIVolume", params, optFns, addOperationCreateCachediSCSIVolumeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCachediSCSIVolume", params, optFns, c.addOperationCreateCachediSCSIVolumeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -120,7 +120,7 @@ type CreateCachediSCSIVolumeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCachediSCSIVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCachediSCSIVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCachediSCSIVolume{}, middleware.After)
 	if err != nil {
 		return err

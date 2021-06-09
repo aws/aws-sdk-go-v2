@@ -21,7 +21,7 @@ func (c *Client) CreateCustomVerificationEmailTemplate(ctx context.Context, para
 		params = &CreateCustomVerificationEmailTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCustomVerificationEmailTemplate", params, optFns, addOperationCreateCustomVerificationEmailTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCustomVerificationEmailTemplate", params, optFns, c.addOperationCreateCustomVerificationEmailTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type CreateCustomVerificationEmailTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCustomVerificationEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCustomVerificationEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateCustomVerificationEmailTemplate{}, middleware.After)
 	if err != nil {
 		return err

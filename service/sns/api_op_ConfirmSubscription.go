@@ -20,7 +20,7 @@ func (c *Client) ConfirmSubscription(ctx context.Context, params *ConfirmSubscri
 		params = &ConfirmSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ConfirmSubscription", params, optFns, addOperationConfirmSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ConfirmSubscription", params, optFns, c.addOperationConfirmSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ConfirmSubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationConfirmSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationConfirmSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpConfirmSubscription{}, middleware.After)
 	if err != nil {
 		return err

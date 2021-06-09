@@ -19,7 +19,7 @@ func (c *Client) ListFlowDefinitions(ctx context.Context, params *ListFlowDefini
 		params = &ListFlowDefinitionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFlowDefinitions", params, optFns, addOperationListFlowDefinitionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFlowDefinitions", params, optFns, c.addOperationListFlowDefinitionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ListFlowDefinitionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFlowDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFlowDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFlowDefinitions{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) ModifyAvailabilityZoneGroup(ctx context.Context, params *Modify
 		params = &ModifyAvailabilityZoneGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyAvailabilityZoneGroup", params, optFns, addOperationModifyAvailabilityZoneGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyAvailabilityZoneGroup", params, optFns, c.addOperationModifyAvailabilityZoneGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ModifyAvailabilityZoneGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyAvailabilityZoneGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyAvailabilityZoneGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyAvailabilityZoneGroup{}, middleware.After)
 	if err != nil {
 		return err

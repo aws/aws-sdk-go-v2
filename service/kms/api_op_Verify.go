@@ -44,7 +44,7 @@ func (c *Client) Verify(ctx context.Context, params *VerifyInput, optFns ...func
 		params = &VerifyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Verify", params, optFns, addOperationVerifyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "Verify", params, optFns, c.addOperationVerifyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -135,7 +135,7 @@ type VerifyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationVerifyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationVerifyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpVerify{}, middleware.After)
 	if err != nil {
 		return err

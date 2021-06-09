@@ -25,7 +25,7 @@ func (c *Client) PutUserPermissionsBoundary(ctx context.Context, params *PutUser
 		params = &PutUserPermissionsBoundaryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutUserPermissionsBoundary", params, optFns, addOperationPutUserPermissionsBoundaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutUserPermissionsBoundary", params, optFns, c.addOperationPutUserPermissionsBoundaryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type PutUserPermissionsBoundaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutUserPermissionsBoundaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutUserPermissionsBoundaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutUserPermissionsBoundary{}, middleware.After)
 	if err != nil {
 		return err

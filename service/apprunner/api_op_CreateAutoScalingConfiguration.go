@@ -27,7 +27,7 @@ func (c *Client) CreateAutoScalingConfiguration(ctx context.Context, params *Cre
 		params = &CreateAutoScalingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAutoScalingConfiguration", params, optFns, addOperationCreateAutoScalingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAutoScalingConfiguration", params, optFns, c.addOperationCreateAutoScalingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type CreateAutoScalingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAutoScalingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAutoScalingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateAutoScalingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

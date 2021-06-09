@@ -21,7 +21,7 @@ func (c *Client) DescribeMergeConflicts(ctx context.Context, params *DescribeMer
 		params = &DescribeMergeConflictsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeMergeConflicts", params, optFns, addOperationDescribeMergeConflictsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeMergeConflicts", params, optFns, c.addOperationDescribeMergeConflictsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ type DescribeMergeConflictsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeMergeConflictsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeMergeConflictsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMergeConflicts{}, middleware.After)
 	if err != nil {
 		return err

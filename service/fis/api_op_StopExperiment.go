@@ -17,7 +17,7 @@ func (c *Client) StopExperiment(ctx context.Context, params *StopExperimentInput
 		params = &StopExperimentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopExperiment", params, optFns, addOperationStopExperimentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopExperiment", params, optFns, c.addOperationStopExperimentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type StopExperimentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopExperiment{}, middleware.After)
 	if err != nil {
 		return err

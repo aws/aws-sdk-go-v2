@@ -21,7 +21,7 @@ func (c *Client) GetLoadBalancerMetricData(ctx context.Context, params *GetLoadB
 		params = &GetLoadBalancerMetricDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLoadBalancerMetricData", params, optFns, addOperationGetLoadBalancerMetricDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLoadBalancerMetricData", params, optFns, c.addOperationGetLoadBalancerMetricDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -178,7 +178,7 @@ type GetLoadBalancerMetricDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLoadBalancerMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLoadBalancerMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLoadBalancerMetricData{}, middleware.After)
 	if err != nil {
 		return err

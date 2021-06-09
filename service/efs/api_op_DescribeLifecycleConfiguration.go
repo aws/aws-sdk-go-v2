@@ -22,7 +22,7 @@ func (c *Client) DescribeLifecycleConfiguration(ctx context.Context, params *Des
 		params = &DescribeLifecycleConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLifecycleConfiguration", params, optFns, addOperationDescribeLifecycleConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLifecycleConfiguration", params, optFns, c.addOperationDescribeLifecycleConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DescribeLifecycleConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLifecycleConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLifecycleConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeLifecycleConfiguration{}, middleware.After)
 	if err != nil {
 		return err

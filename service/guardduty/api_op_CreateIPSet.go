@@ -22,7 +22,7 @@ func (c *Client) CreateIPSet(ctx context.Context, params *CreateIPSetInput, optF
 		params = &CreateIPSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateIPSet", params, optFns, addOperationCreateIPSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateIPSet", params, optFns, c.addOperationCreateIPSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type CreateIPSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIPSet{}, middleware.After)
 	if err != nil {
 		return err

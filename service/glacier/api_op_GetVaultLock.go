@@ -41,7 +41,7 @@ func (c *Client) GetVaultLock(ctx context.Context, params *GetVaultLockInput, op
 		params = &GetVaultLockInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetVaultLock", params, optFns, addOperationGetVaultLockMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetVaultLock", params, optFns, c.addOperationGetVaultLockMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type GetVaultLockOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetVaultLockMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetVaultLockMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVaultLock{}, middleware.After)
 	if err != nil {
 		return err

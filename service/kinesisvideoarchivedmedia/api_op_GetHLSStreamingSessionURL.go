@@ -159,7 +159,7 @@ func (c *Client) GetHLSStreamingSessionURL(ctx context.Context, params *GetHLSSt
 		params = &GetHLSStreamingSessionURLInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetHLSStreamingSessionURL", params, optFns, addOperationGetHLSStreamingSessionURLMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetHLSStreamingSessionURL", params, optFns, c.addOperationGetHLSStreamingSessionURLMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -318,7 +318,7 @@ type GetHLSStreamingSessionURLOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetHLSStreamingSessionURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetHLSStreamingSessionURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetHLSStreamingSessionURL{}, middleware.After)
 	if err != nil {
 		return err

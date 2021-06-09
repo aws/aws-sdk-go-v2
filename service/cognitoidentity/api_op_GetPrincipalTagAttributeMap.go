@@ -17,7 +17,7 @@ func (c *Client) GetPrincipalTagAttributeMap(ctx context.Context, params *GetPri
 		params = &GetPrincipalTagAttributeMapInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPrincipalTagAttributeMap", params, optFns, addOperationGetPrincipalTagAttributeMapMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPrincipalTagAttributeMap", params, optFns, c.addOperationGetPrincipalTagAttributeMapMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type GetPrincipalTagAttributeMapOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPrincipalTagAttributeMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPrincipalTagAttributeMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPrincipalTagAttributeMap{}, middleware.After)
 	if err != nil {
 		return err

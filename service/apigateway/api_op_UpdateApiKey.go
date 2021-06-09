@@ -18,7 +18,7 @@ func (c *Client) UpdateApiKey(ctx context.Context, params *UpdateApiKeyInput, op
 		params = &UpdateApiKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateApiKey", params, optFns, addOperationUpdateApiKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateApiKey", params, optFns, c.addOperationUpdateApiKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type UpdateApiKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApiKey{}, middleware.After)
 	if err != nil {
 		return err

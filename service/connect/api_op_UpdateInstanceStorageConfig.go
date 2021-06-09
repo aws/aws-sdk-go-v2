@@ -18,7 +18,7 @@ func (c *Client) UpdateInstanceStorageConfig(ctx context.Context, params *Update
 		params = &UpdateInstanceStorageConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateInstanceStorageConfig", params, optFns, addOperationUpdateInstanceStorageConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateInstanceStorageConfig", params, optFns, c.addOperationUpdateInstanceStorageConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UpdateInstanceStorageConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateInstanceStorageConfig{}, middleware.After)
 	if err != nil {
 		return err

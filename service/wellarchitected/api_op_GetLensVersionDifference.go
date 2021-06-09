@@ -17,7 +17,7 @@ func (c *Client) GetLensVersionDifference(ctx context.Context, params *GetLensVe
 		params = &GetLensVersionDifferenceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLensVersionDifference", params, optFns, addOperationGetLensVersionDifferenceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLensVersionDifference", params, optFns, c.addOperationGetLensVersionDifferenceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type GetLensVersionDifferenceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLensVersionDifferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLensVersionDifferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLensVersionDifference{}, middleware.After)
 	if err != nil {
 		return err

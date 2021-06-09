@@ -17,7 +17,7 @@ func (c *Client) CreateProfilingGroup(ctx context.Context, params *CreateProfili
 		params = &CreateProfilingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateProfilingGroup", params, optFns, addOperationCreateProfilingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateProfilingGroup", params, optFns, c.addOperationCreateProfilingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type CreateProfilingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateProfilingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateProfilingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProfilingGroup{}, middleware.After)
 	if err != nil {
 		return err

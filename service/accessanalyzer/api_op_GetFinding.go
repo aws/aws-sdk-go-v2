@@ -17,7 +17,7 @@ func (c *Client) GetFinding(ctx context.Context, params *GetFindingInput, optFns
 		params = &GetFindingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFinding", params, optFns, addOperationGetFindingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFinding", params, optFns, c.addOperationGetFindingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetFindingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFinding{}, middleware.After)
 	if err != nil {
 		return err

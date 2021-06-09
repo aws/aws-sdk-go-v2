@@ -19,7 +19,7 @@ func (c *Client) ListBackupPlanTemplates(ctx context.Context, params *ListBackup
 		params = &ListBackupPlanTemplatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBackupPlanTemplates", params, optFns, addOperationListBackupPlanTemplatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBackupPlanTemplates", params, optFns, c.addOperationListBackupPlanTemplatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListBackupPlanTemplatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBackupPlanTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBackupPlanTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBackupPlanTemplates{}, middleware.After)
 	if err != nil {
 		return err

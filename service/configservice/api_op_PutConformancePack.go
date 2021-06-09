@@ -24,7 +24,7 @@ func (c *Client) PutConformancePack(ctx context.Context, params *PutConformanceP
 		params = &PutConformancePackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutConformancePack", params, optFns, addOperationPutConformancePackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutConformancePack", params, optFns, c.addOperationPutConformancePackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type PutConformancePackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutConformancePackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutConformancePackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutConformancePack{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) GetQualificationScore(ctx context.Context, params *GetQualifica
 		params = &GetQualificationScoreInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetQualificationScore", params, optFns, addOperationGetQualificationScoreMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetQualificationScore", params, optFns, c.addOperationGetQualificationScoreMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetQualificationScoreOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetQualificationScoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetQualificationScoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetQualificationScore{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) StopSentimentDetectionJob(ctx context.Context, params *StopSent
 		params = &StopSentimentDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopSentimentDetectionJob", params, optFns, addOperationStopSentimentDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopSentimentDetectionJob", params, optFns, c.addOperationStopSentimentDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type StopSentimentDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopSentimentDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopSentimentDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopSentimentDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

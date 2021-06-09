@@ -21,7 +21,7 @@ func (c *Client) NotifyWorkers(ctx context.Context, params *NotifyWorkersInput, 
 		params = &NotifyWorkersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "NotifyWorkers", params, optFns, addOperationNotifyWorkersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "NotifyWorkers", params, optFns, c.addOperationNotifyWorkersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type NotifyWorkersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationNotifyWorkersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationNotifyWorkersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNotifyWorkers{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DescribePHIDetectionJob(ctx context.Context, params *DescribePH
 		params = &DescribePHIDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePHIDetectionJob", params, optFns, addOperationDescribePHIDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePHIDetectionJob", params, optFns, c.addOperationDescribePHIDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DescribePHIDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePHIDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePHIDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePHIDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

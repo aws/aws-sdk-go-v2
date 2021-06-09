@@ -43,7 +43,7 @@ func (c *Client) RequestCancelWorkflowExecution(ctx context.Context, params *Req
 		params = &RequestCancelWorkflowExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RequestCancelWorkflowExecution", params, optFns, addOperationRequestCancelWorkflowExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RequestCancelWorkflowExecution", params, optFns, c.addOperationRequestCancelWorkflowExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type RequestCancelWorkflowExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRequestCancelWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRequestCancelWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRequestCancelWorkflowExecution{}, middleware.After)
 	if err != nil {
 		return err

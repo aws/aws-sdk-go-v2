@@ -18,7 +18,7 @@ func (c *Client) DescribeAppImageConfig(ctx context.Context, params *DescribeApp
 		params = &DescribeAppImageConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAppImageConfig", params, optFns, addOperationDescribeAppImageConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAppImageConfig", params, optFns, c.addOperationDescribeAppImageConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeAppImageConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAppImageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAppImageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAppImageConfig{}, middleware.After)
 	if err != nil {
 		return err

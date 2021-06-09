@@ -18,7 +18,7 @@ func (c *Client) UpdateAssociationStatus(ctx context.Context, params *UpdateAsso
 		params = &UpdateAssociationStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAssociationStatus", params, optFns, addOperationUpdateAssociationStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAssociationStatus", params, optFns, c.addOperationUpdateAssociationStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UpdateAssociationStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAssociationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAssociationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAssociationStatus{}, middleware.After)
 	if err != nil {
 		return err

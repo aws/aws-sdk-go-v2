@@ -17,7 +17,7 @@ func (c *Client) GetService(ctx context.Context, params *GetServiceInput, optFns
 		params = &GetServiceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetService", params, optFns, addOperationGetServiceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetService", params, optFns, c.addOperationGetServiceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetServiceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetService{}, middleware.After)
 	if err != nil {
 		return err

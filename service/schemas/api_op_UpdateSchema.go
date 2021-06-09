@@ -19,7 +19,7 @@ func (c *Client) UpdateSchema(ctx context.Context, params *UpdateSchemaInput, op
 		params = &UpdateSchemaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSchema", params, optFns, addOperationUpdateSchemaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSchema", params, optFns, c.addOperationUpdateSchemaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type UpdateSchemaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSchema{}, middleware.After)
 	if err != nil {
 		return err

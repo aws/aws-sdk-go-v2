@@ -27,7 +27,7 @@ func (c *Client) FinalizeCutover(ctx context.Context, params *FinalizeCutoverInp
 		params = &FinalizeCutoverInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "FinalizeCutover", params, optFns, addOperationFinalizeCutoverMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "FinalizeCutover", params, optFns, c.addOperationFinalizeCutoverMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type FinalizeCutoverOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationFinalizeCutoverMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationFinalizeCutoverMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpFinalizeCutover{}, middleware.After)
 	if err != nil {
 		return err

@@ -14,7 +14,7 @@ func (c *Client) HttpResponseCode(ctx context.Context, params *HttpResponseCodeI
 		params = &HttpResponseCodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpResponseCode", params, optFns, addOperationHttpResponseCodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpResponseCode", params, optFns, c.addOperationHttpResponseCodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +34,7 @@ type HttpResponseCodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHttpResponseCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHttpResponseCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpResponseCode{}, middleware.After)
 	if err != nil {
 		return err

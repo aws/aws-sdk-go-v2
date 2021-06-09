@@ -17,7 +17,7 @@ func (c *Client) UpdateComponent(ctx context.Context, params *UpdateComponentInp
 		params = &UpdateComponentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateComponent", params, optFns, addOperationUpdateComponentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateComponent", params, optFns, c.addOperationUpdateComponentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UpdateComponentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateComponent{}, middleware.After)
 	if err != nil {
 		return err

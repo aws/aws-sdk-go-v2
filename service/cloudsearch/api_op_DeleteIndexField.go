@@ -20,7 +20,7 @@ func (c *Client) DeleteIndexField(ctx context.Context, params *DeleteIndexFieldI
 		params = &DeleteIndexFieldInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteIndexField", params, optFns, addOperationDeleteIndexFieldMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteIndexField", params, optFns, c.addOperationDeleteIndexFieldMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DeleteIndexFieldOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteIndexFieldMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteIndexFieldMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteIndexField{}, middleware.After)
 	if err != nil {
 		return err

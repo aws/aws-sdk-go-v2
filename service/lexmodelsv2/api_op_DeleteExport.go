@@ -17,7 +17,7 @@ func (c *Client) DeleteExport(ctx context.Context, params *DeleteExportInput, op
 		params = &DeleteExportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteExport", params, optFns, addOperationDeleteExportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteExport", params, optFns, c.addOperationDeleteExportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteExportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteExport{}, middleware.After)
 	if err != nil {
 		return err

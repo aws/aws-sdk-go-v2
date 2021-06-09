@@ -16,7 +16,7 @@ func (c *Client) GetMapGlyphs(ctx context.Context, params *GetMapGlyphsInput, op
 		params = &GetMapGlyphsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMapGlyphs", params, optFns, addOperationGetMapGlyphsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMapGlyphs", params, optFns, c.addOperationGetMapGlyphsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetMapGlyphsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMapGlyphsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMapGlyphsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMapGlyphs{}, middleware.After)
 	if err != nil {
 		return err

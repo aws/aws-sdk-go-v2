@@ -22,7 +22,7 @@ func (c *Client) CreateCapacityProvider(ctx context.Context, params *CreateCapac
 		params = &CreateCapacityProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCapacityProvider", params, optFns, addOperationCreateCapacityProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCapacityProvider", params, optFns, c.addOperationCreateCapacityProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type CreateCapacityProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCapacityProvider{}, middleware.After)
 	if err != nil {
 		return err

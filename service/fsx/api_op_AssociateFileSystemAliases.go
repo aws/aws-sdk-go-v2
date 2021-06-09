@@ -30,7 +30,7 @@ func (c *Client) AssociateFileSystemAliases(ctx context.Context, params *Associa
 		params = &AssociateFileSystemAliasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateFileSystemAliases", params, optFns, addOperationAssociateFileSystemAliasesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateFileSystemAliases", params, optFns, c.addOperationAssociateFileSystemAliasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type AssociateFileSystemAliasesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateFileSystemAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateFileSystemAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateFileSystemAliases{}, middleware.After)
 	if err != nil {
 		return err

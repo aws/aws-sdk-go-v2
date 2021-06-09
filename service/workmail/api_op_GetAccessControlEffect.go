@@ -18,7 +18,7 @@ func (c *Client) GetAccessControlEffect(ctx context.Context, params *GetAccessCo
 		params = &GetAccessControlEffectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccessControlEffect", params, optFns, addOperationGetAccessControlEffectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccessControlEffect", params, optFns, c.addOperationGetAccessControlEffectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type GetAccessControlEffectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccessControlEffectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccessControlEffectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAccessControlEffect{}, middleware.After)
 	if err != nil {
 		return err

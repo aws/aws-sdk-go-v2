@@ -18,7 +18,7 @@ func (c *Client) DescribeAutomationExecutions(ctx context.Context, params *Descr
 		params = &DescribeAutomationExecutionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAutomationExecutions", params, optFns, addOperationDescribeAutomationExecutionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAutomationExecutions", params, optFns, c.addOperationDescribeAutomationExecutionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeAutomationExecutionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAutomationExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAutomationExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAutomationExecutions{}, middleware.After)
 	if err != nil {
 		return err

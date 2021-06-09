@@ -18,7 +18,7 @@ func (c *Client) GetAsset(ctx context.Context, params *GetAssetInput, optFns ...
 		params = &GetAssetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAsset", params, optFns, addOperationGetAssetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAsset", params, optFns, c.addOperationGetAssetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type GetAssetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAsset{}, middleware.After)
 	if err != nil {
 		return err

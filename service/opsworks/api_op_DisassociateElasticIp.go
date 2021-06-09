@@ -22,7 +22,7 @@ func (c *Client) DisassociateElasticIp(ctx context.Context, params *Disassociate
 		params = &DisassociateElasticIpInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateElasticIp", params, optFns, addOperationDisassociateElasticIpMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateElasticIp", params, optFns, c.addOperationDisassociateElasticIpMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DisassociateElasticIpOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateElasticIp{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) StopAutomationExecution(ctx context.Context, params *StopAutoma
 		params = &StopAutomationExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopAutomationExecution", params, optFns, addOperationStopAutomationExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopAutomationExecution", params, optFns, c.addOperationStopAutomationExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type StopAutomationExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopAutomationExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopAutomationExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopAutomationExecution{}, middleware.After)
 	if err != nil {
 		return err

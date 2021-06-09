@@ -16,7 +16,7 @@ func (c *Client) HttpPayloadTraitsWithMediaType(ctx context.Context, params *Htt
 		params = &HttpPayloadTraitsWithMediaTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadTraitsWithMediaType", params, optFns, addOperationHttpPayloadTraitsWithMediaTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadTraitsWithMediaType", params, optFns, c.addOperationHttpPayloadTraitsWithMediaTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type HttpPayloadTraitsWithMediaTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHttpPayloadTraitsWithMediaTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHttpPayloadTraitsWithMediaTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadTraitsWithMediaType{}, middleware.After)
 	if err != nil {
 		return err

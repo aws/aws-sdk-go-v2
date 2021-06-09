@@ -21,7 +21,7 @@ func (c *Client) DeleteConfigRule(ctx context.Context, params *DeleteConfigRuleI
 		params = &DeleteConfigRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteConfigRule", params, optFns, addOperationDeleteConfigRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteConfigRule", params, optFns, c.addOperationDeleteConfigRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteConfigRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteConfigRule{}, middleware.After)
 	if err != nil {
 		return err

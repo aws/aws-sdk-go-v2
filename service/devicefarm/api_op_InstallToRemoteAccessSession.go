@@ -19,7 +19,7 @@ func (c *Client) InstallToRemoteAccessSession(ctx context.Context, params *Insta
 		params = &InstallToRemoteAccessSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InstallToRemoteAccessSession", params, optFns, addOperationInstallToRemoteAccessSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InstallToRemoteAccessSession", params, optFns, c.addOperationInstallToRemoteAccessSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type InstallToRemoteAccessSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInstallToRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInstallToRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInstallToRemoteAccessSession{}, middleware.After)
 	if err != nil {
 		return err

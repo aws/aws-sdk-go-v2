@@ -25,7 +25,7 @@ func (c *Client) AssociateTargetsWithJob(ctx context.Context, params *AssociateT
 		params = &AssociateTargetsWithJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateTargetsWithJob", params, optFns, addOperationAssociateTargetsWithJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateTargetsWithJob", params, optFns, c.addOperationAssociateTargetsWithJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type AssociateTargetsWithJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateTargetsWithJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateTargetsWithJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateTargetsWithJob{}, middleware.After)
 	if err != nil {
 		return err

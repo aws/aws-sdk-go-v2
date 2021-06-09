@@ -19,7 +19,7 @@ func (c *Client) BatchDisassociateProjectAssets(ctx context.Context, params *Bat
 		params = &BatchDisassociateProjectAssetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDisassociateProjectAssets", params, optFns, addOperationBatchDisassociateProjectAssetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDisassociateProjectAssets", params, optFns, c.addOperationBatchDisassociateProjectAssetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type BatchDisassociateProjectAssetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDisassociateProjectAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDisassociateProjectAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDisassociateProjectAssets{}, middleware.After)
 	if err != nil {
 		return err

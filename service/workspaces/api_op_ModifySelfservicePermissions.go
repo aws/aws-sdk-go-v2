@@ -20,7 +20,7 @@ func (c *Client) ModifySelfservicePermissions(ctx context.Context, params *Modif
 		params = &ModifySelfservicePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifySelfservicePermissions", params, optFns, addOperationModifySelfservicePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifySelfservicePermissions", params, optFns, c.addOperationModifySelfservicePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type ModifySelfservicePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifySelfservicePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifySelfservicePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifySelfservicePermissions{}, middleware.After)
 	if err != nil {
 		return err

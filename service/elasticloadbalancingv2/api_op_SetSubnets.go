@@ -21,7 +21,7 @@ func (c *Client) SetSubnets(ctx context.Context, params *SetSubnetsInput, optFns
 		params = &SetSubnetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetSubnets", params, optFns, addOperationSetSubnetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetSubnets", params, optFns, c.addOperationSetSubnetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type SetSubnetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetSubnets{}, middleware.After)
 	if err != nil {
 		return err

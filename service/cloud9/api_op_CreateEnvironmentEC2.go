@@ -19,7 +19,7 @@ func (c *Client) CreateEnvironmentEC2(ctx context.Context, params *CreateEnviron
 		params = &CreateEnvironmentEC2Input{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateEnvironmentEC2", params, optFns, addOperationCreateEnvironmentEC2Middlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateEnvironmentEC2", params, optFns, c.addOperationCreateEnvironmentEC2Middlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ type CreateEnvironmentEC2Output struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateEnvironmentEC2Middlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateEnvironmentEC2Middlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEnvironmentEC2{}, middleware.After)
 	if err != nil {
 		return err

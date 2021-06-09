@@ -17,7 +17,7 @@ func (c *Client) PutParameter(ctx context.Context, params *PutParameterInput, op
 		params = &PutParameterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutParameter", params, optFns, addOperationPutParameterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutParameter", params, optFns, c.addOperationPutParameterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -240,7 +240,7 @@ type PutParameterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutParameter{}, middleware.After)
 	if err != nil {
 		return err

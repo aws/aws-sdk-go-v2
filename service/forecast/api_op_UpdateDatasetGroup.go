@@ -18,7 +18,7 @@ func (c *Client) UpdateDatasetGroup(ctx context.Context, params *UpdateDatasetGr
 		params = &UpdateDatasetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDatasetGroup", params, optFns, addOperationUpdateDatasetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDatasetGroup", params, optFns, c.addOperationUpdateDatasetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type UpdateDatasetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDatasetGroup{}, middleware.After)
 	if err != nil {
 		return err

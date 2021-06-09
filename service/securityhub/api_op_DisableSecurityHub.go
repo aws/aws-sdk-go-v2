@@ -24,7 +24,7 @@ func (c *Client) DisableSecurityHub(ctx context.Context, params *DisableSecurity
 		params = &DisableSecurityHubInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableSecurityHub", params, optFns, addOperationDisableSecurityHubMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableSecurityHub", params, optFns, c.addOperationDisableSecurityHubMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DisableSecurityHubOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableSecurityHubMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableSecurityHubMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableSecurityHub{}, middleware.After)
 	if err != nil {
 		return err

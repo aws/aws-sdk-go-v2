@@ -17,7 +17,7 @@ func (c *Client) GetInstanceProfile(ctx context.Context, params *GetInstanceProf
 		params = &GetInstanceProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInstanceProfile", params, optFns, addOperationGetInstanceProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInstanceProfile", params, optFns, c.addOperationGetInstanceProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetInstanceProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInstanceProfile{}, middleware.After)
 	if err != nil {
 		return err

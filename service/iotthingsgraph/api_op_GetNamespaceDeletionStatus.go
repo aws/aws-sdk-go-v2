@@ -17,7 +17,7 @@ func (c *Client) GetNamespaceDeletionStatus(ctx context.Context, params *GetName
 		params = &GetNamespaceDeletionStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetNamespaceDeletionStatus", params, optFns, addOperationGetNamespaceDeletionStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetNamespaceDeletionStatus", params, optFns, c.addOperationGetNamespaceDeletionStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetNamespaceDeletionStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetNamespaceDeletionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetNamespaceDeletionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetNamespaceDeletionStatus{}, middleware.After)
 	if err != nil {
 		return err

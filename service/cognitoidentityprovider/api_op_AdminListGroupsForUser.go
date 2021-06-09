@@ -19,7 +19,7 @@ func (c *Client) AdminListGroupsForUser(ctx context.Context, params *AdminListGr
 		params = &AdminListGroupsForUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminListGroupsForUser", params, optFns, addOperationAdminListGroupsForUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminListGroupsForUser", params, optFns, c.addOperationAdminListGroupsForUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type AdminListGroupsForUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminListGroupsForUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminListGroupsForUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminListGroupsForUser{}, middleware.After)
 	if err != nil {
 		return err

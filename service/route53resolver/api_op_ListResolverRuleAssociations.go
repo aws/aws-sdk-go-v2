@@ -19,7 +19,7 @@ func (c *Client) ListResolverRuleAssociations(ctx context.Context, params *ListR
 		params = &ListResolverRuleAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResolverRuleAssociations", params, optFns, addOperationListResolverRuleAssociationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResolverRuleAssociations", params, optFns, c.addOperationListResolverRuleAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ListResolverRuleAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListResolverRuleAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResolverRuleAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResolverRuleAssociations{}, middleware.After)
 	if err != nil {
 		return err

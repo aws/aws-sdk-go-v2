@@ -18,7 +18,7 @@ func (c *Client) PutExternalEvaluation(ctx context.Context, params *PutExternalE
 		params = &PutExternalEvaluationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutExternalEvaluation", params, optFns, addOperationPutExternalEvaluationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutExternalEvaluation", params, optFns, c.addOperationPutExternalEvaluationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type PutExternalEvaluationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutExternalEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutExternalEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutExternalEvaluation{}, middleware.After)
 	if err != nil {
 		return err

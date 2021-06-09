@@ -20,7 +20,7 @@ func (c *Client) GetComplianceDetailsByConfigRule(ctx context.Context, params *G
 		params = &GetComplianceDetailsByConfigRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetComplianceDetailsByConfigRule", params, optFns, addOperationGetComplianceDetailsByConfigRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetComplianceDetailsByConfigRule", params, optFns, c.addOperationGetComplianceDetailsByConfigRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type GetComplianceDetailsByConfigRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetComplianceDetailsByConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetComplianceDetailsByConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceDetailsByConfigRule{}, middleware.After)
 	if err != nil {
 		return err

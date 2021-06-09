@@ -42,7 +42,7 @@ func (c *Client) ListFragments(ctx context.Context, params *ListFragmentsInput, 
 		params = &ListFragmentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFragments", params, optFns, addOperationListFragmentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFragments", params, optFns, c.addOperationListFragmentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type ListFragmentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFragmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFragmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFragments{}, middleware.After)
 	if err != nil {
 		return err

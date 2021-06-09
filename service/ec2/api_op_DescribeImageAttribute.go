@@ -18,7 +18,7 @@ func (c *Client) DescribeImageAttribute(ctx context.Context, params *DescribeIma
 		params = &DescribeImageAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeImageAttribute", params, optFns, addOperationDescribeImageAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeImageAttribute", params, optFns, c.addOperationDescribeImageAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type DescribeImageAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeImageAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeImageAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeImageAttribute{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DisassociateServiceQuotaTemplate(ctx context.Context, params *D
 		params = &DisassociateServiceQuotaTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateServiceQuotaTemplate", params, optFns, addOperationDisassociateServiceQuotaTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateServiceQuotaTemplate", params, optFns, c.addOperationDisassociateServiceQuotaTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type DisassociateServiceQuotaTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateServiceQuotaTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateServiceQuotaTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateServiceQuotaTemplate{}, middleware.After)
 	if err != nil {
 		return err

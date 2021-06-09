@@ -17,7 +17,7 @@ func (c *Client) GetHealthCheckStatus(ctx context.Context, params *GetHealthChec
 		params = &GetHealthCheckStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetHealthCheckStatus", params, optFns, addOperationGetHealthCheckStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetHealthCheckStatus", params, optFns, c.addOperationGetHealthCheckStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetHealthCheckStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetHealthCheckStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetHealthCheckStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetHealthCheckStatus{}, middleware.After)
 	if err != nil {
 		return err

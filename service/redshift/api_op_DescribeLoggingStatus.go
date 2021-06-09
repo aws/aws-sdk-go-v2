@@ -18,7 +18,7 @@ func (c *Client) DescribeLoggingStatus(ctx context.Context, params *DescribeLogg
 		params = &DescribeLoggingStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLoggingStatus", params, optFns, addOperationDescribeLoggingStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLoggingStatus", params, optFns, c.addOperationDescribeLoggingStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DescribeLoggingStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLoggingStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLoggingStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeLoggingStatus{}, middleware.After)
 	if err != nil {
 		return err

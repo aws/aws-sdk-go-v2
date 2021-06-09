@@ -19,7 +19,7 @@ func (c *Client) RemoveClientIDFromOpenIDConnectProvider(ctx context.Context, pa
 		params = &RemoveClientIDFromOpenIDConnectProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveClientIDFromOpenIDConnectProvider", params, optFns, addOperationRemoveClientIDFromOpenIDConnectProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveClientIDFromOpenIDConnectProvider", params, optFns, c.addOperationRemoveClientIDFromOpenIDConnectProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type RemoveClientIDFromOpenIDConnectProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveClientIDFromOpenIDConnectProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveClientIDFromOpenIDConnectProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemoveClientIDFromOpenIDConnectProvider{}, middleware.After)
 	if err != nil {
 		return err

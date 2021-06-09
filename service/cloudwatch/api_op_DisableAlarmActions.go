@@ -17,7 +17,7 @@ func (c *Client) DisableAlarmActions(ctx context.Context, params *DisableAlarmAc
 		params = &DisableAlarmActionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableAlarmActions", params, optFns, addOperationDisableAlarmActionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableAlarmActions", params, optFns, c.addOperationDisableAlarmActionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DisableAlarmActionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableAlarmActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableAlarmActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDisableAlarmActions{}, middleware.After)
 	if err != nil {
 		return err

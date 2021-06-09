@@ -18,7 +18,7 @@ func (c *Client) AssociateSigninDelegateGroupsWithAccount(ctx context.Context, p
 		params = &AssociateSigninDelegateGroupsWithAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateSigninDelegateGroupsWithAccount", params, optFns, addOperationAssociateSigninDelegateGroupsWithAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateSigninDelegateGroupsWithAccount", params, optFns, c.addOperationAssociateSigninDelegateGroupsWithAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type AssociateSigninDelegateGroupsWithAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateSigninDelegateGroupsWithAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateSigninDelegateGroupsWithAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateSigninDelegateGroupsWithAccount{}, middleware.After)
 	if err != nil {
 		return err

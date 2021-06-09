@@ -44,7 +44,7 @@ func (c *Client) TagMFADevice(ctx context.Context, params *TagMFADeviceInput, op
 		params = &TagMFADeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TagMFADevice", params, optFns, addOperationTagMFADeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagMFADevice", params, optFns, c.addOperationTagMFADeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type TagMFADeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTagMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTagMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpTagMFADevice{}, middleware.After)
 	if err != nil {
 		return err

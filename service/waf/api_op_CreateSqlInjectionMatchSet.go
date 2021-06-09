@@ -45,7 +45,7 @@ func (c *Client) CreateSqlInjectionMatchSet(ctx context.Context, params *CreateS
 		params = &CreateSqlInjectionMatchSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSqlInjectionMatchSet", params, optFns, addOperationCreateSqlInjectionMatchSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSqlInjectionMatchSet", params, optFns, c.addOperationCreateSqlInjectionMatchSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type CreateSqlInjectionMatchSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSqlInjectionMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSqlInjectionMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSqlInjectionMatchSet{}, middleware.After)
 	if err != nil {
 		return err

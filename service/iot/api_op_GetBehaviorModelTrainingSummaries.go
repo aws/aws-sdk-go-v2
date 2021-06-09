@@ -18,7 +18,7 @@ func (c *Client) GetBehaviorModelTrainingSummaries(ctx context.Context, params *
 		params = &GetBehaviorModelTrainingSummariesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBehaviorModelTrainingSummaries", params, optFns, addOperationGetBehaviorModelTrainingSummariesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBehaviorModelTrainingSummaries", params, optFns, c.addOperationGetBehaviorModelTrainingSummariesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetBehaviorModelTrainingSummariesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBehaviorModelTrainingSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBehaviorModelTrainingSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBehaviorModelTrainingSummaries{}, middleware.After)
 	if err != nil {
 		return err

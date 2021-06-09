@@ -18,7 +18,7 @@ func (c *Client) DisassociateTrackerConsumer(ctx context.Context, params *Disass
 		params = &DisassociateTrackerConsumerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateTrackerConsumer", params, optFns, addOperationDisassociateTrackerConsumerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateTrackerConsumer", params, optFns, c.addOperationDisassociateTrackerConsumerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DisassociateTrackerConsumerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateTrackerConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateTrackerConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateTrackerConsumer{}, middleware.After)
 	if err != nil {
 		return err

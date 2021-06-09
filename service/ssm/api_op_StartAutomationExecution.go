@@ -17,7 +17,7 @@ func (c *Client) StartAutomationExecution(ctx context.Context, params *StartAuto
 		params = &StartAutomationExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartAutomationExecution", params, optFns, addOperationStartAutomationExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartAutomationExecution", params, optFns, c.addOperationStartAutomationExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +118,7 @@ type StartAutomationExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartAutomationExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartAutomationExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartAutomationExecution{}, middleware.After)
 	if err != nil {
 		return err

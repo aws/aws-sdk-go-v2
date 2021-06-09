@@ -18,7 +18,7 @@ func (c *Client) DeleteElasticsearchDomain(ctx context.Context, params *DeleteEl
 		params = &DeleteElasticsearchDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteElasticsearchDomain", params, optFns, addOperationDeleteElasticsearchDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteElasticsearchDomain", params, optFns, c.addOperationDeleteElasticsearchDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteElasticsearchDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteElasticsearchDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteElasticsearchDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteElasticsearchDomain{}, middleware.After)
 	if err != nil {
 		return err

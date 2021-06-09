@@ -17,7 +17,7 @@ func (c *Client) DeletePlatformVersion(ctx context.Context, params *DeletePlatfo
 		params = &DeletePlatformVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePlatformVersion", params, optFns, addOperationDeletePlatformVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePlatformVersion", params, optFns, c.addOperationDeletePlatformVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeletePlatformVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePlatformVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePlatformVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeletePlatformVersion{}, middleware.After)
 	if err != nil {
 		return err

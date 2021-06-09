@@ -21,7 +21,7 @@ func (c *Client) ListStreamConsumers(ctx context.Context, params *ListStreamCons
 		params = &ListStreamConsumersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListStreamConsumers", params, optFns, addOperationListStreamConsumersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListStreamConsumers", params, optFns, c.addOperationListStreamConsumersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type ListStreamConsumersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListStreamConsumersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListStreamConsumersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStreamConsumers{}, middleware.After)
 	if err != nil {
 		return err

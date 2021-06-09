@@ -16,7 +16,7 @@ func (c *Client) ListTagsLogGroup(ctx context.Context, params *ListTagsLogGroupI
 		params = &ListTagsLogGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTagsLogGroup", params, optFns, addOperationListTagsLogGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTagsLogGroup", params, optFns, c.addOperationListTagsLogGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type ListTagsLogGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTagsLogGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTagsLogGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTagsLogGroup{}, middleware.After)
 	if err != nil {
 		return err

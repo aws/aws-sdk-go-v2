@@ -19,7 +19,7 @@ func (c *Client) CreateLanguageModel(ctx context.Context, params *CreateLanguage
 		params = &CreateLanguageModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLanguageModel", params, optFns, addOperationCreateLanguageModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLanguageModel", params, optFns, c.addOperationCreateLanguageModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type CreateLanguageModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLanguageModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLanguageModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLanguageModel{}, middleware.After)
 	if err != nil {
 		return err

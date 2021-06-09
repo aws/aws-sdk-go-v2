@@ -19,7 +19,7 @@ func (c *Client) DeleteInsightRules(ctx context.Context, params *DeleteInsightRu
 		params = &DeleteInsightRulesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteInsightRules", params, optFns, addOperationDeleteInsightRulesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInsightRules", params, optFns, c.addOperationDeleteInsightRulesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteInsightRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteInsightRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteInsightRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteInsightRules{}, middleware.After)
 	if err != nil {
 		return err

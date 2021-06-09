@@ -19,7 +19,7 @@ func (c *Client) DescribeNotificationConfigurations(ctx context.Context, params 
 		params = &DescribeNotificationConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeNotificationConfigurations", params, optFns, addOperationDescribeNotificationConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeNotificationConfigurations", params, optFns, c.addOperationDescribeNotificationConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeNotificationConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeNotificationConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeNotificationConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeNotificationConfigurations{}, middleware.After)
 	if err != nil {
 		return err

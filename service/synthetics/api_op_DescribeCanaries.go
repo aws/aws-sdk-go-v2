@@ -22,7 +22,7 @@ func (c *Client) DescribeCanaries(ctx context.Context, params *DescribeCanariesI
 		params = &DescribeCanariesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCanaries", params, optFns, addOperationDescribeCanariesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCanaries", params, optFns, c.addOperationDescribeCanariesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DescribeCanariesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCanariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCanariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCanaries{}, middleware.After)
 	if err != nil {
 		return err

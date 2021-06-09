@@ -23,7 +23,7 @@ func (c *Client) ListRateBasedRules(ctx context.Context, params *ListRateBasedRu
 		params = &ListRateBasedRulesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRateBasedRules", params, optFns, addOperationListRateBasedRulesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRateBasedRules", params, optFns, c.addOperationListRateBasedRulesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListRateBasedRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRateBasedRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRateBasedRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRateBasedRules{}, middleware.After)
 	if err != nil {
 		return err

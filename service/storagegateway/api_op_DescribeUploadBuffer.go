@@ -19,7 +19,7 @@ func (c *Client) DescribeUploadBuffer(ctx context.Context, params *DescribeUploa
 		params = &DescribeUploadBufferInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeUploadBuffer", params, optFns, addOperationDescribeUploadBufferMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeUploadBuffer", params, optFns, c.addOperationDescribeUploadBufferMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeUploadBufferOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeUploadBufferMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeUploadBufferMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUploadBuffer{}, middleware.After)
 	if err != nil {
 		return err

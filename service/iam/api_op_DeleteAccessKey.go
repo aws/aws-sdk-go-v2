@@ -20,7 +20,7 @@ func (c *Client) DeleteAccessKey(ctx context.Context, params *DeleteAccessKeyInp
 		params = &DeleteAccessKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAccessKey", params, optFns, addOperationDeleteAccessKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAccessKey", params, optFns, c.addOperationDeleteAccessKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteAccessKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAccessKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAccessKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteAccessKey{}, middleware.After)
 	if err != nil {
 		return err

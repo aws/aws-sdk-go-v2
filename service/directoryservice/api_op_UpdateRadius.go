@@ -18,7 +18,7 @@ func (c *Client) UpdateRadius(ctx context.Context, params *UpdateRadiusInput, op
 		params = &UpdateRadiusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRadius", params, optFns, addOperationUpdateRadiusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRadius", params, optFns, c.addOperationUpdateRadiusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type UpdateRadiusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRadiusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRadiusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRadius{}, middleware.After)
 	if err != nil {
 		return err

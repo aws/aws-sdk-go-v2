@@ -16,7 +16,7 @@ func (c *Client) ValidateConfiguration(ctx context.Context, params *ValidateConf
 		params = &ValidateConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ValidateConfiguration", params, optFns, addOperationValidateConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ValidateConfiguration", params, optFns, c.addOperationValidateConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type ValidateConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationValidateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationValidateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidateConfiguration{}, middleware.After)
 	if err != nil {
 		return err

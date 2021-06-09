@@ -18,7 +18,7 @@ func (c *Client) ReimportApi(ctx context.Context, params *ReimportApiInput, optF
 		params = &ReimportApiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReimportApi", params, optFns, addOperationReimportApiMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReimportApi", params, optFns, c.addOperationReimportApiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -124,7 +124,7 @@ type ReimportApiOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReimportApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReimportApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpReimportApi{}, middleware.After)
 	if err != nil {
 		return err

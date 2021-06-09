@@ -21,7 +21,7 @@ func (c *Client) GetDownloadUrlForLayer(ctx context.Context, params *GetDownload
 		params = &GetDownloadUrlForLayerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDownloadUrlForLayer", params, optFns, addOperationGetDownloadUrlForLayerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDownloadUrlForLayer", params, optFns, c.addOperationGetDownloadUrlForLayerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type GetDownloadUrlForLayerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDownloadUrlForLayerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDownloadUrlForLayerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDownloadUrlForLayer{}, middleware.After)
 	if err != nil {
 		return err

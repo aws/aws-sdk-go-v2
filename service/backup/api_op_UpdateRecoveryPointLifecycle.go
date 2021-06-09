@@ -25,7 +25,7 @@ func (c *Client) UpdateRecoveryPointLifecycle(ctx context.Context, params *Updat
 		params = &UpdateRecoveryPointLifecycleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRecoveryPointLifecycle", params, optFns, addOperationUpdateRecoveryPointLifecycleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRecoveryPointLifecycle", params, optFns, c.addOperationUpdateRecoveryPointLifecycleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type UpdateRecoveryPointLifecycleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRecoveryPointLifecycleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRecoveryPointLifecycleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecoveryPointLifecycle{}, middleware.After)
 	if err != nil {
 		return err

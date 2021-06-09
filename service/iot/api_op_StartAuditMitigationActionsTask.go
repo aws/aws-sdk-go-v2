@@ -18,7 +18,7 @@ func (c *Client) StartAuditMitigationActionsTask(ctx context.Context, params *St
 		params = &StartAuditMitigationActionsTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartAuditMitigationActionsTask", params, optFns, addOperationStartAuditMitigationActionsTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartAuditMitigationActionsTask", params, optFns, c.addOperationStartAuditMitigationActionsTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type StartAuditMitigationActionsTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartAuditMitigationActionsTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartAuditMitigationActionsTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAuditMitigationActionsTask{}, middleware.After)
 	if err != nil {
 		return err

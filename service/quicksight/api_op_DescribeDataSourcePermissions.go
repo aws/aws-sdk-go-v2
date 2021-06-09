@@ -17,7 +17,7 @@ func (c *Client) DescribeDataSourcePermissions(ctx context.Context, params *Desc
 		params = &DescribeDataSourcePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDataSourcePermissions", params, optFns, addOperationDescribeDataSourcePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDataSourcePermissions", params, optFns, c.addOperationDescribeDataSourcePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DescribeDataSourcePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDataSourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDataSourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataSourcePermissions{}, middleware.After)
 	if err != nil {
 		return err

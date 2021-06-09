@@ -20,7 +20,7 @@ func (c *Client) DescribeEnvironmentHealth(ctx context.Context, params *Describe
 		params = &DescribeEnvironmentHealthInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEnvironmentHealth", params, optFns, addOperationDescribeEnvironmentHealthMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEnvironmentHealth", params, optFns, c.addOperationDescribeEnvironmentHealthMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type DescribeEnvironmentHealthOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEnvironmentHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEnvironmentHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEnvironmentHealth{}, middleware.After)
 	if err != nil {
 		return err

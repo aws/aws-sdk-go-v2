@@ -18,7 +18,7 @@ func (c *Client) ModifyInstanceEventStartTime(ctx context.Context, params *Modif
 		params = &ModifyInstanceEventStartTimeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyInstanceEventStartTime", params, optFns, addOperationModifyInstanceEventStartTimeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyInstanceEventStartTime", params, optFns, c.addOperationModifyInstanceEventStartTimeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type ModifyInstanceEventStartTimeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyInstanceEventStartTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyInstanceEventStartTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyInstanceEventStartTime{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) ListProtocolsLists(ctx context.Context, params *ListProtocolsLi
 		params = &ListProtocolsListsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListProtocolsLists", params, optFns, addOperationListProtocolsListsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListProtocolsLists", params, optFns, c.addOperationListProtocolsListsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ListProtocolsListsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListProtocolsListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListProtocolsListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProtocolsLists{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) CancelReservedInstancesListing(ctx context.Context, params *Can
 		params = &CancelReservedInstancesListingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelReservedInstancesListing", params, optFns, addOperationCancelReservedInstancesListingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelReservedInstancesListing", params, optFns, c.addOperationCancelReservedInstancesListingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type CancelReservedInstancesListingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelReservedInstancesListingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelReservedInstancesListingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCancelReservedInstancesListing{}, middleware.After)
 	if err != nil {
 		return err

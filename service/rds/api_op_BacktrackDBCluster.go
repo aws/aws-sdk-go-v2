@@ -21,7 +21,7 @@ func (c *Client) BacktrackDBCluster(ctx context.Context, params *BacktrackDBClus
 		params = &BacktrackDBClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BacktrackDBCluster", params, optFns, addOperationBacktrackDBClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BacktrackDBCluster", params, optFns, c.addOperationBacktrackDBClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ type BacktrackDBClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBacktrackDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBacktrackDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpBacktrackDBCluster{}, middleware.After)
 	if err != nil {
 		return err

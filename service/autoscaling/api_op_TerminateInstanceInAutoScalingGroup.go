@@ -30,7 +30,7 @@ func (c *Client) TerminateInstanceInAutoScalingGroup(ctx context.Context, params
 		params = &TerminateInstanceInAutoScalingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TerminateInstanceInAutoScalingGroup", params, optFns, addOperationTerminateInstanceInAutoScalingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TerminateInstanceInAutoScalingGroup", params, optFns, c.addOperationTerminateInstanceInAutoScalingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type TerminateInstanceInAutoScalingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTerminateInstanceInAutoScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTerminateInstanceInAutoScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpTerminateInstanceInAutoScalingGroup{}, middleware.After)
 	if err != nil {
 		return err

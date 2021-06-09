@@ -91,7 +91,7 @@ func (c *Client) AssumeRole(ctx context.Context, params *AssumeRoleInput, optFns
 		params = &AssumeRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssumeRole", params, optFns, addOperationAssumeRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssumeRole", params, optFns, c.addOperationAssumeRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -323,7 +323,7 @@ type AssumeRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssumeRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssumeRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAssumeRole{}, middleware.After)
 	if err != nil {
 		return err

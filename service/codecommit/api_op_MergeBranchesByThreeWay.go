@@ -17,7 +17,7 @@ func (c *Client) MergeBranchesByThreeWay(ctx context.Context, params *MergeBranc
 		params = &MergeBranchesByThreeWayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MergeBranchesByThreeWay", params, optFns, addOperationMergeBranchesByThreeWayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MergeBranchesByThreeWay", params, optFns, c.addOperationMergeBranchesByThreeWayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type MergeBranchesByThreeWayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMergeBranchesByThreeWayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMergeBranchesByThreeWayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergeBranchesByThreeWay{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ListSnapshotBlocks(ctx context.Context, params *ListSnapshotBlo
 		params = &ListSnapshotBlocksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSnapshotBlocks", params, optFns, addOperationListSnapshotBlocksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSnapshotBlocks", params, optFns, c.addOperationListSnapshotBlocksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ListSnapshotBlocksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSnapshotBlocksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSnapshotBlocksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSnapshotBlocks{}, middleware.After)
 	if err != nil {
 		return err

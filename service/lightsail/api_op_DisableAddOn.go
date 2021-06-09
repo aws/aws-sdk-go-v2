@@ -19,7 +19,7 @@ func (c *Client) DisableAddOn(ctx context.Context, params *DisableAddOnInput, op
 		params = &DisableAddOnInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableAddOn", params, optFns, addOperationDisableAddOnMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableAddOn", params, optFns, c.addOperationDisableAddOnMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DisableAddOnOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableAddOnMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableAddOnMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableAddOn{}, middleware.After)
 	if err != nil {
 		return err

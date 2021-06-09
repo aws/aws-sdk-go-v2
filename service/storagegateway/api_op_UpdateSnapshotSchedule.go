@@ -24,7 +24,7 @@ func (c *Client) UpdateSnapshotSchedule(ctx context.Context, params *UpdateSnaps
 		params = &UpdateSnapshotScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSnapshotSchedule", params, optFns, addOperationUpdateSnapshotScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSnapshotSchedule", params, optFns, c.addOperationUpdateSnapshotScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type UpdateSnapshotScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSnapshotSchedule{}, middleware.After)
 	if err != nil {
 		return err

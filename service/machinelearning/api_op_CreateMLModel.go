@@ -27,7 +27,7 @@ func (c *Client) CreateMLModel(ctx context.Context, params *CreateMLModelInput, 
 		params = &CreateMLModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMLModel", params, optFns, addOperationCreateMLModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMLModel", params, optFns, c.addOperationCreateMLModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -130,7 +130,7 @@ type CreateMLModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateMLModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateMLModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMLModel{}, middleware.After)
 	if err != nil {
 		return err

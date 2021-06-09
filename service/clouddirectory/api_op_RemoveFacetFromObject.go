@@ -17,7 +17,7 @@ func (c *Client) RemoveFacetFromObject(ctx context.Context, params *RemoveFacetF
 		params = &RemoveFacetFromObjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveFacetFromObject", params, optFns, addOperationRemoveFacetFromObjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveFacetFromObject", params, optFns, c.addOperationRemoveFacetFromObjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type RemoveFacetFromObjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveFacetFromObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveFacetFromObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveFacetFromObject{}, middleware.After)
 	if err != nil {
 		return err

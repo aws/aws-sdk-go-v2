@@ -16,7 +16,7 @@ func (c *Client) StopPHIDetectionJob(ctx context.Context, params *StopPHIDetecti
 		params = &StopPHIDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopPHIDetectionJob", params, optFns, addOperationStopPHIDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopPHIDetectionJob", params, optFns, c.addOperationStopPHIDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type StopPHIDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopPHIDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopPHIDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopPHIDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

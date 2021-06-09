@@ -30,7 +30,7 @@ func (c *Client) CreateCertificateAuthorityAuditReport(ctx context.Context, para
 		params = &CreateCertificateAuthorityAuditReportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCertificateAuthorityAuditReport", params, optFns, addOperationCreateCertificateAuthorityAuditReportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCertificateAuthorityAuditReport", params, optFns, c.addOperationCreateCertificateAuthorityAuditReportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type CreateCertificateAuthorityAuditReportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCertificateAuthorityAuditReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCertificateAuthorityAuditReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCertificateAuthorityAuditReport{}, middleware.After)
 	if err != nil {
 		return err

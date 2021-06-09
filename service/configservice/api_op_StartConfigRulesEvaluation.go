@@ -44,7 +44,7 @@ func (c *Client) StartConfigRulesEvaluation(ctx context.Context, params *StartCo
 		params = &StartConfigRulesEvaluationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartConfigRulesEvaluation", params, optFns, addOperationStartConfigRulesEvaluationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartConfigRulesEvaluation", params, optFns, c.addOperationStartConfigRulesEvaluationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type StartConfigRulesEvaluationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartConfigRulesEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartConfigRulesEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartConfigRulesEvaluation{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) ReplaceRoute(ctx context.Context, params *ReplaceRouteInput, op
 		params = &ReplaceRouteInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReplaceRoute", params, optFns, addOperationReplaceRouteMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReplaceRoute", params, optFns, c.addOperationReplaceRouteMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type ReplaceRouteOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReplaceRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReplaceRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpReplaceRoute{}, middleware.After)
 	if err != nil {
 		return err

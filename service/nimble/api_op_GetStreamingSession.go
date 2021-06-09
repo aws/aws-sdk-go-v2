@@ -18,7 +18,7 @@ func (c *Client) GetStreamingSession(ctx context.Context, params *GetStreamingSe
 		params = &GetStreamingSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetStreamingSession", params, optFns, addOperationGetStreamingSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetStreamingSession", params, optFns, c.addOperationGetStreamingSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetStreamingSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetStreamingSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetStreamingSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStreamingSession{}, middleware.After)
 	if err != nil {
 		return err

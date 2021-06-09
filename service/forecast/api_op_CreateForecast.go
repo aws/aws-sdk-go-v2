@@ -29,7 +29,7 @@ func (c *Client) CreateForecast(ctx context.Context, params *CreateForecastInput
 		params = &CreateForecastInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateForecast", params, optFns, addOperationCreateForecastMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateForecast", params, optFns, c.addOperationCreateForecastMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ type CreateForecastOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateForecast{}, middleware.After)
 	if err != nil {
 		return err

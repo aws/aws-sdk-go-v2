@@ -19,7 +19,7 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 		params = &PutResourcePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutResourcePolicy", params, optFns, addOperationPutResourcePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutResourcePolicy", params, optFns, c.addOperationPutResourcePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type PutResourcePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutResourcePolicy{}, middleware.After)
 	if err != nil {
 		return err

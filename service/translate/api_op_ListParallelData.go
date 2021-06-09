@@ -18,7 +18,7 @@ func (c *Client) ListParallelData(ctx context.Context, params *ListParallelDataI
 		params = &ListParallelDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListParallelData", params, optFns, addOperationListParallelDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListParallelData", params, optFns, c.addOperationListParallelDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ListParallelDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListParallelData{}, middleware.After)
 	if err != nil {
 		return err

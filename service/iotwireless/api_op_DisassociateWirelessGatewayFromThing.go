@@ -16,7 +16,7 @@ func (c *Client) DisassociateWirelessGatewayFromThing(ctx context.Context, param
 		params = &DisassociateWirelessGatewayFromThingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateWirelessGatewayFromThing", params, optFns, addOperationDisassociateWirelessGatewayFromThingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateWirelessGatewayFromThing", params, optFns, c.addOperationDisassociateWirelessGatewayFromThingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DisassociateWirelessGatewayFromThingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateWirelessGatewayFromThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateWirelessGatewayFromThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateWirelessGatewayFromThing{}, middleware.After)
 	if err != nil {
 		return err

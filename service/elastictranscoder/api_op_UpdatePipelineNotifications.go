@@ -20,7 +20,7 @@ func (c *Client) UpdatePipelineNotifications(ctx context.Context, params *Update
 		params = &UpdatePipelineNotificationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePipelineNotifications", params, optFns, addOperationUpdatePipelineNotificationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePipelineNotifications", params, optFns, c.addOperationUpdatePipelineNotificationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type UpdatePipelineNotificationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePipelineNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePipelineNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePipelineNotifications{}, middleware.After)
 	if err != nil {
 		return err

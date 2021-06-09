@@ -16,7 +16,7 @@ func (c *Client) DeleteReplicationSubnetGroup(ctx context.Context, params *Delet
 		params = &DeleteReplicationSubnetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteReplicationSubnetGroup", params, optFns, addOperationDeleteReplicationSubnetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteReplicationSubnetGroup", params, optFns, c.addOperationDeleteReplicationSubnetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteReplicationSubnetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteReplicationSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteReplicationSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteReplicationSubnetGroup{}, middleware.After)
 	if err != nil {
 		return err

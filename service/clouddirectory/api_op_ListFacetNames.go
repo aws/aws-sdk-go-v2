@@ -17,7 +17,7 @@ func (c *Client) ListFacetNames(ctx context.Context, params *ListFacetNamesInput
 		params = &ListFacetNamesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFacetNames", params, optFns, addOperationListFacetNamesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFacetNames", params, optFns, c.addOperationListFacetNamesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListFacetNamesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFacetNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFacetNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFacetNames{}, middleware.After)
 	if err != nil {
 		return err

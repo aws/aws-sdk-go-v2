@@ -21,7 +21,7 @@ func (c *Client) SetLoadBalancerListenerSSLCertificate(ctx context.Context, para
 		params = &SetLoadBalancerListenerSSLCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetLoadBalancerListenerSSLCertificate", params, optFns, addOperationSetLoadBalancerListenerSSLCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetLoadBalancerListenerSSLCertificate", params, optFns, c.addOperationSetLoadBalancerListenerSSLCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type SetLoadBalancerListenerSSLCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetLoadBalancerListenerSSLCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetLoadBalancerListenerSSLCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetLoadBalancerListenerSSLCertificate{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListGroundStations(ctx context.Context, params *ListGroundStati
 		params = &ListGroundStationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListGroundStations", params, optFns, addOperationListGroundStationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListGroundStations", params, optFns, c.addOperationListGroundStationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListGroundStationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListGroundStationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListGroundStationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroundStations{}, middleware.After)
 	if err != nil {
 		return err

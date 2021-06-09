@@ -17,7 +17,7 @@ func (c *Client) DeleteCustomerGateway(ctx context.Context, params *DeleteCustom
 		params = &DeleteCustomerGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomerGateway", params, optFns, addOperationDeleteCustomerGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomerGateway", params, optFns, c.addOperationDeleteCustomerGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteCustomerGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCustomerGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCustomerGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteCustomerGateway{}, middleware.After)
 	if err != nil {
 		return err

@@ -26,7 +26,7 @@ func (c *Client) CreatePublicDnsNamespace(ctx context.Context, params *CreatePub
 		params = &CreatePublicDnsNamespaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePublicDnsNamespace", params, optFns, addOperationCreatePublicDnsNamespaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePublicDnsNamespace", params, optFns, c.addOperationCreatePublicDnsNamespaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type CreatePublicDnsNamespaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePublicDnsNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePublicDnsNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePublicDnsNamespace{}, middleware.After)
 	if err != nil {
 		return err

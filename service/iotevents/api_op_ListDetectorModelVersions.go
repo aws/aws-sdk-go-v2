@@ -18,7 +18,7 @@ func (c *Client) ListDetectorModelVersions(ctx context.Context, params *ListDete
 		params = &ListDetectorModelVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDetectorModelVersions", params, optFns, addOperationListDetectorModelVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDetectorModelVersions", params, optFns, c.addOperationListDetectorModelVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListDetectorModelVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDetectorModelVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDetectorModelVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDetectorModelVersions{}, middleware.After)
 	if err != nil {
 		return err

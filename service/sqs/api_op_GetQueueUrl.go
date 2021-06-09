@@ -22,7 +22,7 @@ func (c *Client) GetQueueUrl(ctx context.Context, params *GetQueueUrlInput, optF
 		params = &GetQueueUrlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetQueueUrl", params, optFns, addOperationGetQueueUrlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetQueueUrl", params, optFns, c.addOperationGetQueueUrlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetQueueUrlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetQueueUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetQueueUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetQueueUrl{}, middleware.After)
 	if err != nil {
 		return err

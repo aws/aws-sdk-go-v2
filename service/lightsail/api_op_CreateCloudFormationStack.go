@@ -23,7 +23,7 @@ func (c *Client) CreateCloudFormationStack(ctx context.Context, params *CreateCl
 		params = &CreateCloudFormationStackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCloudFormationStack", params, optFns, addOperationCreateCloudFormationStackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCloudFormationStack", params, optFns, c.addOperationCreateCloudFormationStackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type CreateCloudFormationStackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCloudFormationStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCloudFormationStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCloudFormationStack{}, middleware.After)
 	if err != nil {
 		return err

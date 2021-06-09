@@ -20,7 +20,7 @@ func (c *Client) ListHumanLoops(ctx context.Context, params *ListHumanLoopsInput
 		params = &ListHumanLoopsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListHumanLoops", params, optFns, addOperationListHumanLoopsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListHumanLoops", params, optFns, c.addOperationListHumanLoopsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type ListHumanLoopsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListHumanLoopsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListHumanLoopsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHumanLoops{}, middleware.After)
 	if err != nil {
 		return err

@@ -30,7 +30,7 @@ func (c *Client) ModifyHsm(ctx context.Context, params *ModifyHsmInput, optFns .
 		params = &ModifyHsmInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyHsm", params, optFns, addOperationModifyHsmMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyHsm", params, optFns, c.addOperationModifyHsmMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type ModifyHsmOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyHsm{}, middleware.After)
 	if err != nil {
 		return err

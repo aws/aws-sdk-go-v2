@@ -18,7 +18,7 @@ func (c *Client) GetDatabases(ctx context.Context, params *GetDatabasesInput, op
 		params = &GetDatabasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDatabases", params, optFns, addOperationGetDatabasesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDatabases", params, optFns, c.addOperationGetDatabasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type GetDatabasesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDatabases{}, middleware.After)
 	if err != nil {
 		return err

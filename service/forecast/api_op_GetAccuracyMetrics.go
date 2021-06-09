@@ -31,7 +31,7 @@ func (c *Client) GetAccuracyMetrics(ctx context.Context, params *GetAccuracyMetr
 		params = &GetAccuracyMetricsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccuracyMetrics", params, optFns, addOperationGetAccuracyMetricsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccuracyMetrics", params, optFns, c.addOperationGetAccuracyMetricsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetAccuracyMetricsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccuracyMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccuracyMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAccuracyMetrics{}, middleware.After)
 	if err != nil {
 		return err

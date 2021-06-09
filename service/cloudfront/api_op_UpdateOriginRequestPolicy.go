@@ -31,7 +31,7 @@ func (c *Client) UpdateOriginRequestPolicy(ctx context.Context, params *UpdateOr
 		params = &UpdateOriginRequestPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateOriginRequestPolicy", params, optFns, addOperationUpdateOriginRequestPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateOriginRequestPolicy", params, optFns, c.addOperationUpdateOriginRequestPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type UpdateOriginRequestPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateOriginRequestPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateOriginRequestPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpUpdateOriginRequestPolicy{}, middleware.After)
 	if err != nil {
 		return err

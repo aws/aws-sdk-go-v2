@@ -17,7 +17,7 @@ func (c *Client) GetDiscoveredSchema(ctx context.Context, params *GetDiscoveredS
 		params = &GetDiscoveredSchemaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDiscoveredSchema", params, optFns, addOperationGetDiscoveredSchemaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDiscoveredSchema", params, optFns, c.addOperationGetDiscoveredSchemaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetDiscoveredSchemaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDiscoveredSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDiscoveredSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDiscoveredSchema{}, middleware.After)
 	if err != nil {
 		return err

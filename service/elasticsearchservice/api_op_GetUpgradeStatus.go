@@ -18,7 +18,7 @@ func (c *Client) GetUpgradeStatus(ctx context.Context, params *GetUpgradeStatusI
 		params = &GetUpgradeStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUpgradeStatus", params, optFns, addOperationGetUpgradeStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetUpgradeStatus", params, optFns, c.addOperationGetUpgradeStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type GetUpgradeStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetUpgradeStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetUpgradeStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUpgradeStatus{}, middleware.After)
 	if err != nil {
 		return err

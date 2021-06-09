@@ -17,7 +17,7 @@ func (c *Client) UpdateVirtualNode(ctx context.Context, params *UpdateVirtualNod
 		params = &UpdateVirtualNodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateVirtualNode", params, optFns, addOperationUpdateVirtualNodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateVirtualNode", params, optFns, c.addOperationUpdateVirtualNodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type UpdateVirtualNodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateVirtualNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateVirtualNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVirtualNode{}, middleware.After)
 	if err != nil {
 		return err

@@ -29,7 +29,7 @@ func (c *Client) DeregisterTaskDefinition(ctx context.Context, params *Deregiste
 		params = &DeregisterTaskDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterTaskDefinition", params, optFns, addOperationDeregisterTaskDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterTaskDefinition", params, optFns, c.addOperationDeregisterTaskDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DeregisterTaskDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterTaskDefinition{}, middleware.After)
 	if err != nil {
 		return err

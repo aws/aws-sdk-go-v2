@@ -19,7 +19,7 @@ func (c *Client) DescribeDomainAutoTunes(ctx context.Context, params *DescribeDo
 		params = &DescribeDomainAutoTunesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDomainAutoTunes", params, optFns, addOperationDescribeDomainAutoTunesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDomainAutoTunes", params, optFns, c.addOperationDescribeDomainAutoTunesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DescribeDomainAutoTunesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDomainAutoTunesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDomainAutoTunesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDomainAutoTunes{}, middleware.After)
 	if err != nil {
 		return err

@@ -33,7 +33,7 @@ func (c *Client) DescribeClusterSnapshots(ctx context.Context, params *DescribeC
 		params = &DescribeClusterSnapshotsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeClusterSnapshots", params, optFns, addOperationDescribeClusterSnapshotsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeClusterSnapshots", params, optFns, c.addOperationDescribeClusterSnapshotsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -145,7 +145,7 @@ type DescribeClusterSnapshotsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeClusterSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeClusterSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeClusterSnapshots{}, middleware.After)
 	if err != nil {
 		return err

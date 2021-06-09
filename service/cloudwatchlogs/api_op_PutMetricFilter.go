@@ -33,7 +33,7 @@ func (c *Client) PutMetricFilter(ctx context.Context, params *PutMetricFilterInp
 		params = &PutMetricFilterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutMetricFilter", params, optFns, addOperationPutMetricFilterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutMetricFilter", params, optFns, c.addOperationPutMetricFilterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type PutMetricFilterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutMetricFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutMetricFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutMetricFilter{}, middleware.After)
 	if err != nil {
 		return err

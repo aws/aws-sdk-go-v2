@@ -19,7 +19,7 @@ func (c *Client) DeleteResourcePolicyStatement(ctx context.Context, params *Dele
 		params = &DeleteResourcePolicyStatementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteResourcePolicyStatement", params, optFns, addOperationDeleteResourcePolicyStatementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteResourcePolicyStatement", params, optFns, c.addOperationDeleteResourcePolicyStatementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DeleteResourcePolicyStatementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteResourcePolicyStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteResourcePolicyStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteResourcePolicyStatement{}, middleware.After)
 	if err != nil {
 		return err

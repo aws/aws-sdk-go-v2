@@ -52,7 +52,7 @@ func (c *Client) Invoke(ctx context.Context, params *InvokeInput, optFns ...func
 		params = &InvokeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Invoke", params, optFns, addOperationInvokeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "Invoke", params, optFns, c.addOperationInvokeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -137,7 +137,7 @@ type InvokeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInvokeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInvokeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvoke{}, middleware.After)
 	if err != nil {
 		return err

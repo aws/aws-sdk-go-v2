@@ -20,7 +20,7 @@ func (c *Client) DescribeRecommendationExportJobs(ctx context.Context, params *D
 		params = &DescribeRecommendationExportJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRecommendationExportJobs", params, optFns, addOperationDescribeRecommendationExportJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRecommendationExportJobs", params, optFns, c.addOperationDescribeRecommendationExportJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DescribeRecommendationExportJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRecommendationExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRecommendationExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeRecommendationExportJobs{}, middleware.After)
 	if err != nil {
 		return err

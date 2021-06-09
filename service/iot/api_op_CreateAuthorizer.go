@@ -17,7 +17,7 @@ func (c *Client) CreateAuthorizer(ctx context.Context, params *CreateAuthorizerI
 		params = &CreateAuthorizerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAuthorizer", params, optFns, addOperationCreateAuthorizerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAuthorizer", params, optFns, c.addOperationCreateAuthorizerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type CreateAuthorizerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAuthorizer{}, middleware.After)
 	if err != nil {
 		return err

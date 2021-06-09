@@ -17,7 +17,7 @@ func (c *Client) ConstantAndVariableQueryString(ctx context.Context, params *Con
 		params = &ConstantAndVariableQueryStringInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ConstantAndVariableQueryString", params, optFns, addOperationConstantAndVariableQueryStringMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ConstantAndVariableQueryString", params, optFns, c.addOperationConstantAndVariableQueryStringMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ type ConstantAndVariableQueryStringOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationConstantAndVariableQueryStringMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationConstantAndVariableQueryStringMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpConstantAndVariableQueryString{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) PutFunctionCodeSigningConfig(ctx context.Context, params *PutFu
 		params = &PutFunctionCodeSigningConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutFunctionCodeSigningConfig", params, optFns, addOperationPutFunctionCodeSigningConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutFunctionCodeSigningConfig", params, optFns, c.addOperationPutFunctionCodeSigningConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type PutFunctionCodeSigningConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutFunctionCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutFunctionCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFunctionCodeSigningConfig{}, middleware.After)
 	if err != nil {
 		return err

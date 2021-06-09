@@ -17,7 +17,7 @@ func (c *Client) DeleteIPSet(ctx context.Context, params *DeleteIPSetInput, optF
 		params = &DeleteIPSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteIPSet", params, optFns, addOperationDeleteIPSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteIPSet", params, optFns, c.addOperationDeleteIPSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteIPSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIPSet{}, middleware.After)
 	if err != nil {
 		return err

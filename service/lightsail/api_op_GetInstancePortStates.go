@@ -19,7 +19,7 @@ func (c *Client) GetInstancePortStates(ctx context.Context, params *GetInstanceP
 		params = &GetInstancePortStatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInstancePortStates", params, optFns, addOperationGetInstancePortStatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInstancePortStates", params, optFns, c.addOperationGetInstancePortStatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetInstancePortStatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInstancePortStatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInstancePortStatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInstancePortStates{}, middleware.After)
 	if err != nil {
 		return err

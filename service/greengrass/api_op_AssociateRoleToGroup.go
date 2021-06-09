@@ -18,7 +18,7 @@ func (c *Client) AssociateRoleToGroup(ctx context.Context, params *AssociateRole
 		params = &AssociateRoleToGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateRoleToGroup", params, optFns, addOperationAssociateRoleToGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateRoleToGroup", params, optFns, c.addOperationAssociateRoleToGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type AssociateRoleToGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateRoleToGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateRoleToGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateRoleToGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ListStackInstancesForProvisionedProduct(ctx context.Context, pa
 		params = &ListStackInstancesForProvisionedProductInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListStackInstancesForProvisionedProduct", params, optFns, addOperationListStackInstancesForProvisionedProductMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListStackInstancesForProvisionedProduct", params, optFns, c.addOperationListStackInstancesForProvisionedProductMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ListStackInstancesForProvisionedProductOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListStackInstancesForProvisionedProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListStackInstancesForProvisionedProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStackInstancesForProvisionedProduct{}, middleware.After)
 	if err != nil {
 		return err

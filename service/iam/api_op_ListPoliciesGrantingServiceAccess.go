@@ -49,7 +49,7 @@ func (c *Client) ListPoliciesGrantingServiceAccess(ctx context.Context, params *
 		params = &ListPoliciesGrantingServiceAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPoliciesGrantingServiceAccess", params, optFns, addOperationListPoliciesGrantingServiceAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPoliciesGrantingServiceAccess", params, optFns, c.addOperationListPoliciesGrantingServiceAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type ListPoliciesGrantingServiceAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPoliciesGrantingServiceAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPoliciesGrantingServiceAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListPoliciesGrantingServiceAccess{}, middleware.After)
 	if err != nil {
 		return err

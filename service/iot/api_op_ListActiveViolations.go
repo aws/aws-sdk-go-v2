@@ -18,7 +18,7 @@ func (c *Client) ListActiveViolations(ctx context.Context, params *ListActiveVio
 		params = &ListActiveViolationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListActiveViolations", params, optFns, addOperationListActiveViolationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListActiveViolations", params, optFns, c.addOperationListActiveViolationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListActiveViolationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListActiveViolationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListActiveViolationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListActiveViolations{}, middleware.After)
 	if err != nil {
 		return err

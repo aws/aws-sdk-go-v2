@@ -62,7 +62,7 @@ func (c *Client) ReceiveMessage(ctx context.Context, params *ReceiveMessageInput
 		params = &ReceiveMessageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReceiveMessage", params, optFns, addOperationReceiveMessageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReceiveMessage", params, optFns, c.addOperationReceiveMessageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -234,7 +234,7 @@ type ReceiveMessageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReceiveMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReceiveMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpReceiveMessage{}, middleware.After)
 	if err != nil {
 		return err

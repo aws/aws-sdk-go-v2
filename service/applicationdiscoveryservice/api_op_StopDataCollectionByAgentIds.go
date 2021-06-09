@@ -17,7 +17,7 @@ func (c *Client) StopDataCollectionByAgentIds(ctx context.Context, params *StopD
 		params = &StopDataCollectionByAgentIdsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopDataCollectionByAgentIds", params, optFns, addOperationStopDataCollectionByAgentIdsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopDataCollectionByAgentIds", params, optFns, c.addOperationStopDataCollectionByAgentIdsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StopDataCollectionByAgentIdsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopDataCollectionByAgentIdsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopDataCollectionByAgentIdsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopDataCollectionByAgentIds{}, middleware.After)
 	if err != nil {
 		return err

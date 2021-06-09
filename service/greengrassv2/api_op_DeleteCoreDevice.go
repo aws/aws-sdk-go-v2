@@ -21,7 +21,7 @@ func (c *Client) DeleteCoreDevice(ctx context.Context, params *DeleteCoreDeviceI
 		params = &DeleteCoreDeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCoreDevice", params, optFns, addOperationDeleteCoreDeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCoreDevice", params, optFns, c.addOperationDeleteCoreDeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteCoreDeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCoreDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCoreDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCoreDevice{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) SignalResource(ctx context.Context, params *SignalResourceInput
 		params = &SignalResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SignalResource", params, optFns, addOperationSignalResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SignalResource", params, optFns, c.addOperationSignalResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type SignalResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSignalResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSignalResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSignalResource{}, middleware.After)
 	if err != nil {
 		return err

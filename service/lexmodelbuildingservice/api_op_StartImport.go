@@ -18,7 +18,7 @@ func (c *Client) StartImport(ctx context.Context, params *StartImportInput, optF
 		params = &StartImportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartImport", params, optFns, addOperationStartImportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartImport", params, optFns, c.addOperationStartImportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type StartImportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartImport{}, middleware.After)
 	if err != nil {
 		return err

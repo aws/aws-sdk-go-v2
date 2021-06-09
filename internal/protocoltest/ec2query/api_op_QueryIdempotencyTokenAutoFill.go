@@ -16,7 +16,7 @@ func (c *Client) QueryIdempotencyTokenAutoFill(ctx context.Context, params *Quer
 		params = &QueryIdempotencyTokenAutoFillInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "QueryIdempotencyTokenAutoFill", params, optFns, addOperationQueryIdempotencyTokenAutoFillMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "QueryIdempotencyTokenAutoFill", params, optFns, c.addOperationQueryIdempotencyTokenAutoFillMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ type QueryIdempotencyTokenAutoFillOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationQueryIdempotencyTokenAutoFillMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationQueryIdempotencyTokenAutoFillMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpQueryIdempotencyTokenAutoFill{}, middleware.After)
 	if err != nil {
 		return err

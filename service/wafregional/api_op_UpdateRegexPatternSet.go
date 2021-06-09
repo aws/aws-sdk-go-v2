@@ -60,7 +60,7 @@ func (c *Client) UpdateRegexPatternSet(ctx context.Context, params *UpdateRegexP
 		params = &UpdateRegexPatternSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRegexPatternSet", params, optFns, addOperationUpdateRegexPatternSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRegexPatternSet", params, optFns, c.addOperationUpdateRegexPatternSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type UpdateRegexPatternSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRegexPatternSet{}, middleware.After)
 	if err != nil {
 		return err

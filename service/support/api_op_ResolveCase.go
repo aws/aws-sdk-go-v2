@@ -26,7 +26,7 @@ func (c *Client) ResolveCase(ctx context.Context, params *ResolveCaseInput, optF
 		params = &ResolveCaseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResolveCase", params, optFns, addOperationResolveCaseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResolveCase", params, optFns, c.addOperationResolveCaseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ResolveCaseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResolveCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResolveCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResolveCase{}, middleware.After)
 	if err != nil {
 		return err

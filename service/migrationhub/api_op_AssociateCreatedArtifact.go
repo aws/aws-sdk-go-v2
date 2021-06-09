@@ -31,7 +31,7 @@ func (c *Client) AssociateCreatedArtifact(ctx context.Context, params *Associate
 		params = &AssociateCreatedArtifactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateCreatedArtifact", params, optFns, addOperationAssociateCreatedArtifactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateCreatedArtifact", params, optFns, c.addOperationAssociateCreatedArtifactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type AssociateCreatedArtifactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateCreatedArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateCreatedArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateCreatedArtifact{}, middleware.After)
 	if err != nil {
 		return err

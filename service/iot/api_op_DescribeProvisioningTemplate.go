@@ -18,7 +18,7 @@ func (c *Client) DescribeProvisioningTemplate(ctx context.Context, params *Descr
 		params = &DescribeProvisioningTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeProvisioningTemplate", params, optFns, addOperationDescribeProvisioningTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeProvisioningTemplate", params, optFns, c.addOperationDescribeProvisioningTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DescribeProvisioningTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeProvisioningTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeProvisioningTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeProvisioningTemplate{}, middleware.After)
 	if err != nil {
 		return err

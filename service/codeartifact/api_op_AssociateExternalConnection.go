@@ -19,7 +19,7 @@ func (c *Client) AssociateExternalConnection(ctx context.Context, params *Associ
 		params = &AssociateExternalConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateExternalConnection", params, optFns, addOperationAssociateExternalConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateExternalConnection", params, optFns, c.addOperationAssociateExternalConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type AssociateExternalConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateExternalConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateExternalConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateExternalConnection{}, middleware.After)
 	if err != nil {
 		return err

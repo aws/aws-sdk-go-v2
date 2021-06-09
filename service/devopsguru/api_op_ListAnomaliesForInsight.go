@@ -19,7 +19,7 @@ func (c *Client) ListAnomaliesForInsight(ctx context.Context, params *ListAnomal
 		params = &ListAnomaliesForInsightInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAnomaliesForInsight", params, optFns, addOperationListAnomaliesForInsightMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAnomaliesForInsight", params, optFns, c.addOperationListAnomaliesForInsightMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListAnomaliesForInsightOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAnomaliesForInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAnomaliesForInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnomaliesForInsight{}, middleware.After)
 	if err != nil {
 		return err

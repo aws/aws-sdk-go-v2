@@ -16,7 +16,7 @@ func (c *Client) ExpireSession(ctx context.Context, params *ExpireSessionInput, 
 		params = &ExpireSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExpireSession", params, optFns, addOperationExpireSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExpireSession", params, optFns, c.addOperationExpireSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type ExpireSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExpireSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExpireSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpExpireSession{}, middleware.After)
 	if err != nil {
 		return err

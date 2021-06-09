@@ -19,7 +19,7 @@ func (c *Client) GetCompatibleElasticsearchVersions(ctx context.Context, params 
 		params = &GetCompatibleElasticsearchVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCompatibleElasticsearchVersions", params, optFns, addOperationGetCompatibleElasticsearchVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCompatibleElasticsearchVersions", params, optFns, c.addOperationGetCompatibleElasticsearchVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetCompatibleElasticsearchVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCompatibleElasticsearchVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCompatibleElasticsearchVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCompatibleElasticsearchVersions{}, middleware.After)
 	if err != nil {
 		return err

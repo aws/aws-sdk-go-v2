@@ -18,7 +18,7 @@ func (c *Client) ModifyScheduledAction(ctx context.Context, params *ModifySchedu
 		params = &ModifyScheduledActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyScheduledAction", params, optFns, addOperationModifyScheduledActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyScheduledAction", params, optFns, c.addOperationModifyScheduledActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ type ModifyScheduledActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyScheduledAction{}, middleware.After)
 	if err != nil {
 		return err

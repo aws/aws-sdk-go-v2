@@ -16,7 +16,7 @@ func (c *Client) DeleteAssessmentFramework(ctx context.Context, params *DeleteAs
 		params = &DeleteAssessmentFrameworkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAssessmentFramework", params, optFns, addOperationDeleteAssessmentFrameworkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAssessmentFramework", params, optFns, c.addOperationDeleteAssessmentFrameworkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteAssessmentFrameworkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAssessmentFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAssessmentFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAssessmentFramework{}, middleware.After)
 	if err != nil {
 		return err

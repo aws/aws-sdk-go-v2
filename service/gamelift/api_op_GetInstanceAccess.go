@@ -36,7 +36,7 @@ func (c *Client) GetInstanceAccess(ctx context.Context, params *GetInstanceAcces
 		params = &GetInstanceAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInstanceAccess", params, optFns, addOperationGetInstanceAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInstanceAccess", params, optFns, c.addOperationGetInstanceAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type GetInstanceAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInstanceAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInstanceAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInstanceAccess{}, middleware.After)
 	if err != nil {
 		return err

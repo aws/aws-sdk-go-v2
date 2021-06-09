@@ -32,7 +32,7 @@ func (c *Client) GetUserAttributeVerificationCode(ctx context.Context, params *G
 		params = &GetUserAttributeVerificationCodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUserAttributeVerificationCode", params, optFns, addOperationGetUserAttributeVerificationCodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetUserAttributeVerificationCode", params, optFns, c.addOperationGetUserAttributeVerificationCodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ type GetUserAttributeVerificationCodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetUserAttributeVerificationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetUserAttributeVerificationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUserAttributeVerificationCode{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) ListBranches(ctx context.Context, params *ListBranchesInput, op
 		params = &ListBranchesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBranches", params, optFns, addOperationListBranchesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBranches", params, optFns, c.addOperationListBranchesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListBranchesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBranchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBranchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBranches{}, middleware.After)
 	if err != nil {
 		return err

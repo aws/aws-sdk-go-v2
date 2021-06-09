@@ -17,7 +17,7 @@ func (c *Client) DescribeExclusions(ctx context.Context, params *DescribeExclusi
 		params = &DescribeExclusionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeExclusions", params, optFns, addOperationDescribeExclusionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeExclusions", params, optFns, c.addOperationDescribeExclusionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeExclusionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeExclusionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeExclusionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeExclusions{}, middleware.After)
 	if err != nil {
 		return err

@@ -48,7 +48,7 @@ func (c *Client) ListBucketInventoryConfigurations(ctx context.Context, params *
 		params = &ListBucketInventoryConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBucketInventoryConfigurations", params, optFns, addOperationListBucketInventoryConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBucketInventoryConfigurations", params, optFns, c.addOperationListBucketInventoryConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ type ListBucketInventoryConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBucketInventoryConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBucketInventoryConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListBucketInventoryConfigurations{}, middleware.After)
 	if err != nil {
 		return err

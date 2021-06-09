@@ -16,7 +16,7 @@ func (c *Client) BackTestAnomalyDetector(ctx context.Context, params *BackTestAn
 		params = &BackTestAnomalyDetectorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BackTestAnomalyDetector", params, optFns, addOperationBackTestAnomalyDetectorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BackTestAnomalyDetector", params, optFns, c.addOperationBackTestAnomalyDetectorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type BackTestAnomalyDetectorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBackTestAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBackTestAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBackTestAnomalyDetector{}, middleware.After)
 	if err != nil {
 		return err

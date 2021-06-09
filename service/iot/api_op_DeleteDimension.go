@@ -16,7 +16,7 @@ func (c *Client) DeleteDimension(ctx context.Context, params *DeleteDimensionInp
 		params = &DeleteDimensionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDimension", params, optFns, addOperationDeleteDimensionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDimension", params, optFns, c.addOperationDeleteDimensionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteDimensionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDimension{}, middleware.After)
 	if err != nil {
 		return err

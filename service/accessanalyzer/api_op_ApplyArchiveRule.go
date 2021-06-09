@@ -18,7 +18,7 @@ func (c *Client) ApplyArchiveRule(ctx context.Context, params *ApplyArchiveRuleI
 		params = &ApplyArchiveRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ApplyArchiveRule", params, optFns, addOperationApplyArchiveRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ApplyArchiveRule", params, optFns, c.addOperationApplyArchiveRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ApplyArchiveRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationApplyArchiveRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationApplyArchiveRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpApplyArchiveRule{}, middleware.After)
 	if err != nil {
 		return err

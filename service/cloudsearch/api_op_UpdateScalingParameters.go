@@ -24,7 +24,7 @@ func (c *Client) UpdateScalingParameters(ctx context.Context, params *UpdateScal
 		params = &UpdateScalingParametersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateScalingParameters", params, optFns, addOperationUpdateScalingParametersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateScalingParameters", params, optFns, c.addOperationUpdateScalingParametersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type UpdateScalingParametersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateScalingParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateScalingParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateScalingParameters{}, middleware.After)
 	if err != nil {
 		return err

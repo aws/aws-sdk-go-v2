@@ -17,7 +17,7 @@ func (c *Client) CreateSite(ctx context.Context, params *CreateSiteInput, optFns
 		params = &CreateSiteInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSite", params, optFns, addOperationCreateSiteMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSite", params, optFns, c.addOperationCreateSiteMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type CreateSiteOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSite{}, middleware.After)
 	if err != nil {
 		return err

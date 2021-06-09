@@ -18,7 +18,7 @@ func (c *Client) UpdateAssessmentTarget(ctx context.Context, params *UpdateAsses
 		params = &UpdateAssessmentTargetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAssessmentTarget", params, optFns, addOperationUpdateAssessmentTargetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAssessmentTarget", params, optFns, c.addOperationUpdateAssessmentTargetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type UpdateAssessmentTargetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAssessmentTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAssessmentTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAssessmentTarget{}, middleware.After)
 	if err != nil {
 		return err

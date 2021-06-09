@@ -20,7 +20,7 @@ func (c *Client) DescribeCompilationJob(ctx context.Context, params *DescribeCom
 		params = &DescribeCompilationJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCompilationJob", params, optFns, addOperationDescribeCompilationJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCompilationJob", params, optFns, c.addOperationDescribeCompilationJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -124,7 +124,7 @@ type DescribeCompilationJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCompilationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCompilationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCompilationJob{}, middleware.After)
 	if err != nil {
 		return err

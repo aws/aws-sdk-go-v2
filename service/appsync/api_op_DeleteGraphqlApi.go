@@ -16,7 +16,7 @@ func (c *Client) DeleteGraphqlApi(ctx context.Context, params *DeleteGraphqlApiI
 		params = &DeleteGraphqlApiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGraphqlApi", params, optFns, addOperationDeleteGraphqlApiMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGraphqlApi", params, optFns, c.addOperationDeleteGraphqlApiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteGraphqlApiOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGraphqlApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGraphqlApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGraphqlApi{}, middleware.After)
 	if err != nil {
 		return err

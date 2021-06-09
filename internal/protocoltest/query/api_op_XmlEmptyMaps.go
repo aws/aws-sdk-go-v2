@@ -15,7 +15,7 @@ func (c *Client) XmlEmptyMaps(ctx context.Context, params *XmlEmptyMapsInput, op
 		params = &XmlEmptyMapsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "XmlEmptyMaps", params, optFns, addOperationXmlEmptyMapsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "XmlEmptyMaps", params, optFns, c.addOperationXmlEmptyMapsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ type XmlEmptyMapsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationXmlEmptyMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationXmlEmptyMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpXmlEmptyMaps{}, middleware.After)
 	if err != nil {
 		return err

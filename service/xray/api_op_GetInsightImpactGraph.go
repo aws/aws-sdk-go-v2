@@ -20,7 +20,7 @@ func (c *Client) GetInsightImpactGraph(ctx context.Context, params *GetInsightIm
 		params = &GetInsightImpactGraphInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInsightImpactGraph", params, optFns, addOperationGetInsightImpactGraphMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInsightImpactGraph", params, optFns, c.addOperationGetInsightImpactGraphMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type GetInsightImpactGraphOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInsightImpactGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInsightImpactGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInsightImpactGraph{}, middleware.After)
 	if err != nil {
 		return err

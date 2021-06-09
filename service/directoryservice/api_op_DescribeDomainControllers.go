@@ -18,7 +18,7 @@ func (c *Client) DescribeDomainControllers(ctx context.Context, params *Describe
 		params = &DescribeDomainControllersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDomainControllers", params, optFns, addOperationDescribeDomainControllersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDomainControllers", params, optFns, c.addOperationDescribeDomainControllersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DescribeDomainControllersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDomainControllersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDomainControllersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDomainControllers{}, middleware.After)
 	if err != nil {
 		return err

@@ -40,7 +40,7 @@ func (c *Client) StartFleetActions(ctx context.Context, params *StartFleetAction
 		params = &StartFleetActionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartFleetActions", params, optFns, addOperationStartFleetActionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartFleetActions", params, optFns, c.addOperationStartFleetActionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type StartFleetActionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartFleetActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartFleetActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartFleetActions{}, middleware.After)
 	if err != nil {
 		return err

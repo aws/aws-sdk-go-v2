@@ -18,7 +18,7 @@ func (c *Client) ListWorldGenerationJobs(ctx context.Context, params *ListWorldG
 		params = &ListWorldGenerationJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListWorldGenerationJobs", params, optFns, addOperationListWorldGenerationJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListWorldGenerationJobs", params, optFns, c.addOperationListWorldGenerationJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ListWorldGenerationJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListWorldGenerationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListWorldGenerationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorldGenerationJobs{}, middleware.After)
 	if err != nil {
 		return err

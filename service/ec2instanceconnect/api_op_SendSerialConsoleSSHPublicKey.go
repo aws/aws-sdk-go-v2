@@ -20,7 +20,7 @@ func (c *Client) SendSerialConsoleSSHPublicKey(ctx context.Context, params *Send
 		params = &SendSerialConsoleSSHPublicKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendSerialConsoleSSHPublicKey", params, optFns, addOperationSendSerialConsoleSSHPublicKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendSerialConsoleSSHPublicKey", params, optFns, c.addOperationSendSerialConsoleSSHPublicKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type SendSerialConsoleSSHPublicKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendSerialConsoleSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendSerialConsoleSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendSerialConsoleSSHPublicKey{}, middleware.After)
 	if err != nil {
 		return err

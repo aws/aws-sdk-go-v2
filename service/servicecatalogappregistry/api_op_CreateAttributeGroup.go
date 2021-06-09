@@ -21,7 +21,7 @@ func (c *Client) CreateAttributeGroup(ctx context.Context, params *CreateAttribu
 		params = &CreateAttributeGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAttributeGroup", params, optFns, addOperationCreateAttributeGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAttributeGroup", params, optFns, c.addOperationCreateAttributeGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type CreateAttributeGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAttributeGroup{}, middleware.After)
 	if err != nil {
 		return err

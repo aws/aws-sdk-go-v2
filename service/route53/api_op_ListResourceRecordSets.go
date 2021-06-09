@@ -47,7 +47,7 @@ func (c *Client) ListResourceRecordSets(ctx context.Context, params *ListResourc
 		params = &ListResourceRecordSetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResourceRecordSets", params, optFns, addOperationListResourceRecordSetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResourceRecordSets", params, optFns, c.addOperationListResourceRecordSetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -156,7 +156,7 @@ type ListResourceRecordSetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListResourceRecordSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResourceRecordSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListResourceRecordSets{}, middleware.After)
 	if err != nil {
 		return err

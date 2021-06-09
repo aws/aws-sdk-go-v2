@@ -18,7 +18,7 @@ func (c *Client) AcknowledgeThirdPartyJob(ctx context.Context, params *Acknowled
 		params = &AcknowledgeThirdPartyJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcknowledgeThirdPartyJob", params, optFns, addOperationAcknowledgeThirdPartyJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcknowledgeThirdPartyJob", params, optFns, c.addOperationAcknowledgeThirdPartyJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type AcknowledgeThirdPartyJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAcknowledgeThirdPartyJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAcknowledgeThirdPartyJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcknowledgeThirdPartyJob{}, middleware.After)
 	if err != nil {
 		return err

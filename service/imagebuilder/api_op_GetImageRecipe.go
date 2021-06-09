@@ -17,7 +17,7 @@ func (c *Client) GetImageRecipe(ctx context.Context, params *GetImageRecipeInput
 		params = &GetImageRecipeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetImageRecipe", params, optFns, addOperationGetImageRecipeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetImageRecipe", params, optFns, c.addOperationGetImageRecipeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetImageRecipeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetImageRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetImageRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImageRecipe{}, middleware.After)
 	if err != nil {
 		return err

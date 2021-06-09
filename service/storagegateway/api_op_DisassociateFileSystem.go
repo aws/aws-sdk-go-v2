@@ -19,7 +19,7 @@ func (c *Client) DisassociateFileSystem(ctx context.Context, params *Disassociat
 		params = &DisassociateFileSystemInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateFileSystem", params, optFns, addOperationDisassociateFileSystemMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateFileSystem", params, optFns, c.addOperationDisassociateFileSystemMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DisassociateFileSystemOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateFileSystem{}, middleware.After)
 	if err != nil {
 		return err

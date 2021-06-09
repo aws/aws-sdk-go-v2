@@ -27,7 +27,7 @@ func (c *Client) ReleaseAddress(ctx context.Context, params *ReleaseAddressInput
 		params = &ReleaseAddressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReleaseAddress", params, optFns, addOperationReleaseAddressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReleaseAddress", params, optFns, c.addOperationReleaseAddressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type ReleaseAddressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReleaseAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReleaseAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpReleaseAddress{}, middleware.After)
 	if err != nil {
 		return err

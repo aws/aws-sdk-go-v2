@@ -45,7 +45,7 @@ func (c *Client) UndeprecateWorkflowType(ctx context.Context, params *Undeprecat
 		params = &UndeprecateWorkflowTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UndeprecateWorkflowType", params, optFns, addOperationUndeprecateWorkflowTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UndeprecateWorkflowType", params, optFns, c.addOperationUndeprecateWorkflowTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type UndeprecateWorkflowTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUndeprecateWorkflowTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUndeprecateWorkflowTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUndeprecateWorkflowType{}, middleware.After)
 	if err != nil {
 		return err

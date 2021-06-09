@@ -18,7 +18,7 @@ func (c *Client) DeletePortfolio(ctx context.Context, params *DeletePortfolioInp
 		params = &DeletePortfolioInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePortfolio", params, optFns, addOperationDeletePortfolioMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePortfolio", params, optFns, c.addOperationDeletePortfolioMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeletePortfolioOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePortfolio{}, middleware.After)
 	if err != nil {
 		return err

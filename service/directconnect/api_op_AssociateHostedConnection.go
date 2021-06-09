@@ -23,7 +23,7 @@ func (c *Client) AssociateHostedConnection(ctx context.Context, params *Associat
 		params = &AssociateHostedConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateHostedConnection", params, optFns, addOperationAssociateHostedConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateHostedConnection", params, optFns, c.addOperationAssociateHostedConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -152,7 +152,7 @@ type AssociateHostedConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateHostedConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateHostedConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateHostedConnection{}, middleware.After)
 	if err != nil {
 		return err

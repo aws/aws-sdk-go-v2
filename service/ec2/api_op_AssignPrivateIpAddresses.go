@@ -33,7 +33,7 @@ func (c *Client) AssignPrivateIpAddresses(ctx context.Context, params *AssignPri
 		params = &AssignPrivateIpAddressesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssignPrivateIpAddresses", params, optFns, addOperationAssignPrivateIpAddressesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssignPrivateIpAddresses", params, optFns, c.addOperationAssignPrivateIpAddressesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type AssignPrivateIpAddressesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssignPrivateIpAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssignPrivateIpAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpAssignPrivateIpAddresses{}, middleware.After)
 	if err != nil {
 		return err

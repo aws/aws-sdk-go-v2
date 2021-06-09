@@ -23,7 +23,7 @@ func (c *Client) RegisterToWorkMail(ctx context.Context, params *RegisterToWorkM
 		params = &RegisterToWorkMailInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterToWorkMail", params, optFns, addOperationRegisterToWorkMailMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterToWorkMail", params, optFns, c.addOperationRegisterToWorkMailMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type RegisterToWorkMailOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterToWorkMailMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterToWorkMailMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterToWorkMail{}, middleware.After)
 	if err != nil {
 		return err

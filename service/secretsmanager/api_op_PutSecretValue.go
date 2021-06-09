@@ -87,7 +87,7 @@ func (c *Client) PutSecretValue(ctx context.Context, params *PutSecretValueInput
 		params = &PutSecretValueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutSecretValue", params, optFns, addOperationPutSecretValueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutSecretValue", params, optFns, c.addOperationPutSecretValueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -208,7 +208,7 @@ type PutSecretValueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutSecretValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutSecretValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutSecretValue{}, middleware.After)
 	if err != nil {
 		return err

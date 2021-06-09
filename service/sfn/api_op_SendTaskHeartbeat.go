@@ -31,7 +31,7 @@ func (c *Client) SendTaskHeartbeat(ctx context.Context, params *SendTaskHeartbea
 		params = &SendTaskHeartbeatInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendTaskHeartbeat", params, optFns, addOperationSendTaskHeartbeatMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendTaskHeartbeat", params, optFns, c.addOperationSendTaskHeartbeatMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type SendTaskHeartbeatOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendTaskHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendTaskHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendTaskHeartbeat{}, middleware.After)
 	if err != nil {
 		return err

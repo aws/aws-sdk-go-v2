@@ -18,7 +18,7 @@ func (c *Client) ModifyClusterDbRevision(ctx context.Context, params *ModifyClus
 		params = &ModifyClusterDbRevisionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyClusterDbRevision", params, optFns, addOperationModifyClusterDbRevisionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyClusterDbRevision", params, optFns, c.addOperationModifyClusterDbRevisionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ModifyClusterDbRevisionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyClusterDbRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyClusterDbRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyClusterDbRevision{}, middleware.After)
 	if err != nil {
 		return err

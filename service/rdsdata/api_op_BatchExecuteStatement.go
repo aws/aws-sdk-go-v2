@@ -22,7 +22,7 @@ func (c *Client) BatchExecuteStatement(ctx context.Context, params *BatchExecute
 		params = &BatchExecuteStatementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchExecuteStatement", params, optFns, addOperationBatchExecuteStatementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchExecuteStatement", params, optFns, c.addOperationBatchExecuteStatementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type BatchExecuteStatementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchExecuteStatement{}, middleware.After)
 	if err != nil {
 		return err

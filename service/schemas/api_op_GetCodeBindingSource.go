@@ -16,7 +16,7 @@ func (c *Client) GetCodeBindingSource(ctx context.Context, params *GetCodeBindin
 		params = &GetCodeBindingSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCodeBindingSource", params, optFns, addOperationGetCodeBindingSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCodeBindingSource", params, optFns, c.addOperationGetCodeBindingSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetCodeBindingSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCodeBindingSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCodeBindingSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCodeBindingSource{}, middleware.After)
 	if err != nil {
 		return err

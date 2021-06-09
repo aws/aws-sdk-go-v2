@@ -18,7 +18,7 @@ func (c *Client) PutResolverRulePolicy(ctx context.Context, params *PutResolverR
 		params = &PutResolverRulePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutResolverRulePolicy", params, optFns, addOperationPutResolverRulePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutResolverRulePolicy", params, optFns, c.addOperationPutResolverRulePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type PutResolverRulePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutResolverRulePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutResolverRulePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutResolverRulePolicy{}, middleware.After)
 	if err != nil {
 		return err

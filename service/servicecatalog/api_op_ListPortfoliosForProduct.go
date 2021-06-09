@@ -18,7 +18,7 @@ func (c *Client) ListPortfoliosForProduct(ctx context.Context, params *ListPortf
 		params = &ListPortfoliosForProductInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPortfoliosForProduct", params, optFns, addOperationListPortfoliosForProductMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPortfoliosForProduct", params, optFns, c.addOperationListPortfoliosForProductMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ListPortfoliosForProductOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPortfoliosForProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPortfoliosForProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPortfoliosForProduct{}, middleware.After)
 	if err != nil {
 		return err

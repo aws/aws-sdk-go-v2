@@ -66,7 +66,7 @@ func (c *Client) TestFailover(ctx context.Context, params *TestFailoverInput, op
 		params = &TestFailoverInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestFailover", params, optFns, addOperationTestFailoverMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestFailover", params, optFns, c.addOperationTestFailoverMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +101,7 @@ type TestFailoverOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTestFailoverMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestFailoverMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpTestFailover{}, middleware.After)
 	if err != nil {
 		return err

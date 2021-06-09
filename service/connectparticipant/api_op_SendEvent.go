@@ -20,7 +20,7 @@ func (c *Client) SendEvent(ctx context.Context, params *SendEventInput, optFns .
 		params = &SendEventInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendEvent", params, optFns, addOperationSendEventMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendEvent", params, optFns, c.addOperationSendEventMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type SendEventOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendEvent{}, middleware.After)
 	if err != nil {
 		return err

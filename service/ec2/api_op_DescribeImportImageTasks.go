@@ -19,7 +19,7 @@ func (c *Client) DescribeImportImageTasks(ctx context.Context, params *DescribeI
 		params = &DescribeImportImageTasksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeImportImageTasks", params, optFns, addOperationDescribeImportImageTasksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeImportImageTasks", params, optFns, c.addOperationDescribeImportImageTasksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type DescribeImportImageTasksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeImportImageTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeImportImageTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeImportImageTasks{}, middleware.After)
 	if err != nil {
 		return err

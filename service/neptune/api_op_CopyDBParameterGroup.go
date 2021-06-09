@@ -17,7 +17,7 @@ func (c *Client) CopyDBParameterGroup(ctx context.Context, params *CopyDBParamet
 		params = &CopyDBParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopyDBParameterGroup", params, optFns, addOperationCopyDBParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopyDBParameterGroup", params, optFns, c.addOperationCopyDBParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type CopyDBParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopyDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopyDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopyDBParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

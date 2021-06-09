@@ -17,7 +17,7 @@ func (c *Client) CancelBundleTask(ctx context.Context, params *CancelBundleTaskI
 		params = &CancelBundleTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelBundleTask", params, optFns, addOperationCancelBundleTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelBundleTask", params, optFns, c.addOperationCancelBundleTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CancelBundleTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelBundleTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelBundleTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCancelBundleTask{}, middleware.After)
 	if err != nil {
 		return err

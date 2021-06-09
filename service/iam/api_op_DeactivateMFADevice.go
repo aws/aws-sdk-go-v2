@@ -21,7 +21,7 @@ func (c *Client) DeactivateMFADevice(ctx context.Context, params *DeactivateMFAD
 		params = &DeactivateMFADeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeactivateMFADevice", params, optFns, addOperationDeactivateMFADeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeactivateMFADevice", params, optFns, c.addOperationDeactivateMFADeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeactivateMFADeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeactivateMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeactivateMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeactivateMFADevice{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) RegisterRdsDbInstance(ctx context.Context, params *RegisterRdsD
 		params = &RegisterRdsDbInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterRdsDbInstance", params, optFns, addOperationRegisterRdsDbInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterRdsDbInstance", params, optFns, c.addOperationRegisterRdsDbInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type RegisterRdsDbInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterRdsDbInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterRdsDbInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterRdsDbInstance{}, middleware.After)
 	if err != nil {
 		return err

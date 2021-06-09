@@ -19,7 +19,7 @@ func (c *Client) ModifyAddressAttribute(ctx context.Context, params *ModifyAddre
 		params = &ModifyAddressAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyAddressAttribute", params, optFns, addOperationModifyAddressAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyAddressAttribute", params, optFns, c.addOperationModifyAddressAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ModifyAddressAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyAddressAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyAddressAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyAddressAttribute{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) AssociateDiscoveredResource(ctx context.Context, params *Associ
 		params = &AssociateDiscoveredResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateDiscoveredResource", params, optFns, addOperationAssociateDiscoveredResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateDiscoveredResource", params, optFns, c.addOperationAssociateDiscoveredResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type AssociateDiscoveredResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateDiscoveredResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateDiscoveredResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateDiscoveredResource{}, middleware.After)
 	if err != nil {
 		return err

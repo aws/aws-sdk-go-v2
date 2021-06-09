@@ -20,7 +20,7 @@ func (c *Client) ResumeProcesses(ctx context.Context, params *ResumeProcessesInp
 		params = &ResumeProcessesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResumeProcesses", params, optFns, addOperationResumeProcessesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResumeProcesses", params, optFns, c.addOperationResumeProcessesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ResumeProcessesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResumeProcessesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResumeProcessesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpResumeProcesses{}, middleware.After)
 	if err != nil {
 		return err

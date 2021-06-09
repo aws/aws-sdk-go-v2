@@ -19,7 +19,7 @@ func (c *Client) UntagMFADevice(ctx context.Context, params *UntagMFADeviceInput
 		params = &UntagMFADeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagMFADevice", params, optFns, addOperationUntagMFADeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagMFADevice", params, optFns, c.addOperationUntagMFADeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UntagMFADeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUntagMFADevice{}, middleware.After)
 	if err != nil {
 		return err

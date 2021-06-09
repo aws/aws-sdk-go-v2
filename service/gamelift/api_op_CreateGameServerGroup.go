@@ -57,7 +57,7 @@ func (c *Client) CreateGameServerGroup(ctx context.Context, params *CreateGameSe
 		params = &CreateGameServerGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateGameServerGroup", params, optFns, addOperationCreateGameServerGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateGameServerGroup", params, optFns, c.addOperationCreateGameServerGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -202,7 +202,7 @@ type CreateGameServerGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGameServerGroup{}, middleware.After)
 	if err != nil {
 		return err

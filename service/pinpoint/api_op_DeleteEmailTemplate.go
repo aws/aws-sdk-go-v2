@@ -18,7 +18,7 @@ func (c *Client) DeleteEmailTemplate(ctx context.Context, params *DeleteEmailTem
 		params = &DeleteEmailTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEmailTemplate", params, optFns, addOperationDeleteEmailTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEmailTemplate", params, optFns, c.addOperationDeleteEmailTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type DeleteEmailTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEmailTemplate{}, middleware.After)
 	if err != nil {
 		return err

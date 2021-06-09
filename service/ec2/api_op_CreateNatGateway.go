@@ -24,7 +24,7 @@ func (c *Client) CreateNatGateway(ctx context.Context, params *CreateNatGatewayI
 		params = &CreateNatGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateNatGateway", params, optFns, addOperationCreateNatGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateNatGateway", params, optFns, c.addOperationCreateNatGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type CreateNatGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateNatGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateNatGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateNatGateway{}, middleware.After)
 	if err != nil {
 		return err

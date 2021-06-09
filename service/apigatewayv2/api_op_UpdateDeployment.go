@@ -18,7 +18,7 @@ func (c *Client) UpdateDeployment(ctx context.Context, params *UpdateDeploymentI
 		params = &UpdateDeploymentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDeployment", params, optFns, addOperationUpdateDeploymentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDeployment", params, optFns, c.addOperationUpdateDeploymentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type UpdateDeploymentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDeployment{}, middleware.After)
 	if err != nil {
 		return err

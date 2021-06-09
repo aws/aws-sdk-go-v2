@@ -19,7 +19,7 @@ func (c *Client) GetThingShadow(ctx context.Context, params *GetThingShadowInput
 		params = &GetThingShadowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetThingShadow", params, optFns, addOperationGetThingShadowMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetThingShadow", params, optFns, c.addOperationGetThingShadowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetThingShadowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetThingShadowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetThingShadowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetThingShadow{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) CreateLongTermPricing(ctx context.Context, params *CreateLongTe
 		params = &CreateLongTermPricingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLongTermPricing", params, optFns, addOperationCreateLongTermPricingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLongTermPricing", params, optFns, c.addOperationCreateLongTermPricingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type CreateLongTermPricingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLongTermPricingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLongTermPricingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLongTermPricing{}, middleware.After)
 	if err != nil {
 		return err

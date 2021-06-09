@@ -17,7 +17,7 @@ func (c *Client) CopyImage(ctx context.Context, params *CopyImageInput, optFns .
 		params = &CopyImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopyImage", params, optFns, addOperationCopyImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopyImage", params, optFns, c.addOperationCopyImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type CopyImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopyImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopyImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopyImage{}, middleware.After)
 	if err != nil {
 		return err

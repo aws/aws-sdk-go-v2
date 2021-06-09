@@ -16,7 +16,7 @@ func (c *Client) GetBootstrapBrokers(ctx context.Context, params *GetBootstrapBr
 		params = &GetBootstrapBrokersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBootstrapBrokers", params, optFns, addOperationGetBootstrapBrokersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBootstrapBrokers", params, optFns, c.addOperationGetBootstrapBrokersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetBootstrapBrokersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBootstrapBrokersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBootstrapBrokersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBootstrapBrokers{}, middleware.After)
 	if err != nil {
 		return err

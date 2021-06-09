@@ -16,7 +16,7 @@ func (c *Client) DetachNetworkInterface(ctx context.Context, params *DetachNetwo
 		params = &DetachNetworkInterfaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachNetworkInterface", params, optFns, addOperationDetachNetworkInterfaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachNetworkInterface", params, optFns, c.addOperationDetachNetworkInterfaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DetachNetworkInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachNetworkInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachNetworkInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDetachNetworkInterface{}, middleware.After)
 	if err != nil {
 		return err

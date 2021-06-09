@@ -22,7 +22,7 @@ func (c *Client) GetDistributionMetricData(ctx context.Context, params *GetDistr
 		params = &GetDistributionMetricDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDistributionMetricData", params, optFns, addOperationGetDistributionMetricDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDistributionMetricData", params, optFns, c.addOperationGetDistributionMetricDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -163,7 +163,7 @@ type GetDistributionMetricDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDistributionMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDistributionMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDistributionMetricData{}, middleware.After)
 	if err != nil {
 		return err

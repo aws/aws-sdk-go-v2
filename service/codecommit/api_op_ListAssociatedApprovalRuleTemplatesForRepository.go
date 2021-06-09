@@ -18,7 +18,7 @@ func (c *Client) ListAssociatedApprovalRuleTemplatesForRepository(ctx context.Co
 		params = &ListAssociatedApprovalRuleTemplatesForRepositoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAssociatedApprovalRuleTemplatesForRepository", params, optFns, addOperationListAssociatedApprovalRuleTemplatesForRepositoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAssociatedApprovalRuleTemplatesForRepository", params, optFns, c.addOperationListAssociatedApprovalRuleTemplatesForRepositoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListAssociatedApprovalRuleTemplatesForRepositoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAssociatedApprovalRuleTemplatesForRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAssociatedApprovalRuleTemplatesForRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAssociatedApprovalRuleTemplatesForRepository{}, middleware.After)
 	if err != nil {
 		return err

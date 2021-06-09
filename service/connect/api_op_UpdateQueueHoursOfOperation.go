@@ -17,7 +17,7 @@ func (c *Client) UpdateQueueHoursOfOperation(ctx context.Context, params *Update
 		params = &UpdateQueueHoursOfOperationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateQueueHoursOfOperation", params, optFns, addOperationUpdateQueueHoursOfOperationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateQueueHoursOfOperation", params, optFns, c.addOperationUpdateQueueHoursOfOperationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type UpdateQueueHoursOfOperationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateQueueHoursOfOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateQueueHoursOfOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQueueHoursOfOperation{}, middleware.After)
 	if err != nil {
 		return err

@@ -37,7 +37,7 @@ func (c *Client) XmlLists(ctx context.Context, params *XmlListsInput, optFns ...
 		params = &XmlListsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "XmlLists", params, optFns, addOperationXmlListsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "XmlLists", params, optFns, c.addOperationXmlListsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type XmlListsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationXmlListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationXmlListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpXmlLists{}, middleware.After)
 	if err != nil {
 		return err

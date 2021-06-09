@@ -102,7 +102,7 @@ func (c *Client) ReEncrypt(ctx context.Context, params *ReEncryptInput, optFns .
 		params = &ReEncryptInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReEncrypt", params, optFns, addOperationReEncryptMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReEncrypt", params, optFns, c.addOperationReEncryptMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -242,7 +242,7 @@ type ReEncryptOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReEncryptMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReEncryptMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReEncrypt{}, middleware.After)
 	if err != nil {
 		return err

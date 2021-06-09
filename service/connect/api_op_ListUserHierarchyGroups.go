@@ -22,7 +22,7 @@ func (c *Client) ListUserHierarchyGroups(ctx context.Context, params *ListUserHi
 		params = &ListUserHierarchyGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListUserHierarchyGroups", params, optFns, addOperationListUserHierarchyGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListUserHierarchyGroups", params, optFns, c.addOperationListUserHierarchyGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListUserHierarchyGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListUserHierarchyGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListUserHierarchyGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUserHierarchyGroups{}, middleware.After)
 	if err != nil {
 		return err

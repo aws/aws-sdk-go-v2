@@ -18,7 +18,7 @@ func (c *Client) CreateCustomDataIdentifier(ctx context.Context, params *CreateC
 		params = &CreateCustomDataIdentifierInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCustomDataIdentifier", params, optFns, addOperationCreateCustomDataIdentifierMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCustomDataIdentifier", params, optFns, c.addOperationCreateCustomDataIdentifierMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type CreateCustomDataIdentifierOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomDataIdentifier{}, middleware.After)
 	if err != nil {
 		return err

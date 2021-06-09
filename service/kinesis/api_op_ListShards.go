@@ -24,7 +24,7 @@ func (c *Client) ListShards(ctx context.Context, params *ListShardsInput, optFns
 		params = &ListShardsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListShards", params, optFns, addOperationListShardsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListShards", params, optFns, c.addOperationListShardsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type ListShardsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListShardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListShardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListShards{}, middleware.After)
 	if err != nil {
 		return err

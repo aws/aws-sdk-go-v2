@@ -56,7 +56,7 @@ func (c *Client) StopInstances(ctx context.Context, params *StopInstancesInput, 
 		params = &StopInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopInstances", params, optFns, addOperationStopInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopInstances", params, optFns, c.addOperationStopInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type StopInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpStopInstances{}, middleware.After)
 	if err != nil {
 		return err

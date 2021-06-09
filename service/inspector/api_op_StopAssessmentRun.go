@@ -17,7 +17,7 @@ func (c *Client) StopAssessmentRun(ctx context.Context, params *StopAssessmentRu
 		params = &StopAssessmentRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopAssessmentRun", params, optFns, addOperationStopAssessmentRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopAssessmentRun", params, optFns, c.addOperationStopAssessmentRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StopAssessmentRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopAssessmentRun{}, middleware.After)
 	if err != nil {
 		return err

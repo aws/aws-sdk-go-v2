@@ -17,7 +17,7 @@ func (c *Client) CreateSampleFindings(ctx context.Context, params *CreateSampleF
 		params = &CreateSampleFindingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSampleFindings", params, optFns, addOperationCreateSampleFindingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSampleFindings", params, optFns, c.addOperationCreateSampleFindingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type CreateSampleFindingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSampleFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSampleFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSampleFindings{}, middleware.After)
 	if err != nil {
 		return err

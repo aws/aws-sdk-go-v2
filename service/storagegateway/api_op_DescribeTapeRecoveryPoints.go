@@ -22,7 +22,7 @@ func (c *Client) DescribeTapeRecoveryPoints(ctx context.Context, params *Describ
 		params = &DescribeTapeRecoveryPointsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTapeRecoveryPoints", params, optFns, addOperationDescribeTapeRecoveryPointsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTapeRecoveryPoints", params, optFns, c.addOperationDescribeTapeRecoveryPointsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type DescribeTapeRecoveryPointsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTapeRecoveryPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTapeRecoveryPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTapeRecoveryPoints{}, middleware.After)
 	if err != nil {
 		return err

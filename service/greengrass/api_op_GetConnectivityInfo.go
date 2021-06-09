@@ -17,7 +17,7 @@ func (c *Client) GetConnectivityInfo(ctx context.Context, params *GetConnectivit
 		params = &GetConnectivityInfoInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetConnectivityInfo", params, optFns, addOperationGetConnectivityInfoMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetConnectivityInfo", params, optFns, c.addOperationGetConnectivityInfoMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetConnectivityInfoOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetConnectivityInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetConnectivityInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnectivityInfo{}, middleware.After)
 	if err != nil {
 		return err

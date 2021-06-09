@@ -21,7 +21,7 @@ func (c *Client) GetDevEndpoint(ctx context.Context, params *GetDevEndpointInput
 		params = &GetDevEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDevEndpoint", params, optFns, addOperationGetDevEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDevEndpoint", params, optFns, c.addOperationGetDevEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type GetDevEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDevEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDevEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDevEndpoint{}, middleware.After)
 	if err != nil {
 		return err

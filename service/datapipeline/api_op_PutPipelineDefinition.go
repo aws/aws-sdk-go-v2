@@ -71,7 +71,7 @@ func (c *Client) PutPipelineDefinition(ctx context.Context, params *PutPipelineD
 		params = &PutPipelineDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutPipelineDefinition", params, optFns, addOperationPutPipelineDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutPipelineDefinition", params, optFns, c.addOperationPutPipelineDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -124,7 +124,7 @@ type PutPipelineDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutPipelineDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutPipelineDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutPipelineDefinition{}, middleware.After)
 	if err != nil {
 		return err

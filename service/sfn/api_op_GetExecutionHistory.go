@@ -26,7 +26,7 @@ func (c *Client) GetExecutionHistory(ctx context.Context, params *GetExecutionHi
 		params = &GetExecutionHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetExecutionHistory", params, optFns, addOperationGetExecutionHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetExecutionHistory", params, optFns, c.addOperationGetExecutionHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type GetExecutionHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetExecutionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetExecutionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetExecutionHistory{}, middleware.After)
 	if err != nil {
 		return err

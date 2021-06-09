@@ -17,7 +17,7 @@ func (c *Client) UpdatePullRequestStatus(ctx context.Context, params *UpdatePull
 		params = &UpdatePullRequestStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePullRequestStatus", params, optFns, addOperationUpdatePullRequestStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePullRequestStatus", params, optFns, c.addOperationUpdatePullRequestStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UpdatePullRequestStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePullRequestStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePullRequestStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePullRequestStatus{}, middleware.After)
 	if err != nil {
 		return err

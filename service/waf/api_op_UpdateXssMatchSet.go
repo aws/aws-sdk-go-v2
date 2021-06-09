@@ -59,7 +59,7 @@ func (c *Client) UpdateXssMatchSet(ctx context.Context, params *UpdateXssMatchSe
 		params = &UpdateXssMatchSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateXssMatchSet", params, optFns, addOperationUpdateXssMatchSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateXssMatchSet", params, optFns, c.addOperationUpdateXssMatchSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type UpdateXssMatchSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateXssMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateXssMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateXssMatchSet{}, middleware.After)
 	if err != nil {
 		return err

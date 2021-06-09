@@ -24,7 +24,7 @@ func (c *Client) ExportAutoScalingGroupRecommendations(ctx context.Context, para
 		params = &ExportAutoScalingGroupRecommendationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExportAutoScalingGroupRecommendations", params, optFns, addOperationExportAutoScalingGroupRecommendationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExportAutoScalingGroupRecommendations", params, optFns, c.addOperationExportAutoScalingGroupRecommendationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type ExportAutoScalingGroupRecommendationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExportAutoScalingGroupRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExportAutoScalingGroupRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpExportAutoScalingGroupRecommendations{}, middleware.After)
 	if err != nil {
 		return err

@@ -26,7 +26,7 @@ func (c *Client) DeprovisionByoipCidr(ctx context.Context, params *DeprovisionBy
 		params = &DeprovisionByoipCidrInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeprovisionByoipCidr", params, optFns, addOperationDeprovisionByoipCidrMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeprovisionByoipCidr", params, optFns, c.addOperationDeprovisionByoipCidrMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DeprovisionByoipCidrOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeprovisionByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeprovisionByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeprovisionByoipCidr{}, middleware.After)
 	if err != nil {
 		return err

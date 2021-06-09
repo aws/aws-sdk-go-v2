@@ -17,7 +17,7 @@ func (c *Client) GetRegexPatternSet(ctx context.Context, params *GetRegexPattern
 		params = &GetRegexPatternSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRegexPatternSet", params, optFns, addOperationGetRegexPatternSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRegexPatternSet", params, optFns, c.addOperationGetRegexPatternSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type GetRegexPatternSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRegexPatternSet{}, middleware.After)
 	if err != nil {
 		return err

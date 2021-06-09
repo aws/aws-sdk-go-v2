@@ -18,7 +18,7 @@ func (c *Client) BuildSuggesters(ctx context.Context, params *BuildSuggestersInp
 		params = &BuildSuggestersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BuildSuggesters", params, optFns, addOperationBuildSuggestersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BuildSuggesters", params, optFns, c.addOperationBuildSuggestersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type BuildSuggestersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBuildSuggestersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBuildSuggestersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpBuildSuggesters{}, middleware.After)
 	if err != nil {
 		return err

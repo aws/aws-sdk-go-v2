@@ -19,7 +19,7 @@ func (c *Client) DescribeEnvironmentMemberships(ctx context.Context, params *Des
 		params = &DescribeEnvironmentMembershipsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEnvironmentMemberships", params, optFns, addOperationDescribeEnvironmentMembershipsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEnvironmentMemberships", params, optFns, c.addOperationDescribeEnvironmentMembershipsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type DescribeEnvironmentMembershipsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEnvironmentMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEnvironmentMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEnvironmentMemberships{}, middleware.After)
 	if err != nil {
 		return err

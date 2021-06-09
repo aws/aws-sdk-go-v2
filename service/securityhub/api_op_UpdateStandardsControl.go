@@ -18,7 +18,7 @@ func (c *Client) UpdateStandardsControl(ctx context.Context, params *UpdateStand
 		params = &UpdateStandardsControlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateStandardsControl", params, optFns, addOperationUpdateStandardsControlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateStandardsControl", params, optFns, c.addOperationUpdateStandardsControlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type UpdateStandardsControlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateStandardsControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateStandardsControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateStandardsControl{}, middleware.After)
 	if err != nil {
 		return err

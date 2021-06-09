@@ -31,7 +31,7 @@ func (c *Client) ModifyCurrentDBClusterCapacity(ctx context.Context, params *Mod
 		params = &ModifyCurrentDBClusterCapacityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyCurrentDBClusterCapacity", params, optFns, addOperationModifyCurrentDBClusterCapacityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyCurrentDBClusterCapacity", params, optFns, c.addOperationModifyCurrentDBClusterCapacityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ type ModifyCurrentDBClusterCapacityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyCurrentDBClusterCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyCurrentDBClusterCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyCurrentDBClusterCapacity{}, middleware.After)
 	if err != nil {
 		return err

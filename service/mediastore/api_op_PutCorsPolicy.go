@@ -28,7 +28,7 @@ func (c *Client) PutCorsPolicy(ctx context.Context, params *PutCorsPolicyInput, 
 		params = &PutCorsPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutCorsPolicy", params, optFns, addOperationPutCorsPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutCorsPolicy", params, optFns, c.addOperationPutCorsPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type PutCorsPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutCorsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutCorsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutCorsPolicy{}, middleware.After)
 	if err != nil {
 		return err

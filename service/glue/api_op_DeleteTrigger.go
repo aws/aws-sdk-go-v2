@@ -17,7 +17,7 @@ func (c *Client) DeleteTrigger(ctx context.Context, params *DeleteTriggerInput, 
 		params = &DeleteTriggerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTrigger", params, optFns, addOperationDeleteTriggerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTrigger", params, optFns, c.addOperationDeleteTriggerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteTriggerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTrigger{}, middleware.After)
 	if err != nil {
 		return err

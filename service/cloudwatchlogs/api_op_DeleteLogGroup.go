@@ -17,7 +17,7 @@ func (c *Client) DeleteLogGroup(ctx context.Context, params *DeleteLogGroupInput
 		params = &DeleteLogGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLogGroup", params, optFns, addOperationDeleteLogGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLogGroup", params, optFns, c.addOperationDeleteLogGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteLogGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLogGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLogGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLogGroup{}, middleware.After)
 	if err != nil {
 		return err

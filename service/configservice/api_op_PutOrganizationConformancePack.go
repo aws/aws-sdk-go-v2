@@ -37,7 +37,7 @@ func (c *Client) PutOrganizationConformancePack(ctx context.Context, params *Put
 		params = &PutOrganizationConformancePackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutOrganizationConformancePack", params, optFns, addOperationPutOrganizationConformancePackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutOrganizationConformancePack", params, optFns, c.addOperationPutOrganizationConformancePackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type PutOrganizationConformancePackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutOrganizationConformancePackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutOrganizationConformancePackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutOrganizationConformancePack{}, middleware.After)
 	if err != nil {
 		return err

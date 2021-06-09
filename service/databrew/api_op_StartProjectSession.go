@@ -17,7 +17,7 @@ func (c *Client) StartProjectSession(ctx context.Context, params *StartProjectSe
 		params = &StartProjectSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartProjectSession", params, optFns, addOperationStartProjectSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartProjectSession", params, optFns, c.addOperationStartProjectSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type StartProjectSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartProjectSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartProjectSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartProjectSession{}, middleware.After)
 	if err != nil {
 		return err

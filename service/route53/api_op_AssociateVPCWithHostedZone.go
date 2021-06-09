@@ -24,7 +24,7 @@ func (c *Client) AssociateVPCWithHostedZone(ctx context.Context, params *Associa
 		params = &AssociateVPCWithHostedZoneInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateVPCWithHostedZone", params, optFns, addOperationAssociateVPCWithHostedZoneMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateVPCWithHostedZone", params, optFns, c.addOperationAssociateVPCWithHostedZoneMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type AssociateVPCWithHostedZoneOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateVPCWithHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateVPCWithHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpAssociateVPCWithHostedZone{}, middleware.After)
 	if err != nil {
 		return err

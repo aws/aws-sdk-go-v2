@@ -20,7 +20,7 @@ func (c *Client) GetFunctionEventInvokeConfig(ctx context.Context, params *GetFu
 		params = &GetFunctionEventInvokeConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFunctionEventInvokeConfig", params, optFns, addOperationGetFunctionEventInvokeConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFunctionEventInvokeConfig", params, optFns, c.addOperationGetFunctionEventInvokeConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type GetFunctionEventInvokeConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFunctionEventInvokeConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFunctionEventInvokeConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFunctionEventInvokeConfig{}, middleware.After)
 	if err != nil {
 		return err

@@ -81,7 +81,7 @@ func (c *Client) PutBucketAnalyticsConfiguration(ctx context.Context, params *Pu
 		params = &PutBucketAnalyticsConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketAnalyticsConfiguration", params, optFns, addOperationPutBucketAnalyticsConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketAnalyticsConfiguration", params, optFns, c.addOperationPutBucketAnalyticsConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +118,7 @@ type PutBucketAnalyticsConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketAnalyticsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketAnalyticsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketAnalyticsConfiguration{}, middleware.After)
 	if err != nil {
 		return err

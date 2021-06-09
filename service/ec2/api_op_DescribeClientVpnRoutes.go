@@ -18,7 +18,7 @@ func (c *Client) DescribeClientVpnRoutes(ctx context.Context, params *DescribeCl
 		params = &DescribeClientVpnRoutesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeClientVpnRoutes", params, optFns, addOperationDescribeClientVpnRoutesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeClientVpnRoutes", params, optFns, c.addOperationDescribeClientVpnRoutesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DescribeClientVpnRoutesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeClientVpnRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeClientVpnRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeClientVpnRoutes{}, middleware.After)
 	if err != nil {
 		return err

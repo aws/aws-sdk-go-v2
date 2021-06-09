@@ -27,7 +27,7 @@ func (c *Client) EnableEbsEncryptionByDefault(ctx context.Context, params *Enabl
 		params = &EnableEbsEncryptionByDefaultInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableEbsEncryptionByDefault", params, optFns, addOperationEnableEbsEncryptionByDefaultMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableEbsEncryptionByDefault", params, optFns, c.addOperationEnableEbsEncryptionByDefaultMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type EnableEbsEncryptionByDefaultOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableEbsEncryptionByDefaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableEbsEncryptionByDefaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpEnableEbsEncryptionByDefault{}, middleware.After)
 	if err != nil {
 		return err

@@ -65,7 +65,7 @@ func (c *Client) UpdateByteMatchSet(ctx context.Context, params *UpdateByteMatch
 		params = &UpdateByteMatchSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateByteMatchSet", params, optFns, addOperationUpdateByteMatchSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateByteMatchSet", params, optFns, c.addOperationUpdateByteMatchSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -115,7 +115,7 @@ type UpdateByteMatchSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateByteMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateByteMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateByteMatchSet{}, middleware.After)
 	if err != nil {
 		return err

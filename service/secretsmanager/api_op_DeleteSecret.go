@@ -51,7 +51,7 @@ func (c *Client) DeleteSecret(ctx context.Context, params *DeleteSecretInput, op
 		params = &DeleteSecretInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSecret", params, optFns, addOperationDeleteSecretMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSecret", params, optFns, c.addOperationDeleteSecretMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -123,7 +123,7 @@ type DeleteSecretOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSecret{}, middleware.After)
 	if err != nil {
 		return err

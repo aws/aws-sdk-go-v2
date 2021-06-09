@@ -18,7 +18,7 @@ func (c *Client) UpdateHITReviewStatus(ctx context.Context, params *UpdateHITRev
 		params = &UpdateHITReviewStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateHITReviewStatus", params, optFns, addOperationUpdateHITReviewStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateHITReviewStatus", params, optFns, c.addOperationUpdateHITReviewStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type UpdateHITReviewStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateHITReviewStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateHITReviewStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateHITReviewStatus{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListFindingsFilters(ctx context.Context, params *ListFindingsFi
 		params = &ListFindingsFiltersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFindingsFilters", params, optFns, addOperationListFindingsFiltersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFindingsFilters", params, optFns, c.addOperationListFindingsFiltersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ListFindingsFiltersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFindingsFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFindingsFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFindingsFilters{}, middleware.After)
 	if err != nil {
 		return err

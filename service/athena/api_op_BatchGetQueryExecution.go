@@ -22,7 +22,7 @@ func (c *Client) BatchGetQueryExecution(ctx context.Context, params *BatchGetQue
 		params = &BatchGetQueryExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetQueryExecution", params, optFns, addOperationBatchGetQueryExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetQueryExecution", params, optFns, c.addOperationBatchGetQueryExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type BatchGetQueryExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetQueryExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetQueryExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetQueryExecution{}, middleware.After)
 	if err != nil {
 		return err

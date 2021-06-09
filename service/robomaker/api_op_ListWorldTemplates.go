@@ -18,7 +18,7 @@ func (c *Client) ListWorldTemplates(ctx context.Context, params *ListWorldTempla
 		params = &ListWorldTemplatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListWorldTemplates", params, optFns, addOperationListWorldTemplatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListWorldTemplates", params, optFns, c.addOperationListWorldTemplatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ListWorldTemplatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListWorldTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListWorldTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorldTemplates{}, middleware.After)
 	if err != nil {
 		return err

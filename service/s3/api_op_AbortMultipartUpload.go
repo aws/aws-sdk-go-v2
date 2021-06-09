@@ -50,7 +50,7 @@ func (c *Client) AbortMultipartUpload(ctx context.Context, params *AbortMultipar
 		params = &AbortMultipartUploadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AbortMultipartUpload", params, optFns, addOperationAbortMultipartUploadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AbortMultipartUpload", params, optFns, c.addOperationAbortMultipartUploadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ type AbortMultipartUploadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAbortMultipartUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAbortMultipartUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpAbortMultipartUpload{}, middleware.After)
 	if err != nil {
 		return err

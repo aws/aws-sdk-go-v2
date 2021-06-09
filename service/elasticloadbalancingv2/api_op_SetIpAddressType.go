@@ -18,7 +18,7 @@ func (c *Client) SetIpAddressType(ctx context.Context, params *SetIpAddressTypeI
 		params = &SetIpAddressTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetIpAddressType", params, optFns, addOperationSetIpAddressTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetIpAddressType", params, optFns, c.addOperationSetIpAddressTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type SetIpAddressTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetIpAddressTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetIpAddressTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetIpAddressType{}, middleware.After)
 	if err != nil {
 		return err

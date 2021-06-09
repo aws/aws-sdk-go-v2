@@ -17,7 +17,7 @@ func (c *Client) GetImage(ctx context.Context, params *GetImageInput, optFns ...
 		params = &GetImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetImage", params, optFns, addOperationGetImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetImage", params, optFns, c.addOperationGetImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImage{}, middleware.After)
 	if err != nil {
 		return err

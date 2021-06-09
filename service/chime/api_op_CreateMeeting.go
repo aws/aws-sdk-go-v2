@@ -25,7 +25,7 @@ func (c *Client) CreateMeeting(ctx context.Context, params *CreateMeetingInput, 
 		params = &CreateMeetingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMeeting", params, optFns, addOperationCreateMeetingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMeeting", params, optFns, c.addOperationCreateMeetingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type CreateMeetingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateMeetingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateMeetingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMeeting{}, middleware.After)
 	if err != nil {
 		return err

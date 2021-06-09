@@ -19,7 +19,7 @@ func (c *Client) CreateRegexPatternSet(ctx context.Context, params *CreateRegexP
 		params = &CreateRegexPatternSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRegexPatternSet", params, optFns, addOperationCreateRegexPatternSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRegexPatternSet", params, optFns, c.addOperationCreateRegexPatternSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type CreateRegexPatternSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRegexPatternSet{}, middleware.After)
 	if err != nil {
 		return err

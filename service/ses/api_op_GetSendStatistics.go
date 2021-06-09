@@ -20,7 +20,7 @@ func (c *Client) GetSendStatistics(ctx context.Context, params *GetSendStatistic
 		params = &GetSendStatisticsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSendStatistics", params, optFns, addOperationGetSendStatisticsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSendStatistics", params, optFns, c.addOperationGetSendStatisticsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetSendStatisticsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSendStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSendStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetSendStatistics{}, middleware.After)
 	if err != nil {
 		return err

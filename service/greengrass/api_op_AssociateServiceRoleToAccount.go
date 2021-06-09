@@ -19,7 +19,7 @@ func (c *Client) AssociateServiceRoleToAccount(ctx context.Context, params *Asso
 		params = &AssociateServiceRoleToAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateServiceRoleToAccount", params, optFns, addOperationAssociateServiceRoleToAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateServiceRoleToAccount", params, optFns, c.addOperationAssociateServiceRoleToAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type AssociateServiceRoleToAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateServiceRoleToAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateServiceRoleToAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateServiceRoleToAccount{}, middleware.After)
 	if err != nil {
 		return err

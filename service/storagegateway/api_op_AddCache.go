@@ -21,7 +21,7 @@ func (c *Client) AddCache(ctx context.Context, params *AddCacheInput, optFns ...
 		params = &AddCacheInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddCache", params, optFns, addOperationAddCacheMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddCache", params, optFns, c.addOperationAddCacheMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type AddCacheOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddCache{}, middleware.After)
 	if err != nil {
 		return err

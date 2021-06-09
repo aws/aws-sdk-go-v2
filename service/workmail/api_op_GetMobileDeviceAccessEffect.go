@@ -20,7 +20,7 @@ func (c *Client) GetMobileDeviceAccessEffect(ctx context.Context, params *GetMob
 		params = &GetMobileDeviceAccessEffectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMobileDeviceAccessEffect", params, optFns, addOperationGetMobileDeviceAccessEffectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMobileDeviceAccessEffect", params, optFns, c.addOperationGetMobileDeviceAccessEffectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type GetMobileDeviceAccessEffectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMobileDeviceAccessEffectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMobileDeviceAccessEffectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMobileDeviceAccessEffect{}, middleware.After)
 	if err != nil {
 		return err

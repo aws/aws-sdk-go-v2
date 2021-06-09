@@ -23,7 +23,7 @@ func (c *Client) CreateAddon(ctx context.Context, params *CreateAddonInput, optF
 		params = &CreateAddonInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAddon", params, optFns, addOperationCreateAddonMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAddon", params, optFns, c.addOperationCreateAddonMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type CreateAddonOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAddon{}, middleware.After)
 	if err != nil {
 		return err

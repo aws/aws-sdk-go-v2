@@ -22,7 +22,7 @@ func (c *Client) CreateIndex(ctx context.Context, params *CreateIndexInput, optF
 		params = &CreateIndexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateIndex", params, optFns, addOperationCreateIndexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateIndex", params, optFns, c.addOperationCreateIndexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type CreateIndexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateIndex{}, middleware.After)
 	if err != nil {
 		return err

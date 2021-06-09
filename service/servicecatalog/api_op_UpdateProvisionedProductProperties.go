@@ -18,7 +18,7 @@ func (c *Client) UpdateProvisionedProductProperties(ctx context.Context, params 
 		params = &UpdateProvisionedProductPropertiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateProvisionedProductProperties", params, optFns, addOperationUpdateProvisionedProductPropertiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateProvisionedProductProperties", params, optFns, c.addOperationUpdateProvisionedProductPropertiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type UpdateProvisionedProductPropertiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateProvisionedProductPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateProvisionedProductPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateProvisionedProductProperties{}, middleware.After)
 	if err != nil {
 		return err

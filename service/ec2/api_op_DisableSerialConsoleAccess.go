@@ -20,7 +20,7 @@ func (c *Client) DisableSerialConsoleAccess(ctx context.Context, params *Disable
 		params = &DisableSerialConsoleAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableSerialConsoleAccess", params, optFns, addOperationDisableSerialConsoleAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableSerialConsoleAccess", params, optFns, c.addOperationDisableSerialConsoleAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DisableSerialConsoleAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableSerialConsoleAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableSerialConsoleAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDisableSerialConsoleAccess{}, middleware.After)
 	if err != nil {
 		return err

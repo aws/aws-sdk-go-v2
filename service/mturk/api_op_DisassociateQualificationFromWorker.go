@@ -19,7 +19,7 @@ func (c *Client) DisassociateQualificationFromWorker(ctx context.Context, params
 		params = &DisassociateQualificationFromWorkerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateQualificationFromWorker", params, optFns, addOperationDisassociateQualificationFromWorkerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateQualificationFromWorker", params, optFns, c.addOperationDisassociateQualificationFromWorkerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DisassociateQualificationFromWorkerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateQualificationFromWorkerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateQualificationFromWorkerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateQualificationFromWorker{}, middleware.After)
 	if err != nil {
 		return err

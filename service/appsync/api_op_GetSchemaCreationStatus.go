@@ -17,7 +17,7 @@ func (c *Client) GetSchemaCreationStatus(ctx context.Context, params *GetSchemaC
 		params = &GetSchemaCreationStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSchemaCreationStatus", params, optFns, addOperationGetSchemaCreationStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSchemaCreationStatus", params, optFns, c.addOperationGetSchemaCreationStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type GetSchemaCreationStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSchemaCreationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSchemaCreationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSchemaCreationStatus{}, middleware.After)
 	if err != nil {
 		return err

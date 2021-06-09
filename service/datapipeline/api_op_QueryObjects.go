@@ -26,7 +26,7 @@ func (c *Client) QueryObjects(ctx context.Context, params *QueryObjectsInput, op
 		params = &QueryObjectsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "QueryObjects", params, optFns, addOperationQueryObjectsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "QueryObjects", params, optFns, c.addOperationQueryObjectsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type QueryObjectsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationQueryObjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationQueryObjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpQueryObjects{}, middleware.After)
 	if err != nil {
 		return err

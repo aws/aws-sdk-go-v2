@@ -20,7 +20,7 @@ func (c *Client) DescribeGatewayInformation(ctx context.Context, params *Describ
 		params = &DescribeGatewayInformationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeGatewayInformation", params, optFns, addOperationDescribeGatewayInformationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeGatewayInformation", params, optFns, c.addOperationDescribeGatewayInformationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -115,7 +115,7 @@ type DescribeGatewayInformationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeGatewayInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeGatewayInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeGatewayInformation{}, middleware.After)
 	if err != nil {
 		return err

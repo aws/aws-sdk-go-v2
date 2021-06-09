@@ -17,7 +17,7 @@ func (c *Client) DeleteEventStream(ctx context.Context, params *DeleteEventStrea
 		params = &DeleteEventStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEventStream", params, optFns, addOperationDeleteEventStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEventStream", params, optFns, c.addOperationDeleteEventStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteEventStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEventStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEventStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEventStream{}, middleware.After)
 	if err != nil {
 		return err

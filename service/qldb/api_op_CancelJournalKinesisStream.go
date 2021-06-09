@@ -19,7 +19,7 @@ func (c *Client) CancelJournalKinesisStream(ctx context.Context, params *CancelJ
 		params = &CancelJournalKinesisStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelJournalKinesisStream", params, optFns, addOperationCancelJournalKinesisStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelJournalKinesisStream", params, optFns, c.addOperationCancelJournalKinesisStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CancelJournalKinesisStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelJournalKinesisStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelJournalKinesisStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelJournalKinesisStream{}, middleware.After)
 	if err != nil {
 		return err

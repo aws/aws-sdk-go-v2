@@ -19,7 +19,7 @@ func (c *Client) ListGroupMembers(ctx context.Context, params *ListGroupMembersI
 		params = &ListGroupMembersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListGroupMembers", params, optFns, addOperationListGroupMembersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListGroupMembers", params, optFns, c.addOperationListGroupMembersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListGroupMembersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListGroupMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListGroupMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListGroupMembers{}, middleware.After)
 	if err != nil {
 		return err

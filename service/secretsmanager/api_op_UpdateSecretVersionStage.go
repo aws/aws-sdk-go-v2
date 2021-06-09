@@ -40,7 +40,7 @@ func (c *Client) UpdateSecretVersionStage(ctx context.Context, params *UpdateSec
 		params = &UpdateSecretVersionStageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSecretVersionStage", params, optFns, addOperationUpdateSecretVersionStageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSecretVersionStage", params, optFns, c.addOperationUpdateSecretVersionStageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +105,7 @@ type UpdateSecretVersionStageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSecretVersionStageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSecretVersionStageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSecretVersionStage{}, middleware.After)
 	if err != nil {
 		return err

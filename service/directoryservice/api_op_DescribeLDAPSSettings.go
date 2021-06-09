@@ -17,7 +17,7 @@ func (c *Client) DescribeLDAPSSettings(ctx context.Context, params *DescribeLDAP
 		params = &DescribeLDAPSSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLDAPSSettings", params, optFns, addOperationDescribeLDAPSSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLDAPSSettings", params, optFns, c.addOperationDescribeLDAPSSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeLDAPSSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLDAPSSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLDAPSSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLDAPSSettings{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteConnectorProfile(ctx context.Context, params *DeleteConne
 		params = &DeleteConnectorProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteConnectorProfile", params, optFns, addOperationDeleteConnectorProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteConnectorProfile", params, optFns, c.addOperationDeleteConnectorProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteConnectorProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteConnectorProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteConnectorProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConnectorProfile{}, middleware.After)
 	if err != nil {
 		return err

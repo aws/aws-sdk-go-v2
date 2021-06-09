@@ -18,7 +18,7 @@ func (c *Client) CreatePushTemplate(ctx context.Context, params *CreatePushTempl
 		params = &CreatePushTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePushTemplate", params, optFns, addOperationCreatePushTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePushTemplate", params, optFns, c.addOperationCreatePushTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type CreatePushTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePushTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePushTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePushTemplate{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) CancelTaskExecution(ctx context.Context, params *CancelTaskExec
 		params = &CancelTaskExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelTaskExecution", params, optFns, addOperationCancelTaskExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelTaskExecution", params, optFns, c.addOperationCancelTaskExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type CancelTaskExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelTaskExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelTaskExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelTaskExecution{}, middleware.After)
 	if err != nil {
 		return err

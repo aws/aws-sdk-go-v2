@@ -22,7 +22,7 @@ func (c *Client) StartRelationalDatabase(ctx context.Context, params *StartRelat
 		params = &StartRelationalDatabaseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartRelationalDatabase", params, optFns, addOperationStartRelationalDatabaseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartRelationalDatabase", params, optFns, c.addOperationStartRelationalDatabaseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type StartRelationalDatabaseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartRelationalDatabase{}, middleware.After)
 	if err != nil {
 		return err

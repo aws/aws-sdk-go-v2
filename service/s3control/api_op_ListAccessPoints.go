@@ -44,7 +44,7 @@ func (c *Client) ListAccessPoints(ctx context.Context, params *ListAccessPointsI
 		params = &ListAccessPointsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAccessPoints", params, optFns, addOperationListAccessPointsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAccessPoints", params, optFns, c.addOperationListAccessPointsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ type ListAccessPointsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAccessPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAccessPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListAccessPoints{}, middleware.After)
 	if err != nil {
 		return err

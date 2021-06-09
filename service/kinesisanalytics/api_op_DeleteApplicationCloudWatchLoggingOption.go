@@ -22,7 +22,7 @@ func (c *Client) DeleteApplicationCloudWatchLoggingOption(ctx context.Context, p
 		params = &DeleteApplicationCloudWatchLoggingOptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteApplicationCloudWatchLoggingOption", params, optFns, addOperationDeleteApplicationCloudWatchLoggingOptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteApplicationCloudWatchLoggingOption", params, optFns, c.addOperationDeleteApplicationCloudWatchLoggingOptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DeleteApplicationCloudWatchLoggingOptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteApplicationCloudWatchLoggingOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteApplicationCloudWatchLoggingOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteApplicationCloudWatchLoggingOption{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, op
 		params = &DeleteBackupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBackup", params, optFns, addOperationDeleteBackupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBackup", params, optFns, c.addOperationDeleteBackupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteBackupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBackup{}, middleware.After)
 	if err != nil {
 		return err

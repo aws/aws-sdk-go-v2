@@ -21,7 +21,7 @@ func (c *Client) UpdateEndpointWeightsAndCapacities(ctx context.Context, params 
 		params = &UpdateEndpointWeightsAndCapacitiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateEndpointWeightsAndCapacities", params, optFns, addOperationUpdateEndpointWeightsAndCapacitiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateEndpointWeightsAndCapacities", params, optFns, c.addOperationUpdateEndpointWeightsAndCapacitiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UpdateEndpointWeightsAndCapacitiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateEndpointWeightsAndCapacitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateEndpointWeightsAndCapacitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEndpointWeightsAndCapacities{}, middleware.After)
 	if err != nil {
 		return err

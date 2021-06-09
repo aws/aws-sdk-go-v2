@@ -19,7 +19,7 @@ func (c *Client) DisableRule(ctx context.Context, params *DisableRuleInput, optF
 		params = &DisableRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableRule", params, optFns, addOperationDisableRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableRule", params, optFns, c.addOperationDisableRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DisableRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableRule{}, middleware.After)
 	if err != nil {
 		return err

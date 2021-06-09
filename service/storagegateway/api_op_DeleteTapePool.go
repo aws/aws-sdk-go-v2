@@ -18,7 +18,7 @@ func (c *Client) DeleteTapePool(ctx context.Context, params *DeleteTapePoolInput
 		params = &DeleteTapePoolInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTapePool", params, optFns, addOperationDeleteTapePoolMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTapePool", params, optFns, c.addOperationDeleteTapePoolMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteTapePoolOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTapePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTapePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTapePool{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) StopEngagement(ctx context.Context, params *StopEngagementInput
 		params = &StopEngagementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopEngagement", params, optFns, addOperationStopEngagementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopEngagement", params, optFns, c.addOperationStopEngagementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type StopEngagementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopEngagement{}, middleware.After)
 	if err != nil {
 		return err

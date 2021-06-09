@@ -23,7 +23,7 @@ func (c *Client) ModifyReservedInstances(ctx context.Context, params *ModifyRese
 		params = &ModifyReservedInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyReservedInstances", params, optFns, addOperationModifyReservedInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyReservedInstances", params, optFns, c.addOperationModifyReservedInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ModifyReservedInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyReservedInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyReservedInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyReservedInstances{}, middleware.After)
 	if err != nil {
 		return err

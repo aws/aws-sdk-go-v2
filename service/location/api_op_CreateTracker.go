@@ -19,7 +19,7 @@ func (c *Client) CreateTracker(ctx context.Context, params *CreateTrackerInput, 
 		params = &CreateTrackerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTracker", params, optFns, addOperationCreateTrackerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTracker", params, optFns, c.addOperationCreateTrackerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -122,7 +122,7 @@ type CreateTrackerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTracker{}, middleware.After)
 	if err != nil {
 		return err

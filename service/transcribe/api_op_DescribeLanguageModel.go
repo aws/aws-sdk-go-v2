@@ -23,7 +23,7 @@ func (c *Client) DescribeLanguageModel(ctx context.Context, params *DescribeLang
 		params = &DescribeLanguageModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLanguageModel", params, optFns, addOperationDescribeLanguageModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLanguageModel", params, optFns, c.addOperationDescribeLanguageModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DescribeLanguageModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLanguageModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLanguageModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLanguageModel{}, middleware.After)
 	if err != nil {
 		return err

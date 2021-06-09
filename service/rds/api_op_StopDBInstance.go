@@ -26,7 +26,7 @@ func (c *Client) StopDBInstance(ctx context.Context, params *StopDBInstanceInput
 		params = &StopDBInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopDBInstance", params, optFns, addOperationStopDBInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopDBInstance", params, optFns, c.addOperationStopDBInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type StopDBInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpStopDBInstance{}, middleware.After)
 	if err != nil {
 		return err

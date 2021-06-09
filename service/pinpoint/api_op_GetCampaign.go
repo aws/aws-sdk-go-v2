@@ -18,7 +18,7 @@ func (c *Client) GetCampaign(ctx context.Context, params *GetCampaignInput, optF
 		params = &GetCampaignInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCampaign", params, optFns, addOperationGetCampaignMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCampaign", params, optFns, c.addOperationGetCampaignMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetCampaignOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCampaign{}, middleware.After)
 	if err != nil {
 		return err

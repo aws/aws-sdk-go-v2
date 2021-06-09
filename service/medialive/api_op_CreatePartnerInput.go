@@ -18,7 +18,7 @@ func (c *Client) CreatePartnerInput(ctx context.Context, params *CreatePartnerIn
 		params = &CreatePartnerInputInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePartnerInput", params, optFns, addOperationCreatePartnerInputMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePartnerInput", params, optFns, c.addOperationCreatePartnerInputMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type CreatePartnerInputOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePartnerInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePartnerInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePartnerInput{}, middleware.After)
 	if err != nil {
 		return err

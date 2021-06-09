@@ -22,7 +22,7 @@ func (c *Client) AssociateResolverRule(ctx context.Context, params *AssociateRes
 		params = &AssociateResolverRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateResolverRule", params, optFns, addOperationAssociateResolverRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateResolverRule", params, optFns, c.addOperationAssociateResolverRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type AssociateResolverRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateResolverRule{}, middleware.After)
 	if err != nil {
 		return err

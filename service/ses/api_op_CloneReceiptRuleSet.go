@@ -21,7 +21,7 @@ func (c *Client) CloneReceiptRuleSet(ctx context.Context, params *CloneReceiptRu
 		params = &CloneReceiptRuleSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CloneReceiptRuleSet", params, optFns, addOperationCloneReceiptRuleSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CloneReceiptRuleSet", params, optFns, c.addOperationCloneReceiptRuleSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type CloneReceiptRuleSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCloneReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCloneReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCloneReceiptRuleSet{}, middleware.After)
 	if err != nil {
 		return err

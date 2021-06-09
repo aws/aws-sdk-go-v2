@@ -18,7 +18,7 @@ func (c *Client) GetDistributions(ctx context.Context, params *GetDistributionsI
 		params = &GetDistributionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDistributions", params, optFns, addOperationGetDistributionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDistributions", params, optFns, c.addOperationGetDistributionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetDistributionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDistributionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDistributionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDistributions{}, middleware.After)
 	if err != nil {
 		return err

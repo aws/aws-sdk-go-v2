@@ -20,7 +20,7 @@ func (c *Client) TerminateProvisionedProduct(ctx context.Context, params *Termin
 		params = &TerminateProvisionedProductInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TerminateProvisionedProduct", params, optFns, addOperationTerminateProvisionedProductMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TerminateProvisionedProduct", params, optFns, c.addOperationTerminateProvisionedProductMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type TerminateProvisionedProductOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTerminateProvisionedProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTerminateProvisionedProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTerminateProvisionedProduct{}, middleware.After)
 	if err != nil {
 		return err

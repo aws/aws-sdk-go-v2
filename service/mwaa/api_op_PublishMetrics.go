@@ -18,7 +18,7 @@ func (c *Client) PublishMetrics(ctx context.Context, params *PublishMetricsInput
 		params = &PublishMetricsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PublishMetrics", params, optFns, addOperationPublishMetricsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PublishMetrics", params, optFns, c.addOperationPublishMetricsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type PublishMetricsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPublishMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPublishMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPublishMetrics{}, middleware.After)
 	if err != nil {
 		return err

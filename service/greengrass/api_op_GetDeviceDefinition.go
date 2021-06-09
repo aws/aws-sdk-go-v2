@@ -16,7 +16,7 @@ func (c *Client) GetDeviceDefinition(ctx context.Context, params *GetDeviceDefin
 		params = &GetDeviceDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDeviceDefinition", params, optFns, addOperationGetDeviceDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDeviceDefinition", params, optFns, c.addOperationGetDeviceDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type GetDeviceDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDeviceDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDeviceDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeviceDefinition{}, middleware.After)
 	if err != nil {
 		return err

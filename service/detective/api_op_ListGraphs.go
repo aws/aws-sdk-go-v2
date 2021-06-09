@@ -21,7 +21,7 @@ func (c *Client) ListGraphs(ctx context.Context, params *ListGraphsInput, optFns
 		params = &ListGraphsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListGraphs", params, optFns, addOperationListGraphsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListGraphs", params, optFns, c.addOperationListGraphsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListGraphsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListGraphsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListGraphsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGraphs{}, middleware.After)
 	if err != nil {
 		return err

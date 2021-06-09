@@ -41,7 +41,7 @@ func (c *Client) GetSegmentDetection(ctx context.Context, params *GetSegmentDete
 		params = &GetSegmentDetectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSegmentDetection", params, optFns, addOperationGetSegmentDetectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSegmentDetection", params, optFns, c.addOperationGetSegmentDetectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type GetSegmentDetectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSegmentDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSegmentDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSegmentDetection{}, middleware.After)
 	if err != nil {
 		return err

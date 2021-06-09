@@ -22,7 +22,7 @@ func (c *Client) DescribeStep(ctx context.Context, params *DescribeStepInput, op
 		params = &DescribeStepInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeStep", params, optFns, addOperationDescribeStepMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeStep", params, optFns, c.addOperationDescribeStepMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeStepOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStep{}, middleware.After)
 	if err != nil {
 		return err

@@ -27,7 +27,7 @@ func (c *Client) StartInstanceRefresh(ctx context.Context, params *StartInstance
 		params = &StartInstanceRefreshInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartInstanceRefresh", params, optFns, addOperationStartInstanceRefreshMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartInstanceRefresh", params, optFns, c.addOperationStartInstanceRefreshMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type StartInstanceRefreshOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartInstanceRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartInstanceRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartInstanceRefresh{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeInsight(ctx context.Context, params *DescribeInsightInp
 		params = &DescribeInsightInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInsight", params, optFns, addOperationDescribeInsightMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInsight", params, optFns, c.addOperationDescribeInsightMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeInsightOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInsight{}, middleware.After)
 	if err != nil {
 		return err

@@ -27,7 +27,7 @@ func (c *Client) FailoverDBCluster(ctx context.Context, params *FailoverDBCluste
 		params = &FailoverDBClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "FailoverDBCluster", params, optFns, addOperationFailoverDBClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "FailoverDBCluster", params, optFns, c.addOperationFailoverDBClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type FailoverDBClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationFailoverDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationFailoverDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpFailoverDBCluster{}, middleware.After)
 	if err != nil {
 		return err

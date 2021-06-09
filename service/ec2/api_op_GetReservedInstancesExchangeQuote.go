@@ -21,7 +21,7 @@ func (c *Client) GetReservedInstancesExchangeQuote(ctx context.Context, params *
 		params = &GetReservedInstancesExchangeQuoteInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetReservedInstancesExchangeQuote", params, optFns, addOperationGetReservedInstancesExchangeQuoteMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetReservedInstancesExchangeQuote", params, optFns, c.addOperationGetReservedInstancesExchangeQuoteMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type GetReservedInstancesExchangeQuoteOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetReservedInstancesExchangeQuoteMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetReservedInstancesExchangeQuoteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpGetReservedInstancesExchangeQuote{}, middleware.After)
 	if err != nil {
 		return err

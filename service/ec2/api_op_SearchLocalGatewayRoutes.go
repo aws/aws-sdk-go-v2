@@ -18,7 +18,7 @@ func (c *Client) SearchLocalGatewayRoutes(ctx context.Context, params *SearchLoc
 		params = &SearchLocalGatewayRoutesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchLocalGatewayRoutes", params, optFns, addOperationSearchLocalGatewayRoutesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchLocalGatewayRoutes", params, optFns, c.addOperationSearchLocalGatewayRoutesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type SearchLocalGatewayRoutesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchLocalGatewayRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchLocalGatewayRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpSearchLocalGatewayRoutes{}, middleware.After)
 	if err != nil {
 		return err

@@ -30,7 +30,7 @@ func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyI
 		params = &PutScalingPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutScalingPolicy", params, optFns, addOperationPutScalingPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutScalingPolicy", params, optFns, c.addOperationPutScalingPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -174,7 +174,7 @@ type PutScalingPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutScalingPolicy{}, middleware.After)
 	if err != nil {
 		return err

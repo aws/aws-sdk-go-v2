@@ -17,7 +17,7 @@ func (c *Client) GetRoom(ctx context.Context, params *GetRoomInput, optFns ...fu
 		params = &GetRoomInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRoom", params, optFns, addOperationGetRoomMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRoom", params, optFns, c.addOperationGetRoomMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type GetRoomOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRoom{}, middleware.After)
 	if err != nil {
 		return err

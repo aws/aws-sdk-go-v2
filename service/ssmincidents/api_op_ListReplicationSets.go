@@ -17,7 +17,7 @@ func (c *Client) ListReplicationSets(ctx context.Context, params *ListReplicatio
 		params = &ListReplicationSetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListReplicationSets", params, optFns, addOperationListReplicationSetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListReplicationSets", params, optFns, c.addOperationListReplicationSetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ListReplicationSetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListReplicationSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListReplicationSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReplicationSets{}, middleware.After)
 	if err != nil {
 		return err

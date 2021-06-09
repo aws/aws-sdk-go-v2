@@ -15,7 +15,7 @@ func (c *Client) DeleteDocumentationPart(ctx context.Context, params *DeleteDocu
 		params = &DeleteDocumentationPartInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDocumentationPart", params, optFns, addOperationDeleteDocumentationPartMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDocumentationPart", params, optFns, c.addOperationDeleteDocumentationPartMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteDocumentationPartOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDocumentationPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDocumentationPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDocumentationPart{}, middleware.After)
 	if err != nil {
 		return err

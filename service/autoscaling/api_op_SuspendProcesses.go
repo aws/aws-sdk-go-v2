@@ -22,7 +22,7 @@ func (c *Client) SuspendProcesses(ctx context.Context, params *SuspendProcessesI
 		params = &SuspendProcessesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SuspendProcesses", params, optFns, addOperationSuspendProcessesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SuspendProcesses", params, optFns, c.addOperationSuspendProcessesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type SuspendProcessesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSuspendProcessesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSuspendProcessesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSuspendProcesses{}, middleware.After)
 	if err != nil {
 		return err

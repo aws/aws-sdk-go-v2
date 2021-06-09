@@ -21,7 +21,7 @@ func (c *Client) GetTranscriptionJob(ctx context.Context, params *GetTranscripti
 		params = &GetTranscriptionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTranscriptionJob", params, optFns, addOperationGetTranscriptionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTranscriptionJob", params, optFns, c.addOperationGetTranscriptionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type GetTranscriptionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTranscriptionJob{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) ResolveRoom(ctx context.Context, params *ResolveRoomInput, optF
 		params = &ResolveRoomInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResolveRoom", params, optFns, addOperationResolveRoomMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResolveRoom", params, optFns, c.addOperationResolveRoomMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type ResolveRoomOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResolveRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResolveRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResolveRoom{}, middleware.After)
 	if err != nil {
 		return err

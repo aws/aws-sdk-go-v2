@@ -68,7 +68,7 @@ func (c *Client) GetMetricStatistics(ctx context.Context, params *GetMetricStati
 		params = &GetMetricStatisticsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMetricStatistics", params, optFns, addOperationGetMetricStatisticsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMetricStatistics", params, optFns, c.addOperationGetMetricStatisticsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -194,7 +194,7 @@ type GetMetricStatisticsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMetricStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMetricStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetMetricStatistics{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DisassociateFromAdministratorAccount(ctx context.Context, param
 		params = &DisassociateFromAdministratorAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateFromAdministratorAccount", params, optFns, addOperationDisassociateFromAdministratorAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateFromAdministratorAccount", params, optFns, c.addOperationDisassociateFromAdministratorAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +34,7 @@ type DisassociateFromAdministratorAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateFromAdministratorAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateFromAdministratorAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateFromAdministratorAccount{}, middleware.After)
 	if err != nil {
 		return err

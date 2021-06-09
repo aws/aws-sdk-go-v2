@@ -20,7 +20,7 @@ func (c *Client) GetComplianceDetailsByResource(ctx context.Context, params *Get
 		params = &GetComplianceDetailsByResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetComplianceDetailsByResource", params, optFns, addOperationGetComplianceDetailsByResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetComplianceDetailsByResource", params, optFns, c.addOperationGetComplianceDetailsByResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type GetComplianceDetailsByResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetComplianceDetailsByResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetComplianceDetailsByResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceDetailsByResource{}, middleware.After)
 	if err != nil {
 		return err

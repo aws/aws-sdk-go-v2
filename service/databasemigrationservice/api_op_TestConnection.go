@@ -17,7 +17,7 @@ func (c *Client) TestConnection(ctx context.Context, params *TestConnectionInput
 		params = &TestConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestConnection", params, optFns, addOperationTestConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestConnection", params, optFns, c.addOperationTestConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type TestConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTestConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTestConnection{}, middleware.After)
 	if err != nil {
 		return err

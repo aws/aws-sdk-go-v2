@@ -16,7 +16,7 @@ func (c *Client) DeleteInputSecurityGroup(ctx context.Context, params *DeleteInp
 		params = &DeleteInputSecurityGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteInputSecurityGroup", params, optFns, addOperationDeleteInputSecurityGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInputSecurityGroup", params, optFns, c.addOperationDeleteInputSecurityGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteInputSecurityGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteInputSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteInputSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInputSecurityGroup{}, middleware.After)
 	if err != nil {
 		return err

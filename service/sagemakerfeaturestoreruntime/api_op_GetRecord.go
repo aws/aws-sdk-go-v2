@@ -19,7 +19,7 @@ func (c *Client) GetRecord(ctx context.Context, params *GetRecordInput, optFns .
 		params = &GetRecordInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRecord", params, optFns, addOperationGetRecordMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRecord", params, optFns, c.addOperationGetRecordMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type GetRecordOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecord{}, middleware.After)
 	if err != nil {
 		return err

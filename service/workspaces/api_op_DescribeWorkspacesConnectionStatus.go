@@ -17,7 +17,7 @@ func (c *Client) DescribeWorkspacesConnectionStatus(ctx context.Context, params 
 		params = &DescribeWorkspacesConnectionStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkspacesConnectionStatus", params, optFns, addOperationDescribeWorkspacesConnectionStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkspacesConnectionStatus", params, optFns, c.addOperationDescribeWorkspacesConnectionStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DescribeWorkspacesConnectionStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeWorkspacesConnectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeWorkspacesConnectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkspacesConnectionStatus{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DeregisterTargets(ctx context.Context, params *DeregisterTarget
 		params = &DeregisterTargetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterTargets", params, optFns, addOperationDeregisterTargetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterTargets", params, optFns, c.addOperationDeregisterTargetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeregisterTargetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeregisterTargets{}, middleware.After)
 	if err != nil {
 		return err

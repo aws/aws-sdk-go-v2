@@ -30,7 +30,7 @@ func (c *Client) DescribeAttachment(ctx context.Context, params *DescribeAttachm
 		params = &DescribeAttachmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAttachment", params, optFns, addOperationDescribeAttachmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAttachment", params, optFns, c.addOperationDescribeAttachmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DescribeAttachmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAttachment{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetStoredQuery(ctx context.Context, params *GetStoredQueryInput
 		params = &GetStoredQueryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetStoredQuery", params, optFns, addOperationGetStoredQueryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetStoredQuery", params, optFns, c.addOperationGetStoredQueryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetStoredQueryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetStoredQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetStoredQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetStoredQuery{}, middleware.After)
 	if err != nil {
 		return err

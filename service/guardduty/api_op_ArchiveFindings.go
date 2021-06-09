@@ -18,7 +18,7 @@ func (c *Client) ArchiveFindings(ctx context.Context, params *ArchiveFindingsInp
 		params = &ArchiveFindingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ArchiveFindings", params, optFns, addOperationArchiveFindingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ArchiveFindings", params, optFns, c.addOperationArchiveFindingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type ArchiveFindingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationArchiveFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationArchiveFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpArchiveFindings{}, middleware.After)
 	if err != nil {
 		return err

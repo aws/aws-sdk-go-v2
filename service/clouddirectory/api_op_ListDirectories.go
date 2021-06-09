@@ -18,7 +18,7 @@ func (c *Client) ListDirectories(ctx context.Context, params *ListDirectoriesInp
 		params = &ListDirectoriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDirectories", params, optFns, addOperationListDirectoriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDirectories", params, optFns, c.addOperationListDirectoriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListDirectoriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDirectoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDirectoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDirectories{}, middleware.After)
 	if err != nil {
 		return err

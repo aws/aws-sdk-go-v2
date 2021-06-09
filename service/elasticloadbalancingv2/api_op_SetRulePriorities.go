@@ -19,7 +19,7 @@ func (c *Client) SetRulePriorities(ctx context.Context, params *SetRulePrioritie
 		params = &SetRulePrioritiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetRulePriorities", params, optFns, addOperationSetRulePrioritiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetRulePriorities", params, optFns, c.addOperationSetRulePrioritiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type SetRulePrioritiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetRulePrioritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetRulePrioritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetRulePriorities{}, middleware.After)
 	if err != nil {
 		return err

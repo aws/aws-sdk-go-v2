@@ -19,7 +19,7 @@ func (c *Client) RejectSkill(ctx context.Context, params *RejectSkillInput, optF
 		params = &RejectSkillInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RejectSkill", params, optFns, addOperationRejectSkillMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RejectSkill", params, optFns, c.addOperationRejectSkillMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type RejectSkillOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRejectSkillMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRejectSkillMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRejectSkill{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CreateDatabase(ctx context.Context, params *CreateDatabaseInput
 		params = &CreateDatabaseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDatabase", params, optFns, addOperationCreateDatabaseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDatabase", params, optFns, c.addOperationCreateDatabaseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type CreateDatabaseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDatabase{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateInferenceScheduler(ctx context.Context, params *UpdateInf
 		params = &UpdateInferenceSchedulerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateInferenceScheduler", params, optFns, addOperationUpdateInferenceSchedulerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateInferenceScheduler", params, optFns, c.addOperationUpdateInferenceSchedulerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type UpdateInferenceSchedulerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateInferenceScheduler{}, middleware.After)
 	if err != nil {
 		return err

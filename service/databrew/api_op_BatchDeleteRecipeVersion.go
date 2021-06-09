@@ -49,7 +49,7 @@ func (c *Client) BatchDeleteRecipeVersion(ctx context.Context, params *BatchDele
 		params = &BatchDeleteRecipeVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteRecipeVersion", params, optFns, addOperationBatchDeleteRecipeVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteRecipeVersion", params, optFns, c.addOperationBatchDeleteRecipeVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type BatchDeleteRecipeVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteRecipeVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteRecipeVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteRecipeVersion{}, middleware.After)
 	if err != nil {
 		return err

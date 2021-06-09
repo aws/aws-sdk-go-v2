@@ -27,7 +27,7 @@ func (c *Client) RejectDomainTransferFromAnotherAwsAccount(ctx context.Context, 
 		params = &RejectDomainTransferFromAnotherAwsAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RejectDomainTransferFromAnotherAwsAccount", params, optFns, addOperationRejectDomainTransferFromAnotherAwsAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RejectDomainTransferFromAnotherAwsAccount", params, optFns, c.addOperationRejectDomainTransferFromAnotherAwsAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type RejectDomainTransferFromAnotherAwsAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRejectDomainTransferFromAnotherAwsAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRejectDomainTransferFromAnotherAwsAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRejectDomainTransferFromAnotherAwsAccount{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ImportSshPublicKey(ctx context.Context, params *ImportSshPublic
 		params = &ImportSshPublicKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportSshPublicKey", params, optFns, addOperationImportSshPublicKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportSshPublicKey", params, optFns, c.addOperationImportSshPublicKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type ImportSshPublicKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportSshPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportSshPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportSshPublicKey{}, middleware.After)
 	if err != nil {
 		return err

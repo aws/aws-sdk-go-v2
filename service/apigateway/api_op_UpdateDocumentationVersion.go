@@ -17,7 +17,7 @@ func (c *Client) UpdateDocumentationVersion(ctx context.Context, params *UpdateD
 		params = &UpdateDocumentationVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDocumentationVersion", params, optFns, addOperationUpdateDocumentationVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDocumentationVersion", params, optFns, c.addOperationUpdateDocumentationVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type UpdateDocumentationVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDocumentationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDocumentationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDocumentationVersion{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DescribeStandards(ctx context.Context, params *DescribeStandard
 		params = &DescribeStandardsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeStandards", params, optFns, addOperationDescribeStandardsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeStandards", params, optFns, c.addOperationDescribeStandardsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeStandardsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeStandardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeStandardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeStandards{}, middleware.After)
 	if err != nil {
 		return err

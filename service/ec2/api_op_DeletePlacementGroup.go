@@ -20,7 +20,7 @@ func (c *Client) DeletePlacementGroup(ctx context.Context, params *DeletePlaceme
 		params = &DeletePlacementGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePlacementGroup", params, optFns, addOperationDeletePlacementGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePlacementGroup", params, optFns, c.addOperationDeletePlacementGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeletePlacementGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePlacementGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePlacementGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeletePlacementGroup{}, middleware.After)
 	if err != nil {
 		return err

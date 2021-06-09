@@ -16,7 +16,7 @@ func (c *Client) GetSupportedResourceTypes(ctx context.Context, params *GetSuppo
 		params = &GetSupportedResourceTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSupportedResourceTypes", params, optFns, addOperationGetSupportedResourceTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSupportedResourceTypes", params, optFns, c.addOperationGetSupportedResourceTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type GetSupportedResourceTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSupportedResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSupportedResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSupportedResourceTypes{}, middleware.After)
 	if err != nil {
 		return err

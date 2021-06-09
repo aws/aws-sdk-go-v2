@@ -19,7 +19,7 @@ func (c *Client) SubmitTaskStateChange(ctx context.Context, params *SubmitTaskSt
 		params = &SubmitTaskStateChangeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SubmitTaskStateChange", params, optFns, addOperationSubmitTaskStateChangeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SubmitTaskStateChange", params, optFns, c.addOperationSubmitTaskStateChangeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type SubmitTaskStateChangeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSubmitTaskStateChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSubmitTaskStateChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSubmitTaskStateChange{}, middleware.After)
 	if err != nil {
 		return err

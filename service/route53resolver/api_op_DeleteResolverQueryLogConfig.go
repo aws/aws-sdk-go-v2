@@ -30,7 +30,7 @@ func (c *Client) DeleteResolverQueryLogConfig(ctx context.Context, params *Delet
 		params = &DeleteResolverQueryLogConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteResolverQueryLogConfig", params, optFns, addOperationDeleteResolverQueryLogConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteResolverQueryLogConfig", params, optFns, c.addOperationDeleteResolverQueryLogConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DeleteResolverQueryLogConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteResolverQueryLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteResolverQueryLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteResolverQueryLogConfig{}, middleware.After)
 	if err != nil {
 		return err

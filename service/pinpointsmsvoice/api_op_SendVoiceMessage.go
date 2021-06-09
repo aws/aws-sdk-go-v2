@@ -17,7 +17,7 @@ func (c *Client) SendVoiceMessage(ctx context.Context, params *SendVoiceMessageI
 		params = &SendVoiceMessageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendVoiceMessage", params, optFns, addOperationSendVoiceMessageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendVoiceMessage", params, optFns, c.addOperationSendVoiceMessageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type SendVoiceMessageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendVoiceMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendVoiceMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendVoiceMessage{}, middleware.After)
 	if err != nil {
 		return err

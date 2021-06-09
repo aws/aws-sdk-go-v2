@@ -89,7 +89,7 @@ func (c *Client) GenerateDataKey(ctx context.Context, params *GenerateDataKeyInp
 		params = &GenerateDataKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GenerateDataKey", params, optFns, addOperationGenerateDataKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GenerateDataKey", params, optFns, c.addOperationGenerateDataKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -176,7 +176,7 @@ type GenerateDataKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGenerateDataKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGenerateDataKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGenerateDataKey{}, middleware.After)
 	if err != nil {
 		return err

@@ -24,7 +24,7 @@ func (c *Client) GetServiceGraph(ctx context.Context, params *GetServiceGraphInp
 		params = &GetServiceGraphInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetServiceGraph", params, optFns, addOperationGetServiceGraphMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetServiceGraph", params, optFns, c.addOperationGetServiceGraphMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type GetServiceGraphOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetServiceGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetServiceGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceGraph{}, middleware.After)
 	if err != nil {
 		return err

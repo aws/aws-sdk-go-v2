@@ -19,7 +19,7 @@ func (c *Client) TestMetricFilter(ctx context.Context, params *TestMetricFilterI
 		params = &TestMetricFilterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestMetricFilter", params, optFns, addOperationTestMetricFilterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestMetricFilter", params, optFns, c.addOperationTestMetricFilterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type TestMetricFilterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTestMetricFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestMetricFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTestMetricFilter{}, middleware.After)
 	if err != nil {
 		return err

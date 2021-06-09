@@ -19,7 +19,7 @@ func (c *Client) ListReportDefinitions(ctx context.Context, params *ListReportDe
 		params = &ListReportDefinitionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListReportDefinitions", params, optFns, addOperationListReportDefinitionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListReportDefinitions", params, optFns, c.addOperationListReportDefinitionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ListReportDefinitionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListReportDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListReportDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReportDefinitions{}, middleware.After)
 	if err != nil {
 		return err

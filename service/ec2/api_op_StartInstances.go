@@ -34,7 +34,7 @@ func (c *Client) StartInstances(ctx context.Context, params *StartInstancesInput
 		params = &StartInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartInstances", params, optFns, addOperationStartInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartInstances", params, optFns, c.addOperationStartInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type StartInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpStartInstances{}, middleware.After)
 	if err != nil {
 		return err

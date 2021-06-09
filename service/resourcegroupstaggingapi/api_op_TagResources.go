@@ -42,7 +42,7 @@ func (c *Client) TagResources(ctx context.Context, params *TagResourcesInput, op
 		params = &TagResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TagResources", params, optFns, addOperationTagResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagResources", params, optFns, c.addOperationTagResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type TagResourcesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTagResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTagResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTagResources{}, middleware.After)
 	if err != nil {
 		return err

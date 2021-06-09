@@ -16,7 +16,7 @@ func (c *Client) DeleteResourcesByExternalId(ctx context.Context, params *Delete
 		params = &DeleteResourcesByExternalIdInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteResourcesByExternalId", params, optFns, addOperationDeleteResourcesByExternalIdMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteResourcesByExternalId", params, optFns, c.addOperationDeleteResourcesByExternalIdMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ type DeleteResourcesByExternalIdOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteResourcesByExternalIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteResourcesByExternalIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteResourcesByExternalId{}, middleware.After)
 	if err != nil {
 		return err

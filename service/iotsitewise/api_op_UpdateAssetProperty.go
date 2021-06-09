@@ -23,7 +23,7 @@ func (c *Client) UpdateAssetProperty(ctx context.Context, params *UpdateAssetPro
 		params = &UpdateAssetPropertyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAssetProperty", params, optFns, addOperationUpdateAssetPropertyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAssetProperty", params, optFns, c.addOperationUpdateAssetPropertyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type UpdateAssetPropertyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAssetPropertyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAssetPropertyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAssetProperty{}, middleware.After)
 	if err != nil {
 		return err

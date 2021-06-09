@@ -20,7 +20,7 @@ func (c *Client) InferRxNorm(ctx context.Context, params *InferRxNormInput, optF
 		params = &InferRxNormInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InferRxNorm", params, optFns, addOperationInferRxNormMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InferRxNorm", params, optFns, c.addOperationInferRxNormMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type InferRxNormOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInferRxNormMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInferRxNormMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInferRxNorm{}, middleware.After)
 	if err != nil {
 		return err

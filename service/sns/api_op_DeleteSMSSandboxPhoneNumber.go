@@ -25,7 +25,7 @@ func (c *Client) DeleteSMSSandboxPhoneNumber(ctx context.Context, params *Delete
 		params = &DeleteSMSSandboxPhoneNumberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSMSSandboxPhoneNumber", params, optFns, addOperationDeleteSMSSandboxPhoneNumberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSMSSandboxPhoneNumber", params, optFns, c.addOperationDeleteSMSSandboxPhoneNumberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteSMSSandboxPhoneNumberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSMSSandboxPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSMSSandboxPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteSMSSandboxPhoneNumber{}, middleware.After)
 	if err != nil {
 		return err

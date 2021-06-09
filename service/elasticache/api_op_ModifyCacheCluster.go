@@ -19,7 +19,7 @@ func (c *Client) ModifyCacheCluster(ctx context.Context, params *ModifyCacheClus
 		params = &ModifyCacheClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyCacheCluster", params, optFns, addOperationModifyCacheClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyCacheCluster", params, optFns, c.addOperationModifyCacheClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -280,7 +280,7 @@ type ModifyCacheClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyCacheCluster{}, middleware.After)
 	if err != nil {
 		return err

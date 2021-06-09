@@ -18,7 +18,7 @@ func (c *Client) DeletePredictor(ctx context.Context, params *DeletePredictorInp
 		params = &DeletePredictorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePredictor", params, optFns, addOperationDeletePredictorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePredictor", params, optFns, c.addOperationDeletePredictorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeletePredictorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePredictorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePredictorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePredictor{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) StartDiscoverer(ctx context.Context, params *StartDiscovererInp
 		params = &StartDiscovererInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDiscoverer", params, optFns, addOperationStartDiscovererMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDiscoverer", params, optFns, c.addOperationStartDiscovererMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StartDiscovererOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDiscoverer{}, middleware.After)
 	if err != nil {
 		return err

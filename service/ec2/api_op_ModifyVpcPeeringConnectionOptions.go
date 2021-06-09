@@ -42,7 +42,7 @@ func (c *Client) ModifyVpcPeeringConnectionOptions(ctx context.Context, params *
 		params = &ModifyVpcPeeringConnectionOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyVpcPeeringConnectionOptions", params, optFns, addOperationModifyVpcPeeringConnectionOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyVpcPeeringConnectionOptions", params, optFns, c.addOperationModifyVpcPeeringConnectionOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type ModifyVpcPeeringConnectionOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyVpcPeeringConnectionOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyVpcPeeringConnectionOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyVpcPeeringConnectionOptions{}, middleware.After)
 	if err != nil {
 		return err

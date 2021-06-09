@@ -18,7 +18,7 @@ func (c *Client) AssociateTrialComponent(ctx context.Context, params *AssociateT
 		params = &AssociateTrialComponentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateTrialComponent", params, optFns, addOperationAssociateTrialComponentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateTrialComponent", params, optFns, c.addOperationAssociateTrialComponentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type AssociateTrialComponentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateTrialComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateTrialComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateTrialComponent{}, middleware.After)
 	if err != nil {
 		return err

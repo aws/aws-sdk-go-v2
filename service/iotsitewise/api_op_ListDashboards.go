@@ -19,7 +19,7 @@ func (c *Client) ListDashboards(ctx context.Context, params *ListDashboardsInput
 		params = &ListDashboardsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDashboards", params, optFns, addOperationListDashboardsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDashboards", params, optFns, c.addOperationListDashboardsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListDashboardsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDashboardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDashboardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDashboards{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) UngroupResources(ctx context.Context, params *UngroupResourcesI
 		params = &UngroupResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UngroupResources", params, optFns, addOperationUngroupResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UngroupResources", params, optFns, c.addOperationUngroupResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type UngroupResourcesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUngroupResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUngroupResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUngroupResources{}, middleware.After)
 	if err != nil {
 		return err

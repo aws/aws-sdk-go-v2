@@ -19,7 +19,7 @@ func (c *Client) CreateCacheCluster(ctx context.Context, params *CreateCacheClus
 		params = &CreateCacheClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCacheCluster", params, optFns, addOperationCreateCacheClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCacheCluster", params, optFns, c.addOperationCreateCacheClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -278,7 +278,7 @@ type CreateCacheClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateCacheCluster{}, middleware.After)
 	if err != nil {
 		return err

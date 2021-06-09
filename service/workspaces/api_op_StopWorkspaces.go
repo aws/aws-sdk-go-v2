@@ -19,7 +19,7 @@ func (c *Client) StopWorkspaces(ctx context.Context, params *StopWorkspacesInput
 		params = &StopWorkspacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopWorkspaces", params, optFns, addOperationStopWorkspacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopWorkspaces", params, optFns, c.addOperationStopWorkspacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type StopWorkspacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopWorkspaces{}, middleware.After)
 	if err != nil {
 		return err

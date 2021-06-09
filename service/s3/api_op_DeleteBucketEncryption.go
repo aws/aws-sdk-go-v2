@@ -36,7 +36,7 @@ func (c *Client) DeleteBucketEncryption(ctx context.Context, params *DeleteBucke
 		params = &DeleteBucketEncryptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketEncryption", params, optFns, addOperationDeleteBucketEncryptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketEncryption", params, optFns, c.addOperationDeleteBucketEncryptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DeleteBucketEncryptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBucketEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBucketEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteBucketEncryption{}, middleware.After)
 	if err != nil {
 		return err

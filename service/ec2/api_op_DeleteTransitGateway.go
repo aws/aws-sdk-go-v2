@@ -17,7 +17,7 @@ func (c *Client) DeleteTransitGateway(ctx context.Context, params *DeleteTransit
 		params = &DeleteTransitGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTransitGateway", params, optFns, addOperationDeleteTransitGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTransitGateway", params, optFns, c.addOperationDeleteTransitGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteTransitGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTransitGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTransitGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteTransitGateway{}, middleware.After)
 	if err != nil {
 		return err

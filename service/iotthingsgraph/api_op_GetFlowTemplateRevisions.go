@@ -21,7 +21,7 @@ func (c *Client) GetFlowTemplateRevisions(ctx context.Context, params *GetFlowTe
 		params = &GetFlowTemplateRevisionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFlowTemplateRevisions", params, optFns, addOperationGetFlowTemplateRevisionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFlowTemplateRevisions", params, optFns, c.addOperationGetFlowTemplateRevisionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetFlowTemplateRevisionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFlowTemplateRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFlowTemplateRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFlowTemplateRevisions{}, middleware.After)
 	if err != nil {
 		return err

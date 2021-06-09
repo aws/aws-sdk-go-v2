@@ -17,7 +17,7 @@ func (c *Client) ModifyFpgaImageAttribute(ctx context.Context, params *ModifyFpg
 		params = &ModifyFpgaImageAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyFpgaImageAttribute", params, optFns, addOperationModifyFpgaImageAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyFpgaImageAttribute", params, optFns, c.addOperationModifyFpgaImageAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type ModifyFpgaImageAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyFpgaImageAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyFpgaImageAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyFpgaImageAttribute{}, middleware.After)
 	if err != nil {
 		return err

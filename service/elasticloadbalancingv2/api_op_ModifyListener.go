@@ -24,7 +24,7 @@ func (c *Client) ModifyListener(ctx context.Context, params *ModifyListenerInput
 		params = &ModifyListenerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyListener", params, optFns, addOperationModifyListenerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyListener", params, optFns, c.addOperationModifyListenerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ type ModifyListenerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyListener{}, middleware.After)
 	if err != nil {
 		return err

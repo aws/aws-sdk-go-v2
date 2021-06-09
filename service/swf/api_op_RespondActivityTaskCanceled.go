@@ -46,7 +46,7 @@ func (c *Client) RespondActivityTaskCanceled(ctx context.Context, params *Respon
 		params = &RespondActivityTaskCanceledInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RespondActivityTaskCanceled", params, optFns, addOperationRespondActivityTaskCanceledMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RespondActivityTaskCanceled", params, optFns, c.addOperationRespondActivityTaskCanceledMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type RespondActivityTaskCanceledOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRespondActivityTaskCanceledMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRespondActivityTaskCanceledMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRespondActivityTaskCanceled{}, middleware.After)
 	if err != nil {
 		return err

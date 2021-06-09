@@ -19,7 +19,7 @@ func (c *Client) DescribeCertificates(ctx context.Context, params *DescribeCerti
 		params = &DescribeCertificatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCertificates", params, optFns, addOperationDescribeCertificatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCertificates", params, optFns, c.addOperationDescribeCertificatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DescribeCertificatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeCertificates{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteBillingGroup(ctx context.Context, params *DeleteBillingGr
 		params = &DeleteBillingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBillingGroup", params, optFns, addOperationDeleteBillingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBillingGroup", params, optFns, c.addOperationDeleteBillingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteBillingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBillingGroup{}, middleware.After)
 	if err != nil {
 		return err

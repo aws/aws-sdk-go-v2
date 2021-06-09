@@ -21,7 +21,7 @@ func (c *Client) RebootRelationalDatabase(ctx context.Context, params *RebootRel
 		params = &RebootRelationalDatabaseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RebootRelationalDatabase", params, optFns, addOperationRebootRelationalDatabaseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RebootRelationalDatabase", params, optFns, c.addOperationRebootRelationalDatabaseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type RebootRelationalDatabaseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRebootRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRebootRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRebootRelationalDatabase{}, middleware.After)
 	if err != nil {
 		return err

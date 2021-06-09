@@ -20,7 +20,7 @@ func (c *Client) GetHostReservationPurchasePreview(ctx context.Context, params *
 		params = &GetHostReservationPurchasePreviewInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetHostReservationPurchasePreview", params, optFns, addOperationGetHostReservationPurchasePreviewMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetHostReservationPurchasePreview", params, optFns, c.addOperationGetHostReservationPurchasePreviewMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetHostReservationPurchasePreviewOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetHostReservationPurchasePreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetHostReservationPurchasePreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpGetHostReservationPurchasePreview{}, middleware.After)
 	if err != nil {
 		return err

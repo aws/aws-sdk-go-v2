@@ -17,7 +17,7 @@ func (c *Client) GetMaintenanceWindow(ctx context.Context, params *GetMaintenanc
 		params = &GetMaintenanceWindowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMaintenanceWindow", params, optFns, addOperationGetMaintenanceWindowMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMaintenanceWindow", params, optFns, c.addOperationGetMaintenanceWindowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ type GetMaintenanceWindowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMaintenanceWindow{}, middleware.After)
 	if err != nil {
 		return err

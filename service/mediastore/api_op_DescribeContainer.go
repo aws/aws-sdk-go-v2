@@ -22,7 +22,7 @@ func (c *Client) DescribeContainer(ctx context.Context, params *DescribeContaine
 		params = &DescribeContainerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeContainer", params, optFns, addOperationDescribeContainerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeContainer", params, optFns, c.addOperationDescribeContainerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeContainerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeContainerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeContainerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeContainer{}, middleware.After)
 	if err != nil {
 		return err

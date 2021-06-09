@@ -21,7 +21,7 @@ func (c *Client) DescribeStreamSummary(ctx context.Context, params *DescribeStre
 		params = &DescribeStreamSummaryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeStreamSummary", params, optFns, addOperationDescribeStreamSummaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeStreamSummary", params, optFns, c.addOperationDescribeStreamSummaryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DescribeStreamSummaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeStreamSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeStreamSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStreamSummary{}, middleware.After)
 	if err != nil {
 		return err

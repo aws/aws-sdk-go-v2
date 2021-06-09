@@ -47,7 +47,7 @@ func (c *Client) RetireGrant(ctx context.Context, params *RetireGrantInput, optF
 		params = &RetireGrantInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RetireGrant", params, optFns, addOperationRetireGrantMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RetireGrant", params, optFns, c.addOperationRetireGrantMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type RetireGrantOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRetireGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRetireGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRetireGrant{}, middleware.After)
 	if err != nil {
 		return err

@@ -26,7 +26,7 @@ func (c *Client) DeleteScript(ctx context.Context, params *DeleteScriptInput, op
 		params = &DeleteScriptInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteScript", params, optFns, addOperationDeleteScriptMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteScript", params, optFns, c.addOperationDeleteScriptMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteScriptOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteScript{}, middleware.After)
 	if err != nil {
 		return err

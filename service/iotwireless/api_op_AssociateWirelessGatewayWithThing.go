@@ -16,7 +16,7 @@ func (c *Client) AssociateWirelessGatewayWithThing(ctx context.Context, params *
 		params = &AssociateWirelessGatewayWithThingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateWirelessGatewayWithThing", params, optFns, addOperationAssociateWirelessGatewayWithThingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateWirelessGatewayWithThing", params, optFns, c.addOperationAssociateWirelessGatewayWithThingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type AssociateWirelessGatewayWithThingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateWirelessGatewayWithThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateWirelessGatewayWithThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateWirelessGatewayWithThing{}, middleware.After)
 	if err != nil {
 		return err

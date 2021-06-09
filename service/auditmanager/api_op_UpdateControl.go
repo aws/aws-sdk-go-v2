@@ -17,7 +17,7 @@ func (c *Client) UpdateControl(ctx context.Context, params *UpdateControlInput, 
 		params = &UpdateControlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateControl", params, optFns, addOperationUpdateControlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateControl", params, optFns, c.addOperationUpdateControlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type UpdateControlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateControl{}, middleware.After)
 	if err != nil {
 		return err

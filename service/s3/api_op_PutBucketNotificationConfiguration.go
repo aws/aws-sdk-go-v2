@@ -52,7 +52,7 @@ func (c *Client) PutBucketNotificationConfiguration(ctx context.Context, params 
 		params = &PutBucketNotificationConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketNotificationConfiguration", params, optFns, addOperationPutBucketNotificationConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketNotificationConfiguration", params, optFns, c.addOperationPutBucketNotificationConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type PutBucketNotificationConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketNotificationConfiguration{}, middleware.After)
 	if err != nil {
 		return err

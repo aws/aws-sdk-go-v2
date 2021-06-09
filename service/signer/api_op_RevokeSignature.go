@@ -17,7 +17,7 @@ func (c *Client) RevokeSignature(ctx context.Context, params *RevokeSignatureInp
 		params = &RevokeSignatureInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokeSignature", params, optFns, addOperationRevokeSignatureMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeSignature", params, optFns, c.addOperationRevokeSignatureMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type RevokeSignatureOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokeSignatureMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokeSignatureMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokeSignature{}, middleware.After)
 	if err != nil {
 		return err

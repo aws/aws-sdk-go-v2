@@ -18,7 +18,7 @@ func (c *Client) BatchEnableAlarm(ctx context.Context, params *BatchEnableAlarmI
 		params = &BatchEnableAlarmInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchEnableAlarm", params, optFns, addOperationBatchEnableAlarmMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchEnableAlarm", params, optFns, c.addOperationBatchEnableAlarmMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type BatchEnableAlarmOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchEnableAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchEnableAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchEnableAlarm{}, middleware.After)
 	if err != nil {
 		return err

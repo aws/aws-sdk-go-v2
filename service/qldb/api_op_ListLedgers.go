@@ -20,7 +20,7 @@ func (c *Client) ListLedgers(ctx context.Context, params *ListLedgersInput, optF
 		params = &ListLedgersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLedgers", params, optFns, addOperationListLedgersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLedgers", params, optFns, c.addOperationListLedgersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListLedgersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLedgersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLedgersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLedgers{}, middleware.After)
 	if err != nil {
 		return err

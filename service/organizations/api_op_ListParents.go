@@ -27,7 +27,7 @@ func (c *Client) ListParents(ctx context.Context, params *ListParentsInput, optF
 		params = &ListParentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListParents", params, optFns, addOperationListParentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListParents", params, optFns, c.addOperationListParentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type ListParentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListParentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListParentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListParents{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) GetBulkPublishDetails(ctx context.Context, params *GetBulkPubli
 		params = &GetBulkPublishDetailsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBulkPublishDetails", params, optFns, addOperationGetBulkPublishDetailsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBulkPublishDetails", params, optFns, c.addOperationGetBulkPublishDetailsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type GetBulkPublishDetailsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBulkPublishDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBulkPublishDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBulkPublishDetails{}, middleware.After)
 	if err != nil {
 		return err

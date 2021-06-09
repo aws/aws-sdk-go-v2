@@ -18,7 +18,7 @@ func (c *Client) DescribeAutoMLJob(ctx context.Context, params *DescribeAutoMLJo
 		params = &DescribeAutoMLJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAutoMLJob", params, optFns, addOperationDescribeAutoMLJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAutoMLJob", params, optFns, c.addOperationDescribeAutoMLJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +129,7 @@ type DescribeAutoMLJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAutoMLJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAutoMLJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAutoMLJob{}, middleware.After)
 	if err != nil {
 		return err

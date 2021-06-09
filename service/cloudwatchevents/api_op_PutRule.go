@@ -56,7 +56,7 @@ func (c *Client) PutRule(ctx context.Context, params *PutRuleInput, optFns ...fu
 		params = &PutRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutRule", params, optFns, addOperationPutRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutRule", params, optFns, c.addOperationPutRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ type PutRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRule{}, middleware.After)
 	if err != nil {
 		return err

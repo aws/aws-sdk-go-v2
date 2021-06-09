@@ -19,7 +19,7 @@ func (c *Client) UpdateQueueOutboundCallerConfig(ctx context.Context, params *Up
 		params = &UpdateQueueOutboundCallerConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateQueueOutboundCallerConfig", params, optFns, addOperationUpdateQueueOutboundCallerConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateQueueOutboundCallerConfig", params, optFns, c.addOperationUpdateQueueOutboundCallerConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UpdateQueueOutboundCallerConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateQueueOutboundCallerConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateQueueOutboundCallerConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQueueOutboundCallerConfig{}, middleware.After)
 	if err != nil {
 		return err

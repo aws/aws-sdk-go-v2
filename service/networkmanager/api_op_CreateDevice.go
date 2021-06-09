@@ -19,7 +19,7 @@ func (c *Client) CreateDevice(ctx context.Context, params *CreateDeviceInput, op
 		params = &CreateDeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDevice", params, optFns, addOperationCreateDeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDevice", params, optFns, c.addOperationCreateDeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type CreateDeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDevice{}, middleware.After)
 	if err != nil {
 		return err

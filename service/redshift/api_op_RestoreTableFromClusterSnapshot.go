@@ -27,7 +27,7 @@ func (c *Client) RestoreTableFromClusterSnapshot(ctx context.Context, params *Re
 		params = &RestoreTableFromClusterSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreTableFromClusterSnapshot", params, optFns, addOperationRestoreTableFromClusterSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreTableFromClusterSnapshot", params, optFns, c.addOperationRestoreTableFromClusterSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type RestoreTableFromClusterSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreTableFromClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreTableFromClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreTableFromClusterSnapshot{}, middleware.After)
 	if err != nil {
 		return err

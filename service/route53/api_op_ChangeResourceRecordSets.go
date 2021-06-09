@@ -78,7 +78,7 @@ func (c *Client) ChangeResourceRecordSets(ctx context.Context, params *ChangeRes
 		params = &ChangeResourceRecordSetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ChangeResourceRecordSets", params, optFns, addOperationChangeResourceRecordSetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ChangeResourceRecordSets", params, optFns, c.addOperationChangeResourceRecordSetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +118,7 @@ type ChangeResourceRecordSetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationChangeResourceRecordSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationChangeResourceRecordSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpChangeResourceRecordSets{}, middleware.After)
 	if err != nil {
 		return err

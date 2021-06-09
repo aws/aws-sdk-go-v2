@@ -17,7 +17,7 @@ func (c *Client) CreateOriginEndpoint(ctx context.Context, params *CreateOriginE
 		params = &CreateOriginEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateOriginEndpoint", params, optFns, addOperationCreateOriginEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateOriginEndpoint", params, optFns, c.addOperationCreateOriginEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -148,7 +148,7 @@ type CreateOriginEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateOriginEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateOriginEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOriginEndpoint{}, middleware.After)
 	if err != nil {
 		return err

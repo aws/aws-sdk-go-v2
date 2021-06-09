@@ -20,7 +20,7 @@ func (c *Client) UpdateLocationSmb(ctx context.Context, params *UpdateLocationSm
 		params = &UpdateLocationSmbInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLocationSmb", params, optFns, addOperationUpdateLocationSmbMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLocationSmb", params, optFns, c.addOperationUpdateLocationSmbMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type UpdateLocationSmbOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLocationSmbMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLocationSmbMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLocationSmb{}, middleware.After)
 	if err != nil {
 		return err

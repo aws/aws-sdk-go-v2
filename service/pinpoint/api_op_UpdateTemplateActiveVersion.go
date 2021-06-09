@@ -17,7 +17,7 @@ func (c *Client) UpdateTemplateActiveVersion(ctx context.Context, params *Update
 		params = &UpdateTemplateActiveVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateTemplateActiveVersion", params, optFns, addOperationUpdateTemplateActiveVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateTemplateActiveVersion", params, optFns, c.addOperationUpdateTemplateActiveVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type UpdateTemplateActiveVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateTemplateActiveVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateTemplateActiveVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTemplateActiveVersion{}, middleware.After)
 	if err != nil {
 		return err

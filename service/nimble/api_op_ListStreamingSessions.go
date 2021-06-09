@@ -17,7 +17,7 @@ func (c *Client) ListStreamingSessions(ctx context.Context, params *ListStreamin
 		params = &ListStreamingSessionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListStreamingSessions", params, optFns, addOperationListStreamingSessionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListStreamingSessions", params, optFns, c.addOperationListStreamingSessionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListStreamingSessionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListStreamingSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListStreamingSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStreamingSessions{}, middleware.After)
 	if err != nil {
 		return err

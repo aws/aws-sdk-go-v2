@@ -17,7 +17,7 @@ func (c *Client) GetEula(ctx context.Context, params *GetEulaInput, optFns ...fu
 		params = &GetEulaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEula", params, optFns, addOperationGetEulaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEula", params, optFns, c.addOperationGetEulaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetEulaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEulaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEulaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEula{}, middleware.After)
 	if err != nil {
 		return err

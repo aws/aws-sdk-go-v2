@@ -18,7 +18,7 @@ func (c *Client) GetUsageForecast(ctx context.Context, params *GetUsageForecastI
 		params = &GetUsageForecastInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUsageForecast", params, optFns, addOperationGetUsageForecastMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetUsageForecast", params, optFns, c.addOperationGetUsageForecastMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -134,7 +134,7 @@ type GetUsageForecastOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetUsageForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetUsageForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUsageForecast{}, middleware.After)
 	if err != nil {
 		return err

@@ -43,7 +43,7 @@ func (c *Client) PutConfigRule(ctx context.Context, params *PutConfigRuleInput, 
 		params = &PutConfigRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutConfigRule", params, optFns, addOperationPutConfigRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutConfigRule", params, optFns, c.addOperationPutConfigRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type PutConfigRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutConfigRule{}, middleware.After)
 	if err != nil {
 		return err

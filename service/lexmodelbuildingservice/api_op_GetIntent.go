@@ -20,7 +20,7 @@ func (c *Client) GetIntent(ctx context.Context, params *GetIntentInput, optFns .
 		params = &GetIntentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetIntent", params, optFns, addOperationGetIntentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetIntent", params, optFns, c.addOperationGetIntentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -112,7 +112,7 @@ type GetIntentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIntent{}, middleware.After)
 	if err != nil {
 		return err

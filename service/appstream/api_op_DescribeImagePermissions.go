@@ -19,7 +19,7 @@ func (c *Client) DescribeImagePermissions(ctx context.Context, params *DescribeI
 		params = &DescribeImagePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeImagePermissions", params, optFns, addOperationDescribeImagePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeImagePermissions", params, optFns, c.addOperationDescribeImagePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type DescribeImagePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeImagePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeImagePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImagePermissions{}, middleware.After)
 	if err != nil {
 		return err

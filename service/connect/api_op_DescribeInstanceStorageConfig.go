@@ -19,7 +19,7 @@ func (c *Client) DescribeInstanceStorageConfig(ctx context.Context, params *Desc
 		params = &DescribeInstanceStorageConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInstanceStorageConfig", params, optFns, addOperationDescribeInstanceStorageConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInstanceStorageConfig", params, optFns, c.addOperationDescribeInstanceStorageConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeInstanceStorageConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInstanceStorageConfig{}, middleware.After)
 	if err != nil {
 		return err

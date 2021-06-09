@@ -21,7 +21,7 @@ func (c *Client) BatchEnableStandards(ctx context.Context, params *BatchEnableSt
 		params = &BatchEnableStandardsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchEnableStandards", params, optFns, addOperationBatchEnableStandardsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchEnableStandards", params, optFns, c.addOperationBatchEnableStandardsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type BatchEnableStandardsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchEnableStandardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchEnableStandardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchEnableStandards{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) GetSegmentVersions(ctx context.Context, params *GetSegmentVersi
 		params = &GetSegmentVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSegmentVersions", params, optFns, addOperationGetSegmentVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSegmentVersions", params, optFns, c.addOperationGetSegmentVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type GetSegmentVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSegmentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSegmentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSegmentVersions{}, middleware.After)
 	if err != nil {
 		return err

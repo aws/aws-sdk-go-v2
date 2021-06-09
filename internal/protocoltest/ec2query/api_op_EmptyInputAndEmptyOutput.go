@@ -17,7 +17,7 @@ func (c *Client) EmptyInputAndEmptyOutput(ctx context.Context, params *EmptyInpu
 		params = &EmptyInputAndEmptyOutputInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EmptyInputAndEmptyOutput", params, optFns, addOperationEmptyInputAndEmptyOutputMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EmptyInputAndEmptyOutput", params, optFns, c.addOperationEmptyInputAndEmptyOutputMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ type EmptyInputAndEmptyOutputOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEmptyInputAndEmptyOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEmptyInputAndEmptyOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpEmptyInputAndEmptyOutput{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DetectPHI(ctx context.Context, params *DetectPHIInput, optFns .
 		params = &DetectPHIInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetectPHI", params, optFns, addOperationDetectPHIMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetectPHI", params, optFns, c.addOperationDetectPHIMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DetectPHIOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetectPHIMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetectPHIMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectPHI{}, middleware.After)
 	if err != nil {
 		return err

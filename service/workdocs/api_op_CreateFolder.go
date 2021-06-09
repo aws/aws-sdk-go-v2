@@ -17,7 +17,7 @@ func (c *Client) CreateFolder(ctx context.Context, params *CreateFolderInput, op
 		params = &CreateFolderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFolder", params, optFns, addOperationCreateFolderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFolder", params, optFns, c.addOperationCreateFolderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type CreateFolderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFolder{}, middleware.After)
 	if err != nil {
 		return err

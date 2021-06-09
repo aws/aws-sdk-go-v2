@@ -22,7 +22,7 @@ func (c *Client) UpdateLedgerPermissionsMode(ctx context.Context, params *Update
 		params = &UpdateLedgerPermissionsModeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLedgerPermissionsMode", params, optFns, addOperationUpdateLedgerPermissionsModeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLedgerPermissionsMode", params, optFns, c.addOperationUpdateLedgerPermissionsModeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type UpdateLedgerPermissionsModeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLedgerPermissionsModeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLedgerPermissionsModeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLedgerPermissionsMode{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) AssociateFirewallPolicy(ctx context.Context, params *AssociateF
 		params = &AssociateFirewallPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateFirewallPolicy", params, optFns, addOperationAssociateFirewallPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateFirewallPolicy", params, optFns, c.addOperationAssociateFirewallPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type AssociateFirewallPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateFirewallPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateFirewallPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateFirewallPolicy{}, middleware.After)
 	if err != nil {
 		return err

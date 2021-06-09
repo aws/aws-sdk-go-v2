@@ -21,7 +21,7 @@ func (c *Client) AddLayerVersionPermission(ctx context.Context, params *AddLayer
 		params = &AddLayerVersionPermissionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddLayerVersionPermission", params, optFns, addOperationAddLayerVersionPermissionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddLayerVersionPermission", params, optFns, c.addOperationAddLayerVersionPermissionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type AddLayerVersionPermissionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddLayerVersionPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddLayerVersionPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddLayerVersionPermission{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteFpgaImage(ctx context.Context, params *DeleteFpgaImageInp
 		params = &DeleteFpgaImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFpgaImage", params, optFns, addOperationDeleteFpgaImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFpgaImage", params, optFns, c.addOperationDeleteFpgaImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteFpgaImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFpgaImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFpgaImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteFpgaImage{}, middleware.After)
 	if err != nil {
 		return err

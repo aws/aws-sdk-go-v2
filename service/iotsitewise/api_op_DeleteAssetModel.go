@@ -24,7 +24,7 @@ func (c *Client) DeleteAssetModel(ctx context.Context, params *DeleteAssetModelI
 		params = &DeleteAssetModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAssetModel", params, optFns, addOperationDeleteAssetModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAssetModel", params, optFns, c.addOperationDeleteAssetModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DeleteAssetModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAssetModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAssetModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAssetModel{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) DescribeMountTargets(ctx context.Context, params *DescribeMount
 		params = &DescribeMountTargetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeMountTargets", params, optFns, addOperationDescribeMountTargetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeMountTargets", params, optFns, c.addOperationDescribeMountTargetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type DescribeMountTargetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeMountTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeMountTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeMountTargets{}, middleware.After)
 	if err != nil {
 		return err

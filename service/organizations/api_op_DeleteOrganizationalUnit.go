@@ -18,7 +18,7 @@ func (c *Client) DeleteOrganizationalUnit(ctx context.Context, params *DeleteOrg
 		params = &DeleteOrganizationalUnitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteOrganizationalUnit", params, optFns, addOperationDeleteOrganizationalUnitMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteOrganizationalUnit", params, optFns, c.addOperationDeleteOrganizationalUnitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteOrganizationalUnitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteOrganizationalUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteOrganizationalUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteOrganizationalUnit{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) GetPullRequestApprovalStates(ctx context.Context, params *GetPu
 		params = &GetPullRequestApprovalStatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPullRequestApprovalStates", params, optFns, addOperationGetPullRequestApprovalStatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPullRequestApprovalStates", params, optFns, c.addOperationGetPullRequestApprovalStatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetPullRequestApprovalStatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPullRequestApprovalStatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPullRequestApprovalStatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPullRequestApprovalStates{}, middleware.After)
 	if err != nil {
 		return err

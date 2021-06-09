@@ -16,7 +16,7 @@ func (c *Client) CancelInputDeviceTransfer(ctx context.Context, params *CancelIn
 		params = &CancelInputDeviceTransferInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelInputDeviceTransfer", params, optFns, addOperationCancelInputDeviceTransferMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelInputDeviceTransfer", params, optFns, c.addOperationCancelInputDeviceTransferMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type CancelInputDeviceTransferOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelInputDeviceTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelInputDeviceTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelInputDeviceTransfer{}, middleware.After)
 	if err != nil {
 		return err

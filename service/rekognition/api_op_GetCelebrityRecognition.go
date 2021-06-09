@@ -51,7 +51,7 @@ func (c *Client) GetCelebrityRecognition(ctx context.Context, params *GetCelebri
 		params = &GetCelebrityRecognitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCelebrityRecognition", params, optFns, addOperationGetCelebrityRecognitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCelebrityRecognition", params, optFns, c.addOperationGetCelebrityRecognitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type GetCelebrityRecognitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCelebrityRecognitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCelebrityRecognitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCelebrityRecognition{}, middleware.After)
 	if err != nil {
 		return err

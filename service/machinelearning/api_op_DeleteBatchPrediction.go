@@ -19,7 +19,7 @@ func (c *Client) DeleteBatchPrediction(ctx context.Context, params *DeleteBatchP
 		params = &DeleteBatchPredictionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBatchPrediction", params, optFns, addOperationDeleteBatchPredictionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBatchPrediction", params, optFns, c.addOperationDeleteBatchPredictionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteBatchPredictionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBatchPrediction{}, middleware.After)
 	if err != nil {
 		return err

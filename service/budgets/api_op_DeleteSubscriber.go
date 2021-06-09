@@ -18,7 +18,7 @@ func (c *Client) DeleteSubscriber(ctx context.Context, params *DeleteSubscriberI
 		params = &DeleteSubscriberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSubscriber", params, optFns, addOperationDeleteSubscriberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSubscriber", params, optFns, c.addOperationDeleteSubscriberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DeleteSubscriberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSubscriberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSubscriberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSubscriber{}, middleware.After)
 	if err != nil {
 		return err

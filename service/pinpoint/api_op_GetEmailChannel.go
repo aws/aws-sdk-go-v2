@@ -18,7 +18,7 @@ func (c *Client) GetEmailChannel(ctx context.Context, params *GetEmailChannelInp
 		params = &GetEmailChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEmailChannel", params, optFns, addOperationGetEmailChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEmailChannel", params, optFns, c.addOperationGetEmailChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetEmailChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEmailChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEmailChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEmailChannel{}, middleware.After)
 	if err != nil {
 		return err

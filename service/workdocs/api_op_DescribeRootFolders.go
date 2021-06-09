@@ -24,7 +24,7 @@ func (c *Client) DescribeRootFolders(ctx context.Context, params *DescribeRootFo
 		params = &DescribeRootFoldersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRootFolders", params, optFns, addOperationDescribeRootFoldersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRootFolders", params, optFns, c.addOperationDescribeRootFoldersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeRootFoldersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRootFoldersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRootFoldersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRootFolders{}, middleware.After)
 	if err != nil {
 		return err

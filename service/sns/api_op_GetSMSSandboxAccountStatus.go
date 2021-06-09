@@ -25,7 +25,7 @@ func (c *Client) GetSMSSandboxAccountStatus(ctx context.Context, params *GetSMSS
 		params = &GetSMSSandboxAccountStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSMSSandboxAccountStatus", params, optFns, addOperationGetSMSSandboxAccountStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSMSSandboxAccountStatus", params, optFns, c.addOperationGetSMSSandboxAccountStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetSMSSandboxAccountStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSMSSandboxAccountStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSMSSandboxAccountStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetSMSSandboxAccountStatus{}, middleware.After)
 	if err != nil {
 		return err

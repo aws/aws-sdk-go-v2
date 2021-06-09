@@ -18,7 +18,7 @@ func (c *Client) BatchDisassociateApprovalRuleTemplateFromRepositories(ctx conte
 		params = &BatchDisassociateApprovalRuleTemplateFromRepositoriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDisassociateApprovalRuleTemplateFromRepositories", params, optFns, addOperationBatchDisassociateApprovalRuleTemplateFromRepositoriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDisassociateApprovalRuleTemplateFromRepositories", params, optFns, c.addOperationBatchDisassociateApprovalRuleTemplateFromRepositoriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDisassociateApprovalRuleTemplateFromRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDisassociateApprovalRuleTemplateFromRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDisassociateApprovalRuleTemplateFromRepositories{}, middleware.After)
 	if err != nil {
 		return err

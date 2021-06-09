@@ -52,7 +52,7 @@ func (c *Client) CreatePredictor(ctx context.Context, params *CreatePredictorInp
 		params = &CreatePredictorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePredictor", params, optFns, addOperationCreatePredictorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePredictor", params, optFns, c.addOperationCreatePredictorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -210,7 +210,7 @@ type CreatePredictorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePredictorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePredictorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePredictor{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) RefreshSchemas(ctx context.Context, params *RefreshSchemasInput
 		params = &RefreshSchemasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RefreshSchemas", params, optFns, addOperationRefreshSchemasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RefreshSchemas", params, optFns, c.addOperationRefreshSchemasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type RefreshSchemasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRefreshSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRefreshSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRefreshSchemas{}, middleware.After)
 	if err != nil {
 		return err

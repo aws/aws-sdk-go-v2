@@ -21,7 +21,7 @@ func (c *Client) StopModel(ctx context.Context, params *StopModelInput, optFns .
 		params = &StopModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopModel", params, optFns, addOperationStopModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopModel", params, optFns, c.addOperationStopModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type StopModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopModel{}, middleware.After)
 	if err != nil {
 		return err

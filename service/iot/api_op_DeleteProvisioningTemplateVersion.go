@@ -16,7 +16,7 @@ func (c *Client) DeleteProvisioningTemplateVersion(ctx context.Context, params *
 		params = &DeleteProvisioningTemplateVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProvisioningTemplateVersion", params, optFns, addOperationDeleteProvisioningTemplateVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProvisioningTemplateVersion", params, optFns, c.addOperationDeleteProvisioningTemplateVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteProvisioningTemplateVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteProvisioningTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteProvisioningTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProvisioningTemplateVersion{}, middleware.After)
 	if err != nil {
 		return err

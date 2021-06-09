@@ -18,7 +18,7 @@ func (c *Client) ListVocabularyFilters(ctx context.Context, params *ListVocabula
 		params = &ListVocabularyFiltersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListVocabularyFilters", params, optFns, addOperationListVocabularyFiltersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListVocabularyFilters", params, optFns, c.addOperationListVocabularyFiltersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ListVocabularyFiltersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListVocabularyFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListVocabularyFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListVocabularyFilters{}, middleware.After)
 	if err != nil {
 		return err

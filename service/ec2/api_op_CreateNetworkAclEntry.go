@@ -30,7 +30,7 @@ func (c *Client) CreateNetworkAclEntry(ctx context.Context, params *CreateNetwor
 		params = &CreateNetworkAclEntryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateNetworkAclEntry", params, optFns, addOperationCreateNetworkAclEntryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateNetworkAclEntry", params, optFns, c.addOperationCreateNetworkAclEntryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +105,7 @@ type CreateNetworkAclEntryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateNetworkAclEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateNetworkAclEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateNetworkAclEntry{}, middleware.After)
 	if err != nil {
 		return err

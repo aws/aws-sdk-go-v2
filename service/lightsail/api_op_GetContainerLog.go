@@ -24,7 +24,7 @@ func (c *Client) GetContainerLog(ctx context.Context, params *GetContainerLogInp
 		params = &GetContainerLogInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetContainerLog", params, optFns, addOperationGetContainerLogMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetContainerLog", params, optFns, c.addOperationGetContainerLogMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +118,7 @@ type GetContainerLogOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetContainerLogMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetContainerLogMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetContainerLog{}, middleware.After)
 	if err != nil {
 		return err

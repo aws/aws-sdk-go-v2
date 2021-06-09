@@ -17,7 +17,7 @@ func (c *Client) AddLFTagsToResource(ctx context.Context, params *AddLFTagsToRes
 		params = &AddLFTagsToResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddLFTagsToResource", params, optFns, addOperationAddLFTagsToResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddLFTagsToResource", params, optFns, c.addOperationAddLFTagsToResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type AddLFTagsToResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddLFTagsToResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddLFTagsToResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddLFTagsToResource{}, middleware.After)
 	if err != nil {
 		return err

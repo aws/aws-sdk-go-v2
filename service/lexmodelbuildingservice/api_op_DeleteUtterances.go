@@ -24,7 +24,7 @@ func (c *Client) DeleteUtterances(ctx context.Context, params *DeleteUtterancesI
 		params = &DeleteUtterancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteUtterances", params, optFns, addOperationDeleteUtterancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteUtterances", params, optFns, c.addOperationDeleteUtterancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeleteUtterancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteUtterancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteUtterancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteUtterances{}, middleware.After)
 	if err != nil {
 		return err

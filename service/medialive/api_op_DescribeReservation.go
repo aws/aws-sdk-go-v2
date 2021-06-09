@@ -17,7 +17,7 @@ func (c *Client) DescribeReservation(ctx context.Context, params *DescribeReserv
 		params = &DescribeReservationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeReservation", params, optFns, addOperationDescribeReservationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeReservation", params, optFns, c.addOperationDescribeReservationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ type DescribeReservationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeReservation{}, middleware.After)
 	if err != nil {
 		return err

@@ -32,7 +32,7 @@ func (c *Client) CreateVolume(ctx context.Context, params *CreateVolumeInput, op
 		params = &CreateVolumeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVolume", params, optFns, addOperationCreateVolumeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateVolume", params, optFns, c.addOperationCreateVolumeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -231,7 +231,7 @@ type CreateVolumeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateVolume{}, middleware.After)
 	if err != nil {
 		return err

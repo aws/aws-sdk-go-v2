@@ -19,7 +19,7 @@ func (c *Client) PutSession(ctx context.Context, params *PutSessionInput, optFns
 		params = &PutSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutSession", params, optFns, addOperationPutSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutSession", params, optFns, c.addOperationPutSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ type PutSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSession{}, middleware.After)
 	if err != nil {
 		return err

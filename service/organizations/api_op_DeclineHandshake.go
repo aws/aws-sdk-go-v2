@@ -23,7 +23,7 @@ func (c *Client) DeclineHandshake(ctx context.Context, params *DeclineHandshakeI
 		params = &DeclineHandshakeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeclineHandshake", params, optFns, addOperationDeclineHandshakeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeclineHandshake", params, optFns, c.addOperationDeclineHandshakeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DeclineHandshakeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeclineHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeclineHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeclineHandshake{}, middleware.After)
 	if err != nil {
 		return err

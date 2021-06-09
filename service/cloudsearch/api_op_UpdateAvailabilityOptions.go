@@ -23,7 +23,7 @@ func (c *Client) UpdateAvailabilityOptions(ctx context.Context, params *UpdateAv
 		params = &UpdateAvailabilityOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAvailabilityOptions", params, optFns, addOperationUpdateAvailabilityOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAvailabilityOptions", params, optFns, c.addOperationUpdateAvailabilityOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type UpdateAvailabilityOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAvailabilityOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAvailabilityOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateAvailabilityOptions{}, middleware.After)
 	if err != nil {
 		return err

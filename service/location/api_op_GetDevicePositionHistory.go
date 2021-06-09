@@ -20,7 +20,7 @@ func (c *Client) GetDevicePositionHistory(ctx context.Context, params *GetDevice
 		params = &GetDevicePositionHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDevicePositionHistory", params, optFns, addOperationGetDevicePositionHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDevicePositionHistory", params, optFns, c.addOperationGetDevicePositionHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type GetDevicePositionHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDevicePositionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDevicePositionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDevicePositionHistory{}, middleware.After)
 	if err != nil {
 		return err

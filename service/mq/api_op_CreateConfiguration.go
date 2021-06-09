@@ -19,7 +19,7 @@ func (c *Client) CreateConfiguration(ctx context.Context, params *CreateConfigur
 		params = &CreateConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateConfiguration", params, optFns, addOperationCreateConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateConfiguration", params, optFns, c.addOperationCreateConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type CreateConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfiguration{}, middleware.After)
 	if err != nil {
 		return err

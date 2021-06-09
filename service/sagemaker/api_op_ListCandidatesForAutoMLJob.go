@@ -18,7 +18,7 @@ func (c *Client) ListCandidatesForAutoMLJob(ctx context.Context, params *ListCan
 		params = &ListCandidatesForAutoMLJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCandidatesForAutoMLJob", params, optFns, addOperationListCandidatesForAutoMLJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCandidatesForAutoMLJob", params, optFns, c.addOperationListCandidatesForAutoMLJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type ListCandidatesForAutoMLJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCandidatesForAutoMLJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCandidatesForAutoMLJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCandidatesForAutoMLJob{}, middleware.After)
 	if err != nil {
 		return err

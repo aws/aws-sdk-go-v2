@@ -32,7 +32,7 @@ func (c *Client) AuthorizeClusterSecurityGroupIngress(ctx context.Context, param
 		params = &AuthorizeClusterSecurityGroupIngressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AuthorizeClusterSecurityGroupIngress", params, optFns, addOperationAuthorizeClusterSecurityGroupIngressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AuthorizeClusterSecurityGroupIngress", params, optFns, c.addOperationAuthorizeClusterSecurityGroupIngressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type AuthorizeClusterSecurityGroupIngressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAuthorizeClusterSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAuthorizeClusterSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAuthorizeClusterSecurityGroupIngress{}, middleware.After)
 	if err != nil {
 		return err

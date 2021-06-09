@@ -33,7 +33,7 @@ func (c *Client) CreateVpcEndpoint(ctx context.Context, params *CreateVpcEndpoin
 		params = &CreateVpcEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVpcEndpoint", params, optFns, addOperationCreateVpcEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateVpcEndpoint", params, optFns, c.addOperationCreateVpcEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ type CreateVpcEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateVpcEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateVpcEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateVpcEndpoint{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeDatastore(ctx context.Context, params *DescribeDatastor
 		params = &DescribeDatastoreInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDatastore", params, optFns, addOperationDescribeDatastoreMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDatastore", params, optFns, c.addOperationDescribeDatastoreMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeDatastoreOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDatastore{}, middleware.After)
 	if err != nil {
 		return err

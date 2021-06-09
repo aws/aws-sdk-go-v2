@@ -17,7 +17,7 @@ func (c *Client) DeleteQuickConnect(ctx context.Context, params *DeleteQuickConn
 		params = &DeleteQuickConnectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteQuickConnect", params, optFns, addOperationDeleteQuickConnectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteQuickConnect", params, optFns, c.addOperationDeleteQuickConnectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteQuickConnectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteQuickConnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteQuickConnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteQuickConnect{}, middleware.After)
 	if err != nil {
 		return err

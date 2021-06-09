@@ -16,7 +16,7 @@ func (c *Client) RedactRoomMessage(ctx context.Context, params *RedactRoomMessag
 		params = &RedactRoomMessageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RedactRoomMessage", params, optFns, addOperationRedactRoomMessageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RedactRoomMessage", params, optFns, c.addOperationRedactRoomMessageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type RedactRoomMessageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRedactRoomMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRedactRoomMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRedactRoomMessage{}, middleware.After)
 	if err != nil {
 		return err

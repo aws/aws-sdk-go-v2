@@ -18,7 +18,7 @@ func (c *Client) PutCommentReaction(ctx context.Context, params *PutCommentReact
 		params = &PutCommentReactionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutCommentReaction", params, optFns, addOperationPutCommentReactionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutCommentReaction", params, optFns, c.addOperationPutCommentReactionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type PutCommentReactionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutCommentReactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutCommentReactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutCommentReaction{}, middleware.After)
 	if err != nil {
 		return err

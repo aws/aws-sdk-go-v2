@@ -17,7 +17,7 @@ func (c *Client) ResetNetworkInterfaceAttribute(ctx context.Context, params *Res
 		params = &ResetNetworkInterfaceAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetNetworkInterfaceAttribute", params, optFns, addOperationResetNetworkInterfaceAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetNetworkInterfaceAttribute", params, optFns, c.addOperationResetNetworkInterfaceAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ResetNetworkInterfaceAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetNetworkInterfaceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetNetworkInterfaceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpResetNetworkInterfaceAttribute{}, middleware.After)
 	if err != nil {
 		return err

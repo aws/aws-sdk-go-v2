@@ -33,7 +33,7 @@ func (c *Client) GetObjectAcl(ctx context.Context, params *GetObjectAclInput, op
 		params = &GetObjectAclInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetObjectAcl", params, optFns, addOperationGetObjectAclMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetObjectAcl", params, optFns, c.addOperationGetObjectAclMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type GetObjectAclOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetObjectAclMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetObjectAclMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetObjectAcl{}, middleware.After)
 	if err != nil {
 		return err

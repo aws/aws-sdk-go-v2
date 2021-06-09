@@ -18,7 +18,7 @@ func (c *Client) GetSmsTemplate(ctx context.Context, params *GetSmsTemplateInput
 		params = &GetSmsTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSmsTemplate", params, optFns, addOperationGetSmsTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSmsTemplate", params, optFns, c.addOperationGetSmsTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetSmsTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSmsTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSmsTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSmsTemplate{}, middleware.After)
 	if err != nil {
 		return err

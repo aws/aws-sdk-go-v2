@@ -17,7 +17,7 @@ func (c *Client) DescribeConfigurationRevision(ctx context.Context, params *Desc
 		params = &DescribeConfigurationRevisionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeConfigurationRevision", params, optFns, addOperationDescribeConfigurationRevisionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConfigurationRevision", params, optFns, c.addOperationDescribeConfigurationRevisionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type DescribeConfigurationRevisionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeConfigurationRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeConfigurationRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConfigurationRevision{}, middleware.After)
 	if err != nil {
 		return err

@@ -54,7 +54,7 @@ func (c *Client) GetDiscoveredResourceCounts(ctx context.Context, params *GetDis
 		params = &GetDiscoveredResourceCountsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDiscoveredResourceCounts", params, optFns, addOperationGetDiscoveredResourceCountsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDiscoveredResourceCounts", params, optFns, c.addOperationGetDiscoveredResourceCountsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ type GetDiscoveredResourceCountsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDiscoveredResourceCountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDiscoveredResourceCountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDiscoveredResourceCounts{}, middleware.After)
 	if err != nil {
 		return err

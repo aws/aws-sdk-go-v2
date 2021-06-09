@@ -22,7 +22,7 @@ func (c *Client) DeregisterElasticIp(ctx context.Context, params *DeregisterElas
 		params = &DeregisterElasticIpInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterElasticIp", params, optFns, addOperationDeregisterElasticIpMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterElasticIp", params, optFns, c.addOperationDeregisterElasticIpMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeregisterElasticIpOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterElasticIp{}, middleware.After)
 	if err != nil {
 		return err

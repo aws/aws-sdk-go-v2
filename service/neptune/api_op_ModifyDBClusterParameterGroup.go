@@ -32,7 +32,7 @@ func (c *Client) ModifyDBClusterParameterGroup(ctx context.Context, params *Modi
 		params = &ModifyDBClusterParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyDBClusterParameterGroup", params, optFns, addOperationModifyDBClusterParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyDBClusterParameterGroup", params, optFns, c.addOperationModifyDBClusterParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type ModifyDBClusterParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBClusterParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

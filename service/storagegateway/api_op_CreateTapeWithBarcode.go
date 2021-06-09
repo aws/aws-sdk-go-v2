@@ -22,7 +22,7 @@ func (c *Client) CreateTapeWithBarcode(ctx context.Context, params *CreateTapeWi
 		params = &CreateTapeWithBarcodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTapeWithBarcode", params, optFns, addOperationCreateTapeWithBarcodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTapeWithBarcode", params, optFns, c.addOperationCreateTapeWithBarcodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type CreateTapeWithBarcodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTapeWithBarcodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTapeWithBarcodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTapeWithBarcode{}, middleware.After)
 	if err != nil {
 		return err

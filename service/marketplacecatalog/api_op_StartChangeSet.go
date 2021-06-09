@@ -29,7 +29,7 @@ func (c *Client) StartChangeSet(ctx context.Context, params *StartChangeSetInput
 		params = &StartChangeSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartChangeSet", params, optFns, addOperationStartChangeSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartChangeSet", params, optFns, c.addOperationStartChangeSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type StartChangeSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartChangeSet{}, middleware.After)
 	if err != nil {
 		return err

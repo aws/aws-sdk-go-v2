@@ -30,7 +30,7 @@ func (c *Client) DescribePrincipalIdFormat(ctx context.Context, params *Describe
 		params = &DescribePrincipalIdFormatInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePrincipalIdFormat", params, optFns, addOperationDescribePrincipalIdFormatMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePrincipalIdFormat", params, optFns, c.addOperationDescribePrincipalIdFormatMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type DescribePrincipalIdFormatOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePrincipalIdFormatMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePrincipalIdFormatMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribePrincipalIdFormat{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteQueuedReservedInstances(ctx context.Context, params *Dele
 		params = &DeleteQueuedReservedInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteQueuedReservedInstances", params, optFns, addOperationDeleteQueuedReservedInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteQueuedReservedInstances", params, optFns, c.addOperationDeleteQueuedReservedInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteQueuedReservedInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteQueuedReservedInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteQueuedReservedInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteQueuedReservedInstances{}, middleware.After)
 	if err != nil {
 		return err

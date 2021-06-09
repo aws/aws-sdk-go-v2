@@ -32,7 +32,7 @@ func (c *Client) UpdateNFSFileShare(ctx context.Context, params *UpdateNFSFileSh
 		params = &UpdateNFSFileShareInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateNFSFileShare", params, optFns, addOperationUpdateNFSFileShareMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateNFSFileShare", params, optFns, c.addOperationUpdateNFSFileShareMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -135,7 +135,7 @@ type UpdateNFSFileShareOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateNFSFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateNFSFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateNFSFileShare{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DisassociateRoleFromGroup(ctx context.Context, params *Disassoc
 		params = &DisassociateRoleFromGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateRoleFromGroup", params, optFns, addOperationDisassociateRoleFromGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateRoleFromGroup", params, optFns, c.addOperationDisassociateRoleFromGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DisassociateRoleFromGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateRoleFromGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateRoleFromGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateRoleFromGroup{}, middleware.After)
 	if err != nil {
 		return err

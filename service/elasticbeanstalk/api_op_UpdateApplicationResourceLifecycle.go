@@ -17,7 +17,7 @@ func (c *Client) UpdateApplicationResourceLifecycle(ctx context.Context, params 
 		params = &UpdateApplicationResourceLifecycleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateApplicationResourceLifecycle", params, optFns, addOperationUpdateApplicationResourceLifecycleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateApplicationResourceLifecycle", params, optFns, c.addOperationUpdateApplicationResourceLifecycleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UpdateApplicationResourceLifecycleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateApplicationResourceLifecycleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateApplicationResourceLifecycleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateApplicationResourceLifecycle{}, middleware.After)
 	if err != nil {
 		return err

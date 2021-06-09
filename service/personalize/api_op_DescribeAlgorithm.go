@@ -17,7 +17,7 @@ func (c *Client) DescribeAlgorithm(ctx context.Context, params *DescribeAlgorith
 		params = &DescribeAlgorithmInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAlgorithm", params, optFns, addOperationDescribeAlgorithmMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAlgorithm", params, optFns, c.addOperationDescribeAlgorithmMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeAlgorithmOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAlgorithmMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAlgorithmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAlgorithm{}, middleware.After)
 	if err != nil {
 		return err

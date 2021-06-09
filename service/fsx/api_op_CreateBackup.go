@@ -55,7 +55,7 @@ func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, op
 		params = &CreateBackupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateBackup", params, optFns, addOperationCreateBackupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBackup", params, optFns, c.addOperationCreateBackupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +96,7 @@ type CreateBackupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBackup{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) GetSites(ctx context.Context, params *GetSitesInput, optFns ...
 		params = &GetSitesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSites", params, optFns, addOperationGetSitesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSites", params, optFns, c.addOperationGetSitesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetSitesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSitesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSitesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSites{}, middleware.After)
 	if err != nil {
 		return err

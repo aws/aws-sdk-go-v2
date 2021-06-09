@@ -17,7 +17,7 @@ func (c *Client) BatchStopJobRun(ctx context.Context, params *BatchStopJobRunInp
 		params = &BatchStopJobRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchStopJobRun", params, optFns, addOperationBatchStopJobRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchStopJobRun", params, optFns, c.addOperationBatchStopJobRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type BatchStopJobRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchStopJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchStopJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchStopJobRun{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) UpdateAddon(ctx context.Context, params *UpdateAddonInput, optF
 		params = &UpdateAddonInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAddon", params, optFns, addOperationUpdateAddonMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAddon", params, optFns, c.addOperationUpdateAddonMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type UpdateAddonOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAddon{}, middleware.After)
 	if err != nil {
 		return err

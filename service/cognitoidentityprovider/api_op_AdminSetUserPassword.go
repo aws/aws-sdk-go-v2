@@ -23,7 +23,7 @@ func (c *Client) AdminSetUserPassword(ctx context.Context, params *AdminSetUserP
 		params = &AdminSetUserPasswordInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminSetUserPassword", params, optFns, addOperationAdminSetUserPasswordMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminSetUserPassword", params, optFns, c.addOperationAdminSetUserPasswordMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type AdminSetUserPasswordOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminSetUserPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminSetUserPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminSetUserPassword{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) GetCheckerIpRanges(ctx context.Context, params *GetCheckerIpRan
 		params = &GetCheckerIpRangesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCheckerIpRanges", params, optFns, addOperationGetCheckerIpRangesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCheckerIpRanges", params, optFns, c.addOperationGetCheckerIpRangesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetCheckerIpRangesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCheckerIpRangesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCheckerIpRangesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetCheckerIpRanges{}, middleware.After)
 	if err != nil {
 		return err

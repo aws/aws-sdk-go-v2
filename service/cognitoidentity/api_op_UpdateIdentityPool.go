@@ -18,7 +18,7 @@ func (c *Client) UpdateIdentityPool(ctx context.Context, params *UpdateIdentityP
 		params = &UpdateIdentityPoolInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateIdentityPool", params, optFns, addOperationUpdateIdentityPoolMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateIdentityPool", params, optFns, c.addOperationUpdateIdentityPoolMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -123,7 +123,7 @@ type UpdateIdentityPoolOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateIdentityPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateIdentityPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateIdentityPool{}, middleware.After)
 	if err != nil {
 		return err

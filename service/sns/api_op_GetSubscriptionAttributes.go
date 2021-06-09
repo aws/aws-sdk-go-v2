@@ -16,7 +16,7 @@ func (c *Client) GetSubscriptionAttributes(ctx context.Context, params *GetSubsc
 		params = &GetSubscriptionAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSubscriptionAttributes", params, optFns, addOperationGetSubscriptionAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSubscriptionAttributes", params, optFns, c.addOperationGetSubscriptionAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +104,7 @@ type GetSubscriptionAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSubscriptionAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSubscriptionAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetSubscriptionAttributes{}, middleware.After)
 	if err != nil {
 		return err

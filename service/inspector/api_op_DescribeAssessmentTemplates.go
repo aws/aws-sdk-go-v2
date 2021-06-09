@@ -18,7 +18,7 @@ func (c *Client) DescribeAssessmentTemplates(ctx context.Context, params *Descri
 		params = &DescribeAssessmentTemplatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAssessmentTemplates", params, optFns, addOperationDescribeAssessmentTemplatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAssessmentTemplates", params, optFns, c.addOperationDescribeAssessmentTemplatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DescribeAssessmentTemplatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAssessmentTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAssessmentTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAssessmentTemplates{}, middleware.After)
 	if err != nil {
 		return err

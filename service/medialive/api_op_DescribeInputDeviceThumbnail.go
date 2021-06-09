@@ -19,7 +19,7 @@ func (c *Client) DescribeInputDeviceThumbnail(ctx context.Context, params *Descr
 		params = &DescribeInputDeviceThumbnailInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInputDeviceThumbnail", params, optFns, addOperationDescribeInputDeviceThumbnailMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInputDeviceThumbnail", params, optFns, c.addOperationDescribeInputDeviceThumbnailMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DescribeInputDeviceThumbnailOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInputDeviceThumbnailMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInputDeviceThumbnailMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInputDeviceThumbnail{}, middleware.After)
 	if err != nil {
 		return err

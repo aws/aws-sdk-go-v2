@@ -28,7 +28,7 @@ func (c *Client) ListTrainingJobs(ctx context.Context, params *ListTrainingJobsI
 		params = &ListTrainingJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTrainingJobs", params, optFns, addOperationListTrainingJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTrainingJobs", params, optFns, c.addOperationListTrainingJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type ListTrainingJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTrainingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTrainingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTrainingJobs{}, middleware.After)
 	if err != nil {
 		return err

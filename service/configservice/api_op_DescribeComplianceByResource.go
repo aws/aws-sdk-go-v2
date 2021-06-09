@@ -40,7 +40,7 @@ func (c *Client) DescribeComplianceByResource(ctx context.Context, params *Descr
 		params = &DescribeComplianceByResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeComplianceByResource", params, optFns, addOperationDescribeComplianceByResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeComplianceByResource", params, optFns, c.addOperationDescribeComplianceByResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type DescribeComplianceByResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeComplianceByResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeComplianceByResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeComplianceByResource{}, middleware.After)
 	if err != nil {
 		return err

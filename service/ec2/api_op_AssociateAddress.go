@@ -40,7 +40,7 @@ func (c *Client) AssociateAddress(ctx context.Context, params *AssociateAddressI
 		params = &AssociateAddressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateAddress", params, optFns, addOperationAssociateAddressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateAddress", params, optFns, c.addOperationAssociateAddressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ type AssociateAddressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpAssociateAddress{}, middleware.After)
 	if err != nil {
 		return err

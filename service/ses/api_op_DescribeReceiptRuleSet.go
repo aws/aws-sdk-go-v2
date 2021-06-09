@@ -20,7 +20,7 @@ func (c *Client) DescribeReceiptRuleSet(ctx context.Context, params *DescribeRec
 		params = &DescribeReceiptRuleSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeReceiptRuleSet", params, optFns, addOperationDescribeReceiptRuleSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeReceiptRuleSet", params, optFns, c.addOperationDescribeReceiptRuleSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeReceiptRuleSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeReceiptRuleSet{}, middleware.After)
 	if err != nil {
 		return err

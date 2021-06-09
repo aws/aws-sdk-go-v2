@@ -33,7 +33,7 @@ func (c *Client) CreateStudio(ctx context.Context, params *CreateStudioInput, op
 		params = &CreateStudioInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateStudio", params, optFns, addOperationCreateStudioMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateStudio", params, optFns, c.addOperationCreateStudioMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type CreateStudioOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateStudioMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateStudioMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStudio{}, middleware.After)
 	if err != nil {
 		return err

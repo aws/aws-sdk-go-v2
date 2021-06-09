@@ -30,7 +30,7 @@ func (c *Client) ListCustomRoutingPortMappings(ctx context.Context, params *List
 		params = &ListCustomRoutingPortMappingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCustomRoutingPortMappings", params, optFns, addOperationListCustomRoutingPortMappingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCustomRoutingPortMappings", params, optFns, c.addOperationListCustomRoutingPortMappingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type ListCustomRoutingPortMappingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCustomRoutingPortMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCustomRoutingPortMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCustomRoutingPortMappings{}, middleware.After)
 	if err != nil {
 		return err

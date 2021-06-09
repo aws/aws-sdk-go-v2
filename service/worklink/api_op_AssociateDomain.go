@@ -16,7 +16,7 @@ func (c *Client) AssociateDomain(ctx context.Context, params *AssociateDomainInp
 		params = &AssociateDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateDomain", params, optFns, addOperationAssociateDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateDomain", params, optFns, c.addOperationAssociateDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type AssociateDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateDomain{}, middleware.After)
 	if err != nil {
 		return err

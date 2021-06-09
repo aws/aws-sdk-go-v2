@@ -24,7 +24,7 @@ func (c *Client) PromoteResourceShareCreatedFromPolicy(ctx context.Context, para
 		params = &PromoteResourceShareCreatedFromPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PromoteResourceShareCreatedFromPolicy", params, optFns, addOperationPromoteResourceShareCreatedFromPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PromoteResourceShareCreatedFromPolicy", params, optFns, c.addOperationPromoteResourceShareCreatedFromPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type PromoteResourceShareCreatedFromPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPromoteResourceShareCreatedFromPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPromoteResourceShareCreatedFromPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPromoteResourceShareCreatedFromPolicy{}, middleware.After)
 	if err != nil {
 		return err

@@ -34,7 +34,7 @@ func (c *Client) ListMetrics(ctx context.Context, params *ListMetricsInput, optF
 		params = &ListMetricsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListMetrics", params, optFns, addOperationListMetricsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListMetrics", params, optFns, c.addOperationListMetricsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type ListMetricsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListMetrics{}, middleware.After)
 	if err != nil {
 		return err

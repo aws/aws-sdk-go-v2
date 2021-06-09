@@ -17,7 +17,7 @@ func (c *Client) StopImageBuilder(ctx context.Context, params *StopImageBuilderI
 		params = &StopImageBuilderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopImageBuilder", params, optFns, addOperationStopImageBuilderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopImageBuilder", params, optFns, c.addOperationStopImageBuilderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type StopImageBuilderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopImageBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopImageBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopImageBuilder{}, middleware.After)
 	if err != nil {
 		return err

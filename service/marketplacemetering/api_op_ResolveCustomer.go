@@ -19,7 +19,7 @@ func (c *Client) ResolveCustomer(ctx context.Context, params *ResolveCustomerInp
 		params = &ResolveCustomerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResolveCustomer", params, optFns, addOperationResolveCustomerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResolveCustomer", params, optFns, c.addOperationResolveCustomerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ResolveCustomerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResolveCustomerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResolveCustomerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResolveCustomer{}, middleware.After)
 	if err != nil {
 		return err

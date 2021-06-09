@@ -17,7 +17,7 @@ func (c *Client) AdminDeleteUserAttributes(ctx context.Context, params *AdminDel
 		params = &AdminDeleteUserAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminDeleteUserAttributes", params, optFns, addOperationAdminDeleteUserAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminDeleteUserAttributes", params, optFns, c.addOperationAdminDeleteUserAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type AdminDeleteUserAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminDeleteUserAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminDeleteUserAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminDeleteUserAttributes{}, middleware.After)
 	if err != nil {
 		return err

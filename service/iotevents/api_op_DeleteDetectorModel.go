@@ -17,7 +17,7 @@ func (c *Client) DeleteDetectorModel(ctx context.Context, params *DeleteDetector
 		params = &DeleteDetectorModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDetectorModel", params, optFns, addOperationDeleteDetectorModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDetectorModel", params, optFns, c.addOperationDeleteDetectorModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteDetectorModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDetectorModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDetectorModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDetectorModel{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) SampleChannelData(ctx context.Context, params *SampleChannelDat
 		params = &SampleChannelDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SampleChannelData", params, optFns, addOperationSampleChannelDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SampleChannelData", params, optFns, c.addOperationSampleChannelDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type SampleChannelDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSampleChannelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSampleChannelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSampleChannelData{}, middleware.After)
 	if err != nil {
 		return err

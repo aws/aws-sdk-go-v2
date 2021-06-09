@@ -21,7 +21,7 @@ func (c *Client) ListCompilationJobs(ctx context.Context, params *ListCompilatio
 		params = &ListCompilationJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCompilationJobs", params, optFns, addOperationListCompilationJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCompilationJobs", params, optFns, c.addOperationListCompilationJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type ListCompilationJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCompilationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCompilationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCompilationJobs{}, middleware.After)
 	if err != nil {
 		return err

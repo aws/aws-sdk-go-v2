@@ -47,7 +47,7 @@ func (c *Client) GetParametersForImport(ctx context.Context, params *GetParamete
 		params = &GetParametersForImportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetParametersForImport", params, optFns, addOperationGetParametersForImportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetParametersForImport", params, optFns, c.addOperationGetParametersForImportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ type GetParametersForImportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetParametersForImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetParametersForImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetParametersForImport{}, middleware.After)
 	if err != nil {
 		return err

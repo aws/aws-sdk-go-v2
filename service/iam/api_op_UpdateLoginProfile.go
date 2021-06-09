@@ -22,7 +22,7 @@ func (c *Client) UpdateLoginProfile(ctx context.Context, params *UpdateLoginProf
 		params = &UpdateLoginProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLoginProfile", params, optFns, addOperationUpdateLoginProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLoginProfile", params, optFns, c.addOperationUpdateLoginProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type UpdateLoginProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLoginProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLoginProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateLoginProfile{}, middleware.After)
 	if err != nil {
 		return err

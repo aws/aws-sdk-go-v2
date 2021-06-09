@@ -19,7 +19,7 @@ func (c *Client) DeleteAutoSnapshot(ctx context.Context, params *DeleteAutoSnaps
 		params = &DeleteAutoSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAutoSnapshot", params, optFns, addOperationDeleteAutoSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAutoSnapshot", params, optFns, c.addOperationDeleteAutoSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeleteAutoSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAutoSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAutoSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAutoSnapshot{}, middleware.After)
 	if err != nil {
 		return err

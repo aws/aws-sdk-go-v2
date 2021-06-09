@@ -18,7 +18,7 @@ func (c *Client) DescribeNotificationsForBudget(ctx context.Context, params *Des
 		params = &DescribeNotificationsForBudgetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeNotificationsForBudget", params, optFns, addOperationDescribeNotificationsForBudgetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeNotificationsForBudget", params, optFns, c.addOperationDescribeNotificationsForBudgetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type DescribeNotificationsForBudgetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeNotificationsForBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeNotificationsForBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeNotificationsForBudget{}, middleware.After)
 	if err != nil {
 		return err

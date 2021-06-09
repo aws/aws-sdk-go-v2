@@ -18,7 +18,7 @@ func (c *Client) UpdateContactFlowContent(ctx context.Context, params *UpdateCon
 		params = &UpdateContactFlowContentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateContactFlowContent", params, optFns, addOperationUpdateContactFlowContentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateContactFlowContent", params, optFns, c.addOperationUpdateContactFlowContentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type UpdateContactFlowContentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateContactFlowContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateContactFlowContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateContactFlowContent{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DetachStaticIp(ctx context.Context, params *DetachStaticIpInput
 		params = &DetachStaticIpInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachStaticIp", params, optFns, addOperationDetachStaticIpMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachStaticIp", params, optFns, c.addOperationDetachStaticIpMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DetachStaticIpOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetachStaticIp{}, middleware.After)
 	if err != nil {
 		return err

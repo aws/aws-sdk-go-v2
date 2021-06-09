@@ -18,7 +18,7 @@ func (c *Client) DeleteLaunchTemplate(ctx context.Context, params *DeleteLaunchT
 		params = &DeleteLaunchTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLaunchTemplate", params, optFns, addOperationDeleteLaunchTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLaunchTemplate", params, optFns, c.addOperationDeleteLaunchTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DeleteLaunchTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLaunchTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLaunchTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteLaunchTemplate{}, middleware.After)
 	if err != nil {
 		return err

@@ -31,7 +31,7 @@ func (c *Client) AbortVaultLock(ctx context.Context, params *AbortVaultLockInput
 		params = &AbortVaultLockInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AbortVaultLock", params, optFns, addOperationAbortVaultLockMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AbortVaultLock", params, optFns, c.addOperationAbortVaultLockMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type AbortVaultLockOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAbortVaultLockMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAbortVaultLockMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAbortVaultLock{}, middleware.After)
 	if err != nil {
 		return err

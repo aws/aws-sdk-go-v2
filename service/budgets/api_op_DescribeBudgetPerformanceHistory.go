@@ -19,7 +19,7 @@ func (c *Client) DescribeBudgetPerformanceHistory(ctx context.Context, params *D
 		params = &DescribeBudgetPerformanceHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeBudgetPerformanceHistory", params, optFns, addOperationDescribeBudgetPerformanceHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeBudgetPerformanceHistory", params, optFns, c.addOperationDescribeBudgetPerformanceHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DescribeBudgetPerformanceHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeBudgetPerformanceHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeBudgetPerformanceHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBudgetPerformanceHistory{}, middleware.After)
 	if err != nil {
 		return err

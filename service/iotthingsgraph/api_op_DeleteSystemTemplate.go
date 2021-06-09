@@ -18,7 +18,7 @@ func (c *Client) DeleteSystemTemplate(ctx context.Context, params *DeleteSystemT
 		params = &DeleteSystemTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSystemTemplate", params, optFns, addOperationDeleteSystemTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSystemTemplate", params, optFns, c.addOperationDeleteSystemTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteSystemTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSystemTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSystemTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSystemTemplate{}, middleware.After)
 	if err != nil {
 		return err

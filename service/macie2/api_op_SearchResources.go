@@ -19,7 +19,7 @@ func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInp
 		params = &SearchResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchResources", params, optFns, addOperationSearchResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchResources", params, optFns, c.addOperationSearchResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type SearchResourcesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchResources{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) CreateLoadBalancerListeners(ctx context.Context, params *Create
 		params = &CreateLoadBalancerListenersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLoadBalancerListeners", params, optFns, addOperationCreateLoadBalancerListenersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLoadBalancerListeners", params, optFns, c.addOperationCreateLoadBalancerListenersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CreateLoadBalancerListenersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLoadBalancerListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLoadBalancerListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateLoadBalancerListeners{}, middleware.After)
 	if err != nil {
 		return err

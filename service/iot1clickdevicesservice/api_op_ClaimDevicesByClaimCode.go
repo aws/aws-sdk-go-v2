@@ -17,7 +17,7 @@ func (c *Client) ClaimDevicesByClaimCode(ctx context.Context, params *ClaimDevic
 		params = &ClaimDevicesByClaimCodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ClaimDevicesByClaimCode", params, optFns, addOperationClaimDevicesByClaimCodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ClaimDevicesByClaimCode", params, optFns, c.addOperationClaimDevicesByClaimCodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type ClaimDevicesByClaimCodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationClaimDevicesByClaimCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationClaimDevicesByClaimCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpClaimDevicesByClaimCode{}, middleware.After)
 	if err != nil {
 		return err

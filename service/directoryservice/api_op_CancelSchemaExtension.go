@@ -19,7 +19,7 @@ func (c *Client) CancelSchemaExtension(ctx context.Context, params *CancelSchema
 		params = &CancelSchemaExtensionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelSchemaExtension", params, optFns, addOperationCancelSchemaExtensionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelSchemaExtension", params, optFns, c.addOperationCancelSchemaExtensionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type CancelSchemaExtensionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelSchemaExtensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelSchemaExtensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelSchemaExtension{}, middleware.After)
 	if err != nil {
 		return err

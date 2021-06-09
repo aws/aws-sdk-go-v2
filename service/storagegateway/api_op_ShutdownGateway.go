@@ -30,7 +30,7 @@ func (c *Client) ShutdownGateway(ctx context.Context, params *ShutdownGatewayInp
 		params = &ShutdownGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ShutdownGateway", params, optFns, addOperationShutdownGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ShutdownGateway", params, optFns, c.addOperationShutdownGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ShutdownGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationShutdownGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationShutdownGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpShutdownGateway{}, middleware.After)
 	if err != nil {
 		return err

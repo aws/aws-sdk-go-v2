@@ -19,7 +19,7 @@ func (c *Client) DeleteDBClusterSnapshot(ctx context.Context, params *DeleteDBCl
 		params = &DeleteDBClusterSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDBClusterSnapshot", params, optFns, addOperationDeleteDBClusterSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDBClusterSnapshot", params, optFns, c.addOperationDeleteDBClusterSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteDBClusterSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDBClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDBClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBClusterSnapshot{}, middleware.After)
 	if err != nil {
 		return err

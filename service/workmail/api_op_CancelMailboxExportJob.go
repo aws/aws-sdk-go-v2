@@ -18,7 +18,7 @@ func (c *Client) CancelMailboxExportJob(ctx context.Context, params *CancelMailb
 		params = &CancelMailboxExportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelMailboxExportJob", params, optFns, addOperationCancelMailboxExportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelMailboxExportJob", params, optFns, c.addOperationCancelMailboxExportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type CancelMailboxExportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelMailboxExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelMailboxExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelMailboxExportJob{}, middleware.After)
 	if err != nil {
 		return err

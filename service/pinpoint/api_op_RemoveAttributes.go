@@ -18,7 +18,7 @@ func (c *Client) RemoveAttributes(ctx context.Context, params *RemoveAttributesI
 		params = &RemoveAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveAttributes", params, optFns, addOperationRemoveAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveAttributes", params, optFns, c.addOperationRemoveAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type RemoveAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveAttributes{}, middleware.After)
 	if err != nil {
 		return err

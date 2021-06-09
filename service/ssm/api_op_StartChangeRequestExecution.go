@@ -20,7 +20,7 @@ func (c *Client) StartChangeRequestExecution(ctx context.Context, params *StartC
 		params = &StartChangeRequestExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartChangeRequestExecution", params, optFns, addOperationStartChangeRequestExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartChangeRequestExecution", params, optFns, c.addOperationStartChangeRequestExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ type StartChangeRequestExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartChangeRequestExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartChangeRequestExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartChangeRequestExecution{}, middleware.After)
 	if err != nil {
 		return err

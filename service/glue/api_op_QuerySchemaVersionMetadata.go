@@ -17,7 +17,7 @@ func (c *Client) QuerySchemaVersionMetadata(ctx context.Context, params *QuerySc
 		params = &QuerySchemaVersionMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "QuerySchemaVersionMetadata", params, optFns, addOperationQuerySchemaVersionMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "QuerySchemaVersionMetadata", params, optFns, c.addOperationQuerySchemaVersionMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type QuerySchemaVersionMetadataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationQuerySchemaVersionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationQuerySchemaVersionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpQuerySchemaVersionMetadata{}, middleware.After)
 	if err != nil {
 		return err

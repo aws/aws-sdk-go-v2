@@ -17,7 +17,7 @@ func (c *Client) StartImagePipelineExecution(ctx context.Context, params *StartI
 		params = &StartImagePipelineExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartImagePipelineExecution", params, optFns, addOperationStartImagePipelineExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartImagePipelineExecution", params, optFns, c.addOperationStartImagePipelineExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type StartImagePipelineExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartImagePipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartImagePipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartImagePipelineExecution{}, middleware.After)
 	if err != nil {
 		return err

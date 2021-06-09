@@ -23,7 +23,7 @@ func (c *Client) ListCustomVerificationEmailTemplates(ctx context.Context, param
 		params = &ListCustomVerificationEmailTemplatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCustomVerificationEmailTemplates", params, optFns, addOperationListCustomVerificationEmailTemplatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCustomVerificationEmailTemplates", params, optFns, c.addOperationListCustomVerificationEmailTemplatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ListCustomVerificationEmailTemplatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCustomVerificationEmailTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCustomVerificationEmailTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomVerificationEmailTemplates{}, middleware.After)
 	if err != nil {
 		return err

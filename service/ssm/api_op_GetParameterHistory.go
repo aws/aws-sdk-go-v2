@@ -18,7 +18,7 @@ func (c *Client) GetParameterHistory(ctx context.Context, params *GetParameterHi
 		params = &GetParameterHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetParameterHistory", params, optFns, addOperationGetParameterHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetParameterHistory", params, optFns, c.addOperationGetParameterHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type GetParameterHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetParameterHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetParameterHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetParameterHistory{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) DescribeInstanceAttribute(ctx context.Context, params *Describe
 		params = &DescribeInstanceAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInstanceAttribute", params, optFns, addOperationDescribeInstanceAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInstanceAttribute", params, optFns, c.addOperationDescribeInstanceAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -115,7 +115,7 @@ type DescribeInstanceAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInstanceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInstanceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeInstanceAttribute{}, middleware.After)
 	if err != nil {
 		return err

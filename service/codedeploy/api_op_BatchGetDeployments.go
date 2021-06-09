@@ -18,7 +18,7 @@ func (c *Client) BatchGetDeployments(ctx context.Context, params *BatchGetDeploy
 		params = &BatchGetDeploymentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetDeployments", params, optFns, addOperationBatchGetDeploymentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetDeployments", params, optFns, c.addOperationBatchGetDeploymentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type BatchGetDeploymentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetDeployments{}, middleware.After)
 	if err != nil {
 		return err

@@ -26,7 +26,7 @@ func (c *Client) CreatePredictorBacktestExportJob(ctx context.Context, params *C
 		params = &CreatePredictorBacktestExportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePredictorBacktestExportJob", params, optFns, addOperationCreatePredictorBacktestExportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePredictorBacktestExportJob", params, optFns, c.addOperationCreatePredictorBacktestExportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type CreatePredictorBacktestExportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePredictorBacktestExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePredictorBacktestExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePredictorBacktestExportJob{}, middleware.After)
 	if err != nil {
 		return err

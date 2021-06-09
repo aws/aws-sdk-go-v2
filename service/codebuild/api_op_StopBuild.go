@@ -17,7 +17,7 @@ func (c *Client) StopBuild(ctx context.Context, params *StopBuildInput, optFns .
 		params = &StopBuildInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopBuild", params, optFns, addOperationStopBuildMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopBuild", params, optFns, c.addOperationStopBuildMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type StopBuildOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopBuild{}, middleware.After)
 	if err != nil {
 		return err

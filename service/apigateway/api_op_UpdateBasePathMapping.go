@@ -17,7 +17,7 @@ func (c *Client) UpdateBasePathMapping(ctx context.Context, params *UpdateBasePa
 		params = &UpdateBasePathMappingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateBasePathMapping", params, optFns, addOperationUpdateBasePathMappingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateBasePathMapping", params, optFns, c.addOperationUpdateBasePathMappingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type UpdateBasePathMappingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateBasePathMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateBasePathMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBasePathMapping{}, middleware.After)
 	if err != nil {
 		return err

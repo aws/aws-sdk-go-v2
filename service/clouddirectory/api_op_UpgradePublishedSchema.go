@@ -17,7 +17,7 @@ func (c *Client) UpgradePublishedSchema(ctx context.Context, params *UpgradePubl
 		params = &UpgradePublishedSchemaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpgradePublishedSchema", params, optFns, addOperationUpgradePublishedSchemaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpgradePublishedSchema", params, optFns, c.addOperationUpgradePublishedSchemaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type UpgradePublishedSchemaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpgradePublishedSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpgradePublishedSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpgradePublishedSchema{}, middleware.After)
 	if err != nil {
 		return err

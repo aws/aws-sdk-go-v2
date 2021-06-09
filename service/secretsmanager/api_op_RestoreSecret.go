@@ -26,7 +26,7 @@ func (c *Client) RestoreSecret(ctx context.Context, params *RestoreSecretInput, 
 		params = &RestoreSecretInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreSecret", params, optFns, addOperationRestoreSecretMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreSecret", params, optFns, c.addOperationRestoreSecretMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type RestoreSecretOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRestoreSecret{}, middleware.After)
 	if err != nil {
 		return err

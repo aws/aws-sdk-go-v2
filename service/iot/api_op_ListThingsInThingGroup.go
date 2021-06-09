@@ -17,7 +17,7 @@ func (c *Client) ListThingsInThingGroup(ctx context.Context, params *ListThingsI
 		params = &ListThingsInThingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListThingsInThingGroup", params, optFns, addOperationListThingsInThingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListThingsInThingGroup", params, optFns, c.addOperationListThingsInThingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListThingsInThingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListThingsInThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListThingsInThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThingsInThingGroup{}, middleware.After)
 	if err != nil {
 		return err

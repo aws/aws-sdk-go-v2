@@ -24,7 +24,7 @@ func (c *Client) UpdateGameSessionQueue(ctx context.Context, params *UpdateGameS
 		params = &UpdateGameSessionQueueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateGameSessionQueue", params, optFns, addOperationUpdateGameSessionQueueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateGameSessionQueue", params, optFns, c.addOperationUpdateGameSessionQueueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +96,7 @@ type UpdateGameSessionQueueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateGameSessionQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateGameSessionQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateGameSessionQueue{}, middleware.After)
 	if err != nil {
 		return err

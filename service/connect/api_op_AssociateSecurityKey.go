@@ -17,7 +17,7 @@ func (c *Client) AssociateSecurityKey(ctx context.Context, params *AssociateSecu
 		params = &AssociateSecurityKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateSecurityKey", params, optFns, addOperationAssociateSecurityKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateSecurityKey", params, optFns, c.addOperationAssociateSecurityKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type AssociateSecurityKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateSecurityKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateSecurityKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateSecurityKey{}, middleware.After)
 	if err != nil {
 		return err

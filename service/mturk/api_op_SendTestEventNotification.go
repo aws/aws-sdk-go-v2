@@ -22,7 +22,7 @@ func (c *Client) SendTestEventNotification(ctx context.Context, params *SendTest
 		params = &SendTestEventNotificationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendTestEventNotification", params, optFns, addOperationSendTestEventNotificationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendTestEventNotification", params, optFns, c.addOperationSendTestEventNotificationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type SendTestEventNotificationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendTestEventNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendTestEventNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendTestEventNotification{}, middleware.After)
 	if err != nil {
 		return err

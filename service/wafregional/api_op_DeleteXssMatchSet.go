@@ -35,7 +35,7 @@ func (c *Client) DeleteXssMatchSet(ctx context.Context, params *DeleteXssMatchSe
 		params = &DeleteXssMatchSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteXssMatchSet", params, optFns, addOperationDeleteXssMatchSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteXssMatchSet", params, optFns, c.addOperationDeleteXssMatchSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DeleteXssMatchSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteXssMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteXssMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteXssMatchSet{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteAppValidationConfiguration(ctx context.Context, params *D
 		params = &DeleteAppValidationConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAppValidationConfiguration", params, optFns, addOperationDeleteAppValidationConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAppValidationConfiguration", params, optFns, c.addOperationDeleteAppValidationConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteAppValidationConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAppValidationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAppValidationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAppValidationConfiguration{}, middleware.After)
 	if err != nil {
 		return err

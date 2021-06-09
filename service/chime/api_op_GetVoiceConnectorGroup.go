@@ -18,7 +18,7 @@ func (c *Client) GetVoiceConnectorGroup(ctx context.Context, params *GetVoiceCon
 		params = &GetVoiceConnectorGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetVoiceConnectorGroup", params, optFns, addOperationGetVoiceConnectorGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetVoiceConnectorGroup", params, optFns, c.addOperationGetVoiceConnectorGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetVoiceConnectorGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVoiceConnectorGroup{}, middleware.After)
 	if err != nil {
 		return err

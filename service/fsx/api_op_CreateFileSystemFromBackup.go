@@ -44,7 +44,7 @@ func (c *Client) CreateFileSystemFromBackup(ctx context.Context, params *CreateF
 		params = &CreateFileSystemFromBackupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFileSystemFromBackup", params, optFns, addOperationCreateFileSystemFromBackupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFileSystemFromBackup", params, optFns, c.addOperationCreateFileSystemFromBackupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ type CreateFileSystemFromBackupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFileSystemFromBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFileSystemFromBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFileSystemFromBackup{}, middleware.After)
 	if err != nil {
 		return err

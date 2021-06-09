@@ -75,7 +75,7 @@ func (c *Client) PutBucketIntelligentTieringConfiguration(ctx context.Context, p
 		params = &PutBucketIntelligentTieringConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketIntelligentTieringConfiguration", params, optFns, addOperationPutBucketIntelligentTieringConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketIntelligentTieringConfiguration", params, optFns, c.addOperationPutBucketIntelligentTieringConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type PutBucketIntelligentTieringConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketIntelligentTieringConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketIntelligentTieringConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketIntelligentTieringConfiguration{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ModifyDBInstance(ctx context.Context, params *ModifyDBInstanceI
 		params = &ModifyDBInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyDBInstance", params, optFns, addOperationModifyDBInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyDBInstance", params, optFns, c.addOperationModifyDBInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type ModifyDBInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBInstance{}, middleware.After)
 	if err != nil {
 		return err

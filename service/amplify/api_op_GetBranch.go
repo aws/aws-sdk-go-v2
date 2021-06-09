@@ -17,7 +17,7 @@ func (c *Client) GetBranch(ctx context.Context, params *GetBranchInput, optFns .
 		params = &GetBranchInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBranch", params, optFns, addOperationGetBranchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBranch", params, optFns, c.addOperationGetBranchMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetBranchOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBranch{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateFlowMediaStream(ctx context.Context, params *UpdateFlowMe
 		params = &UpdateFlowMediaStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFlowMediaStream", params, optFns, addOperationUpdateFlowMediaStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFlowMediaStream", params, optFns, c.addOperationUpdateFlowMediaStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type UpdateFlowMediaStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFlowMediaStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFlowMediaStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFlowMediaStream{}, middleware.After)
 	if err != nil {
 		return err

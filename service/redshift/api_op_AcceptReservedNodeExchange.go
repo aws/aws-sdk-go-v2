@@ -18,7 +18,7 @@ func (c *Client) AcceptReservedNodeExchange(ctx context.Context, params *AcceptR
 		params = &AcceptReservedNodeExchangeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcceptReservedNodeExchange", params, optFns, addOperationAcceptReservedNodeExchangeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcceptReservedNodeExchange", params, optFns, c.addOperationAcceptReservedNodeExchangeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type AcceptReservedNodeExchangeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAcceptReservedNodeExchangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAcceptReservedNodeExchangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAcceptReservedNodeExchange{}, middleware.After)
 	if err != nil {
 		return err

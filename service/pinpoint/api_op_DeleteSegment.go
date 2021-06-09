@@ -17,7 +17,7 @@ func (c *Client) DeleteSegment(ctx context.Context, params *DeleteSegmentInput, 
 		params = &DeleteSegmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSegment", params, optFns, addOperationDeleteSegmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSegment", params, optFns, c.addOperationDeleteSegmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteSegmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSegmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSegmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSegment{}, middleware.After)
 	if err != nil {
 		return err

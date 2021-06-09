@@ -20,7 +20,7 @@ func (c *Client) GetUICustomization(ctx context.Context, params *GetUICustomizat
 		params = &GetUICustomizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUICustomization", params, optFns, addOperationGetUICustomizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetUICustomization", params, optFns, c.addOperationGetUICustomizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetUICustomizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetUICustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetUICustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUICustomization{}, middleware.After)
 	if err != nil {
 		return err

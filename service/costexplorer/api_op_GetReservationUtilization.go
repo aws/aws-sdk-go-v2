@@ -20,7 +20,7 @@ func (c *Client) GetReservationUtilization(ctx context.Context, params *GetReser
 		params = &GetReservationUtilizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetReservationUtilization", params, optFns, addOperationGetReservationUtilizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetReservationUtilization", params, optFns, c.addOperationGetReservationUtilizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -157,7 +157,7 @@ type GetReservationUtilizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetReservationUtilizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetReservationUtilizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetReservationUtilization{}, middleware.After)
 	if err != nil {
 		return err

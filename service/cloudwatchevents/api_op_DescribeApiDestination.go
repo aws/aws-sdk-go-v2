@@ -18,7 +18,7 @@ func (c *Client) DescribeApiDestination(ctx context.Context, params *DescribeApi
 		params = &DescribeApiDestinationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeApiDestination", params, optFns, addOperationDescribeApiDestinationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeApiDestination", params, optFns, c.addOperationDescribeApiDestinationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type DescribeApiDestinationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeApiDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeApiDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApiDestination{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) GetFunctionCodeSigningConfig(ctx context.Context, params *GetFu
 		params = &GetFunctionCodeSigningConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFunctionCodeSigningConfig", params, optFns, addOperationGetFunctionCodeSigningConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFunctionCodeSigningConfig", params, optFns, c.addOperationGetFunctionCodeSigningConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type GetFunctionCodeSigningConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFunctionCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFunctionCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFunctionCodeSigningConfig{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CreateSubnetGroup(ctx context.Context, params *CreateSubnetGrou
 		params = &CreateSubnetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSubnetGroup", params, optFns, addOperationCreateSubnetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSubnetGroup", params, optFns, c.addOperationCreateSubnetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CreateSubnetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSubnetGroup{}, middleware.After)
 	if err != nil {
 		return err

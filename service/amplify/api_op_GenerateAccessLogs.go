@@ -17,7 +17,7 @@ func (c *Client) GenerateAccessLogs(ctx context.Context, params *GenerateAccessL
 		params = &GenerateAccessLogsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GenerateAccessLogs", params, optFns, addOperationGenerateAccessLogsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GenerateAccessLogs", params, optFns, c.addOperationGenerateAccessLogsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GenerateAccessLogsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGenerateAccessLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGenerateAccessLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateAccessLogs{}, middleware.After)
 	if err != nil {
 		return err

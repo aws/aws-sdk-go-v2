@@ -17,7 +17,7 @@ func (c *Client) CreateType(ctx context.Context, params *CreateTypeInput, optFns
 		params = &CreateTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateType", params, optFns, addOperationCreateTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateType", params, optFns, c.addOperationCreateTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type CreateTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateType{}, middleware.After)
 	if err != nil {
 		return err

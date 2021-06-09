@@ -21,7 +21,7 @@ func (c *Client) ListEventTrackers(ctx context.Context, params *ListEventTracker
 		params = &ListEventTrackersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEventTrackers", params, optFns, addOperationListEventTrackersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEventTrackers", params, optFns, c.addOperationListEventTrackersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListEventTrackersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEventTrackersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEventTrackersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEventTrackers{}, middleware.After)
 	if err != nil {
 		return err

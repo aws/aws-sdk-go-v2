@@ -17,7 +17,7 @@ func (c *Client) GetRun(ctx context.Context, params *GetRunInput, optFns ...func
 		params = &GetRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRun", params, optFns, addOperationGetRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRun", params, optFns, c.addOperationGetRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRun{}, middleware.After)
 	if err != nil {
 		return err

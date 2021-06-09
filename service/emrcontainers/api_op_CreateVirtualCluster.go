@@ -22,7 +22,7 @@ func (c *Client) CreateVirtualCluster(ctx context.Context, params *CreateVirtual
 		params = &CreateVirtualClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVirtualCluster", params, optFns, addOperationCreateVirtualClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateVirtualCluster", params, optFns, c.addOperationCreateVirtualClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type CreateVirtualClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateVirtualClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateVirtualClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVirtualCluster{}, middleware.After)
 	if err != nil {
 		return err

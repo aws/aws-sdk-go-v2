@@ -49,7 +49,7 @@ func (c *Client) PutLifecycleHook(ctx context.Context, params *PutLifecycleHookI
 		params = &PutLifecycleHookInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutLifecycleHook", params, optFns, addOperationPutLifecycleHookMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutLifecycleHook", params, optFns, c.addOperationPutLifecycleHookMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -123,7 +123,7 @@ type PutLifecycleHookOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutLifecycleHookMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutLifecycleHookMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutLifecycleHook{}, middleware.After)
 	if err != nil {
 		return err

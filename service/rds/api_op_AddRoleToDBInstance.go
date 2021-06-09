@@ -17,7 +17,7 @@ func (c *Client) AddRoleToDBInstance(ctx context.Context, params *AddRoleToDBIns
 		params = &AddRoleToDBInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddRoleToDBInstance", params, optFns, addOperationAddRoleToDBInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddRoleToDBInstance", params, optFns, c.addOperationAddRoleToDBInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type AddRoleToDBInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddRoleToDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddRoleToDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAddRoleToDBInstance{}, middleware.After)
 	if err != nil {
 		return err

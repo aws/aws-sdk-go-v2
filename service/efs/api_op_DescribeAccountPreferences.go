@@ -16,7 +16,7 @@ func (c *Client) DescribeAccountPreferences(ctx context.Context, params *Describ
 		params = &DescribeAccountPreferencesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAccountPreferences", params, optFns, addOperationDescribeAccountPreferencesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAccountPreferences", params, optFns, c.addOperationDescribeAccountPreferencesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DescribeAccountPreferencesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAccountPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAccountPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAccountPreferences{}, middleware.After)
 	if err != nil {
 		return err

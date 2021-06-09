@@ -18,7 +18,7 @@ func (c *Client) DeleteStackInstances(ctx context.Context, params *DeleteStackIn
 		params = &DeleteStackInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteStackInstances", params, optFns, addOperationDeleteStackInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteStackInstances", params, optFns, c.addOperationDeleteStackInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ type DeleteStackInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteStackInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteStackInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteStackInstances{}, middleware.After)
 	if err != nil {
 		return err

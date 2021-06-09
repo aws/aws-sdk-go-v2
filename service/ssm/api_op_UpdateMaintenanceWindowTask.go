@@ -52,7 +52,7 @@ func (c *Client) UpdateMaintenanceWindowTask(ctx context.Context, params *Update
 		params = &UpdateMaintenanceWindowTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateMaintenanceWindowTask", params, optFns, addOperationUpdateMaintenanceWindowTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMaintenanceWindowTask", params, optFns, c.addOperationUpdateMaintenanceWindowTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -220,7 +220,7 @@ type UpdateMaintenanceWindowTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateMaintenanceWindowTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateMaintenanceWindowTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMaintenanceWindowTask{}, middleware.After)
 	if err != nil {
 		return err

@@ -37,7 +37,7 @@ func (c *Client) PutAccessPointPolicy(ctx context.Context, params *PutAccessPoin
 		params = &PutAccessPointPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAccessPointPolicy", params, optFns, addOperationPutAccessPointPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAccessPointPolicy", params, optFns, c.addOperationPutAccessPointPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type PutAccessPointPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAccessPointPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAccessPointPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutAccessPointPolicy{}, middleware.After)
 	if err != nil {
 		return err

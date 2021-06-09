@@ -24,7 +24,7 @@ func (c *Client) ListOriginRequestPolicies(ctx context.Context, params *ListOrig
 		params = &ListOriginRequestPoliciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListOriginRequestPolicies", params, optFns, addOperationListOriginRequestPoliciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListOriginRequestPolicies", params, optFns, c.addOperationListOriginRequestPoliciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ListOriginRequestPoliciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListOriginRequestPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListOriginRequestPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListOriginRequestPolicies{}, middleware.After)
 	if err != nil {
 		return err

@@ -33,7 +33,7 @@ func (c *Client) PutFunctionEventInvokeConfig(ctx context.Context, params *PutFu
 		params = &PutFunctionEventInvokeConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutFunctionEventInvokeConfig", params, optFns, addOperationPutFunctionEventInvokeConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutFunctionEventInvokeConfig", params, optFns, c.addOperationPutFunctionEventInvokeConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ type PutFunctionEventInvokeConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutFunctionEventInvokeConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutFunctionEventInvokeConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFunctionEventInvokeConfig{}, middleware.After)
 	if err != nil {
 		return err

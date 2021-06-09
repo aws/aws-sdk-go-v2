@@ -29,7 +29,7 @@ func (c *Client) DisassociateClientVpnTargetNetwork(ctx context.Context, params 
 		params = &DisassociateClientVpnTargetNetworkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateClientVpnTargetNetwork", params, optFns, addOperationDisassociateClientVpnTargetNetworkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateClientVpnTargetNetwork", params, optFns, c.addOperationDisassociateClientVpnTargetNetworkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DisassociateClientVpnTargetNetworkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateClientVpnTargetNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateClientVpnTargetNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDisassociateClientVpnTargetNetwork{}, middleware.After)
 	if err != nil {
 		return err

@@ -41,7 +41,7 @@ func (c *Client) SignalWorkflowExecution(ctx context.Context, params *SignalWork
 		params = &SignalWorkflowExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SignalWorkflowExecution", params, optFns, addOperationSignalWorkflowExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SignalWorkflowExecution", params, optFns, c.addOperationSignalWorkflowExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type SignalWorkflowExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSignalWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSignalWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSignalWorkflowExecution{}, middleware.After)
 	if err != nil {
 		return err

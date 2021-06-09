@@ -15,7 +15,7 @@ func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *O
 		params = &OperationWithOptionalInputOutputInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "OperationWithOptionalInputOutput", params, optFns, addOperationOperationWithOptionalInputOutputMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "OperationWithOptionalInputOutput", params, optFns, c.addOperationOperationWithOptionalInputOutputMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ type OperationWithOptionalInputOutputOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationOperationWithOptionalInputOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationOperationWithOptionalInputOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpOperationWithOptionalInputOutput{}, middleware.After)
 	if err != nil {
 		return err

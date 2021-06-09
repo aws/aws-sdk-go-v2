@@ -16,7 +16,7 @@ func (c *Client) ImportAppCatalog(ctx context.Context, params *ImportAppCatalogI
 		params = &ImportAppCatalogInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportAppCatalog", params, optFns, addOperationImportAppCatalogMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportAppCatalog", params, optFns, c.addOperationImportAppCatalogMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type ImportAppCatalogOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportAppCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportAppCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportAppCatalog{}, middleware.After)
 	if err != nil {
 		return err

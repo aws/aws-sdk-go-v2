@@ -17,7 +17,7 @@ func (c *Client) DescribeTracker(ctx context.Context, params *DescribeTrackerInp
 		params = &DescribeTrackerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTracker", params, optFns, addOperationDescribeTrackerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTracker", params, optFns, c.addOperationDescribeTrackerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type DescribeTrackerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTracker{}, middleware.After)
 	if err != nil {
 		return err

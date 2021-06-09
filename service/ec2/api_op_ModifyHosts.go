@@ -25,7 +25,7 @@ func (c *Client) ModifyHosts(ctx context.Context, params *ModifyHostsInput, optF
 		params = &ModifyHostsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyHosts", params, optFns, addOperationModifyHostsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyHosts", params, optFns, c.addOperationModifyHostsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type ModifyHostsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyHostsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyHostsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyHosts{}, middleware.After)
 	if err != nil {
 		return err

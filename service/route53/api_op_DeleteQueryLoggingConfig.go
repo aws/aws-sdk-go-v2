@@ -20,7 +20,7 @@ func (c *Client) DeleteQueryLoggingConfig(ctx context.Context, params *DeleteQue
 		params = &DeleteQueryLoggingConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteQueryLoggingConfig", params, optFns, addOperationDeleteQueryLoggingConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteQueryLoggingConfig", params, optFns, c.addOperationDeleteQueryLoggingConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteQueryLoggingConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteQueryLoggingConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteQueryLoggingConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteQueryLoggingConfig{}, middleware.After)
 	if err != nil {
 		return err

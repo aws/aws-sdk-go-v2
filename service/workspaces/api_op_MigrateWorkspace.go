@@ -26,7 +26,7 @@ func (c *Client) MigrateWorkspace(ctx context.Context, params *MigrateWorkspaceI
 		params = &MigrateWorkspaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MigrateWorkspace", params, optFns, addOperationMigrateWorkspaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MigrateWorkspace", params, optFns, c.addOperationMigrateWorkspaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type MigrateWorkspaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMigrateWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMigrateWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMigrateWorkspace{}, middleware.After)
 	if err != nil {
 		return err

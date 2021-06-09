@@ -21,7 +21,7 @@ func (c *Client) GetFindingsReportAccountSummary(ctx context.Context, params *Ge
 		params = &GetFindingsReportAccountSummaryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFindingsReportAccountSummary", params, optFns, addOperationGetFindingsReportAccountSummaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFindingsReportAccountSummary", params, optFns, c.addOperationGetFindingsReportAccountSummaryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type GetFindingsReportAccountSummaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFindingsReportAccountSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFindingsReportAccountSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingsReportAccountSummary{}, middleware.After)
 	if err != nil {
 		return err

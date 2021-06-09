@@ -19,7 +19,7 @@ func (c *Client) CreateWorldGenerationJob(ctx context.Context, params *CreateWor
 		params = &CreateWorldGenerationJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateWorldGenerationJob", params, optFns, addOperationCreateWorldGenerationJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateWorldGenerationJob", params, optFns, c.addOperationCreateWorldGenerationJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type CreateWorldGenerationJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateWorldGenerationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateWorldGenerationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorldGenerationJob{}, middleware.After)
 	if err != nil {
 		return err

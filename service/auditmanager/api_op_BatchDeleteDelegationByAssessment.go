@@ -17,7 +17,7 @@ func (c *Client) BatchDeleteDelegationByAssessment(ctx context.Context, params *
 		params = &BatchDeleteDelegationByAssessmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteDelegationByAssessment", params, optFns, addOperationBatchDeleteDelegationByAssessmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteDelegationByAssessment", params, optFns, c.addOperationBatchDeleteDelegationByAssessmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type BatchDeleteDelegationByAssessmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteDelegationByAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteDelegationByAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteDelegationByAssessment{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) ModifyManagedPrefixList(ctx context.Context, params *ModifyMana
 		params = &ModifyManagedPrefixListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyManagedPrefixList", params, optFns, addOperationModifyManagedPrefixListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyManagedPrefixList", params, optFns, c.addOperationModifyManagedPrefixListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ModifyManagedPrefixListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyManagedPrefixListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyManagedPrefixListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyManagedPrefixList{}, middleware.After)
 	if err != nil {
 		return err

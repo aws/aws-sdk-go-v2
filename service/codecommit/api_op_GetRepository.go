@@ -22,7 +22,7 @@ func (c *Client) GetRepository(ctx context.Context, params *GetRepositoryInput, 
 		params = &GetRepositoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRepository", params, optFns, addOperationGetRepositoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRepository", params, optFns, c.addOperationGetRepositoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetRepositoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRepository{}, middleware.After)
 	if err != nil {
 		return err

@@ -24,7 +24,7 @@ func (c *Client) DescribeProvisioningParameters(ctx context.Context, params *Des
 		params = &DescribeProvisioningParametersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeProvisioningParameters", params, optFns, addOperationDescribeProvisioningParametersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeProvisioningParameters", params, optFns, c.addOperationDescribeProvisioningParametersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type DescribeProvisioningParametersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeProvisioningParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeProvisioningParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProvisioningParameters{}, middleware.After)
 	if err != nil {
 		return err

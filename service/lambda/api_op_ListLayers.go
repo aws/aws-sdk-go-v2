@@ -22,7 +22,7 @@ func (c *Client) ListLayers(ctx context.Context, params *ListLayersInput, optFns
 		params = &ListLayersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLayers", params, optFns, addOperationListLayersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLayers", params, optFns, c.addOperationListLayersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListLayersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLayersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLayersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLayers{}, middleware.After)
 	if err != nil {
 		return err

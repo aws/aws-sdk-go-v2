@@ -24,7 +24,7 @@ func (c *Client) ListUserPolicies(ctx context.Context, params *ListUserPoliciesI
 		params = &ListUserPoliciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListUserPolicies", params, optFns, addOperationListUserPoliciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListUserPolicies", params, optFns, c.addOperationListUserPoliciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type ListUserPoliciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListUserPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListUserPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListUserPolicies{}, middleware.After)
 	if err != nil {
 		return err

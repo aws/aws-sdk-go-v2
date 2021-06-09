@@ -17,7 +17,7 @@ func (c *Client) DisassociatePhoneNumberFromUser(ctx context.Context, params *Di
 		params = &DisassociatePhoneNumberFromUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociatePhoneNumberFromUser", params, optFns, addOperationDisassociatePhoneNumberFromUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociatePhoneNumberFromUser", params, optFns, c.addOperationDisassociatePhoneNumberFromUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DisassociatePhoneNumberFromUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociatePhoneNumberFromUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociatePhoneNumberFromUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociatePhoneNumberFromUser{}, middleware.After)
 	if err != nil {
 		return err

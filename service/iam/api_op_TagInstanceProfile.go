@@ -43,7 +43,7 @@ func (c *Client) TagInstanceProfile(ctx context.Context, params *TagInstanceProf
 		params = &TagInstanceProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TagInstanceProfile", params, optFns, addOperationTagInstanceProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagInstanceProfile", params, optFns, c.addOperationTagInstanceProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type TagInstanceProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTagInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTagInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpTagInstanceProfile{}, middleware.After)
 	if err != nil {
 		return err

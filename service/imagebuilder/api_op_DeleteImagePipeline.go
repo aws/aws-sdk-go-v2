@@ -16,7 +16,7 @@ func (c *Client) DeleteImagePipeline(ctx context.Context, params *DeleteImagePip
 		params = &DeleteImagePipelineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteImagePipeline", params, optFns, addOperationDeleteImagePipelineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteImagePipeline", params, optFns, c.addOperationDeleteImagePipelineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteImagePipelineOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteImagePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteImagePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteImagePipeline{}, middleware.After)
 	if err != nil {
 		return err

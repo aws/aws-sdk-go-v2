@@ -21,7 +21,7 @@ func (c *Client) DescribeConfigRuleEvaluationStatus(ctx context.Context, params 
 		params = &DescribeConfigRuleEvaluationStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeConfigRuleEvaluationStatus", params, optFns, addOperationDescribeConfigRuleEvaluationStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConfigRuleEvaluationStatus", params, optFns, c.addOperationDescribeConfigRuleEvaluationStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DescribeConfigRuleEvaluationStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeConfigRuleEvaluationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeConfigRuleEvaluationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConfigRuleEvaluationStatus{}, middleware.After)
 	if err != nil {
 		return err

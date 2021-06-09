@@ -17,7 +17,7 @@ func (c *Client) SetV2LoggingOptions(ctx context.Context, params *SetV2LoggingOp
 		params = &SetV2LoggingOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetV2LoggingOptions", params, optFns, addOperationSetV2LoggingOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetV2LoggingOptions", params, optFns, c.addOperationSetV2LoggingOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type SetV2LoggingOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetV2LoggingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetV2LoggingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSetV2LoggingOptions{}, middleware.After)
 	if err != nil {
 		return err

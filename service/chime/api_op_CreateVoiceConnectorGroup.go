@@ -22,7 +22,7 @@ func (c *Client) CreateVoiceConnectorGroup(ctx context.Context, params *CreateVo
 		params = &CreateVoiceConnectorGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVoiceConnectorGroup", params, optFns, addOperationCreateVoiceConnectorGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateVoiceConnectorGroup", params, optFns, c.addOperationCreateVoiceConnectorGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CreateVoiceConnectorGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVoiceConnectorGroup{}, middleware.After)
 	if err != nil {
 		return err

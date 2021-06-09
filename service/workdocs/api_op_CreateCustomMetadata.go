@@ -17,7 +17,7 @@ func (c *Client) CreateCustomMetadata(ctx context.Context, params *CreateCustomM
 		params = &CreateCustomMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCustomMetadata", params, optFns, addOperationCreateCustomMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCustomMetadata", params, optFns, c.addOperationCreateCustomMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type CreateCustomMetadataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCustomMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCustomMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomMetadata{}, middleware.After)
 	if err != nil {
 		return err

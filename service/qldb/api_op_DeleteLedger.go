@@ -19,7 +19,7 @@ func (c *Client) DeleteLedger(ctx context.Context, params *DeleteLedgerInput, op
 		params = &DeleteLedgerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLedger", params, optFns, addOperationDeleteLedgerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLedger", params, optFns, c.addOperationDeleteLedgerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteLedgerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLedger{}, middleware.After)
 	if err != nil {
 		return err

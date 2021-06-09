@@ -22,7 +22,7 @@ func (c *Client) RetrieveTapeRecoveryPoint(ctx context.Context, params *Retrieve
 		params = &RetrieveTapeRecoveryPointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RetrieveTapeRecoveryPoint", params, optFns, addOperationRetrieveTapeRecoveryPointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RetrieveTapeRecoveryPoint", params, optFns, c.addOperationRetrieveTapeRecoveryPointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type RetrieveTapeRecoveryPointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRetrieveTapeRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRetrieveTapeRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRetrieveTapeRecoveryPoint{}, middleware.After)
 	if err != nil {
 		return err

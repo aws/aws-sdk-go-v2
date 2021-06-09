@@ -20,7 +20,7 @@ func (c *Client) CreateAddress(ctx context.Context, params *CreateAddressInput, 
 		params = &CreateAddressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAddress", params, optFns, addOperationCreateAddressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAddress", params, optFns, c.addOperationCreateAddressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type CreateAddressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAddress{}, middleware.After)
 	if err != nil {
 		return err

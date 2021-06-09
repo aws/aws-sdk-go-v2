@@ -17,7 +17,7 @@ func (c *Client) GetLoggingConfiguration(ctx context.Context, params *GetLogging
 		params = &GetLoggingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLoggingConfiguration", params, optFns, addOperationGetLoggingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLoggingConfiguration", params, optFns, c.addOperationGetLoggingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetLoggingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLoggingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

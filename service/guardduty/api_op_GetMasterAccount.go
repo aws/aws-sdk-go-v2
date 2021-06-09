@@ -18,7 +18,7 @@ func (c *Client) GetMasterAccount(ctx context.Context, params *GetMasterAccountI
 		params = &GetMasterAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMasterAccount", params, optFns, addOperationGetMasterAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMasterAccount", params, optFns, c.addOperationGetMasterAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetMasterAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMasterAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMasterAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMasterAccount{}, middleware.After)
 	if err != nil {
 		return err

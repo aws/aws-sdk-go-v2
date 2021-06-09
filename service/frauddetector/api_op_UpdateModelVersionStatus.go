@@ -23,7 +23,7 @@ func (c *Client) UpdateModelVersionStatus(ctx context.Context, params *UpdateMod
 		params = &UpdateModelVersionStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateModelVersionStatus", params, optFns, addOperationUpdateModelVersionStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateModelVersionStatus", params, optFns, c.addOperationUpdateModelVersionStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type UpdateModelVersionStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateModelVersionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateModelVersionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateModelVersionStatus{}, middleware.After)
 	if err != nil {
 		return err

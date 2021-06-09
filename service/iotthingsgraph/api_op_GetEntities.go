@@ -41,7 +41,7 @@ func (c *Client) GetEntities(ctx context.Context, params *GetEntitiesInput, optF
 		params = &GetEntitiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEntities", params, optFns, addOperationGetEntitiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEntities", params, optFns, c.addOperationGetEntitiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type GetEntitiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEntities{}, middleware.After)
 	if err != nil {
 		return err

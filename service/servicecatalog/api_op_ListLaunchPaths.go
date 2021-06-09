@@ -20,7 +20,7 @@ func (c *Client) ListLaunchPaths(ctx context.Context, params *ListLaunchPathsInp
 		params = &ListLaunchPathsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLaunchPaths", params, optFns, addOperationListLaunchPathsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLaunchPaths", params, optFns, c.addOperationListLaunchPathsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListLaunchPathsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLaunchPathsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLaunchPathsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLaunchPaths{}, middleware.After)
 	if err != nil {
 		return err

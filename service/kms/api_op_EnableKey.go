@@ -26,7 +26,7 @@ func (c *Client) EnableKey(ctx context.Context, params *EnableKeyInput, optFns .
 		params = &EnableKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableKey", params, optFns, addOperationEnableKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableKey", params, optFns, c.addOperationEnableKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type EnableKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableKey{}, middleware.After)
 	if err != nil {
 		return err

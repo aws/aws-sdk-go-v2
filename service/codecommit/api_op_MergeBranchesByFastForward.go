@@ -16,7 +16,7 @@ func (c *Client) MergeBranchesByFastForward(ctx context.Context, params *MergeBr
 		params = &MergeBranchesByFastForwardInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MergeBranchesByFastForward", params, optFns, addOperationMergeBranchesByFastForwardMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MergeBranchesByFastForward", params, optFns, c.addOperationMergeBranchesByFastForwardMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type MergeBranchesByFastForwardOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMergeBranchesByFastForwardMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMergeBranchesByFastForwardMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergeBranchesByFastForward{}, middleware.After)
 	if err != nil {
 		return err

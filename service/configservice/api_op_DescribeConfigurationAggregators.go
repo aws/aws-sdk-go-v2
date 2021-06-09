@@ -20,7 +20,7 @@ func (c *Client) DescribeConfigurationAggregators(ctx context.Context, params *D
 		params = &DescribeConfigurationAggregatorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeConfigurationAggregators", params, optFns, addOperationDescribeConfigurationAggregatorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConfigurationAggregators", params, optFns, c.addOperationDescribeConfigurationAggregatorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeConfigurationAggregatorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeConfigurationAggregatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeConfigurationAggregatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConfigurationAggregators{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) DescribeWorkingStorage(ctx context.Context, params *DescribeWor
 		params = &DescribeWorkingStorageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkingStorage", params, optFns, addOperationDescribeWorkingStorageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkingStorage", params, optFns, c.addOperationDescribeWorkingStorageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type DescribeWorkingStorageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeWorkingStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeWorkingStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkingStorage{}, middleware.After)
 	if err != nil {
 		return err

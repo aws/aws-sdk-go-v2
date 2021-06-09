@@ -17,7 +17,7 @@ func (c *Client) GetTrafficPolicyInstanceCount(ctx context.Context, params *GetT
 		params = &GetTrafficPolicyInstanceCountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTrafficPolicyInstanceCount", params, optFns, addOperationGetTrafficPolicyInstanceCountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTrafficPolicyInstanceCount", params, optFns, c.addOperationGetTrafficPolicyInstanceCountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetTrafficPolicyInstanceCountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTrafficPolicyInstanceCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTrafficPolicyInstanceCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetTrafficPolicyInstanceCount{}, middleware.After)
 	if err != nil {
 		return err

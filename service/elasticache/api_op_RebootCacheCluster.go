@@ -28,7 +28,7 @@ func (c *Client) RebootCacheCluster(ctx context.Context, params *RebootCacheClus
 		params = &RebootCacheClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RebootCacheCluster", params, optFns, addOperationRebootCacheClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RebootCacheCluster", params, optFns, c.addOperationRebootCacheClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type RebootCacheClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRebootCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRebootCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRebootCacheCluster{}, middleware.After)
 	if err != nil {
 		return err

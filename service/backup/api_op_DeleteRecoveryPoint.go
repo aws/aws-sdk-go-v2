@@ -18,7 +18,7 @@ func (c *Client) DeleteRecoveryPoint(ctx context.Context, params *DeleteRecovery
 		params = &DeleteRecoveryPointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRecoveryPoint", params, optFns, addOperationDeleteRecoveryPointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRecoveryPoint", params, optFns, c.addOperationDeleteRecoveryPointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteRecoveryPointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRecoveryPoint{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) GetMLTransform(ctx context.Context, params *GetMLTransformInput
 		params = &GetMLTransformInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMLTransform", params, optFns, addOperationGetMLTransformMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMLTransform", params, optFns, c.addOperationGetMLTransformMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -136,7 +136,7 @@ type GetMLTransformOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMLTransform{}, middleware.After)
 	if err != nil {
 		return err

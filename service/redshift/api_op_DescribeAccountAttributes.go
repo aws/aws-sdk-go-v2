@@ -17,7 +17,7 @@ func (c *Client) DescribeAccountAttributes(ctx context.Context, params *Describe
 		params = &DescribeAccountAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAccountAttributes", params, optFns, addOperationDescribeAccountAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAccountAttributes", params, optFns, c.addOperationDescribeAccountAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DescribeAccountAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAccountAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAccountAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAccountAttributes{}, middleware.After)
 	if err != nil {
 		return err

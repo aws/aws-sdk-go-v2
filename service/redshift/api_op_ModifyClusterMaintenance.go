@@ -18,7 +18,7 @@ func (c *Client) ModifyClusterMaintenance(ctx context.Context, params *ModifyClu
 		params = &ModifyClusterMaintenanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyClusterMaintenance", params, optFns, addOperationModifyClusterMaintenanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyClusterMaintenance", params, optFns, c.addOperationModifyClusterMaintenanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ModifyClusterMaintenanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyClusterMaintenanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyClusterMaintenanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyClusterMaintenance{}, middleware.After)
 	if err != nil {
 		return err

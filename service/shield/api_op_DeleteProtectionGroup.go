@@ -16,7 +16,7 @@ func (c *Client) DeleteProtectionGroup(ctx context.Context, params *DeleteProtec
 		params = &DeleteProtectionGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProtectionGroup", params, optFns, addOperationDeleteProtectionGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProtectionGroup", params, optFns, c.addOperationDeleteProtectionGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteProtectionGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProtectionGroup{}, middleware.After)
 	if err != nil {
 		return err

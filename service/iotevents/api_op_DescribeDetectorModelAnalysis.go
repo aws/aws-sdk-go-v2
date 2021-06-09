@@ -19,7 +19,7 @@ func (c *Client) DescribeDetectorModelAnalysis(ctx context.Context, params *Desc
 		params = &DescribeDetectorModelAnalysisInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDetectorModelAnalysis", params, optFns, addOperationDescribeDetectorModelAnalysisMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDetectorModelAnalysis", params, optFns, c.addOperationDescribeDetectorModelAnalysisMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeDetectorModelAnalysisOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDetectorModelAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDetectorModelAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDetectorModelAnalysis{}, middleware.After)
 	if err != nil {
 		return err

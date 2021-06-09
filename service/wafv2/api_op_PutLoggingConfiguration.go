@@ -37,7 +37,7 @@ func (c *Client) PutLoggingConfiguration(ctx context.Context, params *PutLogging
 		params = &PutLoggingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutLoggingConfiguration", params, optFns, addOperationPutLoggingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutLoggingConfiguration", params, optFns, c.addOperationPutLoggingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type PutLoggingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutLoggingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

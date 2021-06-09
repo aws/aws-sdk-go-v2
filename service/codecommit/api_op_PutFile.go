@@ -18,7 +18,7 @@ func (c *Client) PutFile(ctx context.Context, params *PutFileInput, optFns ...fu
 		params = &PutFileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutFile", params, optFns, addOperationPutFileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutFile", params, optFns, c.addOperationPutFileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ type PutFileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutFile{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DescribeDataIngestionJob(ctx context.Context, params *DescribeD
 		params = &DescribeDataIngestionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDataIngestionJob", params, optFns, addOperationDescribeDataIngestionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDataIngestionJob", params, optFns, c.addOperationDescribeDataIngestionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type DescribeDataIngestionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDataIngestionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDataIngestionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeDataIngestionJob{}, middleware.After)
 	if err != nil {
 		return err

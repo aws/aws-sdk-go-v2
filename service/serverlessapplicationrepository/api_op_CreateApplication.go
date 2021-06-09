@@ -18,7 +18,7 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 		params = &CreateApplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateApplication", params, optFns, addOperationCreateApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateApplication", params, optFns, c.addOperationCreateApplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -158,7 +158,7 @@ type CreateApplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApplication{}, middleware.After)
 	if err != nil {
 		return err

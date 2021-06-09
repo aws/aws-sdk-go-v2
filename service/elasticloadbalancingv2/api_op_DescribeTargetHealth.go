@@ -17,7 +17,7 @@ func (c *Client) DescribeTargetHealth(ctx context.Context, params *DescribeTarge
 		params = &DescribeTargetHealthInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTargetHealth", params, optFns, addOperationDescribeTargetHealthMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTargetHealth", params, optFns, c.addOperationDescribeTargetHealthMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeTargetHealthOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTargetHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTargetHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTargetHealth{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeWebsiteCertificateAuthority(ctx context.Context, params
 		params = &DescribeWebsiteCertificateAuthorityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWebsiteCertificateAuthority", params, optFns, addOperationDescribeWebsiteCertificateAuthorityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWebsiteCertificateAuthority", params, optFns, c.addOperationDescribeWebsiteCertificateAuthorityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeWebsiteCertificateAuthorityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeWebsiteCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeWebsiteCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeWebsiteCertificateAuthority{}, middleware.After)
 	if err != nil {
 		return err

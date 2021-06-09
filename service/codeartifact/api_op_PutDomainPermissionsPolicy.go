@@ -21,7 +21,7 @@ func (c *Client) PutDomainPermissionsPolicy(ctx context.Context, params *PutDoma
 		params = &PutDomainPermissionsPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutDomainPermissionsPolicy", params, optFns, addOperationPutDomainPermissionsPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutDomainPermissionsPolicy", params, optFns, c.addOperationPutDomainPermissionsPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type PutDomainPermissionsPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutDomainPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutDomainPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDomainPermissionsPolicy{}, middleware.After)
 	if err != nil {
 		return err

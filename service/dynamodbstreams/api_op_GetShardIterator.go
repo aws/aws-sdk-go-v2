@@ -20,7 +20,7 @@ func (c *Client) GetShardIterator(ctx context.Context, params *GetShardIteratorI
 		params = &GetShardIteratorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetShardIterator", params, optFns, addOperationGetShardIteratorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetShardIterator", params, optFns, c.addOperationGetShardIteratorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type GetShardIteratorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetShardIteratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetShardIteratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetShardIterator{}, middleware.After)
 	if err != nil {
 		return err

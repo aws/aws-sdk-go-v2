@@ -16,7 +16,7 @@ func (c *Client) DeleteContactList(ctx context.Context, params *DeleteContactLis
 		params = &DeleteContactListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteContactList", params, optFns, addOperationDeleteContactListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteContactList", params, optFns, c.addOperationDeleteContactListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteContactListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteContactListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteContactListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteContactList{}, middleware.After)
 	if err != nil {
 		return err

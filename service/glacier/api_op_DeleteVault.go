@@ -38,7 +38,7 @@ func (c *Client) DeleteVault(ctx context.Context, params *DeleteVaultInput, optF
 		params = &DeleteVaultInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVault", params, optFns, addOperationDeleteVaultMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVault", params, optFns, c.addOperationDeleteVaultMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type DeleteVaultOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVault{}, middleware.After)
 	if err != nil {
 		return err

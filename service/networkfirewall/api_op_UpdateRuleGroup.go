@@ -21,7 +21,7 @@ func (c *Client) UpdateRuleGroup(ctx context.Context, params *UpdateRuleGroupInp
 		params = &UpdateRuleGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRuleGroup", params, optFns, addOperationUpdateRuleGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRuleGroup", params, optFns, c.addOperationUpdateRuleGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ type UpdateRuleGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateRuleGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) ListQuickConnects(ctx context.Context, params *ListQuickConnect
 		params = &ListQuickConnectsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListQuickConnects", params, optFns, addOperationListQuickConnectsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListQuickConnects", params, optFns, c.addOperationListQuickConnectsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ListQuickConnectsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListQuickConnectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListQuickConnectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQuickConnects{}, middleware.After)
 	if err != nil {
 		return err

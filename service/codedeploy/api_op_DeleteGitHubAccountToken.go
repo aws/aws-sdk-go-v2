@@ -16,7 +16,7 @@ func (c *Client) DeleteGitHubAccountToken(ctx context.Context, params *DeleteGit
 		params = &DeleteGitHubAccountTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGitHubAccountToken", params, optFns, addOperationDeleteGitHubAccountTokenMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGitHubAccountToken", params, optFns, c.addOperationDeleteGitHubAccountTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteGitHubAccountTokenOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGitHubAccountTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGitHubAccountTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteGitHubAccountToken{}, middleware.After)
 	if err != nil {
 		return err

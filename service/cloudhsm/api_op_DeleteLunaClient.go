@@ -26,7 +26,7 @@ func (c *Client) DeleteLunaClient(ctx context.Context, params *DeleteLunaClientI
 		params = &DeleteLunaClientInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLunaClient", params, optFns, addOperationDeleteLunaClientMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLunaClient", params, optFns, c.addOperationDeleteLunaClientMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DeleteLunaClientOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLunaClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLunaClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLunaClient{}, middleware.After)
 	if err != nil {
 		return err

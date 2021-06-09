@@ -19,7 +19,7 @@ func (c *Client) AddFlowMediaStreams(ctx context.Context, params *AddFlowMediaSt
 		params = &AddFlowMediaStreamsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddFlowMediaStreams", params, optFns, addOperationAddFlowMediaStreamsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddFlowMediaStreams", params, optFns, c.addOperationAddFlowMediaStreamsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type AddFlowMediaStreamsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddFlowMediaStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddFlowMediaStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddFlowMediaStreams{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DescribeInferenceScheduler(ctx context.Context, params *Describ
 		params = &DescribeInferenceSchedulerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInferenceScheduler", params, optFns, addOperationDescribeInferenceSchedulerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInferenceScheduler", params, optFns, c.addOperationDescribeInferenceSchedulerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ type DescribeInferenceSchedulerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeInferenceScheduler{}, middleware.After)
 	if err != nil {
 		return err

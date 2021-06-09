@@ -19,7 +19,7 @@ func (c *Client) ListAccessPreviewFindings(ctx context.Context, params *ListAcce
 		params = &ListAccessPreviewFindingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAccessPreviewFindings", params, optFns, addOperationListAccessPreviewFindingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAccessPreviewFindings", params, optFns, c.addOperationListAccessPreviewFindingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListAccessPreviewFindingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAccessPreviewFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAccessPreviewFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccessPreviewFindings{}, middleware.After)
 	if err != nil {
 		return err

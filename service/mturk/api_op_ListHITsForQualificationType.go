@@ -21,7 +21,7 @@ func (c *Client) ListHITsForQualificationType(ctx context.Context, params *ListH
 		params = &ListHITsForQualificationTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListHITsForQualificationType", params, optFns, addOperationListHITsForQualificationTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListHITsForQualificationType", params, optFns, c.addOperationListHITsForQualificationTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListHITsForQualificationTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListHITsForQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListHITsForQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHITsForQualificationType{}, middleware.After)
 	if err != nil {
 		return err

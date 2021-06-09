@@ -20,7 +20,7 @@ func (c *Client) StartDetectorModelAnalysis(ctx context.Context, params *StartDe
 		params = &StartDetectorModelAnalysisInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDetectorModelAnalysis", params, optFns, addOperationStartDetectorModelAnalysisMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDetectorModelAnalysis", params, optFns, c.addOperationStartDetectorModelAnalysisMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StartDetectorModelAnalysisOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDetectorModelAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDetectorModelAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDetectorModelAnalysis{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) ListApiDestinations(ctx context.Context, params *ListApiDestina
 		params = &ListApiDestinationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListApiDestinations", params, optFns, addOperationListApiDestinationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListApiDestinations", params, optFns, c.addOperationListApiDestinationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListApiDestinationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListApiDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListApiDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApiDestinations{}, middleware.After)
 	if err != nil {
 		return err

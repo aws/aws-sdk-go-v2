@@ -23,7 +23,7 @@ func (c *Client) ListScripts(ctx context.Context, params *ListScriptsInput, optF
 		params = &ListScriptsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListScripts", params, optFns, addOperationListScriptsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListScripts", params, optFns, c.addOperationListScriptsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListScriptsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListScriptsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListScriptsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListScripts{}, middleware.After)
 	if err != nil {
 		return err

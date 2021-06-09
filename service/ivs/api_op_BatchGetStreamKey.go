@@ -17,7 +17,7 @@ func (c *Client) BatchGetStreamKey(ctx context.Context, params *BatchGetStreamKe
 		params = &BatchGetStreamKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetStreamKey", params, optFns, addOperationBatchGetStreamKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetStreamKey", params, optFns, c.addOperationBatchGetStreamKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type BatchGetStreamKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetStreamKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetStreamKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetStreamKey{}, middleware.After)
 	if err != nil {
 		return err

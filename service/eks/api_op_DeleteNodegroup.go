@@ -17,7 +17,7 @@ func (c *Client) DeleteNodegroup(ctx context.Context, params *DeleteNodegroupInp
 		params = &DeleteNodegroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteNodegroup", params, optFns, addOperationDeleteNodegroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteNodegroup", params, optFns, c.addOperationDeleteNodegroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteNodegroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteNodegroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteNodegroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteNodegroup{}, middleware.After)
 	if err != nil {
 		return err

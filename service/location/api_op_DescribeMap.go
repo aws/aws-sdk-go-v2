@@ -17,7 +17,7 @@ func (c *Client) DescribeMap(ctx context.Context, params *DescribeMapInput, optF
 		params = &DescribeMapInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeMap", params, optFns, addOperationDescribeMapMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeMap", params, optFns, c.addOperationDescribeMapMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type DescribeMapOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeMap{}, middleware.After)
 	if err != nil {
 		return err

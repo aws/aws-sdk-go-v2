@@ -17,7 +17,7 @@ func (c *Client) ListThesauri(ctx context.Context, params *ListThesauriInput, op
 		params = &ListThesauriInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListThesauri", params, optFns, addOperationListThesauriMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListThesauri", params, optFns, c.addOperationListThesauriMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListThesauriOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListThesauriMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListThesauriMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListThesauri{}, middleware.After)
 	if err != nil {
 		return err

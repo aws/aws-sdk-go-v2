@@ -19,7 +19,7 @@ func (c *Client) GetLayerVersionByArn(ctx context.Context, params *GetLayerVersi
 		params = &GetLayerVersionByArnInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLayerVersionByArn", params, optFns, addOperationGetLayerVersionByArnMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLayerVersionByArn", params, optFns, c.addOperationGetLayerVersionByArnMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type GetLayerVersionByArnOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLayerVersionByArnMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLayerVersionByArnMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLayerVersionByArn{}, middleware.After)
 	if err != nil {
 		return err

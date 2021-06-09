@@ -16,7 +16,7 @@ func (c *Client) DeleteDeployment(ctx context.Context, params *DeleteDeploymentI
 		params = &DeleteDeploymentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDeployment", params, optFns, addOperationDeleteDeploymentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDeployment", params, optFns, c.addOperationDeleteDeploymentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteDeploymentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDeployment{}, middleware.After)
 	if err != nil {
 		return err

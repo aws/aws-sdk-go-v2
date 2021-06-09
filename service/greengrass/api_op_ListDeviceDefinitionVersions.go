@@ -17,7 +17,7 @@ func (c *Client) ListDeviceDefinitionVersions(ctx context.Context, params *ListD
 		params = &ListDeviceDefinitionVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDeviceDefinitionVersions", params, optFns, addOperationListDeviceDefinitionVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDeviceDefinitionVersions", params, optFns, c.addOperationListDeviceDefinitionVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListDeviceDefinitionVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDeviceDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDeviceDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDeviceDefinitionVersions{}, middleware.After)
 	if err != nil {
 		return err

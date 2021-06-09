@@ -20,7 +20,7 @@ func (c *Client) CreateWorkteam(ctx context.Context, params *CreateWorkteamInput
 		params = &CreateWorkteamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateWorkteam", params, optFns, addOperationCreateWorkteamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateWorkteam", params, optFns, c.addOperationCreateWorkteamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type CreateWorkteamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWorkteam{}, middleware.After)
 	if err != nil {
 		return err

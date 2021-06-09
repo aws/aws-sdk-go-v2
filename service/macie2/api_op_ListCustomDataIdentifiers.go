@@ -19,7 +19,7 @@ func (c *Client) ListCustomDataIdentifiers(ctx context.Context, params *ListCust
 		params = &ListCustomDataIdentifiersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCustomDataIdentifiers", params, optFns, addOperationListCustomDataIdentifiersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCustomDataIdentifiers", params, optFns, c.addOperationListCustomDataIdentifiersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ListCustomDataIdentifiersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCustomDataIdentifiersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCustomDataIdentifiersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomDataIdentifiers{}, middleware.After)
 	if err != nil {
 		return err

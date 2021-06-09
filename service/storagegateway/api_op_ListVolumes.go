@@ -27,7 +27,7 @@ func (c *Client) ListVolumes(ctx context.Context, params *ListVolumesInput, optF
 		params = &ListVolumesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListVolumes", params, optFns, addOperationListVolumesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListVolumes", params, optFns, c.addOperationListVolumesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type ListVolumesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListVolumesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListVolumesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListVolumes{}, middleware.After)
 	if err != nil {
 		return err

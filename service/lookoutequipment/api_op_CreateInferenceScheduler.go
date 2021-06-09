@@ -23,7 +23,7 @@ func (c *Client) CreateInferenceScheduler(ctx context.Context, params *CreateInf
 		params = &CreateInferenceSchedulerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateInferenceScheduler", params, optFns, addOperationCreateInferenceSchedulerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateInferenceScheduler", params, optFns, c.addOperationCreateInferenceSchedulerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -113,7 +113,7 @@ type CreateInferenceSchedulerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateInferenceScheduler{}, middleware.After)
 	if err != nil {
 		return err

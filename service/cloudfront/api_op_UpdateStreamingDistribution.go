@@ -17,7 +17,7 @@ func (c *Client) UpdateStreamingDistribution(ctx context.Context, params *Update
 		params = &UpdateStreamingDistributionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateStreamingDistribution", params, optFns, addOperationUpdateStreamingDistributionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateStreamingDistribution", params, optFns, c.addOperationUpdateStreamingDistributionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type UpdateStreamingDistributionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateStreamingDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateStreamingDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpUpdateStreamingDistribution{}, middleware.After)
 	if err != nil {
 		return err

@@ -40,7 +40,7 @@ func (c *Client) EnableAllFeatures(ctx context.Context, params *EnableAllFeature
 		params = &EnableAllFeaturesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableAllFeatures", params, optFns, addOperationEnableAllFeaturesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableAllFeatures", params, optFns, c.addOperationEnableAllFeaturesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type EnableAllFeaturesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableAllFeaturesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableAllFeaturesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableAllFeatures{}, middleware.After)
 	if err != nil {
 		return err

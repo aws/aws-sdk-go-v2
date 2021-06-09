@@ -17,7 +17,7 @@ func (c *Client) GetUserPoolMfaConfig(ctx context.Context, params *GetUserPoolMf
 		params = &GetUserPoolMfaConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUserPoolMfaConfig", params, optFns, addOperationGetUserPoolMfaConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetUserPoolMfaConfig", params, optFns, c.addOperationGetUserPoolMfaConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetUserPoolMfaConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetUserPoolMfaConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetUserPoolMfaConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUserPoolMfaConfig{}, middleware.After)
 	if err != nil {
 		return err

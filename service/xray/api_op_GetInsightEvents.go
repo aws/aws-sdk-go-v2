@@ -20,7 +20,7 @@ func (c *Client) GetInsightEvents(ctx context.Context, params *GetInsightEventsI
 		params = &GetInsightEventsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInsightEvents", params, optFns, addOperationGetInsightEventsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInsightEvents", params, optFns, c.addOperationGetInsightEventsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type GetInsightEventsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInsightEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInsightEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInsightEvents{}, middleware.After)
 	if err != nil {
 		return err

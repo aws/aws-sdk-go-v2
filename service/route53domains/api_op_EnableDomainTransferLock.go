@@ -20,7 +20,7 @@ func (c *Client) EnableDomainTransferLock(ctx context.Context, params *EnableDom
 		params = &EnableDomainTransferLockInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableDomainTransferLock", params, optFns, addOperationEnableDomainTransferLockMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableDomainTransferLock", params, optFns, c.addOperationEnableDomainTransferLockMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type EnableDomainTransferLockOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableDomainTransferLockMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableDomainTransferLockMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableDomainTransferLock{}, middleware.After)
 	if err != nil {
 		return err

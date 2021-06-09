@@ -16,7 +16,7 @@ func (c *Client) DeleteProvisioningTemplate(ctx context.Context, params *DeleteP
 		params = &DeleteProvisioningTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProvisioningTemplate", params, optFns, addOperationDeleteProvisioningTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProvisioningTemplate", params, optFns, c.addOperationDeleteProvisioningTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteProvisioningTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteProvisioningTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteProvisioningTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProvisioningTemplate{}, middleware.After)
 	if err != nil {
 		return err

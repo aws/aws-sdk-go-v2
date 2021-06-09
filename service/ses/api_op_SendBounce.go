@@ -23,7 +23,7 @@ func (c *Client) SendBounce(ctx context.Context, params *SendBounceInput, optFns
 		params = &SendBounceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendBounce", params, optFns, addOperationSendBounceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendBounce", params, optFns, c.addOperationSendBounceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type SendBounceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendBounceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendBounceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSendBounce{}, middleware.After)
 	if err != nil {
 		return err

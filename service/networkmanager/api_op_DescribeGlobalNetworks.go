@@ -21,7 +21,7 @@ func (c *Client) DescribeGlobalNetworks(ctx context.Context, params *DescribeGlo
 		params = &DescribeGlobalNetworksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeGlobalNetworks", params, optFns, addOperationDescribeGlobalNetworksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeGlobalNetworks", params, optFns, c.addOperationDescribeGlobalNetworksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeGlobalNetworksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeGlobalNetworksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeGlobalNetworksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGlobalNetworks{}, middleware.After)
 	if err != nil {
 		return err

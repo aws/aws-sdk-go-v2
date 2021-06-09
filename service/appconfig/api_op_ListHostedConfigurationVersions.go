@@ -19,7 +19,7 @@ func (c *Client) ListHostedConfigurationVersions(ctx context.Context, params *Li
 		params = &ListHostedConfigurationVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListHostedConfigurationVersions", params, optFns, addOperationListHostedConfigurationVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListHostedConfigurationVersions", params, optFns, c.addOperationListHostedConfigurationVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ListHostedConfigurationVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListHostedConfigurationVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListHostedConfigurationVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHostedConfigurationVersions{}, middleware.After)
 	if err != nil {
 		return err

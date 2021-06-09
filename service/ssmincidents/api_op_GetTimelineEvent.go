@@ -17,7 +17,7 @@ func (c *Client) GetTimelineEvent(ctx context.Context, params *GetTimelineEventI
 		params = &GetTimelineEventInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTimelineEvent", params, optFns, addOperationGetTimelineEventMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTimelineEvent", params, optFns, c.addOperationGetTimelineEventMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetTimelineEventOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTimelineEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTimelineEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTimelineEvent{}, middleware.After)
 	if err != nil {
 		return err

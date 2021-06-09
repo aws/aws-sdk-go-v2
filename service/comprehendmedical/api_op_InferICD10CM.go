@@ -20,7 +20,7 @@ func (c *Client) InferICD10CM(ctx context.Context, params *InferICD10CMInput, op
 		params = &InferICD10CMInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InferICD10CM", params, optFns, addOperationInferICD10CMMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InferICD10CM", params, optFns, c.addOperationInferICD10CMMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type InferICD10CMOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInferICD10CMMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInferICD10CMMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInferICD10CM{}, middleware.After)
 	if err != nil {
 		return err

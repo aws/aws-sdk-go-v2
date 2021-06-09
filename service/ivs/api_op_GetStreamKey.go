@@ -17,7 +17,7 @@ func (c *Client) GetStreamKey(ctx context.Context, params *GetStreamKeyInput, op
 		params = &GetStreamKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetStreamKey", params, optFns, addOperationGetStreamKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetStreamKey", params, optFns, c.addOperationGetStreamKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetStreamKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetStreamKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetStreamKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStreamKey{}, middleware.After)
 	if err != nil {
 		return err

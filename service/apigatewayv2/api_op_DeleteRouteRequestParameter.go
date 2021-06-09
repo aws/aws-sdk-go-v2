@@ -16,7 +16,7 @@ func (c *Client) DeleteRouteRequestParameter(ctx context.Context, params *Delete
 		params = &DeleteRouteRequestParameterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRouteRequestParameter", params, optFns, addOperationDeleteRouteRequestParameterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRouteRequestParameter", params, optFns, c.addOperationDeleteRouteRequestParameterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteRouteRequestParameterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRouteRequestParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRouteRequestParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRouteRequestParameter{}, middleware.After)
 	if err != nil {
 		return err

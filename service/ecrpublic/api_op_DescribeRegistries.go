@@ -18,7 +18,7 @@ func (c *Client) DescribeRegistries(ctx context.Context, params *DescribeRegistr
 		params = &DescribeRegistriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRegistries", params, optFns, addOperationDescribeRegistriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRegistries", params, optFns, c.addOperationDescribeRegistriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DescribeRegistriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRegistriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRegistriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRegistries{}, middleware.After)
 	if err != nil {
 		return err

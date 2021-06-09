@@ -18,7 +18,7 @@ func (c *Client) ImportInstallationMedia(ctx context.Context, params *ImportInst
 		params = &ImportInstallationMediaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportInstallationMedia", params, optFns, addOperationImportInstallationMediaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportInstallationMedia", params, optFns, c.addOperationImportInstallationMediaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type ImportInstallationMediaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportInstallationMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportInstallationMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpImportInstallationMedia{}, middleware.After)
 	if err != nil {
 		return err

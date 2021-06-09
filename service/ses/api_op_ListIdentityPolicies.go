@@ -24,7 +24,7 @@ func (c *Client) ListIdentityPolicies(ctx context.Context, params *ListIdentityP
 		params = &ListIdentityPoliciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListIdentityPolicies", params, optFns, addOperationListIdentityPoliciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListIdentityPolicies", params, optFns, c.addOperationListIdentityPoliciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListIdentityPoliciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListIdentityPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListIdentityPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListIdentityPolicies{}, middleware.After)
 	if err != nil {
 		return err

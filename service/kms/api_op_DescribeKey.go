@@ -72,7 +72,7 @@ func (c *Client) DescribeKey(ctx context.Context, params *DescribeKeyInput, optF
 		params = &DescribeKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeKey", params, optFns, addOperationDescribeKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeKey", params, optFns, c.addOperationDescribeKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -127,7 +127,7 @@ type DescribeKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeKey{}, middleware.After)
 	if err != nil {
 		return err

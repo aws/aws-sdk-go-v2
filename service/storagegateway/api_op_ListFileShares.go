@@ -20,7 +20,7 @@ func (c *Client) ListFileShares(ctx context.Context, params *ListFileSharesInput
 		params = &ListFileSharesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFileShares", params, optFns, addOperationListFileSharesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFileShares", params, optFns, c.addOperationListFileSharesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ListFileSharesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFileSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFileSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFileShares{}, middleware.After)
 	if err != nil {
 		return err

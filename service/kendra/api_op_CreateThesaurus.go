@@ -19,7 +19,7 @@ func (c *Client) CreateThesaurus(ctx context.Context, params *CreateThesaurusInp
 		params = &CreateThesaurusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateThesaurus", params, optFns, addOperationCreateThesaurusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateThesaurus", params, optFns, c.addOperationCreateThesaurusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type CreateThesaurusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateThesaurus{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) DescribeLayers(ctx context.Context, params *DescribeLayersInput
 		params = &DescribeLayersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLayers", params, optFns, addOperationDescribeLayersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLayers", params, optFns, c.addOperationDescribeLayersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeLayersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLayersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLayersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLayers{}, middleware.After)
 	if err != nil {
 		return err

@@ -27,7 +27,7 @@ func (c *Client) DisassociateFileSystemAliases(ctx context.Context, params *Disa
 		params = &DisassociateFileSystemAliasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateFileSystemAliases", params, optFns, addOperationDisassociateFileSystemAliasesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateFileSystemAliases", params, optFns, c.addOperationDisassociateFileSystemAliasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type DisassociateFileSystemAliasesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateFileSystemAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateFileSystemAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateFileSystemAliases{}, middleware.After)
 	if err != nil {
 		return err

@@ -27,7 +27,7 @@ func (c *Client) PutLifecycleEventHookExecutionStatus(ctx context.Context, param
 		params = &PutLifecycleEventHookExecutionStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutLifecycleEventHookExecutionStatus", params, optFns, addOperationPutLifecycleEventHookExecutionStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutLifecycleEventHookExecutionStatus", params, optFns, c.addOperationPutLifecycleEventHookExecutionStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type PutLifecycleEventHookExecutionStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutLifecycleEventHookExecutionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutLifecycleEventHookExecutionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutLifecycleEventHookExecutionStatus{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) GetRelationalDatabaseBlueprints(ctx context.Context, params *Ge
 		params = &GetRelationalDatabaseBlueprintsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRelationalDatabaseBlueprints", params, optFns, addOperationGetRelationalDatabaseBlueprintsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRelationalDatabaseBlueprints", params, optFns, c.addOperationGetRelationalDatabaseBlueprintsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetRelationalDatabaseBlueprintsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRelationalDatabaseBlueprintsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRelationalDatabaseBlueprintsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseBlueprints{}, middleware.After)
 	if err != nil {
 		return err

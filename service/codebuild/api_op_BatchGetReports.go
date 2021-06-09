@@ -17,7 +17,7 @@ func (c *Client) BatchGetReports(ctx context.Context, params *BatchGetReportsInp
 		params = &BatchGetReportsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetReports", params, optFns, addOperationBatchGetReportsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetReports", params, optFns, c.addOperationBatchGetReportsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type BatchGetReportsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetReports{}, middleware.After)
 	if err != nil {
 		return err

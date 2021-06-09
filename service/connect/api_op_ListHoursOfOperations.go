@@ -22,7 +22,7 @@ func (c *Client) ListHoursOfOperations(ctx context.Context, params *ListHoursOfO
 		params = &ListHoursOfOperationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListHoursOfOperations", params, optFns, addOperationListHoursOfOperationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListHoursOfOperations", params, optFns, c.addOperationListHoursOfOperationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListHoursOfOperationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListHoursOfOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListHoursOfOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHoursOfOperations{}, middleware.After)
 	if err != nil {
 		return err

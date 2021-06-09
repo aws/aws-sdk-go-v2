@@ -19,7 +19,7 @@ func (c *Client) ImportMigrationTask(ctx context.Context, params *ImportMigratio
 		params = &ImportMigrationTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportMigrationTask", params, optFns, addOperationImportMigrationTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportMigrationTask", params, optFns, c.addOperationImportMigrationTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ImportMigrationTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportMigrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportMigrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportMigrationTask{}, middleware.After)
 	if err != nil {
 		return err

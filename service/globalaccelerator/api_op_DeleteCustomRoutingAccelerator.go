@@ -30,7 +30,7 @@ func (c *Client) DeleteCustomRoutingAccelerator(ctx context.Context, params *Del
 		params = &DeleteCustomRoutingAcceleratorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomRoutingAccelerator", params, optFns, addOperationDeleteCustomRoutingAcceleratorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomRoutingAccelerator", params, optFns, c.addOperationDeleteCustomRoutingAcceleratorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteCustomRoutingAcceleratorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCustomRoutingAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCustomRoutingAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCustomRoutingAccelerator{}, middleware.After)
 	if err != nil {
 		return err

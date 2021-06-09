@@ -17,7 +17,7 @@ func (c *Client) RegisterWebhookWithThirdParty(ctx context.Context, params *Regi
 		params = &RegisterWebhookWithThirdPartyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterWebhookWithThirdParty", params, optFns, addOperationRegisterWebhookWithThirdPartyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterWebhookWithThirdParty", params, optFns, c.addOperationRegisterWebhookWithThirdPartyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type RegisterWebhookWithThirdPartyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterWebhookWithThirdPartyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterWebhookWithThirdPartyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterWebhookWithThirdParty{}, middleware.After)
 	if err != nil {
 		return err

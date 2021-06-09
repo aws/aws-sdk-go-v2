@@ -18,7 +18,7 @@ func (c *Client) UpdateCrawler(ctx context.Context, params *UpdateCrawlerInput, 
 		params = &UpdateCrawlerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateCrawler", params, optFns, addOperationUpdateCrawlerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateCrawler", params, optFns, c.addOperationUpdateCrawlerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type UpdateCrawlerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateCrawlerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateCrawlerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCrawler{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeBackupVault(ctx context.Context, params *DescribeBackup
 		params = &DescribeBackupVaultInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeBackupVault", params, optFns, addOperationDescribeBackupVaultMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeBackupVault", params, optFns, c.addOperationDescribeBackupVaultMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DescribeBackupVaultOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBackupVault{}, middleware.After)
 	if err != nil {
 		return err

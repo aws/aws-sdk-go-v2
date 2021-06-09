@@ -18,7 +18,7 @@ func (c *Client) DescribeNetworkInterfaces(ctx context.Context, params *Describe
 		params = &DescribeNetworkInterfacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeNetworkInterfaces", params, optFns, addOperationDescribeNetworkInterfacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeNetworkInterfaces", params, optFns, c.addOperationDescribeNetworkInterfacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -185,7 +185,7 @@ type DescribeNetworkInterfacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeNetworkInterfacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeNetworkInterfacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeNetworkInterfaces{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) GetPullRequestOverrideState(ctx context.Context, params *GetPul
 		params = &GetPullRequestOverrideStateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPullRequestOverrideState", params, optFns, addOperationGetPullRequestOverrideStateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPullRequestOverrideState", params, optFns, c.addOperationGetPullRequestOverrideStateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetPullRequestOverrideStateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPullRequestOverrideStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPullRequestOverrideStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPullRequestOverrideState{}, middleware.After)
 	if err != nil {
 		return err

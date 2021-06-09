@@ -23,7 +23,7 @@ func (c *Client) GetStreamingDistribution(ctx context.Context, params *GetStream
 		params = &GetStreamingDistributionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetStreamingDistribution", params, optFns, addOperationGetStreamingDistributionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetStreamingDistribution", params, optFns, c.addOperationGetStreamingDistributionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type GetStreamingDistributionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetStreamingDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetStreamingDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetStreamingDistribution{}, middleware.After)
 	if err != nil {
 		return err

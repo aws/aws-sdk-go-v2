@@ -28,7 +28,7 @@ func (c *Client) GetComplianceDetail(ctx context.Context, params *GetComplianceD
 		params = &GetComplianceDetailInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetComplianceDetail", params, optFns, addOperationGetComplianceDetailMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetComplianceDetail", params, optFns, c.addOperationGetComplianceDetailMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type GetComplianceDetailOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetComplianceDetailMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetComplianceDetailMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceDetail{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListMultiplexPrograms(ctx context.Context, params *ListMultiple
 		params = &ListMultiplexProgramsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListMultiplexPrograms", params, optFns, addOperationListMultiplexProgramsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListMultiplexPrograms", params, optFns, c.addOperationListMultiplexProgramsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListMultiplexProgramsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListMultiplexProgramsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListMultiplexProgramsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMultiplexPrograms{}, middleware.After)
 	if err != nil {
 		return err

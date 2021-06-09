@@ -22,7 +22,7 @@ func (c *Client) DescribeVirtualInterfaces(ctx context.Context, params *Describe
 		params = &DescribeVirtualInterfacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeVirtualInterfaces", params, optFns, addOperationDescribeVirtualInterfacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeVirtualInterfaces", params, optFns, c.addOperationDescribeVirtualInterfacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DescribeVirtualInterfacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeVirtualInterfacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeVirtualInterfacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeVirtualInterfaces{}, middleware.After)
 	if err != nil {
 		return err

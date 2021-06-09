@@ -20,7 +20,7 @@ func (c *Client) DescribeVolumeAttribute(ctx context.Context, params *DescribeVo
 		params = &DescribeVolumeAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeVolumeAttribute", params, optFns, addOperationDescribeVolumeAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeVolumeAttribute", params, optFns, c.addOperationDescribeVolumeAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DescribeVolumeAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeVolumeAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeVolumeAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeVolumeAttribute{}, middleware.After)
 	if err != nil {
 		return err

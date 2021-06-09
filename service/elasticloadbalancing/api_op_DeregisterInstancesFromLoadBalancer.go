@@ -23,7 +23,7 @@ func (c *Client) DeregisterInstancesFromLoadBalancer(ctx context.Context, params
 		params = &DeregisterInstancesFromLoadBalancerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterInstancesFromLoadBalancer", params, optFns, addOperationDeregisterInstancesFromLoadBalancerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterInstancesFromLoadBalancer", params, optFns, c.addOperationDeregisterInstancesFromLoadBalancerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DeregisterInstancesFromLoadBalancerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterInstancesFromLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterInstancesFromLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeregisterInstancesFromLoadBalancer{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) StartHumanLoop(ctx context.Context, params *StartHumanLoopInput
 		params = &StartHumanLoopInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartHumanLoop", params, optFns, addOperationStartHumanLoopMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartHumanLoop", params, optFns, c.addOperationStartHumanLoopMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type StartHumanLoopOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartHumanLoopMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartHumanLoopMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartHumanLoop{}, middleware.After)
 	if err != nil {
 		return err

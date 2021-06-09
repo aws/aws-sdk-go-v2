@@ -21,7 +21,7 @@ func (c *Client) ModifyRule(ctx context.Context, params *ModifyRuleInput, optFns
 		params = &ModifyRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyRule", params, optFns, addOperationModifyRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyRule", params, optFns, c.addOperationModifyRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ModifyRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyRule{}, middleware.After)
 	if err != nil {
 		return err

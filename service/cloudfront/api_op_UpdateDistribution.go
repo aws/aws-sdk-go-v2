@@ -94,7 +94,7 @@ func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistribut
 		params = &UpdateDistributionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDistribution", params, optFns, addOperationUpdateDistributionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDistribution", params, optFns, c.addOperationUpdateDistributionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -135,7 +135,7 @@ type UpdateDistributionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpUpdateDistribution{}, middleware.After)
 	if err != nil {
 		return err

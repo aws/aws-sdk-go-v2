@@ -16,7 +16,7 @@ func (c *Client) CreateUsagePlanKey(ctx context.Context, params *CreateUsagePlan
 		params = &CreateUsagePlanKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateUsagePlanKey", params, optFns, addOperationCreateUsagePlanKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateUsagePlanKey", params, optFns, c.addOperationCreateUsagePlanKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type CreateUsagePlanKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateUsagePlanKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateUsagePlanKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUsagePlanKey{}, middleware.After)
 	if err != nil {
 		return err

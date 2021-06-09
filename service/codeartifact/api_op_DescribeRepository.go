@@ -18,7 +18,7 @@ func (c *Client) DescribeRepository(ctx context.Context, params *DescribeReposit
 		params = &DescribeRepositoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRepository", params, optFns, addOperationDescribeRepositoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRepository", params, optFns, c.addOperationDescribeRepositoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeRepositoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRepository{}, middleware.After)
 	if err != nil {
 		return err

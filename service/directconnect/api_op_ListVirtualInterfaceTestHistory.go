@@ -17,7 +17,7 @@ func (c *Client) ListVirtualInterfaceTestHistory(ctx context.Context, params *Li
 		params = &ListVirtualInterfaceTestHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListVirtualInterfaceTestHistory", params, optFns, addOperationListVirtualInterfaceTestHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListVirtualInterfaceTestHistory", params, optFns, c.addOperationListVirtualInterfaceTestHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ListVirtualInterfaceTestHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListVirtualInterfaceTestHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListVirtualInterfaceTestHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListVirtualInterfaceTestHistory{}, middleware.After)
 	if err != nil {
 		return err

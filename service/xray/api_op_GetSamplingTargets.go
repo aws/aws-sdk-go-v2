@@ -19,7 +19,7 @@ func (c *Client) GetSamplingTargets(ctx context.Context, params *GetSamplingTarg
 		params = &GetSamplingTargetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSamplingTargets", params, optFns, addOperationGetSamplingTargetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSamplingTargets", params, optFns, c.addOperationGetSamplingTargetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetSamplingTargetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSamplingTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSamplingTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSamplingTargets{}, middleware.After)
 	if err != nil {
 		return err

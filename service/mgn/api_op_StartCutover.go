@@ -19,7 +19,7 @@ func (c *Client) StartCutover(ctx context.Context, params *StartCutoverInput, op
 		params = &StartCutoverInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartCutover", params, optFns, addOperationStartCutoverMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartCutover", params, optFns, c.addOperationStartCutoverMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type StartCutoverOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartCutoverMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartCutoverMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartCutover{}, middleware.After)
 	if err != nil {
 		return err

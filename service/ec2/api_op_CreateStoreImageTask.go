@@ -24,7 +24,7 @@ func (c *Client) CreateStoreImageTask(ctx context.Context, params *CreateStoreIm
 		params = &CreateStoreImageTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateStoreImageTask", params, optFns, addOperationCreateStoreImageTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateStoreImageTask", params, optFns, c.addOperationCreateStoreImageTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type CreateStoreImageTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateStoreImageTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateStoreImageTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateStoreImageTask{}, middleware.After)
 	if err != nil {
 		return err

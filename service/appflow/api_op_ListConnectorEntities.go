@@ -19,7 +19,7 @@ func (c *Client) ListConnectorEntities(ctx context.Context, params *ListConnecto
 		params = &ListConnectorEntitiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListConnectorEntities", params, optFns, addOperationListConnectorEntitiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListConnectorEntities", params, optFns, c.addOperationListConnectorEntitiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListConnectorEntitiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListConnectorEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListConnectorEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConnectorEntities{}, middleware.After)
 	if err != nil {
 		return err

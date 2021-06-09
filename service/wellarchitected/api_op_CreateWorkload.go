@@ -22,7 +22,7 @@ func (c *Client) CreateWorkload(ctx context.Context, params *CreateWorkloadInput
 		params = &CreateWorkloadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateWorkload", params, optFns, addOperationCreateWorkloadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateWorkload", params, optFns, c.addOperationCreateWorkloadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -179,7 +179,7 @@ type CreateWorkloadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkload{}, middleware.After)
 	if err != nil {
 		return err

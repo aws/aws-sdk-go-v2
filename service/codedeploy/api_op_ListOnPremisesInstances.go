@@ -20,7 +20,7 @@ func (c *Client) ListOnPremisesInstances(ctx context.Context, params *ListOnPrem
 		params = &ListOnPremisesInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListOnPremisesInstances", params, optFns, addOperationListOnPremisesInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListOnPremisesInstances", params, optFns, c.addOperationListOnPremisesInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ListOnPremisesInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListOnPremisesInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListOnPremisesInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOnPremisesInstances{}, middleware.After)
 	if err != nil {
 		return err

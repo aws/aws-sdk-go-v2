@@ -17,7 +17,7 @@ func (c *Client) StopRemoteAccessSession(ctx context.Context, params *StopRemote
 		params = &StopRemoteAccessSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopRemoteAccessSession", params, optFns, addOperationStopRemoteAccessSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopRemoteAccessSession", params, optFns, c.addOperationStopRemoteAccessSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type StopRemoteAccessSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopRemoteAccessSession{}, middleware.After)
 	if err != nil {
 		return err

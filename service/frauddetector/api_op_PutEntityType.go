@@ -20,7 +20,7 @@ func (c *Client) PutEntityType(ctx context.Context, params *PutEntityTypeInput, 
 		params = &PutEntityTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutEntityType", params, optFns, addOperationPutEntityTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutEntityType", params, optFns, c.addOperationPutEntityTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type PutEntityTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutEntityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutEntityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutEntityType{}, middleware.After)
 	if err != nil {
 		return err

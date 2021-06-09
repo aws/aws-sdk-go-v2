@@ -16,7 +16,7 @@ func (c *Client) RemoveTags(ctx context.Context, params *RemoveTagsInput, optFns
 		params = &RemoveTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveTags", params, optFns, addOperationRemoveTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveTags", params, optFns, c.addOperationRemoveTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type RemoveTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveTags{}, middleware.After)
 	if err != nil {
 		return err

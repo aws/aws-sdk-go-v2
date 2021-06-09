@@ -17,7 +17,7 @@ func (c *Client) GetRelationalDatabaseLogStreams(ctx context.Context, params *Ge
 		params = &GetRelationalDatabaseLogStreamsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRelationalDatabaseLogStreams", params, optFns, addOperationGetRelationalDatabaseLogStreamsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRelationalDatabaseLogStreams", params, optFns, c.addOperationGetRelationalDatabaseLogStreamsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetRelationalDatabaseLogStreamsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRelationalDatabaseLogStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRelationalDatabaseLogStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseLogStreams{}, middleware.After)
 	if err != nil {
 		return err

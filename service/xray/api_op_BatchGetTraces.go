@@ -20,7 +20,7 @@ func (c *Client) BatchGetTraces(ctx context.Context, params *BatchGetTracesInput
 		params = &BatchGetTracesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetTraces", params, optFns, addOperationBatchGetTracesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetTraces", params, optFns, c.addOperationBatchGetTracesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type BatchGetTracesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetTracesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetTracesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetTraces{}, middleware.After)
 	if err != nil {
 		return err

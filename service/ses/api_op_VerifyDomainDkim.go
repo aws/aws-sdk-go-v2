@@ -45,7 +45,7 @@ func (c *Client) VerifyDomainDkim(ctx context.Context, params *VerifyDomainDkimI
 		params = &VerifyDomainDkimInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "VerifyDomainDkim", params, optFns, addOperationVerifyDomainDkimMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "VerifyDomainDkim", params, optFns, c.addOperationVerifyDomainDkimMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type VerifyDomainDkimOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationVerifyDomainDkimMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationVerifyDomainDkimMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpVerifyDomainDkim{}, middleware.After)
 	if err != nil {
 		return err

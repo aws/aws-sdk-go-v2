@@ -18,7 +18,7 @@ func (c *Client) ListVolumeInitiators(ctx context.Context, params *ListVolumeIni
 		params = &ListVolumeInitiatorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListVolumeInitiators", params, optFns, addOperationListVolumeInitiatorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListVolumeInitiators", params, optFns, c.addOperationListVolumeInitiatorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type ListVolumeInitiatorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListVolumeInitiatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListVolumeInitiatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListVolumeInitiators{}, middleware.After)
 	if err != nil {
 		return err

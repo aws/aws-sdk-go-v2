@@ -18,7 +18,7 @@ func (c *Client) CloseTunnel(ctx context.Context, params *CloseTunnelInput, optF
 		params = &CloseTunnelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CloseTunnel", params, optFns, addOperationCloseTunnelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CloseTunnel", params, optFns, c.addOperationCloseTunnelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type CloseTunnelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCloseTunnelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCloseTunnelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCloseTunnel{}, middleware.After)
 	if err != nil {
 		return err

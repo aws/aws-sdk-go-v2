@@ -16,7 +16,7 @@ func (c *Client) UpdateDocumentationPart(ctx context.Context, params *UpdateDocu
 		params = &UpdateDocumentationPartInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDocumentationPart", params, optFns, addOperationUpdateDocumentationPartMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDocumentationPart", params, optFns, c.addOperationUpdateDocumentationPartMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type UpdateDocumentationPartOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDocumentationPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDocumentationPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDocumentationPart{}, middleware.After)
 	if err != nil {
 		return err

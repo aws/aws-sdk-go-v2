@@ -17,7 +17,7 @@ func (c *Client) DescribeRiskConfiguration(ctx context.Context, params *Describe
 		params = &DescribeRiskConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRiskConfiguration", params, optFns, addOperationDescribeRiskConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRiskConfiguration", params, optFns, c.addOperationDescribeRiskConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DescribeRiskConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRiskConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRiskConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRiskConfiguration{}, middleware.After)
 	if err != nil {
 		return err

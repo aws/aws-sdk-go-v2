@@ -16,7 +16,7 @@ func (c *Client) ForgetDevice(ctx context.Context, params *ForgetDeviceInput, op
 		params = &ForgetDeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ForgetDevice", params, optFns, addOperationForgetDeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ForgetDevice", params, optFns, c.addOperationForgetDeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type ForgetDeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationForgetDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationForgetDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpForgetDevice{}, middleware.After)
 	if err != nil {
 		return err

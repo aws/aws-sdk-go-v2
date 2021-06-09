@@ -20,7 +20,7 @@ func (c *Client) GetObject(ctx context.Context, params *GetObjectInput, optFns .
 		params = &GetObjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetObject", params, optFns, addOperationGetObjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetObject", params, optFns, c.addOperationGetObjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ type GetObjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetObject{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteMultiplex(ctx context.Context, params *DeleteMultiplexInp
 		params = &DeleteMultiplexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMultiplex", params, optFns, addOperationDeleteMultiplexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMultiplex", params, optFns, c.addOperationDeleteMultiplexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DeleteMultiplexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMultiplex{}, middleware.After)
 	if err != nil {
 		return err

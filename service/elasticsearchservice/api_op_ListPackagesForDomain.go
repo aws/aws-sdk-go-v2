@@ -18,7 +18,7 @@ func (c *Client) ListPackagesForDomain(ctx context.Context, params *ListPackages
 		params = &ListPackagesForDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPackagesForDomain", params, optFns, addOperationListPackagesForDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPackagesForDomain", params, optFns, c.addOperationListPackagesForDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListPackagesForDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPackagesForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPackagesForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPackagesForDomain{}, middleware.After)
 	if err != nil {
 		return err

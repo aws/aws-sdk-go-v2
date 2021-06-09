@@ -19,7 +19,7 @@ func (c *Client) GetInsight(ctx context.Context, params *GetInsightInput, optFns
 		params = &GetInsightInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInsight", params, optFns, addOperationGetInsightMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInsight", params, optFns, c.addOperationGetInsightMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetInsightOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInsight{}, middleware.After)
 	if err != nil {
 		return err

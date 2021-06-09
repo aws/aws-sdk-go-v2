@@ -26,7 +26,7 @@ func (c *Client) ResendValidationEmail(ctx context.Context, params *ResendValida
 		params = &ResendValidationEmailInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResendValidationEmail", params, optFns, addOperationResendValidationEmailMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResendValidationEmail", params, optFns, c.addOperationResendValidationEmailMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type ResendValidationEmailOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResendValidationEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResendValidationEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResendValidationEmail{}, middleware.After)
 	if err != nil {
 		return err

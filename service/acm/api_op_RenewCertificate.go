@@ -23,7 +23,7 @@ func (c *Client) RenewCertificate(ctx context.Context, params *RenewCertificateI
 		params = &RenewCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RenewCertificate", params, optFns, addOperationRenewCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RenewCertificate", params, optFns, c.addOperationRenewCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type RenewCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRenewCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRenewCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRenewCertificate{}, middleware.After)
 	if err != nil {
 		return err

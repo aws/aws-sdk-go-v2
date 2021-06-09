@@ -21,7 +21,7 @@ func (c *Client) GetInstancesHealthStatus(ctx context.Context, params *GetInstan
 		params = &GetInstancesHealthStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInstancesHealthStatus", params, optFns, addOperationGetInstancesHealthStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInstancesHealthStatus", params, optFns, c.addOperationGetInstancesHealthStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type GetInstancesHealthStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInstancesHealthStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInstancesHealthStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInstancesHealthStatus{}, middleware.After)
 	if err != nil {
 		return err

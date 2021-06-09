@@ -18,7 +18,7 @@ func (c *Client) ListApprovedOrigins(ctx context.Context, params *ListApprovedOr
 		params = &ListApprovedOriginsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListApprovedOrigins", params, optFns, addOperationListApprovedOriginsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListApprovedOrigins", params, optFns, c.addOperationListApprovedOriginsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListApprovedOriginsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListApprovedOriginsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListApprovedOriginsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApprovedOrigins{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UnshareApplication(ctx context.Context, params *UnshareApplicat
 		params = &UnshareApplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnshareApplication", params, optFns, addOperationUnshareApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnshareApplication", params, optFns, c.addOperationUnshareApplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type UnshareApplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnshareApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnshareApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUnshareApplication{}, middleware.After)
 	if err != nil {
 		return err

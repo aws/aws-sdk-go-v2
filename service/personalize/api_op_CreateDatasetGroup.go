@@ -59,7 +59,7 @@ func (c *Client) CreateDatasetGroup(ctx context.Context, params *CreateDatasetGr
 		params = &CreateDatasetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDatasetGroup", params, optFns, addOperationCreateDatasetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDatasetGroup", params, optFns, c.addOperationCreateDatasetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type CreateDatasetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDatasetGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -126,7 +126,7 @@ func (c *Client) CreateMountTarget(ctx context.Context, params *CreateMountTarge
 		params = &CreateMountTargetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMountTarget", params, optFns, addOperationCreateMountTargetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMountTarget", params, optFns, c.addOperationCreateMountTargetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -210,7 +210,7 @@ type CreateMountTargetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateMountTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateMountTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMountTarget{}, middleware.After)
 	if err != nil {
 		return err

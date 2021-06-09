@@ -30,7 +30,7 @@ func (c *Client) DetectFaces(ctx context.Context, params *DetectFacesInput, optF
 		params = &DetectFacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetectFaces", params, optFns, addOperationDetectFacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetectFaces", params, optFns, c.addOperationDetectFacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type DetectFacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetectFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetectFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectFaces{}, middleware.After)
 	if err != nil {
 		return err

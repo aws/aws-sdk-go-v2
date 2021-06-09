@@ -18,7 +18,7 @@ func (c *Client) DescribeEgressOnlyInternetGateways(ctx context.Context, params 
 		params = &DescribeEgressOnlyInternetGatewaysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEgressOnlyInternetGateways", params, optFns, addOperationDescribeEgressOnlyInternetGatewaysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEgressOnlyInternetGateways", params, optFns, c.addOperationDescribeEgressOnlyInternetGatewaysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DescribeEgressOnlyInternetGatewaysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEgressOnlyInternetGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEgressOnlyInternetGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeEgressOnlyInternetGateways{}, middleware.After)
 	if err != nil {
 		return err

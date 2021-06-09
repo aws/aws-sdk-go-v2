@@ -25,7 +25,7 @@ func (c *Client) DescribeProjectVersions(ctx context.Context, params *DescribePr
 		params = &DescribeProjectVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeProjectVersions", params, optFns, addOperationDescribeProjectVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeProjectVersions", params, optFns, c.addOperationDescribeProjectVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type DescribeProjectVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeProjectVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeProjectVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProjectVersions{}, middleware.After)
 	if err != nil {
 		return err

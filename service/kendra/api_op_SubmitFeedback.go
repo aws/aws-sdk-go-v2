@@ -18,7 +18,7 @@ func (c *Client) SubmitFeedback(ctx context.Context, params *SubmitFeedbackInput
 		params = &SubmitFeedbackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SubmitFeedback", params, optFns, addOperationSubmitFeedbackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SubmitFeedback", params, optFns, c.addOperationSubmitFeedbackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type SubmitFeedbackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSubmitFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSubmitFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSubmitFeedback{}, middleware.After)
 	if err != nil {
 		return err

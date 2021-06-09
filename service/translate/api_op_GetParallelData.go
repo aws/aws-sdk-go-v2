@@ -17,7 +17,7 @@ func (c *Client) GetParallelData(ctx context.Context, params *GetParallelDataInp
 		params = &GetParallelDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetParallelData", params, optFns, addOperationGetParallelDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetParallelData", params, optFns, c.addOperationGetParallelDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type GetParallelDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetParallelData{}, middleware.After)
 	if err != nil {
 		return err

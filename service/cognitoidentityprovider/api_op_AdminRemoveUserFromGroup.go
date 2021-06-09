@@ -17,7 +17,7 @@ func (c *Client) AdminRemoveUserFromGroup(ctx context.Context, params *AdminRemo
 		params = &AdminRemoveUserFromGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminRemoveUserFromGroup", params, optFns, addOperationAdminRemoveUserFromGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminRemoveUserFromGroup", params, optFns, c.addOperationAdminRemoveUserFromGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type AdminRemoveUserFromGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminRemoveUserFromGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminRemoveUserFromGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminRemoveUserFromGroup{}, middleware.After)
 	if err != nil {
 		return err

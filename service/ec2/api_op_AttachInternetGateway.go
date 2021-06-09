@@ -19,7 +19,7 @@ func (c *Client) AttachInternetGateway(ctx context.Context, params *AttachIntern
 		params = &AttachInternetGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachInternetGateway", params, optFns, addOperationAttachInternetGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachInternetGateway", params, optFns, c.addOperationAttachInternetGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type AttachInternetGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachInternetGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachInternetGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpAttachInternetGateway{}, middleware.After)
 	if err != nil {
 		return err

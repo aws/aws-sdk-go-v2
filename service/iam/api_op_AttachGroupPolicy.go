@@ -24,7 +24,7 @@ func (c *Client) AttachGroupPolicy(ctx context.Context, params *AttachGroupPolic
 		params = &AttachGroupPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachGroupPolicy", params, optFns, addOperationAttachGroupPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachGroupPolicy", params, optFns, c.addOperationAttachGroupPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type AttachGroupPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAttachGroupPolicy{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) BatchCreateChannelMembership(ctx context.Context, params *Batch
 		params = &BatchCreateChannelMembershipInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchCreateChannelMembership", params, optFns, addOperationBatchCreateChannelMembershipMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchCreateChannelMembership", params, optFns, c.addOperationBatchCreateChannelMembershipMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type BatchCreateChannelMembershipOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchCreateChannelMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchCreateChannelMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateChannelMembership{}, middleware.After)
 	if err != nil {
 		return err

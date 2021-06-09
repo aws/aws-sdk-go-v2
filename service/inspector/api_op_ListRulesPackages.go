@@ -17,7 +17,7 @@ func (c *Client) ListRulesPackages(ctx context.Context, params *ListRulesPackage
 		params = &ListRulesPackagesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRulesPackages", params, optFns, addOperationListRulesPackagesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRulesPackages", params, optFns, c.addOperationListRulesPackagesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListRulesPackagesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRulesPackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRulesPackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRulesPackages{}, middleware.After)
 	if err != nil {
 		return err

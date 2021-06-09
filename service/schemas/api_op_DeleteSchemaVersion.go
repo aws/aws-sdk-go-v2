@@ -16,7 +16,7 @@ func (c *Client) DeleteSchemaVersion(ctx context.Context, params *DeleteSchemaVe
 		params = &DeleteSchemaVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSchemaVersion", params, optFns, addOperationDeleteSchemaVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSchemaVersion", params, optFns, c.addOperationDeleteSchemaVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteSchemaVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSchemaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSchemaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSchemaVersion{}, middleware.After)
 	if err != nil {
 		return err

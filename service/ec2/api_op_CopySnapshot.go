@@ -39,7 +39,7 @@ func (c *Client) CopySnapshot(ctx context.Context, params *CopySnapshotInput, op
 		params = &CopySnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopySnapshot", params, optFns, addOperationCopySnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopySnapshot", params, optFns, c.addOperationCopySnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -148,7 +148,7 @@ type CopySnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopySnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopySnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCopySnapshot{}, middleware.After)
 	if err != nil {
 		return err
@@ -315,7 +315,7 @@ func (c *PresignClient) PresignCopySnapshot(ctx context.Context, params *CopySna
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
 	result, _, err := c.client.invokeOperation(ctx, "CopySnapshot", params, clientOptFns,
-		addOperationCopySnapshotMiddlewares,
+		c.client.addOperationCopySnapshotMiddlewares,
 		presignConverter(options).convertToPresignMiddleware,
 	)
 	if err != nil {

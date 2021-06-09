@@ -24,7 +24,7 @@ func (c *Client) CreateResolverEndpoint(ctx context.Context, params *CreateResol
 		params = &CreateResolverEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateResolverEndpoint", params, optFns, addOperationCreateResolverEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateResolverEndpoint", params, optFns, c.addOperationCreateResolverEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type CreateResolverEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateResolverEndpoint{}, middleware.After)
 	if err != nil {
 		return err

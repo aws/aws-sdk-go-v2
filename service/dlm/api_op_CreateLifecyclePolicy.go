@@ -18,7 +18,7 @@ func (c *Client) CreateLifecyclePolicy(ctx context.Context, params *CreateLifecy
 		params = &CreateLifecyclePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLifecyclePolicy", params, optFns, addOperationCreateLifecyclePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLifecyclePolicy", params, optFns, c.addOperationCreateLifecyclePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type CreateLifecyclePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLifecyclePolicy{}, middleware.After)
 	if err != nil {
 		return err

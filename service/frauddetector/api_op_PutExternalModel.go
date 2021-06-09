@@ -19,7 +19,7 @@ func (c *Client) PutExternalModel(ctx context.Context, params *PutExternalModelI
 		params = &PutExternalModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutExternalModel", params, optFns, addOperationPutExternalModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutExternalModel", params, optFns, c.addOperationPutExternalModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type PutExternalModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutExternalModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutExternalModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutExternalModel{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) BatchGetCrawlers(ctx context.Context, params *BatchGetCrawlersI
 		params = &BatchGetCrawlersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetCrawlers", params, optFns, addOperationBatchGetCrawlersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetCrawlers", params, optFns, c.addOperationBatchGetCrawlersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type BatchGetCrawlersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetCrawlersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetCrawlersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetCrawlers{}, middleware.After)
 	if err != nil {
 		return err

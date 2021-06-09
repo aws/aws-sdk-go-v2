@@ -18,7 +18,7 @@ func (c *Client) DeleteEndpointAccess(ctx context.Context, params *DeleteEndpoin
 		params = &DeleteEndpointAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEndpointAccess", params, optFns, addOperationDeleteEndpointAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEndpointAccess", params, optFns, c.addOperationDeleteEndpointAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type DeleteEndpointAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteEndpointAccess{}, middleware.After)
 	if err != nil {
 		return err

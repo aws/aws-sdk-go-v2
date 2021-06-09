@@ -35,7 +35,7 @@ func (c *Client) DeleteGeoMatchSet(ctx context.Context, params *DeleteGeoMatchSe
 		params = &DeleteGeoMatchSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGeoMatchSet", params, optFns, addOperationDeleteGeoMatchSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGeoMatchSet", params, optFns, c.addOperationDeleteGeoMatchSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DeleteGeoMatchSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGeoMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGeoMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteGeoMatchSet{}, middleware.After)
 	if err != nil {
 		return err

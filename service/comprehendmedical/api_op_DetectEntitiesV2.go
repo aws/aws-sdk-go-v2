@@ -25,7 +25,7 @@ func (c *Client) DetectEntitiesV2(ctx context.Context, params *DetectEntitiesV2I
 		params = &DetectEntitiesV2Input{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetectEntitiesV2", params, optFns, addOperationDetectEntitiesV2Middlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetectEntitiesV2", params, optFns, c.addOperationDetectEntitiesV2Middlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DetectEntitiesV2Output struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetectEntitiesV2Middlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetectEntitiesV2Middlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectEntitiesV2{}, middleware.After)
 	if err != nil {
 		return err

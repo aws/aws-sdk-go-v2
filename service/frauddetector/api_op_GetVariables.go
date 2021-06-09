@@ -23,7 +23,7 @@ func (c *Client) GetVariables(ctx context.Context, params *GetVariablesInput, op
 		params = &GetVariablesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetVariables", params, optFns, addOperationGetVariablesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetVariables", params, optFns, c.addOperationGetVariablesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetVariablesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetVariablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetVariablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetVariables{}, middleware.After)
 	if err != nil {
 		return err

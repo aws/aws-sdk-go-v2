@@ -21,7 +21,7 @@ func (c *Client) DeleteAttendee(ctx context.Context, params *DeleteAttendeeInput
 		params = &DeleteAttendeeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAttendee", params, optFns, addOperationDeleteAttendeeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAttendee", params, optFns, c.addOperationDeleteAttendeeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteAttendeeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAttendee{}, middleware.After)
 	if err != nil {
 		return err

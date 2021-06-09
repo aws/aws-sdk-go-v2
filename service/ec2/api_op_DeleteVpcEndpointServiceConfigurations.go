@@ -20,7 +20,7 @@ func (c *Client) DeleteVpcEndpointServiceConfigurations(ctx context.Context, par
 		params = &DeleteVpcEndpointServiceConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVpcEndpointServiceConfigurations", params, optFns, addOperationDeleteVpcEndpointServiceConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVpcEndpointServiceConfigurations", params, optFns, c.addOperationDeleteVpcEndpointServiceConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DeleteVpcEndpointServiceConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVpcEndpointServiceConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVpcEndpointServiceConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteVpcEndpointServiceConfigurations{}, middleware.After)
 	if err != nil {
 		return err

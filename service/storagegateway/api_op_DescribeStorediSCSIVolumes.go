@@ -20,7 +20,7 @@ func (c *Client) DescribeStorediSCSIVolumes(ctx context.Context, params *Describ
 		params = &DescribeStorediSCSIVolumesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeStorediSCSIVolumes", params, optFns, addOperationDescribeStorediSCSIVolumesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeStorediSCSIVolumes", params, optFns, c.addOperationDescribeStorediSCSIVolumesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +105,7 @@ type DescribeStorediSCSIVolumesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeStorediSCSIVolumesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeStorediSCSIVolumesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStorediSCSIVolumes{}, middleware.After)
 	if err != nil {
 		return err

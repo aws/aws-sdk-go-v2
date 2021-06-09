@@ -21,7 +21,7 @@ func (c *Client) StopCanary(ctx context.Context, params *StopCanaryInput, optFns
 		params = &StopCanaryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopCanary", params, optFns, addOperationStopCanaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopCanary", params, optFns, c.addOperationStopCanaryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type StopCanaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopCanary{}, middleware.After)
 	if err != nil {
 		return err

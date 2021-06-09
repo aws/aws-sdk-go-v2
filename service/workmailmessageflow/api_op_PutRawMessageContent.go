@@ -27,7 +27,7 @@ func (c *Client) PutRawMessageContent(ctx context.Context, params *PutRawMessage
 		params = &PutRawMessageContentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutRawMessageContent", params, optFns, addOperationPutRawMessageContentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutRawMessageContent", params, optFns, c.addOperationPutRawMessageContentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type PutRawMessageContentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutRawMessageContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutRawMessageContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutRawMessageContent{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DescribeServiceIntegration(ctx context.Context, params *Describ
 		params = &DescribeServiceIntegrationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeServiceIntegration", params, optFns, addOperationDescribeServiceIntegrationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeServiceIntegration", params, optFns, c.addOperationDescribeServiceIntegrationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DescribeServiceIntegrationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeServiceIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeServiceIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeServiceIntegration{}, middleware.After)
 	if err != nil {
 		return err

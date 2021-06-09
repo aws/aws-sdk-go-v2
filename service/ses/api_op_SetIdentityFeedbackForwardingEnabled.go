@@ -24,7 +24,7 @@ func (c *Client) SetIdentityFeedbackForwardingEnabled(ctx context.Context, param
 		params = &SetIdentityFeedbackForwardingEnabledInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetIdentityFeedbackForwardingEnabled", params, optFns, addOperationSetIdentityFeedbackForwardingEnabledMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetIdentityFeedbackForwardingEnabled", params, optFns, c.addOperationSetIdentityFeedbackForwardingEnabledMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type SetIdentityFeedbackForwardingEnabledOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetIdentityFeedbackForwardingEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetIdentityFeedbackForwardingEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetIdentityFeedbackForwardingEnabled{}, middleware.After)
 	if err != nil {
 		return err

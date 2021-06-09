@@ -17,7 +17,7 @@ func (c *Client) GetBackupPlanFromJSON(ctx context.Context, params *GetBackupPla
 		params = &GetBackupPlanFromJSONInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBackupPlanFromJSON", params, optFns, addOperationGetBackupPlanFromJSONMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBackupPlanFromJSON", params, optFns, c.addOperationGetBackupPlanFromJSONMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetBackupPlanFromJSONOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBackupPlanFromJSONMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBackupPlanFromJSONMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackupPlanFromJSON{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) UpdateFlowEntitlement(ctx context.Context, params *UpdateFlowEn
 		params = &UpdateFlowEntitlementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFlowEntitlement", params, optFns, addOperationUpdateFlowEntitlementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFlowEntitlement", params, optFns, c.addOperationUpdateFlowEntitlementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type UpdateFlowEntitlementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFlowEntitlementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFlowEntitlementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFlowEntitlement{}, middleware.After)
 	if err != nil {
 		return err

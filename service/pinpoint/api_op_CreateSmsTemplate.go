@@ -17,7 +17,7 @@ func (c *Client) CreateSmsTemplate(ctx context.Context, params *CreateSmsTemplat
 		params = &CreateSmsTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSmsTemplate", params, optFns, addOperationCreateSmsTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSmsTemplate", params, optFns, c.addOperationCreateSmsTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type CreateSmsTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSmsTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSmsTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSmsTemplate{}, middleware.After)
 	if err != nil {
 		return err

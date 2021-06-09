@@ -18,7 +18,7 @@ func (c *Client) SendProjectSessionAction(ctx context.Context, params *SendProje
 		params = &SendProjectSessionActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendProjectSessionAction", params, optFns, addOperationSendProjectSessionActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendProjectSessionAction", params, optFns, c.addOperationSendProjectSessionActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type SendProjectSessionActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendProjectSessionActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendProjectSessionActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendProjectSessionAction{}, middleware.After)
 	if err != nil {
 		return err

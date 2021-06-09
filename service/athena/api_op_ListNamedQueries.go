@@ -22,7 +22,7 @@ func (c *Client) ListNamedQueries(ctx context.Context, params *ListNamedQueriesI
 		params = &ListNamedQueriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListNamedQueries", params, optFns, addOperationListNamedQueriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListNamedQueries", params, optFns, c.addOperationListNamedQueriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ListNamedQueriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListNamedQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListNamedQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListNamedQueries{}, middleware.After)
 	if err != nil {
 		return err

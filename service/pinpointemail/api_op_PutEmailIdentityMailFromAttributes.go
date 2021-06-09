@@ -18,7 +18,7 @@ func (c *Client) PutEmailIdentityMailFromAttributes(ctx context.Context, params 
 		params = &PutEmailIdentityMailFromAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutEmailIdentityMailFromAttributes", params, optFns, addOperationPutEmailIdentityMailFromAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutEmailIdentityMailFromAttributes", params, optFns, c.addOperationPutEmailIdentityMailFromAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type PutEmailIdentityMailFromAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutEmailIdentityMailFromAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutEmailIdentityMailFromAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEmailIdentityMailFromAttributes{}, middleware.After)
 	if err != nil {
 		return err

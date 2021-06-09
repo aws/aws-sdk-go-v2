@@ -23,7 +23,7 @@ func (c *Client) DisassociateConnectionAlias(ctx context.Context, params *Disass
 		params = &DisassociateConnectionAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateConnectionAlias", params, optFns, addOperationDisassociateConnectionAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateConnectionAlias", params, optFns, c.addOperationDisassociateConnectionAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DisassociateConnectionAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateConnectionAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateConnectionAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateConnectionAlias{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) StartProjectVersion(ctx context.Context, params *StartProjectVe
 		params = &StartProjectVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartProjectVersion", params, optFns, addOperationStartProjectVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartProjectVersion", params, optFns, c.addOperationStartProjectVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type StartProjectVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartProjectVersion{}, middleware.After)
 	if err != nil {
 		return err

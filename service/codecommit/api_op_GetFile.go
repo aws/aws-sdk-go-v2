@@ -17,7 +17,7 @@ func (c *Client) GetFile(ctx context.Context, params *GetFileInput, optFns ...fu
 		params = &GetFileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFile", params, optFns, addOperationGetFileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFile", params, optFns, c.addOperationGetFileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type GetFileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFile{}, middleware.After)
 	if err != nil {
 		return err

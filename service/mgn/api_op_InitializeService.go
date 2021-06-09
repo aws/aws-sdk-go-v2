@@ -16,7 +16,7 @@ func (c *Client) InitializeService(ctx context.Context, params *InitializeServic
 		params = &InitializeServiceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InitializeService", params, optFns, addOperationInitializeServiceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InitializeService", params, optFns, c.addOperationInitializeServiceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +34,7 @@ type InitializeServiceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInitializeServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInitializeServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInitializeService{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) UpdatePullRequestApprovalRuleContent(ctx context.Context, param
 		params = &UpdatePullRequestApprovalRuleContentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePullRequestApprovalRuleContent", params, optFns, addOperationUpdatePullRequestApprovalRuleContentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePullRequestApprovalRuleContent", params, optFns, c.addOperationUpdatePullRequestApprovalRuleContentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type UpdatePullRequestApprovalRuleContentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePullRequestApprovalRuleContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePullRequestApprovalRuleContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePullRequestApprovalRuleContent{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetTableMetadata(ctx context.Context, params *GetTableMetadataI
 		params = &GetTableMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTableMetadata", params, optFns, addOperationGetTableMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTableMetadata", params, optFns, c.addOperationGetTableMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type GetTableMetadataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTableMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTableMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTableMetadata{}, middleware.After)
 	if err != nil {
 		return err

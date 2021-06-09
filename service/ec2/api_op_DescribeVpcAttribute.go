@@ -18,7 +18,7 @@ func (c *Client) DescribeVpcAttribute(ctx context.Context, params *DescribeVpcAt
 		params = &DescribeVpcAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeVpcAttribute", params, optFns, addOperationDescribeVpcAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeVpcAttribute", params, optFns, c.addOperationDescribeVpcAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DescribeVpcAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeVpcAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeVpcAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeVpcAttribute{}, middleware.After)
 	if err != nil {
 		return err

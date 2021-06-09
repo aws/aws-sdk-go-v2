@@ -20,7 +20,7 @@ func (c *Client) DescribePrefixLists(ctx context.Context, params *DescribePrefix
 		params = &DescribePrefixListsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePrefixLists", params, optFns, addOperationDescribePrefixListsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePrefixLists", params, optFns, c.addOperationDescribePrefixListsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DescribePrefixListsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePrefixListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePrefixListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribePrefixLists{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) DescribeConnectionsOnInterconnect(ctx context.Context, params *
 		params = &DescribeConnectionsOnInterconnectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeConnectionsOnInterconnect", params, optFns, addOperationDescribeConnectionsOnInterconnectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConnectionsOnInterconnect", params, optFns, c.addOperationDescribeConnectionsOnInterconnectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DescribeConnectionsOnInterconnectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeConnectionsOnInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeConnectionsOnInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConnectionsOnInterconnect{}, middleware.After)
 	if err != nil {
 		return err

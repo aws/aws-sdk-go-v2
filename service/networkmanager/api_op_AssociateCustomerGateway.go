@@ -26,7 +26,7 @@ func (c *Client) AssociateCustomerGateway(ctx context.Context, params *Associate
 		params = &AssociateCustomerGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateCustomerGateway", params, optFns, addOperationAssociateCustomerGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateCustomerGateway", params, optFns, c.addOperationAssociateCustomerGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type AssociateCustomerGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateCustomerGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateCustomerGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateCustomerGateway{}, middleware.After)
 	if err != nil {
 		return err

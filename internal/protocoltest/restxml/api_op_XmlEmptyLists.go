@@ -16,7 +16,7 @@ func (c *Client) XmlEmptyLists(ctx context.Context, params *XmlEmptyListsInput, 
 		params = &XmlEmptyListsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "XmlEmptyLists", params, optFns, addOperationXmlEmptyListsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "XmlEmptyLists", params, optFns, c.addOperationXmlEmptyListsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type XmlEmptyListsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationXmlEmptyListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationXmlEmptyListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlEmptyLists{}, middleware.After)
 	if err != nil {
 		return err

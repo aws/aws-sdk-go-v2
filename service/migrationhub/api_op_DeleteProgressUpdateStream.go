@@ -39,7 +39,7 @@ func (c *Client) DeleteProgressUpdateStream(ctx context.Context, params *DeleteP
 		params = &DeleteProgressUpdateStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProgressUpdateStream", params, optFns, addOperationDeleteProgressUpdateStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProgressUpdateStream", params, optFns, c.addOperationDeleteProgressUpdateStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DeleteProgressUpdateStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteProgressUpdateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteProgressUpdateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProgressUpdateStream{}, middleware.After)
 	if err != nil {
 		return err

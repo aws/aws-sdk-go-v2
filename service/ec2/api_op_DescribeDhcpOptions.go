@@ -21,7 +21,7 @@ func (c *Client) DescribeDhcpOptions(ctx context.Context, params *DescribeDhcpOp
 		params = &DescribeDhcpOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDhcpOptions", params, optFns, addOperationDescribeDhcpOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDhcpOptions", params, optFns, c.addOperationDescribeDhcpOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type DescribeDhcpOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDhcpOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDhcpOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeDhcpOptions{}, middleware.After)
 	if err != nil {
 		return err

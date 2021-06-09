@@ -37,7 +37,7 @@ func (c *Client) AdminUpdateUserAttributes(ctx context.Context, params *AdminUpd
 		params = &AdminUpdateUserAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminUpdateUserAttributes", params, optFns, addOperationAdminUpdateUserAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminUpdateUserAttributes", params, optFns, c.addOperationAdminUpdateUserAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type AdminUpdateUserAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminUpdateUserAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminUpdateUserAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminUpdateUserAttributes{}, middleware.After)
 	if err != nil {
 		return err

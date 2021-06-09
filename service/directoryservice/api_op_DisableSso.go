@@ -16,7 +16,7 @@ func (c *Client) DisableSso(ctx context.Context, params *DisableSsoInput, optFns
 		params = &DisableSsoInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableSso", params, optFns, addOperationDisableSsoMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableSso", params, optFns, c.addOperationDisableSsoMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DisableSsoOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableSsoMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableSsoMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableSso{}, middleware.After)
 	if err != nil {
 		return err

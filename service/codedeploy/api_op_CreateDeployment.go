@@ -17,7 +17,7 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 		params = &CreateDeploymentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDeployment", params, optFns, addOperationCreateDeploymentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDeployment", params, optFns, c.addOperationCreateDeploymentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ type CreateDeploymentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDeployment{}, middleware.After)
 	if err != nil {
 		return err

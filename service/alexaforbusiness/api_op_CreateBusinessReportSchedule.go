@@ -19,7 +19,7 @@ func (c *Client) CreateBusinessReportSchedule(ctx context.Context, params *Creat
 		params = &CreateBusinessReportScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateBusinessReportSchedule", params, optFns, addOperationCreateBusinessReportScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBusinessReportSchedule", params, optFns, c.addOperationCreateBusinessReportScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type CreateBusinessReportScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateBusinessReportScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateBusinessReportScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBusinessReportSchedule{}, middleware.After)
 	if err != nil {
 		return err

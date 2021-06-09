@@ -18,7 +18,7 @@ func (c *Client) ExportBundle(ctx context.Context, params *ExportBundleInput, op
 		params = &ExportBundleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExportBundle", params, optFns, addOperationExportBundleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExportBundle", params, optFns, c.addOperationExportBundleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ExportBundleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExportBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExportBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportBundle{}, middleware.After)
 	if err != nil {
 		return err

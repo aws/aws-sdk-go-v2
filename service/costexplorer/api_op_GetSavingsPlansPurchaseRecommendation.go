@@ -18,7 +18,7 @@ func (c *Client) GetSavingsPlansPurchaseRecommendation(ctx context.Context, para
 		params = &GetSavingsPlansPurchaseRecommendationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSavingsPlansPurchaseRecommendation", params, optFns, addOperationGetSavingsPlansPurchaseRecommendationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSavingsPlansPurchaseRecommendation", params, optFns, c.addOperationGetSavingsPlansPurchaseRecommendationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type GetSavingsPlansPurchaseRecommendationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSavingsPlansPurchaseRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSavingsPlansPurchaseRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSavingsPlansPurchaseRecommendation{}, middleware.After)
 	if err != nil {
 		return err

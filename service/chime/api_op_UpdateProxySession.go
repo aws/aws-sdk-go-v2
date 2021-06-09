@@ -17,7 +17,7 @@ func (c *Client) UpdateProxySession(ctx context.Context, params *UpdateProxySess
 		params = &UpdateProxySessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateProxySession", params, optFns, addOperationUpdateProxySessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateProxySession", params, optFns, c.addOperationUpdateProxySessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UpdateProxySessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateProxySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateProxySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProxySession{}, middleware.After)
 	if err != nil {
 		return err

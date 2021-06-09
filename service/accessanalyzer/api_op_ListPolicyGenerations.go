@@ -18,7 +18,7 @@ func (c *Client) ListPolicyGenerations(ctx context.Context, params *ListPolicyGe
 		params = &ListPolicyGenerationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPolicyGenerations", params, optFns, addOperationListPolicyGenerationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPolicyGenerations", params, optFns, c.addOperationListPolicyGenerationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListPolicyGenerationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPolicyGenerationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPolicyGenerationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPolicyGenerations{}, middleware.After)
 	if err != nil {
 		return err

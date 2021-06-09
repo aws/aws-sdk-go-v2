@@ -25,7 +25,7 @@ func (c *Client) CopyDBClusterSnapshot(ctx context.Context, params *CopyDBCluste
 		params = &CopyDBClusterSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopyDBClusterSnapshot", params, optFns, addOperationCopyDBClusterSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopyDBClusterSnapshot", params, optFns, c.addOperationCopyDBClusterSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -142,7 +142,7 @@ type CopyDBClusterSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopyDBClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopyDBClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopyDBClusterSnapshot{}, middleware.After)
 	if err != nil {
 		return err
@@ -309,7 +309,7 @@ func (c *PresignClient) PresignCopyDBClusterSnapshot(ctx context.Context, params
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
 	result, _, err := c.client.invokeOperation(ctx, "CopyDBClusterSnapshot", params, clientOptFns,
-		addOperationCopyDBClusterSnapshotMiddlewares,
+		c.client.addOperationCopyDBClusterSnapshotMiddlewares,
 		presignConverter(options).convertToPresignMiddleware,
 	)
 	if err != nil {

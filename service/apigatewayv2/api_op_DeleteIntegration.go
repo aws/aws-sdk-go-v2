@@ -16,7 +16,7 @@ func (c *Client) DeleteIntegration(ctx context.Context, params *DeleteIntegratio
 		params = &DeleteIntegrationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteIntegration", params, optFns, addOperationDeleteIntegrationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteIntegration", params, optFns, c.addOperationDeleteIntegrationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteIntegrationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIntegration{}, middleware.After)
 	if err != nil {
 		return err

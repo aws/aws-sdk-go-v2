@@ -16,7 +16,7 @@ func (c *Client) DeleteAddressBook(ctx context.Context, params *DeleteAddressBoo
 		params = &DeleteAddressBookInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAddressBook", params, optFns, addOperationDeleteAddressBookMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAddressBook", params, optFns, c.addOperationDeleteAddressBookMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteAddressBookOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAddressBookMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAddressBookMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAddressBook{}, middleware.After)
 	if err != nil {
 		return err

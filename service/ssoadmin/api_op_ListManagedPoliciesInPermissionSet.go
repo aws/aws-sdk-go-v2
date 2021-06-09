@@ -18,7 +18,7 @@ func (c *Client) ListManagedPoliciesInPermissionSet(ctx context.Context, params 
 		params = &ListManagedPoliciesInPermissionSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListManagedPoliciesInPermissionSet", params, optFns, addOperationListManagedPoliciesInPermissionSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListManagedPoliciesInPermissionSet", params, optFns, c.addOperationListManagedPoliciesInPermissionSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListManagedPoliciesInPermissionSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListManagedPoliciesInPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListManagedPoliciesInPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListManagedPoliciesInPermissionSet{}, middleware.After)
 	if err != nil {
 		return err

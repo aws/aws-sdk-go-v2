@@ -18,7 +18,7 @@ func (c *Client) DeleteEvent(ctx context.Context, params *DeleteEventInput, optF
 		params = &DeleteEventInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEvent", params, optFns, addOperationDeleteEventMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEvent", params, optFns, c.addOperationDeleteEventMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteEventOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEvent{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) ValidateAssessmentReportIntegrity(ctx context.Context, params *
 		params = &ValidateAssessmentReportIntegrityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ValidateAssessmentReportIntegrity", params, optFns, addOperationValidateAssessmentReportIntegrityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ValidateAssessmentReportIntegrity", params, optFns, c.addOperationValidateAssessmentReportIntegrityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ValidateAssessmentReportIntegrityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationValidateAssessmentReportIntegrityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationValidateAssessmentReportIntegrityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidateAssessmentReportIntegrity{}, middleware.After)
 	if err != nil {
 		return err

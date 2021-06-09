@@ -20,7 +20,7 @@ func (c *Client) DescribeChapCredentials(ctx context.Context, params *DescribeCh
 		params = &DescribeChapCredentialsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeChapCredentials", params, optFns, addOperationDescribeChapCredentialsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeChapCredentials", params, optFns, c.addOperationDescribeChapCredentialsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DescribeChapCredentialsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeChapCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeChapCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeChapCredentials{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) CreateTrail(ctx context.Context, params *CreateTrailInput, optF
 		params = &CreateTrailInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTrail", params, optFns, addOperationCreateTrailMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTrail", params, optFns, c.addOperationCreateTrailMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -186,7 +186,7 @@ type CreateTrailOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTrailMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTrailMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTrail{}, middleware.After)
 	if err != nil {
 		return err

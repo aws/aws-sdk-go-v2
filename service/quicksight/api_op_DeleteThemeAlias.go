@@ -18,7 +18,7 @@ func (c *Client) DeleteThemeAlias(ctx context.Context, params *DeleteThemeAliasI
 		params = &DeleteThemeAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteThemeAlias", params, optFns, addOperationDeleteThemeAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteThemeAlias", params, optFns, c.addOperationDeleteThemeAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type DeleteThemeAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteThemeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteThemeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteThemeAlias{}, middleware.After)
 	if err != nil {
 		return err

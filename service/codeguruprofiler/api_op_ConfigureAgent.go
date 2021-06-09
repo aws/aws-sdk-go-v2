@@ -19,7 +19,7 @@ func (c *Client) ConfigureAgent(ctx context.Context, params *ConfigureAgentInput
 		params = &ConfigureAgentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ConfigureAgent", params, optFns, addOperationConfigureAgentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ConfigureAgent", params, optFns, c.addOperationConfigureAgentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type ConfigureAgentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationConfigureAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationConfigureAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpConfigureAgent{}, middleware.After)
 	if err != nil {
 		return err

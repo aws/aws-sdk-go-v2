@@ -17,7 +17,7 @@ func (c *Client) PurchaseReservedDBInstancesOffering(ctx context.Context, params
 		params = &PurchaseReservedDBInstancesOfferingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PurchaseReservedDBInstancesOffering", params, optFns, addOperationPurchaseReservedDBInstancesOfferingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PurchaseReservedDBInstancesOffering", params, optFns, c.addOperationPurchaseReservedDBInstancesOfferingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type PurchaseReservedDBInstancesOfferingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPurchaseReservedDBInstancesOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPurchaseReservedDBInstancesOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPurchaseReservedDBInstancesOffering{}, middleware.After)
 	if err != nil {
 		return err

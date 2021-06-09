@@ -18,7 +18,7 @@ func (c *Client) DeleteMonitoringSchedule(ctx context.Context, params *DeleteMon
 		params = &DeleteMonitoringScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMonitoringSchedule", params, optFns, addOperationDeleteMonitoringScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMonitoringSchedule", params, optFns, c.addOperationDeleteMonitoringScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteMonitoringScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMonitoringScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMonitoringScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMonitoringSchedule{}, middleware.After)
 	if err != nil {
 		return err

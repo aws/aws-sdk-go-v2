@@ -18,7 +18,7 @@ func (c *Client) PutResolverQueryLogConfigPolicy(ctx context.Context, params *Pu
 		params = &PutResolverQueryLogConfigPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutResolverQueryLogConfigPolicy", params, optFns, addOperationPutResolverQueryLogConfigPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutResolverQueryLogConfigPolicy", params, optFns, c.addOperationPutResolverQueryLogConfigPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type PutResolverQueryLogConfigPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutResolverQueryLogConfigPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutResolverQueryLogConfigPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutResolverQueryLogConfigPolicy{}, middleware.After)
 	if err != nil {
 		return err

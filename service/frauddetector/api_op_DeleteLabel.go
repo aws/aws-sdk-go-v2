@@ -20,7 +20,7 @@ func (c *Client) DeleteLabel(ctx context.Context, params *DeleteLabelInput, optF
 		params = &DeleteLabelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLabel", params, optFns, addOperationDeleteLabelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLabel", params, optFns, c.addOperationDeleteLabelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteLabelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLabel{}, middleware.After)
 	if err != nil {
 		return err

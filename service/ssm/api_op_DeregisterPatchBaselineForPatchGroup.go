@@ -16,7 +16,7 @@ func (c *Client) DeregisterPatchBaselineForPatchGroup(ctx context.Context, param
 		params = &DeregisterPatchBaselineForPatchGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterPatchBaselineForPatchGroup", params, optFns, addOperationDeregisterPatchBaselineForPatchGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterPatchBaselineForPatchGroup", params, optFns, c.addOperationDeregisterPatchBaselineForPatchGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeregisterPatchBaselineForPatchGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterPatchBaselineForPatchGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterPatchBaselineForPatchGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterPatchBaselineForPatchGroup{}, middleware.After)
 	if err != nil {
 		return err

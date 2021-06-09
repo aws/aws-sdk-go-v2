@@ -17,7 +17,7 @@ func (c *Client) ListSupportedPhoneNumberCountries(ctx context.Context, params *
 		params = &ListSupportedPhoneNumberCountriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSupportedPhoneNumberCountries", params, optFns, addOperationListSupportedPhoneNumberCountriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSupportedPhoneNumberCountries", params, optFns, c.addOperationListSupportedPhoneNumberCountriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type ListSupportedPhoneNumberCountriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSupportedPhoneNumberCountriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSupportedPhoneNumberCountriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSupportedPhoneNumberCountries{}, middleware.After)
 	if err != nil {
 		return err

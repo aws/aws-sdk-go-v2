@@ -20,7 +20,7 @@ func (c *Client) CreateConnectorProfile(ctx context.Context, params *CreateConne
 		params = &CreateConnectorProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateConnectorProfile", params, optFns, addOperationCreateConnectorProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateConnectorProfile", params, optFns, c.addOperationCreateConnectorProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type CreateConnectorProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateConnectorProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateConnectorProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnectorProfile{}, middleware.After)
 	if err != nil {
 		return err

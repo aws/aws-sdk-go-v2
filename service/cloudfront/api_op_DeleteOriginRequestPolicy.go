@@ -21,7 +21,7 @@ func (c *Client) DeleteOriginRequestPolicy(ctx context.Context, params *DeleteOr
 		params = &DeleteOriginRequestPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteOriginRequestPolicy", params, optFns, addOperationDeleteOriginRequestPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteOriginRequestPolicy", params, optFns, c.addOperationDeleteOriginRequestPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteOriginRequestPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteOriginRequestPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteOriginRequestPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteOriginRequestPolicy{}, middleware.After)
 	if err != nil {
 		return err

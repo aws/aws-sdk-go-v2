@@ -17,7 +17,7 @@ func (c *Client) UpdateCustomRoutingListener(ctx context.Context, params *Update
 		params = &UpdateCustomRoutingListenerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateCustomRoutingListener", params, optFns, addOperationUpdateCustomRoutingListenerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateCustomRoutingListener", params, optFns, c.addOperationUpdateCustomRoutingListenerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UpdateCustomRoutingListenerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateCustomRoutingListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateCustomRoutingListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCustomRoutingListener{}, middleware.After)
 	if err != nil {
 		return err

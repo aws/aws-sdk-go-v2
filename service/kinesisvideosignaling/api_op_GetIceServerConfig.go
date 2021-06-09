@@ -30,7 +30,7 @@ func (c *Client) GetIceServerConfig(ctx context.Context, params *GetIceServerCon
 		params = &GetIceServerConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetIceServerConfig", params, optFns, addOperationGetIceServerConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetIceServerConfig", params, optFns, c.addOperationGetIceServerConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type GetIceServerConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetIceServerConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIceServerConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIceServerConfig{}, middleware.After)
 	if err != nil {
 		return err

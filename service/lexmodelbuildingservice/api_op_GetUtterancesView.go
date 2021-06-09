@@ -34,7 +34,7 @@ func (c *Client) GetUtterancesView(ctx context.Context, params *GetUtterancesVie
 		params = &GetUtterancesViewInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUtterancesView", params, optFns, addOperationGetUtterancesViewMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetUtterancesView", params, optFns, c.addOperationGetUtterancesViewMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type GetUtterancesViewOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetUtterancesViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetUtterancesViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUtterancesView{}, middleware.After)
 	if err != nil {
 		return err

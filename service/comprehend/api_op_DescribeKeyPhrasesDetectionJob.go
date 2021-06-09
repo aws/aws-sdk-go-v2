@@ -18,7 +18,7 @@ func (c *Client) DescribeKeyPhrasesDetectionJob(ctx context.Context, params *Des
 		params = &DescribeKeyPhrasesDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeKeyPhrasesDetectionJob", params, optFns, addOperationDescribeKeyPhrasesDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeKeyPhrasesDetectionJob", params, optFns, c.addOperationDescribeKeyPhrasesDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeKeyPhrasesDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeKeyPhrasesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeKeyPhrasesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeKeyPhrasesDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

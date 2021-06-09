@@ -19,7 +19,7 @@ func (c *Client) GetResolverRule(ctx context.Context, params *GetResolverRuleInp
 		params = &GetResolverRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetResolverRule", params, optFns, addOperationGetResolverRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetResolverRule", params, optFns, c.addOperationGetResolverRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetResolverRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResolverRule{}, middleware.After)
 	if err != nil {
 		return err

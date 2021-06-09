@@ -21,7 +21,7 @@ func (c *Client) DescribeCacheSubnetGroups(ctx context.Context, params *Describe
 		params = &DescribeCacheSubnetGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCacheSubnetGroups", params, optFns, addOperationDescribeCacheSubnetGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCacheSubnetGroups", params, optFns, c.addOperationDescribeCacheSubnetGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DescribeCacheSubnetGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCacheSubnetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCacheSubnetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeCacheSubnetGroups{}, middleware.After)
 	if err != nil {
 		return err

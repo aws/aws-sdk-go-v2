@@ -21,7 +21,7 @@ func (c *Client) DeletePullRequestApprovalRule(ctx context.Context, params *Dele
 		params = &DeletePullRequestApprovalRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePullRequestApprovalRule", params, optFns, addOperationDeletePullRequestApprovalRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePullRequestApprovalRule", params, optFns, c.addOperationDeletePullRequestApprovalRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DeletePullRequestApprovalRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePullRequestApprovalRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePullRequestApprovalRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePullRequestApprovalRule{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) RegisterTargetWithMaintenanceWindow(ctx context.Context, params
 		params = &RegisterTargetWithMaintenanceWindowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterTargetWithMaintenanceWindow", params, optFns, addOperationRegisterTargetWithMaintenanceWindowMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterTargetWithMaintenanceWindow", params, optFns, c.addOperationRegisterTargetWithMaintenanceWindowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type RegisterTargetWithMaintenanceWindowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterTargetWithMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterTargetWithMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterTargetWithMaintenanceWindow{}, middleware.After)
 	if err != nil {
 		return err

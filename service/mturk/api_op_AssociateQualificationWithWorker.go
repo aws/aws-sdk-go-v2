@@ -26,7 +26,7 @@ func (c *Client) AssociateQualificationWithWorker(ctx context.Context, params *A
 		params = &AssociateQualificationWithWorkerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateQualificationWithWorker", params, optFns, addOperationAssociateQualificationWithWorkerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateQualificationWithWorker", params, optFns, c.addOperationAssociateQualificationWithWorkerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type AssociateQualificationWithWorkerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateQualificationWithWorkerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateQualificationWithWorkerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateQualificationWithWorker{}, middleware.After)
 	if err != nil {
 		return err

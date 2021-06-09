@@ -17,7 +17,7 @@ func (c *Client) GetSkillGroup(ctx context.Context, params *GetSkillGroupInput, 
 		params = &GetSkillGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSkillGroup", params, optFns, addOperationGetSkillGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSkillGroup", params, optFns, c.addOperationGetSkillGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type GetSkillGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSkillGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSkillGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSkillGroup{}, middleware.After)
 	if err != nil {
 		return err

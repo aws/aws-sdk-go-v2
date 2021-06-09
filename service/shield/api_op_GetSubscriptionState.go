@@ -17,7 +17,7 @@ func (c *Client) GetSubscriptionState(ctx context.Context, params *GetSubscripti
 		params = &GetSubscriptionStateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSubscriptionState", params, optFns, addOperationGetSubscriptionStateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSubscriptionState", params, optFns, c.addOperationGetSubscriptionStateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type GetSubscriptionStateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSubscriptionStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSubscriptionStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSubscriptionState{}, middleware.After)
 	if err != nil {
 		return err

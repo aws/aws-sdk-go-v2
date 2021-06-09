@@ -16,7 +16,7 @@ func (c *Client) DeleteChannelPolicy(ctx context.Context, params *DeleteChannelP
 		params = &DeleteChannelPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteChannelPolicy", params, optFns, addOperationDeleteChannelPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteChannelPolicy", params, optFns, c.addOperationDeleteChannelPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteChannelPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteChannelPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteChannelPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteChannelPolicy{}, middleware.After)
 	if err != nil {
 		return err

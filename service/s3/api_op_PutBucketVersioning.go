@@ -48,7 +48,7 @@ func (c *Client) PutBucketVersioning(ctx context.Context, params *PutBucketVersi
 		params = &PutBucketVersioningInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketVersioning", params, optFns, addOperationPutBucketVersioningMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketVersioning", params, optFns, c.addOperationPutBucketVersioningMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type PutBucketVersioningOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketVersioningMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketVersioningMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketVersioning{}, middleware.After)
 	if err != nil {
 		return err

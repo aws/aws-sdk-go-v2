@@ -18,7 +18,7 @@ func (c *Client) UpdatePortal(ctx context.Context, params *UpdatePortalInput, op
 		params = &UpdatePortalInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePortal", params, optFns, addOperationUpdatePortalMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePortal", params, optFns, c.addOperationUpdatePortalMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type UpdatePortalOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePortal{}, middleware.After)
 	if err != nil {
 		return err

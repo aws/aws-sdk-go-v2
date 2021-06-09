@@ -21,7 +21,7 @@ func (c *Client) ListComplianceSummaries(ctx context.Context, params *ListCompli
 		params = &ListComplianceSummariesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListComplianceSummaries", params, optFns, addOperationListComplianceSummariesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListComplianceSummaries", params, optFns, c.addOperationListComplianceSummariesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type ListComplianceSummariesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListComplianceSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListComplianceSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListComplianceSummaries{}, middleware.After)
 	if err != nil {
 		return err

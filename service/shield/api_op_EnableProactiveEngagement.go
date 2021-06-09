@@ -18,7 +18,7 @@ func (c *Client) EnableProactiveEngagement(ctx context.Context, params *EnablePr
 		params = &EnableProactiveEngagementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableProactiveEngagement", params, optFns, addOperationEnableProactiveEngagementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableProactiveEngagement", params, optFns, c.addOperationEnableProactiveEngagementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ type EnableProactiveEngagementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableProactiveEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableProactiveEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableProactiveEngagement{}, middleware.After)
 	if err != nil {
 		return err

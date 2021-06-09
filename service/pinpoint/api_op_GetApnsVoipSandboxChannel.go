@@ -18,7 +18,7 @@ func (c *Client) GetApnsVoipSandboxChannel(ctx context.Context, params *GetApnsV
 		params = &GetApnsVoipSandboxChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetApnsVoipSandboxChannel", params, optFns, addOperationGetApnsVoipSandboxChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetApnsVoipSandboxChannel", params, optFns, c.addOperationGetApnsVoipSandboxChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetApnsVoipSandboxChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetApnsVoipSandboxChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetApnsVoipSandboxChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApnsVoipSandboxChannel{}, middleware.After)
 	if err != nil {
 		return err

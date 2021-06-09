@@ -16,7 +16,7 @@ func (c *Client) RegisterRobot(ctx context.Context, params *RegisterRobotInput, 
 		params = &RegisterRobotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterRobot", params, optFns, addOperationRegisterRobotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterRobot", params, optFns, c.addOperationRegisterRobotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type RegisterRobotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterRobotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterRobotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterRobot{}, middleware.After)
 	if err != nil {
 		return err

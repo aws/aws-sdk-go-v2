@@ -18,7 +18,7 @@ func (c *Client) StartMonitoringSchedule(ctx context.Context, params *StartMonit
 		params = &StartMonitoringScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartMonitoringSchedule", params, optFns, addOperationStartMonitoringScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartMonitoringSchedule", params, optFns, c.addOperationStartMonitoringScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type StartMonitoringScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartMonitoringScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartMonitoringScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMonitoringSchedule{}, middleware.After)
 	if err != nil {
 		return err

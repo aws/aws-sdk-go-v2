@@ -17,7 +17,7 @@ func (c *Client) DescribeProvisioningTemplateVersion(ctx context.Context, params
 		params = &DescribeProvisioningTemplateVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeProvisioningTemplateVersion", params, optFns, addOperationDescribeProvisioningTemplateVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeProvisioningTemplateVersion", params, optFns, c.addOperationDescribeProvisioningTemplateVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DescribeProvisioningTemplateVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeProvisioningTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeProvisioningTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeProvisioningTemplateVersion{}, middleware.After)
 	if err != nil {
 		return err

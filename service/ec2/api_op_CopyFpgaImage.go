@@ -16,7 +16,7 @@ func (c *Client) CopyFpgaImage(ctx context.Context, params *CopyFpgaImageInput, 
 		params = &CopyFpgaImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopyFpgaImage", params, optFns, addOperationCopyFpgaImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopyFpgaImage", params, optFns, c.addOperationCopyFpgaImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type CopyFpgaImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopyFpgaImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopyFpgaImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCopyFpgaImage{}, middleware.After)
 	if err != nil {
 		return err

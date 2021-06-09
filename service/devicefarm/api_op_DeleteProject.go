@@ -17,7 +17,7 @@ func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, 
 		params = &DeleteProjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProject", params, optFns, addOperationDeleteProjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProject", params, optFns, c.addOperationDeleteProjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteProjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProject{}, middleware.After)
 	if err != nil {
 		return err

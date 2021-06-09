@@ -18,7 +18,7 @@ func (c *Client) UpdateNotebookInstanceLifecycleConfig(ctx context.Context, para
 		params = &UpdateNotebookInstanceLifecycleConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateNotebookInstanceLifecycleConfig", params, optFns, addOperationUpdateNotebookInstanceLifecycleConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateNotebookInstanceLifecycleConfig", params, optFns, c.addOperationUpdateNotebookInstanceLifecycleConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type UpdateNotebookInstanceLifecycleConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateNotebookInstanceLifecycleConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateNotebookInstanceLifecycleConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateNotebookInstanceLifecycleConfig{}, middleware.After)
 	if err != nil {
 		return err

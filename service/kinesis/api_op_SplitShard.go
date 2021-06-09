@@ -53,7 +53,7 @@ func (c *Client) SplitShard(ctx context.Context, params *SplitShardInput, optFns
 		params = &SplitShardInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SplitShard", params, optFns, addOperationSplitShardMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SplitShard", params, optFns, c.addOperationSplitShardMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type SplitShardOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSplitShardMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSplitShardMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSplitShard{}, middleware.After)
 	if err != nil {
 		return err

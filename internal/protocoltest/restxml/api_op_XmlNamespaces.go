@@ -15,7 +15,7 @@ func (c *Client) XmlNamespaces(ctx context.Context, params *XmlNamespacesInput, 
 		params = &XmlNamespacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "XmlNamespaces", params, optFns, addOperationXmlNamespacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "XmlNamespaces", params, optFns, c.addOperationXmlNamespacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ type XmlNamespacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationXmlNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationXmlNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlNamespaces{}, middleware.After)
 	if err != nil {
 		return err

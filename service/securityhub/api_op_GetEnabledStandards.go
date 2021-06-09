@@ -18,7 +18,7 @@ func (c *Client) GetEnabledStandards(ctx context.Context, params *GetEnabledStan
 		params = &GetEnabledStandardsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEnabledStandards", params, optFns, addOperationGetEnabledStandardsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEnabledStandards", params, optFns, c.addOperationGetEnabledStandardsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type GetEnabledStandardsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEnabledStandardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEnabledStandardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnabledStandards{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeletePipeline(ctx context.Context, params *DeletePipelineInput
 		params = &DeletePipelineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePipeline", params, optFns, addOperationDeletePipelineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePipeline", params, optFns, c.addOperationDeletePipelineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeletePipelineOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePipeline{}, middleware.After)
 	if err != nil {
 		return err

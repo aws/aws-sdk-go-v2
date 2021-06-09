@@ -17,7 +17,7 @@ func (c *Client) UpdateFindingsFeedback(ctx context.Context, params *UpdateFindi
 		params = &UpdateFindingsFeedbackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFindingsFeedback", params, optFns, addOperationUpdateFindingsFeedbackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFindingsFeedback", params, optFns, c.addOperationUpdateFindingsFeedbackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UpdateFindingsFeedbackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFindingsFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFindingsFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFindingsFeedback{}, middleware.After)
 	if err != nil {
 		return err

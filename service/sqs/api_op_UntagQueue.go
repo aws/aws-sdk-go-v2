@@ -23,7 +23,7 @@ func (c *Client) UntagQueue(ctx context.Context, params *UntagQueueInput, optFns
 		params = &UntagQueueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagQueue", params, optFns, addOperationUntagQueueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagQueue", params, optFns, c.addOperationUntagQueueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UntagQueueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUntagQueue{}, middleware.After)
 	if err != nil {
 		return err

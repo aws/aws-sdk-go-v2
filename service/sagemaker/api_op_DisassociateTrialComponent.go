@@ -22,7 +22,7 @@ func (c *Client) DisassociateTrialComponent(ctx context.Context, params *Disasso
 		params = &DisassociateTrialComponentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateTrialComponent", params, optFns, addOperationDisassociateTrialComponentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateTrialComponent", params, optFns, c.addOperationDisassociateTrialComponentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DisassociateTrialComponentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateTrialComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateTrialComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateTrialComponent{}, middleware.After)
 	if err != nil {
 		return err

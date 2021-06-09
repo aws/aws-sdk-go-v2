@@ -19,7 +19,7 @@ func (c *Client) DescribeProtectedResource(ctx context.Context, params *Describe
 		params = &DescribeProtectedResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeProtectedResource", params, optFns, addOperationDescribeProtectedResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeProtectedResource", params, optFns, c.addOperationDescribeProtectedResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DescribeProtectedResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeProtectedResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeProtectedResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeProtectedResource{}, middleware.After)
 	if err != nil {
 		return err

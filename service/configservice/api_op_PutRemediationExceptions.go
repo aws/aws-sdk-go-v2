@@ -23,7 +23,7 @@ func (c *Client) PutRemediationExceptions(ctx context.Context, params *PutRemedi
 		params = &PutRemediationExceptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutRemediationExceptions", params, optFns, addOperationPutRemediationExceptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutRemediationExceptions", params, optFns, c.addOperationPutRemediationExceptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type PutRemediationExceptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutRemediationExceptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutRemediationExceptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRemediationExceptions{}, middleware.After)
 	if err != nil {
 		return err

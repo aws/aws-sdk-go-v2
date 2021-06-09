@@ -31,7 +31,7 @@ func (c *Client) GetCertificate(ctx context.Context, params *GetCertificateInput
 		params = &GetCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCertificate", params, optFns, addOperationGetCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCertificate", params, optFns, c.addOperationGetCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type GetCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCertificate{}, middleware.After)
 	if err != nil {
 		return err

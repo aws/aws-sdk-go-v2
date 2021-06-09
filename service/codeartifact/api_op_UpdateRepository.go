@@ -17,7 +17,7 @@ func (c *Client) UpdateRepository(ctx context.Context, params *UpdateRepositoryI
 		params = &UpdateRepositoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRepository", params, optFns, addOperationUpdateRepositoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRepository", params, optFns, c.addOperationUpdateRepositoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type UpdateRepositoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRepository{}, middleware.After)
 	if err != nil {
 		return err

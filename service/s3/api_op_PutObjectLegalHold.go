@@ -21,7 +21,7 @@ func (c *Client) PutObjectLegalHold(ctx context.Context, params *PutObjectLegalH
 		params = &PutObjectLegalHoldInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutObjectLegalHold", params, optFns, addOperationPutObjectLegalHoldMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutObjectLegalHold", params, optFns, c.addOperationPutObjectLegalHoldMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type PutObjectLegalHoldOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutObjectLegalHoldMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutObjectLegalHoldMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutObjectLegalHold{}, middleware.After)
 	if err != nil {
 		return err

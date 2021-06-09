@@ -28,7 +28,7 @@ func (c *Client) DisconnectFromService(ctx context.Context, params *DisconnectFr
 		params = &DisconnectFromServiceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisconnectFromService", params, optFns, addOperationDisconnectFromServiceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisconnectFromService", params, optFns, c.addOperationDisconnectFromServiceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type DisconnectFromServiceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisconnectFromServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisconnectFromServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisconnectFromService{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateCapacityProvider(ctx context.Context, params *UpdateCapac
 		params = &UpdateCapacityProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateCapacityProvider", params, optFns, addOperationUpdateCapacityProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateCapacityProvider", params, optFns, c.addOperationUpdateCapacityProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type UpdateCapacityProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCapacityProvider{}, middleware.After)
 	if err != nil {
 		return err

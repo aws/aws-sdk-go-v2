@@ -58,7 +58,7 @@ func (c *Client) PutEventSelectors(ctx context.Context, params *PutEventSelector
 		params = &PutEventSelectorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutEventSelectors", params, optFns, addOperationPutEventSelectorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutEventSelectors", params, optFns, c.addOperationPutEventSelectorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +129,7 @@ type PutEventSelectorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutEventSelectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutEventSelectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutEventSelectors{}, middleware.After)
 	if err != nil {
 		return err

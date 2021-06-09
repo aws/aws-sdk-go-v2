@@ -18,7 +18,7 @@ func (c *Client) UpdateFolder(ctx context.Context, params *UpdateFolderInput, op
 		params = &UpdateFolderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFolder", params, optFns, addOperationUpdateFolderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFolder", params, optFns, c.addOperationUpdateFolderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UpdateFolderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFolder{}, middleware.After)
 	if err != nil {
 		return err

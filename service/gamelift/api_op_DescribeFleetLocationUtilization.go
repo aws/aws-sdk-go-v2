@@ -31,7 +31,7 @@ func (c *Client) DescribeFleetLocationUtilization(ctx context.Context, params *D
 		params = &DescribeFleetLocationUtilizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFleetLocationUtilization", params, optFns, addOperationDescribeFleetLocationUtilizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFleetLocationUtilization", params, optFns, c.addOperationDescribeFleetLocationUtilizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeFleetLocationUtilizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFleetLocationUtilizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFleetLocationUtilizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFleetLocationUtilization{}, middleware.After)
 	if err != nil {
 		return err

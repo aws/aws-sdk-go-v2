@@ -28,7 +28,7 @@ func (c *Client) SendContactMethodVerification(ctx context.Context, params *Send
 		params = &SendContactMethodVerificationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendContactMethodVerification", params, optFns, addOperationSendContactMethodVerificationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendContactMethodVerification", params, optFns, c.addOperationSendContactMethodVerificationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type SendContactMethodVerificationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendContactMethodVerificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendContactMethodVerificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendContactMethodVerification{}, middleware.After)
 	if err != nil {
 		return err

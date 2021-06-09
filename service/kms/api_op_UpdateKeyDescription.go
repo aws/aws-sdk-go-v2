@@ -29,7 +29,7 @@ func (c *Client) UpdateKeyDescription(ctx context.Context, params *UpdateKeyDesc
 		params = &UpdateKeyDescriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateKeyDescription", params, optFns, addOperationUpdateKeyDescriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateKeyDescription", params, optFns, c.addOperationUpdateKeyDescriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type UpdateKeyDescriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateKeyDescriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateKeyDescriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateKeyDescription{}, middleware.After)
 	if err != nil {
 		return err

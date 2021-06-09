@@ -17,7 +17,7 @@ func (c *Client) DisassociateSkillFromUsers(ctx context.Context, params *Disasso
 		params = &DisassociateSkillFromUsersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateSkillFromUsers", params, optFns, addOperationDisassociateSkillFromUsersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateSkillFromUsers", params, optFns, c.addOperationDisassociateSkillFromUsersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DisassociateSkillFromUsersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateSkillFromUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateSkillFromUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateSkillFromUsers{}, middleware.After)
 	if err != nil {
 		return err

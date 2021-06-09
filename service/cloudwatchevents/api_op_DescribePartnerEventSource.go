@@ -19,7 +19,7 @@ func (c *Client) DescribePartnerEventSource(ctx context.Context, params *Describ
 		params = &DescribePartnerEventSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePartnerEventSource", params, optFns, addOperationDescribePartnerEventSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePartnerEventSource", params, optFns, c.addOperationDescribePartnerEventSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DescribePartnerEventSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePartnerEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePartnerEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePartnerEventSource{}, middleware.After)
 	if err != nil {
 		return err

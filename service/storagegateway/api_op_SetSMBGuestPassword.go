@@ -17,7 +17,7 @@ func (c *Client) SetSMBGuestPassword(ctx context.Context, params *SetSMBGuestPas
 		params = &SetSMBGuestPasswordInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetSMBGuestPassword", params, optFns, addOperationSetSMBGuestPasswordMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetSMBGuestPassword", params, optFns, c.addOperationSetSMBGuestPasswordMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type SetSMBGuestPasswordOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetSMBGuestPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetSMBGuestPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetSMBGuestPassword{}, middleware.After)
 	if err != nil {
 		return err

@@ -29,7 +29,7 @@ func (c *Client) GetTraceSummaries(ctx context.Context, params *GetTraceSummarie
 		params = &GetTraceSummariesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTraceSummaries", params, optFns, addOperationGetTraceSummariesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTraceSummaries", params, optFns, c.addOperationGetTraceSummariesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type GetTraceSummariesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTraceSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTraceSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTraceSummaries{}, middleware.After)
 	if err != nil {
 		return err

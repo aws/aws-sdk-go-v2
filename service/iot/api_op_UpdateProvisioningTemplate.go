@@ -17,7 +17,7 @@ func (c *Client) UpdateProvisioningTemplate(ctx context.Context, params *UpdateP
 		params = &UpdateProvisioningTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateProvisioningTemplate", params, optFns, addOperationUpdateProvisioningTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateProvisioningTemplate", params, optFns, c.addOperationUpdateProvisioningTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type UpdateProvisioningTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateProvisioningTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateProvisioningTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProvisioningTemplate{}, middleware.After)
 	if err != nil {
 		return err

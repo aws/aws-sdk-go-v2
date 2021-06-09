@@ -35,7 +35,7 @@ func (c *Client) UpdateStackInstances(ctx context.Context, params *UpdateStackIn
 		params = &UpdateStackInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateStackInstances", params, optFns, addOperationUpdateStackInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateStackInstances", params, optFns, c.addOperationUpdateStackInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -148,7 +148,7 @@ type UpdateStackInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateStackInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateStackInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateStackInstances{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteApplicationSnapshot(ctx context.Context, params *DeleteAp
 		params = &DeleteApplicationSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteApplicationSnapshot", params, optFns, addOperationDeleteApplicationSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteApplicationSnapshot", params, optFns, c.addOperationDeleteApplicationSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteApplicationSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteApplicationSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteApplicationSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteApplicationSnapshot{}, middleware.After)
 	if err != nil {
 		return err

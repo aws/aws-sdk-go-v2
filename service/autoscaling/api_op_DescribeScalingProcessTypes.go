@@ -18,7 +18,7 @@ func (c *Client) DescribeScalingProcessTypes(ctx context.Context, params *Descri
 		params = &DescribeScalingProcessTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeScalingProcessTypes", params, optFns, addOperationDescribeScalingProcessTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeScalingProcessTypes", params, optFns, c.addOperationDescribeScalingProcessTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DescribeScalingProcessTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeScalingProcessTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeScalingProcessTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeScalingProcessTypes{}, middleware.After)
 	if err != nil {
 		return err

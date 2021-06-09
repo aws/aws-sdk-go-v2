@@ -21,7 +21,7 @@ func (c *Client) CreatePublicKey(ctx context.Context, params *CreatePublicKeyInp
 		params = &CreatePublicKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePublicKey", params, optFns, addOperationCreatePublicKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePublicKey", params, optFns, c.addOperationCreatePublicKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type CreatePublicKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpCreatePublicKey{}, middleware.After)
 	if err != nil {
 		return err

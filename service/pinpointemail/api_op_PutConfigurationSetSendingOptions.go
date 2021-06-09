@@ -17,7 +17,7 @@ func (c *Client) PutConfigurationSetSendingOptions(ctx context.Context, params *
 		params = &PutConfigurationSetSendingOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutConfigurationSetSendingOptions", params, optFns, addOperationPutConfigurationSetSendingOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutConfigurationSetSendingOptions", params, optFns, c.addOperationPutConfigurationSetSendingOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type PutConfigurationSetSendingOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutConfigurationSetSendingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutConfigurationSetSendingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutConfigurationSetSendingOptions{}, middleware.After)
 	if err != nil {
 		return err

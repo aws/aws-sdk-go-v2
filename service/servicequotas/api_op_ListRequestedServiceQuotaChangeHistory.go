@@ -18,7 +18,7 @@ func (c *Client) ListRequestedServiceQuotaChangeHistory(ctx context.Context, par
 		params = &ListRequestedServiceQuotaChangeHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRequestedServiceQuotaChangeHistory", params, optFns, addOperationListRequestedServiceQuotaChangeHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRequestedServiceQuotaChangeHistory", params, optFns, c.addOperationListRequestedServiceQuotaChangeHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListRequestedServiceQuotaChangeHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRequestedServiceQuotaChangeHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRequestedServiceQuotaChangeHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRequestedServiceQuotaChangeHistory{}, middleware.After)
 	if err != nil {
 		return err

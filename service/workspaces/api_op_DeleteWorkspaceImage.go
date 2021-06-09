@@ -18,7 +18,7 @@ func (c *Client) DeleteWorkspaceImage(ctx context.Context, params *DeleteWorkspa
 		params = &DeleteWorkspaceImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkspaceImage", params, optFns, addOperationDeleteWorkspaceImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkspaceImage", params, optFns, c.addOperationDeleteWorkspaceImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteWorkspaceImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteWorkspaceImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteWorkspaceImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWorkspaceImage{}, middleware.After)
 	if err != nil {
 		return err

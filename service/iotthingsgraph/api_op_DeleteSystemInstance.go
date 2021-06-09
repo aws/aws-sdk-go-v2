@@ -18,7 +18,7 @@ func (c *Client) DeleteSystemInstance(ctx context.Context, params *DeleteSystemI
 		params = &DeleteSystemInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSystemInstance", params, optFns, addOperationDeleteSystemInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSystemInstance", params, optFns, c.addOperationDeleteSystemInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteSystemInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSystemInstance{}, middleware.After)
 	if err != nil {
 		return err

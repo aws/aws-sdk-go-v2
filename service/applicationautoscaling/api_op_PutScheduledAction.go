@@ -32,7 +32,7 @@ func (c *Client) PutScheduledAction(ctx context.Context, params *PutScheduledAct
 		params = &PutScheduledActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutScheduledAction", params, optFns, addOperationPutScheduledActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutScheduledAction", params, optFns, c.addOperationPutScheduledActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -242,7 +242,7 @@ type PutScheduledActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutScheduledAction{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DeleteCommentContent(ctx context.Context, params *DeleteComment
 		params = &DeleteCommentContentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCommentContent", params, optFns, addOperationDeleteCommentContentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCommentContent", params, optFns, c.addOperationDeleteCommentContentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteCommentContentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCommentContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCommentContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCommentContent{}, middleware.After)
 	if err != nil {
 		return err

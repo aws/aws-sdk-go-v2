@@ -18,7 +18,7 @@ func (c *Client) StartTrigger(ctx context.Context, params *StartTriggerInput, op
 		params = &StartTriggerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartTrigger", params, optFns, addOperationStartTriggerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartTrigger", params, optFns, c.addOperationStartTriggerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type StartTriggerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTrigger{}, middleware.After)
 	if err != nil {
 		return err

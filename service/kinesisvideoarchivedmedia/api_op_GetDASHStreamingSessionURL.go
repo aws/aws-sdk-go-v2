@@ -135,7 +135,7 @@ func (c *Client) GetDASHStreamingSessionURL(ctx context.Context, params *GetDASH
 		params = &GetDASHStreamingSessionURLInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDASHStreamingSessionURL", params, optFns, addOperationGetDASHStreamingSessionURLMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDASHStreamingSessionURL", params, optFns, c.addOperationGetDASHStreamingSessionURLMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -265,7 +265,7 @@ type GetDASHStreamingSessionURLOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDASHStreamingSessionURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDASHStreamingSessionURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDASHStreamingSessionURL{}, middleware.After)
 	if err != nil {
 		return err

@@ -27,7 +27,7 @@ func (c *Client) CreateApplicationVersion(ctx context.Context, params *CreateApp
 		params = &CreateApplicationVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateApplicationVersion", params, optFns, addOperationCreateApplicationVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateApplicationVersion", params, optFns, c.addOperationCreateApplicationVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type CreateApplicationVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateApplicationVersion{}, middleware.After)
 	if err != nil {
 		return err

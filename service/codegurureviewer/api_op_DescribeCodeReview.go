@@ -17,7 +17,7 @@ func (c *Client) DescribeCodeReview(ctx context.Context, params *DescribeCodeRev
 		params = &DescribeCodeReviewInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCodeReview", params, optFns, addOperationDescribeCodeReviewMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCodeReview", params, optFns, c.addOperationDescribeCodeReviewMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DescribeCodeReviewOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCodeReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCodeReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCodeReview{}, middleware.After)
 	if err != nil {
 		return err

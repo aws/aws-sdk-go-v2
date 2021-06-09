@@ -20,7 +20,7 @@ func (c *Client) ResyncMFADevice(ctx context.Context, params *ResyncMFADeviceInp
 		params = &ResyncMFADeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResyncMFADevice", params, optFns, addOperationResyncMFADeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResyncMFADevice", params, optFns, c.addOperationResyncMFADeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ResyncMFADeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResyncMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResyncMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpResyncMFADevice{}, middleware.After)
 	if err != nil {
 		return err

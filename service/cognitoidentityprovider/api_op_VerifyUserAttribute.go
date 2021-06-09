@@ -15,7 +15,7 @@ func (c *Client) VerifyUserAttribute(ctx context.Context, params *VerifyUserAttr
 		params = &VerifyUserAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "VerifyUserAttribute", params, optFns, addOperationVerifyUserAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "VerifyUserAttribute", params, optFns, c.addOperationVerifyUserAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type VerifyUserAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationVerifyUserAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationVerifyUserAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpVerifyUserAttribute{}, middleware.After)
 	if err != nil {
 		return err

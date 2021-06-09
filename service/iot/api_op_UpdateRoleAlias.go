@@ -16,7 +16,7 @@ func (c *Client) UpdateRoleAlias(ctx context.Context, params *UpdateRoleAliasInp
 		params = &UpdateRoleAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRoleAlias", params, optFns, addOperationUpdateRoleAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRoleAlias", params, optFns, c.addOperationUpdateRoleAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UpdateRoleAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRoleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRoleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRoleAlias{}, middleware.After)
 	if err != nil {
 		return err

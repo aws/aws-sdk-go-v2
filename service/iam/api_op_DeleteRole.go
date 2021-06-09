@@ -21,7 +21,7 @@ func (c *Client) DeleteRole(ctx context.Context, params *DeleteRoleInput, optFns
 		params = &DeleteRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRole", params, optFns, addOperationDeleteRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRole", params, optFns, c.addOperationDeleteRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteRole{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) UpdateWorkspaceAlias(ctx context.Context, params *UpdateWorkspa
 		params = &UpdateWorkspaceAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateWorkspaceAlias", params, optFns, addOperationUpdateWorkspaceAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateWorkspaceAlias", params, optFns, c.addOperationUpdateWorkspaceAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type UpdateWorkspaceAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateWorkspaceAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateWorkspaceAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkspaceAlias{}, middleware.After)
 	if err != nil {
 		return err

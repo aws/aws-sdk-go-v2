@@ -24,7 +24,7 @@ func (c *Client) GetBlueprints(ctx context.Context, params *GetBlueprintsInput, 
 		params = &GetBlueprintsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBlueprints", params, optFns, addOperationGetBlueprintsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBlueprints", params, optFns, c.addOperationGetBlueprintsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type GetBlueprintsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBlueprintsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBlueprintsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBlueprints{}, middleware.After)
 	if err != nil {
 		return err

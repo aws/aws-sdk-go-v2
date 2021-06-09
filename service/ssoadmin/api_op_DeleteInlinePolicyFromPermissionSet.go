@@ -16,7 +16,7 @@ func (c *Client) DeleteInlinePolicyFromPermissionSet(ctx context.Context, params
 		params = &DeleteInlinePolicyFromPermissionSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteInlinePolicyFromPermissionSet", params, optFns, addOperationDeleteInlinePolicyFromPermissionSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInlinePolicyFromPermissionSet", params, optFns, c.addOperationDeleteInlinePolicyFromPermissionSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteInlinePolicyFromPermissionSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteInlinePolicyFromPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteInlinePolicyFromPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteInlinePolicyFromPermissionSet{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeBillingGroup(ctx context.Context, params *DescribeBilli
 		params = &DescribeBillingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeBillingGroup", params, optFns, addOperationDescribeBillingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeBillingGroup", params, optFns, c.addOperationDescribeBillingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeBillingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBillingGroup{}, middleware.After)
 	if err != nil {
 		return err

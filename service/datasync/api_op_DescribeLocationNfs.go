@@ -18,7 +18,7 @@ func (c *Client) DescribeLocationNfs(ctx context.Context, params *DescribeLocati
 		params = &DescribeLocationNfsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLocationNfs", params, optFns, addOperationDescribeLocationNfsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLocationNfs", params, optFns, c.addOperationDescribeLocationNfsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeLocationNfsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLocationNfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLocationNfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationNfs{}, middleware.After)
 	if err != nil {
 		return err

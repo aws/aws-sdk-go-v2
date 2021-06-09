@@ -19,7 +19,7 @@ func (c *Client) RemoveFlowOutput(ctx context.Context, params *RemoveFlowOutputI
 		params = &RemoveFlowOutputInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveFlowOutput", params, optFns, addOperationRemoveFlowOutputMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveFlowOutput", params, optFns, c.addOperationRemoveFlowOutputMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type RemoveFlowOutputOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveFlowOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveFlowOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveFlowOutput{}, middleware.After)
 	if err != nil {
 		return err

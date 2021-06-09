@@ -34,7 +34,7 @@ func (c *Client) CreateInterconnect(ctx context.Context, params *CreateInterconn
 		params = &CreateInterconnectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateInterconnect", params, optFns, addOperationCreateInterconnectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateInterconnect", params, optFns, c.addOperationCreateInterconnectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -144,7 +144,7 @@ type CreateInterconnectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateInterconnect{}, middleware.After)
 	if err != nil {
 		return err

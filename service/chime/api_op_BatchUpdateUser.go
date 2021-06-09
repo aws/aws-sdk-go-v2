@@ -19,7 +19,7 @@ func (c *Client) BatchUpdateUser(ctx context.Context, params *BatchUpdateUserInp
 		params = &BatchUpdateUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchUpdateUser", params, optFns, addOperationBatchUpdateUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchUpdateUser", params, optFns, c.addOperationBatchUpdateUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type BatchUpdateUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchUpdateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchUpdateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateUser{}, middleware.After)
 	if err != nil {
 		return err

@@ -30,7 +30,7 @@ func (c *Client) CreateLogStream(ctx context.Context, params *CreateLogStreamInp
 		params = &CreateLogStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLogStream", params, optFns, addOperationCreateLogStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLogStream", params, optFns, c.addOperationCreateLogStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type CreateLogStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLogStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLogStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLogStream{}, middleware.After)
 	if err != nil {
 		return err

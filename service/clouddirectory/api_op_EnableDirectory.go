@@ -17,7 +17,7 @@ func (c *Client) EnableDirectory(ctx context.Context, params *EnableDirectoryInp
 		params = &EnableDirectoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableDirectory", params, optFns, addOperationEnableDirectoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableDirectory", params, optFns, c.addOperationEnableDirectoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type EnableDirectoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableDirectory{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) SetRiskConfiguration(ctx context.Context, params *SetRiskConfig
 		params = &SetRiskConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetRiskConfiguration", params, optFns, addOperationSetRiskConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetRiskConfiguration", params, optFns, c.addOperationSetRiskConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type SetRiskConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetRiskConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetRiskConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetRiskConfiguration{}, middleware.After)
 	if err != nil {
 		return err

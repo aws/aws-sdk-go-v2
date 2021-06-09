@@ -24,7 +24,7 @@ func (c *Client) ListResourcesForWebACL(ctx context.Context, params *ListResourc
 		params = &ListResourcesForWebACLInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResourcesForWebACL", params, optFns, addOperationListResourcesForWebACLMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResourcesForWebACL", params, optFns, c.addOperationListResourcesForWebACLMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListResourcesForWebACLOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListResourcesForWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResourcesForWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourcesForWebACL{}, middleware.After)
 	if err != nil {
 		return err

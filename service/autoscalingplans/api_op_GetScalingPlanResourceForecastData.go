@@ -21,7 +21,7 @@ func (c *Client) GetScalingPlanResourceForecastData(ctx context.Context, params 
 		params = &GetScalingPlanResourceForecastDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetScalingPlanResourceForecastData", params, optFns, addOperationGetScalingPlanResourceForecastDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetScalingPlanResourceForecastData", params, optFns, c.addOperationGetScalingPlanResourceForecastDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +107,7 @@ type GetScalingPlanResourceForecastDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetScalingPlanResourceForecastDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetScalingPlanResourceForecastDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetScalingPlanResourceForecastData{}, middleware.After)
 	if err != nil {
 		return err

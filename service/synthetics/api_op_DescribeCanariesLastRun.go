@@ -19,7 +19,7 @@ func (c *Client) DescribeCanariesLastRun(ctx context.Context, params *DescribeCa
 		params = &DescribeCanariesLastRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCanariesLastRun", params, optFns, addOperationDescribeCanariesLastRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCanariesLastRun", params, optFns, c.addOperationDescribeCanariesLastRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeCanariesLastRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCanariesLastRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCanariesLastRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCanariesLastRun{}, middleware.After)
 	if err != nil {
 		return err

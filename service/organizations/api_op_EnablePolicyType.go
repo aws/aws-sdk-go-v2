@@ -25,7 +25,7 @@ func (c *Client) EnablePolicyType(ctx context.Context, params *EnablePolicyTypeI
 		params = &EnablePolicyTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnablePolicyType", params, optFns, addOperationEnablePolicyTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnablePolicyType", params, optFns, c.addOperationEnablePolicyTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type EnablePolicyTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnablePolicyTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnablePolicyTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnablePolicyType{}, middleware.After)
 	if err != nil {
 		return err

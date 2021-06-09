@@ -18,7 +18,7 @@ func (c *Client) UpdateContainerService(ctx context.Context, params *UpdateConta
 		params = &UpdateContainerServiceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateContainerService", params, optFns, addOperationUpdateContainerServiceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateContainerService", params, optFns, c.addOperationUpdateContainerServiceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type UpdateContainerServiceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateContainerServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateContainerServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateContainerService{}, middleware.After)
 	if err != nil {
 		return err

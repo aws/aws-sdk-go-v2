@@ -17,7 +17,7 @@ func (c *Client) GetConferencePreference(ctx context.Context, params *GetConfere
 		params = &GetConferencePreferenceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetConferencePreference", params, optFns, addOperationGetConferencePreferenceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetConferencePreference", params, optFns, c.addOperationGetConferencePreferenceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type GetConferencePreferenceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetConferencePreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetConferencePreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetConferencePreference{}, middleware.After)
 	if err != nil {
 		return err

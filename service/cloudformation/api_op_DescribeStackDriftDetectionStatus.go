@@ -30,7 +30,7 @@ func (c *Client) DescribeStackDriftDetectionStatus(ctx context.Context, params *
 		params = &DescribeStackDriftDetectionStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeStackDriftDetectionStatus", params, optFns, addOperationDescribeStackDriftDetectionStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeStackDriftDetectionStatus", params, optFns, c.addOperationDescribeStackDriftDetectionStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -120,7 +120,7 @@ type DescribeStackDriftDetectionStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeStackDriftDetectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeStackDriftDetectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeStackDriftDetectionStatus{}, middleware.After)
 	if err != nil {
 		return err

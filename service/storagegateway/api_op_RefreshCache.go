@@ -42,7 +42,7 @@ func (c *Client) RefreshCache(ctx context.Context, params *RefreshCacheInput, op
 		params = &RefreshCacheInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RefreshCache", params, optFns, addOperationRefreshCacheMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RefreshCache", params, optFns, c.addOperationRefreshCacheMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type RefreshCacheOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRefreshCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRefreshCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRefreshCache{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) DisableEbsEncryptionByDefault(ctx context.Context, params *Disa
 		params = &DisableEbsEncryptionByDefaultInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableEbsEncryptionByDefault", params, optFns, addOperationDisableEbsEncryptionByDefaultMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableEbsEncryptionByDefault", params, optFns, c.addOperationDisableEbsEncryptionByDefaultMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DisableEbsEncryptionByDefaultOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableEbsEncryptionByDefaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableEbsEncryptionByDefaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDisableEbsEncryptionByDefault{}, middleware.After)
 	if err != nil {
 		return err

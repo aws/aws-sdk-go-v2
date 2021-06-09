@@ -48,7 +48,7 @@ func (c *Client) LabelParameterVersion(ctx context.Context, params *LabelParamet
 		params = &LabelParameterVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "LabelParameterVersion", params, optFns, addOperationLabelParameterVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "LabelParameterVersion", params, optFns, c.addOperationLabelParameterVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type LabelParameterVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationLabelParameterVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationLabelParameterVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpLabelParameterVersion{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) TagMeeting(ctx context.Context, params *TagMeetingInput, optFns
 		params = &TagMeetingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TagMeeting", params, optFns, addOperationTagMeetingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagMeeting", params, optFns, c.addOperationTagMeetingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type TagMeetingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTagMeetingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTagMeetingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpTagMeeting{}, middleware.After)
 	if err != nil {
 		return err

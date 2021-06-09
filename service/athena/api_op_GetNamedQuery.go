@@ -18,7 +18,7 @@ func (c *Client) GetNamedQuery(ctx context.Context, params *GetNamedQueryInput, 
 		params = &GetNamedQueryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetNamedQuery", params, optFns, addOperationGetNamedQueryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetNamedQuery", params, optFns, c.addOperationGetNamedQueryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetNamedQueryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetNamedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetNamedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetNamedQuery{}, middleware.After)
 	if err != nil {
 		return err

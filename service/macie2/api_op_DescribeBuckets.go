@@ -19,7 +19,7 @@ func (c *Client) DescribeBuckets(ctx context.Context, params *DescribeBucketsInp
 		params = &DescribeBucketsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeBuckets", params, optFns, addOperationDescribeBucketsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeBuckets", params, optFns, c.addOperationDescribeBucketsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeBucketsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeBucketsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeBucketsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBuckets{}, middleware.After)
 	if err != nil {
 		return err

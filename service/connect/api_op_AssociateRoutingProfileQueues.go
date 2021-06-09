@@ -17,7 +17,7 @@ func (c *Client) AssociateRoutingProfileQueues(ctx context.Context, params *Asso
 		params = &AssociateRoutingProfileQueuesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateRoutingProfileQueues", params, optFns, addOperationAssociateRoutingProfileQueuesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateRoutingProfileQueues", params, optFns, c.addOperationAssociateRoutingProfileQueuesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type AssociateRoutingProfileQueuesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateRoutingProfileQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateRoutingProfileQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateRoutingProfileQueues{}, middleware.After)
 	if err != nil {
 		return err

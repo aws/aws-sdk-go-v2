@@ -29,7 +29,7 @@ func (c *Client) AddAttachmentsToSet(ctx context.Context, params *AddAttachments
 		params = &AddAttachmentsToSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddAttachmentsToSet", params, optFns, addOperationAddAttachmentsToSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddAttachmentsToSet", params, optFns, c.addOperationAddAttachmentsToSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type AddAttachmentsToSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddAttachmentsToSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddAttachmentsToSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddAttachmentsToSet{}, middleware.After)
 	if err != nil {
 		return err

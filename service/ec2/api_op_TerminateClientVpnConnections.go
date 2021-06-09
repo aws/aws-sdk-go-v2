@@ -19,7 +19,7 @@ func (c *Client) TerminateClientVpnConnections(ctx context.Context, params *Term
 		params = &TerminateClientVpnConnectionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TerminateClientVpnConnections", params, optFns, addOperationTerminateClientVpnConnectionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TerminateClientVpnConnections", params, optFns, c.addOperationTerminateClientVpnConnectionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type TerminateClientVpnConnectionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTerminateClientVpnConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTerminateClientVpnConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpTerminateClientVpnConnections{}, middleware.After)
 	if err != nil {
 		return err

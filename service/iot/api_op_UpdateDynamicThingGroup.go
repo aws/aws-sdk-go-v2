@@ -17,7 +17,7 @@ func (c *Client) UpdateDynamicThingGroup(ctx context.Context, params *UpdateDyna
 		params = &UpdateDynamicThingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDynamicThingGroup", params, optFns, addOperationUpdateDynamicThingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDynamicThingGroup", params, optFns, c.addOperationUpdateDynamicThingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type UpdateDynamicThingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDynamicThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDynamicThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDynamicThingGroup{}, middleware.After)
 	if err != nil {
 		return err

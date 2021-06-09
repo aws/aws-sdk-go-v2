@@ -18,7 +18,7 @@ func (c *Client) ListWorkspaces(ctx context.Context, params *ListWorkspacesInput
 		params = &ListWorkspacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListWorkspaces", params, optFns, addOperationListWorkspacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListWorkspaces", params, optFns, c.addOperationListWorkspacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListWorkspacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkspaces{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) UpdateRelatedItems(ctx context.Context, params *UpdateRelatedIt
 		params = &UpdateRelatedItemsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRelatedItems", params, optFns, addOperationUpdateRelatedItemsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRelatedItems", params, optFns, c.addOperationUpdateRelatedItemsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type UpdateRelatedItemsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRelatedItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRelatedItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRelatedItems{}, middleware.After)
 	if err != nil {
 		return err

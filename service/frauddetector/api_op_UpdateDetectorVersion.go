@@ -19,7 +19,7 @@ func (c *Client) UpdateDetectorVersion(ctx context.Context, params *UpdateDetect
 		params = &UpdateDetectorVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDetectorVersion", params, optFns, addOperationUpdateDetectorVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDetectorVersion", params, optFns, c.addOperationUpdateDetectorVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type UpdateDetectorVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDetectorVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDetectorVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDetectorVersion{}, middleware.After)
 	if err != nil {
 		return err

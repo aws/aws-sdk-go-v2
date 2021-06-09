@@ -17,7 +17,7 @@ func (c *Client) KitchenSinkOperation(ctx context.Context, params *KitchenSinkOp
 		params = &KitchenSinkOperationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "KitchenSinkOperation", params, optFns, addOperationKitchenSinkOperationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "KitchenSinkOperation", params, optFns, c.addOperationKitchenSinkOperationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -140,7 +140,7 @@ type KitchenSinkOperationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationKitchenSinkOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationKitchenSinkOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpKitchenSinkOperation{}, middleware.After)
 	if err != nil {
 		return err

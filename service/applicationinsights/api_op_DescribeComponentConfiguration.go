@@ -17,7 +17,7 @@ func (c *Client) DescribeComponentConfiguration(ctx context.Context, params *Des
 		params = &DescribeComponentConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeComponentConfiguration", params, optFns, addOperationDescribeComponentConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeComponentConfiguration", params, optFns, c.addOperationDescribeComponentConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeComponentConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeComponentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeComponentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeComponentConfiguration{}, middleware.After)
 	if err != nil {
 		return err

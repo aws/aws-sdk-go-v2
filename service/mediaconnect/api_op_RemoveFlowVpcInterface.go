@@ -19,7 +19,7 @@ func (c *Client) RemoveFlowVpcInterface(ctx context.Context, params *RemoveFlowV
 		params = &RemoveFlowVpcInterfaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveFlowVpcInterface", params, optFns, addOperationRemoveFlowVpcInterfaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveFlowVpcInterface", params, optFns, c.addOperationRemoveFlowVpcInterfaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type RemoveFlowVpcInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveFlowVpcInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveFlowVpcInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveFlowVpcInterface{}, middleware.After)
 	if err != nil {
 		return err

@@ -28,7 +28,7 @@ func (c *Client) TagCertificateAuthority(ctx context.Context, params *TagCertifi
 		params = &TagCertificateAuthorityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TagCertificateAuthority", params, optFns, addOperationTagCertificateAuthorityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagCertificateAuthority", params, optFns, c.addOperationTagCertificateAuthorityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type TagCertificateAuthorityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTagCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTagCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTagCertificateAuthority{}, middleware.After)
 	if err != nil {
 		return err

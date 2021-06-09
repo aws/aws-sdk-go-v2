@@ -16,7 +16,7 @@ func (c *Client) DisableMacie(ctx context.Context, params *DisableMacieInput, op
 		params = &DisableMacieInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableMacie", params, optFns, addOperationDisableMacieMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableMacie", params, optFns, c.addOperationDisableMacieMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +34,7 @@ type DisableMacieOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableMacieMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableMacieMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableMacie{}, middleware.After)
 	if err != nil {
 		return err

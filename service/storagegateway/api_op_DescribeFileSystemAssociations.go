@@ -18,7 +18,7 @@ func (c *Client) DescribeFileSystemAssociations(ctx context.Context, params *Des
 		params = &DescribeFileSystemAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFileSystemAssociations", params, optFns, addOperationDescribeFileSystemAssociationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFileSystemAssociations", params, optFns, c.addOperationDescribeFileSystemAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeFileSystemAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFileSystemAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFileSystemAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFileSystemAssociations{}, middleware.After)
 	if err != nil {
 		return err

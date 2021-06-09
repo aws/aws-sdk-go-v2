@@ -39,7 +39,7 @@ func (c *Client) AllocateAddress(ctx context.Context, params *AllocateAddressInp
 		params = &AllocateAddressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AllocateAddress", params, optFns, addOperationAllocateAddressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AllocateAddress", params, optFns, c.addOperationAllocateAddressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -125,7 +125,7 @@ type AllocateAddressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAllocateAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAllocateAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpAllocateAddress{}, middleware.After)
 	if err != nil {
 		return err

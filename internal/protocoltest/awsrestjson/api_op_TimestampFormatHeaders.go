@@ -16,7 +16,7 @@ func (c *Client) TimestampFormatHeaders(ctx context.Context, params *TimestampFo
 		params = &TimestampFormatHeadersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TimestampFormatHeaders", params, optFns, addOperationTimestampFormatHeadersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TimestampFormatHeaders", params, optFns, c.addOperationTimestampFormatHeadersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type TimestampFormatHeadersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTimestampFormatHeadersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTimestampFormatHeadersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpTimestampFormatHeaders{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetHostedZoneCount(ctx context.Context, params *GetHostedZoneCo
 		params = &GetHostedZoneCountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetHostedZoneCount", params, optFns, addOperationGetHostedZoneCountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetHostedZoneCount", params, optFns, c.addOperationGetHostedZoneCountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetHostedZoneCountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetHostedZoneCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetHostedZoneCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetHostedZoneCount{}, middleware.After)
 	if err != nil {
 		return err

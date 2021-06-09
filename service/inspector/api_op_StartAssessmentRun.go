@@ -18,7 +18,7 @@ func (c *Client) StartAssessmentRun(ctx context.Context, params *StartAssessment
 		params = &StartAssessmentRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartAssessmentRun", params, optFns, addOperationStartAssessmentRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartAssessmentRun", params, optFns, c.addOperationStartAssessmentRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type StartAssessmentRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartAssessmentRun{}, middleware.After)
 	if err != nil {
 		return err

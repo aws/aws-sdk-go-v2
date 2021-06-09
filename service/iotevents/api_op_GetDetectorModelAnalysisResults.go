@@ -19,7 +19,7 @@ func (c *Client) GetDetectorModelAnalysisResults(ctx context.Context, params *Ge
 		params = &GetDetectorModelAnalysisResultsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDetectorModelAnalysisResults", params, optFns, addOperationGetDetectorModelAnalysisResultsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDetectorModelAnalysisResults", params, optFns, c.addOperationGetDetectorModelAnalysisResultsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type GetDetectorModelAnalysisResultsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDetectorModelAnalysisResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDetectorModelAnalysisResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDetectorModelAnalysisResults{}, middleware.After)
 	if err != nil {
 		return err

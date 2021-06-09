@@ -25,7 +25,7 @@ func (c *Client) AssignVolume(ctx context.Context, params *AssignVolumeInput, op
 		params = &AssignVolumeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssignVolume", params, optFns, addOperationAssignVolumeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssignVolume", params, optFns, c.addOperationAssignVolumeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type AssignVolumeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssignVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssignVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssignVolume{}, middleware.After)
 	if err != nil {
 		return err

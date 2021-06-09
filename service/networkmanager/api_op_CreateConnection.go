@@ -20,7 +20,7 @@ func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionI
 		params = &CreateConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateConnection", params, optFns, addOperationCreateConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateConnection", params, optFns, c.addOperationCreateConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type CreateConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnection{}, middleware.After)
 	if err != nil {
 		return err

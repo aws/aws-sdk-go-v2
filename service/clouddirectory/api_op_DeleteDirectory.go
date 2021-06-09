@@ -17,7 +17,7 @@ func (c *Client) DeleteDirectory(ctx context.Context, params *DeleteDirectoryInp
 		params = &DeleteDirectoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDirectory", params, optFns, addOperationDeleteDirectoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDirectory", params, optFns, c.addOperationDeleteDirectoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteDirectoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDirectory{}, middleware.After)
 	if err != nil {
 		return err

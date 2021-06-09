@@ -18,7 +18,7 @@ func (c *Client) GetDigest(ctx context.Context, params *GetDigestInput, optFns .
 		params = &GetDigestInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDigest", params, optFns, addOperationGetDigestMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDigest", params, optFns, c.addOperationGetDigestMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetDigestOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDigestMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDigestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDigest{}, middleware.After)
 	if err != nil {
 		return err

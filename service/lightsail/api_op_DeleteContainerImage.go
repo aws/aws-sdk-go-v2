@@ -17,7 +17,7 @@ func (c *Client) DeleteContainerImage(ctx context.Context, params *DeleteContain
 		params = &DeleteContainerImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteContainerImage", params, optFns, addOperationDeleteContainerImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteContainerImage", params, optFns, c.addOperationDeleteContainerImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteContainerImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteContainerImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteContainerImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteContainerImage{}, middleware.After)
 	if err != nil {
 		return err

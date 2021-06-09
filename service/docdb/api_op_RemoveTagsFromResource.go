@@ -16,7 +16,7 @@ func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsF
 		params = &RemoveTagsFromResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveTagsFromResource", params, optFns, addOperationRemoveTagsFromResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveTagsFromResource", params, optFns, c.addOperationRemoveTagsFromResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type RemoveTagsFromResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveTagsFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveTagsFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemoveTagsFromResource{}, middleware.After)
 	if err != nil {
 		return err

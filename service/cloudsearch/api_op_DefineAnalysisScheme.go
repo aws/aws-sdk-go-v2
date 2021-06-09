@@ -21,7 +21,7 @@ func (c *Client) DefineAnalysisScheme(ctx context.Context, params *DefineAnalysi
 		params = &DefineAnalysisSchemeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DefineAnalysisScheme", params, optFns, addOperationDefineAnalysisSchemeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DefineAnalysisScheme", params, optFns, c.addOperationDefineAnalysisSchemeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type DefineAnalysisSchemeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDefineAnalysisSchemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDefineAnalysisSchemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDefineAnalysisScheme{}, middleware.After)
 	if err != nil {
 		return err

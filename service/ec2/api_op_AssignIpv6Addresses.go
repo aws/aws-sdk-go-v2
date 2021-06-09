@@ -24,7 +24,7 @@ func (c *Client) AssignIpv6Addresses(ctx context.Context, params *AssignIpv6Addr
 		params = &AssignIpv6AddressesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssignIpv6Addresses", params, optFns, addOperationAssignIpv6AddressesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssignIpv6Addresses", params, optFns, c.addOperationAssignIpv6AddressesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type AssignIpv6AddressesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssignIpv6AddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssignIpv6AddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpAssignIpv6Addresses{}, middleware.After)
 	if err != nil {
 		return err

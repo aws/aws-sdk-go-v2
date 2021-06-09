@@ -19,7 +19,7 @@ func (c *Client) ImportRestApi(ctx context.Context, params *ImportRestApiInput, 
 		params = &ImportRestApiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportRestApi", params, optFns, addOperationImportRestApiMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportRestApi", params, optFns, c.addOperationImportRestApiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -128,7 +128,7 @@ type ImportRestApiOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportRestApi{}, middleware.After)
 	if err != nil {
 		return err

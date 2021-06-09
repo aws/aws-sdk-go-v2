@@ -46,7 +46,7 @@ func (c *Client) InitiateVaultLock(ctx context.Context, params *InitiateVaultLoc
 		params = &InitiateVaultLockInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InitiateVaultLock", params, optFns, addOperationInitiateVaultLockMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InitiateVaultLock", params, optFns, c.addOperationInitiateVaultLockMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type InitiateVaultLockOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInitiateVaultLockMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInitiateVaultLockMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInitiateVaultLock{}, middleware.After)
 	if err != nil {
 		return err

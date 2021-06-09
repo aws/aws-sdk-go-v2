@@ -18,7 +18,7 @@ func (c *Client) ListIdentityProviderConfigs(ctx context.Context, params *ListId
 		params = &ListIdentityProviderConfigsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListIdentityProviderConfigs", params, optFns, addOperationListIdentityProviderConfigsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListIdentityProviderConfigs", params, optFns, c.addOperationListIdentityProviderConfigsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListIdentityProviderConfigsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListIdentityProviderConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListIdentityProviderConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIdentityProviderConfigs{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteImage(ctx context.Context, params *DeleteImageInput, optF
 		params = &DeleteImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteImage", params, optFns, addOperationDeleteImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteImage", params, optFns, c.addOperationDeleteImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteImage{}, middleware.After)
 	if err != nil {
 		return err

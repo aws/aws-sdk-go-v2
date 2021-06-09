@@ -19,7 +19,7 @@ func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryI
 		params = &CreateRepositoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRepository", params, optFns, addOperationCreateRepositoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRepository", params, optFns, c.addOperationCreateRepositoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type CreateRepositoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRepository{}, middleware.After)
 	if err != nil {
 		return err

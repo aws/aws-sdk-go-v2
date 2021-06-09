@@ -17,7 +17,7 @@ func (c *Client) GetModelVersion(ctx context.Context, params *GetModelVersionInp
 		params = &GetModelVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetModelVersion", params, optFns, addOperationGetModelVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetModelVersion", params, optFns, c.addOperationGetModelVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type GetModelVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetModelVersion{}, middleware.After)
 	if err != nil {
 		return err

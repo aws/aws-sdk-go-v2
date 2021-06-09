@@ -33,7 +33,7 @@ func (c *Client) UpdateRealtimeLogConfig(ctx context.Context, params *UpdateReal
 		params = &UpdateRealtimeLogConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRealtimeLogConfig", params, optFns, addOperationUpdateRealtimeLogConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRealtimeLogConfig", params, optFns, c.addOperationUpdateRealtimeLogConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type UpdateRealtimeLogConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRealtimeLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRealtimeLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpUpdateRealtimeLogConfig{}, middleware.After)
 	if err != nil {
 		return err

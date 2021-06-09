@@ -17,7 +17,7 @@ func (c *Client) DescribeDetectMitigationActionsTask(ctx context.Context, params
 		params = &DescribeDetectMitigationActionsTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDetectMitigationActionsTask", params, optFns, addOperationDescribeDetectMitigationActionsTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDetectMitigationActionsTask", params, optFns, c.addOperationDescribeDetectMitigationActionsTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeDetectMitigationActionsTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDetectMitigationActionsTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDetectMitigationActionsTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDetectMitigationActionsTask{}, middleware.After)
 	if err != nil {
 		return err

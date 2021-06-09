@@ -18,7 +18,7 @@ func (c *Client) DescribeAddress(ctx context.Context, params *DescribeAddressInp
 		params = &DescribeAddressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAddress", params, optFns, addOperationDescribeAddressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAddress", params, optFns, c.addOperationDescribeAddressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DescribeAddressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAddress{}, middleware.After)
 	if err != nil {
 		return err

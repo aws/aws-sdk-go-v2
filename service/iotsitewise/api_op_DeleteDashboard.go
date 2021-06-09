@@ -17,7 +17,7 @@ func (c *Client) DeleteDashboard(ctx context.Context, params *DeleteDashboardInp
 		params = &DeleteDashboardInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDashboard", params, optFns, addOperationDeleteDashboardMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDashboard", params, optFns, c.addOperationDeleteDashboardMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteDashboardOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDashboard{}, middleware.After)
 	if err != nil {
 		return err

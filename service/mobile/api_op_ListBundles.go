@@ -18,7 +18,7 @@ func (c *Client) ListBundles(ctx context.Context, params *ListBundlesInput, optF
 		params = &ListBundlesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBundles", params, optFns, addOperationListBundlesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBundles", params, optFns, c.addOperationListBundlesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListBundlesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBundles{}, middleware.After)
 	if err != nil {
 		return err

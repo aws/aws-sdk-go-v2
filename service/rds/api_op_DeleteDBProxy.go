@@ -17,7 +17,7 @@ func (c *Client) DeleteDBProxy(ctx context.Context, params *DeleteDBProxyInput, 
 		params = &DeleteDBProxyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDBProxy", params, optFns, addOperationDeleteDBProxyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDBProxy", params, optFns, c.addOperationDeleteDBProxyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteDBProxyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDBProxyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDBProxyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBProxy{}, middleware.After)
 	if err != nil {
 		return err

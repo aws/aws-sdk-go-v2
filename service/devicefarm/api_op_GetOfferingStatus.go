@@ -23,7 +23,7 @@ func (c *Client) GetOfferingStatus(ctx context.Context, params *GetOfferingStatu
 		params = &GetOfferingStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetOfferingStatus", params, optFns, addOperationGetOfferingStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetOfferingStatus", params, optFns, c.addOperationGetOfferingStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetOfferingStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetOfferingStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetOfferingStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOfferingStatus{}, middleware.After)
 	if err != nil {
 		return err

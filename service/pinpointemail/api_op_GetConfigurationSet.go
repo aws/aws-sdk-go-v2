@@ -23,7 +23,7 @@ func (c *Client) GetConfigurationSet(ctx context.Context, params *GetConfigurati
 		params = &GetConfigurationSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetConfigurationSet", params, optFns, addOperationGetConfigurationSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetConfigurationSet", params, optFns, c.addOperationGetConfigurationSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type GetConfigurationSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfigurationSet{}, middleware.After)
 	if err != nil {
 		return err

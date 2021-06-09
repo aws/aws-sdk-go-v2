@@ -38,7 +38,7 @@ func (c *Client) RunJobFlow(ctx context.Context, params *RunJobFlowInput, optFns
 		params = &RunJobFlowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RunJobFlow", params, optFns, addOperationRunJobFlowMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RunJobFlow", params, optFns, c.addOperationRunJobFlowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -250,7 +250,7 @@ type RunJobFlowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRunJobFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRunJobFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRunJobFlow{}, middleware.After)
 	if err != nil {
 		return err

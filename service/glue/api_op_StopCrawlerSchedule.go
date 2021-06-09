@@ -17,7 +17,7 @@ func (c *Client) StopCrawlerSchedule(ctx context.Context, params *StopCrawlerSch
 		params = &StopCrawlerScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopCrawlerSchedule", params, optFns, addOperationStopCrawlerScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopCrawlerSchedule", params, optFns, c.addOperationStopCrawlerScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type StopCrawlerScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopCrawlerScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopCrawlerScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopCrawlerSchedule{}, middleware.After)
 	if err != nil {
 		return err

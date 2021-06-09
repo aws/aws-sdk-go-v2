@@ -19,7 +19,7 @@ func (c *Client) DeleteThingShadow(ctx context.Context, params *DeleteThingShado
 		params = &DeleteThingShadowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteThingShadow", params, optFns, addOperationDeleteThingShadowMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteThingShadow", params, optFns, c.addOperationDeleteThingShadowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteThingShadowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteThingShadowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteThingShadowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteThingShadow{}, middleware.After)
 	if err != nil {
 		return err

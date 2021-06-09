@@ -29,7 +29,7 @@ func (c *Client) GetBucketOwnershipControls(ctx context.Context, params *GetBuck
 		params = &GetBucketOwnershipControlsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketOwnershipControls", params, optFns, addOperationGetBucketOwnershipControlsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketOwnershipControls", params, optFns, c.addOperationGetBucketOwnershipControlsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type GetBucketOwnershipControlsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketOwnershipControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketOwnershipControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketOwnershipControls{}, middleware.After)
 	if err != nil {
 		return err

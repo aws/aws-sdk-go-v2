@@ -17,7 +17,7 @@ func (c *Client) DescribeLoggingConfiguration(ctx context.Context, params *Descr
 		params = &DescribeLoggingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLoggingConfiguration", params, optFns, addOperationDescribeLoggingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLoggingConfiguration", params, optFns, c.addOperationDescribeLoggingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DescribeLoggingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeLoggingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

@@ -26,7 +26,7 @@ func (c *Client) DescribeHsmConfigurations(ctx context.Context, params *Describe
 		params = &DescribeHsmConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeHsmConfigurations", params, optFns, addOperationDescribeHsmConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeHsmConfigurations", params, optFns, c.addOperationDescribeHsmConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type DescribeHsmConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeHsmConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeHsmConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeHsmConfigurations{}, middleware.After)
 	if err != nil {
 		return err

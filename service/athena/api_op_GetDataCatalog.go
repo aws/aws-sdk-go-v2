@@ -17,7 +17,7 @@ func (c *Client) GetDataCatalog(ctx context.Context, params *GetDataCatalogInput
 		params = &GetDataCatalogInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDataCatalog", params, optFns, addOperationGetDataCatalogMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDataCatalog", params, optFns, c.addOperationGetDataCatalogMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetDataCatalogOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDataCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDataCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataCatalog{}, middleware.After)
 	if err != nil {
 		return err

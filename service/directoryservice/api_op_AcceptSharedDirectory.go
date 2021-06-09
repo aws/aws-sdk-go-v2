@@ -18,7 +18,7 @@ func (c *Client) AcceptSharedDirectory(ctx context.Context, params *AcceptShared
 		params = &AcceptSharedDirectoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcceptSharedDirectory", params, optFns, addOperationAcceptSharedDirectoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcceptSharedDirectory", params, optFns, c.addOperationAcceptSharedDirectoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type AcceptSharedDirectoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAcceptSharedDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAcceptSharedDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcceptSharedDirectory{}, middleware.After)
 	if err != nil {
 		return err

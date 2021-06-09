@@ -16,7 +16,7 @@ func (c *Client) DeleteSecurityConfiguration(ctx context.Context, params *Delete
 		params = &DeleteSecurityConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSecurityConfiguration", params, optFns, addOperationDeleteSecurityConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSecurityConfiguration", params, optFns, c.addOperationDeleteSecurityConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteSecurityConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSecurityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSecurityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSecurityConfiguration{}, middleware.After)
 	if err != nil {
 		return err

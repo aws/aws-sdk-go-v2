@@ -25,7 +25,7 @@ func (c *Client) CreateVPCAssociationAuthorization(ctx context.Context, params *
 		params = &CreateVPCAssociationAuthorizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVPCAssociationAuthorization", params, optFns, addOperationCreateVPCAssociationAuthorizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateVPCAssociationAuthorization", params, optFns, c.addOperationCreateVPCAssociationAuthorizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type CreateVPCAssociationAuthorizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateVPCAssociationAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateVPCAssociationAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpCreateVPCAssociationAuthorization{}, middleware.After)
 	if err != nil {
 		return err

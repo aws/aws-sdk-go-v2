@@ -27,7 +27,7 @@ func (c *Client) DeleteFirewall(ctx context.Context, params *DeleteFirewallInput
 		params = &DeleteFirewallInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFirewall", params, optFns, addOperationDeleteFirewallMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFirewall", params, optFns, c.addOperationDeleteFirewallMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DeleteFirewallOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFirewallMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFirewallMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteFirewall{}, middleware.After)
 	if err != nil {
 		return err

@@ -25,7 +25,7 @@ func (c *Client) ImportTerminology(ctx context.Context, params *ImportTerminolog
 		params = &ImportTerminologyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportTerminology", params, optFns, addOperationImportTerminologyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportTerminology", params, optFns, c.addOperationImportTerminologyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type ImportTerminologyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportTerminologyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportTerminologyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportTerminology{}, middleware.After)
 	if err != nil {
 		return err

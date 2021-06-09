@@ -24,7 +24,7 @@ func (c *Client) RegisterEcsCluster(ctx context.Context, params *RegisterEcsClus
 		params = &RegisterEcsClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterEcsCluster", params, optFns, addOperationRegisterEcsClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterEcsCluster", params, optFns, c.addOperationRegisterEcsClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type RegisterEcsClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterEcsClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterEcsClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterEcsCluster{}, middleware.After)
 	if err != nil {
 		return err

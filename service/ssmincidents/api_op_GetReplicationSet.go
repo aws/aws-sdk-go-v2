@@ -23,7 +23,7 @@ func (c *Client) GetReplicationSet(ctx context.Context, params *GetReplicationSe
 		params = &GetReplicationSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetReplicationSet", params, optFns, addOperationGetReplicationSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetReplicationSet", params, optFns, c.addOperationGetReplicationSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetReplicationSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetReplicationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetReplicationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReplicationSet{}, middleware.After)
 	if err != nil {
 		return err

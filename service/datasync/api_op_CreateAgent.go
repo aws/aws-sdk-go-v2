@@ -29,7 +29,7 @@ func (c *Client) CreateAgent(ctx context.Context, params *CreateAgentInput, optF
 		params = &CreateAgentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAgent", params, optFns, addOperationCreateAgentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAgent", params, optFns, c.addOperationCreateAgentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ type CreateAgentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAgent{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) ModifyWorkspaceState(ctx context.Context, params *ModifyWorkspa
 		params = &ModifyWorkspaceStateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyWorkspaceState", params, optFns, addOperationModifyWorkspaceStateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyWorkspaceState", params, optFns, c.addOperationModifyWorkspaceStateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type ModifyWorkspaceStateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyWorkspaceStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyWorkspaceStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyWorkspaceState{}, middleware.After)
 	if err != nil {
 		return err

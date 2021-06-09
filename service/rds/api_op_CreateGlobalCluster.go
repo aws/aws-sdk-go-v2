@@ -24,7 +24,7 @@ func (c *Client) CreateGlobalCluster(ctx context.Context, params *CreateGlobalCl
 		params = &CreateGlobalClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateGlobalCluster", params, optFns, addOperationCreateGlobalClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateGlobalCluster", params, optFns, c.addOperationCreateGlobalClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type CreateGlobalClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateGlobalCluster{}, middleware.After)
 	if err != nil {
 		return err

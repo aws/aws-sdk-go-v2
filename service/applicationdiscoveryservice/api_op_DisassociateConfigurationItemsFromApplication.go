@@ -16,7 +16,7 @@ func (c *Client) DisassociateConfigurationItemsFromApplication(ctx context.Conte
 		params = &DisassociateConfigurationItemsFromApplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateConfigurationItemsFromApplication", params, optFns, addOperationDisassociateConfigurationItemsFromApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateConfigurationItemsFromApplication", params, optFns, c.addOperationDisassociateConfigurationItemsFromApplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DisassociateConfigurationItemsFromApplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateConfigurationItemsFromApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateConfigurationItemsFromApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateConfigurationItemsFromApplication{}, middleware.After)
 	if err != nil {
 		return err

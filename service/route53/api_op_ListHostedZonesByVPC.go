@@ -29,7 +29,7 @@ func (c *Client) ListHostedZonesByVPC(ctx context.Context, params *ListHostedZon
 		params = &ListHostedZonesByVPCInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListHostedZonesByVPC", params, optFns, addOperationListHostedZonesByVPCMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListHostedZonesByVPC", params, optFns, c.addOperationListHostedZonesByVPCMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type ListHostedZonesByVPCOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListHostedZonesByVPCMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListHostedZonesByVPCMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListHostedZonesByVPC{}, middleware.After)
 	if err != nil {
 		return err

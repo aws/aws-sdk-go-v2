@@ -17,7 +17,7 @@ func (c *Client) UpdateMitigationAction(ctx context.Context, params *UpdateMitig
 		params = &UpdateMitigationActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateMitigationAction", params, optFns, addOperationUpdateMitigationActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMitigationAction", params, optFns, c.addOperationUpdateMitigationActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UpdateMitigationActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateMitigationActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateMitigationActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMitigationAction{}, middleware.After)
 	if err != nil {
 		return err

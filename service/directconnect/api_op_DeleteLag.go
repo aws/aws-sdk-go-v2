@@ -18,7 +18,7 @@ func (c *Client) DeleteLag(ctx context.Context, params *DeleteLagInput, optFns .
 		params = &DeleteLagInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLag", params, optFns, addOperationDeleteLagMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLag", params, optFns, c.addOperationDeleteLagMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -130,7 +130,7 @@ type DeleteLagOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLagMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLagMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLag{}, middleware.After)
 	if err != nil {
 		return err

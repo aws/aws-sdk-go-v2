@@ -21,7 +21,7 @@ func (c *Client) ExitStandby(ctx context.Context, params *ExitStandbyInput, optF
 		params = &ExitStandbyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExitStandby", params, optFns, addOperationExitStandbyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExitStandby", params, optFns, c.addOperationExitStandbyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ExitStandbyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExitStandbyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExitStandbyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpExitStandby{}, middleware.After)
 	if err != nil {
 		return err

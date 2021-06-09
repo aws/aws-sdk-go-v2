@@ -34,7 +34,7 @@ func (c *Client) DescribeAffectedEntities(ctx context.Context, params *DescribeA
 		params = &DescribeAffectedEntitiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAffectedEntities", params, optFns, addOperationDescribeAffectedEntitiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAffectedEntities", params, optFns, c.addOperationDescribeAffectedEntitiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type DescribeAffectedEntitiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAffectedEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAffectedEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAffectedEntities{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DescribeQuerySuggestionsBlockList(ctx context.Context, params *
 		params = &DescribeQuerySuggestionsBlockListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeQuerySuggestionsBlockList", params, optFns, addOperationDescribeQuerySuggestionsBlockListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeQuerySuggestionsBlockList", params, optFns, c.addOperationDescribeQuerySuggestionsBlockListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type DescribeQuerySuggestionsBlockListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeQuerySuggestionsBlockListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeQuerySuggestionsBlockListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeQuerySuggestionsBlockList{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DescribeTrafficMirrorFilters(ctx context.Context, params *Descr
 		params = &DescribeTrafficMirrorFiltersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTrafficMirrorFilters", params, optFns, addOperationDescribeTrafficMirrorFiltersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTrafficMirrorFilters", params, optFns, c.addOperationDescribeTrafficMirrorFiltersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DescribeTrafficMirrorFiltersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTrafficMirrorFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTrafficMirrorFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeTrafficMirrorFilters{}, middleware.After)
 	if err != nil {
 		return err

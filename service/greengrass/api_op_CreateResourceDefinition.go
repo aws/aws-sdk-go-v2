@@ -19,7 +19,7 @@ func (c *Client) CreateResourceDefinition(ctx context.Context, params *CreateRes
 		params = &CreateResourceDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateResourceDefinition", params, optFns, addOperationCreateResourceDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateResourceDefinition", params, optFns, c.addOperationCreateResourceDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type CreateResourceDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateResourceDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateResourceDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateResourceDefinition{}, middleware.After)
 	if err != nil {
 		return err

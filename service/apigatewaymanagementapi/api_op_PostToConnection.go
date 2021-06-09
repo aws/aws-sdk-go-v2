@@ -16,7 +16,7 @@ func (c *Client) PostToConnection(ctx context.Context, params *PostToConnectionI
 		params = &PostToConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PostToConnection", params, optFns, addOperationPostToConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PostToConnection", params, optFns, c.addOperationPostToConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type PostToConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPostToConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPostToConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPostToConnection{}, middleware.After)
 	if err != nil {
 		return err

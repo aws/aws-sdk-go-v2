@@ -40,7 +40,7 @@ func (c *Client) DeleteCacheCluster(ctx context.Context, params *DeleteCacheClus
 		params = &DeleteCacheClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCacheCluster", params, optFns, addOperationDeleteCacheClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCacheCluster", params, optFns, c.addOperationDeleteCacheClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type DeleteCacheClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteCacheCluster{}, middleware.After)
 	if err != nil {
 		return err

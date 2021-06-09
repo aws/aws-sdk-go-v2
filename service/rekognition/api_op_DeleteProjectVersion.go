@@ -22,7 +22,7 @@ func (c *Client) DeleteProjectVersion(ctx context.Context, params *DeleteProject
 		params = &DeleteProjectVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProjectVersion", params, optFns, addOperationDeleteProjectVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProjectVersion", params, optFns, c.addOperationDeleteProjectVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteProjectVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProjectVersion{}, middleware.After)
 	if err != nil {
 		return err

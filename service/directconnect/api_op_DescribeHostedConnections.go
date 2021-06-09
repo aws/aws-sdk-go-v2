@@ -19,7 +19,7 @@ func (c *Client) DescribeHostedConnections(ctx context.Context, params *Describe
 		params = &DescribeHostedConnectionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeHostedConnections", params, optFns, addOperationDescribeHostedConnectionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeHostedConnections", params, optFns, c.addOperationDescribeHostedConnectionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DescribeHostedConnectionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeHostedConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeHostedConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHostedConnections{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) ListTagsForCertificate(ctx context.Context, params *ListTagsFor
 		params = &ListTagsForCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTagsForCertificate", params, optFns, addOperationListTagsForCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTagsForCertificate", params, optFns, c.addOperationListTagsForCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ListTagsForCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTagsForCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTagsForCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTagsForCertificate{}, middleware.After)
 	if err != nil {
 		return err

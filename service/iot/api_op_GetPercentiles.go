@@ -25,7 +25,7 @@ func (c *Client) GetPercentiles(ctx context.Context, params *GetPercentilesInput
 		params = &GetPercentilesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPercentiles", params, optFns, addOperationGetPercentilesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPercentiles", params, optFns, c.addOperationGetPercentilesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type GetPercentilesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPercentilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPercentilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPercentiles{}, middleware.After)
 	if err != nil {
 		return err

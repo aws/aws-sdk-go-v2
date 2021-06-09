@@ -23,7 +23,7 @@ func (c *Client) DescribeAggregateComplianceByConformancePacks(ctx context.Conte
 		params = &DescribeAggregateComplianceByConformancePacksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAggregateComplianceByConformancePacks", params, optFns, addOperationDescribeAggregateComplianceByConformancePacksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAggregateComplianceByConformancePacks", params, optFns, c.addOperationDescribeAggregateComplianceByConformancePacksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type DescribeAggregateComplianceByConformancePacksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAggregateComplianceByConformancePacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAggregateComplianceByConformancePacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAggregateComplianceByConformancePacks{}, middleware.After)
 	if err != nil {
 		return err

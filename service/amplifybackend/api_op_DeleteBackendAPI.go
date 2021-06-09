@@ -17,7 +17,7 @@ func (c *Client) DeleteBackendAPI(ctx context.Context, params *DeleteBackendAPII
 		params = &DeleteBackendAPIInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBackendAPI", params, optFns, addOperationDeleteBackendAPIMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBackendAPI", params, optFns, c.addOperationDeleteBackendAPIMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DeleteBackendAPIOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBackendAPIMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBackendAPIMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBackendAPI{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) CreateProtectionGroup(ctx context.Context, params *CreateProtec
 		params = &CreateProtectionGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateProtectionGroup", params, optFns, addOperationCreateProtectionGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateProtectionGroup", params, optFns, c.addOperationCreateProtectionGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type CreateProtectionGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProtectionGroup{}, middleware.After)
 	if err != nil {
 		return err

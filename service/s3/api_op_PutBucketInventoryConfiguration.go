@@ -81,7 +81,7 @@ func (c *Client) PutBucketInventoryConfiguration(ctx context.Context, params *Pu
 		params = &PutBucketInventoryConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketInventoryConfiguration", params, optFns, addOperationPutBucketInventoryConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketInventoryConfiguration", params, optFns, c.addOperationPutBucketInventoryConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +118,7 @@ type PutBucketInventoryConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketInventoryConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketInventoryConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketInventoryConfiguration{}, middleware.After)
 	if err != nil {
 		return err

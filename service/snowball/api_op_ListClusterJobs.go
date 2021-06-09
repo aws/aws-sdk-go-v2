@@ -19,7 +19,7 @@ func (c *Client) ListClusterJobs(ctx context.Context, params *ListClusterJobsInp
 		params = &ListClusterJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListClusterJobs", params, optFns, addOperationListClusterJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListClusterJobs", params, optFns, c.addOperationListClusterJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type ListClusterJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListClusterJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListClusterJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListClusterJobs{}, middleware.After)
 	if err != nil {
 		return err

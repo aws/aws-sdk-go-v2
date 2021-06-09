@@ -17,7 +17,7 @@ func (c *Client) StopReplicationToReplica(ctx context.Context, params *StopRepli
 		params = &StopReplicationToReplicaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopReplicationToReplica", params, optFns, addOperationStopReplicationToReplicaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopReplicationToReplica", params, optFns, c.addOperationStopReplicationToReplicaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type StopReplicationToReplicaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopReplicationToReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopReplicationToReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopReplicationToReplica{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) DescribeEnvironments(ctx context.Context, params *DescribeEnvir
 		params = &DescribeEnvironmentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEnvironments", params, optFns, addOperationDescribeEnvironmentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEnvironments", params, optFns, c.addOperationDescribeEnvironmentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type DescribeEnvironmentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEnvironments{}, middleware.After)
 	if err != nil {
 		return err

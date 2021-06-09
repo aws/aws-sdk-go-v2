@@ -17,7 +17,7 @@ func (c *Client) UndeploySystemInstance(ctx context.Context, params *UndeploySys
 		params = &UndeploySystemInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UndeploySystemInstance", params, optFns, addOperationUndeploySystemInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UndeploySystemInstance", params, optFns, c.addOperationUndeploySystemInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type UndeploySystemInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUndeploySystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUndeploySystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUndeploySystemInstance{}, middleware.After)
 	if err != nil {
 		return err

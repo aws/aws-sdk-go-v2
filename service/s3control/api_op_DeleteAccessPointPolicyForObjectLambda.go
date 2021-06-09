@@ -29,7 +29,7 @@ func (c *Client) DeleteAccessPointPolicyForObjectLambda(ctx context.Context, par
 		params = &DeleteAccessPointPolicyForObjectLambdaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAccessPointPolicyForObjectLambda", params, optFns, addOperationDeleteAccessPointPolicyForObjectLambdaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAccessPointPolicyForObjectLambda", params, optFns, c.addOperationDeleteAccessPointPolicyForObjectLambdaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DeleteAccessPointPolicyForObjectLambdaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAccessPointPolicyForObjectLambdaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAccessPointPolicyForObjectLambdaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteAccessPointPolicyForObjectLambda{}, middleware.After)
 	if err != nil {
 		return err

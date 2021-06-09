@@ -20,7 +20,7 @@ func (c *Client) UpdateParallelData(ctx context.Context, params *UpdateParallelD
 		params = &UpdateParallelDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateParallelData", params, optFns, addOperationUpdateParallelDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateParallelData", params, optFns, c.addOperationUpdateParallelDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type UpdateParallelDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateParallelData{}, middleware.After)
 	if err != nil {
 		return err

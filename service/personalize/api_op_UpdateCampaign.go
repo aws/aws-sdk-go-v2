@@ -22,7 +22,7 @@ func (c *Client) UpdateCampaign(ctx context.Context, params *UpdateCampaignInput
 		params = &UpdateCampaignInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateCampaign", params, optFns, addOperationUpdateCampaignMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateCampaign", params, optFns, c.addOperationUpdateCampaignMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type UpdateCampaignOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCampaign{}, middleware.After)
 	if err != nil {
 		return err

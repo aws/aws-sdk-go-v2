@@ -16,7 +16,7 @@ func (c *Client) DeletePatchBaseline(ctx context.Context, params *DeletePatchBas
 		params = &DeletePatchBaselineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePatchBaseline", params, optFns, addOperationDeletePatchBaselineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePatchBaseline", params, optFns, c.addOperationDeletePatchBaselineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeletePatchBaselineOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePatchBaseline{}, middleware.After)
 	if err != nil {
 		return err

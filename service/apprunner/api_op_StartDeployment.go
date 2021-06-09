@@ -23,7 +23,7 @@ func (c *Client) StartDeployment(ctx context.Context, params *StartDeploymentInp
 		params = &StartDeploymentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDeployment", params, optFns, addOperationStartDeploymentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDeployment", params, optFns, c.addOperationStartDeploymentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type StartDeploymentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartDeployment{}, middleware.After)
 	if err != nil {
 		return err

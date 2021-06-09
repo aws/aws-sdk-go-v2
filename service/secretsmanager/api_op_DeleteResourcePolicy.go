@@ -31,7 +31,7 @@ func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourc
 		params = &DeleteResourcePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteResourcePolicy", params, optFns, addOperationDeleteResourcePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteResourcePolicy", params, optFns, c.addOperationDeleteResourcePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type DeleteResourcePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteResourcePolicy{}, middleware.After)
 	if err != nil {
 		return err

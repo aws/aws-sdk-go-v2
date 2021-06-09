@@ -17,7 +17,7 @@ func (c *Client) ListConnections(ctx context.Context, params *ListConnectionsInp
 		params = &ListConnectionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListConnections", params, optFns, addOperationListConnectionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListConnections", params, optFns, c.addOperationListConnectionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListConnectionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListConnections{}, middleware.After)
 	if err != nil {
 		return err

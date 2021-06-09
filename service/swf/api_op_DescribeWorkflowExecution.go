@@ -39,7 +39,7 @@ func (c *Client) DescribeWorkflowExecution(ctx context.Context, params *Describe
 		params = &DescribeWorkflowExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkflowExecution", params, optFns, addOperationDescribeWorkflowExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkflowExecution", params, optFns, c.addOperationDescribeWorkflowExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +96,7 @@ type DescribeWorkflowExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeWorkflowExecution{}, middleware.After)
 	if err != nil {
 		return err

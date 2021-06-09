@@ -17,7 +17,7 @@ func (c *Client) BatchDeleteScheduledAction(ctx context.Context, params *BatchDe
 		params = &BatchDeleteScheduledActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteScheduledAction", params, optFns, addOperationBatchDeleteScheduledActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteScheduledAction", params, optFns, c.addOperationBatchDeleteScheduledActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type BatchDeleteScheduledActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpBatchDeleteScheduledAction{}, middleware.After)
 	if err != nil {
 		return err

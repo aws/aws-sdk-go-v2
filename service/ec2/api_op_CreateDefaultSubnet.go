@@ -21,7 +21,7 @@ func (c *Client) CreateDefaultSubnet(ctx context.Context, params *CreateDefaultS
 		params = &CreateDefaultSubnetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDefaultSubnet", params, optFns, addOperationCreateDefaultSubnetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDefaultSubnet", params, optFns, c.addOperationCreateDefaultSubnetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type CreateDefaultSubnetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDefaultSubnetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDefaultSubnetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateDefaultSubnet{}, middleware.After)
 	if err != nil {
 		return err

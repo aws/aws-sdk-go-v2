@@ -35,7 +35,7 @@ func (c *Client) RegisterInstance(ctx context.Context, params *RegisterInstanceI
 		params = &RegisterInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterInstance", params, optFns, addOperationRegisterInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterInstance", params, optFns, c.addOperationRegisterInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type RegisterInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterInstance{}, middleware.After)
 	if err != nil {
 		return err

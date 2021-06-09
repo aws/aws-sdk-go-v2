@@ -29,7 +29,7 @@ func (c *Client) PutClusterCapacityProviders(ctx context.Context, params *PutClu
 		params = &PutClusterCapacityProvidersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutClusterCapacityProviders", params, optFns, addOperationPutClusterCapacityProvidersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutClusterCapacityProviders", params, optFns, c.addOperationPutClusterCapacityProvidersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type PutClusterCapacityProvidersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutClusterCapacityProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutClusterCapacityProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutClusterCapacityProviders{}, middleware.After)
 	if err != nil {
 		return err

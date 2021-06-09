@@ -22,7 +22,7 @@ func (c *Client) DescribeFolderContents(ctx context.Context, params *DescribeFol
 		params = &DescribeFolderContentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFolderContents", params, optFns, addOperationDescribeFolderContentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFolderContents", params, optFns, c.addOperationDescribeFolderContentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type DescribeFolderContentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFolderContentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFolderContentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFolderContents{}, middleware.After)
 	if err != nil {
 		return err

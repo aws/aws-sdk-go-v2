@@ -18,7 +18,7 @@ func (c *Client) DescribeSubscribedWorkteam(ctx context.Context, params *Describ
 		params = &DescribeSubscribedWorkteamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSubscribedWorkteam", params, optFns, addOperationDescribeSubscribedWorkteamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSubscribedWorkteam", params, optFns, c.addOperationDescribeSubscribedWorkteamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeSubscribedWorkteamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSubscribedWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSubscribedWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSubscribedWorkteam{}, middleware.After)
 	if err != nil {
 		return err

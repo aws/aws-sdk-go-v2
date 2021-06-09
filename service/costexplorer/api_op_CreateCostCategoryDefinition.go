@@ -17,7 +17,7 @@ func (c *Client) CreateCostCategoryDefinition(ctx context.Context, params *Creat
 		params = &CreateCostCategoryDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCostCategoryDefinition", params, optFns, addOperationCreateCostCategoryDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCostCategoryDefinition", params, optFns, c.addOperationCreateCostCategoryDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type CreateCostCategoryDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCostCategoryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCostCategoryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCostCategoryDefinition{}, middleware.After)
 	if err != nil {
 		return err

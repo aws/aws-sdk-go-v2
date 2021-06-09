@@ -29,7 +29,7 @@ func (c *Client) RestoreServer(ctx context.Context, params *RestoreServerInput, 
 		params = &RestoreServerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreServer", params, optFns, addOperationRestoreServerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreServer", params, optFns, c.addOperationRestoreServerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type RestoreServerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRestoreServer{}, middleware.After)
 	if err != nil {
 		return err

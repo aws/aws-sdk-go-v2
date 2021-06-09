@@ -17,7 +17,7 @@ func (c *Client) GetProject(ctx context.Context, params *GetProjectInput, optFns
 		params = &GetProjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetProject", params, optFns, addOperationGetProjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetProject", params, optFns, c.addOperationGetProjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetProjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetProject{}, middleware.After)
 	if err != nil {
 		return err

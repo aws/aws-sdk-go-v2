@@ -18,7 +18,7 @@ func (c *Client) GetWorkflowRuns(ctx context.Context, params *GetWorkflowRunsInp
 		params = &GetWorkflowRunsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetWorkflowRuns", params, optFns, addOperationGetWorkflowRunsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetWorkflowRuns", params, optFns, c.addOperationGetWorkflowRunsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetWorkflowRunsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetWorkflowRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetWorkflowRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetWorkflowRuns{}, middleware.After)
 	if err != nil {
 		return err

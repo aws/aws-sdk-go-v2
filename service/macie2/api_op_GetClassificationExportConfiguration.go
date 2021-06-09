@@ -17,7 +17,7 @@ func (c *Client) GetClassificationExportConfiguration(ctx context.Context, param
 		params = &GetClassificationExportConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetClassificationExportConfiguration", params, optFns, addOperationGetClassificationExportConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetClassificationExportConfiguration", params, optFns, c.addOperationGetClassificationExportConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type GetClassificationExportConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetClassificationExportConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetClassificationExportConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetClassificationExportConfiguration{}, middleware.After)
 	if err != nil {
 		return err

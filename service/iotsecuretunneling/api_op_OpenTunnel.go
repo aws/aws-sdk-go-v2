@@ -18,7 +18,7 @@ func (c *Client) OpenTunnel(ctx context.Context, params *OpenTunnelInput, optFns
 		params = &OpenTunnelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "OpenTunnel", params, optFns, addOperationOpenTunnelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "OpenTunnel", params, optFns, c.addOperationOpenTunnelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type OpenTunnelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationOpenTunnelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationOpenTunnelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpOpenTunnel{}, middleware.After)
 	if err != nil {
 		return err

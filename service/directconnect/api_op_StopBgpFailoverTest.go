@@ -17,7 +17,7 @@ func (c *Client) StopBgpFailoverTest(ctx context.Context, params *StopBgpFailove
 		params = &StopBgpFailoverTestInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopBgpFailoverTest", params, optFns, addOperationStopBgpFailoverTestMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopBgpFailoverTest", params, optFns, c.addOperationStopBgpFailoverTestMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type StopBgpFailoverTestOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopBgpFailoverTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopBgpFailoverTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopBgpFailoverTest{}, middleware.After)
 	if err != nil {
 		return err

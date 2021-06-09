@@ -21,7 +21,7 @@ func (c *Client) DeleteRelationalDatabaseSnapshot(ctx context.Context, params *D
 		params = &DeleteRelationalDatabaseSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRelationalDatabaseSnapshot", params, optFns, addOperationDeleteRelationalDatabaseSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRelationalDatabaseSnapshot", params, optFns, c.addOperationDeleteRelationalDatabaseSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteRelationalDatabaseSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRelationalDatabaseSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRelationalDatabaseSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRelationalDatabaseSnapshot{}, middleware.After)
 	if err != nil {
 		return err

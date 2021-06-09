@@ -21,7 +21,7 @@ func (c *Client) DeleteDocumentClassifier(ctx context.Context, params *DeleteDoc
 		params = &DeleteDocumentClassifierInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDocumentClassifier", params, optFns, addOperationDeleteDocumentClassifierMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDocumentClassifier", params, optFns, c.addOperationDeleteDocumentClassifierMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteDocumentClassifierOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDocumentClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDocumentClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDocumentClassifier{}, middleware.After)
 	if err != nil {
 		return err

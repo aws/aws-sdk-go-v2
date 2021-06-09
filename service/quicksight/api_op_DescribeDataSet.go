@@ -17,7 +17,7 @@ func (c *Client) DescribeDataSet(ctx context.Context, params *DescribeDataSetInp
 		params = &DescribeDataSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDataSet", params, optFns, addOperationDescribeDataSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDataSet", params, optFns, c.addOperationDescribeDataSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeDataSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataSet{}, middleware.After)
 	if err != nil {
 		return err

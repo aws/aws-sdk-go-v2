@@ -17,7 +17,7 @@ func (c *Client) GetAppValidationConfiguration(ctx context.Context, params *GetA
 		params = &GetAppValidationConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAppValidationConfiguration", params, optFns, addOperationGetAppValidationConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAppValidationConfiguration", params, optFns, c.addOperationGetAppValidationConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetAppValidationConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAppValidationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAppValidationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAppValidationConfiguration{}, middleware.After)
 	if err != nil {
 		return err

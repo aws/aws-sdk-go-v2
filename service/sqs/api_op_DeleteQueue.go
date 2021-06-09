@@ -26,7 +26,7 @@ func (c *Client) DeleteQueue(ctx context.Context, params *DeleteQueueInput, optF
 		params = &DeleteQueueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteQueue", params, optFns, addOperationDeleteQueueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteQueue", params, optFns, c.addOperationDeleteQueueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteQueueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteQueue{}, middleware.After)
 	if err != nil {
 		return err

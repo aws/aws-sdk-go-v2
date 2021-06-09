@@ -17,7 +17,7 @@ func (c *Client) UpdateResolverEndpoint(ctx context.Context, params *UpdateResol
 		params = &UpdateResolverEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateResolverEndpoint", params, optFns, addOperationUpdateResolverEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateResolverEndpoint", params, optFns, c.addOperationUpdateResolverEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type UpdateResolverEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateResolverEndpoint{}, middleware.After)
 	if err != nil {
 		return err

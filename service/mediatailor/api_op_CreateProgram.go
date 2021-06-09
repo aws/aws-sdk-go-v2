@@ -18,7 +18,7 @@ func (c *Client) CreateProgram(ctx context.Context, params *CreateProgramInput, 
 		params = &CreateProgramInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateProgram", params, optFns, addOperationCreateProgramMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateProgram", params, optFns, c.addOperationCreateProgramMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type CreateProgramOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProgram{}, middleware.After)
 	if err != nil {
 		return err

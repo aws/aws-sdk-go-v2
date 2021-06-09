@@ -19,7 +19,7 @@ func (c *Client) AssociateSubnetCidrBlock(ctx context.Context, params *Associate
 		params = &AssociateSubnetCidrBlockInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateSubnetCidrBlock", params, optFns, addOperationAssociateSubnetCidrBlockMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateSubnetCidrBlock", params, optFns, c.addOperationAssociateSubnetCidrBlockMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type AssociateSubnetCidrBlockOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateSubnetCidrBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateSubnetCidrBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpAssociateSubnetCidrBlock{}, middleware.After)
 	if err != nil {
 		return err

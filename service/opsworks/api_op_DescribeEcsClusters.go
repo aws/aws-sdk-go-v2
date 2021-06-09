@@ -26,7 +26,7 @@ func (c *Client) DescribeEcsClusters(ctx context.Context, params *DescribeEcsClu
 		params = &DescribeEcsClustersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEcsClusters", params, optFns, addOperationDescribeEcsClustersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEcsClusters", params, optFns, c.addOperationDescribeEcsClustersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type DescribeEcsClustersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEcsClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEcsClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEcsClusters{}, middleware.After)
 	if err != nil {
 		return err

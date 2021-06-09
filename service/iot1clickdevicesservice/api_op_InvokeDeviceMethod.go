@@ -18,7 +18,7 @@ func (c *Client) InvokeDeviceMethod(ctx context.Context, params *InvokeDeviceMet
 		params = &InvokeDeviceMethodInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InvokeDeviceMethod", params, optFns, addOperationInvokeDeviceMethodMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InvokeDeviceMethod", params, optFns, c.addOperationInvokeDeviceMethodMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type InvokeDeviceMethodOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInvokeDeviceMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInvokeDeviceMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeDeviceMethod{}, middleware.After)
 	if err != nil {
 		return err

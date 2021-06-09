@@ -17,7 +17,7 @@ func (c *Client) DeleteColumnStatisticsForTable(ctx context.Context, params *Del
 		params = &DeleteColumnStatisticsForTableInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteColumnStatisticsForTable", params, optFns, addOperationDeleteColumnStatisticsForTableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteColumnStatisticsForTable", params, optFns, c.addOperationDeleteColumnStatisticsForTableMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DeleteColumnStatisticsForTableOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteColumnStatisticsForTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteColumnStatisticsForTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteColumnStatisticsForTable{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) PutContainerPolicy(ctx context.Context, params *PutContainerPol
 		params = &PutContainerPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutContainerPolicy", params, optFns, addOperationPutContainerPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutContainerPolicy", params, optFns, c.addOperationPutContainerPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type PutContainerPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutContainerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutContainerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutContainerPolicy{}, middleware.After)
 	if err != nil {
 		return err

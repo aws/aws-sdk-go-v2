@@ -18,7 +18,7 @@ func (c *Client) DeleteLink(ctx context.Context, params *DeleteLinkInput, optFns
 		params = &DeleteLinkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLink", params, optFns, addOperationDeleteLinkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLink", params, optFns, c.addOperationDeleteLinkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteLinkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLink{}, middleware.After)
 	if err != nil {
 		return err

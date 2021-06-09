@@ -17,7 +17,7 @@ func (c *Client) UpdateFlow(ctx context.Context, params *UpdateFlowInput, optFns
 		params = &UpdateFlowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFlow", params, optFns, addOperationUpdateFlowMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFlow", params, optFns, c.addOperationUpdateFlowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type UpdateFlowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFlow{}, middleware.After)
 	if err != nil {
 		return err

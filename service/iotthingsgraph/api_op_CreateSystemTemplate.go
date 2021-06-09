@@ -19,7 +19,7 @@ func (c *Client) CreateSystemTemplate(ctx context.Context, params *CreateSystemT
 		params = &CreateSystemTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSystemTemplate", params, optFns, addOperationCreateSystemTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSystemTemplate", params, optFns, c.addOperationCreateSystemTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type CreateSystemTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSystemTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSystemTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSystemTemplate{}, middleware.After)
 	if err != nil {
 		return err

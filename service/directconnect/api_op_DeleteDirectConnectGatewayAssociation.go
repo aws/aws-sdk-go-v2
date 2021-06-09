@@ -21,7 +21,7 @@ func (c *Client) DeleteDirectConnectGatewayAssociation(ctx context.Context, para
 		params = &DeleteDirectConnectGatewayAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDirectConnectGatewayAssociation", params, optFns, addOperationDeleteDirectConnectGatewayAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDirectConnectGatewayAssociation", params, optFns, c.addOperationDeleteDirectConnectGatewayAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteDirectConnectGatewayAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDirectConnectGatewayAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDirectConnectGatewayAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDirectConnectGatewayAssociation{}, middleware.After)
 	if err != nil {
 		return err

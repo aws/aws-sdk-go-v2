@@ -17,7 +17,7 @@ func (c *Client) CreateEnvironmentMembership(ctx context.Context, params *Create
 		params = &CreateEnvironmentMembershipInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateEnvironmentMembership", params, optFns, addOperationCreateEnvironmentMembershipMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateEnvironmentMembership", params, optFns, c.addOperationCreateEnvironmentMembershipMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type CreateEnvironmentMembershipOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateEnvironmentMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateEnvironmentMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEnvironmentMembership{}, middleware.After)
 	if err != nil {
 		return err

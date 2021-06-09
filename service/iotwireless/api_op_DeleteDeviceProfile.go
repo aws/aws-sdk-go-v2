@@ -16,7 +16,7 @@ func (c *Client) DeleteDeviceProfile(ctx context.Context, params *DeleteDevicePr
 		params = &DeleteDeviceProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDeviceProfile", params, optFns, addOperationDeleteDeviceProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDeviceProfile", params, optFns, c.addOperationDeleteDeviceProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteDeviceProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDeviceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDeviceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDeviceProfile{}, middleware.After)
 	if err != nil {
 		return err

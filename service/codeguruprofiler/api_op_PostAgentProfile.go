@@ -18,7 +18,7 @@ func (c *Client) PostAgentProfile(ctx context.Context, params *PostAgentProfileI
 		params = &PostAgentProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PostAgentProfile", params, optFns, addOperationPostAgentProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PostAgentProfile", params, optFns, c.addOperationPostAgentProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type PostAgentProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPostAgentProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPostAgentProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPostAgentProfile{}, middleware.After)
 	if err != nil {
 		return err

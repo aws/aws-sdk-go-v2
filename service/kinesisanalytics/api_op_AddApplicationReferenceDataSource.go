@@ -32,7 +32,7 @@ func (c *Client) AddApplicationReferenceDataSource(ctx context.Context, params *
 		params = &AddApplicationReferenceDataSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddApplicationReferenceDataSource", params, optFns, addOperationAddApplicationReferenceDataSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddApplicationReferenceDataSource", params, optFns, c.addOperationAddApplicationReferenceDataSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type AddApplicationReferenceDataSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddApplicationReferenceDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddApplicationReferenceDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddApplicationReferenceDataSource{}, middleware.After)
 	if err != nil {
 		return err

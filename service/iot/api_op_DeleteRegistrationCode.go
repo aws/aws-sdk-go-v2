@@ -16,7 +16,7 @@ func (c *Client) DeleteRegistrationCode(ctx context.Context, params *DeleteRegis
 		params = &DeleteRegistrationCodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRegistrationCode", params, optFns, addOperationDeleteRegistrationCodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRegistrationCode", params, optFns, c.addOperationDeleteRegistrationCodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ type DeleteRegistrationCodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRegistrationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRegistrationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRegistrationCode{}, middleware.After)
 	if err != nil {
 		return err

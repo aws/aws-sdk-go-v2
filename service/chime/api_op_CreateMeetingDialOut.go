@@ -21,7 +21,7 @@ func (c *Client) CreateMeetingDialOut(ctx context.Context, params *CreateMeeting
 		params = &CreateMeetingDialOutInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMeetingDialOut", params, optFns, addOperationCreateMeetingDialOutMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMeetingDialOut", params, optFns, c.addOperationCreateMeetingDialOutMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type CreateMeetingDialOutOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateMeetingDialOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateMeetingDialOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMeetingDialOut{}, middleware.After)
 	if err != nil {
 		return err

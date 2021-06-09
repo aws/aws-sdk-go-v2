@@ -16,7 +16,7 @@ func (c *Client) DeleteIntegrationResponse(ctx context.Context, params *DeleteIn
 		params = &DeleteIntegrationResponseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteIntegrationResponse", params, optFns, addOperationDeleteIntegrationResponseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteIntegrationResponse", params, optFns, c.addOperationDeleteIntegrationResponseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeleteIntegrationResponseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteIntegrationResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteIntegrationResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIntegrationResponse{}, middleware.After)
 	if err != nil {
 		return err

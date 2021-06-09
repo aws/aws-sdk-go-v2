@@ -29,7 +29,7 @@ func (c *Client) UpdateScript(ctx context.Context, params *UpdateScriptInput, op
 		params = &UpdateScriptInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateScript", params, optFns, addOperationUpdateScriptMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateScript", params, optFns, c.addOperationUpdateScriptMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type UpdateScriptOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateScript{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) SkipWaitTimeForInstanceTermination(ctx context.Context, params 
 		params = &SkipWaitTimeForInstanceTerminationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SkipWaitTimeForInstanceTermination", params, optFns, addOperationSkipWaitTimeForInstanceTerminationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SkipWaitTimeForInstanceTermination", params, optFns, c.addOperationSkipWaitTimeForInstanceTerminationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type SkipWaitTimeForInstanceTerminationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSkipWaitTimeForInstanceTerminationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSkipWaitTimeForInstanceTerminationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSkipWaitTimeForInstanceTermination{}, middleware.After)
 	if err != nil {
 		return err

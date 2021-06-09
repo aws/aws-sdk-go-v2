@@ -19,7 +19,7 @@ func (c *Client) PutObject(ctx context.Context, params *PutObjectInput, optFns .
 		params = &PutObjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutObject", params, optFns, addOperationPutObjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutObject", params, optFns, c.addOperationPutObjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type PutObjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutObject{}, middleware.After)
 	if err != nil {
 		return err

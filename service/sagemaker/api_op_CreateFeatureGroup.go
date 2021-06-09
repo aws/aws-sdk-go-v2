@@ -24,7 +24,7 @@ func (c *Client) CreateFeatureGroup(ctx context.Context, params *CreateFeatureGr
 		params = &CreateFeatureGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFeatureGroup", params, optFns, addOperationCreateFeatureGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFeatureGroup", params, optFns, c.addOperationCreateFeatureGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -131,7 +131,7 @@ type CreateFeatureGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFeatureGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFeatureGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFeatureGroup{}, middleware.After)
 	if err != nil {
 		return err

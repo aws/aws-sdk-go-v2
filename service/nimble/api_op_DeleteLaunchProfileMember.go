@@ -17,7 +17,7 @@ func (c *Client) DeleteLaunchProfileMember(ctx context.Context, params *DeleteLa
 		params = &DeleteLaunchProfileMemberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLaunchProfileMember", params, optFns, addOperationDeleteLaunchProfileMemberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLaunchProfileMember", params, optFns, c.addOperationDeleteLaunchProfileMemberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DeleteLaunchProfileMemberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLaunchProfileMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLaunchProfileMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLaunchProfileMember{}, middleware.After)
 	if err != nil {
 		return err

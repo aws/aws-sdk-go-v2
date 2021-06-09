@@ -16,7 +16,7 @@ func (c *Client) DeleteTopicRule(ctx context.Context, params *DeleteTopicRuleInp
 		params = &DeleteTopicRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTopicRule", params, optFns, addOperationDeleteTopicRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTopicRule", params, optFns, c.addOperationDeleteTopicRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteTopicRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTopicRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTopicRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTopicRule{}, middleware.After)
 	if err != nil {
 		return err

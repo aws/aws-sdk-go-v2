@@ -17,7 +17,7 @@ func (c *Client) StopDiscoverer(ctx context.Context, params *StopDiscovererInput
 		params = &StopDiscovererInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopDiscoverer", params, optFns, addOperationStopDiscovererMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopDiscoverer", params, optFns, c.addOperationStopDiscovererMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StopDiscovererOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopDiscoverer{}, middleware.After)
 	if err != nil {
 		return err

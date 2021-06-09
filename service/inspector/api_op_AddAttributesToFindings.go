@@ -18,7 +18,7 @@ func (c *Client) AddAttributesToFindings(ctx context.Context, params *AddAttribu
 		params = &AddAttributesToFindingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddAttributesToFindings", params, optFns, addOperationAddAttributesToFindingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddAttributesToFindings", params, optFns, c.addOperationAddAttributesToFindingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type AddAttributesToFindingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddAttributesToFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddAttributesToFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddAttributesToFindings{}, middleware.After)
 	if err != nil {
 		return err

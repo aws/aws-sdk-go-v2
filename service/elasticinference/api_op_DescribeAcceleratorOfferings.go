@@ -18,7 +18,7 @@ func (c *Client) DescribeAcceleratorOfferings(ctx context.Context, params *Descr
 		params = &DescribeAcceleratorOfferingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAcceleratorOfferings", params, optFns, addOperationDescribeAcceleratorOfferingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAcceleratorOfferings", params, optFns, c.addOperationDescribeAcceleratorOfferingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeAcceleratorOfferingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAcceleratorOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAcceleratorOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAcceleratorOfferings{}, middleware.After)
 	if err != nil {
 		return err

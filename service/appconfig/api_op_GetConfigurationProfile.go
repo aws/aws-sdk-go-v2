@@ -17,7 +17,7 @@ func (c *Client) GetConfigurationProfile(ctx context.Context, params *GetConfigu
 		params = &GetConfigurationProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetConfigurationProfile", params, optFns, addOperationGetConfigurationProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetConfigurationProfile", params, optFns, c.addOperationGetConfigurationProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type GetConfigurationProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetConfigurationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetConfigurationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfigurationProfile{}, middleware.After)
 	if err != nil {
 		return err

@@ -106,7 +106,7 @@ func (c *Client) HeadObject(ctx context.Context, params *HeadObjectInput, optFns
 		params = &HeadObjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HeadObject", params, optFns, addOperationHeadObjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HeadObject", params, optFns, c.addOperationHeadObjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -378,7 +378,7 @@ type HeadObjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHeadObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHeadObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpHeadObject{}, middleware.After)
 	if err != nil {
 		return err

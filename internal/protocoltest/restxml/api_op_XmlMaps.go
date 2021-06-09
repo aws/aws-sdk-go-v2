@@ -16,7 +16,7 @@ func (c *Client) XmlMaps(ctx context.Context, params *XmlMapsInput, optFns ...fu
 		params = &XmlMapsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "XmlMaps", params, optFns, addOperationXmlMapsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "XmlMaps", params, optFns, c.addOperationXmlMapsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type XmlMapsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationXmlMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationXmlMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlMaps{}, middleware.After)
 	if err != nil {
 		return err

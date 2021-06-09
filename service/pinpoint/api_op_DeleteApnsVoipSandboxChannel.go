@@ -18,7 +18,7 @@ func (c *Client) DeleteApnsVoipSandboxChannel(ctx context.Context, params *Delet
 		params = &DeleteApnsVoipSandboxChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteApnsVoipSandboxChannel", params, optFns, addOperationDeleteApnsVoipSandboxChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteApnsVoipSandboxChannel", params, optFns, c.addOperationDeleteApnsVoipSandboxChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteApnsVoipSandboxChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteApnsVoipSandboxChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteApnsVoipSandboxChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApnsVoipSandboxChannel{}, middleware.After)
 	if err != nil {
 		return err

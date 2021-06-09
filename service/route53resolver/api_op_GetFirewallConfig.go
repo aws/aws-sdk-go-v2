@@ -18,7 +18,7 @@ func (c *Client) GetFirewallConfig(ctx context.Context, params *GetFirewallConfi
 		params = &GetFirewallConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFirewallConfig", params, optFns, addOperationGetFirewallConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFirewallConfig", params, optFns, c.addOperationGetFirewallConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetFirewallConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFirewallConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFirewallConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFirewallConfig{}, middleware.After)
 	if err != nil {
 		return err

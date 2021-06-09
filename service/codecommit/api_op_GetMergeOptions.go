@@ -19,7 +19,7 @@ func (c *Client) GetMergeOptions(ctx context.Context, params *GetMergeOptionsInp
 		params = &GetMergeOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMergeOptions", params, optFns, addOperationGetMergeOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMergeOptions", params, optFns, c.addOperationGetMergeOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type GetMergeOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMergeOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMergeOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMergeOptions{}, middleware.After)
 	if err != nil {
 		return err

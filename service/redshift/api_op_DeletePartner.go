@@ -17,7 +17,7 @@ func (c *Client) DeletePartner(ctx context.Context, params *DeletePartnerInput, 
 		params = &DeletePartnerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePartner", params, optFns, addOperationDeletePartnerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePartner", params, optFns, c.addOperationDeletePartnerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DeletePartnerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePartnerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePartnerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeletePartner{}, middleware.After)
 	if err != nil {
 		return err

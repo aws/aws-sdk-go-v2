@@ -50,7 +50,7 @@ func (c *Client) SetVaultNotifications(ctx context.Context, params *SetVaultNoti
 		params = &SetVaultNotificationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetVaultNotifications", params, optFns, addOperationSetVaultNotificationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetVaultNotifications", params, optFns, c.addOperationSetVaultNotificationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type SetVaultNotificationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetVaultNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetVaultNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSetVaultNotifications{}, middleware.After)
 	if err != nil {
 		return err

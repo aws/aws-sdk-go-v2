@@ -18,7 +18,7 @@ func (c *Client) ActivateKeySigningKey(ctx context.Context, params *ActivateKeyS
 		params = &ActivateKeySigningKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ActivateKeySigningKey", params, optFns, addOperationActivateKeySigningKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ActivateKeySigningKey", params, optFns, c.addOperationActivateKeySigningKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ActivateKeySigningKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationActivateKeySigningKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationActivateKeySigningKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpActivateKeySigningKey{}, middleware.After)
 	if err != nil {
 		return err

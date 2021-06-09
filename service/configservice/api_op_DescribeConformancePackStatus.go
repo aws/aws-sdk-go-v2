@@ -19,7 +19,7 @@ func (c *Client) DescribeConformancePackStatus(ctx context.Context, params *Desc
 		params = &DescribeConformancePackStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeConformancePackStatus", params, optFns, addOperationDescribeConformancePackStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConformancePackStatus", params, optFns, c.addOperationDescribeConformancePackStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeConformancePackStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeConformancePackStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeConformancePackStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConformancePackStatus{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DisableLogging(ctx context.Context, params *DisableLoggingInput
 		params = &DisableLoggingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableLogging", params, optFns, addOperationDisableLoggingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableLogging", params, optFns, c.addOperationDisableLoggingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DisableLoggingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDisableLogging{}, middleware.After)
 	if err != nil {
 		return err

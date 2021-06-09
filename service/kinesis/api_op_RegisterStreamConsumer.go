@@ -28,7 +28,7 @@ func (c *Client) RegisterStreamConsumer(ctx context.Context, params *RegisterStr
 		params = &RegisterStreamConsumerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterStreamConsumer", params, optFns, addOperationRegisterStreamConsumerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterStreamConsumer", params, optFns, c.addOperationRegisterStreamConsumerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type RegisterStreamConsumerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterStreamConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterStreamConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterStreamConsumer{}, middleware.After)
 	if err != nil {
 		return err

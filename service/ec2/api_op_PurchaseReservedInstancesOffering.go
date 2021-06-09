@@ -29,7 +29,7 @@ func (c *Client) PurchaseReservedInstancesOffering(ctx context.Context, params *
 		params = &PurchaseReservedInstancesOfferingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PurchaseReservedInstancesOffering", params, optFns, addOperationPurchaseReservedInstancesOfferingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PurchaseReservedInstancesOffering", params, optFns, c.addOperationPurchaseReservedInstancesOfferingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type PurchaseReservedInstancesOfferingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPurchaseReservedInstancesOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPurchaseReservedInstancesOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpPurchaseReservedInstancesOffering{}, middleware.After)
 	if err != nil {
 		return err

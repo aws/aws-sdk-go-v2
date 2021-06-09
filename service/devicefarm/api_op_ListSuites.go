@@ -18,7 +18,7 @@ func (c *Client) ListSuites(ctx context.Context, params *ListSuitesInput, optFns
 		params = &ListSuitesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSuites", params, optFns, addOperationListSuitesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSuites", params, optFns, c.addOperationListSuitesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListSuitesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSuitesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSuitesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSuites{}, middleware.After)
 	if err != nil {
 		return err

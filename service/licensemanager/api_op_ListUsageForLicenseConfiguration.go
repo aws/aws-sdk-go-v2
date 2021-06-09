@@ -20,7 +20,7 @@ func (c *Client) ListUsageForLicenseConfiguration(ctx context.Context, params *L
 		params = &ListUsageForLicenseConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListUsageForLicenseConfiguration", params, optFns, addOperationListUsageForLicenseConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListUsageForLicenseConfiguration", params, optFns, c.addOperationListUsageForLicenseConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type ListUsageForLicenseConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListUsageForLicenseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListUsageForLicenseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUsageForLicenseConfiguration{}, middleware.After)
 	if err != nil {
 		return err

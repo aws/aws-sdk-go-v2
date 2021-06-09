@@ -18,7 +18,7 @@ func (c *Client) GetBaiduChannel(ctx context.Context, params *GetBaiduChannelInp
 		params = &GetBaiduChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBaiduChannel", params, optFns, addOperationGetBaiduChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBaiduChannel", params, optFns, c.addOperationGetBaiduChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetBaiduChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBaiduChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBaiduChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBaiduChannel{}, middleware.After)
 	if err != nil {
 		return err

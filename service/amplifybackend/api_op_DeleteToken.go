@@ -16,7 +16,7 @@ func (c *Client) DeleteToken(ctx context.Context, params *DeleteTokenInput, optF
 		params = &DeleteTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteToken", params, optFns, addOperationDeleteTokenMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteToken", params, optFns, c.addOperationDeleteTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteTokenOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteToken{}, middleware.After)
 	if err != nil {
 		return err

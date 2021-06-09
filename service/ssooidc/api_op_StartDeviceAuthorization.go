@@ -16,7 +16,7 @@ func (c *Client) StartDeviceAuthorization(ctx context.Context, params *StartDevi
 		params = &StartDeviceAuthorizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDeviceAuthorization", params, optFns, addOperationStartDeviceAuthorizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDeviceAuthorization", params, optFns, c.addOperationStartDeviceAuthorizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type StartDeviceAuthorizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDeviceAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDeviceAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDeviceAuthorization{}, middleware.After)
 	if err != nil {
 		return err

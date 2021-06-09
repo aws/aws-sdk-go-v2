@@ -43,7 +43,7 @@ func (c *Client) StartSigningJob(ctx context.Context, params *StartSigningJobInp
 		params = &StartSigningJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartSigningJob", params, optFns, addOperationStartSigningJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartSigningJob", params, optFns, c.addOperationStartSigningJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type StartSigningJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartSigningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartSigningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSigningJob{}, middleware.After)
 	if err != nil {
 		return err

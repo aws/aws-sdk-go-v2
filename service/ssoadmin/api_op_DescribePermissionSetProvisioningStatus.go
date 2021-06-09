@@ -17,7 +17,7 @@ func (c *Client) DescribePermissionSetProvisioningStatus(ctx context.Context, pa
 		params = &DescribePermissionSetProvisioningStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePermissionSetProvisioningStatus", params, optFns, addOperationDescribePermissionSetProvisioningStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePermissionSetProvisioningStatus", params, optFns, c.addOperationDescribePermissionSetProvisioningStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DescribePermissionSetProvisioningStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePermissionSetProvisioningStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePermissionSetProvisioningStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePermissionSetProvisioningStatus{}, middleware.After)
 	if err != nil {
 		return err

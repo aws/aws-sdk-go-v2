@@ -29,7 +29,7 @@ func (c *Client) CreateSystemInstance(ctx context.Context, params *CreateSystemI
 		params = &CreateSystemInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSystemInstance", params, optFns, addOperationCreateSystemInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSystemInstance", params, optFns, c.addOperationCreateSystemInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type CreateSystemInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSystemInstance{}, middleware.After)
 	if err != nil {
 		return err

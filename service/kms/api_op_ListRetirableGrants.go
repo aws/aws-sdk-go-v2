@@ -36,7 +36,7 @@ func (c *Client) ListRetirableGrants(ctx context.Context, params *ListRetirableG
 		params = &ListRetirableGrantsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRetirableGrants", params, optFns, addOperationListRetirableGrantsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRetirableGrants", params, optFns, c.addOperationListRetirableGrantsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type ListRetirableGrantsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRetirableGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRetirableGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRetirableGrants{}, middleware.After)
 	if err != nil {
 		return err

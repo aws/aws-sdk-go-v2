@@ -27,7 +27,7 @@ func (c *Client) StopTask(ctx context.Context, params *StopTaskInput, optFns ...
 		params = &StopTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopTask", params, optFns, addOperationStopTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopTask", params, optFns, c.addOperationStopTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type StopTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopTask{}, middleware.After)
 	if err != nil {
 		return err

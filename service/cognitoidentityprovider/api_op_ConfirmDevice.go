@@ -18,7 +18,7 @@ func (c *Client) ConfirmDevice(ctx context.Context, params *ConfirmDeviceInput, 
 		params = &ConfirmDeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ConfirmDevice", params, optFns, addOperationConfirmDeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ConfirmDevice", params, optFns, c.addOperationConfirmDeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ConfirmDeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationConfirmDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationConfirmDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmDevice{}, middleware.After)
 	if err != nil {
 		return err

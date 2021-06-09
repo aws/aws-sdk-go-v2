@@ -19,7 +19,7 @@ func (c *Client) DescribeProfilingGroup(ctx context.Context, params *DescribePro
 		params = &DescribeProfilingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeProfilingGroup", params, optFns, addOperationDescribeProfilingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeProfilingGroup", params, optFns, c.addOperationDescribeProfilingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DescribeProfilingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeProfilingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeProfilingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeProfilingGroup{}, middleware.After)
 	if err != nil {
 		return err

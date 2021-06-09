@@ -18,7 +18,7 @@ func (c *Client) DeleteDatasetImportJob(ctx context.Context, params *DeleteDatas
 		params = &DeleteDatasetImportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDatasetImportJob", params, optFns, addOperationDeleteDatasetImportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDatasetImportJob", params, optFns, c.addOperationDeleteDatasetImportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteDatasetImportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDatasetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDatasetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDatasetImportJob{}, middleware.After)
 	if err != nil {
 		return err

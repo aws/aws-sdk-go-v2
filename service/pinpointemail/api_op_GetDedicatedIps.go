@@ -19,7 +19,7 @@ func (c *Client) GetDedicatedIps(ctx context.Context, params *GetDedicatedIpsInp
 		params = &GetDedicatedIpsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDedicatedIps", params, optFns, addOperationGetDedicatedIpsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDedicatedIps", params, optFns, c.addOperationGetDedicatedIpsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetDedicatedIpsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDedicatedIpsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDedicatedIpsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDedicatedIps{}, middleware.After)
 	if err != nil {
 		return err

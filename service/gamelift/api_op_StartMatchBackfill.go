@@ -48,7 +48,7 @@ func (c *Client) StartMatchBackfill(ctx context.Context, params *StartMatchBackf
 		params = &StartMatchBackfillInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartMatchBackfill", params, optFns, addOperationStartMatchBackfillMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartMatchBackfill", params, optFns, c.addOperationStartMatchBackfillMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type StartMatchBackfillOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartMatchBackfillMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartMatchBackfillMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMatchBackfill{}, middleware.After)
 	if err != nil {
 		return err

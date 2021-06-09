@@ -17,7 +17,7 @@ func (c *Client) GetTableVersion(ctx context.Context, params *GetTableVersionInp
 		params = &GetTableVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTableVersion", params, optFns, addOperationGetTableVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTableVersion", params, optFns, c.addOperationGetTableVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetTableVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTableVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTableVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTableVersion{}, middleware.After)
 	if err != nil {
 		return err

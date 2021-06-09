@@ -18,7 +18,7 @@ func (c *Client) UpdateInstanceAttribute(ctx context.Context, params *UpdateInst
 		params = &UpdateInstanceAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateInstanceAttribute", params, optFns, addOperationUpdateInstanceAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateInstanceAttribute", params, optFns, c.addOperationUpdateInstanceAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UpdateInstanceAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateInstanceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateInstanceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateInstanceAttribute{}, middleware.After)
 	if err != nil {
 		return err

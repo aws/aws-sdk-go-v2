@@ -20,7 +20,7 @@ func (c *Client) CreateBackupVault(ctx context.Context, params *CreateBackupVaul
 		params = &CreateBackupVaultInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateBackupVault", params, optFns, addOperationCreateBackupVaultMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBackupVault", params, optFns, c.addOperationCreateBackupVaultMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type CreateBackupVaultOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBackupVault{}, middleware.After)
 	if err != nil {
 		return err

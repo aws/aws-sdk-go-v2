@@ -20,7 +20,7 @@ func (c *Client) NotifyApplicationState(ctx context.Context, params *NotifyAppli
 		params = &NotifyApplicationStateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "NotifyApplicationState", params, optFns, addOperationNotifyApplicationStateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "NotifyApplicationState", params, optFns, c.addOperationNotifyApplicationStateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type NotifyApplicationStateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationNotifyApplicationStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationNotifyApplicationStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNotifyApplicationState{}, middleware.After)
 	if err != nil {
 		return err

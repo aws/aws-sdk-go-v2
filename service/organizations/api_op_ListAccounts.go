@@ -26,7 +26,7 @@ func (c *Client) ListAccounts(ctx context.Context, params *ListAccountsInput, op
 		params = &ListAccountsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAccounts", params, optFns, addOperationListAccountsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAccounts", params, optFns, c.addOperationListAccountsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type ListAccountsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccounts{}, middleware.After)
 	if err != nil {
 		return err

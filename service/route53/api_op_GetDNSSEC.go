@@ -18,7 +18,7 @@ func (c *Client) GetDNSSEC(ctx context.Context, params *GetDNSSECInput, optFns .
 		params = &GetDNSSECInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDNSSEC", params, optFns, addOperationGetDNSSECMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDNSSEC", params, optFns, c.addOperationGetDNSSECMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetDNSSECOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDNSSECMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDNSSECMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetDNSSEC{}, middleware.After)
 	if err != nil {
 		return err

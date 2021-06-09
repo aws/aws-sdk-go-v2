@@ -26,7 +26,7 @@ func (c *Client) ListGameServers(ctx context.Context, params *ListGameServersInp
 		params = &ListGameServersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListGameServers", params, optFns, addOperationListGameServersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListGameServers", params, optFns, c.addOperationListGameServersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type ListGameServersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListGameServersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListGameServersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListGameServers{}, middleware.After)
 	if err != nil {
 		return err

@@ -235,7 +235,7 @@ func (c *Client) RestoreObject(ctx context.Context, params *RestoreObjectInput, 
 		params = &RestoreObjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreObject", params, optFns, addOperationRestoreObjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreObject", params, optFns, c.addOperationRestoreObjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -306,7 +306,7 @@ type RestoreObjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpRestoreObject{}, middleware.After)
 	if err != nil {
 		return err

@@ -24,7 +24,7 @@ func (c *Client) ListTrafficPolicyInstancesByHostedZone(ctx context.Context, par
 		params = &ListTrafficPolicyInstancesByHostedZoneInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTrafficPolicyInstancesByHostedZone", params, optFns, addOperationListTrafficPolicyInstancesByHostedZoneMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTrafficPolicyInstancesByHostedZone", params, optFns, c.addOperationListTrafficPolicyInstancesByHostedZoneMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type ListTrafficPolicyInstancesByHostedZoneOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTrafficPolicyInstancesByHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTrafficPolicyInstancesByHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListTrafficPolicyInstancesByHostedZone{}, middleware.After)
 	if err != nil {
 		return err

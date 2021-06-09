@@ -23,7 +23,7 @@ func (c *Client) GetTagKeys(ctx context.Context, params *GetTagKeysInput, optFns
 		params = &GetTagKeysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTagKeys", params, optFns, addOperationGetTagKeysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTagKeys", params, optFns, c.addOperationGetTagKeysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type GetTagKeysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTagKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTagKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTagKeys{}, middleware.After)
 	if err != nil {
 		return err

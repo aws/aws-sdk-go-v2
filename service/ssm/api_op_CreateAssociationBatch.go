@@ -22,7 +22,7 @@ func (c *Client) CreateAssociationBatch(ctx context.Context, params *CreateAssoc
 		params = &CreateAssociationBatchInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAssociationBatch", params, optFns, addOperationCreateAssociationBatchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAssociationBatch", params, optFns, c.addOperationCreateAssociationBatchMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CreateAssociationBatchOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAssociationBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAssociationBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAssociationBatch{}, middleware.After)
 	if err != nil {
 		return err

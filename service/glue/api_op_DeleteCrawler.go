@@ -17,7 +17,7 @@ func (c *Client) DeleteCrawler(ctx context.Context, params *DeleteCrawlerInput, 
 		params = &DeleteCrawlerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCrawler", params, optFns, addOperationDeleteCrawlerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCrawler", params, optFns, c.addOperationDeleteCrawlerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteCrawlerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCrawlerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCrawlerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCrawler{}, middleware.After)
 	if err != nil {
 		return err

@@ -50,7 +50,7 @@ func (c *Client) GetBucket(ctx context.Context, params *GetBucketInput, optFns .
 		params = &GetBucketInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucket", params, optFns, addOperationGetBucketMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucket", params, optFns, c.addOperationGetBucketMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +96,7 @@ type GetBucketOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucket{}, middleware.After)
 	if err != nil {
 		return err

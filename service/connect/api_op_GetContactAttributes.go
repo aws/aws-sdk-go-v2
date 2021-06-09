@@ -16,7 +16,7 @@ func (c *Client) GetContactAttributes(ctx context.Context, params *GetContactAtt
 		params = &GetContactAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetContactAttributes", params, optFns, addOperationGetContactAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetContactAttributes", params, optFns, c.addOperationGetContactAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type GetContactAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetContactAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetContactAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContactAttributes{}, middleware.After)
 	if err != nil {
 		return err

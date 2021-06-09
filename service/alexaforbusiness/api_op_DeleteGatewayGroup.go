@@ -16,7 +16,7 @@ func (c *Client) DeleteGatewayGroup(ctx context.Context, params *DeleteGatewayGr
 		params = &DeleteGatewayGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGatewayGroup", params, optFns, addOperationDeleteGatewayGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGatewayGroup", params, optFns, c.addOperationDeleteGatewayGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteGatewayGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGatewayGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGatewayGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteGatewayGroup{}, middleware.After)
 	if err != nil {
 		return err

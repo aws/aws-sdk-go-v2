@@ -19,7 +19,7 @@ func (c *Client) DeleteAccountAlias(ctx context.Context, params *DeleteAccountAl
 		params = &DeleteAccountAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAccountAlias", params, optFns, addOperationDeleteAccountAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAccountAlias", params, optFns, c.addOperationDeleteAccountAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteAccountAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAccountAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAccountAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteAccountAlias{}, middleware.After)
 	if err != nil {
 		return err

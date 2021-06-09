@@ -20,7 +20,7 @@ func (c *Client) GetTags(ctx context.Context, params *GetTagsInput, optFns ...fu
 		params = &GetTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTags", params, optFns, addOperationGetTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTags", params, optFns, c.addOperationGetTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTags{}, middleware.After)
 	if err != nil {
 		return err

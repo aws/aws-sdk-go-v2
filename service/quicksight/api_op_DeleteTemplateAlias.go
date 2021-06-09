@@ -17,7 +17,7 @@ func (c *Client) DeleteTemplateAlias(ctx context.Context, params *DeleteTemplate
 		params = &DeleteTemplateAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTemplateAlias", params, optFns, addOperationDeleteTemplateAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTemplateAlias", params, optFns, c.addOperationDeleteTemplateAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DeleteTemplateAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTemplateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTemplateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTemplateAlias{}, middleware.After)
 	if err != nil {
 		return err

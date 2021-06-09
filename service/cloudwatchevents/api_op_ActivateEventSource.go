@@ -17,7 +17,7 @@ func (c *Client) ActivateEventSource(ctx context.Context, params *ActivateEventS
 		params = &ActivateEventSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ActivateEventSource", params, optFns, addOperationActivateEventSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ActivateEventSource", params, optFns, c.addOperationActivateEventSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type ActivateEventSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationActivateEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationActivateEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpActivateEventSource{}, middleware.After)
 	if err != nil {
 		return err

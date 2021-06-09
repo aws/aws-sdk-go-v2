@@ -17,7 +17,7 @@ func (c *Client) DisassociateLenses(ctx context.Context, params *DisassociateLen
 		params = &DisassociateLensesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateLenses", params, optFns, addOperationDisassociateLensesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateLenses", params, optFns, c.addOperationDisassociateLensesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DisassociateLensesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateLensesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateLensesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateLenses{}, middleware.After)
 	if err != nil {
 		return err

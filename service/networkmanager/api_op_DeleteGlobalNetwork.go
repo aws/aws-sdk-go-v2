@@ -18,7 +18,7 @@ func (c *Client) DeleteGlobalNetwork(ctx context.Context, params *DeleteGlobalNe
 		params = &DeleteGlobalNetworkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGlobalNetwork", params, optFns, addOperationDeleteGlobalNetworkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGlobalNetwork", params, optFns, c.addOperationDeleteGlobalNetworkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteGlobalNetworkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGlobalNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGlobalNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGlobalNetwork{}, middleware.After)
 	if err != nil {
 		return err

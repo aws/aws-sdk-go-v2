@@ -20,7 +20,7 @@ func (c *Client) AddApplicationInputProcessingConfiguration(ctx context.Context,
 		params = &AddApplicationInputProcessingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddApplicationInputProcessingConfiguration", params, optFns, addOperationAddApplicationInputProcessingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddApplicationInputProcessingConfiguration", params, optFns, c.addOperationAddApplicationInputProcessingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type AddApplicationInputProcessingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddApplicationInputProcessingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddApplicationInputProcessingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddApplicationInputProcessingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

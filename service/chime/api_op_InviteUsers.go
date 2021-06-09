@@ -19,7 +19,7 @@ func (c *Client) InviteUsers(ctx context.Context, params *InviteUsersInput, optF
 		params = &InviteUsersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InviteUsers", params, optFns, addOperationInviteUsersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InviteUsers", params, optFns, c.addOperationInviteUsersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type InviteUsersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInviteUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInviteUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInviteUsers{}, middleware.After)
 	if err != nil {
 		return err

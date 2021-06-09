@@ -29,7 +29,7 @@ func (c *Client) DescribeTable(ctx context.Context, params *DescribeTableInput, 
 		params = &DescribeTableInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTable", params, optFns, addOperationDescribeTableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTable", params, optFns, c.addOperationDescribeTableMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +107,7 @@ type DescribeTableOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTable{}, middleware.After)
 	if err != nil {
 		return err

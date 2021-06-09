@@ -16,7 +16,7 @@ func (c *Client) DeleteLoadBalancerListeners(ctx context.Context, params *Delete
 		params = &DeleteLoadBalancerListenersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLoadBalancerListeners", params, optFns, addOperationDeleteLoadBalancerListenersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLoadBalancerListeners", params, optFns, c.addOperationDeleteLoadBalancerListenersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteLoadBalancerListenersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLoadBalancerListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLoadBalancerListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteLoadBalancerListeners{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DeleteReceiptFilter(ctx context.Context, params *DeleteReceiptF
 		params = &DeleteReceiptFilterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteReceiptFilter", params, optFns, addOperationDeleteReceiptFilterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteReceiptFilter", params, optFns, c.addOperationDeleteReceiptFilterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteReceiptFilterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteReceiptFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteReceiptFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteReceiptFilter{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) UpdateDomainContact(ctx context.Context, params *UpdateDomainCo
 		params = &UpdateDomainContactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDomainContact", params, optFns, addOperationUpdateDomainContactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDomainContact", params, optFns, c.addOperationUpdateDomainContactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type UpdateDomainContactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDomainContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDomainContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDomainContact{}, middleware.After)
 	if err != nil {
 		return err

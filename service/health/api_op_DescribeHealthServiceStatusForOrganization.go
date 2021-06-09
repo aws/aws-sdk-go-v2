@@ -19,7 +19,7 @@ func (c *Client) DescribeHealthServiceStatusForOrganization(ctx context.Context,
 		params = &DescribeHealthServiceStatusForOrganizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeHealthServiceStatusForOrganization", params, optFns, addOperationDescribeHealthServiceStatusForOrganizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeHealthServiceStatusForOrganization", params, optFns, c.addOperationDescribeHealthServiceStatusForOrganizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DescribeHealthServiceStatusForOrganizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeHealthServiceStatusForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeHealthServiceStatusForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHealthServiceStatusForOrganization{}, middleware.After)
 	if err != nil {
 		return err

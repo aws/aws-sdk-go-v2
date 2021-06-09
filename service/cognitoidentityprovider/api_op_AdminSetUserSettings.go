@@ -21,7 +21,7 @@ func (c *Client) AdminSetUserSettings(ctx context.Context, params *AdminSetUserS
 		params = &AdminSetUserSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminSetUserSettings", params, optFns, addOperationAdminSetUserSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminSetUserSettings", params, optFns, c.addOperationAdminSetUserSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type AdminSetUserSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminSetUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminSetUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminSetUserSettings{}, middleware.After)
 	if err != nil {
 		return err

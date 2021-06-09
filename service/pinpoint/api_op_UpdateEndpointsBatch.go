@@ -21,7 +21,7 @@ func (c *Client) UpdateEndpointsBatch(ctx context.Context, params *UpdateEndpoin
 		params = &UpdateEndpointsBatchInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateEndpointsBatch", params, optFns, addOperationUpdateEndpointsBatchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateEndpointsBatch", params, optFns, c.addOperationUpdateEndpointsBatchMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UpdateEndpointsBatchOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateEndpointsBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateEndpointsBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEndpointsBatch{}, middleware.After)
 	if err != nil {
 		return err

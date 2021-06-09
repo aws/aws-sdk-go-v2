@@ -19,7 +19,7 @@ func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns
 		params = &ListGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListGroups", params, optFns, addOperationListGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListGroups", params, optFns, c.addOperationListGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type ListGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListGroups{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DisableImportFindingsForProduct(ctx context.Context, params *Di
 		params = &DisableImportFindingsForProductInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableImportFindingsForProduct", params, optFns, addOperationDisableImportFindingsForProductMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableImportFindingsForProduct", params, optFns, c.addOperationDisableImportFindingsForProductMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DisableImportFindingsForProductOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableImportFindingsForProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableImportFindingsForProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableImportFindingsForProduct{}, middleware.After)
 	if err != nil {
 		return err

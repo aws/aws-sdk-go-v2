@@ -21,7 +21,7 @@ func (c *Client) SetDesiredCapacity(ctx context.Context, params *SetDesiredCapac
 		params = &SetDesiredCapacityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetDesiredCapacity", params, optFns, addOperationSetDesiredCapacityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetDesiredCapacity", params, optFns, c.addOperationSetDesiredCapacityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type SetDesiredCapacityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetDesiredCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetDesiredCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetDesiredCapacity{}, middleware.After)
 	if err != nil {
 		return err

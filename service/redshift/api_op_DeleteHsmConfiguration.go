@@ -16,7 +16,7 @@ func (c *Client) DeleteHsmConfiguration(ctx context.Context, params *DeleteHsmCo
 		params = &DeleteHsmConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteHsmConfiguration", params, optFns, addOperationDeleteHsmConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteHsmConfiguration", params, optFns, c.addOperationDeleteHsmConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteHsmConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteHsmConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteHsmConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteHsmConfiguration{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) StartVpcEndpointServicePrivateDnsVerification(ctx context.Conte
 		params = &StartVpcEndpointServicePrivateDnsVerificationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartVpcEndpointServicePrivateDnsVerification", params, optFns, addOperationStartVpcEndpointServicePrivateDnsVerificationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartVpcEndpointServicePrivateDnsVerification", params, optFns, c.addOperationStartVpcEndpointServicePrivateDnsVerificationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type StartVpcEndpointServicePrivateDnsVerificationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartVpcEndpointServicePrivateDnsVerificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartVpcEndpointServicePrivateDnsVerificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpStartVpcEndpointServicePrivateDnsVerification{}, middleware.After)
 	if err != nil {
 		return err

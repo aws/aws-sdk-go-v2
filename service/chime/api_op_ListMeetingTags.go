@@ -17,7 +17,7 @@ func (c *Client) ListMeetingTags(ctx context.Context, params *ListMeetingTagsInp
 		params = &ListMeetingTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListMeetingTags", params, optFns, addOperationListMeetingTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListMeetingTags", params, optFns, c.addOperationListMeetingTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type ListMeetingTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListMeetingTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListMeetingTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMeetingTags{}, middleware.After)
 	if err != nil {
 		return err

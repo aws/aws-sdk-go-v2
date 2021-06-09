@@ -45,7 +45,7 @@ func (c *Client) PutBucketEncryption(ctx context.Context, params *PutBucketEncry
 		params = &PutBucketEncryptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketEncryption", params, optFns, addOperationPutBucketEncryptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketEncryption", params, optFns, c.addOperationPutBucketEncryptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type PutBucketEncryptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketEncryption{}, middleware.After)
 	if err != nil {
 		return err

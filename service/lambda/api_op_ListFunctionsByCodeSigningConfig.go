@@ -19,7 +19,7 @@ func (c *Client) ListFunctionsByCodeSigningConfig(ctx context.Context, params *L
 		params = &ListFunctionsByCodeSigningConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFunctionsByCodeSigningConfig", params, optFns, addOperationListFunctionsByCodeSigningConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFunctionsByCodeSigningConfig", params, optFns, c.addOperationListFunctionsByCodeSigningConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListFunctionsByCodeSigningConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFunctionsByCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFunctionsByCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFunctionsByCodeSigningConfig{}, middleware.After)
 	if err != nil {
 		return err

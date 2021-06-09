@@ -17,7 +17,7 @@ func (c *Client) CreatePartitionIndex(ctx context.Context, params *CreatePartiti
 		params = &CreatePartitionIndexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePartitionIndex", params, optFns, addOperationCreatePartitionIndexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePartitionIndex", params, optFns, c.addOperationCreatePartitionIndexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type CreatePartitionIndexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePartitionIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePartitionIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePartitionIndex{}, middleware.After)
 	if err != nil {
 		return err

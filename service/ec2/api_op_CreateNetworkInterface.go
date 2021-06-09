@@ -21,7 +21,7 @@ func (c *Client) CreateNetworkInterface(ctx context.Context, params *CreateNetwo
 		params = &CreateNetworkInterfaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateNetworkInterface", params, optFns, addOperationCreateNetworkInterfaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateNetworkInterface", params, optFns, c.addOperationCreateNetworkInterfaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -112,7 +112,7 @@ type CreateNetworkInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateNetworkInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateNetworkInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateNetworkInterface{}, middleware.After)
 	if err != nil {
 		return err

@@ -95,7 +95,7 @@ func (c *Client) IndexFaces(ctx context.Context, params *IndexFacesInput, optFns
 		params = &IndexFacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "IndexFaces", params, optFns, addOperationIndexFacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "IndexFaces", params, optFns, c.addOperationIndexFacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -206,7 +206,7 @@ type IndexFacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationIndexFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationIndexFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpIndexFaces{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) StartCrawlerSchedule(ctx context.Context, params *StartCrawlerS
 		params = &StartCrawlerScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartCrawlerSchedule", params, optFns, addOperationStartCrawlerScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartCrawlerSchedule", params, optFns, c.addOperationStartCrawlerScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type StartCrawlerScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartCrawlerScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartCrawlerScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartCrawlerSchedule{}, middleware.After)
 	if err != nil {
 		return err

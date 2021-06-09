@@ -18,7 +18,7 @@ func (c *Client) DescribeInternetGateways(ctx context.Context, params *DescribeI
 		params = &DescribeInternetGatewaysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInternetGateways", params, optFns, addOperationDescribeInternetGatewaysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInternetGateways", params, optFns, c.addOperationDescribeInternetGatewaysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type DescribeInternetGatewaysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInternetGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInternetGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeInternetGateways{}, middleware.After)
 	if err != nil {
 		return err

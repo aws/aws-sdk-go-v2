@@ -25,7 +25,7 @@ func (c *Client) CreateLaunchConfiguration(ctx context.Context, params *CreateLa
 		params = &CreateLaunchConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLaunchConfiguration", params, optFns, addOperationCreateLaunchConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLaunchConfiguration", params, optFns, c.addOperationCreateLaunchConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -203,7 +203,7 @@ type CreateLaunchConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateLaunchConfiguration{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeDiscoverer(ctx context.Context, params *DescribeDiscove
 		params = &DescribeDiscovererInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDiscoverer", params, optFns, addOperationDescribeDiscovererMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDiscoverer", params, optFns, c.addOperationDescribeDiscovererMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeDiscovererOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDiscoverer{}, middleware.After)
 	if err != nil {
 		return err

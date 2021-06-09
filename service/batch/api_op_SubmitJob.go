@@ -25,7 +25,7 @@ func (c *Client) SubmitJob(ctx context.Context, params *SubmitJobInput, optFns .
 		params = &SubmitJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SubmitJob", params, optFns, addOperationSubmitJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SubmitJob", params, optFns, c.addOperationSubmitJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -144,7 +144,7 @@ type SubmitJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSubmitJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSubmitJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSubmitJob{}, middleware.After)
 	if err != nil {
 		return err

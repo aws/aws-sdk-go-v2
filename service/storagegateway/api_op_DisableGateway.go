@@ -20,7 +20,7 @@ func (c *Client) DisableGateway(ctx context.Context, params *DisableGatewayInput
 		params = &DisableGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableGateway", params, optFns, addOperationDisableGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableGateway", params, optFns, c.addOperationDisableGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DisableGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableGateway{}, middleware.After)
 	if err != nil {
 		return err

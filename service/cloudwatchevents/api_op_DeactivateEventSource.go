@@ -20,7 +20,7 @@ func (c *Client) DeactivateEventSource(ctx context.Context, params *DeactivateEv
 		params = &DeactivateEventSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeactivateEventSource", params, optFns, addOperationDeactivateEventSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeactivateEventSource", params, optFns, c.addOperationDeactivateEventSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeactivateEventSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeactivateEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeactivateEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeactivateEventSource{}, middleware.After)
 	if err != nil {
 		return err

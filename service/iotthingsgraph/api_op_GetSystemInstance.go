@@ -17,7 +17,7 @@ func (c *Client) GetSystemInstance(ctx context.Context, params *GetSystemInstanc
 		params = &GetSystemInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSystemInstance", params, optFns, addOperationGetSystemInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSystemInstance", params, optFns, c.addOperationGetSystemInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetSystemInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSystemInstance{}, middleware.After)
 	if err != nil {
 		return err

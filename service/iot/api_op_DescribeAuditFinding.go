@@ -19,7 +19,7 @@ func (c *Client) DescribeAuditFinding(ctx context.Context, params *DescribeAudit
 		params = &DescribeAuditFindingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAuditFinding", params, optFns, addOperationDescribeAuditFindingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAuditFinding", params, optFns, c.addOperationDescribeAuditFindingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeAuditFindingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAuditFindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAuditFindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAuditFinding{}, middleware.After)
 	if err != nil {
 		return err

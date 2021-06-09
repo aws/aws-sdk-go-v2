@@ -17,7 +17,7 @@ func (c *Client) RegisterCertificateWithoutCA(ctx context.Context, params *Regis
 		params = &RegisterCertificateWithoutCAInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterCertificateWithoutCA", params, optFns, addOperationRegisterCertificateWithoutCAMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterCertificateWithoutCA", params, optFns, c.addOperationRegisterCertificateWithoutCAMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type RegisterCertificateWithoutCAOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterCertificateWithoutCAMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterCertificateWithoutCAMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterCertificateWithoutCA{}, middleware.After)
 	if err != nil {
 		return err

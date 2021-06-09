@@ -17,7 +17,7 @@ func (c *Client) RegisterDevices(ctx context.Context, params *RegisterDevicesInp
 		params = &RegisterDevicesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterDevices", params, optFns, addOperationRegisterDevicesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterDevices", params, optFns, c.addOperationRegisterDevicesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type RegisterDevicesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterDevices{}, middleware.After)
 	if err != nil {
 		return err

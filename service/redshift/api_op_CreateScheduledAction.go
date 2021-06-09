@@ -20,7 +20,7 @@ func (c *Client) CreateScheduledAction(ctx context.Context, params *CreateSchedu
 		params = &CreateScheduledActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateScheduledAction", params, optFns, addOperationCreateScheduledActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateScheduledAction", params, optFns, c.addOperationCreateScheduledActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -128,7 +128,7 @@ type CreateScheduledActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateScheduledAction{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) DescribeElasticIps(ctx context.Context, params *DescribeElastic
 		params = &DescribeElasticIpsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeElasticIps", params, optFns, addOperationDescribeElasticIpsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeElasticIps", params, optFns, c.addOperationDescribeElasticIpsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeElasticIpsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeElasticIpsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeElasticIpsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeElasticIps{}, middleware.After)
 	if err != nil {
 		return err

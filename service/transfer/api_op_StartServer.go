@@ -21,7 +21,7 @@ func (c *Client) StartServer(ctx context.Context, params *StartServerInput, optF
 		params = &StartServerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartServer", params, optFns, addOperationStartServerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartServer", params, optFns, c.addOperationStartServerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type StartServerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartServer{}, middleware.After)
 	if err != nil {
 		return err

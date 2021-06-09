@@ -16,7 +16,7 @@ func (c *Client) DisassociateContactFromAddressBook(ctx context.Context, params 
 		params = &DisassociateContactFromAddressBookInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateContactFromAddressBook", params, optFns, addOperationDisassociateContactFromAddressBookMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateContactFromAddressBook", params, optFns, c.addOperationDisassociateContactFromAddressBookMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DisassociateContactFromAddressBookOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateContactFromAddressBookMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateContactFromAddressBookMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateContactFromAddressBook{}, middleware.After)
 	if err != nil {
 		return err

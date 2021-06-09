@@ -18,7 +18,7 @@ func (c *Client) DescribeDatasetImportJob(ctx context.Context, params *DescribeD
 		params = &DescribeDatasetImportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDatasetImportJob", params, optFns, addOperationDescribeDatasetImportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDatasetImportJob", params, optFns, c.addOperationDescribeDatasetImportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeDatasetImportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDatasetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDatasetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDatasetImportJob{}, middleware.After)
 	if err != nil {
 		return err

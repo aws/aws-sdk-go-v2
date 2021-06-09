@@ -28,7 +28,7 @@ func (c *Client) DescribeAggregateIdFormat(ctx context.Context, params *Describe
 		params = &DescribeAggregateIdFormatInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAggregateIdFormat", params, optFns, addOperationDescribeAggregateIdFormatMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAggregateIdFormat", params, optFns, c.addOperationDescribeAggregateIdFormatMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeAggregateIdFormatOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAggregateIdFormatMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAggregateIdFormatMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeAggregateIdFormat{}, middleware.After)
 	if err != nil {
 		return err

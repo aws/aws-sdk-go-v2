@@ -25,7 +25,7 @@ func (c *Client) DescribeScalingPolicies(ctx context.Context, params *DescribeSc
 		params = &DescribeScalingPoliciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeScalingPolicies", params, optFns, addOperationDescribeScalingPoliciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeScalingPolicies", params, optFns, c.addOperationDescribeScalingPoliciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -204,7 +204,7 @@ type DescribeScalingPoliciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeScalingPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeScalingPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeScalingPolicies{}, middleware.After)
 	if err != nil {
 		return err

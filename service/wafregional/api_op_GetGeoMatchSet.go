@@ -23,7 +23,7 @@ func (c *Client) GetGeoMatchSet(ctx context.Context, params *GetGeoMatchSetInput
 		params = &GetGeoMatchSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetGeoMatchSet", params, optFns, addOperationGetGeoMatchSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetGeoMatchSet", params, optFns, c.addOperationGetGeoMatchSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetGeoMatchSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetGeoMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetGeoMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetGeoMatchSet{}, middleware.After)
 	if err != nil {
 		return err

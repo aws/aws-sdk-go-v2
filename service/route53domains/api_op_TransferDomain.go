@@ -51,7 +51,7 @@ func (c *Client) TransferDomain(ctx context.Context, params *TransferDomainInput
 		params = &TransferDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TransferDomain", params, optFns, addOperationTransferDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TransferDomain", params, optFns, c.addOperationTransferDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -159,7 +159,7 @@ type TransferDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTransferDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTransferDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTransferDomain{}, middleware.After)
 	if err != nil {
 		return err

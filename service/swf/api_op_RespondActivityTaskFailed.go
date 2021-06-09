@@ -43,7 +43,7 @@ func (c *Client) RespondActivityTaskFailed(ctx context.Context, params *RespondA
 		params = &RespondActivityTaskFailedInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RespondActivityTaskFailed", params, optFns, addOperationRespondActivityTaskFailedMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RespondActivityTaskFailed", params, optFns, c.addOperationRespondActivityTaskFailedMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type RespondActivityTaskFailedOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRespondActivityTaskFailedMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRespondActivityTaskFailedMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRespondActivityTaskFailed{}, middleware.After)
 	if err != nil {
 		return err

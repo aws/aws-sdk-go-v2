@@ -55,7 +55,7 @@ func (c *Client) DescribeCustomKeyStores(ctx context.Context, params *DescribeCu
 		params = &DescribeCustomKeyStoresInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCustomKeyStores", params, optFns, addOperationDescribeCustomKeyStoresMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCustomKeyStores", params, optFns, c.addOperationDescribeCustomKeyStoresMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ type DescribeCustomKeyStoresOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCustomKeyStoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCustomKeyStoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCustomKeyStores{}, middleware.After)
 	if err != nil {
 		return err

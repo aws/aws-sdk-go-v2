@@ -30,7 +30,7 @@ func (c *Client) DiscoverInputSchema(ctx context.Context, params *DiscoverInputS
 		params = &DiscoverInputSchemaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DiscoverInputSchema", params, optFns, addOperationDiscoverInputSchemaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DiscoverInputSchema", params, optFns, c.addOperationDiscoverInputSchemaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type DiscoverInputSchemaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDiscoverInputSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDiscoverInputSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDiscoverInputSchema{}, middleware.After)
 	if err != nil {
 		return err

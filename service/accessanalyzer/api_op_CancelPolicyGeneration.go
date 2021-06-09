@@ -16,7 +16,7 @@ func (c *Client) CancelPolicyGeneration(ctx context.Context, params *CancelPolic
 		params = &CancelPolicyGenerationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelPolicyGeneration", params, optFns, addOperationCancelPolicyGenerationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelPolicyGeneration", params, optFns, c.addOperationCancelPolicyGenerationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type CancelPolicyGenerationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelPolicyGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelPolicyGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelPolicyGeneration{}, middleware.After)
 	if err != nil {
 		return err

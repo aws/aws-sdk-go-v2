@@ -19,7 +19,7 @@ func (c *Client) GetAccountSummary(ctx context.Context, params *GetAccountSummar
 		params = &GetAccountSummaryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccountSummary", params, optFns, addOperationGetAccountSummaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccountSummary", params, optFns, c.addOperationGetAccountSummaryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type GetAccountSummaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccountSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccountSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetAccountSummary{}, middleware.After)
 	if err != nil {
 		return err

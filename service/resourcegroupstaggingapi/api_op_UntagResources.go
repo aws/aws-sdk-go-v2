@@ -28,7 +28,7 @@ func (c *Client) UntagResources(ctx context.Context, params *UntagResourcesInput
 		params = &UntagResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagResources", params, optFns, addOperationUntagResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagResources", params, optFns, c.addOperationUntagResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type UntagResourcesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUntagResources{}, middleware.After)
 	if err != nil {
 		return err

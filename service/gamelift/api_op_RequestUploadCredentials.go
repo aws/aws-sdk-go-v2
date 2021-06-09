@@ -26,7 +26,7 @@ func (c *Client) RequestUploadCredentials(ctx context.Context, params *RequestUp
 		params = &RequestUploadCredentialsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RequestUploadCredentials", params, optFns, addOperationRequestUploadCredentialsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RequestUploadCredentials", params, optFns, c.addOperationRequestUploadCredentialsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type RequestUploadCredentialsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRequestUploadCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRequestUploadCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRequestUploadCredentials{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) DeleteJobQueue(ctx context.Context, params *DeleteJobQueueInput
 		params = &DeleteJobQueueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteJobQueue", params, optFns, addOperationDeleteJobQueueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteJobQueue", params, optFns, c.addOperationDeleteJobQueueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteJobQueueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteJobQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteJobQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteJobQueue{}, middleware.After)
 	if err != nil {
 		return err

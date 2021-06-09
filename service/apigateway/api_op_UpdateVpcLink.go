@@ -17,7 +17,7 @@ func (c *Client) UpdateVpcLink(ctx context.Context, params *UpdateVpcLinkInput, 
 		params = &UpdateVpcLinkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateVpcLink", params, optFns, addOperationUpdateVpcLinkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateVpcLink", params, optFns, c.addOperationUpdateVpcLinkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type UpdateVpcLinkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateVpcLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateVpcLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVpcLink{}, middleware.After)
 	if err != nil {
 		return err

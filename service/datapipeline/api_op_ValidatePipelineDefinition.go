@@ -52,7 +52,7 @@ func (c *Client) ValidatePipelineDefinition(ctx context.Context, params *Validat
 		params = &ValidatePipelineDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ValidatePipelineDefinition", params, optFns, addOperationValidatePipelineDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ValidatePipelineDefinition", params, optFns, c.addOperationValidatePipelineDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ type ValidatePipelineDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationValidatePipelineDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationValidatePipelineDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpValidatePipelineDefinition{}, middleware.After)
 	if err != nil {
 		return err

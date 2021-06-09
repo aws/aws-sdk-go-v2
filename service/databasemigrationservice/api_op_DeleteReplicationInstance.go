@@ -18,7 +18,7 @@ func (c *Client) DeleteReplicationInstance(ctx context.Context, params *DeleteRe
 		params = &DeleteReplicationInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteReplicationInstance", params, optFns, addOperationDeleteReplicationInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteReplicationInstance", params, optFns, c.addOperationDeleteReplicationInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteReplicationInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteReplicationInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteReplicationInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteReplicationInstance{}, middleware.After)
 	if err != nil {
 		return err

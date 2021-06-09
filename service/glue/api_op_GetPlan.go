@@ -17,7 +17,7 @@ func (c *Client) GetPlan(ctx context.Context, params *GetPlanInput, optFns ...fu
 		params = &GetPlanInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPlan", params, optFns, addOperationGetPlanMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPlan", params, optFns, c.addOperationGetPlanMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type GetPlanOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPlan{}, middleware.After)
 	if err != nil {
 		return err

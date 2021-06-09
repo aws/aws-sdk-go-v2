@@ -18,7 +18,7 @@ func (c *Client) UpdatePublicKey(ctx context.Context, params *UpdatePublicKeyInp
 		params = &UpdatePublicKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePublicKey", params, optFns, addOperationUpdatePublicKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePublicKey", params, optFns, c.addOperationUpdatePublicKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UpdatePublicKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpUpdatePublicKey{}, middleware.After)
 	if err != nil {
 		return err

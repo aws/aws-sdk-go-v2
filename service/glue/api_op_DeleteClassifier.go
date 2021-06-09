@@ -16,7 +16,7 @@ func (c *Client) DeleteClassifier(ctx context.Context, params *DeleteClassifierI
 		params = &DeleteClassifierInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteClassifier", params, optFns, addOperationDeleteClassifierMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteClassifier", params, optFns, c.addOperationDeleteClassifierMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteClassifierOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteClassifier{}, middleware.After)
 	if err != nil {
 		return err

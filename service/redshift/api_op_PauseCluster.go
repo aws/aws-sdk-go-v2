@@ -17,7 +17,7 @@ func (c *Client) PauseCluster(ctx context.Context, params *PauseClusterInput, op
 		params = &PauseClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PauseCluster", params, optFns, addOperationPauseClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PauseCluster", params, optFns, c.addOperationPauseClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type PauseClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPauseClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPauseClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPauseCluster{}, middleware.After)
 	if err != nil {
 		return err

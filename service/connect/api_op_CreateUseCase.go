@@ -17,7 +17,7 @@ func (c *Client) CreateUseCase(ctx context.Context, params *CreateUseCaseInput, 
 		params = &CreateUseCaseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateUseCase", params, optFns, addOperationCreateUseCaseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateUseCase", params, optFns, c.addOperationCreateUseCaseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type CreateUseCaseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateUseCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateUseCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUseCase{}, middleware.After)
 	if err != nil {
 		return err

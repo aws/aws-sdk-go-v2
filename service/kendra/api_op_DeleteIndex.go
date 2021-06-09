@@ -18,7 +18,7 @@ func (c *Client) DeleteIndex(ctx context.Context, params *DeleteIndexInput, optF
 		params = &DeleteIndexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteIndex", params, optFns, addOperationDeleteIndexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteIndex", params, optFns, c.addOperationDeleteIndexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteIndexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteIndex{}, middleware.After)
 	if err != nil {
 		return err

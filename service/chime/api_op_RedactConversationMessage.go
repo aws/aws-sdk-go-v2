@@ -16,7 +16,7 @@ func (c *Client) RedactConversationMessage(ctx context.Context, params *RedactCo
 		params = &RedactConversationMessageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RedactConversationMessage", params, optFns, addOperationRedactConversationMessageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RedactConversationMessage", params, optFns, c.addOperationRedactConversationMessageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type RedactConversationMessageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRedactConversationMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRedactConversationMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRedactConversationMessage{}, middleware.After)
 	if err != nil {
 		return err

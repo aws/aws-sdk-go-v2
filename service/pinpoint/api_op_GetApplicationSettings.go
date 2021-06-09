@@ -17,7 +17,7 @@ func (c *Client) GetApplicationSettings(ctx context.Context, params *GetApplicat
 		params = &GetApplicationSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetApplicationSettings", params, optFns, addOperationGetApplicationSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetApplicationSettings", params, optFns, c.addOperationGetApplicationSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type GetApplicationSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetApplicationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetApplicationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplicationSettings{}, middleware.After)
 	if err != nil {
 		return err

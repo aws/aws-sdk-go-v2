@@ -19,7 +19,7 @@ func (c *Client) GetAssociatedIpv6PoolCidrs(ctx context.Context, params *GetAsso
 		params = &GetAssociatedIpv6PoolCidrsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAssociatedIpv6PoolCidrs", params, optFns, addOperationGetAssociatedIpv6PoolCidrsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAssociatedIpv6PoolCidrs", params, optFns, c.addOperationGetAssociatedIpv6PoolCidrsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetAssociatedIpv6PoolCidrsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAssociatedIpv6PoolCidrsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAssociatedIpv6PoolCidrsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpGetAssociatedIpv6PoolCidrs{}, middleware.After)
 	if err != nil {
 		return err

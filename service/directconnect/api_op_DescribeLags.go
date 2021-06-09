@@ -17,7 +17,7 @@ func (c *Client) DescribeLags(ctx context.Context, params *DescribeLagsInput, op
 		params = &DescribeLagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLags", params, optFns, addOperationDescribeLagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLags", params, optFns, c.addOperationDescribeLagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DescribeLagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLags{}, middleware.After)
 	if err != nil {
 		return err

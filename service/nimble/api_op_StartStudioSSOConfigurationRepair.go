@@ -24,7 +24,7 @@ func (c *Client) StartStudioSSOConfigurationRepair(ctx context.Context, params *
 		params = &StartStudioSSOConfigurationRepairInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartStudioSSOConfigurationRepair", params, optFns, addOperationStartStudioSSOConfigurationRepairMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartStudioSSOConfigurationRepair", params, optFns, c.addOperationStartStudioSSOConfigurationRepairMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type StartStudioSSOConfigurationRepairOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartStudioSSOConfigurationRepairMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartStudioSSOConfigurationRepairMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartStudioSSOConfigurationRepair{}, middleware.After)
 	if err != nil {
 		return err

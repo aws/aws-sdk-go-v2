@@ -19,7 +19,7 @@ func (c *Client) SetRepositoryPolicy(ctx context.Context, params *SetRepositoryP
 		params = &SetRepositoryPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetRepositoryPolicy", params, optFns, addOperationSetRepositoryPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetRepositoryPolicy", params, optFns, c.addOperationSetRepositoryPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type SetRepositoryPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetRepositoryPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetRepositoryPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetRepositoryPolicy{}, middleware.After)
 	if err != nil {
 		return err

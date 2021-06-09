@@ -18,7 +18,7 @@ func (c *Client) OverridePullRequestApprovalRules(ctx context.Context, params *O
 		params = &OverridePullRequestApprovalRulesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "OverridePullRequestApprovalRules", params, optFns, addOperationOverridePullRequestApprovalRulesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "OverridePullRequestApprovalRules", params, optFns, c.addOperationOverridePullRequestApprovalRulesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type OverridePullRequestApprovalRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationOverridePullRequestApprovalRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationOverridePullRequestApprovalRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpOverridePullRequestApprovalRules{}, middleware.After)
 	if err != nil {
 		return err

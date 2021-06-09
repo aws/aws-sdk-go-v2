@@ -20,7 +20,7 @@ func (c *Client) ListFunctionEventInvokeConfigs(ctx context.Context, params *Lis
 		params = &ListFunctionEventInvokeConfigsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFunctionEventInvokeConfigs", params, optFns, addOperationListFunctionEventInvokeConfigsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFunctionEventInvokeConfigs", params, optFns, c.addOperationListFunctionEventInvokeConfigsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ListFunctionEventInvokeConfigsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFunctionEventInvokeConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFunctionEventInvokeConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFunctionEventInvokeConfigs{}, middleware.After)
 	if err != nil {
 		return err

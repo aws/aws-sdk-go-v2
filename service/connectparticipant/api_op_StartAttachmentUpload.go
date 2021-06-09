@@ -19,7 +19,7 @@ func (c *Client) StartAttachmentUpload(ctx context.Context, params *StartAttachm
 		params = &StartAttachmentUploadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartAttachmentUpload", params, optFns, addOperationStartAttachmentUploadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartAttachmentUpload", params, optFns, c.addOperationStartAttachmentUploadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type StartAttachmentUploadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartAttachmentUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartAttachmentUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAttachmentUpload{}, middleware.After)
 	if err != nil {
 		return err

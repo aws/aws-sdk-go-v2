@@ -19,7 +19,7 @@ func (c *Client) DetachThingPrincipal(ctx context.Context, params *DetachThingPr
 		params = &DetachThingPrincipalInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachThingPrincipal", params, optFns, addOperationDetachThingPrincipalMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachThingPrincipal", params, optFns, c.addOperationDetachThingPrincipalMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DetachThingPrincipalOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachThingPrincipalMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachThingPrincipalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDetachThingPrincipal{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) ReplaceIamInstanceProfileAssociation(ctx context.Context, param
 		params = &ReplaceIamInstanceProfileAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReplaceIamInstanceProfileAssociation", params, optFns, addOperationReplaceIamInstanceProfileAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReplaceIamInstanceProfileAssociation", params, optFns, c.addOperationReplaceIamInstanceProfileAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ReplaceIamInstanceProfileAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReplaceIamInstanceProfileAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReplaceIamInstanceProfileAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpReplaceIamInstanceProfileAssociation{}, middleware.After)
 	if err != nil {
 		return err

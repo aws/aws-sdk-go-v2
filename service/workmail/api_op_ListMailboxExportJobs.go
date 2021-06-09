@@ -19,7 +19,7 @@ func (c *Client) ListMailboxExportJobs(ctx context.Context, params *ListMailboxE
 		params = &ListMailboxExportJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListMailboxExportJobs", params, optFns, addOperationListMailboxExportJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListMailboxExportJobs", params, optFns, c.addOperationListMailboxExportJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListMailboxExportJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListMailboxExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListMailboxExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMailboxExportJobs{}, middleware.After)
 	if err != nil {
 		return err

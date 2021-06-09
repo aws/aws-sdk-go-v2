@@ -17,7 +17,7 @@ func (c *Client) ProvideAnomalyFeedback(ctx context.Context, params *ProvideAnom
 		params = &ProvideAnomalyFeedbackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ProvideAnomalyFeedback", params, optFns, addOperationProvideAnomalyFeedbackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ProvideAnomalyFeedback", params, optFns, c.addOperationProvideAnomalyFeedbackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ProvideAnomalyFeedbackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationProvideAnomalyFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationProvideAnomalyFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpProvideAnomalyFeedback{}, middleware.After)
 	if err != nil {
 		return err

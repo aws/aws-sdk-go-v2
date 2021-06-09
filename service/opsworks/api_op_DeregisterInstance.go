@@ -22,7 +22,7 @@ func (c *Client) DeregisterInstance(ctx context.Context, params *DeregisterInsta
 		params = &DeregisterInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterInstance", params, optFns, addOperationDeregisterInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterInstance", params, optFns, c.addOperationDeregisterInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeregisterInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterInstance{}, middleware.After)
 	if err != nil {
 		return err

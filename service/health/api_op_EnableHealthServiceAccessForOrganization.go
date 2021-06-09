@@ -39,7 +39,7 @@ func (c *Client) EnableHealthServiceAccessForOrganization(ctx context.Context, p
 		params = &EnableHealthServiceAccessForOrganizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableHealthServiceAccessForOrganization", params, optFns, addOperationEnableHealthServiceAccessForOrganizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableHealthServiceAccessForOrganization", params, optFns, c.addOperationEnableHealthServiceAccessForOrganizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type EnableHealthServiceAccessForOrganizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableHealthServiceAccessForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableHealthServiceAccessForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableHealthServiceAccessForOrganization{}, middleware.After)
 	if err != nil {
 		return err

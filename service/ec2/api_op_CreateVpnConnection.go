@@ -29,7 +29,7 @@ func (c *Client) CreateVpnConnection(ctx context.Context, params *CreateVpnConne
 		params = &CreateVpnConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVpnConnection", params, optFns, addOperationCreateVpnConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateVpnConnection", params, optFns, c.addOperationCreateVpnConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type CreateVpnConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateVpnConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateVpnConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateVpnConnection{}, middleware.After)
 	if err != nil {
 		return err

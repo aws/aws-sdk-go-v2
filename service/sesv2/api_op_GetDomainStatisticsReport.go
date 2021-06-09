@@ -19,7 +19,7 @@ func (c *Client) GetDomainStatisticsReport(ctx context.Context, params *GetDomai
 		params = &GetDomainStatisticsReportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDomainStatisticsReport", params, optFns, addOperationGetDomainStatisticsReportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDomainStatisticsReport", params, optFns, c.addOperationGetDomainStatisticsReportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type GetDomainStatisticsReportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDomainStatisticsReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDomainStatisticsReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainStatisticsReport{}, middleware.After)
 	if err != nil {
 		return err

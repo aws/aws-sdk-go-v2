@@ -18,7 +18,7 @@ func (c *Client) ListSharedProjects(ctx context.Context, params *ListSharedProje
 		params = &ListSharedProjectsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSharedProjects", params, optFns, addOperationListSharedProjectsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSharedProjects", params, optFns, c.addOperationListSharedProjectsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type ListSharedProjectsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSharedProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSharedProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSharedProjects{}, middleware.After)
 	if err != nil {
 		return err

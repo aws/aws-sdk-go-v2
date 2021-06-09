@@ -18,7 +18,7 @@ func (c *Client) DescribeDashboard(ctx context.Context, params *DescribeDashboar
 		params = &DescribeDashboardInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDashboard", params, optFns, addOperationDescribeDashboardMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDashboard", params, optFns, c.addOperationDescribeDashboardMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type DescribeDashboardOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDashboard{}, middleware.After)
 	if err != nil {
 		return err

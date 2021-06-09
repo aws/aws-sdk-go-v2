@@ -17,7 +17,7 @@ func (c *Client) DissociatePackage(ctx context.Context, params *DissociatePackag
 		params = &DissociatePackageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DissociatePackage", params, optFns, addOperationDissociatePackageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DissociatePackage", params, optFns, c.addOperationDissociatePackageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DissociatePackageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDissociatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDissociatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDissociatePackage{}, middleware.After)
 	if err != nil {
 		return err

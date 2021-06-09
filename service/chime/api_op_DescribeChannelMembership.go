@@ -20,7 +20,7 @@ func (c *Client) DescribeChannelMembership(ctx context.Context, params *Describe
 		params = &DescribeChannelMembershipInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeChannelMembership", params, optFns, addOperationDescribeChannelMembershipMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeChannelMembership", params, optFns, c.addOperationDescribeChannelMembershipMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeChannelMembershipOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeChannelMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeChannelMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeChannelMembership{}, middleware.After)
 	if err != nil {
 		return err

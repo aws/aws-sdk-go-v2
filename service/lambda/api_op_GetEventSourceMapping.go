@@ -19,7 +19,7 @@ func (c *Client) GetEventSourceMapping(ctx context.Context, params *GetEventSour
 		params = &GetEventSourceMappingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEventSourceMapping", params, optFns, addOperationGetEventSourceMappingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEventSourceMapping", params, optFns, c.addOperationGetEventSourceMappingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -126,7 +126,7 @@ type GetEventSourceMappingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEventSourceMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEventSourceMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEventSourceMapping{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) ListTagsForStream(ctx context.Context, params *ListTagsForStrea
 		params = &ListTagsForStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTagsForStream", params, optFns, addOperationListTagsForStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTagsForStream", params, optFns, c.addOperationListTagsForStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListTagsForStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTagsForStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTagsForStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTagsForStream{}, middleware.After)
 	if err != nil {
 		return err

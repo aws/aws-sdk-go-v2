@@ -20,7 +20,7 @@ func (c *Client) BatchGetWorkflows(ctx context.Context, params *BatchGetWorkflow
 		params = &BatchGetWorkflowsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetWorkflows", params, optFns, addOperationBatchGetWorkflowsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetWorkflows", params, optFns, c.addOperationBatchGetWorkflowsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type BatchGetWorkflowsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetWorkflowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetWorkflowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetWorkflows{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) ListMetricSets(ctx context.Context, params *ListMetricSetsInput
 		params = &ListMetricSetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListMetricSets", params, optFns, addOperationListMetricSetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListMetricSets", params, optFns, c.addOperationListMetricSetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListMetricSetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListMetricSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListMetricSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMetricSets{}, middleware.After)
 	if err != nil {
 		return err

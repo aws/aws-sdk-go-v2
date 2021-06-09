@@ -22,7 +22,7 @@ func (c *Client) DescribeAlias(ctx context.Context, params *DescribeAliasInput, 
 		params = &DescribeAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAlias", params, optFns, addOperationDescribeAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAlias", params, optFns, c.addOperationDescribeAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DescribeAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAlias{}, middleware.After)
 	if err != nil {
 		return err

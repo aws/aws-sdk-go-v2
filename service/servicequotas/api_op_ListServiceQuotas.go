@@ -20,7 +20,7 @@ func (c *Client) ListServiceQuotas(ctx context.Context, params *ListServiceQuota
 		params = &ListServiceQuotasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListServiceQuotas", params, optFns, addOperationListServiceQuotasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListServiceQuotas", params, optFns, c.addOperationListServiceQuotasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListServiceQuotasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListServiceQuotasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListServiceQuotasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListServiceQuotas{}, middleware.After)
 	if err != nil {
 		return err

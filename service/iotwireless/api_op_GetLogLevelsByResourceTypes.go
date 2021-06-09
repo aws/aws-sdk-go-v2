@@ -18,7 +18,7 @@ func (c *Client) GetLogLevelsByResourceTypes(ctx context.Context, params *GetLog
 		params = &GetLogLevelsByResourceTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLogLevelsByResourceTypes", params, optFns, addOperationGetLogLevelsByResourceTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLogLevelsByResourceTypes", params, optFns, c.addOperationGetLogLevelsByResourceTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetLogLevelsByResourceTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLogLevelsByResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLogLevelsByResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLogLevelsByResourceTypes{}, middleware.After)
 	if err != nil {
 		return err

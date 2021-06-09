@@ -19,7 +19,7 @@ func (c *Client) AdminGetUser(ctx context.Context, params *AdminGetUserInput, op
 		params = &AdminGetUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminGetUser", params, optFns, addOperationAdminGetUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminGetUser", params, optFns, c.addOperationAdminGetUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type AdminGetUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminGetUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminGetUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminGetUser{}, middleware.After)
 	if err != nil {
 		return err

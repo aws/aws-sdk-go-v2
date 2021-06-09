@@ -16,7 +16,7 @@ func (c *Client) DeleteMitigationAction(ctx context.Context, params *DeleteMitig
 		params = &DeleteMitigationActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMitigationAction", params, optFns, addOperationDeleteMitigationActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMitigationAction", params, optFns, c.addOperationDeleteMitigationActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteMitigationActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMitigationActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMitigationActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMitigationAction{}, middleware.After)
 	if err != nil {
 		return err

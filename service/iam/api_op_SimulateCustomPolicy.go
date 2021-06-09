@@ -33,7 +33,7 @@ func (c *Client) SimulateCustomPolicy(ctx context.Context, params *SimulateCusto
 		params = &SimulateCustomPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SimulateCustomPolicy", params, optFns, addOperationSimulateCustomPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SimulateCustomPolicy", params, optFns, c.addOperationSimulateCustomPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -234,7 +234,7 @@ type SimulateCustomPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSimulateCustomPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSimulateCustomPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSimulateCustomPolicy{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteSkillAuthorization(ctx context.Context, params *DeleteSki
 		params = &DeleteSkillAuthorizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSkillAuthorization", params, optFns, addOperationDeleteSkillAuthorizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSkillAuthorization", params, optFns, c.addOperationDeleteSkillAuthorizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteSkillAuthorizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSkillAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSkillAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSkillAuthorization{}, middleware.After)
 	if err != nil {
 		return err

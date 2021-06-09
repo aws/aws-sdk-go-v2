@@ -17,7 +17,7 @@ func (c *Client) ModifyUser(ctx context.Context, params *ModifyUserInput, optFns
 		params = &ModifyUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyUser", params, optFns, addOperationModifyUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyUser", params, optFns, c.addOperationModifyUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type ModifyUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyUser{}, middleware.After)
 	if err != nil {
 		return err

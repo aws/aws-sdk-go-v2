@@ -17,7 +17,7 @@ func (c *Client) UpdateVoiceConnector(ctx context.Context, params *UpdateVoiceCo
 		params = &UpdateVoiceConnectorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateVoiceConnector", params, optFns, addOperationUpdateVoiceConnectorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateVoiceConnector", params, optFns, c.addOperationUpdateVoiceConnectorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type UpdateVoiceConnectorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateVoiceConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateVoiceConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVoiceConnector{}, middleware.After)
 	if err != nil {
 		return err

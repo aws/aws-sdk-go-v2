@@ -17,7 +17,7 @@ func (c *Client) GetGrant(ctx context.Context, params *GetGrantInput, optFns ...
 		params = &GetGrantInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetGrant", params, optFns, addOperationGetGrantMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetGrant", params, optFns, c.addOperationGetGrantMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetGrantOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetGrant{}, middleware.After)
 	if err != nil {
 		return err

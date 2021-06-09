@@ -17,7 +17,7 @@ func (c *Client) UpdateComment(ctx context.Context, params *UpdateCommentInput, 
 		params = &UpdateCommentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateComment", params, optFns, addOperationUpdateCommentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateComment", params, optFns, c.addOperationUpdateCommentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type UpdateCommentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateComment{}, middleware.After)
 	if err != nil {
 		return err

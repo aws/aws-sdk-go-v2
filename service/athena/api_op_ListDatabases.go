@@ -18,7 +18,7 @@ func (c *Client) ListDatabases(ctx context.Context, params *ListDatabasesInput, 
 		params = &ListDatabasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDatabases", params, optFns, addOperationListDatabasesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDatabases", params, optFns, c.addOperationListDatabasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListDatabasesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDatabases{}, middleware.After)
 	if err != nil {
 		return err

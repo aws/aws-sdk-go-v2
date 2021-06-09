@@ -43,7 +43,7 @@ func (c *Client) CreateMatchmakingRuleSet(ctx context.Context, params *CreateMat
 		params = &CreateMatchmakingRuleSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMatchmakingRuleSet", params, optFns, addOperationCreateMatchmakingRuleSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMatchmakingRuleSet", params, optFns, c.addOperationCreateMatchmakingRuleSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type CreateMatchmakingRuleSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateMatchmakingRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateMatchmakingRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMatchmakingRuleSet{}, middleware.After)
 	if err != nil {
 		return err

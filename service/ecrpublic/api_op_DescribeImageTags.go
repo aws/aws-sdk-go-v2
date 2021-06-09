@@ -18,7 +18,7 @@ func (c *Client) DescribeImageTags(ctx context.Context, params *DescribeImageTag
 		params = &DescribeImageTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeImageTags", params, optFns, addOperationDescribeImageTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeImageTags", params, optFns, c.addOperationDescribeImageTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DescribeImageTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeImageTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeImageTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImageTags{}, middleware.After)
 	if err != nil {
 		return err

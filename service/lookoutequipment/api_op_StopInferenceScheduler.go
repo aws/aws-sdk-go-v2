@@ -17,7 +17,7 @@ func (c *Client) StopInferenceScheduler(ctx context.Context, params *StopInferen
 		params = &StopInferenceSchedulerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopInferenceScheduler", params, optFns, addOperationStopInferenceSchedulerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopInferenceScheduler", params, optFns, c.addOperationStopInferenceSchedulerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type StopInferenceSchedulerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStopInferenceScheduler{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteJourney(ctx context.Context, params *DeleteJourneyInput, 
 		params = &DeleteJourneyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteJourney", params, optFns, addOperationDeleteJourneyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteJourney", params, optFns, c.addOperationDeleteJourneyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteJourneyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteJourneyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteJourneyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteJourney{}, middleware.After)
 	if err != nil {
 		return err

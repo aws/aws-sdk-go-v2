@@ -16,7 +16,7 @@ func (c *Client) UpdatePreparedStatement(ctx context.Context, params *UpdatePrep
 		params = &UpdatePreparedStatementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePreparedStatement", params, optFns, addOperationUpdatePreparedStatementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePreparedStatement", params, optFns, c.addOperationUpdatePreparedStatementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UpdatePreparedStatementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePreparedStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePreparedStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePreparedStatement{}, middleware.After)
 	if err != nil {
 		return err

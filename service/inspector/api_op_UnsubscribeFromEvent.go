@@ -18,7 +18,7 @@ func (c *Client) UnsubscribeFromEvent(ctx context.Context, params *UnsubscribeFr
 		params = &UnsubscribeFromEventInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnsubscribeFromEvent", params, optFns, addOperationUnsubscribeFromEventMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnsubscribeFromEvent", params, optFns, c.addOperationUnsubscribeFromEventMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UnsubscribeFromEventOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnsubscribeFromEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnsubscribeFromEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnsubscribeFromEvent{}, middleware.After)
 	if err != nil {
 		return err

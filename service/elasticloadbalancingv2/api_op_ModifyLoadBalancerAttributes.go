@@ -20,7 +20,7 @@ func (c *Client) ModifyLoadBalancerAttributes(ctx context.Context, params *Modif
 		params = &ModifyLoadBalancerAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyLoadBalancerAttributes", params, optFns, addOperationModifyLoadBalancerAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyLoadBalancerAttributes", params, optFns, c.addOperationModifyLoadBalancerAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ModifyLoadBalancerAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyLoadBalancerAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyLoadBalancerAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyLoadBalancerAttributes{}, middleware.After)
 	if err != nil {
 		return err

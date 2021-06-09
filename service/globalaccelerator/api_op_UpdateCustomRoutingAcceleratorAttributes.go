@@ -17,7 +17,7 @@ func (c *Client) UpdateCustomRoutingAcceleratorAttributes(ctx context.Context, p
 		params = &UpdateCustomRoutingAcceleratorAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateCustomRoutingAcceleratorAttributes", params, optFns, addOperationUpdateCustomRoutingAcceleratorAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateCustomRoutingAcceleratorAttributes", params, optFns, c.addOperationUpdateCustomRoutingAcceleratorAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type UpdateCustomRoutingAcceleratorAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateCustomRoutingAcceleratorAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateCustomRoutingAcceleratorAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCustomRoutingAcceleratorAttributes{}, middleware.After)
 	if err != nil {
 		return err

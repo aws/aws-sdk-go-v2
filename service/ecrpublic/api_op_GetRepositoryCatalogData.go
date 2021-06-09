@@ -18,7 +18,7 @@ func (c *Client) GetRepositoryCatalogData(ctx context.Context, params *GetReposi
 		params = &GetRepositoryCatalogDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRepositoryCatalogData", params, optFns, addOperationGetRepositoryCatalogDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRepositoryCatalogData", params, optFns, c.addOperationGetRepositoryCatalogDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetRepositoryCatalogDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRepositoryCatalogDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRepositoryCatalogDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRepositoryCatalogData{}, middleware.After)
 	if err != nil {
 		return err

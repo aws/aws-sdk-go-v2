@@ -18,7 +18,7 @@ func (c *Client) DeregisterTransitGatewayMulticastGroupMembers(ctx context.Conte
 		params = &DeregisterTransitGatewayMulticastGroupMembersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterTransitGatewayMulticastGroupMembers", params, optFns, addOperationDeregisterTransitGatewayMulticastGroupMembersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterTransitGatewayMulticastGroupMembers", params, optFns, c.addOperationDeregisterTransitGatewayMulticastGroupMembersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DeregisterTransitGatewayMulticastGroupMembersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterTransitGatewayMulticastGroupMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterTransitGatewayMulticastGroupMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeregisterTransitGatewayMulticastGroupMembers{}, middleware.After)
 	if err != nil {
 		return err

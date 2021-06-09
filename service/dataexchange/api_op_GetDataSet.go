@@ -18,7 +18,7 @@ func (c *Client) GetDataSet(ctx context.Context, params *GetDataSetInput, optFns
 		params = &GetDataSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDataSet", params, optFns, addOperationGetDataSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDataSet", params, optFns, c.addOperationGetDataSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type GetDataSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataSet{}, middleware.After)
 	if err != nil {
 		return err

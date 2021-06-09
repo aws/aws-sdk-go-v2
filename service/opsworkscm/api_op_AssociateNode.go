@@ -31,7 +31,7 @@ func (c *Client) AssociateNode(ctx context.Context, params *AssociateNodeInput, 
 		params = &AssociateNodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateNode", params, optFns, addOperationAssociateNodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateNode", params, optFns, c.addOperationAssociateNodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type AssociateNodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateNode{}, middleware.After)
 	if err != nil {
 		return err

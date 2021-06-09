@@ -20,7 +20,7 @@ func (c *Client) BatchDeleteDocument(ctx context.Context, params *BatchDeleteDoc
 		params = &BatchDeleteDocumentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteDocument", params, optFns, addOperationBatchDeleteDocumentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteDocument", params, optFns, c.addOperationBatchDeleteDocumentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type BatchDeleteDocumentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteDocument{}, middleware.After)
 	if err != nil {
 		return err

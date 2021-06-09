@@ -17,7 +17,7 @@ func (c *Client) AllQueryStringTypes(ctx context.Context, params *AllQueryString
 		params = &AllQueryStringTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AllQueryStringTypes", params, optFns, addOperationAllQueryStringTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AllQueryStringTypes", params, optFns, c.addOperationAllQueryStringTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type AllQueryStringTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAllQueryStringTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAllQueryStringTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpAllQueryStringTypes{}, middleware.After)
 	if err != nil {
 		return err

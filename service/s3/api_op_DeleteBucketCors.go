@@ -29,7 +29,7 @@ func (c *Client) DeleteBucketCors(ctx context.Context, params *DeleteBucketCorsI
 		params = &DeleteBucketCorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketCors", params, optFns, addOperationDeleteBucketCorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketCors", params, optFns, c.addOperationDeleteBucketCorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeleteBucketCorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBucketCorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBucketCorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteBucketCors{}, middleware.After)
 	if err != nil {
 		return err

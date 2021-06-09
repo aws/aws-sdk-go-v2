@@ -16,7 +16,7 @@ func (c *Client) UpdateApiMapping(ctx context.Context, params *UpdateApiMappingI
 		params = &UpdateApiMappingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateApiMapping", params, optFns, addOperationUpdateApiMappingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateApiMapping", params, optFns, c.addOperationUpdateApiMappingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type UpdateApiMappingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateApiMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateApiMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApiMapping{}, middleware.After)
 	if err != nil {
 		return err

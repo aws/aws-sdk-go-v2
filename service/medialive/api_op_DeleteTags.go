@@ -16,7 +16,7 @@ func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns
 		params = &DeleteTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTags", params, optFns, addOperationDeleteTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTags", params, optFns, c.addOperationDeleteTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTags{}, middleware.After)
 	if err != nil {
 		return err

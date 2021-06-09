@@ -17,7 +17,7 @@ func (c *Client) ListEntitiesDetectionV2Jobs(ctx context.Context, params *ListEn
 		params = &ListEntitiesDetectionV2JobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEntitiesDetectionV2Jobs", params, optFns, addOperationListEntitiesDetectionV2JobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEntitiesDetectionV2Jobs", params, optFns, c.addOperationListEntitiesDetectionV2JobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListEntitiesDetectionV2JobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEntitiesDetectionV2JobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEntitiesDetectionV2JobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEntitiesDetectionV2Jobs{}, middleware.After)
 	if err != nil {
 		return err

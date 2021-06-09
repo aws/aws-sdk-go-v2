@@ -20,7 +20,7 @@ func (c *Client) ListLexBots(ctx context.Context, params *ListLexBotsInput, optF
 		params = &ListLexBotsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLexBots", params, optFns, addOperationListLexBotsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLexBots", params, optFns, c.addOperationListLexBotsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListLexBotsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLexBotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLexBotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLexBots{}, middleware.After)
 	if err != nil {
 		return err

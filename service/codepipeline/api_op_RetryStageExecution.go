@@ -20,7 +20,7 @@ func (c *Client) RetryStageExecution(ctx context.Context, params *RetryStageExec
 		params = &RetryStageExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RetryStageExecution", params, optFns, addOperationRetryStageExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RetryStageExecution", params, optFns, c.addOperationRetryStageExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type RetryStageExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRetryStageExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRetryStageExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRetryStageExecution{}, middleware.After)
 	if err != nil {
 		return err

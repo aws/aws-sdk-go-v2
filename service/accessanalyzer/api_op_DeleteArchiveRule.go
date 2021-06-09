@@ -16,7 +16,7 @@ func (c *Client) DeleteArchiveRule(ctx context.Context, params *DeleteArchiveRul
 		params = &DeleteArchiveRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteArchiveRule", params, optFns, addOperationDeleteArchiveRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteArchiveRule", params, optFns, c.addOperationDeleteArchiveRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteArchiveRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteArchiveRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteArchiveRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteArchiveRule{}, middleware.After)
 	if err != nil {
 		return err

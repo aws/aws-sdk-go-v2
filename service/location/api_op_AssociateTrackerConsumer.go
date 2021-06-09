@@ -20,7 +20,7 @@ func (c *Client) AssociateTrackerConsumer(ctx context.Context, params *Associate
 		params = &AssociateTrackerConsumerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateTrackerConsumer", params, optFns, addOperationAssociateTrackerConsumerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateTrackerConsumer", params, optFns, c.addOperationAssociateTrackerConsumerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type AssociateTrackerConsumerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateTrackerConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateTrackerConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateTrackerConsumer{}, middleware.After)
 	if err != nil {
 		return err

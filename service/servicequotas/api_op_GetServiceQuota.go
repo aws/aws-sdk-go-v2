@@ -19,7 +19,7 @@ func (c *Client) GetServiceQuota(ctx context.Context, params *GetServiceQuotaInp
 		params = &GetServiceQuotaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetServiceQuota", params, optFns, addOperationGetServiceQuotaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetServiceQuota", params, optFns, c.addOperationGetServiceQuotaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetServiceQuotaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetServiceQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetServiceQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetServiceQuota{}, middleware.After)
 	if err != nil {
 		return err

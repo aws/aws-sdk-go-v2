@@ -44,7 +44,7 @@ func (c *Client) ListBucketIntelligentTieringConfigurations(ctx context.Context,
 		params = &ListBucketIntelligentTieringConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBucketIntelligentTieringConfigurations", params, optFns, addOperationListBucketIntelligentTieringConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBucketIntelligentTieringConfigurations", params, optFns, c.addOperationListBucketIntelligentTieringConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type ListBucketIntelligentTieringConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBucketIntelligentTieringConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBucketIntelligentTieringConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListBucketIntelligentTieringConfigurations{}, middleware.After)
 	if err != nil {
 		return err

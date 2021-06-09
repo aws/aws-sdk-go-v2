@@ -18,7 +18,7 @@ func (c *Client) DiscoverPollEndpoint(ctx context.Context, params *DiscoverPollE
 		params = &DiscoverPollEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DiscoverPollEndpoint", params, optFns, addOperationDiscoverPollEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DiscoverPollEndpoint", params, optFns, c.addOperationDiscoverPollEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DiscoverPollEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDiscoverPollEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDiscoverPollEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDiscoverPollEndpoint{}, middleware.After)
 	if err != nil {
 		return err

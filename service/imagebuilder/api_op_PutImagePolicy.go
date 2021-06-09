@@ -23,7 +23,7 @@ func (c *Client) PutImagePolicy(ctx context.Context, params *PutImagePolicyInput
 		params = &PutImagePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutImagePolicy", params, optFns, addOperationPutImagePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutImagePolicy", params, optFns, c.addOperationPutImagePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type PutImagePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutImagePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutImagePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutImagePolicy{}, middleware.After)
 	if err != nil {
 		return err

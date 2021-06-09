@@ -31,7 +31,7 @@ func (c *Client) PutPublicAccessBlock(ctx context.Context, params *PutPublicAcce
 		params = &PutPublicAccessBlockInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutPublicAccessBlock", params, optFns, addOperationPutPublicAccessBlockMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutPublicAccessBlock", params, optFns, c.addOperationPutPublicAccessBlockMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type PutPublicAccessBlockOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutPublicAccessBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutPublicAccessBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutPublicAccessBlock{}, middleware.After)
 	if err != nil {
 		return err

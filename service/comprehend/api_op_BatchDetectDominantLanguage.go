@@ -20,7 +20,7 @@ func (c *Client) BatchDetectDominantLanguage(ctx context.Context, params *BatchD
 		params = &BatchDetectDominantLanguageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDetectDominantLanguage", params, optFns, addOperationBatchDetectDominantLanguageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDetectDominantLanguage", params, optFns, c.addOperationBatchDetectDominantLanguageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type BatchDetectDominantLanguageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDetectDominantLanguageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDetectDominantLanguageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDetectDominantLanguage{}, middleware.After)
 	if err != nil {
 		return err

@@ -35,7 +35,7 @@ func (c *Client) TerminateInstances(ctx context.Context, params *TerminateInstan
 		params = &TerminateInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TerminateInstances", params, optFns, addOperationTerminateInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TerminateInstances", params, optFns, c.addOperationTerminateInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type TerminateInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTerminateInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTerminateInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpTerminateInstances{}, middleware.After)
 	if err != nil {
 		return err

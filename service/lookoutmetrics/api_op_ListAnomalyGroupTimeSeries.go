@@ -18,7 +18,7 @@ func (c *Client) ListAnomalyGroupTimeSeries(ctx context.Context, params *ListAno
 		params = &ListAnomalyGroupTimeSeriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAnomalyGroupTimeSeries", params, optFns, addOperationListAnomalyGroupTimeSeriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAnomalyGroupTimeSeries", params, optFns, c.addOperationListAnomalyGroupTimeSeriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type ListAnomalyGroupTimeSeriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAnomalyGroupTimeSeriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAnomalyGroupTimeSeriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnomalyGroupTimeSeries{}, middleware.After)
 	if err != nil {
 		return err

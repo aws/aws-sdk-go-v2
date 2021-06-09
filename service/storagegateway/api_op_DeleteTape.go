@@ -17,7 +17,7 @@ func (c *Client) DeleteTape(ctx context.Context, params *DeleteTapeInput, optFns
 		params = &DeleteTapeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTape", params, optFns, addOperationDeleteTapeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTape", params, optFns, c.addOperationDeleteTapeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DeleteTapeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTapeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTapeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTape{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) AssociateElasticIp(ctx context.Context, params *AssociateElasti
 		params = &AssociateElasticIpInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateElasticIp", params, optFns, addOperationAssociateElasticIpMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateElasticIp", params, optFns, c.addOperationAssociateElasticIpMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type AssociateElasticIpOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateElasticIp{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeVirtualService(ctx context.Context, params *DescribeVir
 		params = &DescribeVirtualServiceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeVirtualService", params, optFns, addOperationDescribeVirtualServiceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeVirtualService", params, optFns, c.addOperationDescribeVirtualServiceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeVirtualServiceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeVirtualServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeVirtualServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVirtualService{}, middleware.After)
 	if err != nil {
 		return err

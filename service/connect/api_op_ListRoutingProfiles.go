@@ -24,7 +24,7 @@ func (c *Client) ListRoutingProfiles(ctx context.Context, params *ListRoutingPro
 		params = &ListRoutingProfilesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRoutingProfiles", params, optFns, addOperationListRoutingProfilesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRoutingProfiles", params, optFns, c.addOperationListRoutingProfilesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type ListRoutingProfilesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRoutingProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRoutingProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRoutingProfiles{}, middleware.After)
 	if err != nil {
 		return err

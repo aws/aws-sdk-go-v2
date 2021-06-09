@@ -17,7 +17,7 @@ func (c *Client) ListStudioMembers(ctx context.Context, params *ListStudioMember
 		params = &ListStudioMembersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListStudioMembers", params, optFns, addOperationListStudioMembersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListStudioMembers", params, optFns, c.addOperationListStudioMembersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListStudioMembersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListStudioMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListStudioMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStudioMembers{}, middleware.After)
 	if err != nil {
 		return err

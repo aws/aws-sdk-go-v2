@@ -17,7 +17,7 @@ func (c *Client) DescribeAccountAssignmentDeletionStatus(ctx context.Context, pa
 		params = &DescribeAccountAssignmentDeletionStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAccountAssignmentDeletionStatus", params, optFns, addOperationDescribeAccountAssignmentDeletionStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAccountAssignmentDeletionStatus", params, optFns, c.addOperationDescribeAccountAssignmentDeletionStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DescribeAccountAssignmentDeletionStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAccountAssignmentDeletionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAccountAssignmentDeletionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAccountAssignmentDeletionStatus{}, middleware.After)
 	if err != nil {
 		return err

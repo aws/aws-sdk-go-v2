@@ -22,7 +22,7 @@ func (c *Client) AssociateAdminAccount(ctx context.Context, params *AssociateAdm
 		params = &AssociateAdminAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateAdminAccount", params, optFns, addOperationAssociateAdminAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateAdminAccount", params, optFns, c.addOperationAssociateAdminAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type AssociateAdminAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateAdminAccount{}, middleware.After)
 	if err != nil {
 		return err

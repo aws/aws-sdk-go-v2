@@ -16,7 +16,7 @@ func (c *Client) GetMissionProfile(ctx context.Context, params *GetMissionProfil
 		params = &GetMissionProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMissionProfile", params, optFns, addOperationGetMissionProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMissionProfile", params, optFns, c.addOperationGetMissionProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type GetMissionProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMissionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMissionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMissionProfile{}, middleware.After)
 	if err != nil {
 		return err

@@ -29,7 +29,7 @@ func (c *Client) AssociateKmsKey(ctx context.Context, params *AssociateKmsKeyInp
 		params = &AssociateKmsKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateKmsKey", params, optFns, addOperationAssociateKmsKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateKmsKey", params, optFns, c.addOperationAssociateKmsKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type AssociateKmsKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateKmsKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateKmsKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateKmsKey{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetContactPolicy(ctx context.Context, params *GetContactPolicyI
 		params = &GetContactPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetContactPolicy", params, optFns, addOperationGetContactPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetContactPolicy", params, optFns, c.addOperationGetContactPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetContactPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetContactPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetContactPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetContactPolicy{}, middleware.After)
 	if err != nil {
 		return err

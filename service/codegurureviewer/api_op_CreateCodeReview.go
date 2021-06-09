@@ -23,7 +23,7 @@ func (c *Client) CreateCodeReview(ctx context.Context, params *CreateCodeReviewI
 		params = &CreateCodeReviewInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCodeReview", params, optFns, addOperationCreateCodeReviewMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCodeReview", params, optFns, c.addOperationCreateCodeReviewMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type CreateCodeReviewOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCodeReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCodeReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCodeReview{}, middleware.After)
 	if err != nil {
 		return err

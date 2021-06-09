@@ -18,7 +18,7 @@ func (c *Client) ListAttachedIndices(ctx context.Context, params *ListAttachedIn
 		params = &ListAttachedIndicesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAttachedIndices", params, optFns, addOperationListAttachedIndicesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAttachedIndices", params, optFns, c.addOperationListAttachedIndicesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ListAttachedIndicesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAttachedIndicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAttachedIndicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAttachedIndices{}, middleware.After)
 	if err != nil {
 		return err

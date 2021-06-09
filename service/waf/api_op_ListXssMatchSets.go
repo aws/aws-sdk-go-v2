@@ -23,7 +23,7 @@ func (c *Client) ListXssMatchSets(ctx context.Context, params *ListXssMatchSetsI
 		params = &ListXssMatchSetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListXssMatchSets", params, optFns, addOperationListXssMatchSetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListXssMatchSets", params, optFns, c.addOperationListXssMatchSetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ListXssMatchSetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListXssMatchSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListXssMatchSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListXssMatchSets{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DescribeWorkteam(ctx context.Context, params *DescribeWorkteamI
 		params = &DescribeWorkteamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkteam", params, optFns, addOperationDescribeWorkteamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkteam", params, optFns, c.addOperationDescribeWorkteamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DescribeWorkteamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkteam{}, middleware.After)
 	if err != nil {
 		return err

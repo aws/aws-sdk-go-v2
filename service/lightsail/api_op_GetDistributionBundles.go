@@ -19,7 +19,7 @@ func (c *Client) GetDistributionBundles(ctx context.Context, params *GetDistribu
 		params = &GetDistributionBundlesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDistributionBundles", params, optFns, addOperationGetDistributionBundlesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDistributionBundles", params, optFns, c.addOperationGetDistributionBundlesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type GetDistributionBundlesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDistributionBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDistributionBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDistributionBundles{}, middleware.After)
 	if err != nil {
 		return err

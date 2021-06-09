@@ -20,7 +20,7 @@ func (c *Client) CreateNotificationRule(ctx context.Context, params *CreateNotif
 		params = &CreateNotificationRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateNotificationRule", params, optFns, addOperationCreateNotificationRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateNotificationRule", params, optFns, c.addOperationCreateNotificationRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type CreateNotificationRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNotificationRule{}, middleware.After)
 	if err != nil {
 		return err

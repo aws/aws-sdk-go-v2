@@ -17,7 +17,7 @@ func (c *Client) AssociateApprovedOrigin(ctx context.Context, params *AssociateA
 		params = &AssociateApprovedOriginInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateApprovedOrigin", params, optFns, addOperationAssociateApprovedOriginMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateApprovedOrigin", params, optFns, c.addOperationAssociateApprovedOriginMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type AssociateApprovedOriginOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateApprovedOriginMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateApprovedOriginMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateApprovedOrigin{}, middleware.After)
 	if err != nil {
 		return err

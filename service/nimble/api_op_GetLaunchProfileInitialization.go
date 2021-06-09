@@ -17,7 +17,7 @@ func (c *Client) GetLaunchProfileInitialization(ctx context.Context, params *Get
 		params = &GetLaunchProfileInitializationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLaunchProfileInitialization", params, optFns, addOperationGetLaunchProfileInitializationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLaunchProfileInitialization", params, optFns, c.addOperationGetLaunchProfileInitializationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type GetLaunchProfileInitializationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLaunchProfileInitializationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLaunchProfileInitializationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLaunchProfileInitialization{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) DescribeCodeBinding(ctx context.Context, params *DescribeCodeBi
 		params = &DescribeCodeBindingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCodeBinding", params, optFns, addOperationDescribeCodeBindingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCodeBinding", params, optFns, c.addOperationDescribeCodeBindingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DescribeCodeBindingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCodeBindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCodeBindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCodeBinding{}, middleware.After)
 	if err != nil {
 		return err

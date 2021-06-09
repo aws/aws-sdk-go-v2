@@ -17,7 +17,7 @@ func (c *Client) ListCuratedEnvironmentImages(ctx context.Context, params *ListC
 		params = &ListCuratedEnvironmentImagesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCuratedEnvironmentImages", params, optFns, addOperationListCuratedEnvironmentImagesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCuratedEnvironmentImages", params, optFns, c.addOperationListCuratedEnvironmentImagesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type ListCuratedEnvironmentImagesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCuratedEnvironmentImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCuratedEnvironmentImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCuratedEnvironmentImages{}, middleware.After)
 	if err != nil {
 		return err

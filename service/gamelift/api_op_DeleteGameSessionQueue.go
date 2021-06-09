@@ -22,7 +22,7 @@ func (c *Client) DeleteGameSessionQueue(ctx context.Context, params *DeleteGameS
 		params = &DeleteGameSessionQueueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGameSessionQueue", params, optFns, addOperationDeleteGameSessionQueueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGameSessionQueue", params, optFns, c.addOperationDeleteGameSessionQueueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteGameSessionQueueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGameSessionQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGameSessionQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteGameSessionQueue{}, middleware.After)
 	if err != nil {
 		return err

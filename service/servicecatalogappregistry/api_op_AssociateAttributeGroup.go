@@ -19,7 +19,7 @@ func (c *Client) AssociateAttributeGroup(ctx context.Context, params *AssociateA
 		params = &AssociateAttributeGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateAttributeGroup", params, optFns, addOperationAssociateAttributeGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateAttributeGroup", params, optFns, c.addOperationAssociateAttributeGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type AssociateAttributeGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateAttributeGroup{}, middleware.After)
 	if err != nil {
 		return err

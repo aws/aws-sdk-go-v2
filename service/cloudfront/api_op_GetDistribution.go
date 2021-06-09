@@ -22,7 +22,7 @@ func (c *Client) GetDistribution(ctx context.Context, params *GetDistributionInp
 		params = &GetDistributionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDistribution", params, optFns, addOperationGetDistributionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDistribution", params, optFns, c.addOperationGetDistributionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type GetDistributionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetDistribution{}, middleware.After)
 	if err != nil {
 		return err

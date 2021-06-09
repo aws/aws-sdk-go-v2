@@ -18,7 +18,7 @@ func (c *Client) DescribeThesaurus(ctx context.Context, params *DescribeThesauru
 		params = &DescribeThesaurusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeThesaurus", params, optFns, addOperationDescribeThesaurusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeThesaurus", params, optFns, c.addOperationDescribeThesaurusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type DescribeThesaurusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeThesaurus{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) StopDBInstanceAutomatedBackupsReplication(ctx context.Context, 
 		params = &StopDBInstanceAutomatedBackupsReplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopDBInstanceAutomatedBackupsReplication", params, optFns, addOperationStopDBInstanceAutomatedBackupsReplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopDBInstanceAutomatedBackupsReplication", params, optFns, c.addOperationStopDBInstanceAutomatedBackupsReplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type StopDBInstanceAutomatedBackupsReplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopDBInstanceAutomatedBackupsReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopDBInstanceAutomatedBackupsReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpStopDBInstanceAutomatedBackupsReplication{}, middleware.After)
 	if err != nil {
 		return err

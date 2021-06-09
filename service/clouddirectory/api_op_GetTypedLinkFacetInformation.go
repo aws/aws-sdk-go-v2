@@ -18,7 +18,7 @@ func (c *Client) GetTypedLinkFacetInformation(ctx context.Context, params *GetTy
 		params = &GetTypedLinkFacetInformationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTypedLinkFacetInformation", params, optFns, addOperationGetTypedLinkFacetInformationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTypedLinkFacetInformation", params, optFns, c.addOperationGetTypedLinkFacetInformationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetTypedLinkFacetInformationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTypedLinkFacetInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTypedLinkFacetInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTypedLinkFacetInformation{}, middleware.After)
 	if err != nil {
 		return err

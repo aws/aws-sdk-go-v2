@@ -38,7 +38,7 @@ func (c *Client) CreateCertificateFromCsr(ctx context.Context, params *CreateCer
 		params = &CreateCertificateFromCsrInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCertificateFromCsr", params, optFns, addOperationCreateCertificateFromCsrMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCertificateFromCsr", params, optFns, c.addOperationCreateCertificateFromCsrMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type CreateCertificateFromCsrOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCertificateFromCsrMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCertificateFromCsrMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCertificateFromCsr{}, middleware.After)
 	if err != nil {
 		return err

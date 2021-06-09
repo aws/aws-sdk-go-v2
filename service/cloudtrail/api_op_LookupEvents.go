@@ -58,7 +58,7 @@ func (c *Client) LookupEvents(ctx context.Context, params *LookupEventsInput, op
 		params = &LookupEventsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "LookupEvents", params, optFns, addOperationLookupEventsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "LookupEvents", params, optFns, c.addOperationLookupEventsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -121,7 +121,7 @@ type LookupEventsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationLookupEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationLookupEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpLookupEvents{}, middleware.After)
 	if err != nil {
 		return err

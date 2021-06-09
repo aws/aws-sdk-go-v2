@@ -48,7 +48,7 @@ func (c *Client) RegisterUsage(ctx context.Context, params *RegisterUsageInput, 
 		params = &RegisterUsageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterUsage", params, optFns, addOperationRegisterUsageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterUsage", params, optFns, c.addOperationRegisterUsageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type RegisterUsageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterUsage{}, middleware.After)
 	if err != nil {
 		return err

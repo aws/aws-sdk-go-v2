@@ -17,7 +17,7 @@ func (c *Client) DeleteDBParameterGroup(ctx context.Context, params *DeleteDBPar
 		params = &DeleteDBParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDBParameterGroup", params, optFns, addOperationDeleteDBParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDBParameterGroup", params, optFns, c.addOperationDeleteDBParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteDBParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

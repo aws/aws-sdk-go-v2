@@ -19,7 +19,7 @@ func (c *Client) GetDiscoverySummary(ctx context.Context, params *GetDiscoverySu
 		params = &GetDiscoverySummaryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDiscoverySummary", params, optFns, addOperationGetDiscoverySummaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDiscoverySummary", params, optFns, c.addOperationGetDiscoverySummaryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type GetDiscoverySummaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDiscoverySummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDiscoverySummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDiscoverySummary{}, middleware.After)
 	if err != nil {
 		return err

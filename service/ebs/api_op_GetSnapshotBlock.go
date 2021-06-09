@@ -18,7 +18,7 @@ func (c *Client) GetSnapshotBlock(ctx context.Context, params *GetSnapshotBlockI
 		params = &GetSnapshotBlockInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSnapshotBlock", params, optFns, addOperationGetSnapshotBlockMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSnapshotBlock", params, optFns, c.addOperationGetSnapshotBlockMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type GetSnapshotBlockOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSnapshotBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSnapshotBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSnapshotBlock{}, middleware.After)
 	if err != nil {
 		return err

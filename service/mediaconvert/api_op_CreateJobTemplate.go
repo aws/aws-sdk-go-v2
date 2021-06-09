@@ -18,7 +18,7 @@ func (c *Client) CreateJobTemplate(ctx context.Context, params *CreateJobTemplat
 		params = &CreateJobTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateJobTemplate", params, optFns, addOperationCreateJobTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateJobTemplate", params, optFns, c.addOperationCreateJobTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type CreateJobTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateJobTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateJobTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateJobTemplate{}, middleware.After)
 	if err != nil {
 		return err

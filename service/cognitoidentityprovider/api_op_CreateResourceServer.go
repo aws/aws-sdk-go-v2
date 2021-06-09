@@ -17,7 +17,7 @@ func (c *Client) CreateResourceServer(ctx context.Context, params *CreateResourc
 		params = &CreateResourceServerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateResourceServer", params, optFns, addOperationCreateResourceServerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateResourceServer", params, optFns, c.addOperationCreateResourceServerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type CreateResourceServerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateResourceServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateResourceServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateResourceServer{}, middleware.After)
 	if err != nil {
 		return err

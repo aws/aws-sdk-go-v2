@@ -18,7 +18,7 @@ func (c *Client) GetResourceDefinitionVersion(ctx context.Context, params *GetRe
 		params = &GetResourceDefinitionVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetResourceDefinitionVersion", params, optFns, addOperationGetResourceDefinitionVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetResourceDefinitionVersion", params, optFns, c.addOperationGetResourceDefinitionVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type GetResourceDefinitionVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetResourceDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetResourceDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceDefinitionVersion{}, middleware.After)
 	if err != nil {
 		return err

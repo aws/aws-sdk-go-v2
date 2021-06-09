@@ -32,7 +32,7 @@ func (c *Client) ResendConfirmationCode(ctx context.Context, params *ResendConfi
 		params = &ResendConfirmationCodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResendConfirmationCode", params, optFns, addOperationResendConfirmationCodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResendConfirmationCode", params, optFns, c.addOperationResendConfirmationCodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type ResendConfirmationCodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResendConfirmationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResendConfirmationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResendConfirmationCode{}, middleware.After)
 	if err != nil {
 		return err

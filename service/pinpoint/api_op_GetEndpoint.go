@@ -18,7 +18,7 @@ func (c *Client) GetEndpoint(ctx context.Context, params *GetEndpointInput, optF
 		params = &GetEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEndpoint", params, optFns, addOperationGetEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEndpoint", params, optFns, c.addOperationGetEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEndpoint{}, middleware.After)
 	if err != nil {
 		return err

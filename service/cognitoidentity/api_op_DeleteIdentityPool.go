@@ -18,7 +18,7 @@ func (c *Client) DeleteIdentityPool(ctx context.Context, params *DeleteIdentityP
 		params = &DeleteIdentityPoolInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteIdentityPool", params, optFns, addOperationDeleteIdentityPoolMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteIdentityPool", params, optFns, c.addOperationDeleteIdentityPoolMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteIdentityPoolOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteIdentityPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteIdentityPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteIdentityPool{}, middleware.After)
 	if err != nil {
 		return err

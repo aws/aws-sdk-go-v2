@@ -17,7 +17,7 @@ func (c *Client) PutDetector(ctx context.Context, params *PutDetectorInput, optF
 		params = &PutDetectorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutDetector", params, optFns, addOperationPutDetectorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutDetector", params, optFns, c.addOperationPutDetectorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type PutDetectorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutDetector{}, middleware.After)
 	if err != nil {
 		return err

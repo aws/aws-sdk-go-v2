@@ -17,7 +17,7 @@ func (c *Client) ListResourceSharePermissions(ctx context.Context, params *ListR
 		params = &ListResourceSharePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResourceSharePermissions", params, optFns, addOperationListResourceSharePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResourceSharePermissions", params, optFns, c.addOperationListResourceSharePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListResourceSharePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListResourceSharePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResourceSharePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResourceSharePermissions{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetDisk(ctx context.Context, params *GetDiskInput, optFns ...fu
 		params = &GetDiskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDisk", params, optFns, addOperationGetDiskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDisk", params, optFns, c.addOperationGetDiskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetDiskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDiskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDiskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDisk{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateBrokerStorage(ctx context.Context, params *UpdateBrokerSt
 		params = &UpdateBrokerStorageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateBrokerStorage", params, optFns, addOperationUpdateBrokerStorageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateBrokerStorage", params, optFns, c.addOperationUpdateBrokerStorageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type UpdateBrokerStorageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateBrokerStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateBrokerStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBrokerStorage{}, middleware.After)
 	if err != nil {
 		return err

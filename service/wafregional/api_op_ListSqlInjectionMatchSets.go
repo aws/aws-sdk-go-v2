@@ -23,7 +23,7 @@ func (c *Client) ListSqlInjectionMatchSets(ctx context.Context, params *ListSqlI
 		params = &ListSqlInjectionMatchSetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSqlInjectionMatchSets", params, optFns, addOperationListSqlInjectionMatchSetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSqlInjectionMatchSets", params, optFns, c.addOperationListSqlInjectionMatchSetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ListSqlInjectionMatchSetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSqlInjectionMatchSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSqlInjectionMatchSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSqlInjectionMatchSets{}, middleware.After)
 	if err != nil {
 		return err

@@ -60,7 +60,7 @@ func (c *Client) ChangeMessageVisibility(ctx context.Context, params *ChangeMess
 		params = &ChangeMessageVisibilityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ChangeMessageVisibility", params, optFns, addOperationChangeMessageVisibilityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ChangeMessageVisibility", params, optFns, c.addOperationChangeMessageVisibilityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +96,7 @@ type ChangeMessageVisibilityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationChangeMessageVisibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationChangeMessageVisibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpChangeMessageVisibility{}, middleware.After)
 	if err != nil {
 		return err

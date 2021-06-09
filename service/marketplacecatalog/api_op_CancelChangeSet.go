@@ -19,7 +19,7 @@ func (c *Client) CancelChangeSet(ctx context.Context, params *CancelChangeSetInp
 		params = &CancelChangeSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelChangeSet", params, optFns, addOperationCancelChangeSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelChangeSet", params, optFns, c.addOperationCancelChangeSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type CancelChangeSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelChangeSet{}, middleware.After)
 	if err != nil {
 		return err

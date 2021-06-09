@@ -19,7 +19,7 @@ func (c *Client) DescribeAlert(ctx context.Context, params *DescribeAlertInput, 
 		params = &DescribeAlertInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAlert", params, optFns, addOperationDescribeAlertMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAlert", params, optFns, c.addOperationDescribeAlertMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DescribeAlertOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAlertMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAlertMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAlert{}, middleware.After)
 	if err != nil {
 		return err

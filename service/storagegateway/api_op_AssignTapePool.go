@@ -20,7 +20,7 @@ func (c *Client) AssignTapePool(ctx context.Context, params *AssignTapePoolInput
 		params = &AssignTapePoolInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssignTapePool", params, optFns, addOperationAssignTapePoolMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssignTapePool", params, optFns, c.addOperationAssignTapePoolMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type AssignTapePoolOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssignTapePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssignTapePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssignTapePool{}, middleware.After)
 	if err != nil {
 		return err

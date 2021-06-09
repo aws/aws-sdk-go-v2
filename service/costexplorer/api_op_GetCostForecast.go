@@ -18,7 +18,7 @@ func (c *Client) GetCostForecast(ctx context.Context, params *GetCostForecastInp
 		params = &GetCostForecastInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCostForecast", params, optFns, addOperationGetCostForecastMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCostForecast", params, optFns, c.addOperationGetCostForecastMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -139,7 +139,7 @@ type GetCostForecastOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCostForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCostForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCostForecast{}, middleware.After)
 	if err != nil {
 		return err

@@ -50,7 +50,7 @@ func (c *Client) ModifyVolume(ctx context.Context, params *ModifyVolumeInput, op
 		params = &ModifyVolumeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyVolume", params, optFns, addOperationModifyVolumeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyVolume", params, optFns, c.addOperationModifyVolumeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -137,7 +137,7 @@ type ModifyVolumeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyVolume{}, middleware.After)
 	if err != nil {
 		return err

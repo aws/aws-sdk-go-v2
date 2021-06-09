@@ -18,7 +18,7 @@ func (c *Client) ApplySecurityGroupsToClientVpnTargetNetwork(ctx context.Context
 		params = &ApplySecurityGroupsToClientVpnTargetNetworkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ApplySecurityGroupsToClientVpnTargetNetwork", params, optFns, addOperationApplySecurityGroupsToClientVpnTargetNetworkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ApplySecurityGroupsToClientVpnTargetNetwork", params, optFns, c.addOperationApplySecurityGroupsToClientVpnTargetNetworkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ApplySecurityGroupsToClientVpnTargetNetworkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationApplySecurityGroupsToClientVpnTargetNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationApplySecurityGroupsToClientVpnTargetNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpApplySecurityGroupsToClientVpnTargetNetwork{}, middleware.After)
 	if err != nil {
 		return err

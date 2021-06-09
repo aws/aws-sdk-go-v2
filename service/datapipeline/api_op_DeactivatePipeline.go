@@ -20,7 +20,7 @@ func (c *Client) DeactivatePipeline(ctx context.Context, params *DeactivatePipel
 		params = &DeactivatePipelineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeactivatePipeline", params, optFns, addOperationDeactivatePipelineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeactivatePipeline", params, optFns, c.addOperationDeactivatePipelineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeactivatePipelineOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeactivatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeactivatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeactivatePipeline{}, middleware.After)
 	if err != nil {
 		return err

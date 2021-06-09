@@ -20,7 +20,7 @@ func (c *Client) DeleteProvisioningArtifact(ctx context.Context, params *DeleteP
 		params = &DeleteProvisioningArtifactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProvisioningArtifact", params, optFns, addOperationDeleteProvisioningArtifactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProvisioningArtifact", params, optFns, c.addOperationDeleteProvisioningArtifactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DeleteProvisioningArtifactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProvisioningArtifact{}, middleware.After)
 	if err != nil {
 		return err

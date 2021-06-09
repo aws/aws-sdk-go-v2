@@ -16,7 +16,7 @@ func (c *Client) RegisterPatchBaselineForPatchGroup(ctx context.Context, params 
 		params = &RegisterPatchBaselineForPatchGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterPatchBaselineForPatchGroup", params, optFns, addOperationRegisterPatchBaselineForPatchGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterPatchBaselineForPatchGroup", params, optFns, c.addOperationRegisterPatchBaselineForPatchGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type RegisterPatchBaselineForPatchGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterPatchBaselineForPatchGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterPatchBaselineForPatchGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterPatchBaselineForPatchGroup{}, middleware.After)
 	if err != nil {
 		return err

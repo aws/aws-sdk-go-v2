@@ -38,7 +38,7 @@ func (c *Client) CreateDiskSnapshot(ctx context.Context, params *CreateDiskSnaps
 		params = &CreateDiskSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDiskSnapshot", params, optFns, addOperationCreateDiskSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDiskSnapshot", params, optFns, c.addOperationCreateDiskSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type CreateDiskSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDiskSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDiskSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDiskSnapshot{}, middleware.After)
 	if err != nil {
 		return err

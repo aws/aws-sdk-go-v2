@@ -18,7 +18,7 @@ func (c *Client) GetGeofence(ctx context.Context, params *GetGeofenceInput, optF
 		params = &GetGeofenceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetGeofence", params, optFns, addOperationGetGeofenceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetGeofence", params, optFns, c.addOperationGetGeofenceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type GetGeofenceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGeofence{}, middleware.After)
 	if err != nil {
 		return err

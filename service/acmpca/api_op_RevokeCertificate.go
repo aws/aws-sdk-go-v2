@@ -35,7 +35,7 @@ func (c *Client) RevokeCertificate(ctx context.Context, params *RevokeCertificat
 		params = &RevokeCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokeCertificate", params, optFns, addOperationRevokeCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeCertificate", params, optFns, c.addOperationRevokeCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type RevokeCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokeCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokeCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRevokeCertificate{}, middleware.After)
 	if err != nil {
 		return err

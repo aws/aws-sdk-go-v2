@@ -28,7 +28,7 @@ func (c *Client) GetAccountAuthorizationDetails(ctx context.Context, params *Get
 		params = &GetAccountAuthorizationDetailsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccountAuthorizationDetails", params, optFns, addOperationGetAccountAuthorizationDetailsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccountAuthorizationDetails", params, optFns, c.addOperationGetAccountAuthorizationDetailsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type GetAccountAuthorizationDetailsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccountAuthorizationDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccountAuthorizationDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetAccountAuthorizationDetails{}, middleware.After)
 	if err != nil {
 		return err

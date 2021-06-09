@@ -20,7 +20,7 @@ func (c *Client) StartEntitiesDetectionV2Job(ctx context.Context, params *StartE
 		params = &StartEntitiesDetectionV2JobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartEntitiesDetectionV2Job", params, optFns, addOperationStartEntitiesDetectionV2JobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartEntitiesDetectionV2Job", params, optFns, c.addOperationStartEntitiesDetectionV2JobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type StartEntitiesDetectionV2JobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartEntitiesDetectionV2Job{}, middleware.After)
 	if err != nil {
 		return err

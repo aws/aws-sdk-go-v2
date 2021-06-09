@@ -26,7 +26,7 @@ func (c *Client) GetOpsItem(ctx context.Context, params *GetOpsItemInput, optFns
 		params = &GetOpsItemInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetOpsItem", params, optFns, addOperationGetOpsItemMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetOpsItem", params, optFns, c.addOperationGetOpsItemMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetOpsItemOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetOpsItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetOpsItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOpsItem{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateLicenseConfiguration(ctx context.Context, params *UpdateL
 		params = &UpdateLicenseConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLicenseConfiguration", params, optFns, addOperationUpdateLicenseConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLicenseConfiguration", params, optFns, c.addOperationUpdateLicenseConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type UpdateLicenseConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLicenseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLicenseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLicenseConfiguration{}, middleware.After)
 	if err != nil {
 		return err

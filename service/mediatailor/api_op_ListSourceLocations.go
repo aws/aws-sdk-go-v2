@@ -18,7 +18,7 @@ func (c *Client) ListSourceLocations(ctx context.Context, params *ListSourceLoca
 		params = &ListSourceLocationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSourceLocations", params, optFns, addOperationListSourceLocationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSourceLocations", params, optFns, c.addOperationListSourceLocationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ListSourceLocationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSourceLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSourceLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSourceLocations{}, middleware.After)
 	if err != nil {
 		return err

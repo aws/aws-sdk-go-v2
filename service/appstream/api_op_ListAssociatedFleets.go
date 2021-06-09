@@ -16,7 +16,7 @@ func (c *Client) ListAssociatedFleets(ctx context.Context, params *ListAssociate
 		params = &ListAssociatedFleetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAssociatedFleets", params, optFns, addOperationListAssociatedFleetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAssociatedFleets", params, optFns, c.addOperationListAssociatedFleetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ListAssociatedFleetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAssociatedFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAssociatedFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAssociatedFleets{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) GetCredentialReport(ctx context.Context, params *GetCredentialR
 		params = &GetCredentialReportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCredentialReport", params, optFns, addOperationGetCredentialReportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCredentialReport", params, optFns, c.addOperationGetCredentialReportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetCredentialReportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCredentialReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCredentialReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetCredentialReport{}, middleware.After)
 	if err != nil {
 		return err

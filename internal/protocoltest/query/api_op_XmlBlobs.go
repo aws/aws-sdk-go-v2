@@ -15,7 +15,7 @@ func (c *Client) XmlBlobs(ctx context.Context, params *XmlBlobsInput, optFns ...
 		params = &XmlBlobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "XmlBlobs", params, optFns, addOperationXmlBlobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "XmlBlobs", params, optFns, c.addOperationXmlBlobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ type XmlBlobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationXmlBlobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationXmlBlobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpXmlBlobs{}, middleware.After)
 	if err != nil {
 		return err

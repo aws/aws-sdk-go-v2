@@ -30,7 +30,7 @@ func (c *Client) DetachPolicy(ctx context.Context, params *DetachPolicyInput, op
 		params = &DetachPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachPolicy", params, optFns, addOperationDetachPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachPolicy", params, optFns, c.addOperationDetachPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type DetachPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetachPolicy{}, middleware.After)
 	if err != nil {
 		return err

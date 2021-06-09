@@ -20,7 +20,7 @@ func (c *Client) SearchTablesByLFTags(ctx context.Context, params *SearchTablesB
 		params = &SearchTablesByLFTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchTablesByLFTags", params, optFns, addOperationSearchTablesByLFTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchTablesByLFTags", params, optFns, c.addOperationSearchTablesByLFTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type SearchTablesByLFTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchTablesByLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchTablesByLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchTablesByLFTags{}, middleware.After)
 	if err != nil {
 		return err

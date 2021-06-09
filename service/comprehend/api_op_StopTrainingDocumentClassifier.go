@@ -21,7 +21,7 @@ func (c *Client) StopTrainingDocumentClassifier(ctx context.Context, params *Sto
 		params = &StopTrainingDocumentClassifierInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopTrainingDocumentClassifier", params, optFns, addOperationStopTrainingDocumentClassifierMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopTrainingDocumentClassifier", params, optFns, c.addOperationStopTrainingDocumentClassifierMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type StopTrainingDocumentClassifierOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopTrainingDocumentClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopTrainingDocumentClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopTrainingDocumentClassifier{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteAggregationAuthorization(ctx context.Context, params *Del
 		params = &DeleteAggregationAuthorizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAggregationAuthorization", params, optFns, addOperationDeleteAggregationAuthorizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAggregationAuthorization", params, optFns, c.addOperationDeleteAggregationAuthorizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteAggregationAuthorizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAggregationAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAggregationAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAggregationAuthorization{}, middleware.After)
 	if err != nil {
 		return err

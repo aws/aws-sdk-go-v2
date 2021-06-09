@@ -17,7 +17,7 @@ func (c *Client) GetSystemTemplate(ctx context.Context, params *GetSystemTemplat
 		params = &GetSystemTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSystemTemplate", params, optFns, addOperationGetSystemTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSystemTemplate", params, optFns, c.addOperationGetSystemTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetSystemTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSystemTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSystemTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSystemTemplate{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListBudgetsForResource(ctx context.Context, params *ListBudgets
 		params = &ListBudgetsForResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBudgetsForResource", params, optFns, addOperationListBudgetsForResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBudgetsForResource", params, optFns, c.addOperationListBudgetsForResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ListBudgetsForResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBudgetsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBudgetsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListBudgetsForResource{}, middleware.After)
 	if err != nil {
 		return err

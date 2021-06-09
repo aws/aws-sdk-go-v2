@@ -17,7 +17,7 @@ func (c *Client) DescribeTemplatePermissions(ctx context.Context, params *Descri
 		params = &DescribeTemplatePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTemplatePermissions", params, optFns, addOperationDescribeTemplatePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTemplatePermissions", params, optFns, c.addOperationDescribeTemplatePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeTemplatePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTemplatePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTemplatePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTemplatePermissions{}, middleware.After)
 	if err != nil {
 		return err

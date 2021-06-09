@@ -16,7 +16,7 @@ func (c *Client) DeleteCloudFrontOriginAccessIdentity(ctx context.Context, param
 		params = &DeleteCloudFrontOriginAccessIdentityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCloudFrontOriginAccessIdentity", params, optFns, addOperationDeleteCloudFrontOriginAccessIdentityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCloudFrontOriginAccessIdentity", params, optFns, c.addOperationDeleteCloudFrontOriginAccessIdentityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteCloudFrontOriginAccessIdentityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCloudFrontOriginAccessIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCloudFrontOriginAccessIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteCloudFrontOriginAccessIdentity{}, middleware.After)
 	if err != nil {
 		return err

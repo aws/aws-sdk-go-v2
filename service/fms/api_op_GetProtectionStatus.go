@@ -20,7 +20,7 @@ func (c *Client) GetProtectionStatus(ctx context.Context, params *GetProtectionS
 		params = &GetProtectionStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetProtectionStatus", params, optFns, addOperationGetProtectionStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetProtectionStatus", params, optFns, c.addOperationGetProtectionStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type GetProtectionStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetProtectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetProtectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetProtectionStatus{}, middleware.After)
 	if err != nil {
 		return err

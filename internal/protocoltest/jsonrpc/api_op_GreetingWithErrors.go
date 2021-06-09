@@ -27,7 +27,7 @@ func (c *Client) GreetingWithErrors(ctx context.Context, params *GreetingWithErr
 		params = &GreetingWithErrorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GreetingWithErrors", params, optFns, addOperationGreetingWithErrorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GreetingWithErrors", params, optFns, c.addOperationGreetingWithErrorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GreetingWithErrorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGreetingWithErrorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGreetingWithErrorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGreetingWithErrors{}, middleware.After)
 	if err != nil {
 		return err

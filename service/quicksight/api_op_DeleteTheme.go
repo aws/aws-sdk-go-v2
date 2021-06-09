@@ -16,7 +16,7 @@ func (c *Client) DeleteTheme(ctx context.Context, params *DeleteThemeInput, optF
 		params = &DeleteThemeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTheme", params, optFns, addOperationDeleteThemeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTheme", params, optFns, c.addOperationDeleteThemeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DeleteThemeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTheme{}, middleware.After)
 	if err != nil {
 		return err

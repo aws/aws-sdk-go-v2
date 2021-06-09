@@ -18,7 +18,7 @@ func (c *Client) ListPlacements(ctx context.Context, params *ListPlacementsInput
 		params = &ListPlacementsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPlacements", params, optFns, addOperationListPlacementsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPlacements", params, optFns, c.addOperationListPlacementsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListPlacementsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPlacementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPlacementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPlacements{}, middleware.After)
 	if err != nil {
 		return err

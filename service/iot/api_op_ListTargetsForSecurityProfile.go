@@ -19,7 +19,7 @@ func (c *Client) ListTargetsForSecurityProfile(ctx context.Context, params *List
 		params = &ListTargetsForSecurityProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTargetsForSecurityProfile", params, optFns, addOperationListTargetsForSecurityProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTargetsForSecurityProfile", params, optFns, c.addOperationListTargetsForSecurityProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListTargetsForSecurityProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTargetsForSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTargetsForSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTargetsForSecurityProfile{}, middleware.After)
 	if err != nil {
 		return err

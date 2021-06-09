@@ -19,7 +19,7 @@ func (c *Client) UpdateCostCategoryDefinition(ctx context.Context, params *Updat
 		params = &UpdateCostCategoryDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateCostCategoryDefinition", params, optFns, addOperationUpdateCostCategoryDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateCostCategoryDefinition", params, optFns, c.addOperationUpdateCostCategoryDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type UpdateCostCategoryDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateCostCategoryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateCostCategoryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCostCategoryDefinition{}, middleware.After)
 	if err != nil {
 		return err

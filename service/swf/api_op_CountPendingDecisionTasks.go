@@ -39,7 +39,7 @@ func (c *Client) CountPendingDecisionTasks(ctx context.Context, params *CountPen
 		params = &CountPendingDecisionTasksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CountPendingDecisionTasks", params, optFns, addOperationCountPendingDecisionTasksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CountPendingDecisionTasks", params, optFns, c.addOperationCountPendingDecisionTasksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type CountPendingDecisionTasksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCountPendingDecisionTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCountPendingDecisionTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCountPendingDecisionTasks{}, middleware.After)
 	if err != nil {
 		return err

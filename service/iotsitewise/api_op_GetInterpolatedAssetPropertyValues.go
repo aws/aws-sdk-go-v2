@@ -30,7 +30,7 @@ func (c *Client) GetInterpolatedAssetPropertyValues(ctx context.Context, params 
 		params = &GetInterpolatedAssetPropertyValuesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInterpolatedAssetPropertyValues", params, optFns, addOperationGetInterpolatedAssetPropertyValuesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInterpolatedAssetPropertyValues", params, optFns, c.addOperationGetInterpolatedAssetPropertyValuesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -113,7 +113,7 @@ type GetInterpolatedAssetPropertyValuesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInterpolatedAssetPropertyValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInterpolatedAssetPropertyValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInterpolatedAssetPropertyValues{}, middleware.After)
 	if err != nil {
 		return err

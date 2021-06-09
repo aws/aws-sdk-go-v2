@@ -16,7 +16,7 @@ func (c *Client) DeleteCustomDataIdentifier(ctx context.Context, params *DeleteC
 		params = &DeleteCustomDataIdentifierInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomDataIdentifier", params, optFns, addOperationDeleteCustomDataIdentifierMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomDataIdentifier", params, optFns, c.addOperationDeleteCustomDataIdentifierMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteCustomDataIdentifierOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCustomDataIdentifier{}, middleware.After)
 	if err != nil {
 		return err

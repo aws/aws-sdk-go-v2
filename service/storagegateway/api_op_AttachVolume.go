@@ -20,7 +20,7 @@ func (c *Client) AttachVolume(ctx context.Context, params *AttachVolumeInput, op
 		params = &AttachVolumeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachVolume", params, optFns, addOperationAttachVolumeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachVolume", params, optFns, c.addOperationAttachVolumeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type AttachVolumeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachVolume{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetOutpostInstanceTypes(ctx context.Context, params *GetOutpost
 		params = &GetOutpostInstanceTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetOutpostInstanceTypes", params, optFns, addOperationGetOutpostInstanceTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetOutpostInstanceTypes", params, optFns, c.addOperationGetOutpostInstanceTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetOutpostInstanceTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetOutpostInstanceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetOutpostInstanceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOutpostInstanceTypes{}, middleware.After)
 	if err != nil {
 		return err

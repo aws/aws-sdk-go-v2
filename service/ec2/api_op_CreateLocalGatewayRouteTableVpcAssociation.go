@@ -17,7 +17,7 @@ func (c *Client) CreateLocalGatewayRouteTableVpcAssociation(ctx context.Context,
 		params = &CreateLocalGatewayRouteTableVpcAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLocalGatewayRouteTableVpcAssociation", params, optFns, addOperationCreateLocalGatewayRouteTableVpcAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLocalGatewayRouteTableVpcAssociation", params, optFns, c.addOperationCreateLocalGatewayRouteTableVpcAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type CreateLocalGatewayRouteTableVpcAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLocalGatewayRouteTableVpcAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLocalGatewayRouteTableVpcAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateLocalGatewayRouteTableVpcAssociation{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) DescribeBandwidthRateLimit(ctx context.Context, params *Describ
 		params = &DescribeBandwidthRateLimitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeBandwidthRateLimit", params, optFns, addOperationDescribeBandwidthRateLimitMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeBandwidthRateLimit", params, optFns, c.addOperationDescribeBandwidthRateLimitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeBandwidthRateLimitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeBandwidthRateLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeBandwidthRateLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBandwidthRateLimit{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateResourcePolicy(ctx context.Context, params *UpdateResourc
 		params = &UpdateResourcePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateResourcePolicy", params, optFns, addOperationUpdateResourcePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateResourcePolicy", params, optFns, c.addOperationUpdateResourcePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type UpdateResourcePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResourcePolicy{}, middleware.After)
 	if err != nil {
 		return err

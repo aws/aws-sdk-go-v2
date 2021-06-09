@@ -19,7 +19,7 @@ func (c *Client) DescribeInstancePatchStatesForPatchGroup(ctx context.Context, p
 		params = &DescribeInstancePatchStatesForPatchGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInstancePatchStatesForPatchGroup", params, optFns, addOperationDescribeInstancePatchStatesForPatchGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInstancePatchStatesForPatchGroup", params, optFns, c.addOperationDescribeInstancePatchStatesForPatchGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DescribeInstancePatchStatesForPatchGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInstancePatchStatesForPatchGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInstancePatchStatesForPatchGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInstancePatchStatesForPatchGroup{}, middleware.After)
 	if err != nil {
 		return err

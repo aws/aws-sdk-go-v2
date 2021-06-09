@@ -18,7 +18,7 @@ func (c *Client) ReplicateSecretToRegions(ctx context.Context, params *Replicate
 		params = &ReplicateSecretToRegionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReplicateSecretToRegions", params, optFns, addOperationReplicateSecretToRegionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReplicateSecretToRegions", params, optFns, c.addOperationReplicateSecretToRegionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ReplicateSecretToRegionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReplicateSecretToRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReplicateSecretToRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReplicateSecretToRegions{}, middleware.After)
 	if err != nil {
 		return err

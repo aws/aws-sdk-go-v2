@@ -20,7 +20,7 @@ func (c *Client) StopStream(ctx context.Context, params *StopStreamInput, optFns
 		params = &StopStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopStream", params, optFns, addOperationStopStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopStream", params, optFns, c.addOperationStopStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type StopStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopStream{}, middleware.After)
 	if err != nil {
 		return err

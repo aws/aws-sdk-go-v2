@@ -22,7 +22,7 @@ func (c *Client) ListPolicyVersions(ctx context.Context, params *ListPolicyVersi
 		params = &ListPolicyVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPolicyVersions", params, optFns, addOperationListPolicyVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPolicyVersions", params, optFns, c.addOperationListPolicyVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type ListPolicyVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPolicyVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPolicyVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListPolicyVersions{}, middleware.After)
 	if err != nil {
 		return err

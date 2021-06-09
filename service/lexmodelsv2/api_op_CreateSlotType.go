@@ -20,7 +20,7 @@ func (c *Client) CreateSlotType(ctx context.Context, params *CreateSlotTypeInput
 		params = &CreateSlotTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSlotType", params, optFns, addOperationCreateSlotTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSlotType", params, optFns, c.addOperationCreateSlotTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -126,7 +126,7 @@ type CreateSlotTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSlotTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSlotTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSlotType{}, middleware.After)
 	if err != nil {
 		return err

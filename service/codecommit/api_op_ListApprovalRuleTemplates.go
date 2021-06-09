@@ -19,7 +19,7 @@ func (c *Client) ListApprovalRuleTemplates(ctx context.Context, params *ListAppr
 		params = &ListApprovalRuleTemplatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListApprovalRuleTemplates", params, optFns, addOperationListApprovalRuleTemplatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListApprovalRuleTemplates", params, optFns, c.addOperationListApprovalRuleTemplatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListApprovalRuleTemplatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListApprovalRuleTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListApprovalRuleTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApprovalRuleTemplates{}, middleware.After)
 	if err != nil {
 		return err

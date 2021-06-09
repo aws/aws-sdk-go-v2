@@ -29,7 +29,7 @@ func (c *Client) CreateGlobalReplicationGroup(ctx context.Context, params *Creat
 		params = &CreateGlobalReplicationGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateGlobalReplicationGroup", params, optFns, addOperationCreateGlobalReplicationGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateGlobalReplicationGroup", params, optFns, c.addOperationCreateGlobalReplicationGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type CreateGlobalReplicationGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateGlobalReplicationGroup{}, middleware.After)
 	if err != nil {
 		return err

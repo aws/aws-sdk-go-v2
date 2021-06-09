@@ -16,7 +16,7 @@ func (c *Client) DeleteWorldTemplate(ctx context.Context, params *DeleteWorldTem
 		params = &DeleteWorldTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteWorldTemplate", params, optFns, addOperationDeleteWorldTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteWorldTemplate", params, optFns, c.addOperationDeleteWorldTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteWorldTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteWorldTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteWorldTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorldTemplate{}, middleware.After)
 	if err != nil {
 		return err

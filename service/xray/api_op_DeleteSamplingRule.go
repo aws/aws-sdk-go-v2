@@ -17,7 +17,7 @@ func (c *Client) DeleteSamplingRule(ctx context.Context, params *DeleteSamplingR
 		params = &DeleteSamplingRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSamplingRule", params, optFns, addOperationDeleteSamplingRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSamplingRule", params, optFns, c.addOperationDeleteSamplingRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteSamplingRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSamplingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSamplingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSamplingRule{}, middleware.After)
 	if err != nil {
 		return err

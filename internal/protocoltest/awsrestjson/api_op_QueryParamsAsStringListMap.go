@@ -14,7 +14,7 @@ func (c *Client) QueryParamsAsStringListMap(ctx context.Context, params *QueryPa
 		params = &QueryParamsAsStringListMapInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "QueryParamsAsStringListMap", params, optFns, addOperationQueryParamsAsStringListMapMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "QueryParamsAsStringListMap", params, optFns, c.addOperationQueryParamsAsStringListMapMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ type QueryParamsAsStringListMapOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationQueryParamsAsStringListMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationQueryParamsAsStringListMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpQueryParamsAsStringListMap{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ListProvisionedCapacity(ctx context.Context, params *ListProvis
 		params = &ListProvisionedCapacityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListProvisionedCapacity", params, optFns, addOperationListProvisionedCapacityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListProvisionedCapacity", params, optFns, c.addOperationListProvisionedCapacityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type ListProvisionedCapacityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListProvisionedCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListProvisionedCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProvisionedCapacity{}, middleware.After)
 	if err != nil {
 		return err

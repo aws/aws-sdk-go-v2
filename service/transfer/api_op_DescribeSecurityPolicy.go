@@ -21,7 +21,7 @@ func (c *Client) DescribeSecurityPolicy(ctx context.Context, params *DescribeSec
 		params = &DescribeSecurityPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSecurityPolicy", params, optFns, addOperationDescribeSecurityPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSecurityPolicy", params, optFns, c.addOperationDescribeSecurityPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DescribeSecurityPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSecurityPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSecurityPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSecurityPolicy{}, middleware.After)
 	if err != nil {
 		return err

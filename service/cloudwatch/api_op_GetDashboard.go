@@ -19,7 +19,7 @@ func (c *Client) GetDashboard(ctx context.Context, params *GetDashboardInput, op
 		params = &GetDashboardInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDashboard", params, optFns, addOperationGetDashboardMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDashboard", params, optFns, c.addOperationGetDashboardMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type GetDashboardOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetDashboard{}, middleware.After)
 	if err != nil {
 		return err

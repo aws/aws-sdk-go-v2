@@ -16,7 +16,7 @@ func (c *Client) LaunchApp(ctx context.Context, params *LaunchAppInput, optFns .
 		params = &LaunchAppInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "LaunchApp", params, optFns, addOperationLaunchAppMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "LaunchApp", params, optFns, c.addOperationLaunchAppMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type LaunchAppOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationLaunchAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationLaunchAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpLaunchApp{}, middleware.After)
 	if err != nil {
 		return err

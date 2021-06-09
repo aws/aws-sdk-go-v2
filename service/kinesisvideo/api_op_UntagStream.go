@@ -18,7 +18,7 @@ func (c *Client) UntagStream(ctx context.Context, params *UntagStreamInput, optF
 		params = &UntagStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagStream", params, optFns, addOperationUntagStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagStream", params, optFns, c.addOperationUntagStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type UntagStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUntagStream{}, middleware.After)
 	if err != nil {
 		return err

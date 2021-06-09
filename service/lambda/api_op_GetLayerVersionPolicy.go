@@ -18,7 +18,7 @@ func (c *Client) GetLayerVersionPolicy(ctx context.Context, params *GetLayerVers
 		params = &GetLayerVersionPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLayerVersionPolicy", params, optFns, addOperationGetLayerVersionPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLayerVersionPolicy", params, optFns, c.addOperationGetLayerVersionPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetLayerVersionPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLayerVersionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLayerVersionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLayerVersionPolicy{}, middleware.After)
 	if err != nil {
 		return err

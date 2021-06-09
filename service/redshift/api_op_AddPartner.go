@@ -18,7 +18,7 @@ func (c *Client) AddPartner(ctx context.Context, params *AddPartnerInput, optFns
 		params = &AddPartnerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddPartner", params, optFns, addOperationAddPartnerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddPartner", params, optFns, c.addOperationAddPartnerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type AddPartnerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddPartnerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddPartnerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAddPartner{}, middleware.After)
 	if err != nil {
 		return err

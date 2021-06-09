@@ -17,7 +17,7 @@ func (c *Client) DescribeSavingsPlanRates(ctx context.Context, params *DescribeS
 		params = &DescribeSavingsPlanRatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSavingsPlanRates", params, optFns, addOperationDescribeSavingsPlanRatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSavingsPlanRates", params, optFns, c.addOperationDescribeSavingsPlanRatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeSavingsPlanRatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSavingsPlanRatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSavingsPlanRatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSavingsPlanRates{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) CompleteAttachmentUpload(ctx context.Context, params *CompleteA
 		params = &CompleteAttachmentUploadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CompleteAttachmentUpload", params, optFns, addOperationCompleteAttachmentUploadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CompleteAttachmentUpload", params, optFns, c.addOperationCompleteAttachmentUploadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CompleteAttachmentUploadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCompleteAttachmentUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCompleteAttachmentUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCompleteAttachmentUpload{}, middleware.After)
 	if err != nil {
 		return err

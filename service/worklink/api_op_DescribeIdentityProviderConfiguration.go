@@ -17,7 +17,7 @@ func (c *Client) DescribeIdentityProviderConfiguration(ctx context.Context, para
 		params = &DescribeIdentityProviderConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeIdentityProviderConfiguration", params, optFns, addOperationDescribeIdentityProviderConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeIdentityProviderConfiguration", params, optFns, c.addOperationDescribeIdentityProviderConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DescribeIdentityProviderConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeIdentityProviderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeIdentityProviderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeIdentityProviderConfiguration{}, middleware.After)
 	if err != nil {
 		return err

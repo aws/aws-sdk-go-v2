@@ -17,7 +17,7 @@ func (c *Client) GetSigningProfile(ctx context.Context, params *GetSigningProfil
 		params = &GetSigningProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSigningProfile", params, optFns, addOperationGetSigningProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSigningProfile", params, optFns, c.addOperationGetSigningProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type GetSigningProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSigningProfile{}, middleware.After)
 	if err != nil {
 		return err

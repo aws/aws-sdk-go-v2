@@ -18,7 +18,7 @@ func (c *Client) ListPackagingConfigurations(ctx context.Context, params *ListPa
 		params = &ListPackagingConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPackagingConfigurations", params, optFns, addOperationListPackagingConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPackagingConfigurations", params, optFns, c.addOperationListPackagingConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListPackagingConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPackagingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPackagingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPackagingConfigurations{}, middleware.After)
 	if err != nil {
 		return err

@@ -29,7 +29,7 @@ func (c *Client) ResetDBClusterParameterGroup(ctx context.Context, params *Reset
 		params = &ResetDBClusterParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetDBClusterParameterGroup", params, optFns, addOperationResetDBClusterParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetDBClusterParameterGroup", params, optFns, c.addOperationResetDBClusterParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type ResetDBClusterParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpResetDBClusterParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

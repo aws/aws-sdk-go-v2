@@ -16,7 +16,7 @@ func (c *Client) UpdateWorkflow(ctx context.Context, params *UpdateWorkflowInput
 		params = &UpdateWorkflowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateWorkflow", params, optFns, addOperationUpdateWorkflowMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateWorkflow", params, optFns, c.addOperationUpdateWorkflowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UpdateWorkflowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWorkflow{}, middleware.After)
 	if err != nil {
 		return err

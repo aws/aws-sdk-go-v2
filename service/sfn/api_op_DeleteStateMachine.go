@@ -19,7 +19,7 @@ func (c *Client) DeleteStateMachine(ctx context.Context, params *DeleteStateMach
 		params = &DeleteStateMachineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteStateMachine", params, optFns, addOperationDeleteStateMachineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteStateMachine", params, optFns, c.addOperationDeleteStateMachineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteStateMachineOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteStateMachine{}, middleware.After)
 	if err != nil {
 		return err

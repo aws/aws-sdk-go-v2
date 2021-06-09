@@ -32,7 +32,7 @@ func (c *Client) InitiateAuth(ctx context.Context, params *InitiateAuthInput, op
 		params = &InitiateAuthInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InitiateAuth", params, optFns, addOperationInitiateAuthMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InitiateAuth", params, optFns, c.addOperationInitiateAuthMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -238,7 +238,7 @@ type InitiateAuthOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInitiateAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInitiateAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInitiateAuth{}, middleware.After)
 	if err != nil {
 		return err

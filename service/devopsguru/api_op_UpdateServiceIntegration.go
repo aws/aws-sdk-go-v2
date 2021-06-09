@@ -20,7 +20,7 @@ func (c *Client) UpdateServiceIntegration(ctx context.Context, params *UpdateSer
 		params = &UpdateServiceIntegrationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateServiceIntegration", params, optFns, addOperationUpdateServiceIntegrationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateServiceIntegration", params, optFns, c.addOperationUpdateServiceIntegrationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type UpdateServiceIntegrationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateServiceIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateServiceIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateServiceIntegration{}, middleware.After)
 	if err != nil {
 		return err

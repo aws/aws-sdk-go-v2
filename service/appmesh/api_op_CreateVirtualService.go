@@ -23,7 +23,7 @@ func (c *Client) CreateVirtualService(ctx context.Context, params *CreateVirtual
 		params = &CreateVirtualServiceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVirtualService", params, optFns, addOperationCreateVirtualServiceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateVirtualService", params, optFns, c.addOperationCreateVirtualServiceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type CreateVirtualServiceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateVirtualServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateVirtualServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVirtualService{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DeleteSuggester(ctx context.Context, params *DeleteSuggesterInp
 		params = &DeleteSuggesterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSuggester", params, optFns, addOperationDeleteSuggesterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSuggester", params, optFns, c.addOperationDeleteSuggesterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DeleteSuggesterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSuggesterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSuggesterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteSuggester{}, middleware.After)
 	if err != nil {
 		return err

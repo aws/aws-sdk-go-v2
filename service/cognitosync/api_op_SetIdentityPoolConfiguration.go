@@ -37,7 +37,7 @@ func (c *Client) SetIdentityPoolConfiguration(ctx context.Context, params *SetId
 		params = &SetIdentityPoolConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetIdentityPoolConfiguration", params, optFns, addOperationSetIdentityPoolConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetIdentityPoolConfiguration", params, optFns, c.addOperationSetIdentityPoolConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type SetIdentityPoolConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetIdentityPoolConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetIdentityPoolConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSetIdentityPoolConfiguration{}, middleware.After)
 	if err != nil {
 		return err

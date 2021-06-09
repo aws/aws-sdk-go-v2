@@ -22,7 +22,7 @@ func (c *Client) ListPredictors(ctx context.Context, params *ListPredictorsInput
 		params = &ListPredictorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPredictors", params, optFns, addOperationListPredictorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPredictors", params, optFns, c.addOperationListPredictorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type ListPredictorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPredictorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPredictorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPredictors{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeUserProfile(ctx context.Context, params *DescribeUserPr
 		params = &DescribeUserProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeUserProfile", params, optFns, addOperationDescribeUserProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeUserProfile", params, optFns, c.addOperationDescribeUserProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type DescribeUserProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUserProfile{}, middleware.After)
 	if err != nil {
 		return err

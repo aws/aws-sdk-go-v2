@@ -16,7 +16,7 @@ func (c *Client) DeleteFieldLevelEncryptionProfile(ctx context.Context, params *
 		params = &DeleteFieldLevelEncryptionProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFieldLevelEncryptionProfile", params, optFns, addOperationDeleteFieldLevelEncryptionProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFieldLevelEncryptionProfile", params, optFns, c.addOperationDeleteFieldLevelEncryptionProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteFieldLevelEncryptionProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFieldLevelEncryptionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFieldLevelEncryptionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteFieldLevelEncryptionProfile{}, middleware.After)
 	if err != nil {
 		return err

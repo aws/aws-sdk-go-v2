@@ -16,7 +16,7 @@ func (c *Client) CreateHostedConfigurationVersion(ctx context.Context, params *C
 		params = &CreateHostedConfigurationVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateHostedConfigurationVersion", params, optFns, addOperationCreateHostedConfigurationVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateHostedConfigurationVersion", params, optFns, c.addOperationCreateHostedConfigurationVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type CreateHostedConfigurationVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateHostedConfigurationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateHostedConfigurationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateHostedConfigurationVersion{}, middleware.After)
 	if err != nil {
 		return err

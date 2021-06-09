@@ -24,7 +24,7 @@ func (c *Client) AllocateTransitVirtualInterface(ctx context.Context, params *Al
 		params = &AllocateTransitVirtualInterfaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AllocateTransitVirtualInterface", params, optFns, addOperationAllocateTransitVirtualInterfaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AllocateTransitVirtualInterface", params, optFns, c.addOperationAllocateTransitVirtualInterfaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type AllocateTransitVirtualInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAllocateTransitVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAllocateTransitVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAllocateTransitVirtualInterface{}, middleware.After)
 	if err != nil {
 		return err

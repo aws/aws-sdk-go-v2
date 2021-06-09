@@ -18,7 +18,7 @@ func (c *Client) ListIndex(ctx context.Context, params *ListIndexInput, optFns .
 		params = &ListIndexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListIndex", params, optFns, addOperationListIndexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListIndex", params, optFns, c.addOperationListIndexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListIndexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIndex{}, middleware.After)
 	if err != nil {
 		return err

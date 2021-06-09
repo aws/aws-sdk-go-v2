@@ -17,7 +17,7 @@ func (c *Client) SetV2LoggingLevel(ctx context.Context, params *SetV2LoggingLeve
 		params = &SetV2LoggingLevelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetV2LoggingLevel", params, optFns, addOperationSetV2LoggingLevelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetV2LoggingLevel", params, optFns, c.addOperationSetV2LoggingLevelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type SetV2LoggingLevelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetV2LoggingLevelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetV2LoggingLevelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSetV2LoggingLevel{}, middleware.After)
 	if err != nil {
 		return err

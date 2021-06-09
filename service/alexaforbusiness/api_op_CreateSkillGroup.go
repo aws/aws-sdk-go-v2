@@ -18,7 +18,7 @@ func (c *Client) CreateSkillGroup(ctx context.Context, params *CreateSkillGroupI
 		params = &CreateSkillGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSkillGroup", params, optFns, addOperationCreateSkillGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSkillGroup", params, optFns, c.addOperationCreateSkillGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type CreateSkillGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSkillGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSkillGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSkillGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) TestDNSAnswer(ctx context.Context, params *TestDNSAnswerInput, 
 		params = &TestDNSAnswerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestDNSAnswer", params, optFns, addOperationTestDNSAnswerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestDNSAnswer", params, optFns, c.addOperationTestDNSAnswerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ type TestDNSAnswerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTestDNSAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestDNSAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpTestDNSAnswer{}, middleware.After)
 	if err != nil {
 		return err

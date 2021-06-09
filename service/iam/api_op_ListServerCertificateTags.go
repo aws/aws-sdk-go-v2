@@ -26,7 +26,7 @@ func (c *Client) ListServerCertificateTags(ctx context.Context, params *ListServ
 		params = &ListServerCertificateTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListServerCertificateTags", params, optFns, addOperationListServerCertificateTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListServerCertificateTags", params, optFns, c.addOperationListServerCertificateTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type ListServerCertificateTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListServerCertificateTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListServerCertificateTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListServerCertificateTags{}, middleware.After)
 	if err != nil {
 		return err

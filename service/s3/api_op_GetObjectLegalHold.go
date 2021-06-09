@@ -20,7 +20,7 @@ func (c *Client) GetObjectLegalHold(ctx context.Context, params *GetObjectLegalH
 		params = &GetObjectLegalHoldInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetObjectLegalHold", params, optFns, addOperationGetObjectLegalHoldMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetObjectLegalHold", params, optFns, c.addOperationGetObjectLegalHoldMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type GetObjectLegalHoldOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetObjectLegalHoldMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetObjectLegalHoldMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetObjectLegalHold{}, middleware.After)
 	if err != nil {
 		return err

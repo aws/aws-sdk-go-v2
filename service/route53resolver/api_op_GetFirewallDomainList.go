@@ -17,7 +17,7 @@ func (c *Client) GetFirewallDomainList(ctx context.Context, params *GetFirewallD
 		params = &GetFirewallDomainListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFirewallDomainList", params, optFns, addOperationGetFirewallDomainListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFirewallDomainList", params, optFns, c.addOperationGetFirewallDomainListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetFirewallDomainListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFirewallDomainListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFirewallDomainListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFirewallDomainList{}, middleware.After)
 	if err != nil {
 		return err

@@ -24,7 +24,7 @@ func (c *Client) RegisterElasticIp(ctx context.Context, params *RegisterElasticI
 		params = &RegisterElasticIpInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterElasticIp", params, optFns, addOperationRegisterElasticIpMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterElasticIp", params, optFns, c.addOperationRegisterElasticIpMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type RegisterElasticIpOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterElasticIp{}, middleware.After)
 	if err != nil {
 		return err

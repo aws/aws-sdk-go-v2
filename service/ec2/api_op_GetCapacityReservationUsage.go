@@ -20,7 +20,7 @@ func (c *Client) GetCapacityReservationUsage(ctx context.Context, params *GetCap
 		params = &GetCapacityReservationUsageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCapacityReservationUsage", params, optFns, addOperationGetCapacityReservationUsageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCapacityReservationUsage", params, optFns, c.addOperationGetCapacityReservationUsageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ type GetCapacityReservationUsageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCapacityReservationUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCapacityReservationUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpGetCapacityReservationUsage{}, middleware.After)
 	if err != nil {
 		return err

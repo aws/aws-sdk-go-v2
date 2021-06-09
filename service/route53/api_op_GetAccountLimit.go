@@ -27,7 +27,7 @@ func (c *Client) GetAccountLimit(ctx context.Context, params *GetAccountLimitInp
 		params = &GetAccountLimitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccountLimit", params, optFns, addOperationGetAccountLimitMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccountLimit", params, optFns, c.addOperationGetAccountLimitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type GetAccountLimitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccountLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccountLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetAccountLimit{}, middleware.After)
 	if err != nil {
 		return err

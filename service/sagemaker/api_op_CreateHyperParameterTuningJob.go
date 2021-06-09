@@ -21,7 +21,7 @@ func (c *Client) CreateHyperParameterTuningJob(ctx context.Context, params *Crea
 		params = &CreateHyperParameterTuningJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateHyperParameterTuningJob", params, optFns, addOperationCreateHyperParameterTuningJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateHyperParameterTuningJob", params, optFns, c.addOperationCreateHyperParameterTuningJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +96,7 @@ type CreateHyperParameterTuningJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateHyperParameterTuningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateHyperParameterTuningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHyperParameterTuningJob{}, middleware.After)
 	if err != nil {
 		return err

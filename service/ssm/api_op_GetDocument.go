@@ -18,7 +18,7 @@ func (c *Client) GetDocument(ctx context.Context, params *GetDocumentInput, optF
 		params = &GetDocumentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDocument", params, optFns, addOperationGetDocumentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDocument", params, optFns, c.addOperationGetDocumentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type GetDocumentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDocument{}, middleware.After)
 	if err != nil {
 		return err

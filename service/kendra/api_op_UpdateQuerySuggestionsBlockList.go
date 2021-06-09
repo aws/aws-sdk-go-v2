@@ -23,7 +23,7 @@ func (c *Client) UpdateQuerySuggestionsBlockList(ctx context.Context, params *Up
 		params = &UpdateQuerySuggestionsBlockListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateQuerySuggestionsBlockList", params, optFns, addOperationUpdateQuerySuggestionsBlockListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateQuerySuggestionsBlockList", params, optFns, c.addOperationUpdateQuerySuggestionsBlockListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type UpdateQuerySuggestionsBlockListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateQuerySuggestionsBlockListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateQuerySuggestionsBlockListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateQuerySuggestionsBlockList{}, middleware.After)
 	if err != nil {
 		return err

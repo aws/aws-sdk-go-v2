@@ -18,7 +18,7 @@ func (c *Client) PutResourceLogLevel(ctx context.Context, params *PutResourceLog
 		params = &PutResourceLogLevelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutResourceLogLevel", params, optFns, addOperationPutResourceLogLevelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutResourceLogLevel", params, optFns, c.addOperationPutResourceLogLevelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type PutResourceLogLevelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutResourceLogLevelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutResourceLogLevelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutResourceLogLevel{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) CreateGroupVersion(ctx context.Context, params *CreateGroupVers
 		params = &CreateGroupVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateGroupVersion", params, optFns, addOperationCreateGroupVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateGroupVersion", params, optFns, c.addOperationCreateGroupVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type CreateGroupVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateGroupVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateGroupVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGroupVersion{}, middleware.After)
 	if err != nil {
 		return err

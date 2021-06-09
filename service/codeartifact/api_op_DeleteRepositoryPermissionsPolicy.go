@@ -22,7 +22,7 @@ func (c *Client) DeleteRepositoryPermissionsPolicy(ctx context.Context, params *
 		params = &DeleteRepositoryPermissionsPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRepositoryPermissionsPolicy", params, optFns, addOperationDeleteRepositoryPermissionsPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRepositoryPermissionsPolicy", params, optFns, c.addOperationDeleteRepositoryPermissionsPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type DeleteRepositoryPermissionsPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRepositoryPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRepositoryPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRepositoryPermissionsPolicy{}, middleware.After)
 	if err != nil {
 		return err

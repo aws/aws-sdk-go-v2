@@ -21,7 +21,7 @@ func (c *Client) GetObjectLockConfiguration(ctx context.Context, params *GetObje
 		params = &GetObjectLockConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetObjectLockConfiguration", params, optFns, addOperationGetObjectLockConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetObjectLockConfiguration", params, optFns, c.addOperationGetObjectLockConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type GetObjectLockConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetObjectLockConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetObjectLockConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetObjectLockConfiguration{}, middleware.After)
 	if err != nil {
 		return err

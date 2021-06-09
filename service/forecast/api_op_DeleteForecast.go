@@ -20,7 +20,7 @@ func (c *Client) DeleteForecast(ctx context.Context, params *DeleteForecastInput
 		params = &DeleteForecastInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteForecast", params, optFns, addOperationDeleteForecastMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteForecast", params, optFns, c.addOperationDeleteForecastMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteForecastOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteForecast{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) GetRandomPassword(ctx context.Context, params *GetRandomPasswor
 		params = &GetRandomPasswordInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRandomPassword", params, optFns, addOperationGetRandomPasswordMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRandomPassword", params, optFns, c.addOperationGetRandomPasswordMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type GetRandomPasswordOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRandomPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRandomPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRandomPassword{}, middleware.After)
 	if err != nil {
 		return err

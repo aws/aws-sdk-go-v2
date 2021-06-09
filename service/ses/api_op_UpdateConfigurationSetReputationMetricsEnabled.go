@@ -20,7 +20,7 @@ func (c *Client) UpdateConfigurationSetReputationMetricsEnabled(ctx context.Cont
 		params = &UpdateConfigurationSetReputationMetricsEnabledInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateConfigurationSetReputationMetricsEnabled", params, optFns, addOperationUpdateConfigurationSetReputationMetricsEnabledMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateConfigurationSetReputationMetricsEnabled", params, optFns, c.addOperationUpdateConfigurationSetReputationMetricsEnabledMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UpdateConfigurationSetReputationMetricsEnabledOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateConfigurationSetReputationMetricsEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateConfigurationSetReputationMetricsEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateConfigurationSetReputationMetricsEnabled{}, middleware.After)
 	if err != nil {
 		return err

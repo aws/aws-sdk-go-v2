@@ -17,7 +17,7 @@ func (c *Client) CreateCommit(ctx context.Context, params *CreateCommitInput, op
 		params = &CreateCommitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCommit", params, optFns, addOperationCreateCommitMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCommit", params, optFns, c.addOperationCreateCommitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type CreateCommitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCommit{}, middleware.After)
 	if err != nil {
 		return err

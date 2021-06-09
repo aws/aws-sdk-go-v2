@@ -17,7 +17,7 @@ func (c *Client) UpdateAppImageConfig(ctx context.Context, params *UpdateAppImag
 		params = &UpdateAppImageConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAppImageConfig", params, optFns, addOperationUpdateAppImageConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAppImageConfig", params, optFns, c.addOperationUpdateAppImageConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type UpdateAppImageConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAppImageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAppImageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAppImageConfig{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) StartPiiEntitiesDetectionJob(ctx context.Context, params *Start
 		params = &StartPiiEntitiesDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartPiiEntitiesDetectionJob", params, optFns, addOperationStartPiiEntitiesDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartPiiEntitiesDetectionJob", params, optFns, c.addOperationStartPiiEntitiesDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type StartPiiEntitiesDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartPiiEntitiesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartPiiEntitiesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartPiiEntitiesDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

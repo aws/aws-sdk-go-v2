@@ -25,7 +25,7 @@ func (c *Client) DescribeConnectionLoa(ctx context.Context, params *DescribeConn
 		params = &DescribeConnectionLoaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeConnectionLoa", params, optFns, addOperationDescribeConnectionLoaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConnectionLoa", params, optFns, c.addOperationDescribeConnectionLoaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeConnectionLoaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeConnectionLoaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeConnectionLoaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConnectionLoa{}, middleware.After)
 	if err != nil {
 		return err

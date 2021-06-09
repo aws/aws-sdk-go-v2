@@ -19,7 +19,7 @@ func (c *Client) BatchGetImage(ctx context.Context, params *BatchGetImageInput, 
 		params = &BatchGetImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetImage", params, optFns, addOperationBatchGetImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetImage", params, optFns, c.addOperationBatchGetImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type BatchGetImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetImage{}, middleware.After)
 	if err != nil {
 		return err

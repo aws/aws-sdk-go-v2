@@ -16,7 +16,7 @@ func (c *Client) GetDeviceRegistration(ctx context.Context, params *GetDeviceReg
 		params = &GetDeviceRegistrationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDeviceRegistration", params, optFns, addOperationGetDeviceRegistrationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDeviceRegistration", params, optFns, c.addOperationGetDeviceRegistrationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetDeviceRegistrationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDeviceRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDeviceRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeviceRegistration{}, middleware.After)
 	if err != nil {
 		return err

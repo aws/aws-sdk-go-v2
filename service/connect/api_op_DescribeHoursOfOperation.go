@@ -18,7 +18,7 @@ func (c *Client) DescribeHoursOfOperation(ctx context.Context, params *DescribeH
 		params = &DescribeHoursOfOperationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeHoursOfOperation", params, optFns, addOperationDescribeHoursOfOperationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeHoursOfOperation", params, optFns, c.addOperationDescribeHoursOfOperationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DescribeHoursOfOperationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeHoursOfOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeHoursOfOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeHoursOfOperation{}, middleware.After)
 	if err != nil {
 		return err

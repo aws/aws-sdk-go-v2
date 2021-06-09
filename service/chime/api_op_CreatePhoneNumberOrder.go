@@ -20,7 +20,7 @@ func (c *Client) CreatePhoneNumberOrder(ctx context.Context, params *CreatePhone
 		params = &CreatePhoneNumberOrderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePhoneNumberOrder", params, optFns, addOperationCreatePhoneNumberOrderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePhoneNumberOrder", params, optFns, c.addOperationCreatePhoneNumberOrderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CreatePhoneNumberOrderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePhoneNumberOrderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePhoneNumberOrderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePhoneNumberOrder{}, middleware.After)
 	if err != nil {
 		return err

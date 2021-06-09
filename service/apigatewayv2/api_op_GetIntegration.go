@@ -17,7 +17,7 @@ func (c *Client) GetIntegration(ctx context.Context, params *GetIntegrationInput
 		params = &GetIntegrationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetIntegration", params, optFns, addOperationGetIntegrationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetIntegration", params, optFns, c.addOperationGetIntegrationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -196,7 +196,7 @@ type GetIntegrationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIntegration{}, middleware.After)
 	if err != nil {
 		return err

@@ -26,7 +26,7 @@ func (c *Client) PutFunctionConcurrency(ctx context.Context, params *PutFunction
 		params = &PutFunctionConcurrencyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutFunctionConcurrency", params, optFns, addOperationPutFunctionConcurrencyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutFunctionConcurrency", params, optFns, c.addOperationPutFunctionConcurrencyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type PutFunctionConcurrencyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutFunctionConcurrencyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutFunctionConcurrencyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFunctionConcurrency{}, middleware.After)
 	if err != nil {
 		return err

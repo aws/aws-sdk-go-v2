@@ -19,7 +19,7 @@ func (c *Client) ListComplianceStatus(ctx context.Context, params *ListComplianc
 		params = &ListComplianceStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListComplianceStatus", params, optFns, addOperationListComplianceStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListComplianceStatus", params, optFns, c.addOperationListComplianceStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ListComplianceStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListComplianceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListComplianceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListComplianceStatus{}, middleware.After)
 	if err != nil {
 		return err

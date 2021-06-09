@@ -17,7 +17,7 @@ func (c *Client) BatchDisassociateUserStack(ctx context.Context, params *BatchDi
 		params = &BatchDisassociateUserStackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDisassociateUserStack", params, optFns, addOperationBatchDisassociateUserStackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDisassociateUserStack", params, optFns, c.addOperationBatchDisassociateUserStackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type BatchDisassociateUserStackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDisassociateUserStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDisassociateUserStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDisassociateUserStack{}, middleware.After)
 	if err != nil {
 		return err

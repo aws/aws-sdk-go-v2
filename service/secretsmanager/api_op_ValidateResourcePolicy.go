@@ -40,7 +40,7 @@ func (c *Client) ValidateResourcePolicy(ctx context.Context, params *ValidateRes
 		params = &ValidateResourcePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ValidateResourcePolicy", params, optFns, addOperationValidateResourcePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ValidateResourcePolicy", params, optFns, c.addOperationValidateResourcePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type ValidateResourcePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationValidateResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationValidateResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpValidateResourcePolicy{}, middleware.After)
 	if err != nil {
 		return err

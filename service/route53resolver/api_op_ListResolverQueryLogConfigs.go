@@ -20,7 +20,7 @@ func (c *Client) ListResolverQueryLogConfigs(ctx context.Context, params *ListRe
 		params = &ListResolverQueryLogConfigsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResolverQueryLogConfigs", params, optFns, addOperationListResolverQueryLogConfigsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResolverQueryLogConfigs", params, optFns, c.addOperationListResolverQueryLogConfigsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -144,7 +144,7 @@ type ListResolverQueryLogConfigsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListResolverQueryLogConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResolverQueryLogConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResolverQueryLogConfigs{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) HttpPayloadWithXmlName(ctx context.Context, params *HttpPayload
 		params = &HttpPayloadWithXmlNameInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadWithXmlName", params, optFns, addOperationHttpPayloadWithXmlNameMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadWithXmlName", params, optFns, c.addOperationHttpPayloadWithXmlNameMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ type HttpPayloadWithXmlNameOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHttpPayloadWithXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHttpPayloadWithXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadWithXmlName{}, middleware.After)
 	if err != nil {
 		return err

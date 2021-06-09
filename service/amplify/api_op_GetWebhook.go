@@ -17,7 +17,7 @@ func (c *Client) GetWebhook(ctx context.Context, params *GetWebhookInput, optFns
 		params = &GetWebhookInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetWebhook", params, optFns, addOperationGetWebhookMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetWebhook", params, optFns, c.addOperationGetWebhookMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type GetWebhookOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWebhook{}, middleware.After)
 	if err != nil {
 		return err

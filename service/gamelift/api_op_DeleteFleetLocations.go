@@ -29,7 +29,7 @@ func (c *Client) DeleteFleetLocations(ctx context.Context, params *DeleteFleetLo
 		params = &DeleteFleetLocationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFleetLocations", params, optFns, addOperationDeleteFleetLocationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFleetLocations", params, optFns, c.addOperationDeleteFleetLocationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type DeleteFleetLocationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFleetLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFleetLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFleetLocations{}, middleware.After)
 	if err != nil {
 		return err

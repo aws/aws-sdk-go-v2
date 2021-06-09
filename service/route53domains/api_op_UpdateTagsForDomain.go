@@ -19,7 +19,7 @@ func (c *Client) UpdateTagsForDomain(ctx context.Context, params *UpdateTagsForD
 		params = &UpdateTagsForDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateTagsForDomain", params, optFns, addOperationUpdateTagsForDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateTagsForDomain", params, optFns, c.addOperationUpdateTagsForDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type UpdateTagsForDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateTagsForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateTagsForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTagsForDomain{}, middleware.After)
 	if err != nil {
 		return err

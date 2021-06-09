@@ -32,7 +32,7 @@ func (c *Client) ListStackSets(ctx context.Context, params *ListStackSetsInput, 
 		params = &ListStackSetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListStackSets", params, optFns, addOperationListStackSetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListStackSets", params, optFns, c.addOperationListStackSetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type ListStackSetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListStackSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListStackSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListStackSets{}, middleware.After)
 	if err != nil {
 		return err

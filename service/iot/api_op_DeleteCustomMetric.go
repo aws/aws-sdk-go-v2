@@ -21,7 +21,7 @@ func (c *Client) DeleteCustomMetric(ctx context.Context, params *DeleteCustomMet
 		params = &DeleteCustomMetricInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomMetric", params, optFns, addOperationDeleteCustomMetricMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomMetric", params, optFns, c.addOperationDeleteCustomMetricMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteCustomMetricOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCustomMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCustomMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCustomMetric{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteIntegrationAssociation(ctx context.Context, params *Delet
 		params = &DeleteIntegrationAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteIntegrationAssociation", params, optFns, addOperationDeleteIntegrationAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteIntegrationAssociation", params, optFns, c.addOperationDeleteIntegrationAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteIntegrationAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteIntegrationAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteIntegrationAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIntegrationAssociation{}, middleware.After)
 	if err != nil {
 		return err

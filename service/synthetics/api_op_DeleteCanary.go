@@ -41,7 +41,7 @@ func (c *Client) DeleteCanary(ctx context.Context, params *DeleteCanaryInput, op
 		params = &DeleteCanaryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCanary", params, optFns, addOperationDeleteCanaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCanary", params, optFns, c.addOperationDeleteCanaryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DeleteCanaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCanary{}, middleware.After)
 	if err != nil {
 		return err

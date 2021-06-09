@@ -17,7 +17,7 @@ func (c *Client) UpdateBranch(ctx context.Context, params *UpdateBranchInput, op
 		params = &UpdateBranchInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateBranch", params, optFns, addOperationUpdateBranchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateBranch", params, optFns, c.addOperationUpdateBranchMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type UpdateBranchOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBranch{}, middleware.After)
 	if err != nil {
 		return err

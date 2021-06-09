@@ -22,7 +22,7 @@ func (c *Client) DescribeRegions(ctx context.Context, params *DescribeRegionsInp
 		params = &DescribeRegionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRegions", params, optFns, addOperationDescribeRegionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRegions", params, optFns, c.addOperationDescribeRegionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DescribeRegionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeRegions{}, middleware.After)
 	if err != nil {
 		return err

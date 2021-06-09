@@ -19,7 +19,7 @@ func (c *Client) ApplyEnvironmentManagedAction(ctx context.Context, params *Appl
 		params = &ApplyEnvironmentManagedActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ApplyEnvironmentManagedAction", params, optFns, addOperationApplyEnvironmentManagedActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ApplyEnvironmentManagedAction", params, optFns, c.addOperationApplyEnvironmentManagedActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ApplyEnvironmentManagedActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationApplyEnvironmentManagedActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationApplyEnvironmentManagedActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpApplyEnvironmentManagedAction{}, middleware.After)
 	if err != nil {
 		return err

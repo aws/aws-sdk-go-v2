@@ -17,7 +17,7 @@ func (c *Client) PromoteReadReplicaDBCluster(ctx context.Context, params *Promot
 		params = &PromoteReadReplicaDBClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PromoteReadReplicaDBCluster", params, optFns, addOperationPromoteReadReplicaDBClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PromoteReadReplicaDBCluster", params, optFns, c.addOperationPromoteReadReplicaDBClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type PromoteReadReplicaDBClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPromoteReadReplicaDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPromoteReadReplicaDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPromoteReadReplicaDBCluster{}, middleware.After)
 	if err != nil {
 		return err

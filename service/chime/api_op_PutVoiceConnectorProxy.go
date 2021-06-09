@@ -18,7 +18,7 @@ func (c *Client) PutVoiceConnectorProxy(ctx context.Context, params *PutVoiceCon
 		params = &PutVoiceConnectorProxyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutVoiceConnectorProxy", params, optFns, addOperationPutVoiceConnectorProxyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutVoiceConnectorProxy", params, optFns, c.addOperationPutVoiceConnectorProxyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type PutVoiceConnectorProxyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutVoiceConnectorProxyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutVoiceConnectorProxyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVoiceConnectorProxy{}, middleware.After)
 	if err != nil {
 		return err

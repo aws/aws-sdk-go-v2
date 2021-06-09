@@ -17,7 +17,7 @@ func (c *Client) UpdateChannelClass(ctx context.Context, params *UpdateChannelCl
 		params = &UpdateChannelClassInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateChannelClass", params, optFns, addOperationUpdateChannelClassMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateChannelClass", params, optFns, c.addOperationUpdateChannelClassMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type UpdateChannelClassOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateChannelClassMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateChannelClassMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChannelClass{}, middleware.After)
 	if err != nil {
 		return err

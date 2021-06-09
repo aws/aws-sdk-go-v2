@@ -32,7 +32,7 @@ func (c *Client) DescribeMatchmakingConfigurations(ctx context.Context, params *
 		params = &DescribeMatchmakingConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeMatchmakingConfigurations", params, optFns, addOperationDescribeMatchmakingConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeMatchmakingConfigurations", params, optFns, c.addOperationDescribeMatchmakingConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type DescribeMatchmakingConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeMatchmakingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeMatchmakingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMatchmakingConfigurations{}, middleware.After)
 	if err != nil {
 		return err

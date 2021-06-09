@@ -21,7 +21,7 @@ func (c *Client) GetLoadBalancerTlsCertificates(ctx context.Context, params *Get
 		params = &GetLoadBalancerTlsCertificatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLoadBalancerTlsCertificates", params, optFns, addOperationGetLoadBalancerTlsCertificatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLoadBalancerTlsCertificates", params, optFns, c.addOperationGetLoadBalancerTlsCertificatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetLoadBalancerTlsCertificatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLoadBalancerTlsCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLoadBalancerTlsCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLoadBalancerTlsCertificates{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) DescribeContinuousExports(ctx context.Context, params *Describe
 		params = &DescribeContinuousExportsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeContinuousExports", params, optFns, addOperationDescribeContinuousExportsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeContinuousExports", params, optFns, c.addOperationDescribeContinuousExportsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeContinuousExportsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeContinuousExportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeContinuousExportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeContinuousExports{}, middleware.After)
 	if err != nil {
 		return err

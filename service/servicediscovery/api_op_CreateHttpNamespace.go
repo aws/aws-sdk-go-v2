@@ -23,7 +23,7 @@ func (c *Client) CreateHttpNamespace(ctx context.Context, params *CreateHttpName
 		params = &CreateHttpNamespaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateHttpNamespace", params, optFns, addOperationCreateHttpNamespaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateHttpNamespace", params, optFns, c.addOperationCreateHttpNamespaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type CreateHttpNamespaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateHttpNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateHttpNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHttpNamespace{}, middleware.After)
 	if err != nil {
 		return err

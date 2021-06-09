@@ -20,7 +20,7 @@ func (c *Client) DetachElasticLoadBalancer(ctx context.Context, params *DetachEl
 		params = &DetachElasticLoadBalancerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachElasticLoadBalancer", params, optFns, addOperationDetachElasticLoadBalancerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachElasticLoadBalancer", params, optFns, c.addOperationDetachElasticLoadBalancerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DetachElasticLoadBalancerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachElasticLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachElasticLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetachElasticLoadBalancer{}, middleware.After)
 	if err != nil {
 		return err

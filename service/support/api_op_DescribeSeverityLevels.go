@@ -28,7 +28,7 @@ func (c *Client) DescribeSeverityLevels(ctx context.Context, params *DescribeSev
 		params = &DescribeSeverityLevelsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSeverityLevels", params, optFns, addOperationDescribeSeverityLevelsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSeverityLevels", params, optFns, c.addOperationDescribeSeverityLevelsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeSeverityLevelsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSeverityLevelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSeverityLevelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSeverityLevels{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DescribeDBProxyTargets(ctx context.Context, params *DescribeDBP
 		params = &DescribeDBProxyTargetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDBProxyTargets", params, optFns, addOperationDescribeDBProxyTargetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDBProxyTargets", params, optFns, c.addOperationDescribeDBProxyTargetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeDBProxyTargetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDBProxyTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDBProxyTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBProxyTargets{}, middleware.After)
 	if err != nil {
 		return err

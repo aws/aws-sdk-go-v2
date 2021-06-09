@@ -17,7 +17,7 @@ func (c *Client) GetDefaultRetentionPolicy(ctx context.Context, params *GetDefau
 		params = &GetDefaultRetentionPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDefaultRetentionPolicy", params, optFns, addOperationGetDefaultRetentionPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDefaultRetentionPolicy", params, optFns, c.addOperationGetDefaultRetentionPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetDefaultRetentionPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDefaultRetentionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDefaultRetentionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDefaultRetentionPolicy{}, middleware.After)
 	if err != nil {
 		return err

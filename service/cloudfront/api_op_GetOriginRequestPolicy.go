@@ -29,7 +29,7 @@ func (c *Client) GetOriginRequestPolicy(ctx context.Context, params *GetOriginRe
 		params = &GetOriginRequestPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetOriginRequestPolicy", params, optFns, addOperationGetOriginRequestPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetOriginRequestPolicy", params, optFns, c.addOperationGetOriginRequestPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetOriginRequestPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetOriginRequestPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetOriginRequestPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetOriginRequestPolicy{}, middleware.After)
 	if err != nil {
 		return err

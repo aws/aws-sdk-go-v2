@@ -18,7 +18,7 @@ func (c *Client) GetGlobalSettings(ctx context.Context, params *GetGlobalSetting
 		params = &GetGlobalSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetGlobalSettings", params, optFns, addOperationGetGlobalSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetGlobalSettings", params, optFns, c.addOperationGetGlobalSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type GetGlobalSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetGlobalSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetGlobalSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGlobalSettings{}, middleware.After)
 	if err != nil {
 		return err

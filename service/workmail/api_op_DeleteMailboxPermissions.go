@@ -16,7 +16,7 @@ func (c *Client) DeleteMailboxPermissions(ctx context.Context, params *DeleteMai
 		params = &DeleteMailboxPermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMailboxPermissions", params, optFns, addOperationDeleteMailboxPermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMailboxPermissions", params, optFns, c.addOperationDeleteMailboxPermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteMailboxPermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMailboxPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMailboxPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMailboxPermissions{}, middleware.After)
 	if err != nil {
 		return err

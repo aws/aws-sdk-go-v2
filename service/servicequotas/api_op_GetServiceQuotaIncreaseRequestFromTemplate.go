@@ -18,7 +18,7 @@ func (c *Client) GetServiceQuotaIncreaseRequestFromTemplate(ctx context.Context,
 		params = &GetServiceQuotaIncreaseRequestFromTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetServiceQuotaIncreaseRequestFromTemplate", params, optFns, addOperationGetServiceQuotaIncreaseRequestFromTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetServiceQuotaIncreaseRequestFromTemplate", params, optFns, c.addOperationGetServiceQuotaIncreaseRequestFromTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type GetServiceQuotaIncreaseRequestFromTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetServiceQuotaIncreaseRequestFromTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetServiceQuotaIncreaseRequestFromTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetServiceQuotaIncreaseRequestFromTemplate{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) MergePullRequestByFastForward(ctx context.Context, params *Merg
 		params = &MergePullRequestByFastForwardInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MergePullRequestByFastForward", params, optFns, addOperationMergePullRequestByFastForwardMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MergePullRequestByFastForward", params, optFns, c.addOperationMergePullRequestByFastForwardMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type MergePullRequestByFastForwardOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMergePullRequestByFastForwardMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMergePullRequestByFastForwardMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergePullRequestByFastForward{}, middleware.After)
 	if err != nil {
 		return err

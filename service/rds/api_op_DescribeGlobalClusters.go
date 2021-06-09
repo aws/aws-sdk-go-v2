@@ -21,7 +21,7 @@ func (c *Client) DescribeGlobalClusters(ctx context.Context, params *DescribeGlo
 		params = &DescribeGlobalClustersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeGlobalClusters", params, optFns, addOperationDescribeGlobalClustersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeGlobalClusters", params, optFns, c.addOperationDescribeGlobalClustersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DescribeGlobalClustersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeGlobalClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeGlobalClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeGlobalClusters{}, middleware.After)
 	if err != nil {
 		return err

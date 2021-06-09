@@ -18,7 +18,7 @@ func (c *Client) CreateRoom(ctx context.Context, params *CreateRoomInput, optFns
 		params = &CreateRoomInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRoom", params, optFns, addOperationCreateRoomMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRoom", params, optFns, c.addOperationCreateRoomMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type CreateRoomOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRoom{}, middleware.After)
 	if err != nil {
 		return err

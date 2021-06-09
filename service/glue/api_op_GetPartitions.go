@@ -18,7 +18,7 @@ func (c *Client) GetPartitions(ctx context.Context, params *GetPartitionsInput, 
 		params = &GetPartitionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPartitions", params, optFns, addOperationGetPartitionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPartitions", params, optFns, c.addOperationGetPartitionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ type GetPartitionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPartitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPartitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPartitions{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) PutRepositoryPermissionsPolicy(ctx context.Context, params *Put
 		params = &PutRepositoryPermissionsPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutRepositoryPermissionsPolicy", params, optFns, addOperationPutRepositoryPermissionsPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutRepositoryPermissionsPolicy", params, optFns, c.addOperationPutRepositoryPermissionsPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type PutRepositoryPermissionsPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutRepositoryPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutRepositoryPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutRepositoryPermissionsPolicy{}, middleware.After)
 	if err != nil {
 		return err

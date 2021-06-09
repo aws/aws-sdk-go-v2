@@ -18,7 +18,7 @@ func (c *Client) StartJob(ctx context.Context, params *StartJobInput, optFns ...
 		params = &StartJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartJob", params, optFns, addOperationStartJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartJob", params, optFns, c.addOperationStartJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type StartJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartJob{}, middleware.After)
 	if err != nil {
 		return err

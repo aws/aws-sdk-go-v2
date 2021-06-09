@@ -27,7 +27,7 @@ func (c *Client) ListObjectParentPaths(ctx context.Context, params *ListObjectPa
 		params = &ListObjectParentPathsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListObjectParentPaths", params, optFns, addOperationListObjectParentPathsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListObjectParentPaths", params, optFns, c.addOperationListObjectParentPathsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type ListObjectParentPathsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListObjectParentPathsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListObjectParentPathsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListObjectParentPaths{}, middleware.After)
 	if err != nil {
 		return err

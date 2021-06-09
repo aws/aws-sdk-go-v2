@@ -19,7 +19,7 @@ func (c *Client) DetectDominantLanguage(ctx context.Context, params *DetectDomin
 		params = &DetectDominantLanguageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetectDominantLanguage", params, optFns, addOperationDetectDominantLanguageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetectDominantLanguage", params, optFns, c.addOperationDetectDominantLanguageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DetectDominantLanguageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetectDominantLanguageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetectDominantLanguageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectDominantLanguage{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ListEntitlements(ctx context.Context, params *ListEntitlementsI
 		params = &ListEntitlementsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEntitlements", params, optFns, addOperationListEntitlementsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEntitlements", params, optFns, c.addOperationListEntitlementsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ListEntitlementsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEntitlements{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteHumanLoop(ctx context.Context, params *DeleteHumanLoopInp
 		params = &DeleteHumanLoopInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteHumanLoop", params, optFns, addOperationDeleteHumanLoopMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteHumanLoop", params, optFns, c.addOperationDeleteHumanLoopMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteHumanLoopOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteHumanLoopMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteHumanLoopMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteHumanLoop{}, middleware.After)
 	if err != nil {
 		return err

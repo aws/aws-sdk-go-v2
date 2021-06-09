@@ -22,7 +22,7 @@ func (c *Client) CancelInstanceRefresh(ctx context.Context, params *CancelInstan
 		params = &CancelInstanceRefreshInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelInstanceRefresh", params, optFns, addOperationCancelInstanceRefreshMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelInstanceRefresh", params, optFns, c.addOperationCancelInstanceRefreshMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type CancelInstanceRefreshOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelInstanceRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelInstanceRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCancelInstanceRefresh{}, middleware.After)
 	if err != nil {
 		return err

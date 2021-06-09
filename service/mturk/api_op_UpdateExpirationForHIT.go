@@ -19,7 +19,7 @@ func (c *Client) UpdateExpirationForHIT(ctx context.Context, params *UpdateExpir
 		params = &UpdateExpirationForHITInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateExpirationForHIT", params, optFns, addOperationUpdateExpirationForHITMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateExpirationForHIT", params, optFns, c.addOperationUpdateExpirationForHITMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type UpdateExpirationForHITOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateExpirationForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateExpirationForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateExpirationForHIT{}, middleware.After)
 	if err != nil {
 		return err

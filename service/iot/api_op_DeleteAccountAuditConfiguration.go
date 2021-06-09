@@ -18,7 +18,7 @@ func (c *Client) DeleteAccountAuditConfiguration(ctx context.Context, params *De
 		params = &DeleteAccountAuditConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAccountAuditConfiguration", params, optFns, addOperationDeleteAccountAuditConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAccountAuditConfiguration", params, optFns, c.addOperationDeleteAccountAuditConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteAccountAuditConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAccountAuditConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAccountAuditConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAccountAuditConfiguration{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) GetReportDefinition(ctx context.Context, params *GetReportDefin
 		params = &GetReportDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetReportDefinition", params, optFns, addOperationGetReportDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetReportDefinition", params, optFns, c.addOperationGetReportDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type GetReportDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetReportDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetReportDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReportDefinition{}, middleware.After)
 	if err != nil {
 		return err

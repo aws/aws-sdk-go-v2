@@ -18,7 +18,7 @@ func (c *Client) DescribeAssociationExecutions(ctx context.Context, params *Desc
 		params = &DescribeAssociationExecutionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAssociationExecutions", params, optFns, addOperationDescribeAssociationExecutionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAssociationExecutions", params, optFns, c.addOperationDescribeAssociationExecutionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeAssociationExecutionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAssociationExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAssociationExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAssociationExecutions{}, middleware.After)
 	if err != nil {
 		return err

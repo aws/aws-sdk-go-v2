@@ -18,7 +18,7 @@ func (c *Client) DescribeDBEngineVersions(ctx context.Context, params *DescribeD
 		params = &DescribeDBEngineVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDBEngineVersions", params, optFns, addOperationDescribeDBEngineVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDBEngineVersions", params, optFns, c.addOperationDescribeDBEngineVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -125,7 +125,7 @@ type DescribeDBEngineVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDBEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDBEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBEngineVersions{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) GetCommit(ctx context.Context, params *GetCommitInput, optFns .
 		params = &GetCommitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCommit", params, optFns, addOperationGetCommitMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCommit", params, optFns, c.addOperationGetCommitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetCommitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCommit{}, middleware.After)
 	if err != nil {
 		return err

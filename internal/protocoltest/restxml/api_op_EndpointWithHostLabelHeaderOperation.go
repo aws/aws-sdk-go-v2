@@ -17,7 +17,7 @@ func (c *Client) EndpointWithHostLabelHeaderOperation(ctx context.Context, param
 		params = &EndpointWithHostLabelHeaderOperationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EndpointWithHostLabelHeaderOperation", params, optFns, addOperationEndpointWithHostLabelHeaderOperationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EndpointWithHostLabelHeaderOperation", params, optFns, c.addOperationEndpointWithHostLabelHeaderOperationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ type EndpointWithHostLabelHeaderOperationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEndpointWithHostLabelHeaderOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEndpointWithHostLabelHeaderOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpEndpointWithHostLabelHeaderOperation{}, middleware.After)
 	if err != nil {
 		return err

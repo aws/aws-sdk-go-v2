@@ -24,7 +24,7 @@ func (c *Client) CreatePortal(ctx context.Context, params *CreatePortalInput, op
 		params = &CreatePortalInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePortal", params, optFns, addOperationCreatePortalMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePortal", params, optFns, c.addOperationCreatePortalMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -144,7 +144,7 @@ type CreatePortalOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePortal{}, middleware.After)
 	if err != nil {
 		return err

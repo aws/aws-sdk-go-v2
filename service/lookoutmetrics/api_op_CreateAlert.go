@@ -17,7 +17,7 @@ func (c *Client) CreateAlert(ctx context.Context, params *CreateAlertInput, optF
 		params = &CreateAlertInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAlert", params, optFns, addOperationCreateAlertMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAlert", params, optFns, c.addOperationCreateAlertMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type CreateAlertOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAlertMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAlertMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAlert{}, middleware.After)
 	if err != nil {
 		return err

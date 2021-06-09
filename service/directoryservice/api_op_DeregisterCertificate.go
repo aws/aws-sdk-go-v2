@@ -17,7 +17,7 @@ func (c *Client) DeregisterCertificate(ctx context.Context, params *DeregisterCe
 		params = &DeregisterCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterCertificate", params, optFns, addOperationDeregisterCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterCertificate", params, optFns, c.addOperationDeregisterCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeregisterCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterCertificate{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteLanguageModel(ctx context.Context, params *DeleteLanguage
 		params = &DeleteLanguageModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLanguageModel", params, optFns, addOperationDeleteLanguageModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLanguageModel", params, optFns, c.addOperationDeleteLanguageModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteLanguageModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLanguageModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLanguageModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLanguageModel{}, middleware.After)
 	if err != nil {
 		return err

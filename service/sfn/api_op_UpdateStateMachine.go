@@ -24,7 +24,7 @@ func (c *Client) UpdateStateMachine(ctx context.Context, params *UpdateStateMach
 		params = &UpdateStateMachineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateStateMachine", params, optFns, addOperationUpdateStateMachineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateStateMachine", params, optFns, c.addOperationUpdateStateMachineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type UpdateStateMachineOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateStateMachine{}, middleware.After)
 	if err != nil {
 		return err

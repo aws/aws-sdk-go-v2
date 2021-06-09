@@ -34,7 +34,7 @@ func (c *Client) CreateConfigurationProfile(ctx context.Context, params *CreateC
 		params = &CreateConfigurationProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateConfigurationProfile", params, optFns, addOperationCreateConfigurationProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateConfigurationProfile", params, optFns, c.addOperationCreateConfigurationProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ type CreateConfigurationProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateConfigurationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateConfigurationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfigurationProfile{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) ExecuteSql(ctx context.Context, params *ExecuteSqlInput, optFns
 		params = &ExecuteSqlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExecuteSql", params, optFns, addOperationExecuteSqlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExecuteSql", params, optFns, c.addOperationExecuteSqlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type ExecuteSqlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExecuteSqlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExecuteSqlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteSql{}, middleware.After)
 	if err != nil {
 		return err

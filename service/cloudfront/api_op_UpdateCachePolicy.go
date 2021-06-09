@@ -30,7 +30,7 @@ func (c *Client) UpdateCachePolicy(ctx context.Context, params *UpdateCachePolic
 		params = &UpdateCachePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateCachePolicy", params, optFns, addOperationUpdateCachePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateCachePolicy", params, optFns, c.addOperationUpdateCachePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type UpdateCachePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateCachePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateCachePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpUpdateCachePolicy{}, middleware.After)
 	if err != nil {
 		return err

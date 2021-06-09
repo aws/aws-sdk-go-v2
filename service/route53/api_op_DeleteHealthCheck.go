@@ -29,7 +29,7 @@ func (c *Client) DeleteHealthCheck(ctx context.Context, params *DeleteHealthChec
 		params = &DeleteHealthCheckInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteHealthCheck", params, optFns, addOperationDeleteHealthCheckMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteHealthCheck", params, optFns, c.addOperationDeleteHealthCheckMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DeleteHealthCheckOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteHealthCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteHealthCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteHealthCheck{}, middleware.After)
 	if err != nil {
 		return err

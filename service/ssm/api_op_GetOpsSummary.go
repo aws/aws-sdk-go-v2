@@ -18,7 +18,7 @@ func (c *Client) GetOpsSummary(ctx context.Context, params *GetOpsSummaryInput, 
 		params = &GetOpsSummaryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetOpsSummary", params, optFns, addOperationGetOpsSummaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetOpsSummary", params, optFns, c.addOperationGetOpsSummaryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type GetOpsSummaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetOpsSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetOpsSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOpsSummary{}, middleware.After)
 	if err != nil {
 		return err

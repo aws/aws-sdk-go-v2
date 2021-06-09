@@ -45,7 +45,7 @@ func (c *Client) CreateHealthCheck(ctx context.Context, params *CreateHealthChec
 		params = &CreateHealthCheckInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateHealthCheck", params, optFns, addOperationCreateHealthCheckMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateHealthCheck", params, optFns, c.addOperationCreateHealthCheckMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type CreateHealthCheckOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateHealthCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateHealthCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpCreateHealthCheck{}, middleware.After)
 	if err != nil {
 		return err

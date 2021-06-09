@@ -17,7 +17,7 @@ func (c *Client) ListUserProfiles(ctx context.Context, params *ListUserProfilesI
 		params = &ListUserProfilesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListUserProfiles", params, optFns, addOperationListUserProfilesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListUserProfiles", params, optFns, c.addOperationListUserProfilesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ListUserProfilesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListUserProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListUserProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUserProfiles{}, middleware.After)
 	if err != nil {
 		return err

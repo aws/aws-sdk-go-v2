@@ -18,7 +18,7 @@ func (c *Client) ListBuildBatchesForProject(ctx context.Context, params *ListBui
 		params = &ListBuildBatchesForProjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBuildBatchesForProject", params, optFns, addOperationListBuildBatchesForProjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBuildBatchesForProject", params, optFns, c.addOperationListBuildBatchesForProjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListBuildBatchesForProjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBuildBatchesForProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBuildBatchesForProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListBuildBatchesForProject{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) DescribeTapeArchives(ctx context.Context, params *DescribeTapeA
 		params = &DescribeTapeArchivesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTapeArchives", params, optFns, addOperationDescribeTapeArchivesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTapeArchives", params, optFns, c.addOperationDescribeTapeArchivesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeTapeArchivesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTapeArchivesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTapeArchivesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTapeArchives{}, middleware.After)
 	if err != nil {
 		return err

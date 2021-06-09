@@ -16,7 +16,7 @@ func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionI
 		params = &RemovePermissionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemovePermission", params, optFns, addOperationRemovePermissionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemovePermission", params, optFns, c.addOperationRemovePermissionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type RemovePermissionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemovePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemovePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemovePermission{}, middleware.After)
 	if err != nil {
 		return err

@@ -24,7 +24,7 @@ func (c *Client) ExportLambdaFunctionRecommendations(ctx context.Context, params
 		params = &ExportLambdaFunctionRecommendationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExportLambdaFunctionRecommendations", params, optFns, addOperationExportLambdaFunctionRecommendationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExportLambdaFunctionRecommendations", params, optFns, c.addOperationExportLambdaFunctionRecommendationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +107,7 @@ type ExportLambdaFunctionRecommendationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExportLambdaFunctionRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExportLambdaFunctionRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpExportLambdaFunctionRecommendations{}, middleware.After)
 	if err != nil {
 		return err

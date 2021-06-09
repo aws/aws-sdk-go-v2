@@ -21,7 +21,7 @@ func (c *Client) CreateInstancesFromSnapshot(ctx context.Context, params *Create
 		params = &CreateInstancesFromSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateInstancesFromSnapshot", params, optFns, addOperationCreateInstancesFromSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateInstancesFromSnapshot", params, optFns, c.addOperationCreateInstancesFromSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -142,7 +142,7 @@ type CreateInstancesFromSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateInstancesFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateInstancesFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateInstancesFromSnapshot{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) PutSchemaFromJson(ctx context.Context, params *PutSchemaFromJso
 		params = &PutSchemaFromJsonInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutSchemaFromJson", params, optFns, addOperationPutSchemaFromJsonMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutSchemaFromJson", params, optFns, c.addOperationPutSchemaFromJsonMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type PutSchemaFromJsonOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutSchemaFromJsonMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutSchemaFromJsonMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSchemaFromJson{}, middleware.After)
 	if err != nil {
 		return err

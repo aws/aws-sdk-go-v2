@@ -18,7 +18,7 @@ func (c *Client) GetBundles(ctx context.Context, params *GetBundlesInput, optFns
 		params = &GetBundlesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBundles", params, optFns, addOperationGetBundlesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBundles", params, optFns, c.addOperationGetBundlesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetBundlesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBundles{}, middleware.After)
 	if err != nil {
 		return err

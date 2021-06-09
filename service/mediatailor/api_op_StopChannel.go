@@ -16,7 +16,7 @@ func (c *Client) StopChannel(ctx context.Context, params *StopChannelInput, optF
 		params = &StopChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopChannel", params, optFns, addOperationStopChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopChannel", params, optFns, c.addOperationStopChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type StopChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopChannel{}, middleware.After)
 	if err != nil {
 		return err

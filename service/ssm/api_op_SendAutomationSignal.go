@@ -18,7 +18,7 @@ func (c *Client) SendAutomationSignal(ctx context.Context, params *SendAutomatio
 		params = &SendAutomationSignalInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendAutomationSignal", params, optFns, addOperationSendAutomationSignalMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendAutomationSignal", params, optFns, c.addOperationSendAutomationSignalMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type SendAutomationSignalOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendAutomationSignalMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendAutomationSignalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendAutomationSignal{}, middleware.After)
 	if err != nil {
 		return err

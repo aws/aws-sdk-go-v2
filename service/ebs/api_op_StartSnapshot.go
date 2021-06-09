@@ -22,7 +22,7 @@ func (c *Client) StartSnapshot(ctx context.Context, params *StartSnapshotInput, 
 		params = &StartSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartSnapshot", params, optFns, addOperationStartSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartSnapshot", params, optFns, c.addOperationStartSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -140,7 +140,7 @@ type StartSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSnapshot{}, middleware.After)
 	if err != nil {
 		return err

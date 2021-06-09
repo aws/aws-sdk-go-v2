@@ -18,7 +18,7 @@ func (c *Client) DeletePortal(ctx context.Context, params *DeletePortalInput, op
 		params = &DeletePortalInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePortal", params, optFns, addOperationDeletePortalMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePortal", params, optFns, c.addOperationDeletePortalMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeletePortalOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePortal{}, middleware.After)
 	if err != nil {
 		return err

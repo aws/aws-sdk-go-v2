@@ -17,7 +17,7 @@ func (c *Client) DeleteStudioSessionMapping(ctx context.Context, params *DeleteS
 		params = &DeleteStudioSessionMappingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteStudioSessionMapping", params, optFns, addOperationDeleteStudioSessionMappingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteStudioSessionMapping", params, optFns, c.addOperationDeleteStudioSessionMappingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DeleteStudioSessionMappingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteStudioSessionMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteStudioSessionMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteStudioSessionMapping{}, middleware.After)
 	if err != nil {
 		return err

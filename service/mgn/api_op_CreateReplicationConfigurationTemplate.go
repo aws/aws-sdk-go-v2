@@ -17,7 +17,7 @@ func (c *Client) CreateReplicationConfigurationTemplate(ctx context.Context, par
 		params = &CreateReplicationConfigurationTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateReplicationConfigurationTemplate", params, optFns, addOperationCreateReplicationConfigurationTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateReplicationConfigurationTemplate", params, optFns, c.addOperationCreateReplicationConfigurationTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -156,7 +156,7 @@ type CreateReplicationConfigurationTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateReplicationConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateReplicationConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateReplicationConfigurationTemplate{}, middleware.After)
 	if err != nil {
 		return err

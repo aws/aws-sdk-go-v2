@@ -18,7 +18,7 @@ func (c *Client) DescribeClusterTracks(ctx context.Context, params *DescribeClus
 		params = &DescribeClusterTracksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeClusterTracks", params, optFns, addOperationDescribeClusterTracksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeClusterTracks", params, optFns, c.addOperationDescribeClusterTracksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeClusterTracksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeClusterTracksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeClusterTracksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeClusterTracks{}, middleware.After)
 	if err != nil {
 		return err

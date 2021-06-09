@@ -21,7 +21,7 @@ func (c *Client) GetThirdPartyJobDetails(ctx context.Context, params *GetThirdPa
 		params = &GetThirdPartyJobDetailsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetThirdPartyJobDetails", params, optFns, addOperationGetThirdPartyJobDetailsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetThirdPartyJobDetails", params, optFns, c.addOperationGetThirdPartyJobDetailsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type GetThirdPartyJobDetailsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetThirdPartyJobDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetThirdPartyJobDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetThirdPartyJobDetails{}, middleware.After)
 	if err != nil {
 		return err

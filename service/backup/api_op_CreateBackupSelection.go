@@ -38,7 +38,7 @@ func (c *Client) CreateBackupSelection(ctx context.Context, params *CreateBackup
 		params = &CreateBackupSelectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateBackupSelection", params, optFns, addOperationCreateBackupSelectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBackupSelection", params, optFns, c.addOperationCreateBackupSelectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type CreateBackupSelectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateBackupSelectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateBackupSelectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBackupSelection{}, middleware.After)
 	if err != nil {
 		return err

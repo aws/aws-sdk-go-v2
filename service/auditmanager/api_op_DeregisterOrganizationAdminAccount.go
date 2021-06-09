@@ -16,7 +16,7 @@ func (c *Client) DeregisterOrganizationAdminAccount(ctx context.Context, params 
 		params = &DeregisterOrganizationAdminAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterOrganizationAdminAccount", params, optFns, addOperationDeregisterOrganizationAdminAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterOrganizationAdminAccount", params, optFns, c.addOperationDeregisterOrganizationAdminAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type DeregisterOrganizationAdminAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterOrganizationAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterOrganizationAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterOrganizationAdminAccount{}, middleware.After)
 	if err != nil {
 		return err

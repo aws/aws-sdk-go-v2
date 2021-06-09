@@ -54,7 +54,7 @@ func (c *Client) CreateCampaign(ctx context.Context, params *CreateCampaignInput
 		params = &CreateCampaignInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCampaign", params, optFns, addOperationCreateCampaignMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCampaign", params, optFns, c.addOperationCreateCampaignMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +96,7 @@ type CreateCampaignOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCampaign{}, middleware.After)
 	if err != nil {
 		return err

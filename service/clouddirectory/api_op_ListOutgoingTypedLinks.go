@@ -20,7 +20,7 @@ func (c *Client) ListOutgoingTypedLinks(ctx context.Context, params *ListOutgoin
 		params = &ListOutgoingTypedLinksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListOutgoingTypedLinks", params, optFns, addOperationListOutgoingTypedLinksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListOutgoingTypedLinks", params, optFns, c.addOperationListOutgoingTypedLinksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type ListOutgoingTypedLinksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListOutgoingTypedLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListOutgoingTypedLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOutgoingTypedLinks{}, middleware.After)
 	if err != nil {
 		return err

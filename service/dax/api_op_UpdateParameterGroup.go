@@ -18,7 +18,7 @@ func (c *Client) UpdateParameterGroup(ctx context.Context, params *UpdateParamet
 		params = &UpdateParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateParameterGroup", params, optFns, addOperationUpdateParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateParameterGroup", params, optFns, c.addOperationUpdateParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UpdateParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

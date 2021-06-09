@@ -18,7 +18,7 @@ func (c *Client) DeletePushTemplate(ctx context.Context, params *DeletePushTempl
 		params = &DeletePushTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePushTemplate", params, optFns, addOperationDeletePushTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePushTemplate", params, optFns, c.addOperationDeletePushTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type DeletePushTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePushTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePushTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePushTemplate{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) ListOpsItemEvents(ctx context.Context, params *ListOpsItemEvent
 		params = &ListOpsItemEventsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListOpsItemEvents", params, optFns, addOperationListOpsItemEventsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListOpsItemEvents", params, optFns, c.addOperationListOpsItemEventsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListOpsItemEventsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListOpsItemEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListOpsItemEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOpsItemEvents{}, middleware.After)
 	if err != nil {
 		return err

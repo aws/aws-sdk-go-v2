@@ -22,7 +22,7 @@ func (c *Client) CreateConfigurationSetTrackingOptions(ctx context.Context, para
 		params = &CreateConfigurationSetTrackingOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateConfigurationSetTrackingOptions", params, optFns, addOperationCreateConfigurationSetTrackingOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateConfigurationSetTrackingOptions", params, optFns, c.addOperationCreateConfigurationSetTrackingOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type CreateConfigurationSetTrackingOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateConfigurationSetTrackingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateConfigurationSetTrackingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateConfigurationSetTrackingOptions{}, middleware.After)
 	if err != nil {
 		return err

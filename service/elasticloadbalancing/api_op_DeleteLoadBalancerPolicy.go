@@ -17,7 +17,7 @@ func (c *Client) DeleteLoadBalancerPolicy(ctx context.Context, params *DeleteLoa
 		params = &DeleteLoadBalancerPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLoadBalancerPolicy", params, optFns, addOperationDeleteLoadBalancerPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLoadBalancerPolicy", params, optFns, c.addOperationDeleteLoadBalancerPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteLoadBalancerPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLoadBalancerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLoadBalancerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteLoadBalancerPolicy{}, middleware.After)
 	if err != nil {
 		return err

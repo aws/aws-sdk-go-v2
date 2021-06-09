@@ -20,7 +20,7 @@ func (c *Client) ListByoipCidrs(ctx context.Context, params *ListByoipCidrsInput
 		params = &ListByoipCidrsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListByoipCidrs", params, optFns, addOperationListByoipCidrsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListByoipCidrs", params, optFns, c.addOperationListByoipCidrsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ListByoipCidrsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListByoipCidrsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListByoipCidrsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListByoipCidrs{}, middleware.After)
 	if err != nil {
 		return err

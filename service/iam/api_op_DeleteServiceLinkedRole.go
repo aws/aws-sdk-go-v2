@@ -33,7 +33,7 @@ func (c *Client) DeleteServiceLinkedRole(ctx context.Context, params *DeleteServ
 		params = &DeleteServiceLinkedRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteServiceLinkedRole", params, optFns, addOperationDeleteServiceLinkedRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteServiceLinkedRole", params, optFns, c.addOperationDeleteServiceLinkedRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DeleteServiceLinkedRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteServiceLinkedRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteServiceLinkedRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteServiceLinkedRole{}, middleware.After)
 	if err != nil {
 		return err

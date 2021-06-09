@@ -20,7 +20,7 @@ func (c *Client) DescribeNetworkAcls(ctx context.Context, params *DescribeNetwor
 		params = &DescribeNetworkAclsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeNetworkAcls", params, optFns, addOperationDescribeNetworkAclsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeNetworkAcls", params, optFns, c.addOperationDescribeNetworkAclsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -122,7 +122,7 @@ type DescribeNetworkAclsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeNetworkAclsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeNetworkAclsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeNetworkAcls{}, middleware.After)
 	if err != nil {
 		return err

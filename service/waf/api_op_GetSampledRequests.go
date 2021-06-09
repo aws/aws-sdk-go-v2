@@ -32,7 +32,7 @@ func (c *Client) GetSampledRequests(ctx context.Context, params *GetSampledReque
 		params = &GetSampledRequestsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSampledRequests", params, optFns, addOperationGetSampledRequestsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSampledRequests", params, optFns, c.addOperationGetSampledRequestsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type GetSampledRequestsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSampledRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSampledRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSampledRequests{}, middleware.After)
 	if err != nil {
 		return err

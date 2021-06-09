@@ -25,7 +25,7 @@ func (c *Client) PutDeliveryChannel(ctx context.Context, params *PutDeliveryChan
 		params = &PutDeliveryChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutDeliveryChannel", params, optFns, addOperationPutDeliveryChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutDeliveryChannel", params, optFns, c.addOperationPutDeliveryChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type PutDeliveryChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutDeliveryChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutDeliveryChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutDeliveryChannel{}, middleware.After)
 	if err != nil {
 		return err

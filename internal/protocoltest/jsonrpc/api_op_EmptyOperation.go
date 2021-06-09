@@ -15,7 +15,7 @@ func (c *Client) EmptyOperation(ctx context.Context, params *EmptyOperationInput
 		params = &EmptyOperationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EmptyOperation", params, optFns, addOperationEmptyOperationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EmptyOperation", params, optFns, c.addOperationEmptyOperationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -33,7 +33,7 @@ type EmptyOperationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEmptyOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEmptyOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEmptyOperation{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DeleteManagedEndpoint(ctx context.Context, params *DeleteManage
 		params = &DeleteManagedEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteManagedEndpoint", params, optFns, addOperationDeleteManagedEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteManagedEndpoint", params, optFns, c.addOperationDeleteManagedEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteManagedEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteManagedEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteManagedEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteManagedEndpoint{}, middleware.After)
 	if err != nil {
 		return err

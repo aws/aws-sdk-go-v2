@@ -17,7 +17,7 @@ func (c *Client) DescribeRecommendationFeedback(ctx context.Context, params *Des
 		params = &DescribeRecommendationFeedbackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRecommendationFeedback", params, optFns, addOperationDescribeRecommendationFeedbackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRecommendationFeedback", params, optFns, c.addOperationDescribeRecommendationFeedbackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeRecommendationFeedbackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRecommendationFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRecommendationFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRecommendationFeedback{}, middleware.After)
 	if err != nil {
 		return err

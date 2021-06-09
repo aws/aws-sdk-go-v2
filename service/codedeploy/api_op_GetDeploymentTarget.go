@@ -17,7 +17,7 @@ func (c *Client) GetDeploymentTarget(ctx context.Context, params *GetDeploymentT
 		params = &GetDeploymentTargetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDeploymentTarget", params, optFns, addOperationGetDeploymentTargetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDeploymentTarget", params, optFns, c.addOperationGetDeploymentTargetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type GetDeploymentTargetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDeploymentTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDeploymentTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDeploymentTarget{}, middleware.After)
 	if err != nil {
 		return err

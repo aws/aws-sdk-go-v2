@@ -18,7 +18,7 @@ func (c *Client) ListBootstrapActions(ctx context.Context, params *ListBootstrap
 		params = &ListBootstrapActionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBootstrapActions", params, optFns, addOperationListBootstrapActionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBootstrapActions", params, optFns, c.addOperationListBootstrapActionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListBootstrapActionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBootstrapActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBootstrapActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListBootstrapActions{}, middleware.After)
 	if err != nil {
 		return err

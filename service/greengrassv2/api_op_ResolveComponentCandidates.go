@@ -30,7 +30,7 @@ func (c *Client) ResolveComponentCandidates(ctx context.Context, params *Resolve
 		params = &ResolveComponentCandidatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResolveComponentCandidates", params, optFns, addOperationResolveComponentCandidatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResolveComponentCandidates", params, optFns, c.addOperationResolveComponentCandidatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ResolveComponentCandidatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResolveComponentCandidatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResolveComponentCandidatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpResolveComponentCandidates{}, middleware.After)
 	if err != nil {
 		return err

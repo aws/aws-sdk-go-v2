@@ -19,7 +19,7 @@ func (c *Client) SetLocalConsolePassword(ctx context.Context, params *SetLocalCo
 		params = &SetLocalConsolePasswordInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetLocalConsolePassword", params, optFns, addOperationSetLocalConsolePasswordMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetLocalConsolePassword", params, optFns, c.addOperationSetLocalConsolePasswordMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type SetLocalConsolePasswordOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetLocalConsolePasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetLocalConsolePasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetLocalConsolePassword{}, middleware.After)
 	if err != nil {
 		return err

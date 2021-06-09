@@ -22,7 +22,7 @@ func (c *Client) ListMFADevices(ctx context.Context, params *ListMFADevicesInput
 		params = &ListMFADevicesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListMFADevices", params, optFns, addOperationListMFADevicesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListMFADevices", params, optFns, c.addOperationListMFADevicesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type ListMFADevicesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListMFADevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListMFADevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListMFADevices{}, middleware.After)
 	if err != nil {
 		return err

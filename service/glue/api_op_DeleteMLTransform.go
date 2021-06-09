@@ -21,7 +21,7 @@ func (c *Client) DeleteMLTransform(ctx context.Context, params *DeleteMLTransfor
 		params = &DeleteMLTransformInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMLTransform", params, optFns, addOperationDeleteMLTransformMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMLTransform", params, optFns, c.addOperationDeleteMLTransformMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteMLTransformOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMLTransform{}, middleware.After)
 	if err != nil {
 		return err

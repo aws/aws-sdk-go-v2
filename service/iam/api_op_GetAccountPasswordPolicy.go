@@ -21,7 +21,7 @@ func (c *Client) GetAccountPasswordPolicy(ctx context.Context, params *GetAccoun
 		params = &GetAccountPasswordPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccountPasswordPolicy", params, optFns, addOperationGetAccountPasswordPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccountPasswordPolicy", params, optFns, c.addOperationGetAccountPasswordPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetAccountPasswordPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccountPasswordPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccountPasswordPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetAccountPasswordPolicy{}, middleware.After)
 	if err != nil {
 		return err

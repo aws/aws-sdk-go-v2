@@ -25,7 +25,7 @@ func (c *Client) CreateClusterParameterGroup(ctx context.Context, params *Create
 		params = &CreateClusterParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateClusterParameterGroup", params, optFns, addOperationCreateClusterParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateClusterParameterGroup", params, optFns, c.addOperationCreateClusterParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type CreateClusterParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateClusterParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

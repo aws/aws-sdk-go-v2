@@ -16,7 +16,7 @@ func (c *Client) ListNamedShadowsForThing(ctx context.Context, params *ListNamed
 		params = &ListNamedShadowsForThingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListNamedShadowsForThing", params, optFns, addOperationListNamedShadowsForThingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListNamedShadowsForThing", params, optFns, c.addOperationListNamedShadowsForThingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListNamedShadowsForThingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListNamedShadowsForThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListNamedShadowsForThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNamedShadowsForThing{}, middleware.After)
 	if err != nil {
 		return err

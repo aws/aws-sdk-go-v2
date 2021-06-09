@@ -17,7 +17,7 @@ func (c *Client) DeleteImageVersion(ctx context.Context, params *DeleteImageVers
 		params = &DeleteImageVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteImageVersion", params, optFns, addOperationDeleteImageVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteImageVersion", params, optFns, c.addOperationDeleteImageVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteImageVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteImageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteImageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteImageVersion{}, middleware.After)
 	if err != nil {
 		return err

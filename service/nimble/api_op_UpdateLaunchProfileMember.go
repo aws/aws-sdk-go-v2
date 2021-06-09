@@ -18,7 +18,7 @@ func (c *Client) UpdateLaunchProfileMember(ctx context.Context, params *UpdateLa
 		params = &UpdateLaunchProfileMemberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLaunchProfileMember", params, optFns, addOperationUpdateLaunchProfileMemberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLaunchProfileMember", params, optFns, c.addOperationUpdateLaunchProfileMemberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type UpdateLaunchProfileMemberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLaunchProfileMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLaunchProfileMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLaunchProfileMember{}, middleware.After)
 	if err != nil {
 		return err

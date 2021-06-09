@@ -26,7 +26,7 @@ func (c *Client) DescribeConversionTasks(ctx context.Context, params *DescribeCo
 		params = &DescribeConversionTasksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeConversionTasks", params, optFns, addOperationDescribeConversionTasksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConversionTasks", params, optFns, c.addOperationDescribeConversionTasksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeConversionTasksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeConversionTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeConversionTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeConversionTasks{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) PurchaseProvisionedCapacity(ctx context.Context, params *Purcha
 		params = &PurchaseProvisionedCapacityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PurchaseProvisionedCapacity", params, optFns, addOperationPurchaseProvisionedCapacityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PurchaseProvisionedCapacity", params, optFns, c.addOperationPurchaseProvisionedCapacityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type PurchaseProvisionedCapacityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPurchaseProvisionedCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPurchaseProvisionedCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPurchaseProvisionedCapacity{}, middleware.After)
 	if err != nil {
 		return err

@@ -25,7 +25,7 @@ func (c *Client) DeleteApplicationReferenceDataSource(ctx context.Context, param
 		params = &DeleteApplicationReferenceDataSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteApplicationReferenceDataSource", params, optFns, addOperationDeleteApplicationReferenceDataSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteApplicationReferenceDataSource", params, optFns, c.addOperationDeleteApplicationReferenceDataSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DeleteApplicationReferenceDataSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteApplicationReferenceDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteApplicationReferenceDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteApplicationReferenceDataSource{}, middleware.After)
 	if err != nil {
 		return err

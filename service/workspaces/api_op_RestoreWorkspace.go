@@ -22,7 +22,7 @@ func (c *Client) RestoreWorkspace(ctx context.Context, params *RestoreWorkspaceI
 		params = &RestoreWorkspaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreWorkspace", params, optFns, addOperationRestoreWorkspaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreWorkspace", params, optFns, c.addOperationRestoreWorkspaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type RestoreWorkspaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRestoreWorkspace{}, middleware.After)
 	if err != nil {
 		return err

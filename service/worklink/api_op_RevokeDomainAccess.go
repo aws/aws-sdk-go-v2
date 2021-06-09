@@ -16,7 +16,7 @@ func (c *Client) RevokeDomainAccess(ctx context.Context, params *RevokeDomainAcc
 		params = &RevokeDomainAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokeDomainAccess", params, optFns, addOperationRevokeDomainAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeDomainAccess", params, optFns, c.addOperationRevokeDomainAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type RevokeDomainAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokeDomainAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokeDomainAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokeDomainAccess{}, middleware.After)
 	if err != nil {
 		return err

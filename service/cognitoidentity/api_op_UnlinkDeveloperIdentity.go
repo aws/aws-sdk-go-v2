@@ -20,7 +20,7 @@ func (c *Client) UnlinkDeveloperIdentity(ctx context.Context, params *UnlinkDeve
 		params = &UnlinkDeveloperIdentityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnlinkDeveloperIdentity", params, optFns, addOperationUnlinkDeveloperIdentityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnlinkDeveloperIdentity", params, optFns, c.addOperationUnlinkDeveloperIdentityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type UnlinkDeveloperIdentityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnlinkDeveloperIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnlinkDeveloperIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnlinkDeveloperIdentity{}, middleware.After)
 	if err != nil {
 		return err

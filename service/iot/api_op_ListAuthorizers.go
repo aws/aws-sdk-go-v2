@@ -18,7 +18,7 @@ func (c *Client) ListAuthorizers(ctx context.Context, params *ListAuthorizersInp
 		params = &ListAuthorizersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAuthorizers", params, optFns, addOperationListAuthorizersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAuthorizers", params, optFns, c.addOperationListAuthorizersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListAuthorizersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAuthorizersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAuthorizersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAuthorizers{}, middleware.After)
 	if err != nil {
 		return err

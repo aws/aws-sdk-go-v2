@@ -16,7 +16,7 @@ func (c *Client) DeleteResourceDefinition(ctx context.Context, params *DeleteRes
 		params = &DeleteResourceDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteResourceDefinition", params, optFns, addOperationDeleteResourceDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteResourceDefinition", params, optFns, c.addOperationDeleteResourceDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteResourceDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteResourceDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteResourceDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteResourceDefinition{}, middleware.After)
 	if err != nil {
 		return err

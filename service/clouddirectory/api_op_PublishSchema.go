@@ -17,7 +17,7 @@ func (c *Client) PublishSchema(ctx context.Context, params *PublishSchemaInput, 
 		params = &PublishSchemaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PublishSchema", params, optFns, addOperationPublishSchemaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PublishSchema", params, optFns, c.addOperationPublishSchemaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type PublishSchemaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPublishSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPublishSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPublishSchema{}, middleware.After)
 	if err != nil {
 		return err

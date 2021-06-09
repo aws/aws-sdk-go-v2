@@ -17,7 +17,7 @@ func (c *Client) PhoneNumberValidate(ctx context.Context, params *PhoneNumberVal
 		params = &PhoneNumberValidateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PhoneNumberValidate", params, optFns, addOperationPhoneNumberValidateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PhoneNumberValidate", params, optFns, c.addOperationPhoneNumberValidateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type PhoneNumberValidateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPhoneNumberValidateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPhoneNumberValidateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPhoneNumberValidate{}, middleware.After)
 	if err != nil {
 		return err

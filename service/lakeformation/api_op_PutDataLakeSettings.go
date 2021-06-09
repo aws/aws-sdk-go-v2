@@ -23,7 +23,7 @@ func (c *Client) PutDataLakeSettings(ctx context.Context, params *PutDataLakeSet
 		params = &PutDataLakeSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutDataLakeSettings", params, optFns, addOperationPutDataLakeSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutDataLakeSettings", params, optFns, c.addOperationPutDataLakeSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type PutDataLakeSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutDataLakeSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutDataLakeSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutDataLakeSettings{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) CreateResolver(ctx context.Context, params *CreateResolverInput
 		params = &CreateResolverInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateResolver", params, optFns, addOperationCreateResolverMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateResolver", params, optFns, c.addOperationCreateResolverMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type CreateResolverOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateResolverMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateResolverMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateResolver{}, middleware.After)
 	if err != nil {
 		return err

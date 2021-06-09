@@ -19,7 +19,7 @@ func (c *Client) ListElasticsearchInstanceTypes(ctx context.Context, params *Lis
 		params = &ListElasticsearchInstanceTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListElasticsearchInstanceTypes", params, optFns, addOperationListElasticsearchInstanceTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListElasticsearchInstanceTypes", params, optFns, c.addOperationListElasticsearchInstanceTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ListElasticsearchInstanceTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListElasticsearchInstanceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListElasticsearchInstanceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListElasticsearchInstanceTypes{}, middleware.After)
 	if err != nil {
 		return err

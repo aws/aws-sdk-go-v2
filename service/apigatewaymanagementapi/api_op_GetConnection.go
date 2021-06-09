@@ -18,7 +18,7 @@ func (c *Client) GetConnection(ctx context.Context, params *GetConnectionInput, 
 		params = &GetConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetConnection", params, optFns, addOperationGetConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetConnection", params, optFns, c.addOperationGetConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type GetConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnection{}, middleware.After)
 	if err != nil {
 		return err

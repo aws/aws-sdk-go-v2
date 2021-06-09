@@ -23,7 +23,7 @@ func (c *Client) ListRegexPatternSets(ctx context.Context, params *ListRegexPatt
 		params = &ListRegexPatternSetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRegexPatternSets", params, optFns, addOperationListRegexPatternSetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRegexPatternSets", params, optFns, c.addOperationListRegexPatternSetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ListRegexPatternSetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRegexPatternSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRegexPatternSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRegexPatternSets{}, middleware.After)
 	if err != nil {
 		return err

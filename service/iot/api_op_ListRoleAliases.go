@@ -17,7 +17,7 @@ func (c *Client) ListRoleAliases(ctx context.Context, params *ListRoleAliasesInp
 		params = &ListRoleAliasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRoleAliases", params, optFns, addOperationListRoleAliasesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRoleAliases", params, optFns, c.addOperationListRoleAliasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ListRoleAliasesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRoleAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRoleAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRoleAliases{}, middleware.After)
 	if err != nil {
 		return err

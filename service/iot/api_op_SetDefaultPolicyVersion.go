@@ -19,7 +19,7 @@ func (c *Client) SetDefaultPolicyVersion(ctx context.Context, params *SetDefault
 		params = &SetDefaultPolicyVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetDefaultPolicyVersion", params, optFns, addOperationSetDefaultPolicyVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetDefaultPolicyVersion", params, optFns, c.addOperationSetDefaultPolicyVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type SetDefaultPolicyVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetDefaultPolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetDefaultPolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSetDefaultPolicyVersion{}, middleware.After)
 	if err != nil {
 		return err

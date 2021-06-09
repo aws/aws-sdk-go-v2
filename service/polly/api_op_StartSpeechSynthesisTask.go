@@ -23,7 +23,7 @@ func (c *Client) StartSpeechSynthesisTask(ctx context.Context, params *StartSpee
 		params = &StartSpeechSynthesisTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartSpeechSynthesisTask", params, optFns, addOperationStartSpeechSynthesisTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartSpeechSynthesisTask", params, optFns, c.addOperationStartSpeechSynthesisTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type StartSpeechSynthesisTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartSpeechSynthesisTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartSpeechSynthesisTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSpeechSynthesisTask{}, middleware.After)
 	if err != nil {
 		return err

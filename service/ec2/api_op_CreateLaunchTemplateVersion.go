@@ -23,7 +23,7 @@ func (c *Client) CreateLaunchTemplateVersion(ctx context.Context, params *Create
 		params = &CreateLaunchTemplateVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLaunchTemplateVersion", params, optFns, addOperationCreateLaunchTemplateVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLaunchTemplateVersion", params, optFns, c.addOperationCreateLaunchTemplateVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type CreateLaunchTemplateVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLaunchTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLaunchTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateLaunchTemplateVersion{}, middleware.After)
 	if err != nil {
 		return err

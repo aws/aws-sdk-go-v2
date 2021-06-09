@@ -19,7 +19,7 @@ func (c *Client) CreateContainerRecipe(ctx context.Context, params *CreateContai
 		params = &CreateContainerRecipeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateContainerRecipe", params, optFns, addOperationCreateContainerRecipeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateContainerRecipe", params, optFns, c.addOperationCreateContainerRecipeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ type CreateContainerRecipeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateContainerRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateContainerRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateContainerRecipe{}, middleware.After)
 	if err != nil {
 		return err

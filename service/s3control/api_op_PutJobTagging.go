@@ -78,7 +78,7 @@ func (c *Client) PutJobTagging(ctx context.Context, params *PutJobTaggingInput, 
 		params = &PutJobTaggingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutJobTagging", params, optFns, addOperationPutJobTaggingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutJobTagging", params, optFns, c.addOperationPutJobTaggingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ type PutJobTaggingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutJobTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutJobTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutJobTagging{}, middleware.After)
 	if err != nil {
 		return err

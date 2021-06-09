@@ -18,7 +18,7 @@ func (c *Client) SetTagsForResource(ctx context.Context, params *SetTagsForResou
 		params = &SetTagsForResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetTagsForResource", params, optFns, addOperationSetTagsForResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetTagsForResource", params, optFns, c.addOperationSetTagsForResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type SetTagsForResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetTagsForResource{}, middleware.After)
 	if err != nil {
 		return err

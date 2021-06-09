@@ -21,7 +21,7 @@ func (c *Client) UpdateModelVersion(ctx context.Context, params *UpdateModelVers
 		params = &UpdateModelVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateModelVersion", params, optFns, addOperationUpdateModelVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateModelVersion", params, optFns, c.addOperationUpdateModelVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type UpdateModelVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateModelVersion{}, middleware.After)
 	if err != nil {
 		return err

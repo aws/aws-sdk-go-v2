@@ -17,7 +17,7 @@ func (c *Client) RejectSharedDirectory(ctx context.Context, params *RejectShared
 		params = &RejectSharedDirectoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RejectSharedDirectory", params, optFns, addOperationRejectSharedDirectoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RejectSharedDirectory", params, optFns, c.addOperationRejectSharedDirectoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type RejectSharedDirectoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRejectSharedDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRejectSharedDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRejectSharedDirectory{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) RebalanceSlotsInGlobalReplicationGroup(ctx context.Context, par
 		params = &RebalanceSlotsInGlobalReplicationGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RebalanceSlotsInGlobalReplicationGroup", params, optFns, addOperationRebalanceSlotsInGlobalReplicationGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RebalanceSlotsInGlobalReplicationGroup", params, optFns, c.addOperationRebalanceSlotsInGlobalReplicationGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type RebalanceSlotsInGlobalReplicationGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRebalanceSlotsInGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRebalanceSlotsInGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRebalanceSlotsInGlobalReplicationGroup{}, middleware.After)
 	if err != nil {
 		return err

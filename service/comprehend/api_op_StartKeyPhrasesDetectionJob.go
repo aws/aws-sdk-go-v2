@@ -19,7 +19,7 @@ func (c *Client) StartKeyPhrasesDetectionJob(ctx context.Context, params *StartK
 		params = &StartKeyPhrasesDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartKeyPhrasesDetectionJob", params, optFns, addOperationStartKeyPhrasesDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartKeyPhrasesDetectionJob", params, optFns, c.addOperationStartKeyPhrasesDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +107,7 @@ type StartKeyPhrasesDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartKeyPhrasesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartKeyPhrasesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartKeyPhrasesDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

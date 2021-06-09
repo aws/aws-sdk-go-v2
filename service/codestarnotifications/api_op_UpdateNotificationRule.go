@@ -20,7 +20,7 @@ func (c *Client) UpdateNotificationRule(ctx context.Context, params *UpdateNotif
 		params = &UpdateNotificationRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateNotificationRule", params, optFns, addOperationUpdateNotificationRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateNotificationRule", params, optFns, c.addOperationUpdateNotificationRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type UpdateNotificationRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNotificationRule{}, middleware.After)
 	if err != nil {
 		return err

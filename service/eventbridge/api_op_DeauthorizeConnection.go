@@ -20,7 +20,7 @@ func (c *Client) DeauthorizeConnection(ctx context.Context, params *DeauthorizeC
 		params = &DeauthorizeConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeauthorizeConnection", params, optFns, addOperationDeauthorizeConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeauthorizeConnection", params, optFns, c.addOperationDeauthorizeConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DeauthorizeConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeauthorizeConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeauthorizeConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeauthorizeConnection{}, middleware.After)
 	if err != nil {
 		return err

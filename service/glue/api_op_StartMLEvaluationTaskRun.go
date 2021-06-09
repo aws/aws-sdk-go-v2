@@ -20,7 +20,7 @@ func (c *Client) StartMLEvaluationTaskRun(ctx context.Context, params *StartMLEv
 		params = &StartMLEvaluationTaskRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartMLEvaluationTaskRun", params, optFns, addOperationStartMLEvaluationTaskRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartMLEvaluationTaskRun", params, optFns, c.addOperationStartMLEvaluationTaskRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StartMLEvaluationTaskRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartMLEvaluationTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartMLEvaluationTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMLEvaluationTaskRun{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) ListLFTags(ctx context.Context, params *ListLFTagsInput, optFns
 		params = &ListLFTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLFTags", params, optFns, addOperationListLFTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLFTags", params, optFns, c.addOperationListLFTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListLFTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLFTags{}, middleware.After)
 	if err != nil {
 		return err

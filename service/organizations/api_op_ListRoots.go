@@ -29,7 +29,7 @@ func (c *Client) ListRoots(ctx context.Context, params *ListRootsInput, optFns .
 		params = &ListRootsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRoots", params, optFns, addOperationListRootsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRoots", params, optFns, c.addOperationListRootsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type ListRootsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRootsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRootsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRoots{}, middleware.After)
 	if err != nil {
 		return err

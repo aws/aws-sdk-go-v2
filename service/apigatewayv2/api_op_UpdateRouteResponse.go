@@ -17,7 +17,7 @@ func (c *Client) UpdateRouteResponse(ctx context.Context, params *UpdateRouteRes
 		params = &UpdateRouteResponseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRouteResponse", params, optFns, addOperationUpdateRouteResponseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRouteResponse", params, optFns, c.addOperationUpdateRouteResponseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type UpdateRouteResponseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRouteResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRouteResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRouteResponse{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) PutInlinePolicyToPermissionSet(ctx context.Context, params *Put
 		params = &PutInlinePolicyToPermissionSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutInlinePolicyToPermissionSet", params, optFns, addOperationPutInlinePolicyToPermissionSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutInlinePolicyToPermissionSet", params, optFns, c.addOperationPutInlinePolicyToPermissionSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type PutInlinePolicyToPermissionSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutInlinePolicyToPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutInlinePolicyToPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutInlinePolicyToPermissionSet{}, middleware.After)
 	if err != nil {
 		return err

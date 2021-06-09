@@ -16,7 +16,7 @@ func (c *Client) AssociateTeamMember(ctx context.Context, params *AssociateTeamM
 		params = &AssociateTeamMemberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateTeamMember", params, optFns, addOperationAssociateTeamMemberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateTeamMember", params, optFns, c.addOperationAssociateTeamMemberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type AssociateTeamMemberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateTeamMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateTeamMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateTeamMember{}, middleware.After)
 	if err != nil {
 		return err

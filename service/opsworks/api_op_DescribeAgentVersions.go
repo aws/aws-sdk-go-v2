@@ -19,7 +19,7 @@ func (c *Client) DescribeAgentVersions(ctx context.Context, params *DescribeAgen
 		params = &DescribeAgentVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAgentVersions", params, optFns, addOperationDescribeAgentVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAgentVersions", params, optFns, c.addOperationDescribeAgentVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DescribeAgentVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAgentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAgentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAgentVersions{}, middleware.After)
 	if err != nil {
 		return err

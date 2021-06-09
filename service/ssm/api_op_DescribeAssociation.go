@@ -21,7 +21,7 @@ func (c *Client) DescribeAssociation(ctx context.Context, params *DescribeAssoci
 		params = &DescribeAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAssociation", params, optFns, addOperationDescribeAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAssociation", params, optFns, c.addOperationDescribeAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DescribeAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAssociation{}, middleware.After)
 	if err != nil {
 		return err

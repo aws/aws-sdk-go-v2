@@ -19,7 +19,7 @@ func (c *Client) GenerateTemplate(ctx context.Context, params *GenerateTemplateI
 		params = &GenerateTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GenerateTemplate", params, optFns, addOperationGenerateTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GenerateTemplate", params, optFns, c.addOperationGenerateTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GenerateTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGenerateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGenerateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGenerateTemplate{}, middleware.After)
 	if err != nil {
 		return err

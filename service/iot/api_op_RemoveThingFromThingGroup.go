@@ -18,7 +18,7 @@ func (c *Client) RemoveThingFromThingGroup(ctx context.Context, params *RemoveTh
 		params = &RemoveThingFromThingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveThingFromThingGroup", params, optFns, addOperationRemoveThingFromThingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveThingFromThingGroup", params, optFns, c.addOperationRemoveThingFromThingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type RemoveThingFromThingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveThingFromThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveThingFromThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveThingFromThingGroup{}, middleware.After)
 	if err != nil {
 		return err

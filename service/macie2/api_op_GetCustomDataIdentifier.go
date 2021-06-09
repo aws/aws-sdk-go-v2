@@ -17,7 +17,7 @@ func (c *Client) GetCustomDataIdentifier(ctx context.Context, params *GetCustomD
 		params = &GetCustomDataIdentifierInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCustomDataIdentifier", params, optFns, addOperationGetCustomDataIdentifierMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCustomDataIdentifier", params, optFns, c.addOperationGetCustomDataIdentifierMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type GetCustomDataIdentifierOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCustomDataIdentifier{}, middleware.After)
 	if err != nil {
 		return err

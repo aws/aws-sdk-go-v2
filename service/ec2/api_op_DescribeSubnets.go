@@ -24,7 +24,7 @@ func (c *Client) DescribeSubnets(ctx context.Context, params *DescribeSubnetsInp
 		params = &DescribeSubnetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSubnets", params, optFns, addOperationDescribeSubnetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSubnets", params, optFns, c.addOperationDescribeSubnetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -124,7 +124,7 @@ type DescribeSubnetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeSubnets{}, middleware.After)
 	if err != nil {
 		return err

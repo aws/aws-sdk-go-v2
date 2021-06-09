@@ -16,7 +16,7 @@ func (c *Client) CancelResize(ctx context.Context, params *CancelResizeInput, op
 		params = &CancelResizeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelResize", params, optFns, addOperationCancelResizeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelResize", params, optFns, c.addOperationCancelResizeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type CancelResizeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelResizeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelResizeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCancelResize{}, middleware.After)
 	if err != nil {
 		return err

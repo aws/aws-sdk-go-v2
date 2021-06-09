@@ -37,7 +37,7 @@ func (c *Client) RegisterScalableTarget(ctx context.Context, params *RegisterSca
 		params = &RegisterScalableTargetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterScalableTarget", params, optFns, addOperationRegisterScalableTargetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterScalableTarget", params, optFns, c.addOperationRegisterScalableTargetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -251,7 +251,7 @@ type RegisterScalableTargetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterScalableTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterScalableTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterScalableTarget{}, middleware.After)
 	if err != nil {
 		return err

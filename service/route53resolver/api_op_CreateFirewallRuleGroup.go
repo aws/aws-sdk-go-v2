@@ -19,7 +19,7 @@ func (c *Client) CreateFirewallRuleGroup(ctx context.Context, params *CreateFire
 		params = &CreateFirewallRuleGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFirewallRuleGroup", params, optFns, addOperationCreateFirewallRuleGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFirewallRuleGroup", params, optFns, c.addOperationCreateFirewallRuleGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type CreateFirewallRuleGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFirewallRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFirewallRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFirewallRuleGroup{}, middleware.After)
 	if err != nil {
 		return err

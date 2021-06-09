@@ -45,7 +45,7 @@ func (c *Client) ListMultipartUploads(ctx context.Context, params *ListMultipart
 		params = &ListMultipartUploadsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListMultipartUploads", params, optFns, addOperationListMultipartUploadsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListMultipartUploads", params, optFns, c.addOperationListMultipartUploadsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ type ListMultipartUploadsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListMultipartUploadsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListMultipartUploadsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMultipartUploads{}, middleware.After)
 	if err != nil {
 		return err

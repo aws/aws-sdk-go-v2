@@ -17,7 +17,7 @@ func (c *Client) UpdateClusterSettings(ctx context.Context, params *UpdateCluste
 		params = &UpdateClusterSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateClusterSettings", params, optFns, addOperationUpdateClusterSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateClusterSettings", params, optFns, c.addOperationUpdateClusterSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UpdateClusterSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateClusterSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateClusterSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateClusterSettings{}, middleware.After)
 	if err != nil {
 		return err

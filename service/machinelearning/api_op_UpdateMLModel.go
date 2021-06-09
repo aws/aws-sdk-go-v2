@@ -17,7 +17,7 @@ func (c *Client) UpdateMLModel(ctx context.Context, params *UpdateMLModelInput, 
 		params = &UpdateMLModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateMLModel", params, optFns, addOperationUpdateMLModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMLModel", params, optFns, c.addOperationUpdateMLModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UpdateMLModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateMLModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateMLModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMLModel{}, middleware.After)
 	if err != nil {
 		return err

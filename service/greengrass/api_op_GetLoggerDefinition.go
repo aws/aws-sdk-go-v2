@@ -16,7 +16,7 @@ func (c *Client) GetLoggerDefinition(ctx context.Context, params *GetLoggerDefin
 		params = &GetLoggerDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLoggerDefinition", params, optFns, addOperationGetLoggerDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLoggerDefinition", params, optFns, c.addOperationGetLoggerDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type GetLoggerDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLoggerDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLoggerDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLoggerDefinition{}, middleware.After)
 	if err != nil {
 		return err

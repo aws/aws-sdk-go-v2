@@ -23,7 +23,7 @@ func (c *Client) StartInstance(ctx context.Context, params *StartInstanceInput, 
 		params = &StartInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartInstance", params, optFns, addOperationStartInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartInstance", params, optFns, c.addOperationStartInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type StartInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartInstance{}, middleware.After)
 	if err != nil {
 		return err

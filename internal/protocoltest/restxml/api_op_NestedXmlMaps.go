@@ -15,7 +15,7 @@ func (c *Client) NestedXmlMaps(ctx context.Context, params *NestedXmlMapsInput, 
 		params = &NestedXmlMapsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "NestedXmlMaps", params, optFns, addOperationNestedXmlMapsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "NestedXmlMaps", params, optFns, c.addOperationNestedXmlMapsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type NestedXmlMapsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationNestedXmlMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationNestedXmlMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpNestedXmlMaps{}, middleware.After)
 	if err != nil {
 		return err

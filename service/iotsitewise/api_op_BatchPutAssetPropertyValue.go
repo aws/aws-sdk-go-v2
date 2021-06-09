@@ -44,7 +44,7 @@ func (c *Client) BatchPutAssetPropertyValue(ctx context.Context, params *BatchPu
 		params = &BatchPutAssetPropertyValueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchPutAssetPropertyValue", params, optFns, addOperationBatchPutAssetPropertyValueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchPutAssetPropertyValue", params, optFns, c.addOperationBatchPutAssetPropertyValueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type BatchPutAssetPropertyValueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchPutAssetPropertyValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchPutAssetPropertyValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutAssetPropertyValue{}, middleware.After)
 	if err != nil {
 		return err

@@ -27,7 +27,7 @@ func (c *Client) GetFileUploadURL(ctx context.Context, params *GetFileUploadURLI
 		params = &GetFileUploadURLInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFileUploadURL", params, optFns, addOperationGetFileUploadURLMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFileUploadURL", params, optFns, c.addOperationGetFileUploadURLMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type GetFileUploadURLOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFileUploadURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFileUploadURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFileUploadURL{}, middleware.After)
 	if err != nil {
 		return err

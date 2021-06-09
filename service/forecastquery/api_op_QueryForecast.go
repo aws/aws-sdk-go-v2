@@ -26,7 +26,7 @@ func (c *Client) QueryForecast(ctx context.Context, params *QueryForecastInput, 
 		params = &QueryForecastInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "QueryForecast", params, optFns, addOperationQueryForecastMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "QueryForecast", params, optFns, c.addOperationQueryForecastMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type QueryForecastOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationQueryForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationQueryForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpQueryForecast{}, middleware.After)
 	if err != nil {
 		return err

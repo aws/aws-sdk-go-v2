@@ -17,7 +17,7 @@ func (c *Client) DescribeUserHierarchyGroup(ctx context.Context, params *Describ
 		params = &DescribeUserHierarchyGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeUserHierarchyGroup", params, optFns, addOperationDescribeUserHierarchyGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeUserHierarchyGroup", params, optFns, c.addOperationDescribeUserHierarchyGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DescribeUserHierarchyGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeUserHierarchyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeUserHierarchyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeUserHierarchyGroup{}, middleware.After)
 	if err != nil {
 		return err

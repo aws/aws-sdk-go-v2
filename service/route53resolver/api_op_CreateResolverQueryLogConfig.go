@@ -29,7 +29,7 @@ func (c *Client) CreateResolverQueryLogConfig(ctx context.Context, params *Creat
 		params = &CreateResolverQueryLogConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateResolverQueryLogConfig", params, optFns, addOperationCreateResolverQueryLogConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateResolverQueryLogConfig", params, optFns, c.addOperationCreateResolverQueryLogConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type CreateResolverQueryLogConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateResolverQueryLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateResolverQueryLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateResolverQueryLogConfig{}, middleware.After)
 	if err != nil {
 		return err

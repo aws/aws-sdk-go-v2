@@ -24,7 +24,7 @@ func (c *Client) BatchGetNamedQuery(ctx context.Context, params *BatchGetNamedQu
 		params = &BatchGetNamedQueryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetNamedQuery", params, optFns, addOperationBatchGetNamedQueryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetNamedQuery", params, optFns, c.addOperationBatchGetNamedQueryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type BatchGetNamedQueryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetNamedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetNamedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetNamedQuery{}, middleware.After)
 	if err != nil {
 		return err

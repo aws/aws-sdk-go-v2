@@ -18,7 +18,7 @@ func (c *Client) DeleteVoiceConnectorGroup(ctx context.Context, params *DeleteVo
 		params = &DeleteVoiceConnectorGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVoiceConnectorGroup", params, optFns, addOperationDeleteVoiceConnectorGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVoiceConnectorGroup", params, optFns, c.addOperationDeleteVoiceConnectorGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteVoiceConnectorGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVoiceConnectorGroup{}, middleware.After)
 	if err != nil {
 		return err

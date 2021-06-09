@@ -17,7 +17,7 @@ func (c *Client) CreateGlobalNetwork(ctx context.Context, params *CreateGlobalNe
 		params = &CreateGlobalNetworkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateGlobalNetwork", params, optFns, addOperationCreateGlobalNetworkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateGlobalNetwork", params, optFns, c.addOperationCreateGlobalNetworkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type CreateGlobalNetworkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateGlobalNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateGlobalNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGlobalNetwork{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) GetChannelSchedule(ctx context.Context, params *GetChannelSched
 		params = &GetChannelScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetChannelSchedule", params, optFns, addOperationGetChannelScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetChannelSchedule", params, optFns, c.addOperationGetChannelScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type GetChannelScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetChannelScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetChannelScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChannelSchedule{}, middleware.After)
 	if err != nil {
 		return err

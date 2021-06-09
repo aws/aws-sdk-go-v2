@@ -16,7 +16,7 @@ func (c *Client) UpdateThreatIntelSet(ctx context.Context, params *UpdateThreatI
 		params = &UpdateThreatIntelSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateThreatIntelSet", params, optFns, addOperationUpdateThreatIntelSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateThreatIntelSet", params, optFns, c.addOperationUpdateThreatIntelSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UpdateThreatIntelSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateThreatIntelSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateThreatIntelSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateThreatIntelSet{}, middleware.After)
 	if err != nil {
 		return err

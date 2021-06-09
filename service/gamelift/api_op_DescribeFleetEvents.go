@@ -31,7 +31,7 @@ func (c *Client) DescribeFleetEvents(ctx context.Context, params *DescribeFleetE
 		params = &DescribeFleetEventsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFleetEvents", params, optFns, addOperationDescribeFleetEventsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFleetEvents", params, optFns, c.addOperationDescribeFleetEventsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type DescribeFleetEventsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFleetEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFleetEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFleetEvents{}, middleware.After)
 	if err != nil {
 		return err

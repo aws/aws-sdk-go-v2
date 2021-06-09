@@ -20,7 +20,7 @@ func (c *Client) UntagLogGroup(ctx context.Context, params *UntagLogGroupInput, 
 		params = &UntagLogGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagLogGroup", params, optFns, addOperationUntagLogGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagLogGroup", params, optFns, c.addOperationUntagLogGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type UntagLogGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagLogGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagLogGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUntagLogGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeWorldTemplate(ctx context.Context, params *DescribeWorl
 		params = &DescribeWorldTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorldTemplate", params, optFns, addOperationDescribeWorldTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWorldTemplate", params, optFns, c.addOperationDescribeWorldTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DescribeWorldTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeWorldTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeWorldTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeWorldTemplate{}, middleware.After)
 	if err != nil {
 		return err

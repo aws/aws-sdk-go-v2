@@ -19,7 +19,7 @@ func (c *Client) DeleteExternalModel(ctx context.Context, params *DeleteExternal
 		params = &DeleteExternalModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteExternalModel", params, optFns, addOperationDeleteExternalModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteExternalModel", params, optFns, c.addOperationDeleteExternalModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteExternalModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteExternalModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteExternalModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteExternalModel{}, middleware.After)
 	if err != nil {
 		return err

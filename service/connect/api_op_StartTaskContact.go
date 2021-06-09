@@ -18,7 +18,7 @@ func (c *Client) StartTaskContact(ctx context.Context, params *StartTaskContactI
 		params = &StartTaskContactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartTaskContact", params, optFns, addOperationStartTaskContactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartTaskContact", params, optFns, c.addOperationStartTaskContactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type StartTaskContactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartTaskContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartTaskContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartTaskContact{}, middleware.After)
 	if err != nil {
 		return err

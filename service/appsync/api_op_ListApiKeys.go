@@ -20,7 +20,7 @@ func (c *Client) ListApiKeys(ctx context.Context, params *ListApiKeysInput, optF
 		params = &ListApiKeysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListApiKeys", params, optFns, addOperationListApiKeysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListApiKeys", params, optFns, c.addOperationListApiKeysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListApiKeysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListApiKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListApiKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApiKeys{}, middleware.After)
 	if err != nil {
 		return err

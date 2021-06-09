@@ -37,7 +37,7 @@ func (c *Client) TerminateWorkspaces(ctx context.Context, params *TerminateWorks
 		params = &TerminateWorkspacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TerminateWorkspaces", params, optFns, addOperationTerminateWorkspacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TerminateWorkspaces", params, optFns, c.addOperationTerminateWorkspacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type TerminateWorkspacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTerminateWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTerminateWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTerminateWorkspaces{}, middleware.After)
 	if err != nil {
 		return err

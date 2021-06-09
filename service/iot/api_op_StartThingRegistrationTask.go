@@ -16,7 +16,7 @@ func (c *Client) StartThingRegistrationTask(ctx context.Context, params *StartTh
 		params = &StartThingRegistrationTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartThingRegistrationTask", params, optFns, addOperationStartThingRegistrationTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartThingRegistrationTask", params, optFns, c.addOperationStartThingRegistrationTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type StartThingRegistrationTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartThingRegistrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartThingRegistrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartThingRegistrationTask{}, middleware.After)
 	if err != nil {
 		return err

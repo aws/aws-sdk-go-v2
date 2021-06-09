@@ -18,7 +18,7 @@ func (c *Client) ListTagsForDeliveryStream(ctx context.Context, params *ListTags
 		params = &ListTagsForDeliveryStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTagsForDeliveryStream", params, optFns, addOperationListTagsForDeliveryStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTagsForDeliveryStream", params, optFns, c.addOperationListTagsForDeliveryStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ListTagsForDeliveryStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTagsForDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTagsForDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTagsForDeliveryStream{}, middleware.After)
 	if err != nil {
 		return err

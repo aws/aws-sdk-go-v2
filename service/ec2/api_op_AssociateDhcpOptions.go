@@ -25,7 +25,7 @@ func (c *Client) AssociateDhcpOptions(ctx context.Context, params *AssociateDhcp
 		params = &AssociateDhcpOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateDhcpOptions", params, optFns, addOperationAssociateDhcpOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateDhcpOptions", params, optFns, c.addOperationAssociateDhcpOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type AssociateDhcpOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateDhcpOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateDhcpOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpAssociateDhcpOptions{}, middleware.After)
 	if err != nil {
 		return err

@@ -61,7 +61,7 @@ func (c *Client) GetSessionToken(ctx context.Context, params *GetSessionTokenInp
 		params = &GetSessionTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSessionToken", params, optFns, addOperationGetSessionTokenMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSessionToken", params, optFns, c.addOperationGetSessionTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -117,7 +117,7 @@ type GetSessionTokenOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSessionTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSessionTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetSessionToken{}, middleware.After)
 	if err != nil {
 		return err

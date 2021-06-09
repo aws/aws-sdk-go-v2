@@ -35,7 +35,7 @@ func (c *Client) DescribeCacheClusters(ctx context.Context, params *DescribeCach
 		params = &DescribeCacheClustersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCacheClusters", params, optFns, addOperationDescribeCacheClustersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCacheClusters", params, optFns, c.addOperationDescribeCacheClustersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type DescribeCacheClustersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCacheClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCacheClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeCacheClusters{}, middleware.After)
 	if err != nil {
 		return err

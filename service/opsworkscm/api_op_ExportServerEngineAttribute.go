@@ -23,7 +23,7 @@ func (c *Client) ExportServerEngineAttribute(ctx context.Context, params *Export
 		params = &ExportServerEngineAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExportServerEngineAttribute", params, optFns, addOperationExportServerEngineAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExportServerEngineAttribute", params, optFns, c.addOperationExportServerEngineAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type ExportServerEngineAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExportServerEngineAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExportServerEngineAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpExportServerEngineAttribute{}, middleware.After)
 	if err != nil {
 		return err

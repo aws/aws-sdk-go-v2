@@ -31,7 +31,7 @@ func (c *Client) GetAssetPropertyAggregates(ctx context.Context, params *GetAsse
 		params = &GetAssetPropertyAggregatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAssetPropertyAggregates", params, optFns, addOperationGetAssetPropertyAggregatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAssetPropertyAggregates", params, optFns, c.addOperationGetAssetPropertyAggregatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type GetAssetPropertyAggregatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAssetPropertyAggregatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAssetPropertyAggregatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssetPropertyAggregates{}, middleware.After)
 	if err != nil {
 		return err

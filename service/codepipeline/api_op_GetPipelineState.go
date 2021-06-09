@@ -20,7 +20,7 @@ func (c *Client) GetPipelineState(ctx context.Context, params *GetPipelineStateI
 		params = &GetPipelineStateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPipelineState", params, optFns, addOperationGetPipelineStateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPipelineState", params, optFns, c.addOperationGetPipelineStateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetPipelineStateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPipelineStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPipelineStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPipelineState{}, middleware.After)
 	if err != nil {
 		return err

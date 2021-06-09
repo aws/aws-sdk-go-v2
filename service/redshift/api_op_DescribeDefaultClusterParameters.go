@@ -22,7 +22,7 @@ func (c *Client) DescribeDefaultClusterParameters(ctx context.Context, params *D
 		params = &DescribeDefaultClusterParametersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDefaultClusterParameters", params, optFns, addOperationDescribeDefaultClusterParametersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDefaultClusterParameters", params, optFns, c.addOperationDescribeDefaultClusterParametersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type DescribeDefaultClusterParametersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDefaultClusterParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDefaultClusterParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDefaultClusterParameters{}, middleware.After)
 	if err != nil {
 		return err

@@ -26,7 +26,7 @@ func (c *Client) RunScheduledInstances(ctx context.Context, params *RunScheduled
 		params = &RunScheduledInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RunScheduledInstances", params, optFns, addOperationRunScheduledInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RunScheduledInstances", params, optFns, c.addOperationRunScheduledInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type RunScheduledInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRunScheduledInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRunScheduledInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpRunScheduledInstances{}, middleware.After)
 	if err != nil {
 		return err

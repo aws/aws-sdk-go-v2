@@ -21,7 +21,7 @@ func (c *Client) ListViolationEvents(ctx context.Context, params *ListViolationE
 		params = &ListViolationEventsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListViolationEvents", params, optFns, addOperationListViolationEventsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListViolationEvents", params, optFns, c.addOperationListViolationEventsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type ListViolationEventsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListViolationEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListViolationEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListViolationEvents{}, middleware.After)
 	if err != nil {
 		return err

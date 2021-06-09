@@ -18,7 +18,7 @@ func (c *Client) DescribeUsers(ctx context.Context, params *DescribeUsersInput, 
 		params = &DescribeUsersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeUsers", params, optFns, addOperationDescribeUsersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeUsers", params, optFns, c.addOperationDescribeUsersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DescribeUsersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeUsers{}, middleware.After)
 	if err != nil {
 		return err

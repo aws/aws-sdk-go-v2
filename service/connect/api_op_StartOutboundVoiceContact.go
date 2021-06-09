@@ -28,7 +28,7 @@ func (c *Client) StartOutboundVoiceContact(ctx context.Context, params *StartOut
 		params = &StartOutboundVoiceContactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartOutboundVoiceContact", params, optFns, addOperationStartOutboundVoiceContactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartOutboundVoiceContact", params, optFns, c.addOperationStartOutboundVoiceContactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type StartOutboundVoiceContactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartOutboundVoiceContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartOutboundVoiceContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartOutboundVoiceContact{}, middleware.After)
 	if err != nil {
 		return err

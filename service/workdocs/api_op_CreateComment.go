@@ -17,7 +17,7 @@ func (c *Client) CreateComment(ctx context.Context, params *CreateCommentInput, 
 		params = &CreateCommentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateComment", params, optFns, addOperationCreateCommentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateComment", params, optFns, c.addOperationCreateCommentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type CreateCommentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateComment{}, middleware.After)
 	if err != nil {
 		return err

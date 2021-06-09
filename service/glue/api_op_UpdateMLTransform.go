@@ -21,7 +21,7 @@ func (c *Client) UpdateMLTransform(ctx context.Context, params *UpdateMLTransfor
 		params = &UpdateMLTransformInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateMLTransform", params, optFns, addOperationUpdateMLTransformMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMLTransform", params, optFns, c.addOperationUpdateMLTransformMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type UpdateMLTransformOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMLTransform{}, middleware.After)
 	if err != nil {
 		return err

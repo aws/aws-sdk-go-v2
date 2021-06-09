@@ -18,7 +18,7 @@ func (c *Client) ListGeofenceCollections(ctx context.Context, params *ListGeofen
 		params = &ListGeofenceCollectionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListGeofenceCollections", params, optFns, addOperationListGeofenceCollectionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListGeofenceCollections", params, optFns, c.addOperationListGeofenceCollectionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListGeofenceCollectionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListGeofenceCollectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListGeofenceCollectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGeofenceCollections{}, middleware.After)
 	if err != nil {
 		return err

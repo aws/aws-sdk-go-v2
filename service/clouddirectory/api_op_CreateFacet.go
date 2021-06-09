@@ -18,7 +18,7 @@ func (c *Client) CreateFacet(ctx context.Context, params *CreateFacetInput, optF
 		params = &CreateFacetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFacet", params, optFns, addOperationCreateFacetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFacet", params, optFns, c.addOperationCreateFacetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type CreateFacetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFacet{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) PutLabel(ctx context.Context, params *PutLabelInput, optFns ...
 		params = &PutLabelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutLabel", params, optFns, addOperationPutLabelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutLabel", params, optFns, c.addOperationPutLabelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type PutLabelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutLabel{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) UpdateStream(ctx context.Context, params *UpdateStreamInput, op
 		params = &UpdateStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateStream", params, optFns, addOperationUpdateStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateStream", params, optFns, c.addOperationUpdateStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type UpdateStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateStream{}, middleware.After)
 	if err != nil {
 		return err

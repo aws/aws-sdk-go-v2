@@ -18,7 +18,7 @@ func (c *Client) DisassociateMacSecKey(ctx context.Context, params *Disassociate
 		params = &DisassociateMacSecKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateMacSecKey", params, optFns, addOperationDisassociateMacSecKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateMacSecKey", params, optFns, c.addOperationDisassociateMacSecKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DisassociateMacSecKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateMacSecKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateMacSecKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateMacSecKey{}, middleware.After)
 	if err != nil {
 		return err

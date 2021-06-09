@@ -28,7 +28,7 @@ func (c *Client) AuthorizeDBSecurityGroupIngress(ctx context.Context, params *Au
 		params = &AuthorizeDBSecurityGroupIngressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AuthorizeDBSecurityGroupIngress", params, optFns, addOperationAuthorizeDBSecurityGroupIngressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AuthorizeDBSecurityGroupIngress", params, optFns, c.addOperationAuthorizeDBSecurityGroupIngressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type AuthorizeDBSecurityGroupIngressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAuthorizeDBSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAuthorizeDBSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAuthorizeDBSecurityGroupIngress{}, middleware.After)
 	if err != nil {
 		return err

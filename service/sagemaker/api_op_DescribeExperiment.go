@@ -18,7 +18,7 @@ func (c *Client) DescribeExperiment(ctx context.Context, params *DescribeExperim
 		params = &DescribeExperimentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeExperiment", params, optFns, addOperationDescribeExperimentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeExperiment", params, optFns, c.addOperationDescribeExperimentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DescribeExperimentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeExperiment{}, middleware.After)
 	if err != nil {
 		return err

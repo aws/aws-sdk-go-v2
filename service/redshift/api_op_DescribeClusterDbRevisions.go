@@ -18,7 +18,7 @@ func (c *Client) DescribeClusterDbRevisions(ctx context.Context, params *Describ
 		params = &DescribeClusterDbRevisionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeClusterDbRevisions", params, optFns, addOperationDescribeClusterDbRevisionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeClusterDbRevisions", params, optFns, c.addOperationDescribeClusterDbRevisionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type DescribeClusterDbRevisionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeClusterDbRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeClusterDbRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeClusterDbRevisions{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) MoveAddressToVpc(ctx context.Context, params *MoveAddressToVpcI
 		params = &MoveAddressToVpcInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MoveAddressToVpc", params, optFns, addOperationMoveAddressToVpcMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MoveAddressToVpc", params, optFns, c.addOperationMoveAddressToVpcMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type MoveAddressToVpcOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMoveAddressToVpcMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMoveAddressToVpcMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpMoveAddressToVpc{}, middleware.After)
 	if err != nil {
 		return err

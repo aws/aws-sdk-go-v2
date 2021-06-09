@@ -18,7 +18,7 @@ func (c *Client) DeleteWorkspaceBundle(ctx context.Context, params *DeleteWorksp
 		params = &DeleteWorkspaceBundleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkspaceBundle", params, optFns, addOperationDeleteWorkspaceBundleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkspaceBundle", params, optFns, c.addOperationDeleteWorkspaceBundleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteWorkspaceBundleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteWorkspaceBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteWorkspaceBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWorkspaceBundle{}, middleware.After)
 	if err != nil {
 		return err

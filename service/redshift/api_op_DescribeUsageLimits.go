@@ -34,7 +34,7 @@ func (c *Client) DescribeUsageLimits(ctx context.Context, params *DescribeUsageL
 		params = &DescribeUsageLimitsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeUsageLimits", params, optFns, addOperationDescribeUsageLimitsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeUsageLimits", params, optFns, c.addOperationDescribeUsageLimitsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type DescribeUsageLimitsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeUsageLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeUsageLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeUsageLimits{}, middleware.After)
 	if err != nil {
 		return err

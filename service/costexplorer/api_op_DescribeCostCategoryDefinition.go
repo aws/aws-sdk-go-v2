@@ -21,7 +21,7 @@ func (c *Client) DescribeCostCategoryDefinition(ctx context.Context, params *Des
 		params = &DescribeCostCategoryDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCostCategoryDefinition", params, optFns, addOperationDescribeCostCategoryDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCostCategoryDefinition", params, optFns, c.addOperationDescribeCostCategoryDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DescribeCostCategoryDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCostCategoryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCostCategoryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCostCategoryDefinition{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) GetDomainPermissionsPolicy(ctx context.Context, params *GetDoma
 		params = &GetDomainPermissionsPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDomainPermissionsPolicy", params, optFns, addOperationGetDomainPermissionsPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDomainPermissionsPolicy", params, optFns, c.addOperationGetDomainPermissionsPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetDomainPermissionsPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDomainPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDomainPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainPermissionsPolicy{}, middleware.After)
 	if err != nil {
 		return err

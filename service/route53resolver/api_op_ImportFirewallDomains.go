@@ -28,7 +28,7 @@ func (c *Client) ImportFirewallDomains(ctx context.Context, params *ImportFirewa
 		params = &ImportFirewallDomainsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportFirewallDomains", params, optFns, addOperationImportFirewallDomainsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportFirewallDomains", params, optFns, c.addOperationImportFirewallDomainsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type ImportFirewallDomainsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportFirewallDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportFirewallDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportFirewallDomains{}, middleware.After)
 	if err != nil {
 		return err

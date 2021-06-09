@@ -45,7 +45,7 @@ func (c *Client) DescribeInstanceRefreshes(ctx context.Context, params *Describe
 		params = &DescribeInstanceRefreshesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInstanceRefreshes", params, optFns, addOperationDescribeInstanceRefreshesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInstanceRefreshes", params, optFns, c.addOperationDescribeInstanceRefreshesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type DescribeInstanceRefreshesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInstanceRefreshesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInstanceRefreshesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeInstanceRefreshes{}, middleware.After)
 	if err != nil {
 		return err

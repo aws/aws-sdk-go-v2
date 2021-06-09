@@ -17,7 +17,7 @@ func (c *Client) AddFlowVpcInterfaces(ctx context.Context, params *AddFlowVpcInt
 		params = &AddFlowVpcInterfacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddFlowVpcInterfaces", params, optFns, addOperationAddFlowVpcInterfacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddFlowVpcInterfaces", params, optFns, c.addOperationAddFlowVpcInterfacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type AddFlowVpcInterfacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddFlowVpcInterfacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddFlowVpcInterfacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddFlowVpcInterfaces{}, middleware.After)
 	if err != nil {
 		return err

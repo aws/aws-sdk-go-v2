@@ -17,7 +17,7 @@ func (c *Client) DescribeHub(ctx context.Context, params *DescribeHubInput, optF
 		params = &DescribeHubInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeHub", params, optFns, addOperationDescribeHubMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeHub", params, optFns, c.addOperationDescribeHubMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DescribeHubOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeHubMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeHubMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeHub{}, middleware.After)
 	if err != nil {
 		return err

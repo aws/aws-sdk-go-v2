@@ -17,7 +17,7 @@ func (c *Client) UpdatePackage(ctx context.Context, params *UpdatePackageInput, 
 		params = &UpdatePackageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePackage", params, optFns, addOperationUpdatePackageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePackage", params, optFns, c.addOperationUpdatePackageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type UpdatePackageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePackage{}, middleware.After)
 	if err != nil {
 		return err

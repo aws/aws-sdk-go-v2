@@ -17,7 +17,7 @@ func (c *Client) CreateDBProxy(ctx context.Context, params *CreateDBProxyInput, 
 		params = &CreateDBProxyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDBProxy", params, optFns, addOperationCreateDBProxyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDBProxy", params, optFns, c.addOperationCreateDBProxyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ type CreateDBProxyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDBProxyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDBProxyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBProxy{}, middleware.After)
 	if err != nil {
 		return err

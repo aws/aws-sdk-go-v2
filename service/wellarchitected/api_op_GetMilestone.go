@@ -17,7 +17,7 @@ func (c *Client) GetMilestone(ctx context.Context, params *GetMilestoneInput, op
 		params = &GetMilestoneInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMilestone", params, optFns, addOperationGetMilestoneMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMilestone", params, optFns, c.addOperationGetMilestoneMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetMilestoneOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMilestoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMilestoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMilestone{}, middleware.After)
 	if err != nil {
 		return err

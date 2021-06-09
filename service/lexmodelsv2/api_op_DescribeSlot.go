@@ -18,7 +18,7 @@ func (c *Client) DescribeSlot(ctx context.Context, params *DescribeSlotInput, op
 		params = &DescribeSlotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSlot", params, optFns, addOperationDescribeSlotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSlot", params, optFns, c.addOperationDescribeSlotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type DescribeSlotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSlotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSlotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSlot{}, middleware.After)
 	if err != nil {
 		return err

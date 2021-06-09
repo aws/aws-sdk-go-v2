@@ -18,7 +18,7 @@ func (c *Client) ListObjectAttributes(ctx context.Context, params *ListObjectAtt
 		params = &ListObjectAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListObjectAttributes", params, optFns, addOperationListObjectAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListObjectAttributes", params, optFns, c.addOperationListObjectAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type ListObjectAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListObjectAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListObjectAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListObjectAttributes{}, middleware.After)
 	if err != nil {
 		return err

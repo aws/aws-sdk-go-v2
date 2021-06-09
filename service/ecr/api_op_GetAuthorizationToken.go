@@ -25,7 +25,7 @@ func (c *Client) GetAuthorizationToken(ctx context.Context, params *GetAuthoriza
 		params = &GetAuthorizationTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAuthorizationToken", params, optFns, addOperationGetAuthorizationTokenMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAuthorizationToken", params, optFns, c.addOperationGetAuthorizationTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetAuthorizationTokenOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAuthorizationTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAuthorizationTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAuthorizationToken{}, middleware.After)
 	if err != nil {
 		return err

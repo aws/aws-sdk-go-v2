@@ -22,7 +22,7 @@ func (c *Client) GetHostedZoneLimit(ctx context.Context, params *GetHostedZoneLi
 		params = &GetHostedZoneLimitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetHostedZoneLimit", params, optFns, addOperationGetHostedZoneLimitMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetHostedZoneLimit", params, optFns, c.addOperationGetHostedZoneLimitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type GetHostedZoneLimitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetHostedZoneLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetHostedZoneLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetHostedZoneLimit{}, middleware.After)
 	if err != nil {
 		return err

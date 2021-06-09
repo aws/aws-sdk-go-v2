@@ -17,7 +17,7 @@ func (c *Client) DeleteAppInstance(ctx context.Context, params *DeleteAppInstanc
 		params = &DeleteAppInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAppInstance", params, optFns, addOperationDeleteAppInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAppInstance", params, optFns, c.addOperationDeleteAppInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteAppInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAppInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAppInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAppInstance{}, middleware.After)
 	if err != nil {
 		return err

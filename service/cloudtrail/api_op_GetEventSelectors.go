@@ -33,7 +33,7 @@ func (c *Client) GetEventSelectors(ctx context.Context, params *GetEventSelector
 		params = &GetEventSelectorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEventSelectors", params, optFns, addOperationGetEventSelectorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEventSelectors", params, optFns, c.addOperationGetEventSelectorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type GetEventSelectorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEventSelectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEventSelectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEventSelectors{}, middleware.After)
 	if err != nil {
 		return err

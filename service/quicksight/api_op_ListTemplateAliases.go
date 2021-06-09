@@ -18,7 +18,7 @@ func (c *Client) ListTemplateAliases(ctx context.Context, params *ListTemplateAl
 		params = &ListTemplateAliasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTemplateAliases", params, optFns, addOperationListTemplateAliasesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTemplateAliases", params, optFns, c.addOperationListTemplateAliasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ListTemplateAliasesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTemplateAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTemplateAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTemplateAliases{}, middleware.After)
 	if err != nil {
 		return err

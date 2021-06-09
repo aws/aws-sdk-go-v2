@@ -19,7 +19,7 @@ func (c *Client) DescribeLocalGatewayRouteTables(ctx context.Context, params *De
 		params = &DescribeLocalGatewayRouteTablesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLocalGatewayRouteTables", params, optFns, addOperationDescribeLocalGatewayRouteTablesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLocalGatewayRouteTables", params, optFns, c.addOperationDescribeLocalGatewayRouteTablesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DescribeLocalGatewayRouteTablesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLocalGatewayRouteTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLocalGatewayRouteTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeLocalGatewayRouteTables{}, middleware.After)
 	if err != nil {
 		return err

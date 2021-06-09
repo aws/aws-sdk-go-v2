@@ -18,7 +18,7 @@ func (c *Client) GetProposal(ctx context.Context, params *GetProposalInput, optF
 		params = &GetProposalInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetProposal", params, optFns, addOperationGetProposalMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetProposal", params, optFns, c.addOperationGetProposalMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetProposalOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProposal{}, middleware.After)
 	if err != nil {
 		return err

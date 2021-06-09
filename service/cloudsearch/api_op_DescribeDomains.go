@@ -23,7 +23,7 @@ func (c *Client) DescribeDomains(ctx context.Context, params *DescribeDomainsInp
 		params = &DescribeDomainsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDomains", params, optFns, addOperationDescribeDomainsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDomains", params, optFns, c.addOperationDescribeDomainsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeDomainsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDomains{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CheckoutBorrowLicense(ctx context.Context, params *CheckoutBorr
 		params = &CheckoutBorrowLicenseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CheckoutBorrowLicense", params, optFns, addOperationCheckoutBorrowLicenseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CheckoutBorrowLicense", params, optFns, c.addOperationCheckoutBorrowLicenseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type CheckoutBorrowLicenseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCheckoutBorrowLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCheckoutBorrowLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckoutBorrowLicense{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) BatchGetJobs(ctx context.Context, params *BatchGetJobsInput, op
 		params = &BatchGetJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetJobs", params, optFns, addOperationBatchGetJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetJobs", params, optFns, c.addOperationBatchGetJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type BatchGetJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetJobs{}, middleware.After)
 	if err != nil {
 		return err

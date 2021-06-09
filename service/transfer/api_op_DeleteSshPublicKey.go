@@ -17,7 +17,7 @@ func (c *Client) DeleteSshPublicKey(ctx context.Context, params *DeleteSshPublic
 		params = &DeleteSshPublicKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSshPublicKey", params, optFns, addOperationDeleteSshPublicKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSshPublicKey", params, optFns, c.addOperationDeleteSshPublicKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteSshPublicKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSshPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSshPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSshPublicKey{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DescribeTrails(ctx context.Context, params *DescribeTrailsInput
 		params = &DescribeTrailsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTrails", params, optFns, addOperationDescribeTrailsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTrails", params, optFns, c.addOperationDescribeTrailsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DescribeTrailsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTrailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTrailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTrails{}, middleware.After)
 	if err != nil {
 		return err

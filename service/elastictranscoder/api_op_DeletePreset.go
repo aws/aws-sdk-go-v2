@@ -17,7 +17,7 @@ func (c *Client) DeletePreset(ctx context.Context, params *DeletePresetInput, op
 		params = &DeletePresetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePreset", params, optFns, addOperationDeletePresetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePreset", params, optFns, c.addOperationDeletePresetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeletePresetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePresetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePresetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePreset{}, middleware.After)
 	if err != nil {
 		return err

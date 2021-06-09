@@ -17,7 +17,7 @@ func (c *Client) DetachSecurityProfile(ctx context.Context, params *DetachSecuri
 		params = &DetachSecurityProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachSecurityProfile", params, optFns, addOperationDetachSecurityProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachSecurityProfile", params, optFns, c.addOperationDetachSecurityProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DetachSecurityProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDetachSecurityProfile{}, middleware.After)
 	if err != nil {
 		return err

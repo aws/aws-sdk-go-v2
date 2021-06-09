@@ -19,7 +19,7 @@ func (c *Client) CheckSchemaVersionValidity(ctx context.Context, params *CheckSc
 		params = &CheckSchemaVersionValidityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CheckSchemaVersionValidity", params, optFns, addOperationCheckSchemaVersionValidityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CheckSchemaVersionValidity", params, optFns, c.addOperationCheckSchemaVersionValidityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type CheckSchemaVersionValidityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCheckSchemaVersionValidityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCheckSchemaVersionValidityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckSchemaVersionValidity{}, middleware.After)
 	if err != nil {
 		return err

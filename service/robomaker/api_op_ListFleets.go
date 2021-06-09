@@ -19,7 +19,7 @@ func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns
 		params = &ListFleetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFleets", params, optFns, addOperationListFleetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFleets", params, optFns, c.addOperationListFleetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type ListFleetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFleets{}, middleware.After)
 	if err != nil {
 		return err

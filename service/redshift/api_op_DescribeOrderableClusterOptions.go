@@ -26,7 +26,7 @@ func (c *Client) DescribeOrderableClusterOptions(ctx context.Context, params *De
 		params = &DescribeOrderableClusterOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeOrderableClusterOptions", params, optFns, addOperationDescribeOrderableClusterOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeOrderableClusterOptions", params, optFns, c.addOperationDescribeOrderableClusterOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type DescribeOrderableClusterOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeOrderableClusterOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeOrderableClusterOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeOrderableClusterOptions{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) ImportApplicationUsage(ctx context.Context, params *ImportAppli
 		params = &ImportApplicationUsageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportApplicationUsage", params, optFns, addOperationImportApplicationUsageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportApplicationUsage", params, optFns, c.addOperationImportApplicationUsageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type ImportApplicationUsageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportApplicationUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportApplicationUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportApplicationUsage{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) GetUsagePlans(ctx context.Context, params *GetUsagePlansInput, 
 		params = &GetUsagePlansInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUsagePlans", params, optFns, addOperationGetUsagePlansMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetUsagePlans", params, optFns, c.addOperationGetUsagePlansMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetUsagePlansOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetUsagePlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetUsagePlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUsagePlans{}, middleware.After)
 	if err != nil {
 		return err

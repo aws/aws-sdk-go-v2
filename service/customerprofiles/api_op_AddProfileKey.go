@@ -19,7 +19,7 @@ func (c *Client) AddProfileKey(ctx context.Context, params *AddProfileKeyInput, 
 		params = &AddProfileKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddProfileKey", params, optFns, addOperationAddProfileKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddProfileKey", params, optFns, c.addOperationAddProfileKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type AddProfileKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddProfileKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddProfileKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddProfileKey{}, middleware.After)
 	if err != nil {
 		return err

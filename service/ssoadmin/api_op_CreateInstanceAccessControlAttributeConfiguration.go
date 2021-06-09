@@ -20,7 +20,7 @@ func (c *Client) CreateInstanceAccessControlAttributeConfiguration(ctx context.C
 		params = &CreateInstanceAccessControlAttributeConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateInstanceAccessControlAttributeConfiguration", params, optFns, addOperationCreateInstanceAccessControlAttributeConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateInstanceAccessControlAttributeConfiguration", params, optFns, c.addOperationCreateInstanceAccessControlAttributeConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type CreateInstanceAccessControlAttributeConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateInstanceAccessControlAttributeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateInstanceAccessControlAttributeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateInstanceAccessControlAttributeConfiguration{}, middleware.After)
 	if err != nil {
 		return err

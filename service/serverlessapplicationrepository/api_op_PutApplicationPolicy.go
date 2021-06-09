@@ -20,7 +20,7 @@ func (c *Client) PutApplicationPolicy(ctx context.Context, params *PutApplicatio
 		params = &PutApplicationPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutApplicationPolicy", params, optFns, addOperationPutApplicationPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutApplicationPolicy", params, optFns, c.addOperationPutApplicationPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type PutApplicationPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutApplicationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutApplicationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutApplicationPolicy{}, middleware.After)
 	if err != nil {
 		return err

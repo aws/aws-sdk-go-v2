@@ -18,7 +18,7 @@ func (c *Client) ListAttachedPolicies(ctx context.Context, params *ListAttachedP
 		params = &ListAttachedPoliciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAttachedPolicies", params, optFns, addOperationListAttachedPoliciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAttachedPolicies", params, optFns, c.addOperationListAttachedPoliciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type ListAttachedPoliciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAttachedPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAttachedPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAttachedPolicies{}, middleware.After)
 	if err != nil {
 		return err

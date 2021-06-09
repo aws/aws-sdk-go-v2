@@ -18,7 +18,7 @@ func (c *Client) DescribeRule(ctx context.Context, params *DescribeRuleInput, op
 		params = &DescribeRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRule", params, optFns, addOperationDescribeRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRule", params, optFns, c.addOperationDescribeRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type DescribeRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRule{}, middleware.After)
 	if err != nil {
 		return err

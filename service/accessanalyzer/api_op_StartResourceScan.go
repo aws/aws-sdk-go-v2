@@ -16,7 +16,7 @@ func (c *Client) StartResourceScan(ctx context.Context, params *StartResourceSca
 		params = &StartResourceScanInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartResourceScan", params, optFns, addOperationStartResourceScanMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartResourceScan", params, optFns, c.addOperationStartResourceScanMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StartResourceScanOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartResourceScanMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartResourceScanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartResourceScan{}, middleware.After)
 	if err != nil {
 		return err

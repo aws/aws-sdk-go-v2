@@ -18,7 +18,7 @@ func (c *Client) ProvisionPermissionSet(ctx context.Context, params *ProvisionPe
 		params = &ProvisionPermissionSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ProvisionPermissionSet", params, optFns, addOperationProvisionPermissionSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ProvisionPermissionSet", params, optFns, c.addOperationProvisionPermissionSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type ProvisionPermissionSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationProvisionPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationProvisionPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpProvisionPermissionSet{}, middleware.After)
 	if err != nil {
 		return err

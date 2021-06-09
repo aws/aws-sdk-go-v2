@@ -16,7 +16,7 @@ func (c *Client) GetDocumentationPart(ctx context.Context, params *GetDocumentat
 		params = &GetDocumentationPartInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDocumentationPart", params, optFns, addOperationGetDocumentationPartMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDocumentationPart", params, optFns, c.addOperationGetDocumentationPartMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type GetDocumentationPartOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDocumentationPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDocumentationPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDocumentationPart{}, middleware.After)
 	if err != nil {
 		return err

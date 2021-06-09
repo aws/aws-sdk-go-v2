@@ -50,7 +50,7 @@ func (c *Client) ListOpenWorkflowExecutions(ctx context.Context, params *ListOpe
 		params = &ListOpenWorkflowExecutionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListOpenWorkflowExecutions", params, optFns, addOperationListOpenWorkflowExecutionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListOpenWorkflowExecutions", params, optFns, c.addOperationListOpenWorkflowExecutionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -125,7 +125,7 @@ type ListOpenWorkflowExecutionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListOpenWorkflowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListOpenWorkflowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListOpenWorkflowExecutions{}, middleware.After)
 	if err != nil {
 		return err

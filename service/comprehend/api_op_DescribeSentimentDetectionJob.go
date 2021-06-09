@@ -18,7 +18,7 @@ func (c *Client) DescribeSentimentDetectionJob(ctx context.Context, params *Desc
 		params = &DescribeSentimentDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSentimentDetectionJob", params, optFns, addOperationDescribeSentimentDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSentimentDetectionJob", params, optFns, c.addOperationDescribeSentimentDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeSentimentDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSentimentDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSentimentDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSentimentDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

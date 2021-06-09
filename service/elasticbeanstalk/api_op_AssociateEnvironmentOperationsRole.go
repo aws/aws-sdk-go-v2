@@ -21,7 +21,7 @@ func (c *Client) AssociateEnvironmentOperationsRole(ctx context.Context, params 
 		params = &AssociateEnvironmentOperationsRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateEnvironmentOperationsRole", params, optFns, addOperationAssociateEnvironmentOperationsRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateEnvironmentOperationsRole", params, optFns, c.addOperationAssociateEnvironmentOperationsRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type AssociateEnvironmentOperationsRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateEnvironmentOperationsRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateEnvironmentOperationsRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAssociateEnvironmentOperationsRole{}, middleware.After)
 	if err != nil {
 		return err

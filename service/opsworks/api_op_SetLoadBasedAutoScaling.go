@@ -27,7 +27,7 @@ func (c *Client) SetLoadBasedAutoScaling(ctx context.Context, params *SetLoadBas
 		params = &SetLoadBasedAutoScalingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetLoadBasedAutoScaling", params, optFns, addOperationSetLoadBasedAutoScalingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetLoadBasedAutoScaling", params, optFns, c.addOperationSetLoadBasedAutoScalingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type SetLoadBasedAutoScalingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetLoadBasedAutoScalingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetLoadBasedAutoScalingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetLoadBasedAutoScaling{}, middleware.After)
 	if err != nil {
 		return err

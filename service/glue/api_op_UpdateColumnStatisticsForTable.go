@@ -18,7 +18,7 @@ func (c *Client) UpdateColumnStatisticsForTable(ctx context.Context, params *Upd
 		params = &UpdateColumnStatisticsForTableInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateColumnStatisticsForTable", params, optFns, addOperationUpdateColumnStatisticsForTableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateColumnStatisticsForTable", params, optFns, c.addOperationUpdateColumnStatisticsForTableMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type UpdateColumnStatisticsForTableOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateColumnStatisticsForTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateColumnStatisticsForTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateColumnStatisticsForTable{}, middleware.After)
 	if err != nil {
 		return err

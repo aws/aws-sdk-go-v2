@@ -17,7 +17,7 @@ func (c *Client) ListVerifiedEmailAddresses(ctx context.Context, params *ListVer
 		params = &ListVerifiedEmailAddressesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListVerifiedEmailAddresses", params, optFns, addOperationListVerifiedEmailAddressesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListVerifiedEmailAddresses", params, optFns, c.addOperationListVerifiedEmailAddressesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type ListVerifiedEmailAddressesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListVerifiedEmailAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListVerifiedEmailAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListVerifiedEmailAddresses{}, middleware.After)
 	if err != nil {
 		return err

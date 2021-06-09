@@ -20,7 +20,7 @@ func (c *Client) CreatePatchBaseline(ctx context.Context, params *CreatePatchBas
 		params = &CreatePatchBaselineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePatchBaseline", params, optFns, addOperationCreatePatchBaselineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePatchBaseline", params, optFns, c.addOperationCreatePatchBaselineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -121,7 +121,7 @@ type CreatePatchBaselineOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePatchBaseline{}, middleware.After)
 	if err != nil {
 		return err

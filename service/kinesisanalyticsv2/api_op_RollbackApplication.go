@@ -23,7 +23,7 @@ func (c *Client) RollbackApplication(ctx context.Context, params *RollbackApplic
 		params = &RollbackApplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RollbackApplication", params, optFns, addOperationRollbackApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RollbackApplication", params, optFns, c.addOperationRollbackApplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type RollbackApplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRollbackApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRollbackApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRollbackApplication{}, middleware.After)
 	if err != nil {
 		return err

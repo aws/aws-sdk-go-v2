@@ -20,7 +20,7 @@ func (c *Client) UpdateCanary(ctx context.Context, params *UpdateCanaryInput, op
 		params = &UpdateCanaryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateCanary", params, optFns, addOperationUpdateCanaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateCanary", params, optFns, c.addOperationUpdateCanaryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ type UpdateCanaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCanary{}, middleware.After)
 	if err != nil {
 		return err

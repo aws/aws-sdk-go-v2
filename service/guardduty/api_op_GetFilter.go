@@ -17,7 +17,7 @@ func (c *Client) GetFilter(ctx context.Context, params *GetFilterInput, optFns .
 		params = &GetFilterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFilter", params, optFns, addOperationGetFilterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFilter", params, optFns, c.addOperationGetFilterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetFilterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFilter{}, middleware.After)
 	if err != nil {
 		return err

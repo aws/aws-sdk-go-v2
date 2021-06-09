@@ -20,7 +20,7 @@ func (c *Client) PutVoiceConnectorStreamingConfiguration(ctx context.Context, pa
 		params = &PutVoiceConnectorStreamingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutVoiceConnectorStreamingConfiguration", params, optFns, addOperationPutVoiceConnectorStreamingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutVoiceConnectorStreamingConfiguration", params, optFns, c.addOperationPutVoiceConnectorStreamingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type PutVoiceConnectorStreamingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutVoiceConnectorStreamingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutVoiceConnectorStreamingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVoiceConnectorStreamingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

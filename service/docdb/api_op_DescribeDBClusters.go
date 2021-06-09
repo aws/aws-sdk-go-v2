@@ -23,7 +23,7 @@ func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClust
 		params = &DescribeDBClustersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDBClusters", params, optFns, addOperationDescribeDBClustersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDBClusters", params, optFns, c.addOperationDescribeDBClustersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type DescribeDBClustersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDBClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDBClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBClusters{}, middleware.After)
 	if err != nil {
 		return err

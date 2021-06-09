@@ -21,7 +21,7 @@ func (c *Client) GetSerialConsoleAccessStatus(ctx context.Context, params *GetSe
 		params = &GetSerialConsoleAccessStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSerialConsoleAccessStatus", params, optFns, addOperationGetSerialConsoleAccessStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSerialConsoleAccessStatus", params, optFns, c.addOperationGetSerialConsoleAccessStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetSerialConsoleAccessStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSerialConsoleAccessStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSerialConsoleAccessStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpGetSerialConsoleAccessStatus{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) StopMonitoringMembers(ctx context.Context, params *StopMonitori
 		params = &StopMonitoringMembersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopMonitoringMembers", params, optFns, addOperationStopMonitoringMembersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopMonitoringMembers", params, optFns, c.addOperationStopMonitoringMembersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type StopMonitoringMembersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopMonitoringMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopMonitoringMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopMonitoringMembers{}, middleware.After)
 	if err != nil {
 		return err

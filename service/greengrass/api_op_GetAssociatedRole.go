@@ -16,7 +16,7 @@ func (c *Client) GetAssociatedRole(ctx context.Context, params *GetAssociatedRol
 		params = &GetAssociatedRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAssociatedRole", params, optFns, addOperationGetAssociatedRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAssociatedRole", params, optFns, c.addOperationGetAssociatedRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetAssociatedRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAssociatedRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAssociatedRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssociatedRole{}, middleware.After)
 	if err != nil {
 		return err

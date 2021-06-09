@@ -24,7 +24,7 @@ func (c *Client) GetUsageStatistics(ctx context.Context, params *GetUsageStatist
 		params = &GetUsageStatisticsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUsageStatistics", params, optFns, addOperationGetUsageStatisticsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetUsageStatistics", params, optFns, c.addOperationGetUsageStatisticsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type GetUsageStatisticsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetUsageStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetUsageStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUsageStatistics{}, middleware.After)
 	if err != nil {
 		return err

@@ -26,7 +26,7 @@ func (c *Client) StartReplay(ctx context.Context, params *StartReplayInput, optF
 		params = &StartReplayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartReplay", params, optFns, addOperationStartReplayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartReplay", params, optFns, c.addOperationStartReplayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type StartReplayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartReplayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartReplayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartReplay{}, middleware.After)
 	if err != nil {
 		return err

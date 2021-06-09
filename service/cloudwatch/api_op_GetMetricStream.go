@@ -18,7 +18,7 @@ func (c *Client) GetMetricStream(ctx context.Context, params *GetMetricStreamInp
 		params = &GetMetricStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMetricStream", params, optFns, addOperationGetMetricStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMetricStream", params, optFns, c.addOperationGetMetricStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type GetMetricStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMetricStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMetricStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetMetricStream{}, middleware.After)
 	if err != nil {
 		return err

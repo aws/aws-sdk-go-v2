@@ -23,7 +23,7 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 		params = &CreateAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAlias", params, optFns, addOperationCreateAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAlias", params, optFns, c.addOperationCreateAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ type CreateAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAlias{}, middleware.After)
 	if err != nil {
 		return err

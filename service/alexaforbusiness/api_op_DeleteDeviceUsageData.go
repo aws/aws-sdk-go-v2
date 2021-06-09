@@ -20,7 +20,7 @@ func (c *Client) DeleteDeviceUsageData(ctx context.Context, params *DeleteDevice
 		params = &DeleteDeviceUsageDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDeviceUsageData", params, optFns, addOperationDeleteDeviceUsageDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDeviceUsageData", params, optFns, c.addOperationDeleteDeviceUsageDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteDeviceUsageDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDeviceUsageDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDeviceUsageDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDeviceUsageData{}, middleware.After)
 	if err != nil {
 		return err

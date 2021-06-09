@@ -17,7 +17,7 @@ func (c *Client) UpdateOriginEndpoint(ctx context.Context, params *UpdateOriginE
 		params = &UpdateOriginEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateOriginEndpoint", params, optFns, addOperationUpdateOriginEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateOriginEndpoint", params, optFns, c.addOperationUpdateOriginEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -137,7 +137,7 @@ type UpdateOriginEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateOriginEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateOriginEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateOriginEndpoint{}, middleware.After)
 	if err != nil {
 		return err

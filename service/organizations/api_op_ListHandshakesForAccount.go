@@ -26,7 +26,7 @@ func (c *Client) ListHandshakesForAccount(ctx context.Context, params *ListHands
 		params = &ListHandshakesForAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListHandshakesForAccount", params, optFns, addOperationListHandshakesForAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListHandshakesForAccount", params, optFns, c.addOperationListHandshakesForAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type ListHandshakesForAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListHandshakesForAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListHandshakesForAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHandshakesForAccount{}, middleware.After)
 	if err != nil {
 		return err

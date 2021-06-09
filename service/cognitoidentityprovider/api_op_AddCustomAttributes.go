@@ -17,7 +17,7 @@ func (c *Client) AddCustomAttributes(ctx context.Context, params *AddCustomAttri
 		params = &AddCustomAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddCustomAttributes", params, optFns, addOperationAddCustomAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddCustomAttributes", params, optFns, c.addOperationAddCustomAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type AddCustomAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddCustomAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddCustomAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddCustomAttributes{}, middleware.After)
 	if err != nil {
 		return err

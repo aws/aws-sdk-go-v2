@@ -19,7 +19,7 @@ func (c *Client) MergePullRequestBySquash(ctx context.Context, params *MergePull
 		params = &MergePullRequestBySquashInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MergePullRequestBySquash", params, optFns, addOperationMergePullRequestBySquashMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MergePullRequestBySquash", params, optFns, c.addOperationMergePullRequestBySquashMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type MergePullRequestBySquashOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMergePullRequestBySquashMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMergePullRequestBySquashMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergePullRequestBySquash{}, middleware.After)
 	if err != nil {
 		return err

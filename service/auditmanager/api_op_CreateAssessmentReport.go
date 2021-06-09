@@ -17,7 +17,7 @@ func (c *Client) CreateAssessmentReport(ctx context.Context, params *CreateAsses
 		params = &CreateAssessmentReportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAssessmentReport", params, optFns, addOperationCreateAssessmentReportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAssessmentReport", params, optFns, c.addOperationCreateAssessmentReportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CreateAssessmentReportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAssessmentReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAssessmentReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAssessmentReport{}, middleware.After)
 	if err != nil {
 		return err

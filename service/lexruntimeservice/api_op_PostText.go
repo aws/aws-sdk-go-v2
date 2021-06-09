@@ -70,7 +70,7 @@ func (c *Client) PostText(ctx context.Context, params *PostTextInput, optFns ...
 		params = &PostTextInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PostText", params, optFns, addOperationPostTextMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PostText", params, optFns, c.addOperationPostTextMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -277,7 +277,7 @@ type PostTextOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPostTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPostTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPostText{}, middleware.After)
 	if err != nil {
 		return err

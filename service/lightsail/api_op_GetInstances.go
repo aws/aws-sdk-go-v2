@@ -18,7 +18,7 @@ func (c *Client) GetInstances(ctx context.Context, params *GetInstancesInput, op
 		params = &GetInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInstances", params, optFns, addOperationGetInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInstances", params, optFns, c.addOperationGetInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInstances{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) UpdateLFTag(ctx context.Context, params *UpdateLFTagInput, optF
 		params = &UpdateLFTagInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLFTag", params, optFns, addOperationUpdateLFTagMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLFTag", params, optFns, c.addOperationUpdateLFTagMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type UpdateLFTagOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLFTagMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLFTagMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLFTag{}, middleware.After)
 	if err != nil {
 		return err

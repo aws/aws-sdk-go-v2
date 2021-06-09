@@ -20,7 +20,7 @@ func (c *Client) AuthorizeCacheSecurityGroupIngress(ctx context.Context, params 
 		params = &AuthorizeCacheSecurityGroupIngressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AuthorizeCacheSecurityGroupIngress", params, optFns, addOperationAuthorizeCacheSecurityGroupIngressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AuthorizeCacheSecurityGroupIngress", params, optFns, c.addOperationAuthorizeCacheSecurityGroupIngressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type AuthorizeCacheSecurityGroupIngressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAuthorizeCacheSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAuthorizeCacheSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAuthorizeCacheSecurityGroupIngress{}, middleware.After)
 	if err != nil {
 		return err

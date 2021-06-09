@@ -16,7 +16,7 @@ func (c *Client) TestCustomDataIdentifier(ctx context.Context, params *TestCusto
 		params = &TestCustomDataIdentifierInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestCustomDataIdentifier", params, optFns, addOperationTestCustomDataIdentifierMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestCustomDataIdentifier", params, optFns, c.addOperationTestCustomDataIdentifierMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type TestCustomDataIdentifierOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTestCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestCustomDataIdentifier{}, middleware.After)
 	if err != nil {
 		return err

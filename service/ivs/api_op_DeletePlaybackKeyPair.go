@@ -20,7 +20,7 @@ func (c *Client) DeletePlaybackKeyPair(ctx context.Context, params *DeletePlayba
 		params = &DeletePlaybackKeyPairInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePlaybackKeyPair", params, optFns, addOperationDeletePlaybackKeyPairMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePlaybackKeyPair", params, optFns, c.addOperationDeletePlaybackKeyPairMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeletePlaybackKeyPairOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePlaybackKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePlaybackKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePlaybackKeyPair{}, middleware.After)
 	if err != nil {
 		return err

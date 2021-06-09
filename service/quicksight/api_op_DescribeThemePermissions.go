@@ -17,7 +17,7 @@ func (c *Client) DescribeThemePermissions(ctx context.Context, params *DescribeT
 		params = &DescribeThemePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeThemePermissions", params, optFns, addOperationDescribeThemePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeThemePermissions", params, optFns, c.addOperationDescribeThemePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeThemePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeThemePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeThemePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeThemePermissions{}, middleware.After)
 	if err != nil {
 		return err

@@ -29,7 +29,7 @@ func (c *Client) StopMatchmaking(ctx context.Context, params *StopMatchmakingInp
 		params = &StopMatchmakingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopMatchmaking", params, optFns, addOperationStopMatchmakingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopMatchmaking", params, optFns, c.addOperationStopMatchmakingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type StopMatchmakingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopMatchmakingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopMatchmakingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopMatchmaking{}, middleware.After)
 	if err != nil {
 		return err

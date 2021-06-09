@@ -22,7 +22,7 @@ func (c *Client) CreateOrUpdateTags(ctx context.Context, params *CreateOrUpdateT
 		params = &CreateOrUpdateTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateOrUpdateTags", params, optFns, addOperationCreateOrUpdateTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateOrUpdateTags", params, optFns, c.addOperationCreateOrUpdateTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type CreateOrUpdateTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateOrUpdateTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateOrUpdateTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateOrUpdateTags{}, middleware.After)
 	if err != nil {
 		return err

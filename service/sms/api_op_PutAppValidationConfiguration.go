@@ -17,7 +17,7 @@ func (c *Client) PutAppValidationConfiguration(ctx context.Context, params *PutA
 		params = &PutAppValidationConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAppValidationConfiguration", params, optFns, addOperationPutAppValidationConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAppValidationConfiguration", params, optFns, c.addOperationPutAppValidationConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type PutAppValidationConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAppValidationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAppValidationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAppValidationConfiguration{}, middleware.After)
 	if err != nil {
 		return err

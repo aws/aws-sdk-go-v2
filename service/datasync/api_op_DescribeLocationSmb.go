@@ -18,7 +18,7 @@ func (c *Client) DescribeLocationSmb(ctx context.Context, params *DescribeLocati
 		params = &DescribeLocationSmbInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLocationSmb", params, optFns, addOperationDescribeLocationSmbMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLocationSmb", params, optFns, c.addOperationDescribeLocationSmbMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeLocationSmbOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLocationSmbMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLocationSmbMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationSmb{}, middleware.After)
 	if err != nil {
 		return err

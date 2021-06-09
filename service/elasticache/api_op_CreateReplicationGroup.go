@@ -46,7 +46,7 @@ func (c *Client) CreateReplicationGroup(ctx context.Context, params *CreateRepli
 		params = &CreateReplicationGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateReplicationGroup", params, optFns, addOperationCreateReplicationGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateReplicationGroup", params, optFns, c.addOperationCreateReplicationGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -374,7 +374,7 @@ type CreateReplicationGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateReplicationGroup{}, middleware.After)
 	if err != nil {
 		return err

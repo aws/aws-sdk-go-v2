@@ -20,7 +20,7 @@ func (c *Client) DescribeSourceRegions(ctx context.Context, params *DescribeSour
 		params = &DescribeSourceRegionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSourceRegions", params, optFns, addOperationDescribeSourceRegionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSourceRegions", params, optFns, c.addOperationDescribeSourceRegionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type DescribeSourceRegionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSourceRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSourceRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeSourceRegions{}, middleware.After)
 	if err != nil {
 		return err

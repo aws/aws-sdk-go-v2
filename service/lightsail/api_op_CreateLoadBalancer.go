@@ -26,7 +26,7 @@ func (c *Client) CreateLoadBalancer(ctx context.Context, params *CreateLoadBalan
 		params = &CreateLoadBalancerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLoadBalancer", params, optFns, addOperationCreateLoadBalancerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLoadBalancer", params, optFns, c.addOperationCreateLoadBalancerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type CreateLoadBalancerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLoadBalancer{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) EnableEnhancedMonitoring(ctx context.Context, params *EnableEnh
 		params = &EnableEnhancedMonitoringInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableEnhancedMonitoring", params, optFns, addOperationEnableEnhancedMonitoringMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableEnhancedMonitoring", params, optFns, c.addOperationEnableEnhancedMonitoringMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type EnableEnhancedMonitoringOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableEnhancedMonitoringMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableEnhancedMonitoringMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableEnhancedMonitoring{}, middleware.After)
 	if err != nil {
 		return err

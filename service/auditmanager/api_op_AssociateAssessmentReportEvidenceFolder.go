@@ -17,7 +17,7 @@ func (c *Client) AssociateAssessmentReportEvidenceFolder(ctx context.Context, pa
 		params = &AssociateAssessmentReportEvidenceFolderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateAssessmentReportEvidenceFolder", params, optFns, addOperationAssociateAssessmentReportEvidenceFolderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateAssessmentReportEvidenceFolder", params, optFns, c.addOperationAssociateAssessmentReportEvidenceFolderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type AssociateAssessmentReportEvidenceFolderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateAssessmentReportEvidenceFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateAssessmentReportEvidenceFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateAssessmentReportEvidenceFolder{}, middleware.After)
 	if err != nil {
 		return err

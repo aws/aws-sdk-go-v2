@@ -30,7 +30,7 @@ func (c *Client) ListResourceTags(ctx context.Context, params *ListResourceTagsI
 		params = &ListResourceTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResourceTags", params, optFns, addOperationListResourceTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResourceTags", params, optFns, c.addOperationListResourceTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type ListResourceTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListResourceTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResourceTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourceTags{}, middleware.After)
 	if err != nil {
 		return err

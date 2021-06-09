@@ -19,7 +19,7 @@ func (c *Client) UpdateManagedInstanceRole(ctx context.Context, params *UpdateMa
 		params = &UpdateManagedInstanceRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateManagedInstanceRole", params, optFns, addOperationUpdateManagedInstanceRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateManagedInstanceRole", params, optFns, c.addOperationUpdateManagedInstanceRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type UpdateManagedInstanceRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateManagedInstanceRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateManagedInstanceRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateManagedInstanceRole{}, middleware.After)
 	if err != nil {
 		return err

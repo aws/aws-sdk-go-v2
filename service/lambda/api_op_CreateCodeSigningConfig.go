@@ -20,7 +20,7 @@ func (c *Client) CreateCodeSigningConfig(ctx context.Context, params *CreateCode
 		params = &CreateCodeSigningConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCodeSigningConfig", params, optFns, addOperationCreateCodeSigningConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCodeSigningConfig", params, optFns, c.addOperationCreateCodeSigningConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type CreateCodeSigningConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCodeSigningConfig{}, middleware.After)
 	if err != nil {
 		return err

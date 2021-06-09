@@ -17,7 +17,7 @@ func (c *Client) CompleteMigration(ctx context.Context, params *CompleteMigratio
 		params = &CompleteMigrationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CompleteMigration", params, optFns, addOperationCompleteMigrationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CompleteMigration", params, optFns, c.addOperationCompleteMigrationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type CompleteMigrationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCompleteMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCompleteMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCompleteMigration{}, middleware.After)
 	if err != nil {
 		return err

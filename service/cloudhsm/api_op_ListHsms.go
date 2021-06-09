@@ -30,7 +30,7 @@ func (c *Client) ListHsms(ctx context.Context, params *ListHsmsInput, optFns ...
 		params = &ListHsmsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListHsms", params, optFns, addOperationListHsmsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListHsms", params, optFns, c.addOperationListHsmsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type ListHsmsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListHsmsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListHsmsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHsms{}, middleware.After)
 	if err != nil {
 		return err

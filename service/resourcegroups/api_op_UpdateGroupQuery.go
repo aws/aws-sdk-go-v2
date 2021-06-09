@@ -23,7 +23,7 @@ func (c *Client) UpdateGroupQuery(ctx context.Context, params *UpdateGroupQueryI
 		params = &UpdateGroupQueryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateGroupQuery", params, optFns, addOperationUpdateGroupQueryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateGroupQuery", params, optFns, c.addOperationUpdateGroupQueryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type UpdateGroupQueryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateGroupQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateGroupQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGroupQuery{}, middleware.After)
 	if err != nil {
 		return err

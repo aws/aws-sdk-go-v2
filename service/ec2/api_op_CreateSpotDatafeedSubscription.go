@@ -21,7 +21,7 @@ func (c *Client) CreateSpotDatafeedSubscription(ctx context.Context, params *Cre
 		params = &CreateSpotDatafeedSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSpotDatafeedSubscription", params, optFns, addOperationCreateSpotDatafeedSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSpotDatafeedSubscription", params, optFns, c.addOperationCreateSpotDatafeedSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type CreateSpotDatafeedSubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSpotDatafeedSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSpotDatafeedSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateSpotDatafeedSubscription{}, middleware.After)
 	if err != nil {
 		return err

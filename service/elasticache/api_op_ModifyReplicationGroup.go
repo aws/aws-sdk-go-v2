@@ -28,7 +28,7 @@ func (c *Client) ModifyReplicationGroup(ctx context.Context, params *ModifyRepli
 		params = &ModifyReplicationGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyReplicationGroup", params, optFns, addOperationModifyReplicationGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyReplicationGroup", params, optFns, c.addOperationModifyReplicationGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -211,7 +211,7 @@ type ModifyReplicationGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyReplicationGroup{}, middleware.After)
 	if err != nil {
 		return err

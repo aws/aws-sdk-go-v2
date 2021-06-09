@@ -16,7 +16,7 @@ func (c *Client) AssociateContactWithAddressBook(ctx context.Context, params *As
 		params = &AssociateContactWithAddressBookInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateContactWithAddressBook", params, optFns, addOperationAssociateContactWithAddressBookMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateContactWithAddressBook", params, optFns, c.addOperationAssociateContactWithAddressBookMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type AssociateContactWithAddressBookOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateContactWithAddressBookMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateContactWithAddressBookMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateContactWithAddressBook{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) GetViolationDetails(ctx context.Context, params *GetViolationDe
 		params = &GetViolationDetailsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetViolationDetails", params, optFns, addOperationGetViolationDetailsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetViolationDetails", params, optFns, c.addOperationGetViolationDetailsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type GetViolationDetailsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetViolationDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetViolationDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetViolationDetails{}, middleware.After)
 	if err != nil {
 		return err

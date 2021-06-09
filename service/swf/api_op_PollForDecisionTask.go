@@ -54,7 +54,7 @@ func (c *Client) PollForDecisionTask(ctx context.Context, params *PollForDecisio
 		params = &PollForDecisionTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PollForDecisionTask", params, optFns, addOperationPollForDecisionTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PollForDecisionTask", params, optFns, c.addOperationPollForDecisionTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -155,7 +155,7 @@ type PollForDecisionTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPollForDecisionTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPollForDecisionTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPollForDecisionTask{}, middleware.After)
 	if err != nil {
 		return err

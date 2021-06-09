@@ -17,7 +17,7 @@ func (c *Client) ListDocumentMetadataHistory(ctx context.Context, params *ListDo
 		params = &ListDocumentMetadataHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDocumentMetadataHistory", params, optFns, addOperationListDocumentMetadataHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDocumentMetadataHistory", params, optFns, c.addOperationListDocumentMetadataHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type ListDocumentMetadataHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDocumentMetadataHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDocumentMetadataHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDocumentMetadataHistory{}, middleware.After)
 	if err != nil {
 		return err

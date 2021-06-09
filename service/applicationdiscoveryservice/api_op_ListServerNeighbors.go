@@ -18,7 +18,7 @@ func (c *Client) ListServerNeighbors(ctx context.Context, params *ListServerNeig
 		params = &ListServerNeighborsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListServerNeighbors", params, optFns, addOperationListServerNeighborsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListServerNeighbors", params, optFns, c.addOperationListServerNeighborsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type ListServerNeighborsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListServerNeighborsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListServerNeighborsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListServerNeighbors{}, middleware.After)
 	if err != nil {
 		return err

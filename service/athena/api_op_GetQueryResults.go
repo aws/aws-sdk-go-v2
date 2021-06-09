@@ -29,7 +29,7 @@ func (c *Client) GetQueryResults(ctx context.Context, params *GetQueryResultsInp
 		params = &GetQueryResultsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetQueryResults", params, optFns, addOperationGetQueryResultsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetQueryResults", params, optFns, c.addOperationGetQueryResultsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetQueryResultsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetQueryResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetQueryResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetQueryResults{}, middleware.After)
 	if err != nil {
 		return err

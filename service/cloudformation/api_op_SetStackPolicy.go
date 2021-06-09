@@ -16,7 +16,7 @@ func (c *Client) SetStackPolicy(ctx context.Context, params *SetStackPolicyInput
 		params = &SetStackPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetStackPolicy", params, optFns, addOperationSetStackPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetStackPolicy", params, optFns, c.addOperationSetStackPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type SetStackPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetStackPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetStackPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetStackPolicy{}, middleware.After)
 	if err != nil {
 		return err

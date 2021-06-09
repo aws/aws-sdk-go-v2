@@ -17,7 +17,7 @@ func (c *Client) SendCommand(ctx context.Context, params *SendCommandInput, optF
 		params = &SendCommandInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendCommand", params, optFns, addOperationSendCommandMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendCommand", params, optFns, c.addOperationSendCommandMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -137,7 +137,7 @@ type SendCommandOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendCommand{}, middleware.After)
 	if err != nil {
 		return err

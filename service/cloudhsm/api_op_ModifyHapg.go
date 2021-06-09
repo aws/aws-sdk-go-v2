@@ -26,7 +26,7 @@ func (c *Client) ModifyHapg(ctx context.Context, params *ModifyHapgInput, optFns
 		params = &ModifyHapgInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyHapg", params, optFns, addOperationModifyHapgMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyHapg", params, optFns, c.addOperationModifyHapgMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ModifyHapgOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyHapg{}, middleware.After)
 	if err != nil {
 		return err

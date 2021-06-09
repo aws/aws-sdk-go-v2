@@ -22,7 +22,7 @@ func (c *Client) DescribeChangeSet(ctx context.Context, params *DescribeChangeSe
 		params = &DescribeChangeSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeChangeSet", params, optFns, addOperationDescribeChangeSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeChangeSet", params, optFns, c.addOperationDescribeChangeSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +129,7 @@ type DescribeChangeSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeChangeSet{}, middleware.After)
 	if err != nil {
 		return err

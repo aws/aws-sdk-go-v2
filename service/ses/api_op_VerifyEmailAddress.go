@@ -16,7 +16,7 @@ func (c *Client) VerifyEmailAddress(ctx context.Context, params *VerifyEmailAddr
 		params = &VerifyEmailAddressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "VerifyEmailAddress", params, optFns, addOperationVerifyEmailAddressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "VerifyEmailAddress", params, optFns, c.addOperationVerifyEmailAddressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type VerifyEmailAddressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationVerifyEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationVerifyEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpVerifyEmailAddress{}, middleware.After)
 	if err != nil {
 		return err

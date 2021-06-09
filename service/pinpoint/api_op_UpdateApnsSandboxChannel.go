@@ -18,7 +18,7 @@ func (c *Client) UpdateApnsSandboxChannel(ctx context.Context, params *UpdateApn
 		params = &UpdateApnsSandboxChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateApnsSandboxChannel", params, optFns, addOperationUpdateApnsSandboxChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateApnsSandboxChannel", params, optFns, c.addOperationUpdateApnsSandboxChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UpdateApnsSandboxChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateApnsSandboxChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateApnsSandboxChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApnsSandboxChannel{}, middleware.After)
 	if err != nil {
 		return err

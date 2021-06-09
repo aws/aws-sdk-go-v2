@@ -28,7 +28,7 @@ func (c *Client) GetJobManifest(ctx context.Context, params *GetJobManifestInput
 		params = &GetJobManifestInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetJobManifest", params, optFns, addOperationGetJobManifestMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetJobManifest", params, optFns, c.addOperationGetJobManifestMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetJobManifestOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetJobManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetJobManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetJobManifest{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ReplaceTopicRule(ctx context.Context, params *ReplaceTopicRuleI
 		params = &ReplaceTopicRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReplaceTopicRule", params, optFns, addOperationReplaceTopicRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReplaceTopicRule", params, optFns, c.addOperationReplaceTopicRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type ReplaceTopicRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReplaceTopicRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReplaceTopicRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpReplaceTopicRule{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) AssociateSubnets(ctx context.Context, params *AssociateSubnetsI
 		params = &AssociateSubnetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateSubnets", params, optFns, addOperationAssociateSubnetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateSubnets", params, optFns, c.addOperationAssociateSubnetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type AssociateSubnetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateSubnets{}, middleware.After)
 	if err != nil {
 		return err

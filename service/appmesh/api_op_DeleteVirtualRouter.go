@@ -18,7 +18,7 @@ func (c *Client) DeleteVirtualRouter(ctx context.Context, params *DeleteVirtualR
 		params = &DeleteVirtualRouterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVirtualRouter", params, optFns, addOperationDeleteVirtualRouterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVirtualRouter", params, optFns, c.addOperationDeleteVirtualRouterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DeleteVirtualRouterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVirtualRouterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVirtualRouterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVirtualRouter{}, middleware.After)
 	if err != nil {
 		return err

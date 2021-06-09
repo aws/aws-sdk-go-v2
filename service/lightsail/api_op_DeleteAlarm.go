@@ -21,7 +21,7 @@ func (c *Client) DeleteAlarm(ctx context.Context, params *DeleteAlarmInput, optF
 		params = &DeleteAlarmInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAlarm", params, optFns, addOperationDeleteAlarmMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAlarm", params, optFns, c.addOperationDeleteAlarmMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteAlarmOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAlarm{}, middleware.After)
 	if err != nil {
 		return err

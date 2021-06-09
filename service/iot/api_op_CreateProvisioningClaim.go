@@ -18,7 +18,7 @@ func (c *Client) CreateProvisioningClaim(ctx context.Context, params *CreateProv
 		params = &CreateProvisioningClaimInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateProvisioningClaim", params, optFns, addOperationCreateProvisioningClaimMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateProvisioningClaim", params, optFns, c.addOperationCreateProvisioningClaimMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type CreateProvisioningClaimOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateProvisioningClaimMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateProvisioningClaimMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProvisioningClaim{}, middleware.After)
 	if err != nil {
 		return err

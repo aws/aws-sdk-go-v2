@@ -28,7 +28,7 @@ func (c *Client) DescribeVoices(ctx context.Context, params *DescribeVoicesInput
 		params = &DescribeVoicesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeVoices", params, optFns, addOperationDescribeVoicesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeVoices", params, optFns, c.addOperationDescribeVoicesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type DescribeVoicesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeVoicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeVoicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVoices{}, middleware.After)
 	if err != nil {
 		return err

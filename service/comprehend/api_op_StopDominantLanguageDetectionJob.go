@@ -24,7 +24,7 @@ func (c *Client) StopDominantLanguageDetectionJob(ctx context.Context, params *S
 		params = &StopDominantLanguageDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopDominantLanguageDetectionJob", params, optFns, addOperationStopDominantLanguageDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopDominantLanguageDetectionJob", params, optFns, c.addOperationStopDominantLanguageDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type StopDominantLanguageDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopDominantLanguageDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopDominantLanguageDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopDominantLanguageDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

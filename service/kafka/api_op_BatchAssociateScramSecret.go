@@ -17,7 +17,7 @@ func (c *Client) BatchAssociateScramSecret(ctx context.Context, params *BatchAss
 		params = &BatchAssociateScramSecretInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchAssociateScramSecret", params, optFns, addOperationBatchAssociateScramSecretMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchAssociateScramSecret", params, optFns, c.addOperationBatchAssociateScramSecretMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type BatchAssociateScramSecretOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchAssociateScramSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchAssociateScramSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchAssociateScramSecret{}, middleware.After)
 	if err != nil {
 		return err

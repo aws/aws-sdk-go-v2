@@ -20,7 +20,7 @@ func (c *Client) PutDefaultEncryptionConfiguration(ctx context.Context, params *
 		params = &PutDefaultEncryptionConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutDefaultEncryptionConfiguration", params, optFns, addOperationPutDefaultEncryptionConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutDefaultEncryptionConfiguration", params, optFns, c.addOperationPutDefaultEncryptionConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type PutDefaultEncryptionConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutDefaultEncryptionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutDefaultEncryptionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDefaultEncryptionConfiguration{}, middleware.After)
 	if err != nil {
 		return err

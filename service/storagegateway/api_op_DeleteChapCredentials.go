@@ -18,7 +18,7 @@ func (c *Client) DeleteChapCredentials(ctx context.Context, params *DeleteChapCr
 		params = &DeleteChapCredentialsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteChapCredentials", params, optFns, addOperationDeleteChapCredentialsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteChapCredentials", params, optFns, c.addOperationDeleteChapCredentialsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DeleteChapCredentialsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteChapCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteChapCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteChapCredentials{}, middleware.After)
 	if err != nil {
 		return err

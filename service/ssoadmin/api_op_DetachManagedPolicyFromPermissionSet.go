@@ -16,7 +16,7 @@ func (c *Client) DetachManagedPolicyFromPermissionSet(ctx context.Context, param
 		params = &DetachManagedPolicyFromPermissionSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachManagedPolicyFromPermissionSet", params, optFns, addOperationDetachManagedPolicyFromPermissionSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachManagedPolicyFromPermissionSet", params, optFns, c.addOperationDetachManagedPolicyFromPermissionSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DetachManagedPolicyFromPermissionSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachManagedPolicyFromPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachManagedPolicyFromPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetachManagedPolicyFromPermissionSet{}, middleware.After)
 	if err != nil {
 		return err

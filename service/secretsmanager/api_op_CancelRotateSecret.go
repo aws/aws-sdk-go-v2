@@ -54,7 +54,7 @@ func (c *Client) CancelRotateSecret(ctx context.Context, params *CancelRotateSec
 		params = &CancelRotateSecretInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelRotateSecret", params, optFns, addOperationCancelRotateSecretMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelRotateSecret", params, optFns, c.addOperationCancelRotateSecretMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +107,7 @@ type CancelRotateSecretOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelRotateSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelRotateSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelRotateSecret{}, middleware.After)
 	if err != nil {
 		return err

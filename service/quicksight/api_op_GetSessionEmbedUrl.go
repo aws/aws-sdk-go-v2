@@ -32,7 +32,7 @@ func (c *Client) GetSessionEmbedUrl(ctx context.Context, params *GetSessionEmbed
 		params = &GetSessionEmbedUrlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSessionEmbedUrl", params, optFns, addOperationGetSessionEmbedUrlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSessionEmbedUrl", params, optFns, c.addOperationGetSessionEmbedUrlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type GetSessionEmbedUrlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSessionEmbedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSessionEmbedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSessionEmbedUrl{}, middleware.After)
 	if err != nil {
 		return err

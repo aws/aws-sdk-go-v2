@@ -16,7 +16,7 @@ func (c *Client) DeleteVodSource(ctx context.Context, params *DeleteVodSourceInp
 		params = &DeleteVodSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVodSource", params, optFns, addOperationDeleteVodSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVodSource", params, optFns, c.addOperationDeleteVodSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteVodSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVodSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVodSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVodSource{}, middleware.After)
 	if err != nil {
 		return err

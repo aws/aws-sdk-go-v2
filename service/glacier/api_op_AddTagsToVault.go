@@ -23,7 +23,7 @@ func (c *Client) AddTagsToVault(ctx context.Context, params *AddTagsToVaultInput
 		params = &AddTagsToVaultInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddTagsToVault", params, optFns, addOperationAddTagsToVaultMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddTagsToVault", params, optFns, c.addOperationAddTagsToVaultMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type AddTagsToVaultOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddTagsToVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddTagsToVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddTagsToVault{}, middleware.After)
 	if err != nil {
 		return err

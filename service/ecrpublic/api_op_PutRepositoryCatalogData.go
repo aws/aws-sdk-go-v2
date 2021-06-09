@@ -17,7 +17,7 @@ func (c *Client) PutRepositoryCatalogData(ctx context.Context, params *PutReposi
 		params = &PutRepositoryCatalogDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutRepositoryCatalogData", params, optFns, addOperationPutRepositoryCatalogDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutRepositoryCatalogData", params, optFns, c.addOperationPutRepositoryCatalogDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type PutRepositoryCatalogDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutRepositoryCatalogDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutRepositoryCatalogDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRepositoryCatalogData{}, middleware.After)
 	if err != nil {
 		return err

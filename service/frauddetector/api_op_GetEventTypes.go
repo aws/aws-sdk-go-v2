@@ -23,7 +23,7 @@ func (c *Client) GetEventTypes(ctx context.Context, params *GetEventTypesInput, 
 		params = &GetEventTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEventTypes", params, optFns, addOperationGetEventTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEventTypes", params, optFns, c.addOperationGetEventTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetEventTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEventTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEventTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEventTypes{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListSipMediaApplications(ctx context.Context, params *ListSipMe
 		params = &ListSipMediaApplicationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSipMediaApplications", params, optFns, addOperationListSipMediaApplicationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSipMediaApplications", params, optFns, c.addOperationListSipMediaApplicationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type ListSipMediaApplicationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSipMediaApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSipMediaApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSipMediaApplications{}, middleware.After)
 	if err != nil {
 		return err

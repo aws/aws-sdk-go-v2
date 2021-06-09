@@ -27,7 +27,7 @@ func (c *Client) SetIdentityDkimEnabled(ctx context.Context, params *SetIdentity
 		params = &SetIdentityDkimEnabledInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetIdentityDkimEnabled", params, optFns, addOperationSetIdentityDkimEnabledMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetIdentityDkimEnabled", params, optFns, c.addOperationSetIdentityDkimEnabledMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type SetIdentityDkimEnabledOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetIdentityDkimEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetIdentityDkimEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetIdentityDkimEnabled{}, middleware.After)
 	if err != nil {
 		return err

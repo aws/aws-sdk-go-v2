@@ -17,7 +17,7 @@ func (c *Client) ListGroupVersions(ctx context.Context, params *ListGroupVersion
 		params = &ListGroupVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListGroupVersions", params, optFns, addOperationListGroupVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListGroupVersions", params, optFns, c.addOperationListGroupVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListGroupVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListGroupVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListGroupVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroupVersions{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) StopDBCluster(ctx context.Context, params *StopDBClusterInput, 
 		params = &StopDBClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopDBCluster", params, optFns, addOperationStopDBClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopDBCluster", params, optFns, c.addOperationStopDBClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StopDBClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpStopDBCluster{}, middleware.After)
 	if err != nil {
 		return err

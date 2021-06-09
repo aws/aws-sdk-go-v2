@@ -17,7 +17,7 @@ func (c *Client) RegisterApplicationRevision(ctx context.Context, params *Regist
 		params = &RegisterApplicationRevisionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterApplicationRevision", params, optFns, addOperationRegisterApplicationRevisionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterApplicationRevision", params, optFns, c.addOperationRegisterApplicationRevisionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type RegisterApplicationRevisionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterApplicationRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterApplicationRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterApplicationRevision{}, middleware.After)
 	if err != nil {
 		return err

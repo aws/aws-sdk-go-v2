@@ -16,7 +16,7 @@ func (c *Client) CancelContact(ctx context.Context, params *CancelContactInput, 
 		params = &CancelContactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelContact", params, optFns, addOperationCancelContactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelContact", params, optFns, c.addOperationCancelContactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type CancelContactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelContact{}, middleware.After)
 	if err != nil {
 		return err

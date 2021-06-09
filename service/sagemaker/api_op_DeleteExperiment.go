@@ -18,7 +18,7 @@ func (c *Client) DeleteExperiment(ctx context.Context, params *DeleteExperimentI
 		params = &DeleteExperimentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteExperiment", params, optFns, addOperationDeleteExperimentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteExperiment", params, optFns, c.addOperationDeleteExperimentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteExperimentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteExperiment{}, middleware.After)
 	if err != nil {
 		return err

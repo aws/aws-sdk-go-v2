@@ -18,7 +18,7 @@ func (c *Client) DeleteDBInstanceAutomatedBackup(ctx context.Context, params *De
 		params = &DeleteDBInstanceAutomatedBackupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDBInstanceAutomatedBackup", params, optFns, addOperationDeleteDBInstanceAutomatedBackupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDBInstanceAutomatedBackup", params, optFns, c.addOperationDeleteDBInstanceAutomatedBackupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteDBInstanceAutomatedBackupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDBInstanceAutomatedBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDBInstanceAutomatedBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBInstanceAutomatedBackup{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) DescribeScript(ctx context.Context, params *DescribeScriptInput
 		params = &DescribeScriptInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeScript", params, optFns, addOperationDescribeScriptMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeScript", params, optFns, c.addOperationDescribeScriptMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DescribeScriptOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeScript{}, middleware.After)
 	if err != nil {
 		return err

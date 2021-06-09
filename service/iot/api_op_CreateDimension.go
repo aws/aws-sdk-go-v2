@@ -21,7 +21,7 @@ func (c *Client) CreateDimension(ctx context.Context, params *CreateDimensionInp
 		params = &CreateDimensionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDimension", params, optFns, addOperationCreateDimensionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDimension", params, optFns, c.addOperationCreateDimensionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type CreateDimensionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDimension{}, middleware.After)
 	if err != nil {
 		return err

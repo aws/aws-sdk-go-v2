@@ -17,7 +17,7 @@ func (c *Client) IgnoresWrappingXmlName(ctx context.Context, params *IgnoresWrap
 		params = &IgnoresWrappingXmlNameInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "IgnoresWrappingXmlName", params, optFns, addOperationIgnoresWrappingXmlNameMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "IgnoresWrappingXmlName", params, optFns, c.addOperationIgnoresWrappingXmlNameMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type IgnoresWrappingXmlNameOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationIgnoresWrappingXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationIgnoresWrappingXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpIgnoresWrappingXmlName{}, middleware.After)
 	if err != nil {
 		return err

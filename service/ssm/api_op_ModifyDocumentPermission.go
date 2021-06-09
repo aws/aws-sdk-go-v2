@@ -20,7 +20,7 @@ func (c *Client) ModifyDocumentPermission(ctx context.Context, params *ModifyDoc
 		params = &ModifyDocumentPermissionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyDocumentPermission", params, optFns, addOperationModifyDocumentPermissionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyDocumentPermission", params, optFns, c.addOperationModifyDocumentPermissionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ModifyDocumentPermissionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyDocumentPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyDocumentPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyDocumentPermission{}, middleware.After)
 	if err != nil {
 		return err

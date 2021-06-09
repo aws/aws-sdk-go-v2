@@ -19,7 +19,7 @@ func (c *Client) GetResolverEndpoint(ctx context.Context, params *GetResolverEnd
 		params = &GetResolverEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetResolverEndpoint", params, optFns, addOperationGetResolverEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetResolverEndpoint", params, optFns, c.addOperationGetResolverEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetResolverEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResolverEndpoint{}, middleware.After)
 	if err != nil {
 		return err

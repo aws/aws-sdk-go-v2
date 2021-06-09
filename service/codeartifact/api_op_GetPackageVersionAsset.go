@@ -20,7 +20,7 @@ func (c *Client) GetPackageVersionAsset(ctx context.Context, params *GetPackageV
 		params = &GetPackageVersionAssetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPackageVersionAsset", params, optFns, addOperationGetPackageVersionAssetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPackageVersionAsset", params, optFns, c.addOperationGetPackageVersionAssetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type GetPackageVersionAssetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPackageVersionAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPackageVersionAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPackageVersionAsset{}, middleware.After)
 	if err != nil {
 		return err

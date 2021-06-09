@@ -18,7 +18,7 @@ func (c *Client) UpdateSmsChannel(ctx context.Context, params *UpdateSmsChannelI
 		params = &UpdateSmsChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSmsChannel", params, optFns, addOperationUpdateSmsChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSmsChannel", params, optFns, c.addOperationUpdateSmsChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type UpdateSmsChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSmsChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSmsChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSmsChannel{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) GetMLTaskRun(ctx context.Context, params *GetMLTaskRunInput, op
 		params = &GetMLTaskRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMLTaskRun", params, optFns, addOperationGetMLTaskRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMLTaskRun", params, optFns, c.addOperationGetMLTaskRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type GetMLTaskRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMLTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMLTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMLTaskRun{}, middleware.After)
 	if err != nil {
 		return err

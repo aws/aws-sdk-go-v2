@@ -26,7 +26,7 @@ func (c *Client) DescribeNodeAssociationStatus(ctx context.Context, params *Desc
 		params = &DescribeNodeAssociationStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeNodeAssociationStatus", params, optFns, addOperationDescribeNodeAssociationStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeNodeAssociationStatus", params, optFns, c.addOperationDescribeNodeAssociationStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DescribeNodeAssociationStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeNodeAssociationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeNodeAssociationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeNodeAssociationStatus{}, middleware.After)
 	if err != nil {
 		return err

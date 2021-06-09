@@ -17,7 +17,7 @@ func (c *Client) CreateDomainName(ctx context.Context, params *CreateDomainNameI
 		params = &CreateDomainNameInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDomainName", params, optFns, addOperationCreateDomainNameMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDomainName", params, optFns, c.addOperationCreateDomainNameMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type CreateDomainNameOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDomainName{}, middleware.After)
 	if err != nil {
 		return err

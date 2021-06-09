@@ -16,7 +16,7 @@ func (c *Client) StartOnDemandAppReplication(ctx context.Context, params *StartO
 		params = &StartOnDemandAppReplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartOnDemandAppReplication", params, optFns, addOperationStartOnDemandAppReplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartOnDemandAppReplication", params, optFns, c.addOperationStartOnDemandAppReplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type StartOnDemandAppReplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartOnDemandAppReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartOnDemandAppReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartOnDemandAppReplication{}, middleware.After)
 	if err != nil {
 		return err

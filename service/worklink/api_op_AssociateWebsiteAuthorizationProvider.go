@@ -18,7 +18,7 @@ func (c *Client) AssociateWebsiteAuthorizationProvider(ctx context.Context, para
 		params = &AssociateWebsiteAuthorizationProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateWebsiteAuthorizationProvider", params, optFns, addOperationAssociateWebsiteAuthorizationProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateWebsiteAuthorizationProvider", params, optFns, c.addOperationAssociateWebsiteAuthorizationProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type AssociateWebsiteAuthorizationProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateWebsiteAuthorizationProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateWebsiteAuthorizationProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateWebsiteAuthorizationProvider{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) VerifyTrust(ctx context.Context, params *VerifyTrustInput, optF
 		params = &VerifyTrustInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "VerifyTrust", params, optFns, addOperationVerifyTrustMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "VerifyTrust", params, optFns, c.addOperationVerifyTrustMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type VerifyTrustOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationVerifyTrustMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationVerifyTrustMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpVerifyTrust{}, middleware.After)
 	if err != nil {
 		return err

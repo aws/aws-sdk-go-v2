@@ -19,7 +19,7 @@ func (c *Client) UntagDeliveryStream(ctx context.Context, params *UntagDeliveryS
 		params = &UntagDeliveryStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagDeliveryStream", params, optFns, addOperationUntagDeliveryStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagDeliveryStream", params, optFns, c.addOperationUntagDeliveryStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type UntagDeliveryStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUntagDeliveryStream{}, middleware.After)
 	if err != nil {
 		return err

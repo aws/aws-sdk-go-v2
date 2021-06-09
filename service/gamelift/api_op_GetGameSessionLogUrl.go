@@ -26,7 +26,7 @@ func (c *Client) GetGameSessionLogUrl(ctx context.Context, params *GetGameSessio
 		params = &GetGameSessionLogUrlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetGameSessionLogUrl", params, optFns, addOperationGetGameSessionLogUrlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetGameSessionLogUrl", params, optFns, c.addOperationGetGameSessionLogUrlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetGameSessionLogUrlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetGameSessionLogUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetGameSessionLogUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetGameSessionLogUrl{}, middleware.After)
 	if err != nil {
 		return err

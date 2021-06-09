@@ -39,7 +39,7 @@ func (c *Client) InviteAccountToOrganization(ctx context.Context, params *Invite
 		params = &InviteAccountToOrganizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InviteAccountToOrganization", params, optFns, addOperationInviteAccountToOrganizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InviteAccountToOrganization", params, optFns, c.addOperationInviteAccountToOrganizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type InviteAccountToOrganizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInviteAccountToOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInviteAccountToOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInviteAccountToOrganization{}, middleware.After)
 	if err != nil {
 		return err

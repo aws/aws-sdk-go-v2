@@ -17,7 +17,7 @@ func (c *Client) DisassociateSigninDelegateGroupsFromAccount(ctx context.Context
 		params = &DisassociateSigninDelegateGroupsFromAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateSigninDelegateGroupsFromAccount", params, optFns, addOperationDisassociateSigninDelegateGroupsFromAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateSigninDelegateGroupsFromAccount", params, optFns, c.addOperationDisassociateSigninDelegateGroupsFromAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DisassociateSigninDelegateGroupsFromAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateSigninDelegateGroupsFromAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateSigninDelegateGroupsFromAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateSigninDelegateGroupsFromAccount{}, middleware.After)
 	if err != nil {
 		return err

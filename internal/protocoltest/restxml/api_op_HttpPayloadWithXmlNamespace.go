@@ -16,7 +16,7 @@ func (c *Client) HttpPayloadWithXmlNamespace(ctx context.Context, params *HttpPa
 		params = &HttpPayloadWithXmlNamespaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadWithXmlNamespace", params, optFns, addOperationHttpPayloadWithXmlNamespaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadWithXmlNamespace", params, optFns, c.addOperationHttpPayloadWithXmlNamespaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type HttpPayloadWithXmlNamespaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHttpPayloadWithXmlNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHttpPayloadWithXmlNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadWithXmlNamespace{}, middleware.After)
 	if err != nil {
 		return err

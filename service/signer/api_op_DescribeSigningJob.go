@@ -24,7 +24,7 @@ func (c *Client) DescribeSigningJob(ctx context.Context, params *DescribeSigning
 		params = &DescribeSigningJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSigningJob", params, optFns, addOperationDescribeSigningJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSigningJob", params, optFns, c.addOperationDescribeSigningJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type DescribeSigningJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSigningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSigningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSigningJob{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) DeleteAlias(ctx context.Context, params *DeleteAliasInput, optF
 		params = &DeleteAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAlias", params, optFns, addOperationDeleteAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAlias", params, optFns, c.addOperationDeleteAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAlias{}, middleware.After)
 	if err != nil {
 		return err

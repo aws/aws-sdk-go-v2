@@ -18,7 +18,7 @@ func (c *Client) ListTableMetadata(ctx context.Context, params *ListTableMetadat
 		params = &ListTableMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTableMetadata", params, optFns, addOperationListTableMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTableMetadata", params, optFns, c.addOperationListTableMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListTableMetadataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTableMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTableMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTableMetadata{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) IncreaseReplicationFactor(ctx context.Context, params *Increase
 		params = &IncreaseReplicationFactorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "IncreaseReplicationFactor", params, optFns, addOperationIncreaseReplicationFactorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "IncreaseReplicationFactor", params, optFns, c.addOperationIncreaseReplicationFactorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type IncreaseReplicationFactorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationIncreaseReplicationFactorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationIncreaseReplicationFactorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpIncreaseReplicationFactor{}, middleware.After)
 	if err != nil {
 		return err

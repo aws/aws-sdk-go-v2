@@ -17,7 +17,7 @@ func (c *Client) PutAccountSuppressionAttributes(ctx context.Context, params *Pu
 		params = &PutAccountSuppressionAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAccountSuppressionAttributes", params, optFns, addOperationPutAccountSuppressionAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAccountSuppressionAttributes", params, optFns, c.addOperationPutAccountSuppressionAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type PutAccountSuppressionAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAccountSuppressionAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAccountSuppressionAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountSuppressionAttributes{}, middleware.After)
 	if err != nil {
 		return err

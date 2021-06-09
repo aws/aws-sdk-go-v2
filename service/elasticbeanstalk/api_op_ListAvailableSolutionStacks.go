@@ -18,7 +18,7 @@ func (c *Client) ListAvailableSolutionStacks(ctx context.Context, params *ListAv
 		params = &ListAvailableSolutionStacksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAvailableSolutionStacks", params, optFns, addOperationListAvailableSolutionStacksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAvailableSolutionStacks", params, optFns, c.addOperationListAvailableSolutionStacksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type ListAvailableSolutionStacksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAvailableSolutionStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAvailableSolutionStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListAvailableSolutionStacks{}, middleware.After)
 	if err != nil {
 		return err

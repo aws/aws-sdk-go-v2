@@ -17,7 +17,7 @@ func (c *Client) DescribePage(ctx context.Context, params *DescribePageInput, op
 		params = &DescribePageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePage", params, optFns, addOperationDescribePageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePage", params, optFns, c.addOperationDescribePageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type DescribePageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePage{}, middleware.After)
 	if err != nil {
 		return err

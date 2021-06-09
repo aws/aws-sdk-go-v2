@@ -18,7 +18,7 @@ func (c *Client) PutFindingsPublicationConfiguration(ctx context.Context, params
 		params = &PutFindingsPublicationConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutFindingsPublicationConfiguration", params, optFns, addOperationPutFindingsPublicationConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutFindingsPublicationConfiguration", params, optFns, c.addOperationPutFindingsPublicationConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type PutFindingsPublicationConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutFindingsPublicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutFindingsPublicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFindingsPublicationConfiguration{}, middleware.After)
 	if err != nil {
 		return err

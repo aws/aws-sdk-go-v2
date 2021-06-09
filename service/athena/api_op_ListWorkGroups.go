@@ -18,7 +18,7 @@ func (c *Client) ListWorkGroups(ctx context.Context, params *ListWorkGroupsInput
 		params = &ListWorkGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListWorkGroups", params, optFns, addOperationListWorkGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListWorkGroups", params, optFns, c.addOperationListWorkGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListWorkGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListWorkGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListWorkGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListWorkGroups{}, middleware.After)
 	if err != nil {
 		return err

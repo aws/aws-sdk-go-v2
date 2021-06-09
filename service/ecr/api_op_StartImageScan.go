@@ -21,7 +21,7 @@ func (c *Client) StartImageScan(ctx context.Context, params *StartImageScanInput
 		params = &StartImageScanInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartImageScan", params, optFns, addOperationStartImageScanMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartImageScan", params, optFns, c.addOperationStartImageScanMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type StartImageScanOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartImageScanMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartImageScanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartImageScan{}, middleware.After)
 	if err != nil {
 		return err

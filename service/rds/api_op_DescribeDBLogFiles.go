@@ -18,7 +18,7 @@ func (c *Client) DescribeDBLogFiles(ctx context.Context, params *DescribeDBLogFi
 		params = &DescribeDBLogFilesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDBLogFiles", params, optFns, addOperationDescribeDBLogFilesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDBLogFiles", params, optFns, c.addOperationDescribeDBLogFilesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type DescribeDBLogFilesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDBLogFilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDBLogFilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBLogFiles{}, middleware.After)
 	if err != nil {
 		return err

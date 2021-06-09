@@ -19,7 +19,7 @@ func (c *Client) CreateAccountAlias(ctx context.Context, params *CreateAccountAl
 		params = &CreateAccountAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAccountAlias", params, optFns, addOperationCreateAccountAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAccountAlias", params, optFns, c.addOperationCreateAccountAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type CreateAccountAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAccountAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAccountAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateAccountAlias{}, middleware.After)
 	if err != nil {
 		return err

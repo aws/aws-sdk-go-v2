@@ -52,7 +52,7 @@ func (c *Client) CreateBuild(ctx context.Context, params *CreateBuildInput, optF
 		params = &CreateBuildInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateBuild", params, optFns, addOperationCreateBuildMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBuild", params, optFns, c.addOperationCreateBuildMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ type CreateBuildOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBuild{}, middleware.After)
 	if err != nil {
 		return err

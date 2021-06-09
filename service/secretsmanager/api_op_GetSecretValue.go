@@ -35,7 +35,7 @@ func (c *Client) GetSecretValue(ctx context.Context, params *GetSecretValueInput
 		params = &GetSecretValueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSecretValue", params, optFns, addOperationGetSecretValueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSecretValue", params, optFns, c.addOperationGetSecretValueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +129,7 @@ type GetSecretValueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSecretValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSecretValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSecretValue{}, middleware.After)
 	if err != nil {
 		return err

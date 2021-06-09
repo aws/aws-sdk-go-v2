@@ -20,7 +20,7 @@ func (c *Client) ListChannelsModeratedByAppInstanceUser(ctx context.Context, par
 		params = &ListChannelsModeratedByAppInstanceUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListChannelsModeratedByAppInstanceUser", params, optFns, addOperationListChannelsModeratedByAppInstanceUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListChannelsModeratedByAppInstanceUser", params, optFns, c.addOperationListChannelsModeratedByAppInstanceUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListChannelsModeratedByAppInstanceUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListChannelsModeratedByAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListChannelsModeratedByAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChannelsModeratedByAppInstanceUser{}, middleware.After)
 	if err != nil {
 		return err

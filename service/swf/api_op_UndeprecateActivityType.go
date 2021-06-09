@@ -45,7 +45,7 @@ func (c *Client) UndeprecateActivityType(ctx context.Context, params *Undeprecat
 		params = &UndeprecateActivityTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UndeprecateActivityType", params, optFns, addOperationUndeprecateActivityTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UndeprecateActivityType", params, optFns, c.addOperationUndeprecateActivityTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type UndeprecateActivityTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUndeprecateActivityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUndeprecateActivityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUndeprecateActivityType{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) UpdateVodSource(ctx context.Context, params *UpdateVodSourceInp
 		params = &UpdateVodSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateVodSource", params, optFns, addOperationUpdateVodSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateVodSource", params, optFns, c.addOperationUpdateVodSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type UpdateVodSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateVodSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateVodSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVodSource{}, middleware.After)
 	if err != nil {
 		return err

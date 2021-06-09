@@ -19,7 +19,7 @@ func (c *Client) DescribeFHIRDatastore(ctx context.Context, params *DescribeFHIR
 		params = &DescribeFHIRDatastoreInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFHIRDatastore", params, optFns, addOperationDescribeFHIRDatastoreMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFHIRDatastore", params, optFns, c.addOperationDescribeFHIRDatastoreMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DescribeFHIRDatastoreOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFHIRDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFHIRDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeFHIRDatastore{}, middleware.After)
 	if err != nil {
 		return err

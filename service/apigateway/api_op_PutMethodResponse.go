@@ -16,7 +16,7 @@ func (c *Client) PutMethodResponse(ctx context.Context, params *PutMethodRespons
 		params = &PutMethodResponseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutMethodResponse", params, optFns, addOperationPutMethodResponseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutMethodResponse", params, optFns, c.addOperationPutMethodResponseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +129,7 @@ type PutMethodResponseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutMethodResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutMethodResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutMethodResponse{}, middleware.After)
 	if err != nil {
 		return err

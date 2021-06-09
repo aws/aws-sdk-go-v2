@@ -22,7 +22,7 @@ func (c *Client) TestIdentityProvider(ctx context.Context, params *TestIdentityP
 		params = &TestIdentityProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestIdentityProvider", params, optFns, addOperationTestIdentityProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestIdentityProvider", params, optFns, c.addOperationTestIdentityProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type TestIdentityProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTestIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTestIdentityProvider{}, middleware.After)
 	if err != nil {
 		return err

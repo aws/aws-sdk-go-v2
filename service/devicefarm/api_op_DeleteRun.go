@@ -17,7 +17,7 @@ func (c *Client) DeleteRun(ctx context.Context, params *DeleteRunInput, optFns .
 		params = &DeleteRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRun", params, optFns, addOperationDeleteRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRun", params, optFns, c.addOperationDeleteRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRun{}, middleware.After)
 	if err != nil {
 		return err

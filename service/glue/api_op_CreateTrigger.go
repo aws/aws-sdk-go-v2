@@ -17,7 +17,7 @@ func (c *Client) CreateTrigger(ctx context.Context, params *CreateTriggerInput, 
 		params = &CreateTriggerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTrigger", params, optFns, addOperationCreateTriggerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTrigger", params, optFns, c.addOperationCreateTriggerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type CreateTriggerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTrigger{}, middleware.After)
 	if err != nil {
 		return err

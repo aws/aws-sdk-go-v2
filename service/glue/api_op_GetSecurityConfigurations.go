@@ -18,7 +18,7 @@ func (c *Client) GetSecurityConfigurations(ctx context.Context, params *GetSecur
 		params = &GetSecurityConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSecurityConfigurations", params, optFns, addOperationGetSecurityConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSecurityConfigurations", params, optFns, c.addOperationGetSecurityConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetSecurityConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSecurityConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSecurityConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSecurityConfigurations{}, middleware.After)
 	if err != nil {
 		return err

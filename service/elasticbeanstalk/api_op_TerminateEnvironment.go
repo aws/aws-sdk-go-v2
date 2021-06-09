@@ -18,7 +18,7 @@ func (c *Client) TerminateEnvironment(ctx context.Context, params *TerminateEnvi
 		params = &TerminateEnvironmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TerminateEnvironment", params, optFns, addOperationTerminateEnvironmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TerminateEnvironment", params, optFns, c.addOperationTerminateEnvironmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -175,7 +175,7 @@ type TerminateEnvironmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTerminateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTerminateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpTerminateEnvironment{}, middleware.After)
 	if err != nil {
 		return err

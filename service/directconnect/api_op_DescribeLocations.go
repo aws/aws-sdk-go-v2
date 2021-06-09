@@ -19,7 +19,7 @@ func (c *Client) DescribeLocations(ctx context.Context, params *DescribeLocation
 		params = &DescribeLocationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLocations", params, optFns, addOperationDescribeLocationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLocations", params, optFns, c.addOperationDescribeLocationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DescribeLocationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocations{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ListPrompts(ctx context.Context, params *ListPromptsInput, optF
 		params = &ListPromptsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPrompts", params, optFns, addOperationListPromptsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPrompts", params, optFns, c.addOperationListPromptsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListPromptsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPromptsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPromptsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPrompts{}, middleware.After)
 	if err != nil {
 		return err

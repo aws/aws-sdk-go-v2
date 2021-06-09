@@ -21,7 +21,7 @@ func (c *Client) PutBotAlias(ctx context.Context, params *PutBotAliasInput, optF
 		params = &PutBotAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBotAlias", params, optFns, addOperationPutBotAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBotAlias", params, optFns, c.addOperationPutBotAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type PutBotAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBotAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBotAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutBotAlias{}, middleware.After)
 	if err != nil {
 		return err

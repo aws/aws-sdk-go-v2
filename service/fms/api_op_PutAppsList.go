@@ -17,7 +17,7 @@ func (c *Client) PutAppsList(ctx context.Context, params *PutAppsListInput, optF
 		params = &PutAppsListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAppsList", params, optFns, addOperationPutAppsListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAppsList", params, optFns, c.addOperationPutAppsListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type PutAppsListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAppsListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAppsListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAppsList{}, middleware.After)
 	if err != nil {
 		return err

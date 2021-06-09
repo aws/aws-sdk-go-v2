@@ -27,7 +27,7 @@ func (c *Client) BatchGetResourceConfig(ctx context.Context, params *BatchGetRes
 		params = &BatchGetResourceConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetResourceConfig", params, optFns, addOperationBatchGetResourceConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetResourceConfig", params, optFns, c.addOperationBatchGetResourceConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type BatchGetResourceConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetResourceConfig{}, middleware.After)
 	if err != nil {
 		return err

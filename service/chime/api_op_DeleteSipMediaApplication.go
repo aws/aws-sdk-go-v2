@@ -16,7 +16,7 @@ func (c *Client) DeleteSipMediaApplication(ctx context.Context, params *DeleteSi
 		params = &DeleteSipMediaApplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSipMediaApplication", params, optFns, addOperationDeleteSipMediaApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSipMediaApplication", params, optFns, c.addOperationDeleteSipMediaApplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteSipMediaApplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSipMediaApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSipMediaApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSipMediaApplication{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) GetLexicon(ctx context.Context, params *GetLexiconInput, optFns
 		params = &GetLexiconInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLexicon", params, optFns, addOperationGetLexiconMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLexicon", params, optFns, c.addOperationGetLexiconMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetLexiconOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLexiconMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLexiconMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLexicon{}, middleware.After)
 	if err != nil {
 		return err

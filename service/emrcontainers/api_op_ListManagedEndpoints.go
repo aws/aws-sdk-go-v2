@@ -21,7 +21,7 @@ func (c *Client) ListManagedEndpoints(ctx context.Context, params *ListManagedEn
 		params = &ListManagedEndpointsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListManagedEndpoints", params, optFns, addOperationListManagedEndpointsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListManagedEndpoints", params, optFns, c.addOperationListManagedEndpointsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ListManagedEndpointsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListManagedEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListManagedEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedEndpoints{}, middleware.After)
 	if err != nil {
 		return err

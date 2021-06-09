@@ -19,7 +19,7 @@ func (c *Client) GetStatementResult(ctx context.Context, params *GetStatementRes
 		params = &GetStatementResultInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetStatementResult", params, optFns, addOperationGetStatementResultMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetStatementResult", params, optFns, c.addOperationGetStatementResultMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetStatementResultOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetStatementResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetStatementResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetStatementResult{}, middleware.After)
 	if err != nil {
 		return err

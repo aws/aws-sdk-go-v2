@@ -17,7 +17,7 @@ func (c *Client) ResetResourceLogLevel(ctx context.Context, params *ResetResourc
 		params = &ResetResourceLogLevelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetResourceLogLevel", params, optFns, addOperationResetResourceLogLevelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetResourceLogLevel", params, optFns, c.addOperationResetResourceLogLevelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type ResetResourceLogLevelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetResourceLogLevelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetResourceLogLevelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetResourceLogLevel{}, middleware.After)
 	if err != nil {
 		return err

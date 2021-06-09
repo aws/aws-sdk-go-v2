@@ -21,7 +21,7 @@ func (c *Client) CreateCarrierGateway(ctx context.Context, params *CreateCarrier
 		params = &CreateCarrierGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCarrierGateway", params, optFns, addOperationCreateCarrierGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCarrierGateway", params, optFns, c.addOperationCreateCarrierGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type CreateCarrierGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCarrierGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCarrierGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateCarrierGateway{}, middleware.After)
 	if err != nil {
 		return err

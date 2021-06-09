@@ -19,7 +19,7 @@ func (c *Client) DescribeAggregationAuthorizations(ctx context.Context, params *
 		params = &DescribeAggregationAuthorizationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAggregationAuthorizations", params, optFns, addOperationDescribeAggregationAuthorizationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAggregationAuthorizations", params, optFns, c.addOperationDescribeAggregationAuthorizationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DescribeAggregationAuthorizationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAggregationAuthorizationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAggregationAuthorizationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAggregationAuthorizations{}, middleware.After)
 	if err != nil {
 		return err

@@ -26,7 +26,7 @@ func (c *Client) ListRoles(ctx context.Context, params *ListRolesInput, optFns .
 		params = &ListRolesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRoles", params, optFns, addOperationListRolesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRoles", params, optFns, c.addOperationListRolesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type ListRolesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRolesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRolesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListRoles{}, middleware.After)
 	if err != nil {
 		return err

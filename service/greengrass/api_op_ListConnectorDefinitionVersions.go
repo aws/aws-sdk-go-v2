@@ -20,7 +20,7 @@ func (c *Client) ListConnectorDefinitionVersions(ctx context.Context, params *Li
 		params = &ListConnectorDefinitionVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListConnectorDefinitionVersions", params, optFns, addOperationListConnectorDefinitionVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListConnectorDefinitionVersions", params, optFns, c.addOperationListConnectorDefinitionVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListConnectorDefinitionVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListConnectorDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListConnectorDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConnectorDefinitionVersions{}, middleware.After)
 	if err != nil {
 		return err

@@ -27,7 +27,7 @@ func (c *Client) ListAWSServiceAccessForOrganization(ctx context.Context, params
 		params = &ListAWSServiceAccessForOrganizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAWSServiceAccessForOrganization", params, optFns, addOperationListAWSServiceAccessForOrganizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAWSServiceAccessForOrganization", params, optFns, c.addOperationListAWSServiceAccessForOrganizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type ListAWSServiceAccessForOrganizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAWSServiceAccessForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAWSServiceAccessForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAWSServiceAccessForOrganization{}, middleware.After)
 	if err != nil {
 		return err

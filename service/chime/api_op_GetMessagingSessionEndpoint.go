@@ -18,7 +18,7 @@ func (c *Client) GetMessagingSessionEndpoint(ctx context.Context, params *GetMes
 		params = &GetMessagingSessionEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMessagingSessionEndpoint", params, optFns, addOperationGetMessagingSessionEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMessagingSessionEndpoint", params, optFns, c.addOperationGetMessagingSessionEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type GetMessagingSessionEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMessagingSessionEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMessagingSessionEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMessagingSessionEndpoint{}, middleware.After)
 	if err != nil {
 		return err

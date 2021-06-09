@@ -43,7 +43,7 @@ func (c *Client) RecordLifecycleActionHeartbeat(ctx context.Context, params *Rec
 		params = &RecordLifecycleActionHeartbeatInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RecordLifecycleActionHeartbeat", params, optFns, addOperationRecordLifecycleActionHeartbeatMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RecordLifecycleActionHeartbeat", params, optFns, c.addOperationRecordLifecycleActionHeartbeatMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type RecordLifecycleActionHeartbeatOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRecordLifecycleActionHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRecordLifecycleActionHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRecordLifecycleActionHeartbeat{}, middleware.After)
 	if err != nil {
 		return err

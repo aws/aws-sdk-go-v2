@@ -36,7 +36,7 @@ func (c *Client) DescribeIdentityPoolUsage(ctx context.Context, params *Describe
 		params = &DescribeIdentityPoolUsageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeIdentityPoolUsage", params, optFns, addOperationDescribeIdentityPoolUsageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeIdentityPoolUsage", params, optFns, c.addOperationDescribeIdentityPoolUsageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DescribeIdentityPoolUsageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeIdentityPoolUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeIdentityPoolUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeIdentityPoolUsage{}, middleware.After)
 	if err != nil {
 		return err

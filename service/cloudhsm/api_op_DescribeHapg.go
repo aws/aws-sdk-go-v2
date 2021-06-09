@@ -27,7 +27,7 @@ func (c *Client) DescribeHapg(ctx context.Context, params *DescribeHapgInput, op
 		params = &DescribeHapgInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeHapg", params, optFns, addOperationDescribeHapgMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeHapg", params, optFns, c.addOperationDescribeHapgMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type DescribeHapgOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHapg{}, middleware.After)
 	if err != nil {
 		return err

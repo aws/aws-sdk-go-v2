@@ -17,7 +17,7 @@ func (c *Client) ListCoreDefinitions(ctx context.Context, params *ListCoreDefini
 		params = &ListCoreDefinitionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCoreDefinitions", params, optFns, addOperationListCoreDefinitionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCoreDefinitions", params, optFns, c.addOperationListCoreDefinitionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ListCoreDefinitionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCoreDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCoreDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCoreDefinitions{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteSourceCredentials(ctx context.Context, params *DeleteSour
 		params = &DeleteSourceCredentialsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSourceCredentials", params, optFns, addOperationDeleteSourceCredentialsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSourceCredentials", params, optFns, c.addOperationDeleteSourceCredentialsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteSourceCredentialsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSourceCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSourceCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSourceCredentials{}, middleware.After)
 	if err != nil {
 		return err

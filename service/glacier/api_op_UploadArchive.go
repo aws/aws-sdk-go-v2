@@ -49,7 +49,7 @@ func (c *Client) UploadArchive(ctx context.Context, params *UploadArchiveInput, 
 		params = &UploadArchiveInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UploadArchive", params, optFns, addOperationUploadArchiveMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UploadArchive", params, optFns, c.addOperationUploadArchiveMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type UploadArchiveOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUploadArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUploadArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUploadArchive{}, middleware.After)
 	if err != nil {
 		return err

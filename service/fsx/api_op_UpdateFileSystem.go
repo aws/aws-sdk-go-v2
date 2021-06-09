@@ -55,7 +55,7 @@ func (c *Client) UpdateFileSystem(ctx context.Context, params *UpdateFileSystemI
 		params = &UpdateFileSystemInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFileSystem", params, optFns, addOperationUpdateFileSystemMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFileSystem", params, optFns, c.addOperationUpdateFileSystemMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -127,7 +127,7 @@ type UpdateFileSystemOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateFileSystem{}, middleware.After)
 	if err != nil {
 		return err

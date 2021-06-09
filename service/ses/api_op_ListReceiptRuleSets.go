@@ -23,7 +23,7 @@ func (c *Client) ListReceiptRuleSets(ctx context.Context, params *ListReceiptRul
 		params = &ListReceiptRuleSetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListReceiptRuleSets", params, optFns, addOperationListReceiptRuleSetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListReceiptRuleSets", params, optFns, c.addOperationListReceiptRuleSetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListReceiptRuleSetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListReceiptRuleSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListReceiptRuleSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListReceiptRuleSets{}, middleware.After)
 	if err != nil {
 		return err

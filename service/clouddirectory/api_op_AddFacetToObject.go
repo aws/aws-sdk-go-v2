@@ -18,7 +18,7 @@ func (c *Client) AddFacetToObject(ctx context.Context, params *AddFacetToObjectI
 		params = &AddFacetToObjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddFacetToObject", params, optFns, addOperationAddFacetToObjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddFacetToObject", params, optFns, c.addOperationAddFacetToObjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type AddFacetToObjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddFacetToObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddFacetToObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddFacetToObject{}, middleware.After)
 	if err != nil {
 		return err

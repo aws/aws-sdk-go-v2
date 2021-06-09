@@ -16,7 +16,7 @@ func (c *Client) UpdateRole(ctx context.Context, params *UpdateRoleInput, optFns
 		params = &UpdateRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRole", params, optFns, addOperationUpdateRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRole", params, optFns, c.addOperationUpdateRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UpdateRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateRole{}, middleware.After)
 	if err != nil {
 		return err

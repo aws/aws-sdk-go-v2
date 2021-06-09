@@ -23,7 +23,7 @@ func (c *Client) DeleteMatchmakingConfiguration(ctx context.Context, params *Del
 		params = &DeleteMatchmakingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMatchmakingConfiguration", params, optFns, addOperationDeleteMatchmakingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMatchmakingConfiguration", params, optFns, c.addOperationDeleteMatchmakingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteMatchmakingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMatchmakingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMatchmakingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMatchmakingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

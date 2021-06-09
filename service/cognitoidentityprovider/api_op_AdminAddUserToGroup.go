@@ -17,7 +17,7 @@ func (c *Client) AdminAddUserToGroup(ctx context.Context, params *AdminAddUserTo
 		params = &AdminAddUserToGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminAddUserToGroup", params, optFns, addOperationAdminAddUserToGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminAddUserToGroup", params, optFns, c.addOperationAdminAddUserToGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type AdminAddUserToGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminAddUserToGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminAddUserToGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminAddUserToGroup{}, middleware.After)
 	if err != nil {
 		return err

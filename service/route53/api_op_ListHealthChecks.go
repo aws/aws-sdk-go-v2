@@ -19,7 +19,7 @@ func (c *Client) ListHealthChecks(ctx context.Context, params *ListHealthChecksI
 		params = &ListHealthChecksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListHealthChecks", params, optFns, addOperationListHealthChecksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListHealthChecks", params, optFns, c.addOperationListHealthChecksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type ListHealthChecksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListHealthChecksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListHealthChecksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListHealthChecks{}, middleware.After)
 	if err != nil {
 		return err

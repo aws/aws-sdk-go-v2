@@ -17,7 +17,7 @@ func (c *Client) BatchGetDeploymentGroups(ctx context.Context, params *BatchGetD
 		params = &BatchGetDeploymentGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetDeploymentGroups", params, optFns, addOperationBatchGetDeploymentGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetDeploymentGroups", params, optFns, c.addOperationBatchGetDeploymentGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type BatchGetDeploymentGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetDeploymentGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetDeploymentGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetDeploymentGroups{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DeleteBGPPeer(ctx context.Context, params *DeleteBGPPeerInput, 
 		params = &DeleteBGPPeerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBGPPeer", params, optFns, addOperationDeleteBGPPeerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBGPPeer", params, optFns, c.addOperationDeleteBGPPeerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DeleteBGPPeerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBGPPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBGPPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBGPPeer{}, middleware.After)
 	if err != nil {
 		return err

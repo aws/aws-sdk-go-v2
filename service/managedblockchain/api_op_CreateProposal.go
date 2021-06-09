@@ -20,7 +20,7 @@ func (c *Client) CreateProposal(ctx context.Context, params *CreateProposalInput
 		params = &CreateProposalInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateProposal", params, optFns, addOperationCreateProposalMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateProposal", params, optFns, c.addOperationCreateProposalMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type CreateProposalOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProposal{}, middleware.After)
 	if err != nil {
 		return err

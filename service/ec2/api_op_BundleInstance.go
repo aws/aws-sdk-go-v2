@@ -20,7 +20,7 @@ func (c *Client) BundleInstance(ctx context.Context, params *BundleInstanceInput
 		params = &BundleInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BundleInstance", params, optFns, addOperationBundleInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BundleInstance", params, optFns, c.addOperationBundleInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type BundleInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBundleInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBundleInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpBundleInstance{}, middleware.After)
 	if err != nil {
 		return err

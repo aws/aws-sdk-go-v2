@@ -18,7 +18,7 @@ func (c *Client) DescribeAutoScalingInstances(ctx context.Context, params *Descr
 		params = &DescribeAutoScalingInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAutoScalingInstances", params, optFns, addOperationDescribeAutoScalingInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAutoScalingInstances", params, optFns, c.addOperationDescribeAutoScalingInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeAutoScalingInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAutoScalingInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAutoScalingInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAutoScalingInstances{}, middleware.After)
 	if err != nil {
 		return err

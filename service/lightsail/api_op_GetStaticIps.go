@@ -17,7 +17,7 @@ func (c *Client) GetStaticIps(ctx context.Context, params *GetStaticIpsInput, op
 		params = &GetStaticIpsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetStaticIps", params, optFns, addOperationGetStaticIpsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetStaticIps", params, optFns, c.addOperationGetStaticIpsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetStaticIpsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetStaticIpsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetStaticIpsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetStaticIps{}, middleware.After)
 	if err != nil {
 		return err

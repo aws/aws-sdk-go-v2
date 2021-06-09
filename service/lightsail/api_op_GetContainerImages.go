@@ -21,7 +21,7 @@ func (c *Client) GetContainerImages(ctx context.Context, params *GetContainerIma
 		params = &GetContainerImagesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetContainerImages", params, optFns, addOperationGetContainerImagesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetContainerImages", params, optFns, c.addOperationGetContainerImagesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetContainerImagesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetContainerImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetContainerImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetContainerImages{}, middleware.After)
 	if err != nil {
 		return err

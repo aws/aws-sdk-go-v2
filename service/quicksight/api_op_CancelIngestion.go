@@ -16,7 +16,7 @@ func (c *Client) CancelIngestion(ctx context.Context, params *CancelIngestionInp
 		params = &CancelIngestionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelIngestion", params, optFns, addOperationCancelIngestionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelIngestion", params, optFns, c.addOperationCancelIngestionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type CancelIngestionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelIngestion{}, middleware.After)
 	if err != nil {
 		return err

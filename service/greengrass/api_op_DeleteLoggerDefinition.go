@@ -16,7 +16,7 @@ func (c *Client) DeleteLoggerDefinition(ctx context.Context, params *DeleteLogge
 		params = &DeleteLoggerDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLoggerDefinition", params, optFns, addOperationDeleteLoggerDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLoggerDefinition", params, optFns, c.addOperationDeleteLoggerDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteLoggerDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLoggerDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLoggerDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLoggerDefinition{}, middleware.After)
 	if err != nil {
 		return err

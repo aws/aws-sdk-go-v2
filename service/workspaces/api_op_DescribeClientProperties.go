@@ -17,7 +17,7 @@ func (c *Client) DescribeClientProperties(ctx context.Context, params *DescribeC
 		params = &DescribeClientPropertiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeClientProperties", params, optFns, addOperationDescribeClientPropertiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeClientProperties", params, optFns, c.addOperationDescribeClientPropertiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeClientPropertiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeClientPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeClientPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeClientProperties{}, middleware.After)
 	if err != nil {
 		return err

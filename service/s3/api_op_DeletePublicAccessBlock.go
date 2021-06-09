@@ -40,7 +40,7 @@ func (c *Client) DeletePublicAccessBlock(ctx context.Context, params *DeletePubl
 		params = &DeletePublicAccessBlockInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePublicAccessBlock", params, optFns, addOperationDeletePublicAccessBlockMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePublicAccessBlock", params, optFns, c.addOperationDeletePublicAccessBlockMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type DeletePublicAccessBlockOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePublicAccessBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePublicAccessBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeletePublicAccessBlock{}, middleware.After)
 	if err != nil {
 		return err

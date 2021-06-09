@@ -20,7 +20,7 @@ func (c *Client) DeleteExpression(ctx context.Context, params *DeleteExpressionI
 		params = &DeleteExpressionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteExpression", params, optFns, addOperationDeleteExpressionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteExpression", params, optFns, c.addOperationDeleteExpressionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DeleteExpressionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteExpressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteExpressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteExpression{}, middleware.After)
 	if err != nil {
 		return err

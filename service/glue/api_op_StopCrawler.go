@@ -16,7 +16,7 @@ func (c *Client) StopCrawler(ctx context.Context, params *StopCrawlerInput, optF
 		params = &StopCrawlerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopCrawler", params, optFns, addOperationStopCrawlerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopCrawler", params, optFns, c.addOperationStopCrawlerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type StopCrawlerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopCrawlerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopCrawlerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopCrawler{}, middleware.After)
 	if err != nil {
 		return err

@@ -34,7 +34,7 @@ func (c *Client) AdminInitiateAuth(ctx context.Context, params *AdminInitiateAut
 		params = &AdminInitiateAuthInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminInitiateAuth", params, optFns, addOperationAdminInitiateAuthMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminInitiateAuth", params, optFns, c.addOperationAdminInitiateAuthMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -267,7 +267,7 @@ type AdminInitiateAuthOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminInitiateAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminInitiateAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminInitiateAuth{}, middleware.After)
 	if err != nil {
 		return err

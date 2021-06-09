@@ -16,7 +16,7 @@ func (c *Client) DeleteModelPackageGroupPolicy(ctx context.Context, params *Dele
 		params = &DeleteModelPackageGroupPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteModelPackageGroupPolicy", params, optFns, addOperationDeleteModelPackageGroupPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteModelPackageGroupPolicy", params, optFns, c.addOperationDeleteModelPackageGroupPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteModelPackageGroupPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteModelPackageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteModelPackageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteModelPackageGroupPolicy{}, middleware.After)
 	if err != nil {
 		return err

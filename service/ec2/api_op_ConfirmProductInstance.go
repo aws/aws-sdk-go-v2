@@ -18,7 +18,7 @@ func (c *Client) ConfirmProductInstance(ctx context.Context, params *ConfirmProd
 		params = &ConfirmProductInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ConfirmProductInstance", params, optFns, addOperationConfirmProductInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ConfirmProductInstance", params, optFns, c.addOperationConfirmProductInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type ConfirmProductInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationConfirmProductInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationConfirmProductInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpConfirmProductInstance{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) UpdateAuthorizer(ctx context.Context, params *UpdateAuthorizerI
 		params = &UpdateAuthorizerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAuthorizer", params, optFns, addOperationUpdateAuthorizerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAuthorizer", params, optFns, c.addOperationUpdateAuthorizerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -137,7 +137,7 @@ type UpdateAuthorizerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAuthorizer{}, middleware.After)
 	if err != nil {
 		return err

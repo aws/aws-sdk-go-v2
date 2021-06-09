@@ -17,7 +17,7 @@ func (c *Client) RotateEncryptionKey(ctx context.Context, params *RotateEncrypti
 		params = &RotateEncryptionKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RotateEncryptionKey", params, optFns, addOperationRotateEncryptionKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RotateEncryptionKey", params, optFns, c.addOperationRotateEncryptionKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type RotateEncryptionKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRotateEncryptionKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRotateEncryptionKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRotateEncryptionKey{}, middleware.After)
 	if err != nil {
 		return err

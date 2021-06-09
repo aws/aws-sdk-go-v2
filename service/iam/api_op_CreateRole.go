@@ -23,7 +23,7 @@ func (c *Client) CreateRole(ctx context.Context, params *CreateRoleInput, optFns
 		params = &CreateRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRole", params, optFns, addOperationCreateRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRole", params, optFns, c.addOperationCreateRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ type CreateRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateRole{}, middleware.After)
 	if err != nil {
 		return err

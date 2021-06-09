@@ -49,7 +49,7 @@ func (c *Client) ScheduleKeyDeletion(ctx context.Context, params *ScheduleKeyDel
 		params = &ScheduleKeyDeletionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ScheduleKeyDeletion", params, optFns, addOperationScheduleKeyDeletionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ScheduleKeyDeletion", params, optFns, c.addOperationScheduleKeyDeletionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ type ScheduleKeyDeletionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationScheduleKeyDeletionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationScheduleKeyDeletionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpScheduleKeyDeletion{}, middleware.After)
 	if err != nil {
 		return err

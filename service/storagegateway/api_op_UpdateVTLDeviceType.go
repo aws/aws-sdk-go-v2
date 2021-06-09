@@ -19,7 +19,7 @@ func (c *Client) UpdateVTLDeviceType(ctx context.Context, params *UpdateVTLDevic
 		params = &UpdateVTLDeviceTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateVTLDeviceType", params, optFns, addOperationUpdateVTLDeviceTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateVTLDeviceType", params, optFns, c.addOperationUpdateVTLDeviceTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UpdateVTLDeviceTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateVTLDeviceTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateVTLDeviceTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateVTLDeviceType{}, middleware.After)
 	if err != nil {
 		return err

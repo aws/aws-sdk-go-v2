@@ -44,7 +44,7 @@ func (c *Client) CreateFargateProfile(ctx context.Context, params *CreateFargate
 		params = &CreateFargateProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFargateProfile", params, optFns, addOperationCreateFargateProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFargateProfile", params, optFns, c.addOperationCreateFargateProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ type CreateFargateProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFargateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFargateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFargateProfile{}, middleware.After)
 	if err != nil {
 		return err

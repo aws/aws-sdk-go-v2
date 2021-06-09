@@ -38,7 +38,7 @@ func (c *Client) UploadDocuments(ctx context.Context, params *UploadDocumentsInp
 		params = &UploadDocumentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UploadDocuments", params, optFns, addOperationUploadDocumentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UploadDocuments", params, optFns, c.addOperationUploadDocumentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type UploadDocumentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUploadDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUploadDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUploadDocuments{}, middleware.After)
 	if err != nil {
 		return err

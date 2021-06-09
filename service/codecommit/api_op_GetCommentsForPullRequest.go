@@ -20,7 +20,7 @@ func (c *Client) GetCommentsForPullRequest(ctx context.Context, params *GetComme
 		params = &GetCommentsForPullRequestInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCommentsForPullRequest", params, optFns, addOperationGetCommentsForPullRequestMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCommentsForPullRequest", params, optFns, c.addOperationGetCommentsForPullRequestMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetCommentsForPullRequestOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCommentsForPullRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCommentsForPullRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCommentsForPullRequest{}, middleware.After)
 	if err != nil {
 		return err

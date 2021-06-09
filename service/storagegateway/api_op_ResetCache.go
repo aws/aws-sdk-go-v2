@@ -26,7 +26,7 @@ func (c *Client) ResetCache(ctx context.Context, params *ResetCacheInput, optFns
 		params = &ResetCacheInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetCache", params, optFns, addOperationResetCacheMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetCache", params, optFns, c.addOperationResetCacheMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ResetCacheOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResetCache{}, middleware.After)
 	if err != nil {
 		return err

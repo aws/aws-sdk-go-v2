@@ -22,7 +22,7 @@ func (c *Client) ContinueDeployment(ctx context.Context, params *ContinueDeploym
 		params = &ContinueDeploymentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ContinueDeployment", params, optFns, addOperationContinueDeploymentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ContinueDeployment", params, optFns, c.addOperationContinueDeploymentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type ContinueDeploymentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationContinueDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationContinueDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpContinueDeployment{}, middleware.After)
 	if err != nil {
 		return err

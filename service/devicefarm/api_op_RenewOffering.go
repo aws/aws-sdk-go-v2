@@ -21,7 +21,7 @@ func (c *Client) RenewOffering(ctx context.Context, params *RenewOfferingInput, 
 		params = &RenewOfferingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RenewOffering", params, optFns, addOperationRenewOfferingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RenewOffering", params, optFns, c.addOperationRenewOfferingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type RenewOfferingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRenewOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRenewOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRenewOffering{}, middleware.After)
 	if err != nil {
 		return err

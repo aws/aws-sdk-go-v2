@@ -30,7 +30,7 @@ func (c *Client) StartStreamEncryption(ctx context.Context, params *StartStreamE
 		params = &StartStreamEncryptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartStreamEncryption", params, optFns, addOperationStartStreamEncryptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartStreamEncryption", params, optFns, c.addOperationStartStreamEncryptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type StartStreamEncryptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartStreamEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartStreamEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartStreamEncryption{}, middleware.After)
 	if err != nil {
 		return err

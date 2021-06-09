@@ -18,7 +18,7 @@ func (c *Client) GetConnectors(ctx context.Context, params *GetConnectorsInput, 
 		params = &GetConnectorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetConnectors", params, optFns, addOperationGetConnectorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetConnectors", params, optFns, c.addOperationGetConnectorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetConnectorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetConnectors{}, middleware.After)
 	if err != nil {
 		return err

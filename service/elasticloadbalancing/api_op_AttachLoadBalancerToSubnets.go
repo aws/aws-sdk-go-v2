@@ -21,7 +21,7 @@ func (c *Client) AttachLoadBalancerToSubnets(ctx context.Context, params *Attach
 		params = &AttachLoadBalancerToSubnetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachLoadBalancerToSubnets", params, optFns, addOperationAttachLoadBalancerToSubnetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachLoadBalancerToSubnets", params, optFns, c.addOperationAttachLoadBalancerToSubnetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type AttachLoadBalancerToSubnetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachLoadBalancerToSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachLoadBalancerToSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAttachLoadBalancerToSubnets{}, middleware.After)
 	if err != nil {
 		return err

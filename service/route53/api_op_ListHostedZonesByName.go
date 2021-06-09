@@ -55,7 +55,7 @@ func (c *Client) ListHostedZonesByName(ctx context.Context, params *ListHostedZo
 		params = &ListHostedZonesByNameInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListHostedZonesByName", params, optFns, addOperationListHostedZonesByNameMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListHostedZonesByName", params, optFns, c.addOperationListHostedZonesByNameMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -143,7 +143,7 @@ type ListHostedZonesByNameOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListHostedZonesByNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListHostedZonesByNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListHostedZonesByName{}, middleware.After)
 	if err != nil {
 		return err

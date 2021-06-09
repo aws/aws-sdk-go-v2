@@ -17,7 +17,7 @@ func (c *Client) CreateWorkGroup(ctx context.Context, params *CreateWorkGroupInp
 		params = &CreateWorkGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateWorkGroup", params, optFns, addOperationCreateWorkGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateWorkGroup", params, optFns, c.addOperationCreateWorkGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type CreateWorkGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateWorkGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateWorkGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWorkGroup{}, middleware.After)
 	if err != nil {
 		return err

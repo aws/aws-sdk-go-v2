@@ -30,7 +30,7 @@ func (c *Client) DeleteFileSystem(ctx context.Context, params *DeleteFileSystemI
 		params = &DeleteFileSystemInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFileSystem", params, optFns, addOperationDeleteFileSystemMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFileSystem", params, optFns, c.addOperationDeleteFileSystemMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type DeleteFileSystemOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFileSystem{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteRepositoryPolicy(ctx context.Context, params *DeleteRepos
 		params = &DeleteRepositoryPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRepositoryPolicy", params, optFns, addOperationDeleteRepositoryPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRepositoryPolicy", params, optFns, c.addOperationDeleteRepositoryPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DeleteRepositoryPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRepositoryPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRepositoryPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRepositoryPolicy{}, middleware.After)
 	if err != nil {
 		return err

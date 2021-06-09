@@ -20,7 +20,7 @@ func (c *Client) DescribeKeyPairs(ctx context.Context, params *DescribeKeyPairsI
 		params = &DescribeKeyPairsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeKeyPairs", params, optFns, addOperationDescribeKeyPairsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeKeyPairs", params, optFns, c.addOperationDescribeKeyPairsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type DescribeKeyPairsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeKeyPairsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeKeyPairsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeKeyPairs{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) EnableSharingWithAwsOrganization(ctx context.Context, params *E
 		params = &EnableSharingWithAwsOrganizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableSharingWithAwsOrganization", params, optFns, addOperationEnableSharingWithAwsOrganizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableSharingWithAwsOrganization", params, optFns, c.addOperationEnableSharingWithAwsOrganizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type EnableSharingWithAwsOrganizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableSharingWithAwsOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableSharingWithAwsOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableSharingWithAwsOrganization{}, middleware.After)
 	if err != nil {
 		return err

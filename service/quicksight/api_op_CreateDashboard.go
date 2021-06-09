@@ -22,7 +22,7 @@ func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInp
 		params = &CreateDashboardInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDashboard", params, optFns, addOperationCreateDashboardMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDashboard", params, optFns, c.addOperationCreateDashboardMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +129,7 @@ type CreateDashboardOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDashboard{}, middleware.After)
 	if err != nil {
 		return err

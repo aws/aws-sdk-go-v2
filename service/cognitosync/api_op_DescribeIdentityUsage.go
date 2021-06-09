@@ -37,7 +37,7 @@ func (c *Client) DescribeIdentityUsage(ctx context.Context, params *DescribeIden
 		params = &DescribeIdentityUsageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeIdentityUsage", params, optFns, addOperationDescribeIdentityUsageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeIdentityUsage", params, optFns, c.addOperationDescribeIdentityUsageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DescribeIdentityUsageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeIdentityUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeIdentityUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeIdentityUsage{}, middleware.After)
 	if err != nil {
 		return err

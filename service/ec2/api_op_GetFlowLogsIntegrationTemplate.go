@@ -33,7 +33,7 @@ func (c *Client) GetFlowLogsIntegrationTemplate(ctx context.Context, params *Get
 		params = &GetFlowLogsIntegrationTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFlowLogsIntegrationTemplate", params, optFns, addOperationGetFlowLogsIntegrationTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFlowLogsIntegrationTemplate", params, optFns, c.addOperationGetFlowLogsIntegrationTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type GetFlowLogsIntegrationTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFlowLogsIntegrationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFlowLogsIntegrationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpGetFlowLogsIntegrationTemplate{}, middleware.After)
 	if err != nil {
 		return err

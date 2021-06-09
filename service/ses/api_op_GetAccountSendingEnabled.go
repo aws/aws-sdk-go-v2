@@ -17,7 +17,7 @@ func (c *Client) GetAccountSendingEnabled(ctx context.Context, params *GetAccoun
 		params = &GetAccountSendingEnabledInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccountSendingEnabled", params, optFns, addOperationGetAccountSendingEnabledMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccountSendingEnabled", params, optFns, c.addOperationGetAccountSendingEnabledMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type GetAccountSendingEnabledOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccountSendingEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccountSendingEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetAccountSendingEnabled{}, middleware.After)
 	if err != nil {
 		return err

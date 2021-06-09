@@ -22,7 +22,7 @@ func (c *Client) DescribeMLModels(ctx context.Context, params *DescribeMLModelsI
 		params = &DescribeMLModelsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeMLModels", params, optFns, addOperationDescribeMLModelsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeMLModels", params, optFns, c.addOperationDescribeMLModelsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -138,7 +138,7 @@ type DescribeMLModelsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeMLModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeMLModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMLModels{}, middleware.After)
 	if err != nil {
 		return err

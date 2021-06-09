@@ -18,7 +18,7 @@ func (c *Client) GetResourceShareAssociations(ctx context.Context, params *GetRe
 		params = &GetResourceShareAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetResourceShareAssociations", params, optFns, addOperationGetResourceShareAssociationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetResourceShareAssociations", params, optFns, c.addOperationGetResourceShareAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetResourceShareAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetResourceShareAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetResourceShareAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceShareAssociations{}, middleware.After)
 	if err != nil {
 		return err

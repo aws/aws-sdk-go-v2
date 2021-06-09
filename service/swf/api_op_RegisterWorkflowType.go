@@ -49,7 +49,7 @@ func (c *Client) RegisterWorkflowType(ctx context.Context, params *RegisterWorkf
 		params = &RegisterWorkflowTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterWorkflowType", params, optFns, addOperationRegisterWorkflowTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterWorkflowType", params, optFns, c.addOperationRegisterWorkflowTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -154,7 +154,7 @@ type RegisterWorkflowTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterWorkflowTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterWorkflowTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRegisterWorkflowType{}, middleware.After)
 	if err != nil {
 		return err

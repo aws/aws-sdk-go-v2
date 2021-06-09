@@ -17,7 +17,7 @@ func (c *Client) CreateModelVersion(ctx context.Context, params *CreateModelVers
 		params = &CreateModelVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateModelVersion", params, optFns, addOperationCreateModelVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateModelVersion", params, optFns, c.addOperationCreateModelVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type CreateModelVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelVersion{}, middleware.After)
 	if err != nil {
 		return err

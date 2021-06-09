@@ -32,7 +32,7 @@ func (c *Client) CreateHIT(ctx context.Context, params *CreateHITInput, optFns .
 		params = &CreateHITInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateHIT", params, optFns, addOperationCreateHITMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateHIT", params, optFns, c.addOperationCreateHITMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -160,7 +160,7 @@ type CreateHITOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHIT{}, middleware.After)
 	if err != nil {
 		return err

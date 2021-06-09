@@ -100,7 +100,7 @@ func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMu
 		params = &CompleteMultipartUploadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CompleteMultipartUpload", params, optFns, addOperationCompleteMultipartUploadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CompleteMultipartUpload", params, optFns, c.addOperationCompleteMultipartUploadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -209,7 +209,7 @@ type CompleteMultipartUploadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCompleteMultipartUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCompleteMultipartUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpCompleteMultipartUpload{}, middleware.After)
 	if err != nil {
 		return err

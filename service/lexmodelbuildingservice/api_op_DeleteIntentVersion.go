@@ -18,7 +18,7 @@ func (c *Client) DeleteIntentVersion(ctx context.Context, params *DeleteIntentVe
 		params = &DeleteIntentVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteIntentVersion", params, optFns, addOperationDeleteIntentVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteIntentVersion", params, optFns, c.addOperationDeleteIntentVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteIntentVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteIntentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteIntentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIntentVersion{}, middleware.After)
 	if err != nil {
 		return err

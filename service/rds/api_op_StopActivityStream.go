@@ -21,7 +21,7 @@ func (c *Client) StopActivityStream(ctx context.Context, params *StopActivityStr
 		params = &StopActivityStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopActivityStream", params, optFns, addOperationStopActivityStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopActivityStream", params, optFns, c.addOperationStopActivityStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type StopActivityStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopActivityStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopActivityStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpStopActivityStream{}, middleware.After)
 	if err != nil {
 		return err

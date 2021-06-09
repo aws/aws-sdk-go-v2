@@ -18,7 +18,7 @@ func (c *Client) DeleteMap(ctx context.Context, params *DeleteMapInput, optFns .
 		params = &DeleteMapInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMap", params, optFns, addOperationDeleteMapMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMap", params, optFns, c.addOperationDeleteMapMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteMapOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMap{}, middleware.After)
 	if err != nil {
 		return err

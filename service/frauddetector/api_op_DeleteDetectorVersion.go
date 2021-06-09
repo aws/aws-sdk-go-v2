@@ -19,7 +19,7 @@ func (c *Client) DeleteDetectorVersion(ctx context.Context, params *DeleteDetect
 		params = &DeleteDetectorVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDetectorVersion", params, optFns, addOperationDeleteDetectorVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDetectorVersion", params, optFns, c.addOperationDeleteDetectorVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteDetectorVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDetectorVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDetectorVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDetectorVersion{}, middleware.After)
 	if err != nil {
 		return err

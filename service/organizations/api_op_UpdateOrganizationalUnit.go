@@ -20,7 +20,7 @@ func (c *Client) UpdateOrganizationalUnit(ctx context.Context, params *UpdateOrg
 		params = &UpdateOrganizationalUnitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateOrganizationalUnit", params, optFns, addOperationUpdateOrganizationalUnitMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateOrganizationalUnit", params, optFns, c.addOperationUpdateOrganizationalUnitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type UpdateOrganizationalUnitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateOrganizationalUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateOrganizationalUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateOrganizationalUnit{}, middleware.After)
 	if err != nil {
 		return err

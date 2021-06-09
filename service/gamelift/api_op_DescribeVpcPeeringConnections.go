@@ -27,7 +27,7 @@ func (c *Client) DescribeVpcPeeringConnections(ctx context.Context, params *Desc
 		params = &DescribeVpcPeeringConnectionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeVpcPeeringConnections", params, optFns, addOperationDescribeVpcPeeringConnectionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeVpcPeeringConnections", params, optFns, c.addOperationDescribeVpcPeeringConnectionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DescribeVpcPeeringConnectionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeVpcPeeringConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeVpcPeeringConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeVpcPeeringConnections{}, middleware.After)
 	if err != nil {
 		return err

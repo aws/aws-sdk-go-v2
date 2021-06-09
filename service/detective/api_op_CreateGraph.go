@@ -29,7 +29,7 @@ func (c *Client) CreateGraph(ctx context.Context, params *CreateGraphInput, optF
 		params = &CreateGraphInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateGraph", params, optFns, addOperationCreateGraphMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateGraph", params, optFns, c.addOperationCreateGraphMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type CreateGraphOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGraph{}, middleware.After)
 	if err != nil {
 		return err

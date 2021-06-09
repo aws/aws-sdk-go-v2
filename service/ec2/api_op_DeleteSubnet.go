@@ -17,7 +17,7 @@ func (c *Client) DeleteSubnet(ctx context.Context, params *DeleteSubnetInput, op
 		params = &DeleteSubnetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSubnet", params, optFns, addOperationDeleteSubnetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSubnet", params, optFns, c.addOperationDeleteSubnetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteSubnetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSubnetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSubnetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteSubnet{}, middleware.After)
 	if err != nil {
 		return err

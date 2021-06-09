@@ -48,7 +48,7 @@ func (c *Client) RegisterActivityType(ctx context.Context, params *RegisterActiv
 		params = &RegisterActivityTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterActivityType", params, optFns, addOperationRegisterActivityTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterActivityType", params, optFns, c.addOperationRegisterActivityTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -137,7 +137,7 @@ type RegisterActivityTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterActivityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterActivityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRegisterActivityType{}, middleware.After)
 	if err != nil {
 		return err

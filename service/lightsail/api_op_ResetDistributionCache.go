@@ -20,7 +20,7 @@ func (c *Client) ResetDistributionCache(ctx context.Context, params *ResetDistri
 		params = &ResetDistributionCacheInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetDistributionCache", params, optFns, addOperationResetDistributionCacheMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetDistributionCache", params, optFns, c.addOperationResetDistributionCacheMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ResetDistributionCacheOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetDistributionCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetDistributionCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResetDistributionCache{}, middleware.After)
 	if err != nil {
 		return err

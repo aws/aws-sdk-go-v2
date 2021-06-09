@@ -33,7 +33,7 @@ func (c *Client) UploadEntityDefinitions(ctx context.Context, params *UploadEnti
 		params = &UploadEntityDefinitionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UploadEntityDefinitions", params, optFns, addOperationUploadEntityDefinitionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UploadEntityDefinitions", params, optFns, c.addOperationUploadEntityDefinitionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type UploadEntityDefinitionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUploadEntityDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUploadEntityDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUploadEntityDefinitions{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) StartTranscriptionJob(ctx context.Context, params *StartTranscr
 		params = &StartTranscriptionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartTranscriptionJob", params, optFns, addOperationStartTranscriptionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartTranscriptionJob", params, optFns, c.addOperationStartTranscriptionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -153,7 +153,7 @@ type StartTranscriptionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTranscriptionJob{}, middleware.After)
 	if err != nil {
 		return err

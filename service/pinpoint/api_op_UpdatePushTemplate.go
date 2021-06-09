@@ -18,7 +18,7 @@ func (c *Client) UpdatePushTemplate(ctx context.Context, params *UpdatePushTempl
 		params = &UpdatePushTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePushTemplate", params, optFns, addOperationUpdatePushTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePushTemplate", params, optFns, c.addOperationUpdatePushTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type UpdatePushTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePushTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePushTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePushTemplate{}, middleware.After)
 	if err != nil {
 		return err

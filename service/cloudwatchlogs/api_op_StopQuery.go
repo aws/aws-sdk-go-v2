@@ -18,7 +18,7 @@ func (c *Client) StopQuery(ctx context.Context, params *StopQueryInput, optFns .
 		params = &StopQueryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopQuery", params, optFns, addOperationStopQueryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopQuery", params, optFns, c.addOperationStopQueryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type StopQueryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopQuery{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeApplicationSnapshot(ctx context.Context, params *Descri
 		params = &DescribeApplicationSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeApplicationSnapshot", params, optFns, addOperationDescribeApplicationSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeApplicationSnapshot", params, optFns, c.addOperationDescribeApplicationSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DescribeApplicationSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeApplicationSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeApplicationSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplicationSnapshot{}, middleware.After)
 	if err != nil {
 		return err

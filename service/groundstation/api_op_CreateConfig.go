@@ -18,7 +18,7 @@ func (c *Client) CreateConfig(ctx context.Context, params *CreateConfigInput, op
 		params = &CreateConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateConfig", params, optFns, addOperationCreateConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateConfig", params, optFns, c.addOperationCreateConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type CreateConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfig{}, middleware.After)
 	if err != nil {
 		return err

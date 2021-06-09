@@ -34,7 +34,7 @@ func (c *Client) DeleteRuleGroup(ctx context.Context, params *DeleteRuleGroupInp
 		params = &DeleteRuleGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRuleGroup", params, optFns, addOperationDeleteRuleGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRuleGroup", params, optFns, c.addOperationDeleteRuleGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DeleteRuleGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRuleGroup{}, middleware.After)
 	if err != nil {
 		return err

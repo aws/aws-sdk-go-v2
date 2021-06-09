@@ -85,7 +85,7 @@ func (c *Client) CreateRateBasedRule(ctx context.Context, params *CreateRateBase
 		params = &CreateRateBasedRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRateBasedRule", params, optFns, addOperationCreateRateBasedRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRateBasedRule", params, optFns, c.addOperationCreateRateBasedRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -153,7 +153,7 @@ type CreateRateBasedRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRateBasedRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRateBasedRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRateBasedRule{}, middleware.After)
 	if err != nil {
 		return err

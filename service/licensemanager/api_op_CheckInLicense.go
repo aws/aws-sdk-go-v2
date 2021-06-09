@@ -16,7 +16,7 @@ func (c *Client) CheckInLicense(ctx context.Context, params *CheckInLicenseInput
 		params = &CheckInLicenseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CheckInLicense", params, optFns, addOperationCheckInLicenseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CheckInLicense", params, optFns, c.addOperationCheckInLicenseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type CheckInLicenseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCheckInLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCheckInLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckInLicense{}, middleware.After)
 	if err != nil {
 		return err

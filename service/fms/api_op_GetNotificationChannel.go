@@ -17,7 +17,7 @@ func (c *Client) GetNotificationChannel(ctx context.Context, params *GetNotifica
 		params = &GetNotificationChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetNotificationChannel", params, optFns, addOperationGetNotificationChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetNotificationChannel", params, optFns, c.addOperationGetNotificationChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type GetNotificationChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetNotificationChannel{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) CreateImage(ctx context.Context, params *CreateImageInput, optF
 		params = &CreateImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateImage", params, optFns, addOperationCreateImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateImage", params, optFns, c.addOperationCreateImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type CreateImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateImage{}, middleware.After)
 	if err != nil {
 		return err

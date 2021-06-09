@@ -47,7 +47,7 @@ func (c *Client) ResizeCluster(ctx context.Context, params *ResizeClusterInput, 
 		params = &ResizeClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResizeCluster", params, optFns, addOperationResizeClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResizeCluster", params, optFns, c.addOperationResizeClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type ResizeClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResizeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResizeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpResizeCluster{}, middleware.After)
 	if err != nil {
 		return err

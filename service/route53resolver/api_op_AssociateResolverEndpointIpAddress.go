@@ -21,7 +21,7 @@ func (c *Client) AssociateResolverEndpointIpAddress(ctx context.Context, params 
 		params = &AssociateResolverEndpointIpAddressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateResolverEndpointIpAddress", params, optFns, addOperationAssociateResolverEndpointIpAddressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateResolverEndpointIpAddress", params, optFns, c.addOperationAssociateResolverEndpointIpAddressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type AssociateResolverEndpointIpAddressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateResolverEndpointIpAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateResolverEndpointIpAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateResolverEndpointIpAddress{}, middleware.After)
 	if err != nil {
 		return err

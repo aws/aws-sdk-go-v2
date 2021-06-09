@@ -18,7 +18,7 @@ func (c *Client) RevokeEndpointAccess(ctx context.Context, params *RevokeEndpoin
 		params = &RevokeEndpointAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokeEndpointAccess", params, optFns, addOperationRevokeEndpointAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeEndpointAccess", params, optFns, c.addOperationRevokeEndpointAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type RevokeEndpointAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokeEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokeEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRevokeEndpointAccess{}, middleware.After)
 	if err != nil {
 		return err

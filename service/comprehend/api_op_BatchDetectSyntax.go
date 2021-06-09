@@ -19,7 +19,7 @@ func (c *Client) BatchDetectSyntax(ctx context.Context, params *BatchDetectSynta
 		params = &BatchDetectSyntaxInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDetectSyntax", params, optFns, addOperationBatchDetectSyntaxMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDetectSyntax", params, optFns, c.addOperationBatchDetectSyntaxMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type BatchDetectSyntaxOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDetectSyntaxMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDetectSyntaxMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDetectSyntax{}, middleware.After)
 	if err != nil {
 		return err

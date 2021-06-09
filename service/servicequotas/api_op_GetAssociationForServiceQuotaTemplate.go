@@ -17,7 +17,7 @@ func (c *Client) GetAssociationForServiceQuotaTemplate(ctx context.Context, para
 		params = &GetAssociationForServiceQuotaTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAssociationForServiceQuotaTemplate", params, optFns, addOperationGetAssociationForServiceQuotaTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAssociationForServiceQuotaTemplate", params, optFns, c.addOperationGetAssociationForServiceQuotaTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type GetAssociationForServiceQuotaTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAssociationForServiceQuotaTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAssociationForServiceQuotaTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAssociationForServiceQuotaTemplate{}, middleware.After)
 	if err != nil {
 		return err

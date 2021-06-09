@@ -17,7 +17,7 @@ func (c *Client) DeleteGrant(ctx context.Context, params *DeleteGrantInput, optF
 		params = &DeleteGrantInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGrant", params, optFns, addOperationDeleteGrantMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGrant", params, optFns, c.addOperationDeleteGrantMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DeleteGrantOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteGrant{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DisassociateLambdaFunction(ctx context.Context, params *Disasso
 		params = &DisassociateLambdaFunctionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateLambdaFunction", params, optFns, addOperationDisassociateLambdaFunctionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateLambdaFunction", params, optFns, c.addOperationDisassociateLambdaFunctionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DisassociateLambdaFunctionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateLambdaFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateLambdaFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateLambdaFunction{}, middleware.After)
 	if err != nil {
 		return err

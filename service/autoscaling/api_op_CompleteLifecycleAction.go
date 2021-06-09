@@ -42,7 +42,7 @@ func (c *Client) CompleteLifecycleAction(ctx context.Context, params *CompleteLi
 		params = &CompleteLifecycleActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CompleteLifecycleAction", params, optFns, addOperationCompleteLifecycleActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CompleteLifecycleAction", params, optFns, c.addOperationCompleteLifecycleActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type CompleteLifecycleActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCompleteLifecycleActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCompleteLifecycleActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCompleteLifecycleAction{}, middleware.After)
 	if err != nil {
 		return err

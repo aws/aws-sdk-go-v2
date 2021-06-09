@@ -21,7 +21,7 @@ func (c *Client) DeleteCustomVerificationEmailTemplate(ctx context.Context, para
 		params = &DeleteCustomVerificationEmailTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomVerificationEmailTemplate", params, optFns, addOperationDeleteCustomVerificationEmailTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomVerificationEmailTemplate", params, optFns, c.addOperationDeleteCustomVerificationEmailTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteCustomVerificationEmailTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCustomVerificationEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCustomVerificationEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteCustomVerificationEmailTemplate{}, middleware.After)
 	if err != nil {
 		return err

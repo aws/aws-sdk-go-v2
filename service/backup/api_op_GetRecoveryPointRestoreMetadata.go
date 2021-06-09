@@ -16,7 +16,7 @@ func (c *Client) GetRecoveryPointRestoreMetadata(ctx context.Context, params *Ge
 		params = &GetRecoveryPointRestoreMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRecoveryPointRestoreMetadata", params, optFns, addOperationGetRecoveryPointRestoreMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRecoveryPointRestoreMetadata", params, optFns, c.addOperationGetRecoveryPointRestoreMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetRecoveryPointRestoreMetadataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRecoveryPointRestoreMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRecoveryPointRestoreMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecoveryPointRestoreMetadata{}, middleware.After)
 	if err != nil {
 		return err

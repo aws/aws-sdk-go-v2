@@ -17,7 +17,7 @@ func (c *Client) DeleteIpGroup(ctx context.Context, params *DeleteIpGroupInput, 
 		params = &DeleteIpGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteIpGroup", params, optFns, addOperationDeleteIpGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteIpGroup", params, optFns, c.addOperationDeleteIpGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteIpGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteIpGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteIpGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteIpGroup{}, middleware.After)
 	if err != nil {
 		return err

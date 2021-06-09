@@ -17,7 +17,7 @@ func (c *Client) RemoveRoleFromDBInstance(ctx context.Context, params *RemoveRol
 		params = &RemoveRoleFromDBInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveRoleFromDBInstance", params, optFns, addOperationRemoveRoleFromDBInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveRoleFromDBInstance", params, optFns, c.addOperationRemoveRoleFromDBInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type RemoveRoleFromDBInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveRoleFromDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveRoleFromDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemoveRoleFromDBInstance{}, middleware.After)
 	if err != nil {
 		return err

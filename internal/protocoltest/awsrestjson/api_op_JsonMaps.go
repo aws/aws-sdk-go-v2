@@ -16,7 +16,7 @@ func (c *Client) JsonMaps(ctx context.Context, params *JsonMapsInput, optFns ...
 		params = &JsonMapsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "JsonMaps", params, optFns, addOperationJsonMapsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "JsonMaps", params, optFns, c.addOperationJsonMapsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type JsonMapsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationJsonMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationJsonMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpJsonMaps{}, middleware.After)
 	if err != nil {
 		return err

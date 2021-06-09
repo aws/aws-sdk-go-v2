@@ -45,7 +45,7 @@ func (c *Client) CreateCase(ctx context.Context, params *CreateCaseInput, optFns
 		params = &CreateCaseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCase", params, optFns, addOperationCreateCaseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCase", params, optFns, c.addOperationCreateCaseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -122,7 +122,7 @@ type CreateCaseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCase{}, middleware.After)
 	if err != nil {
 		return err

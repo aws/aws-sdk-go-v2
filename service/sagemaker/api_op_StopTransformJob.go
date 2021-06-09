@@ -19,7 +19,7 @@ func (c *Client) StopTransformJob(ctx context.Context, params *StopTransformJobI
 		params = &StopTransformJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopTransformJob", params, optFns, addOperationStopTransformJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopTransformJob", params, optFns, c.addOperationStopTransformJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type StopTransformJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopTransformJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopTransformJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopTransformJob{}, middleware.After)
 	if err != nil {
 		return err

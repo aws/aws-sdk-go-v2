@@ -18,7 +18,7 @@ func (c *Client) DescribeElasticsearchDomain(ctx context.Context, params *Descri
 		params = &DescribeElasticsearchDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeElasticsearchDomain", params, optFns, addOperationDescribeElasticsearchDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeElasticsearchDomain", params, optFns, c.addOperationDescribeElasticsearchDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DescribeElasticsearchDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeElasticsearchDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeElasticsearchDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeElasticsearchDomain{}, middleware.After)
 	if err != nil {
 		return err

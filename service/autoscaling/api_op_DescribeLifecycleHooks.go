@@ -17,7 +17,7 @@ func (c *Client) DescribeLifecycleHooks(ctx context.Context, params *DescribeLif
 		params = &DescribeLifecycleHooksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLifecycleHooks", params, optFns, addOperationDescribeLifecycleHooksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLifecycleHooks", params, optFns, c.addOperationDescribeLifecycleHooksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DescribeLifecycleHooksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLifecycleHooksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLifecycleHooksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeLifecycleHooks{}, middleware.After)
 	if err != nil {
 		return err

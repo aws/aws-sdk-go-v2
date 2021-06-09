@@ -24,7 +24,7 @@ func (c *Client) ExportEC2InstanceRecommendations(ctx context.Context, params *E
 		params = &ExportEC2InstanceRecommendationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExportEC2InstanceRecommendations", params, optFns, addOperationExportEC2InstanceRecommendationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExportEC2InstanceRecommendations", params, optFns, c.addOperationExportEC2InstanceRecommendationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +104,7 @@ type ExportEC2InstanceRecommendationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExportEC2InstanceRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExportEC2InstanceRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpExportEC2InstanceRecommendations{}, middleware.After)
 	if err != nil {
 		return err

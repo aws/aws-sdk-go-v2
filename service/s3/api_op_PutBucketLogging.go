@@ -63,7 +63,7 @@ func (c *Client) PutBucketLogging(ctx context.Context, params *PutBucketLoggingI
 		params = &PutBucketLoggingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketLogging", params, optFns, addOperationPutBucketLoggingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketLogging", params, optFns, c.addOperationPutBucketLoggingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ type PutBucketLoggingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketLogging{}, middleware.After)
 	if err != nil {
 		return err

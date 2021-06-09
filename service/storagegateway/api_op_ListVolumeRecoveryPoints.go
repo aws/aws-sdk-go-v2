@@ -22,7 +22,7 @@ func (c *Client) ListVolumeRecoveryPoints(ctx context.Context, params *ListVolum
 		params = &ListVolumeRecoveryPointsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListVolumeRecoveryPoints", params, optFns, addOperationListVolumeRecoveryPointsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListVolumeRecoveryPoints", params, optFns, c.addOperationListVolumeRecoveryPointsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListVolumeRecoveryPointsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListVolumeRecoveryPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListVolumeRecoveryPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListVolumeRecoveryPoints{}, middleware.After)
 	if err != nil {
 		return err

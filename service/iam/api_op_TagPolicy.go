@@ -43,7 +43,7 @@ func (c *Client) TagPolicy(ctx context.Context, params *TagPolicyInput, optFns .
 		params = &TagPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TagPolicy", params, optFns, addOperationTagPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagPolicy", params, optFns, c.addOperationTagPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type TagPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTagPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTagPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpTagPolicy{}, middleware.After)
 	if err != nil {
 		return err

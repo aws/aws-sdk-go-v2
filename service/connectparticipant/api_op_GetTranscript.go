@@ -22,7 +22,7 @@ func (c *Client) GetTranscript(ctx context.Context, params *GetTranscriptInput, 
 		params = &GetTranscriptInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTranscript", params, optFns, addOperationGetTranscriptMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTranscript", params, optFns, c.addOperationGetTranscriptMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type GetTranscriptOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTranscriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTranscriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTranscript{}, middleware.After)
 	if err != nil {
 		return err

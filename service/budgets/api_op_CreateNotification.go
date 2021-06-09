@@ -18,7 +18,7 @@ func (c *Client) CreateNotification(ctx context.Context, params *CreateNotificat
 		params = &CreateNotificationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateNotification", params, optFns, addOperationCreateNotificationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateNotification", params, optFns, c.addOperationCreateNotificationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type CreateNotificationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateNotification{}, middleware.After)
 	if err != nil {
 		return err

@@ -27,7 +27,7 @@ func (c *Client) GenerateDataSet(ctx context.Context, params *GenerateDataSetInp
 		params = &GenerateDataSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GenerateDataSet", params, optFns, addOperationGenerateDataSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GenerateDataSet", params, optFns, c.addOperationGenerateDataSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -191,7 +191,7 @@ type GenerateDataSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGenerateDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGenerateDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGenerateDataSet{}, middleware.After)
 	if err != nil {
 		return err

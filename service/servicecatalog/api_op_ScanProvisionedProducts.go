@@ -18,7 +18,7 @@ func (c *Client) ScanProvisionedProducts(ctx context.Context, params *ScanProvis
 		params = &ScanProvisionedProductsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ScanProvisionedProducts", params, optFns, addOperationScanProvisionedProductsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ScanProvisionedProducts", params, optFns, c.addOperationScanProvisionedProductsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ScanProvisionedProductsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationScanProvisionedProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationScanProvisionedProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpScanProvisionedProducts{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) CreateCloudFrontOriginAccessIdentity(ctx context.Context, param
 		params = &CreateCloudFrontOriginAccessIdentityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCloudFrontOriginAccessIdentity", params, optFns, addOperationCreateCloudFrontOriginAccessIdentityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCloudFrontOriginAccessIdentity", params, optFns, c.addOperationCreateCloudFrontOriginAccessIdentityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type CreateCloudFrontOriginAccessIdentityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCloudFrontOriginAccessIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCloudFrontOriginAccessIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpCreateCloudFrontOriginAccessIdentity{}, middleware.After)
 	if err != nil {
 		return err

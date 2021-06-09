@@ -21,7 +21,7 @@ func (c *Client) ReorderReceiptRuleSet(ctx context.Context, params *ReorderRecei
 		params = &ReorderReceiptRuleSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReorderReceiptRuleSet", params, optFns, addOperationReorderReceiptRuleSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReorderReceiptRuleSet", params, optFns, c.addOperationReorderReceiptRuleSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ReorderReceiptRuleSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReorderReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReorderReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpReorderReceiptRuleSet{}, middleware.After)
 	if err != nil {
 		return err

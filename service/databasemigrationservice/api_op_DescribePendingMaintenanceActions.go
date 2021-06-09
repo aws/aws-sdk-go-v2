@@ -18,7 +18,7 @@ func (c *Client) DescribePendingMaintenanceActions(ctx context.Context, params *
 		params = &DescribePendingMaintenanceActionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePendingMaintenanceActions", params, optFns, addOperationDescribePendingMaintenanceActionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePendingMaintenanceActions", params, optFns, c.addOperationDescribePendingMaintenanceActionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DescribePendingMaintenanceActionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePendingMaintenanceActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePendingMaintenanceActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePendingMaintenanceActions{}, middleware.After)
 	if err != nil {
 		return err

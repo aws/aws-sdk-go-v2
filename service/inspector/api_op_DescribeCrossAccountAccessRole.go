@@ -17,7 +17,7 @@ func (c *Client) DescribeCrossAccountAccessRole(ctx context.Context, params *Des
 		params = &DescribeCrossAccountAccessRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCrossAccountAccessRole", params, optFns, addOperationDescribeCrossAccountAccessRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCrossAccountAccessRole", params, optFns, c.addOperationDescribeCrossAccountAccessRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeCrossAccountAccessRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCrossAccountAccessRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCrossAccountAccessRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCrossAccountAccessRole{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DescribeInstanceAssociationsStatus(ctx context.Context, params 
 		params = &DescribeInstanceAssociationsStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInstanceAssociationsStatus", params, optFns, addOperationDescribeInstanceAssociationsStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInstanceAssociationsStatus", params, optFns, c.addOperationDescribeInstanceAssociationsStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeInstanceAssociationsStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInstanceAssociationsStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInstanceAssociationsStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInstanceAssociationsStatus{}, middleware.After)
 	if err != nil {
 		return err

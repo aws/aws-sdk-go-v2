@@ -25,7 +25,7 @@ func (c *Client) CheckCapacity(ctx context.Context, params *CheckCapacityInput, 
 		params = &CheckCapacityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CheckCapacity", params, optFns, addOperationCheckCapacityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CheckCapacity", params, optFns, c.addOperationCheckCapacityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type CheckCapacityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCheckCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCheckCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckCapacity{}, middleware.After)
 	if err != nil {
 		return err

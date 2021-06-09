@@ -23,7 +23,7 @@ func (c *Client) DescribeExpressions(ctx context.Context, params *DescribeExpres
 		params = &DescribeExpressionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeExpressions", params, optFns, addOperationDescribeExpressionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeExpressions", params, optFns, c.addOperationDescribeExpressionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type DescribeExpressionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeExpressionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeExpressionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeExpressions{}, middleware.After)
 	if err != nil {
 		return err

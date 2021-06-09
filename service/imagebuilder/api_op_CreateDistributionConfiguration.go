@@ -19,7 +19,7 @@ func (c *Client) CreateDistributionConfiguration(ctx context.Context, params *Cr
 		params = &CreateDistributionConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDistributionConfiguration", params, optFns, addOperationCreateDistributionConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDistributionConfiguration", params, optFns, c.addOperationCreateDistributionConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type CreateDistributionConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDistributionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDistributionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDistributionConfiguration{}, middleware.After)
 	if err != nil {
 		return err

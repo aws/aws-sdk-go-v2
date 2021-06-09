@@ -17,7 +17,7 @@ func (c *Client) GetHealthCheckLastFailureReason(ctx context.Context, params *Ge
 		params = &GetHealthCheckLastFailureReasonInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetHealthCheckLastFailureReason", params, optFns, addOperationGetHealthCheckLastFailureReasonMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetHealthCheckLastFailureReason", params, optFns, c.addOperationGetHealthCheckLastFailureReasonMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type GetHealthCheckLastFailureReasonOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetHealthCheckLastFailureReasonMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetHealthCheckLastFailureReasonMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetHealthCheckLastFailureReason{}, middleware.After)
 	if err != nil {
 		return err

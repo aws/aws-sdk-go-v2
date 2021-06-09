@@ -20,7 +20,7 @@ func (c *Client) DescribeConnectionAliasPermissions(ctx context.Context, params 
 		params = &DescribeConnectionAliasPermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeConnectionAliasPermissions", params, optFns, addOperationDescribeConnectionAliasPermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConnectionAliasPermissions", params, optFns, c.addOperationDescribeConnectionAliasPermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeConnectionAliasPermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeConnectionAliasPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeConnectionAliasPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConnectionAliasPermissions{}, middleware.After)
 	if err != nil {
 		return err

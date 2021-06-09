@@ -16,7 +16,7 @@ func (c *Client) DeleteFlowDefinition(ctx context.Context, params *DeleteFlowDef
 		params = &DeleteFlowDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFlowDefinition", params, optFns, addOperationDeleteFlowDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFlowDefinition", params, optFns, c.addOperationDeleteFlowDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteFlowDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFlowDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFlowDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFlowDefinition{}, middleware.After)
 	if err != nil {
 		return err

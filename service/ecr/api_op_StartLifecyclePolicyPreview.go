@@ -19,7 +19,7 @@ func (c *Client) StartLifecyclePolicyPreview(ctx context.Context, params *StartL
 		params = &StartLifecyclePolicyPreviewInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartLifecyclePolicyPreview", params, optFns, addOperationStartLifecyclePolicyPreviewMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartLifecyclePolicyPreview", params, optFns, c.addOperationStartLifecyclePolicyPreviewMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type StartLifecyclePolicyPreviewOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartLifecyclePolicyPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartLifecyclePolicyPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartLifecyclePolicyPreview{}, middleware.After)
 	if err != nil {
 		return err

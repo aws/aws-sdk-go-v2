@@ -16,7 +16,7 @@ func (c *Client) DeleteRemoteAccessSession(ctx context.Context, params *DeleteRe
 		params = &DeleteRemoteAccessSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRemoteAccessSession", params, optFns, addOperationDeleteRemoteAccessSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRemoteAccessSession", params, optFns, c.addOperationDeleteRemoteAccessSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteRemoteAccessSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRemoteAccessSession{}, middleware.After)
 	if err != nil {
 		return err

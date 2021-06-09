@@ -17,7 +17,7 @@ func (c *Client) DeleteEventSubscription(ctx context.Context, params *DeleteEven
 		params = &DeleteEventSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEventSubscription", params, optFns, addOperationDeleteEventSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEventSubscription", params, optFns, c.addOperationDeleteEventSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteEventSubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteEventSubscription{}, middleware.After)
 	if err != nil {
 		return err

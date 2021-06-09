@@ -25,7 +25,7 @@ func (c *Client) DisableAvailabilityZonesForLoadBalancer(ctx context.Context, pa
 		params = &DisableAvailabilityZonesForLoadBalancerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableAvailabilityZonesForLoadBalancer", params, optFns, addOperationDisableAvailabilityZonesForLoadBalancerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableAvailabilityZonesForLoadBalancer", params, optFns, c.addOperationDisableAvailabilityZonesForLoadBalancerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DisableAvailabilityZonesForLoadBalancerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableAvailabilityZonesForLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableAvailabilityZonesForLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDisableAvailabilityZonesForLoadBalancer{}, middleware.After)
 	if err != nil {
 		return err

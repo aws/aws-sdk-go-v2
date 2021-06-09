@@ -22,7 +22,7 @@ func (c *Client) ListCrawlers(ctx context.Context, params *ListCrawlersInput, op
 		params = &ListCrawlersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCrawlers", params, optFns, addOperationListCrawlersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCrawlers", params, optFns, c.addOperationListCrawlersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListCrawlersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCrawlersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCrawlersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCrawlers{}, middleware.After)
 	if err != nil {
 		return err

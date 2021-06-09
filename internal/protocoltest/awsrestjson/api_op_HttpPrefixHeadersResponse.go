@@ -15,7 +15,7 @@ func (c *Client) HttpPrefixHeadersResponse(ctx context.Context, params *HttpPref
 		params = &HttpPrefixHeadersResponseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpPrefixHeadersResponse", params, optFns, addOperationHttpPrefixHeadersResponseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpPrefixHeadersResponse", params, optFns, c.addOperationHttpPrefixHeadersResponseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type HttpPrefixHeadersResponseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHttpPrefixHeadersResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHttpPrefixHeadersResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpPrefixHeadersResponse{}, middleware.After)
 	if err != nil {
 		return err
