@@ -80,6 +80,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.6.2
 	github.com/aws/aws-sdk-go-v2/service/sts v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/support v1.3.0
+	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.2.1
 	github.com/aws/aws-sdk-go-v2/service/waf v1.2.1
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.5.1
@@ -97,6 +98,8 @@ replace github.com/aws/aws-sdk-go-v2/config => ../../../config/
 replace github.com/aws/aws-sdk-go-v2/credentials => ../../../credentials/
 
 replace github.com/aws/aws-sdk-go-v2/feature/ec2/imds => ../../../feature/ec2/imds/
+
+replace github.com/aws/aws-sdk-go-v2/internal/configsources => ../../../internal/configsources/
 
 replace github.com/aws/aws-sdk-go-v2/internal/ini => ../../../internal/ini/
 
@@ -196,6 +199,8 @@ replace github.com/aws/aws-sdk-go-v2/service/inspector => ../../../service/inspe
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../../service/internal/accept-encoding/
 
+replace github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery => ../../../service/internal/endpoint-discovery/
+
 replace github.com/aws/aws-sdk-go-v2/service/internal/presigned-url => ../../../service/internal/presigned-url/
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/s3shared => ../../../service/internal/s3shared/
@@ -261,6 +266,8 @@ replace github.com/aws/aws-sdk-go-v2/service/sso => ../../../service/sso/
 replace github.com/aws/aws-sdk-go-v2/service/sts => ../../../service/sts/
 
 replace github.com/aws/aws-sdk-go-v2/service/support => ../../../service/support/
+
+replace github.com/aws/aws-sdk-go-v2/service/timestreamwrite => ../../../service/timestreamwrite/
 
 replace github.com/aws/aws-sdk-go-v2/service/waf => ../../../service/waf/
 
