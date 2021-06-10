@@ -37,6 +37,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ActiveInstanceRefreshNotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request failed because an active instance refresh for the specified Auto Scaling group was\n            not found. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -225,6 +229,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You already have an Auto Scaling group or launch configuration with this name.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3160,7 +3168,7 @@
                 "Throughput": {
                     "target": "com.amazonaws.autoscaling#BlockDeviceEbsThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput to provision for a <code>gp3</code> volume.</p>\n        <p>Valid Range: Minimum value of 125. Maximum value of 1000.</p>"
+                        "smithy.api#documentation": "<p>The throughput (MiBps) to provision for a <code>gp3</code> volume.</p>"
                     }
                 }
             },
@@ -3803,6 +3811,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InstanceRefreshInProgress",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request failed because an active instance refresh operation already exists for the\n            specified Auto Scaling group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3985,6 +3997,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidNextToken",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The <code>NextToken</code> value is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -4528,6 +4544,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "LimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You have already reached a limit for your Amazon EC2 Auto Scaling\n            resources (for example, Auto Scaling groups, launch configurations, or lifecycle hooks). For\n            more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAccountLimits.html\">DescribeAccountLimits</a> in the <i>Amazon EC2 Auto Scaling API\n            Reference</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5835,6 +5855,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceContention",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>You already have a pending update to an Amazon EC2 Auto Scaling resource (for example, an Auto Scaling group,\n            instance, or load balancer).</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -5851,6 +5875,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceInUse",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The operation can't be performed because the resource is in use.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5894,6 +5922,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ScalingActivityInProgress",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The operation can't be performed because there are scaling activities in\n            progress.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -6268,6 +6300,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ServiceLinkedRoleFailure",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>The service-linked role is not yet ready for use.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500

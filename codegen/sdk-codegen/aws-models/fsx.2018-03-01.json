@@ -1470,6 +1470,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of one or more DNS alias names that you want to associate with the Amazon FSx file system. \n            Aliases allow you to use existing DNS names to access the data in your Amazon FSx file system. \n            You can associate up to 50 aliases with a file system at any time. \n            You can associate additional DNS aliases after you create the file system using the AssociateFileSystemAliases operation. \n            You can remove DNS aliases from the file system after it is created using the DisassociateFileSystemAliases operation.\n            You only need to specify the alias name in the request payload.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html\">Working with DNS Aliases</a> and \n        <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html\">Walkthrough 5: Using DNS aliases to access your file system</a>, including\n        additional steps you must take to be able to access your file system using a DNS alias.</p>\n         <p>An alias name has to meet the following requirements:</p>\n            <ul>\n            <li>\n               <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p>\n            </li>\n            <li>\n               <p>Can contain alphanumeric characters, the underscore (_), and the hyphen (-).</p>\n            </li>\n            <li>\n               <p>Cannot start or end with a hyphen.</p>\n            </li>\n            <li>\n               <p>Can start with a numeric.</p>\n            </li>\n         </ul>\n        <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: \n            as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>"
                     }
+                },
+                "AuditLogConfiguration": {
+                    "target": "com.amazonaws.fsx#WindowsAuditLogCreateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log\n            user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server\n            file system.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2935,6 +2941,16 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.fsx#GeneralARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 8,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:[^:]{1,63}:[^:]{0,63}:[^:]{0,63}:(?:|\\d{12}):[^/].{0,1023}$"
+            }
+        },
         "com.amazonaws.fsx#IncompatibleParameterError": {
             "type": "structure",
             "members": {
@@ -4037,7 +4053,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file system. \n      You can update multiple properties in a single request.</p>\n         <p>For Amazon FSx for Windows File Server file systems, you can update the following \n    properties:</p>\n         <ul>\n            <li>\n               <p>AutomaticBackupRetentionDays</p>\n            </li>\n            <li>\n               <p>DailyAutomaticBackupStartTime</p>\n            </li>\n            <li>\n               <p>SelfManagedActiveDirectoryConfiguration</p>\n            </li>\n            <li>\n               <p>StorageCapacity</p>\n            </li>\n            <li>\n               <p>ThroughputCapacity</p>\n            </li>\n            <li>\n               <p>WeeklyMaintenanceStartTime</p>\n            </li>\n         </ul>\n         <p>For Amazon FSx for Lustre file systems, you can update the following \n      properties:</p>\n         <ul>\n            <li>\n               <p>AutoImportPolicy</p>\n            </li>\n            <li>\n               <p>AutomaticBackupRetentionDays</p>\n            </li>\n            <li>\n               <p>DailyAutomaticBackupStartTime</p>\n            </li>\n            <li>\n               <p>DataCompressionType</p>\n            </li>\n            <li>\n               <p>StorageCapacity</p>\n            </li>\n            <li>\n               <p>WeeklyMaintenanceStartTime</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file system. \n      You can update multiple properties in a single request.</p>\n         <p>For Amazon FSx for Windows File Server file systems, you can update the following \n    properties:</p>\n         <ul>\n            <li>\n               <p>AuditLogConfiguration</p>\n            </li>\n            <li>\n               <p>AutomaticBackupRetentionDays</p>\n            </li>\n            <li>\n               <p>DailyAutomaticBackupStartTime</p>\n            </li>\n            <li>\n               <p>SelfManagedActiveDirectoryConfiguration</p>\n            </li>\n            <li>\n               <p>StorageCapacity</p>\n            </li>\n            <li>\n               <p>ThroughputCapacity</p>\n            </li>\n            <li>\n               <p>WeeklyMaintenanceStartTime</p>\n            </li>\n         </ul>\n         <p>For Amazon FSx for Lustre file systems, you can update the following \n      properties:</p>\n         <ul>\n            <li>\n               <p>AutoImportPolicy</p>\n            </li>\n            <li>\n               <p>AutomaticBackupRetentionDays</p>\n            </li>\n            <li>\n               <p>DailyAutomaticBackupStartTime</p>\n            </li>\n            <li>\n               <p>DataCompressionType</p>\n            </li>\n            <li>\n               <p>StorageCapacity</p>\n            </li>\n            <li>\n               <p>WeeklyMaintenanceStartTime</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.fsx#UpdateFileSystemLustreConfiguration": {
@@ -4155,6 +4171,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration Amazon FSx uses to join the Windows File Server instance to the\n            self-managed Microsoft AD directory. You cannot make a self-managed Microsoft AD update request if there is an existing self-managed Microsoft AD update request in progress.</p>"
                     }
+                },
+                "AuditLogConfiguration": {
+                    "target": "com.amazonaws.fsx#WindowsAuditLogCreateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log\n            user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server\n            file system..</p>"
+                    }
                 }
             },
             "traits": {
@@ -4181,6 +4203,85 @@
                     "max": 7
                 },
                 "smithy.api#pattern": "^[1-7]:([01]\\d|2[0-3]):?([0-5]\\d)$"
+            }
+        },
+        "com.amazonaws.fsx#WindowsAccessAuditLogLevel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    },
+                    {
+                        "value": "SUCCESS_ONLY",
+                        "name": "SUCCESS_ONLY"
+                    },
+                    {
+                        "value": "FAILURE_ONLY",
+                        "name": "FAILURE_ONLY"
+                    },
+                    {
+                        "value": "SUCCESS_AND_FAILURE",
+                        "name": "SUCCESS_AND_FAILURE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.fsx#WindowsAuditLogConfiguration": {
+            "type": "structure",
+            "members": {
+                "FileAccessAuditLogLevel": {
+                    "target": "com.amazonaws.fsx#WindowsAccessAuditLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets which attempt type is logged by Amazon FSx for file and folder accesses.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SUCCESS_ONLY</code> - only successful attempts to access files\n                    or folders are logged.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FAILURE_ONLY</code> - only failed attempts to access files\n                    or folders are logged.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SUCCESS_AND_FAILURE</code> - both successful attempts and\n                    failed attempts to access files or folders are logged.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DISABLED</code> - access auditing of files and folders is turned off.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileShareAccessAuditLogLevel": {
+                    "target": "com.amazonaws.fsx#WindowsAccessAuditLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets which attempt type is logged by Amazon FSx for file share accesses.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SUCCESS_ONLY</code> - only successful attempts to access file\n                    shares are logged.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FAILURE_ONLY</code> - only failed attempts to access file\n                    shares are logged.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SUCCESS_AND_FAILURE</code> - both successful attempts and\n                    failed attempts to access file shares are logged.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DISABLED</code> - access auditing of file shares is turned off.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AuditLogDestination": {
+                    "target": "com.amazonaws.fsx#GeneralARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the destination of the audit logs.\n            The destination can be any Amazon CloudWatch Logs log group ARN or\n            Amazon Kinesis Data Firehose delivery stream ARN.</p>\n        <p>The name of the Amazon CloudWatch Logs log group must begin with\n            the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data\n            Firehouse delivery stream must begin with the <code>aws-fsx</code> prefix.</p>\n        <p>The destination ARN (either CloudWatch Logs log group or Kinesis\n            Data Firehose delivery stream) must be in the same AWS partition,\n            AWS region, and AWS account as your Amazon FSx file system.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log\n            user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server\n            file system. For more information,\n            see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/file-access-auditing.html\">\n                File access auditing</a>.</p>"
+            }
+        },
+        "com.amazonaws.fsx#WindowsAuditLogCreateConfiguration": {
+            "type": "structure",
+            "members": {
+                "FileAccessAuditLogLevel": {
+                    "target": "com.amazonaws.fsx#WindowsAccessAuditLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets which attempt type is logged by Amazon FSx for file and folder accesses.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SUCCESS_ONLY</code> - only successful attempts to access files\n                    or folders are logged.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FAILURE_ONLY</code> - only failed attempts to access files\n                    or folders are logged.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SUCCESS_AND_FAILURE</code> - both successful attempts and\n                    failed attempts to access files or folders are logged.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DISABLED</code> - access auditing of files and folders is turned off.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileShareAccessAuditLogLevel": {
+                    "target": "com.amazonaws.fsx#WindowsAccessAuditLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets which attempt type is logged by Amazon FSx for file share accesses.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SUCCESS_ONLY</code> - only successful attempts to access file\n                    shares are logged.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FAILURE_ONLY</code> - only failed attempts to access file\n                    shares are logged.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SUCCESS_AND_FAILURE</code> - both successful attempts and\n                    failed attempts to access file shares are logged.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DISABLED</code> - access auditing of file shares is turned off.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AuditLogDestination": {
+                    "target": "com.amazonaws.fsx#GeneralARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that specifies the destination of the audit logs.</p>\n        <p>The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis\n            Data Firehose delivery stream ARN, with the following requirements:</p>\n        <ul>\n            <li>\n                <p>The destination ARN that you provide (either CloudWatch Logs log group\n                    or Kinesis Data Firehose delivery stream) must be in the same AWS partition,\n                    AWS region, and AWS account as your Amazon FSx file system.</p>\n            </li>\n            <li>\n                <p>The name of the Amazon CloudWatch Logs log group must begin with\n                    the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data\n                    Firehouse delivery stream must begin with the <code>aws-fsx</code> prefix.</p>\n            </li>\n            <li>\n                <p>If you do not provide a destination in <code>AuditLogDestination</code>,\n                    Amazon FSx will create and use a log stream in the CloudWatch Logs\n                    <code>/aws/fsx/windows</code> log group.</p>\n            </li>\n            <li>\n                <p>If <code>AuditLogDestination</code> is provided and the resource does not\n                    exist, the request will fail with a <code>BadRequest</code> error.</p>\n            </li>\n            <li>\n                <p>If <code>FileAccessAuditLogLevel</code> and <code>FileShareAccessAuditLogLevel</code>\n                    are both set to <code>DISABLED</code>, you cannot specify a destination in\n                    <code>AuditLogDestination</code>.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Windows file access auditing configuration used when creating\n            or updating an Amazon FSx for Windows File Server file system.</p>"
             }
         },
         "com.amazonaws.fsx#WindowsDeploymentType": {
@@ -4276,6 +4377,12 @@
                 },
                 "Aliases": {
                     "target": "com.amazonaws.fsx#Aliases"
+                },
+                "AuditLogConfiguration": {
+                    "target": "com.amazonaws.fsx#WindowsAuditLogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log\n            user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server\n            file system.</p>"
+                    }
                 }
             },
             "traits": {
