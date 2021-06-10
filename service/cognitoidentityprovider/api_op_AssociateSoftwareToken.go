@@ -11,7 +11,13 @@ import (
 )
 
 // Returns a unique generated shared secret key code for the user account. The
-// request takes an access token or a session string, but not both.
+// request takes an access token or a session string, but not both. Calling
+// AssociateSoftwareToken immediately disassociates the existing software token
+// from the user account. If the user doesn't subsequently verify the software
+// token, their account is essentially set up to authenticate without MFA. If MFA
+// config is set to Optional at the user pool level, the user can then login
+// without MFA. However, if MFA is set to Required for the user pool, the user will
+// be asked to setup a new software token MFA during sign in.
 func (c *Client) AssociateSoftwareToken(ctx context.Context, params *AssociateSoftwareTokenInput, optFns ...func(*Options)) (*AssociateSoftwareTokenOutput, error) {
 	if params == nil {
 		params = &AssociateSoftwareTokenInput{}

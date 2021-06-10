@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Creates a new ledger in your AWS account.
+// Creates a new ledger in your AWS account in the current Region.
 func (c *Client) CreateLedger(ctx context.Context, params *CreateLedgerInput, optFns ...func(*Options)) (*CreateLedgerOutput, error) {
 	if params == nil {
 		params = &CreateLedgerInput{}
@@ -44,21 +44,24 @@ type CreateLedgerInput struct {
 	//
 	// * ALLOW_ALL: A legacy
 	// permissions mode that enables access control with API-level granularity for
-	// ledgers. This mode allows users who have SendCommand permissions for this ledger
-	// to run all PartiQL commands (hence, ALLOW_ALL) on any tables in the specified
-	// ledger. This mode disregards any table-level or command-level IAM permissions
-	// policies that you create for the ledger.
+	// ledgers. This mode allows users who have the SendCommand API permission for this
+	// ledger to run all PartiQL commands (hence, ALLOW_ALL) on any tables in the
+	// specified ledger. This mode disregards any table-level or command-level IAM
+	// permissions policies that you create for the ledger.
 	//
-	// * STANDARD: (Recommended) A
-	// permissions mode that enables access control with finer granularity for ledgers,
-	// tables, and PartiQL commands. By default, this mode denies all user requests to
-	// run any PartiQL commands on any tables in this ledger. To allow PartiQL commands
-	// to run, you must create IAM permissions policies for specific table resources
-	// and PartiQL actions, in addition to SendCommand API permissions for the
-	// ledger.
+	// * STANDARD: (Recommended)
+	// A permissions mode that enables access control with finer granularity for
+	// ledgers, tables, and PartiQL commands. By default, this mode denies all user
+	// requests to run any PartiQL commands on any tables in this ledger. To allow
+	// PartiQL commands to run, you must create IAM permissions policies for specific
+	// table resources and PartiQL actions, in addition to the SendCommand API
+	// permission for the ledger. For information, see Getting started with the
+	// standard permissions mode
+	// (https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html)
+	// in the Amazon QLDB Developer Guide.
 	//
-	// We strongly recommend using the STANDARD permissions mode to maximize
-	// the security of your ledger data.
+	// We strongly recommend using the STANDARD
+	// permissions mode to maximize the security of your ledger data.
 	//
 	// This member is required.
 	PermissionsMode types.PermissionsMode
@@ -66,10 +69,8 @@ type CreateLedgerInput struct {
 	// The flag that prevents a ledger from being deleted by any user. If not provided
 	// on ledger creation, this feature is enabled (true) by default. If deletion
 	// protection is enabled, you must first disable it before you can delete the
-	// ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can
-	// disable it by calling the UpdateLedger operation to set the flag to false. The
-	// QLDB console disables deletion protection for you when you use it to delete a
-	// ledger.
+	// ledger. You can disable it by calling the UpdateLedger operation to set the flag
+	// to false.
 	DeletionProtection *bool
 
 	// The key-value pairs to add as tags to the ledger that you want to create. Tag
@@ -90,10 +91,8 @@ type CreateLedgerOutput struct {
 	// The flag that prevents a ledger from being deleted by any user. If not provided
 	// on ledger creation, this feature is enabled (true) by default. If deletion
 	// protection is enabled, you must first disable it before you can delete the
-	// ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can
-	// disable it by calling the UpdateLedger operation to set the flag to false. The
-	// QLDB console disables deletion protection for you when you use it to delete a
-	// ledger.
+	// ledger. You can disable it by calling the UpdateLedger operation to set the flag
+	// to false.
 	DeletionProtection *bool
 
 	// The name of the ledger.

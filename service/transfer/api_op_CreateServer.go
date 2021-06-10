@@ -80,12 +80,12 @@ type CreateServerInput struct {
 	// your server's endpoint publicly accessible (PUBLIC) or host it inside your VPC.
 	// With an endpoint that is hosted in a VPC, you can restrict access to your server
 	// and resources only within your VPC or choose to make it internet facing by
-	// attaching Elastic IP addresses directly to it. After March 31, 2021, you won't
-	// be able to create a server using EndpointType=VPC_ENDPOINT in your AWS account
-	// if your account hasn't already done so before March 31, 2021. If you have
-	// already created servers with EndpointType=VPC_ENDPOINT in your AWS account on or
-	// before March 31, 2021, you will not be affected. After this date, use
-	// EndpointType=VPC. For more information, see
+	// attaching Elastic IP addresses directly to it. After May 19, 2021, you won't be
+	// able to create a server using EndpointType=VPC_ENDPOINT in your AWS account if
+	// your account hasn't already done so before May 19, 2021. If you have already
+	// created servers with EndpointType=VPC_ENDPOINT in your AWS account on or before
+	// May 19, 2021, you will not be affected. After this date, use EndpointType=VPC.
+	// For more information, see
 	// https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
 	// It is recommended that you use VPC as the EndpointType. With this endpoint type,
 	// you have the option to directly associate up to three Elastic IPv4 addresses

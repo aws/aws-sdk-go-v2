@@ -651,12 +651,10 @@ type IdentityProviderType struct {
 	// * jwks_uri if not available from
 	// discovery URL specified by oidc_issuer key
 	//
-	// * authorize_scopes
+	// * For SAML providers:
 	//
-	// * For SAML
-	// providers:
-	//
-	// * MetadataFile OR MetadataURL
+	// *
+	// MetadataFile OR MetadataURL
 	//
 	// * IDPSignOut optional
 	ProviderDetails map[string]string
@@ -1527,6 +1525,21 @@ type UserPoolType struct {
 	SmsConfiguration *SmsConfigurationType
 
 	// The reason why the SMS configuration cannot send the messages to your users.
+	// This message might include comma-separated values to describe why your SMS
+	// configuration can't send messages to user pool end users.
+	//
+	// *
+	// InvalidSmsRoleAccessPolicyException - The IAM role which Cognito uses to send
+	// SMS messages is not properly configured. For more information, see
+	// SmsConfigurationType
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SmsConfigurationType.html).
+	//
+	// *
+	// SNSSandbox - The AWS account is in SNS Sandbox and messages won’t reach
+	// unverified end users. This parameter won’t get populated with SNSSandbox if the
+	// IAM user creating the user pool doesn’t have SNS permissions. To learn how to
+	// move your AWS account out of the sandbox, see Moving out of the SMS sandbox
+	// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-moving-to-production.html).
 	SmsConfigurationFailure *string
 
 	// The contents of the SMS verification message.

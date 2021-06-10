@@ -12,10 +12,8 @@ import (
 
 // Deletes a ledger and all of its contents. This action is irreversible. If
 // deletion protection is enabled, you must first disable it before you can delete
-// the ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You
-// can disable it by calling the UpdateLedger operation to set the flag to false.
-// The QLDB console disables deletion protection for you when you use it to delete
-// a ledger.
+// the ledger. You can disable it by calling the UpdateLedger operation to set the
+// flag to false.
 func (c *Client) DeleteLedger(ctx context.Context, params *DeleteLedgerInput, optFns ...func(*Options)) (*DeleteLedgerOutput, error) {
 	if params == nil {
 		params = &DeleteLedgerInput{}

@@ -22,11 +22,10 @@ import (
 // * If your event selector includes management events.
 //
 // * If your event
-// selector includes data events, the Amazon S3 objects or AWS Lambda functions
-// that you are logging for data events.
+// selector includes data events, the resources on which you are logging data
+// events.
 //
-// For more information, see Logging Data
-// and Management Events for Trails
+// For more information, see Logging Data and Management Events for Trails
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)
 // in the AWS CloudTrail User Guide.
 func (c *Client) GetEventSelectors(ctx context.Context, params *GetEventSelectorsInput, optFns ...func(*Options)) (*GetEventSelectorsOutput, error) {

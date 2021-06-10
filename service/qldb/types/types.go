@@ -6,13 +6,13 @@ import (
 	"time"
 )
 
-// The information about an Amazon QLDB journal stream, including the Amazon
-// Resource Name (ARN), stream name, creation time, current status, and the
-// parameters of your original stream creation request.
+// Information about an Amazon QLDB journal stream, including the Amazon Resource
+// Name (ARN), stream name, creation time, current status, and the parameters of
+// the original stream creation request.
 type JournalKinesisStreamDescription struct {
 
-	// The configuration settings of the Amazon Kinesis Data Streams destination for
-	// your QLDB journal stream.
+	// The configuration settings of the Amazon Kinesis Data Streams destination for a
+	// QLDB journal stream.
 	//
 	// This member is required.
 	KinesisConfiguration *KinesisConfiguration
@@ -33,7 +33,7 @@ type JournalKinesisStreamDescription struct {
 	// This member is required.
 	Status StreamStatus
 
-	// The unique ID that QLDB assigns to each QLDB journal stream.
+	// The UUID (represented in Base62-encoded text) of the QLDB journal stream.
 	//
 	// This member is required.
 	StreamId *string
@@ -64,9 +64,9 @@ type JournalKinesisStreamDescription struct {
 	InclusiveStartTime *time.Time
 }
 
-// The information about a journal export job, including the ledger name, export
-// ID, when it was created, current status, and its start and end time export
-// parameters.
+// Information about a journal export job, including the ledger name, export ID,
+// creation time, current status, and the parameters of the original export
+// creation request.
 type JournalS3ExportDescription struct {
 
 	// The exclusive end date and time for the range of journal contents that are
@@ -82,7 +82,7 @@ type JournalS3ExportDescription struct {
 	// This member is required.
 	ExportCreationTime *time.Time
 
-	// The unique ID of the journal export job.
+	// The UUID (represented in Base62-encoded text) of the journal export job.
 	//
 	// This member is required.
 	ExportId *string
@@ -123,19 +123,24 @@ type JournalS3ExportDescription struct {
 	Status ExportStatus
 }
 
-// The configuration settings of the Amazon Kinesis Data Streams destination for
-// your Amazon QLDB journal stream.
+// The configuration settings of the Amazon Kinesis Data Streams destination for an
+// Amazon QLDB journal stream.
 type KinesisConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of the Kinesis data stream resource.
+	// The Amazon Resource Name (ARN) of the Kinesis Data Streams resource.
 	//
 	// This member is required.
 	StreamArn *string
 
 	// Enables QLDB to publish multiple data records in a single Kinesis Data Streams
-	// record. To learn more, see KPL Key Concepts
-	// (https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html) in
-	// the Amazon Kinesis Data Streams Developer Guide.
+	// record, increasing the number of records sent per API call. This option is
+	// enabled by default. Record aggregation has important implications for processing
+	// records and requires de-aggregation in your stream consumer. To learn more, see
+	// KPL Key Concepts
+	// (https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html) and
+	// Consumer De-aggregation
+	// (https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-consumer-deaggregation.html)
+	// in the Amazon Kinesis Data Streams Developer Guide.
 	AggregationEnabled *bool
 }
 
@@ -167,7 +172,7 @@ type S3EncryptionConfiguration struct {
 	ObjectEncryptionType S3ObjectEncryptionType
 
 	// The Amazon Resource Name (ARN) for a symmetric customer master key (CMK) in AWS
-	// Key Management Service (AWS KMS). Amazon QLDB does not support asymmetric CMKs.
+	// Key Management Service (AWS KMS). Amazon S3 does not support asymmetric CMKs.
 	// You must provide a KmsKeyArn if you specify SSE_KMS as the ObjectEncryptionType.
 	// KmsKeyArn is not required if you specify SSE_S3 as the ObjectEncryptionType.
 	KmsKeyArn *string

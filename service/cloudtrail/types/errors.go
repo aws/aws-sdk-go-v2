@@ -628,9 +628,10 @@ func (e *KmsKeyDisabledException) ErrorMessage() string {
 func (e *KmsKeyDisabledException) ErrorCode() string             { return "KmsKeyDisabledException" }
 func (e *KmsKeyDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the KMS key does not exist, when the S3 bucket and
-// the KMS key are not in the same region, or when the KMS key associated with the
-// SNS topic either does not exist or is not in the same region.
+// This exception is thrown when the AWS KMS key does not exist, when the S3 bucket
+// and the AWS KMS key are not in the same region, or when the AWS KMS key
+// associated with the SNS topic either does not exist or is not in the same
+// region.
 type KmsKeyNotFoundException struct {
 	Message *string
 }

@@ -12,14 +12,29 @@ import (
 )
 
 // Creates a new user in the specified user pool. If MessageAction is not set, the
-// default is to send a welcome message via email or phone (SMS). This message is
-// based on a template that you configured in your call to create or update a user
-// pool. This template includes your custom sign-up instructions and placeholders
-// for user name and temporary password. Alternatively, you can call
-// AdminCreateUser with “SUPPRESS” for the MessageAction parameter, and Amazon
-// Cognito will not send any email. In either case, the user will be in the
-// FORCE_CHANGE_PASSWORD state until they sign in and change their password.
-// AdminCreateUser requires developer credentials.
+// default is to send a welcome message via email or phone (SMS). This action might
+// generate an SMS text message. Starting June 1, 2021, U.S. telecom carriers
+// require that you register an origination phone number before you can send SMS
+// messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito,
+// you must register a phone number with Amazon Pinpoint
+// (https://console.aws.amazon.com/pinpoint/home/). Cognito will use the the
+// registered number automatically. Otherwise, Cognito users that must receive SMS
+// messages might be unable to sign up, activate their accounts, or sign in. If you
+// have never used SMS text messages with Amazon Cognito or any other AWS service,
+// Amazon SNS might place your account in SMS sandbox. In sandbox mode
+// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you’ll have
+// limitations, such as sending messages to only verified phone numbers. After
+// testing in the sandbox environment, you can move out of the SMS sandbox and into
+// production. For more information, see  SMS message settings for Cognito User
+// Pools
+// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
+// in the Amazon Cognito Developer Guide. This message is based on a template that
+// you configured in your call to create or update a user pool. This template
+// includes your custom sign-up instructions and placeholders for user name and
+// temporary password. Alternatively, you can call AdminCreateUser with “SUPPRESS”
+// for the MessageAction parameter, and Amazon Cognito will not send any email. In
+// either case, the user will be in the FORCE_CHANGE_PASSWORD state until they sign
+// in and change their password. AdminCreateUser requires developer credentials.
 func (c *Client) AdminCreateUser(ctx context.Context, params *AdminCreateUserInput, optFns ...func(*Options)) (*AdminCreateUserOutput, error) {
 	if params == nil {
 		params = &AdminCreateUserInput{}

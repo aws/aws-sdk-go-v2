@@ -14,9 +14,13 @@ import (
 
 // Returns an array of all Amazon QLDB journal stream descriptors for a given
 // ledger. The output of each stream descriptor includes the same details that are
-// returned by DescribeJournalKinesisStream. This action returns a maximum of
-// MaxResults items. It is paginated so that you can retrieve all the items by
-// calling ListJournalKinesisStreamsForLedger multiple times.
+// returned by DescribeJournalKinesisStream. This action does not return any
+// expired journal streams. For more information, see Expiration for terminal
+// streams
+// (https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration)
+// in the Amazon QLDB Developer Guide. This action returns a maximum of MaxResults
+// items. It is paginated so that you can retrieve all the items by calling
+// ListJournalKinesisStreamsForLedger multiple times.
 func (c *Client) ListJournalKinesisStreamsForLedger(ctx context.Context, params *ListJournalKinesisStreamsForLedgerInput, optFns ...func(*Options)) (*ListJournalKinesisStreamsForLedgerOutput, error) {
 	if params == nil {
 		params = &ListJournalKinesisStreamsForLedgerInput{}
