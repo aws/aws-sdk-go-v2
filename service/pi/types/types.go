@@ -138,6 +138,32 @@ type DimensionKeyDescription struct {
 	Total *float64
 }
 
+// An object that describes the details for a specified dimension.
+type DimensionKeyDetail struct {
+
+	// The full name of the dimension. The full name includes the group name and key
+	// name. The only valid value is db.sql.statement.
+	Dimension *string
+
+	// The status of the dimension detail data. Possible values include the
+	// following:
+	//
+	// * AVAILABLE - The dimension detail data is ready to be retrieved.
+	//
+	// *
+	// PROCESSING - The dimension detail data isn't ready to be retrieved because more
+	// processing time is required. If the requested detail data for db.sql.statement
+	// has the status PROCESSING, Performance Insights returns the truncated query.
+	//
+	// *
+	// UNAVAILABLE - The dimension detail data could not be collected successfully.
+	Status DetailStatus
+
+	// The value of the dimension detail data. For the db.sql.statement dimension, this
+	// value is either the full or truncated SQL query, depending on the return status.
+	Value *string
+}
+
 // A time-ordered series of data points, corresponding to a dimension of a
 // Performance Insights metric.
 type MetricKeyDataPoints struct {

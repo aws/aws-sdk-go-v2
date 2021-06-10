@@ -114,6 +114,20 @@ type BatchDeleteDocumentResponseFailedDocument struct {
 	Id *string
 }
 
+// Provides a response when the status of a document could not be retrieved.
+type BatchGetDocumentStatusResponseError struct {
+
+	// The unique identifier of the document whose status could not be retrieved.
+	DocumentId *string
+
+	// Indicates the source of the error.
+	ErrorCode ErrorCode
+
+	// States that the API could not get the status of a document. This could be
+	// because the request is not valid or there is a system error.
+	ErrorMessage *string
+}
+
 // Provides information about a document that could not be indexed.
 type BatchPutDocumentResponseFailedDocument struct {
 
@@ -707,7 +721,10 @@ type DocumentAttributeValueMemberLongValue struct {
 
 func (*DocumentAttributeValueMemberLongValue) isDocumentAttributeValue() {}
 
-// A date expressed as an ISO 8601 string.
+// A date expressed as an ISO 8601 string. It is important for the time zone to be
+// included in the ISO 8601 date-time format. For example, 20120325T123010+01:00 is
+// the ISO 8601 date-time format for March 25th 2012 at 12:30PM (plus 10 seconds)
+// in Central European Time.
 type DocumentAttributeValueMemberDateValue struct {
 	Value time.Time
 }
@@ -724,6 +741,37 @@ type DocumentAttributeValueCountPair struct {
 
 	// The value of the attribute. For example, "HR."
 	DocumentAttributeValue DocumentAttributeValue
+}
+
+// Identifies a document for which to retrieve status information
+type DocumentInfo struct {
+
+	// The unique identifier of the document.
+	//
+	// This member is required.
+	DocumentId *string
+
+	// Attributes that identify a specific version of a document to check. The only
+	// valid attributes are:
+	//
+	// * version
+	//
+	// * datasourceId
+	//
+	// * jobExecutionId
+	//
+	// The
+	// attributes follow these rules:
+	//
+	// * dataSourceId and jobExecutionId must be used
+	// together.
+	//
+	// * version is ignored if dataSourceId and jobExecutionId are not
+	// provided.
+	//
+	// * If dataSourceId and jobExecutionId are provided, but version is
+	// not, the version defaults to "0".
+	Attributes []DocumentAttribute
 }
 
 // Specifies the properties of a custom index field.
@@ -1744,6 +1792,25 @@ type SqlConfiguration struct {
 	// For MySQL databases, you must enable the ansi_quotes option when you set this
 	// field to DOUBLE_QUOTES.
 	QueryIdentifiersEnclosingOption QueryIdentifiersEnclosingOption
+}
+
+// Provides information about the status of documents submitted for indexing.
+type Status struct {
+
+	// The unique identifier of the document.
+	DocumentId *string
+
+	// The current status of a document. If the document was submitted for deletion,
+	// the status is NOT_FOUND after the document is deleted.
+	DocumentStatus DocumentStatus
+
+	// Indicates the source of the error.
+	FailureCode *string
+
+	// Provides detailed information about why the document couldn't be indexed. Use
+	// this information to correct the error before you resubmit the document for
+	// indexing.
+	FailureReason *string
 }
 
 // A single query suggestion.

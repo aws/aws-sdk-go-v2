@@ -30,6 +30,26 @@ func (m *validateOpDescribeDimensionKeys) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDimensionKeyDetails struct {
+}
+
+func (*validateOpGetDimensionKeyDetails) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDimensionKeyDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDimensionKeyDetailsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDimensionKeyDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResourceMetrics struct {
 }
 
@@ -52,6 +72,10 @@ func (m *validateOpGetResourceMetrics) HandleInitialize(ctx context.Context, in 
 
 func addOpDescribeDimensionKeysValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDimensionKeys{}, middleware.After)
+}
+
+func addOpGetDimensionKeyDetailsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDimensionKeyDetails{}, middleware.After)
 }
 
 func addOpGetResourceMetricsValidationMiddleware(stack *middleware.Stack) error {
@@ -141,6 +165,30 @@ func validateOpDescribeDimensionKeysInput(v *DescribeDimensionKeysInput) error {
 		if err := validateDimensionGroup(v.PartitionBy); err != nil {
 			invalidParams.AddNested("PartitionBy", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDimensionKeyDetailsInput(v *GetDimensionKeyDetailsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDimensionKeyDetailsInput"}
+	if len(v.ServiceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.Group == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Group"))
+	}
+	if v.GroupIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

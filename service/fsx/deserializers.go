@@ -6214,6 +6214,64 @@ func awsAwsjson11_deserializeDocumentUnsupportedOperation(v **types.UnsupportedO
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentWindowsAuditLogConfiguration(v **types.WindowsAuditLogConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WindowsAuditLogConfiguration
+	if *v == nil {
+		sv = &types.WindowsAuditLogConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AuditLogDestination":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GeneralARN to be of type string, got %T instead", value)
+				}
+				sv.AuditLogDestination = ptr.String(jtv)
+			}
+
+		case "FileAccessAuditLogLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WindowsAccessAuditLogLevel to be of type string, got %T instead", value)
+				}
+				sv.FileAccessAuditLogLevel = types.WindowsAccessAuditLogLevel(jtv)
+			}
+
+		case "FileShareAccessAuditLogLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WindowsAccessAuditLogLevel to be of type string, got %T instead", value)
+				}
+				sv.FileShareAccessAuditLogLevel = types.WindowsAccessAuditLogLevel(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentWindowsFileSystemConfiguration(v **types.WindowsFileSystemConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6247,6 +6305,11 @@ func awsAwsjson11_deserializeDocumentWindowsFileSystemConfiguration(v **types.Wi
 
 		case "Aliases":
 			if err := awsAwsjson11_deserializeDocumentAliases(&sv.Aliases, value); err != nil {
+				return err
+			}
+
+		case "AuditLogConfiguration":
+			if err := awsAwsjson11_deserializeDocumentWindowsAuditLogConfiguration(&sv.AuditLogConfiguration, value); err != nil {
 				return err
 			}
 

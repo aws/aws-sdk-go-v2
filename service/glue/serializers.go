@@ -9559,6 +9559,11 @@ func awsAwsjson11_serializeDocumentS3Target(v *types.S3Target, value smithyjson.
 		ok.String(*v.Path)
 	}
 
+	if v.SampleSize != nil {
+		ok := object.Key("SampleSize")
+		ok.Integer(*v.SampleSize)
+	}
+
 	return nil
 }
 

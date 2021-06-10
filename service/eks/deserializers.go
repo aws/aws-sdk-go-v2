@@ -7547,6 +7547,11 @@ func awsRestjson1_deserializeDocumentNodegroup(v **types.Nodegroup, value interf
 				return err
 			}
 
+		case "updateConfig":
+			if err := awsRestjson1_deserializeDocumentNodegroupUpdateConfig(&sv.UpdateConfig, value); err != nil {
+				return err
+			}
+
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7705,6 +7710,63 @@ func awsRestjson1_deserializeDocumentNodegroupScalingConfig(v **types.NodegroupS
 					return err
 				}
 				sv.MinSize = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNodegroupUpdateConfig(v **types.NodegroupUpdateConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NodegroupUpdateConfig
+	if *v == nil {
+		sv = &types.NodegroupUpdateConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxUnavailable":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonZeroInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxUnavailable = ptr.Int32(int32(i64))
+			}
+
+		case "maxUnavailablePercentage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PercentCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxUnavailablePercentage = ptr.Int32(int32(i64))
 			}
 
 		default:

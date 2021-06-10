@@ -62,6 +62,53 @@ func (m *awsAwsjson11_serializeOpDescribeDimensionKeys) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetDimensionKeyDetails struct {
+}
+
+func (*awsAwsjson11_serializeOpGetDimensionKeyDetails) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetDimensionKeyDetails) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetDimensionKeyDetailsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PerformanceInsightsv20180227.GetDimensionKeyDetails")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetDimensionKeyDetailsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetResourceMetrics struct {
 }
 
@@ -114,7 +161,7 @@ func awsAwsjson11_serializeDocumentDimensionGroup(v *types.DimensionGroup, value
 
 	if v.Dimensions != nil {
 		ok := object.Key("Dimensions")
-		if err := awsAwsjson11_serializeDocumentStringList(v.Dimensions, ok); err != nil {
+		if err := awsAwsjson11_serializeDocumentRequestStringList(v.Dimensions, ok); err != nil {
 			return err
 		}
 	}
@@ -182,7 +229,18 @@ func awsAwsjson11_serializeDocumentMetricQueryList(v []types.MetricQuery, value 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStringList(v []string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRequestedDimensionList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRequestStringList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -256,6 +314,40 @@ func awsAwsjson11_serializeOpDocumentDescribeDimensionKeysInput(v *DescribeDimen
 	if v.StartTime != nil {
 		ok := object.Key("StartTime")
 		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetDimensionKeyDetailsInput(v *GetDimensionKeyDetailsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Group != nil {
+		ok := object.Key("Group")
+		ok.String(*v.Group)
+	}
+
+	if v.GroupIdentifier != nil {
+		ok := object.Key("GroupIdentifier")
+		ok.String(*v.GroupIdentifier)
+	}
+
+	if v.Identifier != nil {
+		ok := object.Key("Identifier")
+		ok.String(*v.Identifier)
+	}
+
+	if v.RequestedDimensions != nil {
+		ok := object.Key("RequestedDimensions")
+		if err := awsAwsjson11_serializeDocumentRequestedDimensionList(v.RequestedDimensions, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ServiceType) > 0 {
+		ok := object.Key("ServiceType")
+		ok.String(string(v.ServiceType))
 	}
 
 	return nil

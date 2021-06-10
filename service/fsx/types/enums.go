@@ -461,6 +461,28 @@ func (StorageType) Values() []StorageType {
 	}
 }
 
+type WindowsAccessAuditLogLevel string
+
+// Enum values for WindowsAccessAuditLogLevel
+const (
+	WindowsAccessAuditLogLevelDisabled          WindowsAccessAuditLogLevel = "DISABLED"
+	WindowsAccessAuditLogLevelSuccessOnly       WindowsAccessAuditLogLevel = "SUCCESS_ONLY"
+	WindowsAccessAuditLogLevelFailureOnly       WindowsAccessAuditLogLevel = "FAILURE_ONLY"
+	WindowsAccessAuditLogLevelSuccessAndFailure WindowsAccessAuditLogLevel = "SUCCESS_AND_FAILURE"
+)
+
+// Values returns all known values for WindowsAccessAuditLogLevel. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WindowsAccessAuditLogLevel) Values() []WindowsAccessAuditLogLevel {
+	return []WindowsAccessAuditLogLevel{
+		"DISABLED",
+		"SUCCESS_ONLY",
+		"FAILURE_ONLY",
+		"SUCCESS_AND_FAILURE",
+	}
+}
+
 type WindowsDeploymentType string
 
 // Enum values for WindowsDeploymentType

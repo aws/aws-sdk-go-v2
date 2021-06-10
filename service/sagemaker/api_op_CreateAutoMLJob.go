@@ -46,16 +46,12 @@ type CreateAutoMLJobInput struct {
 	InputDataConfig []types.AutoMLChannel
 
 	// Provides information about encryption and the Amazon S3 output path needed to
-	// store artifacts from an AutoML job. Format(s) supported: CSV. Specifies whether
-	// to automatically deploy the best &ATP; model to an endpoint and the name of that
-	// endpoint if deployed automatically.
+	// store artifacts from an AutoML job. Format(s) supported: CSV.
 	//
 	// This member is required.
 	OutputDataConfig *types.AutoMLOutputDataConfig
 
-	// The ARN of the role that is used to access the data. Specifies whether to
-	// automatically deploy the best &ATP; model to an endpoint and the name of that
-	// endpoint if deployed automatically.
+	// The ARN of the role that is used to access the data.
 	//
 	// This member is required.
 	RoleArn *string

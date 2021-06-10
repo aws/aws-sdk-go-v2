@@ -701,8 +701,9 @@ type Crawler struct {
 	Classifiers []string
 
 	// Crawler configuration information. This versioned JSON string allows users to
-	// specify aspects of a crawler's behavior. For more information, see Configuring a
-	// Crawler (https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html).
+	// specify aspects of a crawler's behavior. For more information, see Include and
+	// Exclude Patterns
+	// (https://docs.aws.amazon.com/glue/latest/dg/define-crawler.html#crawler-data-stores-exclude).
 	Configuration *string
 
 	// If the crawler is running, contains the total time elapsed since the last crawl
@@ -2660,6 +2661,11 @@ type S3Target struct {
 
 	// The path to the Amazon S3 target.
 	Path *string
+
+	// Sets the number of files in each leaf folder to be crawled when crawling sample
+	// files in a dataset. If not set, all the files are crawled. A valid value is an
+	// integer between 1 and 249.
+	SampleSize *int32
 }
 
 // A scheduling object using a cron statement to schedule an event.

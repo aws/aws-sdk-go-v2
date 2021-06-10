@@ -84,7 +84,7 @@ func awsAwsquery_deserializeOpErrorAttachInstances(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	case strings.EqualFold("ServiceLinkedRoleFailure", errorCode):
@@ -195,7 +195,7 @@ func awsAwsquery_deserializeOpErrorAttachLoadBalancers(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	case strings.EqualFold("ServiceLinkedRoleFailure", errorCode):
@@ -306,7 +306,7 @@ func awsAwsquery_deserializeOpErrorAttachLoadBalancerTargetGroups(response *smit
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	case strings.EqualFold("ServiceLinkedRoleFailure", errorCode):
@@ -417,7 +417,7 @@ func awsAwsquery_deserializeOpErrorBatchDeleteScheduledAction(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -525,13 +525,13 @@ func awsAwsquery_deserializeOpErrorBatchPutScheduledUpdateGroupAction(response *
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AlreadyExistsFault", errorCode):
+	case strings.EqualFold("AlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -639,13 +639,13 @@ func awsAwsquery_deserializeOpErrorCancelInstanceRefresh(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ActiveInstanceRefreshNotFoundFault", errorCode):
+	case strings.EqualFold("ActiveInstanceRefreshNotFound", errorCode):
 		return awsAwsquery_deserializeErrorActiveInstanceRefreshNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -753,7 +753,7 @@ func awsAwsquery_deserializeOpErrorCompleteLifecycleAction(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -826,13 +826,13 @@ func awsAwsquery_deserializeOpErrorCreateAutoScalingGroup(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AlreadyExistsFault", errorCode):
+	case strings.EqualFold("AlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	case strings.EqualFold("ServiceLinkedRoleFailure", errorCode):
@@ -908,13 +908,13 @@ func awsAwsquery_deserializeOpErrorCreateLaunchConfiguration(response *smithyhtt
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AlreadyExistsFault", errorCode):
+	case strings.EqualFold("AlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -987,16 +987,16 @@ func awsAwsquery_deserializeOpErrorCreateOrUpdateTags(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AlreadyExistsFault", errorCode):
+	case strings.EqualFold("AlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
-	case strings.EqualFold("ResourceInUseFault", errorCode):
+	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsquery_deserializeErrorResourceInUseFault(response, errorBody)
 
 	default:
@@ -1069,13 +1069,13 @@ func awsAwsquery_deserializeOpErrorDeleteAutoScalingGroup(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
-	case strings.EqualFold("ResourceInUseFault", errorCode):
+	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsquery_deserializeErrorResourceInUseFault(response, errorBody)
 
-	case strings.EqualFold("ScalingActivityInProgressFault", errorCode):
+	case strings.EqualFold("ScalingActivityInProgress", errorCode):
 		return awsAwsquery_deserializeErrorScalingActivityInProgressFault(response, errorBody)
 
 	default:
@@ -1148,10 +1148,10 @@ func awsAwsquery_deserializeOpErrorDeleteLaunchConfiguration(response *smithyhtt
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
-	case strings.EqualFold("ResourceInUseFault", errorCode):
+	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsquery_deserializeErrorResourceInUseFault(response, errorBody)
 
 	default:
@@ -1259,7 +1259,7 @@ func awsAwsquery_deserializeOpErrorDeleteLifecycleHook(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -1332,7 +1332,7 @@ func awsAwsquery_deserializeOpErrorDeleteNotificationConfiguration(response *smi
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -1405,7 +1405,7 @@ func awsAwsquery_deserializeOpErrorDeletePolicy(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	case strings.EqualFold("ServiceLinkedRoleFailure", errorCode):
@@ -1481,7 +1481,7 @@ func awsAwsquery_deserializeOpErrorDeleteScheduledAction(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -1554,10 +1554,10 @@ func awsAwsquery_deserializeOpErrorDeleteTags(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
-	case strings.EqualFold("ResourceInUseFault", errorCode):
+	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsquery_deserializeErrorResourceInUseFault(response, errorBody)
 
 	default:
@@ -1665,16 +1665,16 @@ func awsAwsquery_deserializeOpErrorDeleteWarmPool(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
-	case strings.EqualFold("ResourceInUseFault", errorCode):
+	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsquery_deserializeErrorResourceInUseFault(response, errorBody)
 
-	case strings.EqualFold("ScalingActivityInProgressFault", errorCode):
+	case strings.EqualFold("ScalingActivityInProgress", errorCode):
 		return awsAwsquery_deserializeErrorScalingActivityInProgressFault(response, errorBody)
 
 	default:
@@ -1782,7 +1782,7 @@ func awsAwsquery_deserializeOpErrorDescribeAccountLimits(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -1890,7 +1890,7 @@ func awsAwsquery_deserializeOpErrorDescribeAdjustmentTypes(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -2001,7 +2001,7 @@ func awsAwsquery_deserializeOpErrorDescribeAutoScalingGroups(response *smithyhtt
 	case strings.EqualFold("InvalidNextToken", errorCode):
 		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -2112,7 +2112,7 @@ func awsAwsquery_deserializeOpErrorDescribeAutoScalingInstances(response *smithy
 	case strings.EqualFold("InvalidNextToken", errorCode):
 		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -2220,7 +2220,7 @@ func awsAwsquery_deserializeOpErrorDescribeAutoScalingNotificationTypes(response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -2331,7 +2331,7 @@ func awsAwsquery_deserializeOpErrorDescribeInstanceRefreshes(response *smithyhtt
 	case strings.EqualFold("InvalidNextToken", errorCode):
 		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -2442,7 +2442,7 @@ func awsAwsquery_deserializeOpErrorDescribeLaunchConfigurations(response *smithy
 	case strings.EqualFold("InvalidNextToken", errorCode):
 		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -2550,7 +2550,7 @@ func awsAwsquery_deserializeOpErrorDescribeLifecycleHooks(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -2658,7 +2658,7 @@ func awsAwsquery_deserializeOpErrorDescribeLifecycleHookTypes(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -2766,7 +2766,7 @@ func awsAwsquery_deserializeOpErrorDescribeLoadBalancers(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -2874,7 +2874,7 @@ func awsAwsquery_deserializeOpErrorDescribeLoadBalancerTargetGroups(response *sm
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -2982,7 +2982,7 @@ func awsAwsquery_deserializeOpErrorDescribeMetricCollectionTypes(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -3093,7 +3093,7 @@ func awsAwsquery_deserializeOpErrorDescribeNotificationConfigurations(response *
 	case strings.EqualFold("InvalidNextToken", errorCode):
 		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -3204,7 +3204,7 @@ func awsAwsquery_deserializeOpErrorDescribePolicies(response *smithyhttp.Respons
 	case strings.EqualFold("InvalidNextToken", errorCode):
 		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	case strings.EqualFold("ServiceLinkedRoleFailure", errorCode):
@@ -3318,7 +3318,7 @@ func awsAwsquery_deserializeOpErrorDescribeScalingActivities(response *smithyhtt
 	case strings.EqualFold("InvalidNextToken", errorCode):
 		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -3426,7 +3426,7 @@ func awsAwsquery_deserializeOpErrorDescribeScalingProcessTypes(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -3537,7 +3537,7 @@ func awsAwsquery_deserializeOpErrorDescribeScheduledActions(response *smithyhttp
 	case strings.EqualFold("InvalidNextToken", errorCode):
 		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -3648,7 +3648,7 @@ func awsAwsquery_deserializeOpErrorDescribeTags(response *smithyhttp.Response, m
 	case strings.EqualFold("InvalidNextToken", errorCode):
 		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -3756,7 +3756,7 @@ func awsAwsquery_deserializeOpErrorDescribeTerminationPolicyTypes(response *smit
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -3867,10 +3867,10 @@ func awsAwsquery_deserializeOpErrorDescribeWarmPool(response *smithyhttp.Respons
 	case strings.EqualFold("InvalidNextToken", errorCode):
 		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
 
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -3978,7 +3978,7 @@ func awsAwsquery_deserializeOpErrorDetachInstances(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -4086,7 +4086,7 @@ func awsAwsquery_deserializeOpErrorDetachLoadBalancers(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -4194,7 +4194,7 @@ func awsAwsquery_deserializeOpErrorDetachLoadBalancerTargetGroups(response *smit
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -4267,7 +4267,7 @@ func awsAwsquery_deserializeOpErrorDisableMetricsCollection(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -4340,7 +4340,7 @@ func awsAwsquery_deserializeOpErrorEnableMetricsCollection(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -4448,7 +4448,7 @@ func awsAwsquery_deserializeOpErrorEnterStandby(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -4521,10 +4521,10 @@ func awsAwsquery_deserializeOpErrorExecutePolicy(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
-	case strings.EqualFold("ScalingActivityInProgressFault", errorCode):
+	case strings.EqualFold("ScalingActivityInProgress", errorCode):
 		return awsAwsquery_deserializeErrorScalingActivityInProgressFault(response, errorBody)
 
 	default:
@@ -4632,7 +4632,7 @@ func awsAwsquery_deserializeOpErrorExitStandby(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -4740,7 +4740,7 @@ func awsAwsquery_deserializeOpErrorGetPredictiveScalingForecast(response *smithy
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -4848,10 +4848,10 @@ func awsAwsquery_deserializeOpErrorPutLifecycleHook(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -4924,10 +4924,10 @@ func awsAwsquery_deserializeOpErrorPutNotificationConfiguration(response *smithy
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	case strings.EqualFold("ServiceLinkedRoleFailure", errorCode):
@@ -5038,10 +5038,10 @@ func awsAwsquery_deserializeOpErrorPutScalingPolicy(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	case strings.EqualFold("ServiceLinkedRoleFailure", errorCode):
@@ -5117,13 +5117,13 @@ func awsAwsquery_deserializeOpErrorPutScheduledUpdateGroupAction(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AlreadyExistsFault", errorCode):
+	case strings.EqualFold("AlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -5231,10 +5231,10 @@ func awsAwsquery_deserializeOpErrorPutWarmPool(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -5342,7 +5342,7 @@ func awsAwsquery_deserializeOpErrorRecordLifecycleActionHeartbeat(response *smit
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -5415,10 +5415,10 @@ func awsAwsquery_deserializeOpErrorResumeProcesses(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
-	case strings.EqualFold("ResourceInUseFault", errorCode):
+	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsquery_deserializeErrorResourceInUseFault(response, errorBody)
 
 	default:
@@ -5491,10 +5491,10 @@ func awsAwsquery_deserializeOpErrorSetDesiredCapacity(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
-	case strings.EqualFold("ScalingActivityInProgressFault", errorCode):
+	case strings.EqualFold("ScalingActivityInProgress", errorCode):
 		return awsAwsquery_deserializeErrorScalingActivityInProgressFault(response, errorBody)
 
 	default:
@@ -5567,7 +5567,7 @@ func awsAwsquery_deserializeOpErrorSetInstanceHealth(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -5675,10 +5675,10 @@ func awsAwsquery_deserializeOpErrorSetInstanceProtection(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -5786,13 +5786,13 @@ func awsAwsquery_deserializeOpErrorStartInstanceRefresh(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InstanceRefreshInProgressFault", errorCode):
+	case strings.EqualFold("InstanceRefreshInProgress", errorCode):
 		return awsAwsquery_deserializeErrorInstanceRefreshInProgressFault(response, errorBody)
 
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
 	default:
@@ -5865,10 +5865,10 @@ func awsAwsquery_deserializeOpErrorSuspendProcesses(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
-	case strings.EqualFold("ResourceInUseFault", errorCode):
+	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsquery_deserializeErrorResourceInUseFault(response, errorBody)
 
 	default:
@@ -5976,10 +5976,10 @@ func awsAwsquery_deserializeOpErrorTerminateInstanceInAutoScalingGroup(response 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
-	case strings.EqualFold("ScalingActivityInProgressFault", errorCode):
+	case strings.EqualFold("ScalingActivityInProgress", errorCode):
 		return awsAwsquery_deserializeErrorScalingActivityInProgressFault(response, errorBody)
 
 	default:
@@ -6052,10 +6052,10 @@ func awsAwsquery_deserializeOpErrorUpdateAutoScalingGroup(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceContentionFault", errorCode):
+	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
-	case strings.EqualFold("ScalingActivityInProgressFault", errorCode):
+	case strings.EqualFold("ScalingActivityInProgress", errorCode):
 		return awsAwsquery_deserializeErrorScalingActivityInProgressFault(response, errorBody)
 
 	case strings.EqualFold("ServiceLinkedRoleFailure", errorCode):

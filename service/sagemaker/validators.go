@@ -2930,6 +2930,46 @@ func (m *validateOpSearch) HandleInitialize(ctx context.Context, in middleware.I
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSendPipelineExecutionStepFailure struct {
+}
+
+func (*validateOpSendPipelineExecutionStepFailure) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendPipelineExecutionStepFailure) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendPipelineExecutionStepFailureInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendPipelineExecutionStepFailureInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSendPipelineExecutionStepSuccess struct {
+}
+
+func (*validateOpSendPipelineExecutionStepSuccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendPipelineExecutionStepSuccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendPipelineExecutionStepSuccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendPipelineExecutionStepSuccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartMonitoringSchedule struct {
 }
 
@@ -4272,6 +4312,14 @@ func addOpRenderUiTemplateValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSearchValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearch{}, middleware.After)
+}
+
+func addOpSendPipelineExecutionStepFailureValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendPipelineExecutionStepFailure{}, middleware.After)
+}
+
+func addOpSendPipelineExecutionStepSuccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendPipelineExecutionStepSuccess{}, middleware.After)
 }
 
 func addOpStartMonitoringScheduleValidationMiddleware(stack *middleware.Stack) error {
@@ -7043,6 +7091,41 @@ func validateOutputDataConfig(v *types.OutputDataConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "OutputDataConfig"}
 	if v.S3OutputPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputParameter(v *types.OutputParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputParameter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputParameterList(v []types.OutputParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputParameterList"}
+	for i := range v {
+		if err := validateOutputParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11377,6 +11460,41 @@ func validateOpSearchInput(v *SearchInput) error {
 	if v.SearchExpression != nil {
 		if err := validateSearchExpression(v.SearchExpression); err != nil {
 			invalidParams.AddNested("SearchExpression", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendPipelineExecutionStepFailureInput(v *SendPipelineExecutionStepFailureInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendPipelineExecutionStepFailureInput"}
+	if v.CallbackToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallbackToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendPipelineExecutionStepSuccessInput(v *SendPipelineExecutionStepSuccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendPipelineExecutionStepSuccessInput"}
+	if v.CallbackToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallbackToken"))
+	}
+	if v.OutputParameters != nil {
+		if err := validateOutputParameterList(v.OutputParameters); err != nil {
+			invalidParams.AddNested("OutputParameters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

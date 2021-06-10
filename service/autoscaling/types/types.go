@@ -396,8 +396,7 @@ type Ebs struct {
 	// SnapshotId.
 	SnapshotId *string
 
-	// The throughput to provision for a gp3 volume. Valid Range: Minimum value of 125.
-	// Maximum value of 1000.
+	// The throughput (MiBps) to provision for a gp3 volume.
 	Throughput *int32
 
 	// The volume size, in GiBs. The following are the supported volumes sizes for each

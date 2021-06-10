@@ -699,6 +699,13 @@ func awsRestjson1_serializeOpDocumentCreateNodegroupInput(v *CreateNodegroupInpu
 		}
 	}
 
+	if v.UpdateConfig != nil {
+		ok := object.Key("updateConfig")
+		if err := awsRestjson1_serializeDocumentNodegroupUpdateConfig(v.UpdateConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Version != nil {
 		ok := object.Key("version")
 		ok.String(*v.Version)
@@ -2530,6 +2537,13 @@ func awsRestjson1_serializeOpDocumentUpdateNodegroupConfigInput(v *UpdateNodegro
 		}
 	}
 
+	if v.UpdateConfig != nil {
+		ok := object.Key("updateConfig")
+		if err := awsRestjson1_serializeDocumentNodegroupUpdateConfig(v.UpdateConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2869,6 +2883,23 @@ func awsRestjson1_serializeDocumentNodegroupScalingConfig(v *types.NodegroupScal
 	if v.MinSize != nil {
 		ok := object.Key("minSize")
 		ok.Integer(*v.MinSize)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNodegroupUpdateConfig(v *types.NodegroupUpdateConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxUnavailable != nil {
+		ok := object.Key("maxUnavailable")
+		ok.Integer(*v.MaxUnavailable)
+	}
+
+	if v.MaxUnavailablePercentage != nil {
+		ok := object.Key("maxUnavailablePercentage")
+		ok.Integer(*v.MaxUnavailablePercentage)
 	}
 
 	return nil

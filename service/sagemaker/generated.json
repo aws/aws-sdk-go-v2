@@ -201,6 +201,8 @@
         "api_op_RegisterDevices.go",
         "api_op_RenderUiTemplate.go",
         "api_op_Search.go",
+        "api_op_SendPipelineExecutionStepFailure.go",
+        "api_op_SendPipelineExecutionStepSuccess.go",
         "api_op_StartMonitoringSchedule.go",
         "api_op_StartNotebookInstance.go",
         "api_op_StartPipelineExecution.go",
