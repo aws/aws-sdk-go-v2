@@ -1,3 +1,7 @@
+# v1.3.3 (2021-06-11)
+
+* **Documentation**: Updated to latest API model.
+
 # v1.3.2 (2021-06-04)
 
 * No change notes available for this release.

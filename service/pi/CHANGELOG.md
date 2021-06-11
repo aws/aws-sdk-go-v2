@@ -1,3 +1,7 @@
+# v1.4.0 (2021-06-11)
+
+* **Feature**: Updated to latest API model.
+
 # v1.3.1 (2021-05-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

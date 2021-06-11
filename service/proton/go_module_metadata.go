@@ -3,4 +3,4 @@
 package proton
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "tip"
+const goModuleVersion = "1.0.0"

@@ -1,3 +1,7 @@
+# v1.3.1 (2021-06-11)
+
+* **Documentation**: Updated to latest API model.
+
 # v1.3.0 (2021-06-04)
 
 * **Feature**: Updated service client to latest API model.
