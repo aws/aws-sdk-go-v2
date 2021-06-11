@@ -6,8 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-	"jamf.com/jcds/utils/window"
+	"github.com/aws/aws-sdk-go-v2/feature/s3/manager/internal/window"
 )
 
 func TestSlidingWindow_Order(t *testing.T) {
@@ -50,8 +49,12 @@ func TestSlidingWindow_Errors(t *testing.T) {
 	}
 
 	// Error stops iteration and returns an error
-	assert.LessOrEqual(t, num, 10, "kept iterating")
-	assert.Errorf(t, <-err, msg)
+	if num > 10 {
+		t.Errorf("kept iterating beyond 10 times: actual %d", num)
+	}
+	if e := <-err; e != nil {
+		t.Error(e)
+	}
 }
 
 func TestSlidingWindow_WithoutBuffer(t *testing.T) {
@@ -76,8 +79,6 @@ func TestSlidingWindow_WithoutBuffer(t *testing.T) {
 }
 
 func BenchmarkSlidingWindow_Order(b *testing.B) {
-	a := assert.New(b)
-
 	for i := 0; i < b.N; i++ {
 		ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 		defer cancel()
@@ -92,9 +93,13 @@ func BenchmarkSlidingWindow_Order(b *testing.B) {
 		// Test the print vs the output comment
 		n := 0
 		for o := range out {
-			a.Equal(o, n)
+			if on, ok := o.(int); !ok || on != n {
+				b.Errorf("incorrect element expected %v got %v", n, o)
+			}
 			n++
 		}
-		a.NoError(<-err)
+		if e := <-err; e != nil {
+			b.Error(e)
+		}
 	}
 }

@@ -289,7 +289,7 @@ func isEOF(err error) bool {
 	var responseError interface {
 		HTTPStatusCode() int
 	}
-	return errors.As(d.err, &responseError) &&
+	return errors.As(err, &responseError) &&
 		responseError.HTTPStatusCode() == http.StatusRequestedRangeNotSatisfiable
 }
 
@@ -526,7 +526,7 @@ func (c *dlchunk) ByteRange() string {
 	return byteRange(c.start, c.size)
 }
 
-func (d *Download) byteRange(start int64) string {
+func (d *Downloader) byteRange(start int64) string {
 	return byteRange(start, d.PartSize)
 }
 

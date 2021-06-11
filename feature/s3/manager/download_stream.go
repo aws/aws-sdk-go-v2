@@ -6,9 +6,12 @@ import (
 	"io"
 	"sync/atomic"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/manager/internal/window"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/smithy-go/logging"
 )
 
 // DownloadStream downloads an object in S3 and writes the payload into w
@@ -58,9 +61,10 @@ func (d *Downloader) DownloadStream(ctx context.Context, w io.Writer, input *s3.
 		in := &s3.GetObjectInput{}
 		awsutil.Copy(in, input)
 
-		in.Range = d.byteRange(start)
+		in.Range = aws.String(d.byteRange(start))
 
-		out, err := d.S3.GetObject(inner, in, d.getObjectOptions)
+		options := append(d.ClientOptions, d.retryOption)
+		out, err := d.S3.GetObject(inner, in, options...)
 		// Check if this is the end of the file err if it is don't loop
 		if err != nil {
 			if isEOF(err) {
@@ -77,10 +81,8 @@ func (d *Downloader) DownloadStream(ctx context.Context, w io.Writer, input *s3.
 				return nil, err
 			}
 			if !atomic.CompareAndSwapInt64(&reportedSize, old, new) {
-				d.Logger.Println("Failed to set size due to race condition. Continue uninterrupted")
+				d.Logger.Logf(logging.Debug, "Failed to set size due to race condition. Continue uninterrupted")
 			}
-
-			// d.Logger.Println("Total reported size:", reportedSize, "bytes")
 		}
 		return out, nil
 	})
@@ -122,4 +124,8 @@ Loop:
 	}
 
 	return totalBytes, <-errChan
+}
+
+func (d *Downloader) retryOption(options *s3.Options) {
+	options.Retryer = retry.AddWithMaxAttempts(options.Retryer, d.PartBodyMaxRetries)
 }
