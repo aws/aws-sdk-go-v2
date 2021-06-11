@@ -318,6 +318,32 @@ func (DocumentAttributeValueType) Values() []DocumentAttributeValueType {
 	}
 }
 
+type DocumentStatus string
+
+// Enum values for DocumentStatus
+const (
+	DocumentStatusNotFound     DocumentStatus = "NOT_FOUND"
+	DocumentStatusProcessing   DocumentStatus = "PROCESSING"
+	DocumentStatusIndexed      DocumentStatus = "INDEXED"
+	DocumentStatusUpdated      DocumentStatus = "UPDATED"
+	DocumentStatusFailed       DocumentStatus = "FAILED"
+	DocumentStatusUpdateFailed DocumentStatus = "UPDATE_FAILED"
+)
+
+// Values returns all known values for DocumentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentStatus) Values() []DocumentStatus {
+	return []DocumentStatus{
+		"NOT_FOUND",
+		"PROCESSING",
+		"INDEXED",
+		"UPDATED",
+		"FAILED",
+		"UPDATE_FAILED",
+	}
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode

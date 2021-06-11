@@ -794,7 +794,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*"
+                "smithy.api#pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*$"
             }
         },
         "com.amazonaws.eks#ClusterStatus": {
@@ -1298,6 +1298,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object representing a node group's launch template specification. If specified,\n            then do not specify <code>instanceTypes</code>, <code>diskSize</code>, or\n                <code>remoteAccess</code> and make sure that the launch template meets the\n            requirements in <code>launchTemplateSpecification</code>.</p>"
                     }
+                },
+                "updateConfig": {
+                    "target": "com.amazonaws.eks#NodegroupUpdateConfig"
                 },
                 "capacityType": {
                     "target": "com.amazonaws.eks#CapacityTypes",
@@ -3577,6 +3580,9 @@
                         "smithy.api#documentation": "<p>The health status of the node group. If there are issues with your node group's\n            health, they are listed here.</p>"
                     }
                 },
+                "updateConfig": {
+                    "target": "com.amazonaws.eks#NodegroupUpdateConfig"
+                },
                 "launchTemplate": {
                     "target": "com.amazonaws.eks#LaunchTemplateSpecification",
                     "traits": {
@@ -3768,6 +3774,26 @@
                 ]
             }
         },
+        "com.amazonaws.eks#NodegroupUpdateConfig": {
+            "type": "structure",
+            "members": {
+                "maxUnavailable": {
+                    "target": "com.amazonaws.eks#NonZeroInteger"
+                },
+                "maxUnavailablePercentage": {
+                    "target": "com.amazonaws.eks#PercentCapacity"
+                }
+            }
+        },
+        "com.amazonaws.eks#NonZeroInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.eks#NotFoundException": {
             "type": "structure",
             "members": {
@@ -3932,6 +3958,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object representing an OpenID Connect (OIDC) configuration. Before associating an\n            OIDC identity provider to your cluster, review the considerations in <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html\">Authenticating\n                users for your cluster from an OpenID Connect identity provider</a> in the\n            <i>Amazon EKS User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.eks#PercentCapacity": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.eks#Provider": {
@@ -4730,6 +4766,9 @@
                         "smithy.api#documentation": "<p>The scaling configuration details for the Auto Scaling group after the update.</p>"
                     }
                 },
+                "updateConfig": {
+                    "target": "com.amazonaws.eks#NodegroupUpdateConfig"
+                },
                 "clientRequestToken": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
@@ -4951,6 +4990,14 @@
                     {
                         "value": "ResolveConflicts",
                         "name": "RESOLVE_CONFLICTS"
+                    },
+                    {
+                        "value": "MaxUnavailable",
+                        "name": "MAX_UNAVAILABLE"
+                    },
+                    {
+                        "value": "MaxUnavailablePercentage",
+                        "name": "MAX_UNAVAILABLE_PERCENTAGE"
                     }
                 ]
             }

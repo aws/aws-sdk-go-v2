@@ -167,6 +167,8 @@ type CreateNodegroupInput struct {
 	// The Kubernetes taints to be applied to the nodes in the node group.
 	Taints []types.Taint
 
+	UpdateConfig *types.NodegroupUpdateConfig
+
 	// The Kubernetes version to use for your managed nodes. By default, the Kubernetes
 	// version of the cluster is used, and this is the only accepted specified value.
 	// If you specify launchTemplate, and your launch template uses a custom AMI, then

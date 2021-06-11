@@ -352,27 +352,29 @@ type UpdateParamType string
 
 // Enum values for UpdateParamType
 const (
-	UpdateParamTypeVersion                UpdateParamType = "Version"
-	UpdateParamTypePlatformVersion        UpdateParamType = "PlatformVersion"
-	UpdateParamTypeEndpointPrivateAccess  UpdateParamType = "EndpointPrivateAccess"
-	UpdateParamTypeEndpointPublicAccess   UpdateParamType = "EndpointPublicAccess"
-	UpdateParamTypeClusterLogging         UpdateParamType = "ClusterLogging"
-	UpdateParamTypeDesiredSize            UpdateParamType = "DesiredSize"
-	UpdateParamTypeLabelsToAdd            UpdateParamType = "LabelsToAdd"
-	UpdateParamTypeLabelsToRemove         UpdateParamType = "LabelsToRemove"
-	UpdateParamTypeTaintsToAdd            UpdateParamType = "TaintsToAdd"
-	UpdateParamTypeTaintsToRemove         UpdateParamType = "TaintsToRemove"
-	UpdateParamTypeMaxSize                UpdateParamType = "MaxSize"
-	UpdateParamTypeMinSize                UpdateParamType = "MinSize"
-	UpdateParamTypeReleaseVersion         UpdateParamType = "ReleaseVersion"
-	UpdateParamTypePublicAccessCidrs      UpdateParamType = "PublicAccessCidrs"
-	UpdateParamTypeLaunchTemplateName     UpdateParamType = "LaunchTemplateName"
-	UpdateParamTypeLaunchTemplateVersion  UpdateParamType = "LaunchTemplateVersion"
-	UpdateParamTypeIdentityProviderConfig UpdateParamType = "IdentityProviderConfig"
-	UpdateParamTypeEncryptionConfig       UpdateParamType = "EncryptionConfig"
-	UpdateParamTypeAddonVersion           UpdateParamType = "AddonVersion"
-	UpdateParamTypeServiceAccountRoleArn  UpdateParamType = "ServiceAccountRoleArn"
-	UpdateParamTypeResolveConflicts       UpdateParamType = "ResolveConflicts"
+	UpdateParamTypeVersion                  UpdateParamType = "Version"
+	UpdateParamTypePlatformVersion          UpdateParamType = "PlatformVersion"
+	UpdateParamTypeEndpointPrivateAccess    UpdateParamType = "EndpointPrivateAccess"
+	UpdateParamTypeEndpointPublicAccess     UpdateParamType = "EndpointPublicAccess"
+	UpdateParamTypeClusterLogging           UpdateParamType = "ClusterLogging"
+	UpdateParamTypeDesiredSize              UpdateParamType = "DesiredSize"
+	UpdateParamTypeLabelsToAdd              UpdateParamType = "LabelsToAdd"
+	UpdateParamTypeLabelsToRemove           UpdateParamType = "LabelsToRemove"
+	UpdateParamTypeTaintsToAdd              UpdateParamType = "TaintsToAdd"
+	UpdateParamTypeTaintsToRemove           UpdateParamType = "TaintsToRemove"
+	UpdateParamTypeMaxSize                  UpdateParamType = "MaxSize"
+	UpdateParamTypeMinSize                  UpdateParamType = "MinSize"
+	UpdateParamTypeReleaseVersion           UpdateParamType = "ReleaseVersion"
+	UpdateParamTypePublicAccessCidrs        UpdateParamType = "PublicAccessCidrs"
+	UpdateParamTypeLaunchTemplateName       UpdateParamType = "LaunchTemplateName"
+	UpdateParamTypeLaunchTemplateVersion    UpdateParamType = "LaunchTemplateVersion"
+	UpdateParamTypeIdentityProviderConfig   UpdateParamType = "IdentityProviderConfig"
+	UpdateParamTypeEncryptionConfig         UpdateParamType = "EncryptionConfig"
+	UpdateParamTypeAddonVersion             UpdateParamType = "AddonVersion"
+	UpdateParamTypeServiceAccountRoleArn    UpdateParamType = "ServiceAccountRoleArn"
+	UpdateParamTypeResolveConflicts         UpdateParamType = "ResolveConflicts"
+	UpdateParamTypeMaxUnavailable           UpdateParamType = "MaxUnavailable"
+	UpdateParamTypeMaxUnavailablePercentage UpdateParamType = "MaxUnavailablePercentage"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -401,6 +403,8 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"AddonVersion",
 		"ServiceAccountRoleArn",
 		"ResolveConflicts",
+		"MaxUnavailable",
+		"MaxUnavailablePercentage",
 	}
 }
 

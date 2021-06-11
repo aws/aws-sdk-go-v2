@@ -36,7 +36,8 @@ type CancelJournalKinesisStreamInput struct {
 	// This member is required.
 	LedgerName *string
 
-	// The unique ID that QLDB assigns to each QLDB journal stream.
+	// The UUID (represented in Base62-encoded text) of the QLDB journal stream to be
+	// canceled.
 	//
 	// This member is required.
 	StreamId *string
@@ -44,7 +45,7 @@ type CancelJournalKinesisStreamInput struct {
 
 type CancelJournalKinesisStreamOutput struct {
 
-	// The unique ID that QLDB assigns to each QLDB journal stream.
+	// The UUID (Base62-encoded text) of the canceled QLDB journal stream.
 	StreamId *string
 
 	// Metadata pertaining to the operation's result.

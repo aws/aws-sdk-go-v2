@@ -1145,7 +1145,8 @@ type JobScheduleFrequency struct {
 }
 
 // Specifies a property- or tag-based condition that defines criteria for including
-// or excluding S3 objects from a classification job.
+// or excluding S3 objects from a classification job. A JobScopeTerm object can
+// contain only one simpleScopeTerm object or one tagScopeTerm object.
 type JobScopeTerm struct {
 
 	// A property-based condition that defines a property, operator, and one or more
@@ -1161,9 +1162,9 @@ type JobScopeTerm struct {
 // for including or excluding S3 objects from a classification job.
 type JobScopingBlock struct {
 
-	// An array of conditions, one for each condition that determines which objects to
-	// include or exclude from the job. If you specify more than one condition, Amazon
-	// Macie uses AND logic to join the conditions.
+	// An array of conditions, one for each property- or tag-based condition that
+	// determines which objects to include or exclude from the job. If you specify more
+	// than one condition, Amazon Macie uses AND logic to join the conditions.
 	And []JobScopeTerm
 }
 
@@ -1331,7 +1332,7 @@ type MatchingBucket struct {
 
 	// The total storage size, in bytes, of the objects that Amazon Macie can analyze
 	// in the bucket. These objects use a supported storage class and have a file name
-	// extension for a supported file or storage format.If versioning is enabled for
+	// extension for a supported file or storage format. If versioning is enabled for
 	// the bucket, Macie calculates this value based on the size of the latest version
 	// of each applicable object in the bucket. This value doesn't reflect the storage
 	// size of all versions of each applicable object in the bucket.
@@ -1350,14 +1351,14 @@ type MatchingBucket struct {
 	// objects that aren't encrypted or use client-side encryption.
 	ObjectCountByEncryptionType *ObjectCountByEncryptionType
 
-	// The total storage size, in bytes, of the bucket.If versioning is enabled for the
-	// bucket, Amazon Macie calculates this value based on the size of the latest
+	// The total storage size, in bytes, of the bucket. If versioning is enabled for
+	// the bucket, Amazon Macie calculates this value based on the size of the latest
 	// version of each object in the bucket. This value doesn't reflect the storage
 	// size of all versions of each object in the bucket.
 	SizeInBytes int64
 
 	// The total storage size, in bytes, of the objects that are compressed (.gz,
-	// .gzip, .zip) files in the bucket.If versioning is enabled for the bucket, Macie
+	// .gzip, .zip) files in the bucket. If versioning is enabled for the bucket, Macie
 	// calculates this value based on the size of the latest version of each applicable
 	// object in the bucket. This value doesn't reflect the storage size of all
 	// versions of each applicable object in the bucket.
@@ -1485,8 +1486,8 @@ type ObjectLevelStatistics struct {
 	Total int64
 }
 
-// Provides the location of 1-15 occurrences of sensitive data that was detected by
-// managed data identifiers or a custom data identifier and produced a sensitive
+// Specifies the location of 1-15 occurrences of sensitive data that was detected
+// by managed data identifiers or a custom data identifier and produced a sensitive
 // data finding.
 type Occurrences struct {
 
@@ -1505,17 +1506,12 @@ type Occurrences struct {
 	// TSV file that has any column names that contain sensitive data.
 	LineRanges []Range
 
-	// An array of objects, one for each occurrence of sensitive data in a binary text
-	// file. Each object specifies the position of the data relative to the beginning
-	// of the file. This value is typically null. For binary text files, Amazon Macie
-	// adds location data to a lineRanges.Range or Page object, depending on the file
-	// type.
+	// Reserved for future use.
 	OffsetRanges []Range
 
 	// An array of objects, one for each occurrence of sensitive data in an Adobe
 	// Portable Document Format file. Each object specifies the page that contains the
-	// data, and the position of the data on that page. This value is null for all
-	// other types of files.
+	// data. This value is null for all other types of files.
 	Pages []Page
 
 	// An array of objects, one for each occurrence of sensitive data in an Apache Avro
@@ -1529,10 +1525,10 @@ type Occurrences struct {
 // Document Format file.
 type Page struct {
 
-	// The line that contains the data, and the position of the data on that line.
+	// Reserved for future use.
 	LineRange *Range
 
-	// The position of the data on the page, relative to the beginning of the page.
+	// Reserved for future use.
 	OffsetRange *Range
 
 	// The page number of the page that contains the data.
@@ -1549,37 +1545,16 @@ type PolicyDetails struct {
 	Actor *FindingActor
 }
 
-// Provides details about the location of an occurrence of sensitive data in an
-// Adobe Portable Document Format file, Microsoft Word document, or non-binary text
-// file.
+// Provides details about the location of an occurrence of sensitive data in a
+// Microsoft Word document or non-binary text file.
 type Range struct {
 
-	// Possible values are:
-	//
-	// * In an Occurrences.lineRanges array, the number of lines
-	// from the beginning of the file to the end of the sensitive data.
-	//
-	// * In an
-	// Occurrences.offsetRanges array, the number of characters from the beginning of
-	// the file to the end of the sensitive data.
-	//
-	// * In a Page object, the number of
-	// lines (lineRange) or characters (offsetRange) from the beginning of the page to
-	// the end of the sensitive data.
+	// The number of lines from the beginning of the file to the end of the sensitive
+	// data.
 	End int64
 
-	// Possible values are:
-	//
-	// * In an Occurrences.lineRanges array, the number of lines
-	// from the beginning of the file to the beginning of the sensitive data.
-	//
-	// * In an
-	// Occurrences.offsetRanges array, the number of characters from the beginning of
-	// the file to the beginning of the sensitive data.
-	//
-	// * In a Page object, the number
-	// of lines (lineRange) or characters (offsetRange) from the beginning of the page
-	// to the beginning of the sensitive data.
+	// The number of lines from the beginning of the file to the beginning of the
+	// sensitive data.
 	Start int64
 
 	// The column number for the column that contains the data, if the file contains
@@ -1818,12 +1793,12 @@ type S3Object struct {
 // conditions take precedence over include conditions.
 type Scoping struct {
 
-	// The property- or tag-based conditions that determine which objects to exclude
+	// The property- and tag-based conditions that determine which objects to exclude
 	// from the analysis.
 	Excludes *JobScopingBlock
 
-	// The property- or tag-based conditions that determine which objects to include in
-	// the analysis.
+	// The property- and tag-based conditions that determine which objects to include
+	// in the analysis.
 	Includes *JobScopingBlock
 }
 
@@ -2117,21 +2092,18 @@ type SimpleCriterionForJob struct {
 // included or excluded from a classification job.
 type SimpleScopeTerm struct {
 
-	// The operator to use in the condition. Valid operators for each supported
-	// property (key) are:
+	// The operator to use in the condition. Valid values for each supported property
+	// (key) are:
 	//
 	// * OBJECT_EXTENSION - EQ (equals) or NE (not equals)
 	//
+	// * OBJECT_KEY -
+	// STARTS_WITH
+	//
+	// * OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS
+	//
 	// *
-	// OBJECT_KEY - STARTS_WITH
-	//
-	// * OBJECT_LAST_MODIFIED_DATE - Any operator except
-	// CONTAINS
-	//
-	// * OBJECT_SIZE - Any operator except CONTAINS
-	//
-	// * TAG - EQ (equals) or
-	// NE (not equals)
+	// OBJECT_SIZE - Any operator except CONTAINS
 	Comparator JobComparator
 
 	// The object property to use in the condition.
@@ -2139,8 +2111,8 @@ type SimpleScopeTerm struct {
 
 	// An array that lists the values to use in the condition. If the value for the key
 	// property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple
-	// values and Amazon Macie uses an OR operator to join the values. Otherwise, this
-	// array can specify only one value. Valid values for each supported property (key)
+	// values and Amazon Macie uses OR logic to join the values. Otherwise, this array
+	// can specify only one value. Valid values for each supported property (key)
 	// are:
 	//
 	// * OBJECT_EXTENSION - A string that represents the file name extension of
@@ -2158,13 +2130,9 @@ type SimpleScopeTerm struct {
 	// * OBJECT_SIZE -
 	// An integer that represents the storage size (in bytes) of an object.
 	//
-	// * TAG - A
-	// string that represents a tag key for an object. For advanced options, use a
-	// TagScopeTerm object instead of a SimpleScopeTerm object to define a tag-based
-	// condition for the job.
-	//
-	// Macie doesn't support use of wildcard characters in
-	// these values. Also, string values are case sensitive.
+	// Macie
+	// doesn't support use of wildcard characters in these values. Also, string values
+	// are case sensitive.
 	Values []string
 }
 
@@ -2219,19 +2187,19 @@ type TagCriterionPairForJob struct {
 }
 
 // Specifies a tag-based condition that determines whether an S3 object is included
-// or excluded from a classification job. Tag keys and values are case sensitive.
-// Also, Amazon Macie doesn't support use of partial values or wildcard characters
-// in tag-based conditions.
+// or excluded from a classification job.
 type TagScopeTerm struct {
 
-	// The operator to use in the condition. Valid operators are EQ (equals) or NE (not
+	// The operator to use in the condition. Valid values are EQ (equals) or NE (not
 	// equals).
 	Comparator JobComparator
 
-	// The tag key to use in the condition.
+	// The object property to use in the condition. The only valid value is TAG.
 	Key *string
 
-	// The tag keys or tag key and value pairs to use in the condition.
+	// The tag keys or tag key and value pairs to use in the condition. To specify only
+	// tag keys in a condition, specify the keys in this array and set the value for
+	// each associated tag value to an empty string.
 	TagValues []TagValuePair
 
 	// The type of object to apply the condition to.

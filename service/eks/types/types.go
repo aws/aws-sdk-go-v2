@@ -575,6 +575,8 @@ type Nodegroup struct {
 	// scheduled to your nodes.
 	Taints []Taint
 
+	UpdateConfig *NodegroupUpdateConfig
+
 	// The Kubernetes version of the managed node group.
 	Version *string
 }
@@ -617,6 +619,12 @@ type NodegroupScalingConfig struct {
 	// The minimum number of nodes that the managed node group can scale in to. This
 	// number must be greater than zero.
 	MinSize *int32
+}
+
+type NodegroupUpdateConfig struct {
+	MaxUnavailable *int32
+
+	MaxUnavailablePercentage *int32
 }
 
 // An object representing the OpenID Connect (https://openid.net/connect/) (OIDC)

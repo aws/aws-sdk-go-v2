@@ -542,11 +542,9 @@ type ScopeFilterKey string
 
 // Enum values for ScopeFilterKey
 const (
-	ScopeFilterKeyBucketCreationDate     ScopeFilterKey = "BUCKET_CREATION_DATE"
 	ScopeFilterKeyObjectExtension        ScopeFilterKey = "OBJECT_EXTENSION"
 	ScopeFilterKeyObjectLastModifiedDate ScopeFilterKey = "OBJECT_LAST_MODIFIED_DATE"
 	ScopeFilterKeyObjectSize             ScopeFilterKey = "OBJECT_SIZE"
-	ScopeFilterKeyTag                    ScopeFilterKey = "TAG"
 	ScopeFilterKeyObjectKey              ScopeFilterKey = "OBJECT_KEY"
 )
 
@@ -555,11 +553,9 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ScopeFilterKey) Values() []ScopeFilterKey {
 	return []ScopeFilterKey{
-		"BUCKET_CREATION_DATE",
 		"OBJECT_EXTENSION",
 		"OBJECT_LAST_MODIFIED_DATE",
 		"OBJECT_SIZE",
-		"TAG",
 		"OBJECT_KEY",
 	}
 }

@@ -3834,7 +3834,10 @@
             }
         },
         "com.amazonaws.personalize#KmsKeyArn": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws.*:kms:.*:[0-9]{12}:key/"
+            }
         },
         "com.amazonaws.personalize#LimitExceededException": {
             "type": "structure",
@@ -4996,7 +4999,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
-                }
+                },
+                "smithy.api#pattern": "^(s3|http|https)://.+$"
             }
         },
         "com.amazonaws.personalize#Schemas": {

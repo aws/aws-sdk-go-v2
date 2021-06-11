@@ -5293,7 +5293,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a property- or tag-based condition that defines criteria for including or excluding S3 objects from a classification job.</p>"
+                "smithy.api#documentation": "<p>Specifies a property- or tag-based condition that defines criteria for including or excluding S3 objects from a classification job. A JobScopeTerm object can contain only one simpleScopeTerm object or one tagScopeTerm object.</p>"
             }
         },
         "com.amazonaws.macie2#JobScopingBlock": {
@@ -5302,7 +5302,7 @@
                 "and": {
                     "target": "com.amazonaws.macie2#__listOfJobScopeTerm",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of conditions, one for each condition that determines which objects to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.</p>",
+                        "smithy.api#documentation": "<p>An array of conditions, one for each property- or tag-based condition that determines which objects to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.</p>",
                         "smithy.api#jsonName": "and"
                     }
                 }
@@ -6510,7 +6510,7 @@
                 "classifiableSizeInBytes": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p><p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>",
+                        "smithy.api#documentation": "<p>The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p> <p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>",
                         "smithy.api#jsonName": "classifiableSizeInBytes"
                     }
                 },
@@ -6538,14 +6538,14 @@
                 "sizeInBytes": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total storage size, in bytes, of the bucket.</p><p>If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.</p>",
+                        "smithy.api#documentation": "<p>The total storage size, in bytes, of the bucket.</p> <p>If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.</p>",
                         "smithy.api#jsonName": "sizeInBytes"
                     }
                 },
                 "sizeInBytesCompressed": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket.</p><p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>",
+                        "smithy.api#documentation": "<p>The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket.</p> <p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>",
                         "smithy.api#jsonName": "sizeInBytesCompressed"
                     }
                 },
@@ -6770,14 +6770,14 @@
                 "offsetRanges": {
                     "target": "com.amazonaws.macie2#Ranges",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the beginning of the file.</p> <p>This value is typically null. For binary text files, Amazon Macie adds location data to a lineRanges.Range or Page object, depending on the file type.</p>",
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>",
                         "smithy.api#jsonName": "offsetRanges"
                     }
                 },
                 "pages": {
                     "target": "com.amazonaws.macie2#Pages",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. Each object specifies the page that contains the data, and the position of the data on that page. This value is null for all other types of files.</p>",
+                        "smithy.api#documentation": "<p>An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. Each object specifies the page that contains the data. This value is null for all other types of files.</p>",
                         "smithy.api#jsonName": "pages"
                     }
                 },
@@ -6790,7 +6790,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the location of 1-15 occurrences of sensitive data that was detected by managed data identifiers or a custom data identifier and produced a sensitive data finding.</p>"
+                "smithy.api#documentation": "<p>Specifies the location of 1-15 occurrences of sensitive data that was detected by managed data identifiers or a custom data identifier and produced a sensitive data finding.</p>"
             }
         },
         "com.amazonaws.macie2#OrderBy": {
@@ -6814,14 +6814,14 @@
                 "lineRange": {
                     "target": "com.amazonaws.macie2#Range",
                     "traits": {
-                        "smithy.api#documentation": "<p>The line that contains the data, and the position of the data on that line.</p>",
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>",
                         "smithy.api#jsonName": "lineRange"
                     }
                 },
                 "offsetRange": {
                     "target": "com.amazonaws.macie2#Range",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position of the data on the page, relative to the beginning of the page.</p>",
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>",
                         "smithy.api#jsonName": "offsetRange"
                     }
                 },
@@ -7003,14 +7003,14 @@
                 "end": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#documentation": "<p>Possible values are:</p> <ul><li><p>In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the end of the sensitive data.</p></li> <li><p>In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the end of the sensitive data.</p></li> <li><p>In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the end of the sensitive data.</p></li></ul>",
+                        "smithy.api#documentation": "<p>The number of lines from the beginning of the file to the end of the sensitive data.</p>",
                         "smithy.api#jsonName": "end"
                     }
                 },
                 "start": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#documentation": "<p>Possible values are:</p> <ul><li><p>In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the beginning of the sensitive data.</p></li> <li><p>In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the beginning of the sensitive data.</p></li> <li><p>In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the beginning of the sensitive data.</p></li></ul>",
+                        "smithy.api#documentation": "<p>The number of lines from the beginning of the file to the beginning of the sensitive data.</p>",
                         "smithy.api#jsonName": "start"
                     }
                 },
@@ -7023,7 +7023,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides details about the location of an occurrence of sensitive data in an Adobe Portable Document Format file, Microsoft Word document, or non-binary text file.</p>"
+                "smithy.api#documentation": "<p>Provides details about the location of an occurrence of sensitive data in a Microsoft Word document or non-binary text file.</p>"
             }
         },
         "com.amazonaws.macie2#Ranges": {
@@ -7472,10 +7472,6 @@
                 "smithy.api#documentation": "<p>The property to use in a condition that determines whether an S3 object is included or excluded from a classification job. Valid values are:</p>",
                 "smithy.api#enum": [
                     {
-                        "value": "BUCKET_CREATION_DATE",
-                        "name": "BUCKET_CREATION_DATE"
-                    },
-                    {
                         "value": "OBJECT_EXTENSION",
                         "name": "OBJECT_EXTENSION"
                     },
@@ -7486,10 +7482,6 @@
                     {
                         "value": "OBJECT_SIZE",
                         "name": "OBJECT_SIZE"
-                    },
-                    {
-                        "value": "TAG",
-                        "name": "TAG"
                     },
                     {
                         "value": "OBJECT_KEY",
@@ -7504,14 +7496,14 @@
                 "excludes": {
                     "target": "com.amazonaws.macie2#JobScopingBlock",
                     "traits": {
-                        "smithy.api#documentation": "<p>The property- or tag-based conditions that determine which objects to exclude from the analysis.</p>",
+                        "smithy.api#documentation": "<p>The property- and tag-based conditions that determine which objects to exclude from the analysis.</p>",
                         "smithy.api#jsonName": "excludes"
                     }
                 },
                 "includes": {
                     "target": "com.amazonaws.macie2#JobScopingBlock",
                     "traits": {
-                        "smithy.api#documentation": "<p>The property- or tag-based conditions that determine which objects to include in the analysis.</p>",
+                        "smithy.api#documentation": "<p>The property- and tag-based conditions that determine which objects to include in the analysis.</p>",
                         "smithy.api#jsonName": "includes"
                     }
                 }
@@ -8201,7 +8193,7 @@
                 "comparator": {
                     "target": "com.amazonaws.macie2#JobComparator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operator to use in the condition. Valid operators for each supported property (key) are:</p> <ul><li><p>OBJECT_EXTENSION - EQ (equals) or NE (not equals)</p></li> <li><p>OBJECT_KEY - STARTS_WITH</p></li> <li><p>OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS</p></li> <li><p>OBJECT_SIZE - Any operator except CONTAINS</p></li> <li><p>TAG - EQ (equals) or NE (not equals)</p></li></ul>",
+                        "smithy.api#documentation": "<p>The operator to use in the condition. Valid values for each supported property (key) are:</p> <ul><li><p>OBJECT_EXTENSION - EQ (equals) or NE (not equals)</p></li> <li><p>OBJECT_KEY - STARTS_WITH</p></li> <li><p>OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS</p></li> <li><p>OBJECT_SIZE - Any operator except CONTAINS</p></li></ul>",
                         "smithy.api#jsonName": "comparator"
                     }
                 },
@@ -8215,7 +8207,7 @@
                 "values": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple values and Amazon Macie uses an OR operator to join the values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported property (key) are:</p> <ul><li><p>OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: docx or pdf</p></li> <li><p>OBJECT_KEY - A string that represents the key prefix (folder name or path) of an object. For example: logs or awslogs/eventlogs. This value applies a condition to objects whose keys (names) begin with the specified value.</p></li> <li><p>OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2020-09-28T14:31:13Z</p></li> <li><p>OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object.</p></li> <li><p>TAG - A string that represents a tag key for an object. For advanced options, use a TagScopeTerm object instead of a SimpleScopeTerm object to define a tag-based condition for the job.</p></li></ul> <p>Macie doesn't support use of wildcard characters in these values. Also, string values are case sensitive.</p>",
+                        "smithy.api#documentation": "<p>An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple values and Amazon Macie uses OR logic to join the values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported property (key) are:</p> <ul><li><p>OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: docx or pdf</p></li> <li><p>OBJECT_KEY - A string that represents the key prefix (folder name or path) of an object. For example: logs or awslogs/eventlogs. This value applies a condition to objects whose keys (names) begin with the specified value.</p></li> <li><p>OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2020-09-28T14:31:13Z</p></li> <li><p>OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object.</p></li></ul> <p>Macie doesn't support use of wildcard characters in these values. Also, string values are case sensitive.</p>",
                         "smithy.api#jsonName": "values"
                     }
                 }
@@ -8408,21 +8400,21 @@
                 "comparator": {
                     "target": "com.amazonaws.macie2#JobComparator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operator to use in the condition. Valid operators are EQ (equals) or NE (not equals).</p>",
+                        "smithy.api#documentation": "<p>The operator to use in the condition. Valid values are EQ (equals) or NE (not equals).</p>",
                         "smithy.api#jsonName": "comparator"
                     }
                 },
                 "key": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag key to use in the condition.</p>",
+                        "smithy.api#documentation": "<p>The object property to use in the condition. The only valid value is TAG.</p>",
                         "smithy.api#jsonName": "key"
                     }
                 },
                 "tagValues": {
                     "target": "com.amazonaws.macie2#__listOfTagValuePair",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag keys or tag key and value pairs to use in the condition.</p>",
+                        "smithy.api#documentation": "<p>The tag keys or tag key and value pairs to use in the condition. To specify only tag keys in a condition, specify the keys in this array and set the value for each associated tag value to an empty string.</p>",
                         "smithy.api#jsonName": "tagValues"
                     }
                 },
@@ -8435,7 +8427,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a tag-based condition that determines whether an S3 object is included or excluded from a classification job. Tag keys and values are case sensitive. Also, Amazon Macie doesn't support use of partial values or wildcard characters in tag-based conditions.</p>"
+                "smithy.api#documentation": "<p>Specifies a tag-based condition that determines whether an S3 object is included or excluded from a classification job.</p>"
             }
         },
         "com.amazonaws.macie2#TagTarget": {
@@ -8849,6 +8841,14 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.</p>",
                         "smithy.api#jsonName": "position"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive token that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "clientToken"
                     }
                 }
             }

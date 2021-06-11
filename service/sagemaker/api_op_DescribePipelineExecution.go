@@ -45,6 +45,9 @@ type DescribePipelineExecutionOutput struct {
 	// The time when the pipeline execution was created.
 	CreationTime *time.Time
 
+	// If the execution failed, a message describing why.
+	FailureReason *string
+
 	// Information about the user who created or modified an experiment, trial, or
 	// trial component.
 	LastModifiedBy *types.UserContext
@@ -66,6 +69,9 @@ type DescribePipelineExecutionOutput struct {
 
 	// The status of the pipeline execution.
 	PipelineExecutionStatus types.PipelineExecutionStatus
+
+	// Specifies the names of the experiment and trial created by a pipeline.
+	PipelineExperimentConfig *types.PipelineExperimentConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

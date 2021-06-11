@@ -91,7 +91,7 @@
                     }
                 },
                 "Identifier": {
-                    "target": "com.amazonaws.pi#String",
+                    "target": "com.amazonaws.pi#RequestString",
                     "traits": {
                         "smithy.api#documentation": "<p>An immutable, AWS Region-unique identifier for a data source. Performance Insights gathers metrics from\n      this data source.</p>\n         <p>To use an Amazon RDS instance as a data source, you specify its <code>DbiResourceId</code> value. For example,\n      specify <code>db-FAIHNTYBKTGAUSUZQYPDS2GW4A</code>\n         </p>",
                         "smithy.api#required": {}
@@ -107,14 +107,14 @@
                 "EndTime": {
                     "target": "com.amazonaws.pi#ISOTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time specifying the end of the requested time series data. The value specified is\n        <i>exclusive</i>, which means that data points less than (but not equal to) <code>EndTime</code> are\n      returned.</p>\n         <p>The value for <code>EndTime</code> must be later than the value for\n        <code>StartTime</code>.</p>",
+                        "smithy.api#documentation": "<p>The date and time specifying the end of the requested time series data. The value specified is\n      <i>exclusive</i>, which means that data points less than (but not equal to) <code>EndTime</code> are\n      returned.</p>\n         <p>The value for <code>EndTime</code> must be later than the value for\n      <code>StartTime</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Metric": {
-                    "target": "com.amazonaws.pi#String",
+                    "target": "com.amazonaws.pi#RequestString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a Performance Insights metric to be measured.</p>\n         <p>Valid values for <code>Metric</code> are:</p>\n     \n         <ul>\n            <li>\n               <p>\n                  <code>db.load.avg</code> - a scaled representation of the number of active sessions\n          for the database engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sampledload.avg</code> - the raw number of active sessions for the\n          database engine.</p>\n            </li>\n         </ul>\n         <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and <code>db.sampledload.avg</code> \n          are the same value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> \n          showing the scaled values, <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less than <code>db.load.avg</code>. \n          For most use cases, you can query <code>db.load.avg</code> only. </p>",
+                        "smithy.api#documentation": "<p>The name of a Performance Insights metric to be measured.</p>\n         <p>Valid values for <code>Metric</code> are:</p>\n    \n         <ul>\n            <li>\n               <p>\n                  <code>db.load.avg</code> - a scaled representation of the number of active sessions\n          for the database engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sampledload.avg</code> - the raw number of active sessions for the\n          database engine.</p>\n            </li>\n         </ul>\n         <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and <code>db.sampledload.avg</code> \n          are the same value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> \n          showing the scaled values, <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less than <code>db.load.avg</code>. \n          For most use cases, you can query <code>db.load.avg</code> only. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -150,7 +150,7 @@
                     }
                 },
                 "NextToken": {
-                    "target": "com.amazonaws.pi#String",
+                    "target": "com.amazonaws.pi#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If\n      this parameter is specified, the response includes only records beyond the token, up to the\n      value specified by <code>MaxRecords</code>.</p>"
                     }
@@ -185,25 +185,44 @@
                     }
                 },
                 "NextToken": {
-                    "target": "com.amazonaws.pi#String",
+                    "target": "com.amazonaws.pi#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If\n      this parameter is specified, the response includes only records beyond the token, up to the\n      value specified by <code>MaxRecords</code>.</p>"
                     }
                 }
             }
         },
+        "com.amazonaws.pi#DetailStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
+                    },
+                    {
+                        "value": "PROCESSING",
+                        "name": "PROCESSING"
+                    },
+                    {
+                        "value": "UNAVAILABLE",
+                        "name": "UNAVAILABLE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.pi#DimensionGroup": {
             "type": "structure",
             "members": {
                 "Group": {
-                    "target": "com.amazonaws.pi#String",
+                    "target": "com.amazonaws.pi#RequestString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the dimension group.  Valid values are:</p>\n    \n         <ul>\n            <li>\n               <p>\n                  <code>db</code> - The name of the database to which the client is connected (only Aurora PostgreSQL, RDS\n        PostgreSQL, Aurora MySQL, RDS MySQL, and MariaDB)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.application</code> - The name of the application that is connected to the database (only Aurora\n        PostgreSQL and RDS PostgreSQL)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.host</code> - The host name of the connected client (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.session_type</code> - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql</code> - The SQL that is currently executing (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql_tokenized</code> - The SQL digest (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.wait_event</code> - The event for which the database backend is waiting  (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.wait_event_type</code> - The type of event for which the database backend is waiting (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.user</code> - The user logged in to the database (all engines)</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "Dimensions": {
-                    "target": "com.amazonaws.pi#StringList",
+                    "target": "com.amazonaws.pi#RequestStringList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of specific dimensions from a dimension group. If this parameter is not present,\n      then it signifies that all of the dimensions in the group were requested, or are present in\n      the response.</p>\n         <p>Valid values for elements in the <code>Dimensions</code> array are:</p>\n    \n         <ul>\n            <li>\n               <p>\n                  <code>db.application.name</code> - The name of the application that is connected to the database (only\n      Aurora PostgreSQL and RDS PostgreSQL)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.host.id</code> - The host ID of the connected client (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.host.name</code> - The host name of the connected client (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.name</code> - The name of the database to which the client is connected (only Aurora\n      PostgreSQL, RDS PostgreSQL, Aurora MySQL, RDS MySQL, and MariaDB)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.session_type.name</code> - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql.id</code> - The SQL ID generated by Performance Insights (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql.db_id</code> - The SQL ID generated by the database (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql.statement</code> - The SQL text that is being executed (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql.tokenized_id</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql_tokenized.id</code> - The SQL digest ID generated by Performance Insights (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql_tokenized.db_id</code> - SQL digest ID generated by the database (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sql_tokenized.statement</code> - The SQL digest text (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.user.id</code> - The ID of the user logged in to the database (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.user.name</code> - The name of the user logged in to the database (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.wait_event.name</code> - The event for which the backend is waiting (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.wait_event.type</code> - The type of event for which the backend is waiting (all engines)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.wait_event_type.name</code> - The name of the event type for which the backend is waiting (all\n      engines)</p>\n            </li>\n         </ul>"
                     }
@@ -251,19 +270,127 @@
                 "target": "com.amazonaws.pi#DimensionKeyDescription"
             }
         },
+        "com.amazonaws.pi#DimensionKeyDetail": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.pi#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the dimension detail data. For the <code>db.sql.statement</code> dimension, this value is either the\n      full or truncated SQL query, depending on the return status.</p>"
+                    }
+                },
+                "Dimension": {
+                    "target": "com.amazonaws.pi#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full name of the dimension. The full name includes the group name and key name. The only valid value is\n        <code>db.sql.statement</code>. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pi#DetailStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the dimension detail data. Possible values include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The dimension detail data is ready to be retrieved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PROCESSING</code> - The dimension detail data isn't ready to be retrieved because more processing time is\n          required. If the requested detail data for <code>db.sql.statement</code> has the status <code>PROCESSING</code>,\n          Performance Insights returns the truncated query.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNAVAILABLE</code> - The dimension detail data could not be collected successfully.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that describes the details for a specified dimension.</p>"
+            }
+        },
+        "com.amazonaws.pi#DimensionKeyDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pi#DimensionKeyDetail"
+            }
+        },
         "com.amazonaws.pi#DimensionMap": {
             "type": "map",
             "key": {
-                "target": "com.amazonaws.pi#String"
+                "target": "com.amazonaws.pi#RequestString"
             },
             "value": {
-                "target": "com.amazonaws.pi#String"
+                "target": "com.amazonaws.pi#RequestString"
             }
         },
         "com.amazonaws.pi#Double": {
             "type": "double",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.pi#ErrorString": {
+            "type": "string"
+        },
+        "com.amazonaws.pi#GetDimensionKeyDetails": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pi#GetDimensionKeyDetailsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pi#GetDimensionKeyDetailsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pi#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.pi#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.pi#NotAuthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the attributes of the specified dimension group for a DB instance or data source. For example, if you specify a\n      SQL ID, <code>GetDimensionKeyDetails</code> retrieves the full text of the dimension <code>db.sql.statement</code>\n      associated with this ID. This operation is useful because <code>GetResourceMetrics</code> and\n        <code>DescribeDimensionKeys</code> don't support retrieval of large SQL statement text.</p>"
+            }
+        },
+        "com.amazonaws.pi#GetDimensionKeyDetailsRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceType": {
+                    "target": "com.amazonaws.pi#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS service for which Performance Insights returns data. The only valid value is <code>RDS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.pi#IdentifierString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for a data source from which to gather dimension data. This ID must be immutable and unique within an AWS\n      Region. When a DB instance is the data source, specify its <code>DbiResourceId</code> value. For example, specify\n        <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Group": {
+                    "target": "com.amazonaws.pi#RequestString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dimension group. The only valid value is <code>db.sql</code>. Performance Insights searches the\n      specified group for the dimension group ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupIdentifier": {
+                    "target": "com.amazonaws.pi#RequestString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dimension group from which to retrieve dimension details. For dimension group <code>db.sql</code>,\n      the group ID is <code>db.sql.id</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestedDimensions": {
+                    "target": "com.amazonaws.pi#RequestedDimensionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of dimensions to retrieve the detail data for within the given dimension group. For the dimension group\n                <code>db.sql</code>, specify either the full dimension name <code>db.sql.statement</code> or the short\n            dimension name <code>statement</code>. If you don't specify this parameter, Performance Insights returns all\n            dimension data within the specified dimension group.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pi#GetDimensionKeyDetailsResponse": {
+            "type": "structure",
+            "members": {
+                "Dimensions": {
+                    "target": "com.amazonaws.pi#DimensionKeyDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details for the requested dimensions.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.pi#GetResourceMetrics": {
@@ -300,7 +427,7 @@
                     }
                 },
                 "Identifier": {
-                    "target": "com.amazonaws.pi#String",
+                    "target": "com.amazonaws.pi#RequestString",
                     "traits": {
                         "smithy.api#documentation": "<p>An immutable, AWS Region-unique identifier for a data source. Performance Insights gathers metrics from\n      this data source.</p>\n         <p>To use a DB instance as a data source, specify its <code>DbiResourceId</code> value. For example, specify\n        <code>db-FAIHNTYBKTGAUSUZQYPDS2GW4A</code>.</p>",
                         "smithy.api#required": {}
@@ -340,7 +467,7 @@
                     }
                 },
                 "NextToken": {
-                    "target": "com.amazonaws.pi#String",
+                    "target": "com.amazonaws.pi#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If\n      this parameter is specified, the response includes only records beyond the token, up to the\n      value specified by <code>MaxRecords</code>.</p>"
                     }
@@ -375,7 +502,7 @@
                     }
                 },
                 "NextToken": {
-                    "target": "com.amazonaws.pi#String",
+                    "target": "com.amazonaws.pi#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If\n      this parameter is specified, the response includes only records beyond the token, up to the\n      value specified by <code>MaxRecords</code>.</p>"
                     }
@@ -384,6 +511,16 @@
         },
         "com.amazonaws.pi#ISOTimestamp": {
             "type": "timestamp"
+        },
+        "com.amazonaws.pi#IdentifierString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^db-[a-zA-Z0-9-]*$"
+            }
         },
         "com.amazonaws.pi#Integer": {
             "type": "integer",
@@ -395,7 +532,7 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.pi#String"
+                    "target": "com.amazonaws.pi#ErrorString"
                 }
             },
             "traits": {
@@ -407,7 +544,7 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.pi#String"
+                    "target": "com.amazonaws.pi#ErrorString"
                 }
             },
             "traits": {
@@ -465,7 +602,7 @@
             "type": "structure",
             "members": {
                 "Metric": {
-                    "target": "com.amazonaws.pi#String",
+                    "target": "com.amazonaws.pi#RequestString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of a Performance Insights metric to be measured.</p>\n         <p>Valid values for <code>Metric</code> are:</p>\n    \n         <ul>\n            <li>\n               <p>\n                  <code>db.load.avg</code> - a scaled representation of the number of active sessions\n          for the database engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sampledload.avg</code> - the raw number of active sessions for the\n          database engine.</p>\n            </li>\n         </ul>\n         <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and <code>db.sampledload.avg</code> \n          are the same value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> \n          showing the scaled values, <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less than <code>db.load.avg</code>. \n          For most use cases, you can query <code>db.load.avg</code> only. </p>",
                         "smithy.api#required": {}
@@ -491,10 +628,10 @@
         "com.amazonaws.pi#MetricQueryFilterMap": {
             "type": "map",
             "key": {
-                "target": "com.amazonaws.pi#String"
+                "target": "com.amazonaws.pi#RequestString"
             },
             "value": {
-                "target": "com.amazonaws.pi#String"
+                "target": "com.amazonaws.pi#RequestString"
             }
         },
         "com.amazonaws.pi#MetricQueryList": {
@@ -515,11 +652,21 @@
                 "target": "com.amazonaws.pi#Double"
             }
         },
+        "com.amazonaws.pi#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
         "com.amazonaws.pi#NotAuthorizedException": {
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.pi#String"
+                    "target": "com.amazonaws.pi#ErrorString"
                 }
             },
             "traits": {
@@ -533,6 +680,9 @@
             "operations": [
                 {
                     "target": "com.amazonaws.pi#DescribeDimensionKeys"
+                },
+                {
+                    "target": "com.amazonaws.pi#GetDimensionKeyDetails"
                 },
                 {
                     "target": "com.amazonaws.pi#GetResourceMetrics"
@@ -554,6 +704,40 @@
                 "smithy.api#title": "AWS Performance Insights",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://pi.amazonaws.com/doc/2018-02-27/"
+                }
+            }
+        },
+        "com.amazonaws.pi#RequestString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.pi#RequestStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pi#RequestString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.pi#RequestedDimensionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pi#RequestString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -611,18 +795,13 @@
             }
         },
         "com.amazonaws.pi#String": {
-            "type": "string"
-        },
-        "com.amazonaws.pi#StringList": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.pi#String"
-            },
+            "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 10
-                }
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "\\S"
             }
         }
     }

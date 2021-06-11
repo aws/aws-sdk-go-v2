@@ -4114,7 +4114,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_\\-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-]*$"
             }
         },
         "com.amazonaws.servicecatalog#IdempotencyToken": {
@@ -4124,7 +4124,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.servicecatalog#IgnoreErrors": {
@@ -4361,7 +4361,7 @@
                     }
                 },
                 "PageSize": {
-                    "target": "com.amazonaws.servicecatalog#PageSize",
+                    "target": "com.amazonaws.servicecatalog#PageSizeMax100",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of items to return with this call.</p>"
                     }
@@ -4843,7 +4843,7 @@
                     }
                 },
                 "PageSize": {
-                    "target": "com.amazonaws.servicecatalog#PageSize",
+                    "target": "com.amazonaws.servicecatalog#PageSizeMax100",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of items to return with this call.</p>"
                     }
@@ -4883,7 +4883,7 @@
                     }
                 },
                 "PageSize": {
-                    "target": "com.amazonaws.servicecatalog#PageSize",
+                    "target": "com.amazonaws.servicecatalog#PageSizeMax100",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of items to return with this call.</p>"
                     }
@@ -5667,7 +5667,7 @@
                     "min": 1,
                     "max": 1224
                 },
-                "smithy.api#pattern": "arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
             }
         },
         "com.amazonaws.servicecatalog#NotificationArns": {
@@ -5742,7 +5742,7 @@
         "com.amazonaws.servicecatalog#OrganizationNodeValue": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^[0-9]{12}$)|(^arn:aws:organizations::\\d{12}:organization\\/o-[a-z0-9]{10,32})|(^o-[a-z0-9]{10,32}$)|(^arn:aws:organizations::\\d{12}:ou\\/o-[a-z0-9]{10,32}\\/ou-[0-9a-z]{4,32}-[0-9a-z]{8,32}$)|(^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$)"
+                "smithy.api#pattern": "^(^[0-9]{12}$)|(^arn:aws:organizations::\\d{12}:organization\\/o-[a-z0-9]{10,32})|(^o-[a-z0-9]{10,32}$)|(^arn:aws:organizations::\\d{12}:ou\\/o-[a-z0-9]{10,32}\\/ou-[0-9a-z]{4,32}-[0-9a-z]{8,32}$)|(^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$)$"
             }
         },
         "com.amazonaws.servicecatalog#OrganizationNodes": {
@@ -5806,7 +5806,7 @@
                     "min": 0,
                     "max": 2024
                 },
-                "smithy.api#pattern": "[\\u0009\\u000a\\u000d\\u0020-\\uD7FF\\uE000-\\uFFFD]*"
+                "smithy.api#pattern": "^[\\u0009\\u000a\\u000d\\u0020-\\uD7FF\\uE000-\\uFFFD]*$"
             }
         },
         "com.amazonaws.servicecatalog#ParameterConstraints": {
@@ -6076,7 +6076,7 @@
                     "min": 1,
                     "max": 1224
                 },
-                "smithy.api#pattern": "arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
             }
         },
         "com.amazonaws.servicecatalog#ProductSource": {
@@ -6760,7 +6760,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9._-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
             }
         },
         "com.amazonaws.servicecatalog#ProvisionedProductNameOrArn": {
@@ -6770,7 +6770,7 @@
                     "min": 1,
                     "max": 1224
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}|arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}|arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
             }
         },
         "com.amazonaws.servicecatalog#ProvisionedProductPlanDetails": {
@@ -7218,7 +7218,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
             }
         },
         "com.amazonaws.servicecatalog#ProvisioningArtifactOutputs": {
@@ -8098,7 +8098,7 @@
                     "min": 1,
                     "max": 1224
                 },
-                "smithy.api#pattern": "arn:[a-z0-9-\\.]{1,63}:iam::[a-z0-9-\\.]{0,63}:role\\/.{0,1023}"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:iam::[a-z0-9-\\.]{0,63}:role\\/.{0,1023}$"
             }
         },
         "com.amazonaws.servicecatalog#ScanProvisionedProducts": {
@@ -8309,7 +8309,7 @@
                     }
                 },
                 "PageSize": {
-                    "target": "com.amazonaws.servicecatalog#PageSize",
+                    "target": "com.amazonaws.servicecatalog#PageSizeMax100",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of items to return with this call.</p>"
                     }
@@ -8629,7 +8629,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_\\-.]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-.]*$"
             }
         },
         "com.amazonaws.servicecatalog#ServiceActionSummaries": {
@@ -8927,7 +8927,7 @@
         "com.amazonaws.servicecatalog#StatusMessage": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[\\u0009\\u000a\\u000d\\u0020-\\uD7FF\\uE000-\\uFFFD]*"
+                "smithy.api#pattern": "^[\\u0009\\u000a\\u000d\\u0020-\\uD7FF\\uE000-\\uFFFD]*$"
             }
         },
         "com.amazonaws.servicecatalog#String": {

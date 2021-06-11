@@ -33,12 +33,12 @@ type GetRevisionInput struct {
 
 	// The block location of the document revision to be verified. An address is an
 	// Amazon Ion structure that has two fields: strandId and sequenceNo. For example:
-	// {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}
+	// {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}.
 	//
 	// This member is required.
 	BlockAddress *types.ValueHolder
 
-	// The unique ID of the document to be verified.
+	// The UUID (represented in Base62-encoded text) of the document to be verified.
 	//
 	// This member is required.
 	DocumentId *string
@@ -50,7 +50,7 @@ type GetRevisionInput struct {
 
 	// The latest block location covered by the digest for which to request a proof. An
 	// address is an Amazon Ion structure that has two fields: strandId and sequenceNo.
-	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}
+	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}.
 	DigestTipAddress *types.ValueHolder
 }
 

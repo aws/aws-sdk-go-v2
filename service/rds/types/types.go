@@ -983,8 +983,8 @@ type DBInstance struct {
 	DBInstanceIdentifier *string
 
 	// Specifies the current state of this database. For information about DB instance
-	// statuses, see DB Instance Status
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Status.html)
+	// statuses, see Viewing DB instance status
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/accessing-monitoring.html#Overview.DBInstance.Status)
 	// in the Amazon RDS User Guide.
 	DBInstanceStatus *string
 

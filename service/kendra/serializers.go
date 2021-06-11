@@ -62,6 +62,53 @@ func (m *awsAwsjson11_serializeOpBatchDeleteDocument) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpBatchGetDocumentStatus struct {
+}
+
+func (*awsAwsjson11_serializeOpBatchGetDocumentStatus) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpBatchGetDocumentStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchGetDocumentStatusInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSKendraFrontendService.BatchGetDocumentStatus")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentBatchGetDocumentStatusInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpBatchPutDocument struct {
 }
 
@@ -2684,6 +2731,38 @@ func awsAwsjson11_serializeDocumentDocumentIdList(v []string, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDocumentInfo(v *types.DocumentInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Attributes != nil {
+		ok := object.Key("Attributes")
+		if err := awsAwsjson11_serializeDocumentDocumentAttributeList(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DocumentId != nil {
+		ok := object.Key("DocumentId")
+		ok.String(*v.DocumentId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDocumentInfoList(v []types.DocumentInfo, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentDocumentInfo(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDocumentList(v []types.Document, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3907,6 +3986,25 @@ func awsAwsjson11_serializeOpDocumentBatchDeleteDocumentInput(v *BatchDeleteDocu
 	if v.DocumentIdList != nil {
 		ok := object.Key("DocumentIdList")
 		if err := awsAwsjson11_serializeDocumentDocumentIdList(v.DocumentIdList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IndexId != nil {
+		ok := object.Key("IndexId")
+		ok.String(*v.IndexId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentBatchGetDocumentStatusInput(v *BatchGetDocumentStatusInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DocumentInfoList != nil {
+		ok := object.Key("DocumentInfoList")
+		if err := awsAwsjson11_serializeDocumentDocumentInfoList(v.DocumentInfoList, ok); err != nil {
 			return err
 		}
 	}

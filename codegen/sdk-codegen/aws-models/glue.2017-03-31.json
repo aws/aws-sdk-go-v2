@@ -1871,7 +1871,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.glue#CatalogImportStatus": {
@@ -2121,7 +2121,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[A-Za-z_][A-Za-z0-9_]*"
+                "smithy.api#pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
             }
         },
         "com.amazonaws.glue#CodeGenNode": {
@@ -2306,7 +2306,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.glue#ColumnStatistics": {
@@ -2476,7 +2476,7 @@
                     "min": 0,
                     "max": 131072
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.glue#ColumnValueStringList": {
@@ -2495,7 +2495,7 @@
                     "min": 0,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.glue#Comparator": {
@@ -3215,7 +3215,7 @@
                 "Configuration": {
                     "target": "com.amazonaws.glue#CrawlerConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Crawler configuration information. This versioned JSON string allows users\n        to specify aspects of a crawler's behavior.\n        For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
+                        "smithy.api#documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify\n      aspects of a crawler's behavior. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/define-crawler.html#crawler-data-stores-exclude\">Include and Exclude\n        Patterns</a>.</p>"
                     }
                 },
                 "CrawlerSecurityConfiguration": {
@@ -5357,7 +5357,7 @@
                     "min": 1,
                     "max": 1
                 },
-                "smithy.api#pattern": "[^\\r\\n]"
+                "smithy.api#pattern": "^[^\\r\\n]$"
             }
         },
         "com.amazonaws.glue#CsvHeader": {
@@ -5392,7 +5392,7 @@
                     "min": 1,
                     "max": 1
                 },
-                "smithy.api#pattern": "[^\\r\\n]"
+                "smithy.api#pattern": "^[^\\r\\n]$"
             }
         },
         "com.amazonaws.glue#CustomPatterns": {
@@ -5402,7 +5402,7 @@
                     "min": 0,
                     "max": 16000
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.glue#DagEdges": {
@@ -6842,7 +6842,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.glue#DescriptionStringRemovable": {
@@ -6852,7 +6852,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.glue#DevEndpoint": {
@@ -7368,7 +7368,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.glue#FindMatchesMetrics": {
@@ -7480,7 +7480,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.glue#GenericBoundedDouble": {
@@ -11271,7 +11271,7 @@
                     "min": 1,
                     "max": 10240
                 },
-                "smithy.api#pattern": "arn:aws:glue:.*"
+                "smithy.api#pattern": "^arn:aws:glue:"
             }
         },
         "com.amazonaws.glue#GlueTable": {
@@ -11390,7 +11390,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\t]*$"
             }
         },
         "com.amazonaws.glue#HashString": {
@@ -11400,7 +11400,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.glue#IdString": {
@@ -11410,7 +11410,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.glue#IdempotentParameterMismatchException": {
@@ -12243,13 +12243,13 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.glue#KmsKeyArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:aws:kms:.*"
+                "smithy.api#pattern": "^arn:aws:kms:"
             }
         },
         "com.amazonaws.glue#LabelCount": {
@@ -13041,7 +13041,7 @@
                     "min": 0,
                     "max": 2056
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.glue#LogGroup": {
@@ -13051,7 +13051,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "[\\.\\-_/#A-Za-z0-9]+"
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.glue#LogStream": {
@@ -13061,7 +13061,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "[^:*]*"
+                "smithy.api#pattern": "^[^:*]*$"
             }
         },
         "com.amazonaws.glue#Logical": {
@@ -13400,7 +13400,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.glue#MessageString": {
@@ -13448,7 +13448,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9+-=._./@]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9+-=._./@]+$"
             }
         },
         "com.amazonaws.glue#MetadataKeyValuePair": {
@@ -13484,7 +13484,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9+-=._./@]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9+-=._./@]+$"
             }
         },
         "com.amazonaws.glue#MillisecondsCount": {
@@ -13529,7 +13529,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.glue#NameStringList": {
@@ -14202,7 +14202,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.glue#PrincipalPermissions": {
@@ -15211,7 +15211,7 @@
         "com.amazonaws.glue#RoleArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:aws:iam::\\d{12}:role/.*"
+                "smithy.api#pattern": "^arn:aws:iam::\\d{12}:role/"
             }
         },
         "com.amazonaws.glue#RoleString": {
@@ -15287,6 +15287,12 @@
                     "target": "com.amazonaws.glue#ConnectionName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of a connection which allows a job or crawler to access data in Amazon S3 within an Amazon Virtual Private Cloud environment (Amazon VPC).</p>"
+                    }
+                },
+                "SampleSize": {
+                    "target": "com.amazonaws.glue#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the number of files in each leaf folder to be crawled when crawling sample files in a dataset. If not set, all the files are crawled. A valid value is an integer between 1 and 249.</p>"
                     }
                 }
             },
@@ -15443,7 +15449,7 @@
                     "min": 1,
                     "max": 340000
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.glue#SchemaDefinitionString": {
@@ -15453,7 +15459,7 @@
                     "min": 1,
                     "max": 170000
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.glue#SchemaDiffType": {
@@ -15586,7 +15592,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-_$#.]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-_$#.]+$"
             }
         },
         "com.amazonaws.glue#SchemaRegistryTokenString": {
@@ -15653,7 +15659,7 @@
                     "min": 36,
                     "max": 36
                 },
-                "smithy.api#pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
         },
         "com.amazonaws.glue#SchemaVersionList": {
@@ -17987,7 +17993,7 @@
                     "min": 0,
                     "max": 20000
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.glue#URI": {
@@ -17997,7 +18003,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.glue#UntagResource": {
@@ -19610,7 +19616,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.glue#VersionsString": {
@@ -19620,7 +19626,7 @@
                     "min": 1,
                     "max": 100000
                 },
-                "smithy.api#pattern": "[1-9][0-9]*|[1-9][0-9]*-[1-9][0-9]*"
+                "smithy.api#pattern": "^[1-9][0-9]*|[1-9][0-9]*-[1-9][0-9]*$"
             }
         },
         "com.amazonaws.glue#ViewTextString": {

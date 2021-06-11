@@ -398,6 +398,11 @@ func validateCreateFileSystemWindowsConfiguration(v *types.CreateFileSystemWindo
 	if v.ThroughputCapacity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThroughputCapacity"))
 	}
+	if v.AuditLogConfiguration != nil {
+		if err := validateWindowsAuditLogCreateConfiguration(v.AuditLogConfiguration); err != nil {
+			invalidParams.AddNested("AuditLogConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -490,6 +495,41 @@ func validateTags(v []types.Tag) error {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateFileSystemWindowsConfiguration(v *types.UpdateFileSystemWindowsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFileSystemWindowsConfiguration"}
+	if v.AuditLogConfiguration != nil {
+		if err := validateWindowsAuditLogCreateConfiguration(v.AuditLogConfiguration); err != nil {
+			invalidParams.AddNested("AuditLogConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWindowsAuditLogCreateConfiguration(v *types.WindowsAuditLogCreateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WindowsAuditLogCreateConfiguration"}
+	if len(v.FileAccessAuditLogLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FileAccessAuditLogLevel"))
+	}
+	if len(v.FileShareAccessAuditLogLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FileShareAccessAuditLogLevel"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -795,6 +835,11 @@ func validateOpUpdateFileSystemInput(v *UpdateFileSystemInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFileSystemInput"}
 	if v.FileSystemId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if v.WindowsConfiguration != nil {
+		if err := validateUpdateFileSystemWindowsConfiguration(v.WindowsConfiguration); err != nil {
+			invalidParams.AddNested("WindowsConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

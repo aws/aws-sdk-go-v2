@@ -37,6 +37,9 @@
                     "target": "com.amazonaws.kendra#BatchDeleteDocument"
                 },
                 {
+                    "target": "com.amazonaws.kendra#BatchGetDocumentStatus"
+                },
+                {
                     "target": "com.amazonaws.kendra#BatchPutDocument"
                 },
                 {
@@ -444,6 +447,106 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.kendra#BatchDeleteDocumentResponseFailedDocument"
+            }
+        },
+        "com.amazonaws.kendra#BatchGetDocumentStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#BatchGetDocumentStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#BatchGetDocumentStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the indexing status for one or more documents submitted\n            with the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html\">\n                BatchPutDocument</a> operation.</p>\n        <p>When you use the <code>BatchPutDocument</code> operation,\n            documents are indexed asynchronously. You can use the\n                <code>BatchGetDocumentStatus</code> operation to get the current\n            status of a list of documents so that you can determine if they have\n            been successfully indexed.</p>\n        <p>You can also use the <code>BatchGetDocumentStatus</code> operation\n            to check the status of the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchDeleteDocument.html\">\n                BatchDeleteDocument</a> operation. When a document is\n            deleted from the index, Amazon Kendra returns <code>NOT_FOUND</code> as the\n            status.</p>"
+            }
+        },
+        "com.amazonaws.kendra#BatchGetDocumentStatusRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index to add documents to. The index ID is\n            returned by the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_CreateIndex.html\"> CreateIndex\n            </a> operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DocumentInfoList": {
+                    "target": "com.amazonaws.kendra#DocumentInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DocumentInfo</code> objects that identify the\n            documents for which to get the status. You identify the documents by\n            their document ID and optional attributes.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#BatchGetDocumentStatusResponse": {
+            "type": "structure",
+            "members": {
+                "Errors": {
+                    "target": "com.amazonaws.kendra#BatchGetDocumentStatusResponseErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of documents that Amazon Kendra couldn't get the status for. The\n            list includes the ID of the document and the reason that the status\n            couldn't be found.</p>"
+                    }
+                },
+                "DocumentStatusList": {
+                    "target": "com.amazonaws.kendra#DocumentStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of documents. The status indicates if the document is\n            waiting to be indexed, is in the process of indexing, has completed\n            indexing, or failed indexing. If a document failed indexing, the\n            status provides the reason why.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#BatchGetDocumentStatusResponseError": {
+            "type": "structure",
+            "members": {
+                "DocumentId": {
+                    "target": "com.amazonaws.kendra#DocumentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the document whose status could not be retrieved.</p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.kendra#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the source of the error.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.kendra#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>States that the API could not get the status of a document. This could be \n            because the request is not valid or there is a system error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a response when the status of a document could not be retrieved.</p>"
+            }
+        },
+        "com.amazonaws.kendra#BatchGetDocumentStatusResponseErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#BatchGetDocumentStatusResponseError"
             }
         },
         "com.amazonaws.kendra#BatchPutDocument": {
@@ -3520,7 +3623,7 @@
                 "DateValue": {
                     "target": "com.amazonaws.kendra#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A date expressed as an ISO 8601 string.</p>"
+                        "smithy.api#documentation": "<p>A date expressed as an ISO 8601 string.</p>\n        <p>It is important for the time zone to be included \n            in the ISO 8601 date-time format. For example, \n            20120325T123010+01:00 is the ISO 8601 date-time format \n            for March 25th 2012 at 12:30PM (plus 10 seconds) in \n            Central European Time.</p>"
                     }
                 }
             },
@@ -3590,6 +3693,39 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.kendra#DocumentId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.kendra#DocumentInfo": {
+            "type": "structure",
+            "members": {
+                "DocumentId": {
+                    "target": "com.amazonaws.kendra#DocumentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the document.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.kendra#DocumentAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Attributes that identify a specific version of a document to\n            check.</p>\n        <p>The only valid attributes are:</p>\n        <ul>\n            <li>\n                <p>version</p>\n            </li>\n            <li>\n                <p>datasourceId</p>\n            </li>\n            <li>\n                <p>jobExecutionId</p>\n            </li>\n         </ul>\n        <p>The attributes follow these rules:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>dataSourceId</code> and <code>jobExecutionId</code>\n                    must be used together.</p>\n            </li>\n            <li>\n                <p>\n                  <code>version</code> is ignored if\n                        <code>dataSourceId</code> and\n                        <code>jobExecutionId</code> are not provided.</p>\n            </li>\n            <li>\n                <p>If <code>dataSourceId</code> and\n                        <code>jobExecutionId</code> are provided, but\n                        <code>version</code> is not, the version defaults to\n                    \"0\".</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a document for which to retrieve status\n            information</p>"
+            }
+        },
+        "com.amazonaws.kendra#DocumentInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#DocumentInfo"
             },
             "traits": {
                 "smithy.api#length": {
@@ -3702,6 +3838,43 @@
                     "min": 0,
                     "max": 500
                 }
+            }
+        },
+        "com.amazonaws.kendra#DocumentStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NOT_FOUND",
+                        "name": "NOT_FOUND"
+                    },
+                    {
+                        "value": "PROCESSING",
+                        "name": "PROCESSING"
+                    },
+                    {
+                        "value": "INDEXED",
+                        "name": "INDEXED"
+                    },
+                    {
+                        "value": "UPDATED",
+                        "name": "UPDATED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "UPDATE_FAILED",
+                        "name": "UPDATE_FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kendra#DocumentStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#Status"
             }
         },
         "com.amazonaws.kendra#DocumentsMetadataConfiguration": {
@@ -6885,6 +7058,38 @@
                         "smithy.api#documentation": "<p>Identifies a particular synchronization job.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.kendra#Status": {
+            "type": "structure",
+            "members": {
+                "DocumentId": {
+                    "target": "com.amazonaws.kendra#DocumentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the document.</p>"
+                    }
+                },
+                "DocumentStatus": {
+                    "target": "com.amazonaws.kendra#DocumentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of a document.</p>\n        <p>If the document was submitted for deletion, the status is\n                <code>NOT_FOUND</code> after the document is deleted.</p>"
+                    }
+                },
+                "FailureCode": {
+                    "target": "com.amazonaws.kendra#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the source of the error.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.kendra#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides detailed information about why the document couldn't be\n            indexed. Use this information to correct the error before you\n            resubmit the document for indexing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the status of documents submitted for indexing.</p>"
             }
         },
         "com.amazonaws.kendra#StopDataSourceSyncJob": {

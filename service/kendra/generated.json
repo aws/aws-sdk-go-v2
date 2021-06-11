@@ -6,6 +6,7 @@
     "files": [
         "api_client.go",
         "api_op_BatchDeleteDocument.go",
+        "api_op_BatchGetDocumentStatus.go",
         "api_op_BatchPutDocument.go",
         "api_op_ClearQuerySuggestions.go",
         "api_op_CreateDataSource.go",

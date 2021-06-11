@@ -35,12 +35,12 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 
 type CreateUserInput struct {
 
-	// Specifies the IAM role that controls your users' access to your Amazon S3 bucket
-	// or EFS file system. The policies attached to this role will determine the level
-	// of access you want to provide your users when transferring files into and out of
-	// your Amazon S3 bucket or EFS file system. The IAM role should also contain a
-	// trust relationship that allows the server to access your resources when
-	// servicing your users' transfer requests.
+	// Specifies the Amazon Resource Name (ARN) of the IAM role that controls your
+	// users' access to your Amazon S3 bucket or EFS file system. The policies attached
+	// to this role determine the level of access that you want to provide your users
+	// when transferring files into and out of your Amazon S3 bucket or EFS file
+	// system. The IAM role should also contain a trust relationship that allows the
+	// server to access your resources when servicing your users' transfer requests.
 	//
 	// This member is required.
 	Role *string
@@ -89,13 +89,13 @@ type CreateUserInput struct {
 
 	// The type of landing directory (folder) you want your users' home directory to be
 	// when they log into the server. If you set it to PATH, the user will see the
-	// absolute Amazon S3 bucket paths as is in their file transfer protocol clients.
-	// If you set it LOGICAL, you will need to provide mappings in the
-	// HomeDirectoryMappings for how you want to make Amazon S3 paths visible to your
-	// users.
+	// absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
+	// clients. If you set it LOGICAL, you will need to provide mappings in the
+	// HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to
+	// your users.
 	HomeDirectoryType types.HomeDirectoryType
 
-	// A scope-down policy for your user so you can use the same IAM role across
+	// A scope-down policy for your user so that you can use the same IAM role across
 	// multiple users. This policy scopes down user access to portions of their Amazon
 	// S3 bucket. Variables that you can use inside this policy include
 	// ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.

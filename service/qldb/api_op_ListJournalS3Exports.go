@@ -16,7 +16,7 @@ import (
 // associated with the current AWS account and Region. This action returns a
 // maximum of MaxResults items, and is paginated so that you can retrieve all the
 // items by calling ListJournalS3Exports multiple times. This action does not
-// return any expired export jobs. For more information, see Export Job Expiration
+// return any expired export jobs. For more information, see Export job expiration
 // (https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration)
 // in the Amazon QLDB Developer Guide.
 func (c *Client) ListJournalS3Exports(ctx context.Context, params *ListJournalS3ExportsInput, optFns ...func(*Options)) (*ListJournalS3ExportsOutput, error) {

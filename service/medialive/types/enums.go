@@ -1503,6 +1503,7 @@ type H264AdaptiveQuantization string
 
 // Enum values for H264AdaptiveQuantization
 const (
+	H264AdaptiveQuantizationAuto   H264AdaptiveQuantization = "AUTO"
 	H264AdaptiveQuantizationHigh   H264AdaptiveQuantization = "HIGH"
 	H264AdaptiveQuantizationHigher H264AdaptiveQuantization = "HIGHER"
 	H264AdaptiveQuantizationLow    H264AdaptiveQuantization = "LOW"
@@ -1516,6 +1517,7 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (H264AdaptiveQuantization) Values() []H264AdaptiveQuantization {
 	return []H264AdaptiveQuantization{
+		"AUTO",
 		"HIGH",
 		"HIGHER",
 		"LOW",
@@ -1934,6 +1936,7 @@ type H265AdaptiveQuantization string
 
 // Enum values for H265AdaptiveQuantization
 const (
+	H265AdaptiveQuantizationAuto   H265AdaptiveQuantization = "AUTO"
 	H265AdaptiveQuantizationHigh   H265AdaptiveQuantization = "HIGH"
 	H265AdaptiveQuantizationHigher H265AdaptiveQuantization = "HIGHER"
 	H265AdaptiveQuantizationLow    H265AdaptiveQuantization = "LOW"
@@ -1947,6 +1950,7 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (H265AdaptiveQuantization) Values() []H265AdaptiveQuantization {
 	return []H265AdaptiveQuantization{
+		"AUTO",
 		"HIGH",
 		"HIGHER",
 		"LOW",

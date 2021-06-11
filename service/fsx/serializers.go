@@ -991,6 +991,13 @@ func awsAwsjson11_serializeDocumentCreateFileSystemWindowsConfiguration(v *types
 		}
 	}
 
+	if v.AuditLogConfiguration != nil {
+		ok := object.Key("AuditLogConfiguration")
+		if err := awsAwsjson11_serializeDocumentWindowsAuditLogCreateConfiguration(v.AuditLogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AutomaticBackupRetentionDays != nil {
 		ok := object.Key("AutomaticBackupRetentionDays")
 		ok.Integer(*v.AutomaticBackupRetentionDays)
@@ -1366,6 +1373,13 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemWindowsConfiguration(v *types
 	object := value.Object()
 	defer object.Close()
 
+	if v.AuditLogConfiguration != nil {
+		ok := object.Key("AuditLogConfiguration")
+		if err := awsAwsjson11_serializeDocumentWindowsAuditLogCreateConfiguration(v.AuditLogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AutomaticBackupRetentionDays != nil {
 		ok := object.Key("AutomaticBackupRetentionDays")
 		ok.Integer(*v.AutomaticBackupRetentionDays)
@@ -1391,6 +1405,28 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemWindowsConfiguration(v *types
 	if v.WeeklyMaintenanceStartTime != nil {
 		ok := object.Key("WeeklyMaintenanceStartTime")
 		ok.String(*v.WeeklyMaintenanceStartTime)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentWindowsAuditLogCreateConfiguration(v *types.WindowsAuditLogCreateConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuditLogDestination != nil {
+		ok := object.Key("AuditLogDestination")
+		ok.String(*v.AuditLogDestination)
+	}
+
+	if len(v.FileAccessAuditLogLevel) > 0 {
+		ok := object.Key("FileAccessAuditLogLevel")
+		ok.String(string(v.FileAccessAuditLogLevel))
+	}
+
+	if len(v.FileShareAccessAuditLogLevel) > 0 {
+		ok := object.Key("FileShareAccessAuditLogLevel")
+		ok.String(string(v.FileShareAccessAuditLogLevel))
 	}
 
 	return nil

@@ -13,7 +13,11 @@ import (
 
 // Returns detailed information about a given Amazon QLDB journal stream. The
 // output includes the Amazon Resource Name (ARN), stream name, current status,
-// creation time, and the parameters of your original stream creation request.
+// creation time, and the parameters of the original stream creation request. This
+// action does not return any expired journal streams. For more information, see
+// Expiration for terminal streams
+// (https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration)
+// in the Amazon QLDB Developer Guide.
 func (c *Client) DescribeJournalKinesisStream(ctx context.Context, params *DescribeJournalKinesisStreamInput, optFns ...func(*Options)) (*DescribeJournalKinesisStreamOutput, error) {
 	if params == nil {
 		params = &DescribeJournalKinesisStreamInput{}
@@ -36,7 +40,8 @@ type DescribeJournalKinesisStreamInput struct {
 	// This member is required.
 	LedgerName *string
 
-	// The unique ID that QLDB assigns to each QLDB journal stream.
+	// The UUID (represented in Base62-encoded text) of the QLDB journal stream to
+	// describe.
 	//
 	// This member is required.
 	StreamId *string

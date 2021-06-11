@@ -30,6 +30,26 @@ func (m *validateOpBatchDeleteDocument) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetDocumentStatus struct {
+}
+
+func (*validateOpBatchGetDocumentStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetDocumentStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetDocumentStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetDocumentStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchPutDocument struct {
 }
 
@@ -754,6 +774,10 @@ func addOpBatchDeleteDocumentValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpBatchDeleteDocument{}, middleware.After)
 }
 
+func addOpBatchGetDocumentStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetDocumentStatus{}, middleware.After)
+}
+
 func addOpBatchPutDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchPutDocument{}, middleware.After)
 }
@@ -1338,6 +1362,43 @@ func validateDocumentAttributeList(v []types.DocumentAttribute) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DocumentAttributeList"}
 	for i := range v {
 		if err := validateDocumentAttribute(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentInfo(v *types.DocumentInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentInfo"}
+	if v.DocumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
+	}
+	if v.Attributes != nil {
+		if err := validateDocumentAttributeList(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentInfoList(v []types.DocumentInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentInfoList"}
+	for i := range v {
+		if err := validateDocumentInfo(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2049,6 +2110,28 @@ func validateOpBatchDeleteDocumentInput(v *BatchDeleteDocumentInput) error {
 	if v.DataSourceSyncJobMetricTarget != nil {
 		if err := validateDataSourceSyncJobMetricTarget(v.DataSourceSyncJobMetricTarget); err != nil {
 			invalidParams.AddNested("DataSourceSyncJobMetricTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetDocumentStatusInput(v *BatchGetDocumentStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetDocumentStatusInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.DocumentInfoList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentInfoList"))
+	} else if v.DocumentInfoList != nil {
+		if err := validateDocumentInfoList(v.DocumentInfoList); err != nil {
+			invalidParams.AddNested("DocumentInfoList", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

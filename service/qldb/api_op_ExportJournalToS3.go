@@ -36,17 +36,17 @@ func (c *Client) ExportJournalToS3(ctx context.Context, params *ExportJournalToS
 
 type ExportJournalToS3Input struct {
 
-	// The exclusive end date and time for the range of journal contents that you want
-	// to export. The ExclusiveEndTime must be in ISO 8601 date and time format and in
-	// Universal Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z The
-	// ExclusiveEndTime must be less than or equal to the current UTC date and time.
+	// The exclusive end date and time for the range of journal contents to export. The
+	// ExclusiveEndTime must be in ISO 8601 date and time format and in Universal
+	// Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z. The ExclusiveEndTime
+	// must be less than or equal to the current UTC date and time.
 	//
 	// This member is required.
 	ExclusiveEndTime *time.Time
 
-	// The inclusive start date and time for the range of journal contents that you
-	// want to export. The InclusiveStartTime must be in ISO 8601 date and time format
-	// and in Universal Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z The
+	// The inclusive start date and time for the range of journal contents to export.
+	// The InclusiveStartTime must be in ISO 8601 date and time format and in Universal
+	// Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z. The
 	// InclusiveStartTime must be before ExclusiveEndTime. If you provide an
 	// InclusiveStartTime that is before the ledger's CreationDateTime, Amazon QLDB
 	// defaults it to the ledger's CreationDateTime.
@@ -81,9 +81,9 @@ type ExportJournalToS3Input struct {
 
 type ExportJournalToS3Output struct {
 
-	// The unique ID that QLDB assigns to each journal export job. To describe your
-	// export request and check the status of the job, you can use ExportId to call
-	// DescribeJournalS3Export.
+	// The UUID (represented in Base62-encoded text) that QLDB assigns to each journal
+	// export job. To describe your export request and check the status of the job, you
+	// can use ExportId to call DescribeJournalS3Export.
 	//
 	// This member is required.
 	ExportId *string

@@ -170,7 +170,7 @@
                 "StreamId": {
                     "target": "com.amazonaws.qldb#UniqueId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID that QLDB assigns to each QLDB journal stream.</p>",
+                        "smithy.api#documentation": "<p>The UUID (represented in Base62-encoded text) of the QLDB journal stream to be\n         canceled.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -183,7 +183,7 @@
                 "StreamId": {
                     "target": "com.amazonaws.qldb#UniqueId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID that QLDB assigns to each QLDB journal stream.</p>"
+                        "smithy.api#documentation": "<p>The UUID (Base62-encoded text) of the canceled QLDB journal stream.</p>"
                     }
                 }
             }
@@ -211,7 +211,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new ledger in your AWS account.</p>",
+                "smithy.api#documentation": "<p>Creates a new ledger in your AWS account in the current Region.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ledgers",
@@ -238,14 +238,14 @@
                 "PermissionsMode": {
                     "target": "com.amazonaws.qldb#PermissionsMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The permissions mode to assign to the ledger that you want to create. This parameter can\n         have one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with\n               API-level granularity for ledgers.</p>\n               <p>This mode allows users who have <code>SendCommand</code> permissions for this\n               ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in\n               the specified ledger. This mode disregards any table-level or command-level IAM\n               permissions policies that you create for the ledger.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that\n               enables access control with finer granularity for ledgers, tables, and PartiQL\n               commands.</p>\n               <p>By default, this mode denies all user requests to run any PartiQL commands on any\n               tables in this ledger. To allow PartiQL commands to run, you must create IAM\n               permissions policies for specific table resources and PartiQL actions, in addition to\n                  <code>SendCommand</code> API permissions for the ledger.</p>\n            </li>\n         </ul>\n         <note>\n            <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize\n            the security of your ledger data.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The permissions mode to assign to the ledger that you want to create. This parameter can\n         have one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with\n               API-level granularity for ledgers.</p>\n               <p>This mode allows users who have the <code>SendCommand</code> API permission for\n               this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables\n               in the specified ledger. This mode disregards any table-level or command-level IAM\n               permissions policies that you create for the ledger.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that\n               enables access control with finer granularity for ledgers, tables, and PartiQL\n               commands.</p>\n               <p>By default, this mode denies all user requests to run any PartiQL commands on any\n               tables in this ledger. To allow PartiQL commands to run, you must create IAM\n               permissions policies for specific table resources and PartiQL actions, in addition to\n               the <code>SendCommand</code> API permission for the ledger. For information, see\n                  <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html\">Getting\n                  started with the standard permissions mode</a> in the <i>Amazon QLDB\n                  Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize\n            the security of your ledger data.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "DeletionProtection": {
                     "target": "com.amazonaws.qldb#DeletionProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n         ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n         ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the\n            <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB\n         console disables deletion protection for you when you use it to delete a ledger.</p>"
+                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
                     }
                 }
             }
@@ -286,7 +286,7 @@
                 "DeletionProtection": {
                     "target": "com.amazonaws.qldb#DeletionProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n         ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n         ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the\n            <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB\n         console disables deletion protection for you when you use it to delete a ledger.</p>"
+                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
                     }
                 }
             }
@@ -311,7 +311,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a ledger and all of its contents. This action is irreversible.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n         ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the\n            <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB\n         console disables deletion protection for you when you use it to delete a ledger.</p>",
+                "smithy.api#documentation": "<p>Deletes a ledger and all of its contents. This action is irreversible.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/ledgers/{Name}",
@@ -358,7 +358,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns detailed information about a given Amazon QLDB journal stream. The output\n         includes the Amazon Resource Name (ARN), stream name, current status, creation time, and\n         the parameters of your original stream creation request.</p>",
+                "smithy.api#documentation": "<p>Returns detailed information about a given Amazon QLDB journal stream. The output\n         includes the Amazon Resource Name (ARN), stream name, current status, creation time, and\n         the parameters of the original stream creation request.</p>\n         <p>This action does not return any expired journal streams. For more information, see\n            <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration\">Expiration for terminal streams</a> in the <i>Amazon QLDB Developer\n            Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ledgers/{LedgerName}/journal-kinesis-streams/{StreamId}",
@@ -380,7 +380,7 @@
                 "StreamId": {
                     "target": "com.amazonaws.qldb#UniqueId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID that QLDB assigns to each QLDB journal stream.</p>",
+                        "smithy.api#documentation": "<p>The UUID (represented in Base62-encoded text) of the QLDB journal stream to\n         describe.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -412,7 +412,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a journal export job, including the ledger name, export ID,\n         when it was created, current status, and its start and end time export parameters.</p>\n         <p>This action does not return any expired export jobs. For more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration\">Export Job Expiration</a> in the <i>Amazon QLDB Developer\n         Guide</i>.</p>\n         <p>If the export job with the given <code>ExportId</code> doesn't exist, then throws\n            <code>ResourceNotFoundException</code>.</p>\n         <p>If the ledger with the given <code>Name</code> doesn't exist, then throws\n            <code>ResourceNotFoundException</code>.</p>",
+                "smithy.api#documentation": "<p>Returns information about a journal export job, including the ledger name, export ID,\n         creation time, current status, and the parameters of the original export creation\n         request.</p>\n         <p>This action does not return any expired export jobs. For more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration\">Export job expiration</a> in the <i>Amazon QLDB Developer\n         Guide</i>.</p>\n         <p>If the export job with the given <code>ExportId</code> doesn't exist, then throws\n            <code>ResourceNotFoundException</code>.</p>\n         <p>If the ledger with the given <code>Name</code> doesn't exist, then throws\n            <code>ResourceNotFoundException</code>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ledgers/{Name}/journal-s3-exports/{ExportId}",
@@ -434,7 +434,7 @@
                 "ExportId": {
                     "target": "com.amazonaws.qldb#UniqueId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the journal export job that you want to describe.</p>",
+                        "smithy.api#documentation": "<p>The UUID (represented in Base62-encoded text) of the journal export job to\n         describe.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -527,7 +527,7 @@
                 "DeletionProtection": {
                     "target": "com.amazonaws.qldb#DeletionProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n         ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n         ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the\n            <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB\n         console disables deletion protection for you when you use it to delete a ledger.</p>"
+                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
                     }
                 }
             }
@@ -598,14 +598,14 @@
                 "InclusiveStartTime": {
                     "target": "com.amazonaws.qldb#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The inclusive start date and time for the range of journal contents that you want to\n         export.</p>\n         <p>The <code>InclusiveStartTime</code> must be in <code>ISO 8601</code> date and time\n         format and in Universal Coordinated Time (UTC). For example:\n            <code>2019-06-13T21:36:34Z</code>\n         </p>\n         <p>The <code>InclusiveStartTime</code> must be before <code>ExclusiveEndTime</code>.</p>\n         <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger's\n            <code>CreationDateTime</code>, Amazon QLDB defaults it to the ledger's\n            <code>CreationDateTime</code>.</p>",
+                        "smithy.api#documentation": "<p>The inclusive start date and time for the range of journal contents to export.</p>\n         <p>The <code>InclusiveStartTime</code> must be in <code>ISO 8601</code> date and time\n         format and in Universal Coordinated Time (UTC). For example:\n            <code>2019-06-13T21:36:34Z</code>.</p>\n         <p>The <code>InclusiveStartTime</code> must be before <code>ExclusiveEndTime</code>.</p>\n         <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger's\n            <code>CreationDateTime</code>, Amazon QLDB defaults it to the ledger's\n            <code>CreationDateTime</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ExclusiveEndTime": {
                     "target": "com.amazonaws.qldb#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The exclusive end date and time for the range of journal contents that you want to\n         export.</p>\n         <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format\n         and in Universal Coordinated Time (UTC). For example:\n         <code>2019-06-13T21:36:34Z</code>\n         </p>\n         <p>The <code>ExclusiveEndTime</code> must be less than or equal to the current UTC date and\n         time.</p>",
+                        "smithy.api#documentation": "<p>The exclusive end date and time for the range of journal contents to export.</p>\n         <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format\n         and in Universal Coordinated Time (UTC). For example:\n         <code>2019-06-13T21:36:34Z</code>.</p>\n         <p>The <code>ExclusiveEndTime</code> must be less than or equal to the current UTC date and\n         time.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -631,7 +631,7 @@
                 "ExportId": {
                     "target": "com.amazonaws.qldb#UniqueId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID that QLDB assigns to each journal export job.</p>\n         <p>To describe your export request and check the status of the job, you can use\n            <code>ExportId</code> to call <code>DescribeJournalS3Export</code>.</p>",
+                        "smithy.api#documentation": "<p>The UUID (represented in Base62-encoded text) that QLDB assigns to each journal export\n         job.</p>\n         <p>To describe your export request and check the status of the job, you can use\n            <code>ExportId</code> to call <code>DescribeJournalS3Export</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -698,14 +698,14 @@
                 "BlockAddress": {
                     "target": "com.amazonaws.qldb#ValueHolder",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the block that you want to request. An address is an Amazon Ion\n         structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p>\n         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:14}</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The location of the block that you want to request. An address is an Amazon Ion\n         structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p>\n         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:14}</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DigestTipAddress": {
                     "target": "com.amazonaws.qldb#ValueHolder",
                     "traits": {
-                        "smithy.api#documentation": "<p>The latest block location covered by the digest for which to request a proof. An address\n         is an Amazon Ion structure that has two fields: <code>strandId</code> and\n            <code>sequenceNo</code>.</p>\n         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:49}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The latest block location covered by the digest for which to request a proof. An address\n         is an Amazon Ion structure that has two fields: <code>strandId</code> and\n            <code>sequenceNo</code>.</p>\n         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:49}</code>.</p>"
                     }
                 }
             }
@@ -830,21 +830,21 @@
                 "BlockAddress": {
                     "target": "com.amazonaws.qldb#ValueHolder",
                     "traits": {
-                        "smithy.api#documentation": "<p>The block location of the document revision to be verified. An address is an Amazon Ion\n         structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p>\n         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:14}</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The block location of the document revision to be verified. An address is an Amazon Ion\n         structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p>\n         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:14}</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DocumentId": {
                     "target": "com.amazonaws.qldb#UniqueId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the document to be verified.</p>",
+                        "smithy.api#documentation": "<p>The UUID (represented in Base62-encoded text) of the document to be verified.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DigestTipAddress": {
                     "target": "com.amazonaws.qldb#ValueHolder",
                     "traits": {
-                        "smithy.api#documentation": "<p>The latest block location covered by the digest for which to request a proof. An address\n         is an Amazon Ion structure that has two fields: <code>strandId</code> and\n            <code>sequenceNo</code>.</p>\n         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:49}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The latest block location covered by the digest for which to request a proof. An address\n         is an Amazon Ion structure that has two fields: <code>strandId</code> and\n            <code>sequenceNo</code>.</p>\n         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:49}</code>.</p>"
                     }
                 }
             }
@@ -934,7 +934,7 @@
                 "StreamId": {
                     "target": "com.amazonaws.qldb#UniqueId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID that QLDB assigns to each QLDB journal stream.</p>",
+                        "smithy.api#documentation": "<p>The UUID (represented in Base62-encoded text) of the QLDB journal stream.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -954,7 +954,7 @@
                 "KinesisConfiguration": {
                     "target": "com.amazonaws.qldb#KinesisConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings of the Amazon Kinesis Data Streams destination for your QLDB journal\n         stream.</p>",
+                        "smithy.api#documentation": "<p>The configuration settings of the Amazon Kinesis Data Streams destination for a QLDB journal\n         stream.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -973,7 +973,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The information about an Amazon QLDB journal stream, including the Amazon Resource Name\n         (ARN), stream name, creation time, current status, and the parameters of your original\n         stream creation request.</p>"
+                "smithy.api#documentation": "<p>Information about an Amazon QLDB journal stream, including the Amazon Resource Name\n         (ARN), stream name, creation time, current status, and the parameters of the original\n         stream creation request.</p>"
             }
         },
         "com.amazonaws.qldb#JournalKinesisStreamDescriptionList": {
@@ -995,7 +995,7 @@
                 "ExportId": {
                     "target": "com.amazonaws.qldb#UniqueId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the journal export job.</p>",
+                        "smithy.api#documentation": "<p>The UUID (represented in Base62-encoded text) of the journal export job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1042,7 +1042,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The information about a journal export job, including the ledger name, export ID, when\n         it was created, current status, and its start and end time export parameters.</p>"
+                "smithy.api#documentation": "<p>Information about a journal export job, including the ledger name, export ID, creation\n         time, current status, and the parameters of the original export creation request.</p>"
             }
         },
         "com.amazonaws.qldb#JournalS3ExportList": {
@@ -1057,19 +1057,19 @@
                 "StreamArn": {
                     "target": "com.amazonaws.qldb#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis data stream resource.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis Data Streams resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AggregationEnabled": {
                     "target": "com.amazonaws.qldb#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables QLDB to publish multiple data records in a single Kinesis Data Streams record. To learn more,\n         see <a href=\"https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html\">KPL Key\n            Concepts</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Enables QLDB to publish multiple data records in a single Kinesis Data Streams record, increasing the\n         number of records sent per API call.</p>\n         <p>\n            <i>This option is enabled by default.</i> Record aggregation has important\n         implications for processing records and requires de-aggregation in your stream consumer. To\n         learn more, see <a href=\"https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html\">KPL Key Concepts</a> and <a href=\"https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-consumer-deaggregation.html\">Consumer De-aggregation</a> in the <i>Amazon Kinesis Data Streams Developer\n         Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration settings of the Amazon Kinesis Data Streams destination for your Amazon QLDB journal\n         stream.</p>"
+                "smithy.api#documentation": "<p>The configuration settings of the Amazon Kinesis Data Streams destination for an Amazon QLDB journal\n         stream.</p>"
             }
         },
         "com.amazonaws.qldb#LedgerList": {
@@ -1085,7 +1085,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$"
+                "smithy.api#pattern": "^(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$"
             }
         },
         "com.amazonaws.qldb#LedgerState": {
@@ -1176,7 +1176,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of all Amazon QLDB journal stream descriptors for a given ledger. The\n         output of each stream descriptor includes the same details that are returned by\n            <code>DescribeJournalKinesisStream</code>.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items. It is paginated so that\n         you can retrieve all the items by calling <code>ListJournalKinesisStreamsForLedger</code>\n         multiple times.</p>",
+                "smithy.api#documentation": "<p>Returns an array of all Amazon QLDB journal stream descriptors for a given ledger. The\n         output of each stream descriptor includes the same details that are returned by\n            <code>DescribeJournalKinesisStream</code>.</p>\n         <p>This action does not return any expired journal streams. For more information, see\n            <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration\">Expiration for terminal streams</a> in the <i>Amazon QLDB Developer\n            Guide</i>.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items. It is paginated so that\n         you can retrieve all the items by calling <code>ListJournalKinesisStreamsForLedger</code>\n         multiple times.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ledgers/{LedgerName}/journal-kinesis-streams",
@@ -1242,7 +1242,7 @@
                 "target": "com.amazonaws.qldb#ListJournalS3ExportsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of journal export job descriptions for all ledgers that are associated\n         with the current AWS account and Region.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that\n         you can retrieve all the items by calling <code>ListJournalS3Exports</code> multiple\n         times.</p>\n         <p>This action does not return any expired export jobs. For more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration\">Export Job Expiration</a> in the <i>Amazon QLDB Developer\n         Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Returns an array of journal export job descriptions for all ledgers that are associated\n         with the current AWS account and Region.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that\n         you can retrieve all the items by calling <code>ListJournalS3Exports</code> multiple\n         times.</p>\n         <p>This action does not return any expired export jobs. For more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration\">Export job expiration</a> in the <i>Amazon QLDB Developer\n         Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/journal-s3-exports",
@@ -1264,7 +1264,7 @@
                 "target": "com.amazonaws.qldb#ListJournalS3ExportsForLedgerResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of journal export job descriptions for a specified ledger.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that\n         you can retrieve all the items by calling <code>ListJournalS3ExportsForLedger</code>\n         multiple times.</p>\n         <p>This action does not return any expired export jobs. For more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration\">Export Job Expiration</a> in the <i>Amazon QLDB Developer\n         Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Returns an array of journal export job descriptions for a specified ledger.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that\n         you can retrieve all the items by calling <code>ListJournalS3ExportsForLedger</code>\n         multiple times.</p>\n         <p>This action does not return any expired export jobs. For more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration\">Export job expiration</a> in the <i>Amazon QLDB Developer\n         Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ledgers/{Name}/journal-s3-exports",
@@ -1446,7 +1446,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.qldb#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for which you want to list the tags. For example:</p>\n         <p>\n            <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for which to list the tags. For example:</p>\n         <p>\n            <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code>\n         </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1631,7 +1631,7 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.qldb#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a symmetric customer master key (CMK) in AWS Key\n         Management Service (AWS KMS). Amazon QLDB does not support asymmetric CMKs.</p>\n         <p>You must provide a <code>KmsKeyArn</code> if you specify <code>SSE_KMS</code> as the\n            <code>ObjectEncryptionType</code>.</p>\n         <p>\n            <code>KmsKeyArn</code> is not required if you specify <code>SSE_S3</code> as the\n            <code>ObjectEncryptionType</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a symmetric customer master key (CMK) in AWS Key\n         Management Service (AWS KMS). Amazon S3 does not support asymmetric CMKs.</p>\n         <p>You must provide a <code>KmsKeyArn</code> if you specify <code>SSE_KMS</code> as the\n            <code>ObjectEncryptionType</code>.</p>\n         <p>\n            <code>KmsKeyArn</code> is not required if you specify <code>SSE_S3</code> as the\n            <code>ObjectEncryptionType</code>.</p>"
                     }
                 }
             },
@@ -1751,14 +1751,14 @@
                 "InclusiveStartTime": {
                     "target": "com.amazonaws.qldb#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The inclusive start date and time from which to start streaming journal data. This\n         parameter must be in <code>ISO 8601</code> date and time format and in Universal\n         Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code>\n         </p>\n         <p>The <code>InclusiveStartTime</code> cannot be in the future and must be before\n            <code>ExclusiveEndTime</code>.</p>\n         <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger's\n            <code>CreationDateTime</code>, QLDB effectively defaults it to the ledger's\n            <code>CreationDateTime</code>.</p>",
+                        "smithy.api#documentation": "<p>The inclusive start date and time from which to start streaming journal data. This\n         parameter must be in <code>ISO 8601</code> date and time format and in Universal\n         Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code>.</p>\n         <p>The <code>InclusiveStartTime</code> cannot be in the future and must be before\n            <code>ExclusiveEndTime</code>.</p>\n         <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger's\n            <code>CreationDateTime</code>, QLDB effectively defaults it to the ledger's\n            <code>CreationDateTime</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ExclusiveEndTime": {
                     "target": "com.amazonaws.qldb#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The exclusive date and time that specifies when the stream ends. If you don't define\n         this parameter, the stream runs indefinitely until you cancel it.</p>\n         <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format\n         and in Universal Coordinated Time (UTC). For example:\n         <code>2019-06-13T21:36:34Z</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The exclusive date and time that specifies when the stream ends. If you don't define\n         this parameter, the stream runs indefinitely until you cancel it.</p>\n         <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format\n         and in Universal Coordinated Time (UTC). For example:\n         <code>2019-06-13T21:36:34Z</code>.</p>"
                     }
                 },
                 "KinesisConfiguration": {
@@ -1783,7 +1783,7 @@
                 "StreamId": {
                     "target": "com.amazonaws.qldb#UniqueId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID that QLDB assigns to each QLDB journal stream.</p>"
+                        "smithy.api#documentation": "<p>The UUID (represented in Base62-encoded text) that QLDB assigns to each QLDB journal\n         stream.</p>"
                     }
                 }
             }
@@ -1795,7 +1795,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$"
+                "smithy.api#pattern": "^(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$"
             }
         },
         "com.amazonaws.qldb#StreamStatus": {
@@ -1964,7 +1964,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.qldb#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) from which you want to remove the tags. For\n         example:</p>\n         <p>\n            <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) from which to remove the tags. For example:</p>\n         <p>\n            <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code>\n         </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1972,7 +1972,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.qldb#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of tag keys that you want to remove.</p>",
+                        "smithy.api#documentation": "<p>The list of tag keys to remove.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -2025,7 +2025,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the permissions mode of a ledger.</p>",
+                "smithy.api#documentation": "<p>Updates the permissions mode of a ledger.</p>\n         <important>\n            <p>Before you switch to the <code>STANDARD</code> permissions mode, you must first\n            create all required IAM policies and table tags to avoid disruption to your users. To\n            learn more, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/ledger-management.basics.html#ledger-mgmt.basics.update-permissions.migrating\">Migrating to the standard permissions mode</a> in the <i>Amazon QLDB\n               Developer Guide</i>.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/ledgers/{Name}/permissions-mode",
@@ -2047,7 +2047,7 @@
                 "PermissionsMode": {
                     "target": "com.amazonaws.qldb#PermissionsMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The permissions mode to assign to the ledger. This parameter can have one of the\n         following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with\n               API-level granularity for ledgers.</p>\n               <p>This mode allows users who have <code>SendCommand</code> permissions for this\n               ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in\n               the specified ledger. This mode disregards any table-level or command-level IAM\n               permissions policies that you create for the ledger.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that\n               enables access control with finer granularity for ledgers, tables, and PartiQL\n               commands.</p>\n               <p>By default, this mode denies all user requests to run any PartiQL commands on any\n               tables in this ledger. To allow PartiQL commands to run, you must create IAM\n               permissions policies for specific table resources and PartiQL actions, in addition to\n                  <code>SendCommand</code> API permissions for the ledger.</p>\n            </li>\n         </ul>\n         <note>\n            <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize\n            the security of your ledger data.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The permissions mode to assign to the ledger. This parameter can have one of the\n         following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with\n               API-level granularity for ledgers.</p>\n               <p>This mode allows users who have the <code>SendCommand</code> API permission for\n               this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables\n               in the specified ledger. This mode disregards any table-level or command-level IAM\n               permissions policies that you create for the ledger.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that\n               enables access control with finer granularity for ledgers, tables, and PartiQL\n               commands.</p>\n               <p>By default, this mode denies all user requests to run any PartiQL commands on any\n               tables in this ledger. To allow PartiQL commands to run, you must create IAM\n               permissions policies for specific table resources and PartiQL actions, in addition to\n               the <code>SendCommand</code> API permission for the ledger. For information, see\n                  <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html\">Getting\n                  started with the standard permissions mode</a> in the <i>Amazon QLDB\n                  Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize\n            the security of your ledger data.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2090,7 +2090,7 @@
                 "DeletionProtection": {
                     "target": "com.amazonaws.qldb#DeletionProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n         ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n         ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the\n            <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB\n         console disables deletion protection for you when you use it to delete a ledger.</p>"
+                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
                     }
                 }
             }
@@ -2125,7 +2125,7 @@
                 "DeletionProtection": {
                     "target": "com.amazonaws.qldb#DeletionProtection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n         ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n         ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the\n            <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB\n         console disables deletion protection for you when you use it to delete a ledger.</p>"
+                        "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
                     }
                 }
             }

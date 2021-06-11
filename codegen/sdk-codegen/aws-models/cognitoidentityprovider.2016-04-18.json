@@ -349,7 +349,7 @@
                     "name": "cognito-idp"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Using the Amazon Cognito User Pools API, you can create a user pool to manage\n            directories and users. You can authenticate a user to obtain tokens related to user\n            identity and access policies.</p>\n        <p>This API reference provides information about user pools in Amazon Cognito User\n            Pools.</p>\n        <p>For more information, see the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html\">Amazon Cognito Documentation</a>.</p>",
+                "smithy.api#documentation": "<p>Using the Amazon Cognito User Pools API, you can create a user pool to manage\n            directories and users. You can authenticate a user to obtain tokens related to user\n            identity and access policies.</p>\n        <p>This API reference provides information about user pools in Amazon Cognito User\n            Pools.</p>\n        <p>For more information, see the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html\">Amazon Cognito\n                Documentation</a>.</p>",
                 "smithy.api#title": "Amazon Cognito Identity Provider",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://cognito-idp.amazonaws.com/doc/2016-04-18/"
@@ -732,7 +732,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new user in the specified user pool.</p>\n        <p>If <code>MessageAction</code> is not set, the default is to send a welcome message via\n            email or phone (SMS).</p>\n        <p>This message is based on a template that you configured in your call to create or\n            update a user pool. This template includes your custom sign-up instructions and\n            placeholders for user name and temporary password.</p>\n        <p>Alternatively, you can call <code>AdminCreateUser</code> with “SUPPRESS” for the\n                <code>MessageAction</code> parameter, and Amazon Cognito will not send any email. </p>\n        <p>In either case, the user will be in the <code>FORCE_CHANGE_PASSWORD</code> state until\n            they sign in and change their password.</p>\n        <p>\n            <code>AdminCreateUser</code> requires developer credentials.</p>"
+                "smithy.api#documentation": "<p>Creates a new user in the specified user pool.</p>\n        <p>If <code>MessageAction</code> is not set, the default is to send a welcome message via\n            email or phone (SMS).</p>\n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>\n        \n        <p>This message is based on a template that you configured in your call to create or\n            update a user pool. This template includes your custom sign-up instructions and\n            placeholders for user name and temporary password.</p>\n        <p>Alternatively, you can call <code>AdminCreateUser</code> with “SUPPRESS” for the\n                <code>MessageAction</code> parameter, and Amazon Cognito will not send any email. </p>\n        <p>In either case, the user will be in the <code>FORCE_CHANGE_PASSWORD</code> state until\n            they sign in and change their password.</p>\n        <p>\n            <code>AdminCreateUser</code> requires developer credentials.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#AdminCreateUserConfigType": {
@@ -1457,7 +1457,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates the authentication flow, as an administrator.</p>\n        <p>Calling this action requires developer credentials.</p>"
+                "smithy.api#documentation": "<p>Initiates the authentication flow, as an administrator.</p>\n        \n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>\n        \n        <p>Calling this action requires developer credentials.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#AdminInitiateAuthRequest": {
@@ -1493,7 +1493,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for certain custom\n            workflows that this action triggers.</p>\n        <p>You create custom workflows by assigning AWS Lambda functions to user pool triggers.\n            When you use the AdminInitiateAuth API action, Amazon Cognito invokes the AWS Lambda\n            functions that are specified for various triggers. The ClientMetadata value is passed as\n            input to the functions for only the following triggers:</p>\n        <ul>\n            <li>\n                <p>Pre signup</p>\n            </li>\n            <li>\n                <p>Pre authentication</p>\n            </li>\n            <li>\n                <p>User migration</p>\n            </li>\n         </ul>\n\n        <p>When Amazon Cognito invokes the functions for these triggers, it passes a JSON\n            payload, which the function receives as input. This payload contains a\n                <code>validationData</code> attribute, which provides the data that you assigned to\n            the ClientMetadata parameter in your AdminInitiateAuth request. In your function code in\n            AWS Lambda, you can process the <code>validationData</code> value to enhance your\n            workflow for your specific needs.</p>\n\n        <p>When you use the AdminInitiateAuth API action, Amazon Cognito also invokes the\n            functions for the following triggers, but it does not provide the ClientMetadata value\n            as input:</p>\n\n        <ul>\n            <li>\n                <p>Post authentication</p>\n            </li>\n            <li>\n                <p>Custom message</p>\n            </li>\n            <li>\n                <p>Pre token generation</p>\n            </li>\n            <li>\n                <p>Create auth challenge</p>\n            </li>\n            <li>\n                <p>Define auth challenge</p>\n            </li>\n            <li>\n                <p>Verify auth challenge</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">Customizing User Pool Workflows with Lambda Triggers</a> in the\n                <i>Amazon Cognito Developer Guide</i>.</p>\n        <note>\n            <p>Take the following limitations into consideration when you use the ClientMetadata\n                parameter:</p>\n            <ul>\n               <li>\n                    <p>Amazon Cognito does not store the ClientMetadata value. This data is\n                        available only to AWS Lambda triggers that are assigned to a user pool to\n                        support custom workflows. If your user pool configuration does not include\n                        triggers, the ClientMetadata parameter serves no purpose.</p>\n                </li>\n               <li>\n                    <p>Amazon Cognito does not validate the ClientMetadata value.</p>\n                </li>\n               <li>\n                    <p>Amazon Cognito does not encrypt the the ClientMetadata value, so don't use\n                        it to provide sensitive information.</p>\n                </li>\n            </ul>\n        </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for certain custom\n            workflows that this action triggers.</p>\n        <p>You create custom workflows by assigning AWS Lambda functions to user pool triggers.\n            When you use the AdminInitiateAuth API action, Amazon Cognito invokes the AWS Lambda\n            functions that are specified for various triggers. The ClientMetadata value is passed as\n            input to the functions for only the following triggers:</p>\n        <ul>\n            <li>\n                <p>Pre signup</p>\n            </li>\n            <li>\n                <p>Pre authentication</p>\n            </li>\n            <li>\n                <p>User migration</p>\n            </li>\n         </ul>\n        <p>When Amazon Cognito invokes the functions for these triggers, it passes a JSON\n            payload, which the function receives as input. This payload contains a\n                <code>validationData</code> attribute, which provides the data that you assigned to\n            the ClientMetadata parameter in your AdminInitiateAuth request. In your function code in\n            AWS Lambda, you can process the <code>validationData</code> value to enhance your\n            workflow for your specific needs.</p>\n        <p>When you use the AdminInitiateAuth API action, Amazon Cognito also invokes the\n            functions for the following triggers, but it does not provide the ClientMetadata value\n            as input:</p>\n        <ul>\n            <li>\n                <p>Post authentication</p>\n            </li>\n            <li>\n                <p>Custom message</p>\n            </li>\n            <li>\n                <p>Pre token generation</p>\n            </li>\n            <li>\n                <p>Create auth challenge</p>\n            </li>\n            <li>\n                <p>Define auth challenge</p>\n            </li>\n            <li>\n                <p>Verify auth challenge</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">Customizing User Pool Workflows with Lambda Triggers</a> in the\n                <i>Amazon Cognito Developer Guide</i>.</p>\n        <note>\n            <p>Take the following limitations into consideration when you use the ClientMetadata\n                parameter:</p>\n            <ul>\n               <li>\n                    <p>Amazon Cognito does not store the ClientMetadata value. This data is\n                        available only to AWS Lambda triggers that are assigned to a user pool to\n                        support custom workflows. If your user pool configuration does not include\n                        triggers, the ClientMetadata parameter serves no purpose.</p>\n                </li>\n               <li>\n                    <p>Amazon Cognito does not validate the ClientMetadata value.</p>\n                </li>\n               <li>\n                    <p>Amazon Cognito does not encrypt the the ClientMetadata value, so don't use\n                        it to provide sensitive information.</p>\n                </li>\n            </ul>\n        </note>"
                     }
                 },
                 "AnalyticsMetadata": {
@@ -1979,7 +1979,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Resets the specified user's password in a user pool as an administrator. Works on any\n            user.</p>\n        <p>When a developer calls this API, the current password is invalidated, so it must be\n            changed. If a user tries to sign in after the API is called, the app will get a\n            PasswordResetRequiredException exception back and should direct the user down the flow\n            to reset the password, which is the same as the forgot password flow. In addition, if\n            the user pool has phone verification selected and a verified phone number exists for the\n            user, or if email verification is selected and a verified email exists for the user,\n            calling this API will also result in sending a message to the end user with the code to\n            change their password.</p>\n        <p>Calling this action requires developer credentials.</p>"
+                "smithy.api#documentation": "<p>Resets the specified user's password in a user pool as an administrator. Works on any\n            user.</p>\n        <p>When a developer calls this API, the current password is invalidated, so it must be\n            changed. If a user tries to sign in after the API is called, the app will get a\n            PasswordResetRequiredException exception back and should direct the user down the flow\n            to reset the password, which is the same as the forgot password flow. In addition, if\n            the user pool has phone verification selected and a verified phone number exists for the\n            user, or if email verification is selected and a verified email exists for the user,\n            calling this API will also result in sending a message to the end user with the code to\n            change their password.</p>\n        \n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>\n        \n        <p>Calling this action requires developer credentials.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#AdminResetUserPasswordRequest": {
@@ -2088,7 +2088,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Responds to an authentication challenge, as an administrator.</p>\n        <p>Calling this action requires developer credentials.</p>"
+                "smithy.api#documentation": "<p>Responds to an authentication challenge, as an administrator.</p>\n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>\n        \n        <p>Calling this action requires developer credentials.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#AdminRespondToAuthChallengeRequest": {
@@ -2587,7 +2587,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified user's attributes, including developer attributes, as an\n            administrator. Works on any user.</p>\n        <p>For custom attributes, you must prepend the <code>custom:</code> prefix to the\n            attribute name.</p>\n        <p>In addition to updating user attributes, this API can also be used to mark phone and\n            email as verified.</p>\n        <p>Calling this action requires developer credentials.</p>"
+                "smithy.api#documentation": "<p>Updates the specified user's attributes, including developer attributes, as an\n            administrator. Works on any user.</p>\n        <p>For custom attributes, you must prepend the <code>custom:</code> prefix to the\n            attribute name.</p>\n        <p>In addition to updating user attributes, this API can also be used to mark phone and\n            email as verified.</p>\n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>\n                \n        <p>Calling this action requires developer credentials.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#AdminUpdateUserAttributesRequest": {
@@ -2812,7 +2812,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:([\\w+=/,.@-]*)?:[0-9]+:[\\w+=/,.@-]+(:[\\w+=/,.@-]+)?(:[\\w+=/,.@-]+)?"
+                "smithy.api#pattern": "^arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:([\\w+=/,.@-]*)?:[0-9]+:[\\w+=/,.@-]+(:[\\w+=/,.@-]+)?(:[\\w+=/,.@-]+)?$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#AssociateSoftwareToken": {
@@ -2844,7 +2844,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a unique generated shared secret key code for the user account. The request\n            takes an access token or a session string, but not both.</p>"
+                "smithy.api#documentation": "<p>Returns a unique generated shared secret key code for the user account. The request\n            takes an access token or a session string, but not both.</p>\n        <note>\n            <p>Calling AssociateSoftwareToken immediately disassociates the existing software\n                token from the user account. If the user doesn't subsequently verify the software\n                token, their account is essentially set up to authenticate without MFA. If MFA\n                config is set to Optional at the user pool level, the user can then login without\n                MFA. However, if MFA is set to Required for the user pool, the user will be asked to\n                setup a new software token MFA during sign in.</p>\n        </note>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#AssociateSoftwareTokenRequest": {
@@ -2941,7 +2941,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#AttributeType": {
@@ -3371,7 +3371,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w+]+",
+                "smithy.api#pattern": "^[\\w+]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3391,7 +3391,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w\\s+=,.@-]+"
+                "smithy.api#pattern": "^[\\w\\s+=,.@-]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#ClientPermissionListType": {
@@ -3416,7 +3416,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\w+]+",
+                "smithy.api#pattern": "^[\\w+]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3491,7 +3491,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w]+"
+                "smithy.api#pattern": "^[\\w]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#CompromisedCredentialsActionsType": {
@@ -3918,7 +3918,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#ContextDataType": {
@@ -4330,7 +4330,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon Cognito user pool and sets the password policy for the\n            pool.</p>"
+                "smithy.api#documentation": "<p>Creates a new Amazon Cognito user pool and sets the password policy for the\n            pool.</p>\n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#CreateUserPoolClient": {
@@ -4730,7 +4730,7 @@
                     "min": 1,
                     "max": 20
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#CustomAttributesListType": {
@@ -5723,7 +5723,7 @@
                     "min": 1,
                     "max": 55
                 },
-                "smithy.api#pattern": "[\\w-]+_[0-9a-f-]+"
+                "smithy.api#pattern": "^[\\w-]+_[0-9a-f-]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#DeviceListType": {
@@ -5932,7 +5932,7 @@
         "com.amazonaws.cognitoidentityprovider#EmailAddressType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+@[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+@[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#EmailConfigurationType": {
@@ -5953,7 +5953,7 @@
                 "EmailSendingAccount": {
                     "target": "com.amazonaws.cognitoidentityprovider#EmailSendingAccountType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether Amazon Cognito emails your users by using its built-in email\n            functionality or your Amazon SES email configuration. Specify one of the following\n            values:</p>\n        <dl>\n            <dt>COGNITO_DEFAULT</dt>\n            <dd>\n                    <p>When Amazon Cognito emails your users, it uses its built-in email\n                        functionality. When you use the default option, Amazon Cognito allows only a\n                        limited number of emails each day for your user pool. For typical production\n                        environments, the default email limit is below the required delivery volume.\n                        To achieve a higher delivery volume, specify DEVELOPER to use your Amazon\n                        SES email configuration.</p>\n\n                    <p>To look up the email delivery limit for the default option, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/limits.html\">Limits in Amazon Cognito</a> in the <i>Amazon Cognito\n                            Developer Guide</i>.</p>\n                    <p>The default FROM address is no-reply@verificationemail.com. To customize\n                        the FROM address, provide the ARN of an Amazon SES verified email address\n                        for the <code>SourceArn</code> parameter.</p>\n                    <p> If EmailSendingAccount is COGNITO_DEFAULT, the following parameters\n                        aren't allowed:</p>\n\n                    <ul>\n                  <li>\n                            <p>EmailVerificationMessage</p>\n                        </li>\n                  <li>\n                            <p>EmailVerificationSubject</p>\n                        </li>\n                  <li>\n                            <p>InviteMessageTemplate.EmailMessage</p>\n                        </li>\n                  <li>\n                            <p>InviteMessageTemplate.EmailSubject</p>\n                        </li>\n                  <li>\n                            <p>VerificationMessageTemplate.EmailMessage</p>\n                        </li>\n                  <li>\n                            <p>VerificationMessageTemplate.EmailMessageByLink</p>\n                        </li>\n                  <li>\n                            <p>VerificationMessageTemplate.EmailSubject,</p>\n                        </li>\n                  <li>\n                            <p>VerificationMessageTemplate.EmailSubjectByLink</p>\n                        </li>\n               </ul>\n\n\n                    <note>\n                        <p>DEVELOPER EmailSendingAccount is required.</p>\n                    </note>\n                </dd>\n            <dt>DEVELOPER</dt>\n            <dd>\n                    <p>When Amazon Cognito emails your users, it uses your Amazon SES\n                        configuration. Amazon Cognito calls Amazon SES on your behalf to send email\n                        from your verified email address. When you use this option, the email\n                        delivery limits are the same limits that apply to your Amazon SES verified\n                        email address in your AWS account.</p>\n                    <p>If you use this option, you must provide the ARN of an Amazon SES verified\n                        email address for the <code>SourceArn</code> parameter.</p>\n                    <p>Before Amazon Cognito can email your users, it requires additional\n                        permissions to call Amazon SES on your behalf. When you update your user\n                        pool with this option, Amazon Cognito creates a <i>service-linked\n                            role</i>, which is a type of IAM role, in your AWS account. This\n                        role contains the permissions that allow Amazon Cognito to access Amazon SES\n                        and send email messages with your address. For more information about the\n                        service-linked role that Amazon Cognito creates, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/using-service-linked-roles.html\">Using Service-Linked Roles for Amazon\n                            Cognito</a> in the <i>Amazon Cognito Developer\n                            Guide</i>.</p>\n                </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>Specifies whether Amazon Cognito emails your users by using its built-in email\n            functionality or your Amazon SES email configuration. Specify one of the following\n            values:</p>\n        <dl>\n            <dt>COGNITO_DEFAULT</dt>\n            <dd>\n                    <p>When Amazon Cognito emails your users, it uses its built-in email\n                        functionality. When you use the default option, Amazon Cognito allows only a\n                        limited number of emails each day for your user pool. For typical production\n                        environments, the default email limit is below the required delivery volume.\n                        To achieve a higher delivery volume, specify DEVELOPER to use your Amazon\n                        SES email configuration.</p>\n                    <p>To look up the email delivery limit for the default option, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/limits.html\">Limits in Amazon Cognito</a> in the <i>Amazon Cognito\n                            Developer Guide</i>.</p>\n                    <p>The default FROM address is no-reply@verificationemail.com. To customize\n                        the FROM address, provide the ARN of an Amazon SES verified email address\n                        for the <code>SourceArn</code> parameter.</p>\n                    <p> If EmailSendingAccount is COGNITO_DEFAULT, the following parameters\n                        aren't allowed:</p>\n                    <ul>\n                  <li>\n                            <p>EmailVerificationMessage</p>\n                        </li>\n                  <li>\n                            <p>EmailVerificationSubject</p>\n                        </li>\n                  <li>\n                            <p>InviteMessageTemplate.EmailMessage</p>\n                        </li>\n                  <li>\n                            <p>InviteMessageTemplate.EmailSubject</p>\n                        </li>\n                  <li>\n                            <p>VerificationMessageTemplate.EmailMessage</p>\n                        </li>\n                  <li>\n                            <p>VerificationMessageTemplate.EmailMessageByLink</p>\n                        </li>\n                  <li>\n                            <p>VerificationMessageTemplate.EmailSubject,</p>\n                        </li>\n                  <li>\n                            <p>VerificationMessageTemplate.EmailSubjectByLink</p>\n                        </li>\n               </ul>\n                    <note>\n                        <p>DEVELOPER EmailSendingAccount is required.</p>\n                    </note>\n                </dd>\n            <dt>DEVELOPER</dt>\n            <dd>\n                    <p>When Amazon Cognito emails your users, it uses your Amazon SES\n                        configuration. Amazon Cognito calls Amazon SES on your behalf to send email\n                        from your verified email address. When you use this option, the email\n                        delivery limits are the same limits that apply to your Amazon SES verified\n                        email address in your AWS account.</p>\n                    <p>If you use this option, you must provide the ARN of an Amazon SES verified\n                        email address for the <code>SourceArn</code> parameter.</p>\n                    <p>Before Amazon Cognito can email your users, it requires additional\n                        permissions to call Amazon SES on your behalf. When you update your user\n                        pool with this option, Amazon Cognito creates a <i>service-linked\n                            role</i>, which is a type of IAM role, in your AWS account. This\n                        role contains the permissions that allow Amazon Cognito to access Amazon SES\n                        and send email messages with your address. For more information about the\n                        service-linked role that Amazon Cognito creates, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/using-service-linked-roles.html\">Using Service-Linked Roles for Amazon\n                            Cognito</a> in the <i>Amazon Cognito Developer\n                            Guide</i>.</p>\n                </dd>\n         </dl>"
                     }
                 },
                 "From": {
@@ -5980,7 +5980,7 @@
                     "min": 6,
                     "max": 20000
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]+"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#EmailNotificationSubjectType": {
@@ -5990,7 +5990,7 @@
                     "min": 1,
                     "max": 140
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s]+"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#EmailSendingAccountType": {
@@ -6015,7 +6015,7 @@
                     "min": 6,
                     "max": 20000
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*\\{##[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*##\\}[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*\\{##[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*##\\}[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#EmailVerificationMessageType": {
@@ -6025,7 +6025,7 @@
                     "min": 6,
                     "max": 20000
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*\\{####\\}[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*\\{####\\}[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#EmailVerificationSubjectByLinkType": {
@@ -6035,7 +6035,7 @@
                     "min": 1,
                     "max": 140
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s]+"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#EmailVerificationSubjectType": {
@@ -6045,7 +6045,7 @@
                     "min": 1,
                     "max": 140
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s]+"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#EnableSoftwareTokenMFAException": {
@@ -6159,7 +6159,7 @@
                     "min": 1,
                     "max": 50
                 },
-                "smithy.api#pattern": "[\\w+-]+"
+                "smithy.api#pattern": "^[\\w+-]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#EventResponseType": {
@@ -6417,7 +6417,7 @@
             ],
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Calling this API causes a message to be sent to the end user with a confirmation code\n            that is required to change the user's password. For the <code>Username</code> parameter,\n            you can use the username or user alias. The method used to send the confirmation code is\n            sent according to the specified AccountRecoverySetting. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-recover-a-user-account.html\">Recovering\n                User Accounts</a> in the <i>Amazon Cognito Developer Guide</i>. If\n            neither a verified phone number nor a verified email exists, an\n                <code>InvalidParameterException</code> is thrown. To use the confirmation code for\n            resetting the password, call <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html\">ConfirmForgotPassword</a>.</p>",
+                "smithy.api#documentation": "<p>Calling this API causes a message to be sent to the end user with a confirmation code\n            that is required to change the user's password. For the <code>Username</code> parameter,\n            you can use the username or user alias. The method used to send the confirmation code is\n            sent according to the specified AccountRecoverySetting. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-recover-a-user-account.html\">Recovering\n                User Accounts</a> in the <i>Amazon Cognito Developer Guide</i>. If\n            neither a verified phone number nor a verified email exists, an\n                <code>InvalidParameterException</code> is thrown. To use the confirmation code for\n            resetting the password, call <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html\">ConfirmForgotPassword</a>.</p>\n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>",
                 "smithy.api#optionalAuth": {}
             }
         },
@@ -6955,7 +6955,7 @@
             ],
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Gets the user attribute verification code for the specified attribute name.</p>",
+                "smithy.api#documentation": "<p>Gets the user attribute verification code for the specified attribute name.</p>\n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>",
                 "smithy.api#optionalAuth": {}
             }
         },
@@ -7203,7 +7203,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#GroupType": {
@@ -7322,7 +7322,7 @@
                 "ProviderDetails": {
                     "target": "com.amazonaws.cognitoidentityprovider#ProviderDetailsType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity provider details. The following list describes the provider detail keys\n            for each identity provider type.</p>\n        <ul>\n            <li>\n                <p>For Google and Login with Amazon:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For Facebook:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n                  <li>\n                        <p>api_version</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For Sign in with Apple:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>team_id</p>\n                    </li>\n                  <li>\n                        <p>key_id</p>\n                    </li>\n                  <li>\n                        <p>private_key</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For OIDC providers:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>attributes_request_method</p>\n                    </li>\n                  <li>\n                        <p>oidc_issuer</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n                  <li>\n                        <p>authorize_url <i>if not available from discovery URL specified\n                                by oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>token_url <i>if not available from discovery URL specified by\n                                oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>attributes_url <i>if not available from discovery URL specified\n                                by oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>jwks_uri <i>if not available from discovery URL specified by\n                                oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For SAML providers:</p>\n                <ul>\n                  <li>\n                        <p>MetadataFile OR MetadataURL</p>\n                    </li>\n                  <li>\n                        <p>IDPSignOut <i>optional</i>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The identity provider details. The following list describes the provider detail keys\n            for each identity provider type.</p>\n        <ul>\n            <li>\n                <p>For Google and Login with Amazon:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For Facebook:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n                  <li>\n                        <p>api_version</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For Sign in with Apple:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>team_id</p>\n                    </li>\n                  <li>\n                        <p>key_id</p>\n                    </li>\n                  <li>\n                        <p>private_key</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For OIDC providers:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>attributes_request_method</p>\n                    </li>\n                  <li>\n                        <p>oidc_issuer</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n                  <li>\n                        <p>authorize_url <i>if not available from discovery URL specified\n                                by oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>token_url <i>if not available from discovery URL specified by\n                                oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>attributes_url <i>if not available from discovery URL specified\n                                by oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>jwks_uri <i>if not available from discovery URL specified by\n                                oidc_issuer key</i>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For SAML providers:</p>\n                <ul>\n                  <li>\n                        <p>MetadataFile OR MetadataURL</p>\n                    </li>\n                  <li>\n                        <p>IDPSignOut <i>optional</i>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "AttributeMapping": {
@@ -7392,7 +7392,7 @@
                     "min": 1,
                     "max": 40
                 },
-                "smithy.api#pattern": "[\\w\\s+=.@-]+"
+                "smithy.api#pattern": "^[\\w\\s+=.@-]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#IdpIdentifiersListType": {
@@ -7467,7 +7467,7 @@
             ],
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Initiates the authentication flow.</p>",
+                "smithy.api#documentation": "<p>Initiates the authentication flow.</p>\n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>",
                 "smithy.api#optionalAuth": {}
             }
         },
@@ -7490,7 +7490,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for certain custom\n            workflows that this action triggers.</p>\n        <p>You create custom workflows by assigning AWS Lambda functions to user pool triggers.\n            When you use the InitiateAuth API action, Amazon Cognito invokes the AWS Lambda\n            functions that are specified for various triggers. The ClientMetadata value is passed as\n            input to the functions for only the following triggers:</p>\n        <ul>\n            <li>\n                <p>Pre signup</p>\n            </li>\n            <li>\n                <p>Pre authentication</p>\n            </li>\n            <li>\n                <p>User migration</p>\n            </li>\n         </ul>\n\n        <p>When Amazon Cognito invokes the functions for these triggers, it passes a JSON\n            payload, which the function receives as input. This payload contains a\n                <code>validationData</code> attribute, which provides the data that you assigned to\n            the ClientMetadata parameter in your InitiateAuth request. In your function code in AWS\n            Lambda, you can process the <code>validationData</code> value to enhance your workflow\n            for your specific needs.</p>\n\n        <p>When you use the InitiateAuth API action, Amazon Cognito also invokes the functions\n            for the following triggers, but it does not provide the ClientMetadata value as\n            input:</p>\n\n        <ul>\n            <li>\n                <p>Post authentication</p>\n            </li>\n            <li>\n                <p>Custom message</p>\n            </li>\n            <li>\n                <p>Pre token generation</p>\n            </li>\n            <li>\n                <p>Create auth challenge</p>\n            </li>\n            <li>\n                <p>Define auth challenge</p>\n            </li>\n            <li>\n                <p>Verify auth challenge</p>\n            </li>\n         </ul>\n\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">Customizing User Pool Workflows with Lambda Triggers</a> in the\n                <i>Amazon Cognito Developer Guide</i>.</p>\n        <note>\n            <p>Take the following limitations into consideration when you use the ClientMetadata\n                parameter:</p>\n            <ul>\n               <li>\n                    <p>Amazon Cognito does not store the ClientMetadata value. This data is\n                        available only to AWS Lambda triggers that are assigned to a user pool to\n                        support custom workflows. If your user pool configuration does not include\n                        triggers, the ClientMetadata parameter serves no purpose.</p>\n                </li>\n               <li>\n                    <p>Amazon Cognito does not validate the ClientMetadata value.</p>\n                </li>\n               <li>\n                    <p>Amazon Cognito does not encrypt the the ClientMetadata value, so don't use\n                        it to provide sensitive information.</p>\n                </li>\n            </ul>\n        </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for certain custom\n            workflows that this action triggers.</p>\n        <p>You create custom workflows by assigning AWS Lambda functions to user pool triggers.\n            When you use the InitiateAuth API action, Amazon Cognito invokes the AWS Lambda\n            functions that are specified for various triggers. The ClientMetadata value is passed as\n            input to the functions for only the following triggers:</p>\n        <ul>\n            <li>\n                <p>Pre signup</p>\n            </li>\n            <li>\n                <p>Pre authentication</p>\n            </li>\n            <li>\n                <p>User migration</p>\n            </li>\n         </ul>\n        <p>When Amazon Cognito invokes the functions for these triggers, it passes a JSON\n            payload, which the function receives as input. This payload contains a\n                <code>validationData</code> attribute, which provides the data that you assigned to\n            the ClientMetadata parameter in your InitiateAuth request. In your function code in AWS\n            Lambda, you can process the <code>validationData</code> value to enhance your workflow\n            for your specific needs.</p>\n        <p>When you use the InitiateAuth API action, Amazon Cognito also invokes the functions\n            for the following triggers, but it does not provide the ClientMetadata value as\n            input:</p>\n        <ul>\n            <li>\n                <p>Post authentication</p>\n            </li>\n            <li>\n                <p>Custom message</p>\n            </li>\n            <li>\n                <p>Pre token generation</p>\n            </li>\n            <li>\n                <p>Create auth challenge</p>\n            </li>\n            <li>\n                <p>Define auth challenge</p>\n            </li>\n            <li>\n                <p>Verify auth challenge</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html\">Customizing User Pool Workflows with Lambda Triggers</a> in the\n                <i>Amazon Cognito Developer Guide</i>.</p>\n        <note>\n            <p>Take the following limitations into consideration when you use the ClientMetadata\n                parameter:</p>\n            <ul>\n               <li>\n                    <p>Amazon Cognito does not store the ClientMetadata value. This data is\n                        available only to AWS Lambda triggers that are assigned to a user pool to\n                        support custom workflows. If your user pool configuration does not include\n                        triggers, the ClientMetadata parameter serves no purpose.</p>\n                </li>\n               <li>\n                    <p>Amazon Cognito does not validate the ClientMetadata value.</p>\n                </li>\n               <li>\n                    <p>Amazon Cognito does not encrypt the the ClientMetadata value, so don't use\n                        it to provide sensitive information.</p>\n                </li>\n            </ul>\n        </note>"
                     }
                 },
                 "ClientId": {
@@ -8864,7 +8864,7 @@
                 "smithy.api#length": {
                     "min": 1
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#PaginationKeyType": {
@@ -8873,7 +8873,7 @@
                 "smithy.api#length": {
                     "min": 1
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#PasswordPolicyMinLengthType": {
@@ -8952,7 +8952,7 @@
                     "min": 6,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\S]+",
+                "smithy.api#pattern": "^[\\S]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -9071,7 +9071,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#ProviderNameTypeV1": {
@@ -9081,7 +9081,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "[^_][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_]+"
+                "smithy.api#pattern": "^[^_][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#ProviderUserIdentifierType": {
@@ -9201,7 +9201,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#RefreshTokenValidityType": {
@@ -9267,7 +9267,7 @@
             ],
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Resends the confirmation (for confirmation of registration) to a specific user in the\n            user pool.</p>",
+                "smithy.api#documentation": "<p>Resends the confirmation (for confirmation of registration) to a specific user in the\n            user pool.</p>\n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>",
                 "smithy.api#optionalAuth": {}
             }
         },
@@ -9354,7 +9354,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\x21\\x23-\\x5B\\x5D-\\x7E]+"
+                "smithy.api#pattern": "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#ResourceServerNameType": {
@@ -9364,7 +9364,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\w\\s+=,.@-]+"
+                "smithy.api#pattern": "^[\\w\\s+=,.@-]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#ResourceServerScopeDescriptionType": {
@@ -9395,7 +9395,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\x21\\x23-\\x2E\\x30-\\x5B\\x5D-\\x7E]+"
+                "smithy.api#pattern": "^[\\x21\\x23-\\x2E\\x30-\\x5B\\x5D-\\x7E]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#ResourceServerScopeType": {
@@ -9530,7 +9530,7 @@
             ],
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Responds to the authentication challenge.</p>",
+                "smithy.api#documentation": "<p>Responds to the authentication challenge.</p>\n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>",
                 "smithy.api#optionalAuth": {}
             }
         },
@@ -9857,7 +9857,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\x21\\x23-\\x5B\\x5D-\\x7E]+"
+                "smithy.api#pattern": "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#SearchPaginationTokenType": {
@@ -9866,7 +9866,7 @@
                 "smithy.api#length": {
                     "min": 1
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#SearchedAttributeNamesListType": {
@@ -9881,7 +9881,7 @@
                 "smithy.api#length": {
                     "min": 16
                 },
-                "smithy.api#pattern": "[A-Za-z0-9]+",
+                "smithy.api#pattern": "^[A-Za-z0-9]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -9892,7 +9892,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w+=/]+",
+                "smithy.api#pattern": "^[\\w+=/]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -10157,7 +10157,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Set the user pool multi-factor authentication (MFA) configuration.</p>"
+                "smithy.api#documentation": "<p>Set the user pool multi-factor authentication (MFA) configuration.</p>\n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#SetUserPoolMfaConfigRequest": {
@@ -10333,7 +10333,7 @@
             ],
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Registers the user in the specified user pool and creates a user name, password, and\n            user attributes.</p>",
+                "smithy.api#documentation": "<p>Registers the user in the specified user pool and creates a user name, password, and\n            user attributes.</p>\n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>",
                 "smithy.api#optionalAuth": {}
             }
         },
@@ -10490,7 +10490,7 @@
                     "min": 6,
                     "max": 140
                 },
-                "smithy.api#pattern": ".*\\{####\\}.*"
+                "smithy.api#pattern": "\\{####\\}"
             }
         },
         "com.amazonaws.cognitoidentityprovider#SoftwareTokenMFANotFoundException": {
@@ -10513,7 +10513,7 @@
                     "min": 6,
                     "max": 6
                 },
-                "smithy.api#pattern": "[0-9]+"
+                "smithy.api#pattern": "^[0-9]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#SoftwareTokenMfaConfigType": {
@@ -10835,7 +10835,7 @@
         "com.amazonaws.cognitoidentityprovider#TokenModelType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[A-Za-z0-9-_=.]+",
+                "smithy.api#pattern": "^[A-Za-z0-9-_=.]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -11496,7 +11496,7 @@
             ],
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Allows a user to update a specific attribute (one at a time).</p>",
+                "smithy.api#documentation": "<p>Allows a user to update a specific attribute (one at a time).</p>\n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>",
                 "smithy.api#optionalAuth": {}
             }
         },
@@ -11586,7 +11586,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified user pool with the specified attributes. You can get a list of\n            the current user pool settings using <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPool.html\">DescribeUserPool</a>.</p>\n        <important>\n            <p>If you don't provide a value for an attribute, it will be set to the default\n                value.</p>\n        </important>"
+                "smithy.api#documentation": "<p>Updates the specified user pool with the specified attributes. You can get a list of\n            the current user pool settings using <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPool.html\">DescribeUserPool</a>. If you don't provide a value for an attribute, it will be set to the default\n            value.</p>\n        \n        <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, U.S. \n                telecom carriers require that you register an origination phone number before you can \n                send SMS messages to U.S. phone numbers. If you use SMS text messages in Amazon Cognito, \n                you must register a phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>. \n                Cognito  will use the the registered number automatically. Otherwise, Cognito users that must\n                receive SMS messages might be unable to sign up, activate their accounts, or sign\n                in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other AWS\n                service, Amazon SNS might place your account in SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you’ll have limitations, such as sending messages\n                to only verified phone numbers. After testing in the sandbox environment, you can\n                move out of the SMS sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html\"> SMS message settings for Cognito User Pools</a> in the <i>Amazon\n                        Cognito Developer Guide</i>. </p>\n        </note>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#UpdateUserPoolClient": {
@@ -12001,7 +12001,7 @@
                     "min": 1,
                     "max": 55
                 },
-                "smithy.api#pattern": "import-[0-9a-zA-Z-]+"
+                "smithy.api#pattern": "^import-[0-9a-zA-Z-]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#UserImportJobNameType": {
@@ -12011,7 +12011,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w\\s+=,.@-]+"
+                "smithy.api#pattern": "^[\\w\\s+=,.@-]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#UserImportJobStatusType": {
@@ -12457,7 +12457,7 @@
                     "min": 1,
                     "max": 55
                 },
-                "smithy.api#pattern": "[\\w-]+_[0-9a-zA-Z]+"
+                "smithy.api#pattern": "^[\\w-]+_[0-9a-zA-Z]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#UserPoolListType": {
@@ -12492,7 +12492,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w\\s+=,.@-]+"
+                "smithy.api#pattern": "^[\\w\\s+=,.@-]+$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#UserPoolPolicyType": {
@@ -12675,7 +12675,7 @@
                 "SmsConfigurationFailure": {
                     "target": "com.amazonaws.cognitoidentityprovider#StringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason why the SMS configuration cannot send the messages to your users.</p>"
+                        "smithy.api#documentation": "<p>The reason why the SMS configuration cannot send the messages to your users.</p>\n        <p>This message might include comma-separated values to describe why your SMS configuration\n            can't send messages to user pool end users.</p>\n        \n        <ul>\n            <li>\n                <p>InvalidSmsRoleAccessPolicyException - The IAM role which Cognito uses to send\n                    SMS messages is not properly configured. For more information, see <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SmsConfigurationType.html\">SmsConfigurationType</a>.</p>\n            </li>\n            <li>\n                <p>SNSSandbox - The AWS account is in SNS Sandbox and messages won’t reach\n                    unverified end users. This parameter won’t get populated\n                    with SNSSandbox if the IAM user creating the user pool doesn’t have SNS permissions.\n                    To learn how to move your AWS account out of the sandbox, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-moving-to-production.html\">Moving out of the SMS sandbox</a>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "EmailConfigurationFailure": {
@@ -12875,7 +12875,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+",
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$",
                 "smithy.api#sensitive": {}
             }
         },
