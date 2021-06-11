@@ -80,7 +80,7 @@ func (d *Downloader) DownloadStream(ctx context.Context, w io.Writer, input *s3.
 			if err != nil {
 				return nil, err
 			}
-			if !atomic.CompareAndSwapInt64(&reportedSize, old, new) {
+			if !atomic.CompareAndSwapInt64(&reportedSize, old, new) && d.Logger != nil {
 				d.Logger.Logf(logging.Debug, "Failed to set size due to race condition. Continue uninterrupted")
 			}
 		}
