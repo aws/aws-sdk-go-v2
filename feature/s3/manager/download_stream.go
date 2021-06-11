@@ -53,7 +53,7 @@ func (d *Downloader) DownloadStream(ctx context.Context, w io.Writer, input *s3.
 		start := int64(location) * d.PartSize
 		old := atomic.LoadInt64(&reportedSize)
 		// test start is less than the total
-		if old > 0 && start > old {
+		if old > 0 && start >= old {
 			// This is after the end of the file. Indicate nil nil to close the window
 			return nil, nil
 		}
@@ -119,7 +119,7 @@ func (d *Downloader) DownloadStream(ctx context.Context, w io.Writer, input *s3.
 
 			totalBytes += written
 
-			if written != get.ContentLength {
+			if get.ContentLength > 0 && written != get.ContentLength {
 				return totalBytes, io.ErrShortWrite
 			}
 		}

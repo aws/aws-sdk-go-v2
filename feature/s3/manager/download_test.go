@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"net/http"
 	"reflect"
 	"regexp"
 	"strconv"
@@ -55,19 +54,6 @@ func parseRange(rangeValue string) (start, fin int64) {
 	return start, fin
 }
 
-// httpError mocks a http error response from AWS
-type httpError struct {
-	int
-}
-
-func (e *httpError) Error() string {
-	return fmt.Sprintf("error code: %d", e.int)
-}
-
-func (e *httpError) HTTPStatusCode() int {
-	return e.int
-}
-
 func newDownloadRangeClient(data []byte) (*downloadCaptureClient, *int, *[]string) {
 	capture := &downloadCaptureClient{}
 
@@ -77,7 +63,7 @@ func newDownloadRangeClient(data []byte) (*downloadCaptureClient, *int, *[]strin
 
 		// if this is after the end of the file return 416
 		if start >= int64(len(data)) {
-			return nil, &httpError{http.StatusRequestedRangeNotSatisfiable}
+			return nil, &mockHTTPStatusError{StatusCode: 416}
 		}
 
 		if fin >= int64(len(data)) {
@@ -123,19 +109,18 @@ func (m *mockHTTPStatusError) HTTPStatusCode() int {
 
 func newDownloadContentRangeTotalAnyClient(data []byte) (*downloadCaptureClient, *int) {
 	capture := &downloadCaptureClient{}
-	completed := false
 
 	capture.GetObjectFn = func(_ context.Context, params *s3.GetObjectInput, _ ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
-		if completed {
-			return nil, &mockHTTPStatusError{StatusCode: 416}
-		}
-
 		start, fin := parseRange(aws.ToString(params.Range))
 		fin++
 
+		// if this is after the end of the file return 416
+		if start >= int64(len(data)) {
+			return nil, &mockHTTPStatusError{StatusCode: 416}
+		}
+
 		if fin >= int64(len(data)) {
 			fin = int64(len(data))
-			completed = true
 		}
 
 		bodyBytes := data[start:fin]
