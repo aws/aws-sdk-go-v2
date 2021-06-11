@@ -274,18 +274,23 @@ func (d *downloader) download() (n int64, err error) {
 		// keep grabbing chunks of data until the range of bytes specified in
 		// the request is out of range of the content. Once, this happens, a
 		// 416 should occur.
-		var responseError interface {
-			HTTPStatusCode() int
-		}
-		if errors.As(d.err, &responseError) {
-			if responseError.HTTPStatusCode() == http.StatusRequestedRangeNotSatisfiable {
-				d.err = nil
-			}
+		if isEOF(d.err) {
+			d.err = nil
 		}
 	}
 
 	// Return error
 	return d.written, d.err
+}
+
+// isEOF will indicate if the return is 416 so we know what to do if the content
+// length is not specified
+func isEOF(err error) bool {
+	var responseError interface {
+		HTTPStatusCode() int
+	}
+	return errors.As(d.err, &responseError) &&
+		responseError.HTTPStatusCode() == http.StatusRequestedRangeNotSatisfiable
 }
 
 // downloadPart is an individual goroutine worker reading from the ch channel
@@ -426,13 +431,18 @@ func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
 		return
 	}
 
+	d.totalBytes, d.err = getTotalBytes(resp)
+}
+
+// Get the files total byte size for whether or not to continue
+func getTotalBytes(resp *s3.GetObjectOutput) (int64, error) {
 	if resp.ContentRange == nil {
 		// ContentRange is nil when the full file contents is provided, and
 		// is not chunked. Use ContentLength instead.
 		if resp.ContentLength > 0 {
-			d.totalBytes = resp.ContentLength
-			return
+			return resp.ContentLength, nil
 		}
+		return -1, nil
 	} else {
 		parts := strings.Split(*resp.ContentRange, "/")
 
@@ -445,12 +455,11 @@ func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
 		if totalStr != "*" {
 			total, err = strconv.ParseInt(totalStr, 10, 64)
 			if err != nil {
-				d.err = err
-				return
+				return -1, err
 			}
 		}
 
-		d.totalBytes = total
+		return total, nil
 	}
 }
 
@@ -514,5 +523,13 @@ func (c *dlchunk) ByteRange() string {
 		return c.withRange
 	}
 
-	return fmt.Sprintf("bytes=%d-%d", c.start, c.start+c.size-1)
+	return byteRange(c.start, c.size)
+}
+
+func (d *Download) byteRange(start int64) string {
+	return byteRange(start, d.PartSize)
+}
+
+func byteRange(start, size int64) string {
+	return fmt.Sprintf("bytes=%d-%d", start, start+size-1)
 }
