@@ -92,16 +92,18 @@ func (d *Downloader) DownloadStream(ctx context.Context, w io.Writer, input *s3.
 
 	// outChan is guaranteed to be in order and it needs to be
 	// this is enforced by sliding window with a single consumer
-Loop:
 	for {
 		select {
 		case <-inner.Done():
 			// we were cancelled so just return
 			return totalBytes, inner.Err()
+		case err := <-errChan:
+			return totalBytes, err
 		case out, ok := <-outChan:
 			if !ok {
-				// channel was closed we have read everything
-				break Loop
+				// channel was closed we have read everything so return
+				// and stop the routines
+				return totalBytes, nil
 			}
 			get, ok := out.(*s3.GetObjectOutput)
 			if !ok {
@@ -122,8 +124,6 @@ Loop:
 			}
 		}
 	}
-
-	return totalBytes, <-errChan
 }
 
 func (d *Downloader) retryOption(options *s3.Options) {
