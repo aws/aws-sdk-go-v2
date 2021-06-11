@@ -85,27 +85,39 @@ func (d *Downloader) DownloadStream(ctx context.Context, w io.Writer, input *s3.
 		return out, nil
 	})
 
-	var totalBytes int64 = 0 // total size of the file in bytes that are copied to the output writer
+	// total size of the file in bytes that are copied to the output writer
+	var totalBytes int64 = 0
 
-	// This chan is guaranteed to be in order and it needs to be
+	// outChan is guaranteed to be in order and it needs to be
 	// this is enforced by sliding window with a single consumer
-	for out := range outChan {
-		get, ok := out.(*s3.GetObjectOutput)
-		if !ok {
-			return totalBytes, fmt.Errorf("was the wrong object type got %T", out)
-		}
+Loop:
+	for {
+		select {
+		case <-inner.Done():
+			// we were cancelled so just return
+			return totalBytes, inner.Err()
+		case out, ok := <-outChan:
+			if !ok {
+				// channel was closed we have read everything
+				break Loop
+			}
+			get, ok := out.(*s3.GetObjectOutput)
+			if !ok {
+				return totalBytes, fmt.Errorf("was the wrong object type got %T", out)
+			}
 
-		defer get.Body.Close()
-		written, err := io.Copy(w, get.Body)
+			defer get.Body.Close()
+			written, err := io.Copy(w, get.Body)
 
-		if err != nil {
-			return totalBytes, err
-		}
+			if err != nil {
+				return totalBytes, err
+			}
 
-		totalBytes += written
+			totalBytes += written
 
-		if written != get.ContentLength {
-			return totalBytes, io.ErrShortWrite
+			if written != get.ContentLength {
+				return totalBytes, io.ErrShortWrite
+			}
 		}
 	}
 
