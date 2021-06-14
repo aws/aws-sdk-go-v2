@@ -45,6 +45,10 @@ import (
 // to perform a single GetObjectInput request for that object's range. This will
 // caused the part size, and concurrency configurations to be ignored.
 func (d *Downloader) DownloadStream(ctx context.Context, w io.Writer, input *s3.GetObjectInput) (int64, error) {
+	if err := validateSupportedARNType(aws.ToString(input.Bucket)); err != nil {
+		return 0, err
+	}
+
 	inner, cancel := context.WithCancel(ctx)
 	defer cancel()
 
@@ -126,6 +130,7 @@ func (d *Downloader) DownloadStream(ctx context.Context, w io.Writer, input *s3.
 	}
 }
 
+// retryOption is what we are using for max attempts and relying on the Retryer
 func (d *Downloader) retryOption(options *s3.Options) {
 	options.Retryer = retry.AddWithMaxAttempts(options.Retryer, d.PartBodyMaxRetries)
 }

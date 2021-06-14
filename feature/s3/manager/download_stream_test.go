@@ -245,37 +245,6 @@ func TestDownloadStreamContentRangeTotalAny(t *testing.T) {
 	}
 }
 
-// rely on AWS retry
-// func TestDownloadStreamPartBodyRetry_SuccessRetry(t *testing.T) {
-// 	c, invocations := newDownloadWithErrReaderClient([]testErrReader{
-// 		{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
-// 		{Buf: []byte("123"), Len: 3, Err: io.EOF},
-// 	})
-
-// 	d := manager.NewDownloader(c, func(d *manager.Downloader) {
-// 		d.Concurrency = 1
-// 	})
-
-// 	w := &bytes.Buffer{}
-// 	n, err := d.DownloadStream(context.Background(), w, &s3.GetObjectInput{
-// 		Bucket: aws.String("bucket"),
-// 		Key:    aws.String("key"),
-// 	})
-
-// 	if err != nil {
-// 		t.Fatalf("expect no error, got %v", err)
-// 	}
-// 	if e, a := int64(3), n; e != a {
-// 		t.Errorf("expect %d bytes read, got %d", e, a)
-// 	}
-// 	if e, a := 2, *invocations; e != a {
-// 		t.Errorf("expect %v API calls, got %v", e, a)
-// 	}
-// 	if e, a := "123", string(w.Bytes()); e != a {
-// 		t.Errorf("expect %q response, got %q", e, a)
-// 	}
-// }
-
 func TestDownloadStreamPartBodyRetry_SuccessNoRetry(t *testing.T) {
 	c, invocations := newDownloadWithErrReaderClient([]testErrReader{
 		{Buf: []byte("abc"), Len: 3, Err: io.EOF},
