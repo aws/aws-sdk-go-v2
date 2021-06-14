@@ -52,8 +52,8 @@ func TestSlidingWindow_Errors(t *testing.T) {
 	if num > 10 {
 		t.Errorf("kept iterating beyond 10 times: actual %d", num)
 	}
-	if e := <-err; e != nil {
-		t.Error(e)
+	if e := <-err; e == nil {
+		t.Fatal("Error was expected")
 	}
 }
 
