@@ -6,6 +6,7 @@
     "files": [
         "api_client.go",
         "api_op_DescribeDimensionKeys.go",
+        "api_op_GetDimensionKeyDetails.go",
         "api_op_GetResourceMetrics.go",
         "deserializers.go",
         "doc.go",

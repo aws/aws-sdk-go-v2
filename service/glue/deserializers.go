@@ -29405,6 +29405,19 @@ func awsAwsjson11_deserializeDocumentS3Target(v **types.S3Target, value interfac
 				sv.Path = ptr.String(jtv)
 			}
 
+		case "SampleSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NullableInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SampleSize = ptr.Int32(int32(i64))
+			}
+
 		default:
 			_, _ = key, value
 

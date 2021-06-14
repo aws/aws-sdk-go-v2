@@ -66,7 +66,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+"
+                "smithy.api#pattern": "^arn:([a-z\\d-]+):personalize:.*:.*:.+$"
             }
         },
         "com.amazonaws.personalizeevents#Date": {
@@ -416,7 +416,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 4096
+                    "max": 24262
                 },
                 "smithy.api#mediaType": "application/json"
             }

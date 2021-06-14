@@ -12,9 +12,9 @@ import (
 )
 
 // Returns information about a journal export job, including the ledger name,
-// export ID, when it was created, current status, and its start and end time
-// export parameters. This action does not return any expired export jobs. For more
-// information, see Export Job Expiration
+// export ID, creation time, current status, and the parameters of the original
+// export creation request. This action does not return any expired export jobs.
+// For more information, see Export job expiration
 // (https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration)
 // in the Amazon QLDB Developer Guide. If the export job with the given ExportId
 // doesn't exist, then throws ResourceNotFoundException. If the ledger with the
@@ -36,7 +36,8 @@ func (c *Client) DescribeJournalS3Export(ctx context.Context, params *DescribeJo
 
 type DescribeJournalS3ExportInput struct {
 
-	// The unique ID of the journal export job that you want to describe.
+	// The UUID (represented in Base62-encoded text) of the journal export job to
+	// describe.
 	//
 	// This member is required.
 	ExportId *string

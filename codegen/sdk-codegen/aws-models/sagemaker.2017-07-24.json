@@ -52,7 +52,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:action/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:action/"
             }
         },
         "com.amazonaws.sagemaker#ActionSource": {
@@ -240,7 +240,7 @@
                 "target": "com.amazonaws.sagemaker#AddTagsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Adds or overwrites one or more tags for the specified Amazon SageMaker resource. You can add\n            tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform\n            jobs, models, labeling jobs, work teams, endpoint configurations, and\n            endpoints.</p>\n        <p>Each tag consists of a key and an optional value. Tag keys must be unique per\n            resource. For more information about tags, see For more information, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">AWS\n                Tagging Strategies</a>.</p>\n        <note>\n            <p>Tags that you add to a hyperparameter tuning job by calling this API are also\n                added to any training jobs that the hyperparameter tuning job launches after you\n                call this API, but not to training jobs that the hyperparameter tuning job launched\n                before you called this API. To make sure that the tags associated with a\n                hyperparameter tuning job are also added to all training jobs that the\n                hyperparameter tuning job launches, add the tags when you first create the tuning\n                job by specifying them in the <code>Tags</code> parameter of <a>CreateHyperParameterTuningJob</a>\n            </p>\n        </note>\n        <note>\n            <p>Tags that you add to a SageMaker Studio Domain or User Profile by calling this API are also\n                added to any Apps that the Domain or User Profile launches after you\n                call this API, but not to Apps that the Domain or User Profile launched\n                before you called this API. To make sure that the tags associated with a\n                Domain or User Profile are also added to all Apps that the\n                Domain or User Profile launches, add the tags when you first create the Domain or User Profile by specifying them in the <code>Tags</code> parameter of <a>CreateDomain</a> or <a>CreateUserProfile</a>.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Adds or overwrites one or more tags for the specified Amazon SageMaker resource. You can add\n            tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform\n            jobs, models, labeling jobs, work teams, endpoint configurations, and\n            endpoints.</p>\n        <p>Each tag consists of a key and an optional value. Tag keys must be unique per\n            resource. For more information about tags, see For more information, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">AWS\n                Tagging Strategies</a>.</p>\n        <note>\n            <p>Tags that you add to a hyperparameter tuning job by calling this API are also\n                added to any training jobs that the hyperparameter tuning job launches after you\n                call this API, but not to training jobs that the hyperparameter tuning job launched\n                before you called this API. To make sure that the tags associated with a\n                hyperparameter tuning job are also added to all training jobs that the\n                hyperparameter tuning job launches, add the tags when you first create the tuning\n                job by specifying them in the <code>Tags</code> parameter of <a>CreateHyperParameterTuningJob</a>\n            </p>\n        </note>\n        <note>\n            <p>Tags that you add to a SageMaker Studio Domain or User Profile by calling this API\n                are also added to any Apps that the Domain or User Profile launches after you call\n                this API, but not to Apps that the Domain or User Profile launched before you called\n                this API. To make sure that the tags associated with a Domain or User Profile are\n                also added to all Apps that the Domain or User Profile launches, add the tags when\n                you first create the Domain or User Profile by specifying them in the\n                    <code>Tags</code> parameter of <a>CreateDomain</a> or <a>CreateUserProfile</a>.</p>\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#AddTagsInput": {
@@ -346,7 +346,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "^(?!\\s*$).+"
+                "smithy.api#pattern": "^(?!\\s*$).+$"
             }
         },
         "com.amazonaws.sagemaker#AlgorithmArn": {
@@ -356,7 +356,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:algorithm/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:algorithm/"
             }
         },
         "com.amazonaws.sagemaker#AlgorithmImage": {
@@ -636,7 +636,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app/"
             }
         },
         "com.amazonaws.sagemaker#AppDetails": {
@@ -690,7 +690,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app-image-config/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app-image-config/"
             }
         },
         "com.amazonaws.sagemaker#AppImageConfigDetails": {
@@ -744,7 +744,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#AppImageConfigSortKey": {
@@ -917,7 +917,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#AppNetworkAccessType": {
@@ -1036,7 +1036,7 @@
                     "min": 1,
                     "max": 170
                 },
-                "smithy.api#pattern": "(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:[a-z\\-]*\\/)?([a-zA-Z0-9]([a-zA-Z0-9-]){0,62})(?<!-)$"
+                "smithy.api#pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:[a-z\\-]*\\/)?([a-zA-Z0-9]([a-zA-Z0-9-]){0,62})(?<!-)$"
             }
         },
         "com.amazonaws.sagemaker#ArtifactArn": {
@@ -1046,7 +1046,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:artifact/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:artifact/"
             }
         },
         "com.amazonaws.sagemaker#ArtifactDigest": {
@@ -1278,7 +1278,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:(experiment|experiment-trial-component|artifact|action|context)/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:(experiment|experiment-trial-component|artifact|action|context)/"
             }
         },
         "com.amazonaws.sagemaker#AssociationSummaries": {
@@ -1354,7 +1354,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.sagemaker#AthenaDatabase": {
@@ -1427,7 +1427,7 @@
                     "min": 1,
                     "max": 4096
                 },
-                "smithy.api#pattern": "[\\s\\S]+"
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
         "com.amazonaws.sagemaker#AthenaResultCompressionType": {
@@ -1486,7 +1486,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9._-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9._-]+$"
             }
         },
         "com.amazonaws.sagemaker#AttributeName": {
@@ -1496,7 +1496,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.sagemaker#AttributeNames": {
@@ -1752,7 +1752,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:automl-job/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:automl-job/"
             }
         },
         "com.amazonaws.sagemaker#AutoMLJobArtifacts": {
@@ -1787,13 +1787,13 @@
                 "MaxRuntimePerTrainingJobInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxRuntimePerTrainingJobInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum time, in seconds, a job is allowed to run.</p>"
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, a training job is allowed to run as part of an AutoML job.</p>"
                     }
                 },
                 "MaxAutoMLJobRuntimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxAutoMLJobRuntimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum time, in seconds, an AutoML job is allowed to wait for a trial to complete.\n         It must be equal to or greater than <code>MaxRuntimePerTrainingJobInSeconds</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum runtime, in seconds, an AutoML job has to complete.</p>"
                     }
                 }
             },
@@ -1828,7 +1828,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,31}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,31}$"
             }
         },
         "com.amazonaws.sagemaker#AutoMLJobObjective": {
@@ -2072,7 +2072,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9\\-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-]+$"
             }
         },
         "com.amazonaws.sagemaker#AutoMLOutputDataConfig": {
@@ -2347,7 +2347,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[^ ~^:?*\\[]+"
+                "smithy.api#pattern": "^[^ ~^:?*\\[]+$"
             }
         },
         "com.amazonaws.sagemaker#CacheHitResult": {
@@ -2362,6 +2362,42 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details on the cache hit of a pipeline execution step.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CallbackStepMetadata": {
+            "type": "structure",
+            "members": {
+                "CallbackToken": {
+                    "target": "com.amazonaws.sagemaker#CallbackToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pipeline generated token from the Amazon SQS queue.</p>"
+                    }
+                },
+                "SqsQueueUrl": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the Amazon Simple Queue Service (Amazon SQS) queue used by the callback step.</p>"
+                    }
+                },
+                "OutputParameters": {
+                    "target": "com.amazonaws.sagemaker#OutputParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the output parameters of the callback step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata about a callback step.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CallbackToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
             }
         },
         "com.amazonaws.sagemaker#CandidateArtifactLocations": {
@@ -2463,7 +2499,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:.*/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:.*/"
             }
         },
         "com.amazonaws.sagemaker#CandidateStepName": {
@@ -2630,7 +2666,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.sagemaker#CategoricalParameterRange": {
@@ -2753,7 +2789,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[A-Za-z0-9\\.\\-_]+"
+                "smithy.api#pattern": "^[A-Za-z0-9\\.\\-_]+$"
             }
         },
         "com.amazonaws.sagemaker#ChannelSpecification": {
@@ -2843,7 +2879,7 @@
                     "min": 4,
                     "max": 64
                 },
-                "smithy.api#pattern": "(^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/(3[0-2]|[1-2][0-9]|[0-9]))$)|(^s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:)))(%.+)?s*(\\/(12[0-8]|1[0-1][0-9]|[1-9][0-9]|[0-9]))$)"
+                "smithy.api#pattern": "^(^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/(3[0-2]|[1-2][0-9]|[0-9]))$)|(^s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:)))(%.+)?s*(\\/(12[0-8]|1[0-1][0-9]|[1-9][0-9]|[0-9]))$)$"
             }
         },
         "com.amazonaws.sagemaker#Cidrs": {
@@ -2859,7 +2895,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[ -~]+"
+                "smithy.api#pattern": "^[ -~]+$"
             }
         },
         "com.amazonaws.sagemaker#ClientSecret": {
@@ -2869,7 +2905,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[ -~]+",
+                "smithy.api#pattern": "^[ -~]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -2890,7 +2926,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:code-repository/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:code-repository/"
             }
         },
         "com.amazonaws.sagemaker#CodeRepositoryContains": {
@@ -2900,7 +2936,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.sagemaker#CodeRepositoryNameContains": {
@@ -2910,7 +2946,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.sagemaker#CodeRepositoryNameOrUrl": {
@@ -2920,7 +2956,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^https://([^/]+)/?(.*)$|^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^https://([^/]+)/?(.*)$|^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.sagemaker#CodeRepositorySortBy": {
@@ -3063,7 +3099,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"
             }
         },
         "com.amazonaws.sagemaker#CognitoUserPool": {
@@ -3073,7 +3109,7 @@
                     "min": 1,
                     "max": 55
                 },
-                "smithy.api#pattern": "[\\w-]+_[0-9a-zA-Z]+"
+                "smithy.api#pattern": "^[\\w-]+_[0-9a-zA-Z]+$"
             }
         },
         "com.amazonaws.sagemaker#CollectionConfiguration": {
@@ -3140,7 +3176,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:compilation-job/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:compilation-job/"
             }
         },
         "com.amazonaws.sagemaker#CompilationJobStatus": {
@@ -3469,7 +3505,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#ContainerImage": {
@@ -3479,7 +3515,7 @@
                     "min": 0,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.sagemaker#ContainerMode": {
@@ -3557,7 +3593,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:context/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:context/"
             }
         },
         "com.amazonaws.sagemaker#ContextSource": {
@@ -4096,7 +4132,7 @@
                 "OutputDataConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLOutputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information about encryption and the Amazon S3 output path needed to store\n         artifacts from an AutoML job. Format(s) supported: CSV.</p>\n      \n         <p><para>Specifies whether to automatically deploy the best &ATP; model to an\n         endpoint and the name of that endpoint if deployed automatically.</para></p>",
+                        "smithy.api#documentation": "<p>Provides information about encryption and the Amazon S3 output path needed to store\n         artifacts from an AutoML job. Format(s) supported: CSV.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4121,7 +4157,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role that is used to access the data.</p>\n      \n         <p><para>Specifies whether to automatically deploy the best &ATP; model to an\n         endpoint and the name of that endpoint if deployed automatically.</para></p>",
+                        "smithy.api#documentation": "<p>The ARN of the role that is used to access the data.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5415,7 +5451,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a model in Amazon SageMaker. In the request, you name the model and describe a primary\n            container. For the primary container,\n            you specify the Docker image that contains inference code, artifacts (from prior\n            training), and a custom environment map that the inference code uses when you deploy the\n            model for predictions.</p>\n        <p>Use this API to create a model if you want to use Amazon SageMaker hosting services or run a batch\n            transform job.</p>\n        <p>To host your model, you create an endpoint configuration with the\n                <code>CreateEndpointConfig</code> API, and then create an endpoint with the\n                <code>CreateEndpoint</code> API. Amazon SageMaker then deploys all of the containers that you\n            defined for the model in the hosting environment. </p>\n        <p>For an example that calls this method when deploying a model to Amazon SageMaker hosting services,\n            see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto\">Deploy the\n                Model to Amazon SageMaker Hosting Services (AWS SDK for Python (Boto\n            3)).</a>\n         </p>\n        <p>To run a batch transform using your model, you start a job with the\n                <code>CreateTransformJob</code> API. Amazon SageMaker uses your model and your dataset to get\n            inferences which are then saved to a specified S3 location.</p>\n        <p>In the <code>CreateModel</code> request, you must define a container with the\n                <code>PrimaryContainer</code> parameter.</p>\n        <p>In the request, you also provide an IAM role that Amazon SageMaker can assume to access model\n            artifacts and docker image for deployment on ML compute hosting instances or for batch\n            transform jobs. In addition, you also use the IAM role to manage permissions the\n            inference code needs. For example, if the inference code access any other AWS resources,\n            you grant necessary permissions via this role.</p>"
+                "smithy.api#documentation": "<p>Creates a model in Amazon SageMaker. In the request, you name the model and describe a primary\n            container. For the primary container, you specify the Docker image that\n            contains inference code, artifacts (from prior training), and a custom environment map\n            that the inference code uses when you deploy the model for predictions.</p>\n        <p>Use this API to create a model if you want to use Amazon SageMaker hosting services or run a batch\n            transform job.</p>\n        <p>To host your model, you create an endpoint configuration with the\n                <code>CreateEndpointConfig</code> API, and then create an endpoint with the\n                <code>CreateEndpoint</code> API. Amazon SageMaker then deploys all of the containers that you\n            defined for the model in the hosting environment. </p>\n        <p>For an example that calls this method when deploying a model to Amazon SageMaker hosting services,\n            see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto\">Deploy the\n                Model to Amazon SageMaker Hosting Services (AWS SDK for Python (Boto\n            3)).</a>\n         </p>\n        <p>To run a batch transform using your model, you start a job with the\n                <code>CreateTransformJob</code> API. Amazon SageMaker uses your model and your dataset to get\n            inferences which are then saved to a specified S3 location.</p>\n        <p>In the <code>CreateModel</code> request, you must define a container with the\n                <code>PrimaryContainer</code> parameter.</p>\n        <p>In the request, you also provide an IAM role that Amazon SageMaker can assume to access model\n            artifacts and docker image for deployment on ML compute hosting instances or for batch\n            transform jobs. In addition, you also use the IAM role to manage permissions the\n            inference code needs. For example, if the inference code access any other AWS resources,\n            you grant necessary permissions via this role.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateModelBiasJobDefinition": {
@@ -6545,7 +6581,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a model training job. After training completes, Amazon SageMaker saves the resulting\n            model artifacts to an Amazon S3 location that you specify. </p>\n        <p>If you choose to host your model using Amazon SageMaker hosting services, you can use the\n            resulting model artifacts as part of the model. You can also use the artifacts in a\n            machine learning service other than Amazon SageMaker, provided that you know how to use them for\n            inference.\n            \n        </p>\n        <p>In the request body, you provide the following: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>AlgorithmSpecification</code> - Identifies the training algorithm to\n                    use.\n                    </p>\n            </li>\n            <li>\n                <p>\n                    <code>HyperParameters</code> - Specify these algorithm-specific parameters to\n                    enable the estimation of model parameters during training. Hyperparameters can\n                    be tuned to optimize this learning process. For a list of hyperparameters for\n                    each training algorithm provided by Amazon SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p>\n            </li>\n            <li>\n                <p>\n                  <code>InputDataConfig</code> - Describes the training dataset and the Amazon S3,\n                    EFS, or FSx location where it is stored.</p>\n            </li>\n            <li>\n                <p>\n                  <code>OutputDataConfig</code> - Identifies the Amazon S3 bucket where you want\n                    Amazon SageMaker to save the results of model training. </p>\n            </li>\n            <li>\n                <p>\n                  <code>ResourceConfig</code> - Identifies the resources, ML compute\n                    instances, and ML storage volumes to deploy for model training. In distributed\n                    training, you specify more than one instance. </p>\n                \n            </li>\n            <li>\n                <p>\n                  <code>EnableManagedSpotTraining</code> - Optimize the cost of training machine\n                    learning models by up to 80% by using Amazon EC2 Spot instances. For more\n                    information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html\">Managed Spot\n                        Training</a>. </p>\n            </li>\n            <li>\n                <p>\n                  <code>RoleArn</code> - The Amazon Resource Name (ARN) that Amazon SageMaker assumes to perform tasks on\n                    your behalf during model training.\n                    \n                    You must grant this role the necessary permissions so that Amazon SageMaker can successfully\n                    complete model training. </p>\n            </li>\n            <li>\n                <p>\n                  <code>StoppingCondition</code> - To help cap training costs, use\n                        <code>MaxRuntimeInSeconds</code> to set a time limit for training. Use\n                        <code>MaxWaitTimeInSeconds</code> to specify how long\n                        a managed spot training job has to complete. </p>\n            </li>\n            <li>\n                <p>\n                  <code>Environment</code> - The environment variables to set in the Docker container.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RetryStrategy</code> - The number of times to retry the job when the\n                    job fails due to an <code>InternalServerError</code>.</p>\n            </li>\n         </ul>\n        <p> For more information about Amazon SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>. </p>"
+                "smithy.api#documentation": "<p>Starts a model training job. After training completes, Amazon SageMaker saves the resulting\n            model artifacts to an Amazon S3 location that you specify. </p>\n        <p>If you choose to host your model using Amazon SageMaker hosting services, you can use the\n            resulting model artifacts as part of the model. You can also use the artifacts in a\n            machine learning service other than Amazon SageMaker, provided that you know how to use them for\n            inference. \n        </p>\n        <p>In the request body, you provide the following: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>AlgorithmSpecification</code> - Identifies the training algorithm to\n                    use.\n                    </p>\n            </li>\n            <li>\n                <p>\n                    <code>HyperParameters</code> - Specify these algorithm-specific parameters to\n                    enable the estimation of model parameters during training. Hyperparameters can\n                    be tuned to optimize this learning process. For a list of hyperparameters for\n                    each training algorithm provided by Amazon SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p>\n            </li>\n            <li>\n                <p>\n                  <code>InputDataConfig</code> - Describes the training dataset and the Amazon S3,\n                    EFS, or FSx location where it is stored.</p>\n            </li>\n            <li>\n                <p>\n                  <code>OutputDataConfig</code> - Identifies the Amazon S3 bucket where you want\n                    Amazon SageMaker to save the results of model training. </p>\n            </li>\n            <li>\n                <p>\n                  <code>ResourceConfig</code> - Identifies the resources, ML compute\n                    instances, and ML storage volumes to deploy for model training. In distributed\n                    training, you specify more than one instance. </p>\n                \n            </li>\n            <li>\n                <p>\n                  <code>EnableManagedSpotTraining</code> - Optimize the cost of training machine\n                    learning models by up to 80% by using Amazon EC2 Spot instances. For more\n                    information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html\">Managed Spot\n                        Training</a>. </p>\n            </li>\n            <li>\n                <p>\n                  <code>RoleArn</code> - The Amazon Resource Name (ARN) that Amazon SageMaker assumes to perform tasks on\n                    your behalf during model training.\n                    \n                    You must grant this role the necessary permissions so that Amazon SageMaker can successfully\n                    complete model training. </p>\n            </li>\n            <li>\n                <p>\n                  <code>StoppingCondition</code> - To help cap training costs, use\n                        <code>MaxRuntimeInSeconds</code> to set a time limit for training. Use\n                        <code>MaxWaitTimeInSeconds</code> to specify how long a managed spot\n                    training job has to complete. </p>\n            </li>\n            <li>\n                <p>\n                  <code>Environment</code> - The environment variables to set in the Docker\n                    container.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RetryStrategy</code> - The number of times to retry the job when the job\n                    fails due to an <code>InternalServerError</code>.</p>\n            </li>\n         </ul>\n        <p> For more information about Amazon SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>. </p>"
             }
         },
         "com.amazonaws.sagemaker#CreateTrainingJobRequest": {
@@ -6607,7 +6643,7 @@
                 "StoppingCondition": {
                     "target": "com.amazonaws.sagemaker#StoppingCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run.\n            It also specifies how long a managed Spot training job has to complete.\n            When the job reaches the time limit, Amazon SageMaker ends\n            the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>",
+                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run. It also specifies how long\n            a managed Spot training job has to complete. When the job reaches the time limit, Amazon SageMaker\n            ends the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6674,7 +6710,7 @@
                 "RetryStrategy": {
                     "target": "com.amazonaws.sagemaker#RetryStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n            <code>InternalServerError</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n                <code>InternalServerError</code>.</p>"
                     }
                 }
             }
@@ -7183,7 +7219,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*\\/[a-zA-Z0-9](-*[a-zA-Z0-9.])*"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*\\/[a-zA-Z0-9](-*[a-zA-Z0-9.])*$"
             }
         },
         "com.amazonaws.sagemaker#CsvContentTypes": {
@@ -7388,7 +7424,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[\\S\\s]+"
+                "smithy.api#pattern": "^[\\S\\s]+$"
             }
         },
         "com.amazonaws.sagemaker#DataProcessing": {
@@ -7409,7 +7445,7 @@
                 "JoinSource": {
                     "target": "com.amazonaws.sagemaker#JoinSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the source of the data to join with the transformed data. The valid values\n            are <code>None</code> and <code>Input</code>. The default value is <code>None</code>,\n            which specifies not to join the input with the transformed data. If you want the batch\n            transform job to join the original input data with the transformed data, set\n            <code>JoinSource</code> to <code>Input</code>. You can specify <code>OutputFilter</code> \n            as an additional filter to select a portion of the joined dataset and store it in the output file.</p>\n        <p>For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to\n            the input JSON object in an attribute called <code>SageMakerOutput</code>. The joined\n            result for JSON must be a key-value pair object. If the input is not a key-value pair\n            object, Amazon SageMaker creates a new JSON file. In the new JSON file, and the input data is stored\n            under the <code>SageMakerInput</code> key and the results are stored in\n                <code>SageMakerOutput</code>.</p>\n        <p>For CSV data, Amazon SageMaker takes each row as a JSON array and joins the transformed \n            data with the input by appending each transformed row to the end of the input. \n            The joined data has the original input data followed by the transformed data and \n            the output is a CSV file.</p>\n        <p>For information on how joining in applied, see \n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#batch-transform-data-processing-workflow\">Workflow for Associating Inferences with Input Records</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the source of the data to join with the transformed data. The valid values\n            are <code>None</code> and <code>Input</code>. The default value is <code>None</code>,\n            which specifies not to join the input with the transformed data. If you want the batch\n            transform job to join the original input data with the transformed data, set\n                <code>JoinSource</code> to <code>Input</code>. You can specify\n                <code>OutputFilter</code> as an additional filter to select a portion of the joined\n            dataset and store it in the output file.</p>\n        <p>For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to\n            the input JSON object in an attribute called <code>SageMakerOutput</code>. The joined\n            result for JSON must be a key-value pair object. If the input is not a key-value pair\n            object, Amazon SageMaker creates a new JSON file. In the new JSON file, and the input data is stored\n            under the <code>SageMakerInput</code> key and the results are stored in\n                <code>SageMakerOutput</code>.</p>\n        <p>For CSV data, Amazon SageMaker takes each row as a JSON array and joins the transformed data with\n            the input by appending each transformed row to the end of the input. The joined data has\n            the original input data followed by the transformed data and the output is a CSV\n            file.</p>\n        <p>For information on how joining in applied, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#batch-transform-data-processing-workflow\">Workflow for Associating Inferences with Input Records</a>.</p>"
                     }
                 }
             },
@@ -7523,7 +7559,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.sagemaker#DatasetDefinition": {
@@ -8497,7 +8533,7 @@
                 "ModelPackageName": {
                     "target": "com.amazonaws.sagemaker#VersionedArnOrName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the model package. The name must have 1 to 63 characters. Valid characters\n            are a-z, A-Z, 0-9, and - (hyphen).</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the model package to delete.</p>\n        <p>When you specify a name, the name must have 1 to 63 characters. Valid\n          characters are a-z, A-Z, 0-9, and - (hyphen).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8675,7 +8711,7 @@
                 "target": "com.amazonaws.sagemaker#DeleteTagsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified tags from an Amazon SageMaker resource.</p>\n        <p>To list a resource's tags, use the <code>ListTags</code> API. </p>\n        <note>\n            <p>When you call this API to delete tags from a hyperparameter tuning job, the\n                deleted tags are not removed from training jobs that the hyperparameter tuning job\n                launched before you called this API.</p>\n        </note>\n        <note>\n            <p>When you call this API to delete tags from a SageMaker Studio Domain or User Profile, the\n                deleted tags are not removed from Apps that the SageMaker Studio Domain or User Profile\n                launched before you called this API.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Deletes the specified tags from an Amazon SageMaker resource.</p>\n        <p>To list a resource's tags, use the <code>ListTags</code> API. </p>\n        <note>\n            <p>When you call this API to delete tags from a hyperparameter tuning job, the\n                deleted tags are not removed from training jobs that the hyperparameter tuning job\n                launched before you called this API.</p>\n        </note>\n        <note>\n            <p>When you call this API to delete tags from a SageMaker Studio Domain or User\n                Profile, the deleted tags are not removed from Apps that the SageMaker Studio Domain\n                or User Profile launched before you called this API.</p>\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#DeleteTagsInput": {
@@ -11835,7 +11871,7 @@
                 "ModelPackageName": {
                     "target": "com.amazonaws.sagemaker#VersionedArnOrName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the model package to describe.</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the model package to describe.</p>\n        <p>When you specify a name, the name must have 1 to 63 characters. Valid\n          characters are a-z, A-Z, 0-9, and - (hyphen).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12550,6 +12586,15 @@
                         "smithy.api#documentation": "<p>The description of the pipeline execution.</p>"
                     }
                 },
+                "PipelineExperimentConfig": {
+                    "target": "com.amazonaws.sagemaker#PipelineExperimentConfig"
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#PipelineExecutionFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the execution failed, a message describing why.</p>"
+                    }
+                },
                 "CreationTime": {
                     "target": "com.amazonaws.sagemaker#Timestamp",
                     "traits": {
@@ -13079,7 +13124,7 @@
                 "StoppingCondition": {
                     "target": "com.amazonaws.sagemaker#StoppingCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run.\n            It also specifies how long a managed Spot training job has to complete.\n            When the job reaches the time limit, Amazon SageMaker ends\n            the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>",
+                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run. It also specifies how long\n            a managed Spot training job has to complete. When the job reaches the time limit, Amazon SageMaker\n            ends the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13198,7 +13243,7 @@
                 "RetryStrategy": {
                     "target": "com.amazonaws.sagemaker#RetryStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n            <code>InternalServerError</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n                <code>InternalServerError</code>.</p>"
                     }
                 },
                 "Environment": {
@@ -13908,7 +13953,7 @@
                     "min": 1,
                     "max": 40
                 },
-                "smithy.api#pattern": "[\\S\\s]+"
+                "smithy.api#pattern": "^[\\S\\s]+$"
             }
         },
         "com.amazonaws.sagemaker#DeviceFleetArn": {
@@ -13924,7 +13969,7 @@
                     "min": 1,
                     "max": 800
                 },
-                "smithy.api#pattern": "[\\S\\s]+"
+                "smithy.api#pattern": "^[\\S\\s]+$"
             }
         },
         "com.amazonaws.sagemaker#DeviceFleetSummaries": {
@@ -14204,7 +14249,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:domain/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:domain/"
             }
         },
         "com.amazonaws.sagemaker#DomainDetails": {
@@ -14279,7 +14324,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#DomainStatus": {
@@ -14581,7 +14626,7 @@
                     "min": 1,
                     "max": 30
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9\\ \\_\\.]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9\\ \\_\\.]+$"
             }
         },
         "com.amazonaws.sagemaker#EfsUid": {
@@ -14591,7 +14636,7 @@
                     "min": 0,
                     "max": 10
                 },
-                "smithy.api#pattern": "\\d+"
+                "smithy.api#pattern": "^\\d+$"
             }
         },
         "com.amazonaws.sagemaker#EnableCapture": {
@@ -14701,7 +14746,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:endpoint/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:endpoint/"
             }
         },
         "com.amazonaws.sagemaker#EndpointConfigArn": {
@@ -14711,7 +14756,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:endpoint-config/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:endpoint-config/"
             }
         },
         "com.amazonaws.sagemaker#EndpointConfigName": {
@@ -14721,7 +14766,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#EndpointConfigNameContains": {
@@ -14731,7 +14776,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.sagemaker#EndpointConfigSortKey": {
@@ -14861,7 +14906,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#EndpointNameContains": {
@@ -14871,7 +14916,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.sagemaker#EndpointSortKey": {
@@ -14988,7 +15033,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*$"
             }
         },
         "com.amazonaws.sagemaker#EntityName": {
@@ -15008,7 +15053,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[a-zA-Z_][a-zA-Z0-9_]*"
+                "smithy.api#pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
             }
         },
         "com.amazonaws.sagemaker#EnvironmentMap": {
@@ -15033,7 +15078,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[\\S\\s]*"
+                "smithy.api#pattern": "^[\\S\\s]*$"
             }
         },
         "com.amazonaws.sagemaker#ExecutionStatus": {
@@ -15078,7 +15123,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[\\S\\s]*"
+                "smithy.api#pattern": "^[\\S\\s]*$"
             }
         },
         "com.amazonaws.sagemaker#Experiment": {
@@ -15147,7 +15192,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:experiment/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:experiment/"
             }
         },
         "com.amazonaws.sagemaker#ExperimentConfig": {
@@ -15193,7 +15238,7 @@
                     "min": 1,
                     "max": 120
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,119}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,119}$"
             }
         },
         "com.amazonaws.sagemaker#ExperimentSource": {
@@ -15224,7 +15269,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:"
             }
         },
         "com.amazonaws.sagemaker#ExperimentSummaries": {
@@ -15437,7 +15482,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:feature-group/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:feature-group/"
             }
         },
         "com.amazonaws.sagemaker#FeatureGroupMaxResults": {
@@ -15457,7 +15502,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}$"
             }
         },
         "com.amazonaws.sagemaker#FeatureGroupNameContains": {
@@ -15588,7 +15633,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}"
+                "smithy.api#pattern": "^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}$"
             }
         },
         "com.amazonaws.sagemaker#FeatureType": {
@@ -15759,7 +15804,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.sagemaker#FinalAutoMLJobObjectiveMetric": {
@@ -15840,7 +15885,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:flow-definition/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:flow-definition/"
             }
         },
         "com.amazonaws.sagemaker#FlowDefinitionName": {
@@ -15850,7 +15895,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-z0-9](-*[a-z0-9]){0,62}"
+                "smithy.api#pattern": "^[a-z0-9](-*[a-z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#FlowDefinitionOutputConfig": {
@@ -15972,7 +16017,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.sagemaker#FlowDefinitionTaskKeyword": {
@@ -16067,7 +16112,7 @@
                     "min": 3,
                     "max": 10
                 },
-                "smithy.api#pattern": "[0-9]\\.[A-Za-z0-9.]+"
+                "smithy.api#pattern": "^[0-9]\\.[A-Za-z0-9.]+$"
             }
         },
         "com.amazonaws.sagemaker#GenerateCandidateDefinitionsOnly": {
@@ -16310,7 +16355,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"
             }
         },
         "com.amazonaws.sagemaker#Groups": {
@@ -16544,7 +16589,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:human-task-ui/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:human-task-ui/"
             }
         },
         "com.amazonaws.sagemaker#HumanTaskUiName": {
@@ -16554,7 +16599,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-z0-9](-*[a-z0-9])*"
+                "smithy.api#pattern": "^[a-z0-9](-*[a-z0-9])*$"
             }
         },
         "com.amazonaws.sagemaker#HumanTaskUiStatus": {
@@ -16801,7 +16846,7 @@
                 "StoppingCondition": {
                     "target": "com.amazonaws.sagemaker#StoppingCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a limit to how long a model hyperparameter training job can run. It also\n            specifies how long a managed spot training job has to complete.\n            When the job reaches the time limit, Amazon SageMaker ends the training job. Use this API to cap model\n            training costs.</p>",
+                        "smithy.api#documentation": "<p>Specifies a limit to how long a model hyperparameter training job can run. It also\n            specifies how long a managed spot training job has to complete. When the job reaches the\n            time limit, Amazon SageMaker ends the training job. Use this API to cap model training costs.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16829,7 +16874,7 @@
                 "RetryStrategy": {
                     "target": "com.amazonaws.sagemaker#RetryStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n            <code>InternalServerError</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n                <code>InternalServerError</code>.</p>"
                     }
                 }
             },
@@ -16844,7 +16889,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}$"
             }
         },
         "com.amazonaws.sagemaker#HyperParameterTrainingJobDefinitions": {
@@ -16957,7 +17002,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:hyper-parameter-tuning-job/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:hyper-parameter-tuning-job/"
             }
         },
         "com.amazonaws.sagemaker#HyperParameterTuningJobConfig": {
@@ -17013,7 +17058,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,31}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,31}$"
             }
         },
         "com.amazonaws.sagemaker#HyperParameterTuningJobObjective": {
@@ -17391,7 +17436,7 @@
                     "min": 1,
                     "max": 11
                 },
-                "smithy.api#pattern": "(^DisplayName$)|(^Description$)"
+                "smithy.api#pattern": "^(^DisplayName$)|(^Description$)$"
             }
         },
         "com.amazonaws.sagemaker#ImageDeletePropertyList": {
@@ -18090,7 +18135,7 @@
                 "smithy.api#length": {
                     "min": 1
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.sagemaker#JobReferenceCodeContains": {
@@ -18100,7 +18145,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.sagemaker#JoinSource": {
@@ -18125,7 +18170,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*\\/[a-zA-Z0-9](-*[a-zA-Z0-9.])*"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*\\/[a-zA-Z0-9](-*[a-zA-Z0-9.])*$"
             }
         },
         "com.amazonaws.sagemaker#JsonContentTypes": {
@@ -18228,7 +18273,7 @@
                 "Name": {
                     "target": "com.amazonaws.sagemaker#KernelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the kernel.</p>",
+                        "smithy.api#documentation": "<p>The name of the Jupyter kernel in the image. This value is case sensitive.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18272,7 +18317,7 @@
                     "min": 1,
                     "max": 127
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,126}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,126}$"
             }
         },
         "com.amazonaws.sagemaker#LabelCounter": {
@@ -18354,7 +18399,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:.*"
+                "smithy.api#pattern": "^arn:"
             }
         },
         "com.amazonaws.sagemaker#LabelingJobAlgorithmsConfig": {
@@ -18391,7 +18436,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:labeling-job/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:labeling-job/"
             }
         },
         "com.amazonaws.sagemaker#LabelingJobDataAttributes": {
@@ -18509,7 +18554,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#LabelingJobOutput": {
@@ -18756,7 +18801,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:lambda:[a-z0-9\\-]*:[0-9]{12}:function:.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:lambda:[a-z0-9\\-]*:[0-9]{12}:function:"
             }
         },
         "com.amazonaws.sagemaker#LastModifiedTime": {
@@ -20398,7 +20443,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of endpoints to return in the response. This value defaults to 10.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of endpoints to return in the response. This value defaults to\n            10.</p>"
                     }
                 },
                 "NameContains": {
@@ -22878,7 +22923,7 @@
                 "target": "com.amazonaws.sagemaker#ListTrainingJobsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists training jobs.</p>\n        <note>\n            <p>When <code>StatusEquals</code> and <code>MaxResults</code> are set at the same\n                time, the <code>MaxResults</code> number of training jobs are first retrieved\n                ignoring the <code>StatusEquals</code> parameter and then they are filtered by the\n                <code>StatusEquals</code> parameter, which is returned as a response.</p>\n            <p>For example, if <code>ListTrainingJobs</code> is invoked with the following parameters:</p>\n            <p>\n               <code>{ ... MaxResults: 100, StatusEquals: InProgress ... }</code>\n            </p>\n            <p>First, 100 trainings jobs with any status, including those other than\n                <code>InProgress</code>, are selected (sorted according to the creation time,\n                from the most current to the oldest). Next, those with a status of\n                <code>InProgress</code> are returned.</p>\n            <p>You can quickly test the API using the following AWS CLI code.</p>\n            <p>\n               <code>aws sagemaker list-training-jobs --max-results 100 --status-equals\n                    InProgress</code>\n            </p>\n        </note>",
+                "smithy.api#documentation": "<p>Lists training jobs.</p>\n        <note>\n            <p>When <code>StatusEquals</code> and <code>MaxResults</code> are set at the same\n                time, the <code>MaxResults</code> number of training jobs are first retrieved\n                ignoring the <code>StatusEquals</code> parameter and then they are filtered by the\n                    <code>StatusEquals</code> parameter, which is returned as a response.</p>\n            <p>For example, if <code>ListTrainingJobs</code> is invoked with the following\n                parameters:</p>\n            <p>\n               <code>{ ... MaxResults: 100, StatusEquals: InProgress ... }</code>\n            </p>\n            <p>First, 100 trainings jobs with any status, including those other than\n                    <code>InProgress</code>, are selected (sorted according to the creation time,\n                from the most current to the oldest). Next, those with a status of\n                    <code>InProgress</code> are returned.</p>\n            <p>You can quickly test the API using the following AWS CLI code.</p>\n            <p>\n               <code>aws sagemaker list-training-jobs --max-results 100 --status-equals\n                    InProgress</code>\n            </p>\n        </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -23886,7 +23931,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.sagemaker#MetricRegex": {
@@ -23896,7 +23941,7 @@
                     "min": 1,
                     "max": 500
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.sagemaker#MetricValue": {
@@ -23956,7 +24001,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:model/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:model/"
             }
         },
         "com.amazonaws.sagemaker#ModelArtifacts": {
@@ -24101,7 +24146,7 @@
                 "AutoGenerateEndpointName": {
                     "target": "com.amazonaws.sagemaker#AutoGenerateEndpointName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>True</code> to automatically generate an endpoint name for a one-click\n         Autopilot model deployment; set to <code>False</code> otherwise. The default value is\n            <code>True</code>.</p>\n         <note>\n            <p>If you set <code>AutoGenerateEndpointName</code> to <code>True</code>, do not specify\n            the <code>EndpointName</code>; otherwise a 400 error is thrown.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Set to <code>True</code> to automatically generate an endpoint name for a one-click\n         Autopilot model deployment; set to <code>False</code> otherwise. The default value is\n            <code>False</code>.</p>\n         <note>\n            <p>If you set <code>AutoGenerateEndpointName</code> to <code>True</code>, do not specify\n            the <code>EndpointName</code>; otherwise a 400 error is thrown.</p>\n         </note>"
                     }
                 },
                 "EndpointName": {
@@ -24241,7 +24286,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.sagemaker#ModelNameContains": {
@@ -24251,7 +24296,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.sagemaker#ModelPackage": {
@@ -24368,7 +24413,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:model-package/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:model-package/"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageContainerDefinition": {
@@ -24476,7 +24521,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:model-package-group/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:model-package-group/"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageGroupSortBy": {
@@ -25817,7 +25862,7 @@
                     "min": 1,
                     "max": 15
                 },
-                "smithy.api#pattern": "^.?P.*"
+                "smithy.api#pattern": "^.?P"
             }
         },
         "com.amazonaws.sagemaker#MonitoringType": {
@@ -25850,7 +25895,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^\\/.*"
+                "smithy.api#pattern": "^\\/"
             }
         },
         "com.amazonaws.sagemaker#MultiModelConfig": {
@@ -25874,7 +25919,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9\\-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-]+$"
             }
         },
         "com.amazonaws.sagemaker#NestedFilters": {
@@ -26009,7 +26054,7 @@
                     "min": 1,
                     "max": 16384
                 },
-                "smithy.api#pattern": "[\\S\\s]+"
+                "smithy.api#pattern": "^[\\S\\s]+$"
             }
         },
         "com.amazonaws.sagemaker#NotebookInstanceLifecycleConfigList": {
@@ -26031,7 +26076,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.sagemaker#NotebookInstanceLifecycleConfigNameContains": {
@@ -26041,7 +26086,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.sagemaker#NotebookInstanceLifecycleConfigSortKey": {
@@ -26139,7 +26184,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.sagemaker#NotebookInstanceNameContains": {
@@ -26149,7 +26194,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.sagemaker#NotebookInstanceSortKey": {
@@ -26342,7 +26387,7 @@
         "com.amazonaws.sagemaker#NotificationTopicArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sns:[a-z0-9\\-]*:[0-9]{12}:[a-zA-Z0-9_.-]*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sns:[a-z0-9\\-]*:[0-9]{12}:[a-zA-Z0-9_.-]*$"
             }
         },
         "com.amazonaws.sagemaker#NumberOfHumanWorkersPerDataObject": {
@@ -26596,7 +26641,7 @@
                     "min": 0,
                     "max": 500
                 },
-                "smithy.api#pattern": "https://\\S+"
+                "smithy.api#pattern": "^https://\\S+$"
             }
         },
         "com.amazonaws.sagemaker#OidcMemberDefinition": {
@@ -26775,7 +26820,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using\n            Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following\n            formats: </p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// KMS Key Alias</p>\n                <p>\n                    <code>\"alias/ExampleAlias\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n                </p>\n            </li>\n         </ul>\n        \n        <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must\n            include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,\n            Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. Amazon SageMaker uses server-side\n            encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket\n            policy with an <code>s3:PutObject</code> permission that only allows objects with\n            server-side encryption, set the condition key of\n                <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer\n                Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateTrainingJob</code>, <code>CreateTransformJob</code>, or\n                <code>CreateHyperParameterTuningJob</code> requests. For more information, see\n                <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using\n                Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using\n            Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following\n            formats: </p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// KMS Key Alias</p>\n                <p>\n                    <code>\"alias/ExampleAlias\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n                </p>\n            </li>\n         </ul>\n        \n        <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must\n            include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,\n            Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. Amazon SageMaker uses server-side\n            encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket\n            policy with an <code>s3:PutObject</code> permission that only allows objects with\n            server-side encryption, set the condition key of\n                <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html\">KMS-Managed Encryption\n                Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateTrainingJob</code>, <code>CreateTransformJob</code>, or\n                <code>CreateHyperParameterTuningJob</code> requests. For more information, see\n                <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using\n                Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer\n                Guide</i>.</p>"
                     }
                 },
                 "S3OutputPath": {
@@ -26788,6 +26833,40 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about how to store model training results (model\n            artifacts).</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#OutputParameter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the output parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the output parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An output parameter of a pipeline step.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#OutputParameterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#OutputParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.sagemaker#PaginationToken": {
@@ -26851,7 +26930,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*$"
             }
         },
         "com.amazonaws.sagemaker#ParameterRange": {
@@ -27084,7 +27163,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:pipeline/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:pipeline/"
             }
         },
         "com.amazonaws.sagemaker#PipelineDefinition": {
@@ -27094,7 +27173,7 @@
                     "min": 1,
                     "max": 1048576
                 },
-                "smithy.api#pattern": ".*(?:[ \\r\\n\\t].*)*"
+                "smithy.api#pattern": "(?:[ \\r\\n\\t].*)*$"
             }
         },
         "com.amazonaws.sagemaker#PipelineDescription": {
@@ -27138,6 +27217,15 @@
                     "target": "com.amazonaws.sagemaker#PipelineExecutionDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the pipeline execution.</p>"
+                    }
+                },
+                "PipelineExperimentConfig": {
+                    "target": "com.amazonaws.sagemaker#PipelineExperimentConfig"
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#PipelineExecutionFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the execution failed, a message describing why.</p>"
                     }
                 },
                 "CreationTime": {
@@ -27189,6 +27277,16 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.sagemaker#PipelineExecutionFailureReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1300
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
         "com.amazonaws.sagemaker#PipelineExecutionName": {
             "type": "string",
             "traits": {
@@ -27196,7 +27294,7 @@
                     "min": 1,
                     "max": 82
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,81}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,81}$"
             }
         },
         "com.amazonaws.sagemaker#PipelineExecutionStatus": {
@@ -27268,7 +27366,7 @@
                 "Metadata": {
                     "target": "com.amazonaws.sagemaker#PipelineExecutionStepMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metadata for the step execution.</p>"
+                        "smithy.api#documentation": "<p>Metadata for the step execution.</p>"
                     }
                 }
             },
@@ -27326,6 +27424,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If this is a Condition step metadata object, details on the condition.</p>"
                     }
+                },
+                "Callback": {
+                    "target": "com.amazonaws.sagemaker#CallbackStepMetadata"
                 }
             },
             "traits": {
@@ -27382,6 +27483,26 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#PipelineExperimentConfig": {
+            "type": "structure",
+            "members": {
+                "ExperimentName": {
+                    "target": "com.amazonaws.sagemaker#ExperimentEntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the experiment.</p>"
+                    }
+                },
+                "TrialName": {
+                    "target": "com.amazonaws.sagemaker#ExperimentEntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the trial.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the names of the experiment and trial created by a pipeline.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#PipelineName": {
             "type": "string",
             "traits": {
@@ -27389,7 +27510,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,255}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,255}$"
             }
         },
         "com.amazonaws.sagemaker#PipelineParameterName": {
@@ -27561,7 +27682,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z_][a-zA-Z0-9_]*"
+                "smithy.api#pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
             }
         },
         "com.amazonaws.sagemaker#ProcessingEnvironmentMap": {
@@ -27586,7 +27707,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\S\\s]*"
+                "smithy.api#pattern": "^[\\S\\s]*$"
             }
         },
         "com.amazonaws.sagemaker#ProcessingFeatureStoreOutput": {
@@ -27947,7 +28068,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:processing-job/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:processing-job/"
             }
         },
         "com.amazonaws.sagemaker#ProcessingJobName": {
@@ -27957,7 +28078,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#ProcessingJobStatus": {
@@ -28409,7 +28530,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Identifies\n            a model that you want to host and the resources to deploy for hosting\n            it. If you are deploying multiple models, tell Amazon SageMaker how to distribute\n            traffic among the models by specifying variant weights. </p>"
+                "smithy.api#documentation": "<p>Identifies a model that you want to host and the resources chosen to deploy for\n            hosting it. If you are deploying multiple models, tell Amazon SageMaker how to distribute traffic\n            among the models by specifying variant weights. </p>"
             }
         },
         "com.amazonaws.sagemaker#ProductionVariantAcceleratorType": {
@@ -29019,7 +29140,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:project:.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:project:"
             }
         },
         "com.amazonaws.sagemaker#ProjectEntityName": {
@@ -29029,7 +29150,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,31}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,31}$"
             }
         },
         "com.amazonaws.sagemaker#ProjectId": {
@@ -29039,7 +29160,7 @@
                     "min": 1,
                     "max": 20
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.sagemaker#ProjectSortBy": {
@@ -29428,7 +29549,7 @@
                     "min": 1,
                     "max": 4096
                 },
-                "smithy.api#pattern": "[\\s\\S]+"
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
         "com.amazonaws.sagemaker#RedshiftResultCompressionType": {
@@ -29716,7 +29837,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z-]*:sagemaker:[a-z0-9-]*:[0-9]{12}:.+"
+                "smithy.api#pattern": "^arn:aws[a-z-]*:sagemaker:[a-z0-9-]*:[0-9]{12}:.+$"
             }
         },
         "com.amazonaws.sagemaker#ResourceConfig": {
@@ -29828,7 +29949,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.sagemaker#ResourceSpec": {
@@ -29955,13 +30076,13 @@
                 "MaximumRetryAttempts": {
                     "target": "com.amazonaws.sagemaker#MaximumRetryAttempts",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of times to retry the job. When the job is retried, it's\n            <code>SecondaryStatus</code> is changed to <code>STARTING</code>.</p>",
+                        "smithy.api#documentation": "<p>The number of times to retry the job. When the job is retried, it's\n                <code>SecondaryStatus</code> is changed to <code>STARTING</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The retry strategy to use when a training job fails due to an\n            <code>InternalServerError</code>. <code>RetryStrategy</code> is specified as\n            part of the <code>CreateTrainingJob</code> and <code>CreateHyperParameterTuningJob</code>\n            requests. You can add the <code>StoppingCondition</code> parameter to the request to\n            limit the training time for the complete job.</p>"
+                "smithy.api#documentation": "<p>The retry strategy to use when a training job fails due to an\n                <code>InternalServerError</code>. <code>RetryStrategy</code> is specified as part of\n            the <code>CreateTrainingJob</code> and <code>CreateHyperParameterTuningJob</code>\n            requests. You can add the <code>StoppingCondition</code> parameter to the request to\n            limit the training time for the complete job.</p>"
             }
         },
         "com.amazonaws.sagemaker#RoleArn": {
@@ -30740,6 +30861,12 @@
                     "target": "com.amazonaws.sagemaker#Search"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#SendPipelineExecutionStepFailure"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#SendPipelineExecutionStepSuccess"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#StartMonitoringSchedule"
                 },
                 {
@@ -31234,7 +31361,7 @@
                 "StatusMessage": {
                     "target": "com.amazonaws.sagemaker#StatusMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>A detailed description of the progress within a secondary status.\n            </p>\n        <p>Amazon SageMaker provides secondary statuses and status messages that apply to each of\n            them:</p>\n        <dl>\n            <dt>Starting</dt>\n            <dd>\n                    <ul>\n                  <li>\n                            <p>Starting the training job.</p>\n                        </li>\n                  <li>\n                            <p>Launching\n                                requested ML instances.</p>\n                        </li>\n                  <li>\n                            <p>Insufficient\n                                capacity error from EC2 while launching instances,\n                                retrying!</p>\n                        </li>\n                  <li>\n                            <p>Launched\n                                instance was unhealthy, replacing it!</p>\n                        </li>\n                  <li>\n                            <p>Preparing the instances for training.</p>\n                        </li>\n               </ul>\n                </dd>\n            <dt>Training</dt>\n            <dd>\n                    <ul>\n                  <li>\n                            <p>Downloading the training image.</p>\n                        </li>\n                  <li>\n                            <p>Training\n                                image download completed. Training in\n                                progress.</p>\n                        </li>\n               </ul>\n                </dd>\n         </dl>\n        <important>\n            <p>Status messages are subject to change. Therefore, we recommend not including them\n                in code that programmatically initiates actions. For examples, don't use status\n                messages in if statements.</p>\n        </important>\n        <p>To have an overview of your training job's progress, view\n                <code>TrainingJobStatus</code> and <code>SecondaryStatus</code> in <a>DescribeTrainingJob</a>, and <code>StatusMessage</code> together. For\n            example, at the start of a training job, you might see the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>TrainingJobStatus</code> - InProgress</p>\n            </li>\n            <li>\n                <p>\n                  <code>SecondaryStatus</code> - Training</p>\n            </li>\n            <li>\n                <p>\n                  <code>StatusMessage</code> - Downloading the training image</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A detailed description of the progress within a secondary status.\n            </p>\n        <p>Amazon SageMaker provides secondary statuses and status messages that apply to each of\n            them:</p>\n        <dl>\n            <dt>Starting</dt>\n            <dd>\n                    <ul>\n                  <li>\n                            <p>Starting the training job.</p>\n                        </li>\n                  <li>\n                            <p>Launching requested ML\n                                instances.</p>\n                        </li>\n                  <li>\n                            <p>Insufficient\n                                capacity error from EC2 while launching instances,\n                                retrying!</p>\n                        </li>\n                  <li>\n                            <p>Launched\n                                instance was unhealthy, replacing it!</p>\n                        </li>\n                  <li>\n                            <p>Preparing the instances for training.</p>\n                        </li>\n               </ul>\n                </dd>\n            <dt>Training</dt>\n            <dd>\n                    <ul>\n                  <li>\n                            <p>Downloading the training image.</p>\n                        </li>\n                  <li>\n                            <p>Training\n                                image download completed. Training in\n                                progress.</p>\n                        </li>\n               </ul>\n                </dd>\n         </dl>\n        <important>\n            <p>Status messages are subject to change. Therefore, we recommend not including them\n                in code that programmatically initiates actions. For examples, don't use status\n                messages in if statements.</p>\n        </important>\n        <p>To have an overview of your training job's progress, view\n                <code>TrainingJobStatus</code> and <code>SecondaryStatus</code> in <a>DescribeTrainingJob</a>, and <code>StatusMessage</code> together. For\n            example, at the start of a training job, you might see the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>TrainingJobStatus</code> - InProgress</p>\n            </li>\n            <li>\n                <p>\n                  <code>SecondaryStatus</code> - Training</p>\n            </li>\n            <li>\n                <p>\n                  <code>StatusMessage</code> - Downloading the training image</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -31255,7 +31382,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:secretsmanager:[a-z0-9\\-]*:[0-9]{12}:secret:.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:secretsmanager:[a-z0-9\\-]*:[0-9]{12}:secret:"
             }
         },
         "com.amazonaws.sagemaker#SecurityGroupId": {
@@ -31265,7 +31392,7 @@
                     "min": 0,
                     "max": 32
                 },
-                "smithy.api#pattern": "[-0-9a-zA-Z]+"
+                "smithy.api#pattern": "^[-0-9a-zA-Z]+$"
             }
         },
         "com.amazonaws.sagemaker#SecurityGroupIds": {
@@ -31283,6 +31410,118 @@
         "com.amazonaws.sagemaker#Seed": {
             "type": "long"
         },
+        "com.amazonaws.sagemaker#SendPipelineExecutionStepFailure": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#SendPipelineExecutionStepFailureRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#SendPipelineExecutionStepFailureResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Notifies the pipeline that the execution of a callback step failed, along with a\n        message describing why. When a callback step is run, the pipeline generates a callback\n        token and includes the token in a message sent to Amazon Simple Queue Service (Amazon SQS).</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#SendPipelineExecutionStepFailureRequest": {
+            "type": "structure",
+            "members": {
+                "CallbackToken": {
+                    "target": "com.amazonaws.sagemaker#CallbackToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pipeline generated token from the Amazon SQS queue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing why the step failed.</p>"
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.sagemaker#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         operation. An idempotent operation completes no more than one time.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#SendPipelineExecutionStepFailureResponse": {
+            "type": "structure",
+            "members": {
+                "PipelineExecutionArn": {
+                    "target": "com.amazonaws.sagemaker#PipelineExecutionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#SendPipelineExecutionStepSuccess": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#SendPipelineExecutionStepSuccessRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#SendPipelineExecutionStepSuccessResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Notifies the pipeline that the execution of a callback step succeeded and provides a\n        list of the step's output parameters. When a callback step is run, the pipeline generates\n        a callback token and includes the token in a message sent to Amazon Simple Queue Service (Amazon SQS).</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#SendPipelineExecutionStepSuccessRequest": {
+            "type": "structure",
+            "members": {
+                "CallbackToken": {
+                    "target": "com.amazonaws.sagemaker#CallbackToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pipeline generated token from the Amazon SQS queue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputParameters": {
+                    "target": "com.amazonaws.sagemaker#OutputParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the output parameters of the callback step.</p>"
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.sagemaker#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         operation. An idempotent operation completes no more than one time.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#SendPipelineExecutionStepSuccessResponse": {
+            "type": "structure",
+            "members": {
+                "PipelineExecutionArn": {
+                    "target": "com.amazonaws.sagemaker#PipelineExecutionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ServiceCatalogEntityId": {
             "type": "string",
             "traits": {
@@ -31290,7 +31529,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_\\-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-]*$"
             }
         },
         "com.amazonaws.sagemaker#ServiceCatalogProvisionedProductDetails": {
@@ -31401,7 +31640,7 @@
         "com.amazonaws.sagemaker#SingleSignOnUserIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "UserName"
+                "smithy.api#pattern": "^UserName$"
             }
         },
         "com.amazonaws.sagemaker#SnsTopicArn": {
@@ -31411,7 +31650,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sns:[a-z0-9\\-]*:[0-9]{12}:[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sns:[a-z0-9\\-]*:[0-9]{12}:[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.sagemaker#SortActionsBy": {
@@ -32175,18 +32414,18 @@
                 "MaxRuntimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxRuntimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can run.\n            If the job does not complete during this time, Amazon SageMaker ends the job.</p>\n        <p>When <code>RetryStrategy</code> is specified in the job request, <code>MaxRuntimeInSeconds</code>\n            specifies the maximum time for all of the attempts in total, not each individual attempt.</p>\n        <p>The default value is 1 day. The maximum value is 28 days.</p>"
+                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can run. If\n            the job does not complete during this time, Amazon SageMaker ends the job.</p>\n        <p>When <code>RetryStrategy</code> is specified in the job request,\n                <code>MaxRuntimeInSeconds</code> specifies the maximum time for all of the attempts\n            in total, not each individual attempt.</p>\n        <p>The default value is 1 day. The maximum value is 28 days.</p>"
                     }
                 },
                 "MaxWaitTimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxWaitTimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a managed Spot training job has to complete.\n            It is the amount of time spent waiting for Spot capacity plus the amount of time the job\n            can run. It must be equal to or greater than <code>MaxRuntimeInSeconds</code>.  If the job\n            does not complete during this time, Amazon SageMaker ends the job.</p>\n        <p>When <code>RetryStrategy</code> is specified in the job request, <code>MaxWaitTimeInSeconds</code>\n            specifies the maximum time for all of the attempts in total, not each individual attempt.</p>"
+                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a managed Spot training job has to\n            complete. It is the amount of time spent waiting for Spot capacity plus the amount of\n            time the job can run. It must be equal to or greater than\n                <code>MaxRuntimeInSeconds</code>. If the job does not complete during this time,\n            Amazon SageMaker ends the job.</p>\n        <p>When <code>RetryStrategy</code> is specified in the job request,\n                <code>MaxWaitTimeInSeconds</code> specifies the maximum time for all of the attempts\n            in total, not each individual attempt.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a limit to how long a model training job, model compilation job, or\n            hyperparameter tuning job can run. It also specifies how long a managed Spot training\n            job has to complete.\n            When the job reaches the time limit, Amazon SageMaker ends the training or compilation job. Use this\n            API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>\n        <p>The training algorithms provided by Amazon SageMaker automatically save the intermediate results\n            of a model training job when possible. This attempt to save artifacts is only a best\n            effort case as model might not be in a state from which it can be saved. For example, if\n            training has just started, the model might not be ready to save. When saved, this\n            intermediate data is a valid model artifact. You can use it to create a model with\n                <code>CreateModel</code>.</p>\n        <note>\n            <p>The Neural Topic Model (NTM) currently does not support saving intermediate model\n                artifacts. When training NTMs, make sure that the maximum runtime is sufficient for\n                the training job to complete.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Specifies a limit to how long a model training job, model compilation job, or\n            hyperparameter tuning job can run. It also specifies how long a managed Spot training\n            job has to complete. When the job reaches the time limit, Amazon SageMaker ends the training or\n            compilation job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>\n        <p>The training algorithms provided by Amazon SageMaker automatically save the intermediate results\n            of a model training job when possible. This attempt to save artifacts is only a best\n            effort case as model might not be in a state from which it can be saved. For example, if\n            training has just started, the model might not be ready to save. When saved, this\n            intermediate data is a valid model artifact. You can use it to create a model with\n                <code>CreateModel</code>.</p>\n        <note>\n            <p>The Neural Topic Model (NTM) currently does not support saving intermediate model\n                artifacts. When training NTMs, make sure that the maximum runtime is sufficient for\n                the training job to complete.</p>\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#String": {
@@ -32208,7 +32447,7 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.sagemaker#String2048": {
@@ -32255,7 +32494,7 @@
                     "min": 0,
                     "max": 32
                 },
-                "smithy.api#pattern": "[-0-9a-zA-Z]+"
+                "smithy.api#pattern": "^[-0-9a-zA-Z]+$"
             }
         },
         "com.amazonaws.sagemaker#Subnets": {
@@ -32349,7 +32588,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.sagemaker#Tag": {
@@ -32358,7 +32597,7 @@
                 "Key": {
                     "target": "com.amazonaws.sagemaker#TagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag key.</p>",
+                        "smithy.api#documentation": "<p>The tag key. Tag keys must be unique per resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -32371,7 +32610,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a tag. </p>"
+                "smithy.api#documentation": "<p>A tag object that consists of a key and an optional value, used to manage metadata\n            for Amazon SageMaker AWS resources.</p>\n        <p>You can add tags to notebook instances, training jobs, hyperparameter tuning jobs,\n            batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and\n            endpoints. For more information on adding tags to Amazon SageMaker resources, see <a>AddTags</a>.</p>\n        <p>For more information on adding metadata to your AWS resources with tagging, see\n                <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n                resources</a>. For advice on best practices for managing AWS resources with\n            tagging, see <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n                Best Practices: Implement an Effective AWS Resource Tagging Strategy</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#TagKey": {
@@ -32669,7 +32908,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.sagemaker#TaskInput": {
@@ -32679,7 +32918,7 @@
                     "min": 2,
                     "max": 128000
                 },
-                "smithy.api#pattern": "[\\S\\s]+"
+                "smithy.api#pattern": "^[\\S\\s]+$"
             }
         },
         "com.amazonaws.sagemaker#TaskKeyword": {
@@ -32730,7 +32969,7 @@
                     "min": 1,
                     "max": 128000
                 },
-                "smithy.api#pattern": "[\\S\\s]+"
+                "smithy.api#pattern": "^[\\S\\s]+$"
             }
         },
         "com.amazonaws.sagemaker#TemplateContentSha256": {
@@ -32812,7 +33051,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
             }
         },
         "com.amazonaws.sagemaker#Timestamp": {
@@ -32868,7 +33107,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "[a-zA-Z_][a-zA-Z0-9_]*"
+                "smithy.api#pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
             }
         },
         "com.amazonaws.sagemaker#TrainingEnvironmentMap": {
@@ -32893,7 +33132,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "[\\S\\s]*"
+                "smithy.api#pattern": "^[\\S\\s]*$"
             }
         },
         "com.amazonaws.sagemaker#TrainingInputMode": {
@@ -33190,7 +33429,7 @@
                 "StoppingCondition": {
                     "target": "com.amazonaws.sagemaker#StoppingCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run.\n            It also specifies how long a managed Spot training job has to complete.\n            When the job reaches the time limit, Amazon SageMaker ends\n            the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>"
+                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run. It also specifies how long\n            a managed Spot training job has to complete. When the job reaches the time limit, Amazon SageMaker\n            ends the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>"
                     }
                 },
                 "CreationTime": {
@@ -33292,7 +33531,7 @@
                 "RetryStrategy": {
                     "target": "com.amazonaws.sagemaker#RetryStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n            <code>InternalServerError</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n                <code>InternalServerError</code>.</p>"
                     }
                 },
                 "Tags": {
@@ -33313,7 +33552,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-job/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-job/"
             }
         },
         "com.amazonaws.sagemaker#TrainingJobDefinition": {
@@ -33356,7 +33595,7 @@
                 "StoppingCondition": {
                     "target": "com.amazonaws.sagemaker#StoppingCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run.\n            It also specifies how long a managed Spot training job has to complete.\n            When the job reaches the time limit, Amazon SageMaker ends\n            the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal, which delays job\n            termination for 120 seconds. Algorithms can use this 120-second window to save the model\n            artifacts.</p>",
+                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run. It also specifies how long\n            a managed Spot training job has to complete. When the job reaches the time limit, Amazon SageMaker\n            ends the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal, which delays job\n            termination for 120 seconds. Algorithms can use this 120-second window to save the model\n            artifacts.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -33387,7 +33626,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#TrainingJobSortByOptions": {
@@ -33644,7 +33883,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[a-zA-Z_][a-zA-Z0-9_]{0,1023}"
+                "smithy.api#pattern": "^[a-zA-Z_][a-zA-Z0-9_]{0,1023}$"
             }
         },
         "com.amazonaws.sagemaker#TransformEnvironmentMap": {
@@ -33669,7 +33908,7 @@
                     "min": 0,
                     "max": 10240
                 },
-                "smithy.api#pattern": "[\\S\\s]*"
+                "smithy.api#pattern": "^[\\S\\s]*$"
             }
         },
         "com.amazonaws.sagemaker#TransformInput": {
@@ -33959,7 +34198,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:transform-job/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:transform-job/"
             }
         },
         "com.amazonaws.sagemaker#TransformJobDefinition": {
@@ -34022,7 +34261,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#TransformJobStatus": {
@@ -34284,7 +34523,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:experiment-trial/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:experiment-trial/"
             }
         },
         "com.amazonaws.sagemaker#TrialComponent": {
@@ -34404,7 +34643,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:experiment-trial-component/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:experiment-trial-component/"
             }
         },
         "com.amazonaws.sagemaker#TrialComponentArtifact": {
@@ -34669,7 +34908,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:"
             }
         },
         "com.amazonaws.sagemaker#TrialComponentSourceDetail": {
@@ -34839,7 +35078,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:"
             }
         },
         "com.amazonaws.sagemaker#TrialSummaries": {
@@ -36403,7 +36642,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:user-profile/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:user-profile/"
             }
         },
         "com.amazonaws.sagemaker#UserProfileDetails": {
@@ -36457,7 +36696,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#UserProfileSortKey": {
@@ -36561,7 +36800,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#VariantProperty": {
@@ -36626,7 +36865,7 @@
                     "min": 1,
                     "max": 176
                 },
-                "smithy.api#pattern": "(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:[a-z\\-]*\\/)?([a-zA-Z0-9]([a-zA-Z0-9-]){0,62})(?<!-)(\\/[0-9]{1,5})?$"
+                "smithy.api#pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:[a-z\\-]*\\/)?([a-zA-Z0-9]([a-zA-Z0-9-]){0,62})(?<!-)(\\/[0-9]{1,5})?$"
             }
         },
         "com.amazonaws.sagemaker#VolumeSizeInGB": {
@@ -36666,7 +36905,7 @@
                     "min": 0,
                     "max": 32
                 },
-                "smithy.api#pattern": "[-0-9a-zA-Z]+"
+                "smithy.api#pattern": "^[-0-9a-zA-Z]+$"
             }
         },
         "com.amazonaws.sagemaker#VpcSecurityGroupIds": {
@@ -36756,7 +36995,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:workforce/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:workforce/"
             }
         },
         "com.amazonaws.sagemaker#WorkforceName": {
@@ -36854,7 +37093,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:workteam/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:workteam/"
             }
         },
         "com.amazonaws.sagemaker#WorkteamName": {
@@ -36864,7 +37103,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
         "com.amazonaws.sagemaker#Workteams": {

@@ -9,20 +9,20 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.2.1
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/athena v1.3.1
-	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.6.0
+	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.7.0
 	github.com/aws/aws-sdk-go-v2/service/batch v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.5.1
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.5.2
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.2.1
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.3.1
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.3.1
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.3.2
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.2.1
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.2.1
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.3.2
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.3.3
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.5.1
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.4.1
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.3.1
-	github.com/aws/aws-sdk-go-v2/service/glue v1.5.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.6.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/iam v1.5.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.2.1
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.2.1
 	github.com/aws/aws-sdk-go-v2/service/polly v1.3.0
-	github.com/aws/aws-sdk-go-v2/service/rds v1.4.1
+	github.com/aws/aws-sdk-go-v2/service/rds v1.4.2
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.6.2
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.5.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.6.2

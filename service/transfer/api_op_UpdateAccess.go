@@ -35,7 +35,7 @@ type UpdateAccessInput struct {
 	// S3 or Amazon EFS resources over the enabled protocols using AWS Transfer Family.
 	// If you know the group name, you can view the SID values by running the following
 	// command using Windows PowerShell. Get-ADGroup -Filter {samAccountName -like
-	// "YourGroupName*"} -Properties * | Select SamaccountName,ObjectSid In that
+	// "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSid In that
 	// command, replace YourGroupName with the name of your Active Directory group. The
 	// regex used to validate this parameter is a string of characters consisting of
 	// uppercase and lowercase alphanumeric characters with no spaces. You can also
@@ -51,7 +51,7 @@ type UpdateAccessInput struct {
 	ServerId *string
 
 	// The landing directory (folder) for a user when they log in to the server using
-	// the client. A HomeDirectory example is /directory_name/home/mydirectory.
+	// the client. A HomeDirectory example is /bucket_name/home/mydirectory.
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and
@@ -75,15 +75,15 @@ type UpdateAccessInput struct {
 	// call instead of s3 or efs so you can use the put-object operation. For example,
 	// you can use the following. aws s3api put-object --bucket bucketname --key
 	// path/to/folder/ The end of the key name must end in a / for it to be considered
-	// a folder. Required: No
+	// a folder.
 	HomeDirectoryMappings []types.HomeDirectoryMapEntry
 
-	// The type of landing directory (folder) that you want your users' home directory
-	// to be when they log in to the server. If you set it to PATH, the user will see
-	// the absolute Amazon S3 bucket paths as is in their file transfer protocol
-	// clients. If you set it LOGICAL, you must provide mappings in the
-	// HomeDirectoryMappings for how you want to make Amazon S3 paths visible to your
-	// users.
+	// The type of landing directory (folder) you want your users' home directory to be
+	// when they log into the server. If you set it to PATH, the user will see the
+	// absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
+	// clients. If you set it LOGICAL, you will need to provide mappings in the
+	// HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to
+	// your users.
 	HomeDirectoryType types.HomeDirectoryType
 
 	// A scope-down policy for your user so that you can use the same IAM role across
@@ -108,12 +108,12 @@ type UpdateAccessInput struct {
 	// when transferring files into and out of your Amazon EFS file systems.
 	PosixProfile *types.PosixProfile
 
-	// Specifies the IAM role that controls your users' access to your Amazon S3 bucket
-	// or EFS file system. The policies attached to this role determine the level of
-	// access that you want to provide your users when transferring files into and out
-	// of your Amazon S3 bucket or EFS file system. The IAM role should also contain a
-	// trust relationship that allows the server to access your resources when
-	// servicing your users' transfer requests.
+	// Specifies the Amazon Resource Name (ARN) of the IAM role that controls your
+	// users' access to your Amazon S3 bucket or EFS file system. The policies attached
+	// to this role determine the level of access that you want to provide your users
+	// when transferring files into and out of your Amazon S3 bucket or EFS file
+	// system. The IAM role should also contain a trust relationship that allows the
+	// server to access your resources when servicing your users' transfer requests.
 	Role *string
 }
 

@@ -58,6 +58,8 @@ type UpdateNodegroupConfigInput struct {
 	// The Kubernetes taints to be applied to the nodes in the node group after the
 	// update.
 	Taints *types.UpdateTaintsPayload
+
+	UpdateConfig *types.NodegroupUpdateConfig
 }
 
 type UpdateNodegroupConfigOutput struct {

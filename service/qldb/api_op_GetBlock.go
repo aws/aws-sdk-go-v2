@@ -39,7 +39,7 @@ type GetBlockInput struct {
 
 	// The location of the block that you want to request. An address is an Amazon Ion
 	// structure that has two fields: strandId and sequenceNo. For example:
-	// {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}
+	// {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}.
 	//
 	// This member is required.
 	BlockAddress *types.ValueHolder
@@ -51,7 +51,7 @@ type GetBlockInput struct {
 
 	// The latest block location covered by the digest for which to request a proof. An
 	// address is an Amazon Ion structure that has two fields: strandId and sequenceNo.
-	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}
+	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}.
 	DigestTipAddress *types.ValueHolder
 }
 

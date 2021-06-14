@@ -17,36 +17,39 @@ import (
 // for Windows File Server file systems, you can update the following
 // properties:
 //
+// * AuditLogConfiguration
+//
 // * AutomaticBackupRetentionDays
 //
-// * DailyAutomaticBackupStartTime
+// *
+// DailyAutomaticBackupStartTime
+//
+// * SelfManagedActiveDirectoryConfiguration
 //
 // *
-// SelfManagedActiveDirectoryConfiguration
+// StorageCapacity
+//
+// * ThroughputCapacity
+//
+// * WeeklyMaintenanceStartTime
+//
+// For Amazon
+// FSx for Lustre file systems, you can update the following properties:
+//
+// *
+// AutoImportPolicy
+//
+// * AutomaticBackupRetentionDays
+//
+// *
+// DailyAutomaticBackupStartTime
+//
+// * DataCompressionType
 //
 // * StorageCapacity
 //
 // *
-// ThroughputCapacity
-//
-// * WeeklyMaintenanceStartTime
-//
-// For Amazon FSx for Lustre file
-// systems, you can update the following properties:
-//
-// * AutoImportPolicy
-//
-// *
-// AutomaticBackupRetentionDays
-//
-// * DailyAutomaticBackupStartTime
-//
-// *
-// DataCompressionType
-//
-// * StorageCapacity
-//
-// * WeeklyMaintenanceStartTime
+// WeeklyMaintenanceStartTime
 func (c *Client) UpdateFileSystem(ctx context.Context, params *UpdateFileSystemInput, optFns ...func(*Options)) (*UpdateFileSystemOutput, error) {
 	if params == nil {
 		params = &UpdateFileSystemInput{}

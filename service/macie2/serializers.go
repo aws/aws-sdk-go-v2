@@ -3610,6 +3610,11 @@ func awsRestjson1_serializeOpDocumentUpdateFindingsFilterInput(v *UpdateFindings
 		ok.String(string(v.Action))
 	}
 
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)

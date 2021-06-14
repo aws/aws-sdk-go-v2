@@ -2,6 +2,26 @@
 
 package types
 
+type DetailStatus string
+
+// Enum values for DetailStatus
+const (
+	DetailStatusAvailable   DetailStatus = "AVAILABLE"
+	DetailStatusProcessing  DetailStatus = "PROCESSING"
+	DetailStatusUnavailable DetailStatus = "UNAVAILABLE"
+)
+
+// Values returns all known values for DetailStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DetailStatus) Values() []DetailStatus {
+	return []DetailStatus{
+		"AVAILABLE",
+		"PROCESSING",
+		"UNAVAILABLE",
+	}
+}
+
 type ServiceType string
 
 // Enum values for ServiceType

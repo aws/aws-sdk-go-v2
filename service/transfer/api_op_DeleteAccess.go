@@ -34,7 +34,7 @@ type DeleteAccessInput struct {
 	// S3 or Amazon EFS resources over the enabled protocols using AWS Transfer Family.
 	// If you know the group name, you can view the SID values by running the following
 	// command using Windows PowerShell. Get-ADGroup -Filter {samAccountName -like
-	// "YourGroupName*"} -Properties * | Select SamaccountName,ObjectSid In that
+	// "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSid In that
 	// command, replace YourGroupName with the name of your Active Directory group. The
 	// regex used to validate this parameter is a string of characters consisting of
 	// uppercase and lowercase alphanumeric characters with no spaces. You can also

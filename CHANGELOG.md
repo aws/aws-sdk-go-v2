@@ -1,3 +1,37 @@
+# Release (2021-06-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.7.0](service/autoscaling/CHANGELOG.md#v170-2021-06-11)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.3.2](service/cloudtrail/CHANGELOG.md#v132-2021-06-11)
+  * **Documentation**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.3.3](service/cognitoidentityprovider/CHANGELOG.md#v133-2021-06-11)
+  * **Documentation**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.6.0](service/eks/CHANGELOG.md#v160-2021-06-11)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.6.0](service/fsx/CHANGELOG.md#v160-2021-06-11)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.6.0](service/glue/CHANGELOG.md#v160-2021-06-11)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.6.0](service/kendra/CHANGELOG.md#v160-2021-06-11)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.7.0](service/macie2/CHANGELOG.md#v170-2021-06-11)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.6.0](service/medialive/CHANGELOG.md#v160-2021-06-11)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.4.0](service/pi/CHANGELOG.md#v140-2021-06-11)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.0.0](service/proton/CHANGELOG.md#v100-2021-06-11)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/qldb`: [v1.3.1](service/qldb/CHANGELOG.md#v131-2021-06-11)
+  * **Documentation**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.4.2](service/rds/CHANGELOG.md#v142-2021-06-11)
+  * **Documentation**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.7.0](service/sagemaker/CHANGELOG.md#v170-2021-06-11)
+  * **Feature**: Updated to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.4.1](service/transfer/CHANGELOG.md#v141-2021-06-11)
+  * **Documentation**: Updated to latest API model.
+
 # Release (2021-06-04)
 
 ## General Highlights

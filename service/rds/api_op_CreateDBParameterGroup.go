@@ -49,9 +49,45 @@ type CreateDBParameterGroupInput struct {
 	// The DB parameter group family name. A DB parameter group can be associated with
 	// one and only one DB parameter group family, and can be applied only to a DB
 	// instance running a database engine and engine version compatible with that DB
-	// parameter group family. To list all of the available parameter group families,
-	// use the following command: aws rds describe-db-engine-versions --query
-	// "DBEngineVersions[].DBParameterGroupFamily" The output contains duplicates.
+	// parameter group family. To list all of the available parameter group families
+	// for a DB engine, use the following command: aws rds describe-db-engine-versions
+	// --query "DBEngineVersions[].DBParameterGroupFamily" --engine  For example, to
+	// list all of the available parameter group families for the MySQL DB engine, use
+	// the following command: aws rds describe-db-engine-versions --query
+	// "DBEngineVersions[].DBParameterGroupFamily" --engine mysql The output contains
+	// duplicates. The following are the valid DB engine values:
+	//
+	// * aurora (for MySQL
+	// 5.6-compatible Aurora)
+	//
+	// * aurora-mysql (for MySQL 5.7-compatible Aurora)
+	//
+	// *
+	// aurora-postgresql
+	//
+	// * mariadb
+	//
+	// * mysql
+	//
+	// * oracle-ee
+	//
+	// * oracle-se2
+	//
+	// *
+	// oracle-se1
+	//
+	// * oracle-se
+	//
+	// * postgres
+	//
+	// * sqlserver-ee
+	//
+	// * sqlserver-se
+	//
+	// *
+	// sqlserver-ex
+	//
+	// * sqlserver-web
 	//
 	// This member is required.
 	DBParameterGroupFamily *string

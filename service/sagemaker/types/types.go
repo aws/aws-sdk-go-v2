@@ -1467,14 +1467,14 @@ type AutoMLJobArtifacts struct {
 // generate.
 type AutoMLJobCompletionCriteria struct {
 
-	// The maximum time, in seconds, an AutoML job is allowed to wait for a trial to
-	// complete. It must be equal to or greater than MaxRuntimePerTrainingJobInSeconds.
+	// The maximum runtime, in seconds, an AutoML job has to complete.
 	MaxAutoMLJobRuntimeInSeconds *int32
 
 	// The maximum number of times a training job is allowed to run.
 	MaxCandidates *int32
 
-	// The maximum time, in seconds, a job is allowed to run.
+	// The maximum time, in seconds, a training job is allowed to run as part of an
+	// AutoML job.
 	MaxRuntimePerTrainingJobInSeconds *int32
 }
 
@@ -1688,6 +1688,20 @@ type CacheHitResult struct {
 
 	// The Amazon Resource Name (ARN) of the pipeline execution.
 	SourcePipelineExecutionArn *string
+}
+
+// Metadata about a callback step.
+type CallbackStepMetadata struct {
+
+	// The pipeline generated token from the Amazon SQS queue.
+	CallbackToken *string
+
+	// A list of the output parameters of the callback step.
+	OutputParameters []OutputParameter
+
+	// The URL of the Amazon Simple Queue Service (Amazon SQS) queue used by the
+	// callback step.
+	SqsQueueUrl *string
 }
 
 // The location of artifacts for an AutoML candidate job.
@@ -5565,7 +5579,7 @@ type KernelGatewayImageConfig struct {
 // The specification of a Jupyter kernel.
 type KernelSpec struct {
 
-	// The name of the kernel.
+	// The name of the Jupyter kernel in the image. This value is case sensitive.
 	//
 	// This member is required.
 	Name *string
@@ -6054,7 +6068,7 @@ type ModelDataQuality struct {
 type ModelDeployConfig struct {
 
 	// Set to True to automatically generate an endpoint name for a one-click Autopilot
-	// model deployment; set to False otherwise. The default value is True. If you set
+	// model deployment; set to False otherwise. The default value is False. If you set
 	// AutoGenerateEndpointName to True, do not specify the EndpointName; otherwise a
 	// 400 error is thrown.
 	AutoGenerateEndpointName bool
@@ -7509,6 +7523,20 @@ type OutputDataConfig struct {
 	KmsKeyId *string
 }
 
+// An output parameter of a pipeline step.
+type OutputParameter struct {
+
+	// The name of the output parameter.
+	//
+	// This member is required.
+	Name *string
+
+	// The value of the output parameter.
+	//
+	// This member is required.
+	Value *string
+}
+
 // Assigns a value to a named Pipeline parameter.
 type Parameter struct {
 
@@ -7637,6 +7665,9 @@ type PipelineExecution struct {
 	// The creation time of the pipeline execution.
 	CreationTime *time.Time
 
+	// If the execution failed, a message describing why.
+	FailureReason *string
+
 	// Information about the user who created or modified an experiment, trial, or
 	// trial component.
 	LastModifiedBy *UserContext
@@ -7659,6 +7690,9 @@ type PipelineExecution struct {
 	// The status of the pipeline status.
 	PipelineExecutionStatus PipelineExecutionStatus
 
+	// Specifies the names of the experiment and trial created by a pipeline.
+	PipelineExperimentConfig *PipelineExperimentConfig
+
 	// Contains a list of pipeline parameters. This list can be empty.
 	PipelineParameters []Parameter
 }
@@ -7676,7 +7710,7 @@ type PipelineExecutionStep struct {
 	// failed its execution.
 	FailureReason *string
 
-	// The metadata for the step execution.
+	// Metadata for the step execution.
 	Metadata *PipelineExecutionStepMetadata
 
 	// The time that the step started executing.
@@ -7691,6 +7725,9 @@ type PipelineExecutionStep struct {
 
 // Metadata for a step execution.
 type PipelineExecutionStepMetadata struct {
+
+	// Metadata about a callback step.
+	Callback *CallbackStepMetadata
 
 	// If this is a Condition step metadata object, details on the condition.
 	Condition *ConditionStepMetadata
@@ -7731,6 +7768,16 @@ type PipelineExecutionSummary struct {
 
 	// The start time of the pipeline execution.
 	StartTime *time.Time
+}
+
+// Specifies the names of the experiment and trial created by a pipeline.
+type PipelineExperimentConfig struct {
+
+	// The name of the experiment.
+	ExperimentName *string
+
+	// The name of the trial.
+	TrialName *string
 }
 
 // A summary of a pipeline.
@@ -8088,8 +8135,8 @@ type ProcessingStoppingCondition struct {
 	MaxRuntimeInSeconds int32
 }
 
-// Identifies a model that you want to host and the resources to deploy for hosting
-// it. If you are deploying multiple models, tell Amazon SageMaker how to
+// Identifies a model that you want to host and the resources chosen to deploy for
+// hosting it. If you are deploying multiple models, tell Amazon SageMaker how to
 // distribute traffic among the models by specifying variant weights.
 type ProductionVariant struct {
 
@@ -9332,10 +9379,20 @@ type SuggestionQuery struct {
 	PropertyNameQuery *PropertyNameQuery
 }
 
-// Describes a tag.
+// A tag object that consists of a key and an optional value, used to manage
+// metadata for Amazon SageMaker AWS resources. You can add tags to notebook
+// instances, training jobs, hyperparameter tuning jobs, batch transform jobs,
+// models, labeling jobs, work teams, endpoint configurations, and endpoints. For
+// more information on adding tags to Amazon SageMaker resources, see AddTags. For
+// more information on adding metadata to your AWS resources with tagging, see
+// Tagging AWS resources
+// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html). For advice on
+// best practices for managing AWS resources with tagging, see Tagging Best
+// Practices: Implement an Effective AWS Resource Tagging Strategy
+// (https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf).
 type Tag struct {
 
-	// The tag key.
+	// The tag key. Tag keys must be unique per resource.
 	//
 	// This member is required.
 	Key *string

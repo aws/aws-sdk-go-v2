@@ -20,6 +20,22 @@ import (
 // verified email exists, an InvalidParameterException is thrown. To use the
 // confirmation code for resetting the password, call ConfirmForgotPassword
 // (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html).
+// This action might generate an SMS text message. Starting June 1, 2021, U.S.
+// telecom carriers require that you register an origination phone number before
+// you can send SMS messages to U.S. phone numbers. If you use SMS text messages in
+// Amazon Cognito, you must register a phone number with Amazon Pinpoint
+// (https://console.aws.amazon.com/pinpoint/home/). Cognito will use the the
+// registered number automatically. Otherwise, Cognito users that must receive SMS
+// messages might be unable to sign up, activate their accounts, or sign in. If you
+// have never used SMS text messages with Amazon Cognito or any other AWS service,
+// Amazon SNS might place your account in SMS sandbox. In sandbox mode
+// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you’ll have
+// limitations, such as sending messages to only verified phone numbers. After
+// testing in the sandbox environment, you can move out of the SMS sandbox and into
+// production. For more information, see  SMS message settings for Cognito User
+// Pools
+// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-sms-userpool-settings.html)
+// in the Amazon Cognito Developer Guide.
 func (c *Client) ForgotPassword(ctx context.Context, params *ForgotPasswordInput, optFns ...func(*Options)) (*ForgotPasswordOutput, error) {
 	if params == nil {
 		params = &ForgotPasswordInput{}

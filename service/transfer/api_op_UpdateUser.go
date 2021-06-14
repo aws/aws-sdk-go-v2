@@ -47,9 +47,8 @@ type UpdateUserInput struct {
 	// This member is required.
 	UserName *string
 
-	// Specifies the landing directory (folder) for a user when they log in to the
-	// server using their file transfer protocol client. An example is
-	// your-Amazon-S3-bucket-name>/home/username.
+	// The landing directory (folder) for a user when they log in to the server using
+	// the client. A HomeDirectory example is /bucket_name/home/mydirectory.
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and
@@ -81,14 +80,15 @@ type UpdateUserInput struct {
 	// your users.
 	HomeDirectoryType types.HomeDirectoryType
 
-	// Allows you to supply a scope-down policy for your user so you can use the same
-	// IAM role across multiple users. The policy scopes down user access to portions
-	// of your Amazon S3 bucket. Variables you can use inside this policy include
-	// ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}. For
-	// scope-down policies, AWS Transfer Family stores the policy as a JSON blob,
-	// instead of the Amazon Resource Name (ARN) of the policy. You save the policy as
-	// a JSON blob and pass it in the Policy argument. For an example of a scope-down
-	// policy, see Creating a scope-down policy
+	// A scope-down policy for your user so that you can use the same IAM role across
+	// multiple users. This policy scopes down user access to portions of their Amazon
+	// S3 bucket. Variables that you can use inside this policy include
+	// ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
+	// This only applies when domain of ServerId is S3. Amazon EFS does not use
+	// scope-down policies. For scope-down policies, AWS Transfer Family stores the
+	// policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy.
+	// You save the policy as a JSON blob and pass it in the Policy argument. For an
+	// example of a scope-down policy, see Creating a scope-down policy
 	// (https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down).
 	// For more information, see AssumeRole
 	// (https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) in the
@@ -103,11 +103,12 @@ type UpdateUserInput struct {
 	// systems.
 	PosixProfile *types.PosixProfile
 
-	// The IAM role that controls your users' access to your Amazon S3 bucket. The
-	// policies attached to this role determine the level of access you want to provide
-	// your users when transferring files into and out of your S3 bucket or buckets.
-	// The IAM role should also contain a trust relationship that allows the server to
-	// access your resources when servicing your users' transfer requests.
+	// Specifies the Amazon Resource Name (ARN) of the IAM role that controls your
+	// users' access to your Amazon S3 bucket or EFS file system. The policies attached
+	// to this role determine the level of access that you want to provide your users
+	// when transferring files into and out of your Amazon S3 bucket or EFS file
+	// system. The IAM role should also contain a trust relationship that allows the
+	// server to access your resources when servicing your users' transfer requests.
 	Role *string
 }
 
