@@ -117,7 +117,9 @@ func (d *Downloader) DownloadStream(ctx context.Context, w io.Writer, input *s3.
 			if !ok {
 				// channel was closed we have read everything so return
 				// and stop the routines
-				return totalBytes, nil
+				// check error again incase of race
+				err, _ := <-errChan
+				return totalBytes, err
 			}
 			get, ok := out.(*s3.GetObjectOutput)
 			if !ok {

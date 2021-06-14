@@ -48,10 +48,10 @@ func SlidingWindow(
 			out: make(chan interface{}),
 		}
 	}
+	inner, cancel := context.WithCancel(ctx)
 
 	// the channels we need
-	innerErrors := make(chan error, 1)
-	outerErrors := make(chan error, 1)
+	errChan := make(chan error, 1)
 
 	// Starting threads
 	go func() {
@@ -66,14 +66,17 @@ func SlidingWindow(
 		for {
 			obj := window[windowLocation%windowSize]
 			select {
-			case <-ctx.Done():
+			case <-inner.Done():
 				// stop looping
 				return
 			case <-obj.Lock():
+				// The go routine per window node
 				go func(windowLocation int, obj *windowObject) {
 					result, err := producer(windowLocation)
 					if err != nil {
-						innerErrors <- err
+						errChan <- err
+						cancel()
+						return
 					}
 					obj.Write(result)
 				}(windowLocation, obj)
@@ -85,9 +88,9 @@ func SlidingWindow(
 	outChan := make(chan interface{})
 	// Slide the window
 	go func() {
+		defer cancel()
 		defer close(outChan)
-		defer close(innerErrors)
-		defer close(outerErrors)
+		defer close(errChan)
 
 		windowLocation := 0
 		for {
@@ -96,11 +99,7 @@ func SlidingWindow(
 			select {
 			case result = <-obj.out:
 				obj.used.Unlock()
-			case err := <-innerErrors:
-				// any error will stop this
-				outerErrors <- err
-				return
-			case <-ctx.Done():
+			case <-inner.Done():
 				return
 			}
 
@@ -112,7 +111,7 @@ func SlidingWindow(
 			// Write out the responses
 			select {
 			case outChan <- result:
-			case <-ctx.Done():
+			case <-inner.Done():
 				return
 			}
 
@@ -121,5 +120,5 @@ func SlidingWindow(
 	}()
 
 	// join on the functions
-	return outChan, outerErrors
+	return outChan, errChan
 }

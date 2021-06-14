@@ -232,7 +232,7 @@ func TestDownloadStreamContentRangeTotalAny(t *testing.T) {
 	if e, a := int64(len(buf2MB)), n; e != a {
 		t.Errorf("expect %d bytes read, got %d", e, a)
 	}
-	if e, a := 3, *invocations; e != a {
+	if e, a := 2, *invocations; e != a {
 		t.Errorf("expect %v API calls, got %v", e, a)
 	}
 
