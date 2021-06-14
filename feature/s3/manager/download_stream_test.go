@@ -9,6 +9,7 @@ import (
 	"reflect"
 	"sort"
 	"strings"
+	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -365,11 +366,18 @@ func TestDownloadStream_WithRange(t *testing.T) {
 }
 
 func TestDownloadStream_WithFailure(t *testing.T) {
-	reqCount := int64(0)
 	startingByte := 0
 
+	var m sync.Mutex
+	reqCount := int64(0)
+
 	client := mockDownloadCLient(func(ctx context.Context, params *s3.GetObjectInput, optFns ...func(*s3.Options)) (out *s3.GetObjectOutput, err error) {
-		switch atomic.LoadInt64(&reqCount) {
+		m.Lock()
+		count := reqCount
+		reqCount++
+		m.Unlock()
+
+		switch count {
 		case 1:
 			// Give a chance for the multipart chunks to be queued up
 			time.Sleep(1 * time.Second)
@@ -388,7 +396,6 @@ func TestDownloadStream_WithFailure(t *testing.T) {
 				time.Sleep(25 * time.Millisecond)
 			}
 		}
-		atomic.AddInt64(&reqCount, 1)
 		return out, err
 	})
 
