@@ -52,6 +52,16 @@ func (d *Downloader) DownloadStream(ctx context.Context, w io.Writer, input *s3.
 	inner, cancel := context.WithCancel(ctx)
 	defer cancel()
 
+	// if a range is provided just download that and skip everything else
+	if rng := aws.ToString(input.Range); len(rng) > 0 {
+		options := append(d.ClientOptions, d.retryOption)
+		out, err := d.S3.GetObject(inner, input, options...)
+		if err != nil {
+			return 0, err
+		}
+		return io.Copy(w, out.Body)
+	}
+
 	var reportedSize int64 = -1 // total size of the file in bytes as reported by S3
 	outChan, errChan := window.SlidingWindow(inner, d.Concurrency, func(location int) (interface{}, error) {
 		start := int64(location) * d.PartSize

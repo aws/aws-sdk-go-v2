@@ -330,39 +330,39 @@ func TestDownloadStreamWithContextCanceled(t *testing.T) {
 	}
 }
 
-// func TestDownloadStream_WithRange(t *testing.T) {
-// 	c, invocations, ranges := newDownloadRangeClient([]byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+func TestDownloadStream_WithRange(t *testing.T) {
+	c, invocations, ranges := newDownloadRangeClient([]byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
 
-// 	d := manager.NewDownloader(c, func(d *manager.Downloader) {
-// 		d.Concurrency = 10 // should be ignored
-// 		d.PartSize = 1     // should be ignored
-// 	})
+	d := manager.NewDownloader(c, func(d *manager.Downloader) {
+		d.Concurrency = 10 // should be ignored
+		d.PartSize = 1     // should be ignored
+	})
 
-// 	w := &bytes.Buffer{}
-// 	n, err := d.DownloadStream(context.Background(), w, &s3.GetObjectInput{
-// 		Bucket: aws.String("bucket"),
-// 		Key:    aws.String("key"),
-// 		Range:  aws.String("bytes=2-6"),
-// 	})
+	w := &bytes.Buffer{}
+	n, err := d.DownloadStream(context.Background(), w, &s3.GetObjectInput{
+		Bucket: aws.String("bucket"),
+		Key:    aws.String("key"),
+		Range:  aws.String("bytes=2-6"),
+	})
 
-// 	if err != nil {
-// 		t.Fatalf("expect no error, got %v", err)
-// 	}
-// 	if e, a := int64(5), n; e != a {
-// 		t.Errorf("expect %d bytes read, got %d", e, a)
-// 	}
-// 	if e, a := 1, *invocations; e != a {
-// 		t.Errorf("expect %v API calls, got %v", e, a)
-// 	}
-// 	expectRngs := []string{"bytes=2-6"}
-// 	if e, a := expectRngs, *ranges; !reflect.DeepEqual(e, a) {
-// 		t.Errorf("expect %v ranges, got %v", e, a)
-// 	}
-// 	expectBytes := []byte{2, 3, 4, 5, 6}
-// 	if e, a := expectBytes, w.Bytes(); !reflect.DeepEqual(e, a) {
-// 		t.Errorf("expect %v bytes, got %v", e, a)
-// 	}
-// }
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := int64(5), n; e != a {
+		t.Errorf("expect %d bytes read, got %d", e, a)
+	}
+	if e, a := 1, *invocations; e != a {
+		t.Errorf("expect %v API calls, got %v", e, a)
+	}
+	expectRngs := []string{"bytes=2-6"}
+	if e, a := expectRngs, *ranges; !reflect.DeepEqual(e, a) {
+		t.Errorf("expect %v ranges, got %v", e, a)
+	}
+	expectBytes := []byte{2, 3, 4, 5, 6}
+	if e, a := expectBytes, w.Bytes(); !reflect.DeepEqual(e, a) {
+		t.Errorf("expect %v bytes, got %v", e, a)
+	}
+}
 
 func TestDownloadStream_WithFailure(t *testing.T) {
 	reqCount := int64(0)

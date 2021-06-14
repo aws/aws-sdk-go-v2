@@ -300,11 +300,7 @@ func isEOF(err error) bool {
 // of bytes to be read so that the worker manager knows when it is finished.
 func (d *downloader) downloadPart(ch chan dlchunk) {
 	defer d.wg.Done()
-	for {
-		chunk, ok := <-ch
-		if !ok {
-			break
-		}
+	for chunk := range ch {
 		if d.getErr() != nil {
 			// Drain the channel if there is an error, to prevent deadlocking
 			// of download producer.
