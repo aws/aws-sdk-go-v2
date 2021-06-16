@@ -119,11 +119,11 @@ func addOpListTagsForResourceDiscoverEndpointMiddleware(stack *middleware.Stack,
 			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
 				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
 				opt.Logger = o.Logger
-				opt.EndpointResolverUsedForDiscovery = o.EndpointResolverUsedForDiscovery
+				opt.EndpointResolverUsedForDiscovery = o.EndpointDiscovery.EndpointResolverUsedForDiscovery
 			},
 		},
 		DiscoverOperation:            c.fetchOpListTagsForResourceDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    true,
 	}, "ResolveEndpoint", middleware.After)
 }

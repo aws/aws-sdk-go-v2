@@ -134,11 +134,11 @@ func addOpCreateDatabaseDiscoverEndpointMiddleware(stack *middleware.Stack, o Op
 			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
 				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
 				opt.Logger = o.Logger
-				opt.EndpointResolverUsedForDiscovery = o.EndpointResolverUsedForDiscovery
+				opt.EndpointResolverUsedForDiscovery = o.EndpointDiscovery.EndpointResolverUsedForDiscovery
 			},
 		},
 		DiscoverOperation:            c.fetchOpCreateDatabaseDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    true,
 	}, "ResolveEndpoint", middleware.After)
 }

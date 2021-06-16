@@ -78,17 +78,13 @@ type Options struct {
 	Credentials aws.CredentialsProvider
 
 	// Allows configuring endpoint discovery
-	EnableEndpointDiscovery aws.EndpointDiscoveryEnableState
+	EndpointDiscovery EndpointDiscoveryOptions
 
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions EndpointResolverOptions
 
 	// The service endpoint resolver.
 	EndpointResolver EndpointResolver
-
-	// Allows configuring an endpoint resolver to use when attempting an endpoint
-	// discovery api request.
-	EndpointResolverUsedForDiscovery EndpointResolver
 
 	// Signature Version 4 (SigV4) Signer
 	HTTPSignerV4 HTTPSignerV4
@@ -271,7 +267,7 @@ func resolveEnableEndpointDiscoveryFromConfigSources(cfg aws.Config, o *Options)
 		return err
 	}
 	if found {
-		o.EnableEndpointDiscovery = value
+		o.EndpointDiscovery.EnableEndpointDiscovery = value
 	}
 	return nil
 }
@@ -281,11 +277,21 @@ func resolveEndpointCache(c *Client) {
 	c.endpointCache = internalEndpointDiscovery.NewEndpointCache(10)
 }
 
+// EndpointDiscoveryOptions used to configure endpoint discovery
+type EndpointDiscoveryOptions struct {
+	// Enables endpoint discovery
+	EnableEndpointDiscovery aws.EndpointDiscoveryEnableState
+
+	// Allows configuring an endpoint resolver to use when attempting an endpoint
+	// discovery api request.
+	EndpointResolverUsedForDiscovery EndpointResolver
+}
+
 func resolveEnableEndpointDiscovery(o *Options) {
-	if o.EnableEndpointDiscovery != aws.EndpointDiscoveryUnset {
+	if o.EndpointDiscovery.EnableEndpointDiscovery != aws.EndpointDiscoveryUnset {
 		return
 	}
-	o.EnableEndpointDiscovery = aws.EndpointDiscoveryAuto
+	o.EndpointDiscovery.EnableEndpointDiscovery = aws.EndpointDiscoveryAuto
 }
 
 func (c *Client) handleEndpointDiscoveryFromService(ctx context.Context, input *DescribeEndpointsInput, key string, opt internalEndpointDiscovery.DiscoverEndpointOptions) (internalEndpointDiscovery.Endpoint, error) {
