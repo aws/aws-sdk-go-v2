@@ -1,0 +1,10 @@
+{
+    "id": "831c0006-90e9-4b1e-aece-aac1957a3c6b",
+    "type": "feature",
+    "description": "Adds support for endpoint discovery.",
+    "modules": [
+        "service/dynamodb",
+        "service/timestreamquery",
+        "service/timestreamwrite"
+    ]
+}
