@@ -154,7 +154,7 @@ func addOpCreateBackupDiscoverEndpointMiddleware(stack *middleware.Stack, o Opti
 			},
 		},
 		DiscoverOperation:            c.fetchOpCreateBackupDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

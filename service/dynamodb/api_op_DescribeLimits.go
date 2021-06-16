@@ -188,7 +188,7 @@ func addOpDescribeLimitsDiscoverEndpointMiddleware(stack *middleware.Stack, o Op
 			},
 		},
 		DiscoverOperation:            c.fetchOpDescribeLimitsDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

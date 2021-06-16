@@ -138,7 +138,7 @@ func addOpListGlobalTablesDiscoverEndpointMiddleware(stack *middleware.Stack, o 
 			},
 		},
 		DiscoverOperation:            c.fetchOpListGlobalTablesDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

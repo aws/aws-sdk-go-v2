@@ -287,7 +287,7 @@ func addOpBatchGetItemDiscoverEndpointMiddleware(stack *middleware.Stack, o Opti
 			},
 		},
 		DiscoverOperation:            c.fetchOpBatchGetItemDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

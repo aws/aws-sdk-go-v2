@@ -168,7 +168,7 @@ func addOpRestoreTableFromBackupDiscoverEndpointMiddleware(stack *middleware.Sta
 			},
 		},
 		DiscoverOperation:            c.fetchOpRestoreTableFromBackupDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

@@ -164,7 +164,7 @@ func addOpTransactGetItemsDiscoverEndpointMiddleware(stack *middleware.Stack, o 
 			},
 		},
 		DiscoverOperation:            c.fetchOpTransactGetItemsDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

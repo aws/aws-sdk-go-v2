@@ -141,7 +141,7 @@ func addOpListTagsOfResourceDiscoverEndpointMiddleware(stack *middleware.Stack, 
 			},
 		},
 		DiscoverOperation:            c.fetchOpListTagsOfResourceDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

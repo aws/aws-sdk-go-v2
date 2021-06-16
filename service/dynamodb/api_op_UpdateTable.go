@@ -207,7 +207,7 @@ func addOpUpdateTableDiscoverEndpointMiddleware(stack *middleware.Stack, o Optio
 			},
 		},
 		DiscoverOperation:            c.fetchOpUpdateTableDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

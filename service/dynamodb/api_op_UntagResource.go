@@ -133,7 +133,7 @@ func addOpUntagResourceDiscoverEndpointMiddleware(stack *middleware.Stack, o Opt
 			},
 		},
 		DiscoverOperation:            c.fetchOpUntagResourceDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

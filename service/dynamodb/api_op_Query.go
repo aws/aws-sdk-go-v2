@@ -475,7 +475,7 @@ func addOpQueryDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c 
 			},
 		},
 		DiscoverOperation:            c.fetchOpQueryDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

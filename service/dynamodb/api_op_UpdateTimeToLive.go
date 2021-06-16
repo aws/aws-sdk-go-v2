@@ -152,7 +152,7 @@ func addOpUpdateTimeToLiveDiscoverEndpointMiddleware(stack *middleware.Stack, o 
 			},
 		},
 		DiscoverOperation:            c.fetchOpUpdateTimeToLiveDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

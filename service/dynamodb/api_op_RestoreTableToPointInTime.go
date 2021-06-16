@@ -198,7 +198,7 @@ func addOpRestoreTableToPointInTimeDiscoverEndpointMiddleware(stack *middleware.
 			},
 		},
 		DiscoverOperation:            c.fetchOpRestoreTableToPointInTimeDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

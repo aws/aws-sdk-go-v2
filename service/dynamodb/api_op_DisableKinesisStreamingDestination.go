@@ -139,7 +139,7 @@ func addOpDisableKinesisStreamingDestinationDiscoverEndpointMiddleware(stack *mi
 			},
 		},
 		DiscoverOperation:            c.fetchOpDisableKinesisStreamingDestinationDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

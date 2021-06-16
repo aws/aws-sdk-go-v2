@@ -91,7 +91,7 @@ type Options struct {
 	EnableAcceptEncodingGzip bool
 
 	// Allows configuring endpoint discovery
-	EnableEndpointDiscovery aws.EndpointDiscoveryEnableState
+	EndpointDiscovery EndpointDiscoveryOptions
 
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions EndpointResolverOptions
@@ -291,7 +291,7 @@ func resolveEnableEndpointDiscoveryFromConfigSources(cfg aws.Config, o *Options)
 		return err
 	}
 	if found {
-		o.EnableEndpointDiscovery = value
+		o.EndpointDiscovery.EnableEndpointDiscovery = value
 	}
 	return nil
 }
@@ -301,11 +301,17 @@ func resolveEndpointCache(c *Client) {
 	c.endpointCache = internalEndpointDiscovery.NewEndpointCache(10)
 }
 
+// EndpointDiscoveryOptions used to configure endpoint discovery
+type EndpointDiscoveryOptions struct {
+	// Enables endpoint discovery
+	EnableEndpointDiscovery aws.EndpointDiscoveryEnableState
+}
+
 func resolveEnableEndpointDiscovery(o *Options) {
-	if o.EnableEndpointDiscovery != aws.EndpointDiscoveryUnset {
+	if o.EndpointDiscovery.EnableEndpointDiscovery != aws.EndpointDiscoveryUnset {
 		return
 	}
-	o.EnableEndpointDiscovery = aws.EndpointDiscoveryAuto
+	o.EndpointDiscovery.EnableEndpointDiscovery = aws.EndpointDiscoveryAuto
 }
 
 func (c *Client) handleEndpointDiscoveryFromService(ctx context.Context, input *DescribeEndpointsInput, key string, opt internalEndpointDiscovery.DiscoverEndpointOptions) (internalEndpointDiscovery.Endpoint, error) {

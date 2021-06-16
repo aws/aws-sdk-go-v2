@@ -169,7 +169,7 @@ func addOpListBackupsDiscoverEndpointMiddleware(stack *middleware.Stack, o Optio
 			},
 		},
 		DiscoverOperation:            c.fetchOpListBackupsDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

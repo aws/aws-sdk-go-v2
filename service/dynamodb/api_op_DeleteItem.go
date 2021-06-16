@@ -300,7 +300,7 @@ func addOpDeleteItemDiscoverEndpointMiddleware(stack *middleware.Stack, o Option
 			},
 		},
 		DiscoverOperation:            c.fetchOpDeleteItemDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

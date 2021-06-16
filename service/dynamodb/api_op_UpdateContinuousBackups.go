@@ -141,7 +141,7 @@ func addOpUpdateContinuousBackupsDiscoverEndpointMiddleware(stack *middleware.St
 			},
 		},
 		DiscoverOperation:            c.fetchOpUpdateContinuousBackupsDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

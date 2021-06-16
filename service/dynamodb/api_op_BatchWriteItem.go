@@ -294,7 +294,7 @@ func addOpBatchWriteItemDiscoverEndpointMiddleware(stack *middleware.Stack, o Op
 			},
 		},
 		DiscoverOperation:            c.fetchOpBatchWriteItemDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }

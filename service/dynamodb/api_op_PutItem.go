@@ -361,7 +361,7 @@ func addOpPutItemDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, 
 			},
 		},
 		DiscoverOperation:            c.fetchOpPutItemDiscoverEndpoint,
-		EndpointDiscoveryEnableState: o.EnableEndpointDiscovery,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 	}, "ResolveEndpoint", middleware.After)
 }
