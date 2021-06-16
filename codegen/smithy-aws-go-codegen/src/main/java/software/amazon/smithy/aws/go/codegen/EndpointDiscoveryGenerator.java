@@ -64,26 +64,60 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
     // client specific endpoint discovery handler function name
     private static final String DISCOVERY_ENDPOINT_HANDLER_NAME = "handleEndpointDiscoveryFromService";
     // Symbol for Endpoint resolver interface specific to the client.
-    private static Symbol ENDPOINT_RESOLVER_INTERFACE_NAME= SymbolUtils.createValueSymbolBuilder("EndpointResolver").build();
+    private static Symbol ENDPOINT_RESOLVER_INTERFACE_NAME= SymbolUtils.createValueSymbolBuilder(
+            "EndpointResolver").build();
 
-    // endpoint discovery option
+    // EndpointDiscovery options
+    private static final String ENDPOINT_DISCOVERY_OPTION = "EndpointDiscovery";
+    private static final Symbol ENDPOINT_DISCOVERY_OPTION_TYPE = SymbolUtils.createValueSymbolBuilder(
+            "EndpointDiscoveryOptions").build();
+
+    // enable endpoint discovery
     private static final String ENABLE_ENDPOINT_DISCOVERY_OPTION = "EnableEndpointDiscovery";
     private static final String ENDPOINT_RESOLVER_USED_FOR_DISCOVERY = "EndpointResolverUsedForDiscovery";
-    private static final String DISABLE_HTTPS = "DisableHTTPS";
+
     private static final Symbol ENDPOINT_DISCOVERY_ENABLE_STATE_TYPE = SymbolUtils.createValueSymbolBuilder(
             "EndpointDiscoveryEnableState", AwsGoDependency.AWS_CORE).build();
     private static final Symbol ENDPOINT_DISCOVERY_ENABLE_STATE_UNSET = SymbolUtils.createValueSymbolBuilder(
             "EndpointDiscoveryUnset", AwsGoDependency.AWS_CORE).build();
     private static final Symbol ENDPOINT_DISCOVERY_ENABLE_STATE_AUTO = SymbolUtils.createValueSymbolBuilder(
             "EndpointDiscoveryAuto", AwsGoDependency.AWS_CORE).build();
+
+    // disable-https option for endpoint discovery middleware option
+    private static final String DISABLE_HTTPS = "DisableHTTPS";
+
+    // resolver for enable endpoint discovery
     private static final String ENABLE_ENDPOINT_DISCOVERY_OPTION_RESOLVER = "resolveEnableEndpointDiscovery";
-    private static final Set<String> ServicesSupportingCustomDiscoveryEndpoint = SetUtils.of(
-            "Timestream Query", "Timestream Write");
+
     List<RuntimeClientPlugin> runtimeClientPlugins = new ArrayList<>();
 
-    private static Symbol getUniversalSymbol(String symbolName) {
-        return SymbolUtils.createValueSymbolBuilder(symbolName)
-                .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true).build();
+
+    /**
+     * Generates resolver function to default EnableEndpointDiscovery to AUTO.
+     *
+     * @param model   is the generation model
+     * @param writer  is the GoWriter
+     * @param service is the service for which endpoint discovery is performed.
+     */
+    private static void generateEndpointDiscoveryOptions(Model model, GoWriter writer, ServiceShape service) {
+        if (!serviceSupportsEndpointDiscovery(model, service)) {
+            return;
+        }
+
+        writer.write("// $T used to configure endpoint discovery", ENDPOINT_DISCOVERY_OPTION_TYPE);
+        writer.openBlock("type $T struct {", "}", ENDPOINT_DISCOVERY_OPTION_TYPE, () -> {
+            writer.writeDocs("Enables endpoint discovery");
+            writer.write("$L $T", ENABLE_ENDPOINT_DISCOVERY_OPTION, ENDPOINT_DISCOVERY_ENABLE_STATE_TYPE);
+
+            if (serviceSupportsCustomDiscoveryEndpoint(model, service)) {
+                writer.write("");
+                writer.writeDocs("Allows configuring an endpoint resolver to use when attempting an endpoint discovery "
+                        + "api request.");
+                writer.write("$L $T", ENDPOINT_RESOLVER_USED_FOR_DISCOVERY, ENDPOINT_RESOLVER_INTERFACE_NAME);
+
+            }
+        });
+        writer.write("");
     }
 
     /**
@@ -100,8 +134,10 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
 
         writer.openBlock("func $L(o *Options) {", "}",
                 ENABLE_ENDPOINT_DISCOVERY_OPTION_RESOLVER, () -> {
-                    writer.write("if o.$L != $T { return }", ENABLE_ENDPOINT_DISCOVERY_OPTION, ENDPOINT_DISCOVERY_ENABLE_STATE_UNSET);
-                    writer.write("o.$L = $T", ENABLE_ENDPOINT_DISCOVERY_OPTION, ENDPOINT_DISCOVERY_ENABLE_STATE_AUTO);
+                    writer.write("if o.$L.$L != $T { return }", ENDPOINT_DISCOVERY_OPTION,
+                            ENABLE_ENDPOINT_DISCOVERY_OPTION, ENDPOINT_DISCOVERY_ENABLE_STATE_UNSET);
+                    writer.write("o.$L.$L = $T", ENDPOINT_DISCOVERY_OPTION,
+                            ENABLE_ENDPOINT_DISCOVERY_OPTION, ENDPOINT_DISCOVERY_ENABLE_STATE_AUTO);
                 });
         writer.write("");
     }
@@ -143,14 +179,14 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
                                 writer.write("opt.Logger = o.Logger");
 
                                 if (serviceSupportsCustomDiscoveryEndpoint(model, service)) {
-                                    writer.write("opt.$L = o.$L", ENDPOINT_RESOLVER_USED_FOR_DISCOVERY,
-                                            ENDPOINT_RESOLVER_USED_FOR_DISCOVERY);
+                                    writer.write("opt.$L = o.$L.$L", ENDPOINT_RESOLVER_USED_FOR_DISCOVERY,
+                                            ENDPOINT_DISCOVERY_OPTION, ENDPOINT_RESOLVER_USED_FOR_DISCOVERY);
                                 }
 
                             });
                         });
                         writer.write("DiscoverOperation: c.$L,", discoverOperationName);
-                        writer.write("EndpointDiscoveryEnableState: o.$L,", ENABLE_ENDPOINT_DISCOVERY_OPTION);
+                        writer.write("EndpointDiscoveryEnableState: o.$L.$L,", ENDPOINT_DISCOVERY_OPTION, ENABLE_ENDPOINT_DISCOVERY_OPTION);
                         writer.write("EndpointDiscoveryRequired: $L,",
                                 operationRequiresEndpointDiscovery(model, service, operation));
                     });
@@ -432,6 +468,9 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
 
     // Returns true if service supports providing custom endpoint used with the endpoint discovery api call
     private static boolean serviceSupportsCustomDiscoveryEndpoint(Model model, ServiceShape service) {
+        Set<String> ServicesSupportingCustomDiscoveryEndpoint = SetUtils.of(
+                "Timestream Query", "Timestream Write");
+
         String sdkId = service.expectTrait(ServiceTrait.class).getSdkId();
         for (String id : ServicesSupportingCustomDiscoveryEndpoint) {
             if (sdkId.equalsIgnoreCase(id)) return true;
@@ -484,8 +523,8 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .servicePredicate(EndpointDiscoveryGenerator::serviceSupportsEndpointDiscovery)
                         .addConfigField(ConfigField.builder()
-                                .name(ENABLE_ENDPOINT_DISCOVERY_OPTION)
-                                .type(ENDPOINT_DISCOVERY_ENABLE_STATE_TYPE)
+                                .name(ENDPOINT_DISCOVERY_OPTION)
+                                .type(ENDPOINT_DISCOVERY_OPTION_TYPE)
                                 .documentation("Allows configuring endpoint discovery")
                                 .build())
                         .addConfigFieldResolver(ConfigFieldResolver.builder()
@@ -498,18 +537,18 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
                         .build()
         );
 
-        // Adds config option to provide endpoint used to make request to endpoint discovery service.
-        runtimeClientPlugins.add(
-                RuntimeClientPlugin.builder()
-                        .servicePredicate(EndpointDiscoveryGenerator::serviceSupportsCustomDiscoveryEndpoint)
-                        .addConfigField(ConfigField.builder()
-                                .name(ENDPOINT_RESOLVER_USED_FOR_DISCOVERY)
-                                .type(ENDPOINT_RESOLVER_INTERFACE_NAME)
-                                .documentation("Allows configuring an endpoint resolver to use when attempting an"
-                                        + " endpoint discovery api request.")
-                                .build())
-                        .build()
-        );
+//        // Adds config option to provide endpoint used to make request to endpoint discovery service.
+//        runtimeClientPlugins.add(
+//                RuntimeClientPlugin.builder()
+//                        .servicePredicate(EndpointDiscoveryGenerator::serviceSupportsCustomDiscoveryEndpoint)
+//                        .addConfigField(ConfigField.builder()
+//                                .name(ENDPOINT_RESOLVER_USED_FOR_DISCOVERY)
+//                                .type(ENDPOINT_RESOLVER_INTERFACE_NAME)
+//                                .documentation("Allows configuring an endpoint resolver to use when attempting an"
+//                                        + " endpoint discovery api request.")
+//                                .build())
+//                        .build()
+//        );
 
         return runtimeClientPlugins;
     }
@@ -526,6 +565,7 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
         // generate code specific to service client
         goDelegator.useShapeWriter(service, writer -> {
             generateEndpointCacheResolver(model, writer, service);
+            generateEndpointDiscoveryOptions(model, writer, service);
             generateEnableEndpointDiscoveryResolver(model, writer, service);
             generateEndpointDiscoveryHandler(model, symbolProvider, writer, service);
         });

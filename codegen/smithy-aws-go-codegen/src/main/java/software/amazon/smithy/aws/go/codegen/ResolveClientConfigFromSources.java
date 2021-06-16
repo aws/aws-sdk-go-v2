@@ -28,14 +28,16 @@ public class ResolveClientConfigFromSources implements GoIntegration {
     private static final String USE_ARN_REGION_CONFIG_RESOLVER = "resolveUseARNRegion";
     private static final String RESOLVE_USE_ARN_REGION = "ResolveUseARNRegion";
 
-    // EnableEndpointDiscovery
+    // EndpointDiscovery options
+    private static final String ENDPOINT_DISCOVERY_OPTION = "EndpointDiscovery";
+    private static final Symbol ENDPOINT_DISCOVERY_OPTION_TYPE = SymbolUtils.createValueSymbolBuilder(
+            "EndpointDiscoveryOptions").build();
+
+    // Enable EndpointDiscovery
     private static final String ENABLE_ENDPOINT_DISCOVERY_OPTION = "EnableEndpointDiscovery";
-    private static final Symbol ENDPOINT_DISCOVERY_ENABLE_STATE_TYPE = SymbolUtils.createValueSymbolBuilder(
-           "EndpointDiscoveryEnableState", AwsGoDependency.AWS_CORE).build();
     private static final String ENABLE_ENDPOINT_DISCOVERY_CONFIG_RESOLVER = "resolveEnableEndpointDiscoveryFromConfigSources";
     private static final String RESOLVE_ENABLE_ENDPOINT_DISCOVERY = "ResolveEnableEndpointDiscovery";
 
-    private static final String ENDPOINT_USED_FOR_DISCOVERY = "EndpointUsedForDiscovery";
 
     public static final List<AddAwsConfigFields.AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AddAwsConfigFields.AwsConfigField.builder()
@@ -47,8 +49,8 @@ public class ResolveClientConfigFromSources implements GoIntegration {
                             .build())
                     .build(),
             AddAwsConfigFields.AwsConfigField.builder()
-                    .name(ENABLE_ENDPOINT_DISCOVERY_OPTION)
-                    .type(ENDPOINT_DISCOVERY_ENABLE_STATE_TYPE)
+                    .name(ENDPOINT_DISCOVERY_OPTION)
+                    .type(ENDPOINT_DISCOVERY_OPTION_TYPE)
                     .generatedOnClient(false)
                     .servicePredicate(ResolveClientConfigFromSources::supportsEndpointDiscovery)
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(ENABLE_ENDPOINT_DISCOVERY_CONFIG_RESOLVER)
@@ -117,7 +119,7 @@ public class ResolveClientConfigFromSources implements GoIntegration {
             writer.write("value, found, err := $T(context.Background(), cfg.$L)", resolverFunc,
                     CONFIG_SOURCE_CONFIG_NAME);
             writer.write("if err != nil { return err }");
-            writer.write("if found { o.$L = value }", ENABLE_ENDPOINT_DISCOVERY_OPTION);
+            writer.write("if found { o.$L.$L = value }", ENDPOINT_DISCOVERY_OPTION, ENABLE_ENDPOINT_DISCOVERY_OPTION);
         });
         writer.write("");
     }
