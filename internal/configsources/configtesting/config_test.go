@@ -1,4 +1,4 @@
-package assert
+package configtesting
 
 import (
 	"github.com/aws/aws-sdk-go-v2/config"

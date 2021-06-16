@@ -1147,7 +1147,7 @@ func updateEndpointDiscoveryType(dst *aws.EndpointDiscoveryEnableState, section 
 		*dst = aws.EndpointDiscoveryDisabled
 	case strings.EqualFold(value, endpointDiscoveryEnabled):
 		*dst = aws.EndpointDiscoveryEnabled
-	default: // default to auto
+	case strings.EqualFold(value, endpointDiscoveryAuto):
 		*dst = aws.EndpointDiscoveryAuto
 	}
 }

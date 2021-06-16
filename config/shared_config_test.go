@@ -179,7 +179,7 @@ func TestNewSharedConfig(t *testing.T) {
 			ConfigFilenames: []string{testConfigFilename},
 			Expected: SharedConfig{
 				Profile:                 "endpoint_discovery_unknown",
-				EnableEndpointDiscovery: aws.EndpointDiscoveryAuto,
+				EnableEndpointDiscovery: aws.EndpointDiscoveryUnset,
 			},
 		},
 		"Assume role with credential source Ec2Metadata": {

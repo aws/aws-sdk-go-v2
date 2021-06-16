@@ -101,7 +101,7 @@ const (
 	// EndpointDiscoveryUnset represents EndpointDiscoveryEnableState is unset.
 	// Users do not need to use this value explicitly. The behavior for unset
 	// is the same as for EndpointDiscoveryAuto.
-	EndpointDiscoveryUnset = iota
+	EndpointDiscoveryUnset EndpointDiscoveryEnableState = iota
 
 	// EndpointDiscoveryAuto represents an AUTO state that allows endpoint
 	// discovery only when required by the api. This is the default
