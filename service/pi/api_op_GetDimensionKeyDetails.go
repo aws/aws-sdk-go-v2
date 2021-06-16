@@ -21,7 +21,7 @@ func (c *Client) GetDimensionKeyDetails(ctx context.Context, params *GetDimensio
 		params = &GetDimensionKeyDetailsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDimensionKeyDetails", params, optFns, addOperationGetDimensionKeyDetailsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDimensionKeyDetails", params, optFns, c.addOperationGetDimensionKeyDetailsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type GetDimensionKeyDetailsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDimensionKeyDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDimensionKeyDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDimensionKeyDetails{}, middleware.After)
 	if err != nil {
 		return err

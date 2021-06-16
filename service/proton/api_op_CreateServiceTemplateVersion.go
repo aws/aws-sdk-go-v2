@@ -20,7 +20,7 @@ func (c *Client) CreateServiceTemplateVersion(ctx context.Context, params *Creat
 		params = &CreateServiceTemplateVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateServiceTemplateVersion", params, optFns, addOperationCreateServiceTemplateVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateServiceTemplateVersion", params, optFns, c.addOperationCreateServiceTemplateVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type CreateServiceTemplateVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateServiceTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateServiceTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateServiceTemplateVersion{}, middleware.After)
 	if err != nil {
 		return err

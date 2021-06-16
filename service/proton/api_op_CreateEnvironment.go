@@ -21,7 +21,7 @@ func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmen
 		params = &CreateEnvironmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateEnvironment", params, optFns, addOperationCreateEnvironmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateEnvironment", params, optFns, c.addOperationCreateEnvironmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ type CreateEnvironmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateEnvironment{}, middleware.After)
 	if err != nil {
 		return err

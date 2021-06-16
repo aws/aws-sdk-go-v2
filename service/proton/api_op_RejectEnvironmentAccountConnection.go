@@ -22,7 +22,7 @@ func (c *Client) RejectEnvironmentAccountConnection(ctx context.Context, params 
 		params = &RejectEnvironmentAccountConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RejectEnvironmentAccountConnection", params, optFns, addOperationRejectEnvironmentAccountConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RejectEnvironmentAccountConnection", params, optFns, c.addOperationRejectEnvironmentAccountConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type RejectEnvironmentAccountConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRejectEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRejectEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRejectEnvironmentAccountConnection{}, middleware.After)
 	if err != nil {
 		return err

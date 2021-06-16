@@ -19,7 +19,7 @@ func (c *Client) UpdateEnvironmentAccountConnection(ctx context.Context, params 
 		params = &UpdateEnvironmentAccountConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateEnvironmentAccountConnection", params, optFns, addOperationUpdateEnvironmentAccountConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateEnvironmentAccountConnection", params, optFns, c.addOperationUpdateEnvironmentAccountConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type UpdateEnvironmentAccountConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateEnvironmentAccountConnection{}, middleware.After)
 	if err != nil {
 		return err

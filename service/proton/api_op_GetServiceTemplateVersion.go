@@ -17,7 +17,7 @@ func (c *Client) GetServiceTemplateVersion(ctx context.Context, params *GetServi
 		params = &GetServiceTemplateVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetServiceTemplateVersion", params, optFns, addOperationGetServiceTemplateVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetServiceTemplateVersion", params, optFns, c.addOperationGetServiceTemplateVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type GetServiceTemplateVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetServiceTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetServiceTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetServiceTemplateVersion{}, middleware.After)
 	if err != nil {
 		return err

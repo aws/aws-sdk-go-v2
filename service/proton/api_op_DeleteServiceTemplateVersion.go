@@ -25,7 +25,7 @@ func (c *Client) DeleteServiceTemplateVersion(ctx context.Context, params *Delet
 		params = &DeleteServiceTemplateVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteServiceTemplateVersion", params, optFns, addOperationDeleteServiceTemplateVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteServiceTemplateVersion", params, optFns, c.addOperationDeleteServiceTemplateVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DeleteServiceTemplateVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteServiceTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteServiceTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteServiceTemplateVersion{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetServiceTemplate(ctx context.Context, params *GetServiceTempl
 		params = &GetServiceTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetServiceTemplate", params, optFns, addOperationGetServiceTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetServiceTemplate", params, optFns, c.addOperationGetServiceTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetServiceTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetServiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetServiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetServiceTemplate{}, middleware.After)
 	if err != nil {
 		return err

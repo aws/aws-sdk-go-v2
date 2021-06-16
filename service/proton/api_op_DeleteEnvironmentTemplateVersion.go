@@ -25,7 +25,7 @@ func (c *Client) DeleteEnvironmentTemplateVersion(ctx context.Context, params *D
 		params = &DeleteEnvironmentTemplateVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEnvironmentTemplateVersion", params, optFns, addOperationDeleteEnvironmentTemplateVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEnvironmentTemplateVersion", params, optFns, c.addOperationDeleteEnvironmentTemplateVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DeleteEnvironmentTemplateVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEnvironmentTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEnvironmentTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteEnvironmentTemplateVersion{}, middleware.After)
 	if err != nil {
 		return err

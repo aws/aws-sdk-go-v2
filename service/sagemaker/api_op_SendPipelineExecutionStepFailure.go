@@ -20,7 +20,7 @@ func (c *Client) SendPipelineExecutionStepFailure(ctx context.Context, params *S
 		params = &SendPipelineExecutionStepFailureInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendPipelineExecutionStepFailure", params, optFns, addOperationSendPipelineExecutionStepFailureMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendPipelineExecutionStepFailure", params, optFns, c.addOperationSendPipelineExecutionStepFailureMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type SendPipelineExecutionStepFailureOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendPipelineExecutionStepFailureMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendPipelineExecutionStepFailureMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendPipelineExecutionStepFailure{}, middleware.After)
 	if err != nil {
 		return err

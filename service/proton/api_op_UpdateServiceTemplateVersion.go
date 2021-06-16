@@ -17,7 +17,7 @@ func (c *Client) UpdateServiceTemplateVersion(ctx context.Context, params *Updat
 		params = &UpdateServiceTemplateVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateServiceTemplateVersion", params, optFns, addOperationUpdateServiceTemplateVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateServiceTemplateVersion", params, optFns, c.addOperationUpdateServiceTemplateVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type UpdateServiceTemplateVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateServiceTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateServiceTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateServiceTemplateVersion{}, middleware.After)
 	if err != nil {
 		return err

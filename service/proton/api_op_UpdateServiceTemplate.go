@@ -17,7 +17,7 @@ func (c *Client) UpdateServiceTemplate(ctx context.Context, params *UpdateServic
 		params = &UpdateServiceTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateServiceTemplate", params, optFns, addOperationUpdateServiceTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateServiceTemplate", params, optFns, c.addOperationUpdateServiceTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UpdateServiceTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateServiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateServiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateServiceTemplate{}, middleware.After)
 	if err != nil {
 		return err

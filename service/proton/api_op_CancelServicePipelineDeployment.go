@@ -34,7 +34,7 @@ func (c *Client) CancelServicePipelineDeployment(ctx context.Context, params *Ca
 		params = &CancelServicePipelineDeploymentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelServicePipelineDeployment", params, optFns, addOperationCancelServicePipelineDeploymentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelServicePipelineDeployment", params, optFns, c.addOperationCancelServicePipelineDeploymentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type CancelServicePipelineDeploymentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelServicePipelineDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelServicePipelineDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelServicePipelineDeployment{}, middleware.After)
 	if err != nil {
 		return err

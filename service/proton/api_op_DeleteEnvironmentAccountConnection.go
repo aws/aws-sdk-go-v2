@@ -24,7 +24,7 @@ func (c *Client) DeleteEnvironmentAccountConnection(ctx context.Context, params 
 		params = &DeleteEnvironmentAccountConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEnvironmentAccountConnection", params, optFns, addOperationDeleteEnvironmentAccountConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEnvironmentAccountConnection", params, optFns, c.addOperationDeleteEnvironmentAccountConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteEnvironmentAccountConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteEnvironmentAccountConnection{}, middleware.After)
 	if err != nil {
 		return err

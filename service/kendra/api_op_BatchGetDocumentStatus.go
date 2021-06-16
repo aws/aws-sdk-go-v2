@@ -27,7 +27,7 @@ func (c *Client) BatchGetDocumentStatus(ctx context.Context, params *BatchGetDoc
 		params = &BatchGetDocumentStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetDocumentStatus", params, optFns, addOperationBatchGetDocumentStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetDocumentStatus", params, optFns, c.addOperationBatchGetDocumentStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type BatchGetDocumentStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetDocumentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetDocumentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetDocumentStatus{}, middleware.After)
 	if err != nil {
 		return err
