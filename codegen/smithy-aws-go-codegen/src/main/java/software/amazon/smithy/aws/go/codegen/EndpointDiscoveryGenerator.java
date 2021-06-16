@@ -91,9 +91,8 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
 
     List<RuntimeClientPlugin> runtimeClientPlugins = new ArrayList<>();
 
-
     /**
-     * Generates resolver function to default EnableEndpointDiscovery to AUTO.
+     * Generates endpoint discovery options struct that contains options used to configure endpoint discovery.
      *
      * @param model   is the generation model
      * @param writer  is the GoWriter
@@ -114,7 +113,6 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
                 writer.writeDocs("Allows configuring an endpoint resolver to use when attempting an endpoint discovery "
                         + "api request.");
                 writer.write("$L $T", ENDPOINT_RESOLVER_USED_FOR_DISCOVERY, ENDPOINT_RESOLVER_INTERFACE_NAME);
-
             }
         });
         writer.write("");
@@ -536,19 +534,6 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
                                 .build())
                         .build()
         );
-
-//        // Adds config option to provide endpoint used to make request to endpoint discovery service.
-//        runtimeClientPlugins.add(
-//                RuntimeClientPlugin.builder()
-//                        .servicePredicate(EndpointDiscoveryGenerator::serviceSupportsCustomDiscoveryEndpoint)
-//                        .addConfigField(ConfigField.builder()
-//                                .name(ENDPOINT_RESOLVER_USED_FOR_DISCOVERY)
-//                                .type(ENDPOINT_RESOLVER_INTERFACE_NAME)
-//                                .documentation("Allows configuring an endpoint resolver to use when attempting an"
-//                                        + " endpoint discovery api request.")
-//                                .build())
-//                        .build()
-//        );
 
         return runtimeClientPlugins;
     }
