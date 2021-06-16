@@ -69,12 +69,13 @@ func (c *EndpointCache) Add(endpoint Endpoint) {
 			return
 		}
 	}
-	c.endpoints.Store(endpoint.Key, endpoint)
 
 	size := atomic.AddInt64(&c.size, 1)
 	if size > 0 && size > c.endpointLimit {
 		c.deleteRandomKey()
 	}
+
+	c.endpoints.Store(endpoint.Key, endpoint)
 }
 
 // deleteRandomKey will delete a random key from the cache. If
