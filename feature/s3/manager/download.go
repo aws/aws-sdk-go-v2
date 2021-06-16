@@ -439,24 +439,23 @@ func getTotalBytes(resp *s3.GetObjectOutput) (int64, error) {
 			return resp.ContentLength, nil
 		}
 		return -1, nil
-	} else {
-		parts := strings.Split(*resp.ContentRange, "/")
-
-		total := int64(-1)
-		var err error
-		// Checking for whether or not a numbered total exists
-		// If one does not exist, we will assume the total to be -1, undefined,
-		// and sequentially download each chunk until hitting a 416 error
-		totalStr := parts[len(parts)-1]
-		if totalStr != "*" {
-			total, err = strconv.ParseInt(totalStr, 10, 64)
-			if err != nil {
-				return -1, err
-			}
-		}
-
-		return total, nil
 	}
+	parts := strings.Split(*resp.ContentRange, "/")
+
+	total := int64(-1)
+	var err error
+	// Checking for whether or not a numbered total exists
+	// If one does not exist, we will assume the total to be -1, undefined,
+	// and sequentially download each chunk until hitting a 416 error
+	totalStr := parts[len(parts)-1]
+	if totalStr != "*" {
+		total, err = strconv.ParseInt(totalStr, 10, 64)
+		if err != nil {
+			return -1, err
+		}
+	}
+
+	return total, nil
 }
 
 func (d *downloader) incrWritten(n int64) {

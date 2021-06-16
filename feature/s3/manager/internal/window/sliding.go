@@ -37,6 +37,8 @@ func (obj *windowObject) Lock() <-chan interface{} {
 	return c
 }
 
+// SlidingWindow is a continence method for the algorithm returning consumable
+// channels based on the producer
 func SlidingWindow(
 	ctx context.Context,
 	windowSize int,
@@ -81,7 +83,7 @@ func SlidingWindow(
 					obj.Write(result)
 				}(windowLocation, obj)
 			}
-			windowLocation += 1
+			windowLocation++
 		}
 	}()
 
@@ -115,7 +117,7 @@ func SlidingWindow(
 				return
 			}
 
-			windowLocation += 1
+			windowLocation++
 		}
 	}()
 
