@@ -60,7 +60,7 @@
 //
 //  provider := processcreds.NewProvider("/path/to/command",
 //      func(o *processcreds.Options) {
-// 	      // Override the provider's default timeout
+//        // Override the provider's default timeout
 //        o.Timeout = 2 * time.Minute
 //      })
 //
