@@ -21,7 +21,7 @@ func (c *Client) CreateMonitoringSubscription(ctx context.Context, params *Creat
 		params = &CreateMonitoringSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMonitoringSubscription", params, optFns, addOperationCreateMonitoringSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMonitoringSubscription", params, optFns, c.addOperationCreateMonitoringSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type CreateMonitoringSubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateMonitoringSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateMonitoringSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpCreateMonitoringSubscription{}, middleware.After)
 	if err != nil {
 		return err

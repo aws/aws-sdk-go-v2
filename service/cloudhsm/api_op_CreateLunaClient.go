@@ -26,7 +26,7 @@ func (c *Client) CreateLunaClient(ctx context.Context, params *CreateLunaClientI
 		params = &CreateLunaClientInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLunaClient", params, optFns, addOperationCreateLunaClientMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLunaClient", params, optFns, c.addOperationCreateLunaClientMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type CreateLunaClientOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLunaClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLunaClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLunaClient{}, middleware.After)
 	if err != nil {
 		return err

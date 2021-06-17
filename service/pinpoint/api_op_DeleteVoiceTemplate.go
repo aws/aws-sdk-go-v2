@@ -18,7 +18,7 @@ func (c *Client) DeleteVoiceTemplate(ctx context.Context, params *DeleteVoiceTem
 		params = &DeleteVoiceTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVoiceTemplate", params, optFns, addOperationDeleteVoiceTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVoiceTemplate", params, optFns, c.addOperationDeleteVoiceTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type DeleteVoiceTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVoiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVoiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVoiceTemplate{}, middleware.After)
 	if err != nil {
 		return err

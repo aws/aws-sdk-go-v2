@@ -18,7 +18,7 @@ func (c *Client) DescribeConnectorEntity(ctx context.Context, params *DescribeCo
 		params = &DescribeConnectorEntityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeConnectorEntity", params, optFns, addOperationDescribeConnectorEntityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConnectorEntity", params, optFns, c.addOperationDescribeConnectorEntityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeConnectorEntityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeConnectorEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeConnectorEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConnectorEntity{}, middleware.After)
 	if err != nil {
 		return err

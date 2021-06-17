@@ -20,7 +20,7 @@ func (c *Client) DeleteDBClusterParameterGroup(ctx context.Context, params *Dele
 		params = &DeleteDBClusterParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDBClusterParameterGroup", params, optFns, addOperationDeleteDBClusterParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDBClusterParameterGroup", params, optFns, c.addOperationDeleteDBClusterParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteDBClusterParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBClusterParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

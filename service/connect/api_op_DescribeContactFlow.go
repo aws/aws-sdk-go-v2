@@ -19,7 +19,7 @@ func (c *Client) DescribeContactFlow(ctx context.Context, params *DescribeContac
 		params = &DescribeContactFlowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeContactFlow", params, optFns, addOperationDescribeContactFlowMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeContactFlow", params, optFns, c.addOperationDescribeContactFlowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DescribeContactFlowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeContactFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeContactFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeContactFlow{}, middleware.After)
 	if err != nil {
 		return err

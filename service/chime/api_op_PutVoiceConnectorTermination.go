@@ -19,7 +19,7 @@ func (c *Client) PutVoiceConnectorTermination(ctx context.Context, params *PutVo
 		params = &PutVoiceConnectorTerminationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutVoiceConnectorTermination", params, optFns, addOperationPutVoiceConnectorTerminationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutVoiceConnectorTermination", params, optFns, c.addOperationPutVoiceConnectorTerminationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type PutVoiceConnectorTerminationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutVoiceConnectorTerminationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutVoiceConnectorTerminationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVoiceConnectorTermination{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateSMBFileShareVisibility(ctx context.Context, params *Updat
 		params = &UpdateSMBFileShareVisibilityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSMBFileShareVisibility", params, optFns, addOperationUpdateSMBFileShareVisibilityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSMBFileShareVisibility", params, optFns, c.addOperationUpdateSMBFileShareVisibilityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UpdateSMBFileShareVisibilityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSMBFileShareVisibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSMBFileShareVisibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSMBFileShareVisibility{}, middleware.After)
 	if err != nil {
 		return err

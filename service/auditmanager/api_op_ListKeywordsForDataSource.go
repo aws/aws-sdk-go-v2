@@ -18,7 +18,7 @@ func (c *Client) ListKeywordsForDataSource(ctx context.Context, params *ListKeyw
 		params = &ListKeywordsForDataSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListKeywordsForDataSource", params, optFns, addOperationListKeywordsForDataSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListKeywordsForDataSource", params, optFns, c.addOperationListKeywordsForDataSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListKeywordsForDataSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListKeywordsForDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListKeywordsForDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListKeywordsForDataSource{}, middleware.After)
 	if err != nil {
 		return err

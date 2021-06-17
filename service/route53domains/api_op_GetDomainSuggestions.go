@@ -17,7 +17,7 @@ func (c *Client) GetDomainSuggestions(ctx context.Context, params *GetDomainSugg
 		params = &GetDomainSuggestionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDomainSuggestions", params, optFns, addOperationGetDomainSuggestionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDomainSuggestions", params, optFns, c.addOperationGetDomainSuggestionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type GetDomainSuggestionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDomainSuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDomainSuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDomainSuggestions{}, middleware.After)
 	if err != nil {
 		return err

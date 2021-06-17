@@ -17,7 +17,7 @@ func (c *Client) DisassociateRepository(ctx context.Context, params *Disassociat
 		params = &DisassociateRepositoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateRepository", params, optFns, addOperationDisassociateRepositoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateRepository", params, optFns, c.addOperationDisassociateRepositoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DisassociateRepositoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateRepository{}, middleware.After)
 	if err != nil {
 		return err

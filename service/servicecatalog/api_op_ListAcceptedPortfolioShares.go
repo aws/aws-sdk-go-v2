@@ -18,7 +18,7 @@ func (c *Client) ListAcceptedPortfolioShares(ctx context.Context, params *ListAc
 		params = &ListAcceptedPortfolioSharesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAcceptedPortfolioShares", params, optFns, addOperationListAcceptedPortfolioSharesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAcceptedPortfolioShares", params, optFns, c.addOperationListAcceptedPortfolioSharesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type ListAcceptedPortfolioSharesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAcceptedPortfolioSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAcceptedPortfolioSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAcceptedPortfolioShares{}, middleware.After)
 	if err != nil {
 		return err

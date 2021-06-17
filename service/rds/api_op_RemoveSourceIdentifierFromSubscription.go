@@ -18,7 +18,7 @@ func (c *Client) RemoveSourceIdentifierFromSubscription(ctx context.Context, par
 		params = &RemoveSourceIdentifierFromSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveSourceIdentifierFromSubscription", params, optFns, addOperationRemoveSourceIdentifierFromSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveSourceIdentifierFromSubscription", params, optFns, c.addOperationRemoveSourceIdentifierFromSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type RemoveSourceIdentifierFromSubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveSourceIdentifierFromSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveSourceIdentifierFromSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemoveSourceIdentifierFromSubscription{}, middleware.After)
 	if err != nil {
 		return err

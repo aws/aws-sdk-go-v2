@@ -22,7 +22,7 @@ func (c *Client) ListInstanceProfilesForRole(ctx context.Context, params *ListIn
 		params = &ListInstanceProfilesForRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListInstanceProfilesForRole", params, optFns, addOperationListInstanceProfilesForRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListInstanceProfilesForRole", params, optFns, c.addOperationListInstanceProfilesForRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type ListInstanceProfilesForRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListInstanceProfilesForRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListInstanceProfilesForRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListInstanceProfilesForRole{}, middleware.After)
 	if err != nil {
 		return err

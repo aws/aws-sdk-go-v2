@@ -16,7 +16,7 @@ func (c *Client) NestedStructures(ctx context.Context, params *NestedStructuresI
 		params = &NestedStructuresInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "NestedStructures", params, optFns, addOperationNestedStructuresMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "NestedStructures", params, optFns, c.addOperationNestedStructuresMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ type NestedStructuresOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationNestedStructuresMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationNestedStructuresMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpNestedStructures{}, middleware.After)
 	if err != nil {
 		return err

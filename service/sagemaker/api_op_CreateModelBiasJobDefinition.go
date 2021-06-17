@@ -17,7 +17,7 @@ func (c *Client) CreateModelBiasJobDefinition(ctx context.Context, params *Creat
 		params = &CreateModelBiasJobDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateModelBiasJobDefinition", params, optFns, addOperationCreateModelBiasJobDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateModelBiasJobDefinition", params, optFns, c.addOperationCreateModelBiasJobDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type CreateModelBiasJobDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateModelBiasJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateModelBiasJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelBiasJobDefinition{}, middleware.After)
 	if err != nil {
 		return err

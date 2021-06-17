@@ -20,7 +20,7 @@ func (c *Client) ListTypedLinkFacetAttributes(ctx context.Context, params *ListT
 		params = &ListTypedLinkFacetAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTypedLinkFacetAttributes", params, optFns, addOperationListTypedLinkFacetAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTypedLinkFacetAttributes", params, optFns, c.addOperationListTypedLinkFacetAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ListTypedLinkFacetAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTypedLinkFacetAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTypedLinkFacetAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTypedLinkFacetAttributes{}, middleware.After)
 	if err != nil {
 		return err

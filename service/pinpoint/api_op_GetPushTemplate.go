@@ -18,7 +18,7 @@ func (c *Client) GetPushTemplate(ctx context.Context, params *GetPushTemplateInp
 		params = &GetPushTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPushTemplate", params, optFns, addOperationGetPushTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPushTemplate", params, optFns, c.addOperationGetPushTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetPushTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPushTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPushTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPushTemplate{}, middleware.After)
 	if err != nil {
 		return err

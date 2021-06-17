@@ -18,7 +18,7 @@ func (c *Client) ListRepositories(ctx context.Context, params *ListRepositoriesI
 		params = &ListRepositoriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRepositories", params, optFns, addOperationListRepositoriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRepositories", params, optFns, c.addOperationListRepositoriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListRepositoriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRepositories{}, middleware.After)
 	if err != nil {
 		return err

@@ -30,7 +30,7 @@ func (c *Client) DisableKey(ctx context.Context, params *DisableKeyInput, optFns
 		params = &DisableKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableKey", params, optFns, addOperationDisableKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableKey", params, optFns, c.addOperationDisableKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DisableKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableKey{}, middleware.After)
 	if err != nil {
 		return err

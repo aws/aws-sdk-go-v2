@@ -17,7 +17,7 @@ func (c *Client) DescribeHarvestJob(ctx context.Context, params *DescribeHarvest
 		params = &DescribeHarvestJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeHarvestJob", params, optFns, addOperationDescribeHarvestJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeHarvestJob", params, optFns, c.addOperationDescribeHarvestJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DescribeHarvestJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeHarvestJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeHarvestJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeHarvestJob{}, middleware.After)
 	if err != nil {
 		return err

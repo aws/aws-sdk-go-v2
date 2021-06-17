@@ -22,7 +22,7 @@ func (c *Client) UpdateNodegroupConfig(ctx context.Context, params *UpdateNodegr
 		params = &UpdateNodegroupConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateNodegroupConfig", params, optFns, addOperationUpdateNodegroupConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateNodegroupConfig", params, optFns, c.addOperationUpdateNodegroupConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type UpdateNodegroupConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateNodegroupConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateNodegroupConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNodegroupConfig{}, middleware.After)
 	if err != nil {
 		return err

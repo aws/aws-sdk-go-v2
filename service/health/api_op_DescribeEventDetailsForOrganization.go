@@ -50,7 +50,7 @@ func (c *Client) DescribeEventDetailsForOrganization(ctx context.Context, params
 		params = &DescribeEventDetailsForOrganizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEventDetailsForOrganization", params, optFns, addOperationDescribeEventDetailsForOrganizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEventDetailsForOrganization", params, optFns, c.addOperationDescribeEventDetailsForOrganizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type DescribeEventDetailsForOrganizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEventDetailsForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEventDetailsForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEventDetailsForOrganization{}, middleware.After)
 	if err != nil {
 		return err

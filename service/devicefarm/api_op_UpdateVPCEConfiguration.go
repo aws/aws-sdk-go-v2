@@ -18,7 +18,7 @@ func (c *Client) UpdateVPCEConfiguration(ctx context.Context, params *UpdateVPCE
 		params = &UpdateVPCEConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateVPCEConfiguration", params, optFns, addOperationUpdateVPCEConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateVPCEConfiguration", params, optFns, c.addOperationUpdateVPCEConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type UpdateVPCEConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateVPCEConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateVPCEConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateVPCEConfiguration{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeOperatingSystems(ctx context.Context, params *DescribeO
 		params = &DescribeOperatingSystemsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeOperatingSystems", params, optFns, addOperationDescribeOperatingSystemsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeOperatingSystems", params, optFns, c.addOperationDescribeOperatingSystemsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DescribeOperatingSystemsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeOperatingSystemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeOperatingSystemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeOperatingSystems{}, middleware.After)
 	if err != nil {
 		return err

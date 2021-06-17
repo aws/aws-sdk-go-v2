@@ -24,7 +24,7 @@ func (c *Client) CreateRule(ctx context.Context, params *CreateRuleInput, optFns
 		params = &CreateRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRule", params, optFns, addOperationCreateRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRule", params, optFns, c.addOperationCreateRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type CreateRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateRule{}, middleware.After)
 	if err != nil {
 		return err

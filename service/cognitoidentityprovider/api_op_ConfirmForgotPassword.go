@@ -16,7 +16,7 @@ func (c *Client) ConfirmForgotPassword(ctx context.Context, params *ConfirmForgo
 		params = &ConfirmForgotPasswordInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ConfirmForgotPassword", params, optFns, addOperationConfirmForgotPasswordMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ConfirmForgotPassword", params, optFns, c.addOperationConfirmForgotPasswordMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +101,7 @@ type ConfirmForgotPasswordOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationConfirmForgotPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationConfirmForgotPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmForgotPassword{}, middleware.After)
 	if err != nil {
 		return err

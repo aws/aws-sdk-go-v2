@@ -28,7 +28,7 @@ func (c *Client) RestoreDBInstanceToPointInTime(ctx context.Context, params *Res
 		params = &RestoreDBInstanceToPointInTimeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreDBInstanceToPointInTime", params, optFns, addOperationRestoreDBInstanceToPointInTimeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreDBInstanceToPointInTime", params, optFns, c.addOperationRestoreDBInstanceToPointInTimeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -291,7 +291,7 @@ type RestoreDBInstanceToPointInTimeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreDBInstanceToPointInTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreDBInstanceToPointInTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBInstanceToPointInTime{}, middleware.After)
 	if err != nil {
 		return err

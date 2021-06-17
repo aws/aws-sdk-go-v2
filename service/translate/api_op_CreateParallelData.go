@@ -21,7 +21,7 @@ func (c *Client) CreateParallelData(ctx context.Context, params *CreateParallelD
 		params = &CreateParallelDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateParallelData", params, optFns, addOperationCreateParallelDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateParallelData", params, optFns, c.addOperationCreateParallelDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type CreateParallelDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateParallelData{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) CreateMitigationAction(ctx context.Context, params *CreateMitig
 		params = &CreateMitigationActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMitigationAction", params, optFns, addOperationCreateMitigationActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMitigationAction", params, optFns, c.addOperationCreateMitigationActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type CreateMitigationActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateMitigationActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateMitigationActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMitigationAction{}, middleware.After)
 	if err != nil {
 		return err

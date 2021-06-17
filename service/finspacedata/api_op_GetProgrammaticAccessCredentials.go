@@ -17,7 +17,7 @@ func (c *Client) GetProgrammaticAccessCredentials(ctx context.Context, params *G
 		params = &GetProgrammaticAccessCredentialsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetProgrammaticAccessCredentials", params, optFns, addOperationGetProgrammaticAccessCredentialsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetProgrammaticAccessCredentials", params, optFns, c.addOperationGetProgrammaticAccessCredentialsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetProgrammaticAccessCredentialsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetProgrammaticAccessCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetProgrammaticAccessCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProgrammaticAccessCredentials{}, middleware.After)
 	if err != nil {
 		return err

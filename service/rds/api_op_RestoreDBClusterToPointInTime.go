@@ -30,7 +30,7 @@ func (c *Client) RestoreDBClusterToPointInTime(ctx context.Context, params *Rest
 		params = &RestoreDBClusterToPointInTimeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreDBClusterToPointInTime", params, optFns, addOperationRestoreDBClusterToPointInTimeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreDBClusterToPointInTime", params, optFns, c.addOperationRestoreDBClusterToPointInTimeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -215,7 +215,7 @@ type RestoreDBClusterToPointInTimeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreDBClusterToPointInTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreDBClusterToPointInTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBClusterToPointInTime{}, middleware.After)
 	if err != nil {
 		return err

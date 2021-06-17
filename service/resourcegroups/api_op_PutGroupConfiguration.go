@@ -22,7 +22,7 @@ func (c *Client) PutGroupConfiguration(ctx context.Context, params *PutGroupConf
 		params = &PutGroupConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutGroupConfiguration", params, optFns, addOperationPutGroupConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutGroupConfiguration", params, optFns, c.addOperationPutGroupConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type PutGroupConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutGroupConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutGroupConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutGroupConfiguration{}, middleware.After)
 	if err != nil {
 		return err

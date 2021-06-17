@@ -19,7 +19,7 @@ func (c *Client) CreatePublishingDestination(ctx context.Context, params *Create
 		params = &CreatePublishingDestinationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePublishingDestination", params, optFns, addOperationCreatePublishingDestinationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePublishingDestination", params, optFns, c.addOperationCreatePublishingDestinationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type CreatePublishingDestinationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePublishingDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePublishingDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePublishingDestination{}, middleware.After)
 	if err != nil {
 		return err

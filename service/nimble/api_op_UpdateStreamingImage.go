@@ -18,7 +18,7 @@ func (c *Client) UpdateStreamingImage(ctx context.Context, params *UpdateStreami
 		params = &UpdateStreamingImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateStreamingImage", params, optFns, addOperationUpdateStreamingImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateStreamingImage", params, optFns, c.addOperationUpdateStreamingImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type UpdateStreamingImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateStreamingImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateStreamingImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateStreamingImage{}, middleware.After)
 	if err != nil {
 		return err

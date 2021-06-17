@@ -17,7 +17,7 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 		params = &CreateClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCluster", params, optFns, addOperationCreateClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCluster", params, optFns, c.addOperationCreateClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type CreateClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCluster{}, middleware.After)
 	if err != nil {
 		return err

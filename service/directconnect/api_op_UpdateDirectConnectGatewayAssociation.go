@@ -18,7 +18,7 @@ func (c *Client) UpdateDirectConnectGatewayAssociation(ctx context.Context, para
 		params = &UpdateDirectConnectGatewayAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDirectConnectGatewayAssociation", params, optFns, addOperationUpdateDirectConnectGatewayAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDirectConnectGatewayAssociation", params, optFns, c.addOperationUpdateDirectConnectGatewayAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type UpdateDirectConnectGatewayAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDirectConnectGatewayAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDirectConnectGatewayAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDirectConnectGatewayAssociation{}, middleware.After)
 	if err != nil {
 		return err

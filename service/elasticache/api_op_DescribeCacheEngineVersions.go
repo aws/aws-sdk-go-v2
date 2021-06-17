@@ -18,7 +18,7 @@ func (c *Client) DescribeCacheEngineVersions(ctx context.Context, params *Descri
 		params = &DescribeCacheEngineVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCacheEngineVersions", params, optFns, addOperationDescribeCacheEngineVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCacheEngineVersions", params, optFns, c.addOperationDescribeCacheEngineVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type DescribeCacheEngineVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCacheEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCacheEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeCacheEngineVersions{}, middleware.After)
 	if err != nil {
 		return err

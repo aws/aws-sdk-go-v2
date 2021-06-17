@@ -17,7 +17,7 @@ func (c *Client) DeleteAccountCustomization(ctx context.Context, params *DeleteA
 		params = &DeleteAccountCustomizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAccountCustomization", params, optFns, addOperationDeleteAccountCustomizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAccountCustomization", params, optFns, c.addOperationDeleteAccountCustomizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteAccountCustomizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAccountCustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAccountCustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAccountCustomization{}, middleware.After)
 	if err != nil {
 		return err

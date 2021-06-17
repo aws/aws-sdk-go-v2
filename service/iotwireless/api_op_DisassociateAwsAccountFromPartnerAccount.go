@@ -18,7 +18,7 @@ func (c *Client) DisassociateAwsAccountFromPartnerAccount(ctx context.Context, p
 		params = &DisassociateAwsAccountFromPartnerAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateAwsAccountFromPartnerAccount", params, optFns, addOperationDisassociateAwsAccountFromPartnerAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateAwsAccountFromPartnerAccount", params, optFns, c.addOperationDisassociateAwsAccountFromPartnerAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DisassociateAwsAccountFromPartnerAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateAwsAccountFromPartnerAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateAwsAccountFromPartnerAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateAwsAccountFromPartnerAccount{}, middleware.After)
 	if err != nil {
 		return err

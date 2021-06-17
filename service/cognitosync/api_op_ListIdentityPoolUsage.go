@@ -40,7 +40,7 @@ func (c *Client) ListIdentityPoolUsage(ctx context.Context, params *ListIdentity
 		params = &ListIdentityPoolUsageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListIdentityPoolUsage", params, optFns, addOperationListIdentityPoolUsageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListIdentityPoolUsage", params, optFns, c.addOperationListIdentityPoolUsageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type ListIdentityPoolUsageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListIdentityPoolUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListIdentityPoolUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIdentityPoolUsage{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetRelationalDatabaseSnapshots(ctx context.Context, params *Get
 		params = &GetRelationalDatabaseSnapshotsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRelationalDatabaseSnapshots", params, optFns, addOperationGetRelationalDatabaseSnapshotsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRelationalDatabaseSnapshots", params, optFns, c.addOperationGetRelationalDatabaseSnapshotsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetRelationalDatabaseSnapshotsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRelationalDatabaseSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRelationalDatabaseSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseSnapshots{}, middleware.After)
 	if err != nil {
 		return err

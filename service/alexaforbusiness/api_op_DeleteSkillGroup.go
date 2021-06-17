@@ -16,7 +16,7 @@ func (c *Client) DeleteSkillGroup(ctx context.Context, params *DeleteSkillGroupI
 		params = &DeleteSkillGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSkillGroup", params, optFns, addOperationDeleteSkillGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSkillGroup", params, optFns, c.addOperationDeleteSkillGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type DeleteSkillGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSkillGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSkillGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSkillGroup{}, middleware.After)
 	if err != nil {
 		return err

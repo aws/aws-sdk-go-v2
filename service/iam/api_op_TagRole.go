@@ -53,7 +53,7 @@ func (c *Client) TagRole(ctx context.Context, params *TagRoleInput, optFns ...fu
 		params = &TagRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TagRole", params, optFns, addOperationTagRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagRole", params, optFns, c.addOperationTagRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type TagRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTagRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTagRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpTagRole{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) GetDistributionLatestCacheReset(ctx context.Context, params *Ge
 		params = &GetDistributionLatestCacheResetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDistributionLatestCacheReset", params, optFns, addOperationGetDistributionLatestCacheResetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDistributionLatestCacheReset", params, optFns, c.addOperationGetDistributionLatestCacheResetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetDistributionLatestCacheResetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDistributionLatestCacheResetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDistributionLatestCacheResetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDistributionLatestCacheReset{}, middleware.After)
 	if err != nil {
 		return err

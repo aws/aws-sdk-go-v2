@@ -21,7 +21,7 @@ func (c *Client) ListPlaybackKeyPairs(ctx context.Context, params *ListPlaybackK
 		params = &ListPlaybackKeyPairsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPlaybackKeyPairs", params, optFns, addOperationListPlaybackKeyPairsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPlaybackKeyPairs", params, optFns, c.addOperationListPlaybackKeyPairsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListPlaybackKeyPairsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPlaybackKeyPairsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPlaybackKeyPairsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPlaybackKeyPairs{}, middleware.After)
 	if err != nil {
 		return err

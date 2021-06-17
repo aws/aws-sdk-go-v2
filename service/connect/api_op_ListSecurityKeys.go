@@ -19,7 +19,7 @@ func (c *Client) ListSecurityKeys(ctx context.Context, params *ListSecurityKeysI
 		params = &ListSecurityKeysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSecurityKeys", params, optFns, addOperationListSecurityKeysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSecurityKeys", params, optFns, c.addOperationListSecurityKeysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListSecurityKeysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSecurityKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSecurityKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSecurityKeys{}, middleware.After)
 	if err != nil {
 		return err

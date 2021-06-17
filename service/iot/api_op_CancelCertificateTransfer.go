@@ -22,7 +22,7 @@ func (c *Client) CancelCertificateTransfer(ctx context.Context, params *CancelCe
 		params = &CancelCertificateTransferInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelCertificateTransfer", params, optFns, addOperationCancelCertificateTransferMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelCertificateTransfer", params, optFns, c.addOperationCancelCertificateTransferMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type CancelCertificateTransferOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelCertificateTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelCertificateTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelCertificateTransfer{}, middleware.After)
 	if err != nil {
 		return err

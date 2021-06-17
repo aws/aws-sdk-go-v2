@@ -26,7 +26,7 @@ func (c *Client) PutAccessPointConfigurationForObjectLambda(ctx context.Context,
 		params = &PutAccessPointConfigurationForObjectLambdaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAccessPointConfigurationForObjectLambda", params, optFns, addOperationPutAccessPointConfigurationForObjectLambdaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAccessPointConfigurationForObjectLambda", params, optFns, c.addOperationPutAccessPointConfigurationForObjectLambdaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type PutAccessPointConfigurationForObjectLambdaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAccessPointConfigurationForObjectLambdaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAccessPointConfigurationForObjectLambdaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutAccessPointConfigurationForObjectLambda{}, middleware.After)
 	if err != nil {
 		return err

@@ -41,7 +41,7 @@ func (c *Client) GetBucketAccelerateConfiguration(ctx context.Context, params *G
 		params = &GetBucketAccelerateConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketAccelerateConfiguration", params, optFns, addOperationGetBucketAccelerateConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketAccelerateConfiguration", params, optFns, c.addOperationGetBucketAccelerateConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetBucketAccelerateConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketAccelerateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketAccelerateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketAccelerateConfiguration{}, middleware.After)
 	if err != nil {
 		return err

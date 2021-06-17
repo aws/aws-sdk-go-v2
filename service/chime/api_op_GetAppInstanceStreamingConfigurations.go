@@ -17,7 +17,7 @@ func (c *Client) GetAppInstanceStreamingConfigurations(ctx context.Context, para
 		params = &GetAppInstanceStreamingConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAppInstanceStreamingConfigurations", params, optFns, addOperationGetAppInstanceStreamingConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAppInstanceStreamingConfigurations", params, optFns, c.addOperationGetAppInstanceStreamingConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetAppInstanceStreamingConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAppInstanceStreamingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAppInstanceStreamingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAppInstanceStreamingConfigurations{}, middleware.After)
 	if err != nil {
 		return err

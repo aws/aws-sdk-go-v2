@@ -19,7 +19,7 @@ func (c *Client) UpdateLinkAttributes(ctx context.Context, params *UpdateLinkAtt
 		params = &UpdateLinkAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLinkAttributes", params, optFns, addOperationUpdateLinkAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLinkAttributes", params, optFns, c.addOperationUpdateLinkAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type UpdateLinkAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLinkAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLinkAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLinkAttributes{}, middleware.After)
 	if err != nil {
 		return err

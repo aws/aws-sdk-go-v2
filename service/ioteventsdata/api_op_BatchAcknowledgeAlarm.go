@@ -18,7 +18,7 @@ func (c *Client) BatchAcknowledgeAlarm(ctx context.Context, params *BatchAcknowl
 		params = &BatchAcknowledgeAlarmInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchAcknowledgeAlarm", params, optFns, addOperationBatchAcknowledgeAlarmMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchAcknowledgeAlarm", params, optFns, c.addOperationBatchAcknowledgeAlarmMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type BatchAcknowledgeAlarmOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchAcknowledgeAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchAcknowledgeAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchAcknowledgeAlarm{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) CreateUsageLimit(ctx context.Context, params *CreateUsageLimitI
 		params = &CreateUsageLimitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateUsageLimit", params, optFns, addOperationCreateUsageLimitMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateUsageLimit", params, optFns, c.addOperationCreateUsageLimitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type CreateUsageLimitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateUsageLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateUsageLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateUsageLimit{}, middleware.After)
 	if err != nil {
 		return err

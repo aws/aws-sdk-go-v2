@@ -17,7 +17,7 @@ func (c *Client) DisassociateCustomerGateway(ctx context.Context, params *Disass
 		params = &DisassociateCustomerGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateCustomerGateway", params, optFns, addOperationDisassociateCustomerGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateCustomerGateway", params, optFns, c.addOperationDisassociateCustomerGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DisassociateCustomerGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateCustomerGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateCustomerGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateCustomerGateway{}, middleware.After)
 	if err != nil {
 		return err

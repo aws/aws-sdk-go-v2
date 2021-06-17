@@ -18,7 +18,7 @@ func (c *Client) SearchDevices(ctx context.Context, params *SearchDevicesInput, 
 		params = &SearchDevicesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchDevices", params, optFns, addOperationSearchDevicesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchDevices", params, optFns, c.addOperationSearchDevicesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type SearchDevicesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchDevices{}, middleware.After)
 	if err != nil {
 		return err

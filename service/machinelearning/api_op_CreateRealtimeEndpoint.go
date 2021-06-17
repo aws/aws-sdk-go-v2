@@ -19,7 +19,7 @@ func (c *Client) CreateRealtimeEndpoint(ctx context.Context, params *CreateRealt
 		params = &CreateRealtimeEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRealtimeEndpoint", params, optFns, addOperationCreateRealtimeEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRealtimeEndpoint", params, optFns, c.addOperationCreateRealtimeEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type CreateRealtimeEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRealtimeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRealtimeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRealtimeEndpoint{}, middleware.After)
 	if err != nil {
 		return err

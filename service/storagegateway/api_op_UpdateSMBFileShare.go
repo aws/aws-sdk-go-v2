@@ -27,7 +27,7 @@ func (c *Client) UpdateSMBFileShare(ctx context.Context, params *UpdateSMBFileSh
 		params = &UpdateSMBFileShareInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSMBFileShare", params, optFns, addOperationUpdateSMBFileShareMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSMBFileShare", params, optFns, c.addOperationUpdateSMBFileShareMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -150,7 +150,7 @@ type UpdateSMBFileShareOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSMBFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSMBFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSMBFileShare{}, middleware.After)
 	if err != nil {
 		return err

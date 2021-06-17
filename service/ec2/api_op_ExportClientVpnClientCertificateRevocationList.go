@@ -18,7 +18,7 @@ func (c *Client) ExportClientVpnClientCertificateRevocationList(ctx context.Cont
 		params = &ExportClientVpnClientCertificateRevocationListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExportClientVpnClientCertificateRevocationList", params, optFns, addOperationExportClientVpnClientCertificateRevocationListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExportClientVpnClientCertificateRevocationList", params, optFns, c.addOperationExportClientVpnClientCertificateRevocationListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ExportClientVpnClientCertificateRevocationListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExportClientVpnClientCertificateRevocationListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExportClientVpnClientCertificateRevocationListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpExportClientVpnClientCertificateRevocationList{}, middleware.After)
 	if err != nil {
 		return err

@@ -40,7 +40,7 @@ func (c *Client) PutLifecycleConfiguration(ctx context.Context, params *PutLifec
 		params = &PutLifecycleConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutLifecycleConfiguration", params, optFns, addOperationPutLifecycleConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutLifecycleConfiguration", params, optFns, c.addOperationPutLifecycleConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type PutLifecycleConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutLifecycleConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutLifecycleConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutLifecycleConfiguration{}, middleware.After)
 	if err != nil {
 		return err

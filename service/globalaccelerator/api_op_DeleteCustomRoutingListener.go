@@ -16,7 +16,7 @@ func (c *Client) DeleteCustomRoutingListener(ctx context.Context, params *Delete
 		params = &DeleteCustomRoutingListenerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomRoutingListener", params, optFns, addOperationDeleteCustomRoutingListenerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomRoutingListener", params, optFns, c.addOperationDeleteCustomRoutingListenerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteCustomRoutingListenerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCustomRoutingListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCustomRoutingListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCustomRoutingListener{}, middleware.After)
 	if err != nil {
 		return err

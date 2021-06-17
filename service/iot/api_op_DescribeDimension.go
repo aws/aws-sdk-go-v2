@@ -18,7 +18,7 @@ func (c *Client) DescribeDimension(ctx context.Context, params *DescribeDimensio
 		params = &DescribeDimensionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDimension", params, optFns, addOperationDescribeDimensionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDimension", params, optFns, c.addOperationDescribeDimensionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeDimensionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDimension{}, middleware.After)
 	if err != nil {
 		return err

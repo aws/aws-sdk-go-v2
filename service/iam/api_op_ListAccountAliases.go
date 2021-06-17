@@ -21,7 +21,7 @@ func (c *Client) ListAccountAliases(ctx context.Context, params *ListAccountAlia
 		params = &ListAccountAliasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAccountAliases", params, optFns, addOperationListAccountAliasesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAccountAliases", params, optFns, c.addOperationListAccountAliasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type ListAccountAliasesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAccountAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAccountAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListAccountAliases{}, middleware.After)
 	if err != nil {
 		return err

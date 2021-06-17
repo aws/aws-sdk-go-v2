@@ -28,7 +28,7 @@ func (c *Client) RevokeSecurityGroupIngress(ctx context.Context, params *RevokeS
 		params = &RevokeSecurityGroupIngressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokeSecurityGroupIngress", params, optFns, addOperationRevokeSecurityGroupIngressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeSecurityGroupIngress", params, optFns, c.addOperationRevokeSecurityGroupIngressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +107,7 @@ type RevokeSecurityGroupIngressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokeSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokeSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpRevokeSecurityGroupIngress{}, middleware.After)
 	if err != nil {
 		return err

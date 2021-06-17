@@ -32,7 +32,7 @@ func (c *Client) RespondToAuthChallenge(ctx context.Context, params *RespondToAu
 		params = &RespondToAuthChallengeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RespondToAuthChallenge", params, optFns, addOperationRespondToAuthChallengeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RespondToAuthChallenge", params, optFns, c.addOperationRespondToAuthChallengeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -156,7 +156,7 @@ type RespondToAuthChallengeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRespondToAuthChallengeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRespondToAuthChallengeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRespondToAuthChallenge{}, middleware.After)
 	if err != nil {
 		return err

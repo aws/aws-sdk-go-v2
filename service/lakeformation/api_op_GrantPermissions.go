@@ -20,7 +20,7 @@ func (c *Client) GrantPermissions(ctx context.Context, params *GrantPermissionsI
 		params = &GrantPermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GrantPermissions", params, optFns, addOperationGrantPermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GrantPermissions", params, optFns, c.addOperationGrantPermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type GrantPermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGrantPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGrantPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGrantPermissions{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) GetSuiteDefinition(ctx context.Context, params *GetSuiteDefinit
 		params = &GetSuiteDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSuiteDefinition", params, optFns, addOperationGetSuiteDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSuiteDefinition", params, optFns, c.addOperationGetSuiteDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type GetSuiteDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSuiteDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSuiteDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSuiteDefinition{}, middleware.After)
 	if err != nil {
 		return err

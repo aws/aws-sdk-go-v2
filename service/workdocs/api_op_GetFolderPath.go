@@ -21,7 +21,7 @@ func (c *Client) GetFolderPath(ctx context.Context, params *GetFolderPathInput, 
 		params = &GetFolderPathInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFolderPath", params, optFns, addOperationGetFolderPathMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFolderPath", params, optFns, c.addOperationGetFolderPathMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type GetFolderPathOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFolderPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFolderPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFolderPath{}, middleware.After)
 	if err != nil {
 		return err

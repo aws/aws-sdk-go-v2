@@ -20,7 +20,7 @@ func (c *Client) DeleteMeeting(ctx context.Context, params *DeleteMeetingInput, 
 		params = &DeleteMeetingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMeeting", params, optFns, addOperationDeleteMeetingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMeeting", params, optFns, c.addOperationDeleteMeetingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteMeetingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMeetingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMeetingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMeeting{}, middleware.After)
 	if err != nil {
 		return err

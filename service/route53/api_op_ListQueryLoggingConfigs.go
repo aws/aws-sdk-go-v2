@@ -26,7 +26,7 @@ func (c *Client) ListQueryLoggingConfigs(ctx context.Context, params *ListQueryL
 		params = &ListQueryLoggingConfigsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListQueryLoggingConfigs", params, optFns, addOperationListQueryLoggingConfigsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListQueryLoggingConfigs", params, optFns, c.addOperationListQueryLoggingConfigsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type ListQueryLoggingConfigsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListQueryLoggingConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListQueryLoggingConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListQueryLoggingConfigs{}, middleware.After)
 	if err != nil {
 		return err

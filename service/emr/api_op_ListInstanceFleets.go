@@ -20,7 +20,7 @@ func (c *Client) ListInstanceFleets(ctx context.Context, params *ListInstanceFle
 		params = &ListInstanceFleetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListInstanceFleets", params, optFns, addOperationListInstanceFleetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListInstanceFleets", params, optFns, c.addOperationListInstanceFleetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListInstanceFleetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListInstanceFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListInstanceFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListInstanceFleets{}, middleware.After)
 	if err != nil {
 		return err

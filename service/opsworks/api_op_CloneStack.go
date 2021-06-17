@@ -23,7 +23,7 @@ func (c *Client) CloneStack(ctx context.Context, params *CloneStackInput, optFns
 		params = &CloneStackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CloneStack", params, optFns, addOperationCloneStackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CloneStack", params, optFns, c.addOperationCloneStackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -294,7 +294,7 @@ type CloneStackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCloneStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCloneStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCloneStack{}, middleware.After)
 	if err != nil {
 		return err

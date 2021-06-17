@@ -29,7 +29,7 @@ func (c *Client) SetLoadBalancerPoliciesForBackendServer(ctx context.Context, pa
 		params = &SetLoadBalancerPoliciesForBackendServerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetLoadBalancerPoliciesForBackendServer", params, optFns, addOperationSetLoadBalancerPoliciesForBackendServerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetLoadBalancerPoliciesForBackendServer", params, optFns, c.addOperationSetLoadBalancerPoliciesForBackendServerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type SetLoadBalancerPoliciesForBackendServerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetLoadBalancerPoliciesForBackendServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetLoadBalancerPoliciesForBackendServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetLoadBalancerPoliciesForBackendServer{}, middleware.After)
 	if err != nil {
 		return err

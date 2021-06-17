@@ -18,7 +18,7 @@ func (c *Client) BatchDetectSentiment(ctx context.Context, params *BatchDetectSe
 		params = &BatchDetectSentimentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDetectSentiment", params, optFns, addOperationBatchDetectSentimentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDetectSentiment", params, optFns, c.addOperationBatchDetectSentimentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type BatchDetectSentimentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDetectSentimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDetectSentimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDetectSentiment{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteMember(ctx context.Context, params *DeleteMemberInput, op
 		params = &DeleteMemberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMember", params, optFns, addOperationDeleteMemberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMember", params, optFns, c.addOperationDeleteMemberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteMemberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMember{}, middleware.After)
 	if err != nil {
 		return err

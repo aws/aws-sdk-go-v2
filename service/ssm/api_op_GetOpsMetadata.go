@@ -17,7 +17,7 @@ func (c *Client) GetOpsMetadata(ctx context.Context, params *GetOpsMetadataInput
 		params = &GetOpsMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetOpsMetadata", params, optFns, addOperationGetOpsMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetOpsMetadata", params, optFns, c.addOperationGetOpsMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetOpsMetadataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetOpsMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetOpsMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOpsMetadata{}, middleware.After)
 	if err != nil {
 		return err

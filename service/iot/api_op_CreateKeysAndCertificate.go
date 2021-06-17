@@ -22,7 +22,7 @@ func (c *Client) CreateKeysAndCertificate(ctx context.Context, params *CreateKey
 		params = &CreateKeysAndCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateKeysAndCertificate", params, optFns, addOperationCreateKeysAndCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateKeysAndCertificate", params, optFns, c.addOperationCreateKeysAndCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type CreateKeysAndCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateKeysAndCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateKeysAndCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateKeysAndCertificate{}, middleware.After)
 	if err != nil {
 		return err

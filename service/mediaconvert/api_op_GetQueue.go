@@ -17,7 +17,7 @@ func (c *Client) GetQueue(ctx context.Context, params *GetQueueInput, optFns ...
 		params = &GetQueueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetQueue", params, optFns, addOperationGetQueueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetQueue", params, optFns, c.addOperationGetQueueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type GetQueueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueue{}, middleware.After)
 	if err != nil {
 		return err

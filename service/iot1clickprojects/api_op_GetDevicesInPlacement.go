@@ -16,7 +16,7 @@ func (c *Client) GetDevicesInPlacement(ctx context.Context, params *GetDevicesIn
 		params = &GetDevicesInPlacementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDevicesInPlacement", params, optFns, addOperationGetDevicesInPlacementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDevicesInPlacement", params, optFns, c.addOperationGetDevicesInPlacementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetDevicesInPlacementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDevicesInPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDevicesInPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDevicesInPlacement{}, middleware.After)
 	if err != nil {
 		return err

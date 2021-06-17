@@ -18,7 +18,7 @@ func (c *Client) DescribeFlowExecutionRecords(ctx context.Context, params *Descr
 		params = &DescribeFlowExecutionRecordsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFlowExecutionRecords", params, optFns, addOperationDescribeFlowExecutionRecordsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFlowExecutionRecords", params, optFns, c.addOperationDescribeFlowExecutionRecordsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeFlowExecutionRecordsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFlowExecutionRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFlowExecutionRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFlowExecutionRecords{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) RegisterUser(ctx context.Context, params *RegisterUserInput, op
 		params = &RegisterUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterUser", params, optFns, addOperationRegisterUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterUser", params, optFns, c.addOperationRegisterUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -165,7 +165,7 @@ type RegisterUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterUser{}, middleware.After)
 	if err != nil {
 		return err

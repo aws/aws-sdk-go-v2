@@ -17,7 +17,7 @@ func (c *Client) DeleteDeploymentGroup(ctx context.Context, params *DeleteDeploy
 		params = &DeleteDeploymentGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDeploymentGroup", params, optFns, addOperationDeleteDeploymentGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDeploymentGroup", params, optFns, c.addOperationDeleteDeploymentGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DeleteDeploymentGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDeploymentGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDeploymentGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDeploymentGroup{}, middleware.After)
 	if err != nil {
 		return err

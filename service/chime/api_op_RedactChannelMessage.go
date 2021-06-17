@@ -20,7 +20,7 @@ func (c *Client) RedactChannelMessage(ctx context.Context, params *RedactChannel
 		params = &RedactChannelMessageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RedactChannelMessage", params, optFns, addOperationRedactChannelMessageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RedactChannelMessage", params, optFns, c.addOperationRedactChannelMessageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type RedactChannelMessageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRedactChannelMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRedactChannelMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRedactChannelMessage{}, middleware.After)
 	if err != nil {
 		return err

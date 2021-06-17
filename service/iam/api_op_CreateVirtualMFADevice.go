@@ -29,7 +29,7 @@ func (c *Client) CreateVirtualMFADevice(ctx context.Context, params *CreateVirtu
 		params = &CreateVirtualMFADeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVirtualMFADevice", params, optFns, addOperationCreateVirtualMFADeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateVirtualMFADevice", params, optFns, c.addOperationCreateVirtualMFADeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type CreateVirtualMFADeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateVirtualMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateVirtualMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateVirtualMFADevice{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CreateVariable(ctx context.Context, params *CreateVariableInput
 		params = &CreateVariableInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVariable", params, optFns, addOperationCreateVariableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateVariable", params, optFns, c.addOperationCreateVariableMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type CreateVariableOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateVariableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateVariableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateVariable{}, middleware.After)
 	if err != nil {
 		return err

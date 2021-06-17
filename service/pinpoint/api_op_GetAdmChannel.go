@@ -18,7 +18,7 @@ func (c *Client) GetAdmChannel(ctx context.Context, params *GetAdmChannelInput, 
 		params = &GetAdmChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAdmChannel", params, optFns, addOperationGetAdmChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAdmChannel", params, optFns, c.addOperationGetAdmChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetAdmChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAdmChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAdmChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAdmChannel{}, middleware.After)
 	if err != nil {
 		return err

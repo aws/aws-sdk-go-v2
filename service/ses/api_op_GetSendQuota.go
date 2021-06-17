@@ -17,7 +17,7 @@ func (c *Client) GetSendQuota(ctx context.Context, params *GetSendQuotaInput, op
 		params = &GetSendQuotaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSendQuota", params, optFns, addOperationGetSendQuotaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSendQuota", params, optFns, c.addOperationGetSendQuotaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetSendQuotaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSendQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSendQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetSendQuota{}, middleware.After)
 	if err != nil {
 		return err

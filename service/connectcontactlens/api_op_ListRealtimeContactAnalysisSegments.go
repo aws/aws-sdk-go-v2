@@ -18,7 +18,7 @@ func (c *Client) ListRealtimeContactAnalysisSegments(ctx context.Context, params
 		params = &ListRealtimeContactAnalysisSegmentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRealtimeContactAnalysisSegments", params, optFns, addOperationListRealtimeContactAnalysisSegmentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRealtimeContactAnalysisSegments", params, optFns, c.addOperationListRealtimeContactAnalysisSegmentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type ListRealtimeContactAnalysisSegmentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRealtimeContactAnalysisSegmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRealtimeContactAnalysisSegmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRealtimeContactAnalysisSegments{}, middleware.After)
 	if err != nil {
 		return err

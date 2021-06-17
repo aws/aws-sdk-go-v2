@@ -17,7 +17,7 @@ func (c *Client) DescribeRuleGroup(ctx context.Context, params *DescribeRuleGrou
 		params = &DescribeRuleGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRuleGroup", params, optFns, addOperationDescribeRuleGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRuleGroup", params, optFns, c.addOperationDescribeRuleGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type DescribeRuleGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeRuleGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) UpdateFleetMetadata(ctx context.Context, params *UpdateFleetMet
 		params = &UpdateFleetMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFleetMetadata", params, optFns, addOperationUpdateFleetMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFleetMetadata", params, optFns, c.addOperationUpdateFleetMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type UpdateFleetMetadataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFleetMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFleetMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFleetMetadata{}, middleware.After)
 	if err != nil {
 		return err

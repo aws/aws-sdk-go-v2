@@ -16,7 +16,7 @@ func (c *Client) ResetDeployments(ctx context.Context, params *ResetDeploymentsI
 		params = &ResetDeploymentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetDeployments", params, optFns, addOperationResetDeploymentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetDeployments", params, optFns, c.addOperationResetDeploymentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ResetDeploymentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetDeployments{}, middleware.After)
 	if err != nil {
 		return err

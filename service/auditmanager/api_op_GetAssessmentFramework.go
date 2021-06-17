@@ -17,7 +17,7 @@ func (c *Client) GetAssessmentFramework(ctx context.Context, params *GetAssessme
 		params = &GetAssessmentFrameworkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAssessmentFramework", params, optFns, addOperationGetAssessmentFrameworkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAssessmentFramework", params, optFns, c.addOperationGetAssessmentFrameworkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetAssessmentFrameworkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAssessmentFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAssessmentFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssessmentFramework{}, middleware.After)
 	if err != nil {
 		return err

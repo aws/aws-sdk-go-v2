@@ -45,7 +45,7 @@ func (c *Client) TagOpenIDConnectProvider(ctx context.Context, params *TagOpenID
 		params = &TagOpenIDConnectProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TagOpenIDConnectProvider", params, optFns, addOperationTagOpenIDConnectProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagOpenIDConnectProvider", params, optFns, c.addOperationTagOpenIDConnectProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type TagOpenIDConnectProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTagOpenIDConnectProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTagOpenIDConnectProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpTagOpenIDConnectProvider{}, middleware.After)
 	if err != nil {
 		return err

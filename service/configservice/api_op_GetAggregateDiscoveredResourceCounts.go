@@ -24,7 +24,7 @@ func (c *Client) GetAggregateDiscoveredResourceCounts(ctx context.Context, param
 		params = &GetAggregateDiscoveredResourceCountsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAggregateDiscoveredResourceCounts", params, optFns, addOperationGetAggregateDiscoveredResourceCountsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAggregateDiscoveredResourceCounts", params, optFns, c.addOperationGetAggregateDiscoveredResourceCountsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type GetAggregateDiscoveredResourceCountsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAggregateDiscoveredResourceCountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAggregateDiscoveredResourceCountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAggregateDiscoveredResourceCounts{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CreateDBInstance(ctx context.Context, params *CreateDBInstanceI
 		params = &CreateDBInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDBInstance", params, optFns, addOperationCreateDBInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDBInstance", params, optFns, c.addOperationCreateDBInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -261,7 +261,7 @@ type CreateDBInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBInstance{}, middleware.After)
 	if err != nil {
 		return err

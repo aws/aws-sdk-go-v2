@@ -31,7 +31,7 @@ func (c *Client) CreateTransitVirtualInterface(ctx context.Context, params *Crea
 		params = &CreateTransitVirtualInterfaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTransitVirtualInterface", params, optFns, addOperationCreateTransitVirtualInterfaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTransitVirtualInterface", params, optFns, c.addOperationCreateTransitVirtualInterfaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type CreateTransitVirtualInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTransitVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTransitVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTransitVirtualInterface{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DisassociateGlobalReplicationGroup(ctx context.Context, params 
 		params = &DisassociateGlobalReplicationGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateGlobalReplicationGroup", params, optFns, addOperationDisassociateGlobalReplicationGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateGlobalReplicationGroup", params, optFns, c.addOperationDisassociateGlobalReplicationGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DisassociateGlobalReplicationGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDisassociateGlobalReplicationGroup{}, middleware.After)
 	if err != nil {
 		return err

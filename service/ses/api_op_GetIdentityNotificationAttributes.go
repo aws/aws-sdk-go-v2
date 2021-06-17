@@ -22,7 +22,7 @@ func (c *Client) GetIdentityNotificationAttributes(ctx context.Context, params *
 		params = &GetIdentityNotificationAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetIdentityNotificationAttributes", params, optFns, addOperationGetIdentityNotificationAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetIdentityNotificationAttributes", params, optFns, c.addOperationGetIdentityNotificationAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetIdentityNotificationAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetIdentityNotificationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIdentityNotificationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetIdentityNotificationAttributes{}, middleware.After)
 	if err != nil {
 		return err

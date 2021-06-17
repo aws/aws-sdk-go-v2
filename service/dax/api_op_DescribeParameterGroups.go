@@ -18,7 +18,7 @@ func (c *Client) DescribeParameterGroups(ctx context.Context, params *DescribePa
 		params = &DescribeParameterGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeParameterGroups", params, optFns, addOperationDescribeParameterGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeParameterGroups", params, optFns, c.addOperationDescribeParameterGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DescribeParameterGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeParameterGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeParameterGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeParameterGroups{}, middleware.After)
 	if err != nil {
 		return err

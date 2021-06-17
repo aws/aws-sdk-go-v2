@@ -18,7 +18,7 @@ func (c *Client) StartReplicationTaskAssessment(ctx context.Context, params *Sta
 		params = &StartReplicationTaskAssessmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartReplicationTaskAssessment", params, optFns, addOperationStartReplicationTaskAssessmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartReplicationTaskAssessment", params, optFns, c.addOperationStartReplicationTaskAssessmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StartReplicationTaskAssessmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartReplicationTaskAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartReplicationTaskAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartReplicationTaskAssessment{}, middleware.After)
 	if err != nil {
 		return err

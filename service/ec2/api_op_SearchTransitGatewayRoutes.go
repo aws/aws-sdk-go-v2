@@ -17,7 +17,7 @@ func (c *Client) SearchTransitGatewayRoutes(ctx context.Context, params *SearchT
 		params = &SearchTransitGatewayRoutesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchTransitGatewayRoutes", params, optFns, addOperationSearchTransitGatewayRoutesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchTransitGatewayRoutes", params, optFns, c.addOperationSearchTransitGatewayRoutesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type SearchTransitGatewayRoutesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchTransitGatewayRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchTransitGatewayRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpSearchTransitGatewayRoutes{}, middleware.After)
 	if err != nil {
 		return err

@@ -27,7 +27,7 @@ func (c *Client) CreateAppCookieStickinessPolicy(ctx context.Context, params *Cr
 		params = &CreateAppCookieStickinessPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAppCookieStickinessPolicy", params, optFns, addOperationCreateAppCookieStickinessPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAppCookieStickinessPolicy", params, optFns, c.addOperationCreateAppCookieStickinessPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type CreateAppCookieStickinessPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAppCookieStickinessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAppCookieStickinessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateAppCookieStickinessPolicy{}, middleware.After)
 	if err != nil {
 		return err

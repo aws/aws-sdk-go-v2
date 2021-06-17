@@ -17,7 +17,7 @@ func (c *Client) CreateLink(ctx context.Context, params *CreateLinkInput, optFns
 		params = &CreateLinkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLink", params, optFns, addOperationCreateLinkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLink", params, optFns, c.addOperationCreateLinkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type CreateLinkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLink{}, middleware.After)
 	if err != nil {
 		return err

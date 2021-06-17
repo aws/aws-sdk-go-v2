@@ -34,7 +34,7 @@ func (c *Client) DescribeFileSystems(ctx context.Context, params *DescribeFileSy
 		params = &DescribeFileSystemsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFileSystems", params, optFns, addOperationDescribeFileSystemsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFileSystems", params, optFns, c.addOperationDescribeFileSystemsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type DescribeFileSystemsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFileSystemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFileSystemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFileSystems{}, middleware.After)
 	if err != nil {
 		return err

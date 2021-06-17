@@ -17,7 +17,7 @@ func (c *Client) CreateLocalGatewayRoute(ctx context.Context, params *CreateLoca
 		params = &CreateLocalGatewayRouteInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLocalGatewayRoute", params, optFns, addOperationCreateLocalGatewayRouteMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLocalGatewayRoute", params, optFns, c.addOperationCreateLocalGatewayRouteMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type CreateLocalGatewayRouteOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLocalGatewayRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLocalGatewayRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateLocalGatewayRoute{}, middleware.After)
 	if err != nil {
 		return err

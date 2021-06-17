@@ -17,7 +17,7 @@ func (c *Client) NoInputAndNoOutput(ctx context.Context, params *NoInputAndNoOut
 		params = &NoInputAndNoOutputInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "NoInputAndNoOutput", params, optFns, addOperationNoInputAndNoOutputMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "NoInputAndNoOutput", params, optFns, c.addOperationNoInputAndNoOutputMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ type NoInputAndNoOutputOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationNoInputAndNoOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationNoInputAndNoOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpNoInputAndNoOutput{}, middleware.After)
 	if err != nil {
 		return err

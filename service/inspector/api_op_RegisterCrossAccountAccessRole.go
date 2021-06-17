@@ -17,7 +17,7 @@ func (c *Client) RegisterCrossAccountAccessRole(ctx context.Context, params *Reg
 		params = &RegisterCrossAccountAccessRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterCrossAccountAccessRole", params, optFns, addOperationRegisterCrossAccountAccessRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterCrossAccountAccessRole", params, optFns, c.addOperationRegisterCrossAccountAccessRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type RegisterCrossAccountAccessRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterCrossAccountAccessRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterCrossAccountAccessRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterCrossAccountAccessRole{}, middleware.After)
 	if err != nil {
 		return err

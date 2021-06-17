@@ -16,7 +16,7 @@ func (c *Client) DeleteInfrastructureConfiguration(ctx context.Context, params *
 		params = &DeleteInfrastructureConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteInfrastructureConfiguration", params, optFns, addOperationDeleteInfrastructureConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInfrastructureConfiguration", params, optFns, c.addOperationDeleteInfrastructureConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteInfrastructureConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteInfrastructureConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteInfrastructureConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInfrastructureConfiguration{}, middleware.After)
 	if err != nil {
 		return err

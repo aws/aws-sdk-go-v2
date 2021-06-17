@@ -24,7 +24,7 @@ func (c *Client) EnableVpcClassicLinkDnsSupport(ctx context.Context, params *Ena
 		params = &EnableVpcClassicLinkDnsSupportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableVpcClassicLinkDnsSupport", params, optFns, addOperationEnableVpcClassicLinkDnsSupportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableVpcClassicLinkDnsSupport", params, optFns, c.addOperationEnableVpcClassicLinkDnsSupportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type EnableVpcClassicLinkDnsSupportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableVpcClassicLinkDnsSupportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableVpcClassicLinkDnsSupportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpEnableVpcClassicLinkDnsSupport{}, middleware.After)
 	if err != nil {
 		return err

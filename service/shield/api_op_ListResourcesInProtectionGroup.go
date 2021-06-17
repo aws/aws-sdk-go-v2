@@ -17,7 +17,7 @@ func (c *Client) ListResourcesInProtectionGroup(ctx context.Context, params *Lis
 		params = &ListResourcesInProtectionGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResourcesInProtectionGroup", params, optFns, addOperationListResourcesInProtectionGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResourcesInProtectionGroup", params, optFns, c.addOperationListResourcesInProtectionGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListResourcesInProtectionGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListResourcesInProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResourcesInProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourcesInProtectionGroup{}, middleware.After)
 	if err != nil {
 		return err

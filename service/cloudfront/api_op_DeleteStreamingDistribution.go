@@ -56,7 +56,7 @@ func (c *Client) DeleteStreamingDistribution(ctx context.Context, params *Delete
 		params = &DeleteStreamingDistributionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteStreamingDistribution", params, optFns, addOperationDeleteStreamingDistributionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteStreamingDistribution", params, optFns, c.addOperationDeleteStreamingDistributionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type DeleteStreamingDistributionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteStreamingDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteStreamingDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteStreamingDistribution{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) CancelConversionTask(ctx context.Context, params *CancelConvers
 		params = &CancelConversionTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelConversionTask", params, optFns, addOperationCancelConversionTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelConversionTask", params, optFns, c.addOperationCancelConversionTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type CancelConversionTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelConversionTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelConversionTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCancelConversionTask{}, middleware.After)
 	if err != nil {
 		return err

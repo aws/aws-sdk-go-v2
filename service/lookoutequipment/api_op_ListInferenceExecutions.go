@@ -20,7 +20,7 @@ func (c *Client) ListInferenceExecutions(ctx context.Context, params *ListInfere
 		params = &ListInferenceExecutionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListInferenceExecutions", params, optFns, addOperationListInferenceExecutionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListInferenceExecutions", params, optFns, c.addOperationListInferenceExecutionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type ListInferenceExecutionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListInferenceExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListInferenceExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListInferenceExecutions{}, middleware.After)
 	if err != nil {
 		return err

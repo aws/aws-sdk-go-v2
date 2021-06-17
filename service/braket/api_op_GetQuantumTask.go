@@ -18,7 +18,7 @@ func (c *Client) GetQuantumTask(ctx context.Context, params *GetQuantumTaskInput
 		params = &GetQuantumTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetQuantumTask", params, optFns, addOperationGetQuantumTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetQuantumTask", params, optFns, c.addOperationGetQuantumTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type GetQuantumTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetQuantumTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetQuantumTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQuantumTask{}, middleware.After)
 	if err != nil {
 		return err

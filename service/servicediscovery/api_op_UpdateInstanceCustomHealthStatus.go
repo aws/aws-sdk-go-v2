@@ -23,7 +23,7 @@ func (c *Client) UpdateInstanceCustomHealthStatus(ctx context.Context, params *U
 		params = &UpdateInstanceCustomHealthStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateInstanceCustomHealthStatus", params, optFns, addOperationUpdateInstanceCustomHealthStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateInstanceCustomHealthStatus", params, optFns, c.addOperationUpdateInstanceCustomHealthStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UpdateInstanceCustomHealthStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateInstanceCustomHealthStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateInstanceCustomHealthStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateInstanceCustomHealthStatus{}, middleware.After)
 	if err != nil {
 		return err

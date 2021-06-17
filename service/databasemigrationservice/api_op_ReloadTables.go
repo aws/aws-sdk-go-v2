@@ -17,7 +17,7 @@ func (c *Client) ReloadTables(ctx context.Context, params *ReloadTablesInput, op
 		params = &ReloadTablesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReloadTables", params, optFns, addOperationReloadTablesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReloadTables", params, optFns, c.addOperationReloadTablesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ReloadTablesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReloadTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReloadTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReloadTables{}, middleware.After)
 	if err != nil {
 		return err

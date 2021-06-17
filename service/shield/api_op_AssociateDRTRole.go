@@ -42,7 +42,7 @@ func (c *Client) AssociateDRTRole(ctx context.Context, params *AssociateDRTRoleI
 		params = &AssociateDRTRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateDRTRole", params, optFns, addOperationAssociateDRTRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateDRTRole", params, optFns, c.addOperationAssociateDRTRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type AssociateDRTRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateDRTRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateDRTRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateDRTRole{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) AttachTypedLink(ctx context.Context, params *AttachTypedLinkInp
 		params = &AttachTypedLinkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachTypedLink", params, optFns, addOperationAttachTypedLinkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachTypedLink", params, optFns, c.addOperationAttachTypedLinkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type AttachTypedLinkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachTypedLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachTypedLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAttachTypedLink{}, middleware.After)
 	if err != nil {
 		return err

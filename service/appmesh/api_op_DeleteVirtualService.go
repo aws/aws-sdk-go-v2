@@ -17,7 +17,7 @@ func (c *Client) DeleteVirtualService(ctx context.Context, params *DeleteVirtual
 		params = &DeleteVirtualServiceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVirtualService", params, optFns, addOperationDeleteVirtualServiceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVirtualService", params, optFns, c.addOperationDeleteVirtualServiceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DeleteVirtualServiceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVirtualServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVirtualServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVirtualService{}, middleware.After)
 	if err != nil {
 		return err

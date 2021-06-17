@@ -16,7 +16,7 @@ func (c *Client) DeleteRoom(ctx context.Context, params *DeleteRoomInput, optFns
 		params = &DeleteRoomInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRoom", params, optFns, addOperationDeleteRoomMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRoom", params, optFns, c.addOperationDeleteRoomMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type DeleteRoomOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRoom{}, middleware.After)
 	if err != nil {
 		return err

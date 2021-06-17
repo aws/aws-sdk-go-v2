@@ -19,7 +19,7 @@ func (c *Client) ListAssociatedResources(ctx context.Context, params *ListAssoci
 		params = &ListAssociatedResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAssociatedResources", params, optFns, addOperationListAssociatedResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAssociatedResources", params, optFns, c.addOperationListAssociatedResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListAssociatedResourcesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAssociatedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAssociatedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssociatedResources{}, middleware.After)
 	if err != nil {
 		return err

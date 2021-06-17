@@ -17,7 +17,7 @@ func (c *Client) StopUserImportJob(ctx context.Context, params *StopUserImportJo
 		params = &StopUserImportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopUserImportJob", params, optFns, addOperationStopUserImportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopUserImportJob", params, optFns, c.addOperationStopUserImportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type StopUserImportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopUserImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopUserImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopUserImportJob{}, middleware.After)
 	if err != nil {
 		return err

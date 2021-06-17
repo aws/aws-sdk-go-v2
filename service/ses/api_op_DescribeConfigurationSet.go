@@ -20,7 +20,7 @@ func (c *Client) DescribeConfigurationSet(ctx context.Context, params *DescribeC
 		params = &DescribeConfigurationSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeConfigurationSet", params, optFns, addOperationDescribeConfigurationSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConfigurationSet", params, optFns, c.addOperationDescribeConfigurationSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DescribeConfigurationSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeConfigurationSet{}, middleware.After)
 	if err != nil {
 		return err

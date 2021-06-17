@@ -17,7 +17,7 @@ func (c *Client) DeleteAccessLogSettings(ctx context.Context, params *DeleteAcce
 		params = &DeleteAccessLogSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAccessLogSettings", params, optFns, addOperationDeleteAccessLogSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAccessLogSettings", params, optFns, c.addOperationDeleteAccessLogSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteAccessLogSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAccessLogSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAccessLogSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAccessLogSettings{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) BatchUpdateTableRows(ctx context.Context, params *BatchUpdateTa
 		params = &BatchUpdateTableRowsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchUpdateTableRows", params, optFns, addOperationBatchUpdateTableRowsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchUpdateTableRows", params, optFns, c.addOperationBatchUpdateTableRowsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type BatchUpdateTableRowsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchUpdateTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchUpdateTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateTableRows{}, middleware.After)
 	if err != nil {
 		return err

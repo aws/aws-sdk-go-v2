@@ -18,7 +18,7 @@ func (c *Client) DescribeLimits(ctx context.Context, params *DescribeLimitsInput
 		params = &DescribeLimitsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLimits", params, optFns, addOperationDescribeLimitsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLimits", params, optFns, c.addOperationDescribeLimitsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeLimitsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLimits{}, middleware.After)
 	if err != nil {
 		return err

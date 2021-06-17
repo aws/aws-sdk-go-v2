@@ -27,7 +27,7 @@ func (c *Client) ListTapes(ctx context.Context, params *ListTapesInput, optFns .
 		params = &ListTapesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTapes", params, optFns, addOperationListTapesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTapes", params, optFns, c.addOperationListTapesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type ListTapesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTapesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTapesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTapes{}, middleware.After)
 	if err != nil {
 		return err

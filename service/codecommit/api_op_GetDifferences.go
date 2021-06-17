@@ -20,7 +20,7 @@ func (c *Client) GetDifferences(ctx context.Context, params *GetDifferencesInput
 		params = &GetDifferencesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDifferences", params, optFns, addOperationGetDifferencesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDifferences", params, optFns, c.addOperationGetDifferencesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type GetDifferencesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDifferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDifferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDifferences{}, middleware.After)
 	if err != nil {
 		return err

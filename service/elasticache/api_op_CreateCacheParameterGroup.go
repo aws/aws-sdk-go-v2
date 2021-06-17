@@ -31,7 +31,7 @@ func (c *Client) CreateCacheParameterGroup(ctx context.Context, params *CreateCa
 		params = &CreateCacheParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCacheParameterGroup", params, optFns, addOperationCreateCacheParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCacheParameterGroup", params, optFns, c.addOperationCreateCacheParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type CreateCacheParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCacheParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCacheParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateCacheParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

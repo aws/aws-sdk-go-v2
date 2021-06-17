@@ -17,7 +17,7 @@ func (c *Client) UpdatePreset(ctx context.Context, params *UpdatePresetInput, op
 		params = &UpdatePresetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePreset", params, optFns, addOperationUpdatePresetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePreset", params, optFns, c.addOperationUpdatePresetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type UpdatePresetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePresetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePresetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePreset{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) MeterUsage(ctx context.Context, params *MeterUsageInput, optFns
 		params = &MeterUsageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MeterUsage", params, optFns, addOperationMeterUsageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MeterUsage", params, optFns, c.addOperationMeterUsageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type MeterUsageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMeterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMeterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMeterUsage{}, middleware.After)
 	if err != nil {
 		return err

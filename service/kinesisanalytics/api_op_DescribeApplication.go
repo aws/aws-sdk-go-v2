@@ -27,7 +27,7 @@ func (c *Client) DescribeApplication(ctx context.Context, params *DescribeApplic
 		params = &DescribeApplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeApplication", params, optFns, addOperationDescribeApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeApplication", params, optFns, c.addOperationDescribeApplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeApplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplication{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteContainerPolicy(ctx context.Context, params *DeleteContai
 		params = &DeleteContainerPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteContainerPolicy", params, optFns, addOperationDeleteContainerPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteContainerPolicy", params, optFns, c.addOperationDeleteContainerPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteContainerPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteContainerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteContainerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteContainerPolicy{}, middleware.After)
 	if err != nil {
 		return err

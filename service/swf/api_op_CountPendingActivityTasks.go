@@ -39,7 +39,7 @@ func (c *Client) CountPendingActivityTasks(ctx context.Context, params *CountPen
 		params = &CountPendingActivityTasksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CountPendingActivityTasks", params, optFns, addOperationCountPendingActivityTasksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CountPendingActivityTasks", params, optFns, c.addOperationCountPendingActivityTasksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type CountPendingActivityTasksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCountPendingActivityTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCountPendingActivityTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCountPendingActivityTasks{}, middleware.After)
 	if err != nil {
 		return err

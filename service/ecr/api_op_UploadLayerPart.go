@@ -21,7 +21,7 @@ func (c *Client) UploadLayerPart(ctx context.Context, params *UploadLayerPartInp
 		params = &UploadLayerPartInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UploadLayerPart", params, optFns, addOperationUploadLayerPartMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UploadLayerPart", params, optFns, c.addOperationUploadLayerPartMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type UploadLayerPartOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUploadLayerPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUploadLayerPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUploadLayerPart{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) StopQueryExecution(ctx context.Context, params *StopQueryExecut
 		params = &StopQueryExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopQueryExecution", params, optFns, addOperationStopQueryExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopQueryExecution", params, optFns, c.addOperationStopQueryExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type StopQueryExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopQueryExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopQueryExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopQueryExecution{}, middleware.After)
 	if err != nil {
 		return err

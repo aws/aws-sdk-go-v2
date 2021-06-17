@@ -18,7 +18,7 @@ func (c *Client) UpdateNode(ctx context.Context, params *UpdateNodeInput, optFns
 		params = &UpdateNodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateNode", params, optFns, addOperationUpdateNodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateNode", params, optFns, c.addOperationUpdateNodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UpdateNodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNode{}, middleware.After)
 	if err != nil {
 		return err

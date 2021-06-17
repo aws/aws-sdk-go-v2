@@ -18,7 +18,7 @@ func (c *Client) DescribeContainerInstances(ctx context.Context, params *Describ
 		params = &DescribeContainerInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeContainerInstances", params, optFns, addOperationDescribeContainerInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeContainerInstances", params, optFns, c.addOperationDescribeContainerInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeContainerInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeContainerInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeContainerInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeContainerInstances{}, middleware.After)
 	if err != nil {
 		return err

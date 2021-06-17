@@ -18,7 +18,7 @@ func (c *Client) ListEntities(ctx context.Context, params *ListEntitiesInput, op
 		params = &ListEntitiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEntities", params, optFns, addOperationListEntitiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEntities", params, optFns, c.addOperationListEntitiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListEntitiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEntities{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) BatchSnoozeAlarm(ctx context.Context, params *BatchSnoozeAlarmI
 		params = &BatchSnoozeAlarmInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchSnoozeAlarm", params, optFns, addOperationBatchSnoozeAlarmMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchSnoozeAlarm", params, optFns, c.addOperationBatchSnoozeAlarmMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type BatchSnoozeAlarmOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchSnoozeAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchSnoozeAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchSnoozeAlarm{}, middleware.After)
 	if err != nil {
 		return err

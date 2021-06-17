@@ -26,7 +26,7 @@ func (c *Client) ListAvailableZones(ctx context.Context, params *ListAvailableZo
 		params = &ListAvailableZonesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAvailableZones", params, optFns, addOperationListAvailableZonesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAvailableZones", params, optFns, c.addOperationListAvailableZonesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type ListAvailableZonesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAvailableZonesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAvailableZonesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailableZones{}, middleware.After)
 	if err != nil {
 		return err

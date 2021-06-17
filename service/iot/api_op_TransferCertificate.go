@@ -22,7 +22,7 @@ func (c *Client) TransferCertificate(ctx context.Context, params *TransferCertif
 		params = &TransferCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TransferCertificate", params, optFns, addOperationTransferCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TransferCertificate", params, optFns, c.addOperationTransferCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type TransferCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTransferCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTransferCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpTransferCertificate{}, middleware.After)
 	if err != nil {
 		return err

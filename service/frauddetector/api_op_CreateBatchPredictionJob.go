@@ -17,7 +17,7 @@ func (c *Client) CreateBatchPredictionJob(ctx context.Context, params *CreateBat
 		params = &CreateBatchPredictionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateBatchPredictionJob", params, optFns, addOperationCreateBatchPredictionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBatchPredictionJob", params, optFns, c.addOperationCreateBatchPredictionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type CreateBatchPredictionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateBatchPredictionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateBatchPredictionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBatchPredictionJob{}, middleware.After)
 	if err != nil {
 		return err

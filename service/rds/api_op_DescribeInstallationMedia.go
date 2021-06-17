@@ -19,7 +19,7 @@ func (c *Client) DescribeInstallationMedia(ctx context.Context, params *Describe
 		params = &DescribeInstallationMediaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInstallationMedia", params, optFns, addOperationDescribeInstallationMediaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInstallationMedia", params, optFns, c.addOperationDescribeInstallationMediaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DescribeInstallationMediaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInstallationMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInstallationMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeInstallationMedia{}, middleware.After)
 	if err != nil {
 		return err

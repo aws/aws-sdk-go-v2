@@ -23,7 +23,7 @@ func (c *Client) GetLabels(ctx context.Context, params *GetLabelsInput, optFns .
 		params = &GetLabelsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLabels", params, optFns, addOperationGetLabelsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLabels", params, optFns, c.addOperationGetLabelsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetLabelsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLabels{}, middleware.After)
 	if err != nil {
 		return err

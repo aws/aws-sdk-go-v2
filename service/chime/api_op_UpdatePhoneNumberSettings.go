@@ -19,7 +19,7 @@ func (c *Client) UpdatePhoneNumberSettings(ctx context.Context, params *UpdatePh
 		params = &UpdatePhoneNumberSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePhoneNumberSettings", params, optFns, addOperationUpdatePhoneNumberSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePhoneNumberSettings", params, optFns, c.addOperationUpdatePhoneNumberSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type UpdatePhoneNumberSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePhoneNumberSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePhoneNumberSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePhoneNumberSettings{}, middleware.After)
 	if err != nil {
 		return err

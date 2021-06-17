@@ -16,7 +16,7 @@ func (c *Client) XmlEnums(ctx context.Context, params *XmlEnumsInput, optFns ...
 		params = &XmlEnumsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "XmlEnums", params, optFns, addOperationXmlEnumsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "XmlEnums", params, optFns, c.addOperationXmlEnumsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type XmlEnumsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationXmlEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationXmlEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpXmlEnums{}, middleware.After)
 	if err != nil {
 		return err

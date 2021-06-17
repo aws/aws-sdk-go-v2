@@ -19,7 +19,7 @@ func (c *Client) ListMonitoringExecutions(ctx context.Context, params *ListMonit
 		params = &ListMonitoringExecutionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListMonitoringExecutions", params, optFns, addOperationListMonitoringExecutionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListMonitoringExecutions", params, optFns, c.addOperationListMonitoringExecutionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ type ListMonitoringExecutionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListMonitoringExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListMonitoringExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMonitoringExecutions{}, middleware.After)
 	if err != nil {
 		return err

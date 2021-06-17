@@ -20,7 +20,7 @@ func (c *Client) DescribeEffectivePatchesForPatchBaseline(ctx context.Context, p
 		params = &DescribeEffectivePatchesForPatchBaselineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEffectivePatchesForPatchBaseline", params, optFns, addOperationDescribeEffectivePatchesForPatchBaselineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEffectivePatchesForPatchBaseline", params, optFns, c.addOperationDescribeEffectivePatchesForPatchBaselineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DescribeEffectivePatchesForPatchBaselineOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEffectivePatchesForPatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEffectivePatchesForPatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEffectivePatchesForPatchBaseline{}, middleware.After)
 	if err != nil {
 		return err

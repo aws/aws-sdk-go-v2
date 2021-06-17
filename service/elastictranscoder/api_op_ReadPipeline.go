@@ -17,7 +17,7 @@ func (c *Client) ReadPipeline(ctx context.Context, params *ReadPipelineInput, op
 		params = &ReadPipelineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReadPipeline", params, optFns, addOperationReadPipelineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReadPipeline", params, optFns, c.addOperationReadPipelineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ReadPipelineOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReadPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReadPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpReadPipeline{}, middleware.After)
 	if err != nil {
 		return err

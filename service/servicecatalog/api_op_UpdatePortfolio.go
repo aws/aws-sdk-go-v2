@@ -18,7 +18,7 @@ func (c *Client) UpdatePortfolio(ctx context.Context, params *UpdatePortfolioInp
 		params = &UpdatePortfolioInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePortfolio", params, optFns, addOperationUpdatePortfolioMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePortfolio", params, optFns, c.addOperationUpdatePortfolioMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type UpdatePortfolioOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePortfolio{}, middleware.After)
 	if err != nil {
 		return err

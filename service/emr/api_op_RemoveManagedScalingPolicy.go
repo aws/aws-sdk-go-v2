@@ -16,7 +16,7 @@ func (c *Client) RemoveManagedScalingPolicy(ctx context.Context, params *RemoveM
 		params = &RemoveManagedScalingPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveManagedScalingPolicy", params, optFns, addOperationRemoveManagedScalingPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveManagedScalingPolicy", params, optFns, c.addOperationRemoveManagedScalingPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type RemoveManagedScalingPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveManagedScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveManagedScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveManagedScalingPolicy{}, middleware.After)
 	if err != nil {
 		return err

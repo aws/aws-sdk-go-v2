@@ -18,7 +18,7 @@ func (c *Client) PutBackupVaultAccessPolicy(ctx context.Context, params *PutBack
 		params = &PutBackupVaultAccessPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBackupVaultAccessPolicy", params, optFns, addOperationPutBackupVaultAccessPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBackupVaultAccessPolicy", params, optFns, c.addOperationPutBackupVaultAccessPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type PutBackupVaultAccessPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBackupVaultAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBackupVaultAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutBackupVaultAccessPolicy{}, middleware.After)
 	if err != nil {
 		return err

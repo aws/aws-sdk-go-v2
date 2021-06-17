@@ -20,7 +20,7 @@ func (c *Client) UpdateServiceSpecificCredential(ctx context.Context, params *Up
 		params = &UpdateServiceSpecificCredentialInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateServiceSpecificCredential", params, optFns, addOperationUpdateServiceSpecificCredentialMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateServiceSpecificCredential", params, optFns, c.addOperationUpdateServiceSpecificCredentialMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type UpdateServiceSpecificCredentialOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateServiceSpecificCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateServiceSpecificCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateServiceSpecificCredential{}, middleware.After)
 	if err != nil {
 		return err

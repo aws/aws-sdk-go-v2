@@ -18,7 +18,7 @@ func (c *Client) UpdateTeamMember(ctx context.Context, params *UpdateTeamMemberI
 		params = &UpdateTeamMemberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateTeamMember", params, optFns, addOperationUpdateTeamMemberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateTeamMember", params, optFns, c.addOperationUpdateTeamMemberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type UpdateTeamMemberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateTeamMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateTeamMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTeamMember{}, middleware.After)
 	if err != nil {
 		return err

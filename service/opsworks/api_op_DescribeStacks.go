@@ -21,7 +21,7 @@ func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput
 		params = &DescribeStacksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeStacks", params, optFns, addOperationDescribeStacksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeStacks", params, optFns, c.addOperationDescribeStacksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DescribeStacksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStacks{}, middleware.After)
 	if err != nil {
 		return err

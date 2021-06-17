@@ -17,7 +17,7 @@ func (c *Client) BatchDetectKeyPhrases(ctx context.Context, params *BatchDetectK
 		params = &BatchDetectKeyPhrasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDetectKeyPhrases", params, optFns, addOperationBatchDetectKeyPhrasesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDetectKeyPhrases", params, optFns, c.addOperationBatchDetectKeyPhrasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type BatchDetectKeyPhrasesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDetectKeyPhrasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDetectKeyPhrasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDetectKeyPhrases{}, middleware.After)
 	if err != nil {
 		return err

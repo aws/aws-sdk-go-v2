@@ -17,7 +17,7 @@ func (c *Client) DisassociateServiceRoleFromAccount(ctx context.Context, params 
 		params = &DisassociateServiceRoleFromAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateServiceRoleFromAccount", params, optFns, addOperationDisassociateServiceRoleFromAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateServiceRoleFromAccount", params, optFns, c.addOperationDisassociateServiceRoleFromAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DisassociateServiceRoleFromAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateServiceRoleFromAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateServiceRoleFromAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateServiceRoleFromAccount{}, middleware.After)
 	if err != nil {
 		return err

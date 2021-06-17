@@ -46,7 +46,7 @@ func (c *Client) DeleteBucketMetricsConfiguration(ctx context.Context, params *D
 		params = &DeleteBucketMetricsConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketMetricsConfiguration", params, optFns, addOperationDeleteBucketMetricsConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketMetricsConfiguration", params, optFns, c.addOperationDeleteBucketMetricsConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type DeleteBucketMetricsConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBucketMetricsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBucketMetricsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteBucketMetricsConfiguration{}, middleware.After)
 	if err != nil {
 		return err

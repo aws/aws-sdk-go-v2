@@ -18,7 +18,7 @@ func (c *Client) DescribeEndpointAccess(ctx context.Context, params *DescribeEnd
 		params = &DescribeEndpointAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEndpointAccess", params, optFns, addOperationDescribeEndpointAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEndpointAccess", params, optFns, c.addOperationDescribeEndpointAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type DescribeEndpointAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEndpointAccess{}, middleware.After)
 	if err != nil {
 		return err

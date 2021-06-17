@@ -18,7 +18,7 @@ func (c *Client) CopyPackageVersions(ctx context.Context, params *CopyPackageVer
 		params = &CopyPackageVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopyPackageVersions", params, optFns, addOperationCopyPackageVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopyPackageVersions", params, optFns, c.addOperationCopyPackageVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ type CopyPackageVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopyPackageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopyPackageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCopyPackageVersions{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) GetGroupsForCapacityReservation(ctx context.Context, params *Ge
 		params = &GetGroupsForCapacityReservationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetGroupsForCapacityReservation", params, optFns, addOperationGetGroupsForCapacityReservationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetGroupsForCapacityReservation", params, optFns, c.addOperationGetGroupsForCapacityReservationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type GetGroupsForCapacityReservationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetGroupsForCapacityReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetGroupsForCapacityReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpGetGroupsForCapacityReservation{}, middleware.After)
 	if err != nil {
 		return err

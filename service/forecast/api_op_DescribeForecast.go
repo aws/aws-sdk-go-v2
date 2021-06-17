@@ -31,7 +31,7 @@ func (c *Client) DescribeForecast(ctx context.Context, params *DescribeForecastI
 		params = &DescribeForecastInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeForecast", params, optFns, addOperationDescribeForecastMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeForecast", params, optFns, c.addOperationDescribeForecastMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -112,7 +112,7 @@ type DescribeForecastOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeForecast{}, middleware.After)
 	if err != nil {
 		return err

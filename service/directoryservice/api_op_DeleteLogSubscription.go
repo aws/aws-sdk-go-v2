@@ -16,7 +16,7 @@ func (c *Client) DeleteLogSubscription(ctx context.Context, params *DeleteLogSub
 		params = &DeleteLogSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLogSubscription", params, optFns, addOperationDeleteLogSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLogSubscription", params, optFns, c.addOperationDeleteLogSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteLogSubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLogSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLogSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLogSubscription{}, middleware.After)
 	if err != nil {
 		return err

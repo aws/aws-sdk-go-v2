@@ -19,7 +19,7 @@ func (c *Client) GetInventorySchema(ctx context.Context, params *GetInventorySch
 		params = &GetInventorySchemaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInventorySchema", params, optFns, addOperationGetInventorySchemaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInventorySchema", params, optFns, c.addOperationGetInventorySchemaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type GetInventorySchemaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInventorySchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInventorySchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInventorySchema{}, middleware.After)
 	if err != nil {
 		return err

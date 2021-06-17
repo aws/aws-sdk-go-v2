@@ -19,7 +19,7 @@ func (c *Client) ListProcessingJobs(ctx context.Context, params *ListProcessingJ
 		params = &ListProcessingJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListProcessingJobs", params, optFns, addOperationListProcessingJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListProcessingJobs", params, optFns, c.addOperationListProcessingJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type ListProcessingJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListProcessingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListProcessingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProcessingJobs{}, middleware.After)
 	if err != nil {
 		return err

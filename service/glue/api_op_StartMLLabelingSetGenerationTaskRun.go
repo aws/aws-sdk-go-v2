@@ -25,7 +25,7 @@ func (c *Client) StartMLLabelingSetGenerationTaskRun(ctx context.Context, params
 		params = &StartMLLabelingSetGenerationTaskRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartMLLabelingSetGenerationTaskRun", params, optFns, addOperationStartMLLabelingSetGenerationTaskRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartMLLabelingSetGenerationTaskRun", params, optFns, c.addOperationStartMLLabelingSetGenerationTaskRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type StartMLLabelingSetGenerationTaskRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartMLLabelingSetGenerationTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartMLLabelingSetGenerationTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMLLabelingSetGenerationTaskRun{}, middleware.After)
 	if err != nil {
 		return err

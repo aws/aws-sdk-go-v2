@@ -17,7 +17,7 @@ func (c *Client) BatchCreateVariable(ctx context.Context, params *BatchCreateVar
 		params = &BatchCreateVariableInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchCreateVariable", params, optFns, addOperationBatchCreateVariableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchCreateVariable", params, optFns, c.addOperationBatchCreateVariableMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type BatchCreateVariableOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchCreateVariableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchCreateVariableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchCreateVariable{}, middleware.After)
 	if err != nil {
 		return err

@@ -25,7 +25,7 @@ func (c *Client) GetParametersByPath(ctx context.Context, params *GetParametersB
 		params = &GetParametersByPathInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetParametersByPath", params, optFns, addOperationGetParametersByPathMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetParametersByPath", params, optFns, c.addOperationGetParametersByPathMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type GetParametersByPathOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetParametersByPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetParametersByPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetParametersByPath{}, middleware.After)
 	if err != nil {
 		return err

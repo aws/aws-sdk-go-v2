@@ -16,7 +16,7 @@ func (c *Client) DeleteResourceShare(ctx context.Context, params *DeleteResource
 		params = &DeleteResourceShareInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteResourceShare", params, optFns, addOperationDeleteResourceShareMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteResourceShare", params, optFns, c.addOperationDeleteResourceShareMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteResourceShareOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteResourceShare{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) GetRelationalDatabaseMetricData(ctx context.Context, params *Ge
 		params = &GetRelationalDatabaseMetricDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRelationalDatabaseMetricData", params, optFns, addOperationGetRelationalDatabaseMetricDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRelationalDatabaseMetricData", params, optFns, c.addOperationGetRelationalDatabaseMetricDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -150,7 +150,7 @@ type GetRelationalDatabaseMetricDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRelationalDatabaseMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRelationalDatabaseMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseMetricData{}, middleware.After)
 	if err != nil {
 		return err

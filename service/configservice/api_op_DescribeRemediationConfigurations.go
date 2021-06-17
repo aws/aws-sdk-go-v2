@@ -17,7 +17,7 @@ func (c *Client) DescribeRemediationConfigurations(ctx context.Context, params *
 		params = &DescribeRemediationConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRemediationConfigurations", params, optFns, addOperationDescribeRemediationConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRemediationConfigurations", params, optFns, c.addOperationDescribeRemediationConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DescribeRemediationConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRemediationConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRemediationConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRemediationConfigurations{}, middleware.After)
 	if err != nil {
 		return err

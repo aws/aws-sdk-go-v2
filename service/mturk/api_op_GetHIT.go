@@ -17,7 +17,7 @@ func (c *Client) GetHIT(ctx context.Context, params *GetHITInput, optFns ...func
 		params = &GetHITInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetHIT", params, optFns, addOperationGetHITMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetHIT", params, optFns, c.addOperationGetHITMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetHITOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetHIT{}, middleware.After)
 	if err != nil {
 		return err

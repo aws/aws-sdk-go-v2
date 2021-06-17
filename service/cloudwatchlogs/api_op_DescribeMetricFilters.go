@@ -20,7 +20,7 @@ func (c *Client) DescribeMetricFilters(ctx context.Context, params *DescribeMetr
 		params = &DescribeMetricFiltersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeMetricFilters", params, optFns, addOperationDescribeMetricFiltersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeMetricFilters", params, optFns, c.addOperationDescribeMetricFiltersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DescribeMetricFiltersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeMetricFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeMetricFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMetricFilters{}, middleware.After)
 	if err != nil {
 		return err

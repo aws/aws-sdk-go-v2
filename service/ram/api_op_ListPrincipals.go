@@ -19,7 +19,7 @@ func (c *Client) ListPrincipals(ctx context.Context, params *ListPrincipalsInput
 		params = &ListPrincipalsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPrincipals", params, optFns, addOperationListPrincipalsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPrincipals", params, optFns, c.addOperationListPrincipalsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type ListPrincipalsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPrincipalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPrincipalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPrincipals{}, middleware.After)
 	if err != nil {
 		return err

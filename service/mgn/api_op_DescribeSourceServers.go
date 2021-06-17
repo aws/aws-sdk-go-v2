@@ -18,7 +18,7 @@ func (c *Client) DescribeSourceServers(ctx context.Context, params *DescribeSour
 		params = &DescribeSourceServersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSourceServers", params, optFns, addOperationDescribeSourceServersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSourceServers", params, optFns, c.addOperationDescribeSourceServersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DescribeSourceServersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSourceServersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSourceServersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSourceServers{}, middleware.After)
 	if err != nil {
 		return err

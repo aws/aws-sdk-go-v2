@@ -4,9 +4,11 @@ package dynamodb
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -17,7 +19,7 @@ func (c *Client) DescribeTimeToLive(ctx context.Context, params *DescribeTimeToL
 		params = &DescribeTimeToLiveInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTimeToLive", params, optFns, addOperationDescribeTimeToLiveMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTimeToLive", params, optFns, c.addOperationDescribeTimeToLiveMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +46,7 @@ type DescribeTimeToLiveOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTimeToLiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTimeToLiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeTimeToLive{}, middleware.After)
 	if err != nil {
 		return err
@@ -89,6 +91,9 @@ func addOperationDescribeTimeToLiveMiddlewares(stack *middleware.Stack, options 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addOpDescribeTimeToLiveDiscoverEndpointMiddleware(stack, options, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeTimeToLiveValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -111,6 +116,46 @@ func addOperationDescribeTimeToLiveMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+func addOpDescribeTimeToLiveDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
+	return stack.Serialize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
+		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
+			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
+				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
+				opt.Logger = o.Logger
+			},
+		},
+		DiscoverOperation:            c.fetchOpDescribeTimeToLiveDiscoverEndpoint,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
+		EndpointDiscoveryRequired:    false,
+	}, "ResolveEndpoint", middleware.After)
+}
+
+func (c *Client) fetchOpDescribeTimeToLiveDiscoverEndpoint(ctx context.Context, input interface{}, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+	in, ok := input.(*DescribeTimeToLiveInput)
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
+	}
+	_ = in
+
+	identifierMap := make(map[string]string, 0)
+
+	key := fmt.Sprintf("DynamoDB.%v", identifierMap)
+
+	if v, ok := c.endpointCache.Get(key); ok {
+		return v, nil
+	}
+
+	discoveryOperationInput := &DescribeEndpointsInput{}
+
+	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
+	for _, fn := range optFns {
+		fn(&opt)
+	}
+
+	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, key, opt)
+	return internalEndpointDiscovery.WeightedAddress{}, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeTimeToLive(region string) *awsmiddleware.RegisterServiceMetadata {

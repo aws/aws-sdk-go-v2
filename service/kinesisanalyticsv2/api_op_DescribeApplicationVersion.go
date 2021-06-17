@@ -20,7 +20,7 @@ func (c *Client) DescribeApplicationVersion(ctx context.Context, params *Describ
 		params = &DescribeApplicationVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeApplicationVersion", params, optFns, addOperationDescribeApplicationVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeApplicationVersion", params, optFns, c.addOperationDescribeApplicationVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeApplicationVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplicationVersion{}, middleware.After)
 	if err != nil {
 		return err

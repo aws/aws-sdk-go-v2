@@ -19,7 +19,7 @@ func (c *Client) ListEventTypes(ctx context.Context, params *ListEventTypesInput
 		params = &ListEventTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEventTypes", params, optFns, addOperationListEventTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEventTypes", params, optFns, c.addOperationListEventTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListEventTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEventTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEventTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEventTypes{}, middleware.After)
 	if err != nil {
 		return err

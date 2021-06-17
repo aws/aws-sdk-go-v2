@@ -17,7 +17,7 @@ func (c *Client) GetSchema(ctx context.Context, params *GetSchemaInput, optFns .
 		params = &GetSchemaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSchema", params, optFns, addOperationGetSchemaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSchema", params, optFns, c.addOperationGetSchemaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type GetSchemaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSchema{}, middleware.After)
 	if err != nil {
 		return err

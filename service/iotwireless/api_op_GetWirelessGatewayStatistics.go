@@ -17,7 +17,7 @@ func (c *Client) GetWirelessGatewayStatistics(ctx context.Context, params *GetWi
 		params = &GetWirelessGatewayStatisticsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetWirelessGatewayStatistics", params, optFns, addOperationGetWirelessGatewayStatisticsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetWirelessGatewayStatistics", params, optFns, c.addOperationGetWirelessGatewayStatisticsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetWirelessGatewayStatisticsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetWirelessGatewayStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetWirelessGatewayStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWirelessGatewayStatistics{}, middleware.After)
 	if err != nil {
 		return err

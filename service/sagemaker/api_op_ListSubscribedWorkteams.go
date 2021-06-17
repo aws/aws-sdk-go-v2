@@ -20,7 +20,7 @@ func (c *Client) ListSubscribedWorkteams(ctx context.Context, params *ListSubscr
 		params = &ListSubscribedWorkteamsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSubscribedWorkteams", params, optFns, addOperationListSubscribedWorkteamsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSubscribedWorkteams", params, optFns, c.addOperationListSubscribedWorkteamsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListSubscribedWorkteamsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSubscribedWorkteamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSubscribedWorkteamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSubscribedWorkteams{}, middleware.After)
 	if err != nil {
 		return err

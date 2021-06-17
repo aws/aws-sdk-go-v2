@@ -17,7 +17,7 @@ func (c *Client) DescribeInputSecurityGroup(ctx context.Context, params *Describ
 		params = &DescribeInputSecurityGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInputSecurityGroup", params, optFns, addOperationDescribeInputSecurityGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInputSecurityGroup", params, optFns, c.addOperationDescribeInputSecurityGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeInputSecurityGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInputSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInputSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInputSecurityGroup{}, middleware.After)
 	if err != nil {
 		return err

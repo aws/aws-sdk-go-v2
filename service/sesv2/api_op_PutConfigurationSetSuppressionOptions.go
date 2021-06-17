@@ -17,7 +17,7 @@ func (c *Client) PutConfigurationSetSuppressionOptions(ctx context.Context, para
 		params = &PutConfigurationSetSuppressionOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutConfigurationSetSuppressionOptions", params, optFns, addOperationPutConfigurationSetSuppressionOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutConfigurationSetSuppressionOptions", params, optFns, c.addOperationPutConfigurationSetSuppressionOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type PutConfigurationSetSuppressionOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutConfigurationSetSuppressionOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutConfigurationSetSuppressionOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutConfigurationSetSuppressionOptions{}, middleware.After)
 	if err != nil {
 		return err

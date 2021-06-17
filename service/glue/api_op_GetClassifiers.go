@@ -18,7 +18,7 @@ func (c *Client) GetClassifiers(ctx context.Context, params *GetClassifiersInput
 		params = &GetClassifiersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetClassifiers", params, optFns, addOperationGetClassifiersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetClassifiers", params, optFns, c.addOperationGetClassifiersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetClassifiersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetClassifiersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetClassifiersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetClassifiers{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) UpdateBaiduChannel(ctx context.Context, params *UpdateBaiduChan
 		params = &UpdateBaiduChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateBaiduChannel", params, optFns, addOperationUpdateBaiduChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateBaiduChannel", params, optFns, c.addOperationUpdateBaiduChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UpdateBaiduChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateBaiduChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateBaiduChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBaiduChannel{}, middleware.After)
 	if err != nil {
 		return err

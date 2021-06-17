@@ -19,7 +19,7 @@ func (c *Client) ModifyNetworkInterfaceAttribute(ctx context.Context, params *Mo
 		params = &ModifyNetworkInterfaceAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyNetworkInterfaceAttribute", params, optFns, addOperationModifyNetworkInterfaceAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyNetworkInterfaceAttribute", params, optFns, c.addOperationModifyNetworkInterfaceAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type ModifyNetworkInterfaceAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyNetworkInterfaceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyNetworkInterfaceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyNetworkInterfaceAttribute{}, middleware.After)
 	if err != nil {
 		return err

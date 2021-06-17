@@ -22,7 +22,7 @@ func (c *Client) DescribeRaidArrays(ctx context.Context, params *DescribeRaidArr
 		params = &DescribeRaidArraysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRaidArrays", params, optFns, addOperationDescribeRaidArraysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRaidArrays", params, optFns, c.addOperationDescribeRaidArraysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeRaidArraysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRaidArraysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRaidArraysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRaidArrays{}, middleware.After)
 	if err != nil {
 		return err

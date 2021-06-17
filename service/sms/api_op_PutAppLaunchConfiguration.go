@@ -17,7 +17,7 @@ func (c *Client) PutAppLaunchConfiguration(ctx context.Context, params *PutAppLa
 		params = &PutAppLaunchConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAppLaunchConfiguration", params, optFns, addOperationPutAppLaunchConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAppLaunchConfiguration", params, optFns, c.addOperationPutAppLaunchConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type PutAppLaunchConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAppLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAppLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAppLaunchConfiguration{}, middleware.After)
 	if err != nil {
 		return err

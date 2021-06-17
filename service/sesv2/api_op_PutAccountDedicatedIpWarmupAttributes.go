@@ -16,7 +16,7 @@ func (c *Client) PutAccountDedicatedIpWarmupAttributes(ctx context.Context, para
 		params = &PutAccountDedicatedIpWarmupAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAccountDedicatedIpWarmupAttributes", params, optFns, addOperationPutAccountDedicatedIpWarmupAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAccountDedicatedIpWarmupAttributes", params, optFns, c.addOperationPutAccountDedicatedIpWarmupAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type PutAccountDedicatedIpWarmupAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAccountDedicatedIpWarmupAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAccountDedicatedIpWarmupAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountDedicatedIpWarmupAttributes{}, middleware.After)
 	if err != nil {
 		return err

@@ -4,16 +4,21 @@ package timestreamwrite
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
+	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
+	"net/url"
+	"strings"
 	"time"
 )
 
@@ -24,6 +29,9 @@ const ServiceAPIVersion = "2018-11-01"
 // Write.
 type Client struct {
 	options Options
+
+	// cache used to store discovered endpoints
+	endpointCache *internalEndpointDiscovery.EndpointCache
 }
 
 // New returns an initialized Client based on the functional options. Provide
@@ -42,6 +50,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveDefaultEndpointConfiguration(&options)
 
+	resolveEnableEndpointDiscovery(&options)
+
 	for _, fn := range optFns {
 		fn(&options)
 	}
@@ -49,6 +59,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	client := &Client{
 		options: options,
 	}
+
+	resolveEndpointCache(client)
 
 	return client
 }
@@ -64,6 +76,9 @@ type Options struct {
 
 	// The credentials object to use when signing requests.
 	Credentials aws.CredentialsProvider
+
+	// Allows configuring endpoint discovery
+	EndpointDiscovery EndpointDiscoveryOptions
 
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions EndpointResolverOptions
@@ -171,6 +186,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSEndpointResolver(cfg, &opts)
+	resolveEnableEndpointDiscoveryFromConfigSources(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -239,6 +255,100 @@ func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 		LogRetryAttempts: o.ClientLogMode.IsRetries(),
 	}
 	return retry.AddRetryMiddlewares(stack, mo)
+}
+
+// resolves EnableEndpointDiscovery configuration
+func resolveEnableEndpointDiscoveryFromConfigSources(cfg aws.Config, o *Options) error {
+	if len(cfg.ConfigSources) == 0 {
+		return nil
+	}
+	value, found, err := internalConfig.ResolveEnableEndpointDiscovery(context.Background(), cfg.ConfigSources)
+	if err != nil {
+		return err
+	}
+	if found {
+		o.EndpointDiscovery.EnableEndpointDiscovery = value
+	}
+	return nil
+}
+
+// resolves endpoint cache on client
+func resolveEndpointCache(c *Client) {
+	c.endpointCache = internalEndpointDiscovery.NewEndpointCache(10)
+}
+
+// EndpointDiscoveryOptions used to configure endpoint discovery
+type EndpointDiscoveryOptions struct {
+	// Enables endpoint discovery
+	EnableEndpointDiscovery aws.EndpointDiscoveryEnableState
+
+	// Allows configuring an endpoint resolver to use when attempting an endpoint
+	// discovery api request.
+	EndpointResolverUsedForDiscovery EndpointResolver
+}
+
+func resolveEnableEndpointDiscovery(o *Options) {
+	if o.EndpointDiscovery.EnableEndpointDiscovery != aws.EndpointDiscoveryUnset {
+		return
+	}
+	o.EndpointDiscovery.EnableEndpointDiscovery = aws.EndpointDiscoveryAuto
+}
+
+func (c *Client) handleEndpointDiscoveryFromService(ctx context.Context, input *DescribeEndpointsInput, key string, opt internalEndpointDiscovery.DiscoverEndpointOptions) (internalEndpointDiscovery.Endpoint, error) {
+	// assert endpoint resolver interface is of expected type.
+	endpointResolver, ok := opt.EndpointResolverUsedForDiscovery.(EndpointResolver)
+	if opt.EndpointResolverUsedForDiscovery != nil && !ok {
+		return internalEndpointDiscovery.Endpoint{},
+			fmt.Errorf("Unexpected endpoint resolver type %T provided for endpoint discovery api call", opt.EndpointResolverUsedForDiscovery)
+	}
+
+	output, err := c.DescribeEndpoints(ctx, input, func(o *Options) {
+		o.EndpointOptions.DisableHTTPS = opt.DisableHTTPS
+		o.Logger = opt.Logger
+		if endpointResolver != nil {
+			o.EndpointResolver = endpointResolver
+		}
+	})
+	if err != nil {
+		return internalEndpointDiscovery.Endpoint{}, err
+	}
+
+	endpoint := internalEndpointDiscovery.Endpoint{}
+	endpoint.Key = key
+
+	for _, e := range output.Endpoints {
+		if e.Address == nil {
+			continue
+		}
+		address := *e.Address
+
+		var scheme string
+		if idx := strings.Index(address, "://"); idx != -1 {
+			scheme = address[:idx]
+		}
+		if len(scheme) == 0 {
+			scheme = "https"
+			if opt.DisableHTTPS {
+				scheme = "http"
+			}
+			address = fmt.Sprintf("%s://%s", scheme, address)
+		}
+
+		cachedInMinutes := e.CachePeriodInMinutes
+		u, err := url.Parse(address)
+		if err != nil {
+			continue
+		}
+
+		addr := internalEndpointDiscovery.WeightedAddress{
+			URL:     u,
+			Expired: time.Now().Add(time.Duration(cachedInMinutes) * time.Minute).Round(0),
+		}
+		endpoint.Add(addr)
+	}
+
+	c.endpointCache.Add(endpoint)
+	return endpoint, nil
 }
 
 func addRequestIDRetrieverMiddleware(stack *middleware.Stack) error {

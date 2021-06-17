@@ -19,7 +19,7 @@ func (c *Client) DescribePackages(ctx context.Context, params *DescribePackagesI
 		params = &DescribePackagesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePackages", params, optFns, addOperationDescribePackagesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePackages", params, optFns, c.addOperationDescribePackagesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DescribePackagesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePackages{}, middleware.After)
 	if err != nil {
 		return err

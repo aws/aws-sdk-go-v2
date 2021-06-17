@@ -28,7 +28,7 @@ func (c *Client) CreateCustomRoutingAccelerator(ctx context.Context, params *Cre
 		params = &CreateCustomRoutingAcceleratorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCustomRoutingAccelerator", params, optFns, addOperationCreateCustomRoutingAcceleratorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCustomRoutingAccelerator", params, optFns, c.addOperationCreateCustomRoutingAcceleratorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type CreateCustomRoutingAcceleratorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCustomRoutingAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCustomRoutingAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCustomRoutingAccelerator{}, middleware.After)
 	if err != nil {
 		return err

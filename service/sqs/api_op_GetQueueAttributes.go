@@ -19,7 +19,7 @@ func (c *Client) GetQueueAttributes(ctx context.Context, params *GetQueueAttribu
 		params = &GetQueueAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetQueueAttributes", params, optFns, addOperationGetQueueAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetQueueAttributes", params, optFns, c.addOperationGetQueueAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -190,7 +190,7 @@ type GetQueueAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetQueueAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetQueueAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetQueueAttributes{}, middleware.After)
 	if err != nil {
 		return err

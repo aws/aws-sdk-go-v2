@@ -24,7 +24,7 @@ func (c *Client) StartTextTranslationJob(ctx context.Context, params *StartTextT
 		params = &StartTextTranslationJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartTextTranslationJob", params, optFns, addOperationStartTextTranslationJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartTextTranslationJob", params, optFns, c.addOperationStartTextTranslationJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ type StartTextTranslationJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartTextTranslationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartTextTranslationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTextTranslationJob{}, middleware.After)
 	if err != nil {
 		return err

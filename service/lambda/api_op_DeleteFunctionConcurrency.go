@@ -16,7 +16,7 @@ func (c *Client) DeleteFunctionConcurrency(ctx context.Context, params *DeleteFu
 		params = &DeleteFunctionConcurrencyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFunctionConcurrency", params, optFns, addOperationDeleteFunctionConcurrencyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFunctionConcurrency", params, optFns, c.addOperationDeleteFunctionConcurrencyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteFunctionConcurrencyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFunctionConcurrencyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFunctionConcurrencyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFunctionConcurrency{}, middleware.After)
 	if err != nil {
 		return err

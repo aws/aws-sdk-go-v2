@@ -19,7 +19,7 @@ func (c *Client) DisassociateResolverRule(ctx context.Context, params *Disassoci
 		params = &DisassociateResolverRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateResolverRule", params, optFns, addOperationDisassociateResolverRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateResolverRule", params, optFns, c.addOperationDisassociateResolverRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DisassociateResolverRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateResolverRule{}, middleware.After)
 	if err != nil {
 		return err

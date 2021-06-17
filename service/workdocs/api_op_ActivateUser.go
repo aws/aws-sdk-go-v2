@@ -17,7 +17,7 @@ func (c *Client) ActivateUser(ctx context.Context, params *ActivateUserInput, op
 		params = &ActivateUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ActivateUser", params, optFns, addOperationActivateUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ActivateUser", params, optFns, c.addOperationActivateUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type ActivateUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationActivateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationActivateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpActivateUser{}, middleware.After)
 	if err != nil {
 		return err

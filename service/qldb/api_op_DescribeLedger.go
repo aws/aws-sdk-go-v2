@@ -18,7 +18,7 @@ func (c *Client) DescribeLedger(ctx context.Context, params *DescribeLedgerInput
 		params = &DescribeLedgerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLedger", params, optFns, addOperationDescribeLedgerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLedger", params, optFns, c.addOperationDescribeLedgerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DescribeLedgerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeLedger{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) ModifyOptionGroup(ctx context.Context, params *ModifyOptionGrou
 		params = &ModifyOptionGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyOptionGroup", params, optFns, addOperationModifyOptionGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyOptionGroup", params, optFns, c.addOperationModifyOptionGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ModifyOptionGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyOptionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyOptionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyOptionGroup{}, middleware.After)
 	if err != nil {
 		return err

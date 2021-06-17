@@ -17,7 +17,7 @@ func (c *Client) GetCoreDefinitionVersion(ctx context.Context, params *GetCoreDe
 		params = &GetCoreDefinitionVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCoreDefinitionVersion", params, optFns, addOperationGetCoreDefinitionVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCoreDefinitionVersion", params, optFns, c.addOperationGetCoreDefinitionVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type GetCoreDefinitionVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCoreDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCoreDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCoreDefinitionVersion{}, middleware.After)
 	if err != nil {
 		return err

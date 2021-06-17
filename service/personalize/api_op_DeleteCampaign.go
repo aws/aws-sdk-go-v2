@@ -20,7 +20,7 @@ func (c *Client) DeleteCampaign(ctx context.Context, params *DeleteCampaignInput
 		params = &DeleteCampaignInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCampaign", params, optFns, addOperationDeleteCampaignMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCampaign", params, optFns, c.addOperationDeleteCampaignMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteCampaignOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCampaign{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DescribeAnomalyDetectors(ctx context.Context, params *DescribeA
 		params = &DescribeAnomalyDetectorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAnomalyDetectors", params, optFns, addOperationDescribeAnomalyDetectorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAnomalyDetectors", params, optFns, c.addOperationDescribeAnomalyDetectorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeAnomalyDetectorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAnomalyDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAnomalyDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAnomalyDetectors{}, middleware.After)
 	if err != nil {
 		return err

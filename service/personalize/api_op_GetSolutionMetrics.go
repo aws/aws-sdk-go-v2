@@ -16,7 +16,7 @@ func (c *Client) GetSolutionMetrics(ctx context.Context, params *GetSolutionMetr
 		params = &GetSolutionMetricsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSolutionMetrics", params, optFns, addOperationGetSolutionMetricsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSolutionMetrics", params, optFns, c.addOperationGetSolutionMetricsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetSolutionMetricsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSolutionMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSolutionMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSolutionMetrics{}, middleware.After)
 	if err != nil {
 		return err

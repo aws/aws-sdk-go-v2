@@ -18,7 +18,7 @@ func (c *Client) ListReportsForReportGroup(ctx context.Context, params *ListRepo
 		params = &ListReportsForReportGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListReportsForReportGroup", params, optFns, addOperationListReportsForReportGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListReportsForReportGroup", params, optFns, c.addOperationListReportsForReportGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type ListReportsForReportGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListReportsForReportGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListReportsForReportGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListReportsForReportGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DeregisterManagedInstance(ctx context.Context, params *Deregist
 		params = &DeregisterManagedInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterManagedInstance", params, optFns, addOperationDeregisterManagedInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterManagedInstance", params, optFns, c.addOperationDeregisterManagedInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeregisterManagedInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterManagedInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterManagedInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterManagedInstance{}, middleware.After)
 	if err != nil {
 		return err

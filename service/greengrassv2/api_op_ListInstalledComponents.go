@@ -19,7 +19,7 @@ func (c *Client) ListInstalledComponents(ctx context.Context, params *ListInstal
 		params = &ListInstalledComponentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListInstalledComponents", params, optFns, addOperationListInstalledComponentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListInstalledComponents", params, optFns, c.addOperationListInstalledComponentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListInstalledComponentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListInstalledComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListInstalledComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInstalledComponents{}, middleware.After)
 	if err != nil {
 		return err

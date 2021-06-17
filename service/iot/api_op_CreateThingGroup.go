@@ -19,7 +19,7 @@ func (c *Client) CreateThingGroup(ctx context.Context, params *CreateThingGroupI
 		params = &CreateThingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateThingGroup", params, optFns, addOperationCreateThingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateThingGroup", params, optFns, c.addOperationCreateThingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type CreateThingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateThingGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) ListS3Resources(ctx context.Context, params *ListS3ResourcesInp
 		params = &ListS3ResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListS3Resources", params, optFns, addOperationListS3ResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListS3Resources", params, optFns, c.addOperationListS3ResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ListS3ResourcesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListS3ResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListS3ResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListS3Resources{}, middleware.After)
 	if err != nil {
 		return err

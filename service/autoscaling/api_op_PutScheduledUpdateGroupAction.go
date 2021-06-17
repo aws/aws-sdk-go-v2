@@ -23,7 +23,7 @@ func (c *Client) PutScheduledUpdateGroupAction(ctx context.Context, params *PutS
 		params = &PutScheduledUpdateGroupActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutScheduledUpdateGroupAction", params, optFns, addOperationPutScheduledUpdateGroupActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutScheduledUpdateGroupAction", params, optFns, c.addOperationPutScheduledUpdateGroupActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type PutScheduledUpdateGroupActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutScheduledUpdateGroupActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutScheduledUpdateGroupActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutScheduledUpdateGroupAction{}, middleware.After)
 	if err != nil {
 		return err

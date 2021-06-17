@@ -17,7 +17,7 @@ func (c *Client) DeleteAnomalyDetector(ctx context.Context, params *DeleteAnomal
 		params = &DeleteAnomalyDetectorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAnomalyDetector", params, optFns, addOperationDeleteAnomalyDetectorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAnomalyDetector", params, optFns, c.addOperationDeleteAnomalyDetectorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteAnomalyDetectorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteAnomalyDetector{}, middleware.After)
 	if err != nil {
 		return err

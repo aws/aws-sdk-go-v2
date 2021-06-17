@@ -19,7 +19,7 @@ func (c *Client) DescribeSpotFleetRequests(ctx context.Context, params *Describe
 		params = &DescribeSpotFleetRequestsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSpotFleetRequests", params, optFns, addOperationDescribeSpotFleetRequestsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSpotFleetRequests", params, optFns, c.addOperationDescribeSpotFleetRequestsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DescribeSpotFleetRequestsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSpotFleetRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSpotFleetRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeSpotFleetRequests{}, middleware.After)
 	if err != nil {
 		return err

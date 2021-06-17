@@ -20,7 +20,7 @@ func (c *Client) DescribeInstanceTypeOfferings(ctx context.Context, params *Desc
 		params = &DescribeInstanceTypeOfferingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInstanceTypeOfferings", params, optFns, addOperationDescribeInstanceTypeOfferingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInstanceTypeOfferings", params, optFns, c.addOperationDescribeInstanceTypeOfferingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DescribeInstanceTypeOfferingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInstanceTypeOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInstanceTypeOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeInstanceTypeOfferings{}, middleware.After)
 	if err != nil {
 		return err

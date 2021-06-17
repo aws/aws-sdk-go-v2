@@ -19,7 +19,7 @@ func (c *Client) DescribeRecoveryPoint(ctx context.Context, params *DescribeReco
 		params = &DescribeRecoveryPointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRecoveryPoint", params, optFns, addOperationDescribeRecoveryPointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRecoveryPoint", params, optFns, c.addOperationDescribeRecoveryPointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -143,7 +143,7 @@ type DescribeRecoveryPointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRecoveryPoint{}, middleware.After)
 	if err != nil {
 		return err

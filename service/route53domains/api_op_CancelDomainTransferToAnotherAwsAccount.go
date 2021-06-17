@@ -30,7 +30,7 @@ func (c *Client) CancelDomainTransferToAnotherAwsAccount(ctx context.Context, pa
 		params = &CancelDomainTransferToAnotherAwsAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelDomainTransferToAnotherAwsAccount", params, optFns, addOperationCancelDomainTransferToAnotherAwsAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelDomainTransferToAnotherAwsAccount", params, optFns, c.addOperationCancelDomainTransferToAnotherAwsAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type CancelDomainTransferToAnotherAwsAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelDomainTransferToAnotherAwsAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelDomainTransferToAnotherAwsAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelDomainTransferToAnotherAwsAccount{}, middleware.After)
 	if err != nil {
 		return err

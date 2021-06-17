@@ -18,7 +18,7 @@ func (c *Client) GetFlowTemplate(ctx context.Context, params *GetFlowTemplateInp
 		params = &GetFlowTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFlowTemplate", params, optFns, addOperationGetFlowTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFlowTemplate", params, optFns, c.addOperationGetFlowTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetFlowTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFlowTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFlowTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFlowTemplate{}, middleware.After)
 	if err != nil {
 		return err

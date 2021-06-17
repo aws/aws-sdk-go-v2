@@ -18,7 +18,7 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 		params = &CreateUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateUser", params, optFns, addOperationCreateUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateUser", params, optFns, c.addOperationCreateUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type CreateUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUser{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetConferenceProvider(ctx context.Context, params *GetConferenc
 		params = &GetConferenceProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetConferenceProvider", params, optFns, addOperationGetConferenceProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetConferenceProvider", params, optFns, c.addOperationGetConferenceProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetConferenceProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetConferenceProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetConferenceProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetConferenceProvider{}, middleware.After)
 	if err != nil {
 		return err

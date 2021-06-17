@@ -31,7 +31,7 @@ func (c *Client) ListKeys(ctx context.Context, params *ListKeysInput, optFns ...
 		params = &ListKeysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListKeys", params, optFns, addOperationListKeysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListKeys", params, optFns, c.addOperationListKeysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type ListKeysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListKeys{}, middleware.After)
 	if err != nil {
 		return err

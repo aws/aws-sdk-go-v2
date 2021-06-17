@@ -18,7 +18,7 @@ func (c *Client) ListMilestones(ctx context.Context, params *ListMilestonesInput
 		params = &ListMilestonesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListMilestones", params, optFns, addOperationListMilestonesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListMilestones", params, optFns, c.addOperationListMilestonesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListMilestonesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListMilestonesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListMilestonesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMilestones{}, middleware.After)
 	if err != nil {
 		return err

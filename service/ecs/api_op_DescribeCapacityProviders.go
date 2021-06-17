@@ -17,7 +17,7 @@ func (c *Client) DescribeCapacityProviders(ctx context.Context, params *Describe
 		params = &DescribeCapacityProvidersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCapacityProviders", params, optFns, addOperationDescribeCapacityProvidersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCapacityProviders", params, optFns, c.addOperationDescribeCapacityProvidersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DescribeCapacityProvidersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCapacityProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCapacityProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCapacityProviders{}, middleware.After)
 	if err != nil {
 		return err

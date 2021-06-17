@@ -17,7 +17,7 @@ func (c *Client) AssociateSkillGroupWithRoom(ctx context.Context, params *Associ
 		params = &AssociateSkillGroupWithRoomInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateSkillGroupWithRoom", params, optFns, addOperationAssociateSkillGroupWithRoomMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateSkillGroupWithRoom", params, optFns, c.addOperationAssociateSkillGroupWithRoomMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type AssociateSkillGroupWithRoomOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateSkillGroupWithRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateSkillGroupWithRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateSkillGroupWithRoom{}, middleware.After)
 	if err != nil {
 		return err

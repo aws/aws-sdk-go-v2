@@ -20,7 +20,7 @@ func (c *Client) ListDatasetGroups(ctx context.Context, params *ListDatasetGroup
 		params = &ListDatasetGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDatasetGroups", params, optFns, addOperationListDatasetGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDatasetGroups", params, optFns, c.addOperationListDatasetGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ListDatasetGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDatasetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDatasetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDatasetGroups{}, middleware.After)
 	if err != nil {
 		return err

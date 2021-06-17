@@ -16,7 +16,7 @@ func (c *Client) RevokeIpRules(ctx context.Context, params *RevokeIpRulesInput, 
 		params = &RevokeIpRulesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokeIpRules", params, optFns, addOperationRevokeIpRulesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeIpRules", params, optFns, c.addOperationRevokeIpRulesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type RevokeIpRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokeIpRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokeIpRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRevokeIpRules{}, middleware.After)
 	if err != nil {
 		return err

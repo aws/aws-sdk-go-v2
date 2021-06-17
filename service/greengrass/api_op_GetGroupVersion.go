@@ -17,7 +17,7 @@ func (c *Client) GetGroupVersion(ctx context.Context, params *GetGroupVersionInp
 		params = &GetGroupVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetGroupVersion", params, optFns, addOperationGetGroupVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetGroupVersion", params, optFns, c.addOperationGetGroupVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type GetGroupVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetGroupVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetGroupVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGroupVersion{}, middleware.After)
 	if err != nil {
 		return err

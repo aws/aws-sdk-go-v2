@@ -19,7 +19,7 @@ func (c *Client) AssociateDeviceWithRoom(ctx context.Context, params *AssociateD
 		params = &AssociateDeviceWithRoomInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateDeviceWithRoom", params, optFns, addOperationAssociateDeviceWithRoomMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateDeviceWithRoom", params, optFns, c.addOperationAssociateDeviceWithRoomMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type AssociateDeviceWithRoomOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateDeviceWithRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateDeviceWithRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateDeviceWithRoom{}, middleware.After)
 	if err != nil {
 		return err

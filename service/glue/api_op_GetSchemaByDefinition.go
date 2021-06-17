@@ -22,7 +22,7 @@ func (c *Client) GetSchemaByDefinition(ctx context.Context, params *GetSchemaByD
 		params = &GetSchemaByDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSchemaByDefinition", params, optFns, addOperationGetSchemaByDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSchemaByDefinition", params, optFns, c.addOperationGetSchemaByDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type GetSchemaByDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSchemaByDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSchemaByDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSchemaByDefinition{}, middleware.After)
 	if err != nil {
 		return err

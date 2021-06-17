@@ -23,7 +23,7 @@ func (c *Client) DescribeResourceCollectionHealth(ctx context.Context, params *D
 		params = &DescribeResourceCollectionHealthInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeResourceCollectionHealth", params, optFns, addOperationDescribeResourceCollectionHealthMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeResourceCollectionHealth", params, optFns, c.addOperationDescribeResourceCollectionHealthMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DescribeResourceCollectionHealthOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeResourceCollectionHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeResourceCollectionHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeResourceCollectionHealth{}, middleware.After)
 	if err != nil {
 		return err

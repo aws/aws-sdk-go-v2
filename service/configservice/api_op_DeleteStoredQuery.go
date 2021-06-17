@@ -16,7 +16,7 @@ func (c *Client) DeleteStoredQuery(ctx context.Context, params *DeleteStoredQuer
 		params = &DeleteStoredQueryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteStoredQuery", params, optFns, addOperationDeleteStoredQueryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteStoredQuery", params, optFns, c.addOperationDeleteStoredQueryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteStoredQueryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteStoredQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteStoredQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteStoredQuery{}, middleware.After)
 	if err != nil {
 		return err

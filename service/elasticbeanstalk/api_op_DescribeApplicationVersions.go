@@ -17,7 +17,7 @@ func (c *Client) DescribeApplicationVersions(ctx context.Context, params *Descri
 		params = &DescribeApplicationVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeApplicationVersions", params, optFns, addOperationDescribeApplicationVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeApplicationVersions", params, optFns, c.addOperationDescribeApplicationVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DescribeApplicationVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeApplicationVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeApplicationVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeApplicationVersions{}, middleware.After)
 	if err != nil {
 		return err

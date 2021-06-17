@@ -17,7 +17,7 @@ func (c *Client) GetDevice(ctx context.Context, params *GetDeviceInput, optFns .
 		params = &GetDeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDevice", params, optFns, addOperationGetDeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDevice", params, optFns, c.addOperationGetDeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetDeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDevice{}, middleware.After)
 	if err != nil {
 		return err

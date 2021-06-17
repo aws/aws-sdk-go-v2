@@ -16,7 +16,7 @@ func (c *Client) UpdateSubnetChangeProtection(ctx context.Context, params *Updat
 		params = &UpdateSubnetChangeProtectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSubnetChangeProtection", params, optFns, addOperationUpdateSubnetChangeProtectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSubnetChangeProtection", params, optFns, c.addOperationUpdateSubnetChangeProtectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type UpdateSubnetChangeProtectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSubnetChangeProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSubnetChangeProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateSubnetChangeProtection{}, middleware.After)
 	if err != nil {
 		return err

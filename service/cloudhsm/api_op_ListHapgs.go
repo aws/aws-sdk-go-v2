@@ -29,7 +29,7 @@ func (c *Client) ListHapgs(ctx context.Context, params *ListHapgsInput, optFns .
 		params = &ListHapgsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListHapgs", params, optFns, addOperationListHapgsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListHapgs", params, optFns, c.addOperationListHapgsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type ListHapgsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListHapgsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListHapgsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHapgs{}, middleware.After)
 	if err != nil {
 		return err

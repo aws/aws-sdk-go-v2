@@ -16,7 +16,7 @@ func (c *Client) UpdateAuditStreamConfiguration(ctx context.Context, params *Upd
 		params = &UpdateAuditStreamConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAuditStreamConfiguration", params, optFns, addOperationUpdateAuditStreamConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAuditStreamConfiguration", params, optFns, c.addOperationUpdateAuditStreamConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type UpdateAuditStreamConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAuditStreamConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAuditStreamConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAuditStreamConfiguration{}, middleware.After)
 	if err != nil {
 		return err

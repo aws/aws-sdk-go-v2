@@ -18,7 +18,7 @@ func (c *Client) DescribeTransitGatewayMulticastDomains(ctx context.Context, par
 		params = &DescribeTransitGatewayMulticastDomainsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTransitGatewayMulticastDomains", params, optFns, addOperationDescribeTransitGatewayMulticastDomainsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTransitGatewayMulticastDomains", params, optFns, c.addOperationDescribeTransitGatewayMulticastDomainsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DescribeTransitGatewayMulticastDomainsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTransitGatewayMulticastDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTransitGatewayMulticastDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeTransitGatewayMulticastDomains{}, middleware.After)
 	if err != nil {
 		return err

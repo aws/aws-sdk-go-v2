@@ -17,7 +17,7 @@ func (c *Client) DeleteBackendEnvironment(ctx context.Context, params *DeleteBac
 		params = &DeleteBackendEnvironmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBackendEnvironment", params, optFns, addOperationDeleteBackendEnvironmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBackendEnvironment", params, optFns, c.addOperationDeleteBackendEnvironmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteBackendEnvironmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBackendEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBackendEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBackendEnvironment{}, middleware.After)
 	if err != nil {
 		return err

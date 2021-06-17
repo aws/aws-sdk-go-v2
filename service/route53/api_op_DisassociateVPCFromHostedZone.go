@@ -39,7 +39,7 @@ func (c *Client) DisassociateVPCFromHostedZone(ctx context.Context, params *Disa
 		params = &DisassociateVPCFromHostedZoneInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateVPCFromHostedZone", params, optFns, addOperationDisassociateVPCFromHostedZoneMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateVPCFromHostedZone", params, optFns, c.addOperationDisassociateVPCFromHostedZoneMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type DisassociateVPCFromHostedZoneOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateVPCFromHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateVPCFromHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDisassociateVPCFromHostedZone{}, middleware.After)
 	if err != nil {
 		return err

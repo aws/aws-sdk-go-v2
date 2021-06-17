@@ -27,7 +27,7 @@ func (c *Client) DeregisterContainerInstance(ctx context.Context, params *Deregi
 		params = &DeregisterContainerInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterContainerInstance", params, optFns, addOperationDeregisterContainerInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterContainerInstance", params, optFns, c.addOperationDeregisterContainerInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DeregisterContainerInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterContainerInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterContainerInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterContainerInstance{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) Unsubscribe(ctx context.Context, params *UnsubscribeInput, optF
 		params = &UnsubscribeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Unsubscribe", params, optFns, addOperationUnsubscribeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "Unsubscribe", params, optFns, c.addOperationUnsubscribeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type UnsubscribeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnsubscribeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnsubscribeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUnsubscribe{}, middleware.After)
 	if err != nil {
 		return err

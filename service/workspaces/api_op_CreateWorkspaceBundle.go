@@ -19,7 +19,7 @@ func (c *Client) CreateWorkspaceBundle(ctx context.Context, params *CreateWorksp
 		params = &CreateWorkspaceBundleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateWorkspaceBundle", params, optFns, addOperationCreateWorkspaceBundleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateWorkspaceBundle", params, optFns, c.addOperationCreateWorkspaceBundleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type CreateWorkspaceBundleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateWorkspaceBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateWorkspaceBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWorkspaceBundle{}, middleware.After)
 	if err != nil {
 		return err

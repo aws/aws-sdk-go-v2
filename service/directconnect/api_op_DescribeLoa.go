@@ -23,7 +23,7 @@ func (c *Client) DescribeLoa(ctx context.Context, params *DescribeLoaInput, optF
 		params = &DescribeLoaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLoa", params, optFns, addOperationDescribeLoaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLoa", params, optFns, c.addOperationDescribeLoaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type DescribeLoaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLoaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLoaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLoa{}, middleware.After)
 	if err != nil {
 		return err

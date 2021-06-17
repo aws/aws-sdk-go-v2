@@ -22,7 +22,7 @@ func (c *Client) UpdateElasticIp(ctx context.Context, params *UpdateElasticIpInp
 		params = &UpdateElasticIpInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateElasticIp", params, optFns, addOperationUpdateElasticIpMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateElasticIp", params, optFns, c.addOperationUpdateElasticIpMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type UpdateElasticIpOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateElasticIp{}, middleware.After)
 	if err != nil {
 		return err

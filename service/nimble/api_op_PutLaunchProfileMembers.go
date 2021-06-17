@@ -18,7 +18,7 @@ func (c *Client) PutLaunchProfileMembers(ctx context.Context, params *PutLaunchP
 		params = &PutLaunchProfileMembersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutLaunchProfileMembers", params, optFns, addOperationPutLaunchProfileMembersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutLaunchProfileMembers", params, optFns, c.addOperationPutLaunchProfileMembersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type PutLaunchProfileMembersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutLaunchProfileMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutLaunchProfileMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutLaunchProfileMembers{}, middleware.After)
 	if err != nil {
 		return err

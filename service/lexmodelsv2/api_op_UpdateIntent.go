@@ -18,7 +18,7 @@ func (c *Client) UpdateIntent(ctx context.Context, params *UpdateIntentInput, op
 		params = &UpdateIntentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateIntent", params, optFns, addOperationUpdateIntentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateIntent", params, optFns, c.addOperationUpdateIntentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -161,7 +161,7 @@ type UpdateIntentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIntent{}, middleware.After)
 	if err != nil {
 		return err

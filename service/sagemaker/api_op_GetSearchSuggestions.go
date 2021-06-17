@@ -19,7 +19,7 @@ func (c *Client) GetSearchSuggestions(ctx context.Context, params *GetSearchSugg
 		params = &GetSearchSuggestionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSearchSuggestions", params, optFns, addOperationGetSearchSuggestionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSearchSuggestions", params, optFns, c.addOperationGetSearchSuggestionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetSearchSuggestionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSearchSuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSearchSuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSearchSuggestions{}, middleware.After)
 	if err != nil {
 		return err

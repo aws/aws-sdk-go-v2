@@ -16,7 +16,7 @@ func (c *Client) DeleteBatchPredictionJob(ctx context.Context, params *DeleteBat
 		params = &DeleteBatchPredictionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBatchPredictionJob", params, optFns, addOperationDeleteBatchPredictionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBatchPredictionJob", params, optFns, c.addOperationDeleteBatchPredictionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteBatchPredictionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBatchPredictionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBatchPredictionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBatchPredictionJob{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) TerminateTargetInstances(ctx context.Context, params *Terminate
 		params = &TerminateTargetInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TerminateTargetInstances", params, optFns, addOperationTerminateTargetInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TerminateTargetInstances", params, optFns, c.addOperationTerminateTargetInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type TerminateTargetInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTerminateTargetInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTerminateTargetInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpTerminateTargetInstances{}, middleware.After)
 	if err != nil {
 		return err

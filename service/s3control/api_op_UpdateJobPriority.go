@@ -38,7 +38,7 @@ func (c *Client) UpdateJobPriority(ctx context.Context, params *UpdateJobPriorit
 		params = &UpdateJobPriorityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateJobPriority", params, optFns, addOperationUpdateJobPriorityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateJobPriority", params, optFns, c.addOperationUpdateJobPriorityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type UpdateJobPriorityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateJobPriorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateJobPriorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpUpdateJobPriority{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) AcceptAdministratorInvitation(ctx context.Context, params *Acce
 		params = &AcceptAdministratorInvitationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcceptAdministratorInvitation", params, optFns, addOperationAcceptAdministratorInvitationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcceptAdministratorInvitation", params, optFns, c.addOperationAcceptAdministratorInvitationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type AcceptAdministratorInvitationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAcceptAdministratorInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAcceptAdministratorInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptAdministratorInvitation{}, middleware.After)
 	if err != nil {
 		return err

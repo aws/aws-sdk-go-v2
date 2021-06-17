@@ -49,7 +49,7 @@ func (c *Client) DisconnectCustomKeyStore(ctx context.Context, params *Disconnec
 		params = &DisconnectCustomKeyStoreInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisconnectCustomKeyStore", params, optFns, addOperationDisconnectCustomKeyStoreMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisconnectCustomKeyStore", params, optFns, c.addOperationDisconnectCustomKeyStoreMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DisconnectCustomKeyStoreOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisconnectCustomKeyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisconnectCustomKeyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisconnectCustomKeyStore{}, middleware.After)
 	if err != nil {
 		return err

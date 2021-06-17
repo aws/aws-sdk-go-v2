@@ -25,7 +25,7 @@ func (c *Client) ReleaseHosts(ctx context.Context, params *ReleaseHostsInput, op
 		params = &ReleaseHostsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReleaseHosts", params, optFns, addOperationReleaseHostsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReleaseHosts", params, optFns, c.addOperationReleaseHostsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ReleaseHostsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReleaseHostsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReleaseHostsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpReleaseHosts{}, middleware.After)
 	if err != nil {
 		return err

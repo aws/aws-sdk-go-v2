@@ -23,7 +23,7 @@ func (c *Client) RegisterContainerImage(ctx context.Context, params *RegisterCon
 		params = &RegisterContainerImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterContainerImage", params, optFns, addOperationRegisterContainerImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterContainerImage", params, optFns, c.addOperationRegisterContainerImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type RegisterContainerImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterContainerImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterContainerImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterContainerImage{}, middleware.After)
 	if err != nil {
 		return err

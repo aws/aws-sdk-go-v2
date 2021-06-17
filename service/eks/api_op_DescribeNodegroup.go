@@ -23,7 +23,7 @@ func (c *Client) DescribeNodegroup(ctx context.Context, params *DescribeNodegrou
 		params = &DescribeNodegroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeNodegroup", params, optFns, addOperationDescribeNodegroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeNodegroup", params, optFns, c.addOperationDescribeNodegroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeNodegroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeNodegroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeNodegroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeNodegroup{}, middleware.After)
 	if err != nil {
 		return err

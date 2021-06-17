@@ -16,7 +16,7 @@ func (c *Client) AssociateWirelessGatewayWithCertificate(ctx context.Context, pa
 		params = &AssociateWirelessGatewayWithCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateWirelessGatewayWithCertificate", params, optFns, addOperationAssociateWirelessGatewayWithCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateWirelessGatewayWithCertificate", params, optFns, c.addOperationAssociateWirelessGatewayWithCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type AssociateWirelessGatewayWithCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateWirelessGatewayWithCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateWirelessGatewayWithCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateWirelessGatewayWithCertificate{}, middleware.After)
 	if err != nil {
 		return err

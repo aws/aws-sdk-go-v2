@@ -19,7 +19,7 @@ func (c *Client) ListAlgorithms(ctx context.Context, params *ListAlgorithmsInput
 		params = &ListAlgorithmsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAlgorithms", params, optFns, addOperationListAlgorithmsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAlgorithms", params, optFns, c.addOperationListAlgorithmsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type ListAlgorithmsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAlgorithmsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAlgorithmsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAlgorithms{}, middleware.After)
 	if err != nil {
 		return err

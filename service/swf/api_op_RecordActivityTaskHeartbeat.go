@@ -54,7 +54,7 @@ func (c *Client) RecordActivityTaskHeartbeat(ctx context.Context, params *Record
 		params = &RecordActivityTaskHeartbeatInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RecordActivityTaskHeartbeat", params, optFns, addOperationRecordActivityTaskHeartbeatMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RecordActivityTaskHeartbeat", params, optFns, c.addOperationRecordActivityTaskHeartbeatMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type RecordActivityTaskHeartbeatOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRecordActivityTaskHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRecordActivityTaskHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRecordActivityTaskHeartbeat{}, middleware.After)
 	if err != nil {
 		return err

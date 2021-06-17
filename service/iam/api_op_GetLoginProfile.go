@@ -19,7 +19,7 @@ func (c *Client) GetLoginProfile(ctx context.Context, params *GetLoginProfileInp
 		params = &GetLoginProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLoginProfile", params, optFns, addOperationGetLoginProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLoginProfile", params, optFns, c.addOperationGetLoginProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetLoginProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLoginProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLoginProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetLoginProfile{}, middleware.After)
 	if err != nil {
 		return err

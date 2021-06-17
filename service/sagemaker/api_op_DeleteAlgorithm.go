@@ -16,7 +16,7 @@ func (c *Client) DeleteAlgorithm(ctx context.Context, params *DeleteAlgorithmInp
 		params = &DeleteAlgorithmInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAlgorithm", params, optFns, addOperationDeleteAlgorithmMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAlgorithm", params, optFns, c.addOperationDeleteAlgorithmMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteAlgorithmOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAlgorithmMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAlgorithmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAlgorithm{}, middleware.After)
 	if err != nil {
 		return err

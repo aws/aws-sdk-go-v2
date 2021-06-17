@@ -19,7 +19,7 @@ func (c *Client) ListPartnerEventSourceAccounts(ctx context.Context, params *Lis
 		params = &ListPartnerEventSourceAccountsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPartnerEventSourceAccounts", params, optFns, addOperationListPartnerEventSourceAccountsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPartnerEventSourceAccounts", params, optFns, c.addOperationListPartnerEventSourceAccountsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListPartnerEventSourceAccountsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPartnerEventSourceAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPartnerEventSourceAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPartnerEventSourceAccounts{}, middleware.After)
 	if err != nil {
 		return err

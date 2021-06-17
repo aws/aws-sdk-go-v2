@@ -23,7 +23,7 @@ func (c *Client) PutComponentPolicy(ctx context.Context, params *PutComponentPol
 		params = &PutComponentPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutComponentPolicy", params, optFns, addOperationPutComponentPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutComponentPolicy", params, optFns, c.addOperationPutComponentPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type PutComponentPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutComponentPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutComponentPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutComponentPolicy{}, middleware.After)
 	if err != nil {
 		return err

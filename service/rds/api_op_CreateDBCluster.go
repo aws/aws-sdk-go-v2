@@ -28,7 +28,7 @@ func (c *Client) CreateDBCluster(ctx context.Context, params *CreateDBClusterInp
 		params = &CreateDBClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDBCluster", params, optFns, addOperationCreateDBClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDBCluster", params, optFns, c.addOperationCreateDBClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -359,7 +359,7 @@ type CreateDBClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBCluster{}, middleware.After)
 	if err != nil {
 		return err
@@ -526,7 +526,7 @@ func (c *PresignClient) PresignCreateDBCluster(ctx context.Context, params *Crea
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
 	result, _, err := c.client.invokeOperation(ctx, "CreateDBCluster", params, clientOptFns,
-		addOperationCreateDBClusterMiddlewares,
+		c.client.addOperationCreateDBClusterMiddlewares,
 		presignConverter(options).convertToPresignMiddleware,
 	)
 	if err != nil {

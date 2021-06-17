@@ -45,7 +45,7 @@ func (c *Client) DecodeAuthorizationMessage(ctx context.Context, params *DecodeA
 		params = &DecodeAuthorizationMessageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DecodeAuthorizationMessage", params, optFns, addOperationDecodeAuthorizationMessageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DecodeAuthorizationMessage", params, optFns, c.addOperationDecodeAuthorizationMessageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DecodeAuthorizationMessageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDecodeAuthorizationMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDecodeAuthorizationMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDecodeAuthorizationMessage{}, middleware.After)
 	if err != nil {
 		return err

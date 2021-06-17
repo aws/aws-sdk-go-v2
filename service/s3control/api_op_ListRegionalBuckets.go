@@ -29,7 +29,7 @@ func (c *Client) ListRegionalBuckets(ctx context.Context, params *ListRegionalBu
 		params = &ListRegionalBucketsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRegionalBuckets", params, optFns, addOperationListRegionalBucketsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRegionalBuckets", params, optFns, c.addOperationListRegionalBucketsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type ListRegionalBucketsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRegionalBucketsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRegionalBucketsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListRegionalBuckets{}, middleware.After)
 	if err != nil {
 		return err

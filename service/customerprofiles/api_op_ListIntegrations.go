@@ -17,7 +17,7 @@ func (c *Client) ListIntegrations(ctx context.Context, params *ListIntegrationsI
 		params = &ListIntegrationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListIntegrations", params, optFns, addOperationListIntegrationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListIntegrations", params, optFns, c.addOperationListIntegrationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListIntegrationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIntegrations{}, middleware.After)
 	if err != nil {
 		return err

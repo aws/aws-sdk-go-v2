@@ -20,7 +20,7 @@ func (c *Client) ListSpeechSynthesisTasks(ctx context.Context, params *ListSpeec
 		params = &ListSpeechSynthesisTasksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSpeechSynthesisTasks", params, optFns, addOperationListSpeechSynthesisTasksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSpeechSynthesisTasks", params, optFns, c.addOperationListSpeechSynthesisTasksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListSpeechSynthesisTasksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSpeechSynthesisTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSpeechSynthesisTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSpeechSynthesisTasks{}, middleware.After)
 	if err != nil {
 		return err

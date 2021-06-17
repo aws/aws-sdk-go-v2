@@ -18,7 +18,7 @@ func (c *Client) DescribeResourceGroups(ctx context.Context, params *DescribeRes
 		params = &DescribeResourceGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeResourceGroups", params, optFns, addOperationDescribeResourceGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeResourceGroups", params, optFns, c.addOperationDescribeResourceGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeResourceGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeResourceGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeResourceGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeResourceGroups{}, middleware.After)
 	if err != nil {
 		return err

@@ -27,7 +27,7 @@ func (c *Client) GetBucketLogging(ctx context.Context, params *GetBucketLoggingI
 		params = &GetBucketLoggingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketLogging", params, optFns, addOperationGetBucketLoggingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketLogging", params, optFns, c.addOperationGetBucketLoggingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type GetBucketLoggingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketLogging{}, middleware.After)
 	if err != nil {
 		return err

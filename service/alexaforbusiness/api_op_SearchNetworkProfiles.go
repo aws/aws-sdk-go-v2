@@ -19,7 +19,7 @@ func (c *Client) SearchNetworkProfiles(ctx context.Context, params *SearchNetwor
 		params = &SearchNetworkProfilesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchNetworkProfiles", params, optFns, addOperationSearchNetworkProfilesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchNetworkProfiles", params, optFns, c.addOperationSearchNetworkProfilesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type SearchNetworkProfilesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchNetworkProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchNetworkProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchNetworkProfiles{}, middleware.After)
 	if err != nil {
 		return err

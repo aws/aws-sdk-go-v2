@@ -17,7 +17,7 @@ func (c *Client) PutInvitationConfiguration(ctx context.Context, params *PutInvi
 		params = &PutInvitationConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutInvitationConfiguration", params, optFns, addOperationPutInvitationConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutInvitationConfiguration", params, optFns, c.addOperationPutInvitationConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type PutInvitationConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutInvitationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutInvitationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutInvitationConfiguration{}, middleware.After)
 	if err != nil {
 		return err

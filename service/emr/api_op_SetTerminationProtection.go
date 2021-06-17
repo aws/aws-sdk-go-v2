@@ -29,7 +29,7 @@ func (c *Client) SetTerminationProtection(ctx context.Context, params *SetTermin
 		params = &SetTerminationProtectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetTerminationProtection", params, optFns, addOperationSetTerminationProtectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetTerminationProtection", params, optFns, c.addOperationSetTerminationProtectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type SetTerminationProtectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetTerminationProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetTerminationProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetTerminationProtection{}, middleware.After)
 	if err != nil {
 		return err

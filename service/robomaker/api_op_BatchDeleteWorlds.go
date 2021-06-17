@@ -16,7 +16,7 @@ func (c *Client) BatchDeleteWorlds(ctx context.Context, params *BatchDeleteWorld
 		params = &BatchDeleteWorldsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteWorlds", params, optFns, addOperationBatchDeleteWorldsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteWorlds", params, optFns, c.addOperationBatchDeleteWorldsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type BatchDeleteWorldsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteWorldsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteWorldsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteWorlds{}, middleware.After)
 	if err != nil {
 		return err

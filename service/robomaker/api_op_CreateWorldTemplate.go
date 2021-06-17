@@ -18,7 +18,7 @@ func (c *Client) CreateWorldTemplate(ctx context.Context, params *CreateWorldTem
 		params = &CreateWorldTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateWorldTemplate", params, optFns, addOperationCreateWorldTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateWorldTemplate", params, optFns, c.addOperationCreateWorldTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type CreateWorldTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateWorldTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateWorldTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorldTemplate{}, middleware.After)
 	if err != nil {
 		return err

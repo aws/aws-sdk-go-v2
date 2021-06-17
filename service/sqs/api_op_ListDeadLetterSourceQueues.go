@@ -28,7 +28,7 @@ func (c *Client) ListDeadLetterSourceQueues(ctx context.Context, params *ListDea
 		params = &ListDeadLetterSourceQueuesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDeadLetterSourceQueues", params, optFns, addOperationListDeadLetterSourceQueuesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDeadLetterSourceQueues", params, optFns, c.addOperationListDeadLetterSourceQueuesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type ListDeadLetterSourceQueuesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDeadLetterSourceQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDeadLetterSourceQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListDeadLetterSourceQueues{}, middleware.After)
 	if err != nil {
 		return err

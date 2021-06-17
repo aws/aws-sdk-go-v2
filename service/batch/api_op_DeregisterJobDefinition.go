@@ -17,7 +17,7 @@ func (c *Client) DeregisterJobDefinition(ctx context.Context, params *Deregister
 		params = &DeregisterJobDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterJobDefinition", params, optFns, addOperationDeregisterJobDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterJobDefinition", params, optFns, c.addOperationDeregisterJobDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeregisterJobDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterJobDefinition{}, middleware.After)
 	if err != nil {
 		return err

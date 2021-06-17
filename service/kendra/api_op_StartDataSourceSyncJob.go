@@ -17,7 +17,7 @@ func (c *Client) StartDataSourceSyncJob(ctx context.Context, params *StartDataSo
 		params = &StartDataSourceSyncJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDataSourceSyncJob", params, optFns, addOperationStartDataSourceSyncJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDataSourceSyncJob", params, optFns, c.addOperationStartDataSourceSyncJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type StartDataSourceSyncJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDataSourceSyncJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDataSourceSyncJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDataSourceSyncJob{}, middleware.After)
 	if err != nil {
 		return err

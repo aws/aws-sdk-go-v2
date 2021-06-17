@@ -17,7 +17,7 @@ func (c *Client) DescribeUserImportJob(ctx context.Context, params *DescribeUser
 		params = &DescribeUserImportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeUserImportJob", params, optFns, addOperationDescribeUserImportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeUserImportJob", params, optFns, c.addOperationDescribeUserImportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DescribeUserImportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeUserImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeUserImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUserImportJob{}, middleware.After)
 	if err != nil {
 		return err

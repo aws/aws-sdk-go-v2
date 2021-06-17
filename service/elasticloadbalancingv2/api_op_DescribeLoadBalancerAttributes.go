@@ -31,7 +31,7 @@ func (c *Client) DescribeLoadBalancerAttributes(ctx context.Context, params *Des
 		params = &DescribeLoadBalancerAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLoadBalancerAttributes", params, optFns, addOperationDescribeLoadBalancerAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLoadBalancerAttributes", params, optFns, c.addOperationDescribeLoadBalancerAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DescribeLoadBalancerAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLoadBalancerAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLoadBalancerAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeLoadBalancerAttributes{}, middleware.After)
 	if err != nil {
 		return err

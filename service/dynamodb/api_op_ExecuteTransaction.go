@@ -19,7 +19,7 @@ func (c *Client) ExecuteTransaction(ctx context.Context, params *ExecuteTransact
 		params = &ExecuteTransactionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExecuteTransaction", params, optFns, addOperationExecuteTransactionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExecuteTransaction", params, optFns, c.addOperationExecuteTransactionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ExecuteTransactionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExecuteTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExecuteTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpExecuteTransaction{}, middleware.After)
 	if err != nil {
 		return err

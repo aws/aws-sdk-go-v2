@@ -23,7 +23,7 @@ func (c *Client) EnableVpcClassicLink(ctx context.Context, params *EnableVpcClas
 		params = &EnableVpcClassicLinkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableVpcClassicLink", params, optFns, addOperationEnableVpcClassicLinkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableVpcClassicLink", params, optFns, c.addOperationEnableVpcClassicLinkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type EnableVpcClassicLinkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableVpcClassicLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableVpcClassicLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpEnableVpcClassicLink{}, middleware.After)
 	if err != nil {
 		return err

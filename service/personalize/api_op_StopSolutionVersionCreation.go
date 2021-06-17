@@ -27,7 +27,7 @@ func (c *Client) StopSolutionVersionCreation(ctx context.Context, params *StopSo
 		params = &StopSolutionVersionCreationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopSolutionVersionCreation", params, optFns, addOperationStopSolutionVersionCreationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopSolutionVersionCreation", params, optFns, c.addOperationStopSolutionVersionCreationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type StopSolutionVersionCreationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopSolutionVersionCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopSolutionVersionCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopSolutionVersionCreation{}, middleware.After)
 	if err != nil {
 		return err

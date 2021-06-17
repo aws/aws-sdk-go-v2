@@ -19,7 +19,7 @@ func (c *Client) SendAnnouncement(ctx context.Context, params *SendAnnouncementI
 		params = &SendAnnouncementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendAnnouncement", params, optFns, addOperationSendAnnouncementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendAnnouncement", params, optFns, c.addOperationSendAnnouncementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type SendAnnouncementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendAnnouncementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendAnnouncementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendAnnouncement{}, middleware.After)
 	if err != nil {
 		return err

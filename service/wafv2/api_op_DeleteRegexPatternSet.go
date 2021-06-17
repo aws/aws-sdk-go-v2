@@ -17,7 +17,7 @@ func (c *Client) DeleteRegexPatternSet(ctx context.Context, params *DeleteRegexP
 		params = &DeleteRegexPatternSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRegexPatternSet", params, optFns, addOperationDeleteRegexPatternSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRegexPatternSet", params, optFns, c.addOperationDeleteRegexPatternSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DeleteRegexPatternSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRegexPatternSet{}, middleware.After)
 	if err != nil {
 		return err

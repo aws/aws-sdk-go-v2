@@ -17,7 +17,7 @@ func (c *Client) ListIAMPolicyAssignments(ctx context.Context, params *ListIAMPo
 		params = &ListIAMPolicyAssignmentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListIAMPolicyAssignments", params, optFns, addOperationListIAMPolicyAssignmentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListIAMPolicyAssignments", params, optFns, c.addOperationListIAMPolicyAssignmentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListIAMPolicyAssignmentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListIAMPolicyAssignmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListIAMPolicyAssignmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIAMPolicyAssignments{}, middleware.After)
 	if err != nil {
 		return err

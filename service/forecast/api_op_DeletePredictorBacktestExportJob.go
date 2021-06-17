@@ -16,7 +16,7 @@ func (c *Client) DeletePredictorBacktestExportJob(ctx context.Context, params *D
 		params = &DeletePredictorBacktestExportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePredictorBacktestExportJob", params, optFns, addOperationDeletePredictorBacktestExportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePredictorBacktestExportJob", params, optFns, c.addOperationDeletePredictorBacktestExportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeletePredictorBacktestExportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePredictorBacktestExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePredictorBacktestExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePredictorBacktestExportJob{}, middleware.After)
 	if err != nil {
 		return err

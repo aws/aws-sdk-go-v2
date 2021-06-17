@@ -28,7 +28,7 @@ func (c *Client) CancelDataRepositoryTask(ctx context.Context, params *CancelDat
 		params = &CancelDataRepositoryTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelDataRepositoryTask", params, optFns, addOperationCancelDataRepositoryTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelDataRepositoryTask", params, optFns, c.addOperationCancelDataRepositoryTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type CancelDataRepositoryTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelDataRepositoryTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelDataRepositoryTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelDataRepositoryTask{}, middleware.After)
 	if err != nil {
 		return err

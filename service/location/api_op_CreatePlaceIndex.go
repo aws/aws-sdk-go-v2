@@ -19,7 +19,7 @@ func (c *Client) CreatePlaceIndex(ctx context.Context, params *CreatePlaceIndexI
 		params = &CreatePlaceIndexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePlaceIndex", params, optFns, addOperationCreatePlaceIndexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePlaceIndex", params, optFns, c.addOperationCreatePlaceIndexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -125,7 +125,7 @@ type CreatePlaceIndexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePlaceIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePlaceIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePlaceIndex{}, middleware.After)
 	if err != nil {
 		return err

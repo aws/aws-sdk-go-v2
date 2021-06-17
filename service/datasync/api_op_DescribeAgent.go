@@ -20,7 +20,7 @@ func (c *Client) DescribeAgent(ctx context.Context, params *DescribeAgentInput, 
 		params = &DescribeAgentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAgent", params, optFns, addOperationDescribeAgentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAgent", params, optFns, c.addOperationDescribeAgentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DescribeAgentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAgent{}, middleware.After)
 	if err != nil {
 		return err

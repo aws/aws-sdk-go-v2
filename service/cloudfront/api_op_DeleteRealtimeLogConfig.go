@@ -22,7 +22,7 @@ func (c *Client) DeleteRealtimeLogConfig(ctx context.Context, params *DeleteReal
 		params = &DeleteRealtimeLogConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRealtimeLogConfig", params, optFns, addOperationDeleteRealtimeLogConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRealtimeLogConfig", params, optFns, c.addOperationDeleteRealtimeLogConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteRealtimeLogConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRealtimeLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRealtimeLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteRealtimeLogConfig{}, middleware.After)
 	if err != nil {
 		return err

@@ -31,7 +31,7 @@ func (c *Client) DescribePatchProperties(ctx context.Context, params *DescribePa
 		params = &DescribePatchPropertiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePatchProperties", params, optFns, addOperationDescribePatchPropertiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePatchProperties", params, optFns, c.addOperationDescribePatchPropertiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type DescribePatchPropertiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePatchPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePatchPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePatchProperties{}, middleware.After)
 	if err != nil {
 		return err

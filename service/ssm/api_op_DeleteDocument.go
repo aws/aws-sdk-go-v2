@@ -19,7 +19,7 @@ func (c *Client) DeleteDocument(ctx context.Context, params *DeleteDocumentInput
 		params = &DeleteDocumentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDocument", params, optFns, addOperationDeleteDocumentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDocument", params, optFns, c.addOperationDeleteDocumentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeleteDocumentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDocument{}, middleware.After)
 	if err != nil {
 		return err

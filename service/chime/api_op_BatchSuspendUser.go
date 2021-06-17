@@ -27,7 +27,7 @@ func (c *Client) BatchSuspendUser(ctx context.Context, params *BatchSuspendUserI
 		params = &BatchSuspendUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchSuspendUser", params, optFns, addOperationBatchSuspendUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchSuspendUser", params, optFns, c.addOperationBatchSuspendUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type BatchSuspendUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchSuspendUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchSuspendUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchSuspendUser{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) StopContinuousExport(ctx context.Context, params *StopContinuou
 		params = &StopContinuousExportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopContinuousExport", params, optFns, addOperationStopContinuousExportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopContinuousExport", params, optFns, c.addOperationStopContinuousExportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StopContinuousExportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopContinuousExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopContinuousExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopContinuousExport{}, middleware.After)
 	if err != nil {
 		return err

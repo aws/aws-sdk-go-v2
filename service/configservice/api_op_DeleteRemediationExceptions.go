@@ -20,7 +20,7 @@ func (c *Client) DeleteRemediationExceptions(ctx context.Context, params *Delete
 		params = &DeleteRemediationExceptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRemediationExceptions", params, optFns, addOperationDeleteRemediationExceptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRemediationExceptions", params, optFns, c.addOperationDeleteRemediationExceptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeleteRemediationExceptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRemediationExceptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRemediationExceptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRemediationExceptions{}, middleware.After)
 	if err != nil {
 		return err

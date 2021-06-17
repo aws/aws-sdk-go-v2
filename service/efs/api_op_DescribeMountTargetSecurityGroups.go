@@ -26,7 +26,7 @@ func (c *Client) DescribeMountTargetSecurityGroups(ctx context.Context, params *
 		params = &DescribeMountTargetSecurityGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeMountTargetSecurityGroups", params, optFns, addOperationDescribeMountTargetSecurityGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeMountTargetSecurityGroups", params, optFns, c.addOperationDescribeMountTargetSecurityGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeMountTargetSecurityGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeMountTargetSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeMountTargetSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeMountTargetSecurityGroups{}, middleware.After)
 	if err != nil {
 		return err

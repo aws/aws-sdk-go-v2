@@ -18,7 +18,7 @@ func (c *Client) StartContinuousExport(ctx context.Context, params *StartContinu
 		params = &StartContinuousExportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartContinuousExport", params, optFns, addOperationStartContinuousExportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartContinuousExport", params, optFns, c.addOperationStartContinuousExportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type StartContinuousExportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartContinuousExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartContinuousExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartContinuousExport{}, middleware.After)
 	if err != nil {
 		return err

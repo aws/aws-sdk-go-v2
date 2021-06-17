@@ -33,7 +33,7 @@ func (c *Client) ResumeGameServerGroup(ctx context.Context, params *ResumeGameSe
 		params = &ResumeGameServerGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResumeGameServerGroup", params, optFns, addOperationResumeGameServerGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResumeGameServerGroup", params, optFns, c.addOperationResumeGameServerGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ResumeGameServerGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResumeGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResumeGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResumeGameServerGroup{}, middleware.After)
 	if err != nil {
 		return err

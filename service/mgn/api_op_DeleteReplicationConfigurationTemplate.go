@@ -16,7 +16,7 @@ func (c *Client) DeleteReplicationConfigurationTemplate(ctx context.Context, par
 		params = &DeleteReplicationConfigurationTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteReplicationConfigurationTemplate", params, optFns, addOperationDeleteReplicationConfigurationTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteReplicationConfigurationTemplate", params, optFns, c.addOperationDeleteReplicationConfigurationTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteReplicationConfigurationTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteReplicationConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteReplicationConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteReplicationConfigurationTemplate{}, middleware.After)
 	if err != nil {
 		return err

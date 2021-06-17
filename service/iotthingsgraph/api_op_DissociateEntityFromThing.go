@@ -19,7 +19,7 @@ func (c *Client) DissociateEntityFromThing(ctx context.Context, params *Dissocia
 		params = &DissociateEntityFromThingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DissociateEntityFromThing", params, optFns, addOperationDissociateEntityFromThingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DissociateEntityFromThing", params, optFns, c.addOperationDissociateEntityFromThingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DissociateEntityFromThingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDissociateEntityFromThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDissociateEntityFromThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDissociateEntityFromThing{}, middleware.After)
 	if err != nil {
 		return err

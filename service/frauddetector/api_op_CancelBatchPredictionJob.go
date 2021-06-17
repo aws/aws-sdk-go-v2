@@ -16,7 +16,7 @@ func (c *Client) CancelBatchPredictionJob(ctx context.Context, params *CancelBat
 		params = &CancelBatchPredictionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelBatchPredictionJob", params, optFns, addOperationCancelBatchPredictionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelBatchPredictionJob", params, optFns, c.addOperationCancelBatchPredictionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type CancelBatchPredictionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelBatchPredictionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelBatchPredictionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelBatchPredictionJob{}, middleware.After)
 	if err != nil {
 		return err

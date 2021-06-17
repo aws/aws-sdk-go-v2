@@ -19,7 +19,7 @@ func (c *Client) GetBucketStatistics(ctx context.Context, params *GetBucketStati
 		params = &GetBucketStatisticsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketStatistics", params, optFns, addOperationGetBucketStatisticsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketStatistics", params, optFns, c.addOperationGetBucketStatisticsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +105,7 @@ type GetBucketStatisticsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBucketStatistics{}, middleware.After)
 	if err != nil {
 		return err

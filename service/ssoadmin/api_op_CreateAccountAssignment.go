@@ -24,7 +24,7 @@ func (c *Client) CreateAccountAssignment(ctx context.Context, params *CreateAcco
 		params = &CreateAccountAssignmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAccountAssignment", params, optFns, addOperationCreateAccountAssignmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAccountAssignment", params, optFns, c.addOperationCreateAccountAssignmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type CreateAccountAssignmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAccountAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAccountAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAccountAssignment{}, middleware.After)
 	if err != nil {
 		return err

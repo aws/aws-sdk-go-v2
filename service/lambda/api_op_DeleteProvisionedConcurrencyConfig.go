@@ -16,7 +16,7 @@ func (c *Client) DeleteProvisionedConcurrencyConfig(ctx context.Context, params 
 		params = &DeleteProvisionedConcurrencyConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProvisionedConcurrencyConfig", params, optFns, addOperationDeleteProvisionedConcurrencyConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProvisionedConcurrencyConfig", params, optFns, c.addOperationDeleteProvisionedConcurrencyConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeleteProvisionedConcurrencyConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteProvisionedConcurrencyConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteProvisionedConcurrencyConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProvisionedConcurrencyConfig{}, middleware.After)
 	if err != nil {
 		return err

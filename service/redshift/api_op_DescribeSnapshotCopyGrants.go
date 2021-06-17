@@ -22,7 +22,7 @@ func (c *Client) DescribeSnapshotCopyGrants(ctx context.Context, params *Describ
 		params = &DescribeSnapshotCopyGrantsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSnapshotCopyGrants", params, optFns, addOperationDescribeSnapshotCopyGrantsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSnapshotCopyGrants", params, optFns, c.addOperationDescribeSnapshotCopyGrantsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type DescribeSnapshotCopyGrantsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSnapshotCopyGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSnapshotCopyGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeSnapshotCopyGrants{}, middleware.After)
 	if err != nil {
 		return err

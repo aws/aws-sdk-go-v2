@@ -17,7 +17,7 @@ func (c *Client) AssociateProductWithPortfolio(ctx context.Context, params *Asso
 		params = &AssociateProductWithPortfolioInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateProductWithPortfolio", params, optFns, addOperationAssociateProductWithPortfolioMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateProductWithPortfolio", params, optFns, c.addOperationAssociateProductWithPortfolioMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type AssociateProductWithPortfolioOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateProductWithPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateProductWithPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateProductWithPortfolio{}, middleware.After)
 	if err != nil {
 		return err

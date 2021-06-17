@@ -20,7 +20,7 @@ func (c *Client) DescribeVTLDevices(ctx context.Context, params *DescribeVTLDevi
 		params = &DescribeVTLDevicesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeVTLDevices", params, optFns, addOperationDescribeVTLDevicesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeVTLDevices", params, optFns, c.addOperationDescribeVTLDevicesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DescribeVTLDevicesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeVTLDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeVTLDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeVTLDevices{}, middleware.After)
 	if err != nil {
 		return err

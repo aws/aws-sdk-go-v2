@@ -24,7 +24,7 @@ func (c *Client) ExportEBSVolumeRecommendations(ctx context.Context, params *Exp
 		params = &ExportEBSVolumeRecommendationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExportEBSVolumeRecommendations", params, optFns, addOperationExportEBSVolumeRecommendationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExportEBSVolumeRecommendations", params, optFns, c.addOperationExportEBSVolumeRecommendationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +107,7 @@ type ExportEBSVolumeRecommendationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExportEBSVolumeRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExportEBSVolumeRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpExportEBSVolumeRecommendations{}, middleware.After)
 	if err != nil {
 		return err

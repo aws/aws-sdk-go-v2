@@ -16,7 +16,7 @@ func (c *Client) DeleteDiscoverer(ctx context.Context, params *DeleteDiscovererI
 		params = &DeleteDiscovererInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDiscoverer", params, optFns, addOperationDeleteDiscovererMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDiscoverer", params, optFns, c.addOperationDeleteDiscovererMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteDiscovererOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDiscoverer{}, middleware.After)
 	if err != nil {
 		return err

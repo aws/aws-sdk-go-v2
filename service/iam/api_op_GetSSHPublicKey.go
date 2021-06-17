@@ -23,7 +23,7 @@ func (c *Client) GetSSHPublicKey(ctx context.Context, params *GetSSHPublicKeyInp
 		params = &GetSSHPublicKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSSHPublicKey", params, optFns, addOperationGetSSHPublicKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSSHPublicKey", params, optFns, c.addOperationGetSSHPublicKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type GetSSHPublicKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetSSHPublicKey{}, middleware.After)
 	if err != nil {
 		return err

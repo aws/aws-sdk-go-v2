@@ -31,7 +31,7 @@ func (c *Client) CreateSubnet(ctx context.Context, params *CreateSubnetInput, op
 		params = &CreateSubnetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSubnet", params, optFns, addOperationCreateSubnetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSubnet", params, optFns, c.addOperationCreateSubnetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +96,7 @@ type CreateSubnetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSubnetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSubnetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateSubnet{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DisassociatePhoneNumbersFromVoiceConnectorGroup(ctx context.Con
 		params = &DisassociatePhoneNumbersFromVoiceConnectorGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociatePhoneNumbersFromVoiceConnectorGroup", params, optFns, addOperationDisassociatePhoneNumbersFromVoiceConnectorGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociatePhoneNumbersFromVoiceConnectorGroup", params, optFns, c.addOperationDisassociatePhoneNumbersFromVoiceConnectorGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DisassociatePhoneNumbersFromVoiceConnectorGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociatePhoneNumbersFromVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociatePhoneNumbersFromVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociatePhoneNumbersFromVoiceConnectorGroup{}, middleware.After)
 	if err != nil {
 		return err

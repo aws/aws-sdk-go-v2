@@ -21,7 +21,7 @@ func (c *Client) DescribeType(ctx context.Context, params *DescribeTypeInput, op
 		params = &DescribeTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeType", params, optFns, addOperationDescribeTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeType", params, optFns, c.addOperationDescribeTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -154,7 +154,7 @@ type DescribeTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeType{}, middleware.After)
 	if err != nil {
 		return err

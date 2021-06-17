@@ -17,7 +17,7 @@ func (c *Client) GrantFlowEntitlements(ctx context.Context, params *GrantFlowEnt
 		params = &GrantFlowEntitlementsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GrantFlowEntitlements", params, optFns, addOperationGrantFlowEntitlementsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GrantFlowEntitlements", params, optFns, c.addOperationGrantFlowEntitlementsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GrantFlowEntitlementsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGrantFlowEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGrantFlowEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGrantFlowEntitlements{}, middleware.After)
 	if err != nil {
 		return err

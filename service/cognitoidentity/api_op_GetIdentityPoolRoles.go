@@ -18,7 +18,7 @@ func (c *Client) GetIdentityPoolRoles(ctx context.Context, params *GetIdentityPo
 		params = &GetIdentityPoolRolesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetIdentityPoolRoles", params, optFns, addOperationGetIdentityPoolRolesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetIdentityPoolRoles", params, optFns, c.addOperationGetIdentityPoolRolesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetIdentityPoolRolesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetIdentityPoolRolesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIdentityPoolRolesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetIdentityPoolRoles{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteSourceServer(ctx context.Context, params *DeleteSourceSer
 		params = &DeleteSourceServerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSourceServer", params, optFns, addOperationDeleteSourceServerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSourceServer", params, optFns, c.addOperationDeleteSourceServerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteSourceServerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSourceServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSourceServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSourceServer{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) DescribeChannelModeratedByAppInstanceUser(ctx context.Context, 
 		params = &DescribeChannelModeratedByAppInstanceUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeChannelModeratedByAppInstanceUser", params, optFns, addOperationDescribeChannelModeratedByAppInstanceUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeChannelModeratedByAppInstanceUser", params, optFns, c.addOperationDescribeChannelModeratedByAppInstanceUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeChannelModeratedByAppInstanceUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeChannelModeratedByAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeChannelModeratedByAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeChannelModeratedByAppInstanceUser{}, middleware.After)
 	if err != nil {
 		return err

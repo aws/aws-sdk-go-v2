@@ -20,7 +20,7 @@ func (c *Client) CreateResponsePlan(ctx context.Context, params *CreateResponseP
 		params = &CreateResponsePlanInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateResponsePlan", params, optFns, addOperationCreateResponsePlanMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateResponsePlan", params, optFns, c.addOperationCreateResponsePlanMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type CreateResponsePlanOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateResponsePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateResponsePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateResponsePlan{}, middleware.After)
 	if err != nil {
 		return err

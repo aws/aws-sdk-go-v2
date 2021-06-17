@@ -17,7 +17,7 @@ func (c *Client) GetCatalogImportStatus(ctx context.Context, params *GetCatalogI
 		params = &GetCatalogImportStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCatalogImportStatus", params, optFns, addOperationGetCatalogImportStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCatalogImportStatus", params, optFns, c.addOperationGetCatalogImportStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type GetCatalogImportStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCatalogImportStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCatalogImportStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCatalogImportStatus{}, middleware.After)
 	if err != nil {
 		return err

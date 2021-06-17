@@ -16,7 +16,7 @@ func (c *Client) DeleteNotificationSubscription(ctx context.Context, params *Del
 		params = &DeleteNotificationSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteNotificationSubscription", params, optFns, addOperationDeleteNotificationSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteNotificationSubscription", params, optFns, c.addOperationDeleteNotificationSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteNotificationSubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteNotificationSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteNotificationSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteNotificationSubscription{}, middleware.After)
 	if err != nil {
 		return err

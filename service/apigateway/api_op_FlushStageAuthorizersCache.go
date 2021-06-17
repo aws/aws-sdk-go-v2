@@ -16,7 +16,7 @@ func (c *Client) FlushStageAuthorizersCache(ctx context.Context, params *FlushSt
 		params = &FlushStageAuthorizersCacheInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "FlushStageAuthorizersCache", params, optFns, addOperationFlushStageAuthorizersCacheMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "FlushStageAuthorizersCache", params, optFns, c.addOperationFlushStageAuthorizersCacheMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type FlushStageAuthorizersCacheOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationFlushStageAuthorizersCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationFlushStageAuthorizersCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpFlushStageAuthorizersCache{}, middleware.After)
 	if err != nil {
 		return err

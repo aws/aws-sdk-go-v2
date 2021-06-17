@@ -18,7 +18,7 @@ func (c *Client) DescribeAccountHealth(ctx context.Context, params *DescribeAcco
 		params = &DescribeAccountHealthInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAccountHealth", params, optFns, addOperationDescribeAccountHealthMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAccountHealth", params, optFns, c.addOperationDescribeAccountHealthMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeAccountHealthOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAccountHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAccountHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAccountHealth{}, middleware.After)
 	if err != nil {
 		return err

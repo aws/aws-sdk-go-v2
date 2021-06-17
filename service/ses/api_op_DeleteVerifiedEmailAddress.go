@@ -17,7 +17,7 @@ func (c *Client) DeleteVerifiedEmailAddress(ctx context.Context, params *DeleteV
 		params = &DeleteVerifiedEmailAddressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVerifiedEmailAddress", params, optFns, addOperationDeleteVerifiedEmailAddressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVerifiedEmailAddress", params, optFns, c.addOperationDeleteVerifiedEmailAddressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteVerifiedEmailAddressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVerifiedEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVerifiedEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteVerifiedEmailAddress{}, middleware.After)
 	if err != nil {
 		return err

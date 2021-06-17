@@ -18,7 +18,7 @@ func (c *Client) GetClientCertificates(ctx context.Context, params *GetClientCer
 		params = &GetClientCertificatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetClientCertificates", params, optFns, addOperationGetClientCertificatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetClientCertificates", params, optFns, c.addOperationGetClientCertificatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetClientCertificatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetClientCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetClientCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetClientCertificates{}, middleware.After)
 	if err != nil {
 		return err

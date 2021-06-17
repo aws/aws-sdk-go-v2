@@ -17,7 +17,7 @@ func (c *Client) DeleteExperimentTemplate(ctx context.Context, params *DeleteExp
 		params = &DeleteExperimentTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteExperimentTemplate", params, optFns, addOperationDeleteExperimentTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteExperimentTemplate", params, optFns, c.addOperationDeleteExperimentTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteExperimentTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteExperimentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteExperimentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteExperimentTemplate{}, middleware.After)
 	if err != nil {
 		return err

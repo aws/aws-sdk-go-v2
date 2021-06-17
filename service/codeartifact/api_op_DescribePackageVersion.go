@@ -19,7 +19,7 @@ func (c *Client) DescribePackageVersion(ctx context.Context, params *DescribePac
 		params = &DescribePackageVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePackageVersion", params, optFns, addOperationDescribePackageVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePackageVersion", params, optFns, c.addOperationDescribePackageVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type DescribePackageVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePackageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePackageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePackageVersion{}, middleware.After)
 	if err != nil {
 		return err

@@ -50,7 +50,7 @@ func (c *Client) CreateGameSession(ctx context.Context, params *CreateGameSessio
 		params = &CreateGameSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateGameSession", params, optFns, addOperationCreateGameSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateGameSession", params, optFns, c.addOperationCreateGameSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ type CreateGameSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateGameSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateGameSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGameSession{}, middleware.After)
 	if err != nil {
 		return err

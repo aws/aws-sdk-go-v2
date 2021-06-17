@@ -18,7 +18,7 @@ func (c *Client) ListRouteCalculators(ctx context.Context, params *ListRouteCalc
 		params = &ListRouteCalculatorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRouteCalculators", params, optFns, addOperationListRouteCalculatorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRouteCalculators", params, optFns, c.addOperationListRouteCalculatorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListRouteCalculatorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRouteCalculatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRouteCalculatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRouteCalculators{}, middleware.After)
 	if err != nil {
 		return err

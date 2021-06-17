@@ -19,7 +19,7 @@ func (c *Client) DeleteFlowTemplate(ctx context.Context, params *DeleteFlowTempl
 		params = &DeleteFlowTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFlowTemplate", params, optFns, addOperationDeleteFlowTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFlowTemplate", params, optFns, c.addOperationDeleteFlowTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteFlowTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFlowTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFlowTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFlowTemplate{}, middleware.After)
 	if err != nil {
 		return err

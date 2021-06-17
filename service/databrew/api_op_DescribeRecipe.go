@@ -19,7 +19,7 @@ func (c *Client) DescribeRecipe(ctx context.Context, params *DescribeRecipeInput
 		params = &DescribeRecipeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRecipe", params, optFns, addOperationDescribeRecipeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRecipe", params, optFns, c.addOperationDescribeRecipeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type DescribeRecipeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRecipe{}, middleware.After)
 	if err != nil {
 		return err

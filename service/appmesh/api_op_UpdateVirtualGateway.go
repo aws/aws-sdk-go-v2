@@ -17,7 +17,7 @@ func (c *Client) UpdateVirtualGateway(ctx context.Context, params *UpdateVirtual
 		params = &UpdateVirtualGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateVirtualGateway", params, optFns, addOperationUpdateVirtualGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateVirtualGateway", params, optFns, c.addOperationUpdateVirtualGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type UpdateVirtualGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateVirtualGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateVirtualGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVirtualGateway{}, middleware.After)
 	if err != nil {
 		return err

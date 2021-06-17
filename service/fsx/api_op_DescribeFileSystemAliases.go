@@ -21,7 +21,7 @@ func (c *Client) DescribeFileSystemAliases(ctx context.Context, params *Describe
 		params = &DescribeFileSystemAliasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFileSystemAliases", params, optFns, addOperationDescribeFileSystemAliasesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFileSystemAliases", params, optFns, c.addOperationDescribeFileSystemAliasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DescribeFileSystemAliasesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFileSystemAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFileSystemAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFileSystemAliases{}, middleware.After)
 	if err != nil {
 		return err

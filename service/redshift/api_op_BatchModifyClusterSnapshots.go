@@ -17,7 +17,7 @@ func (c *Client) BatchModifyClusterSnapshots(ctx context.Context, params *BatchM
 		params = &BatchModifyClusterSnapshotsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchModifyClusterSnapshots", params, optFns, addOperationBatchModifyClusterSnapshotsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchModifyClusterSnapshots", params, optFns, c.addOperationBatchModifyClusterSnapshotsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type BatchModifyClusterSnapshotsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchModifyClusterSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchModifyClusterSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpBatchModifyClusterSnapshots{}, middleware.After)
 	if err != nil {
 		return err

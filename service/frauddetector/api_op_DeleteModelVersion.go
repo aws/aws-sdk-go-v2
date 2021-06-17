@@ -20,7 +20,7 @@ func (c *Client) DeleteModelVersion(ctx context.Context, params *DeleteModelVers
 		params = &DeleteModelVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteModelVersion", params, optFns, addOperationDeleteModelVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteModelVersion", params, optFns, c.addOperationDeleteModelVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteModelVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteModelVersion{}, middleware.After)
 	if err != nil {
 		return err

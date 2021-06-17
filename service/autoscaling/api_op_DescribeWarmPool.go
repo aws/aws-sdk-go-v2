@@ -20,7 +20,7 @@ func (c *Client) DescribeWarmPool(ctx context.Context, params *DescribeWarmPoolI
 		params = &DescribeWarmPoolInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWarmPool", params, optFns, addOperationDescribeWarmPoolMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWarmPool", params, optFns, c.addOperationDescribeWarmPoolMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DescribeWarmPoolOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeWarmPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeWarmPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeWarmPool{}, middleware.After)
 	if err != nil {
 		return err

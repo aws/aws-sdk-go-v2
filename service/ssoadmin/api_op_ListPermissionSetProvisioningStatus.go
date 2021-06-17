@@ -19,7 +19,7 @@ func (c *Client) ListPermissionSetProvisioningStatus(ctx context.Context, params
 		params = &ListPermissionSetProvisioningStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPermissionSetProvisioningStatus", params, optFns, addOperationListPermissionSetProvisioningStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPermissionSetProvisioningStatus", params, optFns, c.addOperationListPermissionSetProvisioningStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ListPermissionSetProvisioningStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPermissionSetProvisioningStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPermissionSetProvisioningStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPermissionSetProvisioningStatus{}, middleware.After)
 	if err != nil {
 		return err

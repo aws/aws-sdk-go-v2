@@ -18,7 +18,7 @@ func (c *Client) ListVoiceConnectors(ctx context.Context, params *ListVoiceConne
 		params = &ListVoiceConnectorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListVoiceConnectors", params, optFns, addOperationListVoiceConnectorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListVoiceConnectors", params, optFns, c.addOperationListVoiceConnectorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type ListVoiceConnectorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListVoiceConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListVoiceConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVoiceConnectors{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) DeleteReusableDelegationSet(ctx context.Context, params *Delete
 		params = &DeleteReusableDelegationSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteReusableDelegationSet", params, optFns, addOperationDeleteReusableDelegationSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteReusableDelegationSet", params, optFns, c.addOperationDeleteReusableDelegationSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteReusableDelegationSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteReusableDelegationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteReusableDelegationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteReusableDelegationSet{}, middleware.After)
 	if err != nil {
 		return err

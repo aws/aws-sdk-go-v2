@@ -20,7 +20,7 @@ func (c *Client) DescribeConfigurationRecorders(ctx context.Context, params *Des
 		params = &DescribeConfigurationRecordersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeConfigurationRecorders", params, optFns, addOperationDescribeConfigurationRecordersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConfigurationRecorders", params, optFns, c.addOperationDescribeConfigurationRecordersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeConfigurationRecordersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeConfigurationRecordersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeConfigurationRecordersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConfigurationRecorders{}, middleware.After)
 	if err != nil {
 		return err

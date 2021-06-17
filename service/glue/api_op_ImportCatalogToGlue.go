@@ -16,7 +16,7 @@ func (c *Client) ImportCatalogToGlue(ctx context.Context, params *ImportCatalogT
 		params = &ImportCatalogToGlueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportCatalogToGlue", params, optFns, addOperationImportCatalogToGlueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportCatalogToGlue", params, optFns, c.addOperationImportCatalogToGlueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type ImportCatalogToGlueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportCatalogToGlueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportCatalogToGlueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportCatalogToGlue{}, middleware.After)
 	if err != nil {
 		return err

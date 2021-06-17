@@ -23,7 +23,7 @@ func (c *Client) UpdateQuerySuggestionsConfig(ctx context.Context, params *Updat
 		params = &UpdateQuerySuggestionsConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateQuerySuggestionsConfig", params, optFns, addOperationUpdateQuerySuggestionsConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateQuerySuggestionsConfig", params, optFns, c.addOperationUpdateQuerySuggestionsConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type UpdateQuerySuggestionsConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateQuerySuggestionsConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateQuerySuggestionsConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateQuerySuggestionsConfig{}, middleware.After)
 	if err != nil {
 		return err

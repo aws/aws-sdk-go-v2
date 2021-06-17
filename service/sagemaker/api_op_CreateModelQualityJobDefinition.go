@@ -19,7 +19,7 @@ func (c *Client) CreateModelQualityJobDefinition(ctx context.Context, params *Cr
 		params = &CreateModelQualityJobDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateModelQualityJobDefinition", params, optFns, addOperationCreateModelQualityJobDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateModelQualityJobDefinition", params, optFns, c.addOperationCreateModelQualityJobDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type CreateModelQualityJobDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateModelQualityJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateModelQualityJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelQualityJobDefinition{}, middleware.After)
 	if err != nil {
 		return err

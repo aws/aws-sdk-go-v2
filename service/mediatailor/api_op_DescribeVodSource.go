@@ -18,7 +18,7 @@ func (c *Client) DescribeVodSource(ctx context.Context, params *DescribeVodSourc
 		params = &DescribeVodSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeVodSource", params, optFns, addOperationDescribeVodSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeVodSource", params, optFns, c.addOperationDescribeVodSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeVodSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeVodSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeVodSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVodSource{}, middleware.After)
 	if err != nil {
 		return err

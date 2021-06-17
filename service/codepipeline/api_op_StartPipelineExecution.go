@@ -18,7 +18,7 @@ func (c *Client) StartPipelineExecution(ctx context.Context, params *StartPipeli
 		params = &StartPipelineExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartPipelineExecution", params, optFns, addOperationStartPipelineExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartPipelineExecution", params, optFns, c.addOperationStartPipelineExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type StartPipelineExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartPipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartPipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartPipelineExecution{}, middleware.After)
 	if err != nil {
 		return err

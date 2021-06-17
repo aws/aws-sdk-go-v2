@@ -33,7 +33,7 @@ func (c *Client) ApproveAssignment(ctx context.Context, params *ApproveAssignmen
 		params = &ApproveAssignmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ApproveAssignment", params, optFns, addOperationApproveAssignmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ApproveAssignment", params, optFns, c.addOperationApproveAssignmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ApproveAssignmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationApproveAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationApproveAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpApproveAssignment{}, middleware.After)
 	if err != nil {
 		return err

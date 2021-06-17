@@ -15,7 +15,7 @@ func (c *Client) NullOperation(ctx context.Context, params *NullOperationInput, 
 		params = &NullOperationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "NullOperation", params, optFns, addOperationNullOperationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "NullOperation", params, optFns, c.addOperationNullOperationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type NullOperationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationNullOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationNullOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNullOperation{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) CreateStackInstances(ctx context.Context, params *CreateStackIn
 		params = &CreateStackInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateStackInstances", params, optFns, addOperationCreateStackInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateStackInstances", params, optFns, c.addOperationCreateStackInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -127,7 +127,7 @@ type CreateStackInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateStackInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateStackInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateStackInstances{}, middleware.After)
 	if err != nil {
 		return err

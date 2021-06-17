@@ -26,7 +26,7 @@ func (c *Client) DetectModerationLabels(ctx context.Context, params *DetectModer
 		params = &DetectModerationLabelsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetectModerationLabels", params, optFns, addOperationDetectModerationLabelsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetectModerationLabels", params, optFns, c.addOperationDetectModerationLabelsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DetectModerationLabelsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetectModerationLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetectModerationLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectModerationLabels{}, middleware.After)
 	if err != nil {
 		return err

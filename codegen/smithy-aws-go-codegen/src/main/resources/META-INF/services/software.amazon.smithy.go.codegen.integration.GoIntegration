@@ -32,9 +32,10 @@ software.amazon.smithy.aws.go.codegen.FilterStreamingOperations
 software.amazon.smithy.aws.go.codegen.customization.S3ControlEndpointResolver
 software.amazon.smithy.aws.go.codegen.customization.S3PaginationExtensions
 software.amazon.smithy.aws.go.codegen.AwsHttpPresignURLClientGenerator
-software.amazon.smithy.aws.go.codegen.ResolveClientConfig
+software.amazon.smithy.aws.go.codegen.ResolveClientConfigFromSources
 software.amazon.smithy.aws.go.codegen.customization.S3GetBucketLocation
 software.amazon.smithy.aws.go.codegen.RequestResponseLogging
 software.amazon.smithy.aws.go.codegen.customization.S3AddPutObjectUnseekableBodyDoc
 software.amazon.smithy.aws.go.codegen.customization.BackfillEc2UnboxedToBoxedShapes
 software.amazon.smithy.aws.go.codegen.customization.AdjustAwsRestJsonContentType
+software.amazon.smithy.aws.go.codegen.EndpointDiscoveryGenerator

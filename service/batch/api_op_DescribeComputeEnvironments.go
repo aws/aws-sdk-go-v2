@@ -21,7 +21,7 @@ func (c *Client) DescribeComputeEnvironments(ctx context.Context, params *Descri
 		params = &DescribeComputeEnvironmentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeComputeEnvironments", params, optFns, addOperationDescribeComputeEnvironmentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeComputeEnvironments", params, optFns, c.addOperationDescribeComputeEnvironmentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DescribeComputeEnvironmentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeComputeEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeComputeEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeComputeEnvironments{}, middleware.After)
 	if err != nil {
 		return err

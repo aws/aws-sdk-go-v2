@@ -21,7 +21,7 @@ func (c *Client) DiscoverInstances(ctx context.Context, params *DiscoverInstance
 		params = &DiscoverInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DiscoverInstances", params, optFns, addOperationDiscoverInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DiscoverInstances", params, optFns, c.addOperationDiscoverInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type DiscoverInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDiscoverInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDiscoverInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDiscoverInstances{}, middleware.After)
 	if err != nil {
 		return err

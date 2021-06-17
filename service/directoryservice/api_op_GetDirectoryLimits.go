@@ -17,7 +17,7 @@ func (c *Client) GetDirectoryLimits(ctx context.Context, params *GetDirectoryLim
 		params = &GetDirectoryLimitsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDirectoryLimits", params, optFns, addOperationGetDirectoryLimitsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDirectoryLimits", params, optFns, c.addOperationGetDirectoryLimitsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type GetDirectoryLimitsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDirectoryLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDirectoryLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDirectoryLimits{}, middleware.After)
 	if err != nil {
 		return err

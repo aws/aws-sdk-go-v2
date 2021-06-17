@@ -16,7 +16,7 @@ func (c *Client) GetContainerRecipePolicy(ctx context.Context, params *GetContai
 		params = &GetContainerRecipePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetContainerRecipePolicy", params, optFns, addOperationGetContainerRecipePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetContainerRecipePolicy", params, optFns, c.addOperationGetContainerRecipePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetContainerRecipePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetContainerRecipePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetContainerRecipePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContainerRecipePolicy{}, middleware.After)
 	if err != nil {
 		return err

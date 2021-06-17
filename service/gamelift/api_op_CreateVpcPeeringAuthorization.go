@@ -43,7 +43,7 @@ func (c *Client) CreateVpcPeeringAuthorization(ctx context.Context, params *Crea
 		params = &CreateVpcPeeringAuthorizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVpcPeeringAuthorization", params, optFns, addOperationCreateVpcPeeringAuthorizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateVpcPeeringAuthorization", params, optFns, c.addOperationCreateVpcPeeringAuthorizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type CreateVpcPeeringAuthorizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateVpcPeeringAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateVpcPeeringAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateVpcPeeringAuthorization{}, middleware.After)
 	if err != nil {
 		return err

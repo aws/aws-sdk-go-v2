@@ -18,7 +18,7 @@ func (c *Client) JoinDomain(ctx context.Context, params *JoinDomainInput, optFns
 		params = &JoinDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "JoinDomain", params, optFns, addOperationJoinDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "JoinDomain", params, optFns, c.addOperationJoinDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +107,7 @@ type JoinDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationJoinDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationJoinDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpJoinDomain{}, middleware.After)
 	if err != nil {
 		return err

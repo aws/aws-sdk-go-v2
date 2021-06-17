@@ -18,7 +18,7 @@ func (c *Client) DeleteTestGridProject(ctx context.Context, params *DeleteTestGr
 		params = &DeleteTestGridProjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTestGridProject", params, optFns, addOperationDeleteTestGridProjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTestGridProject", params, optFns, c.addOperationDeleteTestGridProjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteTestGridProjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTestGridProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTestGridProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTestGridProject{}, middleware.After)
 	if err != nil {
 		return err

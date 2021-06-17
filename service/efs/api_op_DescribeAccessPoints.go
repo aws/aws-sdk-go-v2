@@ -22,7 +22,7 @@ func (c *Client) DescribeAccessPoints(ctx context.Context, params *DescribeAcces
 		params = &DescribeAccessPointsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAccessPoints", params, optFns, addOperationDescribeAccessPointsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAccessPoints", params, optFns, c.addOperationDescribeAccessPointsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DescribeAccessPointsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAccessPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAccessPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAccessPoints{}, middleware.After)
 	if err != nil {
 		return err

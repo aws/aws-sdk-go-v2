@@ -33,7 +33,7 @@ func (c *Client) CreateCanary(ctx context.Context, params *CreateCanaryInput, op
 		params = &CreateCanaryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCanary", params, optFns, addOperationCreateCanaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCanary", params, optFns, c.addOperationCreateCanaryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -140,7 +140,7 @@ type CreateCanaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCanary{}, middleware.After)
 	if err != nil {
 		return err

@@ -25,7 +25,7 @@ func (c *Client) GetBlock(ctx context.Context, params *GetBlockInput, optFns ...
 		params = &GetBlockInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBlock", params, optFns, addOperationGetBlockMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBlock", params, optFns, c.addOperationGetBlockMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type GetBlockOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBlock{}, middleware.After)
 	if err != nil {
 		return err

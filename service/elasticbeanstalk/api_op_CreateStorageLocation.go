@@ -20,7 +20,7 @@ func (c *Client) CreateStorageLocation(ctx context.Context, params *CreateStorag
 		params = &CreateStorageLocationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateStorageLocation", params, optFns, addOperationCreateStorageLocationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateStorageLocation", params, optFns, c.addOperationCreateStorageLocationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type CreateStorageLocationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateStorageLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateStorageLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateStorageLocation{}, middleware.After)
 	if err != nil {
 		return err

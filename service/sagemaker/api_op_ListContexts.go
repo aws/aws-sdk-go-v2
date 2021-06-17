@@ -19,7 +19,7 @@ func (c *Client) ListContexts(ctx context.Context, params *ListContextsInput, op
 		params = &ListContextsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListContexts", params, optFns, addOperationListContextsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListContexts", params, optFns, c.addOperationListContextsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type ListContextsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListContextsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListContextsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListContexts{}, middleware.After)
 	if err != nil {
 		return err

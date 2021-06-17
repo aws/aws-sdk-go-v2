@@ -21,7 +21,7 @@ func (c *Client) DescribeInsightRules(ctx context.Context, params *DescribeInsig
 		params = &DescribeInsightRulesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInsightRules", params, optFns, addOperationDescribeInsightRulesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInsightRules", params, optFns, c.addOperationDescribeInsightRulesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeInsightRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInsightRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInsightRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeInsightRules{}, middleware.After)
 	if err != nil {
 		return err

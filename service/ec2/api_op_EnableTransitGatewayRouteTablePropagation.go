@@ -18,7 +18,7 @@ func (c *Client) EnableTransitGatewayRouteTablePropagation(ctx context.Context, 
 		params = &EnableTransitGatewayRouteTablePropagationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableTransitGatewayRouteTablePropagation", params, optFns, addOperationEnableTransitGatewayRouteTablePropagationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableTransitGatewayRouteTablePropagation", params, optFns, c.addOperationEnableTransitGatewayRouteTablePropagationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type EnableTransitGatewayRouteTablePropagationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableTransitGatewayRouteTablePropagationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableTransitGatewayRouteTablePropagationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpEnableTransitGatewayRouteTablePropagation{}, middleware.After)
 	if err != nil {
 		return err

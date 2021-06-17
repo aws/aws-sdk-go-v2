@@ -19,7 +19,7 @@ func (c *Client) InitiateDeviceClaim(ctx context.Context, params *InitiateDevice
 		params = &InitiateDeviceClaimInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InitiateDeviceClaim", params, optFns, addOperationInitiateDeviceClaimMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InitiateDeviceClaim", params, optFns, c.addOperationInitiateDeviceClaimMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type InitiateDeviceClaimOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInitiateDeviceClaimMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInitiateDeviceClaimMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInitiateDeviceClaim{}, middleware.After)
 	if err != nil {
 		return err

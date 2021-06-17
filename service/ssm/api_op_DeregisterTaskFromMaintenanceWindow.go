@@ -16,7 +16,7 @@ func (c *Client) DeregisterTaskFromMaintenanceWindow(ctx context.Context, params
 		params = &DeregisterTaskFromMaintenanceWindowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterTaskFromMaintenanceWindow", params, optFns, addOperationDeregisterTaskFromMaintenanceWindowMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterTaskFromMaintenanceWindow", params, optFns, c.addOperationDeregisterTaskFromMaintenanceWindowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeregisterTaskFromMaintenanceWindowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterTaskFromMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterTaskFromMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterTaskFromMaintenanceWindow{}, middleware.After)
 	if err != nil {
 		return err

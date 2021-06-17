@@ -16,7 +16,7 @@ func (c *Client) DeleteRequestValidator(ctx context.Context, params *DeleteReque
 		params = &DeleteRequestValidatorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRequestValidator", params, optFns, addOperationDeleteRequestValidatorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRequestValidator", params, optFns, c.addOperationDeleteRequestValidatorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteRequestValidatorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRequestValidatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRequestValidatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRequestValidator{}, middleware.After)
 	if err != nil {
 		return err

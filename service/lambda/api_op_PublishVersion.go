@@ -24,7 +24,7 @@ func (c *Client) PublishVersion(ctx context.Context, params *PublishVersionInput
 		params = &PublishVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PublishVersion", params, optFns, addOperationPublishVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PublishVersion", params, optFns, c.addOperationPublishVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -177,7 +177,7 @@ type PublishVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPublishVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPublishVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPublishVersion{}, middleware.After)
 	if err != nil {
 		return err

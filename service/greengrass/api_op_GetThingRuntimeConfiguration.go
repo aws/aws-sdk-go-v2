@@ -17,7 +17,7 @@ func (c *Client) GetThingRuntimeConfiguration(ctx context.Context, params *GetTh
 		params = &GetThingRuntimeConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetThingRuntimeConfiguration", params, optFns, addOperationGetThingRuntimeConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetThingRuntimeConfiguration", params, optFns, c.addOperationGetThingRuntimeConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetThingRuntimeConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetThingRuntimeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetThingRuntimeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetThingRuntimeConfiguration{}, middleware.After)
 	if err != nil {
 		return err

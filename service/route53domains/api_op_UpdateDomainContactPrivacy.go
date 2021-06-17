@@ -34,7 +34,7 @@ func (c *Client) UpdateDomainContactPrivacy(ctx context.Context, params *UpdateD
 		params = &UpdateDomainContactPrivacyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDomainContactPrivacy", params, optFns, addOperationUpdateDomainContactPrivacyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDomainContactPrivacy", params, optFns, c.addOperationUpdateDomainContactPrivacyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type UpdateDomainContactPrivacyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDomainContactPrivacyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDomainContactPrivacyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDomainContactPrivacy{}, middleware.After)
 	if err != nil {
 		return err

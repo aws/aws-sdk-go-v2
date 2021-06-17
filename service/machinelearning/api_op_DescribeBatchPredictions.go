@@ -23,7 +23,7 @@ func (c *Client) DescribeBatchPredictions(ctx context.Context, params *DescribeB
 		params = &DescribeBatchPredictionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeBatchPredictions", params, optFns, addOperationDescribeBatchPredictionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeBatchPredictions", params, optFns, c.addOperationDescribeBatchPredictionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -135,7 +135,7 @@ type DescribeBatchPredictionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeBatchPredictionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeBatchPredictionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBatchPredictions{}, middleware.After)
 	if err != nil {
 		return err

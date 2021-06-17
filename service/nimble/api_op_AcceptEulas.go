@@ -18,7 +18,7 @@ func (c *Client) AcceptEulas(ctx context.Context, params *AcceptEulasInput, optF
 		params = &AcceptEulasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcceptEulas", params, optFns, addOperationAcceptEulasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcceptEulas", params, optFns, c.addOperationAcceptEulasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type AcceptEulasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAcceptEulasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAcceptEulasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptEulas{}, middleware.After)
 	if err != nil {
 		return err

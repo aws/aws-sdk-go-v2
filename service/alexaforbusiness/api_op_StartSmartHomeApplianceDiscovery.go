@@ -16,7 +16,7 @@ func (c *Client) StartSmartHomeApplianceDiscovery(ctx context.Context, params *S
 		params = &StartSmartHomeApplianceDiscoveryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartSmartHomeApplianceDiscovery", params, optFns, addOperationStartSmartHomeApplianceDiscoveryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartSmartHomeApplianceDiscovery", params, optFns, c.addOperationStartSmartHomeApplianceDiscoveryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type StartSmartHomeApplianceDiscoveryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartSmartHomeApplianceDiscoveryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartSmartHomeApplianceDiscoveryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSmartHomeApplianceDiscovery{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) DeleteLoggingConfiguration(ctx context.Context, params *DeleteL
 		params = &DeleteLoggingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLoggingConfiguration", params, optFns, addOperationDeleteLoggingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLoggingConfiguration", params, optFns, c.addOperationDeleteLoggingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteLoggingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLoggingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

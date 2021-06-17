@@ -19,7 +19,7 @@ func (c *Client) UpdateProtectionGroup(ctx context.Context, params *UpdateProtec
 		params = &UpdateProtectionGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateProtectionGroup", params, optFns, addOperationUpdateProtectionGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateProtectionGroup", params, optFns, c.addOperationUpdateProtectionGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type UpdateProtectionGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateProtectionGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -30,7 +30,7 @@ func (c *Client) CreateNodegroup(ctx context.Context, params *CreateNodegroupInp
 		params = &CreateNodegroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateNodegroup", params, optFns, addOperationCreateNodegroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateNodegroup", params, optFns, c.addOperationCreateNodegroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -188,7 +188,7 @@ type CreateNodegroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateNodegroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateNodegroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNodegroup{}, middleware.After)
 	if err != nil {
 		return err

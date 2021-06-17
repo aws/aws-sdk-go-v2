@@ -30,7 +30,7 @@ func (c *Client) StartDocumentAnalysis(ctx context.Context, params *StartDocumen
 		params = &StartDocumentAnalysisInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDocumentAnalysis", params, optFns, addOperationStartDocumentAnalysisMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDocumentAnalysis", params, optFns, c.addOperationStartDocumentAnalysisMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ type StartDocumentAnalysisOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDocumentAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDocumentAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDocumentAnalysis{}, middleware.After)
 	if err != nil {
 		return err

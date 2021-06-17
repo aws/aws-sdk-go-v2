@@ -19,7 +19,7 @@ func (c *Client) DeleteTracker(ctx context.Context, params *DeleteTrackerInput, 
 		params = &DeleteTrackerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTracker", params, optFns, addOperationDeleteTrackerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTracker", params, optFns, c.addOperationDeleteTrackerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteTrackerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTracker{}, middleware.After)
 	if err != nil {
 		return err

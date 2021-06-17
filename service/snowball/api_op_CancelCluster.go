@@ -18,7 +18,7 @@ func (c *Client) CancelCluster(ctx context.Context, params *CancelClusterInput, 
 		params = &CancelClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelCluster", params, optFns, addOperationCancelClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelCluster", params, optFns, c.addOperationCancelClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type CancelClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelCluster{}, middleware.After)
 	if err != nil {
 		return err

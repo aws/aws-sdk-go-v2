@@ -21,7 +21,7 @@ func (c *Client) StopRelationalDatabase(ctx context.Context, params *StopRelatio
 		params = &StopRelationalDatabaseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopRelationalDatabase", params, optFns, addOperationStopRelationalDatabaseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopRelationalDatabase", params, optFns, c.addOperationStopRelationalDatabaseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type StopRelationalDatabaseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopRelationalDatabase{}, middleware.After)
 	if err != nil {
 		return err

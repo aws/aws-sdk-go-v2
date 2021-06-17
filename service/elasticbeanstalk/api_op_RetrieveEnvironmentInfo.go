@@ -20,7 +20,7 @@ func (c *Client) RetrieveEnvironmentInfo(ctx context.Context, params *RetrieveEn
 		params = &RetrieveEnvironmentInfoInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RetrieveEnvironmentInfo", params, optFns, addOperationRetrieveEnvironmentInfoMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RetrieveEnvironmentInfo", params, optFns, c.addOperationRetrieveEnvironmentInfoMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type RetrieveEnvironmentInfoOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRetrieveEnvironmentInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRetrieveEnvironmentInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRetrieveEnvironmentInfo{}, middleware.After)
 	if err != nil {
 		return err

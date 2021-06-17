@@ -17,7 +17,7 @@ func (c *Client) DeleteDeploymentConfig(ctx context.Context, params *DeleteDeplo
 		params = &DeleteDeploymentConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDeploymentConfig", params, optFns, addOperationDeleteDeploymentConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDeploymentConfig", params, optFns, c.addOperationDeleteDeploymentConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteDeploymentConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDeploymentConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDeploymentConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDeploymentConfig{}, middleware.After)
 	if err != nil {
 		return err

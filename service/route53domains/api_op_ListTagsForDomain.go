@@ -19,7 +19,7 @@ func (c *Client) ListTagsForDomain(ctx context.Context, params *ListTagsForDomai
 		params = &ListTagsForDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTagsForDomain", params, optFns, addOperationListTagsForDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTagsForDomain", params, optFns, c.addOperationListTagsForDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ListTagsForDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTagsForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTagsForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTagsForDomain{}, middleware.After)
 	if err != nil {
 		return err

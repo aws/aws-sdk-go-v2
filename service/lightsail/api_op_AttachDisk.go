@@ -22,7 +22,7 @@ func (c *Client) AttachDisk(ctx context.Context, params *AttachDiskInput, optFns
 		params = &AttachDiskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachDisk", params, optFns, addOperationAttachDiskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachDisk", params, optFns, c.addOperationAttachDiskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type AttachDiskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachDiskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachDiskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachDisk{}, middleware.After)
 	if err != nil {
 		return err

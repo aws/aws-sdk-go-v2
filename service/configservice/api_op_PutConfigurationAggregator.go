@@ -32,7 +32,7 @@ func (c *Client) PutConfigurationAggregator(ctx context.Context, params *PutConf
 		params = &PutConfigurationAggregatorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutConfigurationAggregator", params, optFns, addOperationPutConfigurationAggregatorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutConfigurationAggregator", params, optFns, c.addOperationPutConfigurationAggregatorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type PutConfigurationAggregatorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutConfigurationAggregatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutConfigurationAggregatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutConfigurationAggregator{}, middleware.After)
 	if err != nil {
 		return err

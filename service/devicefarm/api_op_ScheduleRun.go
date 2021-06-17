@@ -17,7 +17,7 @@ func (c *Client) ScheduleRun(ctx context.Context, params *ScheduleRunInput, optF
 		params = &ScheduleRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ScheduleRun", params, optFns, addOperationScheduleRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ScheduleRun", params, optFns, c.addOperationScheduleRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type ScheduleRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationScheduleRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationScheduleRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpScheduleRun{}, middleware.After)
 	if err != nil {
 		return err

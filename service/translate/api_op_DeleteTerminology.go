@@ -16,7 +16,7 @@ func (c *Client) DeleteTerminology(ctx context.Context, params *DeleteTerminolog
 		params = &DeleteTerminologyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTerminology", params, optFns, addOperationDeleteTerminologyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTerminology", params, optFns, c.addOperationDeleteTerminologyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteTerminologyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTerminologyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTerminologyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTerminology{}, middleware.After)
 	if err != nil {
 		return err

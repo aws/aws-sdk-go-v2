@@ -21,7 +21,7 @@ func (c *Client) GroupResources(ctx context.Context, params *GroupResourcesInput
 		params = &GroupResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GroupResources", params, optFns, addOperationGroupResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GroupResources", params, optFns, c.addOperationGroupResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type GroupResourcesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGroupResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGroupResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGroupResources{}, middleware.After)
 	if err != nil {
 		return err

@@ -28,7 +28,7 @@ func (c *Client) ListAccountsForParent(ctx context.Context, params *ListAccounts
 		params = &ListAccountsForParentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAccountsForParent", params, optFns, addOperationListAccountsForParentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAccountsForParent", params, optFns, c.addOperationListAccountsForParentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type ListAccountsForParentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAccountsForParentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAccountsForParentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccountsForParent{}, middleware.After)
 	if err != nil {
 		return err

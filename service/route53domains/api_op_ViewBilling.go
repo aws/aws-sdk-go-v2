@@ -19,7 +19,7 @@ func (c *Client) ViewBilling(ctx context.Context, params *ViewBillingInput, optF
 		params = &ViewBillingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ViewBilling", params, optFns, addOperationViewBillingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ViewBilling", params, optFns, c.addOperationViewBillingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type ViewBillingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationViewBillingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationViewBillingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpViewBilling{}, middleware.After)
 	if err != nil {
 		return err

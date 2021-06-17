@@ -17,7 +17,7 @@ func (c *Client) DeleteEmailIdentity(ctx context.Context, params *DeleteEmailIde
 		params = &DeleteEmailIdentityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEmailIdentity", params, optFns, addOperationDeleteEmailIdentityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEmailIdentity", params, optFns, c.addOperationDeleteEmailIdentityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteEmailIdentityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEmailIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEmailIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEmailIdentity{}, middleware.After)
 	if err != nil {
 		return err

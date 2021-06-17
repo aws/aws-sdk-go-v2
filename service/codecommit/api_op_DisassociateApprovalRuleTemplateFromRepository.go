@@ -19,7 +19,7 @@ func (c *Client) DisassociateApprovalRuleTemplateFromRepository(ctx context.Cont
 		params = &DisassociateApprovalRuleTemplateFromRepositoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateApprovalRuleTemplateFromRepository", params, optFns, addOperationDisassociateApprovalRuleTemplateFromRepositoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateApprovalRuleTemplateFromRepository", params, optFns, c.addOperationDisassociateApprovalRuleTemplateFromRepositoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DisassociateApprovalRuleTemplateFromRepositoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateApprovalRuleTemplateFromRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateApprovalRuleTemplateFromRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateApprovalRuleTemplateFromRepository{}, middleware.After)
 	if err != nil {
 		return err

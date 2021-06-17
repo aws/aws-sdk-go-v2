@@ -19,7 +19,7 @@ func (c *Client) GetManagedPrefixListAssociations(ctx context.Context, params *G
 		params = &GetManagedPrefixListAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetManagedPrefixListAssociations", params, optFns, addOperationGetManagedPrefixListAssociationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetManagedPrefixListAssociations", params, optFns, c.addOperationGetManagedPrefixListAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetManagedPrefixListAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetManagedPrefixListAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetManagedPrefixListAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpGetManagedPrefixListAssociations{}, middleware.After)
 	if err != nil {
 		return err

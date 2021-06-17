@@ -17,7 +17,7 @@ func (c *Client) GetDocumentVersion(ctx context.Context, params *GetDocumentVers
 		params = &GetDocumentVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDocumentVersion", params, optFns, addOperationGetDocumentVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDocumentVersion", params, optFns, c.addOperationGetDocumentVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetDocumentVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDocumentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDocumentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDocumentVersion{}, middleware.After)
 	if err != nil {
 		return err

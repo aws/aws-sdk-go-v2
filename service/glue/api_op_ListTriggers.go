@@ -22,7 +22,7 @@ func (c *Client) ListTriggers(ctx context.Context, params *ListTriggersInput, op
 		params = &ListTriggersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTriggers", params, optFns, addOperationListTriggersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTriggers", params, optFns, c.addOperationListTriggersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ListTriggersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTriggers{}, middleware.After)
 	if err != nil {
 		return err

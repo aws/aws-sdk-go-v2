@@ -17,7 +17,7 @@ func (c *Client) GetDirectory(ctx context.Context, params *GetDirectoryInput, op
 		params = &GetDirectoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDirectory", params, optFns, addOperationGetDirectoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDirectory", params, optFns, c.addOperationGetDirectoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetDirectoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDirectory{}, middleware.After)
 	if err != nil {
 		return err

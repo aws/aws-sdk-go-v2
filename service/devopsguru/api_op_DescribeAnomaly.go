@@ -17,7 +17,7 @@ func (c *Client) DescribeAnomaly(ctx context.Context, params *DescribeAnomalyInp
 		params = &DescribeAnomalyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAnomaly", params, optFns, addOperationDescribeAnomalyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAnomaly", params, optFns, c.addOperationDescribeAnomalyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeAnomalyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAnomalyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAnomalyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAnomaly{}, middleware.After)
 	if err != nil {
 		return err

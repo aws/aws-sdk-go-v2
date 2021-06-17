@@ -19,7 +19,7 @@ func (c *Client) ModifyCacheParameterGroup(ctx context.Context, params *ModifyCa
 		params = &ModifyCacheParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyCacheParameterGroup", params, optFns, addOperationModifyCacheParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyCacheParameterGroup", params, optFns, c.addOperationModifyCacheParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ModifyCacheParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyCacheParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyCacheParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyCacheParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

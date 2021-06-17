@@ -17,7 +17,7 @@ func (c *Client) ListIpRoutes(ctx context.Context, params *ListIpRoutesInput, op
 		params = &ListIpRoutesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListIpRoutes", params, optFns, addOperationListIpRoutesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListIpRoutes", params, optFns, c.addOperationListIpRoutesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListIpRoutesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListIpRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListIpRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListIpRoutes{}, middleware.After)
 	if err != nil {
 		return err

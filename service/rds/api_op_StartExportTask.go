@@ -18,7 +18,7 @@ func (c *Client) StartExportTask(ctx context.Context, params *StartExportTaskInp
 		params = &StartExportTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartExportTask", params, optFns, addOperationStartExportTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartExportTask", params, optFns, c.addOperationStartExportTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -183,7 +183,7 @@ type StartExportTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartExportTask{}, middleware.After)
 	if err != nil {
 		return err

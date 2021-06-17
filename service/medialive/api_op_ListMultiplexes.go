@@ -18,7 +18,7 @@ func (c *Client) ListMultiplexes(ctx context.Context, params *ListMultiplexesInp
 		params = &ListMultiplexesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListMultiplexes", params, optFns, addOperationListMultiplexesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListMultiplexes", params, optFns, c.addOperationListMultiplexesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ListMultiplexesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListMultiplexesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListMultiplexesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMultiplexes{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetRawMessageContent(ctx context.Context, params *GetRawMessage
 		params = &GetRawMessageContentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRawMessageContent", params, optFns, addOperationGetRawMessageContentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRawMessageContent", params, optFns, c.addOperationGetRawMessageContentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetRawMessageContentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRawMessageContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRawMessageContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRawMessageContent{}, middleware.After)
 	if err != nil {
 		return err

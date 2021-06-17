@@ -16,7 +16,7 @@ func (c *Client) DeleteUsageReportSubscription(ctx context.Context, params *Dele
 		params = &DeleteUsageReportSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteUsageReportSubscription", params, optFns, addOperationDeleteUsageReportSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteUsageReportSubscription", params, optFns, c.addOperationDeleteUsageReportSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +34,7 @@ type DeleteUsageReportSubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteUsageReportSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteUsageReportSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteUsageReportSubscription{}, middleware.After)
 	if err != nil {
 		return err

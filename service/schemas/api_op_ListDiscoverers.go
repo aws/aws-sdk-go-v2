@@ -18,7 +18,7 @@ func (c *Client) ListDiscoverers(ctx context.Context, params *ListDiscoverersInp
 		params = &ListDiscoverersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDiscoverers", params, optFns, addOperationListDiscoverersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDiscoverers", params, optFns, c.addOperationListDiscoverersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListDiscoverersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDiscoverersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDiscoverersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDiscoverers{}, middleware.After)
 	if err != nil {
 		return err

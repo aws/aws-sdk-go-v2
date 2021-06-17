@@ -17,7 +17,7 @@ func (c *Client) GetControl(ctx context.Context, params *GetControlInput, optFns
 		params = &GetControlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetControl", params, optFns, addOperationGetControlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetControl", params, optFns, c.addOperationGetControlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetControlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetControl{}, middleware.After)
 	if err != nil {
 		return err

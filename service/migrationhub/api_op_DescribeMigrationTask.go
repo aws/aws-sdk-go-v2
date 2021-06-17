@@ -17,7 +17,7 @@ func (c *Client) DescribeMigrationTask(ctx context.Context, params *DescribeMigr
 		params = &DescribeMigrationTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeMigrationTask", params, optFns, addOperationDescribeMigrationTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeMigrationTask", params, optFns, c.addOperationDescribeMigrationTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DescribeMigrationTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeMigrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeMigrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMigrationTask{}, middleware.After)
 	if err != nil {
 		return err

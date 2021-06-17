@@ -22,7 +22,7 @@ func (c *Client) GetCurrentMetricData(ctx context.Context, params *GetCurrentMet
 		params = &GetCurrentMetricDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCurrentMetricData", params, optFns, addOperationGetCurrentMetricDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCurrentMetricData", params, optFns, c.addOperationGetCurrentMetricDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -123,7 +123,7 @@ type GetCurrentMetricDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCurrentMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCurrentMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCurrentMetricData{}, middleware.After)
 	if err != nil {
 		return err

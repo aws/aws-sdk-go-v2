@@ -18,7 +18,7 @@ func (c *Client) CreateTypedLinkFacet(ctx context.Context, params *CreateTypedLi
 		params = &CreateTypedLinkFacetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTypedLinkFacet", params, optFns, addOperationCreateTypedLinkFacetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTypedLinkFacet", params, optFns, c.addOperationCreateTypedLinkFacetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type CreateTypedLinkFacetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTypedLinkFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTypedLinkFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTypedLinkFacet{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CreateHomeRegionControl(ctx context.Context, params *CreateHome
 		params = &CreateHomeRegionControlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateHomeRegionControl", params, optFns, addOperationCreateHomeRegionControlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateHomeRegionControl", params, optFns, c.addOperationCreateHomeRegionControlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type CreateHomeRegionControlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateHomeRegionControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateHomeRegionControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHomeRegionControl{}, middleware.After)
 	if err != nil {
 		return err

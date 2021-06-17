@@ -20,7 +20,7 @@ func (c *Client) CreateReplicationJob(ctx context.Context, params *CreateReplica
 		params = &CreateReplicationJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateReplicationJob", params, optFns, addOperationCreateReplicationJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateReplicationJob", params, optFns, c.addOperationCreateReplicationJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type CreateReplicationJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateReplicationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateReplicationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateReplicationJob{}, middleware.After)
 	if err != nil {
 		return err

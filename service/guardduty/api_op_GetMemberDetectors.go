@@ -17,7 +17,7 @@ func (c *Client) GetMemberDetectors(ctx context.Context, params *GetMemberDetect
 		params = &GetMemberDetectorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMemberDetectors", params, optFns, addOperationGetMemberDetectorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMemberDetectors", params, optFns, c.addOperationGetMemberDetectorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetMemberDetectorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMemberDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMemberDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMemberDetectors{}, middleware.After)
 	if err != nil {
 		return err

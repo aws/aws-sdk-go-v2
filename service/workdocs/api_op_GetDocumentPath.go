@@ -21,7 +21,7 @@ func (c *Client) GetDocumentPath(ctx context.Context, params *GetDocumentPathInp
 		params = &GetDocumentPathInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDocumentPath", params, optFns, addOperationGetDocumentPathMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDocumentPath", params, optFns, c.addOperationGetDocumentPathMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type GetDocumentPathOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDocumentPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDocumentPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDocumentPath{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteRevision(ctx context.Context, params *DeleteRevisionInput
 		params = &DeleteRevisionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRevision", params, optFns, addOperationDeleteRevisionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRevision", params, optFns, c.addOperationDeleteRevisionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteRevisionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRevision{}, middleware.After)
 	if err != nil {
 		return err

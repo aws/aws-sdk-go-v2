@@ -22,7 +22,7 @@ func (c *Client) DescribeAlarmHistory(ctx context.Context, params *DescribeAlarm
 		params = &DescribeAlarmHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAlarmHistory", params, optFns, addOperationDescribeAlarmHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAlarmHistory", params, optFns, c.addOperationDescribeAlarmHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type DescribeAlarmHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAlarmHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAlarmHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAlarmHistory{}, middleware.After)
 	if err != nil {
 		return err

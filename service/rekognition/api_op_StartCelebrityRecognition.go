@@ -28,7 +28,7 @@ func (c *Client) StartCelebrityRecognition(ctx context.Context, params *StartCel
 		params = &StartCelebrityRecognitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartCelebrityRecognition", params, optFns, addOperationStartCelebrityRecognitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartCelebrityRecognition", params, optFns, c.addOperationStartCelebrityRecognitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type StartCelebrityRecognitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartCelebrityRecognitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartCelebrityRecognitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartCelebrityRecognition{}, middleware.After)
 	if err != nil {
 		return err

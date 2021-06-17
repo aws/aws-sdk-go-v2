@@ -23,7 +23,7 @@ func (c *Client) UpdateResourceDataSync(ctx context.Context, params *UpdateResou
 		params = &UpdateResourceDataSyncInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateResourceDataSync", params, optFns, addOperationUpdateResourceDataSyncMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateResourceDataSync", params, optFns, c.addOperationUpdateResourceDataSyncMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type UpdateResourceDataSyncOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateResourceDataSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateResourceDataSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateResourceDataSync{}, middleware.After)
 	if err != nil {
 		return err

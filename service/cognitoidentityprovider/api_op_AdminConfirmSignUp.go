@@ -17,7 +17,7 @@ func (c *Client) AdminConfirmSignUp(ctx context.Context, params *AdminConfirmSig
 		params = &AdminConfirmSignUpInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminConfirmSignUp", params, optFns, addOperationAdminConfirmSignUpMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminConfirmSignUp", params, optFns, c.addOperationAdminConfirmSignUpMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type AdminConfirmSignUpOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminConfirmSignUpMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminConfirmSignUpMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminConfirmSignUp{}, middleware.After)
 	if err != nil {
 		return err

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -19,7 +20,7 @@ func (c *Client) ListTables(ctx context.Context, params *ListTablesInput, optFns
 		params = &ListTablesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTables", params, optFns, addOperationListTablesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTables", params, optFns, c.addOperationListTablesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +64,7 @@ type ListTablesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListTables{}, middleware.After)
 	if err != nil {
 		return err
@@ -108,6 +109,9 @@ func addOperationListTablesMiddlewares(stack *middleware.Stack, options Options)
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addOpListTablesDiscoverEndpointMiddleware(stack, options, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTables(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -127,6 +131,46 @@ func addOperationListTablesMiddlewares(stack *middleware.Stack, options Options)
 		return err
 	}
 	return nil
+}
+
+func addOpListTablesDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
+	return stack.Serialize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
+		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
+			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
+				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
+				opt.Logger = o.Logger
+			},
+		},
+		DiscoverOperation:            c.fetchOpListTablesDiscoverEndpoint,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
+		EndpointDiscoveryRequired:    false,
+	}, "ResolveEndpoint", middleware.After)
+}
+
+func (c *Client) fetchOpListTablesDiscoverEndpoint(ctx context.Context, input interface{}, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+	in, ok := input.(*ListTablesInput)
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
+	}
+	_ = in
+
+	identifierMap := make(map[string]string, 0)
+
+	key := fmt.Sprintf("DynamoDB.%v", identifierMap)
+
+	if v, ok := c.endpointCache.Get(key); ok {
+		return v, nil
+	}
+
+	discoveryOperationInput := &DescribeEndpointsInput{}
+
+	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
+	for _, fn := range optFns {
+		fn(&opt)
+	}
+
+	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, key, opt)
+	return internalEndpointDiscovery.WeightedAddress{}, nil
 }
 
 // ListTablesAPIClient is a client that implements the ListTables operation.

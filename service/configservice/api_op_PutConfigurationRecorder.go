@@ -23,7 +23,7 @@ func (c *Client) PutConfigurationRecorder(ctx context.Context, params *PutConfig
 		params = &PutConfigurationRecorderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutConfigurationRecorder", params, optFns, addOperationPutConfigurationRecorderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutConfigurationRecorder", params, optFns, c.addOperationPutConfigurationRecorderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type PutConfigurationRecorderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutConfigurationRecorderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutConfigurationRecorderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutConfigurationRecorder{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DisassociateAttributeGroup(ctx context.Context, params *Disasso
 		params = &DisassociateAttributeGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateAttributeGroup", params, optFns, addOperationDisassociateAttributeGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateAttributeGroup", params, optFns, c.addOperationDisassociateAttributeGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DisassociateAttributeGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateAttributeGroup{}, middleware.After)
 	if err != nil {
 		return err

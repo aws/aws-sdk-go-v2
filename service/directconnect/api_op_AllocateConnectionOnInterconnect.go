@@ -23,7 +23,7 @@ func (c *Client) AllocateConnectionOnInterconnect(ctx context.Context, params *A
 		params = &AllocateConnectionOnInterconnectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AllocateConnectionOnInterconnect", params, optFns, addOperationAllocateConnectionOnInterconnectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AllocateConnectionOnInterconnect", params, optFns, c.addOperationAllocateConnectionOnInterconnectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -171,7 +171,7 @@ type AllocateConnectionOnInterconnectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAllocateConnectionOnInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAllocateConnectionOnInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAllocateConnectionOnInterconnect{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) AssociatePackage(ctx context.Context, params *AssociatePackageI
 		params = &AssociatePackageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociatePackage", params, optFns, addOperationAssociatePackageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociatePackage", params, optFns, c.addOperationAssociatePackageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type AssociatePackageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociatePackage{}, middleware.After)
 	if err != nil {
 		return err

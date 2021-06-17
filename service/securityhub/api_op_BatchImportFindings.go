@@ -49,7 +49,7 @@ func (c *Client) BatchImportFindings(ctx context.Context, params *BatchImportFin
 		params = &BatchImportFindingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchImportFindings", params, optFns, addOperationBatchImportFindingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchImportFindings", params, optFns, c.addOperationBatchImportFindingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type BatchImportFindingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchImportFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchImportFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchImportFindings{}, middleware.After)
 	if err != nil {
 		return err

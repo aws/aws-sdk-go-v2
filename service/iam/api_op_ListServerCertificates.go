@@ -28,7 +28,7 @@ func (c *Client) ListServerCertificates(ctx context.Context, params *ListServerC
 		params = &ListServerCertificatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListServerCertificates", params, optFns, addOperationListServerCertificatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListServerCertificates", params, optFns, c.addOperationListServerCertificatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type ListServerCertificatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListServerCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListServerCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListServerCertificates{}, middleware.After)
 	if err != nil {
 		return err

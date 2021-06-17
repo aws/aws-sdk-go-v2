@@ -17,7 +17,7 @@ func (c *Client) UpdateAssessmentControl(ctx context.Context, params *UpdateAsse
 		params = &UpdateAssessmentControlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAssessmentControl", params, optFns, addOperationUpdateAssessmentControlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAssessmentControl", params, optFns, c.addOperationUpdateAssessmentControlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type UpdateAssessmentControlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAssessmentControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAssessmentControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAssessmentControl{}, middleware.After)
 	if err != nil {
 		return err

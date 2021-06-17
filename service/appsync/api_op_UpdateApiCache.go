@@ -17,7 +17,7 @@ func (c *Client) UpdateApiCache(ctx context.Context, params *UpdateApiCacheInput
 		params = &UpdateApiCacheInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateApiCache", params, optFns, addOperationUpdateApiCacheMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateApiCache", params, optFns, c.addOperationUpdateApiCacheMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type UpdateApiCacheOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApiCache{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) DescribeBuild(ctx context.Context, params *DescribeBuildInput, 
 		params = &DescribeBuildInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeBuild", params, optFns, addOperationDescribeBuildMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeBuild", params, optFns, c.addOperationDescribeBuildMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeBuildOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBuild{}, middleware.After)
 	if err != nil {
 		return err

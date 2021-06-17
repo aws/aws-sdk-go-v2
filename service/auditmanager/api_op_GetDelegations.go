@@ -18,7 +18,7 @@ func (c *Client) GetDelegations(ctx context.Context, params *GetDelegationsInput
 		params = &GetDelegationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDelegations", params, optFns, addOperationGetDelegationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDelegations", params, optFns, c.addOperationGetDelegationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetDelegationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDelegationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDelegationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDelegations{}, middleware.After)
 	if err != nil {
 		return err

@@ -25,7 +25,7 @@ func (c *Client) GetContextKeysForCustomPolicy(ctx context.Context, params *GetC
 		params = &GetContextKeysForCustomPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetContextKeysForCustomPolicy", params, optFns, addOperationGetContextKeysForCustomPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetContextKeysForCustomPolicy", params, optFns, c.addOperationGetContextKeysForCustomPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type GetContextKeysForCustomPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetContextKeysForCustomPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetContextKeysForCustomPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetContextKeysForCustomPolicy{}, middleware.After)
 	if err != nil {
 		return err

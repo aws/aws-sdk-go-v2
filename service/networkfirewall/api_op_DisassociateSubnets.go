@@ -19,7 +19,7 @@ func (c *Client) DisassociateSubnets(ctx context.Context, params *DisassociateSu
 		params = &DisassociateSubnetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateSubnets", params, optFns, addOperationDisassociateSubnetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateSubnets", params, optFns, c.addOperationDisassociateSubnetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type DisassociateSubnetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateSubnets{}, middleware.After)
 	if err != nil {
 		return err

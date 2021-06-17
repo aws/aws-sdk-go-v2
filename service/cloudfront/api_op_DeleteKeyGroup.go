@@ -20,7 +20,7 @@ func (c *Client) DeleteKeyGroup(ctx context.Context, params *DeleteKeyGroupInput
 		params = &DeleteKeyGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteKeyGroup", params, optFns, addOperationDeleteKeyGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteKeyGroup", params, optFns, c.addOperationDeleteKeyGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteKeyGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteKeyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteKeyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteKeyGroup{}, middleware.After)
 	if err != nil {
 		return err

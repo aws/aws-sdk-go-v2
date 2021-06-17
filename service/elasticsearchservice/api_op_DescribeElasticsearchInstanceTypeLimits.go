@@ -19,7 +19,7 @@ func (c *Client) DescribeElasticsearchInstanceTypeLimits(ctx context.Context, pa
 		params = &DescribeElasticsearchInstanceTypeLimitsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeElasticsearchInstanceTypeLimits", params, optFns, addOperationDescribeElasticsearchInstanceTypeLimitsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeElasticsearchInstanceTypeLimits", params, optFns, c.addOperationDescribeElasticsearchInstanceTypeLimitsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type DescribeElasticsearchInstanceTypeLimitsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeElasticsearchInstanceTypeLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeElasticsearchInstanceTypeLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeElasticsearchInstanceTypeLimits{}, middleware.After)
 	if err != nil {
 		return err

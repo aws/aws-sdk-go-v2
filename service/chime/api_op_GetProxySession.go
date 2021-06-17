@@ -18,7 +18,7 @@ func (c *Client) GetProxySession(ctx context.Context, params *GetProxySessionInp
 		params = &GetProxySessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetProxySession", params, optFns, addOperationGetProxySessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetProxySession", params, optFns, c.addOperationGetProxySessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetProxySessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetProxySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetProxySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProxySession{}, middleware.After)
 	if err != nil {
 		return err

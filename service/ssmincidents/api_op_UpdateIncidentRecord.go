@@ -21,7 +21,7 @@ func (c *Client) UpdateIncidentRecord(ctx context.Context, params *UpdateInciden
 		params = &UpdateIncidentRecordInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateIncidentRecord", params, optFns, addOperationUpdateIncidentRecordMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateIncidentRecord", params, optFns, c.addOperationUpdateIncidentRecordMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type UpdateIncidentRecordOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateIncidentRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateIncidentRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIncidentRecord{}, middleware.After)
 	if err != nil {
 		return err

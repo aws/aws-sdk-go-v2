@@ -17,7 +17,7 @@ func (c *Client) DescribeCopyProductStatus(ctx context.Context, params *Describe
 		params = &DescribeCopyProductStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCopyProductStatus", params, optFns, addOperationDescribeCopyProductStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCopyProductStatus", params, optFns, c.addOperationDescribeCopyProductStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeCopyProductStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCopyProductStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCopyProductStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCopyProductStatus{}, middleware.After)
 	if err != nil {
 		return err

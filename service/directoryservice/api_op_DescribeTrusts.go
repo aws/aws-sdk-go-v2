@@ -19,7 +19,7 @@ func (c *Client) DescribeTrusts(ctx context.Context, params *DescribeTrustsInput
 		params = &DescribeTrustsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTrusts", params, optFns, addOperationDescribeTrustsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTrusts", params, optFns, c.addOperationDescribeTrustsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DescribeTrustsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTrustsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTrustsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTrusts{}, middleware.After)
 	if err != nil {
 		return err

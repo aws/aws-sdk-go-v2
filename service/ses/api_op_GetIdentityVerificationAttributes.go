@@ -38,7 +38,7 @@ func (c *Client) GetIdentityVerificationAttributes(ctx context.Context, params *
 		params = &GetIdentityVerificationAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetIdentityVerificationAttributes", params, optFns, addOperationGetIdentityVerificationAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetIdentityVerificationAttributes", params, optFns, c.addOperationGetIdentityVerificationAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type GetIdentityVerificationAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetIdentityVerificationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIdentityVerificationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetIdentityVerificationAttributes{}, middleware.After)
 	if err != nil {
 		return err

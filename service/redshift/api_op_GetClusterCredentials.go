@@ -37,7 +37,7 @@ func (c *Client) GetClusterCredentials(ctx context.Context, params *GetClusterCr
 		params = &GetClusterCredentialsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetClusterCredentials", params, optFns, addOperationGetClusterCredentialsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetClusterCredentials", params, optFns, c.addOperationGetClusterCredentialsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -160,7 +160,7 @@ type GetClusterCredentialsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetClusterCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetClusterCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetClusterCredentials{}, middleware.After)
 	if err != nil {
 		return err

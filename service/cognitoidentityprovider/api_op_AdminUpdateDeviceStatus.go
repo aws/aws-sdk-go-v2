@@ -18,7 +18,7 @@ func (c *Client) AdminUpdateDeviceStatus(ctx context.Context, params *AdminUpdat
 		params = &AdminUpdateDeviceStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminUpdateDeviceStatus", params, optFns, addOperationAdminUpdateDeviceStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminUpdateDeviceStatus", params, optFns, c.addOperationAdminUpdateDeviceStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type AdminUpdateDeviceStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminUpdateDeviceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminUpdateDeviceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminUpdateDeviceStatus{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) DetachRolePolicy(ctx context.Context, params *DetachRolePolicyI
 		params = &DetachRolePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachRolePolicy", params, optFns, addOperationDetachRolePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachRolePolicy", params, optFns, c.addOperationDetachRolePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DetachRolePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachRolePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachRolePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDetachRolePolicy{}, middleware.After)
 	if err != nil {
 		return err

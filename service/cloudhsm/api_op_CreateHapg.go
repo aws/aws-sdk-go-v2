@@ -27,7 +27,7 @@ func (c *Client) CreateHapg(ctx context.Context, params *CreateHapgInput, optFns
 		params = &CreateHapgInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateHapg", params, optFns, addOperationCreateHapgMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateHapg", params, optFns, c.addOperationCreateHapgMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type CreateHapgOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHapg{}, middleware.After)
 	if err != nil {
 		return err

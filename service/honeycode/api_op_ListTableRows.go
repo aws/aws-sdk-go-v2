@@ -19,7 +19,7 @@ func (c *Client) ListTableRows(ctx context.Context, params *ListTableRowsInput, 
 		params = &ListTableRowsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTableRows", params, optFns, addOperationListTableRowsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTableRows", params, optFns, c.addOperationListTableRowsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type ListTableRowsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTableRows{}, middleware.After)
 	if err != nil {
 		return err

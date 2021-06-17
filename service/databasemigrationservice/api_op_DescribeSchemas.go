@@ -17,7 +17,7 @@ func (c *Client) DescribeSchemas(ctx context.Context, params *DescribeSchemasInp
 		params = &DescribeSchemasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSchemas", params, optFns, addOperationDescribeSchemasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSchemas", params, optFns, c.addOperationDescribeSchemasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DescribeSchemasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSchemas{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) GetChangeLogs(ctx context.Context, params *GetChangeLogsInput, 
 		params = &GetChangeLogsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetChangeLogs", params, optFns, addOperationGetChangeLogsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetChangeLogs", params, optFns, c.addOperationGetChangeLogsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type GetChangeLogsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetChangeLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetChangeLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChangeLogs{}, middleware.After)
 	if err != nil {
 		return err

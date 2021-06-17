@@ -14,7 +14,7 @@ func (c *Client) XmlEmptyStrings(ctx context.Context, params *XmlEmptyStringsInp
 		params = &XmlEmptyStringsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "XmlEmptyStrings", params, optFns, addOperationXmlEmptyStringsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "XmlEmptyStrings", params, optFns, c.addOperationXmlEmptyStringsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ type XmlEmptyStringsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationXmlEmptyStringsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationXmlEmptyStringsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlEmptyStrings{}, middleware.After)
 	if err != nil {
 		return err

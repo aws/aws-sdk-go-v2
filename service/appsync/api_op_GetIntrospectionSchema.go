@@ -17,7 +17,7 @@ func (c *Client) GetIntrospectionSchema(ctx context.Context, params *GetIntrospe
 		params = &GetIntrospectionSchemaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetIntrospectionSchema", params, optFns, addOperationGetIntrospectionSchemaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetIntrospectionSchema", params, optFns, c.addOperationGetIntrospectionSchemaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type GetIntrospectionSchemaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetIntrospectionSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIntrospectionSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIntrospectionSchema{}, middleware.After)
 	if err != nil {
 		return err

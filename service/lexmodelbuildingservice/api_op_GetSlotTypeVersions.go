@@ -24,7 +24,7 @@ func (c *Client) GetSlotTypeVersions(ctx context.Context, params *GetSlotTypeVer
 		params = &GetSlotTypeVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSlotTypeVersions", params, optFns, addOperationGetSlotTypeVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSlotTypeVersions", params, optFns, c.addOperationGetSlotTypeVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type GetSlotTypeVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSlotTypeVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSlotTypeVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSlotTypeVersions{}, middleware.After)
 	if err != nil {
 		return err

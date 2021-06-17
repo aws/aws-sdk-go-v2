@@ -16,7 +16,7 @@ func (c *Client) ExtendLicenseConsumption(ctx context.Context, params *ExtendLic
 		params = &ExtendLicenseConsumptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExtendLicenseConsumption", params, optFns, addOperationExtendLicenseConsumptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExtendLicenseConsumption", params, optFns, c.addOperationExtendLicenseConsumptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ExtendLicenseConsumptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExtendLicenseConsumptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExtendLicenseConsumptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpExtendLicenseConsumption{}, middleware.After)
 	if err != nil {
 		return err

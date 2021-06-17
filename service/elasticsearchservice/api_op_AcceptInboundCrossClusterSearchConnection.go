@@ -18,7 +18,7 @@ func (c *Client) AcceptInboundCrossClusterSearchConnection(ctx context.Context, 
 		params = &AcceptInboundCrossClusterSearchConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcceptInboundCrossClusterSearchConnection", params, optFns, addOperationAcceptInboundCrossClusterSearchConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcceptInboundCrossClusterSearchConnection", params, optFns, c.addOperationAcceptInboundCrossClusterSearchConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type AcceptInboundCrossClusterSearchConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAcceptInboundCrossClusterSearchConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAcceptInboundCrossClusterSearchConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptInboundCrossClusterSearchConnection{}, middleware.After)
 	if err != nil {
 		return err

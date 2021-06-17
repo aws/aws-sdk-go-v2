@@ -17,7 +17,7 @@ func (c *Client) ListPermissions(ctx context.Context, params *ListPermissionsInp
 		params = &ListPermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPermissions", params, optFns, addOperationListPermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPermissions", params, optFns, c.addOperationListPermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListPermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPermissions{}, middleware.After)
 	if err != nil {
 		return err

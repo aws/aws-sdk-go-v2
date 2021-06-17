@@ -27,7 +27,7 @@ func (c *Client) CreatePortfolioShare(ctx context.Context, params *CreatePortfol
 		params = &CreatePortfolioShareInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePortfolioShare", params, optFns, addOperationCreatePortfolioShareMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePortfolioShare", params, optFns, c.addOperationCreatePortfolioShareMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type CreatePortfolioShareOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePortfolioShare{}, middleware.After)
 	if err != nil {
 		return err

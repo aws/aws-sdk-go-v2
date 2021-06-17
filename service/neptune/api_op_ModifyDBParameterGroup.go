@@ -31,7 +31,7 @@ func (c *Client) ModifyDBParameterGroup(ctx context.Context, params *ModifyDBPar
 		params = &ModifyDBParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyDBParameterGroup", params, optFns, addOperationModifyDBParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyDBParameterGroup", params, optFns, c.addOperationModifyDBParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type ModifyDBParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateInstanceProfile(ctx context.Context, params *UpdateInstan
 		params = &UpdateInstanceProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateInstanceProfile", params, optFns, addOperationUpdateInstanceProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateInstanceProfile", params, optFns, c.addOperationUpdateInstanceProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type UpdateInstanceProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateInstanceProfile{}, middleware.After)
 	if err != nil {
 		return err

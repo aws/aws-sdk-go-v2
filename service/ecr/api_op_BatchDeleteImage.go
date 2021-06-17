@@ -21,7 +21,7 @@ func (c *Client) BatchDeleteImage(ctx context.Context, params *BatchDeleteImageI
 		params = &BatchDeleteImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteImage", params, optFns, addOperationBatchDeleteImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteImage", params, optFns, c.addOperationBatchDeleteImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type BatchDeleteImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteImage{}, middleware.After)
 	if err != nil {
 		return err

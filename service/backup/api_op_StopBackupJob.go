@@ -16,7 +16,7 @@ func (c *Client) StopBackupJob(ctx context.Context, params *StopBackupJobInput, 
 		params = &StopBackupJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopBackupJob", params, optFns, addOperationStopBackupJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopBackupJob", params, optFns, c.addOperationStopBackupJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type StopBackupJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopBackupJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopBackupJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopBackupJob{}, middleware.After)
 	if err != nil {
 		return err

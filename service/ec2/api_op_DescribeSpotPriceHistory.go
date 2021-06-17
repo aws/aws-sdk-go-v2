@@ -25,7 +25,7 @@ func (c *Client) DescribeSpotPriceHistory(ctx context.Context, params *DescribeS
 		params = &DescribeSpotPriceHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSpotPriceHistory", params, optFns, addOperationDescribeSpotPriceHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSpotPriceHistory", params, optFns, c.addOperationDescribeSpotPriceHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type DescribeSpotPriceHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSpotPriceHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSpotPriceHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeSpotPriceHistory{}, middleware.After)
 	if err != nil {
 		return err

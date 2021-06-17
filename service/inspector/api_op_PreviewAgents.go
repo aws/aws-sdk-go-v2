@@ -19,7 +19,7 @@ func (c *Client) PreviewAgents(ctx context.Context, params *PreviewAgentsInput, 
 		params = &PreviewAgentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PreviewAgents", params, optFns, addOperationPreviewAgentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PreviewAgents", params, optFns, c.addOperationPreviewAgentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type PreviewAgentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPreviewAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPreviewAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPreviewAgents{}, middleware.After)
 	if err != nil {
 		return err

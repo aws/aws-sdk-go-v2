@@ -25,7 +25,7 @@ func (c *Client) AllocatePublicVirtualInterface(ctx context.Context, params *All
 		params = &AllocatePublicVirtualInterfaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AllocatePublicVirtualInterface", params, optFns, addOperationAllocatePublicVirtualInterfaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AllocatePublicVirtualInterface", params, optFns, c.addOperationAllocatePublicVirtualInterfaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -173,7 +173,7 @@ type AllocatePublicVirtualInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAllocatePublicVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAllocatePublicVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAllocatePublicVirtualInterface{}, middleware.After)
 	if err != nil {
 		return err

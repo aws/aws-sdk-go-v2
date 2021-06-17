@@ -18,7 +18,7 @@ func (c *Client) GetDeviceFleetReport(ctx context.Context, params *GetDeviceFlee
 		params = &GetDeviceFleetReportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDeviceFleetReport", params, optFns, addOperationGetDeviceFleetReportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDeviceFleetReport", params, optFns, c.addOperationGetDeviceFleetReportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type GetDeviceFleetReportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDeviceFleetReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDeviceFleetReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDeviceFleetReport{}, middleware.After)
 	if err != nil {
 		return err

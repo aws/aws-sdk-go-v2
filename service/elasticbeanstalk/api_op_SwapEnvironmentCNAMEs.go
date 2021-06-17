@@ -16,7 +16,7 @@ func (c *Client) SwapEnvironmentCNAMEs(ctx context.Context, params *SwapEnvironm
 		params = &SwapEnvironmentCNAMEsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SwapEnvironmentCNAMEs", params, optFns, addOperationSwapEnvironmentCNAMEsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SwapEnvironmentCNAMEs", params, optFns, c.addOperationSwapEnvironmentCNAMEsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type SwapEnvironmentCNAMEsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSwapEnvironmentCNAMEsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSwapEnvironmentCNAMEsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSwapEnvironmentCNAMEs{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) DescribeElasticLoadBalancers(ctx context.Context, params *Descr
 		params = &DescribeElasticLoadBalancersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeElasticLoadBalancers", params, optFns, addOperationDescribeElasticLoadBalancersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeElasticLoadBalancers", params, optFns, c.addOperationDescribeElasticLoadBalancersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeElasticLoadBalancersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeElasticLoadBalancersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeElasticLoadBalancersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeElasticLoadBalancers{}, middleware.After)
 	if err != nil {
 		return err

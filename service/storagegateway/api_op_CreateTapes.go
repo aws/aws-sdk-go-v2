@@ -20,7 +20,7 @@ func (c *Client) CreateTapes(ctx context.Context, params *CreateTapesInput, optF
 		params = &CreateTapesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTapes", params, optFns, addOperationCreateTapesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTapes", params, optFns, c.addOperationCreateTapesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +104,7 @@ type CreateTapesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTapesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTapesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTapes{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) CreateProfile(ctx context.Context, params *CreateProfileInput, 
 		params = &CreateProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateProfile", params, optFns, addOperationCreateProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateProfile", params, optFns, c.addOperationCreateProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type CreateProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProfile{}, middleware.After)
 	if err != nil {
 		return err

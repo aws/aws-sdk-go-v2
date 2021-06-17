@@ -21,7 +21,7 @@ func (c *Client) ValidatePolicy(ctx context.Context, params *ValidatePolicyInput
 		params = &ValidatePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ValidatePolicy", params, optFns, addOperationValidatePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ValidatePolicy", params, optFns, c.addOperationValidatePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type ValidatePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationValidatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationValidatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidatePolicy{}, middleware.After)
 	if err != nil {
 		return err

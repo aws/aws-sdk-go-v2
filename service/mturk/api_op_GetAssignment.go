@@ -17,7 +17,7 @@ func (c *Client) GetAssignment(ctx context.Context, params *GetAssignmentInput, 
 		params = &GetAssignmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAssignment", params, optFns, addOperationGetAssignmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAssignment", params, optFns, c.addOperationGetAssignmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetAssignmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAssignment{}, middleware.After)
 	if err != nil {
 		return err

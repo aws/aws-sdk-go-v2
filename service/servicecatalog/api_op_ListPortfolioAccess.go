@@ -20,7 +20,7 @@ func (c *Client) ListPortfolioAccess(ctx context.Context, params *ListPortfolioA
 		params = &ListPortfolioAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPortfolioAccess", params, optFns, addOperationListPortfolioAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPortfolioAccess", params, optFns, c.addOperationListPortfolioAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type ListPortfolioAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPortfolioAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPortfolioAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPortfolioAccess{}, middleware.After)
 	if err != nil {
 		return err

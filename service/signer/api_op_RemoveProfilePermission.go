@@ -16,7 +16,7 @@ func (c *Client) RemoveProfilePermission(ctx context.Context, params *RemoveProf
 		params = &RemoveProfilePermissionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveProfilePermission", params, optFns, addOperationRemoveProfilePermissionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveProfilePermission", params, optFns, c.addOperationRemoveProfilePermissionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type RemoveProfilePermissionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveProfilePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveProfilePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveProfilePermission{}, middleware.After)
 	if err != nil {
 		return err

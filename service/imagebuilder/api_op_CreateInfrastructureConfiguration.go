@@ -19,7 +19,7 @@ func (c *Client) CreateInfrastructureConfiguration(ctx context.Context, params *
 		params = &CreateInfrastructureConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateInfrastructureConfiguration", params, optFns, addOperationCreateInfrastructureConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateInfrastructureConfiguration", params, optFns, c.addOperationCreateInfrastructureConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ type CreateInfrastructureConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateInfrastructureConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateInfrastructureConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInfrastructureConfiguration{}, middleware.After)
 	if err != nil {
 		return err

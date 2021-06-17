@@ -28,7 +28,7 @@ func (c *Client) CreateNFSFileShare(ctx context.Context, params *CreateNFSFileSh
 		params = &CreateNFSFileShareInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateNFSFileShare", params, optFns, addOperationCreateNFSFileShareMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateNFSFileShare", params, optFns, c.addOperationCreateNFSFileShareMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -157,7 +157,7 @@ type CreateNFSFileShareOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateNFSFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateNFSFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateNFSFileShare{}, middleware.After)
 	if err != nil {
 		return err

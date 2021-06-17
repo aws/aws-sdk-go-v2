@@ -22,7 +22,7 @@ func (c *Client) CreateDocumentClassifier(ctx context.Context, params *CreateDoc
 		params = &CreateDocumentClassifierInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDocumentClassifier", params, optFns, addOperationCreateDocumentClassifierMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDocumentClassifier", params, optFns, c.addOperationCreateDocumentClassifierMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +118,7 @@ type CreateDocumentClassifierOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDocumentClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDocumentClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDocumentClassifier{}, middleware.After)
 	if err != nil {
 		return err

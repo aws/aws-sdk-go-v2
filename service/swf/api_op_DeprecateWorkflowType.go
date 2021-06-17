@@ -47,7 +47,7 @@ func (c *Client) DeprecateWorkflowType(ctx context.Context, params *DeprecateWor
 		params = &DeprecateWorkflowTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeprecateWorkflowType", params, optFns, addOperationDeprecateWorkflowTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeprecateWorkflowType", params, optFns, c.addOperationDeprecateWorkflowTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DeprecateWorkflowTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeprecateWorkflowTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeprecateWorkflowTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeprecateWorkflowType{}, middleware.After)
 	if err != nil {
 		return err

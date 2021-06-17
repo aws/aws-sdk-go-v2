@@ -16,7 +16,7 @@ func (c *Client) GetWorldTemplateBody(ctx context.Context, params *GetWorldTempl
 		params = &GetWorldTemplateBodyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetWorldTemplateBody", params, optFns, addOperationGetWorldTemplateBodyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetWorldTemplateBody", params, optFns, c.addOperationGetWorldTemplateBodyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetWorldTemplateBodyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetWorldTemplateBodyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetWorldTemplateBodyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorldTemplateBody{}, middleware.After)
 	if err != nil {
 		return err

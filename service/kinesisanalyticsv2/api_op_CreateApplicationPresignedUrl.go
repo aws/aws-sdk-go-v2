@@ -28,7 +28,7 @@ func (c *Client) CreateApplicationPresignedUrl(ctx context.Context, params *Crea
 		params = &CreateApplicationPresignedUrlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateApplicationPresignedUrl", params, optFns, addOperationCreateApplicationPresignedUrlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateApplicationPresignedUrl", params, optFns, c.addOperationCreateApplicationPresignedUrlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type CreateApplicationPresignedUrlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateApplicationPresignedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateApplicationPresignedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateApplicationPresignedUrl{}, middleware.After)
 	if err != nil {
 		return err

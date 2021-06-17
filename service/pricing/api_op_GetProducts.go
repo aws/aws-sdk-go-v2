@@ -18,7 +18,7 @@ func (c *Client) GetProducts(ctx context.Context, params *GetProductsInput, optF
 		params = &GetProductsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetProducts", params, optFns, addOperationGetProductsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetProducts", params, optFns, c.addOperationGetProductsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type GetProductsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetProducts{}, middleware.After)
 	if err != nil {
 		return err

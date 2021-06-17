@@ -18,7 +18,7 @@ func (c *Client) ListIndices(ctx context.Context, params *ListIndicesInput, optF
 		params = &ListIndicesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListIndices", params, optFns, addOperationListIndicesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListIndices", params, optFns, c.addOperationListIndicesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListIndicesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListIndicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListIndicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListIndices{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CreateComputer(ctx context.Context, params *CreateComputerInput
 		params = &CreateComputerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateComputer", params, optFns, addOperationCreateComputerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateComputer", params, optFns, c.addOperationCreateComputerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type CreateComputerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateComputerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateComputerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateComputer{}, middleware.After)
 	if err != nil {
 		return err

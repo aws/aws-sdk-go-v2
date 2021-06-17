@@ -17,7 +17,7 @@ func (c *Client) BatchDeleteTableVersion(ctx context.Context, params *BatchDelet
 		params = &BatchDeleteTableVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteTableVersion", params, optFns, addOperationBatchDeleteTableVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteTableVersion", params, optFns, c.addOperationBatchDeleteTableVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type BatchDeleteTableVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteTableVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteTableVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteTableVersion{}, middleware.After)
 	if err != nil {
 		return err

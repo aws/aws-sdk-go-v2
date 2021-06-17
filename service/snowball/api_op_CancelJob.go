@@ -18,7 +18,7 @@ func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns .
 		params = &CancelJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelJob", params, optFns, addOperationCancelJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelJob", params, optFns, c.addOperationCancelJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type CancelJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelJob{}, middleware.After)
 	if err != nil {
 		return err

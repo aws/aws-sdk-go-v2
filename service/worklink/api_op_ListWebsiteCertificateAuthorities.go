@@ -19,7 +19,7 @@ func (c *Client) ListWebsiteCertificateAuthorities(ctx context.Context, params *
 		params = &ListWebsiteCertificateAuthoritiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListWebsiteCertificateAuthorities", params, optFns, addOperationListWebsiteCertificateAuthoritiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListWebsiteCertificateAuthorities", params, optFns, c.addOperationListWebsiteCertificateAuthoritiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListWebsiteCertificateAuthoritiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListWebsiteCertificateAuthoritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListWebsiteCertificateAuthoritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWebsiteCertificateAuthorities{}, middleware.After)
 	if err != nil {
 		return err

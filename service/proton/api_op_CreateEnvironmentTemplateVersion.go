@@ -20,7 +20,7 @@ func (c *Client) CreateEnvironmentTemplateVersion(ctx context.Context, params *C
 		params = &CreateEnvironmentTemplateVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateEnvironmentTemplateVersion", params, optFns, addOperationCreateEnvironmentTemplateVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateEnvironmentTemplateVersion", params, optFns, c.addOperationCreateEnvironmentTemplateVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type CreateEnvironmentTemplateVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateEnvironmentTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateEnvironmentTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateEnvironmentTemplateVersion{}, middleware.After)
 	if err != nil {
 		return err

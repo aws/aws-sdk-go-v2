@@ -21,7 +21,7 @@ func (c *Client) DeleteStreamingSession(ctx context.Context, params *DeleteStrea
 		params = &DeleteStreamingSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteStreamingSession", params, optFns, addOperationDeleteStreamingSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteStreamingSession", params, optFns, c.addOperationDeleteStreamingSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DeleteStreamingSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteStreamingSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteStreamingSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteStreamingSession{}, middleware.After)
 	if err != nil {
 		return err

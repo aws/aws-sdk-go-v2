@@ -18,7 +18,7 @@ func (c *Client) CancelImageCreation(ctx context.Context, params *CancelImageCre
 		params = &CancelImageCreationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelImageCreation", params, optFns, addOperationCancelImageCreationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelImageCreation", params, optFns, c.addOperationCancelImageCreationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type CancelImageCreationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelImageCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelImageCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelImageCreation{}, middleware.After)
 	if err != nil {
 		return err

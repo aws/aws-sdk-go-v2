@@ -17,7 +17,7 @@ func (c *Client) DeleteBudgetAction(ctx context.Context, params *DeleteBudgetAct
 		params = &DeleteBudgetActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBudgetAction", params, optFns, addOperationDeleteBudgetActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBudgetAction", params, optFns, c.addOperationDeleteBudgetActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DeleteBudgetActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBudgetActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBudgetActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBudgetAction{}, middleware.After)
 	if err != nil {
 		return err

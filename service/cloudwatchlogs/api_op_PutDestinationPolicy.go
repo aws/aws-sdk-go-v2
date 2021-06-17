@@ -23,7 +23,7 @@ func (c *Client) PutDestinationPolicy(ctx context.Context, params *PutDestinatio
 		params = &PutDestinationPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutDestinationPolicy", params, optFns, addOperationPutDestinationPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutDestinationPolicy", params, optFns, c.addOperationPutDestinationPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type PutDestinationPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutDestinationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutDestinationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutDestinationPolicy{}, middleware.After)
 	if err != nil {
 		return err

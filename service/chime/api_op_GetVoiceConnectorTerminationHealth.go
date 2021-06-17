@@ -18,7 +18,7 @@ func (c *Client) GetVoiceConnectorTerminationHealth(ctx context.Context, params 
 		params = &GetVoiceConnectorTerminationHealthInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetVoiceConnectorTerminationHealth", params, optFns, addOperationGetVoiceConnectorTerminationHealthMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetVoiceConnectorTerminationHealth", params, optFns, c.addOperationGetVoiceConnectorTerminationHealthMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetVoiceConnectorTerminationHealthOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetVoiceConnectorTerminationHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetVoiceConnectorTerminationHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVoiceConnectorTerminationHealth{}, middleware.After)
 	if err != nil {
 		return err

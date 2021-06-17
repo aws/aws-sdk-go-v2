@@ -21,7 +21,7 @@ func (c *Client) UpdateLayer(ctx context.Context, params *UpdateLayerInput, optF
 		params = &UpdateLayerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLayer", params, optFns, addOperationUpdateLayerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLayer", params, optFns, c.addOperationUpdateLayerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ type UpdateLayerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLayerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLayerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLayer{}, middleware.After)
 	if err != nil {
 		return err

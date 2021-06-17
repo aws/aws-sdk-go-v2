@@ -19,7 +19,7 @@ func (c *Client) DeleteScalingPlan(ctx context.Context, params *DeleteScalingPla
 		params = &DeleteScalingPlanInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteScalingPlan", params, optFns, addOperationDeleteScalingPlanMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteScalingPlan", params, optFns, c.addOperationDeleteScalingPlanMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteScalingPlanOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteScalingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteScalingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteScalingPlan{}, middleware.After)
 	if err != nil {
 		return err

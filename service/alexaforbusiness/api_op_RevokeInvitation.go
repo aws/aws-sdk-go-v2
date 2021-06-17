@@ -16,7 +16,7 @@ func (c *Client) RevokeInvitation(ctx context.Context, params *RevokeInvitationI
 		params = &RevokeInvitationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokeInvitation", params, optFns, addOperationRevokeInvitationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeInvitation", params, optFns, c.addOperationRevokeInvitationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type RevokeInvitationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokeInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokeInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRevokeInvitation{}, middleware.After)
 	if err != nil {
 		return err

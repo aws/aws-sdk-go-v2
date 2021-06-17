@@ -17,7 +17,7 @@ func (c *Client) GetCoipPoolUsage(ctx context.Context, params *GetCoipPoolUsageI
 		params = &GetCoipPoolUsageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCoipPoolUsage", params, optFns, addOperationGetCoipPoolUsageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCoipPoolUsage", params, optFns, c.addOperationGetCoipPoolUsageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type GetCoipPoolUsageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCoipPoolUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCoipPoolUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpGetCoipPoolUsage{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) DescribeDimensionKeys(ctx context.Context, params *DescribeDime
 		params = &DescribeDimensionKeysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDimensionKeys", params, optFns, addOperationDescribeDimensionKeysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDimensionKeys", params, optFns, c.addOperationDescribeDimensionKeysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -163,7 +163,7 @@ type DescribeDimensionKeysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDimensionKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDimensionKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDimensionKeys{}, middleware.After)
 	if err != nil {
 		return err

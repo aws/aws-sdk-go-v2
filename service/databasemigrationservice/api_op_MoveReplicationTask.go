@@ -20,7 +20,7 @@ func (c *Client) MoveReplicationTask(ctx context.Context, params *MoveReplicatio
 		params = &MoveReplicationTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MoveReplicationTask", params, optFns, addOperationMoveReplicationTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MoveReplicationTask", params, optFns, c.addOperationMoveReplicationTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type MoveReplicationTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMoveReplicationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMoveReplicationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMoveReplicationTask{}, middleware.After)
 	if err != nil {
 		return err

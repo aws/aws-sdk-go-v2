@@ -17,7 +17,7 @@ func (c *Client) ModifyClientProperties(ctx context.Context, params *ModifyClien
 		params = &ModifyClientPropertiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyClientProperties", params, optFns, addOperationModifyClientPropertiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyClientProperties", params, optFns, c.addOperationModifyClientPropertiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type ModifyClientPropertiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyClientPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyClientPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyClientProperties{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CreateImportJob(ctx context.Context, params *CreateImportJobInp
 		params = &CreateImportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateImportJob", params, optFns, addOperationCreateImportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateImportJob", params, optFns, c.addOperationCreateImportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type CreateImportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateImportJob{}, middleware.After)
 	if err != nil {
 		return err

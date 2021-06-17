@@ -22,7 +22,7 @@ func (c *Client) ListSubscriptions(ctx context.Context, params *ListSubscription
 		params = &ListSubscriptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSubscriptions", params, optFns, addOperationListSubscriptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSubscriptions", params, optFns, c.addOperationListSubscriptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListSubscriptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListSubscriptions{}, middleware.After)
 	if err != nil {
 		return err

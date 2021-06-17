@@ -18,7 +18,7 @@ func (c *Client) DescribeStudio(ctx context.Context, params *DescribeStudioInput
 		params = &DescribeStudioInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeStudio", params, optFns, addOperationDescribeStudioMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeStudio", params, optFns, c.addOperationDescribeStudioMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DescribeStudioOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeStudioMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeStudioMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStudio{}, middleware.After)
 	if err != nil {
 		return err

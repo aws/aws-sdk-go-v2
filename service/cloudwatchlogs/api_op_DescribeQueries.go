@@ -20,7 +20,7 @@ func (c *Client) DescribeQueries(ctx context.Context, params *DescribeQueriesInp
 		params = &DescribeQueriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeQueries", params, optFns, addOperationDescribeQueriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeQueries", params, optFns, c.addOperationDescribeQueriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DescribeQueriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeQueries{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) BatchGrantPermissions(ctx context.Context, params *BatchGrantPe
 		params = &BatchGrantPermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGrantPermissions", params, optFns, addOperationBatchGrantPermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGrantPermissions", params, optFns, c.addOperationBatchGrantPermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type BatchGrantPermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGrantPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGrantPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGrantPermissions{}, middleware.After)
 	if err != nil {
 		return err

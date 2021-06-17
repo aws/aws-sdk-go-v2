@@ -35,7 +35,7 @@ func (c *Client) DeleteByteMatchSet(ctx context.Context, params *DeleteByteMatch
 		params = &DeleteByteMatchSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteByteMatchSet", params, optFns, addOperationDeleteByteMatchSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteByteMatchSet", params, optFns, c.addOperationDeleteByteMatchSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DeleteByteMatchSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteByteMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteByteMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteByteMatchSet{}, middleware.After)
 	if err != nil {
 		return err

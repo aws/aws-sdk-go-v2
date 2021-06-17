@@ -17,7 +17,7 @@ func (c *Client) UpdateInsight(ctx context.Context, params *UpdateInsightInput, 
 		params = &UpdateInsightInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateInsight", params, optFns, addOperationUpdateInsightMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateInsight", params, optFns, c.addOperationUpdateInsightMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type UpdateInsightOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateInsight{}, middleware.After)
 	if err != nil {
 		return err

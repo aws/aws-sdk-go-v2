@@ -16,7 +16,7 @@ func (c *Client) ModifyDBClusterEndpoint(ctx context.Context, params *ModifyDBCl
 		params = &ModifyDBClusterEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyDBClusterEndpoint", params, optFns, addOperationModifyDBClusterEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyDBClusterEndpoint", params, optFns, c.addOperationModifyDBClusterEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +105,7 @@ type ModifyDBClusterEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyDBClusterEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyDBClusterEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBClusterEndpoint{}, middleware.After)
 	if err != nil {
 		return err

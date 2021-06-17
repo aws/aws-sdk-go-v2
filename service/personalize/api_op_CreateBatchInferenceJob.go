@@ -19,7 +19,7 @@ func (c *Client) CreateBatchInferenceJob(ctx context.Context, params *CreateBatc
 		params = &CreateBatchInferenceJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateBatchInferenceJob", params, optFns, addOperationCreateBatchInferenceJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBatchInferenceJob", params, optFns, c.addOperationCreateBatchInferenceJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type CreateBatchInferenceJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateBatchInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateBatchInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBatchInferenceJob{}, middleware.After)
 	if err != nil {
 		return err

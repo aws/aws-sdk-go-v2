@@ -32,7 +32,7 @@ func (c *Client) ProvisionByoipCidr(ctx context.Context, params *ProvisionByoipC
 		params = &ProvisionByoipCidrInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ProvisionByoipCidr", params, optFns, addOperationProvisionByoipCidrMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ProvisionByoipCidr", params, optFns, c.addOperationProvisionByoipCidrMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type ProvisionByoipCidrOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationProvisionByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationProvisionByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpProvisionByoipCidr{}, middleware.After)
 	if err != nil {
 		return err

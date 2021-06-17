@@ -4,9 +4,11 @@ package dynamodb
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,7 +38,7 @@ func (c *Client) UpdateTable(ctx context.Context, params *UpdateTableInput, optF
 		params = &UpdateTableInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateTable", params, optFns, addOperationUpdateTableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateTable", params, optFns, c.addOperationUpdateTableMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -124,7 +126,7 @@ type UpdateTableOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateTable{}, middleware.After)
 	if err != nil {
 		return err
@@ -169,6 +171,9 @@ func addOperationUpdateTableMiddlewares(stack *middleware.Stack, options Options
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addOpUpdateTableDiscoverEndpointMiddleware(stack, options, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateTableValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -191,6 +196,46 @@ func addOperationUpdateTableMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+func addOpUpdateTableDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
+	return stack.Serialize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
+		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
+			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
+				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
+				opt.Logger = o.Logger
+			},
+		},
+		DiscoverOperation:            c.fetchOpUpdateTableDiscoverEndpoint,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
+		EndpointDiscoveryRequired:    false,
+	}, "ResolveEndpoint", middleware.After)
+}
+
+func (c *Client) fetchOpUpdateTableDiscoverEndpoint(ctx context.Context, input interface{}, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+	in, ok := input.(*UpdateTableInput)
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
+	}
+	_ = in
+
+	identifierMap := make(map[string]string, 0)
+
+	key := fmt.Sprintf("DynamoDB.%v", identifierMap)
+
+	if v, ok := c.endpointCache.Get(key); ok {
+		return v, nil
+	}
+
+	discoveryOperationInput := &DescribeEndpointsInput{}
+
+	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
+	for _, fn := range optFns {
+		fn(&opt)
+	}
+
+	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, key, opt)
+	return internalEndpointDiscovery.WeightedAddress{}, nil
 }
 
 func newServiceMetadataMiddleware_opUpdateTable(region string) *awsmiddleware.RegisterServiceMetadata {

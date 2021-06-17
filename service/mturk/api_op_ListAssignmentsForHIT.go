@@ -31,7 +31,7 @@ func (c *Client) ListAssignmentsForHIT(ctx context.Context, params *ListAssignme
 		params = &ListAssignmentsForHITInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAssignmentsForHIT", params, optFns, addOperationListAssignmentsForHITMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAssignmentsForHIT", params, optFns, c.addOperationListAssignmentsForHITMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type ListAssignmentsForHITOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAssignmentsForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAssignmentsForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAssignmentsForHIT{}, middleware.After)
 	if err != nil {
 		return err

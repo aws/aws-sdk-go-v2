@@ -17,7 +17,7 @@ func (c *Client) ListGroupCertificateAuthorities(ctx context.Context, params *Li
 		params = &ListGroupCertificateAuthoritiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListGroupCertificateAuthorities", params, optFns, addOperationListGroupCertificateAuthoritiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListGroupCertificateAuthorities", params, optFns, c.addOperationListGroupCertificateAuthoritiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type ListGroupCertificateAuthoritiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListGroupCertificateAuthoritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListGroupCertificateAuthoritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroupCertificateAuthorities{}, middleware.After)
 	if err != nil {
 		return err

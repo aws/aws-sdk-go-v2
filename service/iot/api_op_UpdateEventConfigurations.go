@@ -17,7 +17,7 @@ func (c *Client) UpdateEventConfigurations(ctx context.Context, params *UpdateEv
 		params = &UpdateEventConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateEventConfigurations", params, optFns, addOperationUpdateEventConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateEventConfigurations", params, optFns, c.addOperationUpdateEventConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ type UpdateEventConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateEventConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateEventConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEventConfigurations{}, middleware.After)
 	if err != nil {
 		return err

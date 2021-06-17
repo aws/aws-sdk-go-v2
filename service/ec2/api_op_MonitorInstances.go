@@ -20,7 +20,7 @@ func (c *Client) MonitorInstances(ctx context.Context, params *MonitorInstancesI
 		params = &MonitorInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MonitorInstances", params, optFns, addOperationMonitorInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MonitorInstances", params, optFns, c.addOperationMonitorInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type MonitorInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMonitorInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMonitorInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpMonitorInstances{}, middleware.After)
 	if err != nil {
 		return err

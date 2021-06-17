@@ -17,7 +17,7 @@ func (c *Client) CreateTagOption(ctx context.Context, params *CreateTagOptionInp
 		params = &CreateTagOptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTagOption", params, optFns, addOperationCreateTagOptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTagOption", params, optFns, c.addOperationCreateTagOptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type CreateTagOptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTagOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTagOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTagOption{}, middleware.After)
 	if err != nil {
 		return err

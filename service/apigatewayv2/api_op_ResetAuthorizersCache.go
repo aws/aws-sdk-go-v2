@@ -16,7 +16,7 @@ func (c *Client) ResetAuthorizersCache(ctx context.Context, params *ResetAuthori
 		params = &ResetAuthorizersCacheInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetAuthorizersCache", params, optFns, addOperationResetAuthorizersCacheMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetAuthorizersCache", params, optFns, c.addOperationResetAuthorizersCacheMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type ResetAuthorizersCacheOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetAuthorizersCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetAuthorizersCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetAuthorizersCache{}, middleware.After)
 	if err != nil {
 		return err

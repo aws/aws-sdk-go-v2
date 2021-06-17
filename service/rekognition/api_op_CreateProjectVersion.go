@@ -25,7 +25,7 @@ func (c *Client) CreateProjectVersion(ctx context.Context, params *CreateProject
 		params = &CreateProjectVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateProjectVersion", params, optFns, addOperationCreateProjectVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateProjectVersion", params, optFns, c.addOperationCreateProjectVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type CreateProjectVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProjectVersion{}, middleware.After)
 	if err != nil {
 		return err

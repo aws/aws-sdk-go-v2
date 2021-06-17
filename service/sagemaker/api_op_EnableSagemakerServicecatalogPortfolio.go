@@ -17,7 +17,7 @@ func (c *Client) EnableSagemakerServicecatalogPortfolio(ctx context.Context, par
 		params = &EnableSagemakerServicecatalogPortfolioInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableSagemakerServicecatalogPortfolio", params, optFns, addOperationEnableSagemakerServicecatalogPortfolioMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableSagemakerServicecatalogPortfolio", params, optFns, c.addOperationEnableSagemakerServicecatalogPortfolioMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ type EnableSagemakerServicecatalogPortfolioOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableSagemakerServicecatalogPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableSagemakerServicecatalogPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableSagemakerServicecatalogPortfolio{}, middleware.After)
 	if err != nil {
 		return err

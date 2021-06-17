@@ -19,7 +19,7 @@ func (c *Client) ListWorkerBlocks(ctx context.Context, params *ListWorkerBlocksI
 		params = &ListWorkerBlocksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListWorkerBlocks", params, optFns, addOperationListWorkerBlocksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListWorkerBlocks", params, optFns, c.addOperationListWorkerBlocksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListWorkerBlocksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListWorkerBlocksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListWorkerBlocksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListWorkerBlocks{}, middleware.After)
 	if err != nil {
 		return err

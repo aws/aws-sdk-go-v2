@@ -22,7 +22,7 @@ func (c *Client) DeleteFileSystemPolicy(ctx context.Context, params *DeleteFileS
 		params = &DeleteFileSystemPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFileSystemPolicy", params, optFns, addOperationDeleteFileSystemPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFileSystemPolicy", params, optFns, c.addOperationDeleteFileSystemPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteFileSystemPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFileSystemPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFileSystemPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFileSystemPolicy{}, middleware.After)
 	if err != nil {
 		return err

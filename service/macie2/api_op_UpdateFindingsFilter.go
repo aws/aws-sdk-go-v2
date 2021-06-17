@@ -18,7 +18,7 @@ func (c *Client) UpdateFindingsFilter(ctx context.Context, params *UpdateFinding
 		params = &UpdateFindingsFilterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFindingsFilter", params, optFns, addOperationUpdateFindingsFilterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFindingsFilter", params, optFns, c.addOperationUpdateFindingsFilterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type UpdateFindingsFilterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFindingsFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFindingsFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFindingsFilter{}, middleware.After)
 	if err != nil {
 		return err

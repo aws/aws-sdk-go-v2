@@ -23,7 +23,7 @@ func (c *Client) GetAttributeValues(ctx context.Context, params *GetAttributeVal
 		params = &GetAttributeValuesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAttributeValues", params, optFns, addOperationGetAttributeValuesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAttributeValues", params, optFns, c.addOperationGetAttributeValuesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type GetAttributeValuesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAttributeValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAttributeValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAttributeValues{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) ModifyBackupAttributes(ctx context.Context, params *ModifyBacku
 		params = &ModifyBackupAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyBackupAttributes", params, optFns, addOperationModifyBackupAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyBackupAttributes", params, optFns, c.addOperationModifyBackupAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ModifyBackupAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyBackupAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyBackupAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyBackupAttributes{}, middleware.After)
 	if err != nil {
 		return err

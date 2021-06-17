@@ -23,7 +23,7 @@ func (c *Client) RegisterCACertificate(ctx context.Context, params *RegisterCACe
 		params = &RegisterCACertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterCACertificate", params, optFns, addOperationRegisterCACertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterCACertificate", params, optFns, c.addOperationRegisterCACertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type RegisterCACertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterCACertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterCACertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterCACertificate{}, middleware.After)
 	if err != nil {
 		return err

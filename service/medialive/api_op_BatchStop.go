@@ -17,7 +17,7 @@ func (c *Client) BatchStop(ctx context.Context, params *BatchStopInput, optFns .
 		params = &BatchStopInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchStop", params, optFns, addOperationBatchStopMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchStop", params, optFns, c.addOperationBatchStopMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type BatchStopOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchStopMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchStopMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchStop{}, middleware.After)
 	if err != nil {
 		return err

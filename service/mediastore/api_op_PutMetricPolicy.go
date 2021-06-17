@@ -19,7 +19,7 @@ func (c *Client) PutMetricPolicy(ctx context.Context, params *PutMetricPolicyInp
 		params = &PutMetricPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutMetricPolicy", params, optFns, addOperationPutMetricPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutMetricPolicy", params, optFns, c.addOperationPutMetricPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type PutMetricPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutMetricPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutMetricPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutMetricPolicy{}, middleware.After)
 	if err != nil {
 		return err

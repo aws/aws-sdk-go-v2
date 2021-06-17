@@ -25,7 +25,7 @@ func (c *Client) CreateStorediSCSIVolume(ctx context.Context, params *CreateStor
 		params = &CreateStorediSCSIVolumeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateStorediSCSIVolume", params, optFns, addOperationCreateStorediSCSIVolumeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateStorediSCSIVolume", params, optFns, c.addOperationCreateStorediSCSIVolumeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ type CreateStorediSCSIVolumeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateStorediSCSIVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateStorediSCSIVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateStorediSCSIVolume{}, middleware.After)
 	if err != nil {
 		return err

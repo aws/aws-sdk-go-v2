@@ -24,7 +24,7 @@ func (c *Client) SetVaultAccessPolicy(ctx context.Context, params *SetVaultAcces
 		params = &SetVaultAccessPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetVaultAccessPolicy", params, optFns, addOperationSetVaultAccessPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetVaultAccessPolicy", params, optFns, c.addOperationSetVaultAccessPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type SetVaultAccessPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetVaultAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetVaultAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSetVaultAccessPolicy{}, middleware.After)
 	if err != nil {
 		return err

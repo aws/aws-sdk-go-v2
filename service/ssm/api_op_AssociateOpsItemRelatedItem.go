@@ -18,7 +18,7 @@ func (c *Client) AssociateOpsItemRelatedItem(ctx context.Context, params *Associ
 		params = &AssociateOpsItemRelatedItemInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateOpsItemRelatedItem", params, optFns, addOperationAssociateOpsItemRelatedItemMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateOpsItemRelatedItem", params, optFns, c.addOperationAssociateOpsItemRelatedItemMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type AssociateOpsItemRelatedItemOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateOpsItemRelatedItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateOpsItemRelatedItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateOpsItemRelatedItem{}, middleware.After)
 	if err != nil {
 		return err

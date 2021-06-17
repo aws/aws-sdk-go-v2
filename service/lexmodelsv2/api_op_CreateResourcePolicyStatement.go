@@ -20,7 +20,7 @@ func (c *Client) CreateResourcePolicyStatement(ctx context.Context, params *Crea
 		params = &CreateResourcePolicyStatementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateResourcePolicyStatement", params, optFns, addOperationCreateResourcePolicyStatementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateResourcePolicyStatement", params, optFns, c.addOperationCreateResourcePolicyStatementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +96,7 @@ type CreateResourcePolicyStatementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateResourcePolicyStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateResourcePolicyStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateResourcePolicyStatement{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) ListLoggingConfigurations(ctx context.Context, params *ListLogg
 		params = &ListLoggingConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLoggingConfigurations", params, optFns, addOperationListLoggingConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLoggingConfigurations", params, optFns, c.addOperationListLoggingConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ListLoggingConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLoggingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLoggingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLoggingConfigurations{}, middleware.After)
 	if err != nil {
 		return err

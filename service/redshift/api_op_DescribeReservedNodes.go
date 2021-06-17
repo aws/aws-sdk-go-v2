@@ -18,7 +18,7 @@ func (c *Client) DescribeReservedNodes(ctx context.Context, params *DescribeRese
 		params = &DescribeReservedNodesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeReservedNodes", params, optFns, addOperationDescribeReservedNodesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeReservedNodes", params, optFns, c.addOperationDescribeReservedNodesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DescribeReservedNodesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeReservedNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeReservedNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeReservedNodes{}, middleware.After)
 	if err != nil {
 		return err

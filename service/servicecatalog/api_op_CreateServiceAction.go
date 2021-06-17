@@ -18,7 +18,7 @@ func (c *Client) CreateServiceAction(ctx context.Context, params *CreateServiceA
 		params = &CreateServiceActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateServiceAction", params, optFns, addOperationCreateServiceActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateServiceAction", params, optFns, c.addOperationCreateServiceActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type CreateServiceActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateServiceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateServiceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateServiceAction{}, middleware.After)
 	if err != nil {
 		return err

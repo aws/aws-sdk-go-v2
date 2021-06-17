@@ -17,7 +17,7 @@ func (c *Client) DeactivateUser(ctx context.Context, params *DeactivateUserInput
 		params = &DeactivateUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeactivateUser", params, optFns, addOperationDeactivateUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeactivateUser", params, optFns, c.addOperationDeactivateUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeactivateUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeactivateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeactivateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeactivateUser{}, middleware.After)
 	if err != nil {
 		return err

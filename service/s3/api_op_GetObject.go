@@ -139,7 +139,7 @@ func (c *Client) GetObject(ctx context.Context, params *GetObjectInput, optFns .
 		params = &GetObjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetObject", params, optFns, addOperationGetObjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetObject", params, optFns, c.addOperationGetObjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -383,7 +383,7 @@ type GetObjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetObject{}, middleware.After)
 	if err != nil {
 		return err
@@ -499,7 +499,7 @@ func (c *PresignClient) PresignGetObject(ctx context.Context, params *GetObjectI
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
 	result, _, err := c.client.invokeOperation(ctx, "GetObject", params, clientOptFns,
-		addOperationGetObjectMiddlewares,
+		c.client.addOperationGetObjectMiddlewares,
 		presignConverter(options).convertToPresignMiddleware,
 		addGetObjectPayloadAsUnsigned,
 	)

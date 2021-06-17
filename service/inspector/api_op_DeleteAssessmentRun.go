@@ -16,7 +16,7 @@ func (c *Client) DeleteAssessmentRun(ctx context.Context, params *DeleteAssessme
 		params = &DeleteAssessmentRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAssessmentRun", params, optFns, addOperationDeleteAssessmentRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAssessmentRun", params, optFns, c.addOperationDeleteAssessmentRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteAssessmentRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAssessmentRun{}, middleware.After)
 	if err != nil {
 		return err

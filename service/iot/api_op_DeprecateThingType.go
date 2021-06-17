@@ -17,7 +17,7 @@ func (c *Client) DeprecateThingType(ctx context.Context, params *DeprecateThingT
 		params = &DeprecateThingTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeprecateThingType", params, optFns, addOperationDeprecateThingTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeprecateThingType", params, optFns, c.addOperationDeprecateThingTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeprecateThingTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeprecateThingTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeprecateThingTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeprecateThingType{}, middleware.After)
 	if err != nil {
 		return err

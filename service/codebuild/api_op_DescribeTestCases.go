@@ -18,7 +18,7 @@ func (c *Client) DescribeTestCases(ctx context.Context, params *DescribeTestCase
 		params = &DescribeTestCasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTestCases", params, optFns, addOperationDescribeTestCasesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTestCases", params, optFns, c.addOperationDescribeTestCasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DescribeTestCasesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTestCasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTestCasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTestCases{}, middleware.After)
 	if err != nil {
 		return err

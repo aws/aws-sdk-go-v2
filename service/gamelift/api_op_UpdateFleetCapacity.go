@@ -57,7 +57,7 @@ func (c *Client) UpdateFleetCapacity(ctx context.Context, params *UpdateFleetCap
 		params = &UpdateFleetCapacityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFleetCapacity", params, optFns, addOperationUpdateFleetCapacityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFleetCapacity", params, optFns, c.addOperationUpdateFleetCapacityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ type UpdateFleetCapacityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFleetCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFleetCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateFleetCapacity{}, middleware.After)
 	if err != nil {
 		return err

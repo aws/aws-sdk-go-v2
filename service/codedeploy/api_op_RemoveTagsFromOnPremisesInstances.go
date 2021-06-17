@@ -17,7 +17,7 @@ func (c *Client) RemoveTagsFromOnPremisesInstances(ctx context.Context, params *
 		params = &RemoveTagsFromOnPremisesInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveTagsFromOnPremisesInstances", params, optFns, addOperationRemoveTagsFromOnPremisesInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveTagsFromOnPremisesInstances", params, optFns, c.addOperationRemoveTagsFromOnPremisesInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type RemoveTagsFromOnPremisesInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveTagsFromOnPremisesInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveTagsFromOnPremisesInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveTagsFromOnPremisesInstances{}, middleware.After)
 	if err != nil {
 		return err

@@ -45,7 +45,7 @@ func (c *Client) CreateGameSessionQueue(ctx context.Context, params *CreateGameS
 		params = &CreateGameSessionQueueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateGameSessionQueue", params, optFns, addOperationCreateGameSessionQueueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateGameSessionQueue", params, optFns, c.addOperationCreateGameSessionQueueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -124,7 +124,7 @@ type CreateGameSessionQueueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateGameSessionQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateGameSessionQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGameSessionQueue{}, middleware.After)
 	if err != nil {
 		return err

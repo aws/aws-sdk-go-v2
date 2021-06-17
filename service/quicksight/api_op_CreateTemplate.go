@@ -24,7 +24,7 @@ func (c *Client) CreateTemplate(ctx context.Context, params *CreateTemplateInput
 		params = &CreateTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTemplate", params, optFns, addOperationCreateTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTemplate", params, optFns, c.addOperationCreateTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ type CreateTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTemplate{}, middleware.After)
 	if err != nil {
 		return err

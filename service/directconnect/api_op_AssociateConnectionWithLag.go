@@ -31,7 +31,7 @@ func (c *Client) AssociateConnectionWithLag(ctx context.Context, params *Associa
 		params = &AssociateConnectionWithLagInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateConnectionWithLag", params, optFns, addOperationAssociateConnectionWithLagMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateConnectionWithLag", params, optFns, c.addOperationAssociateConnectionWithLagMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -160,7 +160,7 @@ type AssociateConnectionWithLagOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateConnectionWithLagMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateConnectionWithLagMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateConnectionWithLag{}, middleware.After)
 	if err != nil {
 		return err

@@ -31,7 +31,7 @@ func (c *Client) RefreshTrustedAdvisorCheck(ctx context.Context, params *Refresh
 		params = &RefreshTrustedAdvisorCheckInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RefreshTrustedAdvisorCheck", params, optFns, addOperationRefreshTrustedAdvisorCheckMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RefreshTrustedAdvisorCheck", params, optFns, c.addOperationRefreshTrustedAdvisorCheckMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type RefreshTrustedAdvisorCheckOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRefreshTrustedAdvisorCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRefreshTrustedAdvisorCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRefreshTrustedAdvisorCheck{}, middleware.After)
 	if err != nil {
 		return err

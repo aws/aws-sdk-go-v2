@@ -21,7 +21,7 @@ func (c *Client) ListDelegatedServicesForAccount(ctx context.Context, params *Li
 		params = &ListDelegatedServicesForAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDelegatedServicesForAccount", params, optFns, addOperationListDelegatedServicesForAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDelegatedServicesForAccount", params, optFns, c.addOperationListDelegatedServicesForAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type ListDelegatedServicesForAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDelegatedServicesForAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDelegatedServicesForAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDelegatedServicesForAccount{}, middleware.After)
 	if err != nil {
 		return err

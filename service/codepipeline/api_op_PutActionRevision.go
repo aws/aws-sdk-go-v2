@@ -17,7 +17,7 @@ func (c *Client) PutActionRevision(ctx context.Context, params *PutActionRevisio
 		params = &PutActionRevisionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutActionRevision", params, optFns, addOperationPutActionRevisionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutActionRevision", params, optFns, c.addOperationPutActionRevisionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type PutActionRevisionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutActionRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutActionRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutActionRevision{}, middleware.After)
 	if err != nil {
 		return err

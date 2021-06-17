@@ -22,7 +22,7 @@ func (c *Client) ModifyReplicationTask(ctx context.Context, params *ModifyReplic
 		params = &ModifyReplicationTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyReplicationTask", params, optFns, addOperationModifyReplicationTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyReplicationTask", params, optFns, c.addOperationModifyReplicationTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ type ModifyReplicationTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyReplicationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyReplicationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyReplicationTask{}, middleware.After)
 	if err != nil {
 		return err

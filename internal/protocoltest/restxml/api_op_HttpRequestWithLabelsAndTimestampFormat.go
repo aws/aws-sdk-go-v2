@@ -17,7 +17,7 @@ func (c *Client) HttpRequestWithLabelsAndTimestampFormat(ctx context.Context, pa
 		params = &HttpRequestWithLabelsAndTimestampFormatInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpRequestWithLabelsAndTimestampFormat", params, optFns, addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpRequestWithLabelsAndTimestampFormat", params, optFns, c.addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type HttpRequestWithLabelsAndTimestampFormatOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpRequestWithLabelsAndTimestampFormat{}, middleware.After)
 	if err != nil {
 		return err

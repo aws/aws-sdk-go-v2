@@ -18,7 +18,7 @@ func (c *Client) ListActions(ctx context.Context, params *ListActionsInput, optF
 		params = &ListActionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListActions", params, optFns, addOperationListActionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListActions", params, optFns, c.addOperationListActionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ListActionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListActions{}, middleware.After)
 	if err != nil {
 		return err

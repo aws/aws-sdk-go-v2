@@ -21,7 +21,7 @@ func (c *Client) BulkPublish(ctx context.Context, params *BulkPublishInput, optF
 		params = &BulkPublishInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BulkPublish", params, optFns, addOperationBulkPublishMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BulkPublish", params, optFns, c.addOperationBulkPublishMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type BulkPublishOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBulkPublishMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBulkPublishMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBulkPublish{}, middleware.After)
 	if err != nil {
 		return err

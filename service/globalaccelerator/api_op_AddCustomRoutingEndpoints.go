@@ -29,7 +29,7 @@ func (c *Client) AddCustomRoutingEndpoints(ctx context.Context, params *AddCusto
 		params = &AddCustomRoutingEndpointsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddCustomRoutingEndpoints", params, optFns, addOperationAddCustomRoutingEndpointsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddCustomRoutingEndpoints", params, optFns, c.addOperationAddCustomRoutingEndpointsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type AddCustomRoutingEndpointsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddCustomRoutingEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddCustomRoutingEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddCustomRoutingEndpoints{}, middleware.After)
 	if err != nil {
 		return err

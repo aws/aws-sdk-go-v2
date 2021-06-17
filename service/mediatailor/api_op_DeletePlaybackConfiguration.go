@@ -16,7 +16,7 @@ func (c *Client) DeletePlaybackConfiguration(ctx context.Context, params *Delete
 		params = &DeletePlaybackConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePlaybackConfiguration", params, optFns, addOperationDeletePlaybackConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePlaybackConfiguration", params, optFns, c.addOperationDeletePlaybackConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeletePlaybackConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePlaybackConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePlaybackConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePlaybackConfiguration{}, middleware.After)
 	if err != nil {
 		return err

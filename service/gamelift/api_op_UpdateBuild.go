@@ -24,7 +24,7 @@ func (c *Client) UpdateBuild(ctx context.Context, params *UpdateBuildInput, optF
 		params = &UpdateBuildInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateBuild", params, optFns, addOperationUpdateBuildMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateBuild", params, optFns, c.addOperationUpdateBuildMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type UpdateBuildOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateBuild{}, middleware.After)
 	if err != nil {
 		return err

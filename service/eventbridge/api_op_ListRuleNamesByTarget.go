@@ -17,7 +17,7 @@ func (c *Client) ListRuleNamesByTarget(ctx context.Context, params *ListRuleName
 		params = &ListRuleNamesByTargetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRuleNamesByTarget", params, optFns, addOperationListRuleNamesByTargetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRuleNamesByTarget", params, optFns, c.addOperationListRuleNamesByTargetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListRuleNamesByTargetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRuleNamesByTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRuleNamesByTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRuleNamesByTarget{}, middleware.After)
 	if err != nil {
 		return err

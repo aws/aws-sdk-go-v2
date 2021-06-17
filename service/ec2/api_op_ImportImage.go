@@ -21,7 +21,7 @@ func (c *Client) ImportImage(ctx context.Context, params *ImportImageInput, optF
 		params = &ImportImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportImage", params, optFns, addOperationImportImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportImage", params, optFns, c.addOperationImportImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -174,7 +174,7 @@ type ImportImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpImportImage{}, middleware.After)
 	if err != nil {
 		return err

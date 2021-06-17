@@ -17,7 +17,7 @@ func (c *Client) PutAppInstanceStreamingConfigurations(ctx context.Context, para
 		params = &PutAppInstanceStreamingConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAppInstanceStreamingConfigurations", params, optFns, addOperationPutAppInstanceStreamingConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAppInstanceStreamingConfigurations", params, optFns, c.addOperationPutAppInstanceStreamingConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type PutAppInstanceStreamingConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAppInstanceStreamingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAppInstanceStreamingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAppInstanceStreamingConfigurations{}, middleware.After)
 	if err != nil {
 		return err

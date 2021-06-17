@@ -27,7 +27,7 @@ func (c *Client) GetRecommendations(ctx context.Context, params *GetRecommendati
 		params = &GetRecommendationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRecommendations", params, optFns, addOperationGetRecommendationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRecommendations", params, optFns, c.addOperationGetRecommendationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type GetRecommendationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecommendations{}, middleware.After)
 	if err != nil {
 		return err

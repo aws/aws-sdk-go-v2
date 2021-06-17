@@ -25,7 +25,7 @@ func (c *Client) GenerateRandom(ctx context.Context, params *GenerateRandomInput
 		params = &GenerateRandomInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GenerateRandom", params, optFns, addOperationGenerateRandomMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GenerateRandom", params, optFns, c.addOperationGenerateRandomMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GenerateRandomOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGenerateRandomMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGenerateRandomMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGenerateRandom{}, middleware.After)
 	if err != nil {
 		return err

@@ -41,7 +41,7 @@ func (c *Client) ForgotPassword(ctx context.Context, params *ForgotPasswordInput
 		params = &ForgotPasswordInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ForgotPassword", params, optFns, addOperationForgotPasswordMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ForgotPassword", params, optFns, c.addOperationForgotPasswordMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ type ForgotPasswordOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationForgotPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationForgotPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpForgotPassword{}, middleware.After)
 	if err != nil {
 		return err

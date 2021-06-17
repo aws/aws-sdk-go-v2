@@ -18,7 +18,7 @@ func (c *Client) GetColumnStatisticsForPartition(ctx context.Context, params *Ge
 		params = &GetColumnStatisticsForPartitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetColumnStatisticsForPartition", params, optFns, addOperationGetColumnStatisticsForPartitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetColumnStatisticsForPartition", params, optFns, c.addOperationGetColumnStatisticsForPartitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type GetColumnStatisticsForPartitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetColumnStatisticsForPartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetColumnStatisticsForPartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetColumnStatisticsForPartition{}, middleware.After)
 	if err != nil {
 		return err

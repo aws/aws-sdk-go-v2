@@ -38,7 +38,7 @@ func (c *Client) UpdateLoggingConfiguration(ctx context.Context, params *UpdateL
 		params = &UpdateLoggingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLoggingConfiguration", params, optFns, addOperationUpdateLoggingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLoggingConfiguration", params, optFns, c.addOperationUpdateLoggingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type UpdateLoggingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateLoggingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

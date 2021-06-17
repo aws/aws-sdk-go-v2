@@ -18,7 +18,7 @@ func (c *Client) GetHost(ctx context.Context, params *GetHostInput, optFns ...fu
 		params = &GetHostInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetHost", params, optFns, addOperationGetHostMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetHost", params, optFns, c.addOperationGetHostMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetHostOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetHostMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetHostMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetHost{}, middleware.After)
 	if err != nil {
 		return err

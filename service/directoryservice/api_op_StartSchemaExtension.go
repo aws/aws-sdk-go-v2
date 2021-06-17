@@ -16,7 +16,7 @@ func (c *Client) StartSchemaExtension(ctx context.Context, params *StartSchemaEx
 		params = &StartSchemaExtensionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartSchemaExtension", params, optFns, addOperationStartSchemaExtensionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartSchemaExtension", params, optFns, c.addOperationStartSchemaExtensionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type StartSchemaExtensionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartSchemaExtensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartSchemaExtensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSchemaExtension{}, middleware.After)
 	if err != nil {
 		return err

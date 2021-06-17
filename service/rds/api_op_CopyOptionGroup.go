@@ -17,7 +17,7 @@ func (c *Client) CopyOptionGroup(ctx context.Context, params *CopyOptionGroupInp
 		params = &CopyOptionGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopyOptionGroup", params, optFns, addOperationCopyOptionGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopyOptionGroup", params, optFns, c.addOperationCopyOptionGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type CopyOptionGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopyOptionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopyOptionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopyOptionGroup{}, middleware.After)
 	if err != nil {
 		return err

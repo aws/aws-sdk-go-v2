@@ -40,7 +40,7 @@ func (c *Client) AcceptMatch(ctx context.Context, params *AcceptMatchInput, optF
 		params = &AcceptMatchInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcceptMatch", params, optFns, addOperationAcceptMatchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcceptMatch", params, optFns, c.addOperationAcceptMatchMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type AcceptMatchOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAcceptMatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAcceptMatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcceptMatch{}, middleware.After)
 	if err != nil {
 		return err

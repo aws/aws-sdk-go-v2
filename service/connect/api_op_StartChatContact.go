@@ -40,7 +40,7 @@ func (c *Client) StartChatContact(ctx context.Context, params *StartChatContactI
 		params = &StartChatContactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartChatContact", params, optFns, addOperationStartChatContactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartChatContact", params, optFns, c.addOperationStartChatContactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +105,7 @@ type StartChatContactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartChatContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartChatContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartChatContact{}, middleware.After)
 	if err != nil {
 		return err

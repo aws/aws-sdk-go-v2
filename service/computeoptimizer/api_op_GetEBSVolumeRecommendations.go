@@ -22,7 +22,7 @@ func (c *Client) GetEBSVolumeRecommendations(ctx context.Context, params *GetEBS
 		params = &GetEBSVolumeRecommendationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEBSVolumeRecommendations", params, optFns, addOperationGetEBSVolumeRecommendationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEBSVolumeRecommendations", params, optFns, c.addOperationGetEBSVolumeRecommendationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type GetEBSVolumeRecommendationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEBSVolumeRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEBSVolumeRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetEBSVolumeRecommendations{}, middleware.After)
 	if err != nil {
 		return err

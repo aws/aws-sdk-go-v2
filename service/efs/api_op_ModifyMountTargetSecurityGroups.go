@@ -29,7 +29,7 @@ func (c *Client) ModifyMountTargetSecurityGroups(ctx context.Context, params *Mo
 		params = &ModifyMountTargetSecurityGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyMountTargetSecurityGroups", params, optFns, addOperationModifyMountTargetSecurityGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyMountTargetSecurityGroups", params, optFns, c.addOperationModifyMountTargetSecurityGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ModifyMountTargetSecurityGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyMountTargetSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyMountTargetSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpModifyMountTargetSecurityGroups{}, middleware.After)
 	if err != nil {
 		return err

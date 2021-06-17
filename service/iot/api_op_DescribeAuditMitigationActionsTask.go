@@ -21,7 +21,7 @@ func (c *Client) DescribeAuditMitigationActionsTask(ctx context.Context, params 
 		params = &DescribeAuditMitigationActionsTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAuditMitigationActionsTask", params, optFns, addOperationDescribeAuditMitigationActionsTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAuditMitigationActionsTask", params, optFns, c.addOperationDescribeAuditMitigationActionsTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DescribeAuditMitigationActionsTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAuditMitigationActionsTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAuditMitigationActionsTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAuditMitigationActionsTask{}, middleware.After)
 	if err != nil {
 		return err

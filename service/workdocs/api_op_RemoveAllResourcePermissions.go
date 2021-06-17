@@ -16,7 +16,7 @@ func (c *Client) RemoveAllResourcePermissions(ctx context.Context, params *Remov
 		params = &RemoveAllResourcePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveAllResourcePermissions", params, optFns, addOperationRemoveAllResourcePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveAllResourcePermissions", params, optFns, c.addOperationRemoveAllResourcePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type RemoveAllResourcePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveAllResourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveAllResourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveAllResourcePermissions{}, middleware.After)
 	if err != nil {
 		return err

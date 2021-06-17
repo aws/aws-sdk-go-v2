@@ -16,7 +16,7 @@ func (c *Client) DeleteUseCase(ctx context.Context, params *DeleteUseCaseInput, 
 		params = &DeleteUseCaseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteUseCase", params, optFns, addOperationDeleteUseCaseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteUseCase", params, optFns, c.addOperationDeleteUseCaseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteUseCaseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteUseCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteUseCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteUseCase{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateEnvironmentTemplateVersion(ctx context.Context, params *U
 		params = &UpdateEnvironmentTemplateVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateEnvironmentTemplateVersion", params, optFns, addOperationUpdateEnvironmentTemplateVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateEnvironmentTemplateVersion", params, optFns, c.addOperationUpdateEnvironmentTemplateVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type UpdateEnvironmentTemplateVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateEnvironmentTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateEnvironmentTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateEnvironmentTemplateVersion{}, middleware.After)
 	if err != nil {
 		return err

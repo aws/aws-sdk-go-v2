@@ -24,7 +24,7 @@ func (c *Client) AssociateInstanceStorageConfig(ctx context.Context, params *Ass
 		params = &AssociateInstanceStorageConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateInstanceStorageConfig", params, optFns, addOperationAssociateInstanceStorageConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateInstanceStorageConfig", params, optFns, c.addOperationAssociateInstanceStorageConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type AssociateInstanceStorageConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateInstanceStorageConfig{}, middleware.After)
 	if err != nil {
 		return err

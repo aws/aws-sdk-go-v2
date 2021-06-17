@@ -16,7 +16,7 @@ func (c *Client) CancelImportTask(ctx context.Context, params *CancelImportTaskI
 		params = &CancelImportTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelImportTask", params, optFns, addOperationCancelImportTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelImportTask", params, optFns, c.addOperationCancelImportTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type CancelImportTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCancelImportTask{}, middleware.After)
 	if err != nil {
 		return err

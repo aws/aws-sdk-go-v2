@@ -17,7 +17,7 @@ func (c *Client) CancelReplay(ctx context.Context, params *CancelReplayInput, op
 		params = &CancelReplayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelReplay", params, optFns, addOperationCancelReplayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelReplay", params, optFns, c.addOperationCancelReplayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type CancelReplayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelReplayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelReplayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelReplay{}, middleware.After)
 	if err != nil {
 		return err

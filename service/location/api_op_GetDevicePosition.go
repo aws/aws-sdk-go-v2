@@ -18,7 +18,7 @@ func (c *Client) GetDevicePosition(ctx context.Context, params *GetDevicePositio
 		params = &GetDevicePositionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDevicePosition", params, optFns, addOperationGetDevicePositionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDevicePosition", params, optFns, c.addOperationGetDevicePositionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type GetDevicePositionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDevicePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDevicePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDevicePosition{}, middleware.After)
 	if err != nil {
 		return err

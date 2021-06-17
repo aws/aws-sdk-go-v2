@@ -17,7 +17,7 @@ func (c *Client) DescribeCustomRoutingAccelerator(ctx context.Context, params *D
 		params = &DescribeCustomRoutingAcceleratorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCustomRoutingAccelerator", params, optFns, addOperationDescribeCustomRoutingAcceleratorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCustomRoutingAccelerator", params, optFns, c.addOperationDescribeCustomRoutingAcceleratorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeCustomRoutingAcceleratorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCustomRoutingAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCustomRoutingAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCustomRoutingAccelerator{}, middleware.After)
 	if err != nil {
 		return err

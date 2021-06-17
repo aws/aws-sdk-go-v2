@@ -17,7 +17,7 @@ func (c *Client) DisableClientAuthentication(ctx context.Context, params *Disabl
 		params = &DisableClientAuthenticationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableClientAuthentication", params, optFns, addOperationDisableClientAuthenticationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableClientAuthentication", params, optFns, c.addOperationDisableClientAuthenticationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DisableClientAuthenticationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableClientAuthenticationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableClientAuthenticationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableClientAuthentication{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) DescribeAccess(ctx context.Context, params *DescribeAccessInput
 		params = &DescribeAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAccess", params, optFns, addOperationDescribeAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAccess", params, optFns, c.addOperationDescribeAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAccess{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) CreateReplaceRootVolumeTask(ctx context.Context, params *Create
 		params = &CreateReplaceRootVolumeTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateReplaceRootVolumeTask", params, optFns, addOperationCreateReplaceRootVolumeTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateReplaceRootVolumeTask", params, optFns, c.addOperationCreateReplaceRootVolumeTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type CreateReplaceRootVolumeTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateReplaceRootVolumeTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateReplaceRootVolumeTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateReplaceRootVolumeTask{}, middleware.After)
 	if err != nil {
 		return err

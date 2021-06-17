@@ -21,7 +21,7 @@ func (c *Client) RecognizeText(ctx context.Context, params *RecognizeTextInput, 
 		params = &RecognizeTextInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RecognizeText", params, optFns, addOperationRecognizeTextMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RecognizeText", params, optFns, c.addOperationRecognizeTextMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type RecognizeTextOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRecognizeTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRecognizeTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRecognizeText{}, middleware.After)
 	if err != nil {
 		return err

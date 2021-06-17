@@ -18,7 +18,7 @@ func (c *Client) DescribeReservedDBInstancesOfferings(ctx context.Context, param
 		params = &DescribeReservedDBInstancesOfferingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeReservedDBInstancesOfferings", params, optFns, addOperationDescribeReservedDBInstancesOfferingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeReservedDBInstancesOfferings", params, optFns, c.addOperationDescribeReservedDBInstancesOfferingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type DescribeReservedDBInstancesOfferingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeReservedDBInstancesOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeReservedDBInstancesOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeReservedDBInstancesOfferings{}, middleware.After)
 	if err != nil {
 		return err

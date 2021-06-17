@@ -16,7 +16,7 @@ func (c *Client) GetSigningCertificate(ctx context.Context, params *GetSigningCe
 		params = &GetSigningCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSigningCertificate", params, optFns, addOperationGetSigningCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSigningCertificate", params, optFns, c.addOperationGetSigningCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetSigningCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSigningCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSigningCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSigningCertificate{}, middleware.After)
 	if err != nil {
 		return err

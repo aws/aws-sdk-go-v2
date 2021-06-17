@@ -23,7 +23,7 @@ func (c *Client) DescribeAvailabilityZones(ctx context.Context, params *Describe
 		params = &DescribeAvailabilityZonesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAvailabilityZones", params, optFns, addOperationDescribeAvailabilityZonesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAvailabilityZones", params, optFns, c.addOperationDescribeAvailabilityZonesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +105,7 @@ type DescribeAvailabilityZonesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAvailabilityZonesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAvailabilityZonesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeAvailabilityZones{}, middleware.After)
 	if err != nil {
 		return err

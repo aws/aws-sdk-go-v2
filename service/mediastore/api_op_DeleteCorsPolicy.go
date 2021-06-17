@@ -19,7 +19,7 @@ func (c *Client) DeleteCorsPolicy(ctx context.Context, params *DeleteCorsPolicyI
 		params = &DeleteCorsPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCorsPolicy", params, optFns, addOperationDeleteCorsPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCorsPolicy", params, optFns, c.addOperationDeleteCorsPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteCorsPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCorsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCorsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCorsPolicy{}, middleware.After)
 	if err != nil {
 		return err

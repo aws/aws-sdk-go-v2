@@ -21,7 +21,7 @@ func (c *Client) GetRelationalDatabaseMasterUserPassword(ctx context.Context, pa
 		params = &GetRelationalDatabaseMasterUserPasswordInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRelationalDatabaseMasterUserPassword", params, optFns, addOperationGetRelationalDatabaseMasterUserPasswordMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRelationalDatabaseMasterUserPassword", params, optFns, c.addOperationGetRelationalDatabaseMasterUserPasswordMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetRelationalDatabaseMasterUserPasswordOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRelationalDatabaseMasterUserPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRelationalDatabaseMasterUserPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseMasterUserPassword{}, middleware.After)
 	if err != nil {
 		return err

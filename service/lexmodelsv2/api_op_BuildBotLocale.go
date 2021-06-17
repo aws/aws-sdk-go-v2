@@ -20,7 +20,7 @@ func (c *Client) BuildBotLocale(ctx context.Context, params *BuildBotLocaleInput
 		params = &BuildBotLocaleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BuildBotLocale", params, optFns, addOperationBuildBotLocaleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BuildBotLocale", params, optFns, c.addOperationBuildBotLocaleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type BuildBotLocaleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBuildBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBuildBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBuildBotLocale{}, middleware.After)
 	if err != nil {
 		return err

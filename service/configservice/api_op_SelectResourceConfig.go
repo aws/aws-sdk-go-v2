@@ -23,7 +23,7 @@ func (c *Client) SelectResourceConfig(ctx context.Context, params *SelectResourc
 		params = &SelectResourceConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SelectResourceConfig", params, optFns, addOperationSelectResourceConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SelectResourceConfig", params, optFns, c.addOperationSelectResourceConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type SelectResourceConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSelectResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSelectResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSelectResourceConfig{}, middleware.After)
 	if err != nil {
 		return err

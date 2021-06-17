@@ -91,7 +91,7 @@ func (c *Client) CreateSecret(ctx context.Context, params *CreateSecretInput, op
 		params = &CreateSecretInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSecret", params, optFns, addOperationCreateSecretMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSecret", params, optFns, c.addOperationCreateSecretMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -270,7 +270,7 @@ type CreateSecretOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSecret{}, middleware.After)
 	if err != nil {
 		return err

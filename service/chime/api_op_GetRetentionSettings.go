@@ -21,7 +21,7 @@ func (c *Client) GetRetentionSettings(ctx context.Context, params *GetRetentionS
 		params = &GetRetentionSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRetentionSettings", params, optFns, addOperationGetRetentionSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRetentionSettings", params, optFns, c.addOperationGetRetentionSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetRetentionSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRetentionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRetentionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRetentionSettings{}, middleware.After)
 	if err != nil {
 		return err

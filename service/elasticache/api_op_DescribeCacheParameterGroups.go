@@ -19,7 +19,7 @@ func (c *Client) DescribeCacheParameterGroups(ctx context.Context, params *Descr
 		params = &DescribeCacheParameterGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCacheParameterGroups", params, optFns, addOperationDescribeCacheParameterGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCacheParameterGroups", params, optFns, c.addOperationDescribeCacheParameterGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DescribeCacheParameterGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCacheParameterGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCacheParameterGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeCacheParameterGroups{}, middleware.After)
 	if err != nil {
 		return err

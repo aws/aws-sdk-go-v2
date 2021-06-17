@@ -17,7 +17,7 @@ func (c *Client) ListResolversByFunction(ctx context.Context, params *ListResolv
 		params = &ListResolversByFunctionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResolversByFunction", params, optFns, addOperationListResolversByFunctionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResolversByFunction", params, optFns, c.addOperationListResolversByFunctionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListResolversByFunctionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListResolversByFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResolversByFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResolversByFunction{}, middleware.After)
 	if err != nil {
 		return err

@@ -28,7 +28,7 @@ func (c *Client) GetMetricWidgetImage(ctx context.Context, params *GetMetricWidg
 		params = &GetMetricWidgetImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMetricWidgetImage", params, optFns, addOperationGetMetricWidgetImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMetricWidgetImage", params, optFns, c.addOperationGetMetricWidgetImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type GetMetricWidgetImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMetricWidgetImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMetricWidgetImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetMetricWidgetImage{}, middleware.After)
 	if err != nil {
 		return err

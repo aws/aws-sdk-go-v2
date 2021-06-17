@@ -41,7 +41,7 @@ func (c *Client) SimulatePrincipalPolicy(ctx context.Context, params *SimulatePr
 		params = &SimulatePrincipalPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SimulatePrincipalPolicy", params, optFns, addOperationSimulatePrincipalPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SimulatePrincipalPolicy", params, optFns, c.addOperationSimulatePrincipalPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -251,7 +251,7 @@ type SimulatePrincipalPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSimulatePrincipalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSimulatePrincipalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSimulatePrincipalPolicy{}, middleware.After)
 	if err != nil {
 		return err

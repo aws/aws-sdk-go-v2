@@ -22,7 +22,7 @@ func (c *Client) CreateAlarmModel(ctx context.Context, params *CreateAlarmModelI
 		params = &CreateAlarmModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAlarmModel", params, optFns, addOperationCreateAlarmModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAlarmModel", params, optFns, c.addOperationCreateAlarmModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -121,7 +121,7 @@ type CreateAlarmModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAlarmModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAlarmModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAlarmModel{}, middleware.After)
 	if err != nil {
 		return err

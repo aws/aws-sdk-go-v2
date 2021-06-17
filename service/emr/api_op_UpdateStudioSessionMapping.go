@@ -18,7 +18,7 @@ func (c *Client) UpdateStudioSessionMapping(ctx context.Context, params *UpdateS
 		params = &UpdateStudioSessionMappingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateStudioSessionMapping", params, optFns, addOperationUpdateStudioSessionMappingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateStudioSessionMapping", params, optFns, c.addOperationUpdateStudioSessionMappingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type UpdateStudioSessionMappingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateStudioSessionMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateStudioSessionMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateStudioSessionMapping{}, middleware.After)
 	if err != nil {
 		return err

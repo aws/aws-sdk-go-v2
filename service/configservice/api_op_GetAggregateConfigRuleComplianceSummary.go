@@ -20,7 +20,7 @@ func (c *Client) GetAggregateConfigRuleComplianceSummary(ctx context.Context, pa
 		params = &GetAggregateConfigRuleComplianceSummaryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAggregateConfigRuleComplianceSummary", params, optFns, addOperationGetAggregateConfigRuleComplianceSummaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAggregateConfigRuleComplianceSummary", params, optFns, c.addOperationGetAggregateConfigRuleComplianceSummaryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type GetAggregateConfigRuleComplianceSummaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAggregateConfigRuleComplianceSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAggregateConfigRuleComplianceSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAggregateConfigRuleComplianceSummary{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeObject(ctx context.Context, params *DescribeObjectInput
 		params = &DescribeObjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeObject", params, optFns, addOperationDescribeObjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeObject", params, optFns, c.addOperationDescribeObjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeObjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeObject{}, middleware.After)
 	if err != nil {
 		return err

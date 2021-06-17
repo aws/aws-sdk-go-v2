@@ -22,7 +22,7 @@ func (c *Client) RegisterThing(ctx context.Context, params *RegisterThingInput, 
 		params = &RegisterThingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterThing", params, optFns, addOperationRegisterThingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterThing", params, optFns, c.addOperationRegisterThingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type RegisterThingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterThing{}, middleware.After)
 	if err != nil {
 		return err

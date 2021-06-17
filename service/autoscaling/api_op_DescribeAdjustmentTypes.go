@@ -25,7 +25,7 @@ func (c *Client) DescribeAdjustmentTypes(ctx context.Context, params *DescribeAd
 		params = &DescribeAdjustmentTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAdjustmentTypes", params, optFns, addOperationDescribeAdjustmentTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAdjustmentTypes", params, optFns, c.addOperationDescribeAdjustmentTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeAdjustmentTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAdjustmentTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAdjustmentTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAdjustmentTypes{}, middleware.After)
 	if err != nil {
 		return err

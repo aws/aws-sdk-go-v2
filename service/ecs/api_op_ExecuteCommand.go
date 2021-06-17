@@ -17,7 +17,7 @@ func (c *Client) ExecuteCommand(ctx context.Context, params *ExecuteCommandInput
 		params = &ExecuteCommandInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExecuteCommand", params, optFns, addOperationExecuteCommandMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExecuteCommand", params, optFns, c.addOperationExecuteCommandMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type ExecuteCommandOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExecuteCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExecuteCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpExecuteCommand{}, middleware.After)
 	if err != nil {
 		return err

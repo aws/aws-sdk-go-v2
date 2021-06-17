@@ -18,7 +18,7 @@ func (c *Client) PutAggregationAuthorization(ctx context.Context, params *PutAgg
 		params = &PutAggregationAuthorizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAggregationAuthorization", params, optFns, addOperationPutAggregationAuthorizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAggregationAuthorization", params, optFns, c.addOperationPutAggregationAuthorizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type PutAggregationAuthorizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAggregationAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAggregationAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAggregationAuthorization{}, middleware.After)
 	if err != nil {
 		return err

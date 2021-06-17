@@ -17,7 +17,7 @@ func (c *Client) RegenerateSecurityToken(ctx context.Context, params *Regenerate
 		params = &RegenerateSecurityTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegenerateSecurityToken", params, optFns, addOperationRegenerateSecurityTokenMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegenerateSecurityToken", params, optFns, c.addOperationRegenerateSecurityTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type RegenerateSecurityTokenOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegenerateSecurityTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegenerateSecurityTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegenerateSecurityToken{}, middleware.After)
 	if err != nil {
 		return err

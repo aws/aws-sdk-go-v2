@@ -28,7 +28,7 @@ func (c *Client) CreateEmailIdentity(ctx context.Context, params *CreateEmailIde
 		params = &CreateEmailIdentityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateEmailIdentity", params, optFns, addOperationCreateEmailIdentityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateEmailIdentity", params, optFns, c.addOperationCreateEmailIdentityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type CreateEmailIdentityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateEmailIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateEmailIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEmailIdentity{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DetachObject(ctx context.Context, params *DetachObjectInput, op
 		params = &DetachObjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachObject", params, optFns, addOperationDetachObjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachObject", params, optFns, c.addOperationDetachObjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DetachObjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDetachObject{}, middleware.After)
 	if err != nil {
 		return err

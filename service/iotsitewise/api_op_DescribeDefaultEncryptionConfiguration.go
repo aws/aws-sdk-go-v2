@@ -21,7 +21,7 @@ func (c *Client) DescribeDefaultEncryptionConfiguration(ctx context.Context, par
 		params = &DescribeDefaultEncryptionConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDefaultEncryptionConfiguration", params, optFns, addOperationDescribeDefaultEncryptionConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDefaultEncryptionConfiguration", params, optFns, c.addOperationDescribeDefaultEncryptionConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeDefaultEncryptionConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDefaultEncryptionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDefaultEncryptionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDefaultEncryptionConfiguration{}, middleware.After)
 	if err != nil {
 		return err

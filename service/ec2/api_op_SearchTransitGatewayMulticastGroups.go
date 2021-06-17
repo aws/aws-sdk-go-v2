@@ -19,7 +19,7 @@ func (c *Client) SearchTransitGatewayMulticastGroups(ctx context.Context, params
 		params = &SearchTransitGatewayMulticastGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchTransitGatewayMulticastGroups", params, optFns, addOperationSearchTransitGatewayMulticastGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchTransitGatewayMulticastGroups", params, optFns, c.addOperationSearchTransitGatewayMulticastGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type SearchTransitGatewayMulticastGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchTransitGatewayMulticastGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchTransitGatewayMulticastGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpSearchTransitGatewayMulticastGroups{}, middleware.After)
 	if err != nil {
 		return err

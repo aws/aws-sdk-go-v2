@@ -27,7 +27,7 @@ func (c *Client) DeploySystemInstance(ctx context.Context, params *DeploySystemI
 		params = &DeploySystemInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeploySystemInstance", params, optFns, addOperationDeploySystemInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeploySystemInstance", params, optFns, c.addOperationDeploySystemInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DeploySystemInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeploySystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeploySystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeploySystemInstance{}, middleware.After)
 	if err != nil {
 		return err

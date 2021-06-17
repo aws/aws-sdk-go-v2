@@ -17,7 +17,7 @@ func (c *Client) DescribeConstraint(ctx context.Context, params *DescribeConstra
 		params = &DescribeConstraintInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeConstraint", params, optFns, addOperationDescribeConstraintMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConstraint", params, optFns, c.addOperationDescribeConstraintMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeConstraintOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConstraint{}, middleware.After)
 	if err != nil {
 		return err

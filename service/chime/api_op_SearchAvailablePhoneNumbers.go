@@ -21,7 +21,7 @@ func (c *Client) SearchAvailablePhoneNumbers(ctx context.Context, params *Search
 		params = &SearchAvailablePhoneNumbersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchAvailablePhoneNumbers", params, optFns, addOperationSearchAvailablePhoneNumbersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchAvailablePhoneNumbers", params, optFns, c.addOperationSearchAvailablePhoneNumbersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type SearchAvailablePhoneNumbersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchAvailablePhoneNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchAvailablePhoneNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchAvailablePhoneNumbers{}, middleware.After)
 	if err != nil {
 		return err

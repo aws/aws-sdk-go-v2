@@ -20,7 +20,7 @@ func (c *Client) ListEventSubscriptions(ctx context.Context, params *ListEventSu
 		params = &ListEventSubscriptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEventSubscriptions", params, optFns, addOperationListEventSubscriptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEventSubscriptions", params, optFns, c.addOperationListEventSubscriptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ListEventSubscriptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEventSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEventSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEventSubscriptions{}, middleware.After)
 	if err != nil {
 		return err

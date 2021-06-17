@@ -21,7 +21,7 @@ func (c *Client) GetTrailStatus(ctx context.Context, params *GetTrailStatusInput
 		params = &GetTrailStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTrailStatus", params, optFns, addOperationGetTrailStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTrailStatus", params, optFns, c.addOperationGetTrailStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -126,7 +126,7 @@ type GetTrailStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTrailStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTrailStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTrailStatus{}, middleware.After)
 	if err != nil {
 		return err

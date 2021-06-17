@@ -17,7 +17,7 @@ func (c *Client) ListDeploymentConfigs(ctx context.Context, params *ListDeployme
 		params = &ListDeploymentConfigsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDeploymentConfigs", params, optFns, addOperationListDeploymentConfigsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDeploymentConfigs", params, optFns, c.addOperationListDeploymentConfigsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ListDeploymentConfigsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDeploymentConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDeploymentConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDeploymentConfigs{}, middleware.After)
 	if err != nil {
 		return err

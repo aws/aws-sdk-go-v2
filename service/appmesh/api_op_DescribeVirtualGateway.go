@@ -17,7 +17,7 @@ func (c *Client) DescribeVirtualGateway(ctx context.Context, params *DescribeVir
 		params = &DescribeVirtualGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeVirtualGateway", params, optFns, addOperationDescribeVirtualGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeVirtualGateway", params, optFns, c.addOperationDescribeVirtualGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeVirtualGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeVirtualGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeVirtualGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVirtualGateway{}, middleware.After)
 	if err != nil {
 		return err

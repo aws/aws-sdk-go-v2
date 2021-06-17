@@ -17,7 +17,7 @@ func (c *Client) BatchGetChannel(ctx context.Context, params *BatchGetChannelInp
 		params = &BatchGetChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetChannel", params, optFns, addOperationBatchGetChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetChannel", params, optFns, c.addOperationBatchGetChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type BatchGetChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetChannel{}, middleware.After)
 	if err != nil {
 		return err

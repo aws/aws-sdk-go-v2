@@ -18,7 +18,7 @@ func (c *Client) UpdateProject(ctx context.Context, params *UpdateProjectInput, 
 		params = &UpdateProjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateProject", params, optFns, addOperationUpdateProjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateProject", params, optFns, c.addOperationUpdateProjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type UpdateProjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProject{}, middleware.After)
 	if err != nil {
 		return err

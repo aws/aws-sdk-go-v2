@@ -17,7 +17,7 @@ func (c *Client) DeleteSmsTemplate(ctx context.Context, params *DeleteSmsTemplat
 		params = &DeleteSmsTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSmsTemplate", params, optFns, addOperationDeleteSmsTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSmsTemplate", params, optFns, c.addOperationDeleteSmsTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DeleteSmsTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSmsTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSmsTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSmsTemplate{}, middleware.After)
 	if err != nil {
 		return err

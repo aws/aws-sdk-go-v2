@@ -68,7 +68,7 @@ func (c *Client) DescribeEC2InstanceLimits(ctx context.Context, params *Describe
 		params = &DescribeEC2InstanceLimitsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEC2InstanceLimits", params, optFns, addOperationDescribeEC2InstanceLimitsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEC2InstanceLimits", params, optFns, c.addOperationDescribeEC2InstanceLimitsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type DescribeEC2InstanceLimitsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEC2InstanceLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEC2InstanceLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEC2InstanceLimits{}, middleware.After)
 	if err != nil {
 		return err

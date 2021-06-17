@@ -55,7 +55,7 @@ func (c *Client) GetClip(ctx context.Context, params *GetClipInput, optFns ...fu
 		params = &GetClipInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetClip", params, optFns, addOperationGetClipMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetClip", params, optFns, c.addOperationGetClipMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +96,7 @@ type GetClipOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetClipMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetClipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetClip{}, middleware.After)
 	if err != nil {
 		return err

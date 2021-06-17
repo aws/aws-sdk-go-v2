@@ -19,7 +19,7 @@ func (c *Client) DescribeCapacityReservations(ctx context.Context, params *Descr
 		params = &DescribeCapacityReservationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCapacityReservations", params, optFns, addOperationDescribeCapacityReservationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCapacityReservations", params, optFns, c.addOperationDescribeCapacityReservationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -151,7 +151,7 @@ type DescribeCapacityReservationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCapacityReservationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCapacityReservationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeCapacityReservations{}, middleware.After)
 	if err != nil {
 		return err

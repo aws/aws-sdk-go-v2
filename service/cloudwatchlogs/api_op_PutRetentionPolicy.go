@@ -18,7 +18,7 @@ func (c *Client) PutRetentionPolicy(ctx context.Context, params *PutRetentionPol
 		params = &PutRetentionPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutRetentionPolicy", params, optFns, addOperationPutRetentionPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutRetentionPolicy", params, optFns, c.addOperationPutRetentionPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type PutRetentionPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutRetentionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutRetentionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRetentionPolicy{}, middleware.After)
 	if err != nil {
 		return err

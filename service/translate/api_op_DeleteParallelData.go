@@ -17,7 +17,7 @@ func (c *Client) DeleteParallelData(ctx context.Context, params *DeleteParallelD
 		params = &DeleteParallelDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteParallelData", params, optFns, addOperationDeleteParallelDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteParallelData", params, optFns, c.addOperationDeleteParallelDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteParallelDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteParallelData{}, middleware.After)
 	if err != nil {
 		return err

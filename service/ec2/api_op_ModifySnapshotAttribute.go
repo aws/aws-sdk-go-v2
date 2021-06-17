@@ -27,7 +27,7 @@ func (c *Client) ModifySnapshotAttribute(ctx context.Context, params *ModifySnap
 		params = &ModifySnapshotAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifySnapshotAttribute", params, optFns, addOperationModifySnapshotAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifySnapshotAttribute", params, optFns, c.addOperationModifySnapshotAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type ModifySnapshotAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifySnapshotAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifySnapshotAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifySnapshotAttribute{}, middleware.After)
 	if err != nil {
 		return err

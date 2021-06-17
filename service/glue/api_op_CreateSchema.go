@@ -25,7 +25,7 @@ func (c *Client) CreateSchema(ctx context.Context, params *CreateSchemaInput, op
 		params = &CreateSchemaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSchema", params, optFns, addOperationCreateSchemaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSchema", params, optFns, c.addOperationCreateSchemaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -160,7 +160,7 @@ type CreateSchemaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSchema{}, middleware.After)
 	if err != nil {
 		return err

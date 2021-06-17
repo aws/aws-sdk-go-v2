@@ -19,7 +19,7 @@ func (c *Client) AddClientIDToOpenIDConnectProvider(ctx context.Context, params 
 		params = &AddClientIDToOpenIDConnectProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddClientIDToOpenIDConnectProvider", params, optFns, addOperationAddClientIDToOpenIDConnectProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddClientIDToOpenIDConnectProvider", params, optFns, c.addOperationAddClientIDToOpenIDConnectProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type AddClientIDToOpenIDConnectProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddClientIDToOpenIDConnectProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddClientIDToOpenIDConnectProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAddClientIDToOpenIDConnectProvider{}, middleware.After)
 	if err != nil {
 		return err

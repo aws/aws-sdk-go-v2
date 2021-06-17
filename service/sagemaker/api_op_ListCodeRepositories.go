@@ -19,7 +19,7 @@ func (c *Client) ListCodeRepositories(ctx context.Context, params *ListCodeRepos
 		params = &ListCodeRepositoriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCodeRepositories", params, optFns, addOperationListCodeRepositoriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCodeRepositories", params, optFns, c.addOperationListCodeRepositoriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +96,7 @@ type ListCodeRepositoriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCodeRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCodeRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCodeRepositories{}, middleware.After)
 	if err != nil {
 		return err

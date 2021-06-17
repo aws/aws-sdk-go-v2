@@ -17,7 +17,7 @@ func (c *Client) DeleteUserEndpoints(ctx context.Context, params *DeleteUserEndp
 		params = &DeleteUserEndpointsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteUserEndpoints", params, optFns, addOperationDeleteUserEndpointsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteUserEndpoints", params, optFns, c.addOperationDeleteUserEndpointsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteUserEndpointsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteUserEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteUserEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteUserEndpoints{}, middleware.After)
 	if err != nil {
 		return err

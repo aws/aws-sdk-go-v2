@@ -18,7 +18,7 @@ func (c *Client) GetSchemaAsJson(ctx context.Context, params *GetSchemaAsJsonInp
 		params = &GetSchemaAsJsonInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSchemaAsJson", params, optFns, addOperationGetSchemaAsJsonMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSchemaAsJson", params, optFns, c.addOperationGetSchemaAsJsonMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type GetSchemaAsJsonOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSchemaAsJsonMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSchemaAsJsonMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSchemaAsJson{}, middleware.After)
 	if err != nil {
 		return err

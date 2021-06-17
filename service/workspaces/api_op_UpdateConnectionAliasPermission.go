@@ -35,7 +35,7 @@ func (c *Client) UpdateConnectionAliasPermission(ctx context.Context, params *Up
 		params = &UpdateConnectionAliasPermissionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateConnectionAliasPermission", params, optFns, addOperationUpdateConnectionAliasPermissionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateConnectionAliasPermission", params, optFns, c.addOperationUpdateConnectionAliasPermissionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type UpdateConnectionAliasPermissionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateConnectionAliasPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateConnectionAliasPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateConnectionAliasPermission{}, middleware.After)
 	if err != nil {
 		return err

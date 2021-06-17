@@ -24,7 +24,7 @@ func (c *Client) GetRepositoryEndpoint(ctx context.Context, params *GetRepositor
 		params = &GetRepositoryEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRepositoryEndpoint", params, optFns, addOperationGetRepositoryEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRepositoryEndpoint", params, optFns, c.addOperationGetRepositoryEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetRepositoryEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRepositoryEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRepositoryEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRepositoryEndpoint{}, middleware.After)
 	if err != nil {
 		return err

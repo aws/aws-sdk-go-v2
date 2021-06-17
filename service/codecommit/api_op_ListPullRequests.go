@@ -19,7 +19,7 @@ func (c *Client) ListPullRequests(ctx context.Context, params *ListPullRequestsI
 		params = &ListPullRequestsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPullRequests", params, optFns, addOperationListPullRequestsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPullRequests", params, optFns, c.addOperationListPullRequestsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type ListPullRequestsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPullRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPullRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPullRequests{}, middleware.After)
 	if err != nil {
 		return err

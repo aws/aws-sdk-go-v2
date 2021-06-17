@@ -17,7 +17,7 @@ func (c *Client) GetOperationsForResource(ctx context.Context, params *GetOperat
 		params = &GetOperationsForResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetOperationsForResource", params, optFns, addOperationGetOperationsForResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetOperationsForResource", params, optFns, c.addOperationGetOperationsForResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type GetOperationsForResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetOperationsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetOperationsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOperationsForResource{}, middleware.After)
 	if err != nil {
 		return err

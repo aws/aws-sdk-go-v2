@@ -18,7 +18,7 @@ func (c *Client) StopProjectVersion(ctx context.Context, params *StopProjectVers
 		params = &StopProjectVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopProjectVersion", params, optFns, addOperationStopProjectVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopProjectVersion", params, optFns, c.addOperationStopProjectVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StopProjectVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopProjectVersion{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) CreateSipRule(ctx context.Context, params *CreateSipRuleInput, 
 		params = &CreateSipRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSipRule", params, optFns, addOperationCreateSipRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSipRule", params, optFns, c.addOperationCreateSipRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type CreateSipRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSipRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSipRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSipRule{}, middleware.After)
 	if err != nil {
 		return err

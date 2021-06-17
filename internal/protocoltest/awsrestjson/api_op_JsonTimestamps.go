@@ -17,7 +17,7 @@ func (c *Client) JsonTimestamps(ctx context.Context, params *JsonTimestampsInput
 		params = &JsonTimestampsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "JsonTimestamps", params, optFns, addOperationJsonTimestampsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "JsonTimestamps", params, optFns, c.addOperationJsonTimestampsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type JsonTimestampsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationJsonTimestampsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationJsonTimestampsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpJsonTimestamps{}, middleware.After)
 	if err != nil {
 		return err

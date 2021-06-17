@@ -19,7 +19,7 @@ func (c *Client) DeleteDhcpOptions(ctx context.Context, params *DeleteDhcpOption
 		params = &DeleteDhcpOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDhcpOptions", params, optFns, addOperationDeleteDhcpOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDhcpOptions", params, optFns, c.addOperationDeleteDhcpOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteDhcpOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDhcpOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDhcpOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteDhcpOptions{}, middleware.After)
 	if err != nil {
 		return err

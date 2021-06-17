@@ -17,7 +17,7 @@ func (c *Client) GetModelTemplate(ctx context.Context, params *GetModelTemplateI
 		params = &GetModelTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetModelTemplate", params, optFns, addOperationGetModelTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetModelTemplate", params, optFns, c.addOperationGetModelTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetModelTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetModelTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetModelTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetModelTemplate{}, middleware.After)
 	if err != nil {
 		return err

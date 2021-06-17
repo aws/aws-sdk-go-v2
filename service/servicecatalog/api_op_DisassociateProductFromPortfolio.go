@@ -17,7 +17,7 @@ func (c *Client) DisassociateProductFromPortfolio(ctx context.Context, params *D
 		params = &DisassociateProductFromPortfolioInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateProductFromPortfolio", params, optFns, addOperationDisassociateProductFromPortfolioMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateProductFromPortfolio", params, optFns, c.addOperationDisassociateProductFromPortfolioMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DisassociateProductFromPortfolioOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateProductFromPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateProductFromPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateProductFromPortfolio{}, middleware.After)
 	if err != nil {
 		return err

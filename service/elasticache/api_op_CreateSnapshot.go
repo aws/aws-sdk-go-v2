@@ -18,7 +18,7 @@ func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput
 		params = &CreateSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSnapshot", params, optFns, addOperationCreateSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSnapshot", params, optFns, c.addOperationCreateSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type CreateSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateSnapshot{}, middleware.After)
 	if err != nil {
 		return err

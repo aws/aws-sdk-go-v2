@@ -18,7 +18,7 @@ func (c *Client) ListPreparedStatements(ctx context.Context, params *ListPrepare
 		params = &ListPreparedStatementsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPreparedStatements", params, optFns, addOperationListPreparedStatementsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPreparedStatements", params, optFns, c.addOperationListPreparedStatementsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListPreparedStatementsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPreparedStatementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPreparedStatementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPreparedStatements{}, middleware.After)
 	if err != nil {
 		return err

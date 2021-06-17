@@ -17,7 +17,7 @@ func (c *Client) GetAttachment(ctx context.Context, params *GetAttachmentInput, 
 		params = &GetAttachmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAttachment", params, optFns, addOperationGetAttachmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAttachment", params, optFns, c.addOperationGetAttachmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetAttachmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAttachment{}, middleware.After)
 	if err != nil {
 		return err

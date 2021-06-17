@@ -24,7 +24,7 @@ func (c *Client) ListServiceSpecificCredentials(ctx context.Context, params *Lis
 		params = &ListServiceSpecificCredentialsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListServiceSpecificCredentials", params, optFns, addOperationListServiceSpecificCredentialsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListServiceSpecificCredentials", params, optFns, c.addOperationListServiceSpecificCredentialsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListServiceSpecificCredentialsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListServiceSpecificCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListServiceSpecificCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListServiceSpecificCredentials{}, middleware.After)
 	if err != nil {
 		return err

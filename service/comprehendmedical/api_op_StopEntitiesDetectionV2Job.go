@@ -16,7 +16,7 @@ func (c *Client) StopEntitiesDetectionV2Job(ctx context.Context, params *StopEnt
 		params = &StopEntitiesDetectionV2JobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopEntitiesDetectionV2Job", params, optFns, addOperationStopEntitiesDetectionV2JobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopEntitiesDetectionV2Job", params, optFns, c.addOperationStopEntitiesDetectionV2JobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type StopEntitiesDetectionV2JobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopEntitiesDetectionV2Job{}, middleware.After)
 	if err != nil {
 		return err

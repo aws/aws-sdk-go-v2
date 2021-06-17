@@ -17,7 +17,7 @@ func (c *Client) DeleteNetworkInterface(ctx context.Context, params *DeleteNetwo
 		params = &DeleteNetworkInterfaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteNetworkInterface", params, optFns, addOperationDeleteNetworkInterfaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteNetworkInterface", params, optFns, c.addOperationDeleteNetworkInterfaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteNetworkInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteNetworkInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteNetworkInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteNetworkInterface{}, middleware.After)
 	if err != nil {
 		return err

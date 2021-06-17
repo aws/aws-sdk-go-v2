@@ -16,7 +16,7 @@ func (c *Client) DeleteRouteSettings(ctx context.Context, params *DeleteRouteSet
 		params = &DeleteRouteSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRouteSettings", params, optFns, addOperationDeleteRouteSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRouteSettings", params, optFns, c.addOperationDeleteRouteSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteRouteSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRouteSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRouteSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRouteSettings{}, middleware.After)
 	if err != nil {
 		return err

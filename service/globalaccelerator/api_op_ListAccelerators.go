@@ -18,7 +18,7 @@ func (c *Client) ListAccelerators(ctx context.Context, params *ListAcceleratorsI
 		params = &ListAcceleratorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAccelerators", params, optFns, addOperationListAcceleratorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAccelerators", params, optFns, c.addOperationListAcceleratorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ListAcceleratorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAcceleratorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAcceleratorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccelerators{}, middleware.After)
 	if err != nil {
 		return err

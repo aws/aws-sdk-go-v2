@@ -17,7 +17,7 @@ func (c *Client) BatchDeleteClusterSnapshots(ctx context.Context, params *BatchD
 		params = &BatchDeleteClusterSnapshotsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteClusterSnapshots", params, optFns, addOperationBatchDeleteClusterSnapshotsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteClusterSnapshots", params, optFns, c.addOperationBatchDeleteClusterSnapshotsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type BatchDeleteClusterSnapshotsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteClusterSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteClusterSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpBatchDeleteClusterSnapshots{}, middleware.After)
 	if err != nil {
 		return err

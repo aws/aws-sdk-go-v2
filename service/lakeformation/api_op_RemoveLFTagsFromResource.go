@@ -19,7 +19,7 @@ func (c *Client) RemoveLFTagsFromResource(ctx context.Context, params *RemoveLFT
 		params = &RemoveLFTagsFromResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveLFTagsFromResource", params, optFns, addOperationRemoveLFTagsFromResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveLFTagsFromResource", params, optFns, c.addOperationRemoveLFTagsFromResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type RemoveLFTagsFromResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveLFTagsFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveLFTagsFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveLFTagsFromResource{}, middleware.After)
 	if err != nil {
 		return err

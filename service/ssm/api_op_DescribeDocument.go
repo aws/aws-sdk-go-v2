@@ -17,7 +17,7 @@ func (c *Client) DescribeDocument(ctx context.Context, params *DescribeDocumentI
 		params = &DescribeDocumentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDocument", params, optFns, addOperationDescribeDocumentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDocument", params, optFns, c.addOperationDescribeDocumentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeDocumentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDocument{}, middleware.After)
 	if err != nil {
 		return err

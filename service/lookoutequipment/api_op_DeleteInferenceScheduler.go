@@ -17,7 +17,7 @@ func (c *Client) DeleteInferenceScheduler(ctx context.Context, params *DeleteInf
 		params = &DeleteInferenceSchedulerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteInferenceScheduler", params, optFns, addOperationDeleteInferenceSchedulerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInferenceScheduler", params, optFns, c.addOperationDeleteInferenceSchedulerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteInferenceSchedulerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteInferenceScheduler{}, middleware.After)
 	if err != nil {
 		return err

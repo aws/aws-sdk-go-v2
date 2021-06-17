@@ -65,7 +65,7 @@ func (c *Client) DetectLabels(ctx context.Context, params *DetectLabelsInput, op
 		params = &DetectLabelsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetectLabels", params, optFns, addOperationDetectLabelsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetectLabels", params, optFns, c.addOperationDetectLabelsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -122,7 +122,7 @@ type DetectLabelsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetectLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetectLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectLabels{}, middleware.After)
 	if err != nil {
 		return err

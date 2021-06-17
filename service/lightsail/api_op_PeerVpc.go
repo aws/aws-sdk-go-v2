@@ -17,7 +17,7 @@ func (c *Client) PeerVpc(ctx context.Context, params *PeerVpcInput, optFns ...fu
 		params = &PeerVpcInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PeerVpc", params, optFns, addOperationPeerVpcMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PeerVpc", params, optFns, c.addOperationPeerVpcMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type PeerVpcOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPeerVpcMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPeerVpcMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPeerVpc{}, middleware.After)
 	if err != nil {
 		return err

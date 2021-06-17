@@ -24,7 +24,7 @@ func (c *Client) BatchUpdatePhoneNumber(ctx context.Context, params *BatchUpdate
 		params = &BatchUpdatePhoneNumberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchUpdatePhoneNumber", params, optFns, addOperationBatchUpdatePhoneNumberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchUpdatePhoneNumber", params, optFns, c.addOperationBatchUpdatePhoneNumberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type BatchUpdatePhoneNumberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchUpdatePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchUpdatePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdatePhoneNumber{}, middleware.After)
 	if err != nil {
 		return err

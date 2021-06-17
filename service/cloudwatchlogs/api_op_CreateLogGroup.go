@@ -43,7 +43,7 @@ func (c *Client) CreateLogGroup(ctx context.Context, params *CreateLogGroupInput
 		params = &CreateLogGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLogGroup", params, optFns, addOperationCreateLogGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLogGroup", params, optFns, c.addOperationCreateLogGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type CreateLogGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLogGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLogGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLogGroup{}, middleware.After)
 	if err != nil {
 		return err

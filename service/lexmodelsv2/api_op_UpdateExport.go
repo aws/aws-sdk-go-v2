@@ -18,7 +18,7 @@ func (c *Client) UpdateExport(ctx context.Context, params *UpdateExportInput, op
 		params = &UpdateExportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateExport", params, optFns, addOperationUpdateExportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateExport", params, optFns, c.addOperationUpdateExportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type UpdateExportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateExport{}, middleware.After)
 	if err != nil {
 		return err

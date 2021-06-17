@@ -28,7 +28,7 @@ func (c *Client) RegisterResource(ctx context.Context, params *RegisterResourceI
 		params = &RegisterResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterResource", params, optFns, addOperationRegisterResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterResource", params, optFns, c.addOperationRegisterResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type RegisterResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterResource{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) PollForJobs(ctx context.Context, params *PollForJobsInput, optF
 		params = &PollForJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PollForJobs", params, optFns, addOperationPollForJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PollForJobs", params, optFns, c.addOperationPollForJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type PollForJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPollForJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPollForJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPollForJobs{}, middleware.After)
 	if err != nil {
 		return err

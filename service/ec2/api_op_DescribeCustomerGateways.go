@@ -25,7 +25,7 @@ func (c *Client) DescribeCustomerGateways(ctx context.Context, params *DescribeC
 		params = &DescribeCustomerGatewaysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCustomerGateways", params, optFns, addOperationDescribeCustomerGatewaysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCustomerGateways", params, optFns, c.addOperationDescribeCustomerGatewaysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type DescribeCustomerGatewaysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCustomerGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCustomerGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeCustomerGateways{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) CreateInstanceExportTask(ctx context.Context, params *CreateIns
 		params = &CreateInstanceExportTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateInstanceExportTask", params, optFns, addOperationCreateInstanceExportTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateInstanceExportTask", params, optFns, c.addOperationCreateInstanceExportTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type CreateInstanceExportTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateInstanceExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateInstanceExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateInstanceExportTask{}, middleware.After)
 	if err != nil {
 		return err

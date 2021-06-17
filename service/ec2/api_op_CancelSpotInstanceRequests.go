@@ -18,7 +18,7 @@ func (c *Client) CancelSpotInstanceRequests(ctx context.Context, params *CancelS
 		params = &CancelSpotInstanceRequestsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelSpotInstanceRequests", params, optFns, addOperationCancelSpotInstanceRequestsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelSpotInstanceRequests", params, optFns, c.addOperationCancelSpotInstanceRequestsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type CancelSpotInstanceRequestsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelSpotInstanceRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelSpotInstanceRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCancelSpotInstanceRequests{}, middleware.After)
 	if err != nil {
 		return err

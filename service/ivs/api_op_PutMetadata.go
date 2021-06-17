@@ -23,7 +23,7 @@ func (c *Client) PutMetadata(ctx context.Context, params *PutMetadataInput, optF
 		params = &PutMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutMetadata", params, optFns, addOperationPutMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutMetadata", params, optFns, c.addOperationPutMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type PutMetadataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutMetadata{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) AcceptInputDeviceTransfer(ctx context.Context, params *AcceptIn
 		params = &AcceptInputDeviceTransferInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcceptInputDeviceTransfer", params, optFns, addOperationAcceptInputDeviceTransferMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcceptInputDeviceTransfer", params, optFns, c.addOperationAcceptInputDeviceTransferMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type AcceptInputDeviceTransferOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAcceptInputDeviceTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAcceptInputDeviceTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptInputDeviceTransfer{}, middleware.After)
 	if err != nil {
 		return err

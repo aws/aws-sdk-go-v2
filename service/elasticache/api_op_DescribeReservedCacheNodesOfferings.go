@@ -18,7 +18,7 @@ func (c *Client) DescribeReservedCacheNodesOfferings(ctx context.Context, params
 		params = &DescribeReservedCacheNodesOfferingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeReservedCacheNodesOfferings", params, optFns, addOperationDescribeReservedCacheNodesOfferingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeReservedCacheNodesOfferings", params, optFns, c.addOperationDescribeReservedCacheNodesOfferingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -145,7 +145,7 @@ type DescribeReservedCacheNodesOfferingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeReservedCacheNodesOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeReservedCacheNodesOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeReservedCacheNodesOfferings{}, middleware.After)
 	if err != nil {
 		return err

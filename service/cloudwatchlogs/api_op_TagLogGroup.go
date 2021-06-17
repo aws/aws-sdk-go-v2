@@ -23,7 +23,7 @@ func (c *Client) TagLogGroup(ctx context.Context, params *TagLogGroupInput, optF
 		params = &TagLogGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TagLogGroup", params, optFns, addOperationTagLogGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagLogGroup", params, optFns, c.addOperationTagLogGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type TagLogGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTagLogGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTagLogGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTagLogGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -14,7 +14,7 @@ func (c *Client) QueryPrecedence(ctx context.Context, params *QueryPrecedenceInp
 		params = &QueryPrecedenceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "QueryPrecedence", params, optFns, addOperationQueryPrecedenceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "QueryPrecedence", params, optFns, c.addOperationQueryPrecedenceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ type QueryPrecedenceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationQueryPrecedenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationQueryPrecedenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpQueryPrecedence{}, middleware.After)
 	if err != nil {
 		return err

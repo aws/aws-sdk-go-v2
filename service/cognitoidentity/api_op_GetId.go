@@ -17,7 +17,7 @@ func (c *Client) GetId(ctx context.Context, params *GetIdInput, optFns ...func(*
 		params = &GetIdInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetId", params, optFns, addOperationGetIdMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetId", params, optFns, c.addOperationGetIdMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type GetIdOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetId{}, middleware.After)
 	if err != nil {
 		return err

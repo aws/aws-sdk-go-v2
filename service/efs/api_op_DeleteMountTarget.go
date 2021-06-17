@@ -36,7 +36,7 @@ func (c *Client) DeleteMountTarget(ctx context.Context, params *DeleteMountTarge
 		params = &DeleteMountTargetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMountTarget", params, optFns, addOperationDeleteMountTargetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMountTarget", params, optFns, c.addOperationDeleteMountTargetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DeleteMountTargetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMountTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMountTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMountTarget{}, middleware.After)
 	if err != nil {
 		return err

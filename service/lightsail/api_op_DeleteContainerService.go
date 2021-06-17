@@ -16,7 +16,7 @@ func (c *Client) DeleteContainerService(ctx context.Context, params *DeleteConta
 		params = &DeleteContainerServiceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteContainerService", params, optFns, addOperationDeleteContainerServiceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteContainerService", params, optFns, c.addOperationDeleteContainerServiceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteContainerServiceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteContainerServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteContainerServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteContainerService{}, middleware.After)
 	if err != nil {
 		return err

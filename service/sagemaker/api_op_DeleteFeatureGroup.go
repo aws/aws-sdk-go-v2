@@ -20,7 +20,7 @@ func (c *Client) DeleteFeatureGroup(ctx context.Context, params *DeleteFeatureGr
 		params = &DeleteFeatureGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFeatureGroup", params, optFns, addOperationDeleteFeatureGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFeatureGroup", params, optFns, c.addOperationDeleteFeatureGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteFeatureGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFeatureGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFeatureGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFeatureGroup{}, middleware.After)
 	if err != nil {
 		return err

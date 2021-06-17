@@ -18,7 +18,7 @@ func (c *Client) InputAndOutputWithHeaders(ctx context.Context, params *InputAnd
 		params = &InputAndOutputWithHeadersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InputAndOutputWithHeaders", params, optFns, addOperationInputAndOutputWithHeadersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InputAndOutputWithHeaders", params, optFns, c.addOperationInputAndOutputWithHeadersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ type InputAndOutputWithHeadersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInputAndOutputWithHeadersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInputAndOutputWithHeadersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInputAndOutputWithHeaders{}, middleware.After)
 	if err != nil {
 		return err

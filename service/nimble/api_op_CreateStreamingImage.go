@@ -18,7 +18,7 @@ func (c *Client) CreateStreamingImage(ctx context.Context, params *CreateStreami
 		params = &CreateStreamingImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateStreamingImage", params, optFns, addOperationCreateStreamingImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateStreamingImage", params, optFns, c.addOperationCreateStreamingImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type CreateStreamingImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateStreamingImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateStreamingImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStreamingImage{}, middleware.After)
 	if err != nil {
 		return err

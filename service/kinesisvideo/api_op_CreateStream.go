@@ -21,7 +21,7 @@ func (c *Client) CreateStream(ctx context.Context, params *CreateStreamInput, op
 		params = &CreateStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateStream", params, optFns, addOperationCreateStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateStream", params, optFns, c.addOperationCreateStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type CreateStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStream{}, middleware.After)
 	if err != nil {
 		return err

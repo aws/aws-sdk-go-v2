@@ -18,7 +18,7 @@ func (c *Client) ListProvisioningArtifacts(ctx context.Context, params *ListProv
 		params = &ListProvisioningArtifactsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListProvisioningArtifacts", params, optFns, addOperationListProvisioningArtifactsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListProvisioningArtifacts", params, optFns, c.addOperationListProvisioningArtifactsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListProvisioningArtifactsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListProvisioningArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListProvisioningArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProvisioningArtifacts{}, middleware.After)
 	if err != nil {
 		return err

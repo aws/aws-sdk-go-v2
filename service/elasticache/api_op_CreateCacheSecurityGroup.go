@@ -22,7 +22,7 @@ func (c *Client) CreateCacheSecurityGroup(ctx context.Context, params *CreateCac
 		params = &CreateCacheSecurityGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCacheSecurityGroup", params, optFns, addOperationCreateCacheSecurityGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCacheSecurityGroup", params, optFns, c.addOperationCreateCacheSecurityGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type CreateCacheSecurityGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCacheSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCacheSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateCacheSecurityGroup{}, middleware.After)
 	if err != nil {
 		return err

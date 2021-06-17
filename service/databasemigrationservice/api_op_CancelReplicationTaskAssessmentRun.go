@@ -19,7 +19,7 @@ func (c *Client) CancelReplicationTaskAssessmentRun(ctx context.Context, params 
 		params = &CancelReplicationTaskAssessmentRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelReplicationTaskAssessmentRun", params, optFns, addOperationCancelReplicationTaskAssessmentRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelReplicationTaskAssessmentRun", params, optFns, c.addOperationCancelReplicationTaskAssessmentRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type CancelReplicationTaskAssessmentRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelReplicationTaskAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelReplicationTaskAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelReplicationTaskAssessmentRun{}, middleware.After)
 	if err != nil {
 		return err

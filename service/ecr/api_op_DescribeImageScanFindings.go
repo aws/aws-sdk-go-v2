@@ -22,7 +22,7 @@ func (c *Client) DescribeImageScanFindings(ctx context.Context, params *Describe
 		params = &DescribeImageScanFindingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeImageScanFindings", params, optFns, addOperationDescribeImageScanFindingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeImageScanFindings", params, optFns, c.addOperationDescribeImageScanFindingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type DescribeImageScanFindingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeImageScanFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeImageScanFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImageScanFindings{}, middleware.After)
 	if err != nil {
 		return err

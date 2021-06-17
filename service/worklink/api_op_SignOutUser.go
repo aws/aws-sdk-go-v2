@@ -17,7 +17,7 @@ func (c *Client) SignOutUser(ctx context.Context, params *SignOutUserInput, optF
 		params = &SignOutUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SignOutUser", params, optFns, addOperationSignOutUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SignOutUser", params, optFns, c.addOperationSignOutUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type SignOutUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSignOutUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSignOutUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSignOutUser{}, middleware.After)
 	if err != nil {
 		return err

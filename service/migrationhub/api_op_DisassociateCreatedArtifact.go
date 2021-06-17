@@ -30,7 +30,7 @@ func (c *Client) DisassociateCreatedArtifact(ctx context.Context, params *Disass
 		params = &DisassociateCreatedArtifactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateCreatedArtifact", params, optFns, addOperationDisassociateCreatedArtifactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateCreatedArtifact", params, optFns, c.addOperationDisassociateCreatedArtifactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DisassociateCreatedArtifactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateCreatedArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateCreatedArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateCreatedArtifact{}, middleware.After)
 	if err != nil {
 		return err

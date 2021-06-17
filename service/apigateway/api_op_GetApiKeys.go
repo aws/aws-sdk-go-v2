@@ -18,7 +18,7 @@ func (c *Client) GetApiKeys(ctx context.Context, params *GetApiKeysInput, optFns
 		params = &GetApiKeysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetApiKeys", params, optFns, addOperationGetApiKeysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetApiKeys", params, optFns, c.addOperationGetApiKeysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type GetApiKeysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetApiKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetApiKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApiKeys{}, middleware.After)
 	if err != nil {
 		return err

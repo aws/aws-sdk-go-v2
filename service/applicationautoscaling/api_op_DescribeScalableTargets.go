@@ -19,7 +19,7 @@ func (c *Client) DescribeScalableTargets(ctx context.Context, params *DescribeSc
 		params = &DescribeScalableTargetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeScalableTargets", params, optFns, addOperationDescribeScalableTargetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeScalableTargets", params, optFns, c.addOperationDescribeScalableTargetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -195,7 +195,7 @@ type DescribeScalableTargetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeScalableTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeScalableTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeScalableTargets{}, middleware.After)
 	if err != nil {
 		return err

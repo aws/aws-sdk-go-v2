@@ -17,7 +17,7 @@ func (c *Client) RevokeClientVpnIngress(ctx context.Context, params *RevokeClien
 		params = &RevokeClientVpnIngressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokeClientVpnIngress", params, optFns, addOperationRevokeClientVpnIngressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeClientVpnIngress", params, optFns, c.addOperationRevokeClientVpnIngressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type RevokeClientVpnIngressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokeClientVpnIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokeClientVpnIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpRevokeClientVpnIngress{}, middleware.After)
 	if err != nil {
 		return err

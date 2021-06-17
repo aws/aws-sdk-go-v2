@@ -17,7 +17,7 @@ func (c *Client) RevokeFlowEntitlement(ctx context.Context, params *RevokeFlowEn
 		params = &RevokeFlowEntitlementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokeFlowEntitlement", params, optFns, addOperationRevokeFlowEntitlementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeFlowEntitlement", params, optFns, c.addOperationRevokeFlowEntitlementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type RevokeFlowEntitlementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokeFlowEntitlementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokeFlowEntitlementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokeFlowEntitlement{}, middleware.After)
 	if err != nil {
 		return err

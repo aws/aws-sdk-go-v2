@@ -60,7 +60,7 @@ func (c *Client) GetProfile(ctx context.Context, params *GetProfileInput, optFns
 		params = &GetProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetProfile", params, optFns, addOperationGetProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetProfile", params, optFns, c.addOperationGetProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -135,7 +135,7 @@ type GetProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProfile{}, middleware.After)
 	if err != nil {
 		return err

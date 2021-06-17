@@ -16,7 +16,7 @@ func (c *Client) DeleteProfilingGroup(ctx context.Context, params *DeleteProfili
 		params = &DeleteProfilingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProfilingGroup", params, optFns, addOperationDeleteProfilingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProfilingGroup", params, optFns, c.addOperationDeleteProfilingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteProfilingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteProfilingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteProfilingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProfilingGroup{}, middleware.After)
 	if err != nil {
 		return err

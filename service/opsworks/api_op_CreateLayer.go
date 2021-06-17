@@ -28,7 +28,7 @@ func (c *Client) CreateLayer(ctx context.Context, params *CreateLayerInput, optF
 		params = &CreateLayerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLayer", params, optFns, addOperationCreateLayerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLayer", params, optFns, c.addOperationCreateLayerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -143,7 +143,7 @@ type CreateLayerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLayerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLayerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLayer{}, middleware.After)
 	if err != nil {
 		return err

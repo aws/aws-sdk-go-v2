@@ -20,7 +20,7 @@ func (c *Client) UpdateTaskSet(ctx context.Context, params *UpdateTaskSetInput, 
 		params = &UpdateTaskSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateTaskSet", params, optFns, addOperationUpdateTaskSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateTaskSet", params, optFns, c.addOperationUpdateTaskSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type UpdateTaskSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateTaskSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateTaskSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTaskSet{}, middleware.After)
 	if err != nil {
 		return err

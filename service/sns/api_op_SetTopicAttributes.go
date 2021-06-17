@@ -16,7 +16,7 @@ func (c *Client) SetTopicAttributes(ctx context.Context, params *SetTopicAttribu
 		params = &SetTopicAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetTopicAttributes", params, optFns, addOperationSetTopicAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetTopicAttributes", params, optFns, c.addOperationSetTopicAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type SetTopicAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetTopicAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetTopicAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetTopicAttributes{}, middleware.After)
 	if err != nil {
 		return err

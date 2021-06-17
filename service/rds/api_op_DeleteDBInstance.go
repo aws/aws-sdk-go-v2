@@ -39,7 +39,7 @@ func (c *Client) DeleteDBInstance(ctx context.Context, params *DeleteDBInstanceI
 		params = &DeleteDBInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDBInstance", params, optFns, addOperationDeleteDBInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDBInstance", params, optFns, c.addOperationDeleteDBInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ type DeleteDBInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBInstance{}, middleware.After)
 	if err != nil {
 		return err

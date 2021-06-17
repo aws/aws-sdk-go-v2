@@ -22,7 +22,7 @@ func (c *Client) ConnectDirectory(ctx context.Context, params *ConnectDirectoryI
 		params = &ConnectDirectoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ConnectDirectory", params, optFns, addOperationConnectDirectoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ConnectDirectory", params, optFns, c.addOperationConnectDirectoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type ConnectDirectoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationConnectDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationConnectDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConnectDirectory{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) StartElasticsearchServiceSoftwareUpdate(ctx context.Context, pa
 		params = &StartElasticsearchServiceSoftwareUpdateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartElasticsearchServiceSoftwareUpdate", params, optFns, addOperationStartElasticsearchServiceSoftwareUpdateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartElasticsearchServiceSoftwareUpdate", params, optFns, c.addOperationStartElasticsearchServiceSoftwareUpdateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type StartElasticsearchServiceSoftwareUpdateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartElasticsearchServiceSoftwareUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartElasticsearchServiceSoftwareUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartElasticsearchServiceSoftwareUpdate{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) DetachDisk(ctx context.Context, params *DetachDiskInput, optFns
 		params = &DetachDiskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachDisk", params, optFns, addOperationDetachDiskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachDisk", params, optFns, c.addOperationDetachDiskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DetachDiskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachDiskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachDiskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetachDisk{}, middleware.After)
 	if err != nil {
 		return err

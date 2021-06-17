@@ -20,7 +20,7 @@ func (c *Client) ResetSnapshotAttribute(ctx context.Context, params *ResetSnapsh
 		params = &ResetSnapshotAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetSnapshotAttribute", params, optFns, addOperationResetSnapshotAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetSnapshotAttribute", params, optFns, c.addOperationResetSnapshotAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ResetSnapshotAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetSnapshotAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetSnapshotAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpResetSnapshotAttribute{}, middleware.After)
 	if err != nil {
 		return err

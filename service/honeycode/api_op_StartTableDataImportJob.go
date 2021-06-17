@@ -20,7 +20,7 @@ func (c *Client) StartTableDataImportJob(ctx context.Context, params *StartTable
 		params = &StartTableDataImportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartTableDataImportJob", params, optFns, addOperationStartTableDataImportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartTableDataImportJob", params, optFns, c.addOperationStartTableDataImportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type StartTableDataImportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartTableDataImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartTableDataImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartTableDataImportJob{}, middleware.After)
 	if err != nil {
 		return err

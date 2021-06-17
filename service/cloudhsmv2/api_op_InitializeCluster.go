@@ -20,7 +20,7 @@ func (c *Client) InitializeCluster(ctx context.Context, params *InitializeCluste
 		params = &InitializeClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InitializeCluster", params, optFns, addOperationInitializeClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InitializeCluster", params, optFns, c.addOperationInitializeClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type InitializeClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInitializeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInitializeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInitializeCluster{}, middleware.After)
 	if err != nil {
 		return err

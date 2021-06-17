@@ -20,7 +20,7 @@ func (c *Client) ResumeService(ctx context.Context, params *ResumeServiceInput, 
 		params = &ResumeServiceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResumeService", params, optFns, addOperationResumeServiceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResumeService", params, optFns, c.addOperationResumeServiceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ResumeServiceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResumeServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResumeServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpResumeService{}, middleware.After)
 	if err != nil {
 		return err

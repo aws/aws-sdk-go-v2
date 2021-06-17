@@ -24,7 +24,7 @@ func (c *Client) GetJobUnlockCode(ctx context.Context, params *GetJobUnlockCodeI
 		params = &GetJobUnlockCodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetJobUnlockCode", params, optFns, addOperationGetJobUnlockCodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetJobUnlockCode", params, optFns, c.addOperationGetJobUnlockCodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetJobUnlockCodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetJobUnlockCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetJobUnlockCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetJobUnlockCode{}, middleware.After)
 	if err != nil {
 		return err

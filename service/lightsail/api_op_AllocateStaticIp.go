@@ -17,7 +17,7 @@ func (c *Client) AllocateStaticIp(ctx context.Context, params *AllocateStaticIpI
 		params = &AllocateStaticIpInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AllocateStaticIp", params, optFns, addOperationAllocateStaticIpMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AllocateStaticIp", params, optFns, c.addOperationAllocateStaticIpMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type AllocateStaticIpOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAllocateStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAllocateStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAllocateStaticIp{}, middleware.After)
 	if err != nil {
 		return err

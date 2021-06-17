@@ -23,7 +23,7 @@ func (c *Client) DenyCustomRoutingTraffic(ctx context.Context, params *DenyCusto
 		params = &DenyCustomRoutingTrafficInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DenyCustomRoutingTraffic", params, optFns, addOperationDenyCustomRoutingTrafficMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DenyCustomRoutingTraffic", params, optFns, c.addOperationDenyCustomRoutingTrafficMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DenyCustomRoutingTrafficOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDenyCustomRoutingTrafficMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDenyCustomRoutingTrafficMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDenyCustomRoutingTraffic{}, middleware.After)
 	if err != nil {
 		return err

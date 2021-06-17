@@ -35,7 +35,7 @@ func (c *Client) PutResourceAttributes(ctx context.Context, params *PutResourceA
 		params = &PutResourceAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutResourceAttributes", params, optFns, addOperationPutResourceAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutResourceAttributes", params, optFns, c.addOperationPutResourceAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type PutResourceAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutResourceAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutResourceAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutResourceAttributes{}, middleware.After)
 	if err != nil {
 		return err

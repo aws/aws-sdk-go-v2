@@ -23,7 +23,7 @@ func (c *Client) StartDBCluster(ctx context.Context, params *StartDBClusterInput
 		params = &StartDBClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDBCluster", params, optFns, addOperationStartDBClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDBCluster", params, optFns, c.addOperationStartDBClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type StartDBClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartDBCluster{}, middleware.After)
 	if err != nil {
 		return err

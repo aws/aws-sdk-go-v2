@@ -52,7 +52,7 @@ func (c *Client) TagServerCertificate(ctx context.Context, params *TagServerCert
 		params = &TagServerCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TagServerCertificate", params, optFns, addOperationTagServerCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagServerCertificate", params, optFns, c.addOperationTagServerCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type TagServerCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTagServerCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTagServerCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpTagServerCertificate{}, middleware.After)
 	if err != nil {
 		return err

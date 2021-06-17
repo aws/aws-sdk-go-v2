@@ -24,7 +24,7 @@ func (c *Client) DescribeRouteTables(ctx context.Context, params *DescribeRouteT
 		params = &DescribeRouteTablesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRouteTables", params, optFns, addOperationDescribeRouteTablesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRouteTables", params, optFns, c.addOperationDescribeRouteTablesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -142,7 +142,7 @@ type DescribeRouteTablesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRouteTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRouteTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeRouteTables{}, middleware.After)
 	if err != nil {
 		return err

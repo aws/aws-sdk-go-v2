@@ -20,7 +20,7 @@ func (c *Client) DescribeTerminationPolicyTypes(ctx context.Context, params *Des
 		params = &DescribeTerminationPolicyTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTerminationPolicyTypes", params, optFns, addOperationDescribeTerminationPolicyTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTerminationPolicyTypes", params, optFns, c.addOperationDescribeTerminationPolicyTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeTerminationPolicyTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTerminationPolicyTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTerminationPolicyTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTerminationPolicyTypes{}, middleware.After)
 	if err != nil {
 		return err

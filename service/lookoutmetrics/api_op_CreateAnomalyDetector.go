@@ -17,7 +17,7 @@ func (c *Client) CreateAnomalyDetector(ctx context.Context, params *CreateAnomal
 		params = &CreateAnomalyDetectorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAnomalyDetector", params, optFns, addOperationCreateAnomalyDetectorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAnomalyDetector", params, optFns, c.addOperationCreateAnomalyDetectorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type CreateAnomalyDetectorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAnomalyDetector{}, middleware.After)
 	if err != nil {
 		return err

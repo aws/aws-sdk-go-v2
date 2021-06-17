@@ -23,7 +23,7 @@ func (c *Client) AddWorkingStorage(ctx context.Context, params *AddWorkingStorag
 		params = &AddWorkingStorageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddWorkingStorage", params, optFns, addOperationAddWorkingStorageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddWorkingStorage", params, optFns, c.addOperationAddWorkingStorageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type AddWorkingStorageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddWorkingStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddWorkingStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddWorkingStorage{}, middleware.After)
 	if err != nil {
 		return err

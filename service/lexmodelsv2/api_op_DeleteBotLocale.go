@@ -18,7 +18,7 @@ func (c *Client) DeleteBotLocale(ctx context.Context, params *DeleteBotLocaleInp
 		params = &DeleteBotLocaleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBotLocale", params, optFns, addOperationDeleteBotLocaleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBotLocale", params, optFns, c.addOperationDeleteBotLocaleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DeleteBotLocaleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBotLocale{}, middleware.After)
 	if err != nil {
 		return err

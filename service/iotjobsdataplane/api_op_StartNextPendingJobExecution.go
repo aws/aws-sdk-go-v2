@@ -18,7 +18,7 @@ func (c *Client) StartNextPendingJobExecution(ctx context.Context, params *Start
 		params = &StartNextPendingJobExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartNextPendingJobExecution", params, optFns, addOperationStartNextPendingJobExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartNextPendingJobExecution", params, optFns, c.addOperationStartNextPendingJobExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type StartNextPendingJobExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartNextPendingJobExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartNextPendingJobExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartNextPendingJobExecution{}, middleware.After)
 	if err != nil {
 		return err

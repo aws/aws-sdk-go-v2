@@ -16,7 +16,7 @@ func (c *Client) RejectInputDeviceTransfer(ctx context.Context, params *RejectIn
 		params = &RejectInputDeviceTransferInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RejectInputDeviceTransfer", params, optFns, addOperationRejectInputDeviceTransferMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RejectInputDeviceTransfer", params, optFns, c.addOperationRejectInputDeviceTransferMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type RejectInputDeviceTransferOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRejectInputDeviceTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRejectInputDeviceTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectInputDeviceTransfer{}, middleware.After)
 	if err != nil {
 		return err

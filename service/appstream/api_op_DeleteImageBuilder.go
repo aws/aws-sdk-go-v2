@@ -17,7 +17,7 @@ func (c *Client) DeleteImageBuilder(ctx context.Context, params *DeleteImageBuil
 		params = &DeleteImageBuilderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteImageBuilder", params, optFns, addOperationDeleteImageBuilderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteImageBuilder", params, optFns, c.addOperationDeleteImageBuilderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteImageBuilderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteImageBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteImageBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteImageBuilder{}, middleware.After)
 	if err != nil {
 		return err

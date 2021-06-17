@@ -22,7 +22,7 @@ func (c *Client) CreateMesh(ctx context.Context, params *CreateMeshInput, optFns
 		params = &CreateMeshInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMesh", params, optFns, addOperationCreateMeshMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMesh", params, optFns, c.addOperationCreateMeshMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type CreateMeshOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMesh{}, middleware.After)
 	if err != nil {
 		return err

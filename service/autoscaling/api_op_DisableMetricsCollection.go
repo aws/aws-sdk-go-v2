@@ -16,7 +16,7 @@ func (c *Client) DisableMetricsCollection(ctx context.Context, params *DisableMe
 		params = &DisableMetricsCollectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableMetricsCollection", params, optFns, addOperationDisableMetricsCollectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableMetricsCollection", params, optFns, c.addOperationDisableMetricsCollectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type DisableMetricsCollectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableMetricsCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableMetricsCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDisableMetricsCollection{}, middleware.After)
 	if err != nil {
 		return err

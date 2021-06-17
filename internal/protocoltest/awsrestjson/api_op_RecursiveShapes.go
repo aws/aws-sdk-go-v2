@@ -16,7 +16,7 @@ func (c *Client) RecursiveShapes(ctx context.Context, params *RecursiveShapesInp
 		params = &RecursiveShapesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RecursiveShapes", params, optFns, addOperationRecursiveShapesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RecursiveShapes", params, optFns, c.addOperationRecursiveShapesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type RecursiveShapesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRecursiveShapesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRecursiveShapesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRecursiveShapes{}, middleware.After)
 	if err != nil {
 		return err

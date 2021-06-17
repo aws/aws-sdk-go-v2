@@ -19,7 +19,7 @@ func (c *Client) GetEvaluation(ctx context.Context, params *GetEvaluationInput, 
 		params = &GetEvaluationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEvaluation", params, optFns, addOperationGetEvaluationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEvaluation", params, optFns, c.addOperationGetEvaluationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -130,7 +130,7 @@ type GetEvaluationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEvaluation{}, middleware.After)
 	if err != nil {
 		return err

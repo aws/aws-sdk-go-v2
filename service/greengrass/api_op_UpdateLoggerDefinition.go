@@ -16,7 +16,7 @@ func (c *Client) UpdateLoggerDefinition(ctx context.Context, params *UpdateLogge
 		params = &UpdateLoggerDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLoggerDefinition", params, optFns, addOperationUpdateLoggerDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLoggerDefinition", params, optFns, c.addOperationUpdateLoggerDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type UpdateLoggerDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLoggerDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLoggerDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLoggerDefinition{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) TestRenderTemplate(ctx context.Context, params *TestRenderTempl
 		params = &TestRenderTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestRenderTemplate", params, optFns, addOperationTestRenderTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestRenderTemplate", params, optFns, c.addOperationTestRenderTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type TestRenderTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTestRenderTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestRenderTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpTestRenderTemplate{}, middleware.After)
 	if err != nil {
 		return err

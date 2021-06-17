@@ -22,7 +22,7 @@ func (c *Client) DescribeDBSnapshots(ctx context.Context, params *DescribeDBSnap
 		params = &DescribeDBSnapshotsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDBSnapshots", params, optFns, addOperationDescribeDBSnapshotsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDBSnapshots", params, optFns, c.addOperationDescribeDBSnapshotsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -148,7 +148,7 @@ type DescribeDBSnapshotsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDBSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDBSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBSnapshots{}, middleware.After)
 	if err != nil {
 		return err

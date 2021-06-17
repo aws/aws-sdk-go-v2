@@ -17,7 +17,7 @@ func (c *Client) MergeBranchesBySquash(ctx context.Context, params *MergeBranche
 		params = &MergeBranchesBySquashInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MergeBranchesBySquash", params, optFns, addOperationMergeBranchesBySquashMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MergeBranchesBySquash", params, optFns, c.addOperationMergeBranchesBySquashMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type MergeBranchesBySquashOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMergeBranchesBySquashMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMergeBranchesBySquashMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergeBranchesBySquash{}, middleware.After)
 	if err != nil {
 		return err

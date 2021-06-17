@@ -18,7 +18,7 @@ func (c *Client) UpdateTypedLinkFacet(ctx context.Context, params *UpdateTypedLi
 		params = &UpdateTypedLinkFacetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateTypedLinkFacet", params, optFns, addOperationUpdateTypedLinkFacetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateTypedLinkFacet", params, optFns, c.addOperationUpdateTypedLinkFacetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type UpdateTypedLinkFacetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateTypedLinkFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateTypedLinkFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTypedLinkFacet{}, middleware.After)
 	if err != nil {
 		return err

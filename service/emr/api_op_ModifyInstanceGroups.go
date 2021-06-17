@@ -20,7 +20,7 @@ func (c *Client) ModifyInstanceGroups(ctx context.Context, params *ModifyInstanc
 		params = &ModifyInstanceGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyInstanceGroups", params, optFns, addOperationModifyInstanceGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyInstanceGroups", params, optFns, c.addOperationModifyInstanceGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type ModifyInstanceGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyInstanceGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyInstanceGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyInstanceGroups{}, middleware.After)
 	if err != nil {
 		return err

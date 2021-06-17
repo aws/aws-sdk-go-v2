@@ -17,7 +17,7 @@ func (c *Client) AssociateWebsiteCertificateAuthority(ctx context.Context, param
 		params = &AssociateWebsiteCertificateAuthorityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateWebsiteCertificateAuthority", params, optFns, addOperationAssociateWebsiteCertificateAuthorityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateWebsiteCertificateAuthority", params, optFns, c.addOperationAssociateWebsiteCertificateAuthorityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type AssociateWebsiteCertificateAuthorityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateWebsiteCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateWebsiteCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateWebsiteCertificateAuthority{}, middleware.After)
 	if err != nil {
 		return err

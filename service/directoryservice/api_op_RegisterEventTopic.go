@@ -20,7 +20,7 @@ func (c *Client) RegisterEventTopic(ctx context.Context, params *RegisterEventTo
 		params = &RegisterEventTopicInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterEventTopic", params, optFns, addOperationRegisterEventTopicMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterEventTopic", params, optFns, c.addOperationRegisterEventTopicMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type RegisterEventTopicOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterEventTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterEventTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterEventTopic{}, middleware.After)
 	if err != nil {
 		return err

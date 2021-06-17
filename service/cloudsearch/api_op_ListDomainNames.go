@@ -16,7 +16,7 @@ func (c *Client) ListDomainNames(ctx context.Context, params *ListDomainNamesInp
 		params = &ListDomainNamesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDomainNames", params, optFns, addOperationListDomainNamesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDomainNames", params, optFns, c.addOperationListDomainNamesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type ListDomainNamesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDomainNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDomainNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListDomainNames{}, middleware.After)
 	if err != nil {
 		return err

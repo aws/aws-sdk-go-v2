@@ -19,7 +19,7 @@ func (c *Client) AcceptQualificationRequest(ctx context.Context, params *AcceptQ
 		params = &AcceptQualificationRequestInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcceptQualificationRequest", params, optFns, addOperationAcceptQualificationRequestMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcceptQualificationRequest", params, optFns, c.addOperationAcceptQualificationRequestMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type AcceptQualificationRequestOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAcceptQualificationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAcceptQualificationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcceptQualificationRequest{}, middleware.After)
 	if err != nil {
 		return err

@@ -32,7 +32,7 @@ func (c *Client) InvokeEndpoint(ctx context.Context, params *InvokeEndpointInput
 		params = &InvokeEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InvokeEndpoint", params, optFns, addOperationInvokeEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InvokeEndpoint", params, optFns, c.addOperationInvokeEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -139,7 +139,7 @@ type InvokeEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInvokeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInvokeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeEndpoint{}, middleware.After)
 	if err != nil {
 		return err

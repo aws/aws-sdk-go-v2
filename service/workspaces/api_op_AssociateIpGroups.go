@@ -16,7 +16,7 @@ func (c *Client) AssociateIpGroups(ctx context.Context, params *AssociateIpGroup
 		params = &AssociateIpGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateIpGroups", params, optFns, addOperationAssociateIpGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateIpGroups", params, optFns, c.addOperationAssociateIpGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type AssociateIpGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateIpGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateIpGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateIpGroups{}, middleware.After)
 	if err != nil {
 		return err

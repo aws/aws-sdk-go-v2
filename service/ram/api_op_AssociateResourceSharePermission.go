@@ -16,7 +16,7 @@ func (c *Client) AssociateResourceSharePermission(ctx context.Context, params *A
 		params = &AssociateResourceSharePermissionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateResourceSharePermission", params, optFns, addOperationAssociateResourceSharePermissionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateResourceSharePermission", params, optFns, c.addOperationAssociateResourceSharePermissionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type AssociateResourceSharePermissionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateResourceSharePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateResourceSharePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateResourceSharePermission{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) GetCampaignDateRangeKpi(ctx context.Context, params *GetCampaig
 		params = &GetCampaignDateRangeKpiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCampaignDateRangeKpi", params, optFns, addOperationGetCampaignDateRangeKpiMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCampaignDateRangeKpi", params, optFns, c.addOperationGetCampaignDateRangeKpiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type GetCampaignDateRangeKpiOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCampaignDateRangeKpiMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCampaignDateRangeKpiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCampaignDateRangeKpi{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetGatewayResponse(ctx context.Context, params *GetGatewayRespo
 		params = &GetGatewayResponseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetGatewayResponse", params, optFns, addOperationGetGatewayResponseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetGatewayResponse", params, optFns, c.addOperationGetGatewayResponseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -203,7 +203,7 @@ type GetGatewayResponseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetGatewayResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetGatewayResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGatewayResponse{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) CreateInstances(ctx context.Context, params *CreateInstancesInp
 		params = &CreateInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateInstances", params, optFns, addOperationCreateInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateInstances", params, optFns, c.addOperationCreateInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type CreateInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateInstances{}, middleware.After)
 	if err != nil {
 		return err

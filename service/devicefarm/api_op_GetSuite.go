@@ -17,7 +17,7 @@ func (c *Client) GetSuite(ctx context.Context, params *GetSuiteInput, optFns ...
 		params = &GetSuiteInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSuite", params, optFns, addOperationGetSuiteMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSuite", params, optFns, c.addOperationGetSuiteMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetSuiteOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSuiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSuiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSuite{}, middleware.After)
 	if err != nil {
 		return err

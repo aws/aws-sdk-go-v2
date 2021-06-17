@@ -27,7 +27,7 @@ func (c *Client) MergeDeveloperIdentities(ctx context.Context, params *MergeDeve
 		params = &MergeDeveloperIdentitiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MergeDeveloperIdentities", params, optFns, addOperationMergeDeveloperIdentitiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MergeDeveloperIdentities", params, optFns, c.addOperationMergeDeveloperIdentitiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type MergeDeveloperIdentitiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMergeDeveloperIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMergeDeveloperIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergeDeveloperIdentities{}, middleware.After)
 	if err != nil {
 		return err

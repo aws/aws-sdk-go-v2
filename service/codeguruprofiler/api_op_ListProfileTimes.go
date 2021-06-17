@@ -20,7 +20,7 @@ func (c *Client) ListProfileTimes(ctx context.Context, params *ListProfileTimesI
 		params = &ListProfileTimesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListProfileTimes", params, optFns, addOperationListProfileTimesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListProfileTimes", params, optFns, c.addOperationListProfileTimesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ type ListProfileTimesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListProfileTimesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListProfileTimesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfileTimes{}, middleware.After)
 	if err != nil {
 		return err

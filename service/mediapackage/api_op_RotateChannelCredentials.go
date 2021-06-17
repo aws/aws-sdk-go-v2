@@ -21,7 +21,7 @@ func (c *Client) RotateChannelCredentials(ctx context.Context, params *RotateCha
 		params = &RotateChannelCredentialsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RotateChannelCredentials", params, optFns, addOperationRotateChannelCredentialsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RotateChannelCredentials", params, optFns, c.addOperationRotateChannelCredentialsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type RotateChannelCredentialsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRotateChannelCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRotateChannelCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRotateChannelCredentials{}, middleware.After)
 	if err != nil {
 		return err

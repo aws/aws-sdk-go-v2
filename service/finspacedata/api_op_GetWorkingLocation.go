@@ -18,7 +18,7 @@ func (c *Client) GetWorkingLocation(ctx context.Context, params *GetWorkingLocat
 		params = &GetWorkingLocationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetWorkingLocation", params, optFns, addOperationGetWorkingLocationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetWorkingLocation", params, optFns, c.addOperationGetWorkingLocationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetWorkingLocationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetWorkingLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetWorkingLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkingLocation{}, middleware.After)
 	if err != nil {
 		return err

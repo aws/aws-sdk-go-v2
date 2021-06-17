@@ -17,7 +17,7 @@ func (c *Client) DeleteApplicationVersion(ctx context.Context, params *DeleteApp
 		params = &DeleteApplicationVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteApplicationVersion", params, optFns, addOperationDeleteApplicationVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteApplicationVersion", params, optFns, c.addOperationDeleteApplicationVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteApplicationVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteApplicationVersion{}, middleware.After)
 	if err != nil {
 		return err

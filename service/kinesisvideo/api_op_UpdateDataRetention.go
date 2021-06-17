@@ -34,7 +34,7 @@ func (c *Client) UpdateDataRetention(ctx context.Context, params *UpdateDataRete
 		params = &UpdateDataRetentionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDataRetention", params, optFns, addOperationUpdateDataRetentionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDataRetention", params, optFns, c.addOperationUpdateDataRetentionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type UpdateDataRetentionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDataRetentionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDataRetentionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataRetention{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) PutApprovalResult(ctx context.Context, params *PutApprovalResul
 		params = &PutApprovalResultInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutApprovalResult", params, optFns, addOperationPutApprovalResultMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutApprovalResult", params, optFns, c.addOperationPutApprovalResultMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type PutApprovalResultOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutApprovalResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutApprovalResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutApprovalResult{}, middleware.After)
 	if err != nil {
 		return err

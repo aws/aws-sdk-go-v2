@@ -17,7 +17,7 @@ func (c *Client) ListProfileObjectTypeTemplates(ctx context.Context, params *Lis
 		params = &ListProfileObjectTypeTemplatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListProfileObjectTypeTemplates", params, optFns, addOperationListProfileObjectTypeTemplatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListProfileObjectTypeTemplates", params, optFns, c.addOperationListProfileObjectTypeTemplatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type ListProfileObjectTypeTemplatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListProfileObjectTypeTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListProfileObjectTypeTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfileObjectTypeTemplates{}, middleware.After)
 	if err != nil {
 		return err

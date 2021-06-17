@@ -18,7 +18,7 @@ func (c *Client) ListSentimentDetectionJobs(ctx context.Context, params *ListSen
 		params = &ListSentimentDetectionJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSentimentDetectionJobs", params, optFns, addOperationListSentimentDetectionJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSentimentDetectionJobs", params, optFns, c.addOperationListSentimentDetectionJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListSentimentDetectionJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSentimentDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSentimentDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSentimentDetectionJobs{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) GetUserSettings(ctx context.Context, params *GetUserSettingsInp
 		params = &GetUserSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUserSettings", params, optFns, addOperationGetUserSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetUserSettings", params, optFns, c.addOperationGetUserSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetUserSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUserSettings{}, middleware.After)
 	if err != nil {
 		return err

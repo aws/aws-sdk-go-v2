@@ -19,7 +19,7 @@ func (c *Client) DescribeManagedEndpoint(ctx context.Context, params *DescribeMa
 		params = &DescribeManagedEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeManagedEndpoint", params, optFns, addOperationDescribeManagedEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeManagedEndpoint", params, optFns, c.addOperationDescribeManagedEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DescribeManagedEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeManagedEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeManagedEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeManagedEndpoint{}, middleware.After)
 	if err != nil {
 		return err

@@ -28,7 +28,7 @@ func (c *Client) CreateEvaluation(ctx context.Context, params *CreateEvaluationI
 		params = &CreateEvaluationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateEvaluation", params, optFns, addOperationCreateEvaluationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateEvaluation", params, optFns, c.addOperationCreateEvaluationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type CreateEvaluationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEvaluation{}, middleware.After)
 	if err != nil {
 		return err

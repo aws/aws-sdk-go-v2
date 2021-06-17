@@ -21,7 +21,7 @@ func (c *Client) SendAlexaOfferToMaster(ctx context.Context, params *SendAlexaOf
 		params = &SendAlexaOfferToMasterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendAlexaOfferToMaster", params, optFns, addOperationSendAlexaOfferToMasterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendAlexaOfferToMaster", params, optFns, c.addOperationSendAlexaOfferToMasterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type SendAlexaOfferToMasterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendAlexaOfferToMasterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendAlexaOfferToMasterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendAlexaOfferToMaster{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DescribeAvailablePatches(ctx context.Context, params *DescribeA
 		params = &DescribeAvailablePatchesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAvailablePatches", params, optFns, addOperationDescribeAvailablePatchesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAvailablePatches", params, optFns, c.addOperationDescribeAvailablePatchesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DescribeAvailablePatchesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAvailablePatchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAvailablePatchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAvailablePatches{}, middleware.After)
 	if err != nil {
 		return err

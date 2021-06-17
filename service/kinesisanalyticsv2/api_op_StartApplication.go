@@ -18,7 +18,7 @@ func (c *Client) StartApplication(ctx context.Context, params *StartApplicationI
 		params = &StartApplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartApplication", params, optFns, addOperationStartApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartApplication", params, optFns, c.addOperationStartApplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type StartApplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartApplication{}, middleware.After)
 	if err != nil {
 		return err

@@ -30,7 +30,7 @@ func (c *Client) StartDocumentTextDetection(ctx context.Context, params *StartDo
 		params = &StartDocumentTextDetectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDocumentTextDetection", params, optFns, addOperationStartDocumentTextDetectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDocumentTextDetection", params, optFns, c.addOperationStartDocumentTextDetectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type StartDocumentTextDetectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDocumentTextDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDocumentTextDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDocumentTextDetection{}, middleware.After)
 	if err != nil {
 		return err

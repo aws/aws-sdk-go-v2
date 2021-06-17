@@ -16,7 +16,7 @@ func (c *Client) DisassociateFleet(ctx context.Context, params *DisassociateFlee
 		params = &DisassociateFleetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateFleet", params, optFns, addOperationDisassociateFleetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateFleet", params, optFns, c.addOperationDisassociateFleetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DisassociateFleetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateFleet{}, middleware.After)
 	if err != nil {
 		return err

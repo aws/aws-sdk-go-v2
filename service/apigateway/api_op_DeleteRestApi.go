@@ -16,7 +16,7 @@ func (c *Client) DeleteRestApi(ctx context.Context, params *DeleteRestApiInput, 
 		params = &DeleteRestApiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRestApi", params, optFns, addOperationDeleteRestApiMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRestApi", params, optFns, c.addOperationDeleteRestApiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteRestApiOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRestApi{}, middleware.After)
 	if err != nil {
 		return err

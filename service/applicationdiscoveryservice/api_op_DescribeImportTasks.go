@@ -19,7 +19,7 @@ func (c *Client) DescribeImportTasks(ctx context.Context, params *DescribeImport
 		params = &DescribeImportTasksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeImportTasks", params, optFns, addOperationDescribeImportTasksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeImportTasks", params, optFns, c.addOperationDescribeImportTasksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeImportTasksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeImportTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeImportTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImportTasks{}, middleware.After)
 	if err != nil {
 		return err

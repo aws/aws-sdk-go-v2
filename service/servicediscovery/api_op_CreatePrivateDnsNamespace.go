@@ -26,7 +26,7 @@ func (c *Client) CreatePrivateDnsNamespace(ctx context.Context, params *CreatePr
 		params = &CreatePrivateDnsNamespaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePrivateDnsNamespace", params, optFns, addOperationCreatePrivateDnsNamespaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePrivateDnsNamespace", params, optFns, c.addOperationCreatePrivateDnsNamespaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type CreatePrivateDnsNamespaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePrivateDnsNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePrivateDnsNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePrivateDnsNamespace{}, middleware.After)
 	if err != nil {
 		return err

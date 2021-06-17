@@ -21,7 +21,7 @@ func (c *Client) DeleteVariable(ctx context.Context, params *DeleteVariableInput
 		params = &DeleteVariableInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVariable", params, optFns, addOperationDeleteVariableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVariable", params, optFns, c.addOperationDeleteVariableMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteVariableOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVariableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVariableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteVariable{}, middleware.After)
 	if err != nil {
 		return err

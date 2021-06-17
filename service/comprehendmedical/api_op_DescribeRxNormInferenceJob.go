@@ -18,7 +18,7 @@ func (c *Client) DescribeRxNormInferenceJob(ctx context.Context, params *Describ
 		params = &DescribeRxNormInferenceJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRxNormInferenceJob", params, optFns, addOperationDescribeRxNormInferenceJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRxNormInferenceJob", params, optFns, c.addOperationDescribeRxNormInferenceJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DescribeRxNormInferenceJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRxNormInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRxNormInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRxNormInferenceJob{}, middleware.After)
 	if err != nil {
 		return err

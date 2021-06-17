@@ -23,7 +23,7 @@ func (c *Client) DeregisterStreamConsumer(ctx context.Context, params *Deregiste
 		params = &DeregisterStreamConsumerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterStreamConsumer", params, optFns, addOperationDeregisterStreamConsumerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterStreamConsumer", params, optFns, c.addOperationDeregisterStreamConsumerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeregisterStreamConsumerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterStreamConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterStreamConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterStreamConsumer{}, middleware.After)
 	if err != nil {
 		return err

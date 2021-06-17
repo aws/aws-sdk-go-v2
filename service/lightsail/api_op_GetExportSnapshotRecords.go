@@ -20,7 +20,7 @@ func (c *Client) GetExportSnapshotRecords(ctx context.Context, params *GetExport
 		params = &GetExportSnapshotRecordsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetExportSnapshotRecords", params, optFns, addOperationGetExportSnapshotRecordsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetExportSnapshotRecords", params, optFns, c.addOperationGetExportSnapshotRecordsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetExportSnapshotRecordsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetExportSnapshotRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetExportSnapshotRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetExportSnapshotRecords{}, middleware.After)
 	if err != nil {
 		return err

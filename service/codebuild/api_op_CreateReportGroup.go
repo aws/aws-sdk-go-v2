@@ -17,7 +17,7 @@ func (c *Client) CreateReportGroup(ctx context.Context, params *CreateReportGrou
 		params = &CreateReportGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateReportGroup", params, optFns, addOperationCreateReportGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateReportGroup", params, optFns, c.addOperationCreateReportGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type CreateReportGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateReportGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateReportGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateReportGroup{}, middleware.After)
 	if err != nil {
 		return err

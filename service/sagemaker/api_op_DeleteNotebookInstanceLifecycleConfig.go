@@ -16,7 +16,7 @@ func (c *Client) DeleteNotebookInstanceLifecycleConfig(ctx context.Context, para
 		params = &DeleteNotebookInstanceLifecycleConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteNotebookInstanceLifecycleConfig", params, optFns, addOperationDeleteNotebookInstanceLifecycleConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteNotebookInstanceLifecycleConfig", params, optFns, c.addOperationDeleteNotebookInstanceLifecycleConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteNotebookInstanceLifecycleConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteNotebookInstanceLifecycleConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteNotebookInstanceLifecycleConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteNotebookInstanceLifecycleConfig{}, middleware.After)
 	if err != nil {
 		return err

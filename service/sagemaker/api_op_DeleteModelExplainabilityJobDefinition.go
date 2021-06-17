@@ -16,7 +16,7 @@ func (c *Client) DeleteModelExplainabilityJobDefinition(ctx context.Context, par
 		params = &DeleteModelExplainabilityJobDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteModelExplainabilityJobDefinition", params, optFns, addOperationDeleteModelExplainabilityJobDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteModelExplainabilityJobDefinition", params, optFns, c.addOperationDeleteModelExplainabilityJobDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteModelExplainabilityJobDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteModelExplainabilityJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteModelExplainabilityJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteModelExplainabilityJobDefinition{}, middleware.After)
 	if err != nil {
 		return err

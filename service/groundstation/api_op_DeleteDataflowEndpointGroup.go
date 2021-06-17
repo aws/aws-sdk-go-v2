@@ -16,7 +16,7 @@ func (c *Client) DeleteDataflowEndpointGroup(ctx context.Context, params *Delete
 		params = &DeleteDataflowEndpointGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDataflowEndpointGroup", params, optFns, addOperationDeleteDataflowEndpointGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDataflowEndpointGroup", params, optFns, c.addOperationDeleteDataflowEndpointGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteDataflowEndpointGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDataflowEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDataflowEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataflowEndpointGroup{}, middleware.After)
 	if err != nil {
 		return err

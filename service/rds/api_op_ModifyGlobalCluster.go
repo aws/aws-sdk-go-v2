@@ -22,7 +22,7 @@ func (c *Client) ModifyGlobalCluster(ctx context.Context, params *ModifyGlobalCl
 		params = &ModifyGlobalClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyGlobalCluster", params, optFns, addOperationModifyGlobalClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyGlobalCluster", params, optFns, c.addOperationModifyGlobalClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type ModifyGlobalClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyGlobalCluster{}, middleware.After)
 	if err != nil {
 		return err

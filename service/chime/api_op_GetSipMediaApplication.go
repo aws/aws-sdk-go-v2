@@ -18,7 +18,7 @@ func (c *Client) GetSipMediaApplication(ctx context.Context, params *GetSipMedia
 		params = &GetSipMediaApplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSipMediaApplication", params, optFns, addOperationGetSipMediaApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSipMediaApplication", params, optFns, c.addOperationGetSipMediaApplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetSipMediaApplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSipMediaApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSipMediaApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSipMediaApplication{}, middleware.After)
 	if err != nil {
 		return err

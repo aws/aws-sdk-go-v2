@@ -24,7 +24,7 @@ func (c *Client) GetAlarms(ctx context.Context, params *GetAlarmsInput, optFns .
 		params = &GetAlarmsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAlarms", params, optFns, addOperationGetAlarmsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAlarms", params, optFns, c.addOperationGetAlarmsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type GetAlarmsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAlarmsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAlarmsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAlarms{}, middleware.After)
 	if err != nil {
 		return err

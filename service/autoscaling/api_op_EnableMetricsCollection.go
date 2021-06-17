@@ -20,7 +20,7 @@ func (c *Client) EnableMetricsCollection(ctx context.Context, params *EnableMetr
 		params = &EnableMetricsCollectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableMetricsCollection", params, optFns, addOperationEnableMetricsCollectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableMetricsCollection", params, optFns, c.addOperationEnableMetricsCollectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type EnableMetricsCollectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableMetricsCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableMetricsCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpEnableMetricsCollection{}, middleware.After)
 	if err != nil {
 		return err

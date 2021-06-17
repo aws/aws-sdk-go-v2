@@ -24,7 +24,7 @@ func (c *Client) DescribeGameSessionPlacement(ctx context.Context, params *Descr
 		params = &DescribeGameSessionPlacementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeGameSessionPlacement", params, optFns, addOperationDescribeGameSessionPlacementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeGameSessionPlacement", params, optFns, c.addOperationDescribeGameSessionPlacementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeGameSessionPlacementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeGameSessionPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeGameSessionPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeGameSessionPlacement{}, middleware.After)
 	if err != nil {
 		return err

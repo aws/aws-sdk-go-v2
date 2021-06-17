@@ -19,7 +19,7 @@ func (c *Client) ListAutomaticTapeCreationPolicies(ctx context.Context, params *
 		params = &ListAutomaticTapeCreationPoliciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAutomaticTapeCreationPolicies", params, optFns, addOperationListAutomaticTapeCreationPoliciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAutomaticTapeCreationPolicies", params, optFns, c.addOperationListAutomaticTapeCreationPoliciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type ListAutomaticTapeCreationPoliciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAutomaticTapeCreationPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAutomaticTapeCreationPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAutomaticTapeCreationPolicies{}, middleware.After)
 	if err != nil {
 		return err

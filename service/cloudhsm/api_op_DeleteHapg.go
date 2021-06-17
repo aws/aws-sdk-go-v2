@@ -26,7 +26,7 @@ func (c *Client) DeleteHapg(ctx context.Context, params *DeleteHapgInput, optFns
 		params = &DeleteHapgInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteHapg", params, optFns, addOperationDeleteHapgMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteHapg", params, optFns, c.addOperationDeleteHapgMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DeleteHapgOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteHapg{}, middleware.After)
 	if err != nil {
 		return err

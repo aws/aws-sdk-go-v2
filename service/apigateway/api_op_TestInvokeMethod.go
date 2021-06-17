@@ -17,7 +17,7 @@ func (c *Client) TestInvokeMethod(ctx context.Context, params *TestInvokeMethodI
 		params = &TestInvokeMethodInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestInvokeMethod", params, optFns, addOperationTestInvokeMethodMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestInvokeMethod", params, optFns, c.addOperationTestInvokeMethodMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +96,7 @@ type TestInvokeMethodOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTestInvokeMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestInvokeMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestInvokeMethod{}, middleware.After)
 	if err != nil {
 		return err

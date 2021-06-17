@@ -4,8 +4,10 @@ package timestreamwrite
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -20,7 +22,7 @@ func (c *Client) UpdateDatabase(ctx context.Context, params *UpdateDatabaseInput
 		params = &UpdateDatabaseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDatabase", params, optFns, addOperationUpdateDatabaseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDatabase", params, optFns, c.addOperationUpdateDatabaseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +71,7 @@ type UpdateDatabaseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateDatabase{}, middleware.After)
 	if err != nil {
 		return err
@@ -114,6 +116,9 @@ func addOperationUpdateDatabaseMiddlewares(stack *middleware.Stack, options Opti
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addOpUpdateDatabaseDiscoverEndpointMiddleware(stack, options, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDatabaseValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -130,6 +135,55 @@ func addOperationUpdateDatabaseMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	return nil
+}
+
+func addOpUpdateDatabaseDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
+	return stack.Serialize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
+		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
+			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
+				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
+				opt.Logger = o.Logger
+				opt.EndpointResolverUsedForDiscovery = o.EndpointDiscovery.EndpointResolverUsedForDiscovery
+			},
+		},
+		DiscoverOperation:            c.fetchOpUpdateDatabaseDiscoverEndpoint,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
+		EndpointDiscoveryRequired:    true,
+	}, "ResolveEndpoint", middleware.After)
+}
+
+func (c *Client) fetchOpUpdateDatabaseDiscoverEndpoint(ctx context.Context, input interface{}, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+	in, ok := input.(*UpdateDatabaseInput)
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
+	}
+	_ = in
+
+	identifierMap := make(map[string]string, 0)
+
+	key := fmt.Sprintf("Timestream Write.%v", identifierMap)
+
+	if v, ok := c.endpointCache.Get(key); ok {
+		return v, nil
+	}
+
+	discoveryOperationInput := &DescribeEndpointsInput{}
+
+	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
+	for _, fn := range optFns {
+		fn(&opt)
+	}
+
+	endpoint, err := c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, key, opt)
+	if err != nil {
+		return internalEndpointDiscovery.WeightedAddress{}, err
+	}
+
+	weighted, ok := endpoint.GetValidAddress()
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("no valid endpoint address returned by the endpoint discovery api")
+	}
+	return weighted, nil
 }
 
 func newServiceMetadataMiddleware_opUpdateDatabase(region string) *awsmiddleware.RegisterServiceMetadata {

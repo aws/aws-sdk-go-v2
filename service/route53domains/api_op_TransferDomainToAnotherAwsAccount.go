@@ -49,7 +49,7 @@ func (c *Client) TransferDomainToAnotherAwsAccount(ctx context.Context, params *
 		params = &TransferDomainToAnotherAwsAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TransferDomainToAnotherAwsAccount", params, optFns, addOperationTransferDomainToAnotherAwsAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TransferDomainToAnotherAwsAccount", params, optFns, c.addOperationTransferDomainToAnotherAwsAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type TransferDomainToAnotherAwsAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTransferDomainToAnotherAwsAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTransferDomainToAnotherAwsAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTransferDomainToAnotherAwsAccount{}, middleware.After)
 	if err != nil {
 		return err

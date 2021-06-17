@@ -17,7 +17,7 @@ func (c *Client) GetApplicationRevision(ctx context.Context, params *GetApplicat
 		params = &GetApplicationRevisionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetApplicationRevision", params, optFns, addOperationGetApplicationRevisionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetApplicationRevision", params, optFns, c.addOperationGetApplicationRevisionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetApplicationRevisionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetApplicationRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetApplicationRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetApplicationRevision{}, middleware.After)
 	if err != nil {
 		return err

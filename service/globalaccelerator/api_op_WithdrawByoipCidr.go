@@ -23,7 +23,7 @@ func (c *Client) WithdrawByoipCidr(ctx context.Context, params *WithdrawByoipCid
 		params = &WithdrawByoipCidrInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "WithdrawByoipCidr", params, optFns, addOperationWithdrawByoipCidrMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "WithdrawByoipCidr", params, optFns, c.addOperationWithdrawByoipCidrMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type WithdrawByoipCidrOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationWithdrawByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationWithdrawByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpWithdrawByoipCidr{}, middleware.After)
 	if err != nil {
 		return err

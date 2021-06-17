@@ -16,7 +16,7 @@ func (c *Client) UpdateCrawlerSchedule(ctx context.Context, params *UpdateCrawle
 		params = &UpdateCrawlerScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateCrawlerSchedule", params, optFns, addOperationUpdateCrawlerScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateCrawlerSchedule", params, optFns, c.addOperationUpdateCrawlerScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type UpdateCrawlerScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateCrawlerScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateCrawlerScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCrawlerSchedule{}, middleware.After)
 	if err != nil {
 		return err

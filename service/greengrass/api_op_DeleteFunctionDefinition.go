@@ -16,7 +16,7 @@ func (c *Client) DeleteFunctionDefinition(ctx context.Context, params *DeleteFun
 		params = &DeleteFunctionDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFunctionDefinition", params, optFns, addOperationDeleteFunctionDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFunctionDefinition", params, optFns, c.addOperationDeleteFunctionDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteFunctionDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFunctionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFunctionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFunctionDefinition{}, middleware.After)
 	if err != nil {
 		return err

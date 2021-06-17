@@ -19,7 +19,7 @@ func (c *Client) UpdateAuthEventFeedback(ctx context.Context, params *UpdateAuth
 		params = &UpdateAuthEventFeedbackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAuthEventFeedback", params, optFns, addOperationUpdateAuthEventFeedbackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAuthEventFeedback", params, optFns, c.addOperationUpdateAuthEventFeedbackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type UpdateAuthEventFeedbackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAuthEventFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAuthEventFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAuthEventFeedback{}, middleware.After)
 	if err != nil {
 		return err

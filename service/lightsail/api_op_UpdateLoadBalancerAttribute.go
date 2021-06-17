@@ -21,7 +21,7 @@ func (c *Client) UpdateLoadBalancerAttribute(ctx context.Context, params *Update
 		params = &UpdateLoadBalancerAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLoadBalancerAttribute", params, optFns, addOperationUpdateLoadBalancerAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLoadBalancerAttribute", params, optFns, c.addOperationUpdateLoadBalancerAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type UpdateLoadBalancerAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLoadBalancerAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLoadBalancerAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLoadBalancerAttribute{}, middleware.After)
 	if err != nil {
 		return err

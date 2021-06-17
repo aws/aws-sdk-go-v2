@@ -18,7 +18,7 @@ func (c *Client) ListTestGridSessionActions(ctx context.Context, params *ListTes
 		params = &ListTestGridSessionActionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTestGridSessionActions", params, optFns, addOperationListTestGridSessionActionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTestGridSessionActions", params, optFns, c.addOperationListTestGridSessionActionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListTestGridSessionActionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTestGridSessionActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTestGridSessionActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTestGridSessionActions{}, middleware.After)
 	if err != nil {
 		return err

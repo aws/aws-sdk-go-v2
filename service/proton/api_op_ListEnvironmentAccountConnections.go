@@ -19,7 +19,7 @@ func (c *Client) ListEnvironmentAccountConnections(ctx context.Context, params *
 		params = &ListEnvironmentAccountConnectionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEnvironmentAccountConnections", params, optFns, addOperationListEnvironmentAccountConnectionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEnvironmentAccountConnections", params, optFns, c.addOperationListEnvironmentAccountConnectionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ListEnvironmentAccountConnectionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEnvironmentAccountConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEnvironmentAccountConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEnvironmentAccountConnections{}, middleware.After)
 	if err != nil {
 		return err

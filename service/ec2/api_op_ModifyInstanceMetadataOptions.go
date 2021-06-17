@@ -25,7 +25,7 @@ func (c *Client) ModifyInstanceMetadataOptions(ctx context.Context, params *Modi
 		params = &ModifyInstanceMetadataOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyInstanceMetadataOptions", params, optFns, addOperationModifyInstanceMetadataOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyInstanceMetadataOptions", params, optFns, c.addOperationModifyInstanceMetadataOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type ModifyInstanceMetadataOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyInstanceMetadataOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyInstanceMetadataOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyInstanceMetadataOptions{}, middleware.After)
 	if err != nil {
 		return err

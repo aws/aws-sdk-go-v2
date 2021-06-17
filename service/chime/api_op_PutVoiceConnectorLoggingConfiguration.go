@@ -19,7 +19,7 @@ func (c *Client) PutVoiceConnectorLoggingConfiguration(ctx context.Context, para
 		params = &PutVoiceConnectorLoggingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutVoiceConnectorLoggingConfiguration", params, optFns, addOperationPutVoiceConnectorLoggingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutVoiceConnectorLoggingConfiguration", params, optFns, c.addOperationPutVoiceConnectorLoggingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type PutVoiceConnectorLoggingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutVoiceConnectorLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutVoiceConnectorLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVoiceConnectorLoggingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

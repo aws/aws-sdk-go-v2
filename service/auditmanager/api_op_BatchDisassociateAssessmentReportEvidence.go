@@ -18,7 +18,7 @@ func (c *Client) BatchDisassociateAssessmentReportEvidence(ctx context.Context, 
 		params = &BatchDisassociateAssessmentReportEvidenceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDisassociateAssessmentReportEvidence", params, optFns, addOperationBatchDisassociateAssessmentReportEvidenceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDisassociateAssessmentReportEvidence", params, optFns, c.addOperationBatchDisassociateAssessmentReportEvidenceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type BatchDisassociateAssessmentReportEvidenceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDisassociateAssessmentReportEvidenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDisassociateAssessmentReportEvidenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDisassociateAssessmentReportEvidence{}, middleware.After)
 	if err != nil {
 		return err

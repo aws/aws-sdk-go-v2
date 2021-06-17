@@ -18,7 +18,7 @@ func (c *Client) DisassociateFirewallRuleGroup(ctx context.Context, params *Disa
 		params = &DisassociateFirewallRuleGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateFirewallRuleGroup", params, optFns, addOperationDisassociateFirewallRuleGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateFirewallRuleGroup", params, optFns, c.addOperationDisassociateFirewallRuleGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DisassociateFirewallRuleGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateFirewallRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateFirewallRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateFirewallRuleGroup{}, middleware.After)
 	if err != nil {
 		return err

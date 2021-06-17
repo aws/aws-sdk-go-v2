@@ -18,7 +18,7 @@ func (c *Client) ListAppliedSchemaArns(ctx context.Context, params *ListAppliedS
 		params = &ListAppliedSchemaArnsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAppliedSchemaArns", params, optFns, addOperationListAppliedSchemaArnsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAppliedSchemaArns", params, optFns, c.addOperationListAppliedSchemaArnsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListAppliedSchemaArnsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAppliedSchemaArnsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAppliedSchemaArnsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppliedSchemaArns{}, middleware.After)
 	if err != nil {
 		return err

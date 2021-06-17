@@ -19,7 +19,7 @@ func (c *Client) GetTemplate(ctx context.Context, params *GetTemplateInput, optF
 		params = &GetTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTemplate", params, optFns, addOperationGetTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTemplate", params, optFns, c.addOperationGetTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetTemplate{}, middleware.After)
 	if err != nil {
 		return err

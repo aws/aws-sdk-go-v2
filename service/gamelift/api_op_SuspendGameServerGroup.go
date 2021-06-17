@@ -41,7 +41,7 @@ func (c *Client) SuspendGameServerGroup(ctx context.Context, params *SuspendGame
 		params = &SuspendGameServerGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SuspendGameServerGroup", params, optFns, addOperationSuspendGameServerGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SuspendGameServerGroup", params, optFns, c.addOperationSuspendGameServerGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type SuspendGameServerGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSuspendGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSuspendGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSuspendGameServerGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) AssociatePhoneNumbersWithVoiceConnectorGroup(ctx context.Contex
 		params = &AssociatePhoneNumbersWithVoiceConnectorGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociatePhoneNumbersWithVoiceConnectorGroup", params, optFns, addOperationAssociatePhoneNumbersWithVoiceConnectorGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociatePhoneNumbersWithVoiceConnectorGroup", params, optFns, c.addOperationAssociatePhoneNumbersWithVoiceConnectorGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type AssociatePhoneNumbersWithVoiceConnectorGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociatePhoneNumbersWithVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociatePhoneNumbersWithVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociatePhoneNumbersWithVoiceConnectorGroup{}, middleware.After)
 	if err != nil {
 		return err

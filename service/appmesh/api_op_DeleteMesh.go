@@ -19,7 +19,7 @@ func (c *Client) DeleteMesh(ctx context.Context, params *DeleteMeshInput, optFns
 		params = &DeleteMeshInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMesh", params, optFns, addOperationDeleteMeshMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMesh", params, optFns, c.addOperationDeleteMeshMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteMeshOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMesh{}, middleware.After)
 	if err != nil {
 		return err

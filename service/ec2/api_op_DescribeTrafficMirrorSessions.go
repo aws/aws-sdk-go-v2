@@ -19,7 +19,7 @@ func (c *Client) DescribeTrafficMirrorSessions(ctx context.Context, params *Desc
 		params = &DescribeTrafficMirrorSessionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTrafficMirrorSessions", params, optFns, addOperationDescribeTrafficMirrorSessionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTrafficMirrorSessions", params, optFns, c.addOperationDescribeTrafficMirrorSessionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type DescribeTrafficMirrorSessionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTrafficMirrorSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTrafficMirrorSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeTrafficMirrorSessions{}, middleware.After)
 	if err != nil {
 		return err

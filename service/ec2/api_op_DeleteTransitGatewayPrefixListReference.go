@@ -18,7 +18,7 @@ func (c *Client) DeleteTransitGatewayPrefixListReference(ctx context.Context, pa
 		params = &DeleteTransitGatewayPrefixListReferenceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTransitGatewayPrefixListReference", params, optFns, addOperationDeleteTransitGatewayPrefixListReferenceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTransitGatewayPrefixListReference", params, optFns, c.addOperationDeleteTransitGatewayPrefixListReferenceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeleteTransitGatewayPrefixListReferenceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTransitGatewayPrefixListReferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTransitGatewayPrefixListReferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteTransitGatewayPrefixListReference{}, middleware.After)
 	if err != nil {
 		return err

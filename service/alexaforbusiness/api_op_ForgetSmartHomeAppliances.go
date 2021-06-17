@@ -16,7 +16,7 @@ func (c *Client) ForgetSmartHomeAppliances(ctx context.Context, params *ForgetSm
 		params = &ForgetSmartHomeAppliancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ForgetSmartHomeAppliances", params, optFns, addOperationForgetSmartHomeAppliancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ForgetSmartHomeAppliances", params, optFns, c.addOperationForgetSmartHomeAppliancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type ForgetSmartHomeAppliancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationForgetSmartHomeAppliancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationForgetSmartHomeAppliancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpForgetSmartHomeAppliances{}, middleware.After)
 	if err != nil {
 		return err

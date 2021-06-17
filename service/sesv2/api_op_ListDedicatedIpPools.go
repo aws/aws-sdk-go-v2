@@ -18,7 +18,7 @@ func (c *Client) ListDedicatedIpPools(ctx context.Context, params *ListDedicated
 		params = &ListDedicatedIpPoolsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDedicatedIpPools", params, optFns, addOperationListDedicatedIpPoolsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDedicatedIpPools", params, optFns, c.addOperationListDedicatedIpPoolsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListDedicatedIpPoolsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDedicatedIpPoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDedicatedIpPoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDedicatedIpPools{}, middleware.After)
 	if err != nil {
 		return err

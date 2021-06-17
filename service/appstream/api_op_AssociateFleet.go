@@ -16,7 +16,7 @@ func (c *Client) AssociateFleet(ctx context.Context, params *AssociateFleetInput
 		params = &AssociateFleetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateFleet", params, optFns, addOperationAssociateFleetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateFleet", params, optFns, c.addOperationAssociateFleetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type AssociateFleetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateFleet{}, middleware.After)
 	if err != nil {
 		return err

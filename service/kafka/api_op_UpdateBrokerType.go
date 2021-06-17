@@ -16,7 +16,7 @@ func (c *Client) UpdateBrokerType(ctx context.Context, params *UpdateBrokerTypeI
 		params = &UpdateBrokerTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateBrokerType", params, optFns, addOperationUpdateBrokerTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateBrokerType", params, optFns, c.addOperationUpdateBrokerTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type UpdateBrokerTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateBrokerTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateBrokerTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBrokerType{}, middleware.After)
 	if err != nil {
 		return err

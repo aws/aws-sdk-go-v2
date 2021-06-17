@@ -17,7 +17,7 @@ func (c *Client) DisassociateApprovedOrigin(ctx context.Context, params *Disasso
 		params = &DisassociateApprovedOriginInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateApprovedOrigin", params, optFns, addOperationDisassociateApprovedOriginMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateApprovedOrigin", params, optFns, c.addOperationDisassociateApprovedOriginMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DisassociateApprovedOriginOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateApprovedOriginMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateApprovedOriginMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateApprovedOrigin{}, middleware.After)
 	if err != nil {
 		return err

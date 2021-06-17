@@ -18,7 +18,7 @@ func (c *Client) DescribeWorldGenerationJob(ctx context.Context, params *Describ
 		params = &DescribeWorldGenerationJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorldGenerationJob", params, optFns, addOperationDescribeWorldGenerationJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWorldGenerationJob", params, optFns, c.addOperationDescribeWorldGenerationJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type DescribeWorldGenerationJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeWorldGenerationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeWorldGenerationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeWorldGenerationJob{}, middleware.After)
 	if err != nil {
 		return err

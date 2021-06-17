@@ -17,7 +17,7 @@ func (c *Client) UpdateRoutingProfileName(ctx context.Context, params *UpdateRou
 		params = &UpdateRoutingProfileNameInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRoutingProfileName", params, optFns, addOperationUpdateRoutingProfileNameMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRoutingProfileName", params, optFns, c.addOperationUpdateRoutingProfileNameMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UpdateRoutingProfileNameOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRoutingProfileNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRoutingProfileNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRoutingProfileName{}, middleware.After)
 	if err != nil {
 		return err

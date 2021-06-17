@@ -21,7 +21,7 @@ func (c *Client) GetLambdaFunctionRecommendations(ctx context.Context, params *G
 		params = &GetLambdaFunctionRecommendationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLambdaFunctionRecommendations", params, optFns, addOperationGetLambdaFunctionRecommendationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLambdaFunctionRecommendations", params, optFns, c.addOperationGetLambdaFunctionRecommendationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type GetLambdaFunctionRecommendationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLambdaFunctionRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLambdaFunctionRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetLambdaFunctionRecommendations{}, middleware.After)
 	if err != nil {
 		return err

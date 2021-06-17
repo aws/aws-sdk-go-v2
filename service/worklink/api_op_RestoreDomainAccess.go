@@ -16,7 +16,7 @@ func (c *Client) RestoreDomainAccess(ctx context.Context, params *RestoreDomainA
 		params = &RestoreDomainAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreDomainAccess", params, optFns, addOperationRestoreDomainAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreDomainAccess", params, optFns, c.addOperationRestoreDomainAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type RestoreDomainAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreDomainAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreDomainAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRestoreDomainAccess{}, middleware.After)
 	if err != nil {
 		return err

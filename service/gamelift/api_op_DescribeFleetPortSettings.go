@@ -40,7 +40,7 @@ func (c *Client) DescribeFleetPortSettings(ctx context.Context, params *Describe
 		params = &DescribeFleetPortSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFleetPortSettings", params, optFns, addOperationDescribeFleetPortSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFleetPortSettings", params, optFns, c.addOperationDescribeFleetPortSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type DescribeFleetPortSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFleetPortSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFleetPortSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFleetPortSettings{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) GetCardinality(ctx context.Context, params *GetCardinalityInput
 		params = &GetCardinalityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCardinality", params, optFns, addOperationGetCardinalityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCardinality", params, optFns, c.addOperationGetCardinalityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetCardinalityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCardinalityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCardinalityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCardinality{}, middleware.After)
 	if err != nil {
 		return err

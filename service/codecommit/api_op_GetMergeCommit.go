@@ -17,7 +17,7 @@ func (c *Client) GetMergeCommit(ctx context.Context, params *GetMergeCommitInput
 		params = &GetMergeCommitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMergeCommit", params, optFns, addOperationGetMergeCommitMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMergeCommit", params, optFns, c.addOperationGetMergeCommitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type GetMergeCommitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMergeCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMergeCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMergeCommit{}, middleware.After)
 	if err != nil {
 		return err

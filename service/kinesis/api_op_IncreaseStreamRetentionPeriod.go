@@ -24,7 +24,7 @@ func (c *Client) IncreaseStreamRetentionPeriod(ctx context.Context, params *Incr
 		params = &IncreaseStreamRetentionPeriodInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "IncreaseStreamRetentionPeriod", params, optFns, addOperationIncreaseStreamRetentionPeriodMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "IncreaseStreamRetentionPeriod", params, optFns, c.addOperationIncreaseStreamRetentionPeriodMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type IncreaseStreamRetentionPeriodOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationIncreaseStreamRetentionPeriodMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationIncreaseStreamRetentionPeriodMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpIncreaseStreamRetentionPeriod{}, middleware.After)
 	if err != nil {
 		return err

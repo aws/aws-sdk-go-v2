@@ -18,7 +18,7 @@ func (c *Client) GetRegions(ctx context.Context, params *GetRegionsInput, optFns
 		params = &GetRegionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRegions", params, optFns, addOperationGetRegionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRegions", params, optFns, c.addOperationGetRegionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetRegionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRegions{}, middleware.After)
 	if err != nil {
 		return err

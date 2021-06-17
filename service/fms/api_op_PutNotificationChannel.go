@@ -22,7 +22,7 @@ func (c *Client) PutNotificationChannel(ctx context.Context, params *PutNotifica
 		params = &PutNotificationChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutNotificationChannel", params, optFns, addOperationPutNotificationChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutNotificationChannel", params, optFns, c.addOperationPutNotificationChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type PutNotificationChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutNotificationChannel{}, middleware.After)
 	if err != nil {
 		return err

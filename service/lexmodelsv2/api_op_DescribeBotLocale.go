@@ -18,7 +18,7 @@ func (c *Client) DescribeBotLocale(ctx context.Context, params *DescribeBotLocal
 		params = &DescribeBotLocaleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeBotLocale", params, optFns, addOperationDescribeBotLocaleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeBotLocale", params, optFns, c.addOperationDescribeBotLocaleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +104,7 @@ type DescribeBotLocaleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBotLocale{}, middleware.After)
 	if err != nil {
 		return err

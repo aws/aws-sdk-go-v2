@@ -18,7 +18,7 @@ func (c *Client) UpdateAuditSuppression(ctx context.Context, params *UpdateAudit
 		params = &UpdateAuditSuppressionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAuditSuppression", params, optFns, addOperationUpdateAuditSuppressionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAuditSuppression", params, optFns, c.addOperationUpdateAuditSuppressionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type UpdateAuditSuppressionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAuditSuppressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAuditSuppressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAuditSuppression{}, middleware.After)
 	if err != nil {
 		return err

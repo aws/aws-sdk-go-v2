@@ -16,7 +16,7 @@ func (c *Client) DeleteRouteResponse(ctx context.Context, params *DeleteRouteRes
 		params = &DeleteRouteResponseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRouteResponse", params, optFns, addOperationDeleteRouteResponseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRouteResponse", params, optFns, c.addOperationDeleteRouteResponseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteRouteResponseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRouteResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRouteResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRouteResponse{}, middleware.After)
 	if err != nil {
 		return err

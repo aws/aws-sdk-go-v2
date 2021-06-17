@@ -17,7 +17,7 @@ func (c *Client) DescribeCustomRoutingEndpointGroup(ctx context.Context, params 
 		params = &DescribeCustomRoutingEndpointGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCustomRoutingEndpointGroup", params, optFns, addOperationDescribeCustomRoutingEndpointGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCustomRoutingEndpointGroup", params, optFns, c.addOperationDescribeCustomRoutingEndpointGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeCustomRoutingEndpointGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCustomRoutingEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCustomRoutingEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCustomRoutingEndpointGroup{}, middleware.After)
 	if err != nil {
 		return err

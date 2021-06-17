@@ -19,7 +19,7 @@ func (c *Client) UpdateAssumeRolePolicy(ctx context.Context, params *UpdateAssum
 		params = &UpdateAssumeRolePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAssumeRolePolicy", params, optFns, addOperationUpdateAssumeRolePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAssumeRolePolicy", params, optFns, c.addOperationUpdateAssumeRolePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type UpdateAssumeRolePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAssumeRolePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAssumeRolePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateAssumeRolePolicy{}, middleware.After)
 	if err != nil {
 		return err

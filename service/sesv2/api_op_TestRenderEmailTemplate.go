@@ -18,7 +18,7 @@ func (c *Client) TestRenderEmailTemplate(ctx context.Context, params *TestRender
 		params = &TestRenderEmailTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestRenderEmailTemplate", params, optFns, addOperationTestRenderEmailTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestRenderEmailTemplate", params, optFns, c.addOperationTestRenderEmailTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type TestRenderEmailTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTestRenderEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestRenderEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestRenderEmailTemplate{}, middleware.After)
 	if err != nil {
 		return err

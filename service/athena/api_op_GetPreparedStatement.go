@@ -18,7 +18,7 @@ func (c *Client) GetPreparedStatement(ctx context.Context, params *GetPreparedSt
 		params = &GetPreparedStatementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPreparedStatement", params, optFns, addOperationGetPreparedStatementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPreparedStatement", params, optFns, c.addOperationGetPreparedStatementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetPreparedStatementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPreparedStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPreparedStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPreparedStatement{}, middleware.After)
 	if err != nil {
 		return err

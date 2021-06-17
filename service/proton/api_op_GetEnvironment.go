@@ -17,7 +17,7 @@ func (c *Client) GetEnvironment(ctx context.Context, params *GetEnvironmentInput
 		params = &GetEnvironmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEnvironment", params, optFns, addOperationGetEnvironmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEnvironment", params, optFns, c.addOperationGetEnvironmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetEnvironmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetEnvironment{}, middleware.After)
 	if err != nil {
 		return err

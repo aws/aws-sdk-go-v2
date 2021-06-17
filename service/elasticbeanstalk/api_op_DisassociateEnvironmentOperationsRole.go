@@ -21,7 +21,7 @@ func (c *Client) DisassociateEnvironmentOperationsRole(ctx context.Context, para
 		params = &DisassociateEnvironmentOperationsRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateEnvironmentOperationsRole", params, optFns, addOperationDisassociateEnvironmentOperationsRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateEnvironmentOperationsRole", params, optFns, c.addOperationDisassociateEnvironmentOperationsRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DisassociateEnvironmentOperationsRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateEnvironmentOperationsRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateEnvironmentOperationsRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDisassociateEnvironmentOperationsRole{}, middleware.After)
 	if err != nil {
 		return err

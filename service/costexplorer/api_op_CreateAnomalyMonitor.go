@@ -18,7 +18,7 @@ func (c *Client) CreateAnomalyMonitor(ctx context.Context, params *CreateAnomaly
 		params = &CreateAnomalyMonitorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAnomalyMonitor", params, optFns, addOperationCreateAnomalyMonitorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAnomalyMonitor", params, optFns, c.addOperationCreateAnomalyMonitorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type CreateAnomalyMonitorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAnomalyMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAnomalyMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAnomalyMonitor{}, middleware.After)
 	if err != nil {
 		return err

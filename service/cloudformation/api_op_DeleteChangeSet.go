@@ -22,7 +22,7 @@ func (c *Client) DeleteChangeSet(ctx context.Context, params *DeleteChangeSetInp
 		params = &DeleteChangeSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteChangeSet", params, optFns, addOperationDeleteChangeSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteChangeSet", params, optFns, c.addOperationDeleteChangeSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteChangeSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteChangeSet{}, middleware.After)
 	if err != nil {
 		return err

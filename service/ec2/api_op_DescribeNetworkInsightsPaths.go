@@ -18,7 +18,7 @@ func (c *Client) DescribeNetworkInsightsPaths(ctx context.Context, params *Descr
 		params = &DescribeNetworkInsightsPathsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeNetworkInsightsPaths", params, optFns, addOperationDescribeNetworkInsightsPathsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeNetworkInsightsPaths", params, optFns, c.addOperationDescribeNetworkInsightsPathsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DescribeNetworkInsightsPathsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeNetworkInsightsPathsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeNetworkInsightsPathsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeNetworkInsightsPaths{}, middleware.After)
 	if err != nil {
 		return err

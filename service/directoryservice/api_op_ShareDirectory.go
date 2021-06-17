@@ -29,7 +29,7 @@ func (c *Client) ShareDirectory(ctx context.Context, params *ShareDirectoryInput
 		params = &ShareDirectoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ShareDirectory", params, optFns, addOperationShareDirectoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ShareDirectory", params, optFns, c.addOperationShareDirectoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type ShareDirectoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationShareDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationShareDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpShareDirectory{}, middleware.After)
 	if err != nil {
 		return err

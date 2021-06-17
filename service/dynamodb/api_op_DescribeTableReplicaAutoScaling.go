@@ -20,7 +20,7 @@ func (c *Client) DescribeTableReplicaAutoScaling(ctx context.Context, params *De
 		params = &DescribeTableReplicaAutoScalingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTableReplicaAutoScaling", params, optFns, addOperationDescribeTableReplicaAutoScalingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTableReplicaAutoScaling", params, optFns, c.addOperationDescribeTableReplicaAutoScalingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeTableReplicaAutoScalingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTableReplicaAutoScalingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTableReplicaAutoScalingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeTableReplicaAutoScaling{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetPermission(ctx context.Context, params *GetPermissionInput, 
 		params = &GetPermissionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPermission", params, optFns, addOperationGetPermissionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPermission", params, optFns, c.addOperationGetPermissionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetPermissionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPermission{}, middleware.After)
 	if err != nil {
 		return err

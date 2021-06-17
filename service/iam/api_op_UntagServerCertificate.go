@@ -24,7 +24,7 @@ func (c *Client) UntagServerCertificate(ctx context.Context, params *UntagServer
 		params = &UntagServerCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagServerCertificate", params, optFns, addOperationUntagServerCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagServerCertificate", params, optFns, c.addOperationUntagServerCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UntagServerCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagServerCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagServerCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUntagServerCertificate{}, middleware.After)
 	if err != nil {
 		return err

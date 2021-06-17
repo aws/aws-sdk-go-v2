@@ -21,7 +21,7 @@ func (c *Client) DeleteInstanceAccessControlAttributeConfiguration(ctx context.C
 		params = &DeleteInstanceAccessControlAttributeConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteInstanceAccessControlAttributeConfiguration", params, optFns, addOperationDeleteInstanceAccessControlAttributeConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInstanceAccessControlAttributeConfiguration", params, optFns, c.addOperationDeleteInstanceAccessControlAttributeConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteInstanceAccessControlAttributeConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteInstanceAccessControlAttributeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteInstanceAccessControlAttributeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteInstanceAccessControlAttributeConfiguration{}, middleware.After)
 	if err != nil {
 		return err

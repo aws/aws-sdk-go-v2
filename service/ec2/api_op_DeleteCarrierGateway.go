@@ -20,7 +20,7 @@ func (c *Client) DeleteCarrierGateway(ctx context.Context, params *DeleteCarrier
 		params = &DeleteCarrierGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCarrierGateway", params, optFns, addOperationDeleteCarrierGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCarrierGateway", params, optFns, c.addOperationDeleteCarrierGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteCarrierGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCarrierGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCarrierGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteCarrierGateway{}, middleware.After)
 	if err != nil {
 		return err

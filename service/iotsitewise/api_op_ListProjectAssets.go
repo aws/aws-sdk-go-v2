@@ -18,7 +18,7 @@ func (c *Client) ListProjectAssets(ctx context.Context, params *ListProjectAsset
 		params = &ListProjectAssetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListProjectAssets", params, optFns, addOperationListProjectAssetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListProjectAssets", params, optFns, c.addOperationListProjectAssetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListProjectAssetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListProjectAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListProjectAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProjectAssets{}, middleware.After)
 	if err != nil {
 		return err

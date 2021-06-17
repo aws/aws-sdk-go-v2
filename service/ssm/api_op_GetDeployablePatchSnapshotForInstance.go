@@ -18,7 +18,7 @@ func (c *Client) GetDeployablePatchSnapshotForInstance(ctx context.Context, para
 		params = &GetDeployablePatchSnapshotForInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDeployablePatchSnapshotForInstance", params, optFns, addOperationGetDeployablePatchSnapshotForInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDeployablePatchSnapshotForInstance", params, optFns, c.addOperationGetDeployablePatchSnapshotForInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type GetDeployablePatchSnapshotForInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDeployablePatchSnapshotForInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDeployablePatchSnapshotForInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDeployablePatchSnapshotForInstance{}, middleware.After)
 	if err != nil {
 		return err

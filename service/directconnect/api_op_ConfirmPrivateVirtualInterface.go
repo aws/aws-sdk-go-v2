@@ -20,7 +20,7 @@ func (c *Client) ConfirmPrivateVirtualInterface(ctx context.Context, params *Con
 		params = &ConfirmPrivateVirtualInterfaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ConfirmPrivateVirtualInterface", params, optFns, addOperationConfirmPrivateVirtualInterfaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ConfirmPrivateVirtualInterface", params, optFns, c.addOperationConfirmPrivateVirtualInterfaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type ConfirmPrivateVirtualInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationConfirmPrivateVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationConfirmPrivateVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmPrivateVirtualInterface{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) RecursiveXmlShapes(ctx context.Context, params *RecursiveXmlSha
 		params = &RecursiveXmlShapesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RecursiveXmlShapes", params, optFns, addOperationRecursiveXmlShapesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RecursiveXmlShapes", params, optFns, c.addOperationRecursiveXmlShapesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ type RecursiveXmlShapesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRecursiveXmlShapesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRecursiveXmlShapesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpRecursiveXmlShapes{}, middleware.After)
 	if err != nil {
 		return err

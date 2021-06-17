@@ -35,7 +35,7 @@ func (c *Client) SendMessageBatch(ctx context.Context, params *SendMessageBatchI
 		params = &SendMessageBatchInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendMessageBatch", params, optFns, addOperationSendMessageBatchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendMessageBatch", params, optFns, c.addOperationSendMessageBatchMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type SendMessageBatchOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendMessageBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendMessageBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSendMessageBatch{}, middleware.After)
 	if err != nil {
 		return err

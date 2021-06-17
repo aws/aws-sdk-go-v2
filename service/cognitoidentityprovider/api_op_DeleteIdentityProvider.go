@@ -16,7 +16,7 @@ func (c *Client) DeleteIdentityProvider(ctx context.Context, params *DeleteIdent
 		params = &DeleteIdentityProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteIdentityProvider", params, optFns, addOperationDeleteIdentityProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteIdentityProvider", params, optFns, c.addOperationDeleteIdentityProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteIdentityProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteIdentityProvider{}, middleware.After)
 	if err != nil {
 		return err

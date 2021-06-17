@@ -17,7 +17,7 @@ func (c *Client) HttpRequestWithLabels(ctx context.Context, params *HttpRequestW
 		params = &HttpRequestWithLabelsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpRequestWithLabels", params, optFns, addOperationHttpRequestWithLabelsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpRequestWithLabels", params, optFns, c.addOperationHttpRequestWithLabelsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type HttpRequestWithLabelsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHttpRequestWithLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHttpRequestWithLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpRequestWithLabels{}, middleware.After)
 	if err != nil {
 		return err

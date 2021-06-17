@@ -28,7 +28,7 @@ func (c *Client) PutAlarm(ctx context.Context, params *PutAlarmInput, optFns ...
 		params = &PutAlarmInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAlarm", params, optFns, addOperationPutAlarmMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAlarm", params, optFns, c.addOperationPutAlarmMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -182,7 +182,7 @@ type PutAlarmOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAlarm{}, middleware.After)
 	if err != nil {
 		return err

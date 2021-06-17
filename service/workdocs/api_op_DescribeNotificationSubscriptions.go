@@ -17,7 +17,7 @@ func (c *Client) DescribeNotificationSubscriptions(ctx context.Context, params *
 		params = &DescribeNotificationSubscriptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeNotificationSubscriptions", params, optFns, addOperationDescribeNotificationSubscriptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeNotificationSubscriptions", params, optFns, c.addOperationDescribeNotificationSubscriptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeNotificationSubscriptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeNotificationSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeNotificationSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeNotificationSubscriptions{}, middleware.After)
 	if err != nil {
 		return err

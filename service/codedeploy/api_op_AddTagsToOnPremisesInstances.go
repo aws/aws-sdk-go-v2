@@ -17,7 +17,7 @@ func (c *Client) AddTagsToOnPremisesInstances(ctx context.Context, params *AddTa
 		params = &AddTagsToOnPremisesInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddTagsToOnPremisesInstances", params, optFns, addOperationAddTagsToOnPremisesInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddTagsToOnPremisesInstances", params, optFns, c.addOperationAddTagsToOnPremisesInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type AddTagsToOnPremisesInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddTagsToOnPremisesInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddTagsToOnPremisesInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddTagsToOnPremisesInstances{}, middleware.After)
 	if err != nil {
 		return err

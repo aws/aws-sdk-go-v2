@@ -28,7 +28,7 @@ func (c *Client) DeleteConnectionAlias(ctx context.Context, params *DeleteConnec
 		params = &DeleteConnectionAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteConnectionAlias", params, optFns, addOperationDeleteConnectionAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteConnectionAlias", params, optFns, c.addOperationDeleteConnectionAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteConnectionAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteConnectionAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteConnectionAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteConnectionAlias{}, middleware.After)
 	if err != nil {
 		return err

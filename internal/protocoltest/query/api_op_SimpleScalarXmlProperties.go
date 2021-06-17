@@ -14,7 +14,7 @@ func (c *Client) SimpleScalarXmlProperties(ctx context.Context, params *SimpleSc
 		params = &SimpleScalarXmlPropertiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SimpleScalarXmlProperties", params, optFns, addOperationSimpleScalarXmlPropertiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SimpleScalarXmlProperties", params, optFns, c.addOperationSimpleScalarXmlPropertiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type SimpleScalarXmlPropertiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSimpleScalarXmlPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSimpleScalarXmlPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSimpleScalarXmlProperties{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) UnassignInstance(ctx context.Context, params *UnassignInstanceI
 		params = &UnassignInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnassignInstance", params, optFns, addOperationUnassignInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnassignInstance", params, optFns, c.addOperationUnassignInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type UnassignInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnassignInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnassignInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnassignInstance{}, middleware.After)
 	if err != nil {
 		return err

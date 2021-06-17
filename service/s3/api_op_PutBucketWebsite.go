@@ -88,7 +88,7 @@ func (c *Client) PutBucketWebsite(ctx context.Context, params *PutBucketWebsiteI
 		params = &PutBucketWebsiteInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketWebsite", params, optFns, addOperationPutBucketWebsiteMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketWebsite", params, optFns, c.addOperationPutBucketWebsiteMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -127,7 +127,7 @@ type PutBucketWebsiteOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketWebsiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketWebsiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketWebsite{}, middleware.After)
 	if err != nil {
 		return err

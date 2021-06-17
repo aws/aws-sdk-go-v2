@@ -17,7 +17,7 @@ func (c *Client) StartDataCollectionByAgentIds(ctx context.Context, params *Star
 		params = &StartDataCollectionByAgentIdsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDataCollectionByAgentIds", params, optFns, addOperationStartDataCollectionByAgentIdsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDataCollectionByAgentIds", params, optFns, c.addOperationStartDataCollectionByAgentIdsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type StartDataCollectionByAgentIdsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDataCollectionByAgentIdsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDataCollectionByAgentIdsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDataCollectionByAgentIds{}, middleware.After)
 	if err != nil {
 		return err

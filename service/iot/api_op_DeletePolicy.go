@@ -21,7 +21,7 @@ func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, op
 		params = &DeletePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePolicy", params, optFns, addOperationDeletePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePolicy", params, optFns, c.addOperationDeletePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeletePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePolicy{}, middleware.After)
 	if err != nil {
 		return err

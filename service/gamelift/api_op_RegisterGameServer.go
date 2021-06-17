@@ -34,7 +34,7 @@ func (c *Client) RegisterGameServer(ctx context.Context, params *RegisterGameSer
 		params = &RegisterGameServerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterGameServer", params, optFns, addOperationRegisterGameServerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterGameServer", params, optFns, c.addOperationRegisterGameServerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type RegisterGameServerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterGameServer{}, middleware.After)
 	if err != nil {
 		return err

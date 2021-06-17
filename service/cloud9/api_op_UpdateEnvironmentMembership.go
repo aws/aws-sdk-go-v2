@@ -18,7 +18,7 @@ func (c *Client) UpdateEnvironmentMembership(ctx context.Context, params *Update
 		params = &UpdateEnvironmentMembershipInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateEnvironmentMembership", params, optFns, addOperationUpdateEnvironmentMembershipMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateEnvironmentMembership", params, optFns, c.addOperationUpdateEnvironmentMembershipMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type UpdateEnvironmentMembershipOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateEnvironmentMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateEnvironmentMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEnvironmentMembership{}, middleware.After)
 	if err != nil {
 		return err

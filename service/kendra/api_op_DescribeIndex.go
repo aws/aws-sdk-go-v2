@@ -18,7 +18,7 @@ func (c *Client) DescribeIndex(ctx context.Context, params *DescribeIndexInput, 
 		params = &DescribeIndexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeIndex", params, optFns, addOperationDescribeIndexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeIndex", params, optFns, c.addOperationDescribeIndexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ type DescribeIndexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeIndex{}, middleware.After)
 	if err != nil {
 		return err

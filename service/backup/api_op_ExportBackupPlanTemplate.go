@@ -16,7 +16,7 @@ func (c *Client) ExportBackupPlanTemplate(ctx context.Context, params *ExportBac
 		params = &ExportBackupPlanTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExportBackupPlanTemplate", params, optFns, addOperationExportBackupPlanTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExportBackupPlanTemplate", params, optFns, c.addOperationExportBackupPlanTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type ExportBackupPlanTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExportBackupPlanTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExportBackupPlanTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportBackupPlanTemplate{}, middleware.After)
 	if err != nil {
 		return err

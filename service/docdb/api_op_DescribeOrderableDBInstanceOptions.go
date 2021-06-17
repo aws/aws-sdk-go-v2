@@ -18,7 +18,7 @@ func (c *Client) DescribeOrderableDBInstanceOptions(ctx context.Context, params 
 		params = &DescribeOrderableDBInstanceOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeOrderableDBInstanceOptions", params, optFns, addOperationDescribeOrderableDBInstanceOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeOrderableDBInstanceOptions", params, optFns, c.addOperationDescribeOrderableDBInstanceOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type DescribeOrderableDBInstanceOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeOrderableDBInstanceOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeOrderableDBInstanceOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeOrderableDBInstanceOptions{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ReplaceNetworkAclEntry(ctx context.Context, params *ReplaceNetw
 		params = &ReplaceNetworkAclEntryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReplaceNetworkAclEntry", params, optFns, addOperationReplaceNetworkAclEntryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReplaceNetworkAclEntry", params, optFns, c.addOperationReplaceNetworkAclEntryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type ReplaceNetworkAclEntryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReplaceNetworkAclEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReplaceNetworkAclEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpReplaceNetworkAclEntry{}, middleware.After)
 	if err != nil {
 		return err

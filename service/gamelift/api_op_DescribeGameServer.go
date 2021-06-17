@@ -26,7 +26,7 @@ func (c *Client) DescribeGameServer(ctx context.Context, params *DescribeGameSer
 		params = &DescribeGameServerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeGameServer", params, optFns, addOperationDescribeGameServerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeGameServer", params, optFns, c.addOperationDescribeGameServerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeGameServerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeGameServer{}, middleware.After)
 	if err != nil {
 		return err

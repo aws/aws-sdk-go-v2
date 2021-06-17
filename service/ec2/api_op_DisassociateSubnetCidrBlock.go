@@ -19,7 +19,7 @@ func (c *Client) DisassociateSubnetCidrBlock(ctx context.Context, params *Disass
 		params = &DisassociateSubnetCidrBlockInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateSubnetCidrBlock", params, optFns, addOperationDisassociateSubnetCidrBlockMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateSubnetCidrBlock", params, optFns, c.addOperationDisassociateSubnetCidrBlockMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DisassociateSubnetCidrBlockOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateSubnetCidrBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateSubnetCidrBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDisassociateSubnetCidrBlock{}, middleware.After)
 	if err != nil {
 		return err

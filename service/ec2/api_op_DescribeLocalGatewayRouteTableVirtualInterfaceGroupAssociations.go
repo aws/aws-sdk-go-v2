@@ -19,7 +19,7 @@ func (c *Client) DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations
 		params = &DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations", params, optFns, addOperationDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations", params, optFns, c.addOperationDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsOutput struc
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations{}, middleware.After)
 	if err != nil {
 		return err

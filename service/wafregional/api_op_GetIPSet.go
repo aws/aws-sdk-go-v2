@@ -23,7 +23,7 @@ func (c *Client) GetIPSet(ctx context.Context, params *GetIPSetInput, optFns ...
 		params = &GetIPSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetIPSet", params, optFns, addOperationGetIPSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetIPSet", params, optFns, c.addOperationGetIPSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetIPSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetIPSet{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteControl(ctx context.Context, params *DeleteControlInput, 
 		params = &DeleteControlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteControl", params, optFns, addOperationDeleteControlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteControl", params, optFns, c.addOperationDeleteControlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteControlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteControl{}, middleware.After)
 	if err != nil {
 		return err

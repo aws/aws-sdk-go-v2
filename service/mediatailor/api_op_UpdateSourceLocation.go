@@ -18,7 +18,7 @@ func (c *Client) UpdateSourceLocation(ctx context.Context, params *UpdateSourceL
 		params = &UpdateSourceLocationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSourceLocation", params, optFns, addOperationUpdateSourceLocationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSourceLocation", params, optFns, c.addOperationUpdateSourceLocationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type UpdateSourceLocationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSourceLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSourceLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSourceLocation{}, middleware.After)
 	if err != nil {
 		return err

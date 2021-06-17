@@ -16,7 +16,7 @@ func (c *Client) DeleteDynamicThingGroup(ctx context.Context, params *DeleteDyna
 		params = &DeleteDynamicThingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDynamicThingGroup", params, optFns, addOperationDeleteDynamicThingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDynamicThingGroup", params, optFns, c.addOperationDeleteDynamicThingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteDynamicThingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDynamicThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDynamicThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDynamicThingGroup{}, middleware.After)
 	if err != nil {
 		return err

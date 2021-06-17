@@ -19,7 +19,7 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 		params = &ListClustersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListClusters", params, optFns, addOperationListClustersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListClusters", params, optFns, c.addOperationListClustersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListClustersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListClusters{}, middleware.After)
 	if err != nil {
 		return err

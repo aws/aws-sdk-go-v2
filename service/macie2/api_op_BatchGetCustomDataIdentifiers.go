@@ -17,7 +17,7 @@ func (c *Client) BatchGetCustomDataIdentifiers(ctx context.Context, params *Batc
 		params = &BatchGetCustomDataIdentifiersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetCustomDataIdentifiers", params, optFns, addOperationBatchGetCustomDataIdentifiersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetCustomDataIdentifiers", params, optFns, c.addOperationBatchGetCustomDataIdentifiersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type BatchGetCustomDataIdentifiersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetCustomDataIdentifiersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetCustomDataIdentifiersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetCustomDataIdentifiers{}, middleware.After)
 	if err != nil {
 		return err

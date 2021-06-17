@@ -17,7 +17,7 @@ func (c *Client) DeleteRouteCalculator(ctx context.Context, params *DeleteRouteC
 		params = &DeleteRouteCalculatorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRouteCalculator", params, optFns, addOperationDeleteRouteCalculatorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRouteCalculator", params, optFns, c.addOperationDeleteRouteCalculatorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteRouteCalculatorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRouteCalculatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRouteCalculatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRouteCalculator{}, middleware.After)
 	if err != nil {
 		return err

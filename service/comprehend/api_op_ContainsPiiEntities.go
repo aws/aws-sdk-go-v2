@@ -19,7 +19,7 @@ func (c *Client) ContainsPiiEntities(ctx context.Context, params *ContainsPiiEnt
 		params = &ContainsPiiEntitiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ContainsPiiEntities", params, optFns, addOperationContainsPiiEntitiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ContainsPiiEntities", params, optFns, c.addOperationContainsPiiEntitiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ContainsPiiEntitiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationContainsPiiEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationContainsPiiEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpContainsPiiEntities{}, middleware.After)
 	if err != nil {
 		return err

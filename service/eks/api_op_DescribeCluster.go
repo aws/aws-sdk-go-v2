@@ -29,7 +29,7 @@ func (c *Client) DescribeCluster(ctx context.Context, params *DescribeClusterInp
 		params = &DescribeClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCluster", params, optFns, addOperationDescribeClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCluster", params, optFns, c.addOperationDescribeClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCluster{}, middleware.After)
 	if err != nil {
 		return err

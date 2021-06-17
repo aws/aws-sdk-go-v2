@@ -20,7 +20,7 @@ func (c *Client) ModifyVpnConnectionOptions(ctx context.Context, params *ModifyV
 		params = &ModifyVpnConnectionOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyVpnConnectionOptions", params, optFns, addOperationModifyVpnConnectionOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyVpnConnectionOptions", params, optFns, c.addOperationModifyVpnConnectionOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ModifyVpnConnectionOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyVpnConnectionOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyVpnConnectionOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyVpnConnectionOptions{}, middleware.After)
 	if err != nil {
 		return err

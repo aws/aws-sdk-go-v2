@@ -18,7 +18,7 @@ func (c *Client) DescribeIAMPolicyAssignment(ctx context.Context, params *Descri
 		params = &DescribeIAMPolicyAssignmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeIAMPolicyAssignment", params, optFns, addOperationDescribeIAMPolicyAssignmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeIAMPolicyAssignment", params, optFns, c.addOperationDescribeIAMPolicyAssignmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DescribeIAMPolicyAssignmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeIAMPolicyAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeIAMPolicyAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeIAMPolicyAssignment{}, middleware.After)
 	if err != nil {
 		return err

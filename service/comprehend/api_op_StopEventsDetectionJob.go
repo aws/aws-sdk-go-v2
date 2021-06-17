@@ -17,7 +17,7 @@ func (c *Client) StopEventsDetectionJob(ctx context.Context, params *StopEventsD
 		params = &StopEventsDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopEventsDetectionJob", params, optFns, addOperationStopEventsDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopEventsDetectionJob", params, optFns, c.addOperationStopEventsDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StopEventsDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopEventsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopEventsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopEventsDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) DeleteConfigurationSet(ctx context.Context, params *DeleteConfi
 		params = &DeleteConfigurationSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteConfigurationSet", params, optFns, addOperationDeleteConfigurationSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteConfigurationSet", params, optFns, c.addOperationDeleteConfigurationSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteConfigurationSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConfigurationSet{}, middleware.After)
 	if err != nil {
 		return err

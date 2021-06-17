@@ -68,7 +68,7 @@ func (c *Client) UpdateSizeConstraintSet(ctx context.Context, params *UpdateSize
 		params = &UpdateSizeConstraintSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSizeConstraintSet", params, optFns, addOperationUpdateSizeConstraintSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSizeConstraintSet", params, optFns, c.addOperationUpdateSizeConstraintSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ type UpdateSizeConstraintSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSizeConstraintSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSizeConstraintSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSizeConstraintSet{}, middleware.After)
 	if err != nil {
 		return err

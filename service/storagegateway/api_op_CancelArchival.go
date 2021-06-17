@@ -18,7 +18,7 @@ func (c *Client) CancelArchival(ctx context.Context, params *CancelArchivalInput
 		params = &CancelArchivalInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelArchival", params, optFns, addOperationCancelArchivalMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelArchival", params, optFns, c.addOperationCancelArchivalMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type CancelArchivalOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelArchivalMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelArchivalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelArchival{}, middleware.After)
 	if err != nil {
 		return err

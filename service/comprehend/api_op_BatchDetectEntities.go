@@ -19,7 +19,7 @@ func (c *Client) BatchDetectEntities(ctx context.Context, params *BatchDetectEnt
 		params = &BatchDetectEntitiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDetectEntities", params, optFns, addOperationBatchDetectEntitiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDetectEntities", params, optFns, c.addOperationBatchDetectEntitiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type BatchDetectEntitiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDetectEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDetectEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDetectEntities{}, middleware.After)
 	if err != nil {
 		return err

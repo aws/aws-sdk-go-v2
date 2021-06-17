@@ -17,7 +17,7 @@ func (c *Client) GetAction(ctx context.Context, params *GetActionInput, optFns .
 		params = &GetActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAction", params, optFns, addOperationGetActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAction", params, optFns, c.addOperationGetActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAction{}, middleware.After)
 	if err != nil {
 		return err

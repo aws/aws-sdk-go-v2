@@ -18,7 +18,7 @@ func (c *Client) DescribePullRequestEvents(ctx context.Context, params *Describe
 		params = &DescribePullRequestEventsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePullRequestEvents", params, optFns, addOperationDescribePullRequestEventsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePullRequestEvents", params, optFns, c.addOperationDescribePullRequestEventsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DescribePullRequestEventsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePullRequestEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePullRequestEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePullRequestEvents{}, middleware.After)
 	if err != nil {
 		return err

@@ -227,8 +227,28 @@ func TestNewEnvConfig(t *testing.T) {
 				"AWS_ENABLE_ENDPOINT_DISCOVERY": "true",
 			},
 			Config: EnvConfig{
-				EnableEndpointDiscovery: ptr.Bool(true),
+				EnableEndpointDiscovery: aws.EndpointDiscoveryEnabled,
 			},
+		},
+		13: {
+			Env: map[string]string{
+				"AWS_ENABLE_ENDPOINT_DISCOVERY": "auto",
+			},
+			Config: EnvConfig{
+				EnableEndpointDiscovery: aws.EndpointDiscoveryAuto,
+			},
+		},
+		14: {
+			Env: map[string]string{
+				"AWS_ENABLE_ENDPOINT_DISCOVERY": "false",
+			},
+			Config: EnvConfig{
+				EnableEndpointDiscovery: aws.EndpointDiscoveryDisabled,
+			},
+		},
+		15: {
+			Env:    map[string]string{},
+			Config: EnvConfig{},
 		},
 	}
 

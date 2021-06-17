@@ -20,7 +20,7 @@ func (c *Client) DescribeDeliveryChannelStatus(ctx context.Context, params *Desc
 		params = &DescribeDeliveryChannelStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDeliveryChannelStatus", params, optFns, addOperationDescribeDeliveryChannelStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDeliveryChannelStatus", params, optFns, c.addOperationDescribeDeliveryChannelStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeDeliveryChannelStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDeliveryChannelStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDeliveryChannelStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDeliveryChannelStatus{}, middleware.After)
 	if err != nil {
 		return err

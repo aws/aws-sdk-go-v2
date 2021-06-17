@@ -18,7 +18,7 @@ func (c *Client) DeleteAutomaticTapeCreationPolicy(ctx context.Context, params *
 		params = &DeleteAutomaticTapeCreationPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAutomaticTapeCreationPolicy", params, optFns, addOperationDeleteAutomaticTapeCreationPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAutomaticTapeCreationPolicy", params, optFns, c.addOperationDeleteAutomaticTapeCreationPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteAutomaticTapeCreationPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAutomaticTapeCreationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAutomaticTapeCreationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAutomaticTapeCreationPolicy{}, middleware.After)
 	if err != nil {
 		return err

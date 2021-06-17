@@ -30,7 +30,7 @@ func (c *Client) ResetUserPassword(ctx context.Context, params *ResetUserPasswor
 		params = &ResetUserPasswordInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetUserPassword", params, optFns, addOperationResetUserPasswordMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetUserPassword", params, optFns, c.addOperationResetUserPasswordMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ResetUserPasswordOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetUserPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetUserPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResetUserPassword{}, middleware.After)
 	if err != nil {
 		return err

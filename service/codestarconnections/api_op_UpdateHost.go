@@ -17,7 +17,7 @@ func (c *Client) UpdateHost(ctx context.Context, params *UpdateHostInput, optFns
 		params = &UpdateHostInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateHost", params, optFns, addOperationUpdateHostMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateHost", params, optFns, c.addOperationUpdateHostMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type UpdateHostOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateHostMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateHostMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateHost{}, middleware.After)
 	if err != nil {
 		return err

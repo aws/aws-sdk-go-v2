@@ -28,7 +28,7 @@ func (c *Client) StartSupportDataExport(ctx context.Context, params *StartSuppor
 		params = &StartSupportDataExportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartSupportDataExport", params, optFns, addOperationStartSupportDataExportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartSupportDataExport", params, optFns, c.addOperationStartSupportDataExportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ type StartSupportDataExportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartSupportDataExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartSupportDataExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSupportDataExport{}, middleware.After)
 	if err != nil {
 		return err

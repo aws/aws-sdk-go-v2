@@ -17,7 +17,7 @@ func (c *Client) DisassociateExternalConnection(ctx context.Context, params *Dis
 		params = &DisassociateExternalConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateExternalConnection", params, optFns, addOperationDisassociateExternalConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateExternalConnection", params, optFns, c.addOperationDisassociateExternalConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DisassociateExternalConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateExternalConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateExternalConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateExternalConnection{}, middleware.After)
 	if err != nil {
 		return err

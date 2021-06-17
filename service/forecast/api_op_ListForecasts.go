@@ -22,7 +22,7 @@ func (c *Client) ListForecasts(ctx context.Context, params *ListForecastsInput, 
 		params = &ListForecastsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListForecasts", params, optFns, addOperationListForecastsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListForecasts", params, optFns, c.addOperationListForecastsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type ListForecastsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListForecastsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListForecastsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListForecasts{}, middleware.After)
 	if err != nil {
 		return err

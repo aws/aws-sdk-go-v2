@@ -23,7 +23,7 @@ func (c *Client) DisassociateDRTLogBucket(ctx context.Context, params *Disassoci
 		params = &DisassociateDRTLogBucketInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateDRTLogBucket", params, optFns, addOperationDisassociateDRTLogBucketMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateDRTLogBucket", params, optFns, c.addOperationDisassociateDRTLogBucketMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DisassociateDRTLogBucketOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateDRTLogBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateDRTLogBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateDRTLogBucket{}, middleware.After)
 	if err != nil {
 		return err

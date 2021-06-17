@@ -17,7 +17,7 @@ func (c *Client) PutPlaybackConfiguration(ctx context.Context, params *PutPlayba
 		params = &PutPlaybackConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutPlaybackConfiguration", params, optFns, addOperationPutPlaybackConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutPlaybackConfiguration", params, optFns, c.addOperationPutPlaybackConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -190,7 +190,7 @@ type PutPlaybackConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutPlaybackConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutPlaybackConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutPlaybackConfiguration{}, middleware.After)
 	if err != nil {
 		return err

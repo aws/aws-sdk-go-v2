@@ -22,7 +22,7 @@ func (c *Client) UntagOpenIDConnectProvider(ctx context.Context, params *UntagOp
 		params = &UntagOpenIDConnectProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagOpenIDConnectProvider", params, optFns, addOperationUntagOpenIDConnectProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagOpenIDConnectProvider", params, optFns, c.addOperationUntagOpenIDConnectProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UntagOpenIDConnectProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagOpenIDConnectProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagOpenIDConnectProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUntagOpenIDConnectProvider{}, middleware.After)
 	if err != nil {
 		return err

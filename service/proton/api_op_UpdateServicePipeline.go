@@ -30,7 +30,7 @@ func (c *Client) UpdateServicePipeline(ctx context.Context, params *UpdateServic
 		params = &UpdateServicePipelineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateServicePipeline", params, optFns, addOperationUpdateServicePipelineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateServicePipeline", params, optFns, c.addOperationUpdateServicePipelineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type UpdateServicePipelineOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateServicePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateServicePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateServicePipeline{}, middleware.After)
 	if err != nil {
 		return err

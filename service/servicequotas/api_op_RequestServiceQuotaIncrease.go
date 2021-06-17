@@ -17,7 +17,7 @@ func (c *Client) RequestServiceQuotaIncrease(ctx context.Context, params *Reques
 		params = &RequestServiceQuotaIncreaseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RequestServiceQuotaIncrease", params, optFns, addOperationRequestServiceQuotaIncreaseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RequestServiceQuotaIncrease", params, optFns, c.addOperationRequestServiceQuotaIncreaseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type RequestServiceQuotaIncreaseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRequestServiceQuotaIncreaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRequestServiceQuotaIncreaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRequestServiceQuotaIncrease{}, middleware.After)
 	if err != nil {
 		return err

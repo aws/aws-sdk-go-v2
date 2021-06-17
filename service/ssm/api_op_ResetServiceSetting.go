@@ -29,7 +29,7 @@ func (c *Client) ResetServiceSetting(ctx context.Context, params *ResetServiceSe
 		params = &ResetServiceSettingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetServiceSetting", params, optFns, addOperationResetServiceSettingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetServiceSetting", params, optFns, c.addOperationResetServiceSettingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type ResetServiceSettingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetServiceSettingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetServiceSettingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResetServiceSetting{}, middleware.After)
 	if err != nil {
 		return err

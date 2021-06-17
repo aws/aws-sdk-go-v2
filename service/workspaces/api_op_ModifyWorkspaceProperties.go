@@ -19,7 +19,7 @@ func (c *Client) ModifyWorkspaceProperties(ctx context.Context, params *ModifyWo
 		params = &ModifyWorkspacePropertiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyWorkspaceProperties", params, optFns, addOperationModifyWorkspacePropertiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyWorkspaceProperties", params, optFns, c.addOperationModifyWorkspacePropertiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type ModifyWorkspacePropertiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyWorkspacePropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyWorkspacePropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyWorkspaceProperties{}, middleware.After)
 	if err != nil {
 		return err

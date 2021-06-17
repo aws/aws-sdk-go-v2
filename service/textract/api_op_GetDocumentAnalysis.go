@@ -54,7 +54,7 @@ func (c *Client) GetDocumentAnalysis(ctx context.Context, params *GetDocumentAna
 		params = &GetDocumentAnalysisInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDocumentAnalysis", params, optFns, addOperationGetDocumentAnalysisMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDocumentAnalysis", params, optFns, c.addOperationGetDocumentAnalysisMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -115,7 +115,7 @@ type GetDocumentAnalysisOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDocumentAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDocumentAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDocumentAnalysis{}, middleware.After)
 	if err != nil {
 		return err

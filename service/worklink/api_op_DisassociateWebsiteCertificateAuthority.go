@@ -16,7 +16,7 @@ func (c *Client) DisassociateWebsiteCertificateAuthority(ctx context.Context, pa
 		params = &DisassociateWebsiteCertificateAuthorityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateWebsiteCertificateAuthority", params, optFns, addOperationDisassociateWebsiteCertificateAuthorityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateWebsiteCertificateAuthority", params, optFns, c.addOperationDisassociateWebsiteCertificateAuthorityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DisassociateWebsiteCertificateAuthorityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateWebsiteCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateWebsiteCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateWebsiteCertificateAuthority{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) ListWebhooks(ctx context.Context, params *ListWebhooksInput, op
 		params = &ListWebhooksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListWebhooks", params, optFns, addOperationListWebhooksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListWebhooks", params, optFns, c.addOperationListWebhooksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListWebhooksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListWebhooksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListWebhooksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWebhooks{}, middleware.After)
 	if err != nil {
 		return err

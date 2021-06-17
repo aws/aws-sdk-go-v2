@@ -17,7 +17,7 @@ func (c *Client) GetStages(ctx context.Context, params *GetStagesInput, optFns .
 		params = &GetStagesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetStages", params, optFns, addOperationGetStagesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetStages", params, optFns, c.addOperationGetStagesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type GetStagesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetStagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetStagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStages{}, middleware.After)
 	if err != nil {
 		return err

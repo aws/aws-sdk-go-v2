@@ -23,7 +23,7 @@ func (c *Client) DescribeTableRestoreStatus(ctx context.Context, params *Describ
 		params = &DescribeTableRestoreStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTableRestoreStatus", params, optFns, addOperationDescribeTableRestoreStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTableRestoreStatus", params, optFns, c.addOperationDescribeTableRestoreStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DescribeTableRestoreStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTableRestoreStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTableRestoreStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTableRestoreStatus{}, middleware.After)
 	if err != nil {
 		return err

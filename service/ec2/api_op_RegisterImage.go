@@ -61,7 +61,7 @@ func (c *Client) RegisterImage(ctx context.Context, params *RegisterImageInput, 
 		params = &RegisterImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterImage", params, optFns, addOperationRegisterImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterImage", params, optFns, c.addOperationRegisterImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -157,7 +157,7 @@ type RegisterImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpRegisterImage{}, middleware.After)
 	if err != nil {
 		return err

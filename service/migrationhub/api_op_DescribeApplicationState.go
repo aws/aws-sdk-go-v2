@@ -18,7 +18,7 @@ func (c *Client) DescribeApplicationState(ctx context.Context, params *DescribeA
 		params = &DescribeApplicationStateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeApplicationState", params, optFns, addOperationDescribeApplicationStateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeApplicationState", params, optFns, c.addOperationDescribeApplicationStateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DescribeApplicationStateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeApplicationStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeApplicationStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplicationState{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) AddFlowOutputs(ctx context.Context, params *AddFlowOutputsInput
 		params = &AddFlowOutputsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddFlowOutputs", params, optFns, addOperationAddFlowOutputsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddFlowOutputs", params, optFns, c.addOperationAddFlowOutputsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type AddFlowOutputsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddFlowOutputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddFlowOutputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddFlowOutputs{}, middleware.After)
 	if err != nil {
 		return err

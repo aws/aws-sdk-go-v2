@@ -23,7 +23,7 @@ func (c *Client) ModifySnapshotCopyRetentionPeriod(ctx context.Context, params *
 		params = &ModifySnapshotCopyRetentionPeriodInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifySnapshotCopyRetentionPeriod", params, optFns, addOperationModifySnapshotCopyRetentionPeriodMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifySnapshotCopyRetentionPeriod", params, optFns, c.addOperationModifySnapshotCopyRetentionPeriodMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type ModifySnapshotCopyRetentionPeriodOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifySnapshotCopyRetentionPeriodMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifySnapshotCopyRetentionPeriodMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifySnapshotCopyRetentionPeriod{}, middleware.After)
 	if err != nil {
 		return err

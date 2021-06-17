@@ -17,7 +17,7 @@ func (c *Client) DetachFromIndex(ctx context.Context, params *DetachFromIndexInp
 		params = &DetachFromIndexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachFromIndex", params, optFns, addOperationDetachFromIndexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachFromIndex", params, optFns, c.addOperationDetachFromIndexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DetachFromIndexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachFromIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachFromIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDetachFromIndex{}, middleware.After)
 	if err != nil {
 		return err

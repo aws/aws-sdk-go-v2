@@ -16,7 +16,7 @@ func (c *Client) DeleteSipRule(ctx context.Context, params *DeleteSipRuleInput, 
 		params = &DeleteSipRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSipRule", params, optFns, addOperationDeleteSipRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSipRule", params, optFns, c.addOperationDeleteSipRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteSipRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSipRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSipRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSipRule{}, middleware.After)
 	if err != nil {
 		return err

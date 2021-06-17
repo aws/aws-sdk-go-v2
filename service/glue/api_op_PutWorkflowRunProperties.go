@@ -18,7 +18,7 @@ func (c *Client) PutWorkflowRunProperties(ctx context.Context, params *PutWorkfl
 		params = &PutWorkflowRunPropertiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutWorkflowRunProperties", params, optFns, addOperationPutWorkflowRunPropertiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutWorkflowRunProperties", params, optFns, c.addOperationPutWorkflowRunPropertiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type PutWorkflowRunPropertiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutWorkflowRunPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutWorkflowRunPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutWorkflowRunProperties{}, middleware.After)
 	if err != nil {
 		return err

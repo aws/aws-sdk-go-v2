@@ -29,7 +29,7 @@ func (c *Client) StopStreamEncryption(ctx context.Context, params *StopStreamEnc
 		params = &StopStreamEncryptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopStreamEncryption", params, optFns, addOperationStopStreamEncryptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopStreamEncryption", params, optFns, c.addOperationStopStreamEncryptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type StopStreamEncryptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopStreamEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopStreamEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopStreamEncryption{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DescribeLocationFsxWindows(ctx context.Context, params *Describ
 		params = &DescribeLocationFsxWindowsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLocationFsxWindows", params, optFns, addOperationDescribeLocationFsxWindowsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLocationFsxWindows", params, optFns, c.addOperationDescribeLocationFsxWindowsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DescribeLocationFsxWindowsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLocationFsxWindowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLocationFsxWindowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationFsxWindows{}, middleware.After)
 	if err != nil {
 		return err

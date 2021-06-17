@@ -24,7 +24,7 @@ func (c *Client) ListJournalS3Exports(ctx context.Context, params *ListJournalS3
 		params = &ListJournalS3ExportsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListJournalS3Exports", params, optFns, addOperationListJournalS3ExportsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListJournalS3Exports", params, optFns, c.addOperationListJournalS3ExportsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ListJournalS3ExportsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListJournalS3ExportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListJournalS3ExportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJournalS3Exports{}, middleware.After)
 	if err != nil {
 		return err

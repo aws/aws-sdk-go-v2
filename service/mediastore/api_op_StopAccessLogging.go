@@ -18,7 +18,7 @@ func (c *Client) StopAccessLogging(ctx context.Context, params *StopAccessLoggin
 		params = &StopAccessLoggingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopAccessLogging", params, optFns, addOperationStopAccessLoggingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopAccessLogging", params, optFns, c.addOperationStopAccessLoggingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type StopAccessLoggingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopAccessLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopAccessLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopAccessLogging{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) PutDedicatedIpInPool(ctx context.Context, params *PutDedicatedI
 		params = &PutDedicatedIpInPoolInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutDedicatedIpInPool", params, optFns, addOperationPutDedicatedIpInPoolMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutDedicatedIpInPool", params, optFns, c.addOperationPutDedicatedIpInPoolMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type PutDedicatedIpInPoolOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutDedicatedIpInPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutDedicatedIpInPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDedicatedIpInPool{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteBotChannelAssociation(ctx context.Context, params *Delete
 		params = &DeleteBotChannelAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBotChannelAssociation", params, optFns, addOperationDeleteBotChannelAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBotChannelAssociation", params, optFns, c.addOperationDeleteBotChannelAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteBotChannelAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBotChannelAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBotChannelAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBotChannelAssociation{}, middleware.After)
 	if err != nil {
 		return err

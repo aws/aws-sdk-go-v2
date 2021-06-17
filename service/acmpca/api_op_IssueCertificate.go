@@ -24,7 +24,7 @@ func (c *Client) IssueCertificate(ctx context.Context, params *IssueCertificateI
 		params = &IssueCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "IssueCertificate", params, optFns, addOperationIssueCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "IssueCertificate", params, optFns, c.addOperationIssueCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -139,7 +139,7 @@ type IssueCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationIssueCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationIssueCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpIssueCertificate{}, middleware.After)
 	if err != nil {
 		return err

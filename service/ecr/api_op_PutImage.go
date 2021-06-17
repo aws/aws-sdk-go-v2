@@ -22,7 +22,7 @@ func (c *Client) PutImage(ctx context.Context, params *PutImageInput, optFns ...
 		params = &PutImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutImage", params, optFns, addOperationPutImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutImage", params, optFns, c.addOperationPutImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type PutImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutImage{}, middleware.After)
 	if err != nil {
 		return err

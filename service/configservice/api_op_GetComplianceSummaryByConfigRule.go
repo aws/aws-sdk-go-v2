@@ -18,7 +18,7 @@ func (c *Client) GetComplianceSummaryByConfigRule(ctx context.Context, params *G
 		params = &GetComplianceSummaryByConfigRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetComplianceSummaryByConfigRule", params, optFns, addOperationGetComplianceSummaryByConfigRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetComplianceSummaryByConfigRule", params, optFns, c.addOperationGetComplianceSummaryByConfigRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type GetComplianceSummaryByConfigRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetComplianceSummaryByConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetComplianceSummaryByConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceSummaryByConfigRule{}, middleware.After)
 	if err != nil {
 		return err

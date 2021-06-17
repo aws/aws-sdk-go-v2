@@ -17,7 +17,7 @@ func (c *Client) ValidateSecurityProfileBehaviors(ctx context.Context, params *V
 		params = &ValidateSecurityProfileBehaviorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ValidateSecurityProfileBehaviors", params, optFns, addOperationValidateSecurityProfileBehaviorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ValidateSecurityProfileBehaviors", params, optFns, c.addOperationValidateSecurityProfileBehaviorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type ValidateSecurityProfileBehaviorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationValidateSecurityProfileBehaviorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationValidateSecurityProfileBehaviorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidateSecurityProfileBehaviors{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetLicenseConfiguration(ctx context.Context, params *GetLicense
 		params = &GetLicenseConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLicenseConfiguration", params, optFns, addOperationGetLicenseConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLicenseConfiguration", params, optFns, c.addOperationGetLicenseConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type GetLicenseConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLicenseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLicenseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLicenseConfiguration{}, middleware.After)
 	if err != nil {
 		return err

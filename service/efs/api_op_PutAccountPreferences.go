@@ -16,7 +16,7 @@ func (c *Client) PutAccountPreferences(ctx context.Context, params *PutAccountPr
 		params = &PutAccountPreferencesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAccountPreferences", params, optFns, addOperationPutAccountPreferencesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAccountPreferences", params, optFns, c.addOperationPutAccountPreferencesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type PutAccountPreferencesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAccountPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAccountPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountPreferences{}, middleware.After)
 	if err != nil {
 		return err

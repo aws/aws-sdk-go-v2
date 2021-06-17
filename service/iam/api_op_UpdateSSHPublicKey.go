@@ -25,7 +25,7 @@ func (c *Client) UpdateSSHPublicKey(ctx context.Context, params *UpdateSSHPublic
 		params = &UpdateSSHPublicKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSSHPublicKey", params, optFns, addOperationUpdateSSHPublicKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSSHPublicKey", params, optFns, c.addOperationUpdateSSHPublicKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type UpdateSSHPublicKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateSSHPublicKey{}, middleware.After)
 	if err != nil {
 		return err

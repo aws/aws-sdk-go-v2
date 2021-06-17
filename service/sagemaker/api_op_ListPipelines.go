@@ -19,7 +19,7 @@ func (c *Client) ListPipelines(ctx context.Context, params *ListPipelinesInput, 
 		params = &ListPipelinesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPipelines", params, optFns, addOperationListPipelinesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPipelines", params, optFns, c.addOperationListPipelinesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type ListPipelinesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPipelines{}, middleware.After)
 	if err != nil {
 		return err

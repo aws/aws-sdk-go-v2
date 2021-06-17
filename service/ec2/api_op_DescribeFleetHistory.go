@@ -24,7 +24,7 @@ func (c *Client) DescribeFleetHistory(ctx context.Context, params *DescribeFleet
 		params = &DescribeFleetHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFleetHistory", params, optFns, addOperationDescribeFleetHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFleetHistory", params, optFns, c.addOperationDescribeFleetHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type DescribeFleetHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFleetHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFleetHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeFleetHistory{}, middleware.After)
 	if err != nil {
 		return err

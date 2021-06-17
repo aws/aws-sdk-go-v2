@@ -19,7 +19,7 @@ func (c *Client) PutDataCatalogEncryptionSettings(ctx context.Context, params *P
 		params = &PutDataCatalogEncryptionSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutDataCatalogEncryptionSettings", params, optFns, addOperationPutDataCatalogEncryptionSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutDataCatalogEncryptionSettings", params, optFns, c.addOperationPutDataCatalogEncryptionSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type PutDataCatalogEncryptionSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutDataCatalogEncryptionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutDataCatalogEncryptionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutDataCatalogEncryptionSettings{}, middleware.After)
 	if err != nil {
 		return err

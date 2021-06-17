@@ -17,7 +17,7 @@ func (c *Client) DeleteRealtimeEndpoint(ctx context.Context, params *DeleteRealt
 		params = &DeleteRealtimeEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRealtimeEndpoint", params, optFns, addOperationDeleteRealtimeEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRealtimeEndpoint", params, optFns, c.addOperationDeleteRealtimeEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteRealtimeEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRealtimeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRealtimeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRealtimeEndpoint{}, middleware.After)
 	if err != nil {
 		return err

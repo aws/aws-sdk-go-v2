@@ -16,7 +16,7 @@ func (c *Client) AssociateDeviceWithPlacement(ctx context.Context, params *Assoc
 		params = &AssociateDeviceWithPlacementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateDeviceWithPlacement", params, optFns, addOperationAssociateDeviceWithPlacementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateDeviceWithPlacement", params, optFns, c.addOperationAssociateDeviceWithPlacementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type AssociateDeviceWithPlacementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateDeviceWithPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateDeviceWithPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateDeviceWithPlacement{}, middleware.After)
 	if err != nil {
 		return err

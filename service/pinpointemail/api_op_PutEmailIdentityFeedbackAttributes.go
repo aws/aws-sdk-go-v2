@@ -26,7 +26,7 @@ func (c *Client) PutEmailIdentityFeedbackAttributes(ctx context.Context, params 
 		params = &PutEmailIdentityFeedbackAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutEmailIdentityFeedbackAttributes", params, optFns, addOperationPutEmailIdentityFeedbackAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutEmailIdentityFeedbackAttributes", params, optFns, c.addOperationPutEmailIdentityFeedbackAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type PutEmailIdentityFeedbackAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutEmailIdentityFeedbackAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutEmailIdentityFeedbackAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEmailIdentityFeedbackAttributes{}, middleware.After)
 	if err != nil {
 		return err

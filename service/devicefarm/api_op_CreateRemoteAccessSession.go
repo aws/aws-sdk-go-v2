@@ -17,7 +17,7 @@ func (c *Client) CreateRemoteAccessSession(ctx context.Context, params *CreateRe
 		params = &CreateRemoteAccessSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRemoteAccessSession", params, optFns, addOperationCreateRemoteAccessSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRemoteAccessSession", params, optFns, c.addOperationCreateRemoteAccessSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type CreateRemoteAccessSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRemoteAccessSession{}, middleware.After)
 	if err != nil {
 		return err

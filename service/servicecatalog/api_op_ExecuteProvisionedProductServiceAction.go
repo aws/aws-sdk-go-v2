@@ -18,7 +18,7 @@ func (c *Client) ExecuteProvisionedProductServiceAction(ctx context.Context, par
 		params = &ExecuteProvisionedProductServiceActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExecuteProvisionedProductServiceAction", params, optFns, addOperationExecuteProvisionedProductServiceActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExecuteProvisionedProductServiceAction", params, optFns, c.addOperationExecuteProvisionedProductServiceActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type ExecuteProvisionedProductServiceActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExecuteProvisionedProductServiceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExecuteProvisionedProductServiceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpExecuteProvisionedProductServiceAction{}, middleware.After)
 	if err != nil {
 		return err

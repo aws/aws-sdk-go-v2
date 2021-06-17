@@ -19,7 +19,7 @@ func (c *Client) DescribeEmergencyContactSettings(ctx context.Context, params *D
 		params = &DescribeEmergencyContactSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEmergencyContactSettings", params, optFns, addOperationDescribeEmergencyContactSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEmergencyContactSettings", params, optFns, c.addOperationDescribeEmergencyContactSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DescribeEmergencyContactSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEmergencyContactSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEmergencyContactSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEmergencyContactSettings{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) DetachLoadBalancers(ctx context.Context, params *DetachLoadBala
 		params = &DetachLoadBalancersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachLoadBalancers", params, optFns, addOperationDetachLoadBalancersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachLoadBalancers", params, optFns, c.addOperationDetachLoadBalancersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DetachLoadBalancersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachLoadBalancersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachLoadBalancersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDetachLoadBalancers{}, middleware.After)
 	if err != nil {
 		return err

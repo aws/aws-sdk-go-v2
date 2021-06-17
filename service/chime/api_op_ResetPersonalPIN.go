@@ -18,7 +18,7 @@ func (c *Client) ResetPersonalPIN(ctx context.Context, params *ResetPersonalPINI
 		params = &ResetPersonalPINInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetPersonalPIN", params, optFns, addOperationResetPersonalPINMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetPersonalPIN", params, optFns, c.addOperationResetPersonalPINMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ResetPersonalPINOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetPersonalPINMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetPersonalPINMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetPersonalPIN{}, middleware.After)
 	if err != nil {
 		return err

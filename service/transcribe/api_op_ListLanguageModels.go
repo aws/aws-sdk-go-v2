@@ -20,7 +20,7 @@ func (c *Client) ListLanguageModels(ctx context.Context, params *ListLanguageMod
 		params = &ListLanguageModelsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLanguageModels", params, optFns, addOperationListLanguageModelsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLanguageModels", params, optFns, c.addOperationListLanguageModelsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListLanguageModelsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLanguageModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLanguageModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLanguageModels{}, middleware.After)
 	if err != nil {
 		return err

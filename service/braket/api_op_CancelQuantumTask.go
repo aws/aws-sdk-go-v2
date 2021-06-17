@@ -17,7 +17,7 @@ func (c *Client) CancelQuantumTask(ctx context.Context, params *CancelQuantumTas
 		params = &CancelQuantumTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelQuantumTask", params, optFns, addOperationCancelQuantumTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelQuantumTask", params, optFns, c.addOperationCancelQuantumTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type CancelQuantumTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelQuantumTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelQuantumTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelQuantumTask{}, middleware.After)
 	if err != nil {
 		return err

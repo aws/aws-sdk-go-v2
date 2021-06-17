@@ -35,7 +35,7 @@ func (c *Client) CreateEventSubscription(ctx context.Context, params *CreateEven
 		params = &CreateEventSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateEventSubscription", params, optFns, addOperationCreateEventSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateEventSubscription", params, optFns, c.addOperationCreateEventSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -113,7 +113,7 @@ type CreateEventSubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateEventSubscription{}, middleware.After)
 	if err != nil {
 		return err

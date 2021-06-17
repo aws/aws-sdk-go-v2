@@ -19,7 +19,7 @@ func (c *Client) UpdateDefaultBranch(ctx context.Context, params *UpdateDefaultB
 		params = &UpdateDefaultBranchInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDefaultBranch", params, optFns, addOperationUpdateDefaultBranchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDefaultBranch", params, optFns, c.addOperationUpdateDefaultBranchMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type UpdateDefaultBranchOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDefaultBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDefaultBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDefaultBranch{}, middleware.After)
 	if err != nil {
 		return err

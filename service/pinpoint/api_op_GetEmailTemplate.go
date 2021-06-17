@@ -18,7 +18,7 @@ func (c *Client) GetEmailTemplate(ctx context.Context, params *GetEmailTemplateI
 		params = &GetEmailTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEmailTemplate", params, optFns, addOperationGetEmailTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEmailTemplate", params, optFns, c.addOperationGetEmailTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetEmailTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEmailTemplate{}, middleware.After)
 	if err != nil {
 		return err

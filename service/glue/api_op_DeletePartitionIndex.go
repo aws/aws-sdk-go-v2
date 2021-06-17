@@ -16,7 +16,7 @@ func (c *Client) DeletePartitionIndex(ctx context.Context, params *DeletePartiti
 		params = &DeletePartitionIndexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePartitionIndex", params, optFns, addOperationDeletePartitionIndexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePartitionIndex", params, optFns, c.addOperationDeletePartitionIndexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeletePartitionIndexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePartitionIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePartitionIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePartitionIndex{}, middleware.After)
 	if err != nil {
 		return err

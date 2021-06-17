@@ -20,7 +20,7 @@ func (c *Client) PutSigningProfile(ctx context.Context, params *PutSigningProfil
 		params = &PutSigningProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutSigningProfile", params, optFns, addOperationPutSigningProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutSigningProfile", params, optFns, c.addOperationPutSigningProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type PutSigningProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSigningProfile{}, middleware.After)
 	if err != nil {
 		return err

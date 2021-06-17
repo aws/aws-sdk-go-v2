@@ -29,7 +29,7 @@ func (c *Client) RespondDecisionTaskCompleted(ctx context.Context, params *Respo
 		params = &RespondDecisionTaskCompletedInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RespondDecisionTaskCompleted", params, optFns, addOperationRespondDecisionTaskCompletedMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RespondDecisionTaskCompleted", params, optFns, c.addOperationRespondDecisionTaskCompletedMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type RespondDecisionTaskCompletedOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRespondDecisionTaskCompletedMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRespondDecisionTaskCompletedMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRespondDecisionTaskCompleted{}, middleware.After)
 	if err != nil {
 		return err

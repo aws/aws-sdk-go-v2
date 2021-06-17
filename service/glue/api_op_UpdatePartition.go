@@ -17,7 +17,7 @@ func (c *Client) UpdatePartition(ctx context.Context, params *UpdatePartitionInp
 		params = &UpdatePartitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePartition", params, optFns, addOperationUpdatePartitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePartition", params, optFns, c.addOperationUpdatePartitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type UpdatePartitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePartition{}, middleware.After)
 	if err != nil {
 		return err

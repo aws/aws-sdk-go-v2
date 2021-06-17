@@ -19,7 +19,7 @@ func (c *Client) UntagPolicy(ctx context.Context, params *UntagPolicyInput, optF
 		params = &UntagPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagPolicy", params, optFns, addOperationUntagPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagPolicy", params, optFns, c.addOperationUntagPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UntagPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUntagPolicy{}, middleware.After)
 	if err != nil {
 		return err

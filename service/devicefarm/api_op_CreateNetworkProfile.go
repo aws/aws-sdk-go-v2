@@ -17,7 +17,7 @@ func (c *Client) CreateNetworkProfile(ctx context.Context, params *CreateNetwork
 		params = &CreateNetworkProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateNetworkProfile", params, optFns, addOperationCreateNetworkProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateNetworkProfile", params, optFns, c.addOperationCreateNetworkProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type CreateNetworkProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateNetworkProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateNetworkProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateNetworkProfile{}, middleware.After)
 	if err != nil {
 		return err

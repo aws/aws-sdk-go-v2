@@ -21,7 +21,7 @@ func (c *Client) CreateClusterSnapshot(ctx context.Context, params *CreateCluste
 		params = &CreateClusterSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateClusterSnapshot", params, optFns, addOperationCreateClusterSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateClusterSnapshot", params, optFns, c.addOperationCreateClusterSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type CreateClusterSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateClusterSnapshot{}, middleware.After)
 	if err != nil {
 		return err

@@ -54,7 +54,7 @@ func (c *Client) UpdateGeoMatchSet(ctx context.Context, params *UpdateGeoMatchSe
 		params = &UpdateGeoMatchSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateGeoMatchSet", params, optFns, addOperationUpdateGeoMatchSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateGeoMatchSet", params, optFns, c.addOperationUpdateGeoMatchSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ type UpdateGeoMatchSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateGeoMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateGeoMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateGeoMatchSet{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DescribeDeploymentJob(ctx context.Context, params *DescribeDepl
 		params = &DescribeDeploymentJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDeploymentJob", params, optFns, addOperationDescribeDeploymentJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDeploymentJob", params, optFns, c.addOperationDescribeDeploymentJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DescribeDeploymentJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDeploymentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDeploymentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDeploymentJob{}, middleware.After)
 	if err != nil {
 		return err

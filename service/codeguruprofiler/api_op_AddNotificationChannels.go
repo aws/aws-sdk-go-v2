@@ -17,7 +17,7 @@ func (c *Client) AddNotificationChannels(ctx context.Context, params *AddNotific
 		params = &AddNotificationChannelsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddNotificationChannels", params, optFns, addOperationAddNotificationChannelsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddNotificationChannels", params, optFns, c.addOperationAddNotificationChannelsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type AddNotificationChannelsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddNotificationChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddNotificationChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddNotificationChannels{}, middleware.After)
 	if err != nil {
 		return err

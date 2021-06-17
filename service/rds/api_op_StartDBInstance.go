@@ -24,7 +24,7 @@ func (c *Client) StartDBInstance(ctx context.Context, params *StartDBInstanceInp
 		params = &StartDBInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDBInstance", params, optFns, addOperationStartDBInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDBInstance", params, optFns, c.addOperationStartDBInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type StartDBInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartDBInstance{}, middleware.After)
 	if err != nil {
 		return err

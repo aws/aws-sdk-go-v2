@@ -18,7 +18,7 @@ func (c *Client) ListResolverEndpointIpAddresses(ctx context.Context, params *Li
 		params = &ListResolverEndpointIpAddressesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResolverEndpointIpAddresses", params, optFns, addOperationListResolverEndpointIpAddressesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResolverEndpointIpAddresses", params, optFns, c.addOperationListResolverEndpointIpAddressesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type ListResolverEndpointIpAddressesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListResolverEndpointIpAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResolverEndpointIpAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResolverEndpointIpAddresses{}, middleware.After)
 	if err != nil {
 		return err

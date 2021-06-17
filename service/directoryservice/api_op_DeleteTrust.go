@@ -17,7 +17,7 @@ func (c *Client) DeleteTrust(ctx context.Context, params *DeleteTrustInput, optF
 		params = &DeleteTrustInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTrust", params, optFns, addOperationDeleteTrustMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTrust", params, optFns, c.addOperationDeleteTrustMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteTrustOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTrustMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTrustMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTrust{}, middleware.After)
 	if err != nil {
 		return err

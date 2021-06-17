@@ -25,7 +25,7 @@ func (c *Client) DeleteResolverEndpoint(ctx context.Context, params *DeleteResol
 		params = &DeleteResolverEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteResolverEndpoint", params, optFns, addOperationDeleteResolverEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteResolverEndpoint", params, optFns, c.addOperationDeleteResolverEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteResolverEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteResolverEndpoint{}, middleware.After)
 	if err != nil {
 		return err

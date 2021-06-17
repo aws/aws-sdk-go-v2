@@ -27,7 +27,7 @@ func (c *Client) DetachInstances(ctx context.Context, params *DetachInstancesInp
 		params = &DetachInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachInstances", params, optFns, addOperationDetachInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachInstances", params, optFns, c.addOperationDetachInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DetachInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDetachInstances{}, middleware.After)
 	if err != nil {
 		return err

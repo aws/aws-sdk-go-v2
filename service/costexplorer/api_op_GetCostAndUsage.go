@@ -27,7 +27,7 @@ func (c *Client) GetCostAndUsage(ctx context.Context, params *GetCostAndUsageInp
 		params = &GetCostAndUsageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCostAndUsage", params, optFns, addOperationGetCostAndUsageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCostAndUsage", params, optFns, c.addOperationGetCostAndUsageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type GetCostAndUsageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCostAndUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCostAndUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCostAndUsage{}, middleware.After)
 	if err != nil {
 		return err

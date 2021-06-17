@@ -79,7 +79,7 @@ func (c *Client) PutObject(ctx context.Context, params *PutObjectInput, optFns .
 		params = &PutObjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutObject", params, optFns, addOperationPutObjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutObject", params, optFns, c.addOperationPutObjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -337,7 +337,7 @@ type PutObjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutObject{}, middleware.After)
 	if err != nil {
 		return err
@@ -456,7 +456,7 @@ func (c *PresignClient) PresignPutObject(ctx context.Context, params *PutObjectI
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
 	result, _, err := c.client.invokeOperation(ctx, "PutObject", params, clientOptFns,
-		addOperationPutObjectMiddlewares,
+		c.client.addOperationPutObjectMiddlewares,
 		presignConverter(options).convertToPresignMiddleware,
 		func(stack *middleware.Stack, options Options) error {
 			return awshttp.RemoveContentTypeHeader(stack)

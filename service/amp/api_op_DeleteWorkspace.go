@@ -16,7 +16,7 @@ func (c *Client) DeleteWorkspace(ctx context.Context, params *DeleteWorkspaceInp
 		params = &DeleteWorkspaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkspace", params, optFns, addOperationDeleteWorkspaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkspace", params, optFns, c.addOperationDeleteWorkspaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteWorkspaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkspace{}, middleware.After)
 	if err != nil {
 		return err

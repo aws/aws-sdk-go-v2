@@ -21,7 +21,7 @@ func (c *Client) DeleteElasticsearchServiceRole(ctx context.Context, params *Del
 		params = &DeleteElasticsearchServiceRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteElasticsearchServiceRole", params, optFns, addOperationDeleteElasticsearchServiceRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteElasticsearchServiceRole", params, optFns, c.addOperationDeleteElasticsearchServiceRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteElasticsearchServiceRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteElasticsearchServiceRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteElasticsearchServiceRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteElasticsearchServiceRole{}, middleware.After)
 	if err != nil {
 		return err

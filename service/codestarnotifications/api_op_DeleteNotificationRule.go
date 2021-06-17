@@ -16,7 +16,7 @@ func (c *Client) DeleteNotificationRule(ctx context.Context, params *DeleteNotif
 		params = &DeleteNotificationRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteNotificationRule", params, optFns, addOperationDeleteNotificationRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteNotificationRule", params, optFns, c.addOperationDeleteNotificationRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteNotificationRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteNotificationRule{}, middleware.After)
 	if err != nil {
 		return err

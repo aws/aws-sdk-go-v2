@@ -20,7 +20,7 @@ func (c *Client) ListTaskDefinitions(ctx context.Context, params *ListTaskDefini
 		params = &ListTaskDefinitionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTaskDefinitions", params, optFns, addOperationListTaskDefinitionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTaskDefinitions", params, optFns, c.addOperationListTaskDefinitionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type ListTaskDefinitionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTaskDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTaskDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTaskDefinitions{}, middleware.After)
 	if err != nil {
 		return err

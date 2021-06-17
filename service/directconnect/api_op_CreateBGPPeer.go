@@ -26,7 +26,7 @@ func (c *Client) CreateBGPPeer(ctx context.Context, params *CreateBGPPeerInput, 
 		params = &CreateBGPPeerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateBGPPeer", params, optFns, addOperationCreateBGPPeerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBGPPeer", params, optFns, c.addOperationCreateBGPPeerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type CreateBGPPeerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateBGPPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateBGPPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBGPPeer{}, middleware.After)
 	if err != nil {
 		return err

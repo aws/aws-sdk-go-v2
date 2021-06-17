@@ -17,7 +17,7 @@ func (c *Client) DeleteRetentionPolicy(ctx context.Context, params *DeleteRetent
 		params = &DeleteRetentionPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRetentionPolicy", params, optFns, addOperationDeleteRetentionPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRetentionPolicy", params, optFns, c.addOperationDeleteRetentionPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteRetentionPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRetentionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRetentionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRetentionPolicy{}, middleware.After)
 	if err != nil {
 		return err

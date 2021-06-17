@@ -16,7 +16,7 @@ func (c *Client) DeleteNetworkProfile(ctx context.Context, params *DeleteNetwork
 		params = &DeleteNetworkProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteNetworkProfile", params, optFns, addOperationDeleteNetworkProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteNetworkProfile", params, optFns, c.addOperationDeleteNetworkProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteNetworkProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteNetworkProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteNetworkProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteNetworkProfile{}, middleware.After)
 	if err != nil {
 		return err

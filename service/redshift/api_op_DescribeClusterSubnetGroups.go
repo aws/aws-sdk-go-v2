@@ -27,7 +27,7 @@ func (c *Client) DescribeClusterSubnetGroups(ctx context.Context, params *Descri
 		params = &DescribeClusterSubnetGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeClusterSubnetGroups", params, optFns, addOperationDescribeClusterSubnetGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeClusterSubnetGroups", params, optFns, c.addOperationDescribeClusterSubnetGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type DescribeClusterSubnetGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeClusterSubnetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeClusterSubnetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeClusterSubnetGroups{}, middleware.After)
 	if err != nil {
 		return err

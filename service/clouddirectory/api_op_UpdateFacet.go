@@ -25,7 +25,7 @@ func (c *Client) UpdateFacet(ctx context.Context, params *UpdateFacetInput, optF
 		params = &UpdateFacetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFacet", params, optFns, addOperationUpdateFacetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFacet", params, optFns, c.addOperationUpdateFacetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type UpdateFacetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFacet{}, middleware.After)
 	if err != nil {
 		return err

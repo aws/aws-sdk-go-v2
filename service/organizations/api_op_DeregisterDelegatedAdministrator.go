@@ -26,7 +26,7 @@ func (c *Client) DeregisterDelegatedAdministrator(ctx context.Context, params *D
 		params = &DeregisterDelegatedAdministratorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterDelegatedAdministrator", params, optFns, addOperationDeregisterDelegatedAdministratorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterDelegatedAdministrator", params, optFns, c.addOperationDeregisterDelegatedAdministratorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DeregisterDelegatedAdministratorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterDelegatedAdministratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterDelegatedAdministratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterDelegatedAdministrator{}, middleware.After)
 	if err != nil {
 		return err

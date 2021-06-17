@@ -17,7 +17,7 @@ func (c *Client) GetAnswer(ctx context.Context, params *GetAnswerInput, optFns .
 		params = &GetAnswerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAnswer", params, optFns, addOperationGetAnswerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAnswer", params, optFns, c.addOperationGetAnswerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type GetAnswerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAnswer{}, middleware.After)
 	if err != nil {
 		return err

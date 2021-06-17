@@ -18,7 +18,7 @@ func (c *Client) BatchDeleteGeofence(ctx context.Context, params *BatchDeleteGeo
 		params = &BatchDeleteGeofenceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteGeofence", params, optFns, addOperationBatchDeleteGeofenceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteGeofence", params, optFns, c.addOperationBatchDeleteGeofenceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type BatchDeleteGeofenceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteGeofence{}, middleware.After)
 	if err != nil {
 		return err

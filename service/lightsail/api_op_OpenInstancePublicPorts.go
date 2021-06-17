@@ -22,7 +22,7 @@ func (c *Client) OpenInstancePublicPorts(ctx context.Context, params *OpenInstan
 		params = &OpenInstancePublicPortsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "OpenInstancePublicPorts", params, optFns, addOperationOpenInstancePublicPortsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "OpenInstancePublicPorts", params, optFns, c.addOperationOpenInstancePublicPortsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type OpenInstancePublicPortsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationOpenInstancePublicPortsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationOpenInstancePublicPortsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpOpenInstancePublicPorts{}, middleware.After)
 	if err != nil {
 		return err

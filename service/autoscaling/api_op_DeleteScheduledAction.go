@@ -16,7 +16,7 @@ func (c *Client) DeleteScheduledAction(ctx context.Context, params *DeleteSchedu
 		params = &DeleteScheduledActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteScheduledAction", params, optFns, addOperationDeleteScheduledActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteScheduledAction", params, optFns, c.addOperationDeleteScheduledActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteScheduledActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteScheduledAction{}, middleware.After)
 	if err != nil {
 		return err

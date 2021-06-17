@@ -17,7 +17,7 @@ func (c *Client) GetRoomSkillParameter(ctx context.Context, params *GetRoomSkill
 		params = &GetRoomSkillParameterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRoomSkillParameter", params, optFns, addOperationGetRoomSkillParameterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRoomSkillParameter", params, optFns, c.addOperationGetRoomSkillParameterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetRoomSkillParameterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRoomSkillParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRoomSkillParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRoomSkillParameter{}, middleware.After)
 	if err != nil {
 		return err

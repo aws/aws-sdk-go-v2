@@ -18,7 +18,7 @@ func (c *Client) DescribeNotificationRule(ctx context.Context, params *DescribeN
 		params = &DescribeNotificationRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeNotificationRule", params, optFns, addOperationDescribeNotificationRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeNotificationRule", params, optFns, c.addOperationDescribeNotificationRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type DescribeNotificationRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeNotificationRule{}, middleware.After)
 	if err != nil {
 		return err

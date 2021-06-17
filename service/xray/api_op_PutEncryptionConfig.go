@@ -17,7 +17,7 @@ func (c *Client) PutEncryptionConfig(ctx context.Context, params *PutEncryptionC
 		params = &PutEncryptionConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutEncryptionConfig", params, optFns, addOperationPutEncryptionConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutEncryptionConfig", params, optFns, c.addOperationPutEncryptionConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type PutEncryptionConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEncryptionConfig{}, middleware.After)
 	if err != nil {
 		return err

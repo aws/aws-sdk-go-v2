@@ -17,7 +17,7 @@ func (c *Client) GetFolder(ctx context.Context, params *GetFolderInput, optFns .
 		params = &GetFolderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFolder", params, optFns, addOperationGetFolderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFolder", params, optFns, c.addOperationGetFolderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type GetFolderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFolder{}, middleware.After)
 	if err != nil {
 		return err

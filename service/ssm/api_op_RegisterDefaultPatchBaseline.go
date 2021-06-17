@@ -20,7 +20,7 @@ func (c *Client) RegisterDefaultPatchBaseline(ctx context.Context, params *Regis
 		params = &RegisterDefaultPatchBaselineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterDefaultPatchBaseline", params, optFns, addOperationRegisterDefaultPatchBaselineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterDefaultPatchBaseline", params, optFns, c.addOperationRegisterDefaultPatchBaselineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type RegisterDefaultPatchBaselineOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterDefaultPatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterDefaultPatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterDefaultPatchBaseline{}, middleware.After)
 	if err != nil {
 		return err

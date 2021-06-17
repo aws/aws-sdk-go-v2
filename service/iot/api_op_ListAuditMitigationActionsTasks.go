@@ -19,7 +19,7 @@ func (c *Client) ListAuditMitigationActionsTasks(ctx context.Context, params *Li
 		params = &ListAuditMitigationActionsTasksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAuditMitigationActionsTasks", params, optFns, addOperationListAuditMitigationActionsTasksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAuditMitigationActionsTasks", params, optFns, c.addOperationListAuditMitigationActionsTasksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type ListAuditMitigationActionsTasksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAuditMitigationActionsTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAuditMitigationActionsTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAuditMitigationActionsTasks{}, middleware.After)
 	if err != nil {
 		return err

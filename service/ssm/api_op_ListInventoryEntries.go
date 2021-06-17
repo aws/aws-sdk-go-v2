@@ -17,7 +17,7 @@ func (c *Client) ListInventoryEntries(ctx context.Context, params *ListInventory
 		params = &ListInventoryEntriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListInventoryEntries", params, optFns, addOperationListInventoryEntriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListInventoryEntries", params, optFns, c.addOperationListInventoryEntriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type ListInventoryEntriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListInventoryEntriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListInventoryEntriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListInventoryEntries{}, middleware.After)
 	if err != nil {
 		return err

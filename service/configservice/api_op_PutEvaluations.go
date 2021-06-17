@@ -19,7 +19,7 @@ func (c *Client) PutEvaluations(ctx context.Context, params *PutEvaluationsInput
 		params = &PutEvaluationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutEvaluations", params, optFns, addOperationPutEvaluationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutEvaluations", params, optFns, c.addOperationPutEvaluationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type PutEvaluationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutEvaluationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutEvaluationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutEvaluations{}, middleware.After)
 	if err != nil {
 		return err

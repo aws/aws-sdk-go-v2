@@ -24,7 +24,7 @@ func (c *Client) ListContactFlows(ctx context.Context, params *ListContactFlowsI
 		params = &ListContactFlowsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListContactFlows", params, optFns, addOperationListContactFlowsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListContactFlows", params, optFns, c.addOperationListContactFlowsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ListContactFlowsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListContactFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListContactFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListContactFlows{}, middleware.After)
 	if err != nil {
 		return err

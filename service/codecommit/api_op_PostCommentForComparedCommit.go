@@ -18,7 +18,7 @@ func (c *Client) PostCommentForComparedCommit(ctx context.Context, params *PostC
 		params = &PostCommentForComparedCommitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PostCommentForComparedCommit", params, optFns, addOperationPostCommentForComparedCommitMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PostCommentForComparedCommit", params, optFns, c.addOperationPostCommentForComparedCommitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type PostCommentForComparedCommitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPostCommentForComparedCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPostCommentForComparedCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPostCommentForComparedCommit{}, middleware.After)
 	if err != nil {
 		return err

@@ -32,7 +32,7 @@ func (c *Client) PutEmailIdentityDkimSigningAttributes(ctx context.Context, para
 		params = &PutEmailIdentityDkimSigningAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutEmailIdentityDkimSigningAttributes", params, optFns, addOperationPutEmailIdentityDkimSigningAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutEmailIdentityDkimSigningAttributes", params, optFns, c.addOperationPutEmailIdentityDkimSigningAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -120,7 +120,7 @@ type PutEmailIdentityDkimSigningAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutEmailIdentityDkimSigningAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutEmailIdentityDkimSigningAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEmailIdentityDkimSigningAttributes{}, middleware.After)
 	if err != nil {
 		return err

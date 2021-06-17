@@ -17,7 +17,7 @@ func (c *Client) DeleteDomainPermissionsPolicy(ctx context.Context, params *Dele
 		params = &DeleteDomainPermissionsPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDomainPermissionsPolicy", params, optFns, addOperationDeleteDomainPermissionsPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDomainPermissionsPolicy", params, optFns, c.addOperationDeleteDomainPermissionsPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteDomainPermissionsPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDomainPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDomainPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDomainPermissionsPolicy{}, middleware.After)
 	if err != nil {
 		return err

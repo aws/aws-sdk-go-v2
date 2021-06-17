@@ -25,7 +25,7 @@ func (c *Client) ListPublicKeys(ctx context.Context, params *ListPublicKeysInput
 		params = &ListPublicKeysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPublicKeys", params, optFns, addOperationListPublicKeysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPublicKeys", params, optFns, c.addOperationListPublicKeysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ListPublicKeysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPublicKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPublicKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPublicKeys{}, middleware.After)
 	if err != nil {
 		return err

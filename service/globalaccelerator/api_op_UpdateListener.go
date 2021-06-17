@@ -17,7 +17,7 @@ func (c *Client) UpdateListener(ctx context.Context, params *UpdateListenerInput
 		params = &UpdateListenerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateListener", params, optFns, addOperationUpdateListenerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateListener", params, optFns, c.addOperationUpdateListenerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type UpdateListenerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateListener{}, middleware.After)
 	if err != nil {
 		return err

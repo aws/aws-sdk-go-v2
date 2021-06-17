@@ -17,7 +17,7 @@ func (c *Client) DeleteRouteTable(ctx context.Context, params *DeleteRouteTableI
 		params = &DeleteRouteTableInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRouteTable", params, optFns, addOperationDeleteRouteTableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRouteTable", params, optFns, c.addOperationDeleteRouteTableMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteRouteTableOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRouteTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRouteTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteRouteTable{}, middleware.After)
 	if err != nil {
 		return err

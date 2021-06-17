@@ -23,7 +23,7 @@ func (c *Client) DescribeDirectoryConfigs(ctx context.Context, params *DescribeD
 		params = &DescribeDirectoryConfigsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDirectoryConfigs", params, optFns, addOperationDescribeDirectoryConfigsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDirectoryConfigs", params, optFns, c.addOperationDescribeDirectoryConfigsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeDirectoryConfigsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDirectoryConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDirectoryConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDirectoryConfigs{}, middleware.After)
 	if err != nil {
 		return err

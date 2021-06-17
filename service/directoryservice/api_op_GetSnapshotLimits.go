@@ -17,7 +17,7 @@ func (c *Client) GetSnapshotLimits(ctx context.Context, params *GetSnapshotLimit
 		params = &GetSnapshotLimitsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSnapshotLimits", params, optFns, addOperationGetSnapshotLimitsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSnapshotLimits", params, optFns, c.addOperationGetSnapshotLimitsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetSnapshotLimitsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSnapshotLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSnapshotLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSnapshotLimits{}, middleware.After)
 	if err != nil {
 		return err

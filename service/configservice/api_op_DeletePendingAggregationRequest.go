@@ -17,7 +17,7 @@ func (c *Client) DeletePendingAggregationRequest(ctx context.Context, params *De
 		params = &DeletePendingAggregationRequestInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePendingAggregationRequest", params, optFns, addOperationDeletePendingAggregationRequestMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePendingAggregationRequest", params, optFns, c.addOperationDeletePendingAggregationRequestMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeletePendingAggregationRequestOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePendingAggregationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePendingAggregationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePendingAggregationRequest{}, middleware.After)
 	if err != nil {
 		return err

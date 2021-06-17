@@ -20,7 +20,7 @@ func (c *Client) RemoveFromGlobalCluster(ctx context.Context, params *RemoveFrom
 		params = &RemoveFromGlobalClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveFromGlobalCluster", params, optFns, addOperationRemoveFromGlobalClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveFromGlobalCluster", params, optFns, c.addOperationRemoveFromGlobalClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type RemoveFromGlobalClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveFromGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveFromGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemoveFromGlobalCluster{}, middleware.After)
 	if err != nil {
 		return err

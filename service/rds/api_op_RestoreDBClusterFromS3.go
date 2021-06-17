@@ -31,7 +31,7 @@ func (c *Client) RestoreDBClusterFromS3(ctx context.Context, params *RestoreDBCl
 		params = &RestoreDBClusterFromS3Input{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreDBClusterFromS3", params, optFns, addOperationRestoreDBClusterFromS3Middlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreDBClusterFromS3", params, optFns, c.addOperationRestoreDBClusterFromS3Middlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -274,7 +274,7 @@ type RestoreDBClusterFromS3Output struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreDBClusterFromS3Middlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreDBClusterFromS3Middlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBClusterFromS3{}, middleware.After)
 	if err != nil {
 		return err

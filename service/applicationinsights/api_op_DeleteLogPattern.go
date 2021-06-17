@@ -16,7 +16,7 @@ func (c *Client) DeleteLogPattern(ctx context.Context, params *DeleteLogPatternI
 		params = &DeleteLogPatternInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLogPattern", params, optFns, addOperationDeleteLogPatternMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLogPattern", params, optFns, c.addOperationDeleteLogPatternMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteLogPatternOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLogPatternMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLogPatternMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLogPattern{}, middleware.After)
 	if err != nil {
 		return err

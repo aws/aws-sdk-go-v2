@@ -17,7 +17,7 @@ func (c *Client) ListLogPatternSets(ctx context.Context, params *ListLogPatternS
 		params = &ListLogPatternSetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLogPatternSets", params, optFns, addOperationListLogPatternSetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLogPatternSets", params, optFns, c.addOperationListLogPatternSetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListLogPatternSetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLogPatternSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLogPatternSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLogPatternSets{}, middleware.After)
 	if err != nil {
 		return err

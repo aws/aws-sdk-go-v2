@@ -18,7 +18,7 @@ func (c *Client) GetServiceInstance(ctx context.Context, params *GetServiceInsta
 		params = &GetServiceInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetServiceInstance", params, optFns, addOperationGetServiceInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetServiceInstance", params, optFns, c.addOperationGetServiceInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetServiceInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetServiceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetServiceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetServiceInstance{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) StopThingRegistrationTask(ctx context.Context, params *StopThin
 		params = &StopThingRegistrationTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopThingRegistrationTask", params, optFns, addOperationStopThingRegistrationTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopThingRegistrationTask", params, optFns, c.addOperationStopThingRegistrationTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type StopThingRegistrationTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopThingRegistrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopThingRegistrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopThingRegistrationTask{}, middleware.After)
 	if err != nil {
 		return err

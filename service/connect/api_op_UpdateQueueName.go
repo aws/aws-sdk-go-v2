@@ -18,7 +18,7 @@ func (c *Client) UpdateQueueName(ctx context.Context, params *UpdateQueueNameInp
 		params = &UpdateQueueNameInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateQueueName", params, optFns, addOperationUpdateQueueNameMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateQueueName", params, optFns, c.addOperationUpdateQueueNameMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UpdateQueueNameOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateQueueNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateQueueNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQueueName{}, middleware.After)
 	if err != nil {
 		return err

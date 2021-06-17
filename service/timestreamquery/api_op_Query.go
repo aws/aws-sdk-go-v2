@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -22,7 +23,7 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 		params = &QueryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Query", params, optFns, addOperationQueryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "Query", params, optFns, c.addOperationQueryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +95,7 @@ type QueryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpQuery{}, middleware.After)
 	if err != nil {
 		return err
@@ -139,6 +140,9 @@ func addOperationQueryMiddlewares(stack *middleware.Stack, options Options) (err
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addOpQueryDiscoverEndpointMiddleware(stack, options, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opQueryMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -158,6 +162,55 @@ func addOperationQueryMiddlewares(stack *middleware.Stack, options Options) (err
 		return err
 	}
 	return nil
+}
+
+func addOpQueryDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
+	return stack.Serialize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
+		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
+			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
+				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
+				opt.Logger = o.Logger
+				opt.EndpointResolverUsedForDiscovery = o.EndpointDiscovery.EndpointResolverUsedForDiscovery
+			},
+		},
+		DiscoverOperation:            c.fetchOpQueryDiscoverEndpoint,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
+		EndpointDiscoveryRequired:    true,
+	}, "ResolveEndpoint", middleware.After)
+}
+
+func (c *Client) fetchOpQueryDiscoverEndpoint(ctx context.Context, input interface{}, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+	in, ok := input.(*QueryInput)
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
+	}
+	_ = in
+
+	identifierMap := make(map[string]string, 0)
+
+	key := fmt.Sprintf("Timestream Query.%v", identifierMap)
+
+	if v, ok := c.endpointCache.Get(key); ok {
+		return v, nil
+	}
+
+	discoveryOperationInput := &DescribeEndpointsInput{}
+
+	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
+	for _, fn := range optFns {
+		fn(&opt)
+	}
+
+	endpoint, err := c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, key, opt)
+	if err != nil {
+		return internalEndpointDiscovery.WeightedAddress{}, err
+	}
+
+	weighted, ok := endpoint.GetValidAddress()
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("no valid endpoint address returned by the endpoint discovery api")
+	}
+	return weighted, nil
 }
 
 // QueryAPIClient is a client that implements the Query operation.

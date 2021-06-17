@@ -23,7 +23,7 @@ func (c *Client) StartMaintenance(ctx context.Context, params *StartMaintenanceI
 		params = &StartMaintenanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartMaintenance", params, optFns, addOperationStartMaintenanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartMaintenance", params, optFns, c.addOperationStartMaintenanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type StartMaintenanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartMaintenanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartMaintenanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMaintenance{}, middleware.After)
 	if err != nil {
 		return err

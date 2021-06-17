@@ -23,7 +23,7 @@ func (c *Client) SendBonus(ctx context.Context, params *SendBonusInput, optFns .
 		params = &SendBonusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendBonus", params, optFns, addOperationSendBonusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendBonus", params, optFns, c.addOperationSendBonusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type SendBonusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendBonusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendBonusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendBonus{}, middleware.After)
 	if err != nil {
 		return err

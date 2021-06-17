@@ -22,7 +22,7 @@ func (c *Client) DescribeDBInstanceAutomatedBackups(ctx context.Context, params 
 		params = &DescribeDBInstanceAutomatedBackupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDBInstanceAutomatedBackups", params, optFns, addOperationDescribeDBInstanceAutomatedBackupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDBInstanceAutomatedBackups", params, optFns, c.addOperationDescribeDBInstanceAutomatedBackupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ type DescribeDBInstanceAutomatedBackupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDBInstanceAutomatedBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDBInstanceAutomatedBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBInstanceAutomatedBackups{}, middleware.After)
 	if err != nil {
 		return err

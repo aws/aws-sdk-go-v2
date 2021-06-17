@@ -20,7 +20,7 @@ func (c *Client) CreateRelationalDatabase(ctx context.Context, params *CreateRel
 		params = &CreateRelationalDatabaseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRelationalDatabase", params, optFns, addOperationCreateRelationalDatabaseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRelationalDatabase", params, optFns, c.addOperationCreateRelationalDatabaseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -208,7 +208,7 @@ type CreateRelationalDatabaseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRelationalDatabase{}, middleware.After)
 	if err != nil {
 		return err

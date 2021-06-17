@@ -17,7 +17,7 @@ func (c *Client) DescribeDashboardPermissions(ctx context.Context, params *Descr
 		params = &DescribeDashboardPermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDashboardPermissions", params, optFns, addOperationDescribeDashboardPermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDashboardPermissions", params, optFns, c.addOperationDescribeDashboardPermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DescribeDashboardPermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDashboardPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDashboardPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDashboardPermissions{}, middleware.After)
 	if err != nil {
 		return err

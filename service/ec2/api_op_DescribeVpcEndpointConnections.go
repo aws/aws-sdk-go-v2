@@ -19,7 +19,7 @@ func (c *Client) DescribeVpcEndpointConnections(ctx context.Context, params *Des
 		params = &DescribeVpcEndpointConnectionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeVpcEndpointConnections", params, optFns, addOperationDescribeVpcEndpointConnectionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeVpcEndpointConnections", params, optFns, c.addOperationDescribeVpcEndpointConnectionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DescribeVpcEndpointConnectionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeVpcEndpointConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeVpcEndpointConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeVpcEndpointConnections{}, middleware.After)
 	if err != nil {
 		return err

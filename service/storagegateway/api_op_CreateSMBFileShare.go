@@ -28,7 +28,7 @@ func (c *Client) CreateSMBFileShare(ctx context.Context, params *CreateSMBFileSh
 		params = &CreateSMBFileShareInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSMBFileShare", params, optFns, addOperationCreateSMBFileShareMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSMBFileShare", params, optFns, c.addOperationCreateSMBFileShareMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -182,7 +182,7 @@ type CreateSMBFileShareOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSMBFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSMBFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSMBFileShare{}, middleware.After)
 	if err != nil {
 		return err

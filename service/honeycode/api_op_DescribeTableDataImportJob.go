@@ -18,7 +18,7 @@ func (c *Client) DescribeTableDataImportJob(ctx context.Context, params *Describ
 		params = &DescribeTableDataImportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTableDataImportJob", params, optFns, addOperationDescribeTableDataImportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTableDataImportJob", params, optFns, c.addOperationDescribeTableDataImportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type DescribeTableDataImportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTableDataImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTableDataImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTableDataImportJob{}, middleware.After)
 	if err != nil {
 		return err

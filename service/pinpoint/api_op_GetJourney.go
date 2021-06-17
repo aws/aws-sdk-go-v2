@@ -18,7 +18,7 @@ func (c *Client) GetJourney(ctx context.Context, params *GetJourneyInput, optFns
 		params = &GetJourneyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetJourney", params, optFns, addOperationGetJourneyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetJourney", params, optFns, c.addOperationGetJourneyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetJourneyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetJourneyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetJourneyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetJourney{}, middleware.After)
 	if err != nil {
 		return err

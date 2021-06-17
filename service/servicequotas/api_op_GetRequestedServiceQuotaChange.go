@@ -17,7 +17,7 @@ func (c *Client) GetRequestedServiceQuotaChange(ctx context.Context, params *Get
 		params = &GetRequestedServiceQuotaChangeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRequestedServiceQuotaChange", params, optFns, addOperationGetRequestedServiceQuotaChangeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRequestedServiceQuotaChange", params, optFns, c.addOperationGetRequestedServiceQuotaChangeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetRequestedServiceQuotaChangeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRequestedServiceQuotaChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRequestedServiceQuotaChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRequestedServiceQuotaChange{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) EstimateTemplateCost(ctx context.Context, params *EstimateTempl
 		params = &EstimateTemplateCostInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EstimateTemplateCost", params, optFns, addOperationEstimateTemplateCostMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EstimateTemplateCost", params, optFns, c.addOperationEstimateTemplateCostMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type EstimateTemplateCostOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEstimateTemplateCostMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEstimateTemplateCostMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpEstimateTemplateCost{}, middleware.After)
 	if err != nil {
 		return err

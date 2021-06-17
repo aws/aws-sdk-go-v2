@@ -25,7 +25,7 @@ func (c *Client) QueryTimestamps(ctx context.Context, params *QueryTimestampsInp
 		params = &QueryTimestampsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "QueryTimestamps", params, optFns, addOperationQueryTimestampsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "QueryTimestamps", params, optFns, c.addOperationQueryTimestampsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type QueryTimestampsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationQueryTimestampsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationQueryTimestampsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpQueryTimestamps{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListAnalyzers(ctx context.Context, params *ListAnalyzersInput, 
 		params = &ListAnalyzersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAnalyzers", params, optFns, addOperationListAnalyzersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAnalyzers", params, optFns, c.addOperationListAnalyzersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListAnalyzersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAnalyzersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAnalyzersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnalyzers{}, middleware.After)
 	if err != nil {
 		return err

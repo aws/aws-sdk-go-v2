@@ -18,7 +18,7 @@ func (c *Client) GetSuiteRun(ctx context.Context, params *GetSuiteRunInput, optF
 		params = &GetSuiteRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSuiteRun", params, optFns, addOperationGetSuiteRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSuiteRun", params, optFns, c.addOperationGetSuiteRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type GetSuiteRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSuiteRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSuiteRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSuiteRun{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) UpdateDocumentMetadata(ctx context.Context, params *UpdateDocum
 		params = &UpdateDocumentMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDocumentMetadata", params, optFns, addOperationUpdateDocumentMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDocumentMetadata", params, optFns, c.addOperationUpdateDocumentMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type UpdateDocumentMetadataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDocumentMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDocumentMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDocumentMetadata{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) ClearDefaultAuthorizer(ctx context.Context, params *ClearDefaul
 		params = &ClearDefaultAuthorizerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ClearDefaultAuthorizer", params, optFns, addOperationClearDefaultAuthorizerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ClearDefaultAuthorizer", params, optFns, c.addOperationClearDefaultAuthorizerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +34,7 @@ type ClearDefaultAuthorizerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationClearDefaultAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationClearDefaultAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpClearDefaultAuthorizer{}, middleware.After)
 	if err != nil {
 		return err

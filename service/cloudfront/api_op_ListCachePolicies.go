@@ -23,7 +23,7 @@ func (c *Client) ListCachePolicies(ctx context.Context, params *ListCachePolicie
 		params = &ListCachePoliciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCachePolicies", params, optFns, addOperationListCachePoliciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCachePolicies", params, optFns, c.addOperationListCachePoliciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListCachePoliciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCachePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCachePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListCachePolicies{}, middleware.After)
 	if err != nil {
 		return err

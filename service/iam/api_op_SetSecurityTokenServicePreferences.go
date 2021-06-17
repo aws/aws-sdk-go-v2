@@ -35,7 +35,7 @@ func (c *Client) SetSecurityTokenServicePreferences(ctx context.Context, params 
 		params = &SetSecurityTokenServicePreferencesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetSecurityTokenServicePreferences", params, optFns, addOperationSetSecurityTokenServicePreferencesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetSecurityTokenServicePreferences", params, optFns, c.addOperationSetSecurityTokenServicePreferencesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type SetSecurityTokenServicePreferencesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetSecurityTokenServicePreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetSecurityTokenServicePreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetSecurityTokenServicePreferences{}, middleware.After)
 	if err != nil {
 		return err

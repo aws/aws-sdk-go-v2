@@ -19,7 +19,7 @@ func (c *Client) DescribeContributorInsights(ctx context.Context, params *Descri
 		params = &DescribeContributorInsightsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeContributorInsights", params, optFns, addOperationDescribeContributorInsightsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeContributorInsights", params, optFns, c.addOperationDescribeContributorInsightsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type DescribeContributorInsightsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeContributorInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeContributorInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeContributorInsights{}, middleware.After)
 	if err != nil {
 		return err

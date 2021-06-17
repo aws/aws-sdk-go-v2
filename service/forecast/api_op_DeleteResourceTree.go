@@ -35,7 +35,7 @@ func (c *Client) DeleteResourceTree(ctx context.Context, params *DeleteResourceT
 		params = &DeleteResourceTreeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteResourceTree", params, optFns, addOperationDeleteResourceTreeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteResourceTree", params, optFns, c.addOperationDeleteResourceTreeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DeleteResourceTreeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteResourceTreeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteResourceTreeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteResourceTree{}, middleware.After)
 	if err != nil {
 		return err

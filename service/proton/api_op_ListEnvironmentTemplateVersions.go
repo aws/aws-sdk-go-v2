@@ -18,7 +18,7 @@ func (c *Client) ListEnvironmentTemplateVersions(ctx context.Context, params *Li
 		params = &ListEnvironmentTemplateVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEnvironmentTemplateVersions", params, optFns, addOperationListEnvironmentTemplateVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEnvironmentTemplateVersions", params, optFns, c.addOperationListEnvironmentTemplateVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ListEnvironmentTemplateVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEnvironmentTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEnvironmentTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEnvironmentTemplateVersions{}, middleware.After)
 	if err != nil {
 		return err

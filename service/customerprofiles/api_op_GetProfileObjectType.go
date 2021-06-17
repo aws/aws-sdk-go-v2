@@ -18,7 +18,7 @@ func (c *Client) GetProfileObjectType(ctx context.Context, params *GetProfileObj
 		params = &GetProfileObjectTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetProfileObjectType", params, optFns, addOperationGetProfileObjectTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetProfileObjectType", params, optFns, c.addOperationGetProfileObjectTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type GetProfileObjectTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetProfileObjectTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetProfileObjectTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProfileObjectType{}, middleware.After)
 	if err != nil {
 		return err

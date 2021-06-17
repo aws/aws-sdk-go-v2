@@ -16,7 +16,7 @@ func (c *Client) AssociateBudgetWithResource(ctx context.Context, params *Associ
 		params = &AssociateBudgetWithResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateBudgetWithResource", params, optFns, addOperationAssociateBudgetWithResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateBudgetWithResource", params, optFns, c.addOperationAssociateBudgetWithResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type AssociateBudgetWithResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateBudgetWithResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateBudgetWithResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateBudgetWithResource{}, middleware.After)
 	if err != nil {
 		return err

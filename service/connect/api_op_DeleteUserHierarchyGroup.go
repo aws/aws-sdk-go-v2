@@ -17,7 +17,7 @@ func (c *Client) DeleteUserHierarchyGroup(ctx context.Context, params *DeleteUse
 		params = &DeleteUserHierarchyGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteUserHierarchyGroup", params, optFns, addOperationDeleteUserHierarchyGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteUserHierarchyGroup", params, optFns, c.addOperationDeleteUserHierarchyGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteUserHierarchyGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteUserHierarchyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteUserHierarchyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteUserHierarchyGroup{}, middleware.After)
 	if err != nil {
 		return err

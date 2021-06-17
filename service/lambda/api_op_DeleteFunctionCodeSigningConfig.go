@@ -16,7 +16,7 @@ func (c *Client) DeleteFunctionCodeSigningConfig(ctx context.Context, params *De
 		params = &DeleteFunctionCodeSigningConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFunctionCodeSigningConfig", params, optFns, addOperationDeleteFunctionCodeSigningConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFunctionCodeSigningConfig", params, optFns, c.addOperationDeleteFunctionCodeSigningConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteFunctionCodeSigningConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFunctionCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFunctionCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFunctionCodeSigningConfig{}, middleware.After)
 	if err != nil {
 		return err

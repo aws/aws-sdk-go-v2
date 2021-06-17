@@ -73,7 +73,7 @@ func (c *Client) ImportKeyMaterial(ctx context.Context, params *ImportKeyMateria
 		params = &ImportKeyMaterialInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportKeyMaterial", params, optFns, addOperationImportKeyMaterialMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportKeyMaterial", params, optFns, c.addOperationImportKeyMaterialMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ type ImportKeyMaterialOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportKeyMaterialMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportKeyMaterialMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportKeyMaterial{}, middleware.After)
 	if err != nil {
 		return err

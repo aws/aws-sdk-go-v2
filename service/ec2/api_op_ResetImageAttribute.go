@@ -18,7 +18,7 @@ func (c *Client) ResetImageAttribute(ctx context.Context, params *ResetImageAttr
 		params = &ResetImageAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetImageAttribute", params, optFns, addOperationResetImageAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetImageAttribute", params, optFns, c.addOperationResetImageAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ResetImageAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetImageAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetImageAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpResetImageAttribute{}, middleware.After)
 	if err != nil {
 		return err

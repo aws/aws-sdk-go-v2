@@ -21,7 +21,7 @@ func (c *Client) UpdateBandwidthRateLimitSchedule(ctx context.Context, params *U
 		params = &UpdateBandwidthRateLimitScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateBandwidthRateLimitSchedule", params, optFns, addOperationUpdateBandwidthRateLimitScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateBandwidthRateLimitSchedule", params, optFns, c.addOperationUpdateBandwidthRateLimitScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type UpdateBandwidthRateLimitScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateBandwidthRateLimitScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateBandwidthRateLimitScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateBandwidthRateLimitSchedule{}, middleware.After)
 	if err != nil {
 		return err

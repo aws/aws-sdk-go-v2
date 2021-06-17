@@ -25,7 +25,7 @@ func (c *Client) StopInstance(ctx context.Context, params *StopInstanceInput, op
 		params = &StopInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopInstance", params, optFns, addOperationStopInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopInstance", params, optFns, c.addOperationStopInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type StopInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopInstance{}, middleware.After)
 	if err != nil {
 		return err

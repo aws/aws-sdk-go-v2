@@ -30,7 +30,7 @@ func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *Descr
 		params = &DescribeRuntimeConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRuntimeConfiguration", params, optFns, addOperationDescribeRuntimeConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRuntimeConfiguration", params, optFns, c.addOperationDescribeRuntimeConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeRuntimeConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRuntimeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRuntimeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRuntimeConfiguration{}, middleware.After)
 	if err != nil {
 		return err

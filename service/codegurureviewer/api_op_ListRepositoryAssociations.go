@@ -28,7 +28,7 @@ func (c *Client) ListRepositoryAssociations(ctx context.Context, params *ListRep
 		params = &ListRepositoryAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRepositoryAssociations", params, optFns, addOperationListRepositoryAssociationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRepositoryAssociations", params, optFns, c.addOperationListRepositoryAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -121,7 +121,7 @@ type ListRepositoryAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRepositoryAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRepositoryAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRepositoryAssociations{}, middleware.After)
 	if err != nil {
 		return err

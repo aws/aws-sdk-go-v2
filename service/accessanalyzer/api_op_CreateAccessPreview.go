@@ -19,7 +19,7 @@ func (c *Client) CreateAccessPreview(ctx context.Context, params *CreateAccessPr
 		params = &CreateAccessPreviewInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAccessPreview", params, optFns, addOperationCreateAccessPreviewMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAccessPreview", params, optFns, c.addOperationCreateAccessPreviewMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type CreateAccessPreviewOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAccessPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAccessPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccessPreview{}, middleware.After)
 	if err != nil {
 		return err

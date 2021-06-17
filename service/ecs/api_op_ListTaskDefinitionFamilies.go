@@ -22,7 +22,7 @@ func (c *Client) ListTaskDefinitionFamilies(ctx context.Context, params *ListTas
 		params = &ListTaskDefinitionFamiliesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTaskDefinitionFamilies", params, optFns, addOperationListTaskDefinitionFamiliesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTaskDefinitionFamilies", params, optFns, c.addOperationListTaskDefinitionFamiliesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type ListTaskDefinitionFamiliesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTaskDefinitionFamiliesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTaskDefinitionFamiliesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTaskDefinitionFamilies{}, middleware.After)
 	if err != nil {
 		return err

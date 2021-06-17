@@ -20,7 +20,7 @@ func (c *Client) ListFirewallRuleGroups(ctx context.Context, params *ListFirewal
 		params = &ListFirewallRuleGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFirewallRuleGroups", params, optFns, addOperationListFirewallRuleGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFirewallRuleGroups", params, optFns, c.addOperationListFirewallRuleGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type ListFirewallRuleGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFirewallRuleGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFirewallRuleGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFirewallRuleGroups{}, middleware.After)
 	if err != nil {
 		return err

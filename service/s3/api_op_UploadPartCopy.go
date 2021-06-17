@@ -125,7 +125,7 @@ func (c *Client) UploadPartCopy(ctx context.Context, params *UploadPartCopyInput
 		params = &UploadPartCopyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UploadPartCopy", params, optFns, addOperationUploadPartCopyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UploadPartCopy", params, optFns, c.addOperationUploadPartCopyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -318,7 +318,7 @@ type UploadPartCopyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUploadPartCopyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUploadPartCopyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpUploadPartCopy{}, middleware.After)
 	if err != nil {
 		return err

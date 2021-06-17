@@ -18,7 +18,7 @@ func (c *Client) DescribeWorkspaceDirectories(ctx context.Context, params *Descr
 		params = &DescribeWorkspaceDirectoriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkspaceDirectories", params, optFns, addOperationDescribeWorkspaceDirectoriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkspaceDirectories", params, optFns, c.addOperationDescribeWorkspaceDirectoriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeWorkspaceDirectoriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeWorkspaceDirectoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeWorkspaceDirectoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkspaceDirectories{}, middleware.After)
 	if err != nil {
 		return err

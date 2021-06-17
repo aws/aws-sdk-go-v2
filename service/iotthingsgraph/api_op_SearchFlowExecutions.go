@@ -19,7 +19,7 @@ func (c *Client) SearchFlowExecutions(ctx context.Context, params *SearchFlowExe
 		params = &SearchFlowExecutionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchFlowExecutions", params, optFns, addOperationSearchFlowExecutionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchFlowExecutions", params, optFns, c.addOperationSearchFlowExecutionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type SearchFlowExecutionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchFlowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchFlowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchFlowExecutions{}, middleware.After)
 	if err != nil {
 		return err

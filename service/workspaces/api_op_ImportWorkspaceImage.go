@@ -21,7 +21,7 @@ func (c *Client) ImportWorkspaceImage(ctx context.Context, params *ImportWorkspa
 		params = &ImportWorkspaceImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportWorkspaceImage", params, optFns, addOperationImportWorkspaceImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportWorkspaceImage", params, optFns, c.addOperationImportWorkspaceImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type ImportWorkspaceImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportWorkspaceImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportWorkspaceImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportWorkspaceImage{}, middleware.After)
 	if err != nil {
 		return err

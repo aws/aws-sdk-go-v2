@@ -19,7 +19,7 @@ func (c *Client) ResendContactReachabilityEmail(ctx context.Context, params *Res
 		params = &ResendContactReachabilityEmailInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResendContactReachabilityEmail", params, optFns, addOperationResendContactReachabilityEmailMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResendContactReachabilityEmail", params, optFns, c.addOperationResendContactReachabilityEmailMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ResendContactReachabilityEmailOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResendContactReachabilityEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResendContactReachabilityEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResendContactReachabilityEmail{}, middleware.After)
 	if err != nil {
 		return err

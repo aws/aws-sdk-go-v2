@@ -19,7 +19,7 @@ func (c *Client) BatchStopUpdateAction(ctx context.Context, params *BatchStopUpd
 		params = &BatchStopUpdateActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchStopUpdateAction", params, optFns, addOperationBatchStopUpdateActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchStopUpdateAction", params, optFns, c.addOperationBatchStopUpdateActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type BatchStopUpdateActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchStopUpdateActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchStopUpdateActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpBatchStopUpdateAction{}, middleware.After)
 	if err != nil {
 		return err

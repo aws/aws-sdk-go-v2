@@ -21,7 +21,7 @@ func (c *Client) PublishLayerVersion(ctx context.Context, params *PublishLayerVe
 		params = &PublishLayerVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PublishLayerVersion", params, optFns, addOperationPublishLayerVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PublishLayerVersion", params, optFns, c.addOperationPublishLayerVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type PublishLayerVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPublishLayerVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPublishLayerVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPublishLayerVersion{}, middleware.After)
 	if err != nil {
 		return err

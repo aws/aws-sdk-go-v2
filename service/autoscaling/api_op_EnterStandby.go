@@ -26,7 +26,7 @@ func (c *Client) EnterStandby(ctx context.Context, params *EnterStandbyInput, op
 		params = &EnterStandbyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnterStandby", params, optFns, addOperationEnterStandbyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnterStandby", params, optFns, c.addOperationEnterStandbyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type EnterStandbyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnterStandbyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnterStandbyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpEnterStandby{}, middleware.After)
 	if err != nil {
 		return err

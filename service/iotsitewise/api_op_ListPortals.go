@@ -18,7 +18,7 @@ func (c *Client) ListPortals(ctx context.Context, params *ListPortalsInput, optF
 		params = &ListPortalsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPortals", params, optFns, addOperationListPortalsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPortals", params, optFns, c.addOperationListPortalsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ListPortalsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPortalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPortalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPortals{}, middleware.After)
 	if err != nil {
 		return err

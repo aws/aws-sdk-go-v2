@@ -22,7 +22,7 @@ func (c *Client) DeregisterVolume(ctx context.Context, params *DeregisterVolumeI
 		params = &DeregisterVolumeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterVolume", params, optFns, addOperationDeregisterVolumeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterVolume", params, optFns, c.addOperationDeregisterVolumeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeregisterVolumeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterVolume{}, middleware.After)
 	if err != nil {
 		return err

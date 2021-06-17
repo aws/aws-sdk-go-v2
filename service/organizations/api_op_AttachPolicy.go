@@ -37,7 +37,7 @@ func (c *Client) AttachPolicy(ctx context.Context, params *AttachPolicyInput, op
 		params = &AttachPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachPolicy", params, optFns, addOperationAttachPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachPolicy", params, optFns, c.addOperationAttachPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type AttachPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachPolicy{}, middleware.After)
 	if err != nil {
 		return err

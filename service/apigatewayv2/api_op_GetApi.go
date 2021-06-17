@@ -18,7 +18,7 @@ func (c *Client) GetApi(ctx context.Context, params *GetApiInput, optFns ...func
 		params = &GetApiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetApi", params, optFns, addOperationGetApiMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetApi", params, optFns, c.addOperationGetApiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +107,7 @@ type GetApiOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApi{}, middleware.After)
 	if err != nil {
 		return err

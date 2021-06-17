@@ -18,7 +18,7 @@ func (c *Client) UpdateSubscription(ctx context.Context, params *UpdateSubscript
 		params = &UpdateSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSubscription", params, optFns, addOperationUpdateSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSubscription", params, optFns, c.addOperationUpdateSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type UpdateSubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSubscription{}, middleware.After)
 	if err != nil {
 		return err

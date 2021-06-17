@@ -19,7 +19,7 @@ func (c *Client) QueryTableRows(ctx context.Context, params *QueryTableRowsInput
 		params = &QueryTableRowsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "QueryTableRows", params, optFns, addOperationQueryTableRowsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "QueryTableRows", params, optFns, c.addOperationQueryTableRowsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type QueryTableRowsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationQueryTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationQueryTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpQueryTableRows{}, middleware.After)
 	if err != nil {
 		return err

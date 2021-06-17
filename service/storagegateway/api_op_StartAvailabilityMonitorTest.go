@@ -21,7 +21,7 @@ func (c *Client) StartAvailabilityMonitorTest(ctx context.Context, params *Start
 		params = &StartAvailabilityMonitorTestInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartAvailabilityMonitorTest", params, optFns, addOperationStartAvailabilityMonitorTestMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartAvailabilityMonitorTest", params, optFns, c.addOperationStartAvailabilityMonitorTestMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type StartAvailabilityMonitorTestOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartAvailabilityMonitorTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartAvailabilityMonitorTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartAvailabilityMonitorTest{}, middleware.After)
 	if err != nil {
 		return err

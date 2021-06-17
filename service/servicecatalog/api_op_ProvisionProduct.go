@@ -24,7 +24,7 @@ func (c *Client) ProvisionProduct(ctx context.Context, params *ProvisionProductI
 		params = &ProvisionProductInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ProvisionProduct", params, optFns, addOperationProvisionProductMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ProvisionProduct", params, optFns, c.addOperationProvisionProductMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +104,7 @@ type ProvisionProductOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationProvisionProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationProvisionProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpProvisionProduct{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) AddRegion(ctx context.Context, params *AddRegionInput, optFns .
 		params = &AddRegionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddRegion", params, optFns, addOperationAddRegionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddRegion", params, optFns, c.addOperationAddRegionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type AddRegionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddRegion{}, middleware.After)
 	if err != nil {
 		return err

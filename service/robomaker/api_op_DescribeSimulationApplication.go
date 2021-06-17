@@ -18,7 +18,7 @@ func (c *Client) DescribeSimulationApplication(ctx context.Context, params *Desc
 		params = &DescribeSimulationApplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSimulationApplication", params, optFns, addOperationDescribeSimulationApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSimulationApplication", params, optFns, c.addOperationDescribeSimulationApplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type DescribeSimulationApplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSimulationApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSimulationApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSimulationApplication{}, middleware.After)
 	if err != nil {
 		return err

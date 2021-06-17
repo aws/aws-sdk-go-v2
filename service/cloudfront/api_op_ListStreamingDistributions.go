@@ -18,7 +18,7 @@ func (c *Client) ListStreamingDistributions(ctx context.Context, params *ListStr
 		params = &ListStreamingDistributionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListStreamingDistributions", params, optFns, addOperationListStreamingDistributionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListStreamingDistributions", params, optFns, c.addOperationListStreamingDistributionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type ListStreamingDistributionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListStreamingDistributionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListStreamingDistributionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListStreamingDistributions{}, middleware.After)
 	if err != nil {
 		return err

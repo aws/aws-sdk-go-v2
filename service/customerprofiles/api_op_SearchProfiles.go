@@ -18,7 +18,7 @@ func (c *Client) SearchProfiles(ctx context.Context, params *SearchProfilesInput
 		params = &SearchProfilesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchProfiles", params, optFns, addOperationSearchProfilesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchProfiles", params, optFns, c.addOperationSearchProfilesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type SearchProfilesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchProfiles{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateDiscoverer(ctx context.Context, params *UpdateDiscovererI
 		params = &UpdateDiscovererInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDiscoverer", params, optFns, addOperationUpdateDiscovererMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDiscoverer", params, optFns, c.addOperationUpdateDiscovererMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type UpdateDiscovererOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDiscoverer{}, middleware.After)
 	if err != nil {
 		return err

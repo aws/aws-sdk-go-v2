@@ -23,7 +23,7 @@ func (c *Client) CreateUnreferencedMergeCommit(ctx context.Context, params *Crea
 		params = &CreateUnreferencedMergeCommitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateUnreferencedMergeCommit", params, optFns, addOperationCreateUnreferencedMergeCommitMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateUnreferencedMergeCommit", params, optFns, c.addOperationCreateUnreferencedMergeCommitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ type CreateUnreferencedMergeCommitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateUnreferencedMergeCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateUnreferencedMergeCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUnreferencedMergeCommit{}, middleware.After)
 	if err != nil {
 		return err

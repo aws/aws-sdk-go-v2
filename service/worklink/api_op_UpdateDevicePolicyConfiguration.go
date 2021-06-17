@@ -16,7 +16,7 @@ func (c *Client) UpdateDevicePolicyConfiguration(ctx context.Context, params *Up
 		params = &UpdateDevicePolicyConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDevicePolicyConfiguration", params, optFns, addOperationUpdateDevicePolicyConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDevicePolicyConfiguration", params, optFns, c.addOperationUpdateDevicePolicyConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type UpdateDevicePolicyConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDevicePolicyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDevicePolicyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDevicePolicyConfiguration{}, middleware.After)
 	if err != nil {
 		return err

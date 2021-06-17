@@ -30,7 +30,7 @@ func (c *Client) DescribeGameServerGroup(ctx context.Context, params *DescribeGa
 		params = &DescribeGameServerGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeGameServerGroup", params, optFns, addOperationDescribeGameServerGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeGameServerGroup", params, optFns, c.addOperationDescribeGameServerGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeGameServerGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeGameServerGroup{}, middleware.After)
 	if err != nil {
 		return err

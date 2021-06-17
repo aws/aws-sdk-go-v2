@@ -17,7 +17,7 @@ func (c *Client) UpdateVirtualRouter(ctx context.Context, params *UpdateVirtualR
 		params = &UpdateVirtualRouterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateVirtualRouter", params, optFns, addOperationUpdateVirtualRouterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateVirtualRouter", params, optFns, c.addOperationUpdateVirtualRouterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type UpdateVirtualRouterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateVirtualRouterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateVirtualRouterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVirtualRouter{}, middleware.After)
 	if err != nil {
 		return err

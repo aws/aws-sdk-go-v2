@@ -20,7 +20,7 @@ func (c *Client) UpdateActionType(ctx context.Context, params *UpdateActionTypeI
 		params = &UpdateActionTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateActionType", params, optFns, addOperationUpdateActionTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateActionType", params, optFns, c.addOperationUpdateActionTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type UpdateActionTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateActionTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateActionTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateActionType{}, middleware.After)
 	if err != nil {
 		return err

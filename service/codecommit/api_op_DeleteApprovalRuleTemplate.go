@@ -17,7 +17,7 @@ func (c *Client) DeleteApprovalRuleTemplate(ctx context.Context, params *DeleteA
 		params = &DeleteApprovalRuleTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteApprovalRuleTemplate", params, optFns, addOperationDeleteApprovalRuleTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteApprovalRuleTemplate", params, optFns, c.addOperationDeleteApprovalRuleTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteApprovalRuleTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteApprovalRuleTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteApprovalRuleTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteApprovalRuleTemplate{}, middleware.After)
 	if err != nil {
 		return err

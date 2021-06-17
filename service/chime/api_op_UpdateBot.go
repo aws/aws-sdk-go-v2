@@ -18,7 +18,7 @@ func (c *Client) UpdateBot(ctx context.Context, params *UpdateBotInput, optFns .
 		params = &UpdateBotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateBot", params, optFns, addOperationUpdateBotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateBot", params, optFns, c.addOperationUpdateBotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UpdateBotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBot{}, middleware.After)
 	if err != nil {
 		return err

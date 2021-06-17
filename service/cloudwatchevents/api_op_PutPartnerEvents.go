@@ -18,7 +18,7 @@ func (c *Client) PutPartnerEvents(ctx context.Context, params *PutPartnerEventsI
 		params = &PutPartnerEventsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutPartnerEvents", params, optFns, addOperationPutPartnerEventsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutPartnerEvents", params, optFns, c.addOperationPutPartnerEventsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type PutPartnerEventsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutPartnerEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutPartnerEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutPartnerEvents{}, middleware.After)
 	if err != nil {
 		return err

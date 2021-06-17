@@ -21,7 +21,7 @@ func (c *Client) CreateDisk(ctx context.Context, params *CreateDiskInput, optFns
 		params = &CreateDiskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDisk", params, optFns, addOperationCreateDiskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDisk", params, optFns, c.addOperationCreateDiskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type CreateDiskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDiskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDiskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDisk{}, middleware.After)
 	if err != nil {
 		return err

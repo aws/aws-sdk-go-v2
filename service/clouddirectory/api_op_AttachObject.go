@@ -22,7 +22,7 @@ func (c *Client) AttachObject(ctx context.Context, params *AttachObjectInput, op
 		params = &AttachObjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachObject", params, optFns, addOperationAttachObjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachObject", params, optFns, c.addOperationAttachObjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type AttachObjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAttachObject{}, middleware.After)
 	if err != nil {
 		return err

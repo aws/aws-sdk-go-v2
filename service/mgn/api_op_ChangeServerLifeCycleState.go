@@ -20,7 +20,7 @@ func (c *Client) ChangeServerLifeCycleState(ctx context.Context, params *ChangeS
 		params = &ChangeServerLifeCycleStateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ChangeServerLifeCycleState", params, optFns, addOperationChangeServerLifeCycleStateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ChangeServerLifeCycleState", params, optFns, c.addOperationChangeServerLifeCycleStateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type ChangeServerLifeCycleStateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationChangeServerLifeCycleStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationChangeServerLifeCycleStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpChangeServerLifeCycleState{}, middleware.After)
 	if err != nil {
 		return err

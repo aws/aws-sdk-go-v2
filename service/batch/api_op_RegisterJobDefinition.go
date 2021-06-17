@@ -17,7 +17,7 @@ func (c *Client) RegisterJobDefinition(ctx context.Context, params *RegisterJobD
 		params = &RegisterJobDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterJobDefinition", params, optFns, addOperationRegisterJobDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterJobDefinition", params, optFns, c.addOperationRegisterJobDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -125,7 +125,7 @@ type RegisterJobDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterJobDefinition{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeResourcePolicies(ctx context.Context, params *DescribeR
 		params = &DescribeResourcePoliciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeResourcePolicies", params, optFns, addOperationDescribeResourcePoliciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeResourcePolicies", params, optFns, c.addOperationDescribeResourcePoliciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DescribeResourcePoliciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeResourcePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeResourcePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeResourcePolicies{}, middleware.After)
 	if err != nil {
 		return err

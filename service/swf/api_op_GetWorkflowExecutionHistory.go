@@ -40,7 +40,7 @@ func (c *Client) GetWorkflowExecutionHistory(ctx context.Context, params *GetWor
 		params = &GetWorkflowExecutionHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetWorkflowExecutionHistory", params, optFns, addOperationGetWorkflowExecutionHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetWorkflowExecutionHistory", params, optFns, c.addOperationGetWorkflowExecutionHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +101,7 @@ type GetWorkflowExecutionHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetWorkflowExecutionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetWorkflowExecutionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetWorkflowExecutionHistory{}, middleware.After)
 	if err != nil {
 		return err

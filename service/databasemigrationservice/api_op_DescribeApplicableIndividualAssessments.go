@@ -34,7 +34,7 @@ func (c *Client) DescribeApplicableIndividualAssessments(ctx context.Context, pa
 		params = &DescribeApplicableIndividualAssessmentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeApplicableIndividualAssessments", params, optFns, addOperationDescribeApplicableIndividualAssessmentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeApplicableIndividualAssessments", params, optFns, c.addOperationDescribeApplicableIndividualAssessmentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ type DescribeApplicableIndividualAssessmentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeApplicableIndividualAssessmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeApplicableIndividualAssessmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplicableIndividualAssessments{}, middleware.After)
 	if err != nil {
 		return err

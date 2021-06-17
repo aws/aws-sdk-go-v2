@@ -20,7 +20,7 @@ func (c *Client) ListSuppressedDestinations(ctx context.Context, params *ListSup
 		params = &ListSuppressedDestinationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSuppressedDestinations", params, optFns, addOperationListSuppressedDestinationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSuppressedDestinations", params, optFns, c.addOperationListSuppressedDestinationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type ListSuppressedDestinationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSuppressedDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSuppressedDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSuppressedDestinations{}, middleware.After)
 	if err != nil {
 		return err

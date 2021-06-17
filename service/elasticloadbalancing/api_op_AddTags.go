@@ -22,7 +22,7 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 		params = &AddTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddTags", params, optFns, addOperationAddTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddTags", params, optFns, c.addOperationAddTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type AddTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAddTags{}, middleware.After)
 	if err != nil {
 		return err

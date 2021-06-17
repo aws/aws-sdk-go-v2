@@ -18,7 +18,7 @@ func (c *Client) UpdateElasticsearchDomainConfig(ctx context.Context, params *Up
 		params = &UpdateElasticsearchDomainConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateElasticsearchDomainConfig", params, optFns, addOperationUpdateElasticsearchDomainConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateElasticsearchDomainConfig", params, optFns, c.addOperationUpdateElasticsearchDomainConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type UpdateElasticsearchDomainConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateElasticsearchDomainConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateElasticsearchDomainConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateElasticsearchDomainConfig{}, middleware.After)
 	if err != nil {
 		return err

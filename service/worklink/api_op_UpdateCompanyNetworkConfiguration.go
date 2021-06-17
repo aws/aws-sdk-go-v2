@@ -16,7 +16,7 @@ func (c *Client) UpdateCompanyNetworkConfiguration(ctx context.Context, params *
 		params = &UpdateCompanyNetworkConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateCompanyNetworkConfiguration", params, optFns, addOperationUpdateCompanyNetworkConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateCompanyNetworkConfiguration", params, optFns, c.addOperationUpdateCompanyNetworkConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UpdateCompanyNetworkConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateCompanyNetworkConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateCompanyNetworkConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCompanyNetworkConfiguration{}, middleware.After)
 	if err != nil {
 		return err

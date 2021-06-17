@@ -21,7 +21,7 @@ func (c *Client) ListUserTags(ctx context.Context, params *ListUserTagsInput, op
 		params = &ListUserTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListUserTags", params, optFns, addOperationListUserTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListUserTags", params, optFns, c.addOperationListUserTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type ListUserTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListUserTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListUserTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListUserTags{}, middleware.After)
 	if err != nil {
 		return err

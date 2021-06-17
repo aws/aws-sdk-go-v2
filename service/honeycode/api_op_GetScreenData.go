@@ -19,7 +19,7 @@ func (c *Client) GetScreenData(ctx context.Context, params *GetScreenDataInput, 
 		params = &GetScreenDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetScreenData", params, optFns, addOperationGetScreenDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetScreenData", params, optFns, c.addOperationGetScreenDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type GetScreenDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetScreenDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetScreenDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetScreenData{}, middleware.After)
 	if err != nil {
 		return err

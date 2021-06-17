@@ -19,7 +19,7 @@ func (c *Client) DetachTypedLink(ctx context.Context, params *DetachTypedLinkInp
 		params = &DetachTypedLinkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachTypedLink", params, optFns, addOperationDetachTypedLinkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachTypedLink", params, optFns, c.addOperationDetachTypedLinkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DetachTypedLinkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachTypedLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachTypedLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDetachTypedLink{}, middleware.After)
 	if err != nil {
 		return err

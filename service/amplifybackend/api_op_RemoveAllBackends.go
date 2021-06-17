@@ -16,7 +16,7 @@ func (c *Client) RemoveAllBackends(ctx context.Context, params *RemoveAllBackend
 		params = &RemoveAllBackendsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveAllBackends", params, optFns, addOperationRemoveAllBackendsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveAllBackends", params, optFns, c.addOperationRemoveAllBackendsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type RemoveAllBackendsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveAllBackendsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveAllBackendsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveAllBackends{}, middleware.After)
 	if err != nil {
 		return err

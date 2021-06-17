@@ -18,7 +18,7 @@ func (c *Client) ListSamples(ctx context.Context, params *ListSamplesInput, optF
 		params = &ListSamplesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSamples", params, optFns, addOperationListSamplesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSamples", params, optFns, c.addOperationListSamplesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListSamplesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSamplesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSamplesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSamples{}, middleware.After)
 	if err != nil {
 		return err

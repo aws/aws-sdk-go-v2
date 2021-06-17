@@ -26,7 +26,7 @@ func (c *Client) ListResourceDataSync(ctx context.Context, params *ListResourceD
 		params = &ListResourceDataSyncInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResourceDataSync", params, optFns, addOperationListResourceDataSyncMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResourceDataSync", params, optFns, c.addOperationListResourceDataSyncMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ListResourceDataSyncOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListResourceDataSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResourceDataSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourceDataSync{}, middleware.After)
 	if err != nil {
 		return err

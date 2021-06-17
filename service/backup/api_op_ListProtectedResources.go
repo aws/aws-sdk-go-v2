@@ -20,7 +20,7 @@ func (c *Client) ListProtectedResources(ctx context.Context, params *ListProtect
 		params = &ListProtectedResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListProtectedResources", params, optFns, addOperationListProtectedResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListProtectedResources", params, optFns, c.addOperationListProtectedResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListProtectedResourcesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListProtectedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListProtectedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProtectedResources{}, middleware.After)
 	if err != nil {
 		return err

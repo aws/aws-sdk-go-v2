@@ -36,7 +36,7 @@ func (c *Client) DeleteBucketWebsite(ctx context.Context, params *DeleteBucketWe
 		params = &DeleteBucketWebsiteInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketWebsite", params, optFns, addOperationDeleteBucketWebsiteMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketWebsite", params, optFns, c.addOperationDeleteBucketWebsiteMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DeleteBucketWebsiteOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBucketWebsiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBucketWebsiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteBucketWebsite{}, middleware.After)
 	if err != nil {
 		return err

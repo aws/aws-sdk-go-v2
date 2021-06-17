@@ -17,7 +17,7 @@ func (c *Client) CopyDBClusterParameterGroup(ctx context.Context, params *CopyDB
 		params = &CopyDBClusterParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopyDBClusterParameterGroup", params, optFns, addOperationCopyDBClusterParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopyDBClusterParameterGroup", params, optFns, c.addOperationCopyDBClusterParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type CopyDBClusterParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopyDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopyDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopyDBClusterParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

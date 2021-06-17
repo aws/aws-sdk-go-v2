@@ -19,7 +19,7 @@ func (c *Client) ListEventIntegrationAssociations(ctx context.Context, params *L
 		params = &ListEventIntegrationAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEventIntegrationAssociations", params, optFns, addOperationListEventIntegrationAssociationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEventIntegrationAssociations", params, optFns, c.addOperationListEventIntegrationAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListEventIntegrationAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEventIntegrationAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEventIntegrationAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEventIntegrationAssociations{}, middleware.After)
 	if err != nil {
 		return err

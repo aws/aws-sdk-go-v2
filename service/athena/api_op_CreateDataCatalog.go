@@ -18,7 +18,7 @@ func (c *Client) CreateDataCatalog(ctx context.Context, params *CreateDataCatalo
 		params = &CreateDataCatalogInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDataCatalog", params, optFns, addOperationCreateDataCatalogMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDataCatalog", params, optFns, c.addOperationCreateDataCatalogMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type CreateDataCatalogOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDataCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDataCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataCatalog{}, middleware.After)
 	if err != nil {
 		return err

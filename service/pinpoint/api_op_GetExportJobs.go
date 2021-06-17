@@ -18,7 +18,7 @@ func (c *Client) GetExportJobs(ctx context.Context, params *GetExportJobsInput, 
 		params = &GetExportJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetExportJobs", params, optFns, addOperationGetExportJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetExportJobs", params, optFns, c.addOperationGetExportJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetExportJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetExportJobs{}, middleware.After)
 	if err != nil {
 		return err

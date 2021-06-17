@@ -26,7 +26,7 @@ func (c *Client) BatchUpsertTableRows(ctx context.Context, params *BatchUpsertTa
 		params = &BatchUpsertTableRowsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchUpsertTableRows", params, optFns, addOperationBatchUpsertTableRowsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchUpsertTableRows", params, optFns, c.addOperationBatchUpsertTableRowsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ type BatchUpsertTableRowsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchUpsertTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchUpsertTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpsertTableRows{}, middleware.After)
 	if err != nil {
 		return err

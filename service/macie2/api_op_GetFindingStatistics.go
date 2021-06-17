@@ -17,7 +17,7 @@ func (c *Client) GetFindingStatistics(ctx context.Context, params *GetFindingSta
 		params = &GetFindingStatisticsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFindingStatistics", params, optFns, addOperationGetFindingStatisticsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFindingStatistics", params, optFns, c.addOperationGetFindingStatisticsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type GetFindingStatisticsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFindingStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFindingStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingStatistics{}, middleware.After)
 	if err != nil {
 		return err

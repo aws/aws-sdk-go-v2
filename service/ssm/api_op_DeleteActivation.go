@@ -19,7 +19,7 @@ func (c *Client) DeleteActivation(ctx context.Context, params *DeleteActivationI
 		params = &DeleteActivationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteActivation", params, optFns, addOperationDeleteActivationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteActivation", params, optFns, c.addOperationDeleteActivationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteActivationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteActivationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteActivationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteActivation{}, middleware.After)
 	if err != nil {
 		return err

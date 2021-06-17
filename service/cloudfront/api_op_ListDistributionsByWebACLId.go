@@ -17,7 +17,7 @@ func (c *Client) ListDistributionsByWebACLId(ctx context.Context, params *ListDi
 		params = &ListDistributionsByWebACLIdInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDistributionsByWebACLId", params, optFns, addOperationListDistributionsByWebACLIdMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDistributionsByWebACLId", params, optFns, c.addOperationListDistributionsByWebACLIdMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type ListDistributionsByWebACLIdOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDistributionsByWebACLIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDistributionsByWebACLIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListDistributionsByWebACLId{}, middleware.After)
 	if err != nil {
 		return err

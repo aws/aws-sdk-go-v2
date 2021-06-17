@@ -61,7 +61,7 @@ func (c *Client) UploadMultipartPart(ctx context.Context, params *UploadMultipar
 		params = &UploadMultipartPartInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UploadMultipartPart", params, optFns, addOperationUploadMultipartPartMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UploadMultipartPart", params, optFns, c.addOperationUploadMultipartPartMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ type UploadMultipartPartOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUploadMultipartPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUploadMultipartPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUploadMultipartPart{}, middleware.After)
 	if err != nil {
 		return err

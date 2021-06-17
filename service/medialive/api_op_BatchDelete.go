@@ -17,7 +17,7 @@ func (c *Client) BatchDelete(ctx context.Context, params *BatchDeleteInput, optF
 		params = &BatchDeleteInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDelete", params, optFns, addOperationBatchDeleteMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDelete", params, optFns, c.addOperationBatchDeleteMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type BatchDeleteOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDelete{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) CreateEndpointGroup(ctx context.Context, params *CreateEndpoint
 		params = &CreateEndpointGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateEndpointGroup", params, optFns, addOperationCreateEndpointGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateEndpointGroup", params, optFns, c.addOperationCreateEndpointGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +101,7 @@ type CreateEndpointGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEndpointGroup{}, middleware.After)
 	if err != nil {
 		return err

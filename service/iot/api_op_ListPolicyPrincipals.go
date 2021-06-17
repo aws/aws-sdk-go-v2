@@ -20,7 +20,7 @@ func (c *Client) ListPolicyPrincipals(ctx context.Context, params *ListPolicyPri
 		params = &ListPolicyPrincipalsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPolicyPrincipals", params, optFns, addOperationListPolicyPrincipalsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPolicyPrincipals", params, optFns, c.addOperationListPolicyPrincipalsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListPolicyPrincipalsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPolicyPrincipalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPolicyPrincipalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPolicyPrincipals{}, middleware.After)
 	if err != nil {
 		return err

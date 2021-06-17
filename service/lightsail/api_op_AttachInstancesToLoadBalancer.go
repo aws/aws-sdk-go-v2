@@ -22,7 +22,7 @@ func (c *Client) AttachInstancesToLoadBalancer(ctx context.Context, params *Atta
 		params = &AttachInstancesToLoadBalancerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachInstancesToLoadBalancer", params, optFns, addOperationAttachInstancesToLoadBalancerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachInstancesToLoadBalancer", params, optFns, c.addOperationAttachInstancesToLoadBalancerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type AttachInstancesToLoadBalancerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachInstancesToLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachInstancesToLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachInstancesToLoadBalancer{}, middleware.After)
 	if err != nil {
 		return err

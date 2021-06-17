@@ -26,7 +26,7 @@ func (c *Client) PutQueryDefinition(ctx context.Context, params *PutQueryDefinit
 		params = &PutQueryDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutQueryDefinition", params, optFns, addOperationPutQueryDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutQueryDefinition", params, optFns, c.addOperationPutQueryDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type PutQueryDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutQueryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutQueryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutQueryDefinition{}, middleware.After)
 	if err != nil {
 		return err

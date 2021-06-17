@@ -17,7 +17,7 @@ func (c *Client) DeleteVpcEndpointConnectionNotifications(ctx context.Context, p
 		params = &DeleteVpcEndpointConnectionNotificationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVpcEndpointConnectionNotifications", params, optFns, addOperationDeleteVpcEndpointConnectionNotificationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVpcEndpointConnectionNotifications", params, optFns, c.addOperationDeleteVpcEndpointConnectionNotificationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteVpcEndpointConnectionNotificationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVpcEndpointConnectionNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVpcEndpointConnectionNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteVpcEndpointConnectionNotifications{}, middleware.After)
 	if err != nil {
 		return err

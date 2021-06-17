@@ -30,7 +30,7 @@ func (c *Client) CreateAccessKey(ctx context.Context, params *CreateAccessKeyInp
 		params = &CreateAccessKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAccessKey", params, optFns, addOperationCreateAccessKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAccessKey", params, optFns, c.addOperationCreateAccessKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type CreateAccessKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAccessKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAccessKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateAccessKey{}, middleware.After)
 	if err != nil {
 		return err

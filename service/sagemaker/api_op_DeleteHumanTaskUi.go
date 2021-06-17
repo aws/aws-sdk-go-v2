@@ -19,7 +19,7 @@ func (c *Client) DeleteHumanTaskUi(ctx context.Context, params *DeleteHumanTaskU
 		params = &DeleteHumanTaskUiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteHumanTaskUi", params, optFns, addOperationDeleteHumanTaskUiMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteHumanTaskUi", params, optFns, c.addOperationDeleteHumanTaskUiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteHumanTaskUiOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteHumanTaskUiMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteHumanTaskUiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteHumanTaskUi{}, middleware.After)
 	if err != nil {
 		return err

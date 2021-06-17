@@ -23,7 +23,7 @@ func (c *Client) DescribeServiceAccessPolicies(ctx context.Context, params *Desc
 		params = &DescribeServiceAccessPoliciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeServiceAccessPolicies", params, optFns, addOperationDescribeServiceAccessPoliciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeServiceAccessPolicies", params, optFns, c.addOperationDescribeServiceAccessPoliciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeServiceAccessPoliciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeServiceAccessPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeServiceAccessPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeServiceAccessPolicies{}, middleware.After)
 	if err != nil {
 		return err

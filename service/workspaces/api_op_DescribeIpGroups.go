@@ -17,7 +17,7 @@ func (c *Client) DescribeIpGroups(ctx context.Context, params *DescribeIpGroupsI
 		params = &DescribeIpGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeIpGroups", params, optFns, addOperationDescribeIpGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeIpGroups", params, optFns, c.addOperationDescribeIpGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeIpGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeIpGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeIpGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeIpGroups{}, middleware.After)
 	if err != nil {
 		return err

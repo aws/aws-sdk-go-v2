@@ -18,7 +18,7 @@ func (c *Client) DescribeDatasetGroup(ctx context.Context, params *DescribeDatas
 		params = &DescribeDatasetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDatasetGroup", params, optFns, addOperationDescribeDatasetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDatasetGroup", params, optFns, c.addOperationDescribeDatasetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DescribeDatasetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDatasetGroup{}, middleware.After)
 	if err != nil {
 		return err

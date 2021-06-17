@@ -19,7 +19,7 @@ func (c *Client) RemoveAttributesFromFindings(ctx context.Context, params *Remov
 		params = &RemoveAttributesFromFindingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveAttributesFromFindings", params, optFns, addOperationRemoveAttributesFromFindingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveAttributesFromFindings", params, optFns, c.addOperationRemoveAttributesFromFindingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type RemoveAttributesFromFindingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveAttributesFromFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveAttributesFromFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveAttributesFromFindings{}, middleware.After)
 	if err != nil {
 		return err

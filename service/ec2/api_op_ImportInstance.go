@@ -25,7 +25,7 @@ func (c *Client) ImportInstance(ctx context.Context, params *ImportInstanceInput
 		params = &ImportInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportInstance", params, optFns, addOperationImportInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportInstance", params, optFns, c.addOperationImportInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ImportInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpImportInstance{}, middleware.After)
 	if err != nil {
 		return err

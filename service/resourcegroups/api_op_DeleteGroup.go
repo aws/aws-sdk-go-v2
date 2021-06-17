@@ -22,7 +22,7 @@ func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optF
 		params = &DeleteGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGroup", params, optFns, addOperationDeleteGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGroup", params, optFns, c.addOperationDeleteGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGroup{}, middleware.After)
 	if err != nil {
 		return err

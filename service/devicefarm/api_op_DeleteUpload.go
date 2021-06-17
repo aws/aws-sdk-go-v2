@@ -16,7 +16,7 @@ func (c *Client) DeleteUpload(ctx context.Context, params *DeleteUploadInput, op
 		params = &DeleteUploadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteUpload", params, optFns, addOperationDeleteUploadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteUpload", params, optFns, c.addOperationDeleteUploadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteUploadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteUpload{}, middleware.After)
 	if err != nil {
 		return err

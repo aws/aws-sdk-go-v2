@@ -18,7 +18,7 @@ func (c *Client) GetDimensionValues(ctx context.Context, params *GetDimensionVal
 		params = &GetDimensionValuesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDimensionValues", params, optFns, addOperationGetDimensionValuesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDimensionValues", params, optFns, c.addOperationGetDimensionValuesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -366,7 +366,7 @@ type GetDimensionValuesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDimensionValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDimensionValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDimensionValues{}, middleware.After)
 	if err != nil {
 		return err

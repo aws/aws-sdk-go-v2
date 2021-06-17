@@ -16,7 +16,7 @@ func (c *Client) DeleteAccountPasswordPolicy(ctx context.Context, params *Delete
 		params = &DeleteAccountPasswordPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAccountPasswordPolicy", params, optFns, addOperationDeleteAccountPasswordPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAccountPasswordPolicy", params, optFns, c.addOperationDeleteAccountPasswordPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +34,7 @@ type DeleteAccountPasswordPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAccountPasswordPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAccountPasswordPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteAccountPasswordPolicy{}, middleware.After)
 	if err != nil {
 		return err

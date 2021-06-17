@@ -20,7 +20,7 @@ func (c *Client) DescribeFunction(ctx context.Context, params *DescribeFunctionI
 		params = &DescribeFunctionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFunction", params, optFns, addOperationDescribeFunctionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFunction", params, optFns, c.addOperationDescribeFunctionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeFunctionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDescribeFunction{}, middleware.After)
 	if err != nil {
 		return err

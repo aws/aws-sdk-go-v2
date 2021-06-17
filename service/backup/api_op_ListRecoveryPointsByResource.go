@@ -19,7 +19,7 @@ func (c *Client) ListRecoveryPointsByResource(ctx context.Context, params *ListR
 		params = &ListRecoveryPointsByResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRecoveryPointsByResource", params, optFns, addOperationListRecoveryPointsByResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRecoveryPointsByResource", params, optFns, c.addOperationListRecoveryPointsByResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListRecoveryPointsByResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRecoveryPointsByResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRecoveryPointsByResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecoveryPointsByResource{}, middleware.After)
 	if err != nil {
 		return err

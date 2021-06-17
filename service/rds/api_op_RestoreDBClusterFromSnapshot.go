@@ -28,7 +28,7 @@ func (c *Client) RestoreDBClusterFromSnapshot(ctx context.Context, params *Resto
 		params = &RestoreDBClusterFromSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreDBClusterFromSnapshot", params, optFns, addOperationRestoreDBClusterFromSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreDBClusterFromSnapshot", params, optFns, c.addOperationRestoreDBClusterFromSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -211,7 +211,7 @@ type RestoreDBClusterFromSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreDBClusterFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreDBClusterFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBClusterFromSnapshot{}, middleware.After)
 	if err != nil {
 		return err

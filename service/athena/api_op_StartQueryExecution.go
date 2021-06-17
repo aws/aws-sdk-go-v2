@@ -23,7 +23,7 @@ func (c *Client) StartQueryExecution(ctx context.Context, params *StartQueryExec
 		params = &StartQueryExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartQueryExecution", params, optFns, addOperationStartQueryExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartQueryExecution", params, optFns, c.addOperationStartQueryExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type StartQueryExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartQueryExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartQueryExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartQueryExecution{}, middleware.After)
 	if err != nil {
 		return err

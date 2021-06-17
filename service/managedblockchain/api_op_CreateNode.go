@@ -19,7 +19,7 @@ func (c *Client) CreateNode(ctx context.Context, params *CreateNodeInput, optFns
 		params = &CreateNodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateNode", params, optFns, addOperationCreateNodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateNode", params, optFns, c.addOperationCreateNodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type CreateNodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNode{}, middleware.After)
 	if err != nil {
 		return err

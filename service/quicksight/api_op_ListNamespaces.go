@@ -18,7 +18,7 @@ func (c *Client) ListNamespaces(ctx context.Context, params *ListNamespacesInput
 		params = &ListNamespacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListNamespaces", params, optFns, addOperationListNamespacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListNamespaces", params, optFns, c.addOperationListNamespacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListNamespacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNamespaces{}, middleware.After)
 	if err != nil {
 		return err

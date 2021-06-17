@@ -17,7 +17,7 @@ func (c *Client) GetFunctionConcurrency(ctx context.Context, params *GetFunction
 		params = &GetFunctionConcurrencyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFunctionConcurrency", params, optFns, addOperationGetFunctionConcurrencyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFunctionConcurrency", params, optFns, c.addOperationGetFunctionConcurrencyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type GetFunctionConcurrencyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFunctionConcurrencyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFunctionConcurrencyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFunctionConcurrency{}, middleware.After)
 	if err != nil {
 		return err

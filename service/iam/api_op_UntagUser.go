@@ -19,7 +19,7 @@ func (c *Client) UntagUser(ctx context.Context, params *UntagUserInput, optFns .
 		params = &UntagUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagUser", params, optFns, addOperationUntagUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagUser", params, optFns, c.addOperationUntagUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UntagUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUntagUser{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) UpdateSkillGroup(ctx context.Context, params *UpdateSkillGroupI
 		params = &UpdateSkillGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSkillGroup", params, optFns, addOperationUpdateSkillGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSkillGroup", params, optFns, c.addOperationUpdateSkillGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type UpdateSkillGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSkillGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSkillGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSkillGroup{}, middleware.After)
 	if err != nil {
 		return err

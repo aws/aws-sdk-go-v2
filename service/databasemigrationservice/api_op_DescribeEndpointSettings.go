@@ -19,7 +19,7 @@ func (c *Client) DescribeEndpointSettings(ctx context.Context, params *DescribeE
 		params = &DescribeEndpointSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEndpointSettings", params, optFns, addOperationDescribeEndpointSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEndpointSettings", params, optFns, c.addOperationDescribeEndpointSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DescribeEndpointSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEndpointSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEndpointSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEndpointSettings{}, middleware.After)
 	if err != nil {
 		return err

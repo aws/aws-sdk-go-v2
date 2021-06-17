@@ -23,7 +23,7 @@ func (c *Client) DefineSuggester(ctx context.Context, params *DefineSuggesterInp
 		params = &DefineSuggesterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DefineSuggester", params, optFns, addOperationDefineSuggesterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DefineSuggester", params, optFns, c.addOperationDefineSuggesterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DefineSuggesterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDefineSuggesterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDefineSuggesterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDefineSuggester{}, middleware.After)
 	if err != nil {
 		return err

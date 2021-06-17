@@ -18,7 +18,7 @@ func (c *Client) ExportProject(ctx context.Context, params *ExportProjectInput, 
 		params = &ExportProjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExportProject", params, optFns, addOperationExportProjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExportProject", params, optFns, c.addOperationExportProjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ExportProjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExportProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExportProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportProject{}, middleware.After)
 	if err != nil {
 		return err

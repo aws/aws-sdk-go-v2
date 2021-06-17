@@ -19,7 +19,7 @@ func (c *Client) DeleteNetworkInterfacePermission(ctx context.Context, params *D
 		params = &DeleteNetworkInterfacePermissionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteNetworkInterfacePermission", params, optFns, addOperationDeleteNetworkInterfacePermissionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteNetworkInterfacePermission", params, optFns, c.addOperationDeleteNetworkInterfacePermissionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DeleteNetworkInterfacePermissionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteNetworkInterfacePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteNetworkInterfacePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteNetworkInterfacePermission{}, middleware.After)
 	if err != nil {
 		return err

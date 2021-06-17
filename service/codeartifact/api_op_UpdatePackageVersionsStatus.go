@@ -17,7 +17,7 @@ func (c *Client) UpdatePackageVersionsStatus(ctx context.Context, params *Update
 		params = &UpdatePackageVersionsStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePackageVersionsStatus", params, optFns, addOperationUpdatePackageVersionsStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePackageVersionsStatus", params, optFns, c.addOperationUpdatePackageVersionsStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ type UpdatePackageVersionsStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePackageVersionsStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePackageVersionsStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePackageVersionsStatus{}, middleware.After)
 	if err != nil {
 		return err

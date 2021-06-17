@@ -17,7 +17,7 @@ func (c *Client) SendDataToWirelessDevice(ctx context.Context, params *SendDataT
 		params = &SendDataToWirelessDeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendDataToWirelessDevice", params, optFns, addOperationSendDataToWirelessDeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendDataToWirelessDevice", params, optFns, c.addOperationSendDataToWirelessDeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type SendDataToWirelessDeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendDataToWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendDataToWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendDataToWirelessDevice{}, middleware.After)
 	if err != nil {
 		return err

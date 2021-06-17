@@ -19,7 +19,7 @@ func (c *Client) EnableMacie(ctx context.Context, params *EnableMacieInput, optF
 		params = &EnableMacieInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableMacie", params, optFns, addOperationEnableMacieMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableMacie", params, optFns, c.addOperationEnableMacieMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type EnableMacieOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableMacieMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableMacieMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableMacie{}, middleware.After)
 	if err != nil {
 		return err

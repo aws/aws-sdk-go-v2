@@ -40,7 +40,7 @@ func (c *Client) CreateVpcPeeringConnection(ctx context.Context, params *CreateV
 		params = &CreateVpcPeeringConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVpcPeeringConnection", params, optFns, addOperationCreateVpcPeeringConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateVpcPeeringConnection", params, optFns, c.addOperationCreateVpcPeeringConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type CreateVpcPeeringConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateVpcPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateVpcPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateVpcPeeringConnection{}, middleware.After)
 	if err != nil {
 		return err

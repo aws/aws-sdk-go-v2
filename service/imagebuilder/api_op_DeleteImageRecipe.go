@@ -16,7 +16,7 @@ func (c *Client) DeleteImageRecipe(ctx context.Context, params *DeleteImageRecip
 		params = &DeleteImageRecipeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteImageRecipe", params, optFns, addOperationDeleteImageRecipeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteImageRecipe", params, optFns, c.addOperationDeleteImageRecipeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteImageRecipeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteImageRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteImageRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteImageRecipe{}, middleware.After)
 	if err != nil {
 		return err

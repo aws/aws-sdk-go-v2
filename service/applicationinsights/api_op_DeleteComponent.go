@@ -18,7 +18,7 @@ func (c *Client) DeleteComponent(ctx context.Context, params *DeleteComponentInp
 		params = &DeleteComponentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteComponent", params, optFns, addOperationDeleteComponentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteComponent", params, optFns, c.addOperationDeleteComponentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteComponentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteComponent{}, middleware.After)
 	if err != nil {
 		return err

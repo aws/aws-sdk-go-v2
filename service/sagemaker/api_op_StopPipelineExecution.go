@@ -17,7 +17,7 @@ func (c *Client) StopPipelineExecution(ctx context.Context, params *StopPipeline
 		params = &StopPipelineExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopPipelineExecution", params, optFns, addOperationStopPipelineExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopPipelineExecution", params, optFns, c.addOperationStopPipelineExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type StopPipelineExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopPipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopPipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopPipelineExecution{}, middleware.After)
 	if err != nil {
 		return err

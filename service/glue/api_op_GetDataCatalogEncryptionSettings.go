@@ -17,7 +17,7 @@ func (c *Client) GetDataCatalogEncryptionSettings(ctx context.Context, params *G
 		params = &GetDataCatalogEncryptionSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDataCatalogEncryptionSettings", params, optFns, addOperationGetDataCatalogEncryptionSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDataCatalogEncryptionSettings", params, optFns, c.addOperationGetDataCatalogEncryptionSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type GetDataCatalogEncryptionSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDataCatalogEncryptionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDataCatalogEncryptionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataCatalogEncryptionSettings{}, middleware.After)
 	if err != nil {
 		return err

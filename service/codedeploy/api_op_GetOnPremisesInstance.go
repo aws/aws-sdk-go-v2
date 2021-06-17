@@ -17,7 +17,7 @@ func (c *Client) GetOnPremisesInstance(ctx context.Context, params *GetOnPremise
 		params = &GetOnPremisesInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetOnPremisesInstance", params, optFns, addOperationGetOnPremisesInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetOnPremisesInstance", params, optFns, c.addOperationGetOnPremisesInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetOnPremisesInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetOnPremisesInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetOnPremisesInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOnPremisesInstance{}, middleware.After)
 	if err != nil {
 		return err

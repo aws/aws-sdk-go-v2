@@ -17,7 +17,7 @@ func (c *Client) UpdateExperiment(ctx context.Context, params *UpdateExperimentI
 		params = &UpdateExperimentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateExperiment", params, optFns, addOperationUpdateExperimentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateExperiment", params, optFns, c.addOperationUpdateExperimentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UpdateExperimentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateExperiment{}, middleware.After)
 	if err != nil {
 		return err

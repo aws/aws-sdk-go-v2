@@ -24,7 +24,7 @@ func (c *Client) TestAlarm(ctx context.Context, params *TestAlarmInput, optFns .
 		params = &TestAlarmInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestAlarm", params, optFns, addOperationTestAlarmMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestAlarm", params, optFns, c.addOperationTestAlarmMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type TestAlarmOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTestAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTestAlarm{}, middleware.After)
 	if err != nil {
 		return err

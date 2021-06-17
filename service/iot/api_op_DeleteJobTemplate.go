@@ -16,7 +16,7 @@ func (c *Client) DeleteJobTemplate(ctx context.Context, params *DeleteJobTemplat
 		params = &DeleteJobTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteJobTemplate", params, optFns, addOperationDeleteJobTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteJobTemplate", params, optFns, c.addOperationDeleteJobTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteJobTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteJobTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteJobTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteJobTemplate{}, middleware.After)
 	if err != nil {
 		return err

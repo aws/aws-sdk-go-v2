@@ -18,7 +18,7 @@ func (c *Client) AddInstanceFleet(ctx context.Context, params *AddInstanceFleetI
 		params = &AddInstanceFleetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddInstanceFleet", params, optFns, addOperationAddInstanceFleetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddInstanceFleet", params, optFns, c.addOperationAddInstanceFleetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type AddInstanceFleetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddInstanceFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddInstanceFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddInstanceFleet{}, middleware.After)
 	if err != nil {
 		return err

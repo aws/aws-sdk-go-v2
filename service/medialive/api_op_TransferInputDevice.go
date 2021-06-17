@@ -17,7 +17,7 @@ func (c *Client) TransferInputDevice(ctx context.Context, params *TransferInputD
 		params = &TransferInputDeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TransferInputDevice", params, optFns, addOperationTransferInputDeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TransferInputDevice", params, optFns, c.addOperationTransferInputDeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type TransferInputDeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTransferInputDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTransferInputDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpTransferInputDevice{}, middleware.After)
 	if err != nil {
 		return err

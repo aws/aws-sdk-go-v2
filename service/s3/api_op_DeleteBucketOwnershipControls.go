@@ -28,7 +28,7 @@ func (c *Client) DeleteBucketOwnershipControls(ctx context.Context, params *Dele
 		params = &DeleteBucketOwnershipControlsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketOwnershipControls", params, optFns, addOperationDeleteBucketOwnershipControlsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketOwnershipControls", params, optFns, c.addOperationDeleteBucketOwnershipControlsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DeleteBucketOwnershipControlsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBucketOwnershipControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBucketOwnershipControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteBucketOwnershipControls{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteProfileKey(ctx context.Context, params *DeleteProfileKeyI
 		params = &DeleteProfileKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProfileKey", params, optFns, addOperationDeleteProfileKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProfileKey", params, optFns, c.addOperationDeleteProfileKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DeleteProfileKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteProfileKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteProfileKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProfileKey{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) SendBulkEmail(ctx context.Context, params *SendBulkEmailInput, 
 		params = &SendBulkEmailInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendBulkEmail", params, optFns, addOperationSendBulkEmailMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendBulkEmail", params, optFns, c.addOperationSendBulkEmailMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +101,7 @@ type SendBulkEmailOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendBulkEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendBulkEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendBulkEmail{}, middleware.After)
 	if err != nil {
 		return err

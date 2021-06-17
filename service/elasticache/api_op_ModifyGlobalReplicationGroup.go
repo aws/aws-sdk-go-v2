@@ -17,7 +17,7 @@ func (c *Client) ModifyGlobalReplicationGroup(ctx context.Context, params *Modif
 		params = &ModifyGlobalReplicationGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyGlobalReplicationGroup", params, optFns, addOperationModifyGlobalReplicationGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyGlobalReplicationGroup", params, optFns, c.addOperationModifyGlobalReplicationGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type ModifyGlobalReplicationGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyGlobalReplicationGroup{}, middleware.After)
 	if err != nil {
 		return err

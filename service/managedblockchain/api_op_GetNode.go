@@ -18,7 +18,7 @@ func (c *Client) GetNode(ctx context.Context, params *GetNodeInput, optFns ...fu
 		params = &GetNodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetNode", params, optFns, addOperationGetNodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetNode", params, optFns, c.addOperationGetNodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetNodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNode{}, middleware.After)
 	if err != nil {
 		return err

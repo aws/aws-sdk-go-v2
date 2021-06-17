@@ -24,7 +24,7 @@ func (c *Client) ListCostCategoryDefinitions(ctx context.Context, params *ListCo
 		params = &ListCostCategoryDefinitionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCostCategoryDefinitions", params, optFns, addOperationListCostCategoryDefinitionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCostCategoryDefinitions", params, optFns, c.addOperationListCostCategoryDefinitionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListCostCategoryDefinitionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCostCategoryDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCostCategoryDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCostCategoryDefinitions{}, middleware.After)
 	if err != nil {
 		return err

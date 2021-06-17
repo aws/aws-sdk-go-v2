@@ -18,7 +18,7 @@ func (c *Client) DeleteQuerySuggestionsBlockList(ctx context.Context, params *De
 		params = &DeleteQuerySuggestionsBlockListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteQuerySuggestionsBlockList", params, optFns, addOperationDeleteQuerySuggestionsBlockListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteQuerySuggestionsBlockList", params, optFns, c.addOperationDeleteQuerySuggestionsBlockListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteQuerySuggestionsBlockListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteQuerySuggestionsBlockListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteQuerySuggestionsBlockListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteQuerySuggestionsBlockList{}, middleware.After)
 	if err != nil {
 		return err

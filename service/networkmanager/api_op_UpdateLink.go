@@ -18,7 +18,7 @@ func (c *Client) UpdateLink(ctx context.Context, params *UpdateLinkInput, optFns
 		params = &UpdateLinkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLink", params, optFns, addOperationUpdateLinkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLink", params, optFns, c.addOperationUpdateLinkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type UpdateLinkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLink{}, middleware.After)
 	if err != nil {
 		return err

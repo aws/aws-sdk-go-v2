@@ -18,7 +18,7 @@ func (c *Client) GetUserDefinedFunctions(ctx context.Context, params *GetUserDef
 		params = &GetUserDefinedFunctionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUserDefinedFunctions", params, optFns, addOperationGetUserDefinedFunctionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetUserDefinedFunctions", params, optFns, c.addOperationGetUserDefinedFunctionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type GetUserDefinedFunctionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetUserDefinedFunctionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetUserDefinedFunctionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUserDefinedFunctions{}, middleware.After)
 	if err != nil {
 		return err

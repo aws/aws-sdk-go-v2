@@ -17,7 +17,7 @@ func (c *Client) DeleteWorkload(ctx context.Context, params *DeleteWorkloadInput
 		params = &DeleteWorkloadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkload", params, optFns, addOperationDeleteWorkloadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkload", params, optFns, c.addOperationDeleteWorkloadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteWorkloadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkload{}, middleware.After)
 	if err != nil {
 		return err

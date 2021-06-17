@@ -19,7 +19,7 @@ func (c *Client) DeleteConfigurationTemplate(ctx context.Context, params *Delete
 		params = &DeleteConfigurationTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteConfigurationTemplate", params, optFns, addOperationDeleteConfigurationTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteConfigurationTemplate", params, optFns, c.addOperationDeleteConfigurationTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteConfigurationTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteConfigurationTemplate{}, middleware.After)
 	if err != nil {
 		return err

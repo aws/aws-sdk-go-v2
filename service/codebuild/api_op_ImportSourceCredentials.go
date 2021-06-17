@@ -18,7 +18,7 @@ func (c *Client) ImportSourceCredentials(ctx context.Context, params *ImportSour
 		params = &ImportSourceCredentialsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportSourceCredentials", params, optFns, addOperationImportSourceCredentialsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportSourceCredentials", params, optFns, c.addOperationImportSourceCredentialsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ImportSourceCredentialsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportSourceCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportSourceCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportSourceCredentials{}, middleware.After)
 	if err != nil {
 		return err

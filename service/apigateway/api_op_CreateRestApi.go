@@ -18,7 +18,7 @@ func (c *Client) CreateRestApi(ctx context.Context, params *CreateRestApiInput, 
 		params = &CreateRestApiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRestApi", params, optFns, addOperationCreateRestApiMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRestApi", params, optFns, c.addOperationCreateRestApiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -154,7 +154,7 @@ type CreateRestApiOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRestApi{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListKeyPhrasesDetectionJobs(ctx context.Context, params *ListKe
 		params = &ListKeyPhrasesDetectionJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListKeyPhrasesDetectionJobs", params, optFns, addOperationListKeyPhrasesDetectionJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListKeyPhrasesDetectionJobs", params, optFns, c.addOperationListKeyPhrasesDetectionJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListKeyPhrasesDetectionJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListKeyPhrasesDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListKeyPhrasesDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListKeyPhrasesDetectionJobs{}, middleware.After)
 	if err != nil {
 		return err

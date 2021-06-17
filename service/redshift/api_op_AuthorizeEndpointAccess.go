@@ -18,7 +18,7 @@ func (c *Client) AuthorizeEndpointAccess(ctx context.Context, params *AuthorizeE
 		params = &AuthorizeEndpointAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AuthorizeEndpointAccess", params, optFns, addOperationAuthorizeEndpointAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AuthorizeEndpointAccess", params, optFns, c.addOperationAuthorizeEndpointAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type AuthorizeEndpointAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAuthorizeEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAuthorizeEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAuthorizeEndpointAccess{}, middleware.After)
 	if err != nil {
 		return err

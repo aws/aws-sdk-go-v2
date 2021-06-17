@@ -20,7 +20,7 @@ func (c *Client) ResetCacheParameterGroup(ctx context.Context, params *ResetCach
 		params = &ResetCacheParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetCacheParameterGroup", params, optFns, addOperationResetCacheParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetCacheParameterGroup", params, optFns, c.addOperationResetCacheParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ResetCacheParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetCacheParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetCacheParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpResetCacheParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

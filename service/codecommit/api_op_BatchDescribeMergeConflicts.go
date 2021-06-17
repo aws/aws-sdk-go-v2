@@ -18,7 +18,7 @@ func (c *Client) BatchDescribeMergeConflicts(ctx context.Context, params *BatchD
 		params = &BatchDescribeMergeConflictsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDescribeMergeConflicts", params, optFns, addOperationBatchDescribeMergeConflictsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDescribeMergeConflicts", params, optFns, c.addOperationBatchDescribeMergeConflictsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ type BatchDescribeMergeConflictsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDescribeMergeConflictsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDescribeMergeConflictsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDescribeMergeConflicts{}, middleware.After)
 	if err != nil {
 		return err

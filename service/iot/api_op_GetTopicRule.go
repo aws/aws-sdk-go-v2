@@ -17,7 +17,7 @@ func (c *Client) GetTopicRule(ctx context.Context, params *GetTopicRuleInput, op
 		params = &GetTopicRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTopicRule", params, optFns, addOperationGetTopicRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTopicRule", params, optFns, c.addOperationGetTopicRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetTopicRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTopicRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTopicRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTopicRule{}, middleware.After)
 	if err != nil {
 		return err

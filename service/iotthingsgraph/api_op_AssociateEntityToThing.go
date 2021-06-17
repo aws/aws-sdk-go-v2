@@ -18,7 +18,7 @@ func (c *Client) AssociateEntityToThing(ctx context.Context, params *AssociateEn
 		params = &AssociateEntityToThingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateEntityToThing", params, optFns, addOperationAssociateEntityToThingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateEntityToThing", params, optFns, c.addOperationAssociateEntityToThingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type AssociateEntityToThingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateEntityToThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateEntityToThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateEntityToThing{}, middleware.After)
 	if err != nil {
 		return err

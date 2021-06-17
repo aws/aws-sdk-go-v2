@@ -17,7 +17,7 @@ func (c *Client) ListDistributedGrants(ctx context.Context, params *ListDistribu
 		params = &ListDistributedGrantsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDistributedGrants", params, optFns, addOperationListDistributedGrantsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDistributedGrants", params, optFns, c.addOperationListDistributedGrantsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ListDistributedGrantsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDistributedGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDistributedGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDistributedGrants{}, middleware.After)
 	if err != nil {
 		return err

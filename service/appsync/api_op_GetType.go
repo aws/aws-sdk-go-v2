@@ -17,7 +17,7 @@ func (c *Client) GetType(ctx context.Context, params *GetTypeInput, optFns ...fu
 		params = &GetTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetType", params, optFns, addOperationGetTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetType", params, optFns, c.addOperationGetTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetType{}, middleware.After)
 	if err != nil {
 		return err

@@ -31,7 +31,7 @@ func (c *Client) CreateModelPackage(ctx context.Context, params *CreateModelPack
 		params = &CreateModelPackageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateModelPackage", params, optFns, addOperationCreateModelPackageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateModelPackage", params, optFns, c.addOperationCreateModelPackageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -113,7 +113,7 @@ type CreateModelPackageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateModelPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateModelPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelPackage{}, middleware.After)
 	if err != nil {
 		return err

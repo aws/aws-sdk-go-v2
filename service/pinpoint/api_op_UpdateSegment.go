@@ -19,7 +19,7 @@ func (c *Client) UpdateSegment(ctx context.Context, params *UpdateSegmentInput, 
 		params = &UpdateSegmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSegment", params, optFns, addOperationUpdateSegmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSegment", params, optFns, c.addOperationUpdateSegmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type UpdateSegmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSegmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSegmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSegment{}, middleware.After)
 	if err != nil {
 		return err

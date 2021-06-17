@@ -39,7 +39,7 @@ func (c *Client) ModifyFleet(ctx context.Context, params *ModifyFleetInput, optF
 		params = &ModifyFleetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyFleet", params, optFns, addOperationModifyFleetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyFleet", params, optFns, c.addOperationModifyFleetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type ModifyFleetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyFleet{}, middleware.After)
 	if err != nil {
 		return err

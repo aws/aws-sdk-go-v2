@@ -17,7 +17,7 @@ func (c *Client) CreateRecipe(ctx context.Context, params *CreateRecipeInput, op
 		params = &CreateRecipeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRecipe", params, optFns, addOperationCreateRecipeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRecipe", params, optFns, c.addOperationCreateRecipeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type CreateRecipeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRecipe{}, middleware.After)
 	if err != nil {
 		return err

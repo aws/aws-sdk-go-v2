@@ -16,7 +16,7 @@ func (c *Client) UpdateDashboardPublishedVersion(ctx context.Context, params *Up
 		params = &UpdateDashboardPublishedVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDashboardPublishedVersion", params, optFns, addOperationUpdateDashboardPublishedVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDashboardPublishedVersion", params, optFns, c.addOperationUpdateDashboardPublishedVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type UpdateDashboardPublishedVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDashboardPublishedVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDashboardPublishedVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDashboardPublishedVersion{}, middleware.After)
 	if err != nil {
 		return err

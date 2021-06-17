@@ -17,7 +17,7 @@ func (c *Client) UpdateMultiplexProgram(ctx context.Context, params *UpdateMulti
 		params = &UpdateMultiplexProgramInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateMultiplexProgram", params, optFns, addOperationUpdateMultiplexProgramMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMultiplexProgram", params, optFns, c.addOperationUpdateMultiplexProgramMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type UpdateMultiplexProgramOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateMultiplexProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateMultiplexProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMultiplexProgram{}, middleware.After)
 	if err != nil {
 		return err

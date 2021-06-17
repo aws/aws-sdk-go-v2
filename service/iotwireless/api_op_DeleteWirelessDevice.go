@@ -16,7 +16,7 @@ func (c *Client) DeleteWirelessDevice(ctx context.Context, params *DeleteWireles
 		params = &DeleteWirelessDeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteWirelessDevice", params, optFns, addOperationDeleteWirelessDeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteWirelessDevice", params, optFns, c.addOperationDeleteWirelessDeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteWirelessDeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWirelessDevice{}, middleware.After)
 	if err != nil {
 		return err

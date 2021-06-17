@@ -18,7 +18,7 @@ func (c *Client) CreateLocationNfs(ctx context.Context, params *CreateLocationNf
 		params = &CreateLocationNfsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLocationNfs", params, optFns, addOperationCreateLocationNfsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLocationNfs", params, optFns, c.addOperationCreateLocationNfsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type CreateLocationNfsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLocationNfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLocationNfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationNfs{}, middleware.After)
 	if err != nil {
 		return err

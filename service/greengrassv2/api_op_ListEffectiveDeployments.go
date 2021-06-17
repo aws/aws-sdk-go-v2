@@ -19,7 +19,7 @@ func (c *Client) ListEffectiveDeployments(ctx context.Context, params *ListEffec
 		params = &ListEffectiveDeploymentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEffectiveDeployments", params, optFns, addOperationListEffectiveDeploymentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEffectiveDeployments", params, optFns, c.addOperationListEffectiveDeploymentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListEffectiveDeploymentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEffectiveDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEffectiveDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEffectiveDeployments{}, middleware.After)
 	if err != nil {
 		return err

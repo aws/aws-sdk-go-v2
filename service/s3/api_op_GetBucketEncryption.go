@@ -40,7 +40,7 @@ func (c *Client) GetBucketEncryption(ctx context.Context, params *GetBucketEncry
 		params = &GetBucketEncryptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketEncryption", params, optFns, addOperationGetBucketEncryptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketEncryption", params, optFns, c.addOperationGetBucketEncryptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetBucketEncryptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketEncryption{}, middleware.After)
 	if err != nil {
 		return err

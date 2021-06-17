@@ -21,7 +21,7 @@ func (c *Client) VerifyDomainIdentity(ctx context.Context, params *VerifyDomainI
 		params = &VerifyDomainIdentityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "VerifyDomainIdentity", params, optFns, addOperationVerifyDomainIdentityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "VerifyDomainIdentity", params, optFns, c.addOperationVerifyDomainIdentityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type VerifyDomainIdentityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationVerifyDomainIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationVerifyDomainIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpVerifyDomainIdentity{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdatePlacement(ctx context.Context, params *UpdatePlacementInp
 		params = &UpdatePlacementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePlacement", params, optFns, addOperationUpdatePlacementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePlacement", params, optFns, c.addOperationUpdatePlacementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type UpdatePlacementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePlacement{}, middleware.After)
 	if err != nil {
 		return err

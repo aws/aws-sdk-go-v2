@@ -23,7 +23,7 @@ func (c *Client) RestoreDBInstanceFromS3(ctx context.Context, params *RestoreDBI
 		params = &RestoreDBInstanceFromS3Input{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreDBInstanceFromS3", params, optFns, addOperationRestoreDBInstanceFromS3Middlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreDBInstanceFromS3", params, optFns, c.addOperationRestoreDBInstanceFromS3Middlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -338,7 +338,7 @@ type RestoreDBInstanceFromS3Output struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreDBInstanceFromS3Middlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreDBInstanceFromS3Middlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBInstanceFromS3{}, middleware.After)
 	if err != nil {
 		return err

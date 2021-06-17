@@ -19,7 +19,7 @@ func (c *Client) GetBotAliases(ctx context.Context, params *GetBotAliasesInput, 
 		params = &GetBotAliasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBotAliases", params, optFns, addOperationGetBotAliasesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBotAliases", params, optFns, c.addOperationGetBotAliasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type GetBotAliasesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBotAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBotAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBotAliases{}, middleware.After)
 	if err != nil {
 		return err

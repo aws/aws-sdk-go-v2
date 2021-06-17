@@ -21,7 +21,7 @@ func (c *Client) AuthorizeSnapshotAccess(ctx context.Context, params *AuthorizeS
 		params = &AuthorizeSnapshotAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AuthorizeSnapshotAccess", params, optFns, addOperationAuthorizeSnapshotAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AuthorizeSnapshotAccess", params, optFns, c.addOperationAuthorizeSnapshotAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type AuthorizeSnapshotAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAuthorizeSnapshotAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAuthorizeSnapshotAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAuthorizeSnapshotAccess{}, middleware.After)
 	if err != nil {
 		return err

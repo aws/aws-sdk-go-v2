@@ -20,7 +20,7 @@ func (c *Client) ListAllowedNodeTypeModifications(ctx context.Context, params *L
 		params = &ListAllowedNodeTypeModificationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAllowedNodeTypeModifications", params, optFns, addOperationListAllowedNodeTypeModificationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAllowedNodeTypeModifications", params, optFns, c.addOperationListAllowedNodeTypeModificationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListAllowedNodeTypeModificationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAllowedNodeTypeModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAllowedNodeTypeModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListAllowedNodeTypeModifications{}, middleware.After)
 	if err != nil {
 		return err

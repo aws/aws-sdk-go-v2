@@ -24,7 +24,7 @@ func (c *Client) UpdateTerminationProtection(ctx context.Context, params *Update
 		params = &UpdateTerminationProtectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateTerminationProtection", params, optFns, addOperationUpdateTerminationProtectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateTerminationProtection", params, optFns, c.addOperationUpdateTerminationProtectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UpdateTerminationProtectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateTerminationProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateTerminationProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateTerminationProtection{}, middleware.After)
 	if err != nil {
 		return err

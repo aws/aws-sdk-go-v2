@@ -17,7 +17,7 @@ func (c *Client) UpdateReportGroup(ctx context.Context, params *UpdateReportGrou
 		params = &UpdateReportGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateReportGroup", params, optFns, addOperationUpdateReportGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateReportGroup", params, optFns, c.addOperationUpdateReportGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type UpdateReportGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateReportGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateReportGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateReportGroup{}, middleware.After)
 	if err != nil {
 		return err

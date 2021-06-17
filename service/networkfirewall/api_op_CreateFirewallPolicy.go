@@ -20,7 +20,7 @@ func (c *Client) CreateFirewallPolicy(ctx context.Context, params *CreateFirewal
 		params = &CreateFirewallPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFirewallPolicy", params, optFns, addOperationCreateFirewallPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFirewallPolicy", params, optFns, c.addOperationCreateFirewallPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type CreateFirewallPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFirewallPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFirewallPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateFirewallPolicy{}, middleware.After)
 	if err != nil {
 		return err

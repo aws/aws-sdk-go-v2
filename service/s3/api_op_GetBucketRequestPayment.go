@@ -25,7 +25,7 @@ func (c *Client) GetBucketRequestPayment(ctx context.Context, params *GetBucketR
 		params = &GetBucketRequestPaymentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketRequestPayment", params, optFns, addOperationGetBucketRequestPaymentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketRequestPayment", params, optFns, c.addOperationGetBucketRequestPaymentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type GetBucketRequestPaymentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketRequestPaymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketRequestPaymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketRequestPayment{}, middleware.After)
 	if err != nil {
 		return err

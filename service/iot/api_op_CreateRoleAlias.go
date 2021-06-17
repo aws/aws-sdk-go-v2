@@ -17,7 +17,7 @@ func (c *Client) CreateRoleAlias(ctx context.Context, params *CreateRoleAliasInp
 		params = &CreateRoleAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRoleAlias", params, optFns, addOperationCreateRoleAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRoleAlias", params, optFns, c.addOperationCreateRoleAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type CreateRoleAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRoleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRoleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoleAlias{}, middleware.After)
 	if err != nil {
 		return err

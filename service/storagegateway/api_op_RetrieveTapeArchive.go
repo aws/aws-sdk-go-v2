@@ -23,7 +23,7 @@ func (c *Client) RetrieveTapeArchive(ctx context.Context, params *RetrieveTapeAr
 		params = &RetrieveTapeArchiveInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RetrieveTapeArchive", params, optFns, addOperationRetrieveTapeArchiveMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RetrieveTapeArchive", params, optFns, c.addOperationRetrieveTapeArchiveMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type RetrieveTapeArchiveOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRetrieveTapeArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRetrieveTapeArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRetrieveTapeArchive{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) UntagSAMLProvider(ctx context.Context, params *UntagSAMLProvide
 		params = &UntagSAMLProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagSAMLProvider", params, optFns, addOperationUntagSAMLProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagSAMLProvider", params, optFns, c.addOperationUntagSAMLProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UntagSAMLProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagSAMLProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagSAMLProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUntagSAMLProvider{}, middleware.After)
 	if err != nil {
 		return err

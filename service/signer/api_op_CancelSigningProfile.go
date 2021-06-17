@@ -18,7 +18,7 @@ func (c *Client) CancelSigningProfile(ctx context.Context, params *CancelSigning
 		params = &CancelSigningProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelSigningProfile", params, optFns, addOperationCancelSigningProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelSigningProfile", params, optFns, c.addOperationCancelSigningProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type CancelSigningProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelSigningProfile{}, middleware.After)
 	if err != nil {
 		return err

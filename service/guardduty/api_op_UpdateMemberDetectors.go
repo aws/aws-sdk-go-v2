@@ -17,7 +17,7 @@ func (c *Client) UpdateMemberDetectors(ctx context.Context, params *UpdateMember
 		params = &UpdateMemberDetectorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateMemberDetectors", params, optFns, addOperationUpdateMemberDetectorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMemberDetectors", params, optFns, c.addOperationUpdateMemberDetectorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UpdateMemberDetectorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateMemberDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateMemberDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMemberDetectors{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateClusterKafkaVersion(ctx context.Context, params *UpdateCl
 		params = &UpdateClusterKafkaVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateClusterKafkaVersion", params, optFns, addOperationUpdateClusterKafkaVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateClusterKafkaVersion", params, optFns, c.addOperationUpdateClusterKafkaVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type UpdateClusterKafkaVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateClusterKafkaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateClusterKafkaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateClusterKafkaVersion{}, middleware.After)
 	if err != nil {
 		return err

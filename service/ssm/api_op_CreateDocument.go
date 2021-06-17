@@ -22,7 +22,7 @@ func (c *Client) CreateDocument(ctx context.Context, params *CreateDocumentInput
 		params = &CreateDocumentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDocument", params, optFns, addOperationCreateDocumentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDocument", params, optFns, c.addOperationCreateDocumentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ type CreateDocumentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDocument{}, middleware.After)
 	if err != nil {
 		return err

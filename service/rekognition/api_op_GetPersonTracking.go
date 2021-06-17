@@ -41,7 +41,7 @@ func (c *Client) GetPersonTracking(ctx context.Context, params *GetPersonTrackin
 		params = &GetPersonTrackingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPersonTracking", params, optFns, addOperationGetPersonTrackingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPersonTracking", params, optFns, c.addOperationGetPersonTrackingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type GetPersonTrackingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPersonTrackingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPersonTrackingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPersonTracking{}, middleware.After)
 	if err != nil {
 		return err

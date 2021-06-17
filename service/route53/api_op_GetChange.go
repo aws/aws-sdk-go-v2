@@ -30,7 +30,7 @@ func (c *Client) GetChange(ctx context.Context, params *GetChangeInput, optFns .
 		params = &GetChangeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetChange", params, optFns, addOperationGetChangeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetChange", params, optFns, c.addOperationGetChangeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetChangeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetChange{}, middleware.After)
 	if err != nil {
 		return err

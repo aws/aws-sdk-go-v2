@@ -16,7 +16,7 @@ func (c *Client) DeleteHsmClientCertificate(ctx context.Context, params *DeleteH
 		params = &DeleteHsmClientCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteHsmClientCertificate", params, optFns, addOperationDeleteHsmClientCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteHsmClientCertificate", params, optFns, c.addOperationDeleteHsmClientCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteHsmClientCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteHsmClientCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteHsmClientCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteHsmClientCertificate{}, middleware.After)
 	if err != nil {
 		return err

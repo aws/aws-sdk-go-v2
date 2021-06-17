@@ -26,7 +26,7 @@ func (c *Client) CreateProtection(ctx context.Context, params *CreateProtectionI
 		params = &CreateProtectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateProtection", params, optFns, addOperationCreateProtectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateProtection", params, optFns, c.addOperationCreateProtectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type CreateProtectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProtection{}, middleware.After)
 	if err != nil {
 		return err

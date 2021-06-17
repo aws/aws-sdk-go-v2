@@ -19,7 +19,7 @@ func (c *Client) UpdateDirectoryConfig(ctx context.Context, params *UpdateDirect
 		params = &UpdateDirectoryConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDirectoryConfig", params, optFns, addOperationUpdateDirectoryConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDirectoryConfig", params, optFns, c.addOperationUpdateDirectoryConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UpdateDirectoryConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDirectoryConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDirectoryConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDirectoryConfig{}, middleware.After)
 	if err != nil {
 		return err

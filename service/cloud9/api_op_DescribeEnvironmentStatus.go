@@ -17,7 +17,7 @@ func (c *Client) DescribeEnvironmentStatus(ctx context.Context, params *Describe
 		params = &DescribeEnvironmentStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEnvironmentStatus", params, optFns, addOperationDescribeEnvironmentStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEnvironmentStatus", params, optFns, c.addOperationDescribeEnvironmentStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DescribeEnvironmentStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEnvironmentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEnvironmentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEnvironmentStatus{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) GetResourceMetrics(ctx context.Context, params *GetResourceMetr
 		params = &GetResourceMetricsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetResourceMetrics", params, optFns, addOperationGetResourceMetricsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetResourceMetrics", params, optFns, c.addOperationGetResourceMetricsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ type GetResourceMetricsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetResourceMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetResourceMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResourceMetrics{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CreateSecurityProfile(ctx context.Context, params *CreateSecuri
 		params = &CreateSecurityProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSecurityProfile", params, optFns, addOperationCreateSecurityProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSecurityProfile", params, optFns, c.addOperationCreateSecurityProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type CreateSecurityProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSecurityProfile{}, middleware.After)
 	if err != nil {
 		return err

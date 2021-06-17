@@ -16,7 +16,7 @@ func (c *Client) RebootBroker(ctx context.Context, params *RebootBrokerInput, op
 		params = &RebootBrokerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RebootBroker", params, optFns, addOperationRebootBrokerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RebootBroker", params, optFns, c.addOperationRebootBrokerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type RebootBrokerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRebootBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRebootBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRebootBroker{}, middleware.After)
 	if err != nil {
 		return err

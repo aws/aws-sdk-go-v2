@@ -18,7 +18,7 @@ func (c *Client) RetryBuildBatch(ctx context.Context, params *RetryBuildBatchInp
 		params = &RetryBuildBatchInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RetryBuildBatch", params, optFns, addOperationRetryBuildBatchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RetryBuildBatch", params, optFns, c.addOperationRetryBuildBatchMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type RetryBuildBatchOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRetryBuildBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRetryBuildBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRetryBuildBatch{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) AbortDocumentVersionUpload(ctx context.Context, params *AbortDo
 		params = &AbortDocumentVersionUploadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AbortDocumentVersionUpload", params, optFns, addOperationAbortDocumentVersionUploadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AbortDocumentVersionUpload", params, optFns, c.addOperationAbortDocumentVersionUploadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type AbortDocumentVersionUploadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAbortDocumentVersionUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAbortDocumentVersionUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAbortDocumentVersionUpload{}, middleware.After)
 	if err != nil {
 		return err

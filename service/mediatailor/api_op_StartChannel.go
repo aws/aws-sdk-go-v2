@@ -16,7 +16,7 @@ func (c *Client) StartChannel(ctx context.Context, params *StartChannelInput, op
 		params = &StartChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartChannel", params, optFns, addOperationStartChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartChannel", params, optFns, c.addOperationStartChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type StartChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartChannel{}, middleware.After)
 	if err != nil {
 		return err

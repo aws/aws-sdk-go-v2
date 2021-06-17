@@ -17,7 +17,7 @@ func (c *Client) GetRepositoryTriggers(ctx context.Context, params *GetRepositor
 		params = &GetRepositoryTriggersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRepositoryTriggers", params, optFns, addOperationGetRepositoryTriggersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRepositoryTriggers", params, optFns, c.addOperationGetRepositoryTriggersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetRepositoryTriggersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRepositoryTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRepositoryTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRepositoryTriggers{}, middleware.After)
 	if err != nil {
 		return err

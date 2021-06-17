@@ -24,7 +24,7 @@ func (c *Client) BatchCreateTableRows(ctx context.Context, params *BatchCreateTa
 		params = &BatchCreateTableRowsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchCreateTableRows", params, optFns, addOperationBatchCreateTableRowsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchCreateTableRows", params, optFns, c.addOperationBatchCreateTableRowsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type BatchCreateTableRowsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchCreateTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchCreateTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateTableRows{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) CreateAlgorithm(ctx context.Context, params *CreateAlgorithmInp
 		params = &CreateAlgorithmInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAlgorithm", params, optFns, addOperationCreateAlgorithmMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAlgorithm", params, optFns, c.addOperationCreateAlgorithmMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +105,7 @@ type CreateAlgorithmOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAlgorithmMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAlgorithmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAlgorithm{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) RejectGrant(ctx context.Context, params *RejectGrantInput, optF
 		params = &RejectGrantInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RejectGrant", params, optFns, addOperationRejectGrantMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RejectGrant", params, optFns, c.addOperationRejectGrantMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type RejectGrantOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRejectGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRejectGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRejectGrant{}, middleware.After)
 	if err != nil {
 		return err

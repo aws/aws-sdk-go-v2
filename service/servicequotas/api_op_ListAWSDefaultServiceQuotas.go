@@ -19,7 +19,7 @@ func (c *Client) ListAWSDefaultServiceQuotas(ctx context.Context, params *ListAW
 		params = &ListAWSDefaultServiceQuotasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAWSDefaultServiceQuotas", params, optFns, addOperationListAWSDefaultServiceQuotasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAWSDefaultServiceQuotas", params, optFns, c.addOperationListAWSDefaultServiceQuotasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListAWSDefaultServiceQuotasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAWSDefaultServiceQuotasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAWSDefaultServiceQuotasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAWSDefaultServiceQuotas{}, middleware.After)
 	if err != nil {
 		return err

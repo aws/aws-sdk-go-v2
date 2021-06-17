@@ -22,7 +22,7 @@ func (c *Client) CreateArchive(ctx context.Context, params *CreateArchiveInput, 
 		params = &CreateArchiveInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateArchive", params, optFns, addOperationCreateArchiveMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateArchive", params, optFns, c.addOperationCreateArchiveMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type CreateArchiveOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateArchive{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) RebuildWorkspaces(ctx context.Context, params *RebuildWorkspace
 		params = &RebuildWorkspacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RebuildWorkspaces", params, optFns, addOperationRebuildWorkspacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RebuildWorkspaces", params, optFns, c.addOperationRebuildWorkspacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type RebuildWorkspacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRebuildWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRebuildWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRebuildWorkspaces{}, middleware.After)
 	if err != nil {
 		return err

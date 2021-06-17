@@ -20,7 +20,7 @@ func (c *Client) BatchDeletePhoneNumber(ctx context.Context, params *BatchDelete
 		params = &BatchDeletePhoneNumberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeletePhoneNumber", params, optFns, addOperationBatchDeletePhoneNumberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeletePhoneNumber", params, optFns, c.addOperationBatchDeletePhoneNumberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type BatchDeletePhoneNumberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeletePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeletePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeletePhoneNumber{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) MoveAccount(ctx context.Context, params *MoveAccountInput, optF
 		params = &MoveAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MoveAccount", params, optFns, addOperationMoveAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MoveAccount", params, optFns, c.addOperationMoveAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type MoveAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMoveAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMoveAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMoveAccount{}, middleware.After)
 	if err != nil {
 		return err

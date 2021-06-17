@@ -18,7 +18,7 @@ func (c *Client) DeleteEventIntegration(ctx context.Context, params *DeleteEvent
 		params = &DeleteEventIntegrationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEventIntegration", params, optFns, addOperationDeleteEventIntegrationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEventIntegration", params, optFns, c.addOperationDeleteEventIntegrationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteEventIntegrationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEventIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEventIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEventIntegration{}, middleware.After)
 	if err != nil {
 		return err

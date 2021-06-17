@@ -23,7 +23,7 @@ func (c *Client) TerminateJobFlows(ctx context.Context, params *TerminateJobFlow
 		params = &TerminateJobFlowsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TerminateJobFlows", params, optFns, addOperationTerminateJobFlowsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TerminateJobFlows", params, optFns, c.addOperationTerminateJobFlowsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type TerminateJobFlowsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTerminateJobFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTerminateJobFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTerminateJobFlows{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) AttachPrincipalPolicy(ctx context.Context, params *AttachPrinci
 		params = &AttachPrincipalPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachPrincipalPolicy", params, optFns, addOperationAttachPrincipalPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachPrincipalPolicy", params, optFns, c.addOperationAttachPrincipalPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type AttachPrincipalPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachPrincipalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachPrincipalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAttachPrincipalPolicy{}, middleware.After)
 	if err != nil {
 		return err

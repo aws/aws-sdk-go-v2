@@ -18,7 +18,7 @@ func (c *Client) GetAggregateResourceConfig(ctx context.Context, params *GetAggr
 		params = &GetAggregateResourceConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAggregateResourceConfig", params, optFns, addOperationGetAggregateResourceConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAggregateResourceConfig", params, optFns, c.addOperationGetAggregateResourceConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetAggregateResourceConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAggregateResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAggregateResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAggregateResourceConfig{}, middleware.After)
 	if err != nil {
 		return err

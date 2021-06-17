@@ -21,7 +21,7 @@ func (c *Client) AssociateDRTLogBucket(ctx context.Context, params *AssociateDRT
 		params = &AssociateDRTLogBucketInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateDRTLogBucket", params, optFns, addOperationAssociateDRTLogBucketMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateDRTLogBucket", params, optFns, c.addOperationAssociateDRTLogBucketMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type AssociateDRTLogBucketOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateDRTLogBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateDRTLogBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateDRTLogBucket{}, middleware.After)
 	if err != nil {
 		return err

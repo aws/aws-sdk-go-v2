@@ -16,7 +16,7 @@ func (c *Client) DeleteLabels(ctx context.Context, params *DeleteLabelsInput, op
 		params = &DeleteLabelsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLabels", params, optFns, addOperationDeleteLabelsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLabels", params, optFns, c.addOperationDeleteLabelsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteLabelsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLabels{}, middleware.After)
 	if err != nil {
 		return err

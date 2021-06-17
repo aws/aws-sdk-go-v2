@@ -28,7 +28,7 @@ func (c *Client) PutStorageLensConfiguration(ctx context.Context, params *PutSto
 		params = &PutStorageLensConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutStorageLensConfiguration", params, optFns, addOperationPutStorageLensConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutStorageLensConfiguration", params, optFns, c.addOperationPutStorageLensConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type PutStorageLensConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutStorageLensConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutStorageLensConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutStorageLensConfiguration{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) GetHomeRegion(ctx context.Context, params *GetHomeRegionInput, 
 		params = &GetHomeRegionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetHomeRegion", params, optFns, addOperationGetHomeRegionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetHomeRegion", params, optFns, c.addOperationGetHomeRegionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type GetHomeRegionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetHomeRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetHomeRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetHomeRegion{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) BatchCreateAttendee(ctx context.Context, params *BatchCreateAtt
 		params = &BatchCreateAttendeeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchCreateAttendee", params, optFns, addOperationBatchCreateAttendeeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchCreateAttendee", params, optFns, c.addOperationBatchCreateAttendeeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type BatchCreateAttendeeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchCreateAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchCreateAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateAttendee{}, middleware.After)
 	if err != nil {
 		return err

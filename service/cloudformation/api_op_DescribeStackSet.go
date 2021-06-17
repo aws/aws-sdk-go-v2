@@ -17,7 +17,7 @@ func (c *Client) DescribeStackSet(ctx context.Context, params *DescribeStackSetI
 		params = &DescribeStackSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeStackSet", params, optFns, addOperationDescribeStackSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeStackSet", params, optFns, c.addOperationDescribeStackSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeStackSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeStackSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeStackSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeStackSet{}, middleware.After)
 	if err != nil {
 		return err

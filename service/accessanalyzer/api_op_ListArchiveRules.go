@@ -18,7 +18,7 @@ func (c *Client) ListArchiveRules(ctx context.Context, params *ListArchiveRulesI
 		params = &ListArchiveRulesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListArchiveRules", params, optFns, addOperationListArchiveRulesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListArchiveRules", params, optFns, c.addOperationListArchiveRulesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListArchiveRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListArchiveRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListArchiveRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListArchiveRules{}, middleware.After)
 	if err != nil {
 		return err

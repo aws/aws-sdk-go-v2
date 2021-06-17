@@ -20,7 +20,7 @@ func (c *Client) GetPersonalizedRanking(ctx context.Context, params *GetPersonal
 		params = &GetPersonalizedRankingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPersonalizedRanking", params, optFns, addOperationGetPersonalizedRankingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPersonalizedRanking", params, optFns, c.addOperationGetPersonalizedRankingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type GetPersonalizedRankingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPersonalizedRankingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPersonalizedRankingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPersonalizedRanking{}, middleware.After)
 	if err != nil {
 		return err

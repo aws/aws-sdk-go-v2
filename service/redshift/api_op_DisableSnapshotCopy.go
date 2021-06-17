@@ -21,7 +21,7 @@ func (c *Client) DisableSnapshotCopy(ctx context.Context, params *DisableSnapsho
 		params = &DisableSnapshotCopyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableSnapshotCopy", params, optFns, addOperationDisableSnapshotCopyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableSnapshotCopy", params, optFns, c.addOperationDisableSnapshotCopyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DisableSnapshotCopyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableSnapshotCopyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableSnapshotCopyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDisableSnapshotCopy{}, middleware.After)
 	if err != nil {
 		return err

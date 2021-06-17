@@ -19,7 +19,7 @@ func (c *Client) GetPlatformApplicationAttributes(ctx context.Context, params *G
 		params = &GetPlatformApplicationAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPlatformApplicationAttributes", params, optFns, addOperationGetPlatformApplicationAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPlatformApplicationAttributes", params, optFns, c.addOperationGetPlatformApplicationAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type GetPlatformApplicationAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPlatformApplicationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPlatformApplicationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetPlatformApplicationAttributes{}, middleware.After)
 	if err != nil {
 		return err

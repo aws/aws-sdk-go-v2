@@ -17,7 +17,7 @@ func (c *Client) UpdateFieldLevelEncryptionConfig(ctx context.Context, params *U
 		params = &UpdateFieldLevelEncryptionConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFieldLevelEncryptionConfig", params, optFns, addOperationUpdateFieldLevelEncryptionConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFieldLevelEncryptionConfig", params, optFns, c.addOperationUpdateFieldLevelEncryptionConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UpdateFieldLevelEncryptionConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFieldLevelEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFieldLevelEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpUpdateFieldLevelEncryptionConfig{}, middleware.After)
 	if err != nil {
 		return err

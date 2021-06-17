@@ -18,7 +18,7 @@ func (c *Client) DescribeImageVersion(ctx context.Context, params *DescribeImage
 		params = &DescribeImageVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeImageVersion", params, optFns, addOperationDescribeImageVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeImageVersion", params, optFns, c.addOperationDescribeImageVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DescribeImageVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeImageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeImageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImageVersion{}, middleware.After)
 	if err != nil {
 		return err

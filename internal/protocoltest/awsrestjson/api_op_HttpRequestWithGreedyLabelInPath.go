@@ -14,7 +14,7 @@ func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *H
 		params = &HttpRequestWithGreedyLabelInPathInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpRequestWithGreedyLabelInPath", params, optFns, addOperationHttpRequestWithGreedyLabelInPathMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpRequestWithGreedyLabelInPath", params, optFns, c.addOperationHttpRequestWithGreedyLabelInPathMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ type HttpRequestWithGreedyLabelInPathOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHttpRequestWithGreedyLabelInPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHttpRequestWithGreedyLabelInPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpRequestWithGreedyLabelInPath{}, middleware.After)
 	if err != nil {
 		return err

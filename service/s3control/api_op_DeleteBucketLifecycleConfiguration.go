@@ -50,7 +50,7 @@ func (c *Client) DeleteBucketLifecycleConfiguration(ctx context.Context, params 
 		params = &DeleteBucketLifecycleConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketLifecycleConfiguration", params, optFns, addOperationDeleteBucketLifecycleConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketLifecycleConfiguration", params, optFns, c.addOperationDeleteBucketLifecycleConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type DeleteBucketLifecycleConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBucketLifecycleConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBucketLifecycleConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteBucketLifecycleConfiguration{}, middleware.After)
 	if err != nil {
 		return err

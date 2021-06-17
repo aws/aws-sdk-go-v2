@@ -22,7 +22,7 @@ func (c *Client) DetachInstancesFromLoadBalancer(ctx context.Context, params *De
 		params = &DetachInstancesFromLoadBalancerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachInstancesFromLoadBalancer", params, optFns, addOperationDetachInstancesFromLoadBalancerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachInstancesFromLoadBalancer", params, optFns, c.addOperationDetachInstancesFromLoadBalancerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DetachInstancesFromLoadBalancerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachInstancesFromLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachInstancesFromLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetachInstancesFromLoadBalancer{}, middleware.After)
 	if err != nil {
 		return err

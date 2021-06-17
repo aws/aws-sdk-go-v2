@@ -21,7 +21,7 @@ func (c *Client) CreateTransitGatewayConnect(ctx context.Context, params *Create
 		params = &CreateTransitGatewayConnectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTransitGatewayConnect", params, optFns, addOperationCreateTransitGatewayConnectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTransitGatewayConnect", params, optFns, c.addOperationCreateTransitGatewayConnectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type CreateTransitGatewayConnectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTransitGatewayConnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTransitGatewayConnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateTransitGatewayConnect{}, middleware.After)
 	if err != nil {
 		return err

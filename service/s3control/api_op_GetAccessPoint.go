@@ -41,7 +41,7 @@ func (c *Client) GetAccessPoint(ctx context.Context, params *GetAccessPointInput
 		params = &GetAccessPointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccessPoint", params, optFns, addOperationGetAccessPointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccessPoint", params, optFns, c.addOperationGetAccessPointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type GetAccessPointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccessPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccessPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetAccessPoint{}, middleware.After)
 	if err != nil {
 		return err

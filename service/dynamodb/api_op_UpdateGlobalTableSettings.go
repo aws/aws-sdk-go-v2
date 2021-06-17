@@ -4,9 +4,11 @@ package dynamodb
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -17,7 +19,7 @@ func (c *Client) UpdateGlobalTableSettings(ctx context.Context, params *UpdateGl
 		params = &UpdateGlobalTableSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateGlobalTableSettings", params, optFns, addOperationUpdateGlobalTableSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateGlobalTableSettings", params, optFns, c.addOperationUpdateGlobalTableSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +78,7 @@ type UpdateGlobalTableSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateGlobalTableSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateGlobalTableSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateGlobalTableSettings{}, middleware.After)
 	if err != nil {
 		return err
@@ -121,6 +123,9 @@ func addOperationUpdateGlobalTableSettingsMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addOpUpdateGlobalTableSettingsDiscoverEndpointMiddleware(stack, options, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateGlobalTableSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,6 +148,46 @@ func addOperationUpdateGlobalTableSettingsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+func addOpUpdateGlobalTableSettingsDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
+	return stack.Serialize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
+		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
+			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
+				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
+				opt.Logger = o.Logger
+			},
+		},
+		DiscoverOperation:            c.fetchOpUpdateGlobalTableSettingsDiscoverEndpoint,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
+		EndpointDiscoveryRequired:    false,
+	}, "ResolveEndpoint", middleware.After)
+}
+
+func (c *Client) fetchOpUpdateGlobalTableSettingsDiscoverEndpoint(ctx context.Context, input interface{}, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+	in, ok := input.(*UpdateGlobalTableSettingsInput)
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
+	}
+	_ = in
+
+	identifierMap := make(map[string]string, 0)
+
+	key := fmt.Sprintf("DynamoDB.%v", identifierMap)
+
+	if v, ok := c.endpointCache.Get(key); ok {
+		return v, nil
+	}
+
+	discoveryOperationInput := &DescribeEndpointsInput{}
+
+	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
+	for _, fn := range optFns {
+		fn(&opt)
+	}
+
+	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, key, opt)
+	return internalEndpointDiscovery.WeightedAddress{}, nil
 }
 
 func newServiceMetadataMiddleware_opUpdateGlobalTableSettings(region string) *awsmiddleware.RegisterServiceMetadata {

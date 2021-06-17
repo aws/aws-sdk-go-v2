@@ -17,7 +17,7 @@ func (c *Client) DescribeMaintenanceStartTime(ctx context.Context, params *Descr
 		params = &DescribeMaintenanceStartTimeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeMaintenanceStartTime", params, optFns, addOperationDescribeMaintenanceStartTimeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeMaintenanceStartTime", params, optFns, c.addOperationDescribeMaintenanceStartTimeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type DescribeMaintenanceStartTimeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeMaintenanceStartTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeMaintenanceStartTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMaintenanceStartTime{}, middleware.After)
 	if err != nil {
 		return err

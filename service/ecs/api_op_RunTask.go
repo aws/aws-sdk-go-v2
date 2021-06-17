@@ -42,7 +42,7 @@ func (c *Client) RunTask(ctx context.Context, params *RunTaskInput, optFns ...fu
 		params = &RunTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RunTask", params, optFns, addOperationRunTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RunTask", params, optFns, c.addOperationRunTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -204,7 +204,7 @@ type RunTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRunTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRunTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRunTask{}, middleware.After)
 	if err != nil {
 		return err

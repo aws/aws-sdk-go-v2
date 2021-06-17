@@ -17,7 +17,7 @@ func (c *Client) CreateConfigurationSetEventDestination(ctx context.Context, par
 		params = &CreateConfigurationSetEventDestinationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateConfigurationSetEventDestination", params, optFns, addOperationCreateConfigurationSetEventDestinationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateConfigurationSetEventDestination", params, optFns, c.addOperationCreateConfigurationSetEventDestinationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type CreateConfigurationSetEventDestinationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateConfigurationSetEventDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateConfigurationSetEventDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfigurationSetEventDestination{}, middleware.After)
 	if err != nil {
 		return err

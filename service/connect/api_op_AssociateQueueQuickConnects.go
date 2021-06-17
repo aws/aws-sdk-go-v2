@@ -17,7 +17,7 @@ func (c *Client) AssociateQueueQuickConnects(ctx context.Context, params *Associ
 		params = &AssociateQueueQuickConnectsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateQueueQuickConnects", params, optFns, addOperationAssociateQueueQuickConnectsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateQueueQuickConnects", params, optFns, c.addOperationAssociateQueueQuickConnectsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type AssociateQueueQuickConnectsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateQueueQuickConnectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateQueueQuickConnectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateQueueQuickConnects{}, middleware.After)
 	if err != nil {
 		return err

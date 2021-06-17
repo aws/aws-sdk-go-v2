@@ -37,7 +37,7 @@ func (c *Client) GetTextDetection(ctx context.Context, params *GetTextDetectionI
 		params = &GetTextDetectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTextDetection", params, optFns, addOperationGetTextDetectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTextDetection", params, optFns, c.addOperationGetTextDetectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type GetTextDetectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTextDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTextDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTextDetection{}, middleware.After)
 	if err != nil {
 		return err

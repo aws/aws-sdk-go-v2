@@ -28,7 +28,7 @@ func (c *Client) CreateActivation(ctx context.Context, params *CreateActivationI
 		params = &CreateActivationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateActivation", params, optFns, addOperationCreateActivationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateActivation", params, optFns, c.addOperationCreateActivationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type CreateActivationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateActivationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateActivationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateActivation{}, middleware.After)
 	if err != nil {
 		return err

@@ -30,7 +30,7 @@ func (c *Client) GetResourceConfigHistory(ctx context.Context, params *GetResour
 		params = &GetResourceConfigHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetResourceConfigHistory", params, optFns, addOperationGetResourceConfigHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetResourceConfigHistory", params, optFns, c.addOperationGetResourceConfigHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type GetResourceConfigHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetResourceConfigHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetResourceConfigHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResourceConfigHistory{}, middleware.After)
 	if err != nil {
 		return err

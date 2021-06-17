@@ -18,7 +18,7 @@ func (c *Client) ListDataflowEndpointGroups(ctx context.Context, params *ListDat
 		params = &ListDataflowEndpointGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDataflowEndpointGroups", params, optFns, addOperationListDataflowEndpointGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDataflowEndpointGroups", params, optFns, c.addOperationListDataflowEndpointGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListDataflowEndpointGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDataflowEndpointGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDataflowEndpointGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataflowEndpointGroups{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteCustomMetadata(ctx context.Context, params *DeleteCustomM
 		params = &DeleteCustomMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomMetadata", params, optFns, addOperationDeleteCustomMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomMetadata", params, optFns, c.addOperationDeleteCustomMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DeleteCustomMetadataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCustomMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCustomMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCustomMetadata{}, middleware.After)
 	if err != nil {
 		return err

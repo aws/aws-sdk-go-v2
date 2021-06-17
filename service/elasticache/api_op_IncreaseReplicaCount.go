@@ -20,7 +20,7 @@ func (c *Client) IncreaseReplicaCount(ctx context.Context, params *IncreaseRepli
 		params = &IncreaseReplicaCountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "IncreaseReplicaCount", params, optFns, addOperationIncreaseReplicaCountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "IncreaseReplicaCount", params, optFns, c.addOperationIncreaseReplicaCountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type IncreaseReplicaCountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationIncreaseReplicaCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationIncreaseReplicaCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpIncreaseReplicaCount{}, middleware.After)
 	if err != nil {
 		return err

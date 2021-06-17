@@ -17,7 +17,7 @@ func (c *Client) GetInstanceSnapshot(ctx context.Context, params *GetInstanceSna
 		params = &GetInstanceSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInstanceSnapshot", params, optFns, addOperationGetInstanceSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInstanceSnapshot", params, optFns, c.addOperationGetInstanceSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetInstanceSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInstanceSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInstanceSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInstanceSnapshot{}, middleware.After)
 	if err != nil {
 		return err

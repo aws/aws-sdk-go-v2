@@ -19,7 +19,7 @@ func (c *Client) CheckDomainAvailability(ctx context.Context, params *CheckDomai
 		params = &CheckDomainAvailabilityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CheckDomainAvailability", params, optFns, addOperationCheckDomainAvailabilityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CheckDomainAvailability", params, optFns, c.addOperationCheckDomainAvailabilityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type CheckDomainAvailabilityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCheckDomainAvailabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCheckDomainAvailabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckDomainAvailability{}, middleware.After)
 	if err != nil {
 		return err

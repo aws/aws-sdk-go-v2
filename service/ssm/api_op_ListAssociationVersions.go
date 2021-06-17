@@ -18,7 +18,7 @@ func (c *Client) ListAssociationVersions(ctx context.Context, params *ListAssoci
 		params = &ListAssociationVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAssociationVersions", params, optFns, addOperationListAssociationVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAssociationVersions", params, optFns, c.addOperationListAssociationVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListAssociationVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAssociationVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAssociationVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAssociationVersions{}, middleware.After)
 	if err != nil {
 		return err

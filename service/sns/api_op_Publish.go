@@ -30,7 +30,7 @@ func (c *Client) Publish(ctx context.Context, params *PublishInput, optFns ...fu
 		params = &PublishInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Publish", params, optFns, addOperationPublishMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "Publish", params, optFns, c.addOperationPublishMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -174,7 +174,7 @@ type PublishOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPublishMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPublishMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPublish{}, middleware.After)
 	if err != nil {
 		return err

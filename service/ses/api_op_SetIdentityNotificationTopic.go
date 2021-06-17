@@ -25,7 +25,7 @@ func (c *Client) SetIdentityNotificationTopic(ctx context.Context, params *SetId
 		params = &SetIdentityNotificationTopicInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetIdentityNotificationTopic", params, optFns, addOperationSetIdentityNotificationTopicMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetIdentityNotificationTopic", params, optFns, c.addOperationSetIdentityNotificationTopicMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type SetIdentityNotificationTopicOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetIdentityNotificationTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetIdentityNotificationTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetIdentityNotificationTopic{}, middleware.After)
 	if err != nil {
 		return err

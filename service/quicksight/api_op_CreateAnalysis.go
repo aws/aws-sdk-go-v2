@@ -17,7 +17,7 @@ func (c *Client) CreateAnalysis(ctx context.Context, params *CreateAnalysisInput
 		params = &CreateAnalysisInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAnalysis", params, optFns, addOperationCreateAnalysisMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAnalysis", params, optFns, c.addOperationCreateAnalysisMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type CreateAnalysisOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAnalysis{}, middleware.After)
 	if err != nil {
 		return err

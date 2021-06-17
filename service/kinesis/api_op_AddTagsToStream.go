@@ -22,7 +22,7 @@ func (c *Client) AddTagsToStream(ctx context.Context, params *AddTagsToStreamInp
 		params = &AddTagsToStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddTagsToStream", params, optFns, addOperationAddTagsToStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddTagsToStream", params, optFns, c.addOperationAddTagsToStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type AddTagsToStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddTagsToStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddTagsToStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddTagsToStream{}, middleware.After)
 	if err != nil {
 		return err

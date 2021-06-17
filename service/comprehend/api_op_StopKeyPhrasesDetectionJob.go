@@ -23,7 +23,7 @@ func (c *Client) StopKeyPhrasesDetectionJob(ctx context.Context, params *StopKey
 		params = &StopKeyPhrasesDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopKeyPhrasesDetectionJob", params, optFns, addOperationStopKeyPhrasesDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopKeyPhrasesDetectionJob", params, optFns, c.addOperationStopKeyPhrasesDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type StopKeyPhrasesDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopKeyPhrasesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopKeyPhrasesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopKeyPhrasesDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

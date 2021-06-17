@@ -30,7 +30,7 @@ func (c *Client) StopResource(ctx context.Context, params *StopResourceInput, op
 		params = &StopResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopResource", params, optFns, addOperationStopResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopResource", params, optFns, c.addOperationStopResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type StopResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopResource{}, middleware.After)
 	if err != nil {
 		return err

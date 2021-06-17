@@ -17,7 +17,7 @@ func (c *Client) RejectPortfolioShare(ctx context.Context, params *RejectPortfol
 		params = &RejectPortfolioShareInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RejectPortfolioShare", params, optFns, addOperationRejectPortfolioShareMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RejectPortfolioShare", params, optFns, c.addOperationRejectPortfolioShareMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type RejectPortfolioShareOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRejectPortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRejectPortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRejectPortfolioShare{}, middleware.After)
 	if err != nil {
 		return err

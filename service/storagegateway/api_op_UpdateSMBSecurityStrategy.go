@@ -19,7 +19,7 @@ func (c *Client) UpdateSMBSecurityStrategy(ctx context.Context, params *UpdateSM
 		params = &UpdateSMBSecurityStrategyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSMBSecurityStrategy", params, optFns, addOperationUpdateSMBSecurityStrategyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSMBSecurityStrategy", params, optFns, c.addOperationUpdateSMBSecurityStrategyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type UpdateSMBSecurityStrategyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSMBSecurityStrategyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSMBSecurityStrategyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSMBSecurityStrategy{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListImageBuildVersions(ctx context.Context, params *ListImageBu
 		params = &ListImageBuildVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListImageBuildVersions", params, optFns, addOperationListImageBuildVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListImageBuildVersions", params, optFns, c.addOperationListImageBuildVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ListImageBuildVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListImageBuildVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListImageBuildVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImageBuildVersions{}, middleware.After)
 	if err != nil {
 		return err

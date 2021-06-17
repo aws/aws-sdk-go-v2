@@ -24,7 +24,7 @@ func (c *Client) PurchaseReservedNodeOffering(ctx context.Context, params *Purch
 		params = &PurchaseReservedNodeOfferingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PurchaseReservedNodeOffering", params, optFns, addOperationPurchaseReservedNodeOfferingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PurchaseReservedNodeOffering", params, optFns, c.addOperationPurchaseReservedNodeOfferingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type PurchaseReservedNodeOfferingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPurchaseReservedNodeOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPurchaseReservedNodeOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPurchaseReservedNodeOffering{}, middleware.After)
 	if err != nil {
 		return err

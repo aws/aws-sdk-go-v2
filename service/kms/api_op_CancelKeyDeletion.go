@@ -29,7 +29,7 @@ func (c *Client) CancelKeyDeletion(ctx context.Context, params *CancelKeyDeletio
 		params = &CancelKeyDeletionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelKeyDeletion", params, optFns, addOperationCancelKeyDeletionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelKeyDeletion", params, optFns, c.addOperationCancelKeyDeletionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type CancelKeyDeletionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelKeyDeletionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelKeyDeletionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelKeyDeletion{}, middleware.After)
 	if err != nil {
 		return err

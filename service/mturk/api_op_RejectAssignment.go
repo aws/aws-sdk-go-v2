@@ -22,7 +22,7 @@ func (c *Client) RejectAssignment(ctx context.Context, params *RejectAssignmentI
 		params = &RejectAssignmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RejectAssignment", params, optFns, addOperationRejectAssignmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RejectAssignment", params, optFns, c.addOperationRejectAssignmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type RejectAssignmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRejectAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRejectAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRejectAssignment{}, middleware.After)
 	if err != nil {
 		return err

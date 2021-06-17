@@ -38,7 +38,7 @@ func (c *Client) RegisterTaskDefinition(ctx context.Context, params *RegisterTas
 		params = &RegisterTaskDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterTaskDefinition", params, optFns, addOperationRegisterTaskDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterTaskDefinition", params, optFns, c.addOperationRegisterTaskDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -293,7 +293,7 @@ type RegisterTaskDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterTaskDefinition{}, middleware.After)
 	if err != nil {
 		return err

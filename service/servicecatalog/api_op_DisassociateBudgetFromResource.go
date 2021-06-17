@@ -16,7 +16,7 @@ func (c *Client) DisassociateBudgetFromResource(ctx context.Context, params *Dis
 		params = &DisassociateBudgetFromResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateBudgetFromResource", params, optFns, addOperationDisassociateBudgetFromResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateBudgetFromResource", params, optFns, c.addOperationDisassociateBudgetFromResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DisassociateBudgetFromResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateBudgetFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateBudgetFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateBudgetFromResource{}, middleware.After)
 	if err != nil {
 		return err

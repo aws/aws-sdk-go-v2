@@ -17,7 +17,7 @@ func (c *Client) ListExclusions(ctx context.Context, params *ListExclusionsInput
 		params = &ListExclusionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListExclusions", params, optFns, addOperationListExclusionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListExclusions", params, optFns, c.addOperationListExclusionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListExclusionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListExclusionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListExclusionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListExclusions{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) CreateConfigurationSet(ctx context.Context, params *CreateConfi
 		params = &CreateConfigurationSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateConfigurationSet", params, optFns, addOperationCreateConfigurationSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateConfigurationSet", params, optFns, c.addOperationCreateConfigurationSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type CreateConfigurationSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfigurationSet{}, middleware.After)
 	if err != nil {
 		return err

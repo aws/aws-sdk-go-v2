@@ -16,7 +16,7 @@ func (c *Client) DeleteUsagePlan(ctx context.Context, params *DeleteUsagePlanInp
 		params = &DeleteUsagePlanInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteUsagePlan", params, optFns, addOperationDeleteUsagePlanMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteUsagePlan", params, optFns, c.addOperationDeleteUsagePlanMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteUsagePlanOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteUsagePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteUsagePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteUsagePlan{}, middleware.After)
 	if err != nil {
 		return err

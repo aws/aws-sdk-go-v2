@@ -41,7 +41,7 @@ func (c *Client) ListActivityTypes(ctx context.Context, params *ListActivityType
 		params = &ListActivityTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListActivityTypes", params, optFns, addOperationListActivityTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListActivityTypes", params, optFns, c.addOperationListActivityTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ type ListActivityTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListActivityTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListActivityTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListActivityTypes{}, middleware.After)
 	if err != nil {
 		return err

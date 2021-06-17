@@ -28,7 +28,7 @@ func (c *Client) DescribeDataRepositoryTasks(ctx context.Context, params *Descri
 		params = &DescribeDataRepositoryTasksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDataRepositoryTasks", params, optFns, addOperationDescribeDataRepositoryTasksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDataRepositoryTasks", params, optFns, c.addOperationDescribeDataRepositoryTasksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DescribeDataRepositoryTasksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDataRepositoryTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDataRepositoryTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDataRepositoryTasks{}, middleware.After)
 	if err != nil {
 		return err

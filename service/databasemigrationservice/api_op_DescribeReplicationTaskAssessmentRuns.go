@@ -23,7 +23,7 @@ func (c *Client) DescribeReplicationTaskAssessmentRuns(ctx context.Context, para
 		params = &DescribeReplicationTaskAssessmentRunsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeReplicationTaskAssessmentRuns", params, optFns, addOperationDescribeReplicationTaskAssessmentRunsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeReplicationTaskAssessmentRuns", params, optFns, c.addOperationDescribeReplicationTaskAssessmentRunsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeReplicationTaskAssessmentRunsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeReplicationTaskAssessmentRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeReplicationTaskAssessmentRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReplicationTaskAssessmentRuns{}, middleware.After)
 	if err != nil {
 		return err

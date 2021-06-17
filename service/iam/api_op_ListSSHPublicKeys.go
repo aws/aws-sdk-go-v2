@@ -27,7 +27,7 @@ func (c *Client) ListSSHPublicKeys(ctx context.Context, params *ListSSHPublicKey
 		params = &ListSSHPublicKeysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSSHPublicKeys", params, optFns, addOperationListSSHPublicKeysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSSHPublicKeys", params, optFns, c.addOperationListSSHPublicKeysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type ListSSHPublicKeysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSSHPublicKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSSHPublicKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListSSHPublicKeys{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DeleteLaunchProfile(ctx context.Context, params *DeleteLaunchPr
 		params = &DeleteLaunchProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLaunchProfile", params, optFns, addOperationDeleteLaunchProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLaunchProfile", params, optFns, c.addOperationDeleteLaunchProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DeleteLaunchProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLaunchProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLaunchProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLaunchProfile{}, middleware.After)
 	if err != nil {
 		return err

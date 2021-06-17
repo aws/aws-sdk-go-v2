@@ -8,6 +8,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -74,7 +75,7 @@ func (c *Client) TransactWriteItems(ctx context.Context, params *TransactWriteIt
 		params = &TransactWriteItemsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TransactWriteItems", params, optFns, addOperationTransactWriteItemsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TransactWriteItems", params, optFns, c.addOperationTransactWriteItemsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -151,7 +152,7 @@ type TransactWriteItemsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTransactWriteItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTransactWriteItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpTransactWriteItems{}, middleware.After)
 	if err != nil {
 		return err
@@ -196,6 +197,9 @@ func addOperationTransactWriteItemsMiddlewares(stack *middleware.Stack, options 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addOpTransactWriteItemsDiscoverEndpointMiddleware(stack, options, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opTransactWriteItemsMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -221,6 +225,46 @@ func addOperationTransactWriteItemsMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	return nil
+}
+
+func addOpTransactWriteItemsDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
+	return stack.Serialize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
+		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
+			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
+				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
+				opt.Logger = o.Logger
+			},
+		},
+		DiscoverOperation:            c.fetchOpTransactWriteItemsDiscoverEndpoint,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
+		EndpointDiscoveryRequired:    false,
+	}, "ResolveEndpoint", middleware.After)
+}
+
+func (c *Client) fetchOpTransactWriteItemsDiscoverEndpoint(ctx context.Context, input interface{}, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+	in, ok := input.(*TransactWriteItemsInput)
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
+	}
+	_ = in
+
+	identifierMap := make(map[string]string, 0)
+
+	key := fmt.Sprintf("DynamoDB.%v", identifierMap)
+
+	if v, ok := c.endpointCache.Get(key); ok {
+		return v, nil
+	}
+
+	discoveryOperationInput := &DescribeEndpointsInput{}
+
+	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
+	for _, fn := range optFns {
+		fn(&opt)
+	}
+
+	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, key, opt)
+	return internalEndpointDiscovery.WeightedAddress{}, nil
 }
 
 type idempotencyToken_initializeOpTransactWriteItems struct {

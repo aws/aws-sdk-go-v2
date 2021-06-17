@@ -19,7 +19,7 @@ func (c *Client) DescribeElasticGpus(ctx context.Context, params *DescribeElasti
 		params = &DescribeElasticGpusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeElasticGpus", params, optFns, addOperationDescribeElasticGpusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeElasticGpus", params, optFns, c.addOperationDescribeElasticGpusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type DescribeElasticGpusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeElasticGpusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeElasticGpusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeElasticGpus{}, middleware.After)
 	if err != nil {
 		return err

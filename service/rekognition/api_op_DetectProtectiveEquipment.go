@@ -51,7 +51,7 @@ func (c *Client) DetectProtectiveEquipment(ctx context.Context, params *DetectPr
 		params = &DetectProtectiveEquipmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetectProtectiveEquipment", params, optFns, addOperationDetectProtectiveEquipmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetectProtectiveEquipment", params, optFns, c.addOperationDetectProtectiveEquipmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type DetectProtectiveEquipmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetectProtectiveEquipmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetectProtectiveEquipmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectProtectiveEquipment{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DeleteEntityType(ctx context.Context, params *DeleteEntityTypeI
 		params = &DeleteEntityTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEntityType", params, optFns, addOperationDeleteEntityTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEntityType", params, optFns, c.addOperationDeleteEntityTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteEntityTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEntityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEntityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEntityType{}, middleware.After)
 	if err != nil {
 		return err

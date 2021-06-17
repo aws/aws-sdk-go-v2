@@ -17,7 +17,7 @@ func (c *Client) ModifyDBProxyTargetGroup(ctx context.Context, params *ModifyDBP
 		params = &ModifyDBProxyTargetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyDBProxyTargetGroup", params, optFns, addOperationModifyDBProxyTargetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyDBProxyTargetGroup", params, optFns, c.addOperationModifyDBProxyTargetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ModifyDBProxyTargetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyDBProxyTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyDBProxyTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBProxyTargetGroup{}, middleware.After)
 	if err != nil {
 		return err

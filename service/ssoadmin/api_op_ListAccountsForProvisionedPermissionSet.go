@@ -18,7 +18,7 @@ func (c *Client) ListAccountsForProvisionedPermissionSet(ctx context.Context, pa
 		params = &ListAccountsForProvisionedPermissionSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAccountsForProvisionedPermissionSet", params, optFns, addOperationListAccountsForProvisionedPermissionSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAccountsForProvisionedPermissionSet", params, optFns, c.addOperationListAccountsForProvisionedPermissionSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListAccountsForProvisionedPermissionSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAccountsForProvisionedPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAccountsForProvisionedPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccountsForProvisionedPermissionSet{}, middleware.After)
 	if err != nil {
 		return err

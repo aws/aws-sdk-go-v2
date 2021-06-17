@@ -17,7 +17,7 @@ func (c *Client) DeleteFHIRDatastore(ctx context.Context, params *DeleteFHIRData
 		params = &DeleteFHIRDatastoreInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFHIRDatastore", params, optFns, addOperationDeleteFHIRDatastoreMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFHIRDatastore", params, optFns, c.addOperationDeleteFHIRDatastoreMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DeleteFHIRDatastoreOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFHIRDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFHIRDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteFHIRDatastore{}, middleware.After)
 	if err != nil {
 		return err

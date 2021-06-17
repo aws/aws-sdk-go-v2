@@ -21,7 +21,7 @@ func (c *Client) AcceptEnvironmentAccountConnection(ctx context.Context, params 
 		params = &AcceptEnvironmentAccountConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcceptEnvironmentAccountConnection", params, optFns, addOperationAcceptEnvironmentAccountConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcceptEnvironmentAccountConnection", params, optFns, c.addOperationAcceptEnvironmentAccountConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type AcceptEnvironmentAccountConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAcceptEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAcceptEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAcceptEnvironmentAccountConnection{}, middleware.After)
 	if err != nil {
 		return err

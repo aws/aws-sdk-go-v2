@@ -17,7 +17,7 @@ func (c *Client) RebuildEnvironment(ctx context.Context, params *RebuildEnvironm
 		params = &RebuildEnvironmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RebuildEnvironment", params, optFns, addOperationRebuildEnvironmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RebuildEnvironment", params, optFns, c.addOperationRebuildEnvironmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type RebuildEnvironmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRebuildEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRebuildEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRebuildEnvironment{}, middleware.After)
 	if err != nil {
 		return err

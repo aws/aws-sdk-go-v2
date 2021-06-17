@@ -16,7 +16,7 @@ func (c *Client) DisassociateResourceSharePermission(ctx context.Context, params
 		params = &DisassociateResourceSharePermissionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateResourceSharePermission", params, optFns, addOperationDisassociateResourceSharePermissionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateResourceSharePermission", params, optFns, c.addOperationDisassociateResourceSharePermissionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DisassociateResourceSharePermissionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateResourceSharePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateResourceSharePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateResourceSharePermission{}, middleware.After)
 	if err != nil {
 		return err

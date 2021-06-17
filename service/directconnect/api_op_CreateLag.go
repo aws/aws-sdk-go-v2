@@ -35,7 +35,7 @@ func (c *Client) CreateLag(ctx context.Context, params *CreateLagInput, optFns .
 		params = &CreateLagInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLag", params, optFns, addOperationCreateLagMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLag", params, optFns, c.addOperationCreateLagMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -183,7 +183,7 @@ type CreateLagOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLagMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLagMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLag{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DescribeBackupJob(ctx context.Context, params *DescribeBackupJo
 		params = &DescribeBackupJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeBackupJob", params, optFns, addOperationDescribeBackupJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeBackupJob", params, optFns, c.addOperationDescribeBackupJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ type DescribeBackupJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeBackupJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeBackupJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBackupJob{}, middleware.After)
 	if err != nil {
 		return err

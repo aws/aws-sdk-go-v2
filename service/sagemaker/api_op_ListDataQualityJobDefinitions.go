@@ -19,7 +19,7 @@ func (c *Client) ListDataQualityJobDefinitions(ctx context.Context, params *List
 		params = &ListDataQualityJobDefinitionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDataQualityJobDefinitions", params, optFns, addOperationListDataQualityJobDefinitionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDataQualityJobDefinitions", params, optFns, c.addOperationListDataQualityJobDefinitionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type ListDataQualityJobDefinitionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDataQualityJobDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDataQualityJobDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataQualityJobDefinitions{}, middleware.After)
 	if err != nil {
 		return err

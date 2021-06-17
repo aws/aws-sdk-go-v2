@@ -19,7 +19,7 @@ func (c *Client) GetUpgradeHistory(ctx context.Context, params *GetUpgradeHistor
 		params = &GetUpgradeHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUpgradeHistory", params, optFns, addOperationGetUpgradeHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetUpgradeHistory", params, optFns, c.addOperationGetUpgradeHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type GetUpgradeHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetUpgradeHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetUpgradeHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUpgradeHistory{}, middleware.After)
 	if err != nil {
 		return err

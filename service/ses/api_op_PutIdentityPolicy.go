@@ -23,7 +23,7 @@ func (c *Client) PutIdentityPolicy(ctx context.Context, params *PutIdentityPolic
 		params = &PutIdentityPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutIdentityPolicy", params, optFns, addOperationPutIdentityPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutIdentityPolicy", params, optFns, c.addOperationPutIdentityPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type PutIdentityPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutIdentityPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutIdentityPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutIdentityPolicy{}, middleware.After)
 	if err != nil {
 		return err

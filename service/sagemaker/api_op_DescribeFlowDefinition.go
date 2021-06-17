@@ -18,7 +18,7 @@ func (c *Client) DescribeFlowDefinition(ctx context.Context, params *DescribeFlo
 		params = &DescribeFlowDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFlowDefinition", params, optFns, addOperationDescribeFlowDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFlowDefinition", params, optFns, c.addOperationDescribeFlowDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type DescribeFlowDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFlowDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFlowDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFlowDefinition{}, middleware.After)
 	if err != nil {
 		return err

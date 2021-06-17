@@ -17,7 +17,7 @@ func (c *Client) DescribeMultiplexProgram(ctx context.Context, params *DescribeM
 		params = &DescribeMultiplexProgramInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeMultiplexProgram", params, optFns, addOperationDescribeMultiplexProgramMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeMultiplexProgram", params, optFns, c.addOperationDescribeMultiplexProgramMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DescribeMultiplexProgramOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeMultiplexProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeMultiplexProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeMultiplexProgram{}, middleware.After)
 	if err != nil {
 		return err

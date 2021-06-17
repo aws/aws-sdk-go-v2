@@ -17,7 +17,7 @@ func (c *Client) GetApplicationPolicy(ctx context.Context, params *GetApplicatio
 		params = &GetApplicationPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetApplicationPolicy", params, optFns, addOperationGetApplicationPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetApplicationPolicy", params, optFns, c.addOperationGetApplicationPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetApplicationPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetApplicationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetApplicationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplicationPolicy{}, middleware.After)
 	if err != nil {
 		return err

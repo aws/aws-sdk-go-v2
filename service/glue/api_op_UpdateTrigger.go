@@ -17,7 +17,7 @@ func (c *Client) UpdateTrigger(ctx context.Context, params *UpdateTriggerInput, 
 		params = &UpdateTriggerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateTrigger", params, optFns, addOperationUpdateTriggerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateTrigger", params, optFns, c.addOperationUpdateTriggerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type UpdateTriggerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTrigger{}, middleware.After)
 	if err != nil {
 		return err

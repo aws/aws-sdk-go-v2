@@ -27,7 +27,7 @@ func (c *Client) CreateMLTransform(ctx context.Context, params *CreateMLTransfor
 		params = &CreateMLTransformInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMLTransform", params, optFns, addOperationCreateMLTransformMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMLTransform", params, optFns, c.addOperationCreateMLTransformMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -174,7 +174,7 @@ type CreateMLTransformOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMLTransform{}, middleware.After)
 	if err != nil {
 		return err

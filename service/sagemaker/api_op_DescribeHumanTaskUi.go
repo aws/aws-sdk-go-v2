@@ -19,7 +19,7 @@ func (c *Client) DescribeHumanTaskUi(ctx context.Context, params *DescribeHumanT
 		params = &DescribeHumanTaskUiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeHumanTaskUi", params, optFns, addOperationDescribeHumanTaskUiMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeHumanTaskUi", params, optFns, c.addOperationDescribeHumanTaskUiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DescribeHumanTaskUiOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeHumanTaskUiMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeHumanTaskUiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHumanTaskUi{}, middleware.After)
 	if err != nil {
 		return err

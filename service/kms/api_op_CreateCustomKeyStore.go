@@ -52,7 +52,7 @@ func (c *Client) CreateCustomKeyStore(ctx context.Context, params *CreateCustomK
 		params = &CreateCustomKeyStoreInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCustomKeyStore", params, optFns, addOperationCreateCustomKeyStoreMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCustomKeyStore", params, optFns, c.addOperationCreateCustomKeyStoreMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ type CreateCustomKeyStoreOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCustomKeyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCustomKeyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCustomKeyStore{}, middleware.After)
 	if err != nil {
 		return err

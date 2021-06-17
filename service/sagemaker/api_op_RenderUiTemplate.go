@@ -17,7 +17,7 @@ func (c *Client) RenderUiTemplate(ctx context.Context, params *RenderUiTemplateI
 		params = &RenderUiTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RenderUiTemplate", params, optFns, addOperationRenderUiTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RenderUiTemplate", params, optFns, c.addOperationRenderUiTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type RenderUiTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRenderUiTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRenderUiTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRenderUiTemplate{}, middleware.After)
 	if err != nil {
 		return err

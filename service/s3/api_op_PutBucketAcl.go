@@ -148,7 +148,7 @@ func (c *Client) PutBucketAcl(ctx context.Context, params *PutBucketAclInput, op
 		params = &PutBucketAclInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketAcl", params, optFns, addOperationPutBucketAclMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketAcl", params, optFns, c.addOperationPutBucketAclMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -206,7 +206,7 @@ type PutBucketAclOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketAclMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketAclMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketAcl{}, middleware.After)
 	if err != nil {
 		return err

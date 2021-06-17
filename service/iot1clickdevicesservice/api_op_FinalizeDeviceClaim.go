@@ -19,7 +19,7 @@ func (c *Client) FinalizeDeviceClaim(ctx context.Context, params *FinalizeDevice
 		params = &FinalizeDeviceClaimInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "FinalizeDeviceClaim", params, optFns, addOperationFinalizeDeviceClaimMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "FinalizeDeviceClaim", params, optFns, c.addOperationFinalizeDeviceClaimMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type FinalizeDeviceClaimOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationFinalizeDeviceClaimMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationFinalizeDeviceClaimMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpFinalizeDeviceClaim{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) AcceptVpcEndpointConnections(ctx context.Context, params *Accep
 		params = &AcceptVpcEndpointConnectionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcceptVpcEndpointConnections", params, optFns, addOperationAcceptVpcEndpointConnectionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcceptVpcEndpointConnections", params, optFns, c.addOperationAcceptVpcEndpointConnectionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type AcceptVpcEndpointConnectionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAcceptVpcEndpointConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAcceptVpcEndpointConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpAcceptVpcEndpointConnections{}, middleware.After)
 	if err != nil {
 		return err

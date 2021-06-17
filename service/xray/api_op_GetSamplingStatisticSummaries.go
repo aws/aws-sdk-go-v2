@@ -18,7 +18,7 @@ func (c *Client) GetSamplingStatisticSummaries(ctx context.Context, params *GetS
 		params = &GetSamplingStatisticSummariesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSamplingStatisticSummaries", params, optFns, addOperationGetSamplingStatisticSummariesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSamplingStatisticSummaries", params, optFns, c.addOperationGetSamplingStatisticSummariesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetSamplingStatisticSummariesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSamplingStatisticSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSamplingStatisticSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSamplingStatisticSummaries{}, middleware.After)
 	if err != nil {
 		return err

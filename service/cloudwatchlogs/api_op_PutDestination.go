@@ -31,7 +31,7 @@ func (c *Client) PutDestination(ctx context.Context, params *PutDestinationInput
 		params = &PutDestinationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutDestination", params, optFns, addOperationPutDestinationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutDestination", params, optFns, c.addOperationPutDestinationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type PutDestinationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutDestination{}, middleware.After)
 	if err != nil {
 		return err

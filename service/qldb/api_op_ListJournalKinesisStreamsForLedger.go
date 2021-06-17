@@ -26,7 +26,7 @@ func (c *Client) ListJournalKinesisStreamsForLedger(ctx context.Context, params 
 		params = &ListJournalKinesisStreamsForLedgerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListJournalKinesisStreamsForLedger", params, optFns, addOperationListJournalKinesisStreamsForLedgerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListJournalKinesisStreamsForLedger", params, optFns, c.addOperationListJournalKinesisStreamsForLedgerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type ListJournalKinesisStreamsForLedgerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListJournalKinesisStreamsForLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListJournalKinesisStreamsForLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJournalKinesisStreamsForLedger{}, middleware.After)
 	if err != nil {
 		return err

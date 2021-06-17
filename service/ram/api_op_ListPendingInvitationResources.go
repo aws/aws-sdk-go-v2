@@ -19,7 +19,7 @@ func (c *Client) ListPendingInvitationResources(ctx context.Context, params *Lis
 		params = &ListPendingInvitationResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPendingInvitationResources", params, optFns, addOperationListPendingInvitationResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPendingInvitationResources", params, optFns, c.addOperationListPendingInvitationResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListPendingInvitationResourcesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPendingInvitationResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPendingInvitationResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPendingInvitationResources{}, middleware.After)
 	if err != nil {
 		return err

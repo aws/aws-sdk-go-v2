@@ -26,7 +26,7 @@ func (c *Client) SetUserMFAPreference(ctx context.Context, params *SetUserMFAPre
 		params = &SetUserMFAPreferenceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetUserMFAPreference", params, optFns, addOperationSetUserMFAPreferenceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetUserMFAPreference", params, optFns, c.addOperationSetUserMFAPreferenceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type SetUserMFAPreferenceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetUserMFAPreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetUserMFAPreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetUserMFAPreference{}, middleware.After)
 	if err != nil {
 		return err

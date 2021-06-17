@@ -19,7 +19,7 @@ func (c *Client) UpdateEmergencyContactSettings(ctx context.Context, params *Upd
 		params = &UpdateEmergencyContactSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateEmergencyContactSettings", params, optFns, addOperationUpdateEmergencyContactSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateEmergencyContactSettings", params, optFns, c.addOperationUpdateEmergencyContactSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type UpdateEmergencyContactSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateEmergencyContactSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateEmergencyContactSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEmergencyContactSettings{}, middleware.After)
 	if err != nil {
 		return err

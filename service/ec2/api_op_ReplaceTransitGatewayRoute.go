@@ -17,7 +17,7 @@ func (c *Client) ReplaceTransitGatewayRoute(ctx context.Context, params *Replace
 		params = &ReplaceTransitGatewayRouteInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReplaceTransitGatewayRoute", params, optFns, addOperationReplaceTransitGatewayRouteMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReplaceTransitGatewayRoute", params, optFns, c.addOperationReplaceTransitGatewayRouteMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ReplaceTransitGatewayRouteOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReplaceTransitGatewayRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReplaceTransitGatewayRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpReplaceTransitGatewayRoute{}, middleware.After)
 	if err != nil {
 		return err

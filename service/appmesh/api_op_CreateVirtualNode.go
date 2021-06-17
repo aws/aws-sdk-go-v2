@@ -40,7 +40,7 @@ func (c *Client) CreateVirtualNode(ctx context.Context, params *CreateVirtualNod
 		params = &CreateVirtualNodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVirtualNode", params, optFns, addOperationCreateVirtualNodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateVirtualNode", params, optFns, c.addOperationCreateVirtualNodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ type CreateVirtualNodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateVirtualNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateVirtualNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVirtualNode{}, middleware.After)
 	if err != nil {
 		return err

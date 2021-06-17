@@ -18,7 +18,7 @@ func (c *Client) CancelUpdateStack(ctx context.Context, params *CancelUpdateStac
 		params = &CancelUpdateStackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelUpdateStack", params, optFns, addOperationCancelUpdateStackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelUpdateStack", params, optFns, c.addOperationCancelUpdateStackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type CancelUpdateStackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelUpdateStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelUpdateStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCancelUpdateStack{}, middleware.After)
 	if err != nil {
 		return err

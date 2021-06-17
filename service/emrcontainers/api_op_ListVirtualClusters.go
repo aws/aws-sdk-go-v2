@@ -24,7 +24,7 @@ func (c *Client) ListVirtualClusters(ctx context.Context, params *ListVirtualClu
 		params = &ListVirtualClustersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListVirtualClusters", params, optFns, addOperationListVirtualClustersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListVirtualClusters", params, optFns, c.addOperationListVirtualClustersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type ListVirtualClustersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListVirtualClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListVirtualClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVirtualClusters{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListVirtualGateways(ctx context.Context, params *ListVirtualGat
 		params = &ListVirtualGatewaysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListVirtualGateways", params, optFns, addOperationListVirtualGatewaysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListVirtualGateways", params, optFns, c.addOperationListVirtualGatewaysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type ListVirtualGatewaysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListVirtualGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListVirtualGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVirtualGateways{}, middleware.After)
 	if err != nil {
 		return err

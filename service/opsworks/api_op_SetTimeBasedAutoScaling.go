@@ -24,7 +24,7 @@ func (c *Client) SetTimeBasedAutoScaling(ctx context.Context, params *SetTimeBas
 		params = &SetTimeBasedAutoScalingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetTimeBasedAutoScaling", params, optFns, addOperationSetTimeBasedAutoScalingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetTimeBasedAutoScaling", params, optFns, c.addOperationSetTimeBasedAutoScalingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type SetTimeBasedAutoScalingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetTimeBasedAutoScalingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetTimeBasedAutoScalingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetTimeBasedAutoScaling{}, middleware.After)
 	if err != nil {
 		return err

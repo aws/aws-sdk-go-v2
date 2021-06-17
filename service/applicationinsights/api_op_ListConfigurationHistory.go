@@ -29,7 +29,7 @@ func (c *Client) ListConfigurationHistory(ctx context.Context, params *ListConfi
 		params = &ListConfigurationHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListConfigurationHistory", params, optFns, addOperationListConfigurationHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListConfigurationHistory", params, optFns, c.addOperationListConfigurationHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type ListConfigurationHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListConfigurationHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListConfigurationHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListConfigurationHistory{}, middleware.After)
 	if err != nil {
 		return err

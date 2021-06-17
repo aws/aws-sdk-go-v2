@@ -18,7 +18,7 @@ func (c *Client) DeleteCacheParameterGroup(ctx context.Context, params *DeleteCa
 		params = &DeleteCacheParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCacheParameterGroup", params, optFns, addOperationDeleteCacheParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCacheParameterGroup", params, optFns, c.addOperationDeleteCacheParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteCacheParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCacheParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCacheParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteCacheParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

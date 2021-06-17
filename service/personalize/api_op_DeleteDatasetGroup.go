@@ -24,7 +24,7 @@ func (c *Client) DeleteDatasetGroup(ctx context.Context, params *DeleteDatasetGr
 		params = &DeleteDatasetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDatasetGroup", params, optFns, addOperationDeleteDatasetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDatasetGroup", params, optFns, c.addOperationDeleteDatasetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteDatasetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDatasetGroup{}, middleware.After)
 	if err != nil {
 		return err

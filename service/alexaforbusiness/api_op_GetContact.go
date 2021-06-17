@@ -17,7 +17,7 @@ func (c *Client) GetContact(ctx context.Context, params *GetContactInput, optFns
 		params = &GetContactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetContact", params, optFns, addOperationGetContactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetContact", params, optFns, c.addOperationGetContactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetContactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetContact{}, middleware.After)
 	if err != nil {
 		return err

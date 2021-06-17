@@ -18,7 +18,7 @@ func (c *Client) DescribeMaintenanceWindows(ctx context.Context, params *Describ
 		params = &DescribeMaintenanceWindowsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeMaintenanceWindows", params, optFns, addOperationDescribeMaintenanceWindowsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeMaintenanceWindows", params, optFns, c.addOperationDescribeMaintenanceWindowsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeMaintenanceWindowsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeMaintenanceWindowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeMaintenanceWindowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMaintenanceWindows{}, middleware.After)
 	if err != nil {
 		return err

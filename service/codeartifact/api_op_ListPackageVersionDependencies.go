@@ -23,7 +23,7 @@ func (c *Client) ListPackageVersionDependencies(ctx context.Context, params *Lis
 		params = &ListPackageVersionDependenciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPackageVersionDependencies", params, optFns, addOperationListPackageVersionDependenciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPackageVersionDependencies", params, optFns, c.addOperationListPackageVersionDependenciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -140,7 +140,7 @@ type ListPackageVersionDependenciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPackageVersionDependenciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPackageVersionDependenciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPackageVersionDependencies{}, middleware.After)
 	if err != nil {
 		return err

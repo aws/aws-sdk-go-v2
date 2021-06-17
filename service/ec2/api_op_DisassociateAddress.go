@@ -21,7 +21,7 @@ func (c *Client) DisassociateAddress(ctx context.Context, params *DisassociateAd
 		params = &DisassociateAddressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateAddress", params, optFns, addOperationDisassociateAddressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateAddress", params, optFns, c.addOperationDisassociateAddressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DisassociateAddressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDisassociateAddress{}, middleware.After)
 	if err != nil {
 		return err

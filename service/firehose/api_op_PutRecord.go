@@ -44,7 +44,7 @@ func (c *Client) PutRecord(ctx context.Context, params *PutRecordInput, optFns .
 		params = &PutRecordInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutRecord", params, optFns, addOperationPutRecordMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutRecord", params, optFns, c.addOperationPutRecordMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type PutRecordOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRecord{}, middleware.After)
 	if err != nil {
 		return err

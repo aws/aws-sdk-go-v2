@@ -32,7 +32,7 @@ func (c *Client) SignUp(ctx context.Context, params *SignUpInput, optFns ...func
 		params = &SignUpInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SignUp", params, optFns, addOperationSignUpMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SignUp", params, optFns, c.addOperationSignUpMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -130,7 +130,7 @@ type SignUpOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSignUpMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSignUpMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSignUp{}, middleware.After)
 	if err != nil {
 		return err

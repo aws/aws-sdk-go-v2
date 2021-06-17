@@ -18,7 +18,7 @@ func (c *Client) PutSkillAuthorization(ctx context.Context, params *PutSkillAuth
 		params = &PutSkillAuthorizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutSkillAuthorization", params, optFns, addOperationPutSkillAuthorizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutSkillAuthorization", params, optFns, c.addOperationPutSkillAuthorizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type PutSkillAuthorizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutSkillAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutSkillAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutSkillAuthorization{}, middleware.After)
 	if err != nil {
 		return err

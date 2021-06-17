@@ -17,7 +17,7 @@ func (c *Client) DeregisterDevices(ctx context.Context, params *DeregisterDevice
 		params = &DeregisterDevicesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterDevices", params, optFns, addOperationDeregisterDevicesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterDevices", params, optFns, c.addOperationDeregisterDevicesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeregisterDevicesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterDevices{}, middleware.After)
 	if err != nil {
 		return err

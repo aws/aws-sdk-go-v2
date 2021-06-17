@@ -18,7 +18,7 @@ func (c *Client) DescribeReservedElasticsearchInstanceOfferings(ctx context.Cont
 		params = &DescribeReservedElasticsearchInstanceOfferingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeReservedElasticsearchInstanceOfferings", params, optFns, addOperationDescribeReservedElasticsearchInstanceOfferingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeReservedElasticsearchInstanceOfferings", params, optFns, c.addOperationDescribeReservedElasticsearchInstanceOfferingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeReservedElasticsearchInstanceOfferingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeReservedElasticsearchInstanceOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeReservedElasticsearchInstanceOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeReservedElasticsearchInstanceOfferings{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) BatchAssociateUserStack(ctx context.Context, params *BatchAssoc
 		params = &BatchAssociateUserStackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchAssociateUserStack", params, optFns, addOperationBatchAssociateUserStackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchAssociateUserStack", params, optFns, c.addOperationBatchAssociateUserStackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type BatchAssociateUserStackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchAssociateUserStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchAssociateUserStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchAssociateUserStack{}, middleware.After)
 	if err != nil {
 		return err

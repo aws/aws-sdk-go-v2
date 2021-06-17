@@ -16,7 +16,7 @@ func (c *Client) DeleteDatastore(ctx context.Context, params *DeleteDatastoreInp
 		params = &DeleteDatastoreInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDatastore", params, optFns, addOperationDeleteDatastoreMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDatastore", params, optFns, c.addOperationDeleteDatastoreMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteDatastoreOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDatastore{}, middleware.After)
 	if err != nil {
 		return err

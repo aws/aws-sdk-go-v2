@@ -32,7 +32,7 @@ func (c *Client) DeleteMessage(ctx context.Context, params *DeleteMessageInput, 
 		params = &DeleteMessageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMessage", params, optFns, addOperationDeleteMessageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMessage", params, optFns, c.addOperationDeleteMessageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DeleteMessageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteMessage{}, middleware.After)
 	if err != nil {
 		return err

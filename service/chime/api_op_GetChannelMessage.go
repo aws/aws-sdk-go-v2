@@ -20,7 +20,7 @@ func (c *Client) GetChannelMessage(ctx context.Context, params *GetChannelMessag
 		params = &GetChannelMessageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetChannelMessage", params, optFns, addOperationGetChannelMessageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetChannelMessage", params, optFns, c.addOperationGetChannelMessageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type GetChannelMessageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetChannelMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetChannelMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChannelMessage{}, middleware.After)
 	if err != nil {
 		return err

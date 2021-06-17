@@ -16,7 +16,7 @@ func (c *Client) DeleteOutpost(ctx context.Context, params *DeleteOutpostInput, 
 		params = &DeleteOutpostInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteOutpost", params, optFns, addOperationDeleteOutpostMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteOutpost", params, optFns, c.addOperationDeleteOutpostMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteOutpostOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteOutpostMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteOutpostMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteOutpost{}, middleware.After)
 	if err != nil {
 		return err

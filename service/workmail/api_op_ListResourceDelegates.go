@@ -19,7 +19,7 @@ func (c *Client) ListResourceDelegates(ctx context.Context, params *ListResource
 		params = &ListResourceDelegatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResourceDelegates", params, optFns, addOperationListResourceDelegatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResourceDelegates", params, optFns, c.addOperationListResourceDelegatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListResourceDelegatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListResourceDelegatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResourceDelegatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourceDelegates{}, middleware.After)
 	if err != nil {
 		return err

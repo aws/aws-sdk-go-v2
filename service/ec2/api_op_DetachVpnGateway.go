@@ -22,7 +22,7 @@ func (c *Client) DetachVpnGateway(ctx context.Context, params *DetachVpnGatewayI
 		params = &DetachVpnGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachVpnGateway", params, optFns, addOperationDetachVpnGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachVpnGateway", params, optFns, c.addOperationDetachVpnGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DetachVpnGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachVpnGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachVpnGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDetachVpnGateway{}, middleware.After)
 	if err != nil {
 		return err

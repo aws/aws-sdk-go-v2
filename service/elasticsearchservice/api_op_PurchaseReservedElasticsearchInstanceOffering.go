@@ -16,7 +16,7 @@ func (c *Client) PurchaseReservedElasticsearchInstanceOffering(ctx context.Conte
 		params = &PurchaseReservedElasticsearchInstanceOfferingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PurchaseReservedElasticsearchInstanceOffering", params, optFns, addOperationPurchaseReservedElasticsearchInstanceOfferingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PurchaseReservedElasticsearchInstanceOffering", params, optFns, c.addOperationPurchaseReservedElasticsearchInstanceOfferingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type PurchaseReservedElasticsearchInstanceOfferingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPurchaseReservedElasticsearchInstanceOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPurchaseReservedElasticsearchInstanceOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPurchaseReservedElasticsearchInstanceOffering{}, middleware.After)
 	if err != nil {
 		return err

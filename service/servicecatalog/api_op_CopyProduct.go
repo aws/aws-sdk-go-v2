@@ -22,7 +22,7 @@ func (c *Client) CopyProduct(ctx context.Context, params *CopyProductInput, optF
 		params = &CopyProductInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopyProduct", params, optFns, addOperationCopyProductMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopyProduct", params, optFns, c.addOperationCopyProductMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type CopyProductOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopyProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopyProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopyProduct{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) CloseInstancePublicPorts(ctx context.Context, params *CloseInst
 		params = &CloseInstancePublicPortsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CloseInstancePublicPorts", params, optFns, addOperationCloseInstancePublicPortsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CloseInstancePublicPorts", params, optFns, c.addOperationCloseInstancePublicPortsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type CloseInstancePublicPortsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCloseInstancePublicPortsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCloseInstancePublicPortsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCloseInstancePublicPorts{}, middleware.After)
 	if err != nil {
 		return err

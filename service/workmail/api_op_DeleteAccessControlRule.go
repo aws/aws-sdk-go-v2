@@ -16,7 +16,7 @@ func (c *Client) DeleteAccessControlRule(ctx context.Context, params *DeleteAcce
 		params = &DeleteAccessControlRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAccessControlRule", params, optFns, addOperationDeleteAccessControlRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAccessControlRule", params, optFns, c.addOperationDeleteAccessControlRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteAccessControlRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAccessControlRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAccessControlRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAccessControlRule{}, middleware.After)
 	if err != nil {
 		return err

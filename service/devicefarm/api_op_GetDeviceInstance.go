@@ -18,7 +18,7 @@ func (c *Client) GetDeviceInstance(ctx context.Context, params *GetDeviceInstanc
 		params = &GetDeviceInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDeviceInstance", params, optFns, addOperationGetDeviceInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDeviceInstance", params, optFns, c.addOperationGetDeviceInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetDeviceInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDeviceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDeviceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDeviceInstance{}, middleware.After)
 	if err != nil {
 		return err

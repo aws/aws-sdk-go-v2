@@ -18,7 +18,7 @@ func (c *Client) DisassociateLink(ctx context.Context, params *DisassociateLinkI
 		params = &DisassociateLinkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateLink", params, optFns, addOperationDisassociateLinkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateLink", params, optFns, c.addOperationDisassociateLinkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DisassociateLinkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateLink{}, middleware.After)
 	if err != nil {
 		return err

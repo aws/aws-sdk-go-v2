@@ -30,7 +30,7 @@ func (c *Client) DescribeStoreImageTasks(ctx context.Context, params *DescribeSt
 		params = &DescribeStoreImageTasksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeStoreImageTasks", params, optFns, addOperationDescribeStoreImageTasksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeStoreImageTasks", params, optFns, c.addOperationDescribeStoreImageTasksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type DescribeStoreImageTasksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeStoreImageTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeStoreImageTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeStoreImageTasks{}, middleware.After)
 	if err != nil {
 		return err

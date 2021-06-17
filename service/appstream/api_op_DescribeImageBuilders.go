@@ -19,7 +19,7 @@ func (c *Client) DescribeImageBuilders(ctx context.Context, params *DescribeImag
 		params = &DescribeImageBuildersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeImageBuilders", params, optFns, addOperationDescribeImageBuildersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeImageBuilders", params, optFns, c.addOperationDescribeImageBuildersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeImageBuildersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeImageBuildersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeImageBuildersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImageBuilders{}, middleware.After)
 	if err != nil {
 		return err

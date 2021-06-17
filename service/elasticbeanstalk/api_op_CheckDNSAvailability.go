@@ -16,7 +16,7 @@ func (c *Client) CheckDNSAvailability(ctx context.Context, params *CheckDNSAvail
 		params = &CheckDNSAvailabilityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CheckDNSAvailability", params, optFns, addOperationCheckDNSAvailabilityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CheckDNSAvailability", params, optFns, c.addOperationCheckDNSAvailabilityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type CheckDNSAvailabilityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCheckDNSAvailabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCheckDNSAvailabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCheckDNSAvailability{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) GetBatchPrediction(ctx context.Context, params *GetBatchPredict
 		params = &GetBatchPredictionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBatchPrediction", params, optFns, addOperationGetBatchPredictionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBatchPrediction", params, optFns, c.addOperationGetBatchPredictionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +129,7 @@ type GetBatchPredictionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBatchPrediction{}, middleware.After)
 	if err != nil {
 		return err

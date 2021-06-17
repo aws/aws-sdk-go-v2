@@ -45,7 +45,7 @@ func (c *Client) SearchFacesByImage(ctx context.Context, params *SearchFacesByIm
 		params = &SearchFacesByImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchFacesByImage", params, optFns, addOperationSearchFacesByImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchFacesByImage", params, optFns, c.addOperationSearchFacesByImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ type SearchFacesByImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchFacesByImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchFacesByImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchFacesByImage{}, middleware.After)
 	if err != nil {
 		return err

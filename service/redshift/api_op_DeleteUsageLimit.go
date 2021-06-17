@@ -16,7 +16,7 @@ func (c *Client) DeleteUsageLimit(ctx context.Context, params *DeleteUsageLimitI
 		params = &DeleteUsageLimitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteUsageLimit", params, optFns, addOperationDeleteUsageLimitMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteUsageLimit", params, optFns, c.addOperationDeleteUsageLimitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteUsageLimitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteUsageLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteUsageLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteUsageLimit{}, middleware.After)
 	if err != nil {
 		return err

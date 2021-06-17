@@ -20,7 +20,7 @@ func (c *Client) StartLogging(ctx context.Context, params *StartLoggingInput, op
 		params = &StartLoggingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartLogging", params, optFns, addOperationStartLoggingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartLogging", params, optFns, c.addOperationStartLoggingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type StartLoggingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartLogging{}, middleware.After)
 	if err != nil {
 		return err

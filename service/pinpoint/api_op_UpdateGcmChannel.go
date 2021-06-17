@@ -18,7 +18,7 @@ func (c *Client) UpdateGcmChannel(ctx context.Context, params *UpdateGcmChannelI
 		params = &UpdateGcmChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateGcmChannel", params, optFns, addOperationUpdateGcmChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateGcmChannel", params, optFns, c.addOperationUpdateGcmChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type UpdateGcmChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateGcmChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateGcmChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGcmChannel{}, middleware.After)
 	if err != nil {
 		return err

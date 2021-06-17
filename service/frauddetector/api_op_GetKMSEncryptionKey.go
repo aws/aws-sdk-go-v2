@@ -18,7 +18,7 @@ func (c *Client) GetKMSEncryptionKey(ctx context.Context, params *GetKMSEncrypti
 		params = &GetKMSEncryptionKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetKMSEncryptionKey", params, optFns, addOperationGetKMSEncryptionKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetKMSEncryptionKey", params, optFns, c.addOperationGetKMSEncryptionKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type GetKMSEncryptionKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetKMSEncryptionKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetKMSEncryptionKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetKMSEncryptionKey{}, middleware.After)
 	if err != nil {
 		return err

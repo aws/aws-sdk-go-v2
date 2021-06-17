@@ -107,7 +107,7 @@ func (c *Client) CreateBucket(ctx context.Context, params *CreateBucketInput, op
 		params = &CreateBucketInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateBucket", params, optFns, addOperationCreateBucketMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBucket", params, optFns, c.addOperationCreateBucketMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -163,7 +163,7 @@ type CreateBucketOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpCreateBucket{}, middleware.After)
 	if err != nil {
 		return err

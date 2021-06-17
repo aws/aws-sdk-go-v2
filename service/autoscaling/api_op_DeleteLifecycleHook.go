@@ -18,7 +18,7 @@ func (c *Client) DeleteLifecycleHook(ctx context.Context, params *DeleteLifecycl
 		params = &DeleteLifecycleHookInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLifecycleHook", params, optFns, addOperationDeleteLifecycleHookMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLifecycleHook", params, optFns, c.addOperationDeleteLifecycleHookMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteLifecycleHookOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLifecycleHookMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLifecycleHookMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteLifecycleHook{}, middleware.After)
 	if err != nil {
 		return err

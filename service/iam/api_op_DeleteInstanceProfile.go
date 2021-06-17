@@ -22,7 +22,7 @@ func (c *Client) DeleteInstanceProfile(ctx context.Context, params *DeleteInstan
 		params = &DeleteInstanceProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteInstanceProfile", params, optFns, addOperationDeleteInstanceProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInstanceProfile", params, optFns, c.addOperationDeleteInstanceProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteInstanceProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteInstanceProfile{}, middleware.After)
 	if err != nil {
 		return err

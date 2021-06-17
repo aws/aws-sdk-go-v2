@@ -33,7 +33,7 @@ func (c *Client) UpdateRuntimeConfiguration(ctx context.Context, params *UpdateR
 		params = &UpdateRuntimeConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRuntimeConfiguration", params, optFns, addOperationUpdateRuntimeConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRuntimeConfiguration", params, optFns, c.addOperationUpdateRuntimeConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type UpdateRuntimeConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRuntimeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRuntimeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRuntimeConfiguration{}, middleware.After)
 	if err != nil {
 		return err

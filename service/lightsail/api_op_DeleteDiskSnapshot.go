@@ -26,7 +26,7 @@ func (c *Client) DeleteDiskSnapshot(ctx context.Context, params *DeleteDiskSnaps
 		params = &DeleteDiskSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDiskSnapshot", params, optFns, addOperationDeleteDiskSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDiskSnapshot", params, optFns, c.addOperationDeleteDiskSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DeleteDiskSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDiskSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDiskSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDiskSnapshot{}, middleware.After)
 	if err != nil {
 		return err

@@ -40,7 +40,7 @@ func (c *Client) AdminDisableProviderForUser(ctx context.Context, params *AdminD
 		params = &AdminDisableProviderForUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminDisableProviderForUser", params, optFns, addOperationAdminDisableProviderForUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminDisableProviderForUser", params, optFns, c.addOperationAdminDisableProviderForUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type AdminDisableProviderForUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminDisableProviderForUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminDisableProviderForUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminDisableProviderForUser{}, middleware.After)
 	if err != nil {
 		return err

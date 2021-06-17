@@ -16,7 +16,7 @@ func (c *Client) FlushApiCache(ctx context.Context, params *FlushApiCacheInput, 
 		params = &FlushApiCacheInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "FlushApiCache", params, optFns, addOperationFlushApiCacheMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "FlushApiCache", params, optFns, c.addOperationFlushApiCacheMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type FlushApiCacheOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationFlushApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationFlushApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpFlushApiCache{}, middleware.After)
 	if err != nil {
 		return err

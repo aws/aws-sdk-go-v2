@@ -50,7 +50,7 @@ func (c *Client) CreateNotebookInstance(ctx context.Context, params *CreateNoteb
 		params = &CreateNotebookInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateNotebookInstance", params, optFns, addOperationCreateNotebookInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateNotebookInstance", params, optFns, c.addOperationCreateNotebookInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -170,7 +170,7 @@ type CreateNotebookInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateNotebookInstance{}, middleware.After)
 	if err != nil {
 		return err

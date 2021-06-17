@@ -71,7 +71,7 @@ func (c *Client) RotateSecret(ctx context.Context, params *RotateSecretInput, op
 		params = &RotateSecretInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RotateSecret", params, optFns, addOperationRotateSecretMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RotateSecret", params, optFns, c.addOperationRotateSecretMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -144,7 +144,7 @@ type RotateSecretOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRotateSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRotateSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRotateSecret{}, middleware.After)
 	if err != nil {
 		return err

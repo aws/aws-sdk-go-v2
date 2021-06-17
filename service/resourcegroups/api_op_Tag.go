@@ -24,7 +24,7 @@ func (c *Client) Tag(ctx context.Context, params *TagInput, optFns ...func(*Opti
 		params = &TagInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Tag", params, optFns, addOperationTagMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "Tag", params, optFns, c.addOperationTagMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type TagOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTagMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTagMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpTag{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) DeleteConfigurationRecorder(ctx context.Context, params *Delete
 		params = &DeleteConfigurationRecorderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteConfigurationRecorder", params, optFns, addOperationDeleteConfigurationRecorderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteConfigurationRecorder", params, optFns, c.addOperationDeleteConfigurationRecorderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteConfigurationRecorderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteConfigurationRecorderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteConfigurationRecorderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteConfigurationRecorder{}, middleware.After)
 	if err != nil {
 		return err

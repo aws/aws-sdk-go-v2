@@ -18,7 +18,7 @@ func (c *Client) IndexDocuments(ctx context.Context, params *IndexDocumentsInput
 		params = &IndexDocumentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "IndexDocuments", params, optFns, addOperationIndexDocumentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "IndexDocuments", params, optFns, c.addOperationIndexDocumentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type IndexDocumentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationIndexDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationIndexDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpIndexDocuments{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListProvisioningTemplates(ctx context.Context, params *ListProv
 		params = &ListProvisioningTemplatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListProvisioningTemplates", params, optFns, addOperationListProvisioningTemplatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListProvisioningTemplates", params, optFns, c.addOperationListProvisioningTemplatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type ListProvisioningTemplatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListProvisioningTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListProvisioningTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProvisioningTemplates{}, middleware.After)
 	if err != nil {
 		return err

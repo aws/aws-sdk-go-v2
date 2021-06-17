@@ -18,7 +18,7 @@ func (c *Client) DisassociateCertificate(ctx context.Context, params *Disassocia
 		params = &DisassociateCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateCertificate", params, optFns, addOperationDisassociateCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateCertificate", params, optFns, c.addOperationDisassociateCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DisassociateCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateCertificate{}, middleware.After)
 	if err != nil {
 		return err

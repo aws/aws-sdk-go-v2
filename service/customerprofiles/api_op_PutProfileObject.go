@@ -25,7 +25,7 @@ func (c *Client) PutProfileObject(ctx context.Context, params *PutProfileObjectI
 		params = &PutProfileObjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutProfileObject", params, optFns, addOperationPutProfileObjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutProfileObject", params, optFns, c.addOperationPutProfileObjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type PutProfileObjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutProfileObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutProfileObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutProfileObject{}, middleware.After)
 	if err != nil {
 		return err

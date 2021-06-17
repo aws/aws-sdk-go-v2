@@ -17,7 +17,7 @@ func (c *Client) PutAccountDetails(ctx context.Context, params *PutAccountDetail
 		params = &PutAccountDetailsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAccountDetails", params, optFns, addOperationPutAccountDetailsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAccountDetails", params, optFns, c.addOperationPutAccountDetailsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type PutAccountDetailsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAccountDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAccountDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountDetails{}, middleware.After)
 	if err != nil {
 		return err

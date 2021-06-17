@@ -17,7 +17,7 @@ func (c *Client) DisableLDAPS(ctx context.Context, params *DisableLDAPSInput, op
 		params = &DisableLDAPSInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableLDAPS", params, optFns, addOperationDisableLDAPSMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableLDAPS", params, optFns, c.addOperationDisableLDAPSMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DisableLDAPSOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableLDAPSMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableLDAPSMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableLDAPS{}, middleware.After)
 	if err != nil {
 		return err

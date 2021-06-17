@@ -17,7 +17,7 @@ func (c *Client) ListReceivedGrants(ctx context.Context, params *ListReceivedGra
 		params = &ListReceivedGrantsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListReceivedGrants", params, optFns, addOperationListReceivedGrantsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListReceivedGrants", params, optFns, c.addOperationListReceivedGrantsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ListReceivedGrantsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListReceivedGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListReceivedGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListReceivedGrants{}, middleware.After)
 	if err != nil {
 		return err

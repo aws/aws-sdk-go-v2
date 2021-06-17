@@ -20,7 +20,7 @@ func (c *Client) CreateFunctionDefinition(ctx context.Context, params *CreateFun
 		params = &CreateFunctionDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFunctionDefinition", params, optFns, addOperationCreateFunctionDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFunctionDefinition", params, optFns, c.addOperationCreateFunctionDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type CreateFunctionDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFunctionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFunctionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFunctionDefinition{}, middleware.After)
 	if err != nil {
 		return err

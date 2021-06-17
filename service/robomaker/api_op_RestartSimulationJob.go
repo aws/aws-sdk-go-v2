@@ -16,7 +16,7 @@ func (c *Client) RestartSimulationJob(ctx context.Context, params *RestartSimula
 		params = &RestartSimulationJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestartSimulationJob", params, optFns, addOperationRestartSimulationJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestartSimulationJob", params, optFns, c.addOperationRestartSimulationJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type RestartSimulationJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestartSimulationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestartSimulationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRestartSimulationJob{}, middleware.After)
 	if err != nil {
 		return err

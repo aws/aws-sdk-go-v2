@@ -30,7 +30,7 @@ func (c *Client) AdminLinkProviderForUser(ctx context.Context, params *AdminLink
 		params = &AdminLinkProviderForUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminLinkProviderForUser", params, optFns, addOperationAdminLinkProviderForUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminLinkProviderForUser", params, optFns, c.addOperationAdminLinkProviderForUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type AdminLinkProviderForUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminLinkProviderForUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminLinkProviderForUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminLinkProviderForUser{}, middleware.After)
 	if err != nil {
 		return err

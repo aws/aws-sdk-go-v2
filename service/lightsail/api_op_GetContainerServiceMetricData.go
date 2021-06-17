@@ -21,7 +21,7 @@ func (c *Client) GetContainerServiceMetricData(ctx context.Context, params *GetC
 		params = &GetContainerServiceMetricDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetContainerServiceMetricData", params, optFns, addOperationGetContainerServiceMetricDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetContainerServiceMetricData", params, optFns, c.addOperationGetContainerServiceMetricDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -113,7 +113,7 @@ type GetContainerServiceMetricDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetContainerServiceMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetContainerServiceMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetContainerServiceMetricData{}, middleware.After)
 	if err != nil {
 		return err

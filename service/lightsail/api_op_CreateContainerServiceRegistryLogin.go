@@ -34,7 +34,7 @@ func (c *Client) CreateContainerServiceRegistryLogin(ctx context.Context, params
 		params = &CreateContainerServiceRegistryLoginInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateContainerServiceRegistryLogin", params, optFns, addOperationCreateContainerServiceRegistryLoginMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateContainerServiceRegistryLogin", params, optFns, c.addOperationCreateContainerServiceRegistryLoginMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type CreateContainerServiceRegistryLoginOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateContainerServiceRegistryLoginMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateContainerServiceRegistryLoginMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateContainerServiceRegistryLogin{}, middleware.After)
 	if err != nil {
 		return err

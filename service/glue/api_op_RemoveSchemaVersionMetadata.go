@@ -18,7 +18,7 @@ func (c *Client) RemoveSchemaVersionMetadata(ctx context.Context, params *Remove
 		params = &RemoveSchemaVersionMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveSchemaVersionMetadata", params, optFns, addOperationRemoveSchemaVersionMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveSchemaVersionMetadata", params, optFns, c.addOperationRemoveSchemaVersionMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type RemoveSchemaVersionMetadataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveSchemaVersionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveSchemaVersionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveSchemaVersionMetadata{}, middleware.After)
 	if err != nil {
 		return err

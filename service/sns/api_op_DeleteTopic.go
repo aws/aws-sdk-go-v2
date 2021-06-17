@@ -19,7 +19,7 @@ func (c *Client) DeleteTopic(ctx context.Context, params *DeleteTopicInput, optF
 		params = &DeleteTopicInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTopic", params, optFns, addOperationDeleteTopicMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTopic", params, optFns, c.addOperationDeleteTopicMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteTopicOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteTopic{}, middleware.After)
 	if err != nil {
 		return err

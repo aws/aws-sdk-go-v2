@@ -17,7 +17,7 @@ func (c *Client) DeleteLifecyclePolicy(ctx context.Context, params *DeleteLifecy
 		params = &DeleteLifecyclePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLifecyclePolicy", params, optFns, addOperationDeleteLifecyclePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLifecyclePolicy", params, optFns, c.addOperationDeleteLifecyclePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DeleteLifecyclePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLifecyclePolicy{}, middleware.After)
 	if err != nil {
 		return err

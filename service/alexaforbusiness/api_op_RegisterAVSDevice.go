@@ -18,7 +18,7 @@ func (c *Client) RegisterAVSDevice(ctx context.Context, params *RegisterAVSDevic
 		params = &RegisterAVSDeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterAVSDevice", params, optFns, addOperationRegisterAVSDeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterAVSDevice", params, optFns, c.addOperationRegisterAVSDeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type RegisterAVSDeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterAVSDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterAVSDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterAVSDevice{}, middleware.After)
 	if err != nil {
 		return err

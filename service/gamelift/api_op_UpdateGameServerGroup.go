@@ -31,7 +31,7 @@ func (c *Client) UpdateGameServerGroup(ctx context.Context, params *UpdateGameSe
 		params = &UpdateGameServerGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateGameServerGroup", params, optFns, addOperationUpdateGameServerGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateGameServerGroup", params, optFns, c.addOperationUpdateGameServerGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type UpdateGameServerGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateGameServerGroup{}, middleware.After)
 	if err != nil {
 		return err

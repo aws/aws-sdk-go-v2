@@ -58,7 +58,7 @@ func (c *Client) StartGameSessionPlacement(ctx context.Context, params *StartGam
 		params = &StartGameSessionPlacementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartGameSessionPlacement", params, optFns, addOperationStartGameSessionPlacementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartGameSessionPlacement", params, optFns, c.addOperationStartGameSessionPlacementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -128,7 +128,7 @@ type StartGameSessionPlacementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartGameSessionPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartGameSessionPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartGameSessionPlacement{}, middleware.After)
 	if err != nil {
 		return err

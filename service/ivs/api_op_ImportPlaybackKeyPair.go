@@ -22,7 +22,7 @@ func (c *Client) ImportPlaybackKeyPair(ctx context.Context, params *ImportPlayba
 		params = &ImportPlaybackKeyPairInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportPlaybackKeyPair", params, optFns, addOperationImportPlaybackKeyPairMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportPlaybackKeyPair", params, optFns, c.addOperationImportPlaybackKeyPairMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ImportPlaybackKeyPairOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportPlaybackKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportPlaybackKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportPlaybackKeyPair{}, middleware.After)
 	if err != nil {
 		return err

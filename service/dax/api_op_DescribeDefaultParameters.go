@@ -17,7 +17,7 @@ func (c *Client) DescribeDefaultParameters(ctx context.Context, params *Describe
 		params = &DescribeDefaultParametersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDefaultParameters", params, optFns, addOperationDescribeDefaultParametersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDefaultParameters", params, optFns, c.addOperationDescribeDefaultParametersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeDefaultParametersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDefaultParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDefaultParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDefaultParameters{}, middleware.After)
 	if err != nil {
 		return err

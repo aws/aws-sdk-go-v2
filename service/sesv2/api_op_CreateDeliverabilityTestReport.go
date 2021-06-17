@@ -24,7 +24,7 @@ func (c *Client) CreateDeliverabilityTestReport(ctx context.Context, params *Cre
 		params = &CreateDeliverabilityTestReportInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDeliverabilityTestReport", params, optFns, addOperationCreateDeliverabilityTestReportMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDeliverabilityTestReport", params, optFns, c.addOperationCreateDeliverabilityTestReportMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type CreateDeliverabilityTestReportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDeliverabilityTestReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDeliverabilityTestReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDeliverabilityTestReport{}, middleware.After)
 	if err != nil {
 		return err

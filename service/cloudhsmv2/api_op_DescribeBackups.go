@@ -23,7 +23,7 @@ func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInp
 		params = &DescribeBackupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeBackups", params, optFns, addOperationDescribeBackupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeBackups", params, optFns, c.addOperationDescribeBackupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DescribeBackupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBackups{}, middleware.After)
 	if err != nil {
 		return err

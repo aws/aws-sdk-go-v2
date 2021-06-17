@@ -21,7 +21,7 @@ func (c *Client) DeleteLoadBalancerTlsCertificate(ctx context.Context, params *D
 		params = &DeleteLoadBalancerTlsCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLoadBalancerTlsCertificate", params, optFns, addOperationDeleteLoadBalancerTlsCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLoadBalancerTlsCertificate", params, optFns, c.addOperationDeleteLoadBalancerTlsCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DeleteLoadBalancerTlsCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLoadBalancerTlsCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLoadBalancerTlsCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLoadBalancerTlsCertificate{}, middleware.After)
 	if err != nil {
 		return err

@@ -31,7 +31,7 @@ func (c *Client) DescribeSpotInstanceRequests(ctx context.Context, params *Descr
 		params = &DescribeSpotInstanceRequestsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSpotInstanceRequests", params, optFns, addOperationDescribeSpotInstanceRequestsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSpotInstanceRequests", params, optFns, c.addOperationDescribeSpotInstanceRequestsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -208,7 +208,7 @@ type DescribeSpotInstanceRequestsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSpotInstanceRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSpotInstanceRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeSpotInstanceRequests{}, middleware.After)
 	if err != nil {
 		return err

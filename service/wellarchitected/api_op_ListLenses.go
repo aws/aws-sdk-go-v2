@@ -18,7 +18,7 @@ func (c *Client) ListLenses(ctx context.Context, params *ListLensesInput, optFns
 		params = &ListLensesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLenses", params, optFns, addOperationListLensesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLenses", params, optFns, c.addOperationListLensesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ListLensesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLensesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLensesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLenses{}, middleware.After)
 	if err != nil {
 		return err

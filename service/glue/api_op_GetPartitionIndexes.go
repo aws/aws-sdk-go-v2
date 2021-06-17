@@ -18,7 +18,7 @@ func (c *Client) GetPartitionIndexes(ctx context.Context, params *GetPartitionIn
 		params = &GetPartitionIndexesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPartitionIndexes", params, optFns, addOperationGetPartitionIndexesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPartitionIndexes", params, optFns, c.addOperationGetPartitionIndexesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type GetPartitionIndexesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPartitionIndexesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPartitionIndexesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPartitionIndexes{}, middleware.After)
 	if err != nil {
 		return err

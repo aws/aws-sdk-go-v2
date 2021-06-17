@@ -22,7 +22,7 @@ func (c *Client) GetOutcomes(ctx context.Context, params *GetOutcomesInput, optF
 		params = &GetOutcomesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetOutcomes", params, optFns, addOperationGetOutcomesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetOutcomes", params, optFns, c.addOperationGetOutcomesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type GetOutcomesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetOutcomesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetOutcomesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOutcomes{}, middleware.After)
 	if err != nil {
 		return err

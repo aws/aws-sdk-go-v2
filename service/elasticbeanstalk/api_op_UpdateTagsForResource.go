@@ -29,7 +29,7 @@ func (c *Client) UpdateTagsForResource(ctx context.Context, params *UpdateTagsFo
 		params = &UpdateTagsForResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateTagsForResource", params, optFns, addOperationUpdateTagsForResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateTagsForResource", params, optFns, c.addOperationUpdateTagsForResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type UpdateTagsForResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateTagsForResource{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) AssociateEncryptionConfig(ctx context.Context, params *Associat
 		params = &AssociateEncryptionConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateEncryptionConfig", params, optFns, addOperationAssociateEncryptionConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateEncryptionConfig", params, optFns, c.addOperationAssociateEncryptionConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type AssociateEncryptionConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateEncryptionConfig{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CreateFieldLevelEncryptionProfile(ctx context.Context, params *
 		params = &CreateFieldLevelEncryptionProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFieldLevelEncryptionProfile", params, optFns, addOperationCreateFieldLevelEncryptionProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFieldLevelEncryptionProfile", params, optFns, c.addOperationCreateFieldLevelEncryptionProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type CreateFieldLevelEncryptionProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFieldLevelEncryptionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFieldLevelEncryptionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpCreateFieldLevelEncryptionProfile{}, middleware.After)
 	if err != nil {
 		return err

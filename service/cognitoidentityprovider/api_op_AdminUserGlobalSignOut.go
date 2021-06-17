@@ -19,7 +19,7 @@ func (c *Client) AdminUserGlobalSignOut(ctx context.Context, params *AdminUserGl
 		params = &AdminUserGlobalSignOutInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AdminUserGlobalSignOut", params, optFns, addOperationAdminUserGlobalSignOutMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminUserGlobalSignOut", params, optFns, c.addOperationAdminUserGlobalSignOutMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type AdminUserGlobalSignOutOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAdminUserGlobalSignOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAdminUserGlobalSignOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminUserGlobalSignOut{}, middleware.After)
 	if err != nil {
 		return err

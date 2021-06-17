@@ -37,7 +37,7 @@ func (c *Client) RegisterType(ctx context.Context, params *RegisterTypeInput, op
 		params = &RegisterTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterType", params, optFns, addOperationRegisterTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterType", params, optFns, c.addOperationRegisterTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -120,7 +120,7 @@ type RegisterTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRegisterType{}, middleware.After)
 	if err != nil {
 		return err

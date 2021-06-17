@@ -18,7 +18,7 @@ func (c *Client) UpdatePullRequestApprovalState(ctx context.Context, params *Upd
 		params = &UpdatePullRequestApprovalStateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePullRequestApprovalState", params, optFns, addOperationUpdatePullRequestApprovalStateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePullRequestApprovalState", params, optFns, c.addOperationUpdatePullRequestApprovalStateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UpdatePullRequestApprovalStateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePullRequestApprovalStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePullRequestApprovalStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePullRequestApprovalState{}, middleware.After)
 	if err != nil {
 		return err

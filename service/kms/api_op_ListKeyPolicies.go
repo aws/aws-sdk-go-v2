@@ -27,7 +27,7 @@ func (c *Client) ListKeyPolicies(ctx context.Context, params *ListKeyPoliciesInp
 		params = &ListKeyPoliciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListKeyPolicies", params, optFns, addOperationListKeyPoliciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListKeyPolicies", params, optFns, c.addOperationListKeyPoliciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type ListKeyPoliciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListKeyPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListKeyPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListKeyPolicies{}, middleware.After)
 	if err != nil {
 		return err

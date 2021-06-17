@@ -18,7 +18,7 @@ func (c *Client) ListScheduledAudits(ctx context.Context, params *ListScheduledA
 		params = &ListScheduledAuditsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListScheduledAudits", params, optFns, addOperationListScheduledAuditsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListScheduledAudits", params, optFns, c.addOperationListScheduledAuditsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ListScheduledAuditsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListScheduledAuditsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListScheduledAuditsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListScheduledAudits{}, middleware.After)
 	if err != nil {
 		return err

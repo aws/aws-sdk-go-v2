@@ -18,7 +18,7 @@ func (c *Client) StartEventsDetectionJob(ctx context.Context, params *StartEvent
 		params = &StartEventsDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartEventsDetectionJob", params, optFns, addOperationStartEventsDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartEventsDetectionJob", params, optFns, c.addOperationStartEventsDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type StartEventsDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartEventsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartEventsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartEventsDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

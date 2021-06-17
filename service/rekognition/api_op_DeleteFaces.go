@@ -18,7 +18,7 @@ func (c *Client) DeleteFaces(ctx context.Context, params *DeleteFacesInput, optF
 		params = &DeleteFacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFaces", params, optFns, addOperationDeleteFacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFaces", params, optFns, c.addOperationDeleteFacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteFacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFaces{}, middleware.After)
 	if err != nil {
 		return err

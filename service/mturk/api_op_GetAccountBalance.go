@@ -21,7 +21,7 @@ func (c *Client) GetAccountBalance(ctx context.Context, params *GetAccountBalanc
 		params = &GetAccountBalanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccountBalance", params, optFns, addOperationGetAccountBalanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccountBalance", params, optFns, c.addOperationGetAccountBalanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetAccountBalanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccountBalanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccountBalanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAccountBalance{}, middleware.After)
 	if err != nil {
 		return err

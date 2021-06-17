@@ -16,7 +16,7 @@ func (c *Client) DeleteCustomRoutingEndpointGroup(ctx context.Context, params *D
 		params = &DeleteCustomRoutingEndpointGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomRoutingEndpointGroup", params, optFns, addOperationDeleteCustomRoutingEndpointGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomRoutingEndpointGroup", params, optFns, c.addOperationDeleteCustomRoutingEndpointGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteCustomRoutingEndpointGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCustomRoutingEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCustomRoutingEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCustomRoutingEndpointGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) PutChannelPolicy(ctx context.Context, params *PutChannelPolicyI
 		params = &PutChannelPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutChannelPolicy", params, optFns, addOperationPutChannelPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutChannelPolicy", params, optFns, c.addOperationPutChannelPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type PutChannelPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutChannelPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutChannelPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutChannelPolicy{}, middleware.After)
 	if err != nil {
 		return err

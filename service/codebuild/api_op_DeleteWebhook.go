@@ -18,7 +18,7 @@ func (c *Client) DeleteWebhook(ctx context.Context, params *DeleteWebhookInput, 
 		params = &DeleteWebhookInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteWebhook", params, optFns, addOperationDeleteWebhookMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteWebhook", params, optFns, c.addOperationDeleteWebhookMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteWebhookOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWebhook{}, middleware.After)
 	if err != nil {
 		return err

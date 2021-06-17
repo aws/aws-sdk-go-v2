@@ -19,7 +19,7 @@ func (c *Client) CreateCoreDefinition(ctx context.Context, params *CreateCoreDef
 		params = &CreateCoreDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCoreDefinition", params, optFns, addOperationCreateCoreDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCoreDefinition", params, optFns, c.addOperationCreateCoreDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type CreateCoreDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCoreDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCoreDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCoreDefinition{}, middleware.After)
 	if err != nil {
 		return err

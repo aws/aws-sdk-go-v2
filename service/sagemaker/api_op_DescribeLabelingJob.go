@@ -18,7 +18,7 @@ func (c *Client) DescribeLabelingJob(ctx context.Context, params *DescribeLabeli
 		params = &DescribeLabelingJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLabelingJob", params, optFns, addOperationDescribeLabelingJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLabelingJob", params, optFns, c.addOperationDescribeLabelingJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -168,7 +168,7 @@ type DescribeLabelingJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLabelingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLabelingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLabelingJob{}, middleware.After)
 	if err != nil {
 		return err

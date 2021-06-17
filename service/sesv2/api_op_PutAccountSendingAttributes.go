@@ -16,7 +16,7 @@ func (c *Client) PutAccountSendingAttributes(ctx context.Context, params *PutAcc
 		params = &PutAccountSendingAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAccountSendingAttributes", params, optFns, addOperationPutAccountSendingAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAccountSendingAttributes", params, optFns, c.addOperationPutAccountSendingAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type PutAccountSendingAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAccountSendingAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAccountSendingAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountSendingAttributes{}, middleware.After)
 	if err != nil {
 		return err

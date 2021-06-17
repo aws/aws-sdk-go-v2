@@ -30,7 +30,7 @@ func (c *Client) DescribeForecastExportJob(ctx context.Context, params *Describe
 		params = &DescribeForecastExportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeForecastExportJob", params, optFns, addOperationDescribeForecastExportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeForecastExportJob", params, optFns, c.addOperationDescribeForecastExportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +107,7 @@ type DescribeForecastExportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeForecastExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeForecastExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeForecastExportJob{}, middleware.After)
 	if err != nil {
 		return err

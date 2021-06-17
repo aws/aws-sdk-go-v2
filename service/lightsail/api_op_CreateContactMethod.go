@@ -23,7 +23,7 @@ func (c *Client) CreateContactMethod(ctx context.Context, params *CreateContactM
 		params = &CreateContactMethodInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateContactMethod", params, optFns, addOperationCreateContactMethodMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateContactMethod", params, optFns, c.addOperationCreateContactMethodMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type CreateContactMethodOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateContactMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateContactMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateContactMethod{}, middleware.After)
 	if err != nil {
 		return err

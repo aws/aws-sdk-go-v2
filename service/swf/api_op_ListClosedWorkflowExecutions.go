@@ -50,7 +50,7 @@ func (c *Client) ListClosedWorkflowExecutions(ctx context.Context, params *ListC
 		params = &ListClosedWorkflowExecutionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListClosedWorkflowExecutions", params, optFns, addOperationListClosedWorkflowExecutionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListClosedWorkflowExecutions", params, optFns, c.addOperationListClosedWorkflowExecutionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -142,7 +142,7 @@ type ListClosedWorkflowExecutionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListClosedWorkflowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListClosedWorkflowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListClosedWorkflowExecutions{}, middleware.After)
 	if err != nil {
 		return err

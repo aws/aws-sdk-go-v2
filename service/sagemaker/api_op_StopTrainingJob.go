@@ -21,7 +21,7 @@ func (c *Client) StopTrainingJob(ctx context.Context, params *StopTrainingJobInp
 		params = &StopTrainingJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopTrainingJob", params, optFns, addOperationStopTrainingJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopTrainingJob", params, optFns, c.addOperationStopTrainingJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type StopTrainingJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopTrainingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopTrainingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopTrainingJob{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) PutAccessControlRule(ctx context.Context, params *PutAccessCont
 		params = &PutAccessControlRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAccessControlRule", params, optFns, addOperationPutAccessControlRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAccessControlRule", params, optFns, c.addOperationPutAccessControlRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type PutAccessControlRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAccessControlRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAccessControlRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAccessControlRule{}, middleware.After)
 	if err != nil {
 		return err

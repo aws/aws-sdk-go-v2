@@ -20,7 +20,7 @@ func (c *Client) DescribeAggregateComplianceByConfigRules(ctx context.Context, p
 		params = &DescribeAggregateComplianceByConfigRulesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAggregateComplianceByConfigRules", params, optFns, addOperationDescribeAggregateComplianceByConfigRulesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAggregateComplianceByConfigRules", params, optFns, c.addOperationDescribeAggregateComplianceByConfigRulesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DescribeAggregateComplianceByConfigRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAggregateComplianceByConfigRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAggregateComplianceByConfigRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAggregateComplianceByConfigRules{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeSharedDirectories(ctx context.Context, params *Describe
 		params = &DescribeSharedDirectoriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSharedDirectories", params, optFns, addOperationDescribeSharedDirectoriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSharedDirectories", params, optFns, c.addOperationDescribeSharedDirectoriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeSharedDirectoriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSharedDirectoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSharedDirectoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSharedDirectories{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) GetModel(ctx context.Context, params *GetModelInput, optFns ...
 		params = &GetModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetModel", params, optFns, addOperationGetModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetModel", params, optFns, c.addOperationGetModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type GetModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetModel{}, middleware.After)
 	if err != nil {
 		return err

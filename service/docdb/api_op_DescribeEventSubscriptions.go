@@ -21,7 +21,7 @@ func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *Describ
 		params = &DescribeEventSubscriptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEventSubscriptions", params, optFns, addOperationDescribeEventSubscriptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEventSubscriptions", params, optFns, c.addOperationDescribeEventSubscriptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeEventSubscriptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEventSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEventSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEventSubscriptions{}, middleware.After)
 	if err != nil {
 		return err

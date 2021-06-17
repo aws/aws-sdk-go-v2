@@ -20,7 +20,7 @@ func (c *Client) InvokeScreenAutomation(ctx context.Context, params *InvokeScree
 		params = &InvokeScreenAutomationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InvokeScreenAutomation", params, optFns, addOperationInvokeScreenAutomationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InvokeScreenAutomation", params, optFns, c.addOperationInvokeScreenAutomationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type InvokeScreenAutomationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInvokeScreenAutomationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInvokeScreenAutomationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeScreenAutomation{}, middleware.After)
 	if err != nil {
 		return err

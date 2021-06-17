@@ -17,7 +17,7 @@ func (c *Client) UpdatePartnerStatus(ctx context.Context, params *UpdatePartnerS
 		params = &UpdatePartnerStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePartnerStatus", params, optFns, addOperationUpdatePartnerStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePartnerStatus", params, optFns, c.addOperationUpdatePartnerStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type UpdatePartnerStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePartnerStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePartnerStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdatePartnerStatus{}, middleware.After)
 	if err != nil {
 		return err

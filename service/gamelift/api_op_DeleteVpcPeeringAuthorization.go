@@ -21,7 +21,7 @@ func (c *Client) DeleteVpcPeeringAuthorization(ctx context.Context, params *Dele
 		params = &DeleteVpcPeeringAuthorizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVpcPeeringAuthorization", params, optFns, addOperationDeleteVpcPeeringAuthorizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVpcPeeringAuthorization", params, optFns, c.addOperationDeleteVpcPeeringAuthorizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DeleteVpcPeeringAuthorizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVpcPeeringAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVpcPeeringAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteVpcPeeringAuthorization{}, middleware.After)
 	if err != nil {
 		return err

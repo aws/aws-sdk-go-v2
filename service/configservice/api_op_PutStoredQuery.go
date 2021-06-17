@@ -19,7 +19,7 @@ func (c *Client) PutStoredQuery(ctx context.Context, params *PutStoredQueryInput
 		params = &PutStoredQueryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutStoredQuery", params, optFns, addOperationPutStoredQueryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutStoredQuery", params, optFns, c.addOperationPutStoredQueryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type PutStoredQueryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutStoredQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutStoredQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutStoredQuery{}, middleware.After)
 	if err != nil {
 		return err

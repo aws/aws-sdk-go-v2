@@ -18,7 +18,7 @@ func (c *Client) DescribeSMBFileShares(ctx context.Context, params *DescribeSMBF
 		params = &DescribeSMBFileSharesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSMBFileShares", params, optFns, addOperationDescribeSMBFileSharesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSMBFileShares", params, optFns, c.addOperationDescribeSMBFileSharesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DescribeSMBFileSharesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSMBFileSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSMBFileSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSMBFileShares{}, middleware.After)
 	if err != nil {
 		return err

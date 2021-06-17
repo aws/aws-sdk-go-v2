@@ -20,7 +20,7 @@ func (c *Client) GetCredentialsForIdentity(ctx context.Context, params *GetCrede
 		params = &GetCredentialsForIdentityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCredentialsForIdentity", params, optFns, addOperationGetCredentialsForIdentityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCredentialsForIdentity", params, optFns, c.addOperationGetCredentialsForIdentityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type GetCredentialsForIdentityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCredentialsForIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCredentialsForIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCredentialsForIdentity{}, middleware.After)
 	if err != nil {
 		return err

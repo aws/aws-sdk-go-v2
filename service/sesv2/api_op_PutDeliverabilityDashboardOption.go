@@ -24,7 +24,7 @@ func (c *Client) PutDeliverabilityDashboardOption(ctx context.Context, params *P
 		params = &PutDeliverabilityDashboardOptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutDeliverabilityDashboardOption", params, optFns, addOperationPutDeliverabilityDashboardOptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutDeliverabilityDashboardOption", params, optFns, c.addOperationPutDeliverabilityDashboardOptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type PutDeliverabilityDashboardOptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutDeliverabilityDashboardOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutDeliverabilityDashboardOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDeliverabilityDashboardOption{}, middleware.After)
 	if err != nil {
 		return err

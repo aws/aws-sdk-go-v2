@@ -16,7 +16,7 @@ func (c *Client) CreateDocumentationPart(ctx context.Context, params *CreateDocu
 		params = &CreateDocumentationPartInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDocumentationPart", params, optFns, addOperationCreateDocumentationPartMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDocumentationPart", params, optFns, c.addOperationCreateDocumentationPartMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type CreateDocumentationPartOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDocumentationPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDocumentationPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDocumentationPart{}, middleware.After)
 	if err != nil {
 		return err

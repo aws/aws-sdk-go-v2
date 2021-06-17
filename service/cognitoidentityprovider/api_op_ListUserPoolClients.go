@@ -18,7 +18,7 @@ func (c *Client) ListUserPoolClients(ctx context.Context, params *ListUserPoolCl
 		params = &ListUserPoolClientsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListUserPoolClients", params, optFns, addOperationListUserPoolClientsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListUserPoolClients", params, optFns, c.addOperationListUserPoolClientsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListUserPoolClientsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListUserPoolClientsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListUserPoolClientsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUserPoolClients{}, middleware.After)
 	if err != nil {
 		return err

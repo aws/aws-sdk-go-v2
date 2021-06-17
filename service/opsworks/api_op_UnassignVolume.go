@@ -22,7 +22,7 @@ func (c *Client) UnassignVolume(ctx context.Context, params *UnassignVolumeInput
 		params = &UnassignVolumeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnassignVolume", params, optFns, addOperationUnassignVolumeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnassignVolume", params, optFns, c.addOperationUnassignVolumeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type UnassignVolumeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnassignVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnassignVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnassignVolume{}, middleware.After)
 	if err != nil {
 		return err

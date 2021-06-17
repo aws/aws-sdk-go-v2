@@ -17,7 +17,7 @@ func (c *Client) ListLogSubscriptions(ctx context.Context, params *ListLogSubscr
 		params = &ListLogSubscriptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLogSubscriptions", params, optFns, addOperationListLogSubscriptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLogSubscriptions", params, optFns, c.addOperationListLogSubscriptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListLogSubscriptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLogSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLogSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLogSubscriptions{}, middleware.After)
 	if err != nil {
 		return err

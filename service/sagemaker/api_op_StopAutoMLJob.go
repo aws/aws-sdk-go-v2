@@ -16,7 +16,7 @@ func (c *Client) StopAutoMLJob(ctx context.Context, params *StopAutoMLJobInput, 
 		params = &StopAutoMLJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopAutoMLJob", params, optFns, addOperationStopAutoMLJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopAutoMLJob", params, optFns, c.addOperationStopAutoMLJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type StopAutoMLJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopAutoMLJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopAutoMLJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopAutoMLJob{}, middleware.After)
 	if err != nil {
 		return err

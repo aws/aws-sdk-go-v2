@@ -21,7 +21,7 @@ func (c *Client) UpdateSignalingChannel(ctx context.Context, params *UpdateSigna
 		params = &UpdateSignalingChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSignalingChannel", params, optFns, addOperationUpdateSignalingChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSignalingChannel", params, optFns, c.addOperationUpdateSignalingChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UpdateSignalingChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSignalingChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSignalingChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSignalingChannel{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DescribeAutoScalingNotificationTypes(ctx context.Context, param
 		params = &DescribeAutoScalingNotificationTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAutoScalingNotificationTypes", params, optFns, addOperationDescribeAutoScalingNotificationTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAutoScalingNotificationTypes", params, optFns, c.addOperationDescribeAutoScalingNotificationTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ type DescribeAutoScalingNotificationTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAutoScalingNotificationTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAutoScalingNotificationTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAutoScalingNotificationTypes{}, middleware.After)
 	if err != nil {
 		return err

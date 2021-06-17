@@ -16,7 +16,7 @@ func (c *Client) DeregisterOnPremisesInstance(ctx context.Context, params *Dereg
 		params = &DeregisterOnPremisesInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterOnPremisesInstance", params, optFns, addOperationDeregisterOnPremisesInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterOnPremisesInstance", params, optFns, c.addOperationDeregisterOnPremisesInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeregisterOnPremisesInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterOnPremisesInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterOnPremisesInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterOnPremisesInstance{}, middleware.After)
 	if err != nil {
 		return err

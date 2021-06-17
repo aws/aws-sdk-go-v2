@@ -17,7 +17,7 @@ func (c *Client) DescribeNotebookExecution(ctx context.Context, params *Describe
 		params = &DescribeNotebookExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeNotebookExecution", params, optFns, addOperationDescribeNotebookExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeNotebookExecution", params, optFns, c.addOperationDescribeNotebookExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeNotebookExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeNotebookExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeNotebookExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeNotebookExecution{}, middleware.After)
 	if err != nil {
 		return err

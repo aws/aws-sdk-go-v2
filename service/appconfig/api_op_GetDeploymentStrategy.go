@@ -21,7 +21,7 @@ func (c *Client) GetDeploymentStrategy(ctx context.Context, params *GetDeploymen
 		params = &GetDeploymentStrategyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDeploymentStrategy", params, optFns, addOperationGetDeploymentStrategyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDeploymentStrategy", params, optFns, c.addOperationGetDeploymentStrategyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type GetDeploymentStrategyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDeploymentStrategyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDeploymentStrategyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeploymentStrategy{}, middleware.After)
 	if err != nil {
 		return err

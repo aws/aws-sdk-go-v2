@@ -18,7 +18,7 @@ func (c *Client) UpdateSuiteDefinition(ctx context.Context, params *UpdateSuiteD
 		params = &UpdateSuiteDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSuiteDefinition", params, optFns, addOperationUpdateSuiteDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSuiteDefinition", params, optFns, c.addOperationUpdateSuiteDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type UpdateSuiteDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSuiteDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSuiteDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSuiteDefinition{}, middleware.After)
 	if err != nil {
 		return err

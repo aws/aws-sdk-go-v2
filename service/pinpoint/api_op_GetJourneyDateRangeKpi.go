@@ -19,7 +19,7 @@ func (c *Client) GetJourneyDateRangeKpi(ctx context.Context, params *GetJourneyD
 		params = &GetJourneyDateRangeKpiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetJourneyDateRangeKpi", params, optFns, addOperationGetJourneyDateRangeKpiMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetJourneyDateRangeKpi", params, optFns, c.addOperationGetJourneyDateRangeKpiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type GetJourneyDateRangeKpiOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetJourneyDateRangeKpiMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetJourneyDateRangeKpiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetJourneyDateRangeKpi{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) UnassignIpv6Addresses(ctx context.Context, params *UnassignIpv6
 		params = &UnassignIpv6AddressesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnassignIpv6Addresses", params, optFns, addOperationUnassignIpv6AddressesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnassignIpv6Addresses", params, optFns, c.addOperationUnassignIpv6AddressesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UnassignIpv6AddressesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnassignIpv6AddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnassignIpv6AddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpUnassignIpv6Addresses{}, middleware.After)
 	if err != nil {
 		return err

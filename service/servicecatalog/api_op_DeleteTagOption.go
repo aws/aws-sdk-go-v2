@@ -17,7 +17,7 @@ func (c *Client) DeleteTagOption(ctx context.Context, params *DeleteTagOptionInp
 		params = &DeleteTagOptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTagOption", params, optFns, addOperationDeleteTagOptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTagOption", params, optFns, c.addOperationDeleteTagOptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteTagOptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTagOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTagOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTagOption{}, middleware.After)
 	if err != nil {
 		return err

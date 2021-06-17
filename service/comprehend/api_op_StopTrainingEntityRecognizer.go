@@ -21,7 +21,7 @@ func (c *Client) StopTrainingEntityRecognizer(ctx context.Context, params *StopT
 		params = &StopTrainingEntityRecognizerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopTrainingEntityRecognizer", params, optFns, addOperationStopTrainingEntityRecognizerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopTrainingEntityRecognizer", params, optFns, c.addOperationStopTrainingEntityRecognizerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type StopTrainingEntityRecognizerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopTrainingEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopTrainingEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopTrainingEntityRecognizer{}, middleware.After)
 	if err != nil {
 		return err

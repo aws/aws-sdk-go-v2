@@ -16,7 +16,7 @@ func (c *Client) DeleteOptionGroup(ctx context.Context, params *DeleteOptionGrou
 		params = &DeleteOptionGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteOptionGroup", params, optFns, addOperationDeleteOptionGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteOptionGroup", params, optFns, c.addOperationDeleteOptionGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteOptionGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteOptionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteOptionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteOptionGroup{}, middleware.After)
 	if err != nil {
 		return err

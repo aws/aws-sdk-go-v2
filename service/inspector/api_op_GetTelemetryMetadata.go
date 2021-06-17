@@ -17,7 +17,7 @@ func (c *Client) GetTelemetryMetadata(ctx context.Context, params *GetTelemetryM
 		params = &GetTelemetryMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTelemetryMetadata", params, optFns, addOperationGetTelemetryMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTelemetryMetadata", params, optFns, c.addOperationGetTelemetryMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetTelemetryMetadataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTelemetryMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTelemetryMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTelemetryMetadata{}, middleware.After)
 	if err != nil {
 		return err

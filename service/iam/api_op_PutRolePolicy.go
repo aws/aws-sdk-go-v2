@@ -34,7 +34,7 @@ func (c *Client) PutRolePolicy(ctx context.Context, params *PutRolePolicyInput, 
 		params = &PutRolePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutRolePolicy", params, optFns, addOperationPutRolePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutRolePolicy", params, optFns, c.addOperationPutRolePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type PutRolePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutRolePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutRolePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutRolePolicy{}, middleware.After)
 	if err != nil {
 		return err

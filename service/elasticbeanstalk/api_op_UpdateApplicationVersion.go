@@ -19,7 +19,7 @@ func (c *Client) UpdateApplicationVersion(ctx context.Context, params *UpdateApp
 		params = &UpdateApplicationVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateApplicationVersion", params, optFns, addOperationUpdateApplicationVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateApplicationVersion", params, optFns, c.addOperationUpdateApplicationVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type UpdateApplicationVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateApplicationVersion{}, middleware.After)
 	if err != nil {
 		return err

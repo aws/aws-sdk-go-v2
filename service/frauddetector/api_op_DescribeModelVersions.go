@@ -20,7 +20,7 @@ func (c *Client) DescribeModelVersions(ctx context.Context, params *DescribeMode
 		params = &DescribeModelVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeModelVersions", params, optFns, addOperationDescribeModelVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeModelVersions", params, optFns, c.addOperationDescribeModelVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeModelVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeModelVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeModelVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeModelVersions{}, middleware.After)
 	if err != nil {
 		return err

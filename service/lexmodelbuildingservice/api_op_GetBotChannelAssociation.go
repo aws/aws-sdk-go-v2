@@ -20,7 +20,7 @@ func (c *Client) GetBotChannelAssociation(ctx context.Context, params *GetBotCha
 		params = &GetBotChannelAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBotChannelAssociation", params, optFns, addOperationGetBotChannelAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBotChannelAssociation", params, optFns, c.addOperationGetBotChannelAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type GetBotChannelAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBotChannelAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBotChannelAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBotChannelAssociation{}, middleware.After)
 	if err != nil {
 		return err

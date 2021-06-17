@@ -18,7 +18,7 @@ func (c *Client) DescribeEdgePackagingJob(ctx context.Context, params *DescribeE
 		params = &DescribeEdgePackagingJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEdgePackagingJob", params, optFns, addOperationDescribeEdgePackagingJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEdgePackagingJob", params, optFns, c.addOperationDescribeEdgePackagingJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type DescribeEdgePackagingJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEdgePackagingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEdgePackagingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEdgePackagingJob{}, middleware.After)
 	if err != nil {
 		return err

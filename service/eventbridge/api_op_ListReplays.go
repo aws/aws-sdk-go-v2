@@ -18,7 +18,7 @@ func (c *Client) ListReplays(ctx context.Context, params *ListReplaysInput, optF
 		params = &ListReplaysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListReplays", params, optFns, addOperationListReplaysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListReplays", params, optFns, c.addOperationListReplaysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListReplaysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListReplaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListReplaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListReplays{}, middleware.After)
 	if err != nil {
 		return err

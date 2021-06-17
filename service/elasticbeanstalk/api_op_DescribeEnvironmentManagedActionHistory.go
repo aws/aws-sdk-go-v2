@@ -18,7 +18,7 @@ func (c *Client) DescribeEnvironmentManagedActionHistory(ctx context.Context, pa
 		params = &DescribeEnvironmentManagedActionHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEnvironmentManagedActionHistory", params, optFns, addOperationDescribeEnvironmentManagedActionHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEnvironmentManagedActionHistory", params, optFns, c.addOperationDescribeEnvironmentManagedActionHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DescribeEnvironmentManagedActionHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEnvironmentManagedActionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEnvironmentManagedActionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEnvironmentManagedActionHistory{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UnpeerVpc(ctx context.Context, params *UnpeerVpcInput, optFns .
 		params = &UnpeerVpcInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnpeerVpc", params, optFns, addOperationUnpeerVpcMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnpeerVpc", params, optFns, c.addOperationUnpeerVpcMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type UnpeerVpcOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnpeerVpcMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnpeerVpcMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnpeerVpc{}, middleware.After)
 	if err != nil {
 		return err

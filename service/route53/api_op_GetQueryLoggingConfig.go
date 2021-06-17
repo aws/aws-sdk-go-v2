@@ -21,7 +21,7 @@ func (c *Client) GetQueryLoggingConfig(ctx context.Context, params *GetQueryLogg
 		params = &GetQueryLoggingConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetQueryLoggingConfig", params, optFns, addOperationGetQueryLoggingConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetQueryLoggingConfig", params, optFns, c.addOperationGetQueryLoggingConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetQueryLoggingConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetQueryLoggingConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetQueryLoggingConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetQueryLoggingConfig{}, middleware.After)
 	if err != nil {
 		return err

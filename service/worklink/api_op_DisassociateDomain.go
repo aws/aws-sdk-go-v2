@@ -17,7 +17,7 @@ func (c *Client) DisassociateDomain(ctx context.Context, params *DisassociateDom
 		params = &DisassociateDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateDomain", params, optFns, addOperationDisassociateDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateDomain", params, optFns, c.addOperationDisassociateDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DisassociateDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateDomain{}, middleware.After)
 	if err != nil {
 		return err

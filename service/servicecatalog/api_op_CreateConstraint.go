@@ -18,7 +18,7 @@ func (c *Client) CreateConstraint(ctx context.Context, params *CreateConstraintI
 		params = &CreateConstraintInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateConstraint", params, optFns, addOperationCreateConstraintMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateConstraint", params, optFns, c.addOperationCreateConstraintMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -120,7 +120,7 @@ type CreateConstraintOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateConstraint{}, middleware.After)
 	if err != nil {
 		return err

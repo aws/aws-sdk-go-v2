@@ -25,7 +25,7 @@ func (c *Client) DescribeReplicationGroups(ctx context.Context, params *Describe
 		params = &DescribeReplicationGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeReplicationGroups", params, optFns, addOperationDescribeReplicationGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeReplicationGroups", params, optFns, c.addOperationDescribeReplicationGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DescribeReplicationGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeReplicationGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeReplicationGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeReplicationGroups{}, middleware.After)
 	if err != nil {
 		return err

@@ -33,7 +33,7 @@ func (c *Client) GetBucketWebsite(ctx context.Context, params *GetBucketWebsiteI
 		params = &GetBucketWebsiteInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketWebsite", params, optFns, addOperationGetBucketWebsiteMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketWebsite", params, optFns, c.addOperationGetBucketWebsiteMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type GetBucketWebsiteOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketWebsiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketWebsiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketWebsite{}, middleware.After)
 	if err != nil {
 		return err

@@ -122,7 +122,7 @@ func (c *Client) ImportCertificateAuthorityCertificate(ctx context.Context, para
 		params = &ImportCertificateAuthorityCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportCertificateAuthorityCertificate", params, optFns, addOperationImportCertificateAuthorityCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportCertificateAuthorityCertificate", params, optFns, c.addOperationImportCertificateAuthorityCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -164,7 +164,7 @@ type ImportCertificateAuthorityCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportCertificateAuthorityCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportCertificateAuthorityCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportCertificateAuthorityCertificate{}, middleware.After)
 	if err != nil {
 		return err

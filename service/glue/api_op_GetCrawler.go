@@ -17,7 +17,7 @@ func (c *Client) GetCrawler(ctx context.Context, params *GetCrawlerInput, optFns
 		params = &GetCrawlerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCrawler", params, optFns, addOperationGetCrawlerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCrawler", params, optFns, c.addOperationGetCrawlerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetCrawlerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCrawlerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCrawlerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCrawler{}, middleware.After)
 	if err != nil {
 		return err

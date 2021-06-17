@@ -43,7 +43,7 @@ func (c *Client) MergeShards(ctx context.Context, params *MergeShardsInput, optF
 		params = &MergeShardsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MergeShards", params, optFns, addOperationMergeShardsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MergeShards", params, optFns, c.addOperationMergeShardsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type MergeShardsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMergeShardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMergeShardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergeShards{}, middleware.After)
 	if err != nil {
 		return err

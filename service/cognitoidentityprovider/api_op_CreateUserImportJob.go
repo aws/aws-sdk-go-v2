@@ -17,7 +17,7 @@ func (c *Client) CreateUserImportJob(ctx context.Context, params *CreateUserImpo
 		params = &CreateUserImportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateUserImportJob", params, optFns, addOperationCreateUserImportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateUserImportJob", params, optFns, c.addOperationCreateUserImportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type CreateUserImportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateUserImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateUserImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUserImportJob{}, middleware.After)
 	if err != nil {
 		return err

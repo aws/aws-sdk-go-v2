@@ -17,7 +17,7 @@ func (c *Client) UpdateJourney(ctx context.Context, params *UpdateJourneyInput, 
 		params = &UpdateJourneyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateJourney", params, optFns, addOperationUpdateJourneyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateJourney", params, optFns, c.addOperationUpdateJourneyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type UpdateJourneyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateJourneyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateJourneyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateJourney{}, middleware.After)
 	if err != nil {
 		return err

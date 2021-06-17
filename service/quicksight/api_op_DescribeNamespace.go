@@ -17,7 +17,7 @@ func (c *Client) DescribeNamespace(ctx context.Context, params *DescribeNamespac
 		params = &DescribeNamespaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeNamespace", params, optFns, addOperationDescribeNamespaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeNamespace", params, optFns, c.addOperationDescribeNamespaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeNamespaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeNamespace{}, middleware.After)
 	if err != nil {
 		return err

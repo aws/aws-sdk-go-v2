@@ -35,7 +35,7 @@ func (c *Client) GetAccessKeyInfo(ctx context.Context, params *GetAccessKeyInfoI
 		params = &GetAccessKeyInfoInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccessKeyInfo", params, optFns, addOperationGetAccessKeyInfoMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccessKeyInfo", params, optFns, c.addOperationGetAccessKeyInfoMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type GetAccessKeyInfoOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccessKeyInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccessKeyInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetAccessKeyInfo{}, middleware.After)
 	if err != nil {
 		return err

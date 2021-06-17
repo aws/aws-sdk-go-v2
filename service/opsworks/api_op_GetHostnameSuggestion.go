@@ -21,7 +21,7 @@ func (c *Client) GetHostnameSuggestion(ctx context.Context, params *GetHostnameS
 		params = &GetHostnameSuggestionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetHostnameSuggestion", params, optFns, addOperationGetHostnameSuggestionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetHostnameSuggestion", params, optFns, c.addOperationGetHostnameSuggestionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetHostnameSuggestionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetHostnameSuggestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetHostnameSuggestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetHostnameSuggestion{}, middleware.After)
 	if err != nil {
 		return err

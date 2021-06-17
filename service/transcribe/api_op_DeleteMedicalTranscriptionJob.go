@@ -17,7 +17,7 @@ func (c *Client) DeleteMedicalTranscriptionJob(ctx context.Context, params *Dele
 		params = &DeleteMedicalTranscriptionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMedicalTranscriptionJob", params, optFns, addOperationDeleteMedicalTranscriptionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMedicalTranscriptionJob", params, optFns, c.addOperationDeleteMedicalTranscriptionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteMedicalTranscriptionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMedicalTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMedicalTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMedicalTranscriptionJob{}, middleware.After)
 	if err != nil {
 		return err

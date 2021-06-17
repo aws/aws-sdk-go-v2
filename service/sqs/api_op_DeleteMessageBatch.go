@@ -25,7 +25,7 @@ func (c *Client) DeleteMessageBatch(ctx context.Context, params *DeleteMessageBa
 		params = &DeleteMessageBatchInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMessageBatch", params, optFns, addOperationDeleteMessageBatchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMessageBatch", params, optFns, c.addOperationDeleteMessageBatchMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DeleteMessageBatchOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMessageBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMessageBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteMessageBatch{}, middleware.After)
 	if err != nil {
 		return err

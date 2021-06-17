@@ -36,7 +36,7 @@ func (c *Client) AssociateRepository(ctx context.Context, params *AssociateRepos
 		params = &AssociateRepositoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateRepository", params, optFns, addOperationAssociateRepositoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateRepository", params, optFns, c.addOperationAssociateRepositoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +101,7 @@ type AssociateRepositoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateRepository{}, middleware.After)
 	if err != nil {
 		return err

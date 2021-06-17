@@ -19,7 +19,7 @@ func (c *Client) DescribeConditionalForwarders(ctx context.Context, params *Desc
 		params = &DescribeConditionalForwardersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeConditionalForwarders", params, optFns, addOperationDescribeConditionalForwardersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConditionalForwarders", params, optFns, c.addOperationDescribeConditionalForwardersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeConditionalForwardersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeConditionalForwardersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeConditionalForwardersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConditionalForwarders{}, middleware.After)
 	if err != nil {
 		return err

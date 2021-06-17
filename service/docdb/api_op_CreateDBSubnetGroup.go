@@ -18,7 +18,7 @@ func (c *Client) CreateDBSubnetGroup(ctx context.Context, params *CreateDBSubnet
 		params = &CreateDBSubnetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDBSubnetGroup", params, optFns, addOperationCreateDBSubnetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDBSubnetGroup", params, optFns, c.addOperationCreateDBSubnetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type CreateDBSubnetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDBSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDBSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBSubnetGroup{}, middleware.After)
 	if err != nil {
 		return err

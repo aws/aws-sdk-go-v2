@@ -17,7 +17,7 @@ func (c *Client) ListSubscriptionDefinitionVersions(ctx context.Context, params 
 		params = &ListSubscriptionDefinitionVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSubscriptionDefinitionVersions", params, optFns, addOperationListSubscriptionDefinitionVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSubscriptionDefinitionVersions", params, optFns, c.addOperationListSubscriptionDefinitionVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListSubscriptionDefinitionVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSubscriptionDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSubscriptionDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSubscriptionDefinitionVersions{}, middleware.After)
 	if err != nil {
 		return err

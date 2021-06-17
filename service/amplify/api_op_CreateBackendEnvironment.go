@@ -17,7 +17,7 @@ func (c *Client) CreateBackendEnvironment(ctx context.Context, params *CreateBac
 		params = &CreateBackendEnvironmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateBackendEnvironment", params, optFns, addOperationCreateBackendEnvironmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBackendEnvironment", params, optFns, c.addOperationCreateBackendEnvironmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type CreateBackendEnvironmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateBackendEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateBackendEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBackendEnvironment{}, middleware.After)
 	if err != nil {
 		return err

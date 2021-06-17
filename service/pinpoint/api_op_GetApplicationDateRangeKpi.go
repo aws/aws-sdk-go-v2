@@ -19,7 +19,7 @@ func (c *Client) GetApplicationDateRangeKpi(ctx context.Context, params *GetAppl
 		params = &GetApplicationDateRangeKpiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetApplicationDateRangeKpi", params, optFns, addOperationGetApplicationDateRangeKpiMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetApplicationDateRangeKpi", params, optFns, c.addOperationGetApplicationDateRangeKpiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type GetApplicationDateRangeKpiOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetApplicationDateRangeKpiMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetApplicationDateRangeKpiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplicationDateRangeKpi{}, middleware.After)
 	if err != nil {
 		return err

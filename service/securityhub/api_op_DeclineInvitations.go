@@ -19,7 +19,7 @@ func (c *Client) DeclineInvitations(ctx context.Context, params *DeclineInvitati
 		params = &DeclineInvitationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeclineInvitations", params, optFns, addOperationDeclineInvitationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeclineInvitations", params, optFns, c.addOperationDeclineInvitationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeclineInvitationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeclineInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeclineInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeclineInvitations{}, middleware.After)
 	if err != nil {
 		return err

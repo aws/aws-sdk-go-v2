@@ -21,7 +21,7 @@ func (c *Client) RemoveTagsFromVault(ctx context.Context, params *RemoveTagsFrom
 		params = &RemoveTagsFromVaultInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveTagsFromVault", params, optFns, addOperationRemoveTagsFromVaultMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveTagsFromVault", params, optFns, c.addOperationRemoveTagsFromVaultMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type RemoveTagsFromVaultOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveTagsFromVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveTagsFromVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveTagsFromVault{}, middleware.After)
 	if err != nil {
 		return err

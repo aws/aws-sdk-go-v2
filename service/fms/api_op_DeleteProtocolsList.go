@@ -16,7 +16,7 @@ func (c *Client) DeleteProtocolsList(ctx context.Context, params *DeleteProtocol
 		params = &DeleteProtocolsListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProtocolsList", params, optFns, addOperationDeleteProtocolsListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProtocolsList", params, optFns, c.addOperationDeleteProtocolsListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteProtocolsListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteProtocolsListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteProtocolsListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProtocolsList{}, middleware.After)
 	if err != nil {
 		return err

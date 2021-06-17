@@ -19,7 +19,7 @@ func (c *Client) DeleteKeySigningKey(ctx context.Context, params *DeleteKeySigni
 		params = &DeleteKeySigningKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteKeySigningKey", params, optFns, addOperationDeleteKeySigningKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteKeySigningKey", params, optFns, c.addOperationDeleteKeySigningKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DeleteKeySigningKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteKeySigningKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteKeySigningKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteKeySigningKey{}, middleware.After)
 	if err != nil {
 		return err

@@ -47,7 +47,7 @@ func (c *Client) CreateByteMatchSet(ctx context.Context, params *CreateByteMatch
 		params = &CreateByteMatchSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateByteMatchSet", params, optFns, addOperationCreateByteMatchSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateByteMatchSet", params, optFns, c.addOperationCreateByteMatchSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type CreateByteMatchSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateByteMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateByteMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateByteMatchSet{}, middleware.After)
 	if err != nil {
 		return err

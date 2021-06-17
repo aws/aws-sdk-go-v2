@@ -18,7 +18,7 @@ func (c *Client) CreateCacheSubnetGroup(ctx context.Context, params *CreateCache
 		params = &CreateCacheSubnetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCacheSubnetGroup", params, optFns, addOperationCreateCacheSubnetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCacheSubnetGroup", params, optFns, c.addOperationCreateCacheSubnetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type CreateCacheSubnetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCacheSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCacheSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateCacheSubnetGroup{}, middleware.After)
 	if err != nil {
 		return err

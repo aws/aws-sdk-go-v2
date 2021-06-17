@@ -16,7 +16,7 @@ func (c *Client) StopMonitoringSchedule(ctx context.Context, params *StopMonitor
 		params = &StopMonitoringScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopMonitoringSchedule", params, optFns, addOperationStopMonitoringScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopMonitoringSchedule", params, optFns, c.addOperationStopMonitoringScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type StopMonitoringScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopMonitoringScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopMonitoringScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopMonitoringSchedule{}, middleware.After)
 	if err != nil {
 		return err

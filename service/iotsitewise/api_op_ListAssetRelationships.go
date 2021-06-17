@@ -20,7 +20,7 @@ func (c *Client) ListAssetRelationships(ctx context.Context, params *ListAssetRe
 		params = &ListAssetRelationshipsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAssetRelationships", params, optFns, addOperationListAssetRelationshipsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAssetRelationships", params, optFns, c.addOperationListAssetRelationshipsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ListAssetRelationshipsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAssetRelationshipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAssetRelationshipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssetRelationships{}, middleware.After)
 	if err != nil {
 		return err

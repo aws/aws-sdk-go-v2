@@ -18,7 +18,7 @@ func (c *Client) DeleteBranch(ctx context.Context, params *DeleteBranchInput, op
 		params = &DeleteBranchInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBranch", params, optFns, addOperationDeleteBranchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBranch", params, optFns, c.addOperationDeleteBranchMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeleteBranchOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBranch{}, middleware.After)
 	if err != nil {
 		return err

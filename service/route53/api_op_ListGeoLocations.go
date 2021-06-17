@@ -25,7 +25,7 @@ func (c *Client) ListGeoLocations(ctx context.Context, params *ListGeoLocationsI
 		params = &ListGeoLocationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListGeoLocations", params, optFns, addOperationListGeoLocationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListGeoLocations", params, optFns, c.addOperationListGeoLocationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ type ListGeoLocationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListGeoLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListGeoLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListGeoLocations{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) RemoveIpRoutes(ctx context.Context, params *RemoveIpRoutesInput
 		params = &RemoveIpRoutesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveIpRoutes", params, optFns, addOperationRemoveIpRoutesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveIpRoutes", params, optFns, c.addOperationRemoveIpRoutesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type RemoveIpRoutesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveIpRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveIpRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveIpRoutes{}, middleware.After)
 	if err != nil {
 		return err

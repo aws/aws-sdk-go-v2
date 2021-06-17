@@ -17,7 +17,7 @@ func (c *Client) CreateUploadUrl(ctx context.Context, params *CreateUploadUrlInp
 		params = &CreateUploadUrlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateUploadUrl", params, optFns, addOperationCreateUploadUrlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateUploadUrl", params, optFns, c.addOperationCreateUploadUrlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type CreateUploadUrlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateUploadUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateUploadUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUploadUrl{}, middleware.After)
 	if err != nil {
 		return err

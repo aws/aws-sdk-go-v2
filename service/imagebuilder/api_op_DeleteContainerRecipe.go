@@ -16,7 +16,7 @@ func (c *Client) DeleteContainerRecipe(ctx context.Context, params *DeleteContai
 		params = &DeleteContainerRecipeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteContainerRecipe", params, optFns, addOperationDeleteContainerRecipeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteContainerRecipe", params, optFns, c.addOperationDeleteContainerRecipeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteContainerRecipeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteContainerRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteContainerRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteContainerRecipe{}, middleware.After)
 	if err != nil {
 		return err

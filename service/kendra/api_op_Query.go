@@ -33,7 +33,7 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 		params = &QueryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Query", params, optFns, addOperationQueryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "Query", params, optFns, c.addOperationQueryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -137,7 +137,7 @@ type QueryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpQuery{}, middleware.After)
 	if err != nil {
 		return err

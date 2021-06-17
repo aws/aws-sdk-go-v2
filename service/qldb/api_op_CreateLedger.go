@@ -18,7 +18,7 @@ func (c *Client) CreateLedger(ctx context.Context, params *CreateLedgerInput, op
 		params = &CreateLedgerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLedger", params, optFns, addOperationCreateLedgerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLedger", params, optFns, c.addOperationCreateLedgerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ type CreateLedgerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLedger{}, middleware.After)
 	if err != nil {
 		return err

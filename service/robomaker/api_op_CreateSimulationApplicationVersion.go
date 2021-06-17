@@ -18,7 +18,7 @@ func (c *Client) CreateSimulationApplicationVersion(ctx context.Context, params 
 		params = &CreateSimulationApplicationVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSimulationApplicationVersion", params, optFns, addOperationCreateSimulationApplicationVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSimulationApplicationVersion", params, optFns, c.addOperationCreateSimulationApplicationVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type CreateSimulationApplicationVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSimulationApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSimulationApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSimulationApplicationVersion{}, middleware.After)
 	if err != nil {
 		return err

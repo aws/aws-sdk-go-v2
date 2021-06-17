@@ -62,7 +62,7 @@ func (c *Client) PutRecordBatch(ctx context.Context, params *PutRecordBatchInput
 		params = &PutRecordBatchInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutRecordBatch", params, optFns, addOperationPutRecordBatchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutRecordBatch", params, optFns, c.addOperationPutRecordBatchMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ type PutRecordBatchOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutRecordBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutRecordBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRecordBatch{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) CreateNotificationSubscription(ctx context.Context, params *Cre
 		params = &CreateNotificationSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateNotificationSubscription", params, optFns, addOperationCreateNotificationSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateNotificationSubscription", params, optFns, c.addOperationCreateNotificationSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type CreateNotificationSubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateNotificationSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateNotificationSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNotificationSubscription{}, middleware.After)
 	if err != nil {
 		return err

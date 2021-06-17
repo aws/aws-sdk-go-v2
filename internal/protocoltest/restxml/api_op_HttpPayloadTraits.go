@@ -16,7 +16,7 @@ func (c *Client) HttpPayloadTraits(ctx context.Context, params *HttpPayloadTrait
 		params = &HttpPayloadTraitsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadTraits", params, optFns, addOperationHttpPayloadTraitsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadTraits", params, optFns, c.addOperationHttpPayloadTraitsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type HttpPayloadTraitsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHttpPayloadTraitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHttpPayloadTraitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadTraits{}, middleware.After)
 	if err != nil {
 		return err

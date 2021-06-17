@@ -22,7 +22,7 @@ func (c *Client) DescribeRdsDbInstances(ctx context.Context, params *DescribeRds
 		params = &DescribeRdsDbInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRdsDbInstances", params, optFns, addOperationDescribeRdsDbInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRdsDbInstances", params, optFns, c.addOperationDescribeRdsDbInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DescribeRdsDbInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRdsDbInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRdsDbInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRdsDbInstances{}, middleware.After)
 	if err != nil {
 		return err

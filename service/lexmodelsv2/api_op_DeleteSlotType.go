@@ -18,7 +18,7 @@ func (c *Client) DeleteSlotType(ctx context.Context, params *DeleteSlotTypeInput
 		params = &DeleteSlotTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSlotType", params, optFns, addOperationDeleteSlotTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSlotType", params, optFns, c.addOperationDeleteSlotTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type DeleteSlotTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSlotTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSlotTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSlotType{}, middleware.After)
 	if err != nil {
 		return err

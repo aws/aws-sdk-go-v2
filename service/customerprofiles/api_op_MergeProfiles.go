@@ -52,7 +52,7 @@ func (c *Client) MergeProfiles(ctx context.Context, params *MergeProfilesInput, 
 		params = &MergeProfilesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MergeProfiles", params, optFns, addOperationMergeProfilesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MergeProfiles", params, optFns, c.addOperationMergeProfilesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type MergeProfilesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationMergeProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMergeProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpMergeProfiles{}, middleware.After)
 	if err != nil {
 		return err

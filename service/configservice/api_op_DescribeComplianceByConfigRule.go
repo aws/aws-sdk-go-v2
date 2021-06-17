@@ -39,7 +39,7 @@ func (c *Client) DescribeComplianceByConfigRule(ctx context.Context, params *Des
 		params = &DescribeComplianceByConfigRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeComplianceByConfigRule", params, optFns, addOperationDescribeComplianceByConfigRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeComplianceByConfigRule", params, optFns, c.addOperationDescribeComplianceByConfigRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type DescribeComplianceByConfigRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeComplianceByConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeComplianceByConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeComplianceByConfigRule{}, middleware.After)
 	if err != nil {
 		return err

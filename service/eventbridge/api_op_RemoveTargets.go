@@ -23,7 +23,7 @@ func (c *Client) RemoveTargets(ctx context.Context, params *RemoveTargetsInput, 
 		params = &RemoveTargetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveTargets", params, optFns, addOperationRemoveTargetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveTargets", params, optFns, c.addOperationRemoveTargetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type RemoveTargetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveTargets{}, middleware.After)
 	if err != nil {
 		return err

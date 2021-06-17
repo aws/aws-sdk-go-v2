@@ -20,7 +20,7 @@ func (c *Client) DisassociateRecoveryPoint(ctx context.Context, params *Disassoc
 		params = &DisassociateRecoveryPointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateRecoveryPoint", params, optFns, addOperationDisassociateRecoveryPointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateRecoveryPoint", params, optFns, c.addOperationDisassociateRecoveryPointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DisassociateRecoveryPointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateRecoveryPoint{}, middleware.After)
 	if err != nil {
 		return err

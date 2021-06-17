@@ -20,7 +20,7 @@ func (c *Client) InvokeAsync(ctx context.Context, params *InvokeAsyncInput, optF
 		params = &InvokeAsyncInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InvokeAsync", params, optFns, addOperationInvokeAsyncMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InvokeAsync", params, optFns, c.addOperationInvokeAsyncMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type InvokeAsyncOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInvokeAsyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInvokeAsyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeAsync{}, middleware.After)
 	if err != nil {
 		return err

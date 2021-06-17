@@ -16,7 +16,7 @@ func (c *Client) DeleteWorkflow(ctx context.Context, params *DeleteWorkflowInput
 		params = &DeleteWorkflowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkflow", params, optFns, addOperationDeleteWorkflowMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkflow", params, optFns, c.addOperationDeleteWorkflowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteWorkflowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWorkflow{}, middleware.After)
 	if err != nil {
 		return err

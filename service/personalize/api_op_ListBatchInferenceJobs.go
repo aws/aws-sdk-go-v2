@@ -19,7 +19,7 @@ func (c *Client) ListBatchInferenceJobs(ctx context.Context, params *ListBatchIn
 		params = &ListBatchInferenceJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBatchInferenceJobs", params, optFns, addOperationListBatchInferenceJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBatchInferenceJobs", params, optFns, c.addOperationListBatchInferenceJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListBatchInferenceJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBatchInferenceJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBatchInferenceJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListBatchInferenceJobs{}, middleware.After)
 	if err != nil {
 		return err

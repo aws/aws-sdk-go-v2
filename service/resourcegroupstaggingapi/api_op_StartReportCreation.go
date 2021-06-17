@@ -22,7 +22,7 @@ func (c *Client) StartReportCreation(ctx context.Context, params *StartReportCre
 		params = &StartReportCreationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartReportCreation", params, optFns, addOperationStartReportCreationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartReportCreation", params, optFns, c.addOperationStartReportCreationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StartReportCreationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartReportCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartReportCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartReportCreation{}, middleware.After)
 	if err != nil {
 		return err

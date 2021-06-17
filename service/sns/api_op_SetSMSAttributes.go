@@ -24,7 +24,7 @@ func (c *Client) SetSMSAttributes(ctx context.Context, params *SetSMSAttributesI
 		params = &SetSMSAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetSMSAttributes", params, optFns, addOperationSetSMSAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetSMSAttributes", params, optFns, c.addOperationSetSMSAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -115,7 +115,7 @@ type SetSMSAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetSMSAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetSMSAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetSMSAttributes{}, middleware.After)
 	if err != nil {
 		return err

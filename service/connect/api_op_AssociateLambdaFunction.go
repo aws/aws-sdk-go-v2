@@ -18,7 +18,7 @@ func (c *Client) AssociateLambdaFunction(ctx context.Context, params *AssociateL
 		params = &AssociateLambdaFunctionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateLambdaFunction", params, optFns, addOperationAssociateLambdaFunctionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateLambdaFunction", params, optFns, c.addOperationAssociateLambdaFunctionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type AssociateLambdaFunctionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateLambdaFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateLambdaFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateLambdaFunction{}, middleware.After)
 	if err != nil {
 		return err

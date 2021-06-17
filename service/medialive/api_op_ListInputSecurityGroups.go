@@ -18,7 +18,7 @@ func (c *Client) ListInputSecurityGroups(ctx context.Context, params *ListInputS
 		params = &ListInputSecurityGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListInputSecurityGroups", params, optFns, addOperationListInputSecurityGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListInputSecurityGroups", params, optFns, c.addOperationListInputSecurityGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ListInputSecurityGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListInputSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListInputSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInputSecurityGroups{}, middleware.After)
 	if err != nil {
 		return err

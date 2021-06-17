@@ -23,7 +23,7 @@ func (c *Client) ListEntityRecognizers(ctx context.Context, params *ListEntityRe
 		params = &ListEntityRecognizersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEntityRecognizers", params, optFns, addOperationListEntityRecognizersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEntityRecognizers", params, optFns, c.addOperationListEntityRecognizersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListEntityRecognizersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEntityRecognizersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEntityRecognizersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEntityRecognizers{}, middleware.After)
 	if err != nil {
 		return err

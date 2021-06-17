@@ -19,7 +19,7 @@ func (c *Client) DescribeEventTracker(ctx context.Context, params *DescribeEvent
 		params = &DescribeEventTrackerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEventTracker", params, optFns, addOperationDescribeEventTrackerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEventTracker", params, optFns, c.addOperationDescribeEventTrackerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DescribeEventTrackerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEventTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEventTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEventTracker{}, middleware.After)
 	if err != nil {
 		return err

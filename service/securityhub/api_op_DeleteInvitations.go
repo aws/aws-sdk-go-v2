@@ -19,7 +19,7 @@ func (c *Client) DeleteInvitations(ctx context.Context, params *DeleteInvitation
 		params = &DeleteInvitationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteInvitations", params, optFns, addOperationDeleteInvitationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInvitations", params, optFns, c.addOperationDeleteInvitationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteInvitationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInvitations{}, middleware.After)
 	if err != nil {
 		return err

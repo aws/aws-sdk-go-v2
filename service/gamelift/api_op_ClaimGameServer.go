@@ -50,7 +50,7 @@ func (c *Client) ClaimGameServer(ctx context.Context, params *ClaimGameServerInp
 		params = &ClaimGameServerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ClaimGameServer", params, optFns, addOperationClaimGameServerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ClaimGameServer", params, optFns, c.addOperationClaimGameServerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type ClaimGameServerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationClaimGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationClaimGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpClaimGameServer{}, middleware.After)
 	if err != nil {
 		return err

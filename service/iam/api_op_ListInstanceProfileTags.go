@@ -21,7 +21,7 @@ func (c *Client) ListInstanceProfileTags(ctx context.Context, params *ListInstan
 		params = &ListInstanceProfileTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListInstanceProfileTags", params, optFns, addOperationListInstanceProfileTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListInstanceProfileTags", params, optFns, c.addOperationListInstanceProfileTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type ListInstanceProfileTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListInstanceProfileTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListInstanceProfileTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListInstanceProfileTags{}, middleware.After)
 	if err != nil {
 		return err

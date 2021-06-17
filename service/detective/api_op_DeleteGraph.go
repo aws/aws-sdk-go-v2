@@ -19,7 +19,7 @@ func (c *Client) DeleteGraph(ctx context.Context, params *DeleteGraphInput, optF
 		params = &DeleteGraphInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGraph", params, optFns, addOperationDeleteGraphMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGraph", params, optFns, c.addOperationDeleteGraphMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteGraphOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGraph{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) RemoveRoleFromInstanceProfile(ctx context.Context, params *Remo
 		params = &RemoveRoleFromInstanceProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveRoleFromInstanceProfile", params, optFns, addOperationRemoveRoleFromInstanceProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveRoleFromInstanceProfile", params, optFns, c.addOperationRemoveRoleFromInstanceProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type RemoveRoleFromInstanceProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveRoleFromInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveRoleFromInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemoveRoleFromInstanceProfile{}, middleware.After)
 	if err != nil {
 		return err

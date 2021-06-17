@@ -20,7 +20,7 @@ func (c *Client) GetProvisionedProductOutputs(ctx context.Context, params *GetPr
 		params = &GetProvisionedProductOutputsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetProvisionedProductOutputs", params, optFns, addOperationGetProvisionedProductOutputsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetProvisionedProductOutputs", params, optFns, c.addOperationGetProvisionedProductOutputsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type GetProvisionedProductOutputsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetProvisionedProductOutputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetProvisionedProductOutputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetProvisionedProductOutputs{}, middleware.After)
 	if err != nil {
 		return err

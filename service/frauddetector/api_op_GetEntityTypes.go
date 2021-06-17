@@ -23,7 +23,7 @@ func (c *Client) GetEntityTypes(ctx context.Context, params *GetEntityTypesInput
 		params = &GetEntityTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEntityTypes", params, optFns, addOperationGetEntityTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEntityTypes", params, optFns, c.addOperationGetEntityTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type GetEntityTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEntityTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEntityTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEntityTypes{}, middleware.After)
 	if err != nil {
 		return err

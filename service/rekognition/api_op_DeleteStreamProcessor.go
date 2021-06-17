@@ -19,7 +19,7 @@ func (c *Client) DeleteStreamProcessor(ctx context.Context, params *DeleteStream
 		params = &DeleteStreamProcessorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteStreamProcessor", params, optFns, addOperationDeleteStreamProcessorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteStreamProcessor", params, optFns, c.addOperationDeleteStreamProcessorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteStreamProcessorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteStreamProcessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteStreamProcessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteStreamProcessor{}, middleware.After)
 	if err != nil {
 		return err

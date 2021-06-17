@@ -23,7 +23,7 @@ func (c *Client) UploadSSHPublicKey(ctx context.Context, params *UploadSSHPublic
 		params = &UploadSSHPublicKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UploadSSHPublicKey", params, optFns, addOperationUploadSSHPublicKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UploadSSHPublicKey", params, optFns, c.addOperationUploadSSHPublicKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type UploadSSHPublicKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUploadSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUploadSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUploadSSHPublicKey{}, middleware.After)
 	if err != nil {
 		return err

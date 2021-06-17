@@ -30,7 +30,7 @@ func (c *Client) RevokeSecurityGroupEgress(ctx context.Context, params *RevokeSe
 		params = &RevokeSecurityGroupEgressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokeSecurityGroupEgress", params, optFns, addOperationRevokeSecurityGroupEgressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeSecurityGroupEgress", params, optFns, c.addOperationRevokeSecurityGroupEgressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type RevokeSecurityGroupEgressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokeSecurityGroupEgressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokeSecurityGroupEgressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpRevokeSecurityGroupEgress{}, middleware.After)
 	if err != nil {
 		return err

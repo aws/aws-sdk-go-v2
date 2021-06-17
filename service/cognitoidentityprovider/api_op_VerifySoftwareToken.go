@@ -19,7 +19,7 @@ func (c *Client) VerifySoftwareToken(ctx context.Context, params *VerifySoftware
 		params = &VerifySoftwareTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "VerifySoftwareToken", params, optFns, addOperationVerifySoftwareTokenMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "VerifySoftwareToken", params, optFns, c.addOperationVerifySoftwareTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type VerifySoftwareTokenOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationVerifySoftwareTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationVerifySoftwareTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpVerifySoftwareToken{}, middleware.After)
 	if err != nil {
 		return err

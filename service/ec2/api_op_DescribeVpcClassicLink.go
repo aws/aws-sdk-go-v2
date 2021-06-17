@@ -17,7 +17,7 @@ func (c *Client) DescribeVpcClassicLink(ctx context.Context, params *DescribeVpc
 		params = &DescribeVpcClassicLinkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeVpcClassicLink", params, optFns, addOperationDescribeVpcClassicLinkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeVpcClassicLink", params, optFns, c.addOperationDescribeVpcClassicLinkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DescribeVpcClassicLinkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeVpcClassicLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeVpcClassicLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeVpcClassicLink{}, middleware.After)
 	if err != nil {
 		return err

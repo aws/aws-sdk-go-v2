@@ -22,7 +22,7 @@ func (c *Client) DeleteEnvironmentConfiguration(ctx context.Context, params *Del
 		params = &DeleteEnvironmentConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEnvironmentConfiguration", params, optFns, addOperationDeleteEnvironmentConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEnvironmentConfiguration", params, optFns, c.addOperationDeleteEnvironmentConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteEnvironmentConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEnvironmentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEnvironmentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteEnvironmentConfiguration{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CheckDomainTransferability(ctx context.Context, params *CheckDo
 		params = &CheckDomainTransferabilityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CheckDomainTransferability", params, optFns, addOperationCheckDomainTransferabilityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CheckDomainTransferability", params, optFns, c.addOperationCheckDomainTransferabilityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type CheckDomainTransferabilityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCheckDomainTransferabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCheckDomainTransferabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckDomainTransferability{}, middleware.After)
 	if err != nil {
 		return err

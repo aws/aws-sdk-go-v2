@@ -16,7 +16,7 @@ func (c *Client) DeleteBroker(ctx context.Context, params *DeleteBrokerInput, op
 		params = &DeleteBrokerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBroker", params, optFns, addOperationDeleteBrokerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBroker", params, optFns, c.addOperationDeleteBrokerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteBrokerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBroker{}, middleware.After)
 	if err != nil {
 		return err

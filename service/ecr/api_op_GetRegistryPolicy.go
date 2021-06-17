@@ -16,7 +16,7 @@ func (c *Client) GetRegistryPolicy(ctx context.Context, params *GetRegistryPolic
 		params = &GetRegistryPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRegistryPolicy", params, optFns, addOperationGetRegistryPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRegistryPolicy", params, optFns, c.addOperationGetRegistryPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type GetRegistryPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRegistryPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRegistryPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRegistryPolicy{}, middleware.After)
 	if err != nil {
 		return err

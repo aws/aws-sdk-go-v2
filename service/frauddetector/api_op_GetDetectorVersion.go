@@ -17,7 +17,7 @@ func (c *Client) GetDetectorVersion(ctx context.Context, params *GetDetectorVers
 		params = &GetDetectorVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDetectorVersion", params, optFns, addOperationGetDetectorVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDetectorVersion", params, optFns, c.addOperationGetDetectorVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type GetDetectorVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDetectorVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDetectorVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDetectorVersion{}, middleware.After)
 	if err != nil {
 		return err

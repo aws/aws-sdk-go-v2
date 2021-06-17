@@ -21,7 +21,7 @@ func (c *Client) DeleteSigningCertificate(ctx context.Context, params *DeleteSig
 		params = &DeleteSigningCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSigningCertificate", params, optFns, addOperationDeleteSigningCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSigningCertificate", params, optFns, c.addOperationDeleteSigningCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteSigningCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSigningCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSigningCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteSigningCertificate{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteVirtualInterface(ctx context.Context, params *DeleteVirtu
 		params = &DeleteVirtualInterfaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVirtualInterface", params, optFns, addOperationDeleteVirtualInterfaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVirtualInterface", params, optFns, c.addOperationDeleteVirtualInterfaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type DeleteVirtualInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteVirtualInterface{}, middleware.After)
 	if err != nil {
 		return err

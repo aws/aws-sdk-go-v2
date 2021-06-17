@@ -18,7 +18,7 @@ func (c *Client) DisassociateResource(ctx context.Context, params *DisassociateR
 		params = &DisassociateResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateResource", params, optFns, addOperationDisassociateResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateResource", params, optFns, c.addOperationDisassociateResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DisassociateResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateResource{}, middleware.After)
 	if err != nil {
 		return err

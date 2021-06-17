@@ -18,7 +18,7 @@ func (c *Client) ResumeContactRecording(ctx context.Context, params *ResumeConta
 		params = &ResumeContactRecordingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResumeContactRecording", params, optFns, addOperationResumeContactRecordingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResumeContactRecording", params, optFns, c.addOperationResumeContactRecordingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ResumeContactRecordingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResumeContactRecordingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResumeContactRecordingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpResumeContactRecording{}, middleware.After)
 	if err != nil {
 		return err

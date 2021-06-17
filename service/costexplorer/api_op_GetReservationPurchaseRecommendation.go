@@ -31,7 +31,7 @@ func (c *Client) GetReservationPurchaseRecommendation(ctx context.Context, param
 		params = &GetReservationPurchaseRecommendationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetReservationPurchaseRecommendation", params, optFns, addOperationGetReservationPurchaseRecommendationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetReservationPurchaseRecommendation", params, optFns, c.addOperationGetReservationPurchaseRecommendationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -130,7 +130,7 @@ type GetReservationPurchaseRecommendationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetReservationPurchaseRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetReservationPurchaseRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetReservationPurchaseRecommendation{}, middleware.After)
 	if err != nil {
 		return err

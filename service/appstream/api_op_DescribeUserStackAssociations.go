@@ -24,7 +24,7 @@ func (c *Client) DescribeUserStackAssociations(ctx context.Context, params *Desc
 		params = &DescribeUserStackAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeUserStackAssociations", params, optFns, addOperationDescribeUserStackAssociationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeUserStackAssociations", params, optFns, c.addOperationDescribeUserStackAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeUserStackAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeUserStackAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeUserStackAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUserStackAssociations{}, middleware.After)
 	if err != nil {
 		return err

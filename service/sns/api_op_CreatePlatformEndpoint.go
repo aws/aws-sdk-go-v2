@@ -29,7 +29,7 @@ func (c *Client) CreatePlatformEndpoint(ctx context.Context, params *CreatePlatf
 		params = &CreatePlatformEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePlatformEndpoint", params, optFns, addOperationCreatePlatformEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePlatformEndpoint", params, optFns, c.addOperationCreatePlatformEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type CreatePlatformEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePlatformEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePlatformEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreatePlatformEndpoint{}, middleware.After)
 	if err != nil {
 		return err

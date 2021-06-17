@@ -34,7 +34,7 @@ func (c *Client) RegisterInstancesWithLoadBalancer(ctx context.Context, params *
 		params = &RegisterInstancesWithLoadBalancerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterInstancesWithLoadBalancer", params, optFns, addOperationRegisterInstancesWithLoadBalancerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterInstancesWithLoadBalancer", params, optFns, c.addOperationRegisterInstancesWithLoadBalancerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type RegisterInstancesWithLoadBalancerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterInstancesWithLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterInstancesWithLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRegisterInstancesWithLoadBalancer{}, middleware.After)
 	if err != nil {
 		return err

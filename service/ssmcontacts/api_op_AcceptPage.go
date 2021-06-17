@@ -17,7 +17,7 @@ func (c *Client) AcceptPage(ctx context.Context, params *AcceptPageInput, optFns
 		params = &AcceptPageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcceptPage", params, optFns, addOperationAcceptPageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcceptPage", params, optFns, c.addOperationAcceptPageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type AcceptPageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAcceptPageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAcceptPageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcceptPage{}, middleware.After)
 	if err != nil {
 		return err

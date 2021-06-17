@@ -21,7 +21,7 @@ func (c *Client) ListOfferingPromotions(ctx context.Context, params *ListOfferin
 		params = &ListOfferingPromotionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListOfferingPromotions", params, optFns, addOperationListOfferingPromotionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListOfferingPromotions", params, optFns, c.addOperationListOfferingPromotionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ListOfferingPromotionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListOfferingPromotionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListOfferingPromotionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOfferingPromotions{}, middleware.After)
 	if err != nil {
 		return err

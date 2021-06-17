@@ -16,7 +16,7 @@ func (c *Client) DeleteAppLaunchConfiguration(ctx context.Context, params *Delet
 		params = &DeleteAppLaunchConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAppLaunchConfiguration", params, optFns, addOperationDeleteAppLaunchConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAppLaunchConfiguration", params, optFns, c.addOperationDeleteAppLaunchConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type DeleteAppLaunchConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAppLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAppLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAppLaunchConfiguration{}, middleware.After)
 	if err != nil {
 		return err

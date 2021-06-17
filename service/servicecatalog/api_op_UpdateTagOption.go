@@ -17,7 +17,7 @@ func (c *Client) UpdateTagOption(ctx context.Context, params *UpdateTagOptionInp
 		params = &UpdateTagOptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateTagOption", params, optFns, addOperationUpdateTagOptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateTagOption", params, optFns, c.addOperationUpdateTagOptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type UpdateTagOptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateTagOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateTagOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTagOption{}, middleware.After)
 	if err != nil {
 		return err

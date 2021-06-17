@@ -18,7 +18,7 @@ func (c *Client) GetAppLaunchConfiguration(ctx context.Context, params *GetAppLa
 		params = &GetAppLaunchConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAppLaunchConfiguration", params, optFns, addOperationGetAppLaunchConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAppLaunchConfiguration", params, optFns, c.addOperationGetAppLaunchConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetAppLaunchConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAppLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAppLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAppLaunchConfiguration{}, middleware.After)
 	if err != nil {
 		return err

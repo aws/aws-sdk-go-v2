@@ -15,7 +15,7 @@ func (c *Client) XmlUnions(ctx context.Context, params *XmlUnionsInput, optFns .
 		params = &XmlUnionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "XmlUnions", params, optFns, addOperationXmlUnionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "XmlUnions", params, optFns, c.addOperationXmlUnionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ type XmlUnionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationXmlUnionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationXmlUnionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlUnions{}, middleware.After)
 	if err != nil {
 		return err

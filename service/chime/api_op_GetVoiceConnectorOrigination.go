@@ -18,7 +18,7 @@ func (c *Client) GetVoiceConnectorOrigination(ctx context.Context, params *GetVo
 		params = &GetVoiceConnectorOriginationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetVoiceConnectorOrigination", params, optFns, addOperationGetVoiceConnectorOriginationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetVoiceConnectorOrigination", params, optFns, c.addOperationGetVoiceConnectorOriginationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetVoiceConnectorOriginationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetVoiceConnectorOriginationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetVoiceConnectorOriginationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVoiceConnectorOrigination{}, middleware.After)
 	if err != nil {
 		return err

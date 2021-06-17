@@ -29,7 +29,7 @@ func (c *Client) PromoteReadReplica(ctx context.Context, params *PromoteReadRepl
 		params = &PromoteReadReplicaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PromoteReadReplica", params, optFns, addOperationPromoteReadReplicaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PromoteReadReplica", params, optFns, c.addOperationPromoteReadReplicaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type PromoteReadReplicaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPromoteReadReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPromoteReadReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPromoteReadReplica{}, middleware.After)
 	if err != nil {
 		return err

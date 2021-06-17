@@ -20,7 +20,7 @@ func (c *Client) StopStack(ctx context.Context, params *StopStackInput, optFns .
 		params = &StopStackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopStack", params, optFns, addOperationStopStackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopStack", params, optFns, c.addOperationStopStackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type StopStackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopStack{}, middleware.After)
 	if err != nil {
 		return err

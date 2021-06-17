@@ -36,7 +36,7 @@ func (c *Client) DeleteSqlInjectionMatchSet(ctx context.Context, params *DeleteS
 		params = &DeleteSqlInjectionMatchSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSqlInjectionMatchSet", params, optFns, addOperationDeleteSqlInjectionMatchSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSqlInjectionMatchSet", params, optFns, c.addOperationDeleteSqlInjectionMatchSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type DeleteSqlInjectionMatchSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSqlInjectionMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSqlInjectionMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSqlInjectionMatchSet{}, middleware.After)
 	if err != nil {
 		return err

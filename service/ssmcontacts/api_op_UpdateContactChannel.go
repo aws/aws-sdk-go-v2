@@ -17,7 +17,7 @@ func (c *Client) UpdateContactChannel(ctx context.Context, params *UpdateContact
 		params = &UpdateContactChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateContactChannel", params, optFns, addOperationUpdateContactChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateContactChannel", params, optFns, c.addOperationUpdateContactChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type UpdateContactChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateContactChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateContactChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateContactChannel{}, middleware.After)
 	if err != nil {
 		return err

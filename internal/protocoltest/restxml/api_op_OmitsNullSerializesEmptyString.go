@@ -15,7 +15,7 @@ func (c *Client) OmitsNullSerializesEmptyString(ctx context.Context, params *Omi
 		params = &OmitsNullSerializesEmptyStringInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "OmitsNullSerializesEmptyString", params, optFns, addOperationOmitsNullSerializesEmptyStringMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "OmitsNullSerializesEmptyString", params, optFns, c.addOperationOmitsNullSerializesEmptyStringMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ type OmitsNullSerializesEmptyStringOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationOmitsNullSerializesEmptyStringMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationOmitsNullSerializesEmptyStringMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpOmitsNullSerializesEmptyString{}, middleware.After)
 	if err != nil {
 		return err

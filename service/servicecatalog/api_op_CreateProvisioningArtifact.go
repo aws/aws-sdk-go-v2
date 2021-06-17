@@ -23,7 +23,7 @@ func (c *Client) CreateProvisioningArtifact(ctx context.Context, params *CreateP
 		params = &CreateProvisioningArtifactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateProvisioningArtifact", params, optFns, addOperationCreateProvisioningArtifactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateProvisioningArtifact", params, optFns, c.addOperationCreateProvisioningArtifactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type CreateProvisioningArtifactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProvisioningArtifact{}, middleware.After)
 	if err != nil {
 		return err

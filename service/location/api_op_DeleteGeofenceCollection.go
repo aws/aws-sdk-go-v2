@@ -18,7 +18,7 @@ func (c *Client) DeleteGeofenceCollection(ctx context.Context, params *DeleteGeo
 		params = &DeleteGeofenceCollectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGeofenceCollection", params, optFns, addOperationDeleteGeofenceCollectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGeofenceCollection", params, optFns, c.addOperationDeleteGeofenceCollectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteGeofenceCollectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGeofenceCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGeofenceCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGeofenceCollection{}, middleware.After)
 	if err != nil {
 		return err

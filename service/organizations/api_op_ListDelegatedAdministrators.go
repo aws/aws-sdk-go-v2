@@ -21,7 +21,7 @@ func (c *Client) ListDelegatedAdministrators(ctx context.Context, params *ListDe
 		params = &ListDelegatedAdministratorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDelegatedAdministrators", params, optFns, addOperationListDelegatedAdministratorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDelegatedAdministrators", params, optFns, c.addOperationListDelegatedAdministratorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type ListDelegatedAdministratorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDelegatedAdministratorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDelegatedAdministratorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDelegatedAdministrators{}, middleware.After)
 	if err != nil {
 		return err

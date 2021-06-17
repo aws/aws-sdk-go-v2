@@ -21,7 +21,7 @@ func (c *Client) PurchaseOffering(ctx context.Context, params *PurchaseOfferingI
 		params = &PurchaseOfferingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PurchaseOffering", params, optFns, addOperationPurchaseOfferingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PurchaseOffering", params, optFns, c.addOperationPurchaseOfferingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type PurchaseOfferingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPurchaseOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPurchaseOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPurchaseOffering{}, middleware.After)
 	if err != nil {
 		return err

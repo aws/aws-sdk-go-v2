@@ -20,7 +20,7 @@ func (c *Client) GetFederationToken(ctx context.Context, params *GetFederationTo
 		params = &GetFederationTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFederationToken", params, optFns, addOperationGetFederationTokenMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFederationToken", params, optFns, c.addOperationGetFederationTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetFederationTokenOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFederationTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFederationTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFederationToken{}, middleware.After)
 	if err != nil {
 		return err

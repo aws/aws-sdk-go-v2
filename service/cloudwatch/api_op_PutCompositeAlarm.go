@@ -44,7 +44,7 @@ func (c *Client) PutCompositeAlarm(ctx context.Context, params *PutCompositeAlar
 		params = &PutCompositeAlarmInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutCompositeAlarm", params, optFns, addOperationPutCompositeAlarmMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutCompositeAlarm", params, optFns, c.addOperationPutCompositeAlarmMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -151,7 +151,7 @@ type PutCompositeAlarmOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutCompositeAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutCompositeAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutCompositeAlarm{}, middleware.After)
 	if err != nil {
 		return err

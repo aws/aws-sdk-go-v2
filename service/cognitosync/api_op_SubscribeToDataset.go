@@ -33,7 +33,7 @@ func (c *Client) SubscribeToDataset(ctx context.Context, params *SubscribeToData
 		params = &SubscribeToDatasetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SubscribeToDataset", params, optFns, addOperationSubscribeToDatasetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SubscribeToDataset", params, optFns, c.addOperationSubscribeToDatasetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type SubscribeToDatasetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSubscribeToDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSubscribeToDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSubscribeToDataset{}, middleware.After)
 	if err != nil {
 		return err

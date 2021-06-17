@@ -18,7 +18,7 @@ func (c *Client) DescribeAuditTask(ctx context.Context, params *DescribeAuditTas
 		params = &DescribeAuditTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAuditTask", params, optFns, addOperationDescribeAuditTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAuditTask", params, optFns, c.addOperationDescribeAuditTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeAuditTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAuditTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAuditTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAuditTask{}, middleware.After)
 	if err != nil {
 		return err

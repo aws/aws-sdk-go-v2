@@ -21,7 +21,7 @@ func (c *Client) GetAutoScalingGroupRecommendations(ctx context.Context, params 
 		params = &GetAutoScalingGroupRecommendationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAutoScalingGroupRecommendations", params, optFns, addOperationGetAutoScalingGroupRecommendationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAutoScalingGroupRecommendations", params, optFns, c.addOperationGetAutoScalingGroupRecommendationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type GetAutoScalingGroupRecommendationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAutoScalingGroupRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAutoScalingGroupRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAutoScalingGroupRecommendations{}, middleware.After)
 	if err != nil {
 		return err

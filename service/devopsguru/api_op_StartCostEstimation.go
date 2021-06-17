@@ -19,7 +19,7 @@ func (c *Client) StartCostEstimation(ctx context.Context, params *StartCostEstim
 		params = &StartCostEstimationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartCostEstimation", params, optFns, addOperationStartCostEstimationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartCostEstimation", params, optFns, c.addOperationStartCostEstimationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type StartCostEstimationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartCostEstimationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartCostEstimationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartCostEstimation{}, middleware.After)
 	if err != nil {
 		return err

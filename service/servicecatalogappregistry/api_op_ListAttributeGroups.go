@@ -18,7 +18,7 @@ func (c *Client) ListAttributeGroups(ctx context.Context, params *ListAttributeG
 		params = &ListAttributeGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAttributeGroups", params, optFns, addOperationListAttributeGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAttributeGroups", params, optFns, c.addOperationListAttributeGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ListAttributeGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAttributeGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAttributeGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAttributeGroups{}, middleware.After)
 	if err != nil {
 		return err

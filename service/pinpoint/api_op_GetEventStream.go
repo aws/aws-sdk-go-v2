@@ -17,7 +17,7 @@ func (c *Client) GetEventStream(ctx context.Context, params *GetEventStreamInput
 		params = &GetEventStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEventStream", params, optFns, addOperationGetEventStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEventStream", params, optFns, c.addOperationGetEventStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type GetEventStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEventStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEventStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEventStream{}, middleware.After)
 	if err != nil {
 		return err

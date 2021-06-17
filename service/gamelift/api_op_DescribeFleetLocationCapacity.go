@@ -32,7 +32,7 @@ func (c *Client) DescribeFleetLocationCapacity(ctx context.Context, params *Desc
 		params = &DescribeFleetLocationCapacityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFleetLocationCapacity", params, optFns, addOperationDescribeFleetLocationCapacityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFleetLocationCapacity", params, optFns, c.addOperationDescribeFleetLocationCapacityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DescribeFleetLocationCapacityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFleetLocationCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFleetLocationCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFleetLocationCapacity{}, middleware.After)
 	if err != nil {
 		return err

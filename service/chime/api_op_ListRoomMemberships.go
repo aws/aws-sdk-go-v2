@@ -19,7 +19,7 @@ func (c *Client) ListRoomMemberships(ctx context.Context, params *ListRoomMember
 		params = &ListRoomMembershipsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRoomMemberships", params, optFns, addOperationListRoomMembershipsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRoomMemberships", params, optFns, c.addOperationListRoomMembershipsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListRoomMembershipsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRoomMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRoomMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRoomMemberships{}, middleware.After)
 	if err != nil {
 		return err

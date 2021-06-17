@@ -27,7 +27,7 @@ func (c *Client) DisassociateConnectionFromLag(ctx context.Context, params *Disa
 		params = &DisassociateConnectionFromLagInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateConnectionFromLag", params, optFns, addOperationDisassociateConnectionFromLagMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateConnectionFromLag", params, optFns, c.addOperationDisassociateConnectionFromLagMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -156,7 +156,7 @@ type DisassociateConnectionFromLagOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateConnectionFromLagMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateConnectionFromLagMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateConnectionFromLag{}, middleware.After)
 	if err != nil {
 		return err

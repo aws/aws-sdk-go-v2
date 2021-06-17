@@ -16,7 +16,7 @@ func (c *Client) DeleteDedicatedIpPool(ctx context.Context, params *DeleteDedica
 		params = &DeleteDedicatedIpPoolInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDedicatedIpPool", params, optFns, addOperationDeleteDedicatedIpPoolMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDedicatedIpPool", params, optFns, c.addOperationDeleteDedicatedIpPoolMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteDedicatedIpPoolOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDedicatedIpPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDedicatedIpPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDedicatedIpPool{}, middleware.After)
 	if err != nil {
 		return err

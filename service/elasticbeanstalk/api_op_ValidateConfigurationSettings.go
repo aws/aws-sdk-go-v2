@@ -20,7 +20,7 @@ func (c *Client) ValidateConfigurationSettings(ctx context.Context, params *Vali
 		params = &ValidateConfigurationSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ValidateConfigurationSettings", params, optFns, addOperationValidateConfigurationSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ValidateConfigurationSettings", params, optFns, c.addOperationValidateConfigurationSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ValidateConfigurationSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationValidateConfigurationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationValidateConfigurationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpValidateConfigurationSettings{}, middleware.After)
 	if err != nil {
 		return err

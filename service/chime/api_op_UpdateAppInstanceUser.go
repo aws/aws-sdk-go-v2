@@ -17,7 +17,7 @@ func (c *Client) UpdateAppInstanceUser(ctx context.Context, params *UpdateAppIns
 		params = &UpdateAppInstanceUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAppInstanceUser", params, optFns, addOperationUpdateAppInstanceUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAppInstanceUser", params, optFns, c.addOperationUpdateAppInstanceUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UpdateAppInstanceUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAppInstanceUser{}, middleware.After)
 	if err != nil {
 		return err

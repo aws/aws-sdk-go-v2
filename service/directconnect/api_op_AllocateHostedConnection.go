@@ -24,7 +24,7 @@ func (c *Client) AllocateHostedConnection(ctx context.Context, params *AllocateH
 		params = &AllocateHostedConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AllocateHostedConnection", params, optFns, addOperationAllocateHostedConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AllocateHostedConnection", params, optFns, c.addOperationAllocateHostedConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -174,7 +174,7 @@ type AllocateHostedConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAllocateHostedConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAllocateHostedConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAllocateHostedConnection{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...
 		params = &GetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetGroup", params, optFns, addOperationGetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetGroup", params, optFns, c.addOperationGetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGroup{}, middleware.After)
 	if err != nil {
 		return err

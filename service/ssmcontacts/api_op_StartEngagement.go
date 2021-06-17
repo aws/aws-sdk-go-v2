@@ -18,7 +18,7 @@ func (c *Client) StartEngagement(ctx context.Context, params *StartEngagementInp
 		params = &StartEngagementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartEngagement", params, optFns, addOperationStartEngagementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartEngagement", params, optFns, c.addOperationStartEngagementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type StartEngagementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartEngagement{}, middleware.After)
 	if err != nil {
 		return err

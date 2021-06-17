@@ -19,7 +19,7 @@ func (c *Client) UpdateNotebookInstance(ctx context.Context, params *UpdateNoteb
 		params = &UpdateNotebookInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateNotebookInstance", params, optFns, addOperationUpdateNotebookInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateNotebookInstance", params, optFns, c.addOperationUpdateNotebookInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -122,7 +122,7 @@ type UpdateNotebookInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateNotebookInstance{}, middleware.After)
 	if err != nil {
 		return err

@@ -25,7 +25,7 @@ func (c *Client) DeleteIntent(ctx context.Context, params *DeleteIntentInput, op
 		params = &DeleteIntentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteIntent", params, optFns, addOperationDeleteIntentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteIntent", params, optFns, c.addOperationDeleteIntentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteIntentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIntent{}, middleware.After)
 	if err != nil {
 		return err

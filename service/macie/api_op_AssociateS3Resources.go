@@ -21,7 +21,7 @@ func (c *Client) AssociateS3Resources(ctx context.Context, params *AssociateS3Re
 		params = &AssociateS3ResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateS3Resources", params, optFns, addOperationAssociateS3ResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateS3Resources", params, optFns, c.addOperationAssociateS3ResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type AssociateS3ResourcesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateS3ResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateS3ResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateS3Resources{}, middleware.After)
 	if err != nil {
 		return err

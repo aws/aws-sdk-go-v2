@@ -31,7 +31,7 @@ func (c *Client) SetAlarmState(ctx context.Context, params *SetAlarmStateInput, 
 		params = &SetAlarmStateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetAlarmState", params, optFns, addOperationSetAlarmStateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetAlarmState", params, optFns, c.addOperationSetAlarmStateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type SetAlarmStateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetAlarmStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetAlarmStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetAlarmState{}, middleware.After)
 	if err != nil {
 		return err

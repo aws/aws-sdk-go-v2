@@ -24,7 +24,7 @@ func (c *Client) DescribeStreamConsumer(ctx context.Context, params *DescribeStr
 		params = &DescribeStreamConsumerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeStreamConsumer", params, optFns, addOperationDescribeStreamConsumerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeStreamConsumer", params, optFns, c.addOperationDescribeStreamConsumerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeStreamConsumerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeStreamConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeStreamConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStreamConsumer{}, middleware.After)
 	if err != nil {
 		return err

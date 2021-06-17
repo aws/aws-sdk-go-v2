@@ -18,7 +18,7 @@ func (c *Client) DescribeCodeCoverages(ctx context.Context, params *DescribeCode
 		params = &DescribeCodeCoveragesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCodeCoverages", params, optFns, addOperationDescribeCodeCoveragesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCodeCoverages", params, optFns, c.addOperationDescribeCodeCoveragesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type DescribeCodeCoveragesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCodeCoveragesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCodeCoveragesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCodeCoverages{}, middleware.After)
 	if err != nil {
 		return err

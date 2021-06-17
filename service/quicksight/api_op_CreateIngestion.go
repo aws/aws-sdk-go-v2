@@ -23,7 +23,7 @@ func (c *Client) CreateIngestion(ctx context.Context, params *CreateIngestionInp
 		params = &CreateIngestionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateIngestion", params, optFns, addOperationCreateIngestionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateIngestion", params, optFns, c.addOperationCreateIngestionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type CreateIngestionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIngestion{}, middleware.After)
 	if err != nil {
 		return err

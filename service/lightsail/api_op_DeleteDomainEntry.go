@@ -20,7 +20,7 @@ func (c *Client) DeleteDomainEntry(ctx context.Context, params *DeleteDomainEntr
 		params = &DeleteDomainEntryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDomainEntry", params, optFns, addOperationDeleteDomainEntryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDomainEntry", params, optFns, c.addOperationDeleteDomainEntryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DeleteDomainEntryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDomainEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDomainEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDomainEntry{}, middleware.After)
 	if err != nil {
 		return err

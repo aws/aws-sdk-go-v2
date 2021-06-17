@@ -17,7 +17,7 @@ func (c *Client) GetPatchBaselineForPatchGroup(ctx context.Context, params *GetP
 		params = &GetPatchBaselineForPatchGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPatchBaselineForPatchGroup", params, optFns, addOperationGetPatchBaselineForPatchGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPatchBaselineForPatchGroup", params, optFns, c.addOperationGetPatchBaselineForPatchGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetPatchBaselineForPatchGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPatchBaselineForPatchGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPatchBaselineForPatchGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPatchBaselineForPatchGroup{}, middleware.After)
 	if err != nil {
 		return err

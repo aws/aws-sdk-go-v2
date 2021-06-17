@@ -20,7 +20,7 @@ func (c *Client) GetLinks(ctx context.Context, params *GetLinksInput, optFns ...
 		params = &GetLinksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLinks", params, optFns, addOperationGetLinksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLinks", params, optFns, c.addOperationGetLinksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type GetLinksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLinks{}, middleware.After)
 	if err != nil {
 		return err

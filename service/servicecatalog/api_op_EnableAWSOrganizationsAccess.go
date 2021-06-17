@@ -23,7 +23,7 @@ func (c *Client) EnableAWSOrganizationsAccess(ctx context.Context, params *Enabl
 		params = &EnableAWSOrganizationsAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableAWSOrganizationsAccess", params, optFns, addOperationEnableAWSOrganizationsAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableAWSOrganizationsAccess", params, optFns, c.addOperationEnableAWSOrganizationsAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type EnableAWSOrganizationsAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableAWSOrganizationsAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableAWSOrganizationsAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableAWSOrganizationsAccess{}, middleware.After)
 	if err != nil {
 		return err

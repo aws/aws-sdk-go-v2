@@ -17,7 +17,7 @@ func (c *Client) CopyBackupToRegion(ctx context.Context, params *CopyBackupToReg
 		params = &CopyBackupToRegionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopyBackupToRegion", params, optFns, addOperationCopyBackupToRegionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopyBackupToRegion", params, optFns, c.addOperationCopyBackupToRegionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type CopyBackupToRegionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopyBackupToRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopyBackupToRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopyBackupToRegion{}, middleware.After)
 	if err != nil {
 		return err

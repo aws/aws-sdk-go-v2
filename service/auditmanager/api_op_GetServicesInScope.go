@@ -17,7 +17,7 @@ func (c *Client) GetServicesInScope(ctx context.Context, params *GetServicesInSc
 		params = &GetServicesInScopeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetServicesInScope", params, optFns, addOperationGetServicesInScopeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetServicesInScope", params, optFns, c.addOperationGetServicesInScopeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type GetServicesInScopeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetServicesInScopeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetServicesInScopeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServicesInScope{}, middleware.After)
 	if err != nil {
 		return err

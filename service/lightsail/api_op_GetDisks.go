@@ -18,7 +18,7 @@ func (c *Client) GetDisks(ctx context.Context, params *GetDisksInput, optFns ...
 		params = &GetDisksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDisks", params, optFns, addOperationGetDisksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDisks", params, optFns, c.addOperationGetDisksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetDisksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDisksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDisksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDisks{}, middleware.After)
 	if err != nil {
 		return err

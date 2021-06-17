@@ -18,7 +18,7 @@ func (c *Client) CancelRetrieval(ctx context.Context, params *CancelRetrievalInp
 		params = &CancelRetrievalInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelRetrieval", params, optFns, addOperationCancelRetrievalMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelRetrieval", params, optFns, c.addOperationCancelRetrievalMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type CancelRetrievalOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelRetrievalMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelRetrievalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelRetrieval{}, middleware.After)
 	if err != nil {
 		return err

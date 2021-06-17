@@ -21,7 +21,7 @@ func (c *Client) DeleteEntityRecognizer(ctx context.Context, params *DeleteEntit
 		params = &DeleteEntityRecognizerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEntityRecognizer", params, optFns, addOperationDeleteEntityRecognizerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEntityRecognizer", params, optFns, c.addOperationDeleteEntityRecognizerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteEntityRecognizerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEntityRecognizer{}, middleware.After)
 	if err != nil {
 		return err

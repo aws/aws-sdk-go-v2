@@ -21,7 +21,7 @@ func (c *Client) ModifyInstanceFleet(ctx context.Context, params *ModifyInstance
 		params = &ModifyInstanceFleetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyInstanceFleet", params, optFns, addOperationModifyInstanceFleetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyInstanceFleet", params, optFns, c.addOperationModifyInstanceFleetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type ModifyInstanceFleetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyInstanceFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyInstanceFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyInstanceFleet{}, middleware.After)
 	if err != nil {
 		return err

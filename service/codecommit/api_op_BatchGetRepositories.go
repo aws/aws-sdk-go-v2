@@ -22,7 +22,7 @@ func (c *Client) BatchGetRepositories(ctx context.Context, params *BatchGetRepos
 		params = &BatchGetRepositoriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetRepositories", params, optFns, addOperationBatchGetRepositoriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetRepositories", params, optFns, c.addOperationBatchGetRepositoriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type BatchGetRepositoriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetRepositories{}, middleware.After)
 	if err != nil {
 		return err

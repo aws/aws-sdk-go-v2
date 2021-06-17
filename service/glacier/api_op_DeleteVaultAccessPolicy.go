@@ -24,7 +24,7 @@ func (c *Client) DeleteVaultAccessPolicy(ctx context.Context, params *DeleteVaul
 		params = &DeleteVaultAccessPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVaultAccessPolicy", params, optFns, addOperationDeleteVaultAccessPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVaultAccessPolicy", params, optFns, c.addOperationDeleteVaultAccessPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DeleteVaultAccessPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVaultAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVaultAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVaultAccessPolicy{}, middleware.After)
 	if err != nil {
 		return err

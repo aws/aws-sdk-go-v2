@@ -21,7 +21,7 @@ func (c *Client) CreateIAMPolicyAssignment(ctx context.Context, params *CreateIA
 		params = &CreateIAMPolicyAssignmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateIAMPolicyAssignment", params, optFns, addOperationCreateIAMPolicyAssignmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateIAMPolicyAssignment", params, optFns, c.addOperationCreateIAMPolicyAssignmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ type CreateIAMPolicyAssignmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateIAMPolicyAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateIAMPolicyAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIAMPolicyAssignment{}, middleware.After)
 	if err != nil {
 		return err

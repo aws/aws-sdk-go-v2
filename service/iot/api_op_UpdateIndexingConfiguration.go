@@ -17,7 +17,7 @@ func (c *Client) UpdateIndexingConfiguration(ctx context.Context, params *Update
 		params = &UpdateIndexingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateIndexingConfiguration", params, optFns, addOperationUpdateIndexingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateIndexingConfiguration", params, optFns, c.addOperationUpdateIndexingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type UpdateIndexingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateIndexingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateIndexingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIndexingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

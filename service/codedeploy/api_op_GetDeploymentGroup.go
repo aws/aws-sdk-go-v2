@@ -17,7 +17,7 @@ func (c *Client) GetDeploymentGroup(ctx context.Context, params *GetDeploymentGr
 		params = &GetDeploymentGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDeploymentGroup", params, optFns, addOperationGetDeploymentGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDeploymentGroup", params, optFns, c.addOperationGetDeploymentGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetDeploymentGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDeploymentGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDeploymentGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDeploymentGroup{}, middleware.After)
 	if err != nil {
 		return err

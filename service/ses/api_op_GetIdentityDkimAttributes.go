@@ -38,7 +38,7 @@ func (c *Client) GetIdentityDkimAttributes(ctx context.Context, params *GetIdent
 		params = &GetIdentityDkimAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetIdentityDkimAttributes", params, optFns, addOperationGetIdentityDkimAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetIdentityDkimAttributes", params, optFns, c.addOperationGetIdentityDkimAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type GetIdentityDkimAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetIdentityDkimAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIdentityDkimAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetIdentityDkimAttributes{}, middleware.After)
 	if err != nil {
 		return err

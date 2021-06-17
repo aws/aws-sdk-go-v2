@@ -25,7 +25,7 @@ func (c *Client) GetBucketAcl(ctx context.Context, params *GetBucketAclInput, op
 		params = &GetBucketAclInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketAcl", params, optFns, addOperationGetBucketAclMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketAcl", params, optFns, c.addOperationGetBucketAclMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetBucketAclOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketAclMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketAclMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketAcl{}, middleware.After)
 	if err != nil {
 		return err

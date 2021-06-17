@@ -24,7 +24,7 @@ func (c *Client) GetRule(ctx context.Context, params *GetRuleInput, optFns ...fu
 		params = &GetRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRule", params, optFns, addOperationGetRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRule", params, optFns, c.addOperationGetRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRule{}, middleware.After)
 	if err != nil {
 		return err

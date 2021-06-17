@@ -27,7 +27,7 @@ func (c *Client) UpdateMatchmakingConfiguration(ctx context.Context, params *Upd
 		params = &UpdateMatchmakingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateMatchmakingConfiguration", params, optFns, addOperationUpdateMatchmakingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMatchmakingConfiguration", params, optFns, c.addOperationUpdateMatchmakingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -147,7 +147,7 @@ type UpdateMatchmakingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateMatchmakingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateMatchmakingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMatchmakingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

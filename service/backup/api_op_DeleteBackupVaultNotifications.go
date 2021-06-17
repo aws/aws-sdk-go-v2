@@ -16,7 +16,7 @@ func (c *Client) DeleteBackupVaultNotifications(ctx context.Context, params *Del
 		params = &DeleteBackupVaultNotificationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBackupVaultNotifications", params, optFns, addOperationDeleteBackupVaultNotificationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBackupVaultNotifications", params, optFns, c.addOperationDeleteBackupVaultNotificationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteBackupVaultNotificationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBackupVaultNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBackupVaultNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBackupVaultNotifications{}, middleware.After)
 	if err != nil {
 		return err

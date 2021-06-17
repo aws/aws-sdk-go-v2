@@ -59,7 +59,7 @@ func (c *Client) PutMetricData(ctx context.Context, params *PutMetricDataInput, 
 		params = &PutMetricDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutMetricData", params, optFns, addOperationPutMetricDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutMetricData", params, optFns, c.addOperationPutMetricDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type PutMetricDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutMetricData{}, middleware.After)
 	if err != nil {
 		return err

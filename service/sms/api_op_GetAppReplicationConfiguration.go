@@ -18,7 +18,7 @@ func (c *Client) GetAppReplicationConfiguration(ctx context.Context, params *Get
 		params = &GetAppReplicationConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAppReplicationConfiguration", params, optFns, addOperationGetAppReplicationConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAppReplicationConfiguration", params, optFns, c.addOperationGetAppReplicationConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetAppReplicationConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAppReplicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAppReplicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAppReplicationConfiguration{}, middleware.After)
 	if err != nil {
 		return err

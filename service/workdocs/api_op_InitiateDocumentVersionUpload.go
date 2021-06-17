@@ -23,7 +23,7 @@ func (c *Client) InitiateDocumentVersionUpload(ctx context.Context, params *Init
 		params = &InitiateDocumentVersionUploadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InitiateDocumentVersionUpload", params, optFns, addOperationInitiateDocumentVersionUploadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InitiateDocumentVersionUpload", params, optFns, c.addOperationInitiateDocumentVersionUploadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type InitiateDocumentVersionUploadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInitiateDocumentVersionUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInitiateDocumentVersionUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInitiateDocumentVersionUpload{}, middleware.After)
 	if err != nil {
 		return err

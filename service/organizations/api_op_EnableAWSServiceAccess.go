@@ -34,7 +34,7 @@ func (c *Client) EnableAWSServiceAccess(ctx context.Context, params *EnableAWSSe
 		params = &EnableAWSServiceAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableAWSServiceAccess", params, optFns, addOperationEnableAWSServiceAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableAWSServiceAccess", params, optFns, c.addOperationEnableAWSServiceAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type EnableAWSServiceAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableAWSServiceAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableAWSServiceAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableAWSServiceAccess{}, middleware.After)
 	if err != nil {
 		return err

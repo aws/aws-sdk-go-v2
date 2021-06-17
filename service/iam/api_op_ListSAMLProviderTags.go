@@ -23,7 +23,7 @@ func (c *Client) ListSAMLProviderTags(ctx context.Context, params *ListSAMLProvi
 		params = &ListSAMLProviderTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSAMLProviderTags", params, optFns, addOperationListSAMLProviderTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSAMLProviderTags", params, optFns, c.addOperationListSAMLProviderTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type ListSAMLProviderTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSAMLProviderTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSAMLProviderTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListSAMLProviderTags{}, middleware.After)
 	if err != nil {
 		return err

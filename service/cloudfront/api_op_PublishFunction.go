@@ -23,7 +23,7 @@ func (c *Client) PublishFunction(ctx context.Context, params *PublishFunctionInp
 		params = &PublishFunctionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PublishFunction", params, optFns, addOperationPublishFunctionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PublishFunction", params, optFns, c.addOperationPublishFunctionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type PublishFunctionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPublishFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPublishFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPublishFunction{}, middleware.After)
 	if err != nil {
 		return err

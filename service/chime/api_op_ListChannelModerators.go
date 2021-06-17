@@ -20,7 +20,7 @@ func (c *Client) ListChannelModerators(ctx context.Context, params *ListChannelM
 		params = &ListChannelModeratorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListChannelModerators", params, optFns, addOperationListChannelModeratorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListChannelModerators", params, optFns, c.addOperationListChannelModeratorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ListChannelModeratorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListChannelModeratorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListChannelModeratorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChannelModerators{}, middleware.After)
 	if err != nil {
 		return err

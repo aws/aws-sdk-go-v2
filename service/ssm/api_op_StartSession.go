@@ -25,7 +25,7 @@ func (c *Client) StartSession(ctx context.Context, params *StartSessionInput, op
 		params = &StartSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartSession", params, optFns, addOperationStartSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartSession", params, optFns, c.addOperationStartSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type StartSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSession{}, middleware.After)
 	if err != nil {
 		return err

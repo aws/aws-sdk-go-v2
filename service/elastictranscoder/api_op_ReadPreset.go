@@ -17,7 +17,7 @@ func (c *Client) ReadPreset(ctx context.Context, params *ReadPresetInput, optFns
 		params = &ReadPresetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReadPreset", params, optFns, addOperationReadPresetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReadPreset", params, optFns, c.addOperationReadPresetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type ReadPresetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReadPresetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReadPresetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpReadPreset{}, middleware.After)
 	if err != nil {
 		return err

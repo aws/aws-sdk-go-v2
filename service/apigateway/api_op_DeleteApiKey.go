@@ -16,7 +16,7 @@ func (c *Client) DeleteApiKey(ctx context.Context, params *DeleteApiKeyInput, op
 		params = &DeleteApiKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteApiKey", params, optFns, addOperationDeleteApiKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteApiKey", params, optFns, c.addOperationDeleteApiKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteApiKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApiKey{}, middleware.After)
 	if err != nil {
 		return err

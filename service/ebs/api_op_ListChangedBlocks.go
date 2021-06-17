@@ -20,7 +20,7 @@ func (c *Client) ListChangedBlocks(ctx context.Context, params *ListChangedBlock
 		params = &ListChangedBlocksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListChangedBlocks", params, optFns, addOperationListChangedBlocksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListChangedBlocks", params, optFns, c.addOperationListChangedBlocksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type ListChangedBlocksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListChangedBlocksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListChangedBlocksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChangedBlocks{}, middleware.After)
 	if err != nil {
 		return err

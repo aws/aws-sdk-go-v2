@@ -18,7 +18,7 @@ func (c *Client) PutCodeBinding(ctx context.Context, params *PutCodeBindingInput
 		params = &PutCodeBindingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutCodeBinding", params, optFns, addOperationPutCodeBindingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutCodeBinding", params, optFns, c.addOperationPutCodeBindingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type PutCodeBindingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutCodeBindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutCodeBindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutCodeBinding{}, middleware.After)
 	if err != nil {
 		return err

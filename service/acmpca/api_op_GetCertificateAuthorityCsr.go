@@ -29,7 +29,7 @@ func (c *Client) GetCertificateAuthorityCsr(ctx context.Context, params *GetCert
 		params = &GetCertificateAuthorityCsrInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCertificateAuthorityCsr", params, optFns, addOperationGetCertificateAuthorityCsrMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCertificateAuthorityCsr", params, optFns, c.addOperationGetCertificateAuthorityCsrMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type GetCertificateAuthorityCsrOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCertificateAuthorityCsrMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCertificateAuthorityCsrMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCertificateAuthorityCsr{}, middleware.After)
 	if err != nil {
 		return err

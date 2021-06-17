@@ -17,7 +17,7 @@ func (c *Client) BatchCreateDelegationByAssessment(ctx context.Context, params *
 		params = &BatchCreateDelegationByAssessmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchCreateDelegationByAssessment", params, optFns, addOperationBatchCreateDelegationByAssessmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchCreateDelegationByAssessment", params, optFns, c.addOperationBatchCreateDelegationByAssessmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type BatchCreateDelegationByAssessmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchCreateDelegationByAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchCreateDelegationByAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateDelegationByAssessment{}, middleware.After)
 	if err != nil {
 		return err

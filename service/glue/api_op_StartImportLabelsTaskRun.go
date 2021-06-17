@@ -37,7 +37,7 @@ func (c *Client) StartImportLabelsTaskRun(ctx context.Context, params *StartImpo
 		params = &StartImportLabelsTaskRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartImportLabelsTaskRun", params, optFns, addOperationStartImportLabelsTaskRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartImportLabelsTaskRun", params, optFns, c.addOperationStartImportLabelsTaskRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type StartImportLabelsTaskRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartImportLabelsTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartImportLabelsTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartImportLabelsTaskRun{}, middleware.After)
 	if err != nil {
 		return err

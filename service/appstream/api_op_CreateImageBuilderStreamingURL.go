@@ -17,7 +17,7 @@ func (c *Client) CreateImageBuilderStreamingURL(ctx context.Context, params *Cre
 		params = &CreateImageBuilderStreamingURLInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateImageBuilderStreamingURL", params, optFns, addOperationCreateImageBuilderStreamingURLMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateImageBuilderStreamingURL", params, optFns, c.addOperationCreateImageBuilderStreamingURLMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type CreateImageBuilderStreamingURLOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateImageBuilderStreamingURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateImageBuilderStreamingURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateImageBuilderStreamingURL{}, middleware.After)
 	if err != nil {
 		return err

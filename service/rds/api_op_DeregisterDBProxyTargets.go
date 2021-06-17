@@ -17,7 +17,7 @@ func (c *Client) DeregisterDBProxyTargets(ctx context.Context, params *Deregiste
 		params = &DeregisterDBProxyTargetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterDBProxyTargets", params, optFns, addOperationDeregisterDBProxyTargetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterDBProxyTargets", params, optFns, c.addOperationDeregisterDBProxyTargetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeregisterDBProxyTargetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterDBProxyTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterDBProxyTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeregisterDBProxyTargets{}, middleware.After)
 	if err != nil {
 		return err

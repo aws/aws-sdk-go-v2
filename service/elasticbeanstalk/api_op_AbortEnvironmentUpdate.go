@@ -17,7 +17,7 @@ func (c *Client) AbortEnvironmentUpdate(ctx context.Context, params *AbortEnviro
 		params = &AbortEnvironmentUpdateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AbortEnvironmentUpdate", params, optFns, addOperationAbortEnvironmentUpdateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AbortEnvironmentUpdate", params, optFns, c.addOperationAbortEnvironmentUpdateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type AbortEnvironmentUpdateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAbortEnvironmentUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAbortEnvironmentUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAbortEnvironmentUpdate{}, middleware.After)
 	if err != nil {
 		return err

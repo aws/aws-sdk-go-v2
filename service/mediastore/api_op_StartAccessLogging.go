@@ -18,7 +18,7 @@ func (c *Client) StartAccessLogging(ctx context.Context, params *StartAccessLogg
 		params = &StartAccessLoggingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartAccessLogging", params, optFns, addOperationStartAccessLoggingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartAccessLogging", params, optFns, c.addOperationStartAccessLoggingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type StartAccessLoggingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartAccessLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartAccessLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartAccessLogging{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) ListCompatibleImages(ctx context.Context, params *ListCompatibl
 		params = &ListCompatibleImagesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCompatibleImages", params, optFns, addOperationListCompatibleImagesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCompatibleImages", params, optFns, c.addOperationListCompatibleImagesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListCompatibleImagesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCompatibleImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCompatibleImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCompatibleImages{}, middleware.After)
 	if err != nil {
 		return err

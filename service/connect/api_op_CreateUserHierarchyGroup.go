@@ -16,7 +16,7 @@ func (c *Client) CreateUserHierarchyGroup(ctx context.Context, params *CreateUse
 		params = &CreateUserHierarchyGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateUserHierarchyGroup", params, optFns, addOperationCreateUserHierarchyGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateUserHierarchyGroup", params, optFns, c.addOperationCreateUserHierarchyGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type CreateUserHierarchyGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateUserHierarchyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateUserHierarchyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUserHierarchyGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteMonitoringSubscription(ctx context.Context, params *Delet
 		params = &DeleteMonitoringSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMonitoringSubscription", params, optFns, addOperationDeleteMonitoringSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMonitoringSubscription", params, optFns, c.addOperationDeleteMonitoringSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteMonitoringSubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteMonitoringSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteMonitoringSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteMonitoringSubscription{}, middleware.After)
 	if err != nil {
 		return err

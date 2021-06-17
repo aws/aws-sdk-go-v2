@@ -16,7 +16,7 @@ func (c *Client) DeleteThesaurus(ctx context.Context, params *DeleteThesaurusInp
 		params = &DeleteThesaurusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteThesaurus", params, optFns, addOperationDeleteThesaurusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteThesaurus", params, optFns, c.addOperationDeleteThesaurusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteThesaurusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteThesaurus{}, middleware.After)
 	if err != nil {
 		return err

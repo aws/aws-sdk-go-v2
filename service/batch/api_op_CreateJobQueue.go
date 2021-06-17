@@ -23,7 +23,7 @@ func (c *Client) CreateJobQueue(ctx context.Context, params *CreateJobQueueInput
 		params = &CreateJobQueueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateJobQueue", params, optFns, addOperationCreateJobQueueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateJobQueue", params, optFns, c.addOperationCreateJobQueueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type CreateJobQueueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateJobQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateJobQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateJobQueue{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListTextTranslationJobs(ctx context.Context, params *ListTextTr
 		params = &ListTextTranslationJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTextTranslationJobs", params, optFns, addOperationListTextTranslationJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTextTranslationJobs", params, optFns, c.addOperationListTextTranslationJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListTextTranslationJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTextTranslationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTextTranslationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTextTranslationJobs{}, middleware.After)
 	if err != nil {
 		return err

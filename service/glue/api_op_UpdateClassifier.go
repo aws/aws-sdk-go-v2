@@ -18,7 +18,7 @@ func (c *Client) UpdateClassifier(ctx context.Context, params *UpdateClassifierI
 		params = &UpdateClassifierInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateClassifier", params, optFns, addOperationUpdateClassifierMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateClassifier", params, optFns, c.addOperationUpdateClassifierMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type UpdateClassifierOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateClassifier{}, middleware.After)
 	if err != nil {
 		return err

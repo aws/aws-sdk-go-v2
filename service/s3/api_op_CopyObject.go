@@ -146,7 +146,7 @@ func (c *Client) CopyObject(ctx context.Context, params *CopyObjectInput, optFns
 		params = &CopyObjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopyObject", params, optFns, addOperationCopyObjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopyObject", params, optFns, c.addOperationCopyObjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -434,7 +434,7 @@ type CopyObjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopyObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopyObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpCopyObject{}, middleware.After)
 	if err != nil {
 		return err

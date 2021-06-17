@@ -24,7 +24,7 @@ func (c *Client) SetIdentityMailFromDomain(ctx context.Context, params *SetIdent
 		params = &SetIdentityMailFromDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetIdentityMailFromDomain", params, optFns, addOperationSetIdentityMailFromDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetIdentityMailFromDomain", params, optFns, c.addOperationSetIdentityMailFromDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type SetIdentityMailFromDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetIdentityMailFromDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetIdentityMailFromDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetIdentityMailFromDomain{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DescribeContact(ctx context.Context, params *DescribeContactInp
 		params = &DescribeContactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeContact", params, optFns, addOperationDescribeContactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeContact", params, optFns, c.addOperationDescribeContactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type DescribeContactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeContact{}, middleware.After)
 	if err != nil {
 		return err

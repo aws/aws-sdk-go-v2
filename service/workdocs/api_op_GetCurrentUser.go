@@ -23,7 +23,7 @@ func (c *Client) GetCurrentUser(ctx context.Context, params *GetCurrentUserInput
 		params = &GetCurrentUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCurrentUser", params, optFns, addOperationGetCurrentUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCurrentUser", params, optFns, c.addOperationGetCurrentUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetCurrentUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCurrentUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCurrentUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCurrentUser{}, middleware.After)
 	if err != nil {
 		return err

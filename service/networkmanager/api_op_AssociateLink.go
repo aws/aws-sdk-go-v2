@@ -19,7 +19,7 @@ func (c *Client) AssociateLink(ctx context.Context, params *AssociateLinkInput, 
 		params = &AssociateLinkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateLink", params, optFns, addOperationAssociateLinkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateLink", params, optFns, c.addOperationAssociateLinkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type AssociateLinkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateLink{}, middleware.After)
 	if err != nil {
 		return err

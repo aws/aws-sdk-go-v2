@@ -24,7 +24,7 @@ func (c *Client) DescribeOrganizationConfigRuleStatuses(ctx context.Context, par
 		params = &DescribeOrganizationConfigRuleStatusesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeOrganizationConfigRuleStatuses", params, optFns, addOperationDescribeOrganizationConfigRuleStatusesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeOrganizationConfigRuleStatuses", params, optFns, c.addOperationDescribeOrganizationConfigRuleStatusesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DescribeOrganizationConfigRuleStatusesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeOrganizationConfigRuleStatusesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeOrganizationConfigRuleStatusesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeOrganizationConfigRuleStatuses{}, middleware.After)
 	if err != nil {
 		return err

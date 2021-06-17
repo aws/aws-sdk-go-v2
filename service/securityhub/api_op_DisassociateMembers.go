@@ -18,7 +18,7 @@ func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMe
 		params = &DisassociateMembersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateMembers", params, optFns, addOperationDisassociateMembersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateMembers", params, optFns, c.addOperationDisassociateMembersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DisassociateMembersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateMembers{}, middleware.After)
 	if err != nil {
 		return err

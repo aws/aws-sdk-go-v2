@@ -17,7 +17,7 @@ func (c *Client) ListResourceDefinitionVersions(ctx context.Context, params *Lis
 		params = &ListResourceDefinitionVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResourceDefinitionVersions", params, optFns, addOperationListResourceDefinitionVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResourceDefinitionVersions", params, optFns, c.addOperationListResourceDefinitionVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListResourceDefinitionVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListResourceDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResourceDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResourceDefinitionVersions{}, middleware.After)
 	if err != nil {
 		return err

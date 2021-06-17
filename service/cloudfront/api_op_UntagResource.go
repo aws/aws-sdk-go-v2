@@ -17,7 +17,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 		params = &UntagResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagResource", params, optFns, addOperationUntagResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagResource", params, optFns, c.addOperationUntagResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type UntagResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpUntagResource{}, middleware.After)
 	if err != nil {
 		return err

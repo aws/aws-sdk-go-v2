@@ -16,7 +16,7 @@ func (c *Client) DescribeStorage(ctx context.Context, params *DescribeStorageInp
 		params = &DescribeStorageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeStorage", params, optFns, addOperationDescribeStorageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeStorage", params, optFns, c.addOperationDescribeStorageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DescribeStorageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeStorage{}, middleware.After)
 	if err != nil {
 		return err

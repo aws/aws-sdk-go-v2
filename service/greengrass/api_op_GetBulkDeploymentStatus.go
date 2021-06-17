@@ -17,7 +17,7 @@ func (c *Client) GetBulkDeploymentStatus(ctx context.Context, params *GetBulkDep
 		params = &GetBulkDeploymentStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBulkDeploymentStatus", params, optFns, addOperationGetBulkDeploymentStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBulkDeploymentStatus", params, optFns, c.addOperationGetBulkDeploymentStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetBulkDeploymentStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBulkDeploymentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBulkDeploymentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBulkDeploymentStatus{}, middleware.After)
 	if err != nil {
 		return err

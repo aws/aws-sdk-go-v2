@@ -25,7 +25,7 @@ func (c *Client) BatchMeterUsage(ctx context.Context, params *BatchMeterUsageInp
 		params = &BatchMeterUsageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchMeterUsage", params, optFns, addOperationBatchMeterUsageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchMeterUsage", params, optFns, c.addOperationBatchMeterUsageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type BatchMeterUsageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchMeterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchMeterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchMeterUsage{}, middleware.After)
 	if err != nil {
 		return err

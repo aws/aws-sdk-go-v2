@@ -16,7 +16,7 @@ func (c *Client) ListGitHubAccountTokenNames(ctx context.Context, params *ListGi
 		params = &ListGitHubAccountTokenNamesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListGitHubAccountTokenNames", params, optFns, addOperationListGitHubAccountTokenNamesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListGitHubAccountTokenNames", params, optFns, c.addOperationListGitHubAccountTokenNamesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type ListGitHubAccountTokenNamesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListGitHubAccountTokenNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListGitHubAccountTokenNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListGitHubAccountTokenNames{}, middleware.After)
 	if err != nil {
 		return err

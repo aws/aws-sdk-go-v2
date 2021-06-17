@@ -17,7 +17,7 @@ func (c *Client) DescribeMesh(ctx context.Context, params *DescribeMeshInput, op
 		params = &DescribeMeshInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeMesh", params, optFns, addOperationDescribeMeshMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeMesh", params, optFns, c.addOperationDescribeMeshMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DescribeMeshOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeMesh{}, middleware.After)
 	if err != nil {
 		return err

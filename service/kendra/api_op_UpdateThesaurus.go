@@ -17,7 +17,7 @@ func (c *Client) UpdateThesaurus(ctx context.Context, params *UpdateThesaurusInp
 		params = &UpdateThesaurusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateThesaurus", params, optFns, addOperationUpdateThesaurusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateThesaurus", params, optFns, c.addOperationUpdateThesaurusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UpdateThesaurusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateThesaurus{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) UpdateRoutingProfileDefaultOutboundQueue(ctx context.Context, p
 		params = &UpdateRoutingProfileDefaultOutboundQueueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRoutingProfileDefaultOutboundQueue", params, optFns, addOperationUpdateRoutingProfileDefaultOutboundQueueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRoutingProfileDefaultOutboundQueue", params, optFns, c.addOperationUpdateRoutingProfileDefaultOutboundQueueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type UpdateRoutingProfileDefaultOutboundQueueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRoutingProfileDefaultOutboundQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRoutingProfileDefaultOutboundQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRoutingProfileDefaultOutboundQueue{}, middleware.After)
 	if err != nil {
 		return err

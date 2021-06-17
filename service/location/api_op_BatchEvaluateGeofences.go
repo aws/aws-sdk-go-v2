@@ -20,7 +20,7 @@ func (c *Client) BatchEvaluateGeofences(ctx context.Context, params *BatchEvalua
 		params = &BatchEvaluateGeofencesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchEvaluateGeofences", params, optFns, addOperationBatchEvaluateGeofencesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchEvaluateGeofences", params, optFns, c.addOperationBatchEvaluateGeofencesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type BatchEvaluateGeofencesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchEvaluateGeofencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchEvaluateGeofencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchEvaluateGeofences{}, middleware.After)
 	if err != nil {
 		return err

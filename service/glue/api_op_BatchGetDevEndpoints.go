@@ -20,7 +20,7 @@ func (c *Client) BatchGetDevEndpoints(ctx context.Context, params *BatchGetDevEn
 		params = &BatchGetDevEndpointsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetDevEndpoints", params, optFns, addOperationBatchGetDevEndpointsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetDevEndpoints", params, optFns, c.addOperationBatchGetDevEndpointsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type BatchGetDevEndpointsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetDevEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetDevEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetDevEndpoints{}, middleware.After)
 	if err != nil {
 		return err

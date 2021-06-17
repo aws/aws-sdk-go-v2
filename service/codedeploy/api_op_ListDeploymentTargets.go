@@ -16,7 +16,7 @@ func (c *Client) ListDeploymentTargets(ctx context.Context, params *ListDeployme
 		params = &ListDeploymentTargetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDeploymentTargets", params, optFns, addOperationListDeploymentTargetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDeploymentTargets", params, optFns, c.addOperationListDeploymentTargetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListDeploymentTargetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDeploymentTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDeploymentTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDeploymentTargets{}, middleware.After)
 	if err != nil {
 		return err

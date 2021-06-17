@@ -17,7 +17,7 @@ func (c *Client) GetTest(ctx context.Context, params *GetTestInput, optFns ...fu
 		params = &GetTestInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTest", params, optFns, addOperationGetTestMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTest", params, optFns, c.addOperationGetTestMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetTestOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTest{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) ReserveContact(ctx context.Context, params *ReserveContactInput
 		params = &ReserveContactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReserveContact", params, optFns, addOperationReserveContactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReserveContact", params, optFns, c.addOperationReserveContactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ReserveContactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReserveContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReserveContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpReserveContact{}, middleware.After)
 	if err != nil {
 		return err

@@ -15,7 +15,7 @@ func (c *Client) ChangePassword(ctx context.Context, params *ChangePasswordInput
 		params = &ChangePasswordInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ChangePassword", params, optFns, addOperationChangePasswordMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ChangePassword", params, optFns, c.addOperationChangePasswordMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ChangePasswordOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationChangePasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationChangePasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpChangePassword{}, middleware.After)
 	if err != nil {
 		return err

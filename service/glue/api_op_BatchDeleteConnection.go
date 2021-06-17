@@ -17,7 +17,7 @@ func (c *Client) BatchDeleteConnection(ctx context.Context, params *BatchDeleteC
 		params = &BatchDeleteConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteConnection", params, optFns, addOperationBatchDeleteConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteConnection", params, optFns, c.addOperationBatchDeleteConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type BatchDeleteConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteConnection{}, middleware.After)
 	if err != nil {
 		return err

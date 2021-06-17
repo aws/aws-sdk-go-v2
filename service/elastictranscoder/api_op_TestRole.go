@@ -23,7 +23,7 @@ func (c *Client) TestRole(ctx context.Context, params *TestRoleInput, optFns ...
 		params = &TestRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestRole", params, optFns, addOperationTestRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestRole", params, optFns, c.addOperationTestRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type TestRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTestRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestRole{}, middleware.After)
 	if err != nil {
 		return err

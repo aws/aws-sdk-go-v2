@@ -17,7 +17,7 @@ func (c *Client) DeleteServiceQuotaIncreaseRequestFromTemplate(ctx context.Conte
 		params = &DeleteServiceQuotaIncreaseRequestFromTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteServiceQuotaIncreaseRequestFromTemplate", params, optFns, addOperationDeleteServiceQuotaIncreaseRequestFromTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteServiceQuotaIncreaseRequestFromTemplate", params, optFns, c.addOperationDeleteServiceQuotaIncreaseRequestFromTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteServiceQuotaIncreaseRequestFromTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteServiceQuotaIncreaseRequestFromTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteServiceQuotaIncreaseRequestFromTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteServiceQuotaIncreaseRequestFromTemplate{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) UpdateFleet(ctx context.Context, params *UpdateFleetInput, optF
 		params = &UpdateFleetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFleet", params, optFns, addOperationUpdateFleetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFleet", params, optFns, c.addOperationUpdateFleetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -215,7 +215,7 @@ type UpdateFleetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateFleet{}, middleware.After)
 	if err != nil {
 		return err

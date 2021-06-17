@@ -30,7 +30,7 @@ func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, op
 		params = &DescribeTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeTags", params, optFns, addOperationDescribeTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTags", params, optFns, c.addOperationDescribeTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTags{}, middleware.After)
 	if err != nil {
 		return err

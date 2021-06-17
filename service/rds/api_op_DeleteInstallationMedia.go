@@ -18,7 +18,7 @@ func (c *Client) DeleteInstallationMedia(ctx context.Context, params *DeleteInst
 		params = &DeleteInstallationMediaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteInstallationMedia", params, optFns, addOperationDeleteInstallationMediaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInstallationMedia", params, optFns, c.addOperationDeleteInstallationMediaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DeleteInstallationMediaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteInstallationMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteInstallationMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteInstallationMedia{}, middleware.After)
 	if err != nil {
 		return err

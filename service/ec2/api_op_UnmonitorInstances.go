@@ -20,7 +20,7 @@ func (c *Client) UnmonitorInstances(ctx context.Context, params *UnmonitorInstan
 		params = &UnmonitorInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnmonitorInstances", params, optFns, addOperationUnmonitorInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnmonitorInstances", params, optFns, c.addOperationUnmonitorInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UnmonitorInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnmonitorInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnmonitorInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpUnmonitorInstances{}, middleware.After)
 	if err != nil {
 		return err

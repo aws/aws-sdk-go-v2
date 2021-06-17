@@ -18,7 +18,7 @@ func (c *Client) StopMultiplex(ctx context.Context, params *StopMultiplexInput, 
 		params = &StopMultiplexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopMultiplex", params, optFns, addOperationStopMultiplexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopMultiplex", params, optFns, c.addOperationStopMultiplexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type StopMultiplexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopMultiplex{}, middleware.After)
 	if err != nil {
 		return err

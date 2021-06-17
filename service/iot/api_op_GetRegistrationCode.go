@@ -16,7 +16,7 @@ func (c *Client) GetRegistrationCode(ctx context.Context, params *GetRegistratio
 		params = &GetRegistrationCodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRegistrationCode", params, optFns, addOperationGetRegistrationCodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRegistrationCode", params, optFns, c.addOperationGetRegistrationCodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type GetRegistrationCodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRegistrationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRegistrationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRegistrationCode{}, middleware.After)
 	if err != nil {
 		return err

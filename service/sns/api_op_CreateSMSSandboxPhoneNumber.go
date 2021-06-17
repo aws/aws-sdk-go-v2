@@ -26,7 +26,7 @@ func (c *Client) CreateSMSSandboxPhoneNumber(ctx context.Context, params *Create
 		params = &CreateSMSSandboxPhoneNumberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSMSSandboxPhoneNumber", params, optFns, addOperationCreateSMSSandboxPhoneNumberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSMSSandboxPhoneNumber", params, optFns, c.addOperationCreateSMSSandboxPhoneNumberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type CreateSMSSandboxPhoneNumberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSMSSandboxPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSMSSandboxPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateSMSSandboxPhoneNumber{}, middleware.After)
 	if err != nil {
 		return err

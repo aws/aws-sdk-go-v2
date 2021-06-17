@@ -22,7 +22,7 @@ func (c *Client) SendChannelMessage(ctx context.Context, params *SendChannelMess
 		params = &SendChannelMessageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendChannelMessage", params, optFns, addOperationSendChannelMessageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendChannelMessage", params, optFns, c.addOperationSendChannelMessageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type SendChannelMessageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendChannelMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendChannelMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendChannelMessage{}, middleware.After)
 	if err != nil {
 		return err

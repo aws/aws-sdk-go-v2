@@ -17,7 +17,7 @@ func (c *Client) DeleteProxySession(ctx context.Context, params *DeleteProxySess
 		params = &DeleteProxySessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProxySession", params, optFns, addOperationDeleteProxySessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProxySession", params, optFns, c.addOperationDeleteProxySessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteProxySessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteProxySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteProxySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProxySession{}, middleware.After)
 	if err != nil {
 		return err

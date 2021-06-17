@@ -18,7 +18,7 @@ func (c *Client) DisassociateResourceShare(ctx context.Context, params *Disassoc
 		params = &DisassociateResourceShareInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateResourceShare", params, optFns, addOperationDisassociateResourceShareMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateResourceShare", params, optFns, c.addOperationDisassociateResourceShareMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DisassociateResourceShareOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateResourceShare{}, middleware.After)
 	if err != nil {
 		return err

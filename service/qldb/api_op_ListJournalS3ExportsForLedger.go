@@ -24,7 +24,7 @@ func (c *Client) ListJournalS3ExportsForLedger(ctx context.Context, params *List
 		params = &ListJournalS3ExportsForLedgerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListJournalS3ExportsForLedger", params, optFns, addOperationListJournalS3ExportsForLedgerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListJournalS3ExportsForLedger", params, optFns, c.addOperationListJournalS3ExportsForLedgerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type ListJournalS3ExportsForLedgerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListJournalS3ExportsForLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListJournalS3ExportsForLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJournalS3ExportsForLedger{}, middleware.After)
 	if err != nil {
 		return err

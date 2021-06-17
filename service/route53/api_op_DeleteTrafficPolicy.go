@@ -30,7 +30,7 @@ func (c *Client) DeleteTrafficPolicy(ctx context.Context, params *DeleteTrafficP
 		params = &DeleteTrafficPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTrafficPolicy", params, optFns, addOperationDeleteTrafficPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTrafficPolicy", params, optFns, c.addOperationDeleteTrafficPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DeleteTrafficPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTrafficPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTrafficPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteTrafficPolicy{}, middleware.After)
 	if err != nil {
 		return err

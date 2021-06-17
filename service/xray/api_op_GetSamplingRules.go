@@ -18,7 +18,7 @@ func (c *Client) GetSamplingRules(ctx context.Context, params *GetSamplingRulesI
 		params = &GetSamplingRulesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSamplingRules", params, optFns, addOperationGetSamplingRulesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSamplingRules", params, optFns, c.addOperationGetSamplingRulesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GetSamplingRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSamplingRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSamplingRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSamplingRules{}, middleware.After)
 	if err != nil {
 		return err

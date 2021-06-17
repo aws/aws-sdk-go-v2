@@ -16,7 +16,7 @@ func (c *Client) StartOnDemandAuditTask(ctx context.Context, params *StartOnDema
 		params = &StartOnDemandAuditTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartOnDemandAuditTask", params, optFns, addOperationStartOnDemandAuditTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartOnDemandAuditTask", params, optFns, c.addOperationStartOnDemandAuditTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StartOnDemandAuditTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartOnDemandAuditTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartOnDemandAuditTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartOnDemandAuditTask{}, middleware.After)
 	if err != nil {
 		return err

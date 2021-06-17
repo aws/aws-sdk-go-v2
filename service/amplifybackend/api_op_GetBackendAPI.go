@@ -17,7 +17,7 @@ func (c *Client) GetBackendAPI(ctx context.Context, params *GetBackendAPIInput, 
 		params = &GetBackendAPIInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBackendAPI", params, optFns, addOperationGetBackendAPIMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBackendAPI", params, optFns, c.addOperationGetBackendAPIMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type GetBackendAPIOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBackendAPIMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBackendAPIMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackendAPI{}, middleware.After)
 	if err != nil {
 		return err

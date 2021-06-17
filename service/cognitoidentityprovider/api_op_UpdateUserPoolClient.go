@@ -22,7 +22,7 @@ func (c *Client) UpdateUserPoolClient(ctx context.Context, params *UpdateUserPoo
 		params = &UpdateUserPoolClientInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateUserPoolClient", params, optFns, addOperationUpdateUserPoolClientMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateUserPoolClient", params, optFns, c.addOperationUpdateUserPoolClientMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -194,7 +194,7 @@ type UpdateUserPoolClientOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateUserPoolClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateUserPoolClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateUserPoolClient{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteDistribution(ctx context.Context, params *DeleteDistribut
 		params = &DeleteDistributionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDistribution", params, optFns, addOperationDeleteDistributionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDistribution", params, optFns, c.addOperationDeleteDistributionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteDistributionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDistribution{}, middleware.After)
 	if err != nil {
 		return err

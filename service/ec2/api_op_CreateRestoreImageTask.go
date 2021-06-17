@@ -26,7 +26,7 @@ func (c *Client) CreateRestoreImageTask(ctx context.Context, params *CreateResto
 		params = &CreateRestoreImageTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRestoreImageTask", params, optFns, addOperationCreateRestoreImageTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRestoreImageTask", params, optFns, c.addOperationCreateRestoreImageTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type CreateRestoreImageTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRestoreImageTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRestoreImageTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateRestoreImageTask{}, middleware.After)
 	if err != nil {
 		return err

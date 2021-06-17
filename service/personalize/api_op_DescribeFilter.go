@@ -17,7 +17,7 @@ func (c *Client) DescribeFilter(ctx context.Context, params *DescribeFilterInput
 		params = &DescribeFilterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFilter", params, optFns, addOperationDescribeFilterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFilter", params, optFns, c.addOperationDescribeFilterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeFilterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFilter{}, middleware.After)
 	if err != nil {
 		return err

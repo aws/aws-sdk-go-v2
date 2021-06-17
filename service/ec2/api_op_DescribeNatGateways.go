@@ -18,7 +18,7 @@ func (c *Client) DescribeNatGateways(ctx context.Context, params *DescribeNatGat
 		params = &DescribeNatGatewaysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeNatGateways", params, optFns, addOperationDescribeNatGatewaysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeNatGateways", params, optFns, c.addOperationDescribeNatGatewaysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type DescribeNatGatewaysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeNatGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeNatGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeNatGateways{}, middleware.After)
 	if err != nil {
 		return err

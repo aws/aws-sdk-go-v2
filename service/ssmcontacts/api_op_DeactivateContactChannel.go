@@ -17,7 +17,7 @@ func (c *Client) DeactivateContactChannel(ctx context.Context, params *Deactivat
 		params = &DeactivateContactChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeactivateContactChannel", params, optFns, addOperationDeactivateContactChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeactivateContactChannel", params, optFns, c.addOperationDeactivateContactChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeactivateContactChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeactivateContactChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeactivateContactChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeactivateContactChannel{}, middleware.After)
 	if err != nil {
 		return err

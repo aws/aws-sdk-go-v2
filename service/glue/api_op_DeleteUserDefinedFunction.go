@@ -16,7 +16,7 @@ func (c *Client) DeleteUserDefinedFunction(ctx context.Context, params *DeleteUs
 		params = &DeleteUserDefinedFunctionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteUserDefinedFunction", params, optFns, addOperationDeleteUserDefinedFunctionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteUserDefinedFunction", params, optFns, c.addOperationDeleteUserDefinedFunctionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteUserDefinedFunctionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteUserDefinedFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteUserDefinedFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteUserDefinedFunction{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) CreateConditionalForwarder(ctx context.Context, params *CreateC
 		params = &CreateConditionalForwarderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateConditionalForwarder", params, optFns, addOperationCreateConditionalForwarderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateConditionalForwarder", params, optFns, c.addOperationCreateConditionalForwarderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type CreateConditionalForwarderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateConditionalForwarderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateConditionalForwarderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateConditionalForwarder{}, middleware.After)
 	if err != nil {
 		return err

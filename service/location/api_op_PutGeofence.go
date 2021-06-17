@@ -19,7 +19,7 @@ func (c *Client) PutGeofence(ctx context.Context, params *PutGeofenceInput, optF
 		params = &PutGeofenceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutGeofence", params, optFns, addOperationPutGeofenceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutGeofence", params, optFns, c.addOperationPutGeofenceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type PutGeofenceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutGeofence{}, middleware.After)
 	if err != nil {
 		return err

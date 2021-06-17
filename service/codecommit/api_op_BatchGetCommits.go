@@ -17,7 +17,7 @@ func (c *Client) BatchGetCommits(ctx context.Context, params *BatchGetCommitsInp
 		params = &BatchGetCommitsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetCommits", params, optFns, addOperationBatchGetCommitsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetCommits", params, optFns, c.addOperationBatchGetCommitsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type BatchGetCommitsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetCommitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetCommitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetCommits{}, middleware.After)
 	if err != nil {
 		return err

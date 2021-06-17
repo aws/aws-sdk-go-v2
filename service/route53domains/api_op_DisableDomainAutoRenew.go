@@ -17,7 +17,7 @@ func (c *Client) DisableDomainAutoRenew(ctx context.Context, params *DisableDoma
 		params = &DisableDomainAutoRenewInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableDomainAutoRenew", params, optFns, addOperationDisableDomainAutoRenewMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableDomainAutoRenew", params, optFns, c.addOperationDisableDomainAutoRenewMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DisableDomainAutoRenewOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableDomainAutoRenewMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableDomainAutoRenewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableDomainAutoRenew{}, middleware.After)
 	if err != nil {
 		return err

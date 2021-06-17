@@ -17,7 +17,7 @@ func (c *Client) BatchGetDevicePosition(ctx context.Context, params *BatchGetDev
 		params = &BatchGetDevicePositionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetDevicePosition", params, optFns, addOperationBatchGetDevicePositionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetDevicePosition", params, optFns, c.addOperationBatchGetDevicePositionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type BatchGetDevicePositionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetDevicePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetDevicePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetDevicePosition{}, middleware.After)
 	if err != nil {
 		return err

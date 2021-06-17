@@ -16,7 +16,7 @@ func (c *Client) DeprecateSystemTemplate(ctx context.Context, params *DeprecateS
 		params = &DeprecateSystemTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeprecateSystemTemplate", params, optFns, addOperationDeprecateSystemTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeprecateSystemTemplate", params, optFns, c.addOperationDeprecateSystemTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeprecateSystemTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeprecateSystemTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeprecateSystemTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeprecateSystemTemplate{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CreateContactList(ctx context.Context, params *CreateContactLis
 		params = &CreateContactListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateContactList", params, optFns, addOperationCreateContactListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateContactList", params, optFns, c.addOperationCreateContactListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type CreateContactListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateContactListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateContactListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateContactList{}, middleware.After)
 	if err != nil {
 		return err

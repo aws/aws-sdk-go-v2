@@ -18,7 +18,7 @@ func (c *Client) DisassociateOpsItemRelatedItem(ctx context.Context, params *Dis
 		params = &DisassociateOpsItemRelatedItemInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateOpsItemRelatedItem", params, optFns, addOperationDisassociateOpsItemRelatedItemMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateOpsItemRelatedItem", params, optFns, c.addOperationDisassociateOpsItemRelatedItemMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DisassociateOpsItemRelatedItemOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateOpsItemRelatedItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateOpsItemRelatedItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateOpsItemRelatedItem{}, middleware.After)
 	if err != nil {
 		return err

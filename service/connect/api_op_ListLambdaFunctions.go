@@ -19,7 +19,7 @@ func (c *Client) ListLambdaFunctions(ctx context.Context, params *ListLambdaFunc
 		params = &ListLambdaFunctionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLambdaFunctions", params, optFns, addOperationListLambdaFunctionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLambdaFunctions", params, optFns, c.addOperationListLambdaFunctionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListLambdaFunctionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLambdaFunctionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLambdaFunctionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLambdaFunctions{}, middleware.After)
 	if err != nil {
 		return err

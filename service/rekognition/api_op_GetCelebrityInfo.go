@@ -21,7 +21,7 @@ func (c *Client) GetCelebrityInfo(ctx context.Context, params *GetCelebrityInfoI
 		params = &GetCelebrityInfoInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCelebrityInfo", params, optFns, addOperationGetCelebrityInfoMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCelebrityInfo", params, optFns, c.addOperationGetCelebrityInfoMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetCelebrityInfoOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCelebrityInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCelebrityInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCelebrityInfo{}, middleware.After)
 	if err != nil {
 		return err

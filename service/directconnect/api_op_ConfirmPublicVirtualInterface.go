@@ -19,7 +19,7 @@ func (c *Client) ConfirmPublicVirtualInterface(ctx context.Context, params *Conf
 		params = &ConfirmPublicVirtualInterfaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ConfirmPublicVirtualInterface", params, optFns, addOperationConfirmPublicVirtualInterfaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ConfirmPublicVirtualInterface", params, optFns, c.addOperationConfirmPublicVirtualInterfaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type ConfirmPublicVirtualInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationConfirmPublicVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationConfirmPublicVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmPublicVirtualInterface{}, middleware.After)
 	if err != nil {
 		return err

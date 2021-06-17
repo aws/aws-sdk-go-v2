@@ -19,7 +19,7 @@ func (c *Client) CreateMedicalVocabulary(ctx context.Context, params *CreateMedi
 		params = &CreateMedicalVocabularyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMedicalVocabulary", params, optFns, addOperationCreateMedicalVocabularyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMedicalVocabulary", params, optFns, c.addOperationCreateMedicalVocabularyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type CreateMedicalVocabularyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateMedicalVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateMedicalVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMedicalVocabulary{}, middleware.After)
 	if err != nil {
 		return err

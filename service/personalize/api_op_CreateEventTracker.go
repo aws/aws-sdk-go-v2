@@ -42,7 +42,7 @@ func (c *Client) CreateEventTracker(ctx context.Context, params *CreateEventTrac
 		params = &CreateEventTrackerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateEventTracker", params, optFns, addOperationCreateEventTrackerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateEventTracker", params, optFns, c.addOperationCreateEventTrackerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type CreateEventTrackerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateEventTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateEventTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEventTracker{}, middleware.After)
 	if err != nil {
 		return err

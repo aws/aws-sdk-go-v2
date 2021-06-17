@@ -27,7 +27,7 @@ func (c *Client) FilterLogEvents(ctx context.Context, params *FilterLogEventsInp
 		params = &FilterLogEventsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "FilterLogEvents", params, optFns, addOperationFilterLogEventsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "FilterLogEvents", params, optFns, c.addOperationFilterLogEventsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type FilterLogEventsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationFilterLogEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationFilterLogEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpFilterLogEvents{}, middleware.After)
 	if err != nil {
 		return err

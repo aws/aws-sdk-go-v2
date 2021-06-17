@@ -25,7 +25,7 @@ func (c *Client) UpdateWebACL(ctx context.Context, params *UpdateWebACLInput, op
 		params = &UpdateWebACLInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateWebACL", params, optFns, addOperationUpdateWebACLMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateWebACL", params, optFns, c.addOperationUpdateWebACLMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -120,7 +120,7 @@ type UpdateWebACLOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWebACL{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetServiceProfile(ctx context.Context, params *GetServiceProfil
 		params = &GetServiceProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetServiceProfile", params, optFns, addOperationGetServiceProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetServiceProfile", params, optFns, c.addOperationGetServiceProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetServiceProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetServiceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetServiceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceProfile{}, middleware.After)
 	if err != nil {
 		return err

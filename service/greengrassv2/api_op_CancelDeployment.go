@@ -18,7 +18,7 @@ func (c *Client) CancelDeployment(ctx context.Context, params *CancelDeploymentI
 		params = &CancelDeploymentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelDeployment", params, optFns, addOperationCancelDeploymentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelDeployment", params, optFns, c.addOperationCancelDeploymentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type CancelDeploymentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelDeployment{}, middleware.After)
 	if err != nil {
 		return err

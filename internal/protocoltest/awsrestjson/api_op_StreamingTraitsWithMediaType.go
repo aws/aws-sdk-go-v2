@@ -18,7 +18,7 @@ func (c *Client) StreamingTraitsWithMediaType(ctx context.Context, params *Strea
 		params = &StreamingTraitsWithMediaTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StreamingTraitsWithMediaType", params, optFns, addOperationStreamingTraitsWithMediaTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StreamingTraitsWithMediaType", params, optFns, c.addOperationStreamingTraitsWithMediaTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type StreamingTraitsWithMediaTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStreamingTraitsWithMediaTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStreamingTraitsWithMediaTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStreamingTraitsWithMediaType{}, middleware.After)
 	if err != nil {
 		return err

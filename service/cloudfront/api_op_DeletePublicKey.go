@@ -16,7 +16,7 @@ func (c *Client) DeletePublicKey(ctx context.Context, params *DeletePublicKeyInp
 		params = &DeletePublicKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePublicKey", params, optFns, addOperationDeletePublicKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePublicKey", params, optFns, c.addOperationDeletePublicKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeletePublicKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeletePublicKey{}, middleware.After)
 	if err != nil {
 		return err

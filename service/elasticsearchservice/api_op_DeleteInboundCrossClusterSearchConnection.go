@@ -18,7 +18,7 @@ func (c *Client) DeleteInboundCrossClusterSearchConnection(ctx context.Context, 
 		params = &DeleteInboundCrossClusterSearchConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteInboundCrossClusterSearchConnection", params, optFns, addOperationDeleteInboundCrossClusterSearchConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInboundCrossClusterSearchConnection", params, optFns, c.addOperationDeleteInboundCrossClusterSearchConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteInboundCrossClusterSearchConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteInboundCrossClusterSearchConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteInboundCrossClusterSearchConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInboundCrossClusterSearchConnection{}, middleware.After)
 	if err != nil {
 		return err

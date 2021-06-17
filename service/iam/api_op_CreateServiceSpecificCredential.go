@@ -27,7 +27,7 @@ func (c *Client) CreateServiceSpecificCredential(ctx context.Context, params *Cr
 		params = &CreateServiceSpecificCredentialInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateServiceSpecificCredential", params, optFns, addOperationCreateServiceSpecificCredentialMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateServiceSpecificCredential", params, optFns, c.addOperationCreateServiceSpecificCredentialMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type CreateServiceSpecificCredentialOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateServiceSpecificCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateServiceSpecificCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateServiceSpecificCredential{}, middleware.After)
 	if err != nil {
 		return err

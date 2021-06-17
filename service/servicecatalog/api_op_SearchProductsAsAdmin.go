@@ -18,7 +18,7 @@ func (c *Client) SearchProductsAsAdmin(ctx context.Context, params *SearchProduc
 		params = &SearchProductsAsAdminInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchProductsAsAdmin", params, optFns, addOperationSearchProductsAsAdminMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchProductsAsAdmin", params, optFns, c.addOperationSearchProductsAsAdminMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type SearchProductsAsAdminOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchProductsAsAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchProductsAsAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchProductsAsAdmin{}, middleware.After)
 	if err != nil {
 		return err

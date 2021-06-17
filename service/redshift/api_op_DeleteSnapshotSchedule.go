@@ -16,7 +16,7 @@ func (c *Client) DeleteSnapshotSchedule(ctx context.Context, params *DeleteSnaps
 		params = &DeleteSnapshotScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSnapshotSchedule", params, optFns, addOperationDeleteSnapshotScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSnapshotSchedule", params, optFns, c.addOperationDeleteSnapshotScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteSnapshotScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteSnapshotSchedule{}, middleware.After)
 	if err != nil {
 		return err

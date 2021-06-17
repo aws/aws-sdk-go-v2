@@ -18,7 +18,7 @@ func (c *Client) CreateDBSnapshot(ctx context.Context, params *CreateDBSnapshotI
 		params = &CreateDBSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDBSnapshot", params, optFns, addOperationCreateDBSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDBSnapshot", params, optFns, c.addOperationCreateDBSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type CreateDBSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDBSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDBSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBSnapshot{}, middleware.After)
 	if err != nil {
 		return err

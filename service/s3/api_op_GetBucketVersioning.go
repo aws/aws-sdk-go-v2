@@ -34,7 +34,7 @@ func (c *Client) GetBucketVersioning(ctx context.Context, params *GetBucketVersi
 		params = &GetBucketVersioningInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketVersioning", params, optFns, addOperationGetBucketVersioningMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketVersioning", params, optFns, c.addOperationGetBucketVersioningMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type GetBucketVersioningOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketVersioningMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketVersioningMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketVersioning{}, middleware.After)
 	if err != nil {
 		return err

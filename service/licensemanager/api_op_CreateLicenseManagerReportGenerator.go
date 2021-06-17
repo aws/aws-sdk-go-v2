@@ -17,7 +17,7 @@ func (c *Client) CreateLicenseManagerReportGenerator(ctx context.Context, params
 		params = &CreateLicenseManagerReportGeneratorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLicenseManagerReportGenerator", params, optFns, addOperationCreateLicenseManagerReportGeneratorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLicenseManagerReportGenerator", params, optFns, c.addOperationCreateLicenseManagerReportGeneratorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type CreateLicenseManagerReportGeneratorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLicenseManagerReportGeneratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLicenseManagerReportGeneratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLicenseManagerReportGenerator{}, middleware.After)
 	if err != nil {
 		return err

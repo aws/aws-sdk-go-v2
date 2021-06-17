@@ -20,7 +20,7 @@ func (c *Client) UpdateServiceAccessPolicies(ctx context.Context, params *Update
 		params = &UpdateServiceAccessPoliciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateServiceAccessPolicies", params, optFns, addOperationUpdateServiceAccessPoliciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateServiceAccessPolicies", params, optFns, c.addOperationUpdateServiceAccessPoliciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type UpdateServiceAccessPoliciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateServiceAccessPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateServiceAccessPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateServiceAccessPolicies{}, middleware.After)
 	if err != nil {
 		return err

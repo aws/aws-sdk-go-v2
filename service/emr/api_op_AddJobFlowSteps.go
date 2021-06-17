@@ -33,7 +33,7 @@ func (c *Client) AddJobFlowSteps(ctx context.Context, params *AddJobFlowStepsInp
 		params = &AddJobFlowStepsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddJobFlowSteps", params, optFns, addOperationAddJobFlowStepsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddJobFlowSteps", params, optFns, c.addOperationAddJobFlowStepsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type AddJobFlowStepsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddJobFlowStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddJobFlowStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddJobFlowSteps{}, middleware.After)
 	if err != nil {
 		return err

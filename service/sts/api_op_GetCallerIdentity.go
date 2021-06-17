@@ -24,7 +24,7 @@ func (c *Client) GetCallerIdentity(ctx context.Context, params *GetCallerIdentit
 		params = &GetCallerIdentityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCallerIdentity", params, optFns, addOperationGetCallerIdentityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCallerIdentity", params, optFns, c.addOperationGetCallerIdentityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetCallerIdentityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCallerIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCallerIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetCallerIdentity{}, middleware.After)
 	if err != nil {
 		return err
@@ -141,7 +141,7 @@ func (c *PresignClient) PresignGetCallerIdentity(ctx context.Context, params *Ge
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
 	result, _, err := c.client.invokeOperation(ctx, "GetCallerIdentity", params, clientOptFns,
-		addOperationGetCallerIdentityMiddlewares,
+		c.client.addOperationGetCallerIdentityMiddlewares,
 		presignConverter(options).convertToPresignMiddleware,
 	)
 	if err != nil {

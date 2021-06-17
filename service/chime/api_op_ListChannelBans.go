@@ -20,7 +20,7 @@ func (c *Client) ListChannelBans(ctx context.Context, params *ListChannelBansInp
 		params = &ListChannelBansInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListChannelBans", params, optFns, addOperationListChannelBansMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListChannelBans", params, optFns, c.addOperationListChannelBansMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ListChannelBansOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListChannelBansMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListChannelBansMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChannelBans{}, middleware.After)
 	if err != nil {
 		return err

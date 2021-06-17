@@ -19,7 +19,7 @@ func (c *Client) ListFlowExecutionMessages(ctx context.Context, params *ListFlow
 		params = &ListFlowExecutionMessagesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFlowExecutionMessages", params, optFns, addOperationListFlowExecutionMessagesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFlowExecutionMessages", params, optFns, c.addOperationListFlowExecutionMessagesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListFlowExecutionMessagesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFlowExecutionMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFlowExecutionMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFlowExecutionMessages{}, middleware.After)
 	if err != nil {
 		return err

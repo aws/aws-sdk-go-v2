@@ -21,7 +21,7 @@ func (c *Client) DescribePlatformVersion(ctx context.Context, params *DescribePl
 		params = &DescribePlatformVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePlatformVersion", params, optFns, addOperationDescribePlatformVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePlatformVersion", params, optFns, c.addOperationDescribePlatformVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DescribePlatformVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePlatformVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePlatformVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribePlatformVersion{}, middleware.After)
 	if err != nil {
 		return err

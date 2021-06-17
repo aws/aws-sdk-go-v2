@@ -18,7 +18,7 @@ func (c *Client) TerminateSession(ctx context.Context, params *TerminateSessionI
 		params = &TerminateSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TerminateSession", params, optFns, addOperationTerminateSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TerminateSession", params, optFns, c.addOperationTerminateSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type TerminateSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTerminateSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTerminateSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTerminateSession{}, middleware.After)
 	if err != nil {
 		return err

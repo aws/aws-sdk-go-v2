@@ -17,7 +17,7 @@ func (c *Client) EnableStageTransition(ctx context.Context, params *EnableStageT
 		params = &EnableStageTransitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableStageTransition", params, optFns, addOperationEnableStageTransitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableStageTransition", params, optFns, c.addOperationEnableStageTransitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type EnableStageTransitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableStageTransitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableStageTransitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableStageTransition{}, middleware.After)
 	if err != nil {
 		return err

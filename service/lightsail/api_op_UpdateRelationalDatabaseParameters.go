@@ -27,7 +27,7 @@ func (c *Client) UpdateRelationalDatabaseParameters(ctx context.Context, params 
 		params = &UpdateRelationalDatabaseParametersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRelationalDatabaseParameters", params, optFns, addOperationUpdateRelationalDatabaseParametersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRelationalDatabaseParameters", params, optFns, c.addOperationUpdateRelationalDatabaseParametersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type UpdateRelationalDatabaseParametersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRelationalDatabaseParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRelationalDatabaseParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRelationalDatabaseParameters{}, middleware.After)
 	if err != nil {
 		return err

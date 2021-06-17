@@ -63,7 +63,7 @@ func (c *Client) PutTraceSegments(ctx context.Context, params *PutTraceSegmentsI
 		params = &PutTraceSegmentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutTraceSegments", params, optFns, addOperationPutTraceSegmentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutTraceSegments", params, optFns, c.addOperationPutTraceSegmentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type PutTraceSegmentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutTraceSegmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutTraceSegmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTraceSegments{}, middleware.After)
 	if err != nil {
 		return err

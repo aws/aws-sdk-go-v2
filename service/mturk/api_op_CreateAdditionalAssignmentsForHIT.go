@@ -29,7 +29,7 @@ func (c *Client) CreateAdditionalAssignmentsForHIT(ctx context.Context, params *
 		params = &CreateAdditionalAssignmentsForHITInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAdditionalAssignmentsForHIT", params, optFns, addOperationCreateAdditionalAssignmentsForHITMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAdditionalAssignmentsForHIT", params, optFns, c.addOperationCreateAdditionalAssignmentsForHITMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type CreateAdditionalAssignmentsForHITOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAdditionalAssignmentsForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAdditionalAssignmentsForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAdditionalAssignmentsForHIT{}, middleware.After)
 	if err != nil {
 		return err

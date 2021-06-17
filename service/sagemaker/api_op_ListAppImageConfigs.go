@@ -21,7 +21,7 @@ func (c *Client) ListAppImageConfigs(ctx context.Context, params *ListAppImageCo
 		params = &ListAppImageConfigsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAppImageConfigs", params, optFns, addOperationListAppImageConfigsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAppImageConfigs", params, optFns, c.addOperationListAppImageConfigsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type ListAppImageConfigsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAppImageConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAppImageConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAppImageConfigs{}, middleware.After)
 	if err != nil {
 		return err

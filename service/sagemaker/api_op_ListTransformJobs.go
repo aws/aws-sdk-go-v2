@@ -19,7 +19,7 @@ func (c *Client) ListTransformJobs(ctx context.Context, params *ListTransformJob
 		params = &ListTransformJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTransformJobs", params, optFns, addOperationListTransformJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTransformJobs", params, optFns, c.addOperationListTransformJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type ListTransformJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTransformJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTransformJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTransformJobs{}, middleware.After)
 	if err != nil {
 		return err

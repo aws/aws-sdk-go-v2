@@ -35,7 +35,7 @@ func (c *Client) DeleteImportedKeyMaterial(ctx context.Context, params *DeleteIm
 		params = &DeleteImportedKeyMaterialInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteImportedKeyMaterial", params, optFns, addOperationDeleteImportedKeyMaterialMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteImportedKeyMaterial", params, optFns, c.addOperationDeleteImportedKeyMaterialMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DeleteImportedKeyMaterialOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteImportedKeyMaterialMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteImportedKeyMaterialMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteImportedKeyMaterial{}, middleware.After)
 	if err != nil {
 		return err

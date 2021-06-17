@@ -17,7 +17,7 @@ func (c *Client) UpdateInputSecurityGroup(ctx context.Context, params *UpdateInp
 		params = &UpdateInputSecurityGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateInputSecurityGroup", params, optFns, addOperationUpdateInputSecurityGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateInputSecurityGroup", params, optFns, c.addOperationUpdateInputSecurityGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UpdateInputSecurityGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateInputSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateInputSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateInputSecurityGroup{}, middleware.After)
 	if err != nil {
 		return err

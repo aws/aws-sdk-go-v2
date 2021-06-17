@@ -17,7 +17,7 @@ func (c *Client) DescribeFileSystemPolicy(ctx context.Context, params *DescribeF
 		params = &DescribeFileSystemPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFileSystemPolicy", params, optFns, addOperationDescribeFileSystemPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFileSystemPolicy", params, optFns, c.addOperationDescribeFileSystemPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeFileSystemPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFileSystemPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFileSystemPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFileSystemPolicy{}, middleware.After)
 	if err != nil {
 		return err

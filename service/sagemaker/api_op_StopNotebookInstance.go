@@ -23,7 +23,7 @@ func (c *Client) StopNotebookInstance(ctx context.Context, params *StopNotebookI
 		params = &StopNotebookInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopNotebookInstance", params, optFns, addOperationStopNotebookInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopNotebookInstance", params, optFns, c.addOperationStopNotebookInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type StopNotebookInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopNotebookInstance{}, middleware.After)
 	if err != nil {
 		return err

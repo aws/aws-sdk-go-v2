@@ -18,7 +18,7 @@ func (c *Client) DescribeNetworkInterfacePermissions(ctx context.Context, params
 		params = &DescribeNetworkInterfacePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeNetworkInterfacePermissions", params, optFns, addOperationDescribeNetworkInterfacePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeNetworkInterfacePermissions", params, optFns, c.addOperationDescribeNetworkInterfacePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type DescribeNetworkInterfacePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeNetworkInterfacePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeNetworkInterfacePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeNetworkInterfacePermissions{}, middleware.After)
 	if err != nil {
 		return err

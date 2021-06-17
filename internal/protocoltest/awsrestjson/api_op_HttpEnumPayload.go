@@ -15,7 +15,7 @@ func (c *Client) HttpEnumPayload(ctx context.Context, params *HttpEnumPayloadInp
 		params = &HttpEnumPayloadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpEnumPayload", params, optFns, addOperationHttpEnumPayloadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpEnumPayload", params, optFns, c.addOperationHttpEnumPayloadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ type HttpEnumPayloadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHttpEnumPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHttpEnumPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpEnumPayload{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) BatchGetProjects(ctx context.Context, params *BatchGetProjectsI
 		params = &BatchGetProjectsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetProjects", params, optFns, addOperationBatchGetProjectsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetProjects", params, optFns, c.addOperationBatchGetProjectsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type BatchGetProjectsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetProjects{}, middleware.After)
 	if err != nil {
 		return err

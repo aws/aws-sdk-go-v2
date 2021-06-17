@@ -16,7 +16,7 @@ func (c *Client) TerminateApp(ctx context.Context, params *TerminateAppInput, op
 		params = &TerminateAppInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TerminateApp", params, optFns, addOperationTerminateAppMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TerminateApp", params, optFns, c.addOperationTerminateAppMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type TerminateAppOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTerminateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTerminateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTerminateApp{}, middleware.After)
 	if err != nil {
 		return err

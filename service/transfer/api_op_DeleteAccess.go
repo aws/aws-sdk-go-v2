@@ -17,7 +17,7 @@ func (c *Client) DeleteAccess(ctx context.Context, params *DeleteAccessInput, op
 		params = &DeleteAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAccess", params, optFns, addOperationDeleteAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAccess", params, optFns, c.addOperationDeleteAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DeleteAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAccess{}, middleware.After)
 	if err != nil {
 		return err

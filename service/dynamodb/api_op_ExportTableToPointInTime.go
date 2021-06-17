@@ -21,7 +21,7 @@ func (c *Client) ExportTableToPointInTime(ctx context.Context, params *ExportTab
 		params = &ExportTableToPointInTimeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExportTableToPointInTime", params, optFns, addOperationExportTableToPointInTimeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExportTableToPointInTime", params, optFns, c.addOperationExportTableToPointInTimeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type ExportTableToPointInTimeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExportTableToPointInTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExportTableToPointInTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpExportTableToPointInTime{}, middleware.After)
 	if err != nil {
 		return err

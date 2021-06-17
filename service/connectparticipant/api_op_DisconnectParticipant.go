@@ -20,7 +20,7 @@ func (c *Client) DisconnectParticipant(ctx context.Context, params *DisconnectPa
 		params = &DisconnectParticipantInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisconnectParticipant", params, optFns, addOperationDisconnectParticipantMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisconnectParticipant", params, optFns, c.addOperationDisconnectParticipantMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DisconnectParticipantOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisconnectParticipantMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisconnectParticipantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisconnectParticipant{}, middleware.After)
 	if err != nil {
 		return err

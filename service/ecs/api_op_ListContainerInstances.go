@@ -23,7 +23,7 @@ func (c *Client) ListContainerInstances(ctx context.Context, params *ListContain
 		params = &ListContainerInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListContainerInstances", params, optFns, addOperationListContainerInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListContainerInstances", params, optFns, c.addOperationListContainerInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type ListContainerInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListContainerInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListContainerInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListContainerInstances{}, middleware.After)
 	if err != nil {
 		return err

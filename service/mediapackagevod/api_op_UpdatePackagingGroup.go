@@ -18,7 +18,7 @@ func (c *Client) UpdatePackagingGroup(ctx context.Context, params *UpdatePackagi
 		params = &UpdatePackagingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePackagingGroup", params, optFns, addOperationUpdatePackagingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePackagingGroup", params, optFns, c.addOperationUpdatePackagingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type UpdatePackagingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePackagingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePackagingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePackagingGroup{}, middleware.After)
 	if err != nil {
 		return err

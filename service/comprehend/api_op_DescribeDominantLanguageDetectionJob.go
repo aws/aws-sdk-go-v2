@@ -18,7 +18,7 @@ func (c *Client) DescribeDominantLanguageDetectionJob(ctx context.Context, param
 		params = &DescribeDominantLanguageDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDominantLanguageDetectionJob", params, optFns, addOperationDescribeDominantLanguageDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDominantLanguageDetectionJob", params, optFns, c.addOperationDescribeDominantLanguageDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeDominantLanguageDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDominantLanguageDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDominantLanguageDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDominantLanguageDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

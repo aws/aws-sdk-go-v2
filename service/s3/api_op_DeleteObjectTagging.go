@@ -31,7 +31,7 @@ func (c *Client) DeleteObjectTagging(ctx context.Context, params *DeleteObjectTa
 		params = &DeleteObjectTaggingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteObjectTagging", params, optFns, addOperationDeleteObjectTaggingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteObjectTagging", params, optFns, c.addOperationDeleteObjectTaggingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type DeleteObjectTaggingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteObjectTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteObjectTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteObjectTagging{}, middleware.After)
 	if err != nil {
 		return err

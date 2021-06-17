@@ -18,7 +18,7 @@ func (c *Client) ListListeners(ctx context.Context, params *ListListenersInput, 
 		params = &ListListenersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListListeners", params, optFns, addOperationListListenersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListListeners", params, optFns, c.addOperationListListenersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListListenersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListListeners{}, middleware.After)
 	if err != nil {
 		return err

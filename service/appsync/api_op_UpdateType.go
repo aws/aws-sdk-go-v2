@@ -17,7 +17,7 @@ func (c *Client) UpdateType(ctx context.Context, params *UpdateTypeInput, optFns
 		params = &UpdateTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateType", params, optFns, addOperationUpdateTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateType", params, optFns, c.addOperationUpdateTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UpdateTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateType{}, middleware.After)
 	if err != nil {
 		return err

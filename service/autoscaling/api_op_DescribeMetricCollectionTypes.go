@@ -19,7 +19,7 @@ func (c *Client) DescribeMetricCollectionTypes(ctx context.Context, params *Desc
 		params = &DescribeMetricCollectionTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeMetricCollectionTypes", params, optFns, addOperationDescribeMetricCollectionTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeMetricCollectionTypes", params, optFns, c.addOperationDescribeMetricCollectionTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeMetricCollectionTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeMetricCollectionTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeMetricCollectionTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeMetricCollectionTypes{}, middleware.After)
 	if err != nil {
 		return err

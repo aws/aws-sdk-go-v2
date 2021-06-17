@@ -18,7 +18,7 @@ func (c *Client) DescribePortfolioShareStatus(ctx context.Context, params *Descr
 		params = &DescribePortfolioShareStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePortfolioShareStatus", params, optFns, addOperationDescribePortfolioShareStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePortfolioShareStatus", params, optFns, c.addOperationDescribePortfolioShareStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribePortfolioShareStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePortfolioShareStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePortfolioShareStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePortfolioShareStatus{}, middleware.After)
 	if err != nil {
 		return err

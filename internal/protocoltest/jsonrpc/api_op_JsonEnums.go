@@ -17,7 +17,7 @@ func (c *Client) JsonEnums(ctx context.Context, params *JsonEnumsInput, optFns .
 		params = &JsonEnumsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "JsonEnums", params, optFns, addOperationJsonEnumsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "JsonEnums", params, optFns, c.addOperationJsonEnumsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type JsonEnumsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationJsonEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationJsonEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpJsonEnums{}, middleware.After)
 	if err != nil {
 		return err

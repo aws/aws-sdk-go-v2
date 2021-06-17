@@ -18,7 +18,7 @@ func (c *Client) UpdateResolverDnssecConfig(ctx context.Context, params *UpdateR
 		params = &UpdateResolverDnssecConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateResolverDnssecConfig", params, optFns, addOperationUpdateResolverDnssecConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateResolverDnssecConfig", params, optFns, c.addOperationUpdateResolverDnssecConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UpdateResolverDnssecConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateResolverDnssecConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateResolverDnssecConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateResolverDnssecConfig{}, middleware.After)
 	if err != nil {
 		return err

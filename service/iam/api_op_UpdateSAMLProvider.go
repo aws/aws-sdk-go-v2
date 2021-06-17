@@ -18,7 +18,7 @@ func (c *Client) UpdateSAMLProvider(ctx context.Context, params *UpdateSAMLProvi
 		params = &UpdateSAMLProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSAMLProvider", params, optFns, addOperationUpdateSAMLProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSAMLProvider", params, optFns, c.addOperationUpdateSAMLProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type UpdateSAMLProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSAMLProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSAMLProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateSAMLProvider{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) PutRoomSkillParameter(ctx context.Context, params *PutRoomSkill
 		params = &PutRoomSkillParameterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutRoomSkillParameter", params, optFns, addOperationPutRoomSkillParameterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutRoomSkillParameter", params, optFns, c.addOperationPutRoomSkillParameterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type PutRoomSkillParameterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutRoomSkillParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutRoomSkillParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRoomSkillParameter{}, middleware.After)
 	if err != nil {
 		return err

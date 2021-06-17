@@ -18,7 +18,7 @@ func (c *Client) ListOTAUpdates(ctx context.Context, params *ListOTAUpdatesInput
 		params = &ListOTAUpdatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListOTAUpdates", params, optFns, addOperationListOTAUpdatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListOTAUpdates", params, optFns, c.addOperationListOTAUpdatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ListOTAUpdatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListOTAUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListOTAUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOTAUpdates{}, middleware.After)
 	if err != nil {
 		return err

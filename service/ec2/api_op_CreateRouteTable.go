@@ -21,7 +21,7 @@ func (c *Client) CreateRouteTable(ctx context.Context, params *CreateRouteTableI
 		params = &CreateRouteTableInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRouteTable", params, optFns, addOperationCreateRouteTableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRouteTable", params, optFns, c.addOperationCreateRouteTableMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type CreateRouteTableOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRouteTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRouteTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateRouteTable{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DeregisterTransitGateway(ctx context.Context, params *Deregiste
 		params = &DeregisterTransitGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterTransitGateway", params, optFns, addOperationDeregisterTransitGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterTransitGateway", params, optFns, c.addOperationDeregisterTransitGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeregisterTransitGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterTransitGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterTransitGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterTransitGateway{}, middleware.After)
 	if err != nil {
 		return err

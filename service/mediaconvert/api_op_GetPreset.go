@@ -17,7 +17,7 @@ func (c *Client) GetPreset(ctx context.Context, params *GetPresetInput, optFns .
 		params = &GetPresetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPreset", params, optFns, addOperationGetPresetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPreset", params, optFns, c.addOperationGetPresetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetPresetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPresetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPresetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPreset{}, middleware.After)
 	if err != nil {
 		return err

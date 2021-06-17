@@ -22,7 +22,7 @@ func (c *Client) RestoreFromSnapshot(ctx context.Context, params *RestoreFromSna
 		params = &RestoreFromSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreFromSnapshot", params, optFns, addOperationRestoreFromSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreFromSnapshot", params, optFns, c.addOperationRestoreFromSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type RestoreFromSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRestoreFromSnapshot{}, middleware.After)
 	if err != nil {
 		return err

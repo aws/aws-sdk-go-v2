@@ -19,7 +19,7 @@ func (c *Client) FailoverGlobalReplicationGroup(ctx context.Context, params *Fai
 		params = &FailoverGlobalReplicationGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "FailoverGlobalReplicationGroup", params, optFns, addOperationFailoverGlobalReplicationGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "FailoverGlobalReplicationGroup", params, optFns, c.addOperationFailoverGlobalReplicationGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type FailoverGlobalReplicationGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationFailoverGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationFailoverGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpFailoverGlobalReplicationGroup{}, middleware.After)
 	if err != nil {
 		return err

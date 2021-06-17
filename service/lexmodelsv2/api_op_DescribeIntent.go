@@ -18,7 +18,7 @@ func (c *Client) DescribeIntent(ctx context.Context, params *DescribeIntentInput
 		params = &DescribeIntentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeIntent", params, optFns, addOperationDescribeIntentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeIntent", params, optFns, c.addOperationDescribeIntentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ type DescribeIntentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeIntent{}, middleware.After)
 	if err != nil {
 		return err

@@ -43,7 +43,7 @@ func (c *Client) CreateTransformJob(ctx context.Context, params *CreateTransform
 		params = &CreateTransformJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTransformJob", params, optFns, addOperationCreateTransformJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTransformJob", params, optFns, c.addOperationCreateTransformJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -163,7 +163,7 @@ type CreateTransformJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTransformJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTransformJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTransformJob{}, middleware.After)
 	if err != nil {
 		return err

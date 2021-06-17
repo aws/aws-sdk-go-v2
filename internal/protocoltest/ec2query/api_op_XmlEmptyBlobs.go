@@ -14,7 +14,7 @@ func (c *Client) XmlEmptyBlobs(ctx context.Context, params *XmlEmptyBlobsInput, 
 		params = &XmlEmptyBlobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "XmlEmptyBlobs", params, optFns, addOperationXmlEmptyBlobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "XmlEmptyBlobs", params, optFns, c.addOperationXmlEmptyBlobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +34,7 @@ type XmlEmptyBlobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationXmlEmptyBlobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationXmlEmptyBlobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpXmlEmptyBlobs{}, middleware.After)
 	if err != nil {
 		return err

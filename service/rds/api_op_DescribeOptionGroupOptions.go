@@ -18,7 +18,7 @@ func (c *Client) DescribeOptionGroupOptions(ctx context.Context, params *Describ
 		params = &DescribeOptionGroupOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeOptionGroupOptions", params, optFns, addOperationDescribeOptionGroupOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeOptionGroupOptions", params, optFns, c.addOperationDescribeOptionGroupOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type DescribeOptionGroupOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeOptionGroupOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeOptionGroupOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeOptionGroupOptions{}, middleware.After)
 	if err != nil {
 		return err

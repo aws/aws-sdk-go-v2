@@ -17,7 +17,7 @@ func (c *Client) DeleteAssessmentTemplate(ctx context.Context, params *DeleteAss
 		params = &DeleteAssessmentTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAssessmentTemplate", params, optFns, addOperationDeleteAssessmentTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAssessmentTemplate", params, optFns, c.addOperationDeleteAssessmentTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteAssessmentTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAssessmentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAssessmentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAssessmentTemplate{}, middleware.After)
 	if err != nil {
 		return err

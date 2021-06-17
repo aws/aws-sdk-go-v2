@@ -16,7 +16,7 @@ func (c *Client) GetInlinePolicyForPermissionSet(ctx context.Context, params *Ge
 		params = &GetInlinePolicyForPermissionSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInlinePolicyForPermissionSet", params, optFns, addOperationGetInlinePolicyForPermissionSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInlinePolicyForPermissionSet", params, optFns, c.addOperationGetInlinePolicyForPermissionSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetInlinePolicyForPermissionSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInlinePolicyForPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInlinePolicyForPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInlinePolicyForPermissionSet{}, middleware.After)
 	if err != nil {
 		return err

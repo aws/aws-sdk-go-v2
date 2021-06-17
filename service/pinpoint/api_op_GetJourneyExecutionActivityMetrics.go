@@ -18,7 +18,7 @@ func (c *Client) GetJourneyExecutionActivityMetrics(ctx context.Context, params 
 		params = &GetJourneyExecutionActivityMetricsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetJourneyExecutionActivityMetrics", params, optFns, addOperationGetJourneyExecutionActivityMetricsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetJourneyExecutionActivityMetrics", params, optFns, c.addOperationGetJourneyExecutionActivityMetricsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type GetJourneyExecutionActivityMetricsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetJourneyExecutionActivityMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetJourneyExecutionActivityMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetJourneyExecutionActivityMetrics{}, middleware.After)
 	if err != nil {
 		return err

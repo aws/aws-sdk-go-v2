@@ -14,7 +14,7 @@ func (c *Client) SimpleScalarProperties(ctx context.Context, params *SimpleScala
 		params = &SimpleScalarPropertiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SimpleScalarProperties", params, optFns, addOperationSimpleScalarPropertiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SimpleScalarProperties", params, optFns, c.addOperationSimpleScalarPropertiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type SimpleScalarPropertiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSimpleScalarPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSimpleScalarPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSimpleScalarProperties{}, middleware.After)
 	if err != nil {
 		return err

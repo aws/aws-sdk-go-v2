@@ -17,7 +17,7 @@ func (c *Client) DisassociateRoutingProfileQueues(ctx context.Context, params *D
 		params = &DisassociateRoutingProfileQueuesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateRoutingProfileQueues", params, optFns, addOperationDisassociateRoutingProfileQueuesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateRoutingProfileQueues", params, optFns, c.addOperationDisassociateRoutingProfileQueuesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DisassociateRoutingProfileQueuesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateRoutingProfileQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateRoutingProfileQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateRoutingProfileQueues{}, middleware.After)
 	if err != nil {
 		return err

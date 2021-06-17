@@ -20,7 +20,7 @@ func (c *Client) GetEffectivePermissionsForPath(ctx context.Context, params *Get
 		params = &GetEffectivePermissionsForPathInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEffectivePermissionsForPath", params, optFns, addOperationGetEffectivePermissionsForPathMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEffectivePermissionsForPath", params, optFns, c.addOperationGetEffectivePermissionsForPathMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type GetEffectivePermissionsForPathOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEffectivePermissionsForPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEffectivePermissionsForPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEffectivePermissionsForPath{}, middleware.After)
 	if err != nil {
 		return err

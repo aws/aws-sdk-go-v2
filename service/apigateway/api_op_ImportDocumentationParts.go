@@ -16,7 +16,7 @@ func (c *Client) ImportDocumentationParts(ctx context.Context, params *ImportDoc
 		params = &ImportDocumentationPartsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportDocumentationParts", params, optFns, addOperationImportDocumentationPartsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportDocumentationParts", params, optFns, c.addOperationImportDocumentationPartsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ImportDocumentationPartsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportDocumentationPartsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportDocumentationPartsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportDocumentationParts{}, middleware.After)
 	if err != nil {
 		return err

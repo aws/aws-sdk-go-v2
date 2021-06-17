@@ -16,7 +16,7 @@ func (c *Client) DeleteEnvironmentMembership(ctx context.Context, params *Delete
 		params = &DeleteEnvironmentMembershipInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEnvironmentMembership", params, optFns, addOperationDeleteEnvironmentMembershipMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEnvironmentMembership", params, optFns, c.addOperationDeleteEnvironmentMembershipMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteEnvironmentMembershipOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEnvironmentMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEnvironmentMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEnvironmentMembership{}, middleware.After)
 	if err != nil {
 		return err

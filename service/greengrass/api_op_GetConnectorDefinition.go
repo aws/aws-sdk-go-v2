@@ -16,7 +16,7 @@ func (c *Client) GetConnectorDefinition(ctx context.Context, params *GetConnecto
 		params = &GetConnectorDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetConnectorDefinition", params, optFns, addOperationGetConnectorDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetConnectorDefinition", params, optFns, c.addOperationGetConnectorDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type GetConnectorDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetConnectorDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetConnectorDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnectorDefinition{}, middleware.After)
 	if err != nil {
 		return err

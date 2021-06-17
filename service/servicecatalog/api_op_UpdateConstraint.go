@@ -17,7 +17,7 @@ func (c *Client) UpdateConstraint(ctx context.Context, params *UpdateConstraintI
 		params = &UpdateConstraintInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateConstraint", params, optFns, addOperationUpdateConstraintMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateConstraint", params, optFns, c.addOperationUpdateConstraintMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type UpdateConstraintOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateConstraint{}, middleware.After)
 	if err != nil {
 		return err

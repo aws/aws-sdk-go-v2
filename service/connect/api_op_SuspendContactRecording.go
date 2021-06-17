@@ -21,7 +21,7 @@ func (c *Client) SuspendContactRecording(ctx context.Context, params *SuspendCon
 		params = &SuspendContactRecordingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SuspendContactRecording", params, optFns, addOperationSuspendContactRecordingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SuspendContactRecording", params, optFns, c.addOperationSuspendContactRecordingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type SuspendContactRecordingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSuspendContactRecordingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSuspendContactRecordingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSuspendContactRecording{}, middleware.After)
 	if err != nil {
 		return err

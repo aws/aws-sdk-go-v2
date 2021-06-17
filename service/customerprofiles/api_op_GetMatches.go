@@ -48,7 +48,7 @@ func (c *Client) GetMatches(ctx context.Context, params *GetMatchesInput, optFns
 		params = &GetMatchesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMatches", params, optFns, addOperationGetMatchesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMatches", params, optFns, c.addOperationGetMatchesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type GetMatchesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMatchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMatchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMatches{}, middleware.After)
 	if err != nil {
 		return err

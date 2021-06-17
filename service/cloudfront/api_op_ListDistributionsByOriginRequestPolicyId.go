@@ -23,7 +23,7 @@ func (c *Client) ListDistributionsByOriginRequestPolicyId(ctx context.Context, p
 		params = &ListDistributionsByOriginRequestPolicyIdInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDistributionsByOriginRequestPolicyId", params, optFns, addOperationListDistributionsByOriginRequestPolicyIdMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDistributionsByOriginRequestPolicyId", params, optFns, c.addOperationListDistributionsByOriginRequestPolicyIdMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListDistributionsByOriginRequestPolicyIdOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDistributionsByOriginRequestPolicyIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDistributionsByOriginRequestPolicyIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListDistributionsByOriginRequestPolicyId{}, middleware.After)
 	if err != nil {
 		return err

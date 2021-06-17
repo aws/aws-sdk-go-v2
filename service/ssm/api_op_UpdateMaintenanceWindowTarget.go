@@ -35,7 +35,7 @@ func (c *Client) UpdateMaintenanceWindowTarget(ctx context.Context, params *Upda
 		params = &UpdateMaintenanceWindowTargetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateMaintenanceWindowTarget", params, optFns, addOperationUpdateMaintenanceWindowTargetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMaintenanceWindowTarget", params, optFns, c.addOperationUpdateMaintenanceWindowTargetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ type UpdateMaintenanceWindowTargetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateMaintenanceWindowTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateMaintenanceWindowTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMaintenanceWindowTarget{}, middleware.After)
 	if err != nil {
 		return err

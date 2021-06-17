@@ -19,7 +19,7 @@ func (c *Client) DeleteQueryDefinition(ctx context.Context, params *DeleteQueryD
 		params = &DeleteQueryDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteQueryDefinition", params, optFns, addOperationDeleteQueryDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteQueryDefinition", params, optFns, c.addOperationDeleteQueryDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteQueryDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteQueryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteQueryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteQueryDefinition{}, middleware.After)
 	if err != nil {
 		return err

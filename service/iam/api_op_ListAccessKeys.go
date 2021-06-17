@@ -27,7 +27,7 @@ func (c *Client) ListAccessKeys(ctx context.Context, params *ListAccessKeysInput
 		params = &ListAccessKeysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAccessKeys", params, optFns, addOperationListAccessKeysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAccessKeys", params, optFns, c.addOperationListAccessKeysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type ListAccessKeysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAccessKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAccessKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListAccessKeys{}, middleware.After)
 	if err != nil {
 		return err

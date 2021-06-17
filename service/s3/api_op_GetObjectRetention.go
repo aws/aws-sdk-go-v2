@@ -20,7 +20,7 @@ func (c *Client) GetObjectRetention(ctx context.Context, params *GetObjectRetent
 		params = &GetObjectRetentionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetObjectRetention", params, optFns, addOperationGetObjectRetentionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetObjectRetention", params, optFns, c.addOperationGetObjectRetentionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type GetObjectRetentionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetObjectRetentionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetObjectRetentionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetObjectRetention{}, middleware.After)
 	if err != nil {
 		return err

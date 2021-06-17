@@ -19,7 +19,7 @@ func (c *Client) StartDataIngestionJob(ctx context.Context, params *StartDataIng
 		params = &StartDataIngestionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDataIngestionJob", params, optFns, addOperationStartDataIngestionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDataIngestionJob", params, optFns, c.addOperationStartDataIngestionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type StartDataIngestionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDataIngestionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDataIngestionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartDataIngestionJob{}, middleware.After)
 	if err != nil {
 		return err

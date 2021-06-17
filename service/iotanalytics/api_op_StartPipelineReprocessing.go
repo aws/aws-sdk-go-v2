@@ -18,7 +18,7 @@ func (c *Client) StartPipelineReprocessing(ctx context.Context, params *StartPip
 		params = &StartPipelineReprocessingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartPipelineReprocessing", params, optFns, addOperationStartPipelineReprocessingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartPipelineReprocessing", params, optFns, c.addOperationStartPipelineReprocessingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type StartPipelineReprocessingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartPipelineReprocessingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartPipelineReprocessingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartPipelineReprocessing{}, middleware.After)
 	if err != nil {
 		return err

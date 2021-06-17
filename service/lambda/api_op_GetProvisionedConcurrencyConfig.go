@@ -18,7 +18,7 @@ func (c *Client) GetProvisionedConcurrencyConfig(ctx context.Context, params *Ge
 		params = &GetProvisionedConcurrencyConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetProvisionedConcurrencyConfig", params, optFns, addOperationGetProvisionedConcurrencyConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetProvisionedConcurrencyConfig", params, optFns, c.addOperationGetProvisionedConcurrencyConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type GetProvisionedConcurrencyConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetProvisionedConcurrencyConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetProvisionedConcurrencyConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProvisionedConcurrencyConfig{}, middleware.After)
 	if err != nil {
 		return err

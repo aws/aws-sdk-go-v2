@@ -20,7 +20,7 @@ func (c *Client) GetUser(ctx context.Context, params *GetUserInput, optFns ...fu
 		params = &GetUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUser", params, optFns, addOperationGetUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetUser", params, optFns, c.addOperationGetUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUser{}, middleware.After)
 	if err != nil {
 		return err

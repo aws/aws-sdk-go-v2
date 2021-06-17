@@ -17,7 +17,7 @@ func (c *Client) ModifyReplicationSubnetGroup(ctx context.Context, params *Modif
 		params = &ModifyReplicationSubnetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyReplicationSubnetGroup", params, optFns, addOperationModifyReplicationSubnetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyReplicationSubnetGroup", params, optFns, c.addOperationModifyReplicationSubnetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ModifyReplicationSubnetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyReplicationSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyReplicationSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyReplicationSubnetGroup{}, middleware.After)
 	if err != nil {
 		return err

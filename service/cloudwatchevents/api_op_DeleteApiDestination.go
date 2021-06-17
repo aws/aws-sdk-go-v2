@@ -16,7 +16,7 @@ func (c *Client) DeleteApiDestination(ctx context.Context, params *DeleteApiDest
 		params = &DeleteApiDestinationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteApiDestination", params, optFns, addOperationDeleteApiDestinationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteApiDestination", params, optFns, c.addOperationDeleteApiDestinationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteApiDestinationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteApiDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteApiDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteApiDestination{}, middleware.After)
 	if err != nil {
 		return err

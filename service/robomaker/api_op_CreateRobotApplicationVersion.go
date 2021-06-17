@@ -18,7 +18,7 @@ func (c *Client) CreateRobotApplicationVersion(ctx context.Context, params *Crea
 		params = &CreateRobotApplicationVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRobotApplicationVersion", params, optFns, addOperationCreateRobotApplicationVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRobotApplicationVersion", params, optFns, c.addOperationCreateRobotApplicationVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type CreateRobotApplicationVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRobotApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRobotApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRobotApplicationVersion{}, middleware.After)
 	if err != nil {
 		return err

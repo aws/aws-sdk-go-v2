@@ -18,7 +18,7 @@ func (c *Client) UpdateRobotApplication(ctx context.Context, params *UpdateRobot
 		params = &UpdateRobotApplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRobotApplication", params, optFns, addOperationUpdateRobotApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRobotApplication", params, optFns, c.addOperationUpdateRobotApplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type UpdateRobotApplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRobotApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRobotApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRobotApplication{}, middleware.After)
 	if err != nil {
 		return err

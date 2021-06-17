@@ -17,7 +17,7 @@ func (c *Client) AddRoleToDBCluster(ctx context.Context, params *AddRoleToDBClus
 		params = &AddRoleToDBClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddRoleToDBCluster", params, optFns, addOperationAddRoleToDBClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddRoleToDBCluster", params, optFns, c.addOperationAddRoleToDBClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type AddRoleToDBClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddRoleToDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddRoleToDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAddRoleToDBCluster{}, middleware.After)
 	if err != nil {
 		return err

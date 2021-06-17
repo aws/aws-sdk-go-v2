@@ -18,7 +18,7 @@ func (c *Client) GetSagemakerServicecatalogPortfolioStatus(ctx context.Context, 
 		params = &GetSagemakerServicecatalogPortfolioStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSagemakerServicecatalogPortfolioStatus", params, optFns, addOperationGetSagemakerServicecatalogPortfolioStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSagemakerServicecatalogPortfolioStatus", params, optFns, c.addOperationGetSagemakerServicecatalogPortfolioStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type GetSagemakerServicecatalogPortfolioStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSagemakerServicecatalogPortfolioStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSagemakerServicecatalogPortfolioStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSagemakerServicecatalogPortfolioStatus{}, middleware.After)
 	if err != nil {
 		return err

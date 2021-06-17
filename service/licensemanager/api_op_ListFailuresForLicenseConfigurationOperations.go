@@ -17,7 +17,7 @@ func (c *Client) ListFailuresForLicenseConfigurationOperations(ctx context.Conte
 		params = &ListFailuresForLicenseConfigurationOperationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFailuresForLicenseConfigurationOperations", params, optFns, addOperationListFailuresForLicenseConfigurationOperationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFailuresForLicenseConfigurationOperations", params, optFns, c.addOperationListFailuresForLicenseConfigurationOperationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListFailuresForLicenseConfigurationOperationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFailuresForLicenseConfigurationOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFailuresForLicenseConfigurationOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFailuresForLicenseConfigurationOperations{}, middleware.After)
 	if err != nil {
 		return err

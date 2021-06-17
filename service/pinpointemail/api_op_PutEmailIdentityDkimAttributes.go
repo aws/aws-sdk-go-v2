@@ -16,7 +16,7 @@ func (c *Client) PutEmailIdentityDkimAttributes(ctx context.Context, params *Put
 		params = &PutEmailIdentityDkimAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutEmailIdentityDkimAttributes", params, optFns, addOperationPutEmailIdentityDkimAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutEmailIdentityDkimAttributes", params, optFns, c.addOperationPutEmailIdentityDkimAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type PutEmailIdentityDkimAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutEmailIdentityDkimAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutEmailIdentityDkimAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEmailIdentityDkimAttributes{}, middleware.After)
 	if err != nil {
 		return err

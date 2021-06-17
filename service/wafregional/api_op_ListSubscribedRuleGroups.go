@@ -23,7 +23,7 @@ func (c *Client) ListSubscribedRuleGroups(ctx context.Context, params *ListSubsc
 		params = &ListSubscribedRuleGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSubscribedRuleGroups", params, optFns, addOperationListSubscribedRuleGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSubscribedRuleGroups", params, optFns, c.addOperationListSubscribedRuleGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ListSubscribedRuleGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSubscribedRuleGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSubscribedRuleGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSubscribedRuleGroups{}, middleware.After)
 	if err != nil {
 		return err

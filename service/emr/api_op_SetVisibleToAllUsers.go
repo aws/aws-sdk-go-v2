@@ -24,7 +24,7 @@ func (c *Client) SetVisibleToAllUsers(ctx context.Context, params *SetVisibleToA
 		params = &SetVisibleToAllUsersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetVisibleToAllUsers", params, optFns, addOperationSetVisibleToAllUsersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetVisibleToAllUsers", params, optFns, c.addOperationSetVisibleToAllUsersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type SetVisibleToAllUsersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetVisibleToAllUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetVisibleToAllUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetVisibleToAllUsers{}, middleware.After)
 	if err != nil {
 		return err

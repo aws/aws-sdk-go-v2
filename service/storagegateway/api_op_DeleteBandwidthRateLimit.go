@@ -21,7 +21,7 @@ func (c *Client) DeleteBandwidthRateLimit(ctx context.Context, params *DeleteBan
 		params = &DeleteBandwidthRateLimitInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBandwidthRateLimit", params, optFns, addOperationDeleteBandwidthRateLimitMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBandwidthRateLimit", params, optFns, c.addOperationDeleteBandwidthRateLimitMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DeleteBandwidthRateLimitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBandwidthRateLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBandwidthRateLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBandwidthRateLimit{}, middleware.After)
 	if err != nil {
 		return err

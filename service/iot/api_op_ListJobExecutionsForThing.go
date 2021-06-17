@@ -18,7 +18,7 @@ func (c *Client) ListJobExecutionsForThing(ctx context.Context, params *ListJobE
 		params = &ListJobExecutionsForThingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListJobExecutionsForThing", params, optFns, addOperationListJobExecutionsForThingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListJobExecutionsForThing", params, optFns, c.addOperationListJobExecutionsForThingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ListJobExecutionsForThingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListJobExecutionsForThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListJobExecutionsForThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJobExecutionsForThing{}, middleware.After)
 	if err != nil {
 		return err

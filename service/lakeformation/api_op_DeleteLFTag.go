@@ -21,7 +21,7 @@ func (c *Client) DeleteLFTag(ctx context.Context, params *DeleteLFTagInput, optF
 		params = &DeleteLFTagInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLFTag", params, optFns, addOperationDeleteLFTagMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLFTag", params, optFns, c.addOperationDeleteLFTagMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteLFTagOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLFTagMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLFTagMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLFTag{}, middleware.After)
 	if err != nil {
 		return err

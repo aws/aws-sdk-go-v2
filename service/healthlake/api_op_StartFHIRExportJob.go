@@ -18,7 +18,7 @@ func (c *Client) StartFHIRExportJob(ctx context.Context, params *StartFHIRExport
 		params = &StartFHIRExportJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartFHIRExportJob", params, optFns, addOperationStartFHIRExportJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartFHIRExportJob", params, optFns, c.addOperationStartFHIRExportJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type StartFHIRExportJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartFHIRExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartFHIRExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartFHIRExportJob{}, middleware.After)
 	if err != nil {
 		return err

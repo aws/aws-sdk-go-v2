@@ -18,7 +18,7 @@ func (c *Client) UpdateRuleVersion(ctx context.Context, params *UpdateRuleVersio
 		params = &UpdateRuleVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRuleVersion", params, optFns, addOperationUpdateRuleVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRuleVersion", params, optFns, c.addOperationUpdateRuleVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type UpdateRuleVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRuleVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRuleVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRuleVersion{}, middleware.After)
 	if err != nil {
 		return err

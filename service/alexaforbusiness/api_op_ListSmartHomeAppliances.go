@@ -18,7 +18,7 @@ func (c *Client) ListSmartHomeAppliances(ctx context.Context, params *ListSmartH
 		params = &ListSmartHomeAppliancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSmartHomeAppliances", params, optFns, addOperationListSmartHomeAppliancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSmartHomeAppliances", params, optFns, c.addOperationListSmartHomeAppliancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListSmartHomeAppliancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSmartHomeAppliancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSmartHomeAppliancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSmartHomeAppliances{}, middleware.After)
 	if err != nil {
 		return err

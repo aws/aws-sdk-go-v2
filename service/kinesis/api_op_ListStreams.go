@@ -27,7 +27,7 @@ func (c *Client) ListStreams(ctx context.Context, params *ListStreamsInput, optF
 		params = &ListStreamsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListStreams", params, optFns, addOperationListStreamsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListStreams", params, optFns, c.addOperationListStreamsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ListStreamsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStreams{}, middleware.After)
 	if err != nil {
 		return err

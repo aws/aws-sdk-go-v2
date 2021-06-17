@@ -17,7 +17,7 @@ func (c *Client) SearchIndex(ctx context.Context, params *SearchIndexInput, optF
 		params = &SearchIndexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchIndex", params, optFns, addOperationSearchIndexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchIndex", params, optFns, c.addOperationSearchIndexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type SearchIndexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchIndex{}, middleware.After)
 	if err != nil {
 		return err

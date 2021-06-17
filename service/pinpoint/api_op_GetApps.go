@@ -18,7 +18,7 @@ func (c *Client) GetApps(ctx context.Context, params *GetAppsInput, optFns ...fu
 		params = &GetAppsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetApps", params, optFns, addOperationGetAppsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetApps", params, optFns, c.addOperationGetAppsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetAppsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApps{}, middleware.After)
 	if err != nil {
 		return err

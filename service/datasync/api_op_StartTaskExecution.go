@@ -22,7 +22,7 @@ func (c *Client) StartTaskExecution(ctx context.Context, params *StartTaskExecut
 		params = &StartTaskExecutionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartTaskExecution", params, optFns, addOperationStartTaskExecutionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartTaskExecution", params, optFns, c.addOperationStartTaskExecutionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type StartTaskExecutionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartTaskExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartTaskExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTaskExecution{}, middleware.After)
 	if err != nil {
 		return err

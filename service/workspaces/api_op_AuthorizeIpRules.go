@@ -19,7 +19,7 @@ func (c *Client) AuthorizeIpRules(ctx context.Context, params *AuthorizeIpRulesI
 		params = &AuthorizeIpRulesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AuthorizeIpRules", params, optFns, addOperationAuthorizeIpRulesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AuthorizeIpRules", params, optFns, c.addOperationAuthorizeIpRulesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type AuthorizeIpRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAuthorizeIpRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAuthorizeIpRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAuthorizeIpRules{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteTimelineEvent(ctx context.Context, params *DeleteTimeline
 		params = &DeleteTimelineEventInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTimelineEvent", params, optFns, addOperationDeleteTimelineEventMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTimelineEvent", params, optFns, c.addOperationDeleteTimelineEventMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteTimelineEventOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTimelineEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTimelineEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTimelineEvent{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) PutOutcome(ctx context.Context, params *PutOutcomeInput, optFns
 		params = &PutOutcomeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutOutcome", params, optFns, addOperationPutOutcomeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutOutcome", params, optFns, c.addOperationPutOutcomeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type PutOutcomeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutOutcomeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutOutcomeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutOutcome{}, middleware.After)
 	if err != nil {
 		return err

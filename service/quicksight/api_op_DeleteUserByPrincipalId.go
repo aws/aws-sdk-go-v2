@@ -16,7 +16,7 @@ func (c *Client) DeleteUserByPrincipalId(ctx context.Context, params *DeleteUser
 		params = &DeleteUserByPrincipalIdInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteUserByPrincipalId", params, optFns, addOperationDeleteUserByPrincipalIdMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteUserByPrincipalId", params, optFns, c.addOperationDeleteUserByPrincipalIdMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DeleteUserByPrincipalIdOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteUserByPrincipalIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteUserByPrincipalIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteUserByPrincipalId{}, middleware.After)
 	if err != nil {
 		return err

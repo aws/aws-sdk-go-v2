@@ -19,7 +19,7 @@ func (c *Client) DescribeIdentityPool(ctx context.Context, params *DescribeIdent
 		params = &DescribeIdentityPoolInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeIdentityPool", params, optFns, addOperationDescribeIdentityPoolMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeIdentityPool", params, optFns, c.addOperationDescribeIdentityPoolMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type DescribeIdentityPoolOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeIdentityPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeIdentityPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeIdentityPool{}, middleware.After)
 	if err != nil {
 		return err

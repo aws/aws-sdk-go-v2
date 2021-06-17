@@ -20,7 +20,7 @@ func (c *Client) GetRateBasedStatementManagedKeys(ctx context.Context, params *G
 		params = &GetRateBasedStatementManagedKeysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRateBasedStatementManagedKeys", params, optFns, addOperationGetRateBasedStatementManagedKeysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRateBasedStatementManagedKeys", params, optFns, c.addOperationGetRateBasedStatementManagedKeysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type GetRateBasedStatementManagedKeysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRateBasedStatementManagedKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRateBasedStatementManagedKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRateBasedStatementManagedKeys{}, middleware.After)
 	if err != nil {
 		return err

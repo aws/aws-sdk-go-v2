@@ -20,7 +20,7 @@ func (c *Client) StartStack(ctx context.Context, params *StartStackInput, optFns
 		params = &StartStackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartStack", params, optFns, addOperationStartStackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartStack", params, optFns, c.addOperationStartStackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type StartStackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartStack{}, middleware.After)
 	if err != nil {
 		return err

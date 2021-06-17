@@ -17,7 +17,7 @@ func (c *Client) CreateVoiceTemplate(ctx context.Context, params *CreateVoiceTem
 		params = &CreateVoiceTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVoiceTemplate", params, optFns, addOperationCreateVoiceTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateVoiceTemplate", params, optFns, c.addOperationCreateVoiceTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type CreateVoiceTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateVoiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateVoiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVoiceTemplate{}, middleware.After)
 	if err != nil {
 		return err

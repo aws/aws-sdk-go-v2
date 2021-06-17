@@ -20,7 +20,7 @@ func (c *Client) RegisterTransitGateway(ctx context.Context, params *RegisterTra
 		params = &RegisterTransitGatewayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterTransitGateway", params, optFns, addOperationRegisterTransitGatewayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterTransitGateway", params, optFns, c.addOperationRegisterTransitGatewayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type RegisterTransitGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterTransitGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterTransitGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterTransitGateway{}, middleware.After)
 	if err != nil {
 		return err

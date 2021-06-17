@@ -20,7 +20,7 @@ func (c *Client) CreateEntityRecognizer(ctx context.Context, params *CreateEntit
 		params = &CreateEntityRecognizerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateEntityRecognizer", params, optFns, addOperationCreateEntityRecognizerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateEntityRecognizer", params, optFns, c.addOperationCreateEntityRecognizerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ type CreateEntityRecognizerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEntityRecognizer{}, middleware.After)
 	if err != nil {
 		return err

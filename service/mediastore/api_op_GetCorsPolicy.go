@@ -20,7 +20,7 @@ func (c *Client) GetCorsPolicy(ctx context.Context, params *GetCorsPolicyInput, 
 		params = &GetCorsPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCorsPolicy", params, optFns, addOperationGetCorsPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCorsPolicy", params, optFns, c.addOperationGetCorsPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetCorsPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCorsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCorsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCorsPolicy{}, middleware.After)
 	if err != nil {
 		return err

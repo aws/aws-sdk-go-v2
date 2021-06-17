@@ -17,7 +17,7 @@ func (c *Client) CreateReturnShippingLabel(ctx context.Context, params *CreateRe
 		params = &CreateReturnShippingLabelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateReturnShippingLabel", params, optFns, addOperationCreateReturnShippingLabelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateReturnShippingLabel", params, optFns, c.addOperationCreateReturnShippingLabelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type CreateReturnShippingLabelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateReturnShippingLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateReturnShippingLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateReturnShippingLabel{}, middleware.After)
 	if err != nil {
 		return err

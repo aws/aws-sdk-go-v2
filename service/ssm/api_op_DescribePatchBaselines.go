@@ -18,7 +18,7 @@ func (c *Client) DescribePatchBaselines(ctx context.Context, params *DescribePat
 		params = &DescribePatchBaselinesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePatchBaselines", params, optFns, addOperationDescribePatchBaselinesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePatchBaselines", params, optFns, c.addOperationDescribePatchBaselinesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribePatchBaselinesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePatchBaselinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePatchBaselinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePatchBaselines{}, middleware.After)
 	if err != nil {
 		return err

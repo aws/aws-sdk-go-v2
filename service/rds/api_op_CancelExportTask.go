@@ -18,7 +18,7 @@ func (c *Client) CancelExportTask(ctx context.Context, params *CancelExportTaskI
 		params = &CancelExportTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelExportTask", params, optFns, addOperationCancelExportTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelExportTask", params, optFns, c.addOperationCancelExportTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ type CancelExportTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCancelExportTask{}, middleware.After)
 	if err != nil {
 		return err

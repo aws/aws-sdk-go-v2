@@ -23,7 +23,7 @@ func (c *Client) CreatePresignedDomainUrl(ctx context.Context, params *CreatePre
 		params = &CreatePresignedDomainUrlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreatePresignedDomainUrl", params, optFns, addOperationCreatePresignedDomainUrlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePresignedDomainUrl", params, optFns, c.addOperationCreatePresignedDomainUrlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type CreatePresignedDomainUrlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreatePresignedDomainUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePresignedDomainUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePresignedDomainUrl{}, middleware.After)
 	if err != nil {
 		return err

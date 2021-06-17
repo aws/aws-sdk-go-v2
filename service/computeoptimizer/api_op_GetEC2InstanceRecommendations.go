@@ -22,7 +22,7 @@ func (c *Client) GetEC2InstanceRecommendations(ctx context.Context, params *GetE
 		params = &GetEC2InstanceRecommendationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEC2InstanceRecommendations", params, optFns, addOperationGetEC2InstanceRecommendationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEC2InstanceRecommendations", params, optFns, c.addOperationGetEC2InstanceRecommendationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type GetEC2InstanceRecommendationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEC2InstanceRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEC2InstanceRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetEC2InstanceRecommendations{}, middleware.After)
 	if err != nil {
 		return err

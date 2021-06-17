@@ -18,7 +18,7 @@ func (c *Client) GetCanaryRuns(ctx context.Context, params *GetCanaryRunsInput, 
 		params = &GetCanaryRunsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCanaryRuns", params, optFns, addOperationGetCanaryRunsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCanaryRuns", params, optFns, c.addOperationGetCanaryRunsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetCanaryRunsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCanaryRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCanaryRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCanaryRuns{}, middleware.After)
 	if err != nil {
 		return err

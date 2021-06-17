@@ -24,7 +24,7 @@ func (c *Client) GetEC2RecommendationProjectedMetrics(ctx context.Context, param
 		params = &GetEC2RecommendationProjectedMetricsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEC2RecommendationProjectedMetrics", params, optFns, addOperationGetEC2RecommendationProjectedMetricsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEC2RecommendationProjectedMetrics", params, optFns, c.addOperationGetEC2RecommendationProjectedMetricsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetEC2RecommendationProjectedMetricsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEC2RecommendationProjectedMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEC2RecommendationProjectedMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetEC2RecommendationProjectedMetrics{}, middleware.After)
 	if err != nil {
 		return err

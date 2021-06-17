@@ -19,7 +19,7 @@ func (c *Client) GetReservedNodeExchangeOfferings(ctx context.Context, params *G
 		params = &GetReservedNodeExchangeOfferingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetReservedNodeExchangeOfferings", params, optFns, addOperationGetReservedNodeExchangeOfferingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetReservedNodeExchangeOfferings", params, optFns, c.addOperationGetReservedNodeExchangeOfferingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetReservedNodeExchangeOfferingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetReservedNodeExchangeOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetReservedNodeExchangeOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetReservedNodeExchangeOfferings{}, middleware.After)
 	if err != nil {
 		return err

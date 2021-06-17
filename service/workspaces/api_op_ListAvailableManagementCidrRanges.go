@@ -23,7 +23,7 @@ func (c *Client) ListAvailableManagementCidrRanges(ctx context.Context, params *
 		params = &ListAvailableManagementCidrRangesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAvailableManagementCidrRanges", params, optFns, addOperationListAvailableManagementCidrRangesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAvailableManagementCidrRanges", params, optFns, c.addOperationListAvailableManagementCidrRangesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListAvailableManagementCidrRangesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAvailableManagementCidrRangesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAvailableManagementCidrRangesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailableManagementCidrRanges{}, middleware.After)
 	if err != nil {
 		return err

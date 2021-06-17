@@ -19,7 +19,7 @@ func (c *Client) ListLabelingJobsForWorkteam(ctx context.Context, params *ListLa
 		params = &ListLabelingJobsForWorkteamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLabelingJobsForWorkteam", params, optFns, addOperationListLabelingJobsForWorkteamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLabelingJobsForWorkteam", params, optFns, c.addOperationListLabelingJobsForWorkteamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type ListLabelingJobsForWorkteamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLabelingJobsForWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLabelingJobsForWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLabelingJobsForWorkteam{}, middleware.After)
 	if err != nil {
 		return err

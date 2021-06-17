@@ -17,7 +17,7 @@ func (c *Client) GetLaunchConfiguration(ctx context.Context, params *GetLaunchCo
 		params = &GetLaunchConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLaunchConfiguration", params, optFns, addOperationGetLaunchConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLaunchConfiguration", params, optFns, c.addOperationGetLaunchConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type GetLaunchConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLaunchConfiguration{}, middleware.After)
 	if err != nil {
 		return err

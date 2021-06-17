@@ -19,7 +19,7 @@ func (c *Client) DeleteVirtualNode(ctx context.Context, params *DeleteVirtualNod
 		params = &DeleteVirtualNodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVirtualNode", params, optFns, addOperationDeleteVirtualNodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVirtualNode", params, optFns, c.addOperationDeleteVirtualNodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DeleteVirtualNodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVirtualNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVirtualNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVirtualNode{}, middleware.After)
 	if err != nil {
 		return err

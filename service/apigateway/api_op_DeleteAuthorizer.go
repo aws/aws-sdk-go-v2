@@ -17,7 +17,7 @@ func (c *Client) DeleteAuthorizer(ctx context.Context, params *DeleteAuthorizerI
 		params = &DeleteAuthorizerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAuthorizer", params, optFns, addOperationDeleteAuthorizerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAuthorizer", params, optFns, c.addOperationDeleteAuthorizerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteAuthorizerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAuthorizer{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteProvisionedProductPlan(ctx context.Context, params *Delet
 		params = &DeleteProvisionedProductPlanInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProvisionedProductPlan", params, optFns, addOperationDeleteProvisionedProductPlanMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProvisionedProductPlan", params, optFns, c.addOperationDeleteProvisionedProductPlanMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteProvisionedProductPlanOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteProvisionedProductPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteProvisionedProductPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProvisionedProductPlan{}, middleware.After)
 	if err != nil {
 		return err

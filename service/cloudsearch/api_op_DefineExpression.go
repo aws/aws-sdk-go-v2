@@ -21,7 +21,7 @@ func (c *Client) DefineExpression(ctx context.Context, params *DefineExpressionI
 		params = &DefineExpressionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DefineExpression", params, optFns, addOperationDefineExpressionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DefineExpression", params, optFns, c.addOperationDefineExpressionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DefineExpressionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDefineExpressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDefineExpressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDefineExpression{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DescribeQueue(ctx context.Context, params *DescribeQueueInput, 
 		params = &DescribeQueueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeQueue", params, optFns, addOperationDescribeQueueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeQueue", params, optFns, c.addOperationDescribeQueueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DescribeQueueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeQueue{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) ListDistributionsByCachePolicyId(ctx context.Context, params *L
 		params = &ListDistributionsByCachePolicyIdInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDistributionsByCachePolicyId", params, optFns, addOperationListDistributionsByCachePolicyIdMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDistributionsByCachePolicyId", params, optFns, c.addOperationListDistributionsByCachePolicyIdMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListDistributionsByCachePolicyIdOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDistributionsByCachePolicyIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDistributionsByCachePolicyIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListDistributionsByCachePolicyId{}, middleware.After)
 	if err != nil {
 		return err

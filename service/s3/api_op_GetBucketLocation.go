@@ -37,7 +37,7 @@ func (c *Client) GetBucketLocation(ctx context.Context, params *GetBucketLocatio
 		params = &GetBucketLocationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketLocation", params, optFns, addOperationGetBucketLocationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketLocation", params, optFns, c.addOperationGetBucketLocationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type GetBucketLocationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketLocation{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) CreateEndpointAccess(ctx context.Context, params *CreateEndpoin
 		params = &CreateEndpointAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateEndpointAccess", params, optFns, addOperationCreateEndpointAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateEndpointAccess", params, optFns, c.addOperationCreateEndpointAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type CreateEndpointAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateEndpointAccess{}, middleware.After)
 	if err != nil {
 		return err

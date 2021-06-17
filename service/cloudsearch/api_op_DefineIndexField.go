@@ -25,7 +25,7 @@ func (c *Client) DefineIndexField(ctx context.Context, params *DefineIndexFieldI
 		params = &DefineIndexFieldInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DefineIndexField", params, optFns, addOperationDefineIndexFieldMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DefineIndexField", params, optFns, c.addOperationDefineIndexFieldMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DefineIndexFieldOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDefineIndexFieldMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDefineIndexFieldMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDefineIndexField{}, middleware.After)
 	if err != nil {
 		return err

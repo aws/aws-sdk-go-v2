@@ -36,7 +36,7 @@ func (c *Client) PutBucketPolicy(ctx context.Context, params *PutBucketPolicyInp
 		params = &PutBucketPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketPolicy", params, optFns, addOperationPutBucketPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketPolicy", params, optFns, c.addOperationPutBucketPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type PutBucketPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketPolicy{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) PutConfigurationSetDeliveryOptions(ctx context.Context, params 
 		params = &PutConfigurationSetDeliveryOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutConfigurationSetDeliveryOptions", params, optFns, addOperationPutConfigurationSetDeliveryOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutConfigurationSetDeliveryOptions", params, optFns, c.addOperationPutConfigurationSetDeliveryOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type PutConfigurationSetDeliveryOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutConfigurationSetDeliveryOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutConfigurationSetDeliveryOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutConfigurationSetDeliveryOptions{}, middleware.After)
 	if err != nil {
 		return err

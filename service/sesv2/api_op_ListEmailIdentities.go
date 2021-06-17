@@ -22,7 +22,7 @@ func (c *Client) ListEmailIdentities(ctx context.Context, params *ListEmailIdent
 		params = &ListEmailIdentitiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEmailIdentities", params, optFns, addOperationListEmailIdentitiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEmailIdentities", params, optFns, c.addOperationListEmailIdentitiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListEmailIdentitiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEmailIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEmailIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEmailIdentities{}, middleware.After)
 	if err != nil {
 		return err

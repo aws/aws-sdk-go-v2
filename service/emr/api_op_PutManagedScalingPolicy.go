@@ -21,7 +21,7 @@ func (c *Client) PutManagedScalingPolicy(ctx context.Context, params *PutManaged
 		params = &PutManagedScalingPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutManagedScalingPolicy", params, optFns, addOperationPutManagedScalingPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutManagedScalingPolicy", params, optFns, c.addOperationPutManagedScalingPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type PutManagedScalingPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutManagedScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutManagedScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutManagedScalingPolicy{}, middleware.After)
 	if err != nil {
 		return err

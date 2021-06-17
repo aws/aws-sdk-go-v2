@@ -18,7 +18,7 @@ func (c *Client) StartDetectMitigationActionsTask(ctx context.Context, params *S
 		params = &StartDetectMitigationActionsTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDetectMitigationActionsTask", params, optFns, addOperationStartDetectMitigationActionsTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDetectMitigationActionsTask", params, optFns, c.addOperationStartDetectMitigationActionsTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type StartDetectMitigationActionsTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDetectMitigationActionsTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDetectMitigationActionsTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDetectMitigationActionsTask{}, middleware.After)
 	if err != nil {
 		return err

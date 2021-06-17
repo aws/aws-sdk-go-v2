@@ -138,7 +138,7 @@ func (c *Client) AssumeRoleWithWebIdentity(ctx context.Context, params *AssumeRo
 		params = &AssumeRoleWithWebIdentityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssumeRoleWithWebIdentity", params, optFns, addOperationAssumeRoleWithWebIdentityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssumeRoleWithWebIdentity", params, optFns, c.addOperationAssumeRoleWithWebIdentityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -315,7 +315,7 @@ type AssumeRoleWithWebIdentityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssumeRoleWithWebIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssumeRoleWithWebIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAssumeRoleWithWebIdentity{}, middleware.After)
 	if err != nil {
 		return err

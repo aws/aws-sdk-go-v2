@@ -17,7 +17,7 @@ func (c *Client) GetSession(ctx context.Context, params *GetSessionInput, optFns
 		params = &GetSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSession", params, optFns, addOperationGetSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSession", params, optFns, c.addOperationGetSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type GetSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSession{}, middleware.After)
 	if err != nil {
 		return err

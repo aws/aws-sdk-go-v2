@@ -22,7 +22,7 @@ func (c *Client) ListPhoneNumbersOptedOut(ctx context.Context, params *ListPhone
 		params = &ListPhoneNumbersOptedOutInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPhoneNumbersOptedOut", params, optFns, addOperationListPhoneNumbersOptedOutMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPhoneNumbersOptedOut", params, optFns, c.addOperationListPhoneNumbersOptedOutMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListPhoneNumbersOptedOutOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPhoneNumbersOptedOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPhoneNumbersOptedOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListPhoneNumbersOptedOut{}, middleware.After)
 	if err != nil {
 		return err

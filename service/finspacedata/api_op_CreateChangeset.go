@@ -17,7 +17,7 @@ func (c *Client) CreateChangeset(ctx context.Context, params *CreateChangesetInp
 		params = &CreateChangesetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateChangeset", params, optFns, addOperationCreateChangesetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateChangeset", params, optFns, c.addOperationCreateChangesetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type CreateChangesetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateChangesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateChangesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChangeset{}, middleware.After)
 	if err != nil {
 		return err

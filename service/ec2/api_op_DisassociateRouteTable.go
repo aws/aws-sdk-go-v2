@@ -21,7 +21,7 @@ func (c *Client) DisassociateRouteTable(ctx context.Context, params *Disassociat
 		params = &DisassociateRouteTableInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateRouteTable", params, optFns, addOperationDisassociateRouteTableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateRouteTable", params, optFns, c.addOperationDisassociateRouteTableMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DisassociateRouteTableOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateRouteTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateRouteTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDisassociateRouteTable{}, middleware.After)
 	if err != nil {
 		return err

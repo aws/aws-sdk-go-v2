@@ -18,7 +18,7 @@ func (c *Client) DeleteVoiceConnectorTermination(ctx context.Context, params *De
 		params = &DeleteVoiceConnectorTerminationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVoiceConnectorTermination", params, optFns, addOperationDeleteVoiceConnectorTerminationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVoiceConnectorTermination", params, optFns, c.addOperationDeleteVoiceConnectorTerminationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteVoiceConnectorTerminationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVoiceConnectorTerminationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVoiceConnectorTerminationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVoiceConnectorTermination{}, middleware.After)
 	if err != nil {
 		return err

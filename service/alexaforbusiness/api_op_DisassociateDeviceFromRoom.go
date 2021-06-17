@@ -18,7 +18,7 @@ func (c *Client) DisassociateDeviceFromRoom(ctx context.Context, params *Disasso
 		params = &DisassociateDeviceFromRoomInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateDeviceFromRoom", params, optFns, addOperationDisassociateDeviceFromRoomMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateDeviceFromRoom", params, optFns, c.addOperationDisassociateDeviceFromRoomMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DisassociateDeviceFromRoomOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateDeviceFromRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateDeviceFromRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateDeviceFromRoom{}, middleware.After)
 	if err != nil {
 		return err

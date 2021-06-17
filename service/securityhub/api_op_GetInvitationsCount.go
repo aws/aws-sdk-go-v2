@@ -17,7 +17,7 @@ func (c *Client) GetInvitationsCount(ctx context.Context, params *GetInvitations
 		params = &GetInvitationsCountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInvitationsCount", params, optFns, addOperationGetInvitationsCountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInvitationsCount", params, optFns, c.addOperationGetInvitationsCountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type GetInvitationsCountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInvitationsCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInvitationsCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInvitationsCount{}, middleware.After)
 	if err != nil {
 		return err

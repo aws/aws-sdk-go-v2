@@ -19,7 +19,7 @@ func (c *Client) DescribeLogGroups(ctx context.Context, params *DescribeLogGroup
 		params = &DescribeLogGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLogGroups", params, optFns, addOperationDescribeLogGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLogGroups", params, optFns, c.addOperationDescribeLogGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeLogGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLogGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLogGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLogGroups{}, middleware.After)
 	if err != nil {
 		return err

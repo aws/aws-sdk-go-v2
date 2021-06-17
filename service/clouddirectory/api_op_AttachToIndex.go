@@ -17,7 +17,7 @@ func (c *Client) AttachToIndex(ctx context.Context, params *AttachToIndexInput, 
 		params = &AttachToIndexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachToIndex", params, optFns, addOperationAttachToIndexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachToIndex", params, optFns, c.addOperationAttachToIndexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type AttachToIndexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachToIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachToIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAttachToIndex{}, middleware.After)
 	if err != nil {
 		return err

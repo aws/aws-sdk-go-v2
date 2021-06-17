@@ -23,7 +23,7 @@ func (c *Client) DescribeExportTasks(ctx context.Context, params *DescribeExport
 		params = &DescribeExportTasksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeExportTasks", params, optFns, addOperationDescribeExportTasksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeExportTasks", params, optFns, c.addOperationDescribeExportTasksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DescribeExportTasksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeExportTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeExportTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeExportTasks{}, middleware.After)
 	if err != nil {
 		return err

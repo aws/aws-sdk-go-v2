@@ -35,7 +35,7 @@ func (c *Client) CreateExperimentTemplate(ctx context.Context, params *CreateExp
 		params = &CreateExperimentTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateExperimentTemplate", params, optFns, addOperationCreateExperimentTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateExperimentTemplate", params, optFns, c.addOperationCreateExperimentTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ type CreateExperimentTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateExperimentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateExperimentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateExperimentTemplate{}, middleware.After)
 	if err != nil {
 		return err

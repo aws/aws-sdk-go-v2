@@ -22,7 +22,7 @@ func (c *Client) InitiateLayerUpload(ctx context.Context, params *InitiateLayerU
 		params = &InitiateLayerUploadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InitiateLayerUpload", params, optFns, addOperationInitiateLayerUploadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InitiateLayerUpload", params, optFns, c.addOperationInitiateLayerUploadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type InitiateLayerUploadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInitiateLayerUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInitiateLayerUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInitiateLayerUpload{}, middleware.After)
 	if err != nil {
 		return err

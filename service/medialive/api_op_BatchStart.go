@@ -17,7 +17,7 @@ func (c *Client) BatchStart(ctx context.Context, params *BatchStartInput, optFns
 		params = &BatchStartInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchStart", params, optFns, addOperationBatchStartMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchStart", params, optFns, c.addOperationBatchStartMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type BatchStartOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchStartMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchStartMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchStart{}, middleware.After)
 	if err != nil {
 		return err

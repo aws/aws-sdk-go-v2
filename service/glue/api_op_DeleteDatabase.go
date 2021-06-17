@@ -24,7 +24,7 @@ func (c *Client) DeleteDatabase(ctx context.Context, params *DeleteDatabaseInput
 		params = &DeleteDatabaseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDatabase", params, optFns, addOperationDeleteDatabaseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDatabase", params, optFns, c.addOperationDeleteDatabaseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteDatabaseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDatabase{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) UpdateConfigurationTemplate(ctx context.Context, params *Update
 		params = &UpdateConfigurationTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateConfigurationTemplate", params, optFns, addOperationUpdateConfigurationTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateConfigurationTemplate", params, optFns, c.addOperationUpdateConfigurationTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ type UpdateConfigurationTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateConfigurationTemplate{}, middleware.After)
 	if err != nil {
 		return err

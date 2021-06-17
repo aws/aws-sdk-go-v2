@@ -18,7 +18,7 @@ func (c *Client) DescribeDataSetPermissions(ctx context.Context, params *Describ
 		params = &DescribeDataSetPermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDataSetPermissions", params, optFns, addOperationDescribeDataSetPermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDataSetPermissions", params, optFns, c.addOperationDescribeDataSetPermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DescribeDataSetPermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDataSetPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDataSetPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataSetPermissions{}, middleware.After)
 	if err != nil {
 		return err

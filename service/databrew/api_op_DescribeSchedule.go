@@ -17,7 +17,7 @@ func (c *Client) DescribeSchedule(ctx context.Context, params *DescribeScheduleI
 		params = &DescribeScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSchedule", params, optFns, addOperationDescribeScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSchedule", params, optFns, c.addOperationDescribeScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DescribeScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSchedule{}, middleware.After)
 	if err != nil {
 		return err

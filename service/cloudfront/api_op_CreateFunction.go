@@ -25,7 +25,7 @@ func (c *Client) CreateFunction(ctx context.Context, params *CreateFunctionInput
 		params = &CreateFunctionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFunction", params, optFns, addOperationCreateFunctionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFunction", params, optFns, c.addOperationCreateFunctionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type CreateFunctionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpCreateFunction{}, middleware.After)
 	if err != nil {
 		return err

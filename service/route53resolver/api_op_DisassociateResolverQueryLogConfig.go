@@ -27,7 +27,7 @@ func (c *Client) DisassociateResolverQueryLogConfig(ctx context.Context, params 
 		params = &DisassociateResolverQueryLogConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateResolverQueryLogConfig", params, optFns, addOperationDisassociateResolverQueryLogConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateResolverQueryLogConfig", params, optFns, c.addOperationDisassociateResolverQueryLogConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DisassociateResolverQueryLogConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateResolverQueryLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateResolverQueryLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateResolverQueryLogConfig{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) StartBulkDeployment(ctx context.Context, params *StartBulkDeplo
 		params = &StartBulkDeploymentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartBulkDeployment", params, optFns, addOperationStartBulkDeploymentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartBulkDeployment", params, optFns, c.addOperationStartBulkDeploymentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type StartBulkDeploymentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartBulkDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartBulkDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartBulkDeployment{}, middleware.After)
 	if err != nil {
 		return err

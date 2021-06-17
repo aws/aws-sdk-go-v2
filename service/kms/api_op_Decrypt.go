@@ -80,7 +80,7 @@ func (c *Client) Decrypt(ctx context.Context, params *DecryptInput, optFns ...fu
 		params = &DecryptInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Decrypt", params, optFns, addOperationDecryptMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "Decrypt", params, optFns, c.addOperationDecryptMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -170,7 +170,7 @@ type DecryptOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDecryptMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDecryptMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDecrypt{}, middleware.After)
 	if err != nil {
 		return err

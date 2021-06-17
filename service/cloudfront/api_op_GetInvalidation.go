@@ -22,7 +22,7 @@ func (c *Client) GetInvalidation(ctx context.Context, params *GetInvalidationInp
 		params = &GetInvalidationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInvalidation", params, optFns, addOperationGetInvalidationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInvalidation", params, optFns, c.addOperationGetInvalidationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetInvalidationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInvalidationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInvalidationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetInvalidation{}, middleware.After)
 	if err != nil {
 		return err

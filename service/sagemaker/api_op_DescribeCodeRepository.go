@@ -18,7 +18,7 @@ func (c *Client) DescribeCodeRepository(ctx context.Context, params *DescribeCod
 		params = &DescribeCodeRepositoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCodeRepository", params, optFns, addOperationDescribeCodeRepositoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCodeRepository", params, optFns, c.addOperationDescribeCodeRepositoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeCodeRepositoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCodeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCodeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCodeRepository{}, middleware.After)
 	if err != nil {
 		return err

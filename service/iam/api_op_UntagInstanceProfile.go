@@ -19,7 +19,7 @@ func (c *Client) UntagInstanceProfile(ctx context.Context, params *UntagInstance
 		params = &UntagInstanceProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagInstanceProfile", params, optFns, addOperationUntagInstanceProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagInstanceProfile", params, optFns, c.addOperationUntagInstanceProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UntagInstanceProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUntagInstanceProfile{}, middleware.After)
 	if err != nil {
 		return err

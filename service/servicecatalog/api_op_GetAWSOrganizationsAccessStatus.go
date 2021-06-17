@@ -19,7 +19,7 @@ func (c *Client) GetAWSOrganizationsAccessStatus(ctx context.Context, params *Ge
 		params = &GetAWSOrganizationsAccessStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAWSOrganizationsAccessStatus", params, optFns, addOperationGetAWSOrganizationsAccessStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAWSOrganizationsAccessStatus", params, optFns, c.addOperationGetAWSOrganizationsAccessStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type GetAWSOrganizationsAccessStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAWSOrganizationsAccessStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAWSOrganizationsAccessStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAWSOrganizationsAccessStatus{}, middleware.After)
 	if err != nil {
 		return err

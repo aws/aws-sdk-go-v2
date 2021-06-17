@@ -19,7 +19,7 @@ func (c *Client) GetCostCategories(ctx context.Context, params *GetCostCategorie
 		params = &GetCostCategoriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCostCategories", params, optFns, addOperationGetCostCategoriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCostCategories", params, optFns, c.addOperationGetCostCategoriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -145,7 +145,7 @@ type GetCostCategoriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCostCategoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCostCategoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCostCategories{}, middleware.After)
 	if err != nil {
 		return err

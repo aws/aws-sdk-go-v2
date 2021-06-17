@@ -20,7 +20,7 @@ func (c *Client) GetEnrollmentStatus(ctx context.Context, params *GetEnrollmentS
 		params = &GetEnrollmentStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEnrollmentStatus", params, optFns, addOperationGetEnrollmentStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEnrollmentStatus", params, optFns, c.addOperationGetEnrollmentStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetEnrollmentStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEnrollmentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEnrollmentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetEnrollmentStatus{}, middleware.After)
 	if err != nil {
 		return err

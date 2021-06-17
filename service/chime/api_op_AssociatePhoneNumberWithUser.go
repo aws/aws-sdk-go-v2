@@ -16,7 +16,7 @@ func (c *Client) AssociatePhoneNumberWithUser(ctx context.Context, params *Assoc
 		params = &AssociatePhoneNumberWithUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociatePhoneNumberWithUser", params, optFns, addOperationAssociatePhoneNumberWithUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociatePhoneNumberWithUser", params, optFns, c.addOperationAssociatePhoneNumberWithUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type AssociatePhoneNumberWithUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociatePhoneNumberWithUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociatePhoneNumberWithUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociatePhoneNumberWithUser{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) CreateClusterSecurityGroup(ctx context.Context, params *CreateC
 		params = &CreateClusterSecurityGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateClusterSecurityGroup", params, optFns, addOperationCreateClusterSecurityGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateClusterSecurityGroup", params, optFns, c.addOperationCreateClusterSecurityGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type CreateClusterSecurityGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateClusterSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateClusterSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateClusterSecurityGroup{}, middleware.After)
 	if err != nil {
 		return err

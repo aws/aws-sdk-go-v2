@@ -22,7 +22,7 @@ func (c *Client) DescribeSSLPolicies(ctx context.Context, params *DescribeSSLPol
 		params = &DescribeSSLPoliciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSSLPolicies", params, optFns, addOperationDescribeSSLPoliciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSSLPolicies", params, optFns, c.addOperationDescribeSSLPoliciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DescribeSSLPoliciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSSLPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSSLPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeSSLPolicies{}, middleware.After)
 	if err != nil {
 		return err

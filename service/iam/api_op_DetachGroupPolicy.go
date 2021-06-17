@@ -21,7 +21,7 @@ func (c *Client) DetachGroupPolicy(ctx context.Context, params *DetachGroupPolic
 		params = &DetachGroupPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachGroupPolicy", params, optFns, addOperationDetachGroupPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachGroupPolicy", params, optFns, c.addOperationDetachGroupPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DetachGroupPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDetachGroupPolicy{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) BatchDeleteTableRows(ctx context.Context, params *BatchDeleteTa
 		params = &BatchDeleteTableRowsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteTableRows", params, optFns, addOperationBatchDeleteTableRowsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteTableRows", params, optFns, c.addOperationBatchDeleteTableRowsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type BatchDeleteTableRowsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteTableRows{}, middleware.After)
 	if err != nil {
 		return err

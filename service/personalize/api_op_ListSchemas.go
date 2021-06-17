@@ -20,7 +20,7 @@ func (c *Client) ListSchemas(ctx context.Context, params *ListSchemasInput, optF
 		params = &ListSchemasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSchemas", params, optFns, addOperationListSchemasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSchemas", params, optFns, c.addOperationListSchemasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type ListSchemasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSchemas{}, middleware.After)
 	if err != nil {
 		return err

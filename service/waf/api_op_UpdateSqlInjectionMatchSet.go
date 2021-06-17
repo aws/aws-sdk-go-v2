@@ -61,7 +61,7 @@ func (c *Client) UpdateSqlInjectionMatchSet(ctx context.Context, params *UpdateS
 		params = &UpdateSqlInjectionMatchSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateSqlInjectionMatchSet", params, optFns, addOperationUpdateSqlInjectionMatchSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSqlInjectionMatchSet", params, optFns, c.addOperationUpdateSqlInjectionMatchSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ type UpdateSqlInjectionMatchSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateSqlInjectionMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSqlInjectionMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSqlInjectionMatchSet{}, middleware.After)
 	if err != nil {
 		return err

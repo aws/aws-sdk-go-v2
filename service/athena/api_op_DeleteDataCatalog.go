@@ -16,7 +16,7 @@ func (c *Client) DeleteDataCatalog(ctx context.Context, params *DeleteDataCatalo
 		params = &DeleteDataCatalogInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDataCatalog", params, optFns, addOperationDeleteDataCatalogMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDataCatalog", params, optFns, c.addOperationDeleteDataCatalogMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteDataCatalogOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDataCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDataCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDataCatalog{}, middleware.After)
 	if err != nil {
 		return err

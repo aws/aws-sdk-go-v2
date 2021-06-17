@@ -16,7 +16,7 @@ func (c *Client) GetChannelPolicy(ctx context.Context, params *GetChannelPolicyI
 		params = &GetChannelPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetChannelPolicy", params, optFns, addOperationGetChannelPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetChannelPolicy", params, optFns, c.addOperationGetChannelPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type GetChannelPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetChannelPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetChannelPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChannelPolicy{}, middleware.After)
 	if err != nil {
 		return err

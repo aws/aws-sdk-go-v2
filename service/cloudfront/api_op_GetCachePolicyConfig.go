@@ -21,7 +21,7 @@ func (c *Client) GetCachePolicyConfig(ctx context.Context, params *GetCachePolic
 		params = &GetCachePolicyConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCachePolicyConfig", params, optFns, addOperationGetCachePolicyConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCachePolicyConfig", params, optFns, c.addOperationGetCachePolicyConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetCachePolicyConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCachePolicyConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCachePolicyConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetCachePolicyConfig{}, middleware.After)
 	if err != nil {
 		return err

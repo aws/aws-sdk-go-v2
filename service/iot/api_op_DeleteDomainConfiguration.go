@@ -16,7 +16,7 @@ func (c *Client) DeleteDomainConfiguration(ctx context.Context, params *DeleteDo
 		params = &DeleteDomainConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDomainConfiguration", params, optFns, addOperationDeleteDomainConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDomainConfiguration", params, optFns, c.addOperationDeleteDomainConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteDomainConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDomainConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDomainConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDomainConfiguration{}, middleware.After)
 	if err != nil {
 		return err

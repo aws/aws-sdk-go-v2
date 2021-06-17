@@ -17,7 +17,7 @@ func (c *Client) CreateMilestone(ctx context.Context, params *CreateMilestoneInp
 		params = &CreateMilestoneInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMilestone", params, optFns, addOperationCreateMilestoneMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMilestone", params, optFns, c.addOperationCreateMilestoneMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type CreateMilestoneOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateMilestoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateMilestoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMilestone{}, middleware.After)
 	if err != nil {
 		return err

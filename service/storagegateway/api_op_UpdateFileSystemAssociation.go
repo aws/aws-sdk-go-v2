@@ -18,7 +18,7 @@ func (c *Client) UpdateFileSystemAssociation(ctx context.Context, params *Update
 		params = &UpdateFileSystemAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateFileSystemAssociation", params, optFns, addOperationUpdateFileSystemAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateFileSystemAssociation", params, optFns, c.addOperationUpdateFileSystemAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type UpdateFileSystemAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateFileSystemAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateFileSystemAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateFileSystemAssociation{}, middleware.After)
 	if err != nil {
 		return err

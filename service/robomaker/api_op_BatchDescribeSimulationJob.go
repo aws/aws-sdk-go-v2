@@ -17,7 +17,7 @@ func (c *Client) BatchDescribeSimulationJob(ctx context.Context, params *BatchDe
 		params = &BatchDescribeSimulationJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDescribeSimulationJob", params, optFns, addOperationBatchDescribeSimulationJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDescribeSimulationJob", params, optFns, c.addOperationBatchDescribeSimulationJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type BatchDescribeSimulationJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDescribeSimulationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDescribeSimulationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDescribeSimulationJob{}, middleware.After)
 	if err != nil {
 		return err

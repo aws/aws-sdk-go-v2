@@ -17,7 +17,7 @@ func (c *Client) GetStream(ctx context.Context, params *GetStreamInput, optFns .
 		params = &GetStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetStream", params, optFns, addOperationGetStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetStream", params, optFns, c.addOperationGetStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStream{}, middleware.After)
 	if err != nil {
 		return err

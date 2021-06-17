@@ -21,7 +21,7 @@ func (c *Client) GetMapTile(ctx context.Context, params *GetMapTileInput, optFns
 		params = &GetMapTileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMapTile", params, optFns, addOperationGetMapTileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMapTile", params, optFns, c.addOperationGetMapTileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type GetMapTileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMapTileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMapTileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMapTile{}, middleware.After)
 	if err != nil {
 		return err

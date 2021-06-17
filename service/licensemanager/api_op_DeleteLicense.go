@@ -17,7 +17,7 @@ func (c *Client) DeleteLicense(ctx context.Context, params *DeleteLicenseInput, 
 		params = &DeleteLicenseInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLicense", params, optFns, addOperationDeleteLicenseMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLicense", params, optFns, c.addOperationDeleteLicenseMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteLicenseOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLicense{}, middleware.After)
 	if err != nil {
 		return err

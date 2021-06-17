@@ -18,7 +18,7 @@ func (c *Client) BatchPutScheduledUpdateGroupAction(ctx context.Context, params 
 		params = &BatchPutScheduledUpdateGroupActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchPutScheduledUpdateGroupAction", params, optFns, addOperationBatchPutScheduledUpdateGroupActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchPutScheduledUpdateGroupAction", params, optFns, c.addOperationBatchPutScheduledUpdateGroupActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type BatchPutScheduledUpdateGroupActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchPutScheduledUpdateGroupActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchPutScheduledUpdateGroupActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpBatchPutScheduledUpdateGroupAction{}, middleware.After)
 	if err != nil {
 		return err

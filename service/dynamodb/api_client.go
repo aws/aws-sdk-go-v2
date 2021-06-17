@@ -5,19 +5,24 @@ package dynamodb
 import (
 	"context"
 	cryptorand "crypto/rand"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	ddbcust "github.com/aws/aws-sdk-go-v2/service/dynamodb/internal/customizations"
 	acceptencodingcust "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding"
+	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
+	"net/url"
+	"strings"
 	"time"
 )
 
@@ -27,6 +32,9 @@ const ServiceAPIVersion = "2012-08-10"
 // Client provides the API client to make operations call for Amazon DynamoDB.
 type Client struct {
 	options Options
+
+	// cache used to store discovered endpoints
+	endpointCache *internalEndpointDiscovery.EndpointCache
 }
 
 // New returns an initialized Client based on the functional options. Provide
@@ -47,6 +55,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveIdempotencyTokenProvider(&options)
 
+	resolveEnableEndpointDiscovery(&options)
+
 	for _, fn := range optFns {
 		fn(&options)
 	}
@@ -54,6 +64,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	client := &Client{
 		options: options,
 	}
+
+	resolveEndpointCache(client)
 
 	return client
 }
@@ -77,6 +89,9 @@ type Options struct {
 	// Allows you to enable the client's support for compressed gzip responses.
 	// Disabled by default.
 	EnableAcceptEncodingGzip bool
+
+	// Allows configuring endpoint discovery
+	EndpointDiscovery EndpointDiscoveryOptions
 
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions EndpointResolverOptions
@@ -188,6 +203,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSEndpointResolver(cfg, &opts)
+	resolveEnableEndpointDiscoveryFromConfigSources(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -263,6 +279,86 @@ func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 		LogRetryAttempts: o.ClientLogMode.IsRetries(),
 	}
 	return retry.AddRetryMiddlewares(stack, mo)
+}
+
+// resolves EnableEndpointDiscovery configuration
+func resolveEnableEndpointDiscoveryFromConfigSources(cfg aws.Config, o *Options) error {
+	if len(cfg.ConfigSources) == 0 {
+		return nil
+	}
+	value, found, err := internalConfig.ResolveEnableEndpointDiscovery(context.Background(), cfg.ConfigSources)
+	if err != nil {
+		return err
+	}
+	if found {
+		o.EndpointDiscovery.EnableEndpointDiscovery = value
+	}
+	return nil
+}
+
+// resolves endpoint cache on client
+func resolveEndpointCache(c *Client) {
+	c.endpointCache = internalEndpointDiscovery.NewEndpointCache(10)
+}
+
+// EndpointDiscoveryOptions used to configure endpoint discovery
+type EndpointDiscoveryOptions struct {
+	// Enables endpoint discovery
+	EnableEndpointDiscovery aws.EndpointDiscoveryEnableState
+}
+
+func resolveEnableEndpointDiscovery(o *Options) {
+	if o.EndpointDiscovery.EnableEndpointDiscovery != aws.EndpointDiscoveryUnset {
+		return
+	}
+	o.EndpointDiscovery.EnableEndpointDiscovery = aws.EndpointDiscoveryAuto
+}
+
+func (c *Client) handleEndpointDiscoveryFromService(ctx context.Context, input *DescribeEndpointsInput, key string, opt internalEndpointDiscovery.DiscoverEndpointOptions) (internalEndpointDiscovery.Endpoint, error) {
+	output, err := c.DescribeEndpoints(ctx, input, func(o *Options) {
+		o.EndpointOptions.DisableHTTPS = opt.DisableHTTPS
+		o.Logger = opt.Logger
+	})
+	if err != nil {
+		return internalEndpointDiscovery.Endpoint{}, err
+	}
+
+	endpoint := internalEndpointDiscovery.Endpoint{}
+	endpoint.Key = key
+
+	for _, e := range output.Endpoints {
+		if e.Address == nil {
+			continue
+		}
+		address := *e.Address
+
+		var scheme string
+		if idx := strings.Index(address, "://"); idx != -1 {
+			scheme = address[:idx]
+		}
+		if len(scheme) == 0 {
+			scheme = "https"
+			if opt.DisableHTTPS {
+				scheme = "http"
+			}
+			address = fmt.Sprintf("%s://%s", scheme, address)
+		}
+
+		cachedInMinutes := e.CachePeriodInMinutes
+		u, err := url.Parse(address)
+		if err != nil {
+			continue
+		}
+
+		addr := internalEndpointDiscovery.WeightedAddress{
+			URL:     u,
+			Expired: time.Now().Add(time.Duration(cachedInMinutes) * time.Minute).Round(0),
+		}
+		endpoint.Add(addr)
+	}
+
+	c.endpointCache.Add(endpoint)
+	return endpoint, nil
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token

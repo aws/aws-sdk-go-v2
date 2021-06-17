@@ -21,7 +21,7 @@ func (c *Client) GetEbsDefaultKmsKeyId(ctx context.Context, params *GetEbsDefaul
 		params = &GetEbsDefaultKmsKeyIdInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEbsDefaultKmsKeyId", params, optFns, addOperationGetEbsDefaultKmsKeyIdMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEbsDefaultKmsKeyId", params, optFns, c.addOperationGetEbsDefaultKmsKeyIdMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetEbsDefaultKmsKeyIdOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEbsDefaultKmsKeyIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEbsDefaultKmsKeyIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpGetEbsDefaultKmsKeyId{}, middleware.After)
 	if err != nil {
 		return err

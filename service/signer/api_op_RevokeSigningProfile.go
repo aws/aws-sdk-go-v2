@@ -19,7 +19,7 @@ func (c *Client) RevokeSigningProfile(ctx context.Context, params *RevokeSigning
 		params = &RevokeSigningProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokeSigningProfile", params, optFns, addOperationRevokeSigningProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeSigningProfile", params, optFns, c.addOperationRevokeSigningProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type RevokeSigningProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokeSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokeSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokeSigningProfile{}, middleware.After)
 	if err != nil {
 		return err

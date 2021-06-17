@@ -18,7 +18,7 @@ func (c *Client) DescribeAppInstanceAdmin(ctx context.Context, params *DescribeA
 		params = &DescribeAppInstanceAdminInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAppInstanceAdmin", params, optFns, addOperationDescribeAppInstanceAdminMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAppInstanceAdmin", params, optFns, c.addOperationDescribeAppInstanceAdminMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DescribeAppInstanceAdminOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAppInstanceAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAppInstanceAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAppInstanceAdmin{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) BatchRead(ctx context.Context, params *BatchReadInput, optFns .
 		params = &BatchReadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchRead", params, optFns, addOperationBatchReadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchRead", params, optFns, c.addOperationBatchReadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type BatchReadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchReadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchReadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchRead{}, middleware.After)
 	if err != nil {
 		return err

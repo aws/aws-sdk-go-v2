@@ -65,7 +65,7 @@ func (c *Client) GenerateDataKeyWithoutPlaintext(ctx context.Context, params *Ge
 		params = &GenerateDataKeyWithoutPlaintextInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GenerateDataKeyWithoutPlaintext", params, optFns, addOperationGenerateDataKeyWithoutPlaintextMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GenerateDataKeyWithoutPlaintext", params, optFns, c.addOperationGenerateDataKeyWithoutPlaintextMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -143,7 +143,7 @@ type GenerateDataKeyWithoutPlaintextOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGenerateDataKeyWithoutPlaintextMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGenerateDataKeyWithoutPlaintextMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGenerateDataKeyWithoutPlaintext{}, middleware.After)
 	if err != nil {
 		return err

@@ -25,7 +25,7 @@ func (c *Client) ListSigningJobs(ctx context.Context, params *ListSigningJobsInp
 		params = &ListSigningJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSigningJobs", params, optFns, addOperationListSigningJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSigningJobs", params, optFns, c.addOperationListSigningJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type ListSigningJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSigningJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSigningJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSigningJobs{}, middleware.After)
 	if err != nil {
 		return err

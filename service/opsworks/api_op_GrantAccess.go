@@ -18,7 +18,7 @@ func (c *Client) GrantAccess(ctx context.Context, params *GrantAccessInput, optF
 		params = &GrantAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GrantAccess", params, optFns, addOperationGrantAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GrantAccess", params, optFns, c.addOperationGrantAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GrantAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGrantAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGrantAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGrantAccess{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) GetPackageVersionReadme(ctx context.Context, params *GetPackage
 		params = &GetPackageVersionReadmeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPackageVersionReadme", params, optFns, addOperationGetPackageVersionReadmeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPackageVersionReadme", params, optFns, c.addOperationGetPackageVersionReadmeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -125,7 +125,7 @@ type GetPackageVersionReadmeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPackageVersionReadmeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPackageVersionReadmeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPackageVersionReadme{}, middleware.After)
 	if err != nil {
 		return err

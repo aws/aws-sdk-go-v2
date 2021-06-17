@@ -18,7 +18,7 @@ func (c *Client) CreateSecurityConfiguration(ctx context.Context, params *Create
 		params = &CreateSecurityConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSecurityConfiguration", params, optFns, addOperationCreateSecurityConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSecurityConfiguration", params, optFns, c.addOperationCreateSecurityConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type CreateSecurityConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSecurityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSecurityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSecurityConfiguration{}, middleware.After)
 	if err != nil {
 		return err

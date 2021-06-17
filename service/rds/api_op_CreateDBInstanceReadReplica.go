@@ -29,7 +29,7 @@ func (c *Client) CreateDBInstanceReadReplica(ctx context.Context, params *Create
 		params = &CreateDBInstanceReadReplicaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDBInstanceReadReplica", params, optFns, addOperationCreateDBInstanceReadReplicaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDBInstanceReadReplica", params, optFns, c.addOperationCreateDBInstanceReadReplicaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -375,7 +375,7 @@ type CreateDBInstanceReadReplicaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDBInstanceReadReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDBInstanceReadReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBInstanceReadReplica{}, middleware.After)
 	if err != nil {
 		return err
@@ -542,7 +542,7 @@ func (c *PresignClient) PresignCreateDBInstanceReadReplica(ctx context.Context, 
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
 	result, _, err := c.client.invokeOperation(ctx, "CreateDBInstanceReadReplica", params, clientOptFns,
-		addOperationCreateDBInstanceReadReplicaMiddlewares,
+		c.client.addOperationCreateDBInstanceReadReplicaMiddlewares,
 		presignConverter(options).convertToPresignMiddleware,
 	)
 	if err != nil {

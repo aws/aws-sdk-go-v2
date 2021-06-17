@@ -20,7 +20,7 @@ func (c *Client) CreateManagedEndpoint(ctx context.Context, params *CreateManage
 		params = &CreateManagedEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateManagedEndpoint", params, optFns, addOperationCreateManagedEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateManagedEndpoint", params, optFns, c.addOperationCreateManagedEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type CreateManagedEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateManagedEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateManagedEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateManagedEndpoint{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeSubscription(ctx context.Context, params *DescribeSubsc
 		params = &DescribeSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSubscription", params, optFns, addOperationDescribeSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSubscription", params, optFns, c.addOperationDescribeSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DescribeSubscriptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSubscription{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetLinkAttributes(ctx context.Context, params *GetLinkAttribute
 		params = &GetLinkAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLinkAttributes", params, optFns, addOperationGetLinkAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLinkAttributes", params, optFns, c.addOperationGetLinkAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetLinkAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLinkAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLinkAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLinkAttributes{}, middleware.After)
 	if err != nil {
 		return err

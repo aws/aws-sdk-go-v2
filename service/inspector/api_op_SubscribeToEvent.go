@@ -18,7 +18,7 @@ func (c *Client) SubscribeToEvent(ctx context.Context, params *SubscribeToEventI
 		params = &SubscribeToEventInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SubscribeToEvent", params, optFns, addOperationSubscribeToEventMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SubscribeToEvent", params, optFns, c.addOperationSubscribeToEventMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type SubscribeToEventOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSubscribeToEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSubscribeToEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSubscribeToEvent{}, middleware.After)
 	if err != nil {
 		return err

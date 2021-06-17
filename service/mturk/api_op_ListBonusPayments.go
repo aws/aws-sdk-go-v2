@@ -19,7 +19,7 @@ func (c *Client) ListBonusPayments(ctx context.Context, params *ListBonusPayment
 		params = &ListBonusPaymentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListBonusPayments", params, optFns, addOperationListBonusPaymentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBonusPayments", params, optFns, c.addOperationListBonusPaymentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListBonusPaymentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListBonusPaymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBonusPaymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListBonusPayments{}, middleware.After)
 	if err != nil {
 		return err

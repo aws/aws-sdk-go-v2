@@ -17,7 +17,7 @@ func (c *Client) DescribeCompanyNetworkConfiguration(ctx context.Context, params
 		params = &DescribeCompanyNetworkConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCompanyNetworkConfiguration", params, optFns, addOperationDescribeCompanyNetworkConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCompanyNetworkConfiguration", params, optFns, c.addOperationDescribeCompanyNetworkConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DescribeCompanyNetworkConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCompanyNetworkConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCompanyNetworkConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCompanyNetworkConfiguration{}, middleware.After)
 	if err != nil {
 		return err

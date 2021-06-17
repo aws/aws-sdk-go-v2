@@ -19,7 +19,7 @@ func (c *Client) Untag(ctx context.Context, params *UntagInput, optFns ...func(*
 		params = &UntagInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "Untag", params, optFns, addOperationUntagMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "Untag", params, optFns, c.addOperationUntagMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UntagOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUntag{}, middleware.After)
 	if err != nil {
 		return err

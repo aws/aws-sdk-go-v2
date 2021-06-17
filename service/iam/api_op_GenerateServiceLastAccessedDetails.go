@@ -63,7 +63,7 @@ func (c *Client) GenerateServiceLastAccessedDetails(ctx context.Context, params 
 		params = &GenerateServiceLastAccessedDetailsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GenerateServiceLastAccessedDetails", params, optFns, addOperationGenerateServiceLastAccessedDetailsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GenerateServiceLastAccessedDetails", params, optFns, c.addOperationGenerateServiceLastAccessedDetailsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ type GenerateServiceLastAccessedDetailsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGenerateServiceLastAccessedDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGenerateServiceLastAccessedDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGenerateServiceLastAccessedDetails{}, middleware.After)
 	if err != nil {
 		return err

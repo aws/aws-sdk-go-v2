@@ -17,7 +17,7 @@ func (c *Client) RejectResourceShareInvitation(ctx context.Context, params *Reje
 		params = &RejectResourceShareInvitationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RejectResourceShareInvitation", params, optFns, addOperationRejectResourceShareInvitationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RejectResourceShareInvitation", params, optFns, c.addOperationRejectResourceShareInvitationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type RejectResourceShareInvitationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRejectResourceShareInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRejectResourceShareInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectResourceShareInvitation{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) ListTemplateVersions(ctx context.Context, params *ListTemplateV
 		params = &ListTemplateVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTemplateVersions", params, optFns, addOperationListTemplateVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTemplateVersions", params, optFns, c.addOperationListTemplateVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ListTemplateVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTemplateVersions{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) StartMigration(ctx context.Context, params *StartMigrationInput
 		params = &StartMigrationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartMigration", params, optFns, addOperationStartMigrationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartMigration", params, optFns, c.addOperationStartMigrationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type StartMigrationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartMigration{}, middleware.After)
 	if err != nil {
 		return err

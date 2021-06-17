@@ -18,7 +18,7 @@ func (c *Client) GetUploadStatus(ctx context.Context, params *GetUploadStatusInp
 		params = &GetUploadStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUploadStatus", params, optFns, addOperationGetUploadStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetUploadStatus", params, optFns, c.addOperationGetUploadStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetUploadStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetUploadStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetUploadStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUploadStatus{}, middleware.After)
 	if err != nil {
 		return err

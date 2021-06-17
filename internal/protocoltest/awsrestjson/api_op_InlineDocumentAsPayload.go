@@ -16,7 +16,7 @@ func (c *Client) InlineDocumentAsPayload(ctx context.Context, params *InlineDocu
 		params = &InlineDocumentAsPayloadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InlineDocumentAsPayload", params, optFns, addOperationInlineDocumentAsPayloadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InlineDocumentAsPayload", params, optFns, c.addOperationInlineDocumentAsPayloadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type InlineDocumentAsPayloadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInlineDocumentAsPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInlineDocumentAsPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInlineDocumentAsPayload{}, middleware.After)
 	if err != nil {
 		return err

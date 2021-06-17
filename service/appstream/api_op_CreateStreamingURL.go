@@ -19,7 +19,7 @@ func (c *Client) CreateStreamingURL(ctx context.Context, params *CreateStreaming
 		params = &CreateStreamingURLInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateStreamingURL", params, optFns, addOperationCreateStreamingURLMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateStreamingURL", params, optFns, c.addOperationCreateStreamingURLMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type CreateStreamingURLOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateStreamingURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateStreamingURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateStreamingURL{}, middleware.After)
 	if err != nil {
 		return err

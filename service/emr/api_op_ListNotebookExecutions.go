@@ -22,7 +22,7 @@ func (c *Client) ListNotebookExecutions(ctx context.Context, params *ListNoteboo
 		params = &ListNotebookExecutionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListNotebookExecutions", params, optFns, addOperationListNotebookExecutionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListNotebookExecutions", params, optFns, c.addOperationListNotebookExecutionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ type ListNotebookExecutionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListNotebookExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListNotebookExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListNotebookExecutions{}, middleware.After)
 	if err != nil {
 		return err

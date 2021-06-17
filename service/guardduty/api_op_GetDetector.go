@@ -17,7 +17,7 @@ func (c *Client) GetDetector(ctx context.Context, params *GetDetectorInput, optF
 		params = &GetDetectorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDetector", params, optFns, addOperationGetDetectorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDetector", params, optFns, c.addOperationGetDetectorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type GetDetectorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDetector{}, middleware.After)
 	if err != nil {
 		return err

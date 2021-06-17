@@ -20,7 +20,7 @@ func (c *Client) DeleteInventory(ctx context.Context, params *DeleteInventoryInp
 		params = &DeleteInventoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteInventory", params, optFns, addOperationDeleteInventoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInventory", params, optFns, c.addOperationDeleteInventoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type DeleteInventoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteInventoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteInventoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteInventory{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DescribeManagedRuleGroup(ctx context.Context, params *DescribeM
 		params = &DescribeManagedRuleGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeManagedRuleGroup", params, optFns, addOperationDescribeManagedRuleGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeManagedRuleGroup", params, optFns, c.addOperationDescribeManagedRuleGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ type DescribeManagedRuleGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeManagedRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeManagedRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeManagedRuleGroup{}, middleware.After)
 	if err != nil {
 		return err

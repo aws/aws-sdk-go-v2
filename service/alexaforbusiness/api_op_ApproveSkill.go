@@ -18,7 +18,7 @@ func (c *Client) ApproveSkill(ctx context.Context, params *ApproveSkillInput, op
 		params = &ApproveSkillInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ApproveSkill", params, optFns, addOperationApproveSkillMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ApproveSkill", params, optFns, c.addOperationApproveSkillMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type ApproveSkillOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationApproveSkillMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationApproveSkillMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpApproveSkill{}, middleware.After)
 	if err != nil {
 		return err

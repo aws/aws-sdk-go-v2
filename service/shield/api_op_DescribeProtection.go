@@ -17,7 +17,7 @@ func (c *Client) DescribeProtection(ctx context.Context, params *DescribeProtect
 		params = &DescribeProtectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeProtection", params, optFns, addOperationDescribeProtectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeProtection", params, optFns, c.addOperationDescribeProtectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DescribeProtectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProtection{}, middleware.After)
 	if err != nil {
 		return err

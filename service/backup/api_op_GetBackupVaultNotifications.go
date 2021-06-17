@@ -17,7 +17,7 @@ func (c *Client) GetBackupVaultNotifications(ctx context.Context, params *GetBac
 		params = &GetBackupVaultNotificationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBackupVaultNotifications", params, optFns, addOperationGetBackupVaultNotificationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBackupVaultNotifications", params, optFns, c.addOperationGetBackupVaultNotificationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type GetBackupVaultNotificationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBackupVaultNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBackupVaultNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackupVaultNotifications{}, middleware.After)
 	if err != nil {
 		return err

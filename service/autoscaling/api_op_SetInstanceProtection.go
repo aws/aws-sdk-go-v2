@@ -22,7 +22,7 @@ func (c *Client) SetInstanceProtection(ctx context.Context, params *SetInstanceP
 		params = &SetInstanceProtectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetInstanceProtection", params, optFns, addOperationSetInstanceProtectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetInstanceProtection", params, optFns, c.addOperationSetInstanceProtectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type SetInstanceProtectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetInstanceProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetInstanceProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetInstanceProtection{}, middleware.After)
 	if err != nil {
 		return err

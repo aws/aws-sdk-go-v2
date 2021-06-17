@@ -17,7 +17,7 @@ func (c *Client) CreateIdentityProvider(ctx context.Context, params *CreateIdent
 		params = &CreateIdentityProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateIdentityProvider", params, optFns, addOperationCreateIdentityProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateIdentityProvider", params, optFns, c.addOperationCreateIdentityProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -135,7 +135,7 @@ type CreateIdentityProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateIdentityProvider{}, middleware.After)
 	if err != nil {
 		return err

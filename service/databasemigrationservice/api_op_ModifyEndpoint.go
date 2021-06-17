@@ -17,7 +17,7 @@ func (c *Client) ModifyEndpoint(ctx context.Context, params *ModifyEndpointInput
 		params = &ModifyEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyEndpoint", params, optFns, addOperationModifyEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyEndpoint", params, optFns, c.addOperationModifyEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -225,7 +225,7 @@ type ModifyEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyEndpoint{}, middleware.After)
 	if err != nil {
 		return err

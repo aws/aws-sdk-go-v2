@@ -25,7 +25,7 @@ func (c *Client) ListVirtualMFADevices(ctx context.Context, params *ListVirtualM
 		params = &ListVirtualMFADevicesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListVirtualMFADevices", params, optFns, addOperationListVirtualMFADevicesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListVirtualMFADevices", params, optFns, c.addOperationListVirtualMFADevicesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type ListVirtualMFADevicesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListVirtualMFADevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListVirtualMFADevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListVirtualMFADevices{}, middleware.After)
 	if err != nil {
 		return err

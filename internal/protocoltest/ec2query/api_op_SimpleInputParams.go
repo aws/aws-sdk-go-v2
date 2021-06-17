@@ -16,7 +16,7 @@ func (c *Client) SimpleInputParams(ctx context.Context, params *SimpleInputParam
 		params = &SimpleInputParamsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SimpleInputParams", params, optFns, addOperationSimpleInputParamsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SimpleInputParams", params, optFns, c.addOperationSimpleInputParamsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type SimpleInputParamsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSimpleInputParamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSimpleInputParamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpSimpleInputParams{}, middleware.After)
 	if err != nil {
 		return err

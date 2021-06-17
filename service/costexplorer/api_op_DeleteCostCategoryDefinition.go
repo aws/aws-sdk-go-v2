@@ -17,7 +17,7 @@ func (c *Client) DeleteCostCategoryDefinition(ctx context.Context, params *Delet
 		params = &DeleteCostCategoryDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCostCategoryDefinition", params, optFns, addOperationDeleteCostCategoryDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCostCategoryDefinition", params, optFns, c.addOperationDeleteCostCategoryDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteCostCategoryDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCostCategoryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCostCategoryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCostCategoryDefinition{}, middleware.After)
 	if err != nil {
 		return err

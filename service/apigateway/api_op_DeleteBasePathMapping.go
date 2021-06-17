@@ -16,7 +16,7 @@ func (c *Client) DeleteBasePathMapping(ctx context.Context, params *DeleteBasePa
 		params = &DeleteBasePathMappingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBasePathMapping", params, optFns, addOperationDeleteBasePathMappingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBasePathMapping", params, optFns, c.addOperationDeleteBasePathMappingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteBasePathMappingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBasePathMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBasePathMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBasePathMapping{}, middleware.After)
 	if err != nil {
 		return err

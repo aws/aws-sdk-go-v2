@@ -22,7 +22,7 @@ func (c *Client) ListDomainDeliverabilityCampaigns(ctx context.Context, params *
 		params = &ListDomainDeliverabilityCampaignsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDomainDeliverabilityCampaigns", params, optFns, addOperationListDomainDeliverabilityCampaignsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDomainDeliverabilityCampaigns", params, optFns, c.addOperationListDomainDeliverabilityCampaignsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type ListDomainDeliverabilityCampaignsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDomainDeliverabilityCampaignsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDomainDeliverabilityCampaignsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDomainDeliverabilityCampaigns{}, middleware.After)
 	if err != nil {
 		return err

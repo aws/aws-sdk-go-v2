@@ -18,7 +18,7 @@ func (c *Client) GetRelationalDatabaseLogEvents(ctx context.Context, params *Get
 		params = &GetRelationalDatabaseLogEventsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRelationalDatabaseLogEvents", params, optFns, addOperationGetRelationalDatabaseLogEventsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRelationalDatabaseLogEvents", params, optFns, c.addOperationGetRelationalDatabaseLogEventsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ type GetRelationalDatabaseLogEventsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRelationalDatabaseLogEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRelationalDatabaseLogEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseLogEvents{}, middleware.After)
 	if err != nil {
 		return err

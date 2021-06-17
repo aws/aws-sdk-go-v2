@@ -18,7 +18,7 @@ func (c *Client) CreateVodSource(ctx context.Context, params *CreateVodSourceInp
 		params = &CreateVodSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateVodSource", params, optFns, addOperationCreateVodSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateVodSource", params, optFns, c.addOperationCreateVodSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type CreateVodSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateVodSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateVodSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVodSource{}, middleware.After)
 	if err != nil {
 		return err

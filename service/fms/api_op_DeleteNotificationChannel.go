@@ -18,7 +18,7 @@ func (c *Client) DeleteNotificationChannel(ctx context.Context, params *DeleteNo
 		params = &DeleteNotificationChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteNotificationChannel", params, optFns, addOperationDeleteNotificationChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteNotificationChannel", params, optFns, c.addOperationDeleteNotificationChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -36,7 +36,7 @@ type DeleteNotificationChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteNotificationChannel{}, middleware.After)
 	if err != nil {
 		return err

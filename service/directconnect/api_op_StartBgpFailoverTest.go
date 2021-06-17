@@ -25,7 +25,7 @@ func (c *Client) StartBgpFailoverTest(ctx context.Context, params *StartBgpFailo
 		params = &StartBgpFailoverTestInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartBgpFailoverTest", params, optFns, addOperationStartBgpFailoverTestMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartBgpFailoverTest", params, optFns, c.addOperationStartBgpFailoverTestMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type StartBgpFailoverTestOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartBgpFailoverTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartBgpFailoverTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartBgpFailoverTest{}, middleware.After)
 	if err != nil {
 		return err

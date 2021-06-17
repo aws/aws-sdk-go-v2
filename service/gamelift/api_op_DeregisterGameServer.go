@@ -26,7 +26,7 @@ func (c *Client) DeregisterGameServer(ctx context.Context, params *DeregisterGam
 		params = &DeregisterGameServerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterGameServer", params, optFns, addOperationDeregisterGameServerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterGameServer", params, optFns, c.addOperationDeregisterGameServerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DeregisterGameServerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterGameServer{}, middleware.After)
 	if err != nil {
 		return err

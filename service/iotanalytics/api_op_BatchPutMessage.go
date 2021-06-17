@@ -17,7 +17,7 @@ func (c *Client) BatchPutMessage(ctx context.Context, params *BatchPutMessageInp
 		params = &BatchPutMessageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchPutMessage", params, optFns, addOperationBatchPutMessageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchPutMessage", params, optFns, c.addOperationBatchPutMessageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type BatchPutMessageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchPutMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchPutMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutMessage{}, middleware.After)
 	if err != nil {
 		return err

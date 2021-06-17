@@ -46,7 +46,7 @@ func (c *Client) DeprecateActivityType(ctx context.Context, params *DeprecateAct
 		params = &DeprecateActivityTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeprecateActivityType", params, optFns, addOperationDeprecateActivityTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeprecateActivityType", params, optFns, c.addOperationDeprecateActivityTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type DeprecateActivityTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeprecateActivityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeprecateActivityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeprecateActivityType{}, middleware.After)
 	if err != nil {
 		return err

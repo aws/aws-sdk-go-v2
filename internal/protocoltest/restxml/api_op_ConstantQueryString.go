@@ -18,7 +18,7 @@ func (c *Client) ConstantQueryString(ctx context.Context, params *ConstantQueryS
 		params = &ConstantQueryStringInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ConstantQueryString", params, optFns, addOperationConstantQueryStringMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ConstantQueryString", params, optFns, c.addOperationConstantQueryStringMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type ConstantQueryStringOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationConstantQueryStringMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationConstantQueryStringMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpConstantQueryString{}, middleware.After)
 	if err != nil {
 		return err

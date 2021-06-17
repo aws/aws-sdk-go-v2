@@ -16,7 +16,7 @@ func (c *Client) DisassociateTagOptionFromResource(ctx context.Context, params *
 		params = &DisassociateTagOptionFromResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateTagOptionFromResource", params, optFns, addOperationDisassociateTagOptionFromResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateTagOptionFromResource", params, optFns, c.addOperationDisassociateTagOptionFromResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DisassociateTagOptionFromResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateTagOptionFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateTagOptionFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateTagOptionFromResource{}, middleware.After)
 	if err != nil {
 		return err

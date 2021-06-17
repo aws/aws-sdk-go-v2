@@ -17,7 +17,7 @@ func (c *Client) GetAccessPreview(ctx context.Context, params *GetAccessPreviewI
 		params = &GetAccessPreviewInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccessPreview", params, optFns, addOperationGetAccessPreviewMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccessPreview", params, optFns, c.addOperationGetAccessPreviewMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetAccessPreviewOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccessPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccessPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccessPreview{}, middleware.After)
 	if err != nil {
 		return err

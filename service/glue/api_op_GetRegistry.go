@@ -17,7 +17,7 @@ func (c *Client) GetRegistry(ctx context.Context, params *GetRegistryInput, optF
 		params = &GetRegistryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRegistry", params, optFns, addOperationGetRegistryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRegistry", params, optFns, c.addOperationGetRegistryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type GetRegistryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRegistry{}, middleware.After)
 	if err != nil {
 		return err

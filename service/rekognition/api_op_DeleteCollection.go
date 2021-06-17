@@ -18,7 +18,7 @@ func (c *Client) DeleteCollection(ctx context.Context, params *DeleteCollectionI
 		params = &DeleteCollectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCollection", params, optFns, addOperationDeleteCollectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCollection", params, optFns, c.addOperationDeleteCollectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteCollectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCollection{}, middleware.After)
 	if err != nil {
 		return err

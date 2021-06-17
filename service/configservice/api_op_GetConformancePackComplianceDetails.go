@@ -19,7 +19,7 @@ func (c *Client) GetConformancePackComplianceDetails(ctx context.Context, params
 		params = &GetConformancePackComplianceDetailsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetConformancePackComplianceDetails", params, optFns, addOperationGetConformancePackComplianceDetailsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetConformancePackComplianceDetails", params, optFns, c.addOperationGetConformancePackComplianceDetailsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type GetConformancePackComplianceDetailsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetConformancePackComplianceDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetConformancePackComplianceDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetConformancePackComplianceDetails{}, middleware.After)
 	if err != nil {
 		return err

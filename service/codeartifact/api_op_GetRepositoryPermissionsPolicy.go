@@ -17,7 +17,7 @@ func (c *Client) GetRepositoryPermissionsPolicy(ctx context.Context, params *Get
 		params = &GetRepositoryPermissionsPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRepositoryPermissionsPolicy", params, optFns, addOperationGetRepositoryPermissionsPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRepositoryPermissionsPolicy", params, optFns, c.addOperationGetRepositoryPermissionsPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetRepositoryPermissionsPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRepositoryPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRepositoryPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRepositoryPermissionsPolicy{}, middleware.After)
 	if err != nil {
 		return err

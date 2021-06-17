@@ -17,7 +17,7 @@ func (c *Client) CreateLocationEfs(ctx context.Context, params *CreateLocationEf
 		params = &CreateLocationEfsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLocationEfs", params, optFns, addOperationCreateLocationEfsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLocationEfs", params, optFns, c.addOperationCreateLocationEfsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type CreateLocationEfsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLocationEfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLocationEfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationEfs{}, middleware.After)
 	if err != nil {
 		return err

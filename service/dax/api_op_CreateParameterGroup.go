@@ -18,7 +18,7 @@ func (c *Client) CreateParameterGroup(ctx context.Context, params *CreateParamet
 		params = &CreateParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateParameterGroup", params, optFns, addOperationCreateParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateParameterGroup", params, optFns, c.addOperationCreateParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type CreateParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

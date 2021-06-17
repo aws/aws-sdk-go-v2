@@ -16,7 +16,7 @@ func (c *Client) RestoreAnalysis(ctx context.Context, params *RestoreAnalysisInp
 		params = &RestoreAnalysisInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreAnalysis", params, optFns, addOperationRestoreAnalysisMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreAnalysis", params, optFns, c.addOperationRestoreAnalysisMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type RestoreAnalysisOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRestoreAnalysis{}, middleware.After)
 	if err != nil {
 		return err

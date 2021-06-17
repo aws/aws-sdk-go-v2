@@ -27,7 +27,7 @@ func (c *Client) GetPredictiveScalingForecast(ctx context.Context, params *GetPr
 		params = &GetPredictiveScalingForecastInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPredictiveScalingForecast", params, optFns, addOperationGetPredictiveScalingForecastMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPredictiveScalingForecast", params, optFns, c.addOperationGetPredictiveScalingForecastMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type GetPredictiveScalingForecastOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPredictiveScalingForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPredictiveScalingForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetPredictiveScalingForecast{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) GetTraceGraph(ctx context.Context, params *GetTraceGraphInput, 
 		params = &GetTraceGraphInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTraceGraph", params, optFns, addOperationGetTraceGraphMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTraceGraph", params, optFns, c.addOperationGetTraceGraphMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetTraceGraphOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTraceGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTraceGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTraceGraph{}, middleware.After)
 	if err != nil {
 		return err

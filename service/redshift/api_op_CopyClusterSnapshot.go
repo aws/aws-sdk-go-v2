@@ -26,7 +26,7 @@ func (c *Client) CopyClusterSnapshot(ctx context.Context, params *CopyClusterSna
 		params = &CopyClusterSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopyClusterSnapshot", params, optFns, addOperationCopyClusterSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopyClusterSnapshot", params, optFns, c.addOperationCopyClusterSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type CopyClusterSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopyClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopyClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopyClusterSnapshot{}, middleware.After)
 	if err != nil {
 		return err

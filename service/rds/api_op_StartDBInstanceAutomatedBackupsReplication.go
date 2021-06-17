@@ -20,7 +20,7 @@ func (c *Client) StartDBInstanceAutomatedBackupsReplication(ctx context.Context,
 		params = &StartDBInstanceAutomatedBackupsReplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDBInstanceAutomatedBackupsReplication", params, optFns, addOperationStartDBInstanceAutomatedBackupsReplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDBInstanceAutomatedBackupsReplication", params, optFns, c.addOperationStartDBInstanceAutomatedBackupsReplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type StartDBInstanceAutomatedBackupsReplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDBInstanceAutomatedBackupsReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDBInstanceAutomatedBackupsReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartDBInstanceAutomatedBackupsReplication{}, middleware.After)
 	if err != nil {
 		return err

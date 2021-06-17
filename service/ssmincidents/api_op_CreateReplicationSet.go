@@ -19,7 +19,7 @@ func (c *Client) CreateReplicationSet(ctx context.Context, params *CreateReplica
 		params = &CreateReplicationSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateReplicationSet", params, optFns, addOperationCreateReplicationSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateReplicationSet", params, optFns, c.addOperationCreateReplicationSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CreateReplicationSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateReplicationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateReplicationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateReplicationSet{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DeleteConfigurationAggregator(ctx context.Context, params *Dele
 		params = &DeleteConfigurationAggregatorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteConfigurationAggregator", params, optFns, addOperationDeleteConfigurationAggregatorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteConfigurationAggregator", params, optFns, c.addOperationDeleteConfigurationAggregatorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteConfigurationAggregatorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteConfigurationAggregatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteConfigurationAggregatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteConfigurationAggregator{}, middleware.After)
 	if err != nil {
 		return err

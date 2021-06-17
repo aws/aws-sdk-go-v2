@@ -23,7 +23,7 @@ func (c *Client) ResetDBParameterGroup(ctx context.Context, params *ResetDBParam
 		params = &ResetDBParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetDBParameterGroup", params, optFns, addOperationResetDBParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetDBParameterGroup", params, optFns, c.addOperationResetDBParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type ResetDBParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpResetDBParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

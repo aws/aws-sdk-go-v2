@@ -17,7 +17,7 @@ func (c *Client) UpdateShareInvitation(ctx context.Context, params *UpdateShareI
 		params = &UpdateShareInvitationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateShareInvitation", params, optFns, addOperationUpdateShareInvitationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateShareInvitation", params, optFns, c.addOperationUpdateShareInvitationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type UpdateShareInvitationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateShareInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateShareInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateShareInvitation{}, middleware.After)
 	if err != nil {
 		return err

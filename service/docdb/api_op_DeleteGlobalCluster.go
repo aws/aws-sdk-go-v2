@@ -19,7 +19,7 @@ func (c *Client) DeleteGlobalCluster(ctx context.Context, params *DeleteGlobalCl
 		params = &DeleteGlobalClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteGlobalCluster", params, optFns, addOperationDeleteGlobalClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGlobalCluster", params, optFns, c.addOperationDeleteGlobalClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteGlobalClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteGlobalCluster{}, middleware.After)
 	if err != nil {
 		return err

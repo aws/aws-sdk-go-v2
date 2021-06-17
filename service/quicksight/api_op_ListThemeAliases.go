@@ -17,7 +17,7 @@ func (c *Client) ListThemeAliases(ctx context.Context, params *ListThemeAliasesI
 		params = &ListThemeAliasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListThemeAliases", params, optFns, addOperationListThemeAliasesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListThemeAliases", params, optFns, c.addOperationListThemeAliasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type ListThemeAliasesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListThemeAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListThemeAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThemeAliases{}, middleware.After)
 	if err != nil {
 		return err

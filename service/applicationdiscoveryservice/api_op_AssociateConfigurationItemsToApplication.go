@@ -16,7 +16,7 @@ func (c *Client) AssociateConfigurationItemsToApplication(ctx context.Context, p
 		params = &AssociateConfigurationItemsToApplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateConfigurationItemsToApplication", params, optFns, addOperationAssociateConfigurationItemsToApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateConfigurationItemsToApplication", params, optFns, c.addOperationAssociateConfigurationItemsToApplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type AssociateConfigurationItemsToApplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateConfigurationItemsToApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateConfigurationItemsToApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateConfigurationItemsToApplication{}, middleware.After)
 	if err != nil {
 		return err

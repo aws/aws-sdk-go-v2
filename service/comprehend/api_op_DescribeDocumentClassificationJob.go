@@ -18,7 +18,7 @@ func (c *Client) DescribeDocumentClassificationJob(ctx context.Context, params *
 		params = &DescribeDocumentClassificationJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDocumentClassificationJob", params, optFns, addOperationDescribeDocumentClassificationJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDocumentClassificationJob", params, optFns, c.addOperationDescribeDocumentClassificationJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DescribeDocumentClassificationJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDocumentClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDocumentClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDocumentClassificationJob{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteListener(ctx context.Context, params *DeleteListenerInput
 		params = &DeleteListenerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteListener", params, optFns, addOperationDeleteListenerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteListener", params, optFns, c.addOperationDeleteListenerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteListenerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteListener{}, middleware.After)
 	if err != nil {
 		return err

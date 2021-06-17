@@ -24,7 +24,7 @@ func (c *Client) StartModel(ctx context.Context, params *StartModelInput, optFns
 		params = &StartModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartModel", params, optFns, addOperationStartModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartModel", params, optFns, c.addOperationStartModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type StartModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartModel{}, middleware.After)
 	if err != nil {
 		return err

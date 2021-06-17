@@ -27,7 +27,7 @@ func (c *Client) AssociateVirtualInterface(ctx context.Context, params *Associat
 		params = &AssociateVirtualInterfaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateVirtualInterface", params, optFns, addOperationAssociateVirtualInterfaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateVirtualInterface", params, optFns, c.addOperationAssociateVirtualInterfaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -170,7 +170,7 @@ type AssociateVirtualInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateVirtualInterface{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) CancelElasticsearchServiceSoftwareUpdate(ctx context.Context, p
 		params = &CancelElasticsearchServiceSoftwareUpdateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelElasticsearchServiceSoftwareUpdate", params, optFns, addOperationCancelElasticsearchServiceSoftwareUpdateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelElasticsearchServiceSoftwareUpdate", params, optFns, c.addOperationCancelElasticsearchServiceSoftwareUpdateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type CancelElasticsearchServiceSoftwareUpdateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelElasticsearchServiceSoftwareUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelElasticsearchServiceSoftwareUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelElasticsearchServiceSoftwareUpdate{}, middleware.After)
 	if err != nil {
 		return err

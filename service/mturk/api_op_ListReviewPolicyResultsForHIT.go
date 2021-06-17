@@ -22,7 +22,7 @@ func (c *Client) ListReviewPolicyResultsForHIT(ctx context.Context, params *List
 		params = &ListReviewPolicyResultsForHITInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListReviewPolicyResultsForHIT", params, optFns, addOperationListReviewPolicyResultsForHITMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListReviewPolicyResultsForHIT", params, optFns, c.addOperationListReviewPolicyResultsForHITMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type ListReviewPolicyResultsForHITOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListReviewPolicyResultsForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListReviewPolicyResultsForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListReviewPolicyResultsForHIT{}, middleware.After)
 	if err != nil {
 		return err

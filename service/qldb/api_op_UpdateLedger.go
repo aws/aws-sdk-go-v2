@@ -18,7 +18,7 @@ func (c *Client) UpdateLedger(ctx context.Context, params *UpdateLedgerInput, op
 		params = &UpdateLedgerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateLedger", params, optFns, addOperationUpdateLedgerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLedger", params, optFns, c.addOperationUpdateLedgerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type UpdateLedgerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLedger{}, middleware.After)
 	if err != nil {
 		return err

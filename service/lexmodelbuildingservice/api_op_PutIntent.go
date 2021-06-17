@@ -61,7 +61,7 @@ func (c *Client) PutIntent(ctx context.Context, params *PutIntentInput, optFns .
 		params = &PutIntentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutIntent", params, optFns, addOperationPutIntentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutIntent", params, optFns, c.addOperationPutIntentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -269,7 +269,7 @@ type PutIntentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutIntent{}, middleware.After)
 	if err != nil {
 		return err

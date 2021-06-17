@@ -16,7 +16,7 @@ func (c *Client) UpdateArtifact(ctx context.Context, params *UpdateArtifactInput
 		params = &UpdateArtifactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateArtifact", params, optFns, addOperationUpdateArtifactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateArtifact", params, optFns, c.addOperationUpdateArtifactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UpdateArtifactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateArtifact{}, middleware.After)
 	if err != nil {
 		return err

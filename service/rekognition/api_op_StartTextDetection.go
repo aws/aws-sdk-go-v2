@@ -26,7 +26,7 @@ func (c *Client) StartTextDetection(ctx context.Context, params *StartTextDetect
 		params = &StartTextDetectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartTextDetection", params, optFns, addOperationStartTextDetectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartTextDetection", params, optFns, c.addOperationStartTextDetectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type StartTextDetectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartTextDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartTextDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTextDetection{}, middleware.After)
 	if err != nil {
 		return err

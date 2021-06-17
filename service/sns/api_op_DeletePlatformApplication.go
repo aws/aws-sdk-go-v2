@@ -19,7 +19,7 @@ func (c *Client) DeletePlatformApplication(ctx context.Context, params *DeletePl
 		params = &DeletePlatformApplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePlatformApplication", params, optFns, addOperationDeletePlatformApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePlatformApplication", params, optFns, c.addOperationDeletePlatformApplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeletePlatformApplicationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePlatformApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePlatformApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeletePlatformApplication{}, middleware.After)
 	if err != nil {
 		return err

@@ -44,7 +44,7 @@ func (c *Client) DescribeWorkflowType(ctx context.Context, params *DescribeWorkf
 		params = &DescribeWorkflowTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkflowType", params, optFns, addOperationDescribeWorkflowTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkflowType", params, optFns, c.addOperationDescribeWorkflowTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type DescribeWorkflowTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeWorkflowTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeWorkflowTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeWorkflowType{}, middleware.After)
 	if err != nil {
 		return err

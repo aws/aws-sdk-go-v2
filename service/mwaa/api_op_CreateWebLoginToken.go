@@ -18,7 +18,7 @@ func (c *Client) CreateWebLoginToken(ctx context.Context, params *CreateWebLogin
 		params = &CreateWebLoginTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateWebLoginToken", params, optFns, addOperationCreateWebLoginTokenMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateWebLoginToken", params, optFns, c.addOperationCreateWebLoginTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type CreateWebLoginTokenOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateWebLoginTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateWebLoginTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWebLoginToken{}, middleware.After)
 	if err != nil {
 		return err

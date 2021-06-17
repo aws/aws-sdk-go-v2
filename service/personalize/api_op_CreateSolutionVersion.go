@@ -53,7 +53,7 @@ func (c *Client) CreateSolutionVersion(ctx context.Context, params *CreateSoluti
 		params = &CreateSolutionVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSolutionVersion", params, optFns, addOperationCreateSolutionVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSolutionVersion", params, optFns, c.addOperationCreateSolutionVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type CreateSolutionVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSolutionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSolutionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSolutionVersion{}, middleware.After)
 	if err != nil {
 		return err

@@ -24,7 +24,7 @@ func (c *Client) DescribeGatewayCapabilityConfiguration(ctx context.Context, par
 		params = &DescribeGatewayCapabilityConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeGatewayCapabilityConfiguration", params, optFns, addOperationDescribeGatewayCapabilityConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeGatewayCapabilityConfiguration", params, optFns, c.addOperationDescribeGatewayCapabilityConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type DescribeGatewayCapabilityConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeGatewayCapabilityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeGatewayCapabilityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGatewayCapabilityConfiguration{}, middleware.After)
 	if err != nil {
 		return err

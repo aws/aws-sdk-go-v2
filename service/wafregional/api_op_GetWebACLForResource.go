@@ -25,7 +25,7 @@ func (c *Client) GetWebACLForResource(ctx context.Context, params *GetWebACLForR
 		params = &GetWebACLForResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetWebACLForResource", params, optFns, addOperationGetWebACLForResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetWebACLForResource", params, optFns, c.addOperationGetWebACLForResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type GetWebACLForResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetWebACLForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetWebACLForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetWebACLForResource{}, middleware.After)
 	if err != nil {
 		return err

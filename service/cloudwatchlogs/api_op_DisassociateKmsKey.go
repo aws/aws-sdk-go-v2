@@ -22,7 +22,7 @@ func (c *Client) DisassociateKmsKey(ctx context.Context, params *DisassociateKms
 		params = &DisassociateKmsKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateKmsKey", params, optFns, addOperationDisassociateKmsKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateKmsKey", params, optFns, c.addOperationDisassociateKmsKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DisassociateKmsKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateKmsKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateKmsKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateKmsKey{}, middleware.After)
 	if err != nil {
 		return err

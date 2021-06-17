@@ -17,7 +17,7 @@ func (c *Client) DeleteStreamKey(ctx context.Context, params *DeleteStreamKeyInp
 		params = &DeleteStreamKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteStreamKey", params, optFns, addOperationDeleteStreamKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteStreamKey", params, optFns, c.addOperationDeleteStreamKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteStreamKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteStreamKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteStreamKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteStreamKey{}, middleware.After)
 	if err != nil {
 		return err

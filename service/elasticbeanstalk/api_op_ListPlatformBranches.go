@@ -22,7 +22,7 @@ func (c *Client) ListPlatformBranches(ctx context.Context, params *ListPlatformB
 		params = &ListPlatformBranchesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPlatformBranches", params, optFns, addOperationListPlatformBranchesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPlatformBranches", params, optFns, c.addOperationListPlatformBranchesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type ListPlatformBranchesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPlatformBranchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPlatformBranchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListPlatformBranches{}, middleware.After)
 	if err != nil {
 		return err

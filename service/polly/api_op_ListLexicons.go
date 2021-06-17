@@ -19,7 +19,7 @@ func (c *Client) ListLexicons(ctx context.Context, params *ListLexiconsInput, op
 		params = &ListLexiconsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListLexicons", params, optFns, addOperationListLexiconsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListLexicons", params, optFns, c.addOperationListLexiconsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type ListLexiconsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListLexiconsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListLexiconsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLexicons{}, middleware.After)
 	if err != nil {
 		return err

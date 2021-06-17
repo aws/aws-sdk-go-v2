@@ -26,7 +26,7 @@ func (c *Client) DescribeDBClusterSnapshotAttributes(ctx context.Context, params
 		params = &DescribeDBClusterSnapshotAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDBClusterSnapshotAttributes", params, optFns, addOperationDescribeDBClusterSnapshotAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDBClusterSnapshotAttributes", params, optFns, c.addOperationDescribeDBClusterSnapshotAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeDBClusterSnapshotAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDBClusterSnapshotAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDBClusterSnapshotAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBClusterSnapshotAttributes{}, middleware.After)
 	if err != nil {
 		return err

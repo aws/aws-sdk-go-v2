@@ -17,7 +17,7 @@ func (c *Client) GetCloudFormationTemplate(ctx context.Context, params *GetCloud
 		params = &GetCloudFormationTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCloudFormationTemplate", params, optFns, addOperationGetCloudFormationTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCloudFormationTemplate", params, optFns, c.addOperationGetCloudFormationTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetCloudFormationTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCloudFormationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCloudFormationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCloudFormationTemplate{}, middleware.After)
 	if err != nil {
 		return err

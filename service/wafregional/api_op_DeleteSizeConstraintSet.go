@@ -36,7 +36,7 @@ func (c *Client) DeleteSizeConstraintSet(ctx context.Context, params *DeleteSize
 		params = &DeleteSizeConstraintSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSizeConstraintSet", params, optFns, addOperationDeleteSizeConstraintSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSizeConstraintSet", params, optFns, c.addOperationDeleteSizeConstraintSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type DeleteSizeConstraintSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSizeConstraintSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSizeConstraintSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSizeConstraintSet{}, middleware.After)
 	if err != nil {
 		return err

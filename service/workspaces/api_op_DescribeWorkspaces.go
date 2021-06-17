@@ -20,7 +20,7 @@ func (c *Client) DescribeWorkspaces(ctx context.Context, params *DescribeWorkspa
 		params = &DescribeWorkspacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkspaces", params, optFns, addOperationDescribeWorkspacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkspaces", params, optFns, c.addOperationDescribeWorkspacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type DescribeWorkspacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkspaces{}, middleware.After)
 	if err != nil {
 		return err

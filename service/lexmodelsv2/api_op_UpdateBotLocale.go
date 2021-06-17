@@ -18,7 +18,7 @@ func (c *Client) UpdateBotLocale(ctx context.Context, params *UpdateBotLocaleInp
 		params = &UpdateBotLocaleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateBotLocale", params, optFns, addOperationUpdateBotLocaleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateBotLocale", params, optFns, c.addOperationUpdateBotLocaleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type UpdateBotLocaleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBotLocale{}, middleware.After)
 	if err != nil {
 		return err

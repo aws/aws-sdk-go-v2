@@ -18,7 +18,7 @@ func (c *Client) CreateGrant(ctx context.Context, params *CreateGrantInput, optF
 		params = &CreateGrantInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateGrant", params, optFns, addOperationCreateGrantMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateGrant", params, optFns, c.addOperationCreateGrantMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type CreateGrantOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGrant{}, middleware.After)
 	if err != nil {
 		return err

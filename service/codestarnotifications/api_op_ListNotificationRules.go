@@ -18,7 +18,7 @@ func (c *Client) ListNotificationRules(ctx context.Context, params *ListNotifica
 		params = &ListNotificationRulesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListNotificationRules", params, optFns, addOperationListNotificationRulesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListNotificationRules", params, optFns, c.addOperationListNotificationRulesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListNotificationRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListNotificationRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListNotificationRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNotificationRules{}, middleware.After)
 	if err != nil {
 		return err

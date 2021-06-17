@@ -31,7 +31,7 @@ func (c *Client) RevokeGrant(ctx context.Context, params *RevokeGrantInput, optF
 		params = &RevokeGrantInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokeGrant", params, optFns, addOperationRevokeGrantMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeGrant", params, optFns, c.addOperationRevokeGrantMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type RevokeGrantOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokeGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokeGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRevokeGrant{}, middleware.After)
 	if err != nil {
 		return err

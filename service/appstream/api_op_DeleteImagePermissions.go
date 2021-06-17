@@ -18,7 +18,7 @@ func (c *Client) DeleteImagePermissions(ctx context.Context, params *DeleteImage
 		params = &DeleteImagePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteImagePermissions", params, optFns, addOperationDeleteImagePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteImagePermissions", params, optFns, c.addOperationDeleteImagePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteImagePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteImagePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteImagePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteImagePermissions{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) ListFileSystemAssociations(ctx context.Context, params *ListFil
 		params = &ListFileSystemAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFileSystemAssociations", params, optFns, addOperationListFileSystemAssociationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFileSystemAssociations", params, optFns, c.addOperationListFileSystemAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListFileSystemAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFileSystemAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFileSystemAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFileSystemAssociations{}, middleware.After)
 	if err != nil {
 		return err

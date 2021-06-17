@@ -18,7 +18,7 @@ func (c *Client) DeleteTrail(ctx context.Context, params *DeleteTrailInput, optF
 		params = &DeleteTrailInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTrail", params, optFns, addOperationDeleteTrailMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTrail", params, optFns, c.addOperationDeleteTrailMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteTrailOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTrailMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTrailMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTrail{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeListener(ctx context.Context, params *DescribeListenerI
 		params = &DescribeListenerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeListener", params, optFns, addOperationDescribeListenerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeListener", params, optFns, c.addOperationDescribeListenerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeListenerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeListener{}, middleware.After)
 	if err != nil {
 		return err

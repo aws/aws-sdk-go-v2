@@ -20,7 +20,7 @@ func (c *Client) SyncResource(ctx context.Context, params *SyncResourceInput, op
 		params = &SyncResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SyncResource", params, optFns, addOperationSyncResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SyncResource", params, optFns, c.addOperationSyncResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type SyncResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSyncResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSyncResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSyncResource{}, middleware.After)
 	if err != nil {
 		return err

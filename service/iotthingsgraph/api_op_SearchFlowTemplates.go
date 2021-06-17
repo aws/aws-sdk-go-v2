@@ -18,7 +18,7 @@ func (c *Client) SearchFlowTemplates(ctx context.Context, params *SearchFlowTemp
 		params = &SearchFlowTemplatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchFlowTemplates", params, optFns, addOperationSearchFlowTemplatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchFlowTemplates", params, optFns, c.addOperationSearchFlowTemplatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type SearchFlowTemplatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchFlowTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchFlowTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchFlowTemplates{}, middleware.After)
 	if err != nil {
 		return err

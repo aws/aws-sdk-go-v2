@@ -26,7 +26,7 @@ func (c *Client) AttachInstances(ctx context.Context, params *AttachInstancesInp
 		params = &AttachInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachInstances", params, optFns, addOperationAttachInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachInstances", params, optFns, c.addOperationAttachInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type AttachInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAttachInstances{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) CompleteSnapshot(ctx context.Context, params *CompleteSnapshotI
 		params = &CompleteSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CompleteSnapshot", params, optFns, addOperationCompleteSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CompleteSnapshot", params, optFns, c.addOperationCompleteSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type CompleteSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCompleteSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCompleteSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCompleteSnapshot{}, middleware.After)
 	if err != nil {
 		return err

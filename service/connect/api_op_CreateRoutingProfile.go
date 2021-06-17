@@ -17,7 +17,7 @@ func (c *Client) CreateRoutingProfile(ctx context.Context, params *CreateRouting
 		params = &CreateRoutingProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateRoutingProfile", params, optFns, addOperationCreateRoutingProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRoutingProfile", params, optFns, c.addOperationCreateRoutingProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type CreateRoutingProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateRoutingProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoutingProfile{}, middleware.After)
 	if err != nil {
 		return err

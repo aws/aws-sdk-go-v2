@@ -23,7 +23,7 @@ func (c *Client) CreateDomainEntry(ctx context.Context, params *CreateDomainEntr
 		params = &CreateDomainEntryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDomainEntry", params, optFns, addOperationCreateDomainEntryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDomainEntry", params, optFns, c.addOperationCreateDomainEntryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type CreateDomainEntryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDomainEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDomainEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDomainEntry{}, middleware.After)
 	if err != nil {
 		return err

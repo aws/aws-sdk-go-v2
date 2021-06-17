@@ -17,7 +17,7 @@ func (c *Client) PutConfigurationSetReputationOptions(ctx context.Context, param
 		params = &PutConfigurationSetReputationOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutConfigurationSetReputationOptions", params, optFns, addOperationPutConfigurationSetReputationOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutConfigurationSetReputationOptions", params, optFns, c.addOperationPutConfigurationSetReputationOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type PutConfigurationSetReputationOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutConfigurationSetReputationOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutConfigurationSetReputationOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutConfigurationSetReputationOptions{}, middleware.After)
 	if err != nil {
 		return err

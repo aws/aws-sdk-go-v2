@@ -18,7 +18,7 @@ func (c *Client) ListGeofences(ctx context.Context, params *ListGeofencesInput, 
 		params = &ListGeofencesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListGeofences", params, optFns, addOperationListGeofencesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListGeofences", params, optFns, c.addOperationListGeofencesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListGeofencesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListGeofencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListGeofencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGeofences{}, middleware.After)
 	if err != nil {
 		return err

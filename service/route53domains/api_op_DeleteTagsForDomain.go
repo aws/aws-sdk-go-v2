@@ -18,7 +18,7 @@ func (c *Client) DeleteTagsForDomain(ctx context.Context, params *DeleteTagsForD
 		params = &DeleteTagsForDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTagsForDomain", params, optFns, addOperationDeleteTagsForDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTagsForDomain", params, optFns, c.addOperationDeleteTagsForDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteTagsForDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTagsForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTagsForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTagsForDomain{}, middleware.After)
 	if err != nil {
 		return err

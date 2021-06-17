@@ -17,7 +17,7 @@ func (c *Client) DeleteLogStream(ctx context.Context, params *DeleteLogStreamInp
 		params = &DeleteLogStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLogStream", params, optFns, addOperationDeleteLogStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLogStream", params, optFns, c.addOperationDeleteLogStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteLogStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLogStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLogStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLogStream{}, middleware.After)
 	if err != nil {
 		return err

@@ -26,7 +26,7 @@ func (c *Client) RegisterTargets(ctx context.Context, params *RegisterTargetsInp
 		params = &RegisterTargetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterTargets", params, optFns, addOperationRegisterTargetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterTargets", params, optFns, c.addOperationRegisterTargetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type RegisterTargetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRegisterTargets{}, middleware.After)
 	if err != nil {
 		return err

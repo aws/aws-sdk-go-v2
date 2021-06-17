@@ -16,7 +16,7 @@ func (c *Client) DownloadDefaultKeyPair(ctx context.Context, params *DownloadDef
 		params = &DownloadDefaultKeyPairInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DownloadDefaultKeyPair", params, optFns, addOperationDownloadDefaultKeyPairMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DownloadDefaultKeyPair", params, optFns, c.addOperationDownloadDefaultKeyPairMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DownloadDefaultKeyPairOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDownloadDefaultKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDownloadDefaultKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDownloadDefaultKeyPair{}, middleware.After)
 	if err != nil {
 		return err

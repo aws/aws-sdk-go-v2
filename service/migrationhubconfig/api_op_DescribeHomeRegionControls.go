@@ -18,7 +18,7 @@ func (c *Client) DescribeHomeRegionControls(ctx context.Context, params *Describ
 		params = &DescribeHomeRegionControlsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeHomeRegionControls", params, optFns, addOperationDescribeHomeRegionControlsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeHomeRegionControls", params, optFns, c.addOperationDescribeHomeRegionControlsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DescribeHomeRegionControlsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeHomeRegionControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeHomeRegionControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHomeRegionControls{}, middleware.After)
 	if err != nil {
 		return err

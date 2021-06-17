@@ -17,7 +17,7 @@ func (c *Client) ListElasticsearchVersions(ctx context.Context, params *ListElas
 		params = &ListElasticsearchVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListElasticsearchVersions", params, optFns, addOperationListElasticsearchVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListElasticsearchVersions", params, optFns, c.addOperationListElasticsearchVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListElasticsearchVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListElasticsearchVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListElasticsearchVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListElasticsearchVersions{}, middleware.After)
 	if err != nil {
 		return err

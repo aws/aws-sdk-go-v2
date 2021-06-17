@@ -17,7 +17,7 @@ func (c *Client) UpdateImagePermissions(ctx context.Context, params *UpdateImage
 		params = &UpdateImagePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateImagePermissions", params, optFns, addOperationUpdateImagePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateImagePermissions", params, optFns, c.addOperationUpdateImagePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UpdateImagePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateImagePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateImagePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateImagePermissions{}, middleware.After)
 	if err != nil {
 		return err

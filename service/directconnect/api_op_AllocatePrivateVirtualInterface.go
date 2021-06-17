@@ -20,7 +20,7 @@ func (c *Client) AllocatePrivateVirtualInterface(ctx context.Context, params *Al
 		params = &AllocatePrivateVirtualInterfaceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AllocatePrivateVirtualInterface", params, optFns, addOperationAllocatePrivateVirtualInterfaceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AllocatePrivateVirtualInterface", params, optFns, c.addOperationAllocatePrivateVirtualInterfaceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -168,7 +168,7 @@ type AllocatePrivateVirtualInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAllocatePrivateVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAllocatePrivateVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAllocatePrivateVirtualInterface{}, middleware.After)
 	if err != nil {
 		return err

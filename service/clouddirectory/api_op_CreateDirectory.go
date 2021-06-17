@@ -21,7 +21,7 @@ func (c *Client) CreateDirectory(ctx context.Context, params *CreateDirectoryInp
 		params = &CreateDirectoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDirectory", params, optFns, addOperationCreateDirectoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDirectory", params, optFns, c.addOperationCreateDirectoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type CreateDirectoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDirectory{}, middleware.After)
 	if err != nil {
 		return err

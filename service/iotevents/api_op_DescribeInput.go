@@ -17,7 +17,7 @@ func (c *Client) DescribeInput(ctx context.Context, params *DescribeInputInput, 
 		params = &DescribeInputInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeInput", params, optFns, addOperationDescribeInputMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeInput", params, optFns, c.addOperationDescribeInputMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeInputOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInput{}, middleware.After)
 	if err != nil {
 		return err

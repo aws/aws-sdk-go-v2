@@ -19,7 +19,7 @@ func (c *Client) DescribeJobRun(ctx context.Context, params *DescribeJobRunInput
 		params = &DescribeJobRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeJobRun", params, optFns, addOperationDescribeJobRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeJobRun", params, optFns, c.addOperationDescribeJobRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DescribeJobRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeJobRun{}, middleware.After)
 	if err != nil {
 		return err

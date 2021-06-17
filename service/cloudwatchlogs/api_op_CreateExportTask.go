@@ -32,7 +32,7 @@ func (c *Client) CreateExportTask(ctx context.Context, params *CreateExportTaskI
 		params = &CreateExportTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateExportTask", params, optFns, addOperationCreateExportTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateExportTask", params, optFns, c.addOperationCreateExportTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type CreateExportTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateExportTask{}, middleware.After)
 	if err != nil {
 		return err

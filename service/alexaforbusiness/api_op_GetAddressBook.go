@@ -17,7 +17,7 @@ func (c *Client) GetAddressBook(ctx context.Context, params *GetAddressBookInput
 		params = &GetAddressBookInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAddressBook", params, optFns, addOperationGetAddressBookMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAddressBook", params, optFns, c.addOperationGetAddressBookMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetAddressBookOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAddressBookMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAddressBookMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAddressBook{}, middleware.After)
 	if err != nil {
 		return err

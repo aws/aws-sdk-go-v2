@@ -17,7 +17,7 @@ func (c *Client) HttpPayloadWithMemberXmlName(ctx context.Context, params *HttpP
 		params = &HttpPayloadWithMemberXmlNameInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadWithMemberXmlName", params, optFns, addOperationHttpPayloadWithMemberXmlNameMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadWithMemberXmlName", params, optFns, c.addOperationHttpPayloadWithMemberXmlNameMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ type HttpPayloadWithMemberXmlNameOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHttpPayloadWithMemberXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHttpPayloadWithMemberXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadWithMemberXmlName{}, middleware.After)
 	if err != nil {
 		return err

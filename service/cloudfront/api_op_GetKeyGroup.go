@@ -22,7 +22,7 @@ func (c *Client) GetKeyGroup(ctx context.Context, params *GetKeyGroupInput, optF
 		params = &GetKeyGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetKeyGroup", params, optFns, addOperationGetKeyGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetKeyGroup", params, optFns, c.addOperationGetKeyGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetKeyGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetKeyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetKeyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetKeyGroup{}, middleware.After)
 	if err != nil {
 		return err

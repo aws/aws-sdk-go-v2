@@ -21,7 +21,7 @@ func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccoun
 		params = &UpdateAccountSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAccountSettings", params, optFns, addOperationUpdateAccountSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAccountSettings", params, optFns, c.addOperationUpdateAccountSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type UpdateAccountSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccountSettings{}, middleware.After)
 	if err != nil {
 		return err

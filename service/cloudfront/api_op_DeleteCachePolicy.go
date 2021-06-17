@@ -20,7 +20,7 @@ func (c *Client) DeleteCachePolicy(ctx context.Context, params *DeleteCachePolic
 		params = &DeleteCachePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCachePolicy", params, optFns, addOperationDeleteCachePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCachePolicy", params, optFns, c.addOperationDeleteCachePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteCachePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCachePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCachePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteCachePolicy{}, middleware.After)
 	if err != nil {
 		return err

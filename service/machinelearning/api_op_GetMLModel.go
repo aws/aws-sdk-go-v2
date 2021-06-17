@@ -20,7 +20,7 @@ func (c *Client) GetMLModel(ctx context.Context, params *GetMLModelInput, optFns
 		params = &GetMLModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMLModel", params, optFns, addOperationGetMLModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMLModel", params, optFns, c.addOperationGetMLModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -189,7 +189,7 @@ type GetMLModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMLModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMLModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMLModel{}, middleware.After)
 	if err != nil {
 		return err

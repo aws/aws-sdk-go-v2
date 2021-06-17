@@ -17,7 +17,7 @@ func (c *Client) GetTrigger(ctx context.Context, params *GetTriggerInput, optFns
 		params = &GetTriggerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTrigger", params, optFns, addOperationGetTriggerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTrigger", params, optFns, c.addOperationGetTriggerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetTriggerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTrigger{}, middleware.After)
 	if err != nil {
 		return err

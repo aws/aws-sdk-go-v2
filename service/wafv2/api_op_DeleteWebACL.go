@@ -18,7 +18,7 @@ func (c *Client) DeleteWebACL(ctx context.Context, params *DeleteWebACLInput, op
 		params = &DeleteWebACLInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteWebACL", params, optFns, addOperationDeleteWebACLMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteWebACL", params, optFns, c.addOperationDeleteWebACLMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type DeleteWebACLOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWebACL{}, middleware.After)
 	if err != nil {
 		return err

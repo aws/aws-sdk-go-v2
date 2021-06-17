@@ -17,7 +17,7 @@ func (c *Client) GetSampleData(ctx context.Context, params *GetSampleDataInput, 
 		params = &GetSampleDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSampleData", params, optFns, addOperationGetSampleDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSampleData", params, optFns, c.addOperationGetSampleDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetSampleDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSampleDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSampleDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSampleData{}, middleware.After)
 	if err != nil {
 		return err

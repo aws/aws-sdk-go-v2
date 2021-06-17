@@ -17,7 +17,7 @@ func (c *Client) SendUsersMessages(ctx context.Context, params *SendUsersMessage
 		params = &SendUsersMessagesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendUsersMessages", params, optFns, addOperationSendUsersMessagesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendUsersMessages", params, optFns, c.addOperationSendUsersMessagesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type SendUsersMessagesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendUsersMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendUsersMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendUsersMessages{}, middleware.After)
 	if err != nil {
 		return err

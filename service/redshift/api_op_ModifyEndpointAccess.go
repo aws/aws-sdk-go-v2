@@ -18,7 +18,7 @@ func (c *Client) ModifyEndpointAccess(ctx context.Context, params *ModifyEndpoin
 		params = &ModifyEndpointAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyEndpointAccess", params, optFns, addOperationModifyEndpointAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyEndpointAccess", params, optFns, c.addOperationModifyEndpointAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type ModifyEndpointAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyEndpointAccess{}, middleware.After)
 	if err != nil {
 		return err

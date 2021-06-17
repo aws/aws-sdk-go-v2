@@ -16,7 +16,7 @@ func (c *Client) DeleteConnection(ctx context.Context, params *DeleteConnectionI
 		params = &DeleteConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteConnection", params, optFns, addOperationDeleteConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteConnection", params, optFns, c.addOperationDeleteConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteConnection{}, middleware.After)
 	if err != nil {
 		return err

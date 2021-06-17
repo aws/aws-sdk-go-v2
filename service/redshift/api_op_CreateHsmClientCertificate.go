@@ -25,7 +25,7 @@ func (c *Client) CreateHsmClientCertificate(ctx context.Context, params *CreateH
 		params = &CreateHsmClientCertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateHsmClientCertificate", params, optFns, addOperationCreateHsmClientCertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateHsmClientCertificate", params, optFns, c.addOperationCreateHsmClientCertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type CreateHsmClientCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateHsmClientCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateHsmClientCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateHsmClientCertificate{}, middleware.After)
 	if err != nil {
 		return err

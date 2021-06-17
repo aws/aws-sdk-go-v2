@@ -16,7 +16,7 @@ func (c *Client) DeletePublishingDestination(ctx context.Context, params *Delete
 		params = &DeletePublishingDestinationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePublishingDestination", params, optFns, addOperationDeletePublishingDestinationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePublishingDestination", params, optFns, c.addOperationDeletePublishingDestinationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeletePublishingDestinationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePublishingDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePublishingDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePublishingDestination{}, middleware.After)
 	if err != nil {
 		return err

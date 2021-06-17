@@ -19,7 +19,7 @@ func (c *Client) ResumeSession(ctx context.Context, params *ResumeSessionInput, 
 		params = &ResumeSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResumeSession", params, optFns, addOperationResumeSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResumeSession", params, optFns, c.addOperationResumeSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type ResumeSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResumeSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResumeSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResumeSession{}, middleware.After)
 	if err != nil {
 		return err

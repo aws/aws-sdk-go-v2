@@ -16,7 +16,7 @@ func (c *Client) DeleteConditionalForwarder(ctx context.Context, params *DeleteC
 		params = &DeleteConditionalForwarderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteConditionalForwarder", params, optFns, addOperationDeleteConditionalForwarderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteConditionalForwarder", params, optFns, c.addOperationDeleteConditionalForwarderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteConditionalForwarderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteConditionalForwarderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteConditionalForwarderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteConditionalForwarder{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) PutModelPackageGroupPolicy(ctx context.Context, params *PutMode
 		params = &PutModelPackageGroupPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutModelPackageGroupPolicy", params, optFns, addOperationPutModelPackageGroupPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutModelPackageGroupPolicy", params, optFns, c.addOperationPutModelPackageGroupPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type PutModelPackageGroupPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutModelPackageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutModelPackageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutModelPackageGroupPolicy{}, middleware.After)
 	if err != nil {
 		return err

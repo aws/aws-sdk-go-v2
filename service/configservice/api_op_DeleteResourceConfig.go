@@ -19,7 +19,7 @@ func (c *Client) DeleteResourceConfig(ctx context.Context, params *DeleteResourc
 		params = &DeleteResourceConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteResourceConfig", params, optFns, addOperationDeleteResourceConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteResourceConfig", params, optFns, c.addOperationDeleteResourceConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteResourceConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteResourceConfig{}, middleware.After)
 	if err != nil {
 		return err

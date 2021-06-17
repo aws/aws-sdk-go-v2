@@ -22,7 +22,7 @@ func (c *Client) ReadJob(ctx context.Context, params *ReadJobInput, optFns ...fu
 		params = &ReadJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReadJob", params, optFns, addOperationReadJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReadJob", params, optFns, c.addOperationReadJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type ReadJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReadJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReadJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpReadJob{}, middleware.After)
 	if err != nil {
 		return err

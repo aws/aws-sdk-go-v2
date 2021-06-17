@@ -18,7 +18,7 @@ func (c *Client) NotifyAppValidationOutput(ctx context.Context, params *NotifyAp
 		params = &NotifyAppValidationOutputInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "NotifyAppValidationOutput", params, optFns, addOperationNotifyAppValidationOutputMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "NotifyAppValidationOutput", params, optFns, c.addOperationNotifyAppValidationOutputMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type NotifyAppValidationOutputOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationNotifyAppValidationOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationNotifyAppValidationOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNotifyAppValidationOutput{}, middleware.After)
 	if err != nil {
 		return err

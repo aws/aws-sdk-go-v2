@@ -17,7 +17,7 @@ func (c *Client) DescribeCopyJob(ctx context.Context, params *DescribeCopyJobInp
 		params = &DescribeCopyJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCopyJob", params, optFns, addOperationDescribeCopyJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCopyJob", params, optFns, c.addOperationDescribeCopyJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeCopyJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCopyJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCopyJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCopyJob{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DeleteAccountAssignment(ctx context.Context, params *DeleteAcco
 		params = &DeleteAccountAssignmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAccountAssignment", params, optFns, addOperationDeleteAccountAssignmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAccountAssignment", params, optFns, c.addOperationDeleteAccountAssignmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type DeleteAccountAssignmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAccountAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAccountAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAccountAssignment{}, middleware.After)
 	if err != nil {
 		return err

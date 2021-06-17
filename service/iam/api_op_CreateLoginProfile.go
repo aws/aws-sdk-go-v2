@@ -24,7 +24,7 @@ func (c *Client) CreateLoginProfile(ctx context.Context, params *CreateLoginProf
 		params = &CreateLoginProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLoginProfile", params, optFns, addOperationCreateLoginProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLoginProfile", params, optFns, c.addOperationCreateLoginProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type CreateLoginProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLoginProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLoginProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateLoginProfile{}, middleware.After)
 	if err != nil {
 		return err

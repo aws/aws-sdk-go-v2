@@ -19,7 +19,7 @@ func (c *Client) SetReceiptRulePosition(ctx context.Context, params *SetReceiptR
 		params = &SetReceiptRulePositionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetReceiptRulePosition", params, optFns, addOperationSetReceiptRulePositionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetReceiptRulePosition", params, optFns, c.addOperationSetReceiptRulePositionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type SetReceiptRulePositionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetReceiptRulePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetReceiptRulePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetReceiptRulePosition{}, middleware.After)
 	if err != nil {
 		return err

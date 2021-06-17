@@ -29,7 +29,7 @@ func (c *Client) CopyWorkspaceImage(ctx context.Context, params *CopyWorkspaceIm
 		params = &CopyWorkspaceImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CopyWorkspaceImage", params, optFns, addOperationCopyWorkspaceImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CopyWorkspaceImage", params, optFns, c.addOperationCopyWorkspaceImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type CopyWorkspaceImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCopyWorkspaceImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCopyWorkspaceImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopyWorkspaceImage{}, middleware.After)
 	if err != nil {
 		return err

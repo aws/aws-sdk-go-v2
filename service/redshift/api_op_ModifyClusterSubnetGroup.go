@@ -19,7 +19,7 @@ func (c *Client) ModifyClusterSubnetGroup(ctx context.Context, params *ModifyClu
 		params = &ModifyClusterSubnetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyClusterSubnetGroup", params, optFns, addOperationModifyClusterSubnetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyClusterSubnetGroup", params, optFns, c.addOperationModifyClusterSubnetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ModifyClusterSubnetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyClusterSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyClusterSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyClusterSubnetGroup{}, middleware.After)
 	if err != nil {
 		return err

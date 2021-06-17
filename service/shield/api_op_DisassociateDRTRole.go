@@ -22,7 +22,7 @@ func (c *Client) DisassociateDRTRole(ctx context.Context, params *DisassociateDR
 		params = &DisassociateDRTRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateDRTRole", params, optFns, addOperationDisassociateDRTRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateDRTRole", params, optFns, c.addOperationDisassociateDRTRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DisassociateDRTRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateDRTRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateDRTRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateDRTRole{}, middleware.After)
 	if err != nil {
 		return err

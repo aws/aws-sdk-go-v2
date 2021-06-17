@@ -26,7 +26,7 @@ func (c *Client) DisposePackageVersions(ctx context.Context, params *DisposePack
 		params = &DisposePackageVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisposePackageVersions", params, optFns, addOperationDisposePackageVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisposePackageVersions", params, optFns, c.addOperationDisposePackageVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ type DisposePackageVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisposePackageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisposePackageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisposePackageVersions{}, middleware.After)
 	if err != nil {
 		return err

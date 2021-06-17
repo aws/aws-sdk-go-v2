@@ -17,7 +17,7 @@ func (c *Client) PutImageScanningConfiguration(ctx context.Context, params *PutI
 		params = &PutImageScanningConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutImageScanningConfiguration", params, optFns, addOperationPutImageScanningConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutImageScanningConfiguration", params, optFns, c.addOperationPutImageScanningConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type PutImageScanningConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutImageScanningConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutImageScanningConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutImageScanningConfiguration{}, middleware.After)
 	if err != nil {
 		return err

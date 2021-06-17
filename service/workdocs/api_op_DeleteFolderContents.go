@@ -16,7 +16,7 @@ func (c *Client) DeleteFolderContents(ctx context.Context, params *DeleteFolderC
 		params = &DeleteFolderContentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFolderContents", params, optFns, addOperationDeleteFolderContentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFolderContents", params, optFns, c.addOperationDeleteFolderContentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteFolderContentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFolderContentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFolderContentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFolderContents{}, middleware.After)
 	if err != nil {
 		return err

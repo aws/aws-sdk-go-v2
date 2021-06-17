@@ -18,7 +18,7 @@ func (c *Client) UpdateVoiceChannel(ctx context.Context, params *UpdateVoiceChan
 		params = &UpdateVoiceChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateVoiceChannel", params, optFns, addOperationUpdateVoiceChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateVoiceChannel", params, optFns, c.addOperationUpdateVoiceChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type UpdateVoiceChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateVoiceChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateVoiceChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVoiceChannel{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DescribeRepositoryAssociation(ctx context.Context, params *Desc
 		params = &DescribeRepositoryAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRepositoryAssociation", params, optFns, addOperationDescribeRepositoryAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRepositoryAssociation", params, optFns, c.addOperationDescribeRepositoryAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type DescribeRepositoryAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRepositoryAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRepositoryAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRepositoryAssociation{}, middleware.After)
 	if err != nil {
 		return err

@@ -27,7 +27,7 @@ func (c *Client) GetGeoLocation(ctx context.Context, params *GetGeoLocationInput
 		params = &GetGeoLocationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetGeoLocation", params, optFns, addOperationGetGeoLocationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetGeoLocation", params, optFns, c.addOperationGetGeoLocationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type GetGeoLocationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetGeoLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetGeoLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetGeoLocation{}, middleware.After)
 	if err != nil {
 		return err

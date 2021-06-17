@@ -16,7 +16,7 @@ func (c *Client) DeleteAppInstanceStreamingConfigurations(ctx context.Context, p
 		params = &DeleteAppInstanceStreamingConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAppInstanceStreamingConfigurations", params, optFns, addOperationDeleteAppInstanceStreamingConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAppInstanceStreamingConfigurations", params, optFns, c.addOperationDeleteAppInstanceStreamingConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteAppInstanceStreamingConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAppInstanceStreamingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAppInstanceStreamingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAppInstanceStreamingConfigurations{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) PutEventStream(ctx context.Context, params *PutEventStreamInput
 		params = &PutEventStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutEventStream", params, optFns, addOperationPutEventStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutEventStream", params, optFns, c.addOperationPutEventStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type PutEventStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutEventStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutEventStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEventStream{}, middleware.After)
 	if err != nil {
 		return err

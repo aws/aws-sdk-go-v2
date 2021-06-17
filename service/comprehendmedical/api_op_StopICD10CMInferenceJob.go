@@ -16,7 +16,7 @@ func (c *Client) StopICD10CMInferenceJob(ctx context.Context, params *StopICD10C
 		params = &StopICD10CMInferenceJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopICD10CMInferenceJob", params, optFns, addOperationStopICD10CMInferenceJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopICD10CMInferenceJob", params, optFns, c.addOperationStopICD10CMInferenceJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type StopICD10CMInferenceJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopICD10CMInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopICD10CMInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopICD10CMInferenceJob{}, middleware.After)
 	if err != nil {
 		return err

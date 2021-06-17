@@ -18,7 +18,7 @@ func (c *Client) BatchAssociateApprovalRuleTemplateWithRepositories(ctx context.
 		params = &BatchAssociateApprovalRuleTemplateWithRepositoriesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchAssociateApprovalRuleTemplateWithRepositories", params, optFns, addOperationBatchAssociateApprovalRuleTemplateWithRepositoriesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchAssociateApprovalRuleTemplateWithRepositories", params, optFns, c.addOperationBatchAssociateApprovalRuleTemplateWithRepositoriesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type BatchAssociateApprovalRuleTemplateWithRepositoriesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchAssociateApprovalRuleTemplateWithRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchAssociateApprovalRuleTemplateWithRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchAssociateApprovalRuleTemplateWithRepositories{}, middleware.After)
 	if err != nil {
 		return err

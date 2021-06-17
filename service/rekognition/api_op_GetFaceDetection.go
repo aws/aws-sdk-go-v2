@@ -33,7 +33,7 @@ func (c *Client) GetFaceDetection(ctx context.Context, params *GetFaceDetectionI
 		params = &GetFaceDetectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFaceDetection", params, optFns, addOperationGetFaceDetectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFaceDetection", params, optFns, c.addOperationGetFaceDetectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type GetFaceDetectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFaceDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFaceDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFaceDetection{}, middleware.After)
 	if err != nil {
 		return err

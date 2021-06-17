@@ -21,7 +21,7 @@ func (c *Client) RequestSpotInstances(ctx context.Context, params *RequestSpotIn
 		params = &RequestSpotInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RequestSpotInstances", params, optFns, addOperationRequestSpotInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RequestSpotInstances", params, optFns, c.addOperationRequestSpotInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -135,7 +135,7 @@ type RequestSpotInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRequestSpotInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRequestSpotInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpRequestSpotInstances{}, middleware.After)
 	if err != nil {
 		return err

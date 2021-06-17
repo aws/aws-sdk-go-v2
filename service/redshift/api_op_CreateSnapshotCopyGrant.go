@@ -22,7 +22,7 @@ func (c *Client) CreateSnapshotCopyGrant(ctx context.Context, params *CreateSnap
 		params = &CreateSnapshotCopyGrantInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSnapshotCopyGrant", params, optFns, addOperationCreateSnapshotCopyGrantMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSnapshotCopyGrant", params, optFns, c.addOperationCreateSnapshotCopyGrantMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type CreateSnapshotCopyGrantOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSnapshotCopyGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSnapshotCopyGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateSnapshotCopyGrant{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) DeleteTaskSet(ctx context.Context, params *DeleteTaskSetInput, 
 		params = &DeleteTaskSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTaskSet", params, optFns, addOperationDeleteTaskSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTaskSet", params, optFns, c.addOperationDeleteTaskSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DeleteTaskSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTaskSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTaskSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTaskSet{}, middleware.After)
 	if err != nil {
 		return err

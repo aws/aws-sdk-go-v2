@@ -19,7 +19,7 @@ func (c *Client) GetPackageVersionHistory(ctx context.Context, params *GetPackag
 		params = &GetPackageVersionHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPackageVersionHistory", params, optFns, addOperationGetPackageVersionHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPackageVersionHistory", params, optFns, c.addOperationGetPackageVersionHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetPackageVersionHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPackageVersionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPackageVersionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPackageVersionHistory{}, middleware.After)
 	if err != nil {
 		return err

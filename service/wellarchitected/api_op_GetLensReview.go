@@ -17,7 +17,7 @@ func (c *Client) GetLensReview(ctx context.Context, params *GetLensReviewInput, 
 		params = &GetLensReviewInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLensReview", params, optFns, addOperationGetLensReviewMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLensReview", params, optFns, c.addOperationGetLensReviewMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type GetLensReviewOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLensReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLensReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLensReview{}, middleware.After)
 	if err != nil {
 		return err

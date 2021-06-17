@@ -25,7 +25,7 @@ func (c *Client) AssociateCustomDomain(ctx context.Context, params *AssociateCus
 		params = &AssociateCustomDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateCustomDomain", params, optFns, addOperationAssociateCustomDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateCustomDomain", params, optFns, c.addOperationAssociateCustomDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type AssociateCustomDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateCustomDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateCustomDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateCustomDomain{}, middleware.After)
 	if err != nil {
 		return err

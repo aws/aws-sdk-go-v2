@@ -36,7 +36,7 @@ func (c *Client) DeleteRegexMatchSet(ctx context.Context, params *DeleteRegexMat
 		params = &DeleteRegexMatchSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRegexMatchSet", params, optFns, addOperationDeleteRegexMatchSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRegexMatchSet", params, optFns, c.addOperationDeleteRegexMatchSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type DeleteRegexMatchSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRegexMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRegexMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRegexMatchSet{}, middleware.After)
 	if err != nil {
 		return err

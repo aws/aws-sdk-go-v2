@@ -18,7 +18,7 @@ func (c *Client) DisableUser(ctx context.Context, params *DisableUserInput, optF
 		params = &DisableUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableUser", params, optFns, addOperationDisableUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableUser", params, optFns, c.addOperationDisableUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DisableUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableUser{}, middleware.After)
 	if err != nil {
 		return err

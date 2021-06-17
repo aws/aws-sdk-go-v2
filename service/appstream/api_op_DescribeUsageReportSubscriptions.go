@@ -17,7 +17,7 @@ func (c *Client) DescribeUsageReportSubscriptions(ctx context.Context, params *D
 		params = &DescribeUsageReportSubscriptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeUsageReportSubscriptions", params, optFns, addOperationDescribeUsageReportSubscriptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeUsageReportSubscriptions", params, optFns, c.addOperationDescribeUsageReportSubscriptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DescribeUsageReportSubscriptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeUsageReportSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeUsageReportSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUsageReportSubscriptions{}, middleware.After)
 	if err != nil {
 		return err

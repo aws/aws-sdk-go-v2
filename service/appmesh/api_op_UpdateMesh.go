@@ -17,7 +17,7 @@ func (c *Client) UpdateMesh(ctx context.Context, params *UpdateMeshInput, optFns
 		params = &UpdateMeshInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateMesh", params, optFns, addOperationUpdateMeshMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMesh", params, optFns, c.addOperationUpdateMeshMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UpdateMeshOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMesh{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DecreaseNodeGroupsInGlobalReplicationGroup(ctx context.Context,
 		params = &DecreaseNodeGroupsInGlobalReplicationGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DecreaseNodeGroupsInGlobalReplicationGroup", params, optFns, addOperationDecreaseNodeGroupsInGlobalReplicationGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DecreaseNodeGroupsInGlobalReplicationGroup", params, optFns, c.addOperationDecreaseNodeGroupsInGlobalReplicationGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type DecreaseNodeGroupsInGlobalReplicationGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDecreaseNodeGroupsInGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDecreaseNodeGroupsInGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDecreaseNodeGroupsInGlobalReplicationGroup{}, middleware.After)
 	if err != nil {
 		return err

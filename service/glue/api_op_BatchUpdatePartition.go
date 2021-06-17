@@ -17,7 +17,7 @@ func (c *Client) BatchUpdatePartition(ctx context.Context, params *BatchUpdatePa
 		params = &BatchUpdatePartitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchUpdatePartition", params, optFns, addOperationBatchUpdatePartitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchUpdatePartition", params, optFns, c.addOperationBatchUpdatePartitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type BatchUpdatePartitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchUpdatePartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchUpdatePartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchUpdatePartition{}, middleware.After)
 	if err != nil {
 		return err

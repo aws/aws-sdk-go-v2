@@ -17,7 +17,7 @@ func (c *Client) DisassociateQueueQuickConnects(ctx context.Context, params *Dis
 		params = &DisassociateQueueQuickConnectsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateQueueQuickConnects", params, optFns, addOperationDisassociateQueueQuickConnectsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateQueueQuickConnects", params, optFns, c.addOperationDisassociateQueueQuickConnectsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DisassociateQueueQuickConnectsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateQueueQuickConnectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateQueueQuickConnectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateQueueQuickConnects{}, middleware.After)
 	if err != nil {
 		return err

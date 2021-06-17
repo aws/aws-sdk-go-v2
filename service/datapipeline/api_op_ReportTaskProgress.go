@@ -34,7 +34,7 @@ func (c *Client) ReportTaskProgress(ctx context.Context, params *ReportTaskProgr
 		params = &ReportTaskProgressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ReportTaskProgress", params, optFns, addOperationReportTaskProgressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReportTaskProgress", params, optFns, c.addOperationReportTaskProgressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type ReportTaskProgressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationReportTaskProgressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReportTaskProgressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReportTaskProgress{}, middleware.After)
 	if err != nil {
 		return err

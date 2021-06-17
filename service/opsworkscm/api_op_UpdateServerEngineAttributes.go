@@ -24,7 +24,7 @@ func (c *Client) UpdateServerEngineAttributes(ctx context.Context, params *Updat
 		params = &UpdateServerEngineAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateServerEngineAttributes", params, optFns, addOperationUpdateServerEngineAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateServerEngineAttributes", params, optFns, c.addOperationUpdateServerEngineAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type UpdateServerEngineAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateServerEngineAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateServerEngineAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateServerEngineAttributes{}, middleware.After)
 	if err != nil {
 		return err

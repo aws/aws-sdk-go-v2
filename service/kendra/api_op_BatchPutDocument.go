@@ -24,7 +24,7 @@ func (c *Client) BatchPutDocument(ctx context.Context, params *BatchPutDocumentI
 		params = &BatchPutDocumentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchPutDocument", params, optFns, addOperationBatchPutDocumentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchPutDocument", params, optFns, c.addOperationBatchPutDocumentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type BatchPutDocumentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchPutDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchPutDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchPutDocument{}, middleware.After)
 	if err != nil {
 		return err

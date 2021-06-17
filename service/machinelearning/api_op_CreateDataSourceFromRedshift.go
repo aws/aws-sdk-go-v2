@@ -42,7 +42,7 @@ func (c *Client) CreateDataSourceFromRedshift(ctx context.Context, params *Creat
 		params = &CreateDataSourceFromRedshiftInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDataSourceFromRedshift", params, optFns, addOperationCreateDataSourceFromRedshiftMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDataSourceFromRedshift", params, optFns, c.addOperationCreateDataSourceFromRedshiftMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ type CreateDataSourceFromRedshiftOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDataSourceFromRedshiftMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDataSourceFromRedshiftMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataSourceFromRedshift{}, middleware.After)
 	if err != nil {
 		return err

@@ -27,7 +27,7 @@ func (c *Client) NotifyWhenUploaded(ctx context.Context, params *NotifyWhenUploa
 		params = &NotifyWhenUploadedInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "NotifyWhenUploaded", params, optFns, addOperationNotifyWhenUploadedMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "NotifyWhenUploaded", params, optFns, c.addOperationNotifyWhenUploadedMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type NotifyWhenUploadedOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationNotifyWhenUploadedMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationNotifyWhenUploadedMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNotifyWhenUploaded{}, middleware.After)
 	if err != nil {
 		return err

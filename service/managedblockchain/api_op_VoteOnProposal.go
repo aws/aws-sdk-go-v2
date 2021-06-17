@@ -19,7 +19,7 @@ func (c *Client) VoteOnProposal(ctx context.Context, params *VoteOnProposalInput
 		params = &VoteOnProposalInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "VoteOnProposal", params, optFns, addOperationVoteOnProposalMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "VoteOnProposal", params, optFns, c.addOperationVoteOnProposalMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type VoteOnProposalOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationVoteOnProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationVoteOnProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpVoteOnProposal{}, middleware.After)
 	if err != nil {
 		return err

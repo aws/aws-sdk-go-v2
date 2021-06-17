@@ -14,7 +14,7 @@ func (c *Client) HttpStringPayload(ctx context.Context, params *HttpStringPayloa
 		params = &HttpStringPayloadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpStringPayload", params, optFns, addOperationHttpStringPayloadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpStringPayload", params, optFns, c.addOperationHttpStringPayloadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ type HttpStringPayloadOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHttpStringPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHttpStringPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpStringPayload{}, middleware.After)
 	if err != nil {
 		return err

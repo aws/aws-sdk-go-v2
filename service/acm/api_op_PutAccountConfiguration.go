@@ -22,7 +22,7 @@ func (c *Client) PutAccountConfiguration(ctx context.Context, params *PutAccount
 		params = &PutAccountConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAccountConfiguration", params, optFns, addOperationPutAccountConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAccountConfiguration", params, optFns, c.addOperationPutAccountConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type PutAccountConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAccountConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAccountConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAccountConfiguration{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetDataflowGraph(ctx context.Context, params *GetDataflowGraphI
 		params = &GetDataflowGraphInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDataflowGraph", params, optFns, addOperationGetDataflowGraphMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDataflowGraph", params, optFns, c.addOperationGetDataflowGraphMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetDataflowGraphOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDataflowGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDataflowGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataflowGraph{}, middleware.After)
 	if err != nil {
 		return err

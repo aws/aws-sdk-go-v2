@@ -24,7 +24,7 @@ func (c *Client) SelectAggregateResourceConfig(ctx context.Context, params *Sele
 		params = &SelectAggregateResourceConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SelectAggregateResourceConfig", params, optFns, addOperationSelectAggregateResourceConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SelectAggregateResourceConfig", params, optFns, c.addOperationSelectAggregateResourceConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type SelectAggregateResourceConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSelectAggregateResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSelectAggregateResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSelectAggregateResourceConfig{}, middleware.After)
 	if err != nil {
 		return err

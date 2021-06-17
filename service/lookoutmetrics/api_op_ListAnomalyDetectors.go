@@ -21,7 +21,7 @@ func (c *Client) ListAnomalyDetectors(ctx context.Context, params *ListAnomalyDe
 		params = &ListAnomalyDetectorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAnomalyDetectors", params, optFns, addOperationListAnomalyDetectorsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAnomalyDetectors", params, optFns, c.addOperationListAnomalyDetectorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListAnomalyDetectorsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAnomalyDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAnomalyDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnomalyDetectors{}, middleware.After)
 	if err != nil {
 		return err

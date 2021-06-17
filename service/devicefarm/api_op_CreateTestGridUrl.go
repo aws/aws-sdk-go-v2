@@ -18,7 +18,7 @@ func (c *Client) CreateTestGridUrl(ctx context.Context, params *CreateTestGridUr
 		params = &CreateTestGridUrlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateTestGridUrl", params, optFns, addOperationCreateTestGridUrlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateTestGridUrl", params, optFns, c.addOperationCreateTestGridUrlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type CreateTestGridUrlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateTestGridUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateTestGridUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTestGridUrl{}, middleware.After)
 	if err != nil {
 		return err

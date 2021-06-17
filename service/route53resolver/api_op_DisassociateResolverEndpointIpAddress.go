@@ -21,7 +21,7 @@ func (c *Client) DisassociateResolverEndpointIpAddress(ctx context.Context, para
 		params = &DisassociateResolverEndpointIpAddressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateResolverEndpointIpAddress", params, optFns, addOperationDisassociateResolverEndpointIpAddressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateResolverEndpointIpAddress", params, optFns, c.addOperationDisassociateResolverEndpointIpAddressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DisassociateResolverEndpointIpAddressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateResolverEndpointIpAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateResolverEndpointIpAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateResolverEndpointIpAddress{}, middleware.After)
 	if err != nil {
 		return err

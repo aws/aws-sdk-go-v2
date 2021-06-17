@@ -17,7 +17,7 @@ func (c *Client) ListDimensions(ctx context.Context, params *ListDimensionsInput
 		params = &ListDimensionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDimensions", params, optFns, addOperationListDimensionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDimensions", params, optFns, c.addOperationListDimensionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type ListDimensionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDimensionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDimensionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDimensions{}, middleware.After)
 	if err != nil {
 		return err

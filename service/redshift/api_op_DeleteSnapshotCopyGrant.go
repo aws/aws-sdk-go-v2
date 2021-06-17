@@ -16,7 +16,7 @@ func (c *Client) DeleteSnapshotCopyGrant(ctx context.Context, params *DeleteSnap
 		params = &DeleteSnapshotCopyGrantInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSnapshotCopyGrant", params, optFns, addOperationDeleteSnapshotCopyGrantMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSnapshotCopyGrant", params, optFns, c.addOperationDeleteSnapshotCopyGrantMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DeleteSnapshotCopyGrantOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSnapshotCopyGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSnapshotCopyGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteSnapshotCopyGrant{}, middleware.After)
 	if err != nil {
 		return err

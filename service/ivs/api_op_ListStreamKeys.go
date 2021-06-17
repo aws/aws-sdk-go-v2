@@ -18,7 +18,7 @@ func (c *Client) ListStreamKeys(ctx context.Context, params *ListStreamKeysInput
 		params = &ListStreamKeysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListStreamKeys", params, optFns, addOperationListStreamKeysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListStreamKeys", params, optFns, c.addOperationListStreamKeysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type ListStreamKeysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListStreamKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListStreamKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStreamKeys{}, middleware.After)
 	if err != nil {
 		return err

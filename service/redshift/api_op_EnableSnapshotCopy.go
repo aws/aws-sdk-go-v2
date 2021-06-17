@@ -18,7 +18,7 @@ func (c *Client) EnableSnapshotCopy(ctx context.Context, params *EnableSnapshotC
 		params = &EnableSnapshotCopyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableSnapshotCopy", params, optFns, addOperationEnableSnapshotCopyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableSnapshotCopy", params, optFns, c.addOperationEnableSnapshotCopyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type EnableSnapshotCopyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableSnapshotCopyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableSnapshotCopyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpEnableSnapshotCopy{}, middleware.After)
 	if err != nil {
 		return err

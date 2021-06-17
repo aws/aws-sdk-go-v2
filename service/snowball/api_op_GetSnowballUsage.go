@@ -19,7 +19,7 @@ func (c *Client) GetSnowballUsage(ctx context.Context, params *GetSnowballUsageI
 		params = &GetSnowballUsageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSnowballUsage", params, optFns, addOperationGetSnowballUsageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSnowballUsage", params, optFns, c.addOperationGetSnowballUsageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetSnowballUsageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSnowballUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSnowballUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSnowballUsage{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) EnableImportFindingsForProduct(ctx context.Context, params *Ena
 		params = &EnableImportFindingsForProductInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableImportFindingsForProduct", params, optFns, addOperationEnableImportFindingsForProductMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableImportFindingsForProduct", params, optFns, c.addOperationEnableImportFindingsForProductMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type EnableImportFindingsForProductOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableImportFindingsForProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableImportFindingsForProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableImportFindingsForProduct{}, middleware.After)
 	if err != nil {
 		return err

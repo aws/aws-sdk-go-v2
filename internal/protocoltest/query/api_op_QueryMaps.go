@@ -16,7 +16,7 @@ func (c *Client) QueryMaps(ctx context.Context, params *QueryMapsInput, optFns .
 		params = &QueryMapsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "QueryMaps", params, optFns, addOperationQueryMapsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "QueryMaps", params, optFns, c.addOperationQueryMapsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type QueryMapsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationQueryMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationQueryMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpQueryMaps{}, middleware.After)
 	if err != nil {
 		return err

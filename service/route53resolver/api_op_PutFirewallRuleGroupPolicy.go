@@ -18,7 +18,7 @@ func (c *Client) PutFirewallRuleGroupPolicy(ctx context.Context, params *PutFire
 		params = &PutFirewallRuleGroupPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutFirewallRuleGroupPolicy", params, optFns, addOperationPutFirewallRuleGroupPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutFirewallRuleGroupPolicy", params, optFns, c.addOperationPutFirewallRuleGroupPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type PutFirewallRuleGroupPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutFirewallRuleGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutFirewallRuleGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutFirewallRuleGroupPolicy{}, middleware.After)
 	if err != nil {
 		return err

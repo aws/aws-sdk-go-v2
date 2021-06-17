@@ -22,7 +22,7 @@ func (c *Client) ListChangeSets(ctx context.Context, params *ListChangeSetsInput
 		params = &ListChangeSetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListChangeSets", params, optFns, addOperationListChangeSetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListChangeSets", params, optFns, c.addOperationListChangeSetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type ListChangeSetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListChangeSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListChangeSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChangeSets{}, middleware.After)
 	if err != nil {
 		return err

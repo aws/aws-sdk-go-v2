@@ -17,7 +17,7 @@ func (c *Client) GetUsageTotals(ctx context.Context, params *GetUsageTotalsInput
 		params = &GetUsageTotalsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetUsageTotals", params, optFns, addOperationGetUsageTotalsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetUsageTotals", params, optFns, c.addOperationGetUsageTotalsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetUsageTotalsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetUsageTotalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetUsageTotalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUsageTotals{}, middleware.After)
 	if err != nil {
 		return err

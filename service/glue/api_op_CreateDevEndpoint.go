@@ -18,7 +18,7 @@ func (c *Client) CreateDevEndpoint(ctx context.Context, params *CreateDevEndpoin
 		params = &CreateDevEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDevEndpoint", params, optFns, addOperationCreateDevEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDevEndpoint", params, optFns, c.addOperationCreateDevEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -211,7 +211,7 @@ type CreateDevEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDevEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDevEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDevEndpoint{}, middleware.After)
 	if err != nil {
 		return err

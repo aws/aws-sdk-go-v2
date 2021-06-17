@@ -17,7 +17,7 @@ func (c *Client) DescribeVirtualRouter(ctx context.Context, params *DescribeVirt
 		params = &DescribeVirtualRouterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeVirtualRouter", params, optFns, addOperationDescribeVirtualRouterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeVirtualRouter", params, optFns, c.addOperationDescribeVirtualRouterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeVirtualRouterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeVirtualRouterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeVirtualRouterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVirtualRouter{}, middleware.After)
 	if err != nil {
 		return err

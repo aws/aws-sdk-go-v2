@@ -16,7 +16,7 @@ func (c *Client) DeleteIAMPolicyAssignment(ctx context.Context, params *DeleteIA
 		params = &DeleteIAMPolicyAssignmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteIAMPolicyAssignment", params, optFns, addOperationDeleteIAMPolicyAssignmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteIAMPolicyAssignment", params, optFns, c.addOperationDeleteIAMPolicyAssignmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DeleteIAMPolicyAssignmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteIAMPolicyAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteIAMPolicyAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIAMPolicyAssignment{}, middleware.After)
 	if err != nil {
 		return err

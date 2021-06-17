@@ -29,7 +29,7 @@ func (c *Client) CreateLBCookieStickinessPolicy(ctx context.Context, params *Cre
 		params = &CreateLBCookieStickinessPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLBCookieStickinessPolicy", params, optFns, addOperationCreateLBCookieStickinessPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLBCookieStickinessPolicy", params, optFns, c.addOperationCreateLBCookieStickinessPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type CreateLBCookieStickinessPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLBCookieStickinessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLBCookieStickinessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateLBCookieStickinessPolicy{}, middleware.After)
 	if err != nil {
 		return err

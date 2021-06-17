@@ -19,7 +19,7 @@ func (c *Client) DeletePartnerEventSource(ctx context.Context, params *DeletePar
 		params = &DeletePartnerEventSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePartnerEventSource", params, optFns, addOperationDeletePartnerEventSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePartnerEventSource", params, optFns, c.addOperationDeletePartnerEventSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeletePartnerEventSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePartnerEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePartnerEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePartnerEventSource{}, middleware.After)
 	if err != nil {
 		return err

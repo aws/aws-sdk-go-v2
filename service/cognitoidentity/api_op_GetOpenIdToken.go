@@ -19,7 +19,7 @@ func (c *Client) GetOpenIdToken(ctx context.Context, params *GetOpenIdTokenInput
 		params = &GetOpenIdTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetOpenIdToken", params, optFns, addOperationGetOpenIdTokenMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetOpenIdToken", params, optFns, c.addOperationGetOpenIdTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type GetOpenIdTokenOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetOpenIdTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetOpenIdTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOpenIdToken{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) PutAppInstanceRetentionSettings(ctx context.Context, params *Pu
 		params = &PutAppInstanceRetentionSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutAppInstanceRetentionSettings", params, optFns, addOperationPutAppInstanceRetentionSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutAppInstanceRetentionSettings", params, optFns, c.addOperationPutAppInstanceRetentionSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type PutAppInstanceRetentionSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutAppInstanceRetentionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutAppInstanceRetentionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAppInstanceRetentionSettings{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) PutRepositoryTriggers(ctx context.Context, params *PutRepositor
 		params = &PutRepositoryTriggersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutRepositoryTriggers", params, optFns, addOperationPutRepositoryTriggersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutRepositoryTriggers", params, optFns, c.addOperationPutRepositoryTriggersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type PutRepositoryTriggersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutRepositoryTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutRepositoryTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRepositoryTriggers{}, middleware.After)
 	if err != nil {
 		return err

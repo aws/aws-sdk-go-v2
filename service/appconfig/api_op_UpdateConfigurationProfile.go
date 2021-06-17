@@ -17,7 +17,7 @@ func (c *Client) UpdateConfigurationProfile(ctx context.Context, params *UpdateC
 		params = &UpdateConfigurationProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateConfigurationProfile", params, optFns, addOperationUpdateConfigurationProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateConfigurationProfile", params, optFns, c.addOperationUpdateConfigurationProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type UpdateConfigurationProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateConfigurationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateConfigurationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConfigurationProfile{}, middleware.After)
 	if err != nil {
 		return err

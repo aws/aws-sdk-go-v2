@@ -18,7 +18,7 @@ func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, op
 		params = &CreateFilterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFilter", params, optFns, addOperationCreateFilterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFilter", params, optFns, c.addOperationCreateFilterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -223,7 +223,7 @@ type CreateFilterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFilter{}, middleware.After)
 	if err != nil {
 		return err

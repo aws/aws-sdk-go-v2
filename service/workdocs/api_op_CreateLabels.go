@@ -16,7 +16,7 @@ func (c *Client) CreateLabels(ctx context.Context, params *CreateLabelsInput, op
 		params = &CreateLabelsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLabels", params, optFns, addOperationCreateLabelsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLabels", params, optFns, c.addOperationCreateLabelsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type CreateLabelsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLabels{}, middleware.After)
 	if err != nil {
 		return err

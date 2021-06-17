@@ -18,7 +18,7 @@ func (c *Client) ListWorkloadShares(ctx context.Context, params *ListWorkloadSha
 		params = &ListWorkloadSharesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListWorkloadShares", params, optFns, addOperationListWorkloadSharesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListWorkloadShares", params, optFns, c.addOperationListWorkloadSharesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ListWorkloadSharesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListWorkloadSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListWorkloadSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkloadShares{}, middleware.After)
 	if err != nil {
 		return err

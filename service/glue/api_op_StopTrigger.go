@@ -16,7 +16,7 @@ func (c *Client) StopTrigger(ctx context.Context, params *StopTriggerInput, optF
 		params = &StopTriggerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopTrigger", params, optFns, addOperationStopTriggerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopTrigger", params, optFns, c.addOperationStopTriggerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type StopTriggerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopTrigger{}, middleware.After)
 	if err != nil {
 		return err

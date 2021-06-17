@@ -17,7 +17,7 @@ func (c *Client) ListRecordHistory(ctx context.Context, params *ListRecordHistor
 		params = &ListRecordHistoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRecordHistory", params, optFns, addOperationListRecordHistoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRecordHistory", params, optFns, c.addOperationListRecordHistoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ListRecordHistoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRecordHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRecordHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRecordHistory{}, middleware.After)
 	if err != nil {
 		return err

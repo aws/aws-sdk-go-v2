@@ -17,7 +17,7 @@ func (c *Client) CreateThemeAlias(ctx context.Context, params *CreateThemeAliasI
 		params = &CreateThemeAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateThemeAlias", params, optFns, addOperationCreateThemeAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateThemeAlias", params, optFns, c.addOperationCreateThemeAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type CreateThemeAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateThemeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateThemeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateThemeAlias{}, middleware.After)
 	if err != nil {
 		return err

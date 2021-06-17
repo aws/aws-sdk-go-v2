@@ -29,7 +29,7 @@ func (c *Client) GetAccessPointPolicyForObjectLambda(ctx context.Context, params
 		params = &GetAccessPointPolicyForObjectLambdaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccessPointPolicyForObjectLambda", params, optFns, addOperationGetAccessPointPolicyForObjectLambdaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccessPointPolicyForObjectLambda", params, optFns, c.addOperationGetAccessPointPolicyForObjectLambdaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type GetAccessPointPolicyForObjectLambdaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccessPointPolicyForObjectLambdaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccessPointPolicyForObjectLambdaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetAccessPointPolicyForObjectLambda{}, middleware.After)
 	if err != nil {
 		return err

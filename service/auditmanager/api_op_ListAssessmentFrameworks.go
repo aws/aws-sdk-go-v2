@@ -19,7 +19,7 @@ func (c *Client) ListAssessmentFrameworks(ctx context.Context, params *ListAsses
 		params = &ListAssessmentFrameworksInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAssessmentFrameworks", params, optFns, addOperationListAssessmentFrameworksMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAssessmentFrameworks", params, optFns, c.addOperationListAssessmentFrameworksMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListAssessmentFrameworksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAssessmentFrameworksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAssessmentFrameworksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssessmentFrameworks{}, middleware.After)
 	if err != nil {
 		return err

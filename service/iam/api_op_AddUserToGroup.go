@@ -16,7 +16,7 @@ func (c *Client) AddUserToGroup(ctx context.Context, params *AddUserToGroupInput
 		params = &AddUserToGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddUserToGroup", params, optFns, addOperationAddUserToGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddUserToGroup", params, optFns, c.addOperationAddUserToGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type AddUserToGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddUserToGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddUserToGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpAddUserToGroup{}, middleware.After)
 	if err != nil {
 		return err

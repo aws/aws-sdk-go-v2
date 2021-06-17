@@ -22,7 +22,7 @@ func (c *Client) RegisterWorkspaceDirectory(ctx context.Context, params *Registe
 		params = &RegisterWorkspaceDirectoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterWorkspaceDirectory", params, optFns, addOperationRegisterWorkspaceDirectoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterWorkspaceDirectory", params, optFns, c.addOperationRegisterWorkspaceDirectoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type RegisterWorkspaceDirectoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterWorkspaceDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterWorkspaceDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterWorkspaceDirectory{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DeleteBaiduChannel(ctx context.Context, params *DeleteBaiduChan
 		params = &DeleteBaiduChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteBaiduChannel", params, optFns, addOperationDeleteBaiduChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBaiduChannel", params, optFns, c.addOperationDeleteBaiduChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteBaiduChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteBaiduChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteBaiduChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBaiduChannel{}, middleware.After)
 	if err != nil {
 		return err

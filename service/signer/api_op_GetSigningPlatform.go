@@ -17,7 +17,7 @@ func (c *Client) GetSigningPlatform(ctx context.Context, params *GetSigningPlatf
 		params = &GetSigningPlatformInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSigningPlatform", params, optFns, addOperationGetSigningPlatformMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSigningPlatform", params, optFns, c.addOperationGetSigningPlatformMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type GetSigningPlatformOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSigningPlatformMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSigningPlatformMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSigningPlatform{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DisassociateIpGroups(ctx context.Context, params *DisassociateI
 		params = &DisassociateIpGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateIpGroups", params, optFns, addOperationDisassociateIpGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateIpGroups", params, optFns, c.addOperationDisassociateIpGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DisassociateIpGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateIpGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateIpGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateIpGroups{}, middleware.After)
 	if err != nil {
 		return err

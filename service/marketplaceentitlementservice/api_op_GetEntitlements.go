@@ -18,7 +18,7 @@ func (c *Client) GetEntitlements(ctx context.Context, params *GetEntitlementsInp
 		params = &GetEntitlementsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEntitlements", params, optFns, addOperationGetEntitlementsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEntitlements", params, optFns, c.addOperationGetEntitlementsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type GetEntitlementsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEntitlements{}, middleware.After)
 	if err != nil {
 		return err

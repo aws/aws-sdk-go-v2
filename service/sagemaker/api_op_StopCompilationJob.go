@@ -22,7 +22,7 @@ func (c *Client) StopCompilationJob(ctx context.Context, params *StopCompilation
 		params = &StopCompilationJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopCompilationJob", params, optFns, addOperationStopCompilationJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopCompilationJob", params, optFns, c.addOperationStopCompilationJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type StopCompilationJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopCompilationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopCompilationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopCompilationJob{}, middleware.After)
 	if err != nil {
 		return err

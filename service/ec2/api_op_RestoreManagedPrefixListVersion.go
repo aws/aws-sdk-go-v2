@@ -18,7 +18,7 @@ func (c *Client) RestoreManagedPrefixListVersion(ctx context.Context, params *Re
 		params = &RestoreManagedPrefixListVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestoreManagedPrefixListVersion", params, optFns, addOperationRestoreManagedPrefixListVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestoreManagedPrefixListVersion", params, optFns, c.addOperationRestoreManagedPrefixListVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type RestoreManagedPrefixListVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestoreManagedPrefixListVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestoreManagedPrefixListVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpRestoreManagedPrefixListVersion{}, middleware.After)
 	if err != nil {
 		return err

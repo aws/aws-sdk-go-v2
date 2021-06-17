@@ -34,7 +34,7 @@ func (c *Client) ListSecretVersionIds(ctx context.Context, params *ListSecretVer
 		params = &ListSecretVersionIdsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSecretVersionIds", params, optFns, addOperationListSecretVersionIdsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSecretVersionIds", params, optFns, c.addOperationListSecretVersionIdsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ type ListSecretVersionIdsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSecretVersionIdsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSecretVersionIdsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSecretVersionIds{}, middleware.After)
 	if err != nil {
 		return err

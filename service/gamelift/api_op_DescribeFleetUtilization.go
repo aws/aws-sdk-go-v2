@@ -46,7 +46,7 @@ func (c *Client) DescribeFleetUtilization(ctx context.Context, params *DescribeF
 		params = &DescribeFleetUtilizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFleetUtilization", params, optFns, addOperationDescribeFleetUtilizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFleetUtilization", params, optFns, c.addOperationDescribeFleetUtilizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type DescribeFleetUtilizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFleetUtilizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFleetUtilizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFleetUtilization{}, middleware.After)
 	if err != nil {
 		return err

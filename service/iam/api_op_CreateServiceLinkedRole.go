@@ -26,7 +26,7 @@ func (c *Client) CreateServiceLinkedRole(ctx context.Context, params *CreateServ
 		params = &CreateServiceLinkedRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateServiceLinkedRole", params, optFns, addOperationCreateServiceLinkedRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateServiceLinkedRole", params, optFns, c.addOperationCreateServiceLinkedRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type CreateServiceLinkedRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateServiceLinkedRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateServiceLinkedRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateServiceLinkedRole{}, middleware.After)
 	if err != nil {
 		return err

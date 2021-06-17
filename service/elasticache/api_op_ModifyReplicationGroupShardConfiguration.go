@@ -18,7 +18,7 @@ func (c *Client) ModifyReplicationGroupShardConfiguration(ctx context.Context, p
 		params = &ModifyReplicationGroupShardConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyReplicationGroupShardConfiguration", params, optFns, addOperationModifyReplicationGroupShardConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyReplicationGroupShardConfiguration", params, optFns, c.addOperationModifyReplicationGroupShardConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type ModifyReplicationGroupShardConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyReplicationGroupShardConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyReplicationGroupShardConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyReplicationGroupShardConfiguration{}, middleware.After)
 	if err != nil {
 		return err

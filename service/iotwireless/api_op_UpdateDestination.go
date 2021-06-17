@@ -17,7 +17,7 @@ func (c *Client) UpdateDestination(ctx context.Context, params *UpdateDestinatio
 		params = &UpdateDestinationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDestination", params, optFns, addOperationUpdateDestinationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDestination", params, optFns, c.addOperationUpdateDestinationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UpdateDestinationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDestination{}, middleware.After)
 	if err != nil {
 		return err

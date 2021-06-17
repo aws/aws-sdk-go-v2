@@ -22,7 +22,7 @@ func (c *Client) ListOriginationNumbers(ctx context.Context, params *ListOrigina
 		params = &ListOriginationNumbersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListOriginationNumbers", params, optFns, addOperationListOriginationNumbersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListOriginationNumbers", params, optFns, c.addOperationListOriginationNumbersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListOriginationNumbersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListOriginationNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListOriginationNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListOriginationNumbers{}, middleware.After)
 	if err != nil {
 		return err

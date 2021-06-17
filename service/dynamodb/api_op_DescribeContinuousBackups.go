@@ -4,9 +4,11 @@ package dynamodb
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -25,7 +27,7 @@ func (c *Client) DescribeContinuousBackups(ctx context.Context, params *Describe
 		params = &DescribeContinuousBackupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeContinuousBackups", params, optFns, addOperationDescribeContinuousBackupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeContinuousBackups", params, optFns, c.addOperationDescribeContinuousBackupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +56,7 @@ type DescribeContinuousBackupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeContinuousBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeContinuousBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeContinuousBackups{}, middleware.After)
 	if err != nil {
 		return err
@@ -99,6 +101,9 @@ func addOperationDescribeContinuousBackupsMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addOpDescribeContinuousBackupsDiscoverEndpointMiddleware(stack, options, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeContinuousBackupsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -121,6 +126,46 @@ func addOperationDescribeContinuousBackupsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+func addOpDescribeContinuousBackupsDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
+	return stack.Serialize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
+		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
+			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
+				opt.DisableHTTPS = o.EndpointOptions.DisableHTTPS
+				opt.Logger = o.Logger
+			},
+		},
+		DiscoverOperation:            c.fetchOpDescribeContinuousBackupsDiscoverEndpoint,
+		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
+		EndpointDiscoveryRequired:    false,
+	}, "ResolveEndpoint", middleware.After)
+}
+
+func (c *Client) fetchOpDescribeContinuousBackupsDiscoverEndpoint(ctx context.Context, input interface{}, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+	in, ok := input.(*DescribeContinuousBackupsInput)
+	if !ok {
+		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
+	}
+	_ = in
+
+	identifierMap := make(map[string]string, 0)
+
+	key := fmt.Sprintf("DynamoDB.%v", identifierMap)
+
+	if v, ok := c.endpointCache.Get(key); ok {
+		return v, nil
+	}
+
+	discoveryOperationInput := &DescribeEndpointsInput{}
+
+	opt := internalEndpointDiscovery.DiscoverEndpointOptions{}
+	for _, fn := range optFns {
+		fn(&opt)
+	}
+
+	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, key, opt)
+	return internalEndpointDiscovery.WeightedAddress{}, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeContinuousBackups(region string) *awsmiddleware.RegisterServiceMetadata {

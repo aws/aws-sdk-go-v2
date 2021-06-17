@@ -19,7 +19,7 @@ func (c *Client) UpdateThingShadow(ctx context.Context, params *UpdateThingShado
 		params = &UpdateThingShadowInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateThingShadow", params, optFns, addOperationUpdateThingShadowMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateThingShadow", params, optFns, c.addOperationUpdateThingShadowMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type UpdateThingShadowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateThingShadowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateThingShadowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateThingShadow{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) ListICD10CMInferenceJobs(ctx context.Context, params *ListICD10
 		params = &ListICD10CMInferenceJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListICD10CMInferenceJobs", params, optFns, addOperationListICD10CMInferenceJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListICD10CMInferenceJobs", params, optFns, c.addOperationListICD10CMInferenceJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListICD10CMInferenceJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListICD10CMInferenceJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListICD10CMInferenceJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListICD10CMInferenceJobs{}, middleware.After)
 	if err != nil {
 		return err

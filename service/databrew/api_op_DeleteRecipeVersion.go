@@ -16,7 +16,7 @@ func (c *Client) DeleteRecipeVersion(ctx context.Context, params *DeleteRecipeVe
 		params = &DeleteRecipeVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRecipeVersion", params, optFns, addOperationDeleteRecipeVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRecipeVersion", params, optFns, c.addOperationDeleteRecipeVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeleteRecipeVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRecipeVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRecipeVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRecipeVersion{}, middleware.After)
 	if err != nil {
 		return err

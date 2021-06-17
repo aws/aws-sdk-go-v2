@@ -16,7 +16,7 @@ func (c *Client) CancelWorldGenerationJob(ctx context.Context, params *CancelWor
 		params = &CancelWorldGenerationJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelWorldGenerationJob", params, optFns, addOperationCancelWorldGenerationJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelWorldGenerationJob", params, optFns, c.addOperationCancelWorldGenerationJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type CancelWorldGenerationJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelWorldGenerationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelWorldGenerationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelWorldGenerationJob{}, middleware.After)
 	if err != nil {
 		return err

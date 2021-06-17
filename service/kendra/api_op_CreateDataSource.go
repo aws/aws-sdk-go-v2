@@ -23,7 +23,7 @@ func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceI
 		params = &CreateDataSourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDataSource", params, optFns, addOperationCreateDataSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDataSource", params, optFns, c.addOperationCreateDataSourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ type CreateDataSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataSource{}, middleware.After)
 	if err != nil {
 		return err

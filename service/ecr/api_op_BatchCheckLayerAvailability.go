@@ -22,7 +22,7 @@ func (c *Client) BatchCheckLayerAvailability(ctx context.Context, params *BatchC
 		params = &BatchCheckLayerAvailabilityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchCheckLayerAvailability", params, optFns, addOperationBatchCheckLayerAvailabilityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchCheckLayerAvailability", params, optFns, c.addOperationBatchCheckLayerAvailabilityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type BatchCheckLayerAvailabilityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchCheckLayerAvailabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchCheckLayerAvailabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchCheckLayerAvailability{}, middleware.After)
 	if err != nil {
 		return err

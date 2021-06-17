@@ -17,7 +17,7 @@ func (c *Client) ListEulaAcceptances(ctx context.Context, params *ListEulaAccept
 		params = &ListEulaAcceptancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEulaAcceptances", params, optFns, addOperationListEulaAcceptancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEulaAcceptances", params, optFns, c.addOperationListEulaAcceptancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type ListEulaAcceptancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEulaAcceptancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEulaAcceptancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEulaAcceptances{}, middleware.After)
 	if err != nil {
 		return err

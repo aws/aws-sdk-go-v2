@@ -16,7 +16,7 @@ func (c *Client) UnlabelParameterVersion(ctx context.Context, params *UnlabelPar
 		params = &UnlabelParameterVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnlabelParameterVersion", params, optFns, addOperationUnlabelParameterVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnlabelParameterVersion", params, optFns, c.addOperationUnlabelParameterVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UnlabelParameterVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnlabelParameterVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnlabelParameterVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnlabelParameterVersion{}, middleware.After)
 	if err != nil {
 		return err

@@ -28,7 +28,7 @@ func (c *Client) ListDiscoveredResources(ctx context.Context, params *ListDiscov
 		params = &ListDiscoveredResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDiscoveredResources", params, optFns, addOperationListDiscoveredResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDiscoveredResources", params, optFns, c.addOperationListDiscoveredResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type ListDiscoveredResourcesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDiscoveredResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDiscoveredResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDiscoveredResources{}, middleware.After)
 	if err != nil {
 		return err

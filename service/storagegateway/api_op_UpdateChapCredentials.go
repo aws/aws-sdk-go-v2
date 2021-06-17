@@ -21,7 +21,7 @@ func (c *Client) UpdateChapCredentials(ctx context.Context, params *UpdateChapCr
 		params = &UpdateChapCredentialsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateChapCredentials", params, optFns, addOperationUpdateChapCredentialsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateChapCredentials", params, optFns, c.addOperationUpdateChapCredentialsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type UpdateChapCredentialsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateChapCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateChapCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateChapCredentials{}, middleware.After)
 	if err != nil {
 		return err

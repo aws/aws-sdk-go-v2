@@ -17,7 +17,7 @@ func (c *Client) StartBuildBatch(ctx context.Context, params *StartBuildBatchInp
 		params = &StartBuildBatchInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartBuildBatch", params, optFns, addOperationStartBuildBatchMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartBuildBatch", params, optFns, c.addOperationStartBuildBatchMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -203,7 +203,7 @@ type StartBuildBatchOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartBuildBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartBuildBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartBuildBatch{}, middleware.After)
 	if err != nil {
 		return err

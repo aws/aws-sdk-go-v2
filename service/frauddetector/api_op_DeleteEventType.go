@@ -19,7 +19,7 @@ func (c *Client) DeleteEventType(ctx context.Context, params *DeleteEventTypeInp
 		params = &DeleteEventTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEventType", params, optFns, addOperationDeleteEventTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEventType", params, optFns, c.addOperationDeleteEventTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type DeleteEventTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEventTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEventTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEventType{}, middleware.After)
 	if err != nil {
 		return err

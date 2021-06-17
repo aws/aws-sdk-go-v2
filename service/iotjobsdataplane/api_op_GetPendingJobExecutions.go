@@ -17,7 +17,7 @@ func (c *Client) GetPendingJobExecutions(ctx context.Context, params *GetPending
 		params = &GetPendingJobExecutionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPendingJobExecutions", params, optFns, addOperationGetPendingJobExecutionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPendingJobExecutions", params, optFns, c.addOperationGetPendingJobExecutionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetPendingJobExecutionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPendingJobExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPendingJobExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPendingJobExecutions{}, middleware.After)
 	if err != nil {
 		return err

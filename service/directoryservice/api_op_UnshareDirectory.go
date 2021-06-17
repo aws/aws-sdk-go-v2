@@ -17,7 +17,7 @@ func (c *Client) UnshareDirectory(ctx context.Context, params *UnshareDirectoryI
 		params = &UnshareDirectoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnshareDirectory", params, optFns, addOperationUnshareDirectoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnshareDirectory", params, optFns, c.addOperationUnshareDirectoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UnshareDirectoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnshareDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnshareDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnshareDirectory{}, middleware.After)
 	if err != nil {
 		return err

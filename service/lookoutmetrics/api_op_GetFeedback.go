@@ -18,7 +18,7 @@ func (c *Client) GetFeedback(ctx context.Context, params *GetFeedbackInput, optF
 		params = &GetFeedbackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetFeedback", params, optFns, addOperationGetFeedbackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetFeedback", params, optFns, c.addOperationGetFeedbackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type GetFeedbackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFeedback{}, middleware.After)
 	if err != nil {
 		return err

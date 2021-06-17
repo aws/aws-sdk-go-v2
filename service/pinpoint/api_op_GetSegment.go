@@ -18,7 +18,7 @@ func (c *Client) GetSegment(ctx context.Context, params *GetSegmentInput, optFns
 		params = &GetSegmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSegment", params, optFns, addOperationGetSegmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSegment", params, optFns, c.addOperationGetSegmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetSegmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSegmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSegmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSegment{}, middleware.After)
 	if err != nil {
 		return err

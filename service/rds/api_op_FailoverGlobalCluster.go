@@ -29,7 +29,7 @@ func (c *Client) FailoverGlobalCluster(ctx context.Context, params *FailoverGlob
 		params = &FailoverGlobalClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "FailoverGlobalCluster", params, optFns, addOperationFailoverGlobalClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "FailoverGlobalCluster", params, optFns, c.addOperationFailoverGlobalClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type FailoverGlobalClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationFailoverGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationFailoverGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpFailoverGlobalCluster{}, middleware.After)
 	if err != nil {
 		return err

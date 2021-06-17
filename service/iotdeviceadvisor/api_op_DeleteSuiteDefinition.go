@@ -16,7 +16,7 @@ func (c *Client) DeleteSuiteDefinition(ctx context.Context, params *DeleteSuiteD
 		params = &DeleteSuiteDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteSuiteDefinition", params, optFns, addOperationDeleteSuiteDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSuiteDefinition", params, optFns, c.addOperationDeleteSuiteDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteSuiteDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteSuiteDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteSuiteDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSuiteDefinition{}, middleware.After)
 	if err != nil {
 		return err

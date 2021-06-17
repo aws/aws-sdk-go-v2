@@ -16,7 +16,7 @@ func (c *Client) DeleteVpcLink(ctx context.Context, params *DeleteVpcLinkInput, 
 		params = &DeleteVpcLinkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVpcLink", params, optFns, addOperationDeleteVpcLinkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVpcLink", params, optFns, c.addOperationDeleteVpcLinkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteVpcLinkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVpcLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVpcLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVpcLink{}, middleware.After)
 	if err != nil {
 		return err

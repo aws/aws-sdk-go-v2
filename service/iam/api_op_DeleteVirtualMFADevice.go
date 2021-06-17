@@ -18,7 +18,7 @@ func (c *Client) DeleteVirtualMFADevice(ctx context.Context, params *DeleteVirtu
 		params = &DeleteVirtualMFADeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteVirtualMFADevice", params, optFns, addOperationDeleteVirtualMFADeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteVirtualMFADevice", params, optFns, c.addOperationDeleteVirtualMFADeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteVirtualMFADeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteVirtualMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteVirtualMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteVirtualMFADevice{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListMeshes(ctx context.Context, params *ListMeshesInput, optFns
 		params = &ListMeshesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListMeshes", params, optFns, addOperationListMeshesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListMeshes", params, optFns, c.addOperationListMeshesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type ListMeshesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListMeshesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListMeshesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMeshes{}, middleware.After)
 	if err != nil {
 		return err

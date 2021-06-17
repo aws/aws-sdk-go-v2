@@ -17,7 +17,7 @@ func (c *Client) GetPullRequest(ctx context.Context, params *GetPullRequestInput
 		params = &GetPullRequestInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPullRequest", params, optFns, addOperationGetPullRequestMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPullRequest", params, optFns, c.addOperationGetPullRequestMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type GetPullRequestOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPullRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPullRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPullRequest{}, middleware.After)
 	if err != nil {
 		return err

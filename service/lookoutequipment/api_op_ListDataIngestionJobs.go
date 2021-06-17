@@ -19,7 +19,7 @@ func (c *Client) ListDataIngestionJobs(ctx context.Context, params *ListDataInge
 		params = &ListDataIngestionJobsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDataIngestionJobs", params, optFns, addOperationListDataIngestionJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDataIngestionJobs", params, optFns, c.addOperationListDataIngestionJobsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListDataIngestionJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDataIngestionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDataIngestionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDataIngestionJobs{}, middleware.After)
 	if err != nil {
 		return err

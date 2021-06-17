@@ -20,7 +20,7 @@ func (c *Client) DetachCertificateFromDistribution(ctx context.Context, params *
 		params = &DetachCertificateFromDistributionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachCertificateFromDistribution", params, optFns, addOperationDetachCertificateFromDistributionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachCertificateFromDistribution", params, optFns, c.addOperationDetachCertificateFromDistributionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DetachCertificateFromDistributionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachCertificateFromDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachCertificateFromDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetachCertificateFromDistribution{}, middleware.After)
 	if err != nil {
 		return err

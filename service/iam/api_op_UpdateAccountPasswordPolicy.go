@@ -29,7 +29,7 @@ func (c *Client) UpdateAccountPasswordPolicy(ctx context.Context, params *Update
 		params = &UpdateAccountPasswordPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAccountPasswordPolicy", params, optFns, addOperationUpdateAccountPasswordPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAccountPasswordPolicy", params, optFns, c.addOperationUpdateAccountPasswordPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +104,7 @@ type UpdateAccountPasswordPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAccountPasswordPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAccountPasswordPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateAccountPasswordPolicy{}, middleware.After)
 	if err != nil {
 		return err

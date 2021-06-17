@@ -18,7 +18,7 @@ func (c *Client) PutClassificationExportConfiguration(ctx context.Context, param
 		params = &PutClassificationExportConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutClassificationExportConfiguration", params, optFns, addOperationPutClassificationExportConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutClassificationExportConfiguration", params, optFns, c.addOperationPutClassificationExportConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type PutClassificationExportConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutClassificationExportConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutClassificationExportConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutClassificationExportConfiguration{}, middleware.After)
 	if err != nil {
 		return err

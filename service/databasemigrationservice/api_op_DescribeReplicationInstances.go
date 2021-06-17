@@ -24,7 +24,7 @@ func (c *Client) DescribeReplicationInstances(ctx context.Context, params *Descr
 		params = &DescribeReplicationInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeReplicationInstances", params, optFns, addOperationDescribeReplicationInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeReplicationInstances", params, optFns, c.addOperationDescribeReplicationInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DescribeReplicationInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeReplicationInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeReplicationInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReplicationInstances{}, middleware.After)
 	if err != nil {
 		return err

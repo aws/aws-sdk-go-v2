@@ -29,7 +29,7 @@ func (c *Client) GetContextKeysForPrincipalPolicy(ctx context.Context, params *G
 		params = &GetContextKeysForPrincipalPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetContextKeysForPrincipalPolicy", params, optFns, addOperationGetContextKeysForPrincipalPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetContextKeysForPrincipalPolicy", params, optFns, c.addOperationGetContextKeysForPrincipalPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type GetContextKeysForPrincipalPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetContextKeysForPrincipalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetContextKeysForPrincipalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetContextKeysForPrincipalPolicy{}, middleware.After)
 	if err != nil {
 		return err

@@ -48,7 +48,7 @@ func (c *Client) CreateSizeConstraintSet(ctx context.Context, params *CreateSize
 		params = &CreateSizeConstraintSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSizeConstraintSet", params, optFns, addOperationCreateSizeConstraintSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSizeConstraintSet", params, optFns, c.addOperationCreateSizeConstraintSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type CreateSizeConstraintSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSizeConstraintSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSizeConstraintSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSizeConstraintSet{}, middleware.After)
 	if err != nil {
 		return err

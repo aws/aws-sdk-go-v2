@@ -16,7 +16,7 @@ func (c *Client) DeregisterEventTopic(ctx context.Context, params *DeregisterEve
 		params = &DeregisterEventTopicInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterEventTopic", params, optFns, addOperationDeregisterEventTopicMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterEventTopic", params, optFns, c.addOperationDeregisterEventTopicMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeregisterEventTopicOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterEventTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterEventTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterEventTopic{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DeleteEventTracker(ctx context.Context, params *DeleteEventTrac
 		params = &DeleteEventTrackerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEventTracker", params, optFns, addOperationDeleteEventTrackerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteEventTracker", params, optFns, c.addOperationDeleteEventTrackerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteEventTrackerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteEventTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteEventTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEventTracker{}, middleware.After)
 	if err != nil {
 		return err

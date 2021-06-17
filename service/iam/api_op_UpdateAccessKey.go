@@ -26,7 +26,7 @@ func (c *Client) UpdateAccessKey(ctx context.Context, params *UpdateAccessKeyInp
 		params = &UpdateAccessKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAccessKey", params, optFns, addOperationUpdateAccessKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAccessKey", params, optFns, c.addOperationUpdateAccessKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type UpdateAccessKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAccessKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAccessKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateAccessKey{}, middleware.After)
 	if err != nil {
 		return err

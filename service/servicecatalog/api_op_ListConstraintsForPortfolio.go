@@ -18,7 +18,7 @@ func (c *Client) ListConstraintsForPortfolio(ctx context.Context, params *ListCo
 		params = &ListConstraintsForPortfolioInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListConstraintsForPortfolio", params, optFns, addOperationListConstraintsForPortfolioMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListConstraintsForPortfolio", params, optFns, c.addOperationListConstraintsForPortfolioMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type ListConstraintsForPortfolioOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListConstraintsForPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListConstraintsForPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListConstraintsForPortfolio{}, middleware.After)
 	if err != nil {
 		return err

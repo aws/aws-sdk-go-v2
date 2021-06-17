@@ -17,7 +17,7 @@ func (c *Client) RemoveFlowMediaStream(ctx context.Context, params *RemoveFlowMe
 		params = &RemoveFlowMediaStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveFlowMediaStream", params, optFns, addOperationRemoveFlowMediaStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveFlowMediaStream", params, optFns, c.addOperationRemoveFlowMediaStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type RemoveFlowMediaStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveFlowMediaStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveFlowMediaStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveFlowMediaStream{}, middleware.After)
 	if err != nil {
 		return err

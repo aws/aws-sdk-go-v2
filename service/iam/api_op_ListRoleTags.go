@@ -20,7 +20,7 @@ func (c *Client) ListRoleTags(ctx context.Context, params *ListRoleTagsInput, op
 		params = &ListRoleTagsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListRoleTags", params, optFns, addOperationListRoleTagsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListRoleTags", params, optFns, c.addOperationListRoleTagsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type ListRoleTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListRoleTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListRoleTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListRoleTags{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) TestAuthorization(ctx context.Context, params *TestAuthorizatio
 		params = &TestAuthorizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestAuthorization", params, optFns, addOperationTestAuthorizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestAuthorization", params, optFns, c.addOperationTestAuthorizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type TestAuthorizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTestAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestAuthorization{}, middleware.After)
 	if err != nil {
 		return err

@@ -61,7 +61,7 @@ func (c *Client) CreateFileSystem(ctx context.Context, params *CreateFileSystemI
 		params = &CreateFileSystemInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFileSystem", params, optFns, addOperationCreateFileSystemMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFileSystem", params, optFns, c.addOperationCreateFileSystemMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -268,7 +268,7 @@ type CreateFileSystemOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFileSystem{}, middleware.After)
 	if err != nil {
 		return err

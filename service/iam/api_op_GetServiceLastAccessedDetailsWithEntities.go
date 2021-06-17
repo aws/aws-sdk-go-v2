@@ -36,7 +36,7 @@ func (c *Client) GetServiceLastAccessedDetailsWithEntities(ctx context.Context, 
 		params = &GetServiceLastAccessedDetailsWithEntitiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetServiceLastAccessedDetailsWithEntities", params, optFns, addOperationGetServiceLastAccessedDetailsWithEntitiesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetServiceLastAccessedDetailsWithEntities", params, optFns, c.addOperationGetServiceLastAccessedDetailsWithEntitiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetServiceLastAccessedDetailsWithEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetServiceLastAccessedDetailsWithEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetServiceLastAccessedDetailsWithEntities{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) ClearQuerySuggestions(ctx context.Context, params *ClearQuerySu
 		params = &ClearQuerySuggestionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ClearQuerySuggestions", params, optFns, addOperationClearQuerySuggestionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ClearQuerySuggestions", params, optFns, c.addOperationClearQuerySuggestionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type ClearQuerySuggestionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationClearQuerySuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationClearQuerySuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpClearQuerySuggestions{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) FlattenedXmlMap(ctx context.Context, params *FlattenedXmlMapInp
 		params = &FlattenedXmlMapInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "FlattenedXmlMap", params, optFns, addOperationFlattenedXmlMapMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "FlattenedXmlMap", params, optFns, c.addOperationFlattenedXmlMapMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ type FlattenedXmlMapOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationFlattenedXmlMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationFlattenedXmlMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpFlattenedXmlMap{}, middleware.After)
 	if err != nil {
 		return err

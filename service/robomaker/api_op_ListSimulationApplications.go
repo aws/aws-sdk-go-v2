@@ -19,7 +19,7 @@ func (c *Client) ListSimulationApplications(ctx context.Context, params *ListSim
 		params = &ListSimulationApplicationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSimulationApplications", params, optFns, addOperationListSimulationApplicationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSimulationApplications", params, optFns, c.addOperationListSimulationApplicationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type ListSimulationApplicationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSimulationApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSimulationApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSimulationApplications{}, middleware.After)
 	if err != nil {
 		return err

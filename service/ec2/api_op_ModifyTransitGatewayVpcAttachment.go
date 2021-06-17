@@ -17,7 +17,7 @@ func (c *Client) ModifyTransitGatewayVpcAttachment(ctx context.Context, params *
 		params = &ModifyTransitGatewayVpcAttachmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyTransitGatewayVpcAttachment", params, optFns, addOperationModifyTransitGatewayVpcAttachmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyTransitGatewayVpcAttachment", params, optFns, c.addOperationModifyTransitGatewayVpcAttachmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ModifyTransitGatewayVpcAttachmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyTransitGatewayVpcAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyTransitGatewayVpcAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyTransitGatewayVpcAttachment{}, middleware.After)
 	if err != nil {
 		return err

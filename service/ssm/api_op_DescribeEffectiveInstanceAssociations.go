@@ -18,7 +18,7 @@ func (c *Client) DescribeEffectiveInstanceAssociations(ctx context.Context, para
 		params = &DescribeEffectiveInstanceAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEffectiveInstanceAssociations", params, optFns, addOperationDescribeEffectiveInstanceAssociationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEffectiveInstanceAssociations", params, optFns, c.addOperationDescribeEffectiveInstanceAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeEffectiveInstanceAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEffectiveInstanceAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEffectiveInstanceAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEffectiveInstanceAssociations{}, middleware.After)
 	if err != nil {
 		return err

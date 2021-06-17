@@ -23,7 +23,7 @@ func (c *Client) RenewDomain(ctx context.Context, params *RenewDomainInput, optF
 		params = &RenewDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RenewDomain", params, optFns, addOperationRenewDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RenewDomain", params, optFns, c.addOperationRenewDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type RenewDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRenewDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRenewDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRenewDomain{}, middleware.After)
 	if err != nil {
 		return err

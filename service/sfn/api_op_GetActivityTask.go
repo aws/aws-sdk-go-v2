@@ -27,7 +27,7 @@ func (c *Client) GetActivityTask(ctx context.Context, params *GetActivityTaskInp
 		params = &GetActivityTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetActivityTask", params, optFns, addOperationGetActivityTaskMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetActivityTask", params, optFns, c.addOperationGetActivityTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type GetActivityTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetActivityTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetActivityTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetActivityTask{}, middleware.After)
 	if err != nil {
 		return err

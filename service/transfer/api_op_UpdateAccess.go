@@ -18,7 +18,7 @@ func (c *Client) UpdateAccess(ctx context.Context, params *UpdateAccessInput, op
 		params = &UpdateAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAccess", params, optFns, addOperationUpdateAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAccess", params, optFns, c.addOperationUpdateAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -134,7 +134,7 @@ type UpdateAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAccess{}, middleware.After)
 	if err != nil {
 		return err

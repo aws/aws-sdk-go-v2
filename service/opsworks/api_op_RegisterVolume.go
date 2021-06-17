@@ -24,7 +24,7 @@ func (c *Client) RegisterVolume(ctx context.Context, params *RegisterVolumeInput
 		params = &RegisterVolumeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterVolume", params, optFns, addOperationRegisterVolumeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterVolume", params, optFns, c.addOperationRegisterVolumeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type RegisterVolumeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterVolume{}, middleware.After)
 	if err != nil {
 		return err

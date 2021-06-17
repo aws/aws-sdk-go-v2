@@ -21,7 +21,7 @@ func (c *Client) PutBlockPublicAccessConfiguration(ctx context.Context, params *
 		params = &PutBlockPublicAccessConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBlockPublicAccessConfiguration", params, optFns, addOperationPutBlockPublicAccessConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBlockPublicAccessConfiguration", params, optFns, c.addOperationPutBlockPublicAccessConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type PutBlockPublicAccessConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBlockPublicAccessConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBlockPublicAccessConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutBlockPublicAccessConfiguration{}, middleware.After)
 	if err != nil {
 		return err

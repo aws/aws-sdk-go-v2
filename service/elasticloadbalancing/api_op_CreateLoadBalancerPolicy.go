@@ -19,7 +19,7 @@ func (c *Client) CreateLoadBalancerPolicy(ctx context.Context, params *CreateLoa
 		params = &CreateLoadBalancerPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLoadBalancerPolicy", params, optFns, addOperationCreateLoadBalancerPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLoadBalancerPolicy", params, optFns, c.addOperationCreateLoadBalancerPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type CreateLoadBalancerPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLoadBalancerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLoadBalancerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateLoadBalancerPolicy{}, middleware.After)
 	if err != nil {
 		return err

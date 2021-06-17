@@ -29,7 +29,7 @@ func (c *Client) PutStorageLensConfigurationTagging(ctx context.Context, params 
 		params = &PutStorageLensConfigurationTaggingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutStorageLensConfigurationTagging", params, optFns, addOperationPutStorageLensConfigurationTaggingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutStorageLensConfigurationTagging", params, optFns, c.addOperationPutStorageLensConfigurationTaggingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type PutStorageLensConfigurationTaggingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutStorageLensConfigurationTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutStorageLensConfigurationTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutStorageLensConfigurationTagging{}, middleware.After)
 	if err != nil {
 		return err

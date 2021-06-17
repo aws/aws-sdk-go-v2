@@ -16,7 +16,7 @@ func (c *Client) InvalidateProjectCache(ctx context.Context, params *InvalidateP
 		params = &InvalidateProjectCacheInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InvalidateProjectCache", params, optFns, addOperationInvalidateProjectCacheMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InvalidateProjectCache", params, optFns, c.addOperationInvalidateProjectCacheMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type InvalidateProjectCacheOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInvalidateProjectCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInvalidateProjectCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInvalidateProjectCache{}, middleware.After)
 	if err != nil {
 		return err

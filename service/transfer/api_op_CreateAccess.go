@@ -22,7 +22,7 @@ func (c *Client) CreateAccess(ctx context.Context, params *CreateAccessInput, op
 		params = &CreateAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAccess", params, optFns, addOperationCreateAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAccess", params, optFns, c.addOperationCreateAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -140,7 +140,7 @@ type CreateAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAccess{}, middleware.After)
 	if err != nil {
 		return err

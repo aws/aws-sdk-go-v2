@@ -17,7 +17,7 @@ func (c *Client) StopDataSourceSyncJob(ctx context.Context, params *StopDataSour
 		params = &StopDataSourceSyncJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopDataSourceSyncJob", params, optFns, addOperationStopDataSourceSyncJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopDataSourceSyncJob", params, optFns, c.addOperationStopDataSourceSyncJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type StopDataSourceSyncJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopDataSourceSyncJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopDataSourceSyncJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopDataSourceSyncJob{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) QueryLists(ctx context.Context, params *QueryListsInput, optFns
 		params = &QueryListsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "QueryLists", params, optFns, addOperationQueryListsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "QueryLists", params, optFns, c.addOperationQueryListsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type QueryListsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationQueryListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationQueryListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpQueryLists{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) BatchDisassociateServiceActionFromProvisioningArtifact(ctx cont
 		params = &BatchDisassociateServiceActionFromProvisioningArtifactInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDisassociateServiceActionFromProvisioningArtifact", params, optFns, addOperationBatchDisassociateServiceActionFromProvisioningArtifactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDisassociateServiceActionFromProvisioningArtifact", params, optFns, c.addOperationBatchDisassociateServiceActionFromProvisioningArtifactMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type BatchDisassociateServiceActionFromProvisioningArtifactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDisassociateServiceActionFromProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDisassociateServiceActionFromProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDisassociateServiceActionFromProvisioningArtifact{}, middleware.After)
 	if err != nil {
 		return err

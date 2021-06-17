@@ -18,7 +18,7 @@ func (c *Client) DescribeBudgetActionsForBudget(ctx context.Context, params *Des
 		params = &DescribeBudgetActionsForBudgetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeBudgetActionsForBudget", params, optFns, addOperationDescribeBudgetActionsForBudgetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeBudgetActionsForBudget", params, optFns, c.addOperationDescribeBudgetActionsForBudgetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DescribeBudgetActionsForBudgetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeBudgetActionsForBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeBudgetActionsForBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBudgetActionsForBudget{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) DescribeServices(ctx context.Context, params *DescribeServicesI
 		params = &DescribeServicesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeServices", params, optFns, addOperationDescribeServicesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeServices", params, optFns, c.addOperationDescribeServicesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DescribeServicesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeServices{}, middleware.After)
 	if err != nil {
 		return err

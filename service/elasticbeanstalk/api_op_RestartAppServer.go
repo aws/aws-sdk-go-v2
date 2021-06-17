@@ -17,7 +17,7 @@ func (c *Client) RestartAppServer(ctx context.Context, params *RestartAppServerI
 		params = &RestartAppServerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RestartAppServer", params, optFns, addOperationRestartAppServerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RestartAppServer", params, optFns, c.addOperationRestartAppServerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type RestartAppServerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRestartAppServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRestartAppServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestartAppServer{}, middleware.After)
 	if err != nil {
 		return err

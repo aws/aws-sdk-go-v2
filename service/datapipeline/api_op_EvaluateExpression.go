@@ -26,7 +26,7 @@ func (c *Client) EvaluateExpression(ctx context.Context, params *EvaluateExpress
 		params = &EvaluateExpressionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EvaluateExpression", params, optFns, addOperationEvaluateExpressionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EvaluateExpression", params, optFns, c.addOperationEvaluateExpressionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type EvaluateExpressionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEvaluateExpressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEvaluateExpressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEvaluateExpression{}, middleware.After)
 	if err != nil {
 		return err

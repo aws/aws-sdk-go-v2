@@ -16,7 +16,7 @@ func (c *Client) DescribeDevicePolicyConfiguration(ctx context.Context, params *
 		params = &DescribeDevicePolicyConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDevicePolicyConfiguration", params, optFns, addOperationDescribeDevicePolicyConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDevicePolicyConfiguration", params, optFns, c.addOperationDescribeDevicePolicyConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeDevicePolicyConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDevicePolicyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDevicePolicyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDevicePolicyConfiguration{}, middleware.After)
 	if err != nil {
 		return err

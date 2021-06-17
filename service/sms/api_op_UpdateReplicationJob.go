@@ -18,7 +18,7 @@ func (c *Client) UpdateReplicationJob(ctx context.Context, params *UpdateReplica
 		params = &UpdateReplicationJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateReplicationJob", params, optFns, addOperationUpdateReplicationJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateReplicationJob", params, optFns, c.addOperationUpdateReplicationJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type UpdateReplicationJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateReplicationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateReplicationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateReplicationJob{}, middleware.After)
 	if err != nil {
 		return err

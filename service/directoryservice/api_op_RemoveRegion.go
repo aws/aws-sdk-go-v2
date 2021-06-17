@@ -18,7 +18,7 @@ func (c *Client) RemoveRegion(ctx context.Context, params *RemoveRegionInput, op
 		params = &RemoveRegionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveRegion", params, optFns, addOperationRemoveRegionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveRegion", params, optFns, c.addOperationRemoveRegionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type RemoveRegionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveRegion{}, middleware.After)
 	if err != nil {
 		return err

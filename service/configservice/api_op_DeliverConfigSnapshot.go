@@ -27,7 +27,7 @@ func (c *Client) DeliverConfigSnapshot(ctx context.Context, params *DeliverConfi
 		params = &DeliverConfigSnapshotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeliverConfigSnapshot", params, optFns, addOperationDeliverConfigSnapshotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeliverConfigSnapshot", params, optFns, c.addOperationDeliverConfigSnapshotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeliverConfigSnapshotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeliverConfigSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeliverConfigSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeliverConfigSnapshot{}, middleware.After)
 	if err != nil {
 		return err

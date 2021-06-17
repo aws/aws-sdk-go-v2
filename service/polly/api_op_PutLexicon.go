@@ -21,7 +21,7 @@ func (c *Client) PutLexicon(ctx context.Context, params *PutLexiconInput, optFns
 		params = &PutLexiconInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutLexicon", params, optFns, addOperationPutLexiconMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutLexicon", params, optFns, c.addOperationPutLexiconMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type PutLexiconOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutLexiconMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutLexiconMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutLexicon{}, middleware.After)
 	if err != nil {
 		return err

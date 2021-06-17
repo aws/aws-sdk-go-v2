@@ -18,7 +18,7 @@ func (c *Client) DescribeDBParameters(ctx context.Context, params *DescribeDBPar
 		params = &DescribeDBParametersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeDBParameters", params, optFns, addOperationDescribeDBParametersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeDBParameters", params, optFns, c.addOperationDescribeDBParametersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type DescribeDBParametersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeDBParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeDBParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBParameters{}, middleware.After)
 	if err != nil {
 		return err

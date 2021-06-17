@@ -20,7 +20,7 @@ func (c *Client) DescribeSnapshotSchedule(ctx context.Context, params *DescribeS
 		params = &DescribeSnapshotScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeSnapshotSchedule", params, optFns, addOperationDescribeSnapshotScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeSnapshotSchedule", params, optFns, c.addOperationDescribeSnapshotScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DescribeSnapshotScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSnapshotSchedule{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, 
 		params = &DeleteClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCluster", params, optFns, addOperationDeleteClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCluster", params, optFns, c.addOperationDeleteClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCluster{}, middleware.After)
 	if err != nil {
 		return err

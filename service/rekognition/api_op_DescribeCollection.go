@@ -21,7 +21,7 @@ func (c *Client) DescribeCollection(ctx context.Context, params *DescribeCollect
 		params = &DescribeCollectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCollection", params, optFns, addOperationDescribeCollectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCollection", params, optFns, c.addOperationDescribeCollectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DescribeCollectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCollection{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) StopDeployment(ctx context.Context, params *StopDeploymentInput
 		params = &StopDeploymentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopDeployment", params, optFns, addOperationStopDeploymentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopDeployment", params, optFns, c.addOperationStopDeploymentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type StopDeploymentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopDeployment{}, middleware.After)
 	if err != nil {
 		return err

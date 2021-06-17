@@ -21,7 +21,7 @@ func (c *Client) DescribeRegionSettings(ctx context.Context, params *DescribeReg
 		params = &DescribeRegionSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRegionSettings", params, optFns, addOperationDescribeRegionSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRegionSettings", params, optFns, c.addOperationDescribeRegionSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DescribeRegionSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRegionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRegionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRegionSettings{}, middleware.After)
 	if err != nil {
 		return err

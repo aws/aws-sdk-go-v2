@@ -21,7 +21,7 @@ func (c *Client) DescribeStatement(ctx context.Context, params *DescribeStatemen
 		params = &DescribeStatementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeStatement", params, optFns, addOperationDescribeStatementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeStatement", params, optFns, c.addOperationDescribeStatementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -125,7 +125,7 @@ type DescribeStatementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStatement{}, middleware.After)
 	if err != nil {
 		return err

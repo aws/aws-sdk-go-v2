@@ -18,7 +18,7 @@ func (c *Client) UpdateRulesOfIpGroup(ctx context.Context, params *UpdateRulesOf
 		params = &UpdateRulesOfIpGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRulesOfIpGroup", params, optFns, addOperationUpdateRulesOfIpGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRulesOfIpGroup", params, optFns, c.addOperationUpdateRulesOfIpGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type UpdateRulesOfIpGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRulesOfIpGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRulesOfIpGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRulesOfIpGroup{}, middleware.After)
 	if err != nil {
 		return err

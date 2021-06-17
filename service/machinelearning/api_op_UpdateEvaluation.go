@@ -17,7 +17,7 @@ func (c *Client) UpdateEvaluation(ctx context.Context, params *UpdateEvaluationI
 		params = &UpdateEvaluationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateEvaluation", params, optFns, addOperationUpdateEvaluationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateEvaluation", params, optFns, c.addOperationUpdateEvaluationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type UpdateEvaluationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEvaluation{}, middleware.After)
 	if err != nil {
 		return err

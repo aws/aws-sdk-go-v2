@@ -18,7 +18,7 @@ func (c *Client) GetAttributeGroup(ctx context.Context, params *GetAttributeGrou
 		params = &GetAttributeGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAttributeGroup", params, optFns, addOperationGetAttributeGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAttributeGroup", params, optFns, c.addOperationGetAttributeGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type GetAttributeGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAttributeGroup{}, middleware.After)
 	if err != nil {
 		return err

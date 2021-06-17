@@ -27,7 +27,7 @@ func (c *Client) JsonLists(ctx context.Context, params *JsonListsInput, optFns .
 		params = &JsonListsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "JsonLists", params, optFns, addOperationJsonListsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "JsonLists", params, optFns, c.addOperationJsonListsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type JsonListsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationJsonListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationJsonListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpJsonLists{}, middleware.After)
 	if err != nil {
 		return err

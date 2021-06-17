@@ -22,7 +22,7 @@ func (c *Client) DisassociateEnclaveCertificateIamRole(ctx context.Context, para
 		params = &DisassociateEnclaveCertificateIamRoleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateEnclaveCertificateIamRole", params, optFns, addOperationDisassociateEnclaveCertificateIamRoleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateEnclaveCertificateIamRole", params, optFns, c.addOperationDisassociateEnclaveCertificateIamRoleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DisassociateEnclaveCertificateIamRoleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateEnclaveCertificateIamRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateEnclaveCertificateIamRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDisassociateEnclaveCertificateIamRole{}, middleware.After)
 	if err != nil {
 		return err

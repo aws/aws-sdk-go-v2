@@ -23,7 +23,7 @@ func (c *Client) DeleteCustomActionType(ctx context.Context, params *DeleteCusto
 		params = &DeleteCustomActionTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomActionType", params, optFns, addOperationDeleteCustomActionTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomActionType", params, optFns, c.addOperationDeleteCustomActionTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DeleteCustomActionTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCustomActionTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCustomActionTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCustomActionType{}, middleware.After)
 	if err != nil {
 		return err

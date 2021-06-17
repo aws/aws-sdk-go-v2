@@ -16,7 +16,7 @@ func (c *Client) DeleteCodeRepository(ctx context.Context, params *DeleteCodeRep
 		params = &DeleteCodeRepositoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCodeRepository", params, optFns, addOperationDeleteCodeRepositoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCodeRepository", params, optFns, c.addOperationDeleteCodeRepositoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteCodeRepositoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCodeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCodeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCodeRepository{}, middleware.After)
 	if err != nil {
 		return err

@@ -24,7 +24,7 @@ func (c *Client) DisassociateHealthCheck(ctx context.Context, params *Disassocia
 		params = &DisassociateHealthCheckInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateHealthCheck", params, optFns, addOperationDisassociateHealthCheckMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateHealthCheck", params, optFns, c.addOperationDisassociateHealthCheckMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DisassociateHealthCheckOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateHealthCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateHealthCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateHealthCheck{}, middleware.After)
 	if err != nil {
 		return err

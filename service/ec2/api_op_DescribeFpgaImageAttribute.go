@@ -17,7 +17,7 @@ func (c *Client) DescribeFpgaImageAttribute(ctx context.Context, params *Describ
 		params = &DescribeFpgaImageAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFpgaImageAttribute", params, optFns, addOperationDescribeFpgaImageAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFpgaImageAttribute", params, optFns, c.addOperationDescribeFpgaImageAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeFpgaImageAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFpgaImageAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFpgaImageAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeFpgaImageAttribute{}, middleware.After)
 	if err != nil {
 		return err

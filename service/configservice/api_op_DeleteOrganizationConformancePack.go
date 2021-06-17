@@ -23,7 +23,7 @@ func (c *Client) DeleteOrganizationConformancePack(ctx context.Context, params *
 		params = &DeleteOrganizationConformancePackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteOrganizationConformancePack", params, optFns, addOperationDeleteOrganizationConformancePackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteOrganizationConformancePack", params, optFns, c.addOperationDeleteOrganizationConformancePackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteOrganizationConformancePackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteOrganizationConformancePackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteOrganizationConformancePackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteOrganizationConformancePack{}, middleware.After)
 	if err != nil {
 		return err

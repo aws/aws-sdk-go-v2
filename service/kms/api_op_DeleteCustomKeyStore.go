@@ -57,7 +57,7 @@ func (c *Client) DeleteCustomKeyStore(ctx context.Context, params *DeleteCustomK
 		params = &DeleteCustomKeyStoreInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomKeyStore", params, optFns, addOperationDeleteCustomKeyStoreMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCustomKeyStore", params, optFns, c.addOperationDeleteCustomKeyStoreMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type DeleteCustomKeyStoreOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCustomKeyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCustomKeyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCustomKeyStore{}, middleware.After)
 	if err != nil {
 		return err

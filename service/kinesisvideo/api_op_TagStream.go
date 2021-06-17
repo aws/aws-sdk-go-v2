@@ -23,7 +23,7 @@ func (c *Client) TagStream(ctx context.Context, params *TagStreamInput, optFns .
 		params = &TagStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TagStream", params, optFns, addOperationTagStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TagStream", params, optFns, c.addOperationTagStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type TagStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTagStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTagStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpTagStream{}, middleware.After)
 	if err != nil {
 		return err

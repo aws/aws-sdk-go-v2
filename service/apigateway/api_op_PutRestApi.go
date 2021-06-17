@@ -20,7 +20,7 @@ func (c *Client) PutRestApi(ctx context.Context, params *PutRestApiInput, optFns
 		params = &PutRestApiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutRestApi", params, optFns, addOperationPutRestApiMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutRestApi", params, optFns, c.addOperationPutRestApiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +129,7 @@ type PutRestApiOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutRestApi{}, middleware.After)
 	if err != nil {
 		return err

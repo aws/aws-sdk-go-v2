@@ -25,7 +25,7 @@ func (c *Client) CreateContext(ctx context.Context, params *CreateContextInput, 
 		params = &CreateContextInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateContext", params, optFns, addOperationCreateContextMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateContext", params, optFns, c.addOperationCreateContextMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type CreateContextOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateContext{}, middleware.After)
 	if err != nil {
 		return err

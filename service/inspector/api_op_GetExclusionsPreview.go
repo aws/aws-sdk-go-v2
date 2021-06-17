@@ -20,7 +20,7 @@ func (c *Client) GetExclusionsPreview(ctx context.Context, params *GetExclusions
 		params = &GetExclusionsPreviewInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetExclusionsPreview", params, optFns, addOperationGetExclusionsPreviewMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetExclusionsPreview", params, optFns, c.addOperationGetExclusionsPreviewMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type GetExclusionsPreviewOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetExclusionsPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetExclusionsPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetExclusionsPreview{}, middleware.After)
 	if err != nil {
 		return err

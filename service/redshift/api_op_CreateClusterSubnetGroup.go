@@ -22,7 +22,7 @@ func (c *Client) CreateClusterSubnetGroup(ctx context.Context, params *CreateClu
 		params = &CreateClusterSubnetGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateClusterSubnetGroup", params, optFns, addOperationCreateClusterSubnetGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateClusterSubnetGroup", params, optFns, c.addOperationCreateClusterSubnetGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type CreateClusterSubnetGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateClusterSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateClusterSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateClusterSubnetGroup{}, middleware.After)
 	if err != nil {
 		return err

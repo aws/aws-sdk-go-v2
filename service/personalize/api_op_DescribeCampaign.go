@@ -27,7 +27,7 @@ func (c *Client) DescribeCampaign(ctx context.Context, params *DescribeCampaignI
 		params = &DescribeCampaignInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCampaign", params, optFns, addOperationDescribeCampaignMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCampaign", params, optFns, c.addOperationDescribeCampaignMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DescribeCampaignOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCampaign{}, middleware.After)
 	if err != nil {
 		return err

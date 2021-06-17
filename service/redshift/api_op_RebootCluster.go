@@ -23,7 +23,7 @@ func (c *Client) RebootCluster(ctx context.Context, params *RebootClusterInput, 
 		params = &RebootClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RebootCluster", params, optFns, addOperationRebootClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RebootCluster", params, optFns, c.addOperationRebootClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type RebootClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRebootClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRebootClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRebootCluster{}, middleware.After)
 	if err != nil {
 		return err

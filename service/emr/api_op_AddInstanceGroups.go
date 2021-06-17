@@ -17,7 +17,7 @@ func (c *Client) AddInstanceGroups(ctx context.Context, params *AddInstanceGroup
 		params = &AddInstanceGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddInstanceGroups", params, optFns, addOperationAddInstanceGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddInstanceGroups", params, optFns, c.addOperationAddInstanceGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type AddInstanceGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddInstanceGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddInstanceGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddInstanceGroups{}, middleware.After)
 	if err != nil {
 		return err

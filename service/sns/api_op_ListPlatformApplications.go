@@ -27,7 +27,7 @@ func (c *Client) ListPlatformApplications(ctx context.Context, params *ListPlatf
 		params = &ListPlatformApplicationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPlatformApplications", params, optFns, addOperationListPlatformApplicationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPlatformApplications", params, optFns, c.addOperationListPlatformApplicationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListPlatformApplicationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPlatformApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPlatformApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListPlatformApplications{}, middleware.After)
 	if err != nil {
 		return err

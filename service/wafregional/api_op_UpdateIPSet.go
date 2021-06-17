@@ -77,7 +77,7 @@ func (c *Client) UpdateIPSet(ctx context.Context, params *UpdateIPSetInput, optF
 		params = &UpdateIPSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateIPSet", params, optFns, addOperationUpdateIPSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateIPSet", params, optFns, c.addOperationUpdateIPSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -126,7 +126,7 @@ type UpdateIPSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateIPSet{}, middleware.After)
 	if err != nil {
 		return err

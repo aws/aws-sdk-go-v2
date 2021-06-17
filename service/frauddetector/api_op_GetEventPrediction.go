@@ -18,7 +18,7 @@ func (c *Client) GetEventPrediction(ctx context.Context, params *GetEventPredict
 		params = &GetEventPredictionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEventPrediction", params, optFns, addOperationGetEventPredictionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEventPrediction", params, optFns, c.addOperationGetEventPredictionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type GetEventPredictionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEventPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEventPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEventPrediction{}, middleware.After)
 	if err != nil {
 		return err

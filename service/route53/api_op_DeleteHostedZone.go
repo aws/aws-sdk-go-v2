@@ -56,7 +56,7 @@ func (c *Client) DeleteHostedZone(ctx context.Context, params *DeleteHostedZoneI
 		params = &DeleteHostedZoneInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteHostedZone", params, optFns, addOperationDeleteHostedZoneMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteHostedZone", params, optFns, c.addOperationDeleteHostedZoneMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ type DeleteHostedZoneOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteHostedZone{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DeleteHsm(ctx context.Context, params *DeleteHsmInput, optFns .
 		params = &DeleteHsmInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteHsm", params, optFns, addOperationDeleteHsmMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteHsm", params, optFns, c.addOperationDeleteHsmMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DeleteHsmOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteHsm{}, middleware.After)
 	if err != nil {
 		return err

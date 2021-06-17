@@ -22,7 +22,7 @@ func (c *Client) DisassociateCustomDomain(ctx context.Context, params *Disassoci
 		params = &DisassociateCustomDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateCustomDomain", params, optFns, addOperationDisassociateCustomDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateCustomDomain", params, optFns, c.addOperationDisassociateCustomDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type DisassociateCustomDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateCustomDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateCustomDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateCustomDomain{}, middleware.After)
 	if err != nil {
 		return err

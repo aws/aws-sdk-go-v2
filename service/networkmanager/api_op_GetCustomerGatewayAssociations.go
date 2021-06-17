@@ -19,7 +19,7 @@ func (c *Client) GetCustomerGatewayAssociations(ctx context.Context, params *Get
 		params = &GetCustomerGatewayAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCustomerGatewayAssociations", params, optFns, addOperationGetCustomerGatewayAssociationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCustomerGatewayAssociations", params, optFns, c.addOperationGetCustomerGatewayAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type GetCustomerGatewayAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCustomerGatewayAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCustomerGatewayAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCustomerGatewayAssociations{}, middleware.After)
 	if err != nil {
 		return err

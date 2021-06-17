@@ -33,7 +33,7 @@ func (c *Client) CreateSnapshotFromVolumeRecoveryPoint(ctx context.Context, para
 		params = &CreateSnapshotFromVolumeRecoveryPointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSnapshotFromVolumeRecoveryPoint", params, optFns, addOperationCreateSnapshotFromVolumeRecoveryPointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSnapshotFromVolumeRecoveryPoint", params, optFns, c.addOperationCreateSnapshotFromVolumeRecoveryPointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type CreateSnapshotFromVolumeRecoveryPointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSnapshotFromVolumeRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSnapshotFromVolumeRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSnapshotFromVolumeRecoveryPoint{}, middleware.After)
 	if err != nil {
 		return err

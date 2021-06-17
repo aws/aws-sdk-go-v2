@@ -17,7 +17,7 @@ func (c *Client) GetDevicePoolCompatibility(ctx context.Context, params *GetDevi
 		params = &GetDevicePoolCompatibilityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDevicePoolCompatibility", params, optFns, addOperationGetDevicePoolCompatibilityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDevicePoolCompatibility", params, optFns, c.addOperationGetDevicePoolCompatibilityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +104,7 @@ type GetDevicePoolCompatibilityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDevicePoolCompatibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDevicePoolCompatibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDevicePoolCompatibility{}, middleware.After)
 	if err != nil {
 		return err

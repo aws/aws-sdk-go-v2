@@ -29,7 +29,7 @@ func (c *Client) LookupDeveloperIdentity(ctx context.Context, params *LookupDeve
 		params = &LookupDeveloperIdentityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "LookupDeveloperIdentity", params, optFns, addOperationLookupDeveloperIdentityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "LookupDeveloperIdentity", params, optFns, c.addOperationLookupDeveloperIdentityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type LookupDeveloperIdentityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationLookupDeveloperIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationLookupDeveloperIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpLookupDeveloperIdentity{}, middleware.After)
 	if err != nil {
 		return err

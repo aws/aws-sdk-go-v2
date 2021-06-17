@@ -19,7 +19,7 @@ func (c *Client) ModifyClusterIamRoles(ctx context.Context, params *ModifyCluste
 		params = &ModifyClusterIamRolesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyClusterIamRoles", params, optFns, addOperationModifyClusterIamRolesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyClusterIamRoles", params, optFns, c.addOperationModifyClusterIamRolesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ModifyClusterIamRolesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyClusterIamRolesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyClusterIamRolesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyClusterIamRoles{}, middleware.After)
 	if err != nil {
 		return err

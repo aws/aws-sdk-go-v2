@@ -17,7 +17,7 @@ func (c *Client) DescribeFirewall(ctx context.Context, params *DescribeFirewallI
 		params = &DescribeFirewallInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFirewall", params, optFns, addOperationDescribeFirewallMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFirewall", params, optFns, c.addOperationDescribeFirewallMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeFirewallOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFirewallMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFirewallMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeFirewall{}, middleware.After)
 	if err != nil {
 		return err

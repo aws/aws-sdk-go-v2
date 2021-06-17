@@ -24,7 +24,7 @@ func (c *Client) DeleteFargateProfile(ctx context.Context, params *DeleteFargate
 		params = &DeleteFargateProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFargateProfile", params, optFns, addOperationDeleteFargateProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFargateProfile", params, optFns, c.addOperationDeleteFargateProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DeleteFargateProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFargateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFargateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFargateProfile{}, middleware.After)
 	if err != nil {
 		return err

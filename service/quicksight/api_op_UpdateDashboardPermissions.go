@@ -17,7 +17,7 @@ func (c *Client) UpdateDashboardPermissions(ctx context.Context, params *UpdateD
 		params = &UpdateDashboardPermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDashboardPermissions", params, optFns, addOperationUpdateDashboardPermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDashboardPermissions", params, optFns, c.addOperationUpdateDashboardPermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type UpdateDashboardPermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDashboardPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDashboardPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDashboardPermissions{}, middleware.After)
 	if err != nil {
 		return err

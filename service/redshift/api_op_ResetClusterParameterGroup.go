@@ -20,7 +20,7 @@ func (c *Client) ResetClusterParameterGroup(ctx context.Context, params *ResetCl
 		params = &ResetClusterParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetClusterParameterGroup", params, optFns, addOperationResetClusterParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetClusterParameterGroup", params, optFns, c.addOperationResetClusterParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ResetClusterParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpResetClusterParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

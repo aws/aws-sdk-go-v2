@@ -23,7 +23,7 @@ func (c *Client) DisableAWSOrganizationsAccess(ctx context.Context, params *Disa
 		params = &DisableAWSOrganizationsAccessInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableAWSOrganizationsAccess", params, optFns, addOperationDisableAWSOrganizationsAccessMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableAWSOrganizationsAccess", params, optFns, c.addOperationDisableAWSOrganizationsAccessMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DisableAWSOrganizationsAccessOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableAWSOrganizationsAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableAWSOrganizationsAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableAWSOrganizationsAccess{}, middleware.After)
 	if err != nil {
 		return err

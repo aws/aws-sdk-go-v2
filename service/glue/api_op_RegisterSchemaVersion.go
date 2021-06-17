@@ -26,7 +26,7 @@ func (c *Client) RegisterSchemaVersion(ctx context.Context, params *RegisterSche
 		params = &RegisterSchemaVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterSchemaVersion", params, optFns, addOperationRegisterSchemaVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterSchemaVersion", params, optFns, c.addOperationRegisterSchemaVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type RegisterSchemaVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterSchemaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterSchemaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterSchemaVersion{}, middleware.After)
 	if err != nil {
 		return err

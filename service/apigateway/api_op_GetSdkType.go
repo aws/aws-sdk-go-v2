@@ -16,7 +16,7 @@ func (c *Client) GetSdkType(ctx context.Context, params *GetSdkTypeInput, optFns
 		params = &GetSdkTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSdkType", params, optFns, addOperationGetSdkTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSdkType", params, optFns, c.addOperationGetSdkTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetSdkTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSdkTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSdkTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSdkType{}, middleware.After)
 	if err != nil {
 		return err

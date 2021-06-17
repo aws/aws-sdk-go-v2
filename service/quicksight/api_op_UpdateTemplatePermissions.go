@@ -17,7 +17,7 @@ func (c *Client) UpdateTemplatePermissions(ctx context.Context, params *UpdateTe
 		params = &UpdateTemplatePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateTemplatePermissions", params, optFns, addOperationUpdateTemplatePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateTemplatePermissions", params, optFns, c.addOperationUpdateTemplatePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type UpdateTemplatePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateTemplatePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateTemplatePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTemplatePermissions{}, middleware.After)
 	if err != nil {
 		return err

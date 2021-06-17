@@ -17,7 +17,7 @@ func (c *Client) DeleteTypedLinkFacet(ctx context.Context, params *DeleteTypedLi
 		params = &DeleteTypedLinkFacetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTypedLinkFacet", params, optFns, addOperationDeleteTypedLinkFacetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTypedLinkFacet", params, optFns, c.addOperationDeleteTypedLinkFacetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteTypedLinkFacetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTypedLinkFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTypedLinkFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTypedLinkFacet{}, middleware.After)
 	if err != nil {
 		return err

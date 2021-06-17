@@ -18,7 +18,7 @@ func (c *Client) PutThirdPartyJobSuccessResult(ctx context.Context, params *PutT
 		params = &PutThirdPartyJobSuccessResultInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutThirdPartyJobSuccessResult", params, optFns, addOperationPutThirdPartyJobSuccessResultMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutThirdPartyJobSuccessResult", params, optFns, c.addOperationPutThirdPartyJobSuccessResultMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type PutThirdPartyJobSuccessResultOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutThirdPartyJobSuccessResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutThirdPartyJobSuccessResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutThirdPartyJobSuccessResult{}, middleware.After)
 	if err != nil {
 		return err

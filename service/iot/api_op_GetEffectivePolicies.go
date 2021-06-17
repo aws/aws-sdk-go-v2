@@ -18,7 +18,7 @@ func (c *Client) GetEffectivePolicies(ctx context.Context, params *GetEffectiveP
 		params = &GetEffectivePoliciesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEffectivePolicies", params, optFns, addOperationGetEffectivePoliciesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetEffectivePolicies", params, optFns, c.addOperationGetEffectivePoliciesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type GetEffectivePoliciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetEffectivePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetEffectivePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEffectivePolicies{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) GlobalSignOut(ctx context.Context, params *GlobalSignOutInput, 
 		params = &GlobalSignOutInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GlobalSignOut", params, optFns, addOperationGlobalSignOutMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GlobalSignOut", params, optFns, c.addOperationGlobalSignOutMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type GlobalSignOutOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGlobalSignOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGlobalSignOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGlobalSignOut{}, middleware.After)
 	if err != nil {
 		return err

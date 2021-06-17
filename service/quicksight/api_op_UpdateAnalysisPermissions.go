@@ -17,7 +17,7 @@ func (c *Client) UpdateAnalysisPermissions(ctx context.Context, params *UpdateAn
 		params = &UpdateAnalysisPermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAnalysisPermissions", params, optFns, addOperationUpdateAnalysisPermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAnalysisPermissions", params, optFns, c.addOperationUpdateAnalysisPermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type UpdateAnalysisPermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAnalysisPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAnalysisPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAnalysisPermissions{}, middleware.After)
 	if err != nil {
 		return err

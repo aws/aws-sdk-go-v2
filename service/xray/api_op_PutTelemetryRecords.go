@@ -17,7 +17,7 @@ func (c *Client) PutTelemetryRecords(ctx context.Context, params *PutTelemetryRe
 		params = &PutTelemetryRecordsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutTelemetryRecords", params, optFns, addOperationPutTelemetryRecordsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutTelemetryRecords", params, optFns, c.addOperationPutTelemetryRecordsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type PutTelemetryRecordsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutTelemetryRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutTelemetryRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTelemetryRecords{}, middleware.After)
 	if err != nil {
 		return err

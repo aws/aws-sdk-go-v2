@@ -18,7 +18,7 @@ func (c *Client) ListAlarmModelVersions(ctx context.Context, params *ListAlarmMo
 		params = &ListAlarmModelVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAlarmModelVersions", params, optFns, addOperationListAlarmModelVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAlarmModelVersions", params, optFns, c.addOperationListAlarmModelVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListAlarmModelVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAlarmModelVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAlarmModelVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAlarmModelVersions{}, middleware.After)
 	if err != nil {
 		return err

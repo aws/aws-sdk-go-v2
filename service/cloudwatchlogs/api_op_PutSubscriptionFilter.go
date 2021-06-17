@@ -43,7 +43,7 @@ func (c *Client) PutSubscriptionFilter(ctx context.Context, params *PutSubscript
 		params = &PutSubscriptionFilterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutSubscriptionFilter", params, optFns, addOperationPutSubscriptionFilterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutSubscriptionFilter", params, optFns, c.addOperationPutSubscriptionFilterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ type PutSubscriptionFilterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutSubscriptionFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutSubscriptionFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutSubscriptionFilter{}, middleware.After)
 	if err != nil {
 		return err

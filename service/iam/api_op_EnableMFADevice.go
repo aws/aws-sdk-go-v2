@@ -18,7 +18,7 @@ func (c *Client) EnableMFADevice(ctx context.Context, params *EnableMFADeviceInp
 		params = &EnableMFADeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableMFADevice", params, optFns, addOperationEnableMFADeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableMFADevice", params, optFns, c.addOperationEnableMFADeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type EnableMFADeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpEnableMFADevice{}, middleware.After)
 	if err != nil {
 		return err

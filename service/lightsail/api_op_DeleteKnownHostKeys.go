@@ -25,7 +25,7 @@ func (c *Client) DeleteKnownHostKeys(ctx context.Context, params *DeleteKnownHos
 		params = &DeleteKnownHostKeysInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteKnownHostKeys", params, optFns, addOperationDeleteKnownHostKeysMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteKnownHostKeys", params, optFns, c.addOperationDeleteKnownHostKeysMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DeleteKnownHostKeysOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteKnownHostKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteKnownHostKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteKnownHostKeys{}, middleware.After)
 	if err != nil {
 		return err

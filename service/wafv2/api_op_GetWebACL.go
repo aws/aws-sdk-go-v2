@@ -17,7 +17,7 @@ func (c *Client) GetWebACL(ctx context.Context, params *GetWebACLInput, optFns .
 		params = &GetWebACLInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetWebACL", params, optFns, addOperationGetWebACLMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetWebACL", params, optFns, c.addOperationGetWebACLMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type GetWebACLOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetWebACL{}, middleware.After)
 	if err != nil {
 		return err

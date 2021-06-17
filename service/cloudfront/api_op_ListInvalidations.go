@@ -18,7 +18,7 @@ func (c *Client) ListInvalidations(ctx context.Context, params *ListInvalidation
 		params = &ListInvalidationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListInvalidations", params, optFns, addOperationListInvalidationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListInvalidations", params, optFns, c.addOperationListInvalidationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListInvalidationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListInvalidationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListInvalidationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListInvalidations{}, middleware.After)
 	if err != nil {
 		return err

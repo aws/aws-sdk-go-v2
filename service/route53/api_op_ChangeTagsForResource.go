@@ -20,7 +20,7 @@ func (c *Client) ChangeTagsForResource(ctx context.Context, params *ChangeTagsFo
 		params = &ChangeTagsForResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ChangeTagsForResource", params, optFns, addOperationChangeTagsForResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ChangeTagsForResource", params, optFns, c.addOperationChangeTagsForResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ChangeTagsForResourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationChangeTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationChangeTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpChangeTagsForResource{}, middleware.After)
 	if err != nil {
 		return err

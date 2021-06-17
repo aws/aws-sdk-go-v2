@@ -17,7 +17,7 @@ func (c *Client) GetKeyPair(ctx context.Context, params *GetKeyPairInput, optFns
 		params = &GetKeyPairInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetKeyPair", params, optFns, addOperationGetKeyPairMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetKeyPair", params, optFns, c.addOperationGetKeyPairMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetKeyPairOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetKeyPair{}, middleware.After)
 	if err != nil {
 		return err

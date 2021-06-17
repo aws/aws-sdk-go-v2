@@ -19,7 +19,7 @@ func (c *Client) GetResolverQueryLogConfigAssociation(ctx context.Context, param
 		params = &GetResolverQueryLogConfigAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetResolverQueryLogConfigAssociation", params, optFns, addOperationGetResolverQueryLogConfigAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetResolverQueryLogConfigAssociation", params, optFns, c.addOperationGetResolverQueryLogConfigAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type GetResolverQueryLogConfigAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetResolverQueryLogConfigAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetResolverQueryLogConfigAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResolverQueryLogConfigAssociation{}, middleware.After)
 	if err != nil {
 		return err

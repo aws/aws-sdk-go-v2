@@ -22,7 +22,7 @@ func (c *Client) ListFaces(ctx context.Context, params *ListFacesInput, optFns .
 		params = &ListFacesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFaces", params, optFns, addOperationListFacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFaces", params, optFns, c.addOperationListFacesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ListFacesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFaces{}, middleware.After)
 	if err != nil {
 		return err

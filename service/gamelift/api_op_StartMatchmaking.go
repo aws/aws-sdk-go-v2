@@ -40,7 +40,7 @@ func (c *Client) StartMatchmaking(ctx context.Context, params *StartMatchmakingI
 		params = &StartMatchmakingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartMatchmaking", params, optFns, addOperationStartMatchmakingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartMatchmaking", params, optFns, c.addOperationStartMatchmakingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type StartMatchmakingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartMatchmakingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartMatchmakingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMatchmaking{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteDataSet(ctx context.Context, params *DeleteDataSetInput, 
 		params = &DeleteDataSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDataSet", params, optFns, addOperationDeleteDataSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDataSet", params, optFns, c.addOperationDeleteDataSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteDataSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataSet{}, middleware.After)
 	if err != nil {
 		return err

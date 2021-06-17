@@ -21,7 +21,7 @@ func (c *Client) DeletePortfolioShare(ctx context.Context, params *DeletePortfol
 		params = &DeletePortfolioShareInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePortfolioShare", params, optFns, addOperationDeletePortfolioShareMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePortfolioShare", params, optFns, c.addOperationDeletePortfolioShareMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type DeletePortfolioShareOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePortfolioShare{}, middleware.After)
 	if err != nil {
 		return err

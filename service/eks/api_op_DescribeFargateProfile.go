@@ -17,7 +17,7 @@ func (c *Client) DescribeFargateProfile(ctx context.Context, params *DescribeFar
 		params = &DescribeFargateProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFargateProfile", params, optFns, addOperationDescribeFargateProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFargateProfile", params, optFns, c.addOperationDescribeFargateProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DescribeFargateProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFargateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFargateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFargateProfile{}, middleware.After)
 	if err != nil {
 		return err

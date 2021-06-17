@@ -22,7 +22,7 @@ func (c *Client) CancelSteps(ctx context.Context, params *CancelStepsInput, optF
 		params = &CancelStepsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelSteps", params, optFns, addOperationCancelStepsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelSteps", params, optFns, c.addOperationCancelStepsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type CancelStepsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelSteps{}, middleware.After)
 	if err != nil {
 		return err

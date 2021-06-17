@@ -19,7 +19,7 @@ func (c *Client) BatchApplyUpdateAction(ctx context.Context, params *BatchApplyU
 		params = &BatchApplyUpdateActionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchApplyUpdateAction", params, optFns, addOperationBatchApplyUpdateActionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchApplyUpdateAction", params, optFns, c.addOperationBatchApplyUpdateActionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type BatchApplyUpdateActionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchApplyUpdateActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchApplyUpdateActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpBatchApplyUpdateAction{}, middleware.After)
 	if err != nil {
 		return err

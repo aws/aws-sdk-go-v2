@@ -18,7 +18,7 @@ func (c *Client) UpdateDeletionProtection(ctx context.Context, params *UpdateDel
 		params = &UpdateDeletionProtectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDeletionProtection", params, optFns, addOperationUpdateDeletionProtectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDeletionProtection", params, optFns, c.addOperationUpdateDeletionProtectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type UpdateDeletionProtectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDeletionProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDeletionProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDeletionProtection{}, middleware.After)
 	if err != nil {
 		return err

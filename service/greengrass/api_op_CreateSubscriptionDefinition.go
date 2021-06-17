@@ -19,7 +19,7 @@ func (c *Client) CreateSubscriptionDefinition(ctx context.Context, params *Creat
 		params = &CreateSubscriptionDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSubscriptionDefinition", params, optFns, addOperationCreateSubscriptionDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSubscriptionDefinition", params, optFns, c.addOperationCreateSubscriptionDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type CreateSubscriptionDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSubscriptionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSubscriptionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSubscriptionDefinition{}, middleware.After)
 	if err != nil {
 		return err

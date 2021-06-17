@@ -30,7 +30,7 @@ func (c *Client) CreateFlowLogs(ctx context.Context, params *CreateFlowLogsInput
 		params = &CreateFlowLogsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFlowLogs", params, optFns, addOperationCreateFlowLogsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFlowLogs", params, optFns, c.addOperationCreateFlowLogsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -142,7 +142,7 @@ type CreateFlowLogsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFlowLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFlowLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCreateFlowLogs{}, middleware.After)
 	if err != nil {
 		return err

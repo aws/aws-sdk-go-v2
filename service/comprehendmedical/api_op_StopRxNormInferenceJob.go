@@ -16,7 +16,7 @@ func (c *Client) StopRxNormInferenceJob(ctx context.Context, params *StopRxNormI
 		params = &StopRxNormInferenceJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopRxNormInferenceJob", params, optFns, addOperationStopRxNormInferenceJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopRxNormInferenceJob", params, optFns, c.addOperationStopRxNormInferenceJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type StopRxNormInferenceJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopRxNormInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopRxNormInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopRxNormInferenceJob{}, middleware.After)
 	if err != nil {
 		return err

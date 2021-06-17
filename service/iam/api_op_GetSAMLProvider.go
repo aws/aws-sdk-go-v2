@@ -21,7 +21,7 @@ func (c *Client) GetSAMLProvider(ctx context.Context, params *GetSAMLProviderInp
 		params = &GetSAMLProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSAMLProvider", params, optFns, addOperationGetSAMLProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSAMLProvider", params, optFns, c.addOperationGetSAMLProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type GetSAMLProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSAMLProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSAMLProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetSAMLProvider{}, middleware.After)
 	if err != nil {
 		return err

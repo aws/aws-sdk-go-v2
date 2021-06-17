@@ -19,7 +19,7 @@ func (c *Client) UpdateDimension(ctx context.Context, params *UpdateDimensionInp
 		params = &UpdateDimensionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDimension", params, optFns, addOperationUpdateDimensionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDimension", params, optFns, c.addOperationUpdateDimensionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type UpdateDimensionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDimension{}, middleware.After)
 	if err != nil {
 		return err

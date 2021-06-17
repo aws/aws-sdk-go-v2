@@ -19,7 +19,7 @@ func (c *Client) ListAvailableManagedRuleGroups(ctx context.Context, params *Lis
 		params = &ListAvailableManagedRuleGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAvailableManagedRuleGroups", params, optFns, addOperationListAvailableManagedRuleGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAvailableManagedRuleGroups", params, optFns, c.addOperationListAvailableManagedRuleGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type ListAvailableManagedRuleGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAvailableManagedRuleGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAvailableManagedRuleGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailableManagedRuleGroups{}, middleware.After)
 	if err != nil {
 		return err

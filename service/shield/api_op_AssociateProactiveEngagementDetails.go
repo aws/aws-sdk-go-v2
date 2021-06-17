@@ -27,7 +27,7 @@ func (c *Client) AssociateProactiveEngagementDetails(ctx context.Context, params
 		params = &AssociateProactiveEngagementDetailsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateProactiveEngagementDetails", params, optFns, addOperationAssociateProactiveEngagementDetailsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateProactiveEngagementDetails", params, optFns, c.addOperationAssociateProactiveEngagementDetailsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type AssociateProactiveEngagementDetailsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateProactiveEngagementDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateProactiveEngagementDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateProactiveEngagementDetails{}, middleware.After)
 	if err != nil {
 		return err

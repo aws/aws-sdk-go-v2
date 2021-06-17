@@ -35,7 +35,7 @@ func (c *Client) DeleteHIT(ctx context.Context, params *DeleteHITInput, optFns .
 		params = &DeleteHITInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteHIT", params, optFns, addOperationDeleteHITMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteHIT", params, optFns, c.addOperationDeleteHITMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DeleteHITOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteHIT{}, middleware.After)
 	if err != nil {
 		return err

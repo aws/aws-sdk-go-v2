@@ -26,7 +26,7 @@ func (c *Client) AssociateIdentityProviderConfig(ctx context.Context, params *As
 		params = &AssociateIdentityProviderConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateIdentityProviderConfig", params, optFns, addOperationAssociateIdentityProviderConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateIdentityProviderConfig", params, optFns, c.addOperationAssociateIdentityProviderConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ type AssociateIdentityProviderConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateIdentityProviderConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateIdentityProviderConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateIdentityProviderConfig{}, middleware.After)
 	if err != nil {
 		return err

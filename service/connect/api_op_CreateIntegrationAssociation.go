@@ -17,7 +17,7 @@ func (c *Client) CreateIntegrationAssociation(ctx context.Context, params *Creat
 		params = &CreateIntegrationAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateIntegrationAssociation", params, optFns, addOperationCreateIntegrationAssociationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateIntegrationAssociation", params, optFns, c.addOperationCreateIntegrationAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type CreateIntegrationAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateIntegrationAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateIntegrationAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIntegrationAssociation{}, middleware.After)
 	if err != nil {
 		return err

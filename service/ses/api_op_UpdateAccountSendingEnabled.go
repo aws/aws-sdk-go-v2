@@ -21,7 +21,7 @@ func (c *Client) UpdateAccountSendingEnabled(ctx context.Context, params *Update
 		params = &UpdateAccountSendingEnabledInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAccountSendingEnabled", params, optFns, addOperationUpdateAccountSendingEnabledMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAccountSendingEnabled", params, optFns, c.addOperationUpdateAccountSendingEnabledMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type UpdateAccountSendingEnabledOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAccountSendingEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAccountSendingEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateAccountSendingEnabled{}, middleware.After)
 	if err != nil {
 		return err

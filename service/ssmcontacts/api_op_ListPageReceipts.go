@@ -18,7 +18,7 @@ func (c *Client) ListPageReceipts(ctx context.Context, params *ListPageReceiptsI
 		params = &ListPageReceiptsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPageReceipts", params, optFns, addOperationListPageReceiptsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPageReceipts", params, optFns, c.addOperationListPageReceiptsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListPageReceiptsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPageReceiptsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPageReceiptsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPageReceipts{}, middleware.After)
 	if err != nil {
 		return err

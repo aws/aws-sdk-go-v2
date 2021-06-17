@@ -18,7 +18,7 @@ func (c *Client) AttachThingPrincipal(ctx context.Context, params *AttachThingPr
 		params = &AttachThingPrincipalInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachThingPrincipal", params, optFns, addOperationAttachThingPrincipalMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachThingPrincipal", params, optFns, c.addOperationAttachThingPrincipalMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type AttachThingPrincipalOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachThingPrincipalMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachThingPrincipalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAttachThingPrincipal{}, middleware.After)
 	if err != nil {
 		return err

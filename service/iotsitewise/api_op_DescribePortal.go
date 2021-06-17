@@ -23,7 +23,7 @@ func (c *Client) DescribePortal(ctx context.Context, params *DescribePortalInput
 		params = &DescribePortalInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePortal", params, optFns, addOperationDescribePortalMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePortal", params, optFns, c.addOperationDescribePortalMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -125,7 +125,7 @@ type DescribePortalOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePortal{}, middleware.After)
 	if err != nil {
 		return err

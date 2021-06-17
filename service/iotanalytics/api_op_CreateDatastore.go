@@ -17,7 +17,7 @@ func (c *Client) CreateDatastore(ctx context.Context, params *CreateDatastoreInp
 		params = &CreateDatastoreInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDatastore", params, optFns, addOperationCreateDatastoreMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDatastore", params, optFns, c.addOperationCreateDatastoreMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type CreateDatastoreOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDatastore{}, middleware.After)
 	if err != nil {
 		return err

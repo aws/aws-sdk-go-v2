@@ -17,7 +17,7 @@ func (c *Client) UpdateJobQueue(ctx context.Context, params *UpdateJobQueueInput
 		params = &UpdateJobQueueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateJobQueue", params, optFns, addOperationUpdateJobQueueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateJobQueue", params, optFns, c.addOperationUpdateJobQueueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type UpdateJobQueueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateJobQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateJobQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateJobQueue{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) DescribeAttack(ctx context.Context, params *DescribeAttackInput
 		params = &DescribeAttackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAttack", params, optFns, addOperationDescribeAttackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAttack", params, optFns, c.addOperationDescribeAttackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeAttackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeAttackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeAttackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAttack{}, middleware.After)
 	if err != nil {
 		return err

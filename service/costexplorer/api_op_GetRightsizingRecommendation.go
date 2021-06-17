@@ -23,7 +23,7 @@ func (c *Client) GetRightsizingRecommendation(ctx context.Context, params *GetRi
 		params = &GetRightsizingRecommendationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRightsizingRecommendation", params, optFns, addOperationGetRightsizingRecommendationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRightsizingRecommendation", params, optFns, c.addOperationGetRightsizingRecommendationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ type GetRightsizingRecommendationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRightsizingRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRightsizingRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRightsizingRecommendation{}, middleware.After)
 	if err != nil {
 		return err

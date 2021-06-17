@@ -18,7 +18,7 @@ func (c *Client) DescribeLaunchConfigurations(ctx context.Context, params *Descr
 		params = &DescribeLaunchConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLaunchConfigurations", params, optFns, addOperationDescribeLaunchConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLaunchConfigurations", params, optFns, c.addOperationDescribeLaunchConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type DescribeLaunchConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLaunchConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLaunchConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeLaunchConfigurations{}, middleware.After)
 	if err != nil {
 		return err

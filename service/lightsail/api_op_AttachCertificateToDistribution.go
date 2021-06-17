@@ -25,7 +25,7 @@ func (c *Client) AttachCertificateToDistribution(ctx context.Context, params *At
 		params = &AttachCertificateToDistributionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AttachCertificateToDistribution", params, optFns, addOperationAttachCertificateToDistributionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachCertificateToDistribution", params, optFns, c.addOperationAttachCertificateToDistributionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type AttachCertificateToDistributionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAttachCertificateToDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAttachCertificateToDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachCertificateToDistribution{}, middleware.After)
 	if err != nil {
 		return err

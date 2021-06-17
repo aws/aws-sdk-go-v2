@@ -16,7 +16,7 @@ func (c *Client) UntagProject(ctx context.Context, params *UntagProjectInput, op
 		params = &UntagProjectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UntagProject", params, optFns, addOperationUntagProjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UntagProject", params, optFns, c.addOperationUntagProjectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type UntagProjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUntagProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUntagProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUntagProject{}, middleware.After)
 	if err != nil {
 		return err

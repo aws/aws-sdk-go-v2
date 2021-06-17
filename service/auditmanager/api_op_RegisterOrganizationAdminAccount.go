@@ -17,7 +17,7 @@ func (c *Client) RegisterOrganizationAdminAccount(ctx context.Context, params *R
 		params = &RegisterOrganizationAdminAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterOrganizationAdminAccount", params, optFns, addOperationRegisterOrganizationAdminAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterOrganizationAdminAccount", params, optFns, c.addOperationRegisterOrganizationAdminAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type RegisterOrganizationAdminAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterOrganizationAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterOrganizationAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterOrganizationAdminAccount{}, middleware.After)
 	if err != nil {
 		return err

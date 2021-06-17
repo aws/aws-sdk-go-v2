@@ -17,7 +17,7 @@ func (c *Client) ModifySubnetAttribute(ctx context.Context, params *ModifySubnet
 		params = &ModifySubnetAttributeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifySubnetAttribute", params, optFns, addOperationModifySubnetAttributeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifySubnetAttribute", params, optFns, c.addOperationModifySubnetAttributeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type ModifySubnetAttributeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifySubnetAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifySubnetAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifySubnetAttribute{}, middleware.After)
 	if err != nil {
 		return err

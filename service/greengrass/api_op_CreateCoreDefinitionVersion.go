@@ -18,7 +18,7 @@ func (c *Client) CreateCoreDefinitionVersion(ctx context.Context, params *Create
 		params = &CreateCoreDefinitionVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateCoreDefinitionVersion", params, optFns, addOperationCreateCoreDefinitionVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCoreDefinitionVersion", params, optFns, c.addOperationCreateCoreDefinitionVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type CreateCoreDefinitionVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateCoreDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateCoreDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCoreDefinitionVersion{}, middleware.After)
 	if err != nil {
 		return err

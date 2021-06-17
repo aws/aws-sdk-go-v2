@@ -16,7 +16,7 @@ func (c *Client) RemoveBackendConfig(ctx context.Context, params *RemoveBackendC
 		params = &RemoveBackendConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveBackendConfig", params, optFns, addOperationRemoveBackendConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveBackendConfig", params, optFns, c.addOperationRemoveBackendConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type RemoveBackendConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveBackendConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveBackendConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveBackendConfig{}, middleware.After)
 	if err != nil {
 		return err

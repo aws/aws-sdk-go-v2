@@ -17,7 +17,7 @@ func (c *Client) GetDeviceDefinitionVersion(ctx context.Context, params *GetDevi
 		params = &GetDeviceDefinitionVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDeviceDefinitionVersion", params, optFns, addOperationGetDeviceDefinitionVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDeviceDefinitionVersion", params, optFns, c.addOperationGetDeviceDefinitionVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type GetDeviceDefinitionVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDeviceDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDeviceDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeviceDefinitionVersion{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) UpdateDomainEndpointOptions(ctx context.Context, params *Update
 		params = &UpdateDomainEndpointOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDomainEndpointOptions", params, optFns, addOperationUpdateDomainEndpointOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDomainEndpointOptions", params, optFns, c.addOperationUpdateDomainEndpointOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type UpdateDomainEndpointOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDomainEndpointOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDomainEndpointOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateDomainEndpointOptions{}, middleware.After)
 	if err != nil {
 		return err

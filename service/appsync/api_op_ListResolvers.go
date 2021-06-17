@@ -17,7 +17,7 @@ func (c *Client) ListResolvers(ctx context.Context, params *ListResolversInput, 
 		params = &ListResolversInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResolvers", params, optFns, addOperationListResolversMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResolvers", params, optFns, c.addOperationListResolversMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListResolversOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListResolversMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResolversMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResolvers{}, middleware.After)
 	if err != nil {
 		return err

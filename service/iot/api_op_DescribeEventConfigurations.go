@@ -18,7 +18,7 @@ func (c *Client) DescribeEventConfigurations(ctx context.Context, params *Descri
 		params = &DescribeEventConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEventConfigurations", params, optFns, addOperationDescribeEventConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEventConfigurations", params, optFns, c.addOperationDescribeEventConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DescribeEventConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEventConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEventConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeEventConfigurations{}, middleware.After)
 	if err != nil {
 		return err

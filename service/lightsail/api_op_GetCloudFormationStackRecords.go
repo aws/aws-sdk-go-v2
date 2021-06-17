@@ -19,7 +19,7 @@ func (c *Client) GetCloudFormationStackRecords(ctx context.Context, params *GetC
 		params = &GetCloudFormationStackRecordsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCloudFormationStackRecords", params, optFns, addOperationGetCloudFormationStackRecordsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCloudFormationStackRecords", params, optFns, c.addOperationGetCloudFormationStackRecordsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type GetCloudFormationStackRecordsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCloudFormationStackRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCloudFormationStackRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCloudFormationStackRecords{}, middleware.After)
 	if err != nil {
 		return err

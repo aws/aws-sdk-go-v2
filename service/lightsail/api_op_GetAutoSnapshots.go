@@ -19,7 +19,7 @@ func (c *Client) GetAutoSnapshots(ctx context.Context, params *GetAutoSnapshotsI
 		params = &GetAutoSnapshotsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAutoSnapshots", params, optFns, addOperationGetAutoSnapshotsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAutoSnapshots", params, optFns, c.addOperationGetAutoSnapshotsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetAutoSnapshotsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAutoSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAutoSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAutoSnapshots{}, middleware.After)
 	if err != nil {
 		return err

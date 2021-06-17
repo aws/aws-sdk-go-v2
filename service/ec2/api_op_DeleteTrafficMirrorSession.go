@@ -16,7 +16,7 @@ func (c *Client) DeleteTrafficMirrorSession(ctx context.Context, params *DeleteT
 		params = &DeleteTrafficMirrorSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTrafficMirrorSession", params, optFns, addOperationDeleteTrafficMirrorSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTrafficMirrorSession", params, optFns, c.addOperationDeleteTrafficMirrorSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteTrafficMirrorSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTrafficMirrorSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTrafficMirrorSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteTrafficMirrorSession{}, middleware.After)
 	if err != nil {
 		return err

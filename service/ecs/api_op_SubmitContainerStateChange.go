@@ -18,7 +18,7 @@ func (c *Client) SubmitContainerStateChange(ctx context.Context, params *SubmitC
 		params = &SubmitContainerStateChangeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SubmitContainerStateChange", params, optFns, addOperationSubmitContainerStateChangeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SubmitContainerStateChange", params, optFns, c.addOperationSubmitContainerStateChangeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type SubmitContainerStateChangeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSubmitContainerStateChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSubmitContainerStateChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSubmitContainerStateChange{}, middleware.After)
 	if err != nil {
 		return err

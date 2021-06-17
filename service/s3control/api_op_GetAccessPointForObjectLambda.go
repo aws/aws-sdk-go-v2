@@ -35,7 +35,7 @@ func (c *Client) GetAccessPointForObjectLambda(ctx context.Context, params *GetA
 		params = &GetAccessPointForObjectLambdaInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAccessPointForObjectLambda", params, optFns, addOperationGetAccessPointForObjectLambdaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccessPointForObjectLambda", params, optFns, c.addOperationGetAccessPointForObjectLambdaMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type GetAccessPointForObjectLambdaOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAccessPointForObjectLambdaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccessPointForObjectLambdaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetAccessPointForObjectLambda{}, middleware.After)
 	if err != nil {
 		return err

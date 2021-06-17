@@ -19,7 +19,7 @@ func (c *Client) RebootNode(ctx context.Context, params *RebootNodeInput, optFns
 		params = &RebootNodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RebootNode", params, optFns, addOperationRebootNodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RebootNode", params, optFns, c.addOperationRebootNodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type RebootNodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRebootNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRebootNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRebootNode{}, middleware.After)
 	if err != nil {
 		return err

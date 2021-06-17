@@ -17,7 +17,7 @@ func (c *Client) UpdateProfileJob(ctx context.Context, params *UpdateProfileJobI
 		params = &UpdateProfileJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateProfileJob", params, optFns, addOperationUpdateProfileJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateProfileJob", params, optFns, c.addOperationUpdateProfileJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ type UpdateProfileJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateProfileJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateProfileJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProfileJob{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) UnlinkIdentity(ctx context.Context, params *UnlinkIdentityInput
 		params = &UnlinkIdentityInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UnlinkIdentity", params, optFns, addOperationUnlinkIdentityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UnlinkIdentity", params, optFns, c.addOperationUnlinkIdentityMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UnlinkIdentityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUnlinkIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUnlinkIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnlinkIdentity{}, middleware.After)
 	if err != nil {
 		return err

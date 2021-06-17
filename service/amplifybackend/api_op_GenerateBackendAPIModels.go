@@ -16,7 +16,7 @@ func (c *Client) GenerateBackendAPIModels(ctx context.Context, params *GenerateB
 		params = &GenerateBackendAPIModelsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GenerateBackendAPIModels", params, optFns, addOperationGenerateBackendAPIModelsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GenerateBackendAPIModels", params, optFns, c.addOperationGenerateBackendAPIModelsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type GenerateBackendAPIModelsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGenerateBackendAPIModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGenerateBackendAPIModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateBackendAPIModels{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) DescribeFeatureGroup(ctx context.Context, params *DescribeFeatu
 		params = &DescribeFeatureGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFeatureGroup", params, optFns, addOperationDescribeFeatureGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFeatureGroup", params, optFns, c.addOperationDescribeFeatureGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -120,7 +120,7 @@ type DescribeFeatureGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFeatureGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFeatureGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFeatureGroup{}, middleware.After)
 	if err != nil {
 		return err

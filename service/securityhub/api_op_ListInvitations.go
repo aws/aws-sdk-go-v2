@@ -21,7 +21,7 @@ func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInp
 		params = &ListInvitationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListInvitations", params, optFns, addOperationListInvitationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListInvitations", params, optFns, c.addOperationListInvitationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type ListInvitationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInvitations{}, middleware.After)
 	if err != nil {
 		return err

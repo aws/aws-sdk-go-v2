@@ -27,7 +27,7 @@ func (c *Client) CreateAccessPoint(ctx context.Context, params *CreateAccessPoin
 		params = &CreateAccessPointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAccessPoint", params, optFns, addOperationCreateAccessPointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAccessPoint", params, optFns, c.addOperationCreateAccessPointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ type CreateAccessPointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAccessPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAccessPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccessPoint{}, middleware.After)
 	if err != nil {
 		return err

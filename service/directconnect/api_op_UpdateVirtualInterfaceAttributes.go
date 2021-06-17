@@ -24,7 +24,7 @@ func (c *Client) UpdateVirtualInterfaceAttributes(ctx context.Context, params *U
 		params = &UpdateVirtualInterfaceAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateVirtualInterfaceAttributes", params, optFns, addOperationUpdateVirtualInterfaceAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateVirtualInterfaceAttributes", params, optFns, c.addOperationUpdateVirtualInterfaceAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -166,7 +166,7 @@ type UpdateVirtualInterfaceAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateVirtualInterfaceAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateVirtualInterfaceAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateVirtualInterfaceAttributes{}, middleware.After)
 	if err != nil {
 		return err

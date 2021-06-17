@@ -16,7 +16,7 @@ func (c *Client) UpdateRegistry(ctx context.Context, params *UpdateRegistryInput
 		params = &UpdateRegistryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRegistry", params, optFns, addOperationUpdateRegistryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRegistry", params, optFns, c.addOperationUpdateRegistryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type UpdateRegistryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRegistry{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) EndpointOperation(ctx context.Context, params *EndpointOperatio
 		params = &EndpointOperationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EndpointOperation", params, optFns, addOperationEndpointOperationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EndpointOperation", params, optFns, c.addOperationEndpointOperationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +34,7 @@ type EndpointOperationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEndpointOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEndpointOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEndpointOperation{}, middleware.After)
 	if err != nil {
 		return err

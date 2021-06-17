@@ -17,7 +17,7 @@ func (c *Client) BatchDeleteBuilds(ctx context.Context, params *BatchDeleteBuild
 		params = &BatchDeleteBuildsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteBuilds", params, optFns, addOperationBatchDeleteBuildsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDeleteBuilds", params, optFns, c.addOperationBatchDeleteBuildsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type BatchDeleteBuildsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDeleteBuildsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDeleteBuildsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteBuilds{}, middleware.After)
 	if err != nil {
 		return err

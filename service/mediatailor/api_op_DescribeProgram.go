@@ -18,7 +18,7 @@ func (c *Client) DescribeProgram(ctx context.Context, params *DescribeProgramInp
 		params = &DescribeProgramInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeProgram", params, optFns, addOperationDescribeProgramMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeProgram", params, optFns, c.addOperationDescribeProgramMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type DescribeProgramOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeProgram{}, middleware.After)
 	if err != nil {
 		return err

@@ -23,7 +23,7 @@ func (c *Client) UpdateGameSession(ctx context.Context, params *UpdateGameSessio
 		params = &UpdateGameSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateGameSession", params, optFns, addOperationUpdateGameSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateGameSession", params, optFns, c.addOperationUpdateGameSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type UpdateGameSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateGameSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateGameSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateGameSession{}, middleware.After)
 	if err != nil {
 		return err

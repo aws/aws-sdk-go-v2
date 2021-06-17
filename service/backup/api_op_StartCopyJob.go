@@ -19,7 +19,7 @@ func (c *Client) StartCopyJob(ctx context.Context, params *StartCopyJobInput, op
 		params = &StartCopyJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartCopyJob", params, optFns, addOperationStartCopyJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartCopyJob", params, optFns, c.addOperationStartCopyJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type StartCopyJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartCopyJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartCopyJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartCopyJob{}, middleware.After)
 	if err != nil {
 		return err

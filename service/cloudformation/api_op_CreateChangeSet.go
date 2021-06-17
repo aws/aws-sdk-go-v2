@@ -35,7 +35,7 @@ func (c *Client) CreateChangeSet(ctx context.Context, params *CreateChangeSetInp
 		params = &CreateChangeSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateChangeSet", params, optFns, addOperationCreateChangeSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateChangeSet", params, optFns, c.addOperationCreateChangeSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -247,7 +247,7 @@ type CreateChangeSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateChangeSet{}, middleware.After)
 	if err != nil {
 		return err

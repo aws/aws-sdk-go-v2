@@ -24,7 +24,7 @@ func (c *Client) SetDataRetrievalPolicy(ctx context.Context, params *SetDataRetr
 		params = &SetDataRetrievalPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetDataRetrievalPolicy", params, optFns, addOperationSetDataRetrievalPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetDataRetrievalPolicy", params, optFns, c.addOperationSetDataRetrievalPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type SetDataRetrievalPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetDataRetrievalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetDataRetrievalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSetDataRetrievalPolicy{}, middleware.After)
 	if err != nil {
 		return err

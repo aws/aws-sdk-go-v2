@@ -20,7 +20,7 @@ func (c *Client) GetKeyPolicy(ctx context.Context, params *GetKeyPolicyInput, op
 		params = &GetKeyPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetKeyPolicy", params, optFns, addOperationGetKeyPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetKeyPolicy", params, optFns, c.addOperationGetKeyPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type GetKeyPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetKeyPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetKeyPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetKeyPolicy{}, middleware.After)
 	if err != nil {
 		return err

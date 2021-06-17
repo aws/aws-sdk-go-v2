@@ -19,7 +19,7 @@ func (c *Client) StartIncident(ctx context.Context, params *StartIncidentInput, 
 		params = &StartIncidentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartIncident", params, optFns, addOperationStartIncidentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartIncident", params, optFns, c.addOperationStartIncidentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type StartIncidentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartIncidentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartIncidentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartIncident{}, middleware.After)
 	if err != nil {
 		return err

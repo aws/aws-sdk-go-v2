@@ -47,7 +47,7 @@ func (c *Client) RemoveAccountFromOrganization(ctx context.Context, params *Remo
 		params = &RemoveAccountFromOrganizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveAccountFromOrganization", params, optFns, addOperationRemoveAccountFromOrganizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveAccountFromOrganization", params, optFns, c.addOperationRemoveAccountFromOrganizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type RemoveAccountFromOrganizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveAccountFromOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveAccountFromOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveAccountFromOrganization{}, middleware.After)
 	if err != nil {
 		return err

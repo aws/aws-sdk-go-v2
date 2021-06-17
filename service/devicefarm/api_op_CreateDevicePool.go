@@ -17,7 +17,7 @@ func (c *Client) CreateDevicePool(ctx context.Context, params *CreateDevicePoolI
 		params = &CreateDevicePoolInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDevicePool", params, optFns, addOperationCreateDevicePoolMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDevicePool", params, optFns, c.addOperationCreateDevicePoolMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ type CreateDevicePoolOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDevicePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDevicePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDevicePool{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DisassociateWebsiteAuthorizationProvider(ctx context.Context, p
 		params = &DisassociateWebsiteAuthorizationProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateWebsiteAuthorizationProvider", params, optFns, addOperationDisassociateWebsiteAuthorizationProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateWebsiteAuthorizationProvider", params, optFns, c.addOperationDisassociateWebsiteAuthorizationProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DisassociateWebsiteAuthorizationProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateWebsiteAuthorizationProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateWebsiteAuthorizationProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateWebsiteAuthorizationProvider{}, middleware.After)
 	if err != nil {
 		return err

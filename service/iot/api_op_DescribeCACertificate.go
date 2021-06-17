@@ -17,7 +17,7 @@ func (c *Client) DescribeCACertificate(ctx context.Context, params *DescribeCACe
 		params = &DescribeCACertificateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeCACertificate", params, optFns, addOperationDescribeCACertificateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCACertificate", params, optFns, c.addOperationDescribeCACertificateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DescribeCACertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeCACertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeCACertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCACertificate{}, middleware.After)
 	if err != nil {
 		return err

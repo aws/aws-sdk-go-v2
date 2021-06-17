@@ -41,7 +41,7 @@ func (c *Client) ModifyInstancePlacement(ctx context.Context, params *ModifyInst
 		params = &ModifyInstancePlacementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyInstancePlacement", params, optFns, addOperationModifyInstancePlacementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyInstancePlacement", params, optFns, c.addOperationModifyInstancePlacementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type ModifyInstancePlacementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyInstancePlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyInstancePlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyInstancePlacement{}, middleware.After)
 	if err != nil {
 		return err

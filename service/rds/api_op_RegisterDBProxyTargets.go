@@ -17,7 +17,7 @@ func (c *Client) RegisterDBProxyTargets(ctx context.Context, params *RegisterDBP
 		params = &RegisterDBProxyTargetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterDBProxyTargets", params, optFns, addOperationRegisterDBProxyTargetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterDBProxyTargets", params, optFns, c.addOperationRegisterDBProxyTargetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type RegisterDBProxyTargetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterDBProxyTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterDBProxyTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRegisterDBProxyTargets{}, middleware.After)
 	if err != nil {
 		return err

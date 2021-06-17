@@ -54,7 +54,7 @@ func (c *Client) UpdateAutoScalingGroup(ctx context.Context, params *UpdateAutoS
 		params = &UpdateAutoScalingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAutoScalingGroup", params, optFns, addOperationUpdateAutoScalingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAutoScalingGroup", params, optFns, c.addOperationUpdateAutoScalingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -187,7 +187,7 @@ type UpdateAutoScalingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAutoScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAutoScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateAutoScalingGroup{}, middleware.After)
 	if err != nil {
 		return err

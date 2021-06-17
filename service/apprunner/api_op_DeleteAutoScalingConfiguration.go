@@ -19,7 +19,7 @@ func (c *Client) DeleteAutoScalingConfiguration(ctx context.Context, params *Del
 		params = &DeleteAutoScalingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAutoScalingConfiguration", params, optFns, addOperationDeleteAutoScalingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAutoScalingConfiguration", params, optFns, c.addOperationDeleteAutoScalingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteAutoScalingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAutoScalingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAutoScalingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteAutoScalingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

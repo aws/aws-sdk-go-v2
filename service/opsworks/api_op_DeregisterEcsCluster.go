@@ -23,7 +23,7 @@ func (c *Client) DeregisterEcsCluster(ctx context.Context, params *DeregisterEcs
 		params = &DeregisterEcsClusterInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterEcsCluster", params, optFns, addOperationDeregisterEcsClusterMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterEcsCluster", params, optFns, c.addOperationDeregisterEcsClusterMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeregisterEcsClusterOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterEcsClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterEcsClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterEcsCluster{}, middleware.After)
 	if err != nil {
 		return err

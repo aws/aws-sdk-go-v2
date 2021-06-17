@@ -27,7 +27,7 @@ func (c *Client) TestFunction(ctx context.Context, params *TestFunctionInput, op
 		params = &TestFunctionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestFunction", params, optFns, addOperationTestFunctionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestFunction", params, optFns, c.addOperationTestFunctionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type TestFunctionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTestFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpTestFunction{}, middleware.After)
 	if err != nil {
 		return err

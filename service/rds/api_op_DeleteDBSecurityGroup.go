@@ -17,7 +17,7 @@ func (c *Client) DeleteDBSecurityGroup(ctx context.Context, params *DeleteDBSecu
 		params = &DeleteDBSecurityGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDBSecurityGroup", params, optFns, addOperationDeleteDBSecurityGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDBSecurityGroup", params, optFns, c.addOperationDeleteDBSecurityGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DeleteDBSecurityGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDBSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDBSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBSecurityGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CreateOutpost(ctx context.Context, params *CreateOutpostInput, 
 		params = &CreateOutpostInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateOutpost", params, optFns, addOperationCreateOutpostMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateOutpost", params, optFns, c.addOperationCreateOutpostMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type CreateOutpostOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateOutpostMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateOutpostMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOutpost{}, middleware.After)
 	if err != nil {
 		return err

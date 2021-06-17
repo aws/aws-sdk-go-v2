@@ -16,7 +16,7 @@ func (c *Client) GetMailboxDetails(ctx context.Context, params *GetMailboxDetail
 		params = &GetMailboxDetailsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMailboxDetails", params, optFns, addOperationGetMailboxDetailsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMailboxDetails", params, optFns, c.addOperationGetMailboxDetailsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetMailboxDetailsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMailboxDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMailboxDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMailboxDetails{}, middleware.After)
 	if err != nil {
 		return err

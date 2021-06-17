@@ -18,7 +18,7 @@ func (c *Client) ListArchives(ctx context.Context, params *ListArchivesInput, op
 		params = &ListArchivesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListArchives", params, optFns, addOperationListArchivesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListArchives", params, optFns, c.addOperationListArchivesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListArchivesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListArchivesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListArchivesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListArchives{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeletePermissionSet(ctx context.Context, params *DeletePermissi
 		params = &DeletePermissionSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePermissionSet", params, optFns, addOperationDeletePermissionSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePermissionSet", params, optFns, c.addOperationDeletePermissionSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeletePermissionSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePermissionSet{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) TranslateText(ctx context.Context, params *TranslateTextInput, 
 		params = &TranslateTextInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TranslateText", params, optFns, addOperationTranslateTextMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TranslateText", params, optFns, c.addOperationTranslateTextMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type TranslateTextOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationTranslateTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTranslateTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTranslateText{}, middleware.After)
 	if err != nil {
 		return err

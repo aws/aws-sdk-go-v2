@@ -17,7 +17,7 @@ func (c *Client) UpdateDatastore(ctx context.Context, params *UpdateDatastoreInp
 		params = &UpdateDatastoreInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDatastore", params, optFns, addOperationUpdateDatastoreMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDatastore", params, optFns, c.addOperationUpdateDatastoreMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type UpdateDatastoreOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDatastore{}, middleware.After)
 	if err != nil {
 		return err

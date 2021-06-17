@@ -18,7 +18,7 @@ func (c *Client) SubmitAttachmentStateChanges(ctx context.Context, params *Submi
 		params = &SubmitAttachmentStateChangesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SubmitAttachmentStateChanges", params, optFns, addOperationSubmitAttachmentStateChangesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SubmitAttachmentStateChanges", params, optFns, c.addOperationSubmitAttachmentStateChangesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type SubmitAttachmentStateChangesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSubmitAttachmentStateChangesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSubmitAttachmentStateChangesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSubmitAttachmentStateChanges{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) DeleteLicenseManagerReportGenerator(ctx context.Context, params
 		params = &DeleteLicenseManagerReportGeneratorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteLicenseManagerReportGenerator", params, optFns, addOperationDeleteLicenseManagerReportGeneratorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteLicenseManagerReportGenerator", params, optFns, c.addOperationDeleteLicenseManagerReportGeneratorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteLicenseManagerReportGeneratorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteLicenseManagerReportGeneratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteLicenseManagerReportGeneratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLicenseManagerReportGenerator{}, middleware.After)
 	if err != nil {
 		return err

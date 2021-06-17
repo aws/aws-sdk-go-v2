@@ -22,7 +22,7 @@ func (c *Client) GetDataEndpoint(ctx context.Context, params *GetDataEndpointInp
 		params = &GetDataEndpointInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDataEndpoint", params, optFns, addOperationGetDataEndpointMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDataEndpoint", params, optFns, c.addOperationGetDataEndpointMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type GetDataEndpointOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDataEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDataEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataEndpoint{}, middleware.After)
 	if err != nil {
 		return err

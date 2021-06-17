@@ -20,7 +20,7 @@ func (c *Client) DeleteModel(ctx context.Context, params *DeleteModelInput, optF
 		params = &DeleteModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteModel", params, optFns, addOperationDeleteModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteModel", params, optFns, c.addOperationDeleteModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteModel{}, middleware.After)
 	if err != nil {
 		return err

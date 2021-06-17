@@ -18,7 +18,7 @@ func (c *Client) SendTaskFailure(ctx context.Context, params *SendTaskFailureInp
 		params = &SendTaskFailureInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendTaskFailure", params, optFns, addOperationSendTaskFailureMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendTaskFailure", params, optFns, c.addOperationSendTaskFailureMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type SendTaskFailureOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendTaskFailureMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendTaskFailureMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendTaskFailure{}, middleware.After)
 	if err != nil {
 		return err

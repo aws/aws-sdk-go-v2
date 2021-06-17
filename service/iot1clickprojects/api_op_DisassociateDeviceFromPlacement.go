@@ -16,7 +16,7 @@ func (c *Client) DisassociateDeviceFromPlacement(ctx context.Context, params *Di
 		params = &DisassociateDeviceFromPlacementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateDeviceFromPlacement", params, optFns, addOperationDisassociateDeviceFromPlacementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateDeviceFromPlacement", params, optFns, c.addOperationDisassociateDeviceFromPlacementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DisassociateDeviceFromPlacementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateDeviceFromPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateDeviceFromPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateDeviceFromPlacement{}, middleware.After)
 	if err != nil {
 		return err

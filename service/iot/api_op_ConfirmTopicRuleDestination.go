@@ -20,7 +20,7 @@ func (c *Client) ConfirmTopicRuleDestination(ctx context.Context, params *Confir
 		params = &ConfirmTopicRuleDestinationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ConfirmTopicRuleDestination", params, optFns, addOperationConfirmTopicRuleDestinationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ConfirmTopicRuleDestination", params, optFns, c.addOperationConfirmTopicRuleDestinationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type ConfirmTopicRuleDestinationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationConfirmTopicRuleDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationConfirmTopicRuleDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpConfirmTopicRuleDestination{}, middleware.After)
 	if err != nil {
 		return err

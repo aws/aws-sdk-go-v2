@@ -18,7 +18,7 @@ func (c *Client) GenerateChangeSet(ctx context.Context, params *GenerateChangeSe
 		params = &GenerateChangeSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GenerateChangeSet", params, optFns, addOperationGenerateChangeSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GenerateChangeSet", params, optFns, c.addOperationGenerateChangeSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type GenerateChangeSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGenerateChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGenerateChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGenerateChangeSet{}, middleware.After)
 	if err != nil {
 		return err

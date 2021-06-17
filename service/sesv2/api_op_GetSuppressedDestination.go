@@ -18,7 +18,7 @@ func (c *Client) GetSuppressedDestination(ctx context.Context, params *GetSuppre
 		params = &GetSuppressedDestinationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSuppressedDestination", params, optFns, addOperationGetSuppressedDestinationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSuppressedDestination", params, optFns, c.addOperationGetSuppressedDestinationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetSuppressedDestinationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSuppressedDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSuppressedDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSuppressedDestination{}, middleware.After)
 	if err != nil {
 		return err

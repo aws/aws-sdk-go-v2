@@ -32,7 +32,7 @@ func (c *Client) UpdateUserAttributes(ctx context.Context, params *UpdateUserAtt
 		params = &UpdateUserAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateUserAttributes", params, optFns, addOperationUpdateUserAttributesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateUserAttributes", params, optFns, c.addOperationUpdateUserAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ type UpdateUserAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateUserAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateUserAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateUserAttributes{}, middleware.After)
 	if err != nil {
 		return err

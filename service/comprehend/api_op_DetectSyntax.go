@@ -18,7 +18,7 @@ func (c *Client) DetectSyntax(ctx context.Context, params *DetectSyntaxInput, op
 		params = &DetectSyntaxInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetectSyntax", params, optFns, addOperationDetectSyntaxMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetectSyntax", params, optFns, c.addOperationDetectSyntaxMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DetectSyntaxOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetectSyntaxMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetectSyntaxMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectSyntax{}, middleware.After)
 	if err != nil {
 		return err

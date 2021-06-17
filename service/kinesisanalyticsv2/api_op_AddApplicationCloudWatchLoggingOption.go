@@ -18,7 +18,7 @@ func (c *Client) AddApplicationCloudWatchLoggingOption(ctx context.Context, para
 		params = &AddApplicationCloudWatchLoggingOptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddApplicationCloudWatchLoggingOption", params, optFns, addOperationAddApplicationCloudWatchLoggingOptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddApplicationCloudWatchLoggingOption", params, optFns, c.addOperationAddApplicationCloudWatchLoggingOptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type AddApplicationCloudWatchLoggingOptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddApplicationCloudWatchLoggingOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddApplicationCloudWatchLoggingOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddApplicationCloudWatchLoggingOption{}, middleware.After)
 	if err != nil {
 		return err

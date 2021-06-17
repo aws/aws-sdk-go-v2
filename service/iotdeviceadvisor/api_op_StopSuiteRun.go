@@ -16,7 +16,7 @@ func (c *Client) StopSuiteRun(ctx context.Context, params *StopSuiteRunInput, op
 		params = &StopSuiteRunInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopSuiteRun", params, optFns, addOperationStopSuiteRunMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopSuiteRun", params, optFns, c.addOperationStopSuiteRunMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type StopSuiteRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopSuiteRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopSuiteRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopSuiteRun{}, middleware.After)
 	if err != nil {
 		return err

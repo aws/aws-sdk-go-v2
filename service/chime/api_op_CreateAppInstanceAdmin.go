@@ -27,7 +27,7 @@ func (c *Client) CreateAppInstanceAdmin(ctx context.Context, params *CreateAppIn
 		params = &CreateAppInstanceAdminInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAppInstanceAdmin", params, optFns, addOperationCreateAppInstanceAdminMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAppInstanceAdmin", params, optFns, c.addOperationCreateAppInstanceAdminMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type CreateAppInstanceAdminOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAppInstanceAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAppInstanceAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAppInstanceAdmin{}, middleware.After)
 	if err != nil {
 		return err

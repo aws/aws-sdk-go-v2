@@ -16,7 +16,7 @@ func (c *Client) DeleteOTAUpdate(ctx context.Context, params *DeleteOTAUpdateInp
 		params = &DeleteOTAUpdateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteOTAUpdate", params, optFns, addOperationDeleteOTAUpdateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteOTAUpdate", params, optFns, c.addOperationDeleteOTAUpdateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type DeleteOTAUpdateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteOTAUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteOTAUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteOTAUpdate{}, middleware.After)
 	if err != nil {
 		return err

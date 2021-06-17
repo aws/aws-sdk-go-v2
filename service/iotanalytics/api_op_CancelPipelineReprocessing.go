@@ -16,7 +16,7 @@ func (c *Client) CancelPipelineReprocessing(ctx context.Context, params *CancelP
 		params = &CancelPipelineReprocessingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelPipelineReprocessing", params, optFns, addOperationCancelPipelineReprocessingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelPipelineReprocessing", params, optFns, c.addOperationCancelPipelineReprocessingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type CancelPipelineReprocessingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCancelPipelineReprocessingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelPipelineReprocessingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelPipelineReprocessing{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DescribeWorkspaceBundles(ctx context.Context, params *DescribeW
 		params = &DescribeWorkspaceBundlesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkspaceBundles", params, optFns, addOperationDescribeWorkspaceBundlesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeWorkspaceBundles", params, optFns, c.addOperationDescribeWorkspaceBundlesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeWorkspaceBundlesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeWorkspaceBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeWorkspaceBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkspaceBundles{}, middleware.After)
 	if err != nil {
 		return err

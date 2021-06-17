@@ -18,7 +18,7 @@ func (c *Client) GetMapSprites(ctx context.Context, params *GetMapSpritesInput, 
 		params = &GetMapSpritesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMapSprites", params, optFns, addOperationGetMapSpritesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMapSprites", params, optFns, c.addOperationGetMapSpritesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type GetMapSpritesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMapSpritesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMapSpritesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMapSprites{}, middleware.After)
 	if err != nil {
 		return err

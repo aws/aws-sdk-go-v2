@@ -18,7 +18,7 @@ func (c *Client) UpdateDomainConfiguration(ctx context.Context, params *UpdateDo
 		params = &UpdateDomainConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDomainConfiguration", params, optFns, addOperationUpdateDomainConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDomainConfiguration", params, optFns, c.addOperationUpdateDomainConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UpdateDomainConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateDomainConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateDomainConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDomainConfiguration{}, middleware.After)
 	if err != nil {
 		return err

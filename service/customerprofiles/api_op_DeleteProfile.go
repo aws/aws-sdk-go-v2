@@ -16,7 +16,7 @@ func (c *Client) DeleteProfile(ctx context.Context, params *DeleteProfileInput, 
 		params = &DeleteProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProfile", params, optFns, addOperationDeleteProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProfile", params, optFns, c.addOperationDeleteProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeleteProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProfile{}, middleware.After)
 	if err != nil {
 		return err

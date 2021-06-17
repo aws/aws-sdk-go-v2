@@ -44,7 +44,7 @@ func (c *Client) AcceptHandshake(ctx context.Context, params *AcceptHandshakeInp
 		params = &AcceptHandshakeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcceptHandshake", params, optFns, addOperationAcceptHandshakeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcceptHandshake", params, optFns, c.addOperationAcceptHandshakeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ type AcceptHandshakeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAcceptHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAcceptHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcceptHandshake{}, middleware.After)
 	if err != nil {
 		return err

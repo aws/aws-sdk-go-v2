@@ -21,7 +21,7 @@ func (c *Client) ExportImage(ctx context.Context, params *ExportImageInput, optF
 		params = &ExportImageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ExportImage", params, optFns, addOperationExportImageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ExportImage", params, optFns, c.addOperationExportImageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +109,7 @@ type ExportImageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationExportImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationExportImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpExportImage{}, middleware.After)
 	if err != nil {
 		return err

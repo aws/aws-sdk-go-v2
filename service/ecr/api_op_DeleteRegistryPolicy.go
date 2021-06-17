@@ -16,7 +16,7 @@ func (c *Client) DeleteRegistryPolicy(ctx context.Context, params *DeleteRegistr
 		params = &DeleteRegistryPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRegistryPolicy", params, optFns, addOperationDeleteRegistryPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRegistryPolicy", params, optFns, c.addOperationDeleteRegistryPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type DeleteRegistryPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRegistryPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRegistryPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRegistryPolicy{}, middleware.After)
 	if err != nil {
 		return err

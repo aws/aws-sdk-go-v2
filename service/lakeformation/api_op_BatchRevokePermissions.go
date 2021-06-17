@@ -17,7 +17,7 @@ func (c *Client) BatchRevokePermissions(ctx context.Context, params *BatchRevoke
 		params = &BatchRevokePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchRevokePermissions", params, optFns, addOperationBatchRevokePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchRevokePermissions", params, optFns, c.addOperationBatchRevokePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type BatchRevokePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchRevokePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchRevokePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchRevokePermissions{}, middleware.After)
 	if err != nil {
 		return err

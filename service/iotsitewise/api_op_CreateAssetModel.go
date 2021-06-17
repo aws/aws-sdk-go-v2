@@ -24,7 +24,7 @@ func (c *Client) CreateAssetModel(ctx context.Context, params *CreateAssetModelI
 		params = &CreateAssetModelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAssetModel", params, optFns, addOperationCreateAssetModelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAssetModel", params, optFns, c.addOperationCreateAssetModelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +107,7 @@ type CreateAssetModelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateAssetModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateAssetModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAssetModel{}, middleware.After)
 	if err != nil {
 		return err

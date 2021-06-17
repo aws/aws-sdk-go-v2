@@ -26,7 +26,7 @@ func (c *Client) DescribeReplay(ctx context.Context, params *DescribeReplayInput
 		params = &DescribeReplayInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeReplay", params, optFns, addOperationDescribeReplayMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeReplay", params, optFns, c.addOperationDescribeReplayMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type DescribeReplayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeReplayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeReplayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReplay{}, middleware.After)
 	if err != nil {
 		return err

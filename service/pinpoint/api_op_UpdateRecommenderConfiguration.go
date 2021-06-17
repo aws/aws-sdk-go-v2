@@ -17,7 +17,7 @@ func (c *Client) UpdateRecommenderConfiguration(ctx context.Context, params *Upd
 		params = &UpdateRecommenderConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRecommenderConfiguration", params, optFns, addOperationUpdateRecommenderConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRecommenderConfiguration", params, optFns, c.addOperationUpdateRecommenderConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type UpdateRecommenderConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRecommenderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRecommenderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecommenderConfiguration{}, middleware.After)
 	if err != nil {
 		return err

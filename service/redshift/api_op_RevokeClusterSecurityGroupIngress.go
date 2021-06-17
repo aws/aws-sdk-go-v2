@@ -22,7 +22,7 @@ func (c *Client) RevokeClusterSecurityGroupIngress(ctx context.Context, params *
 		params = &RevokeClusterSecurityGroupIngressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RevokeClusterSecurityGroupIngress", params, optFns, addOperationRevokeClusterSecurityGroupIngressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeClusterSecurityGroupIngress", params, optFns, c.addOperationRevokeClusterSecurityGroupIngressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type RevokeClusterSecurityGroupIngressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRevokeClusterSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRevokeClusterSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRevokeClusterSecurityGroupIngress{}, middleware.After)
 	if err != nil {
 		return err

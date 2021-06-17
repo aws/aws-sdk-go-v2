@@ -21,7 +21,7 @@ func (c *Client) CreateApprovalRuleTemplate(ctx context.Context, params *CreateA
 		params = &CreateApprovalRuleTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateApprovalRuleTemplate", params, optFns, addOperationCreateApprovalRuleTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateApprovalRuleTemplate", params, optFns, c.addOperationCreateApprovalRuleTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ type CreateApprovalRuleTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateApprovalRuleTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateApprovalRuleTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateApprovalRuleTemplate{}, middleware.After)
 	if err != nil {
 		return err

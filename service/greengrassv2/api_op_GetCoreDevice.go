@@ -18,7 +18,7 @@ func (c *Client) GetCoreDevice(ctx context.Context, params *GetCoreDeviceInput, 
 		params = &GetCoreDeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCoreDevice", params, optFns, addOperationGetCoreDeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCoreDevice", params, optFns, c.addOperationGetCoreDeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type GetCoreDeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCoreDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCoreDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCoreDevice{}, middleware.After)
 	if err != nil {
 		return err

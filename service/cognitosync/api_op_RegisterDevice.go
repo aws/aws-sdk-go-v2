@@ -33,7 +33,7 @@ func (c *Client) RegisterDevice(ctx context.Context, params *RegisterDeviceInput
 		params = &RegisterDeviceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterDevice", params, optFns, addOperationRegisterDeviceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterDevice", params, optFns, c.addOperationRegisterDeviceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type RegisterDeviceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterDevice{}, middleware.After)
 	if err != nil {
 		return err

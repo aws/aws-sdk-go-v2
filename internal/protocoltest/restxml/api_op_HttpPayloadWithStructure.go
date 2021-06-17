@@ -17,7 +17,7 @@ func (c *Client) HttpPayloadWithStructure(ctx context.Context, params *HttpPaylo
 		params = &HttpPayloadWithStructureInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadWithStructure", params, optFns, addOperationHttpPayloadWithStructureMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadWithStructure", params, optFns, c.addOperationHttpPayloadWithStructureMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ type HttpPayloadWithStructureOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationHttpPayloadWithStructureMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationHttpPayloadWithStructureMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadWithStructure{}, middleware.After)
 	if err != nil {
 		return err

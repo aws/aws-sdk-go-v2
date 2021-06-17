@@ -17,7 +17,7 @@ func (c *Client) ListProfilePermissions(ctx context.Context, params *ListProfile
 		params = &ListProfilePermissionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListProfilePermissions", params, optFns, addOperationListProfilePermissionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListProfilePermissions", params, optFns, c.addOperationListProfilePermissionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListProfilePermissionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListProfilePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListProfilePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfilePermissions{}, middleware.After)
 	if err != nil {
 		return err

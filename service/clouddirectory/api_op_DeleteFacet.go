@@ -17,7 +17,7 @@ func (c *Client) DeleteFacet(ctx context.Context, params *DeleteFacetInput, optF
 		params = &DeleteFacetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteFacet", params, optFns, addOperationDeleteFacetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteFacet", params, optFns, c.addOperationDeleteFacetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteFacetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFacet{}, middleware.After)
 	if err != nil {
 		return err

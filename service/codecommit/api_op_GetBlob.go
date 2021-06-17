@@ -16,7 +16,7 @@ func (c *Client) GetBlob(ctx context.Context, params *GetBlobInput, optFns ...fu
 		params = &GetBlobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBlob", params, optFns, addOperationGetBlobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBlob", params, optFns, c.addOperationGetBlobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetBlobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBlobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBlobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBlob{}, middleware.After)
 	if err != nil {
 		return err

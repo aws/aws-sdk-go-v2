@@ -25,7 +25,7 @@ func (c *Client) ListTargetsForPolicy(ctx context.Context, params *ListTargetsFo
 		params = &ListTargetsForPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTargetsForPolicy", params, optFns, addOperationListTargetsForPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTargetsForPolicy", params, optFns, c.addOperationListTargetsForPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type ListTargetsForPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTargetsForPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTargetsForPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTargetsForPolicy{}, middleware.After)
 	if err != nil {
 		return err

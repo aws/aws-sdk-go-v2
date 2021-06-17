@@ -28,7 +28,7 @@ func (c *Client) GetCalendarState(ctx context.Context, params *GetCalendarStateI
 		params = &GetCalendarStateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCalendarState", params, optFns, addOperationGetCalendarStateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCalendarState", params, optFns, c.addOperationGetCalendarStateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type GetCalendarStateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCalendarStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCalendarStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCalendarState{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) GetIndexingConfiguration(ctx context.Context, params *GetIndexi
 		params = &GetIndexingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetIndexingConfiguration", params, optFns, addOperationGetIndexingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetIndexingConfiguration", params, optFns, c.addOperationGetIndexingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type GetIndexingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetIndexingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIndexingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIndexingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

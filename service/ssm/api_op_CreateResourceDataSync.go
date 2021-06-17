@@ -38,7 +38,7 @@ func (c *Client) CreateResourceDataSync(ctx context.Context, params *CreateResou
 		params = &CreateResourceDataSyncInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateResourceDataSync", params, optFns, addOperationCreateResourceDataSyncMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateResourceDataSync", params, optFns, c.addOperationCreateResourceDataSyncMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type CreateResourceDataSyncOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateResourceDataSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateResourceDataSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateResourceDataSync{}, middleware.After)
 	if err != nil {
 		return err

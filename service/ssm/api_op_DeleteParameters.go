@@ -16,7 +16,7 @@ func (c *Client) DeleteParameters(ctx context.Context, params *DeleteParametersI
 		params = &DeleteParametersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteParameters", params, optFns, addOperationDeleteParametersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteParameters", params, optFns, c.addOperationDeleteParametersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type DeleteParametersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteParameters{}, middleware.After)
 	if err != nil {
 		return err

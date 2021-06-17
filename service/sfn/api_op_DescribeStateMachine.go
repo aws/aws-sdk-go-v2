@@ -19,7 +19,7 @@ func (c *Client) DescribeStateMachine(ctx context.Context, params *DescribeState
 		params = &DescribeStateMachineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeStateMachine", params, optFns, addOperationDescribeStateMachineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeStateMachine", params, optFns, c.addOperationDescribeStateMachineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type DescribeStateMachineOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeStateMachine{}, middleware.After)
 	if err != nil {
 		return err

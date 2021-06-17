@@ -19,7 +19,7 @@ func (c *Client) DescribeEngineDefaultParameters(ctx context.Context, params *De
 		params = &DescribeEngineDefaultParametersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEngineDefaultParameters", params, optFns, addOperationDescribeEngineDefaultParametersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEngineDefaultParameters", params, optFns, c.addOperationDescribeEngineDefaultParametersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type DescribeEngineDefaultParametersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEngineDefaultParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEngineDefaultParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEngineDefaultParameters{}, middleware.After)
 	if err != nil {
 		return err

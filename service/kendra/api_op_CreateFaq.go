@@ -18,7 +18,7 @@ func (c *Client) CreateFaq(ctx context.Context, params *CreateFaqInput, optFns .
 		params = &CreateFaqInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFaq", params, optFns, addOperationCreateFaqMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFaq", params, optFns, c.addOperationCreateFaqMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ type CreateFaqOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFaqMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFaqMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFaq{}, middleware.After)
 	if err != nil {
 		return err

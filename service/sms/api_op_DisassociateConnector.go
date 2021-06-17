@@ -17,7 +17,7 @@ func (c *Client) DisassociateConnector(ctx context.Context, params *Disassociate
 		params = &DisassociateConnectorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateConnector", params, optFns, addOperationDisassociateConnectorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateConnector", params, optFns, c.addOperationDisassociateConnectorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type DisassociateConnectorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateConnector{}, middleware.After)
 	if err != nil {
 		return err

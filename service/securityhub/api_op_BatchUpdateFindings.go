@@ -50,7 +50,7 @@ func (c *Client) BatchUpdateFindings(ctx context.Context, params *BatchUpdateFin
 		params = &BatchUpdateFindingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchUpdateFindings", params, optFns, addOperationBatchUpdateFindingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchUpdateFindings", params, optFns, c.addOperationBatchUpdateFindingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -148,7 +148,7 @@ type BatchUpdateFindingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchUpdateFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchUpdateFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateFindings{}, middleware.After)
 	if err != nil {
 		return err

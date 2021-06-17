@@ -18,7 +18,7 @@ func (c *Client) GetColumnStatisticsForTable(ctx context.Context, params *GetCol
 		params = &GetColumnStatisticsForTableInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetColumnStatisticsForTable", params, optFns, addOperationGetColumnStatisticsForTableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetColumnStatisticsForTable", params, optFns, c.addOperationGetColumnStatisticsForTableMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type GetColumnStatisticsForTableOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetColumnStatisticsForTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetColumnStatisticsForTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetColumnStatisticsForTable{}, middleware.After)
 	if err != nil {
 		return err

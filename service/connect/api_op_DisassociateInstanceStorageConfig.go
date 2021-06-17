@@ -19,7 +19,7 @@ func (c *Client) DisassociateInstanceStorageConfig(ctx context.Context, params *
 		params = &DisassociateInstanceStorageConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateInstanceStorageConfig", params, optFns, addOperationDisassociateInstanceStorageConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateInstanceStorageConfig", params, optFns, c.addOperationDisassociateInstanceStorageConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DisassociateInstanceStorageConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateInstanceStorageConfig{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) StreamingTraitsRequireLength(ctx context.Context, params *Strea
 		params = &StreamingTraitsRequireLengthInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StreamingTraitsRequireLength", params, optFns, addOperationStreamingTraitsRequireLengthMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StreamingTraitsRequireLength", params, optFns, c.addOperationStreamingTraitsRequireLengthMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type StreamingTraitsRequireLengthOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStreamingTraitsRequireLengthMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStreamingTraitsRequireLengthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStreamingTraitsRequireLength{}, middleware.After)
 	if err != nil {
 		return err

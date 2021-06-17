@@ -31,7 +31,7 @@ func (c *Client) CreateConfigurationTemplate(ctx context.Context, params *Create
 		params = &CreateConfigurationTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateConfigurationTemplate", params, optFns, addOperationCreateConfigurationTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateConfigurationTemplate", params, optFns, c.addOperationCreateConfigurationTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -159,7 +159,7 @@ type CreateConfigurationTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateConfigurationTemplate{}, middleware.After)
 	if err != nil {
 		return err

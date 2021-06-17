@@ -18,7 +18,7 @@ func (c *Client) UpdateBusinessReportSchedule(ctx context.Context, params *Updat
 		params = &UpdateBusinessReportScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateBusinessReportSchedule", params, optFns, addOperationUpdateBusinessReportScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateBusinessReportSchedule", params, optFns, c.addOperationUpdateBusinessReportScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type UpdateBusinessReportScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateBusinessReportScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateBusinessReportScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateBusinessReportSchedule{}, middleware.After)
 	if err != nil {
 		return err

@@ -30,7 +30,7 @@ func (c *Client) GetRolePolicy(ctx context.Context, params *GetRolePolicyInput, 
 		params = &GetRolePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetRolePolicy", params, optFns, addOperationGetRolePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetRolePolicy", params, optFns, c.addOperationGetRolePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type GetRolePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetRolePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetRolePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetRolePolicy{}, middleware.After)
 	if err != nil {
 		return err

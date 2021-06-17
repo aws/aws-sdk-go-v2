@@ -18,7 +18,7 @@ func (c *Client) ListIdentityProviders(ctx context.Context, params *ListIdentity
 		params = &ListIdentityProvidersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListIdentityProviders", params, optFns, addOperationListIdentityProvidersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListIdentityProviders", params, optFns, c.addOperationListIdentityProvidersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListIdentityProvidersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListIdentityProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListIdentityProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListIdentityProviders{}, middleware.After)
 	if err != nil {
 		return err

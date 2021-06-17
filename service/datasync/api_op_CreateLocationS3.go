@@ -19,7 +19,7 @@ func (c *Client) CreateLocationS3(ctx context.Context, params *CreateLocationS3I
 		params = &CreateLocationS3Input{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLocationS3", params, optFns, addOperationCreateLocationS3Middlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLocationS3", params, optFns, c.addOperationCreateLocationS3Middlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type CreateLocationS3Output struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateLocationS3Middlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateLocationS3Middlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationS3{}, middleware.After)
 	if err != nil {
 		return err

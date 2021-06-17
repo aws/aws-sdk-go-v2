@@ -22,7 +22,7 @@ func (c *Client) DeleteComputeEnvironment(ctx context.Context, params *DeleteCom
 		params = &DeleteComputeEnvironmentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteComputeEnvironment", params, optFns, addOperationDeleteComputeEnvironmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteComputeEnvironment", params, optFns, c.addOperationDeleteComputeEnvironmentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeleteComputeEnvironmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteComputeEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteComputeEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteComputeEnvironment{}, middleware.After)
 	if err != nil {
 		return err

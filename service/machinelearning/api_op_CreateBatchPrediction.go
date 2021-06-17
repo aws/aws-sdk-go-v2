@@ -26,7 +26,7 @@ func (c *Client) CreateBatchPrediction(ctx context.Context, params *CreateBatchP
 		params = &CreateBatchPredictionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateBatchPrediction", params, optFns, addOperationCreateBatchPredictionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBatchPrediction", params, optFns, c.addOperationCreateBatchPredictionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type CreateBatchPredictionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBatchPrediction{}, middleware.After)
 	if err != nil {
 		return err

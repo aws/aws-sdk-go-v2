@@ -16,7 +16,7 @@ func (c *Client) PublishRecipe(ctx context.Context, params *PublishRecipeInput, 
 		params = &PublishRecipeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PublishRecipe", params, optFns, addOperationPublishRecipeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PublishRecipe", params, optFns, c.addOperationPublishRecipeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type PublishRecipeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPublishRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPublishRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPublishRecipe{}, middleware.After)
 	if err != nil {
 		return err

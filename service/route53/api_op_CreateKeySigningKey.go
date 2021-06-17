@@ -18,7 +18,7 @@ func (c *Client) CreateKeySigningKey(ctx context.Context, params *CreateKeySigni
 		params = &CreateKeySigningKeyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateKeySigningKey", params, optFns, addOperationCreateKeySigningKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateKeySigningKey", params, optFns, c.addOperationCreateKeySigningKeyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +104,7 @@ type CreateKeySigningKeyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateKeySigningKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateKeySigningKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpCreateKeySigningKey{}, middleware.After)
 	if err != nil {
 		return err

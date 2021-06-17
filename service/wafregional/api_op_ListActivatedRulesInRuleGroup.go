@@ -23,7 +23,7 @@ func (c *Client) ListActivatedRulesInRuleGroup(ctx context.Context, params *List
 		params = &ListActivatedRulesInRuleGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListActivatedRulesInRuleGroup", params, optFns, addOperationListActivatedRulesInRuleGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListActivatedRulesInRuleGroup", params, optFns, c.addOperationListActivatedRulesInRuleGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ type ListActivatedRulesInRuleGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListActivatedRulesInRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListActivatedRulesInRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListActivatedRulesInRuleGroup{}, middleware.After)
 	if err != nil {
 		return err

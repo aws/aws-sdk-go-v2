@@ -16,7 +16,7 @@ func (c *Client) DeleteServiceSpecificCredential(ctx context.Context, params *De
 		params = &DeleteServiceSpecificCredentialInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteServiceSpecificCredential", params, optFns, addOperationDeleteServiceSpecificCredentialMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteServiceSpecificCredential", params, optFns, c.addOperationDeleteServiceSpecificCredentialMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DeleteServiceSpecificCredentialOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteServiceSpecificCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteServiceSpecificCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteServiceSpecificCredential{}, middleware.After)
 	if err != nil {
 		return err

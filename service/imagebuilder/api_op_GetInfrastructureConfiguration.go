@@ -17,7 +17,7 @@ func (c *Client) GetInfrastructureConfiguration(ctx context.Context, params *Get
 		params = &GetInfrastructureConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetInfrastructureConfiguration", params, optFns, addOperationGetInfrastructureConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetInfrastructureConfiguration", params, optFns, c.addOperationGetInfrastructureConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetInfrastructureConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetInfrastructureConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetInfrastructureConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInfrastructureConfiguration{}, middleware.After)
 	if err != nil {
 		return err

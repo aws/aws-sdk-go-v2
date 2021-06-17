@@ -18,7 +18,7 @@ func (c *Client) DeleteInterconnect(ctx context.Context, params *DeleteInterconn
 		params = &DeleteInterconnectInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteInterconnect", params, optFns, addOperationDeleteInterconnectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInterconnect", params, optFns, c.addOperationDeleteInterconnectMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type DeleteInterconnectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteInterconnect{}, middleware.After)
 	if err != nil {
 		return err

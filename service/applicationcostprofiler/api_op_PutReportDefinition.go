@@ -17,7 +17,7 @@ func (c *Client) PutReportDefinition(ctx context.Context, params *PutReportDefin
 		params = &PutReportDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutReportDefinition", params, optFns, addOperationPutReportDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutReportDefinition", params, optFns, c.addOperationPutReportDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ type PutReportDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutReportDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutReportDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutReportDefinition{}, middleware.After)
 	if err != nil {
 		return err

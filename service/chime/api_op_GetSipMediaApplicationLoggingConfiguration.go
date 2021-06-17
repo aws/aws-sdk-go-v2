@@ -17,7 +17,7 @@ func (c *Client) GetSipMediaApplicationLoggingConfiguration(ctx context.Context,
 		params = &GetSipMediaApplicationLoggingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetSipMediaApplicationLoggingConfiguration", params, optFns, addOperationGetSipMediaApplicationLoggingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetSipMediaApplicationLoggingConfiguration", params, optFns, c.addOperationGetSipMediaApplicationLoggingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type GetSipMediaApplicationLoggingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetSipMediaApplicationLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetSipMediaApplicationLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSipMediaApplicationLoggingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

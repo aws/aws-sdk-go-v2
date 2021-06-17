@@ -17,7 +17,7 @@ func (c *Client) GetPolicyVersion(ctx context.Context, params *GetPolicyVersionI
 		params = &GetPolicyVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPolicyVersion", params, optFns, addOperationGetPolicyVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPolicyVersion", params, optFns, c.addOperationGetPolicyVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ type GetPolicyVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPolicyVersion{}, middleware.After)
 	if err != nil {
 		return err

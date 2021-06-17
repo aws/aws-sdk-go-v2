@@ -18,7 +18,7 @@ func (c *Client) ListTopicRules(ctx context.Context, params *ListTopicRulesInput
 		params = &ListTopicRulesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTopicRules", params, optFns, addOperationListTopicRulesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTopicRules", params, optFns, c.addOperationListTopicRulesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListTopicRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTopicRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTopicRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTopicRules{}, middleware.After)
 	if err != nil {
 		return err

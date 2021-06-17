@@ -17,7 +17,7 @@ func (c *Client) CreateFlowDefinition(ctx context.Context, params *CreateFlowDef
 		params = &CreateFlowDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateFlowDefinition", params, optFns, addOperationCreateFlowDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateFlowDefinition", params, optFns, c.addOperationCreateFlowDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ type CreateFlowDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateFlowDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateFlowDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFlowDefinition{}, middleware.After)
 	if err != nil {
 		return err

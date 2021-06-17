@@ -17,7 +17,7 @@ func (c *Client) ResetJobBookmark(ctx context.Context, params *ResetJobBookmarkI
 		params = &ResetJobBookmarkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ResetJobBookmark", params, optFns, addOperationResetJobBookmarkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetJobBookmark", params, optFns, c.addOperationResetJobBookmarkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type ResetJobBookmarkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationResetJobBookmarkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResetJobBookmarkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResetJobBookmark{}, middleware.After)
 	if err != nil {
 		return err

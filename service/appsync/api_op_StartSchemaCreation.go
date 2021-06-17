@@ -18,7 +18,7 @@ func (c *Client) StartSchemaCreation(ctx context.Context, params *StartSchemaCre
 		params = &StartSchemaCreationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartSchemaCreation", params, optFns, addOperationStartSchemaCreationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartSchemaCreation", params, optFns, c.addOperationStartSchemaCreationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type StartSchemaCreationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartSchemaCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartSchemaCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSchemaCreation{}, middleware.After)
 	if err != nil {
 		return err

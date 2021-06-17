@@ -19,7 +19,7 @@ func (c *Client) DescribeOrderableReplicationInstances(ctx context.Context, para
 		params = &DescribeOrderableReplicationInstancesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeOrderableReplicationInstances", params, optFns, addOperationDescribeOrderableReplicationInstancesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeOrderableReplicationInstances", params, optFns, c.addOperationDescribeOrderableReplicationInstancesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type DescribeOrderableReplicationInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeOrderableReplicationInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeOrderableReplicationInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeOrderableReplicationInstances{}, middleware.After)
 	if err != nil {
 		return err

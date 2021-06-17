@@ -24,7 +24,7 @@ func (c *Client) DisassociateNode(ctx context.Context, params *DisassociateNodeI
 		params = &DisassociateNodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateNode", params, optFns, addOperationDisassociateNodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateNode", params, optFns, c.addOperationDisassociateNodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type DisassociateNodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateNode{}, middleware.After)
 	if err != nil {
 		return err

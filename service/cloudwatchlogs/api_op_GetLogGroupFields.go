@@ -25,7 +25,7 @@ func (c *Client) GetLogGroupFields(ctx context.Context, params *GetLogGroupField
 		params = &GetLogGroupFieldsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLogGroupFields", params, optFns, addOperationGetLogGroupFieldsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLogGroupFields", params, optFns, c.addOperationGetLogGroupFieldsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type GetLogGroupFieldsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetLogGroupFieldsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetLogGroupFieldsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLogGroupFields{}, middleware.After)
 	if err != nil {
 		return err

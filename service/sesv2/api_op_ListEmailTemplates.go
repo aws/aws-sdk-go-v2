@@ -19,7 +19,7 @@ func (c *Client) ListEmailTemplates(ctx context.Context, params *ListEmailTempla
 		params = &ListEmailTemplatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListEmailTemplates", params, optFns, addOperationListEmailTemplatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEmailTemplates", params, optFns, c.addOperationListEmailTemplatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ type ListEmailTemplatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListEmailTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListEmailTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEmailTemplates{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) EnableLogging(ctx context.Context, params *EnableLoggingInput, 
 		params = &EnableLoggingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableLogging", params, optFns, addOperationEnableLoggingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "EnableLogging", params, optFns, c.addOperationEnableLoggingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ type EnableLoggingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationEnableLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationEnableLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpEnableLogging{}, middleware.After)
 	if err != nil {
 		return err

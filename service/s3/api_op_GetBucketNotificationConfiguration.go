@@ -32,7 +32,7 @@ func (c *Client) GetBucketNotificationConfiguration(ctx context.Context, params 
 		params = &GetBucketNotificationConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetBucketNotificationConfiguration", params, optFns, addOperationGetBucketNotificationConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketNotificationConfiguration", params, optFns, c.addOperationGetBucketNotificationConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type GetBucketNotificationConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetBucketNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetBucketNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketNotificationConfiguration{}, middleware.After)
 	if err != nil {
 		return err

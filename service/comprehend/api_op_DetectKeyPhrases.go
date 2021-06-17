@@ -17,7 +17,7 @@ func (c *Client) DetectKeyPhrases(ctx context.Context, params *DetectKeyPhrasesI
 		params = &DetectKeyPhrasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetectKeyPhrases", params, optFns, addOperationDetectKeyPhrasesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetectKeyPhrases", params, optFns, c.addOperationDetectKeyPhrasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DetectKeyPhrasesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetectKeyPhrasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetectKeyPhrasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectKeyPhrases{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateBackendAuth(ctx context.Context, params *UpdateBackendAut
 		params = &UpdateBackendAuthInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateBackendAuth", params, optFns, addOperationUpdateBackendAuthMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateBackendAuth", params, optFns, c.addOperationUpdateBackendAuthMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type UpdateBackendAuthOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateBackendAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateBackendAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBackendAuth{}, middleware.After)
 	if err != nil {
 		return err

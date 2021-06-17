@@ -24,7 +24,7 @@ func (c *Client) DeleteConfigurationSetTrackingOptions(ctx context.Context, para
 		params = &DeleteConfigurationSetTrackingOptionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteConfigurationSetTrackingOptions", params, optFns, addOperationDeleteConfigurationSetTrackingOptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteConfigurationSetTrackingOptions", params, optFns, c.addOperationDeleteConfigurationSetTrackingOptionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteConfigurationSetTrackingOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteConfigurationSetTrackingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteConfigurationSetTrackingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteConfigurationSetTrackingOptions{}, middleware.After)
 	if err != nil {
 		return err

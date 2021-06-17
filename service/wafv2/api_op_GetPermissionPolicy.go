@@ -17,7 +17,7 @@ func (c *Client) GetPermissionPolicy(ctx context.Context, params *GetPermissionP
 		params = &GetPermissionPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPermissionPolicy", params, optFns, addOperationGetPermissionPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPermissionPolicy", params, optFns, c.addOperationGetPermissionPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetPermissionPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetPermissionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetPermissionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPermissionPolicy{}, middleware.After)
 	if err != nil {
 		return err

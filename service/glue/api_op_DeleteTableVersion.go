@@ -16,7 +16,7 @@ func (c *Client) DeleteTableVersion(ctx context.Context, params *DeleteTableVers
 		params = &DeleteTableVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTableVersion", params, optFns, addOperationDeleteTableVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTableVersion", params, optFns, c.addOperationDeleteTableVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DeleteTableVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTableVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTableVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTableVersion{}, middleware.After)
 	if err != nil {
 		return err

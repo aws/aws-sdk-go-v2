@@ -19,7 +19,7 @@ func (c *Client) ListFHIRDatastores(ctx context.Context, params *ListFHIRDatasto
 		params = &ListFHIRDatastoresInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFHIRDatastores", params, optFns, addOperationListFHIRDatastoresMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFHIRDatastores", params, optFns, c.addOperationListFHIRDatastoresMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ListFHIRDatastoresOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListFHIRDatastoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFHIRDatastoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListFHIRDatastores{}, middleware.After)
 	if err != nil {
 		return err

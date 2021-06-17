@@ -36,7 +36,7 @@ func (c *Client) RegisterDomain(ctx context.Context, params *RegisterDomainInput
 		params = &RegisterDomainInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterDomain", params, optFns, addOperationRegisterDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterDomain", params, optFns, c.addOperationRegisterDomainMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ type RegisterDomainOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRegisterDomain{}, middleware.After)
 	if err != nil {
 		return err

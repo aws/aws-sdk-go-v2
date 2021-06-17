@@ -39,7 +39,7 @@ func (c *Client) PutMetricAlarm(ctx context.Context, params *PutMetricAlarmInput
 		params = &PutMetricAlarmInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutMetricAlarm", params, optFns, addOperationPutMetricAlarmMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutMetricAlarm", params, optFns, c.addOperationPutMetricAlarmMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -244,7 +244,7 @@ type PutMetricAlarmOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutMetricAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutMetricAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutMetricAlarm{}, middleware.After)
 	if err != nil {
 		return err

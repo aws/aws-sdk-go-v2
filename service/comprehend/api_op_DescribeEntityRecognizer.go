@@ -18,7 +18,7 @@ func (c *Client) DescribeEntityRecognizer(ctx context.Context, params *DescribeE
 		params = &DescribeEntityRecognizerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEntityRecognizer", params, optFns, addOperationDescribeEntityRecognizerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEntityRecognizer", params, optFns, c.addOperationDescribeEntityRecognizerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DescribeEntityRecognizerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEntityRecognizer{}, middleware.After)
 	if err != nil {
 		return err

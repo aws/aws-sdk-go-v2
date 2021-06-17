@@ -27,7 +27,7 @@ func (c *Client) AuthorizeSecurityGroupEgress(ctx context.Context, params *Autho
 		params = &AuthorizeSecurityGroupEgressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AuthorizeSecurityGroupEgress", params, optFns, addOperationAuthorizeSecurityGroupEgressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AuthorizeSecurityGroupEgress", params, optFns, c.addOperationAuthorizeSecurityGroupEgressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type AuthorizeSecurityGroupEgressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAuthorizeSecurityGroupEgressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAuthorizeSecurityGroupEgressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpAuthorizeSecurityGroupEgress{}, middleware.After)
 	if err != nil {
 		return err

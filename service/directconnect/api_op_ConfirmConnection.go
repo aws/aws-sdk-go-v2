@@ -20,7 +20,7 @@ func (c *Client) ConfirmConnection(ctx context.Context, params *ConfirmConnectio
 		params = &ConfirmConnectionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ConfirmConnection", params, optFns, addOperationConfirmConnectionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ConfirmConnection", params, optFns, c.addOperationConfirmConnectionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type ConfirmConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationConfirmConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationConfirmConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmConnection{}, middleware.After)
 	if err != nil {
 		return err

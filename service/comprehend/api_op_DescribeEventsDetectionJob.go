@@ -17,7 +17,7 @@ func (c *Client) DescribeEventsDetectionJob(ctx context.Context, params *Describ
 		params = &DescribeEventsDetectionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEventsDetectionJob", params, optFns, addOperationDescribeEventsDetectionJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEventsDetectionJob", params, optFns, c.addOperationDescribeEventsDetectionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeEventsDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEventsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEventsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEventsDetectionJob{}, middleware.After)
 	if err != nil {
 		return err

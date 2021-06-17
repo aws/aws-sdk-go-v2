@@ -27,7 +27,7 @@ func (c *Client) AddApplicationVpcConfiguration(ctx context.Context, params *Add
 		params = &AddApplicationVpcConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AddApplicationVpcConfiguration", params, optFns, addOperationAddApplicationVpcConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AddApplicationVpcConfiguration", params, optFns, c.addOperationAddApplicationVpcConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type AddApplicationVpcConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAddApplicationVpcConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAddApplicationVpcConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddApplicationVpcConfiguration{}, middleware.After)
 	if err != nil {
 		return err

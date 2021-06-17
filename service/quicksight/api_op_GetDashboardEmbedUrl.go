@@ -37,7 +37,7 @@ func (c *Client) GetDashboardEmbedUrl(ctx context.Context, params *GetDashboardE
 		params = &GetDashboardEmbedUrlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDashboardEmbedUrl", params, optFns, addOperationGetDashboardEmbedUrlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDashboardEmbedUrl", params, optFns, c.addOperationGetDashboardEmbedUrlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -134,7 +134,7 @@ type GetDashboardEmbedUrlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetDashboardEmbedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetDashboardEmbedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDashboardEmbedUrl{}, middleware.After)
 	if err != nil {
 		return err

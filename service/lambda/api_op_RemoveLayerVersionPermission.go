@@ -18,7 +18,7 @@ func (c *Client) RemoveLayerVersionPermission(ctx context.Context, params *Remov
 		params = &RemoveLayerVersionPermissionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RemoveLayerVersionPermission", params, optFns, addOperationRemoveLayerVersionPermissionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveLayerVersionPermission", params, optFns, c.addOperationRemoveLayerVersionPermissionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type RemoveLayerVersionPermissionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRemoveLayerVersionPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRemoveLayerVersionPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveLayerVersionPermission{}, middleware.After)
 	if err != nil {
 		return err

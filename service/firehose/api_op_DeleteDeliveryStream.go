@@ -24,7 +24,7 @@ func (c *Client) DeleteDeliveryStream(ctx context.Context, params *DeleteDeliver
 		params = &DeleteDeliveryStreamInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDeliveryStream", params, optFns, addOperationDeleteDeliveryStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDeliveryStream", params, optFns, c.addOperationDeleteDeliveryStreamMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DeleteDeliveryStreamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDeliveryStream{}, middleware.After)
 	if err != nil {
 		return err

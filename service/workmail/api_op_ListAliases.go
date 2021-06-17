@@ -17,7 +17,7 @@ func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optF
 		params = &ListAliasesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAliases", params, optFns, addOperationListAliasesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAliases", params, optFns, c.addOperationListAliasesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListAliasesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAliases{}, middleware.After)
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (c *Client) DescribeRuntimeVersions(ctx context.Context, params *DescribeRu
 		params = &DescribeRuntimeVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRuntimeVersions", params, optFns, addOperationDescribeRuntimeVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRuntimeVersions", params, optFns, c.addOperationDescribeRuntimeVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type DescribeRuntimeVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRuntimeVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRuntimeVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRuntimeVersions{}, middleware.After)
 	if err != nil {
 		return err

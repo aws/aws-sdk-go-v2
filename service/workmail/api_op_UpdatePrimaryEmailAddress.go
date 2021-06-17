@@ -19,7 +19,7 @@ func (c *Client) UpdatePrimaryEmailAddress(ctx context.Context, params *UpdatePr
 		params = &UpdatePrimaryEmailAddressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdatePrimaryEmailAddress", params, optFns, addOperationUpdatePrimaryEmailAddressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePrimaryEmailAddress", params, optFns, c.addOperationUpdatePrimaryEmailAddressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type UpdatePrimaryEmailAddressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdatePrimaryEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdatePrimaryEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePrimaryEmailAddress{}, middleware.After)
 	if err != nil {
 		return err

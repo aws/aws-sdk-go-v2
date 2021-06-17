@@ -18,7 +18,7 @@ func (c *Client) DeleteTrafficPolicyInstance(ctx context.Context, params *Delete
 		params = &DeleteTrafficPolicyInstanceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTrafficPolicyInstance", params, optFns, addOperationDeleteTrafficPolicyInstanceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTrafficPolicyInstance", params, optFns, c.addOperationDeleteTrafficPolicyInstanceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DeleteTrafficPolicyInstanceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteTrafficPolicyInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteTrafficPolicyInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteTrafficPolicyInstance{}, middleware.After)
 	if err != nil {
 		return err

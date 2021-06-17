@@ -18,7 +18,7 @@ func (c *Client) OptInPhoneNumber(ctx context.Context, params *OptInPhoneNumberI
 		params = &OptInPhoneNumberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "OptInPhoneNumber", params, optFns, addOperationOptInPhoneNumberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "OptInPhoneNumber", params, optFns, c.addOperationOptInPhoneNumberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type OptInPhoneNumberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationOptInPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationOptInPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpOptInPhoneNumber{}, middleware.After)
 	if err != nil {
 		return err

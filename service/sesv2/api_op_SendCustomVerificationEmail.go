@@ -24,7 +24,7 @@ func (c *Client) SendCustomVerificationEmail(ctx context.Context, params *SendCu
 		params = &SendCustomVerificationEmailInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendCustomVerificationEmail", params, optFns, addOperationSendCustomVerificationEmailMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SendCustomVerificationEmail", params, optFns, c.addOperationSendCustomVerificationEmailMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type SendCustomVerificationEmailOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSendCustomVerificationEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSendCustomVerificationEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendCustomVerificationEmail{}, middleware.After)
 	if err != nil {
 		return err

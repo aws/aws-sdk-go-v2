@@ -17,7 +17,7 @@ func (c *Client) UpdateRuleMetadata(ctx context.Context, params *UpdateRuleMetad
 		params = &UpdateRuleMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateRuleMetadata", params, optFns, addOperationUpdateRuleMetadataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRuleMetadata", params, optFns, c.addOperationUpdateRuleMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type UpdateRuleMetadataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateRuleMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateRuleMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRuleMetadata{}, middleware.After)
 	if err != nil {
 		return err

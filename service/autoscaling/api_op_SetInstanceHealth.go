@@ -19,7 +19,7 @@ func (c *Client) SetInstanceHealth(ctx context.Context, params *SetInstanceHealt
 		params = &SetInstanceHealthInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetInstanceHealth", params, optFns, addOperationSetInstanceHealthMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetInstanceHealth", params, optFns, c.addOperationSetInstanceHealthMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type SetInstanceHealthOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetInstanceHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetInstanceHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetInstanceHealth{}, middleware.After)
 	if err != nil {
 		return err

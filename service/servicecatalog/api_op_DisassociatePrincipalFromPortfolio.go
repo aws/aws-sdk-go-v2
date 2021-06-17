@@ -16,7 +16,7 @@ func (c *Client) DisassociatePrincipalFromPortfolio(ctx context.Context, params 
 		params = &DisassociatePrincipalFromPortfolioInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociatePrincipalFromPortfolio", params, optFns, addOperationDisassociatePrincipalFromPortfolioMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociatePrincipalFromPortfolio", params, optFns, c.addOperationDisassociatePrincipalFromPortfolioMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DisassociatePrincipalFromPortfolioOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociatePrincipalFromPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociatePrincipalFromPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociatePrincipalFromPortfolio{}, middleware.After)
 	if err != nil {
 		return err

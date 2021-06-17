@@ -18,7 +18,7 @@ func (c *Client) GetVoiceConnectorEmergencyCallingConfiguration(ctx context.Cont
 		params = &GetVoiceConnectorEmergencyCallingConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetVoiceConnectorEmergencyCallingConfiguration", params, optFns, addOperationGetVoiceConnectorEmergencyCallingConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetVoiceConnectorEmergencyCallingConfiguration", params, optFns, c.addOperationGetVoiceConnectorEmergencyCallingConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type GetVoiceConnectorEmergencyCallingConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetVoiceConnectorEmergencyCallingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetVoiceConnectorEmergencyCallingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVoiceConnectorEmergencyCallingConfiguration{}, middleware.After)
 	if err != nil {
 		return err

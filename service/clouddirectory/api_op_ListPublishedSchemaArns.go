@@ -19,7 +19,7 @@ func (c *Client) ListPublishedSchemaArns(ctx context.Context, params *ListPublis
 		params = &ListPublishedSchemaArnsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPublishedSchemaArns", params, optFns, addOperationListPublishedSchemaArnsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPublishedSchemaArns", params, optFns, c.addOperationListPublishedSchemaArnsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type ListPublishedSchemaArnsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPublishedSchemaArnsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPublishedSchemaArnsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPublishedSchemaArns{}, middleware.After)
 	if err != nil {
 		return err

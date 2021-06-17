@@ -17,7 +17,7 @@ func (c *Client) GetReportGroupTrend(ctx context.Context, params *GetReportGroup
 		params = &GetReportGroupTrendInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetReportGroupTrend", params, optFns, addOperationGetReportGroupTrendMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetReportGroupTrend", params, optFns, c.addOperationGetReportGroupTrendMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type GetReportGroupTrendOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetReportGroupTrendMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetReportGroupTrendMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetReportGroupTrend{}, middleware.After)
 	if err != nil {
 		return err

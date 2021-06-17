@@ -18,7 +18,7 @@ func (c *Client) DeletePlacement(ctx context.Context, params *DeletePlacementInp
 		params = &DeletePlacementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePlacement", params, optFns, addOperationDeletePlacementMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePlacement", params, optFns, c.addOperationDeletePlacementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type DeletePlacementOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePlacement{}, middleware.After)
 	if err != nil {
 		return err

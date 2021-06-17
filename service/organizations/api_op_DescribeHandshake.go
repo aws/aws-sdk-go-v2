@@ -22,7 +22,7 @@ func (c *Client) DescribeHandshake(ctx context.Context, params *DescribeHandshak
 		params = &DescribeHandshakeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeHandshake", params, optFns, addOperationDescribeHandshakeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeHandshake", params, optFns, c.addOperationDescribeHandshakeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DescribeHandshakeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHandshake{}, middleware.After)
 	if err != nil {
 		return err

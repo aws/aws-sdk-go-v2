@@ -17,7 +17,7 @@ func (c *Client) BatchUpdateSchedule(ctx context.Context, params *BatchUpdateSch
 		params = &BatchUpdateScheduleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchUpdateSchedule", params, optFns, addOperationBatchUpdateScheduleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchUpdateSchedule", params, optFns, c.addOperationBatchUpdateScheduleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type BatchUpdateScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchUpdateScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchUpdateScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateSchedule{}, middleware.After)
 	if err != nil {
 		return err

@@ -25,7 +25,7 @@ func (c *Client) DeleteAutoScalingGroup(ctx context.Context, params *DeleteAutoS
 		params = &DeleteAutoScalingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAutoScalingGroup", params, optFns, addOperationDeleteAutoScalingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAutoScalingGroup", params, optFns, c.addOperationDeleteAutoScalingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type DeleteAutoScalingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAutoScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAutoScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteAutoScalingGroup{}, middleware.After)
 	if err != nil {
 		return err

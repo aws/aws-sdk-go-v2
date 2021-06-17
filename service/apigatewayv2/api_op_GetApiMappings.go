@@ -17,7 +17,7 @@ func (c *Client) GetApiMappings(ctx context.Context, params *GetApiMappingsInput
 		params = &GetApiMappingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetApiMappings", params, optFns, addOperationGetApiMappingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetApiMappings", params, optFns, c.addOperationGetApiMappingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type GetApiMappingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetApiMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetApiMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApiMappings{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) DetachPrincipalPolicy(ctx context.Context, params *DetachPrinci
 		params = &DetachPrincipalPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachPrincipalPolicy", params, optFns, addOperationDetachPrincipalPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachPrincipalPolicy", params, optFns, c.addOperationDetachPrincipalPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type DetachPrincipalPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachPrincipalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachPrincipalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDetachPrincipalPolicy{}, middleware.After)
 	if err != nil {
 		return err

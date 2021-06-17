@@ -17,7 +17,7 @@ func (c *Client) DisableVgwRoutePropagation(ctx context.Context, params *Disable
 		params = &DisableVgwRoutePropagationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisableVgwRoutePropagation", params, optFns, addOperationDisableVgwRoutePropagationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisableVgwRoutePropagation", params, optFns, c.addOperationDisableVgwRoutePropagationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DisableVgwRoutePropagationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisableVgwRoutePropagationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisableVgwRoutePropagationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDisableVgwRoutePropagation{}, middleware.After)
 	if err != nil {
 		return err

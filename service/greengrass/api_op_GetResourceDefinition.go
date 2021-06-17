@@ -17,7 +17,7 @@ func (c *Client) GetResourceDefinition(ctx context.Context, params *GetResourceD
 		params = &GetResourceDefinitionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetResourceDefinition", params, optFns, addOperationGetResourceDefinitionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetResourceDefinition", params, optFns, c.addOperationGetResourceDefinitionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type GetResourceDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetResourceDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetResourceDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceDefinition{}, middleware.After)
 	if err != nil {
 		return err

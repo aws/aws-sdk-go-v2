@@ -54,7 +54,7 @@ func (c *Client) PutBucketAccelerateConfiguration(ctx context.Context, params *P
 		params = &PutBucketAccelerateConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutBucketAccelerateConfiguration", params, optFns, addOperationPutBucketAccelerateConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutBucketAccelerateConfiguration", params, optFns, c.addOperationPutBucketAccelerateConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +86,7 @@ type PutBucketAccelerateConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutBucketAccelerateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutBucketAccelerateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpPutBucketAccelerateConfiguration{}, middleware.After)
 	if err != nil {
 		return err

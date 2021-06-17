@@ -20,7 +20,7 @@ func (c *Client) RecordHandlerProgress(ctx context.Context, params *RecordHandle
 		params = &RecordHandlerProgressInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RecordHandlerProgress", params, optFns, addOperationRecordHandlerProgressMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RecordHandlerProgress", params, optFns, c.addOperationRecordHandlerProgressMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type RecordHandlerProgressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRecordHandlerProgressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRecordHandlerProgressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRecordHandlerProgress{}, middleware.After)
 	if err != nil {
 		return err

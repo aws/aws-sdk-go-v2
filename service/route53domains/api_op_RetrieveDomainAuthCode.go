@@ -17,7 +17,7 @@ func (c *Client) RetrieveDomainAuthCode(ctx context.Context, params *RetrieveDom
 		params = &RetrieveDomainAuthCodeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RetrieveDomainAuthCode", params, optFns, addOperationRetrieveDomainAuthCodeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RetrieveDomainAuthCode", params, optFns, c.addOperationRetrieveDomainAuthCodeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type RetrieveDomainAuthCodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRetrieveDomainAuthCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRetrieveDomainAuthCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRetrieveDomainAuthCode{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) GetGroupCertificateConfiguration(ctx context.Context, params *G
 		params = &GetGroupCertificateConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetGroupCertificateConfiguration", params, optFns, addOperationGetGroupCertificateConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetGroupCertificateConfiguration", params, optFns, c.addOperationGetGroupCertificateConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetGroupCertificateConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetGroupCertificateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetGroupCertificateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGroupCertificateConfiguration{}, middleware.After)
 	if err != nil {
 		return err

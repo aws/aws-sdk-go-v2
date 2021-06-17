@@ -18,7 +18,7 @@ func (c *Client) DeleteManagedPrefixList(ctx context.Context, params *DeleteMana
 		params = &DeleteManagedPrefixListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteManagedPrefixList", params, optFns, addOperationDeleteManagedPrefixListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteManagedPrefixList", params, optFns, c.addOperationDeleteManagedPrefixListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type DeleteManagedPrefixListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteManagedPrefixListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteManagedPrefixListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteManagedPrefixList{}, middleware.After)
 	if err != nil {
 		return err

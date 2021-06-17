@@ -17,7 +17,7 @@ func (c *Client) UpdateAttributeGroup(ctx context.Context, params *UpdateAttribu
 		params = &UpdateAttributeGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAttributeGroup", params, optFns, addOperationUpdateAttributeGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAttributeGroup", params, optFns, c.addOperationUpdateAttributeGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type UpdateAttributeGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAttributeGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -35,7 +35,7 @@ func (c *Client) StartDeviceSync(ctx context.Context, params *StartDeviceSyncInp
 		params = &StartDeviceSyncInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartDeviceSync", params, optFns, addOperationStartDeviceSyncMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartDeviceSync", params, optFns, c.addOperationStartDeviceSyncMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type StartDeviceSyncOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartDeviceSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartDeviceSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDeviceSync{}, middleware.After)
 	if err != nil {
 		return err

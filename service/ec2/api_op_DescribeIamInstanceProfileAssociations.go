@@ -18,7 +18,7 @@ func (c *Client) DescribeIamInstanceProfileAssociations(ctx context.Context, par
 		params = &DescribeIamInstanceProfileAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeIamInstanceProfileAssociations", params, optFns, addOperationDescribeIamInstanceProfileAssociationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeIamInstanceProfileAssociations", params, optFns, c.addOperationDescribeIamInstanceProfileAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ type DescribeIamInstanceProfileAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeIamInstanceProfileAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeIamInstanceProfileAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeIamInstanceProfileAssociations{}, middleware.After)
 	if err != nil {
 		return err

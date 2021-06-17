@@ -18,7 +18,7 @@ func (c *Client) BatchGetApplicationRevisions(ctx context.Context, params *Batch
 		params = &BatchGetApplicationRevisionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetApplicationRevisions", params, optFns, addOperationBatchGetApplicationRevisionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetApplicationRevisions", params, optFns, c.addOperationBatchGetApplicationRevisionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type BatchGetApplicationRevisionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetApplicationRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetApplicationRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetApplicationRevisions{}, middleware.After)
 	if err != nil {
 		return err

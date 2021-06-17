@@ -19,7 +19,7 @@ func (c *Client) GetModelPackageGroupPolicy(ctx context.Context, params *GetMode
 		params = &GetModelPackageGroupPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetModelPackageGroupPolicy", params, optFns, addOperationGetModelPackageGroupPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetModelPackageGroupPolicy", params, optFns, c.addOperationGetModelPackageGroupPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type GetModelPackageGroupPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetModelPackageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetModelPackageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetModelPackageGroupPolicy{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) UpdateMacieSession(ctx context.Context, params *UpdateMacieSess
 		params = &UpdateMacieSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateMacieSession", params, optFns, addOperationUpdateMacieSessionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMacieSession", params, optFns, c.addOperationUpdateMacieSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type UpdateMacieSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateMacieSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateMacieSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMacieSession{}, middleware.After)
 	if err != nil {
 		return err

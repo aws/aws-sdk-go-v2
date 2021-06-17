@@ -19,7 +19,7 @@ func (c *Client) PostCommentReply(ctx context.Context, params *PostCommentReplyI
 		params = &PostCommentReplyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PostCommentReply", params, optFns, addOperationPostCommentReplyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PostCommentReply", params, optFns, c.addOperationPostCommentReplyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type PostCommentReplyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPostCommentReplyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPostCommentReplyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPostCommentReply{}, middleware.After)
 	if err != nil {
 		return err

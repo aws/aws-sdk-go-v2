@@ -17,7 +17,7 @@ func (c *Client) StartAssociationsOnce(ctx context.Context, params *StartAssocia
 		params = &StartAssociationsOnceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartAssociationsOnce", params, optFns, addOperationStartAssociationsOnceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartAssociationsOnce", params, optFns, c.addOperationStartAssociationsOnceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ type StartAssociationsOnceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartAssociationsOnceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartAssociationsOnceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartAssociationsOnce{}, middleware.After)
 	if err != nil {
 		return err

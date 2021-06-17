@@ -26,7 +26,7 @@ func (c *Client) DescribeEffectivePolicy(ctx context.Context, params *DescribeEf
 		params = &DescribeEffectivePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEffectivePolicy", params, optFns, addOperationDescribeEffectivePolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEffectivePolicy", params, optFns, c.addOperationDescribeEffectivePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ type DescribeEffectivePolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEffectivePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEffectivePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEffectivePolicy{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateContributorInsights(ctx context.Context, params *UpdateCo
 		params = &UpdateContributorInsightsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateContributorInsights", params, optFns, addOperationUpdateContributorInsightsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateContributorInsights", params, optFns, c.addOperationUpdateContributorInsightsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type UpdateContributorInsightsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateContributorInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateContributorInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateContributorInsights{}, middleware.After)
 	if err != nil {
 		return err

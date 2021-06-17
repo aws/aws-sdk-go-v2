@@ -31,7 +31,7 @@ func (c *Client) CreateDBClusterParameterGroup(ctx context.Context, params *Crea
 		params = &CreateDBClusterParameterGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDBClusterParameterGroup", params, optFns, addOperationCreateDBClusterParameterGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDBClusterParameterGroup", params, optFns, c.addOperationCreateDBClusterParameterGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type CreateDBClusterParameterGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBClusterParameterGroup{}, middleware.After)
 	if err != nil {
 		return err

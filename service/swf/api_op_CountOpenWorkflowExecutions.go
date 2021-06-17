@@ -47,7 +47,7 @@ func (c *Client) CountOpenWorkflowExecutions(ctx context.Context, params *CountO
 		params = &CountOpenWorkflowExecutionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CountOpenWorkflowExecutions", params, optFns, addOperationCountOpenWorkflowExecutionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CountOpenWorkflowExecutions", params, optFns, c.addOperationCountOpenWorkflowExecutionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ type CountOpenWorkflowExecutionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCountOpenWorkflowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCountOpenWorkflowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCountOpenWorkflowExecutions{}, middleware.After)
 	if err != nil {
 		return err

@@ -25,7 +25,7 @@ func (c *Client) CreateMicrosoftAD(ctx context.Context, params *CreateMicrosoftA
 		params = &CreateMicrosoftADInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateMicrosoftAD", params, optFns, addOperationCreateMicrosoftADMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMicrosoftAD", params, optFns, c.addOperationCreateMicrosoftADMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type CreateMicrosoftADOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateMicrosoftADMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateMicrosoftADMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMicrosoftAD{}, middleware.After)
 	if err != nil {
 		return err

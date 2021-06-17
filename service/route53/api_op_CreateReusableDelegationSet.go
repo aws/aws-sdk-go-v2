@@ -64,7 +64,7 @@ func (c *Client) CreateReusableDelegationSet(ctx context.Context, params *Create
 		params = &CreateReusableDelegationSetInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateReusableDelegationSet", params, optFns, addOperationCreateReusableDelegationSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateReusableDelegationSet", params, optFns, c.addOperationCreateReusableDelegationSetMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ type CreateReusableDelegationSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateReusableDelegationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateReusableDelegationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpCreateReusableDelegationSet{}, middleware.After)
 	if err != nil {
 		return err

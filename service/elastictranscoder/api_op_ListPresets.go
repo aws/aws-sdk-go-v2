@@ -19,7 +19,7 @@ func (c *Client) ListPresets(ctx context.Context, params *ListPresetsInput, optF
 		params = &ListPresetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListPresets", params, optFns, addOperationListPresetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListPresets", params, optFns, c.addOperationListPresetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListPresetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListPresetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListPresetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPresets{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) ModifyAquaConfiguration(ctx context.Context, params *ModifyAqua
 		params = &ModifyAquaConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyAquaConfiguration", params, optFns, addOperationModifyAquaConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyAquaConfiguration", params, optFns, c.addOperationModifyAquaConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type ModifyAquaConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyAquaConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyAquaConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyAquaConfiguration{}, middleware.After)
 	if err != nil {
 		return err

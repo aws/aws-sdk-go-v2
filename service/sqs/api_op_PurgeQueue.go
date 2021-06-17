@@ -22,7 +22,7 @@ func (c *Client) PurgeQueue(ctx context.Context, params *PurgeQueueInput, optFns
 		params = &PurgeQueueInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PurgeQueue", params, optFns, addOperationPurgeQueueMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PurgeQueue", params, optFns, c.addOperationPurgeQueueMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type PurgeQueueOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPurgeQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPurgeQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPurgeQueue{}, middleware.After)
 	if err != nil {
 		return err

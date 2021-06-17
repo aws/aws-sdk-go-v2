@@ -18,7 +18,7 @@ func (c *Client) DescribeBotVersion(ctx context.Context, params *DescribeBotVers
 		params = &DescribeBotVersionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeBotVersion", params, optFns, addOperationDescribeBotVersionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeBotVersion", params, optFns, c.addOperationDescribeBotVersionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type DescribeBotVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeBotVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeBotVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBotVersion{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) CreateDetector(ctx context.Context, params *CreateDetectorInput
 		params = &CreateDetectorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDetector", params, optFns, addOperationCreateDetectorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDetector", params, optFns, c.addOperationCreateDetectorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type CreateDetectorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDetector{}, middleware.After)
 	if err != nil {
 		return err

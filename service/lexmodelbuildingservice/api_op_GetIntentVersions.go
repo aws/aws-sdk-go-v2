@@ -24,7 +24,7 @@ func (c *Client) GetIntentVersions(ctx context.Context, params *GetIntentVersion
 		params = &GetIntentVersionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetIntentVersions", params, optFns, addOperationGetIntentVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetIntentVersions", params, optFns, c.addOperationGetIntentVersionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type GetIntentVersionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetIntentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIntentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIntentVersions{}, middleware.After)
 	if err != nil {
 		return err

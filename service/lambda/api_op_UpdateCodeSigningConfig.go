@@ -18,7 +18,7 @@ func (c *Client) UpdateCodeSigningConfig(ctx context.Context, params *UpdateCode
 		params = &UpdateCodeSigningConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateCodeSigningConfig", params, optFns, addOperationUpdateCodeSigningConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateCodeSigningConfig", params, optFns, c.addOperationUpdateCodeSigningConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type UpdateCodeSigningConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCodeSigningConfig{}, middleware.After)
 	if err != nil {
 		return err

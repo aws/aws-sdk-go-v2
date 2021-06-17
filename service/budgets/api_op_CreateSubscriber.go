@@ -18,7 +18,7 @@ func (c *Client) CreateSubscriber(ctx context.Context, params *CreateSubscriberI
 		params = &CreateSubscriberInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSubscriber", params, optFns, addOperationCreateSubscriberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSubscriber", params, optFns, c.addOperationCreateSubscriberMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type CreateSubscriberOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateSubscriberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateSubscriberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSubscriber{}, middleware.After)
 	if err != nil {
 		return err

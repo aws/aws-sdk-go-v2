@@ -19,7 +19,7 @@ func (c *Client) BatchGetFrameMetricData(ctx context.Context, params *BatchGetFr
 		params = &BatchGetFrameMetricDataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetFrameMetricData", params, optFns, addOperationBatchGetFrameMetricDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetFrameMetricData", params, optFns, c.addOperationBatchGetFrameMetricDataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +129,7 @@ type BatchGetFrameMetricDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchGetFrameMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetFrameMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetFrameMetricData{}, middleware.After)
 	if err != nil {
 		return err

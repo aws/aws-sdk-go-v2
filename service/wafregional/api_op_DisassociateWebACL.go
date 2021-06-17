@@ -24,7 +24,7 @@ func (c *Client) DisassociateWebACL(ctx context.Context, params *DisassociateWeb
 		params = &DisassociateWebACLInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateWebACL", params, optFns, addOperationDisassociateWebACLMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateWebACL", params, optFns, c.addOperationDisassociateWebACLMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DisassociateWebACLOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateWebACL{}, middleware.After)
 	if err != nil {
 		return err

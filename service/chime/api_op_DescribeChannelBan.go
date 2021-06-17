@@ -20,7 +20,7 @@ func (c *Client) DescribeChannelBan(ctx context.Context, params *DescribeChannel
 		params = &DescribeChannelBanInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeChannelBan", params, optFns, addOperationDescribeChannelBanMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeChannelBan", params, optFns, c.addOperationDescribeChannelBanMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ type DescribeChannelBanOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeChannelBanMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeChannelBanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeChannelBan{}, middleware.After)
 	if err != nil {
 		return err

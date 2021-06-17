@@ -18,7 +18,7 @@ func (c *Client) UpdateMobileDeviceAccessRule(ctx context.Context, params *Updat
 		params = &UpdateMobileDeviceAccessRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateMobileDeviceAccessRule", params, optFns, addOperationUpdateMobileDeviceAccessRuleMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMobileDeviceAccessRule", params, optFns, c.addOperationUpdateMobileDeviceAccessRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +87,7 @@ type UpdateMobileDeviceAccessRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateMobileDeviceAccessRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateMobileDeviceAccessRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMobileDeviceAccessRule{}, middleware.After)
 	if err != nil {
 		return err

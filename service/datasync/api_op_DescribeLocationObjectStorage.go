@@ -21,7 +21,7 @@ func (c *Client) DescribeLocationObjectStorage(ctx context.Context, params *Desc
 		params = &DescribeLocationObjectStorageInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLocationObjectStorage", params, optFns, addOperationDescribeLocationObjectStorageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLocationObjectStorage", params, optFns, c.addOperationDescribeLocationObjectStorageMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ type DescribeLocationObjectStorageOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeLocationObjectStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeLocationObjectStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationObjectStorage{}, middleware.After)
 	if err != nil {
 		return err

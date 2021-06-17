@@ -23,7 +23,7 @@ func (c *Client) DescribeFleets(ctx context.Context, params *DescribeFleetsInput
 		params = &DescribeFleetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFleets", params, optFns, addOperationDescribeFleetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFleets", params, optFns, c.addOperationDescribeFleetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DescribeFleetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFleets{}, middleware.After)
 	if err != nil {
 		return err

@@ -46,7 +46,7 @@ func (c *Client) RespondActivityTaskCompleted(ctx context.Context, params *Respo
 		params = &RespondActivityTaskCompletedInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RespondActivityTaskCompleted", params, optFns, addOperationRespondActivityTaskCompletedMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RespondActivityTaskCompleted", params, optFns, c.addOperationRespondActivityTaskCompletedMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ type RespondActivityTaskCompletedOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRespondActivityTaskCompletedMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRespondActivityTaskCompletedMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRespondActivityTaskCompleted{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) PutProtocolsList(ctx context.Context, params *PutProtocolsListI
 		params = &PutProtocolsListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutProtocolsList", params, optFns, addOperationPutProtocolsListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutProtocolsList", params, optFns, c.addOperationPutProtocolsListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type PutProtocolsListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutProtocolsListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutProtocolsListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutProtocolsList{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) GetCommentReactions(ctx context.Context, params *GetCommentReac
 		params = &GetCommentReactionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetCommentReactions", params, optFns, addOperationGetCommentReactionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetCommentReactions", params, optFns, c.addOperationGetCommentReactionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type GetCommentReactionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetCommentReactionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetCommentReactionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCommentReactions{}, middleware.After)
 	if err != nil {
 		return err

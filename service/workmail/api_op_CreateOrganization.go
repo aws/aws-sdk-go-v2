@@ -35,7 +35,7 @@ func (c *Client) CreateOrganization(ctx context.Context, params *CreateOrganizat
 		params = &CreateOrganizationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateOrganization", params, optFns, addOperationCreateOrganizationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateOrganization", params, optFns, c.addOperationCreateOrganizationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type CreateOrganizationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateOrganization{}, middleware.After)
 	if err != nil {
 		return err

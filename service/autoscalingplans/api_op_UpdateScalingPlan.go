@@ -18,7 +18,7 @@ func (c *Client) UpdateScalingPlan(ctx context.Context, params *UpdateScalingPla
 		params = &UpdateScalingPlanInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateScalingPlan", params, optFns, addOperationUpdateScalingPlanMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateScalingPlan", params, optFns, c.addOperationUpdateScalingPlanMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ type UpdateScalingPlanOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateScalingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateScalingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateScalingPlan{}, middleware.After)
 	if err != nil {
 		return err

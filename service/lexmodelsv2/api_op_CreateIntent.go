@@ -45,7 +45,7 @@ func (c *Client) CreateIntent(ctx context.Context, params *CreateIntentInput, op
 		params = &CreateIntentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateIntent", params, optFns, addOperationCreateIntentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateIntent", params, optFns, c.addOperationCreateIntentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -200,7 +200,7 @@ type CreateIntentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIntent{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) PutStudioMembers(ctx context.Context, params *PutStudioMembersI
 		params = &PutStudioMembersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutStudioMembers", params, optFns, addOperationPutStudioMembersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutStudioMembers", params, optFns, c.addOperationPutStudioMembersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ type PutStudioMembersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationPutStudioMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutStudioMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutStudioMembers{}, middleware.After)
 	if err != nil {
 		return err

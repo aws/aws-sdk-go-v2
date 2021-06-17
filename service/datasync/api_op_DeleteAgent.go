@@ -19,7 +19,7 @@ func (c *Client) DeleteAgent(ctx context.Context, params *DeleteAgentInput, optF
 		params = &DeleteAgentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAgent", params, optFns, addOperationDeleteAgentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAgent", params, optFns, c.addOperationDeleteAgentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DeleteAgentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAgent{}, middleware.After)
 	if err != nil {
 		return err

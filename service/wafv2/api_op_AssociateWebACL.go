@@ -23,7 +23,7 @@ func (c *Client) AssociateWebACL(ctx context.Context, params *AssociateWebACLInp
 		params = &AssociateWebACLInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateWebACL", params, optFns, addOperationAssociateWebACLMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateWebACL", params, optFns, c.addOperationAssociateWebACLMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ type AssociateWebACLOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateWebACL{}, middleware.After)
 	if err != nil {
 		return err

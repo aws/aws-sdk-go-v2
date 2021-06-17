@@ -18,7 +18,7 @@ func (c *Client) StartConfigurationRecorder(ctx context.Context, params *StartCo
 		params = &StartConfigurationRecorderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartConfigurationRecorder", params, optFns, addOperationStartConfigurationRecorderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartConfigurationRecorder", params, optFns, c.addOperationStartConfigurationRecorderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type StartConfigurationRecorderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartConfigurationRecorderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartConfigurationRecorderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartConfigurationRecorder{}, middleware.After)
 	if err != nil {
 		return err

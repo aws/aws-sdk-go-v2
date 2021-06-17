@@ -28,7 +28,7 @@ func (c *Client) ListCreatedArtifacts(ctx context.Context, params *ListCreatedAr
 		params = &ListCreatedArtifactsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCreatedArtifacts", params, optFns, addOperationListCreatedArtifactsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCreatedArtifacts", params, optFns, c.addOperationListCreatedArtifactsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type ListCreatedArtifactsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCreatedArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCreatedArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCreatedArtifacts{}, middleware.After)
 	if err != nil {
 		return err

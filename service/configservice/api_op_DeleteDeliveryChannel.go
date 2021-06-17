@@ -18,7 +18,7 @@ func (c *Client) DeleteDeliveryChannel(ctx context.Context, params *DeleteDelive
 		params = &DeleteDeliveryChannelInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDeliveryChannel", params, optFns, addOperationDeleteDeliveryChannelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDeliveryChannel", params, optFns, c.addOperationDeleteDeliveryChannelMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type DeleteDeliveryChannelOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteDeliveryChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteDeliveryChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDeliveryChannel{}, middleware.After)
 	if err != nil {
 		return err

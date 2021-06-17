@@ -19,6 +19,11 @@ const (
 	// Prefix to use for filtering profiles
 	profilePrefix = `profile `
 
+	// string equivalent for boolean
+	endpointDiscoveryDisabled = `false`
+	endpointDiscoveryEnabled  = `true`
+	endpointDiscoveryAuto     = `auto`
+
 	// Static Credentials group
 	accessKeyIDKey  = `aws_access_key_id`     // group required
 	secretAccessKey = `aws_secret_access_key` // group required
@@ -133,14 +138,14 @@ type SharedConfig struct {
 	// Region is the region the SDK should use for looking up AWS service endpoints
 	// and signing requests.
 	//
-	//	region
+	//	region = us-west-2
 	Region string
 
-	// EnableEndpointDiscovery can be enabled in the shared config by setting
-	// endpoint_discovery_enabled to true
+	// EnableEndpointDiscovery can be enabled or disabled in the shared config
+	// by setting endpoint_discovery_enabled to true, or false respectively.
 	//
 	//	endpoint_discovery_enabled = true
-	EnableEndpointDiscovery *bool
+	EnableEndpointDiscovery aws.EndpointDiscoveryEnableState
 
 	// Specifies if the S3 service should allow ARNs to direct the region
 	// the client's requests are sent to.
@@ -157,6 +162,15 @@ func (c SharedConfig) GetS3UseARNRegion(ctx context.Context) (value, ok bool, er
 	}
 
 	return *c.S3UseARNRegion, true, nil
+}
+
+// GetEnableEndpointDiscovery returns if the enable_endpoint_discovery is set.
+func (c SharedConfig) GetEnableEndpointDiscovery(ctx context.Context) (value aws.EndpointDiscoveryEnableState, ok bool, err error) {
+	if c.EnableEndpointDiscovery == aws.EndpointDiscoveryUnset {
+		return aws.EndpointDiscoveryUnset, false, nil
+	}
+
+	return c.EnableEndpointDiscovery, true, nil
 }
 
 // GetRegion returns the region for the profile if a region is set.
@@ -857,7 +871,7 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 	updateString(&c.CredentialProcess, section, credentialProcessKey)
 	updateString(&c.WebIdentityTokenFile, section, webIdentityTokenFileKey)
 
-	updateBoolPtr(&c.EnableEndpointDiscovery, section, enableEndpointDiscoveryKey)
+	updateEndpointDiscoveryType(&c.EnableEndpointDiscovery, section, enableEndpointDiscoveryKey)
 	updateBoolPtr(&c.S3UseARNRegion, section, s3UseARNRegionKey)
 
 	// Shared Credentials
@@ -1114,4 +1128,26 @@ func updateBoolPtr(dst **bool, section ini.Section, key string) {
 	}
 	*dst = new(bool)
 	**dst = section.Bool(key)
+}
+
+// updateEndpointDiscoveryType will only update the dst with the value in the section, if
+// a valid key and corresponding EndpointDiscoveryType is found.
+func updateEndpointDiscoveryType(dst *aws.EndpointDiscoveryEnableState, section ini.Section, key string) {
+	if !section.Has(key) {
+		return
+	}
+
+	value := section.String(key)
+	if len(value) == 0 {
+		return
+	}
+
+	switch {
+	case strings.EqualFold(value, endpointDiscoveryDisabled):
+		*dst = aws.EndpointDiscoveryDisabled
+	case strings.EqualFold(value, endpointDiscoveryEnabled):
+		*dst = aws.EndpointDiscoveryEnabled
+	case strings.EqualFold(value, endpointDiscoveryAuto):
+		*dst = aws.EndpointDiscoveryAuto
+	}
 }

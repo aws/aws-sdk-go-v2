@@ -53,7 +53,7 @@ func (c *Client) ListObjectsV2(ctx context.Context, params *ListObjectsV2Input, 
 		params = &ListObjectsV2Input{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListObjectsV2", params, optFns, addOperationListObjectsV2Middlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListObjectsV2", params, optFns, c.addOperationListObjectsV2Middlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -202,7 +202,7 @@ type ListObjectsV2Output struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListObjectsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListObjectsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListObjectsV2{}, middleware.After)
 	if err != nil {
 		return err

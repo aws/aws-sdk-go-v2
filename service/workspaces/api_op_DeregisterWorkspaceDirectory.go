@@ -28,7 +28,7 @@ func (c *Client) DeregisterWorkspaceDirectory(ctx context.Context, params *Dereg
 		params = &DeregisterWorkspaceDirectoryInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterWorkspaceDirectory", params, optFns, addOperationDeregisterWorkspaceDirectoryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterWorkspaceDirectory", params, optFns, c.addOperationDeregisterWorkspaceDirectoryMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ type DeregisterWorkspaceDirectoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterWorkspaceDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterWorkspaceDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterWorkspaceDirectory{}, middleware.After)
 	if err != nil {
 		return err

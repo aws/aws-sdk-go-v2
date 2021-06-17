@@ -18,7 +18,7 @@ func (c *Client) UpdateGlobalNetwork(ctx context.Context, params *UpdateGlobalNe
 		params = &UpdateGlobalNetworkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateGlobalNetwork", params, optFns, addOperationUpdateGlobalNetworkMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateGlobalNetwork", params, optFns, c.addOperationUpdateGlobalNetworkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type UpdateGlobalNetworkOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateGlobalNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateGlobalNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGlobalNetwork{}, middleware.After)
 	if err != nil {
 		return err

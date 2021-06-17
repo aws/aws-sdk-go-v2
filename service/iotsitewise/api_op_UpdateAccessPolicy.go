@@ -19,7 +19,7 @@ func (c *Client) UpdateAccessPolicy(ctx context.Context, params *UpdateAccessPol
 		params = &UpdateAccessPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateAccessPolicy", params, optFns, addOperationUpdateAccessPolicyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAccessPolicy", params, optFns, c.addOperationUpdateAccessPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type UpdateAccessPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccessPolicy{}, middleware.After)
 	if err != nil {
 		return err

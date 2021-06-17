@@ -18,7 +18,7 @@ func (c *Client) DisassociateIamInstanceProfile(ctx context.Context, params *Dis
 		params = &DisassociateIamInstanceProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateIamInstanceProfile", params, optFns, addOperationDisassociateIamInstanceProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateIamInstanceProfile", params, optFns, c.addOperationDisassociateIamInstanceProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DisassociateIamInstanceProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateIamInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateIamInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpDisassociateIamInstanceProfile{}, middleware.After)
 	if err != nil {
 		return err

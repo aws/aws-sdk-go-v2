@@ -17,7 +17,7 @@ func (c *Client) GetAppsList(ctx context.Context, params *GetAppsListInput, optF
 		params = &GetAppsListInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAppsList", params, optFns, addOperationGetAppsListMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAppsList", params, optFns, c.addOperationGetAppsListMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetAppsListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAppsListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAppsListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAppsList{}, middleware.After)
 	if err != nil {
 		return err

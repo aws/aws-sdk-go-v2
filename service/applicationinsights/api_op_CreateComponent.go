@@ -16,7 +16,7 @@ func (c *Client) CreateComponent(ctx context.Context, params *CreateComponentInp
 		params = &CreateComponentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateComponent", params, optFns, addOperationCreateComponentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateComponent", params, optFns, c.addOperationCreateComponentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type CreateComponentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateComponent{}, middleware.After)
 	if err != nil {
 		return err

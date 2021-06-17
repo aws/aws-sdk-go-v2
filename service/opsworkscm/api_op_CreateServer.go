@@ -37,7 +37,7 @@ func (c *Client) CreateServer(ctx context.Context, params *CreateServerInput, op
 		params = &CreateServerInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateServer", params, optFns, addOperationCreateServerMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateServer", params, optFns, c.addOperationCreateServerMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -264,7 +264,7 @@ type CreateServerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateServer{}, middleware.After)
 	if err != nil {
 		return err

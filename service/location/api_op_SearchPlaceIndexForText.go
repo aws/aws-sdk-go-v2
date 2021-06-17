@@ -21,7 +21,7 @@ func (c *Client) SearchPlaceIndexForText(ctx context.Context, params *SearchPlac
 		params = &SearchPlaceIndexForTextInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SearchPlaceIndexForText", params, optFns, addOperationSearchPlaceIndexForTextMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SearchPlaceIndexForText", params, optFns, c.addOperationSearchPlaceIndexForTextMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ type SearchPlaceIndexForTextOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSearchPlaceIndexForTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSearchPlaceIndexForTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchPlaceIndexForText{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) JsonUnions(ctx context.Context, params *JsonUnionsInput, optFns
 		params = &JsonUnionsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "JsonUnions", params, optFns, addOperationJsonUnionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "JsonUnions", params, optFns, c.addOperationJsonUnionsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ type JsonUnionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationJsonUnionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationJsonUnionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpJsonUnions{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) BatchImportEvidenceToAssessmentControl(ctx context.Context, par
 		params = &BatchImportEvidenceToAssessmentControlInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchImportEvidenceToAssessmentControl", params, optFns, addOperationBatchImportEvidenceToAssessmentControlMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchImportEvidenceToAssessmentControl", params, optFns, c.addOperationBatchImportEvidenceToAssessmentControlMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type BatchImportEvidenceToAssessmentControlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchImportEvidenceToAssessmentControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchImportEvidenceToAssessmentControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchImportEvidenceToAssessmentControl{}, middleware.After)
 	if err != nil {
 		return err

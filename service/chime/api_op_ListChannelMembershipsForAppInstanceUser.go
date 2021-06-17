@@ -21,7 +21,7 @@ func (c *Client) ListChannelMembershipsForAppInstanceUser(ctx context.Context, p
 		params = &ListChannelMembershipsForAppInstanceUserInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListChannelMembershipsForAppInstanceUser", params, optFns, addOperationListChannelMembershipsForAppInstanceUserMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListChannelMembershipsForAppInstanceUser", params, optFns, c.addOperationListChannelMembershipsForAppInstanceUserMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListChannelMembershipsForAppInstanceUserOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListChannelMembershipsForAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListChannelMembershipsForAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChannelMembershipsForAppInstanceUser{}, middleware.After)
 	if err != nil {
 		return err

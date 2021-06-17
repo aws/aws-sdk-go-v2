@@ -26,7 +26,7 @@ func (c *Client) CreateWebACLMigrationStack(ctx context.Context, params *CreateW
 		params = &CreateWebACLMigrationStackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateWebACLMigrationStack", params, optFns, addOperationCreateWebACLMigrationStackMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateWebACLMigrationStack", params, optFns, c.addOperationCreateWebACLMigrationStackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type CreateWebACLMigrationStackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateWebACLMigrationStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateWebACLMigrationStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWebACLMigrationStack{}, middleware.After)
 	if err != nil {
 		return err

@@ -22,7 +22,7 @@ func (c *Client) SynthesizeSpeech(ctx context.Context, params *SynthesizeSpeechI
 		params = &SynthesizeSpeechInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SynthesizeSpeech", params, optFns, addOperationSynthesizeSpeechMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SynthesizeSpeech", params, optFns, c.addOperationSynthesizeSpeechMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -131,7 +131,7 @@ type SynthesizeSpeechOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSynthesizeSpeechMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSynthesizeSpeechMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSynthesizeSpeech{}, middleware.After)
 	if err != nil {
 		return err

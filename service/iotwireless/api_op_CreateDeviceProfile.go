@@ -18,7 +18,7 @@ func (c *Client) CreateDeviceProfile(ctx context.Context, params *CreateDevicePr
 		params = &CreateDeviceProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDeviceProfile", params, optFns, addOperationCreateDeviceProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDeviceProfile", params, optFns, c.addOperationCreateDeviceProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type CreateDeviceProfileOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDeviceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDeviceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDeviceProfile{}, middleware.After)
 	if err != nil {
 		return err

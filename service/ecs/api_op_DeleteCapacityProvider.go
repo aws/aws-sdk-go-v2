@@ -28,7 +28,7 @@ func (c *Client) DeleteCapacityProvider(ctx context.Context, params *DeleteCapac
 		params = &DeleteCapacityProviderInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteCapacityProvider", params, optFns, addOperationDeleteCapacityProviderMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteCapacityProvider", params, optFns, c.addOperationDeleteCapacityProviderMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeleteCapacityProviderOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCapacityProvider{}, middleware.After)
 	if err != nil {
 		return err

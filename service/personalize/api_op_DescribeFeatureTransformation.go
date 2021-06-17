@@ -17,7 +17,7 @@ func (c *Client) DescribeFeatureTransformation(ctx context.Context, params *Desc
 		params = &DescribeFeatureTransformationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeFeatureTransformation", params, optFns, addOperationDescribeFeatureTransformationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeFeatureTransformation", params, optFns, c.addOperationDescribeFeatureTransformationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeFeatureTransformationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeFeatureTransformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeFeatureTransformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFeatureTransformation{}, middleware.After)
 	if err != nil {
 		return err

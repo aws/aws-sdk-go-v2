@@ -19,7 +19,7 @@ func (c *Client) GetMapStyleDescriptor(ctx context.Context, params *GetMapStyleD
 		params = &GetMapStyleDescriptorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetMapStyleDescriptor", params, optFns, addOperationGetMapStyleDescriptorMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMapStyleDescriptor", params, optFns, c.addOperationGetMapStyleDescriptorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ type GetMapStyleDescriptorOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetMapStyleDescriptorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetMapStyleDescriptorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMapStyleDescriptor{}, middleware.After)
 	if err != nil {
 		return err

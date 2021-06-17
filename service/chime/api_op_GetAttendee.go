@@ -20,7 +20,7 @@ func (c *Client) GetAttendee(ctx context.Context, params *GetAttendeeInput, optF
 		params = &GetAttendeeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAttendee", params, optFns, addOperationGetAttendeeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAttendee", params, optFns, c.addOperationGetAttendeeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type GetAttendeeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAttendee{}, middleware.After)
 	if err != nil {
 		return err

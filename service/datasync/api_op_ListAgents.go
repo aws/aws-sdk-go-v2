@@ -25,7 +25,7 @@ func (c *Client) ListAgents(ctx context.Context, params *ListAgentsInput, optFns
 		params = &ListAgentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAgents", params, optFns, addOperationListAgentsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAgents", params, optFns, c.addOperationListAgentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ type ListAgentsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAgents{}, middleware.After)
 	if err != nil {
 		return err

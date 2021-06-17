@@ -18,7 +18,7 @@ func (c *Client) DescribePendingAggregationRequests(ctx context.Context, params 
 		params = &DescribePendingAggregationRequestsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePendingAggregationRequests", params, optFns, addOperationDescribePendingAggregationRequestsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePendingAggregationRequests", params, optFns, c.addOperationDescribePendingAggregationRequestsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ type DescribePendingAggregationRequestsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePendingAggregationRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePendingAggregationRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePendingAggregationRequests{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) UpdateUserDefinedFunction(ctx context.Context, params *UpdateUs
 		params = &UpdateUserDefinedFunctionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateUserDefinedFunction", params, optFns, addOperationUpdateUserDefinedFunctionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateUserDefinedFunction", params, optFns, c.addOperationUpdateUserDefinedFunctionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type UpdateUserDefinedFunctionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateUserDefinedFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateUserDefinedFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateUserDefinedFunction{}, middleware.After)
 	if err != nil {
 		return err

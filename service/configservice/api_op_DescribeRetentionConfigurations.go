@@ -21,7 +21,7 @@ func (c *Client) DescribeRetentionConfigurations(ctx context.Context, params *De
 		params = &DescribeRetentionConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeRetentionConfigurations", params, optFns, addOperationDescribeRetentionConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeRetentionConfigurations", params, optFns, c.addOperationDescribeRetentionConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DescribeRetentionConfigurationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeRetentionConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeRetentionConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRetentionConfigurations{}, middleware.After)
 	if err != nil {
 		return err

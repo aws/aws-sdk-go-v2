@@ -26,7 +26,7 @@ func (c *Client) ListSigningCertificates(ctx context.Context, params *ListSignin
 		params = &ListSigningCertificatesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSigningCertificates", params, optFns, addOperationListSigningCertificatesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSigningCertificates", params, optFns, c.addOperationListSigningCertificatesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ type ListSigningCertificatesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListSigningCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListSigningCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListSigningCertificates{}, middleware.After)
 	if err != nil {
 		return err

@@ -16,7 +16,7 @@ func (c *Client) DeleteAlert(ctx context.Context, params *DeleteAlertInput, optF
 		params = &DeleteAlertInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteAlert", params, optFns, addOperationDeleteAlertMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteAlert", params, optFns, c.addOperationDeleteAlertMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteAlertOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteAlertMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteAlertMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAlert{}, middleware.After)
 	if err != nil {
 		return err

@@ -21,7 +21,7 @@ func (c *Client) DisassociateIdentityProviderConfig(ctx context.Context, params 
 		params = &DisassociateIdentityProviderConfigInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateIdentityProviderConfig", params, optFns, addOperationDisassociateIdentityProviderConfigMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateIdentityProviderConfig", params, optFns, c.addOperationDisassociateIdentityProviderConfigMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type DisassociateIdentityProviderConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateIdentityProviderConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDisassociateIdentityProviderConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateIdentityProviderConfig{}, middleware.After)
 	if err != nil {
 		return err

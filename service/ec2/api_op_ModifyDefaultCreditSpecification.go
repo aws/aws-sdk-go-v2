@@ -29,7 +29,7 @@ func (c *Client) ModifyDefaultCreditSpecification(ctx context.Context, params *M
 		params = &ModifyDefaultCreditSpecificationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ModifyDefaultCreditSpecification", params, optFns, addOperationModifyDefaultCreditSpecificationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyDefaultCreditSpecification", params, optFns, c.addOperationModifyDefaultCreditSpecificationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ type ModifyDefaultCreditSpecificationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationModifyDefaultCreditSpecificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyDefaultCreditSpecificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyDefaultCreditSpecification{}, middleware.After)
 	if err != nil {
 		return err

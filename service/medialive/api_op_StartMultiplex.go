@@ -18,7 +18,7 @@ func (c *Client) StartMultiplex(ctx context.Context, params *StartMultiplexInput
 		params = &StartMultiplexInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartMultiplex", params, optFns, addOperationStartMultiplexMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartMultiplex", params, optFns, c.addOperationStartMultiplexMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ type StartMultiplexOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStartMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStartMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMultiplex{}, middleware.After)
 	if err != nil {
 		return err

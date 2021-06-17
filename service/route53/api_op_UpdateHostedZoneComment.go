@@ -17,7 +17,7 @@ func (c *Client) UpdateHostedZoneComment(ctx context.Context, params *UpdateHost
 		params = &UpdateHostedZoneCommentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateHostedZoneComment", params, optFns, addOperationUpdateHostedZoneCommentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateHostedZoneComment", params, optFns, c.addOperationUpdateHostedZoneCommentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type UpdateHostedZoneCommentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateHostedZoneCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateHostedZoneCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpUpdateHostedZoneComment{}, middleware.After)
 	if err != nil {
 		return err

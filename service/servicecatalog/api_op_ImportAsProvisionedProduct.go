@@ -29,7 +29,7 @@ func (c *Client) ImportAsProvisionedProduct(ctx context.Context, params *ImportA
 		params = &ImportAsProvisionedProductInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportAsProvisionedProduct", params, optFns, addOperationImportAsProvisionedProductMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ImportAsProvisionedProduct", params, optFns, c.addOperationImportAsProvisionedProductMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ type ImportAsProvisionedProductOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationImportAsProvisionedProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationImportAsProvisionedProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportAsProvisionedProduct{}, middleware.After)
 	if err != nil {
 		return err

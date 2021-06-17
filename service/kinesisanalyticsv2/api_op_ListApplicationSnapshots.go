@@ -17,7 +17,7 @@ func (c *Client) ListApplicationSnapshots(ctx context.Context, params *ListAppli
 		params = &ListApplicationSnapshotsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListApplicationSnapshots", params, optFns, addOperationListApplicationSnapshotsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListApplicationSnapshots", params, optFns, c.addOperationListApplicationSnapshotsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListApplicationSnapshotsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListApplicationSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListApplicationSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApplicationSnapshots{}, middleware.After)
 	if err != nil {
 		return err

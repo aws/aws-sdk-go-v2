@@ -18,7 +18,7 @@ func (c *Client) StopLabelingJob(ctx context.Context, params *StopLabelingJobInp
 		params = &StopLabelingJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopLabelingJob", params, optFns, addOperationStopLabelingJobMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopLabelingJob", params, optFns, c.addOperationStopLabelingJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ type StopLabelingJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopLabelingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopLabelingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopLabelingJob{}, middleware.After)
 	if err != nil {
 		return err

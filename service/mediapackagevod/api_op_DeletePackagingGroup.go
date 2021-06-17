@@ -16,7 +16,7 @@ func (c *Client) DeletePackagingGroup(ctx context.Context, params *DeletePackagi
 		params = &DeletePackagingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePackagingGroup", params, optFns, addOperationDeletePackagingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePackagingGroup", params, optFns, c.addOperationDeletePackagingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeletePackagingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeletePackagingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeletePackagingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePackagingGroup{}, middleware.After)
 	if err != nil {
 		return err

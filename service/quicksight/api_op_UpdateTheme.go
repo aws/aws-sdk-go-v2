@@ -17,7 +17,7 @@ func (c *Client) UpdateTheme(ctx context.Context, params *UpdateThemeInput, optF
 		params = &UpdateThemeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateTheme", params, optFns, addOperationUpdateThemeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateTheme", params, optFns, c.addOperationUpdateThemeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ type UpdateThemeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationUpdateThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTheme{}, middleware.After)
 	if err != nil {
 		return err

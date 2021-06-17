@@ -16,7 +16,7 @@ func (c *Client) DetachLoadBalancerTargetGroups(ctx context.Context, params *Det
 		params = &DetachLoadBalancerTargetGroupsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachLoadBalancerTargetGroups", params, optFns, addOperationDetachLoadBalancerTargetGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachLoadBalancerTargetGroups", params, optFns, c.addOperationDetachLoadBalancerTargetGroupsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ type DetachLoadBalancerTargetGroupsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDetachLoadBalancerTargetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDetachLoadBalancerTargetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDetachLoadBalancerTargetGroups{}, middleware.After)
 	if err != nil {
 		return err

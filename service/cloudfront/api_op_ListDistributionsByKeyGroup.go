@@ -23,7 +23,7 @@ func (c *Client) ListDistributionsByKeyGroup(ctx context.Context, params *ListDi
 		params = &ListDistributionsByKeyGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDistributionsByKeyGroup", params, optFns, addOperationListDistributionsByKeyGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDistributionsByKeyGroup", params, optFns, c.addOperationListDistributionsByKeyGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ type ListDistributionsByKeyGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListDistributionsByKeyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDistributionsByKeyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpListDistributionsByKeyGroup{}, middleware.After)
 	if err != nil {
 		return err

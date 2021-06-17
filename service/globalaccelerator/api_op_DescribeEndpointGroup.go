@@ -17,7 +17,7 @@ func (c *Client) DescribeEndpointGroup(ctx context.Context, params *DescribeEndp
 		params = &DescribeEndpointGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEndpointGroup", params, optFns, addOperationDescribeEndpointGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEndpointGroup", params, optFns, c.addOperationDescribeEndpointGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ type DescribeEndpointGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribeEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribeEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEndpointGroup{}, middleware.After)
 	if err != nil {
 		return err

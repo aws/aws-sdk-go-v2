@@ -16,7 +16,7 @@ func (c *Client) GetActiveNames(ctx context.Context, params *GetActiveNamesInput
 		params = &GetActiveNamesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetActiveNames", params, optFns, addOperationGetActiveNamesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetActiveNames", params, optFns, c.addOperationGetActiveNamesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ type GetActiveNamesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetActiveNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetActiveNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetActiveNames{}, middleware.After)
 	if err != nil {
 		return err

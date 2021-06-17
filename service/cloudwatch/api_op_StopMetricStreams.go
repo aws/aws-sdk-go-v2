@@ -16,7 +16,7 @@ func (c *Client) StopMetricStreams(ctx context.Context, params *StopMetricStream
 		params = &StopMetricStreamsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopMetricStreams", params, optFns, addOperationStopMetricStreamsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopMetricStreams", params, optFns, c.addOperationStopMetricStreamsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ type StopMetricStreamsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationStopMetricStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopMetricStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpStopMetricStreams{}, middleware.After)
 	if err != nil {
 		return err

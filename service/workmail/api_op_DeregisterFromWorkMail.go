@@ -19,7 +19,7 @@ func (c *Client) DeregisterFromWorkMail(ctx context.Context, params *DeregisterF
 		params = &DeregisterFromWorkMailInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeregisterFromWorkMail", params, optFns, addOperationDeregisterFromWorkMailMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterFromWorkMail", params, optFns, c.addOperationDeregisterFromWorkMailMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ type DeregisterFromWorkMailOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeregisterFromWorkMailMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeregisterFromWorkMailMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterFromWorkMail{}, middleware.After)
 	if err != nil {
 		return err

@@ -19,7 +19,7 @@ func (c *Client) CheckIfPhoneNumberIsOptedOut(ctx context.Context, params *Check
 		params = &CheckIfPhoneNumberIsOptedOutInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CheckIfPhoneNumberIsOptedOut", params, optFns, addOperationCheckIfPhoneNumberIsOptedOutMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CheckIfPhoneNumberIsOptedOut", params, optFns, c.addOperationCheckIfPhoneNumberIsOptedOutMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type CheckIfPhoneNumberIsOptedOutOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCheckIfPhoneNumberIsOptedOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCheckIfPhoneNumberIsOptedOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCheckIfPhoneNumberIsOptedOut{}, middleware.After)
 	if err != nil {
 		return err

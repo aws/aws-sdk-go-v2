@@ -16,7 +16,7 @@ func (c *Client) DeleteRoleAlias(ctx context.Context, params *DeleteRoleAliasInp
 		params = &DeleteRoleAliasInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteRoleAlias", params, optFns, addOperationDeleteRoleAliasMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRoleAlias", params, optFns, c.addOperationDeleteRoleAliasMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ type DeleteRoleAliasOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteRoleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteRoleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRoleAlias{}, middleware.After)
 	if err != nil {
 		return err

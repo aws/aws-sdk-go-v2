@@ -19,7 +19,7 @@ func (c *Client) AssociateLexBot(ctx context.Context, params *AssociateLexBotInp
 		params = &AssociateLexBotInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AssociateLexBot", params, optFns, addOperationAssociateLexBotMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateLexBot", params, optFns, c.addOperationAssociateLexBotMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ type AssociateLexBotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAssociateLexBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationAssociateLexBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateLexBot{}, middleware.After)
 	if err != nil {
 		return err

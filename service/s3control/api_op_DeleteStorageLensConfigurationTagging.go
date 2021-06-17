@@ -28,7 +28,7 @@ func (c *Client) DeleteStorageLensConfigurationTagging(ctx context.Context, para
 		params = &DeleteStorageLensConfigurationTaggingInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteStorageLensConfigurationTagging", params, optFns, addOperationDeleteStorageLensConfigurationTaggingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteStorageLensConfigurationTagging", params, optFns, c.addOperationDeleteStorageLensConfigurationTaggingMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ type DeleteStorageLensConfigurationTaggingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeleteStorageLensConfigurationTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteStorageLensConfigurationTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteStorageLensConfigurationTagging{}, middleware.After)
 	if err != nil {
 		return err

@@ -17,7 +17,7 @@ func (c *Client) CreateDynamicThingGroup(ctx context.Context, params *CreateDyna
 		params = &CreateDynamicThingGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDynamicThingGroup", params, optFns, addOperationCreateDynamicThingGroupMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDynamicThingGroup", params, optFns, c.addOperationCreateDynamicThingGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ type CreateDynamicThingGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationCreateDynamicThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateDynamicThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDynamicThingGroup{}, middleware.After)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func (c *Client) ListCustomRoutingListeners(ctx context.Context, params *ListCus
 		params = &ListCustomRoutingListenersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListCustomRoutingListeners", params, optFns, addOperationListCustomRoutingListenersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListCustomRoutingListeners", params, optFns, c.addOperationListCustomRoutingListenersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ type ListCustomRoutingListenersOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListCustomRoutingListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListCustomRoutingListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCustomRoutingListeners{}, middleware.After)
 	if err != nil {
 		return err
