@@ -27,7 +27,7 @@ const DefaultDownloadPartSize = 1024 * 1024 * 5
 // when using Download().
 const DefaultDownloadConcurrency = 5
 
-// DefaultPartBodyMaxRetries is the default number of retries to make when a part fails to upload.
+// DefaultPartBodyMaxRetries is the default number of retries to make when a part fails to download.
 const DefaultPartBodyMaxRetries = 3
 
 type errReadingBody struct {
@@ -53,7 +53,7 @@ type Downloader struct {
 	// PartSize is ignored if the Range input parameter is provided.
 	PartSize int64
 
-	// PartBodyMaxRetries is the number of retry attempts to make for failed part uploads
+	// PartBodyMaxRetries is the number of retry attempts to make for failed part downloads.
 	PartBodyMaxRetries int
 
 	// Logger to send logging messages to
