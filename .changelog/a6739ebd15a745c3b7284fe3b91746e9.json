@@ -1,0 +1,8 @@
+{
+    "id": "a6739ebd-15a7-45c3-b728-4fe3b91746e9",
+    "type": "feature",
+    "description": "Add UnmarshalJSON for AWSEpochTime to correctly unmarshal AWSEpochTime, ([#1298](https://github.com/aws/aws-sdk-go-v2/pull/1298))",
+    "modules": [
+        "feature/cloudfront/sign"
+    ]
+}
