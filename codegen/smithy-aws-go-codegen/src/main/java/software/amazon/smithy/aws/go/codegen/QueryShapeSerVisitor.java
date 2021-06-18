@@ -71,7 +71,7 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
 
     @Override
     protected void serializeCollection(GenerationContext context, CollectionShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         MemberShape member = shape.getMember();
         Shape target = context.getModel().expectShape(member.getTarget());
 
@@ -98,13 +98,13 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
     @Override
     protected void serializeDocument(GenerationContext context, DocumentShape shape) {
         LOGGER.warning("Document type is unsupported for Query serialization.");
-        context.getWriter().write("return &smithy.SerializationError{Err: fmt.Errorf("
+        context.getWriter().get().write("return &smithy.SerializationError{Err: fmt.Errorf("
                 + "\"Document type is unsupported for the query protocol.\")}");
     }
 
     @Override
     protected void serializeMap(GenerationContext context, MapShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
 
         // If the map is empty, exit early to avoid extra effort.
         writer.write("if len(v) == 0 { return nil }");
@@ -142,7 +142,7 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
 
     @Override
     protected void serializeStructure(GenerationContext context, StructureShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         writer.write("object := value.Object()");
         writer.write("_ = object");
         writer.write("");
@@ -199,7 +199,7 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
 
     @Override
     protected void serializeUnion(GenerationContext context, UnionShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol symbol = symbolProvider.toSymbol(shape);
         writer.addUseImports(SmithyGoDependency.FMT);

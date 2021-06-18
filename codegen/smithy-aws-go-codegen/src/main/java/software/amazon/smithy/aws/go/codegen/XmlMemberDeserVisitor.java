@@ -70,7 +70,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
 
     @Override
     public Void blobShape(BlobShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         writer.write("var data string");
         handleString(shape, () -> writer.write("data = xtv"));
 
@@ -82,7 +82,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
 
     @Override
     public Void booleanShape(BooleanShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         writer.addUseImports(SmithyGoDependency.FMT);
         consumeToken(shape);
 
@@ -94,7 +94,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
                         shape.getId().getName());
             });
             writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(context.getModel(),
-                    context.getWriter(), pointableIndex, member, "xtv"));
+                    context.getWriter().get(), pointableIndex, member, "xtv"));
         });
         return null;
     }
@@ -104,7 +104,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
      * If member is an xmlAttributeMember, "attr" representing xml attribute value is in scope.
      */
     private void consumeToken(Shape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         // if the member is a modeled as an xml attribute, we do not need to
         // get another token, instead use the attribute values from previously
         // decoded start element.
@@ -121,28 +121,28 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
     @Override
     public Void byteShape(ByteShape shape) {
         // Smithy's byte shape represents a signed 8-bit int, which doesn't line up with Go's unsigned byte
-        handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
+        handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter().get(),
                 pointableIndex, member, "int8(i64)"));
         return null;
     }
 
     @Override
     public Void shortShape(ShortShape shape) {
-        handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
+        handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter().get(),
                 pointableIndex, member, "int16(i64)"));
         return null;
     }
 
     @Override
     public Void integerShape(IntegerShape shape) {
-        handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
+        handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter().get(),
                 pointableIndex, member, "int32(i64)"));
         return null;
     }
 
     @Override
     public Void longShape(LongShape shape) {
-        handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
+        handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter().get(),
                 pointableIndex, member, "i64"));
         return null;
     }
@@ -155,7 +155,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
      * @param cast  A wrapping of {@code i64} to cast it to the proper type.
      */
     private void handleInteger(Shape shape, String cast) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         handleNumber(shape, () -> {
             writer.addUseImports(SmithyGoDependency.STRCONV);
             writer.write("i64, err := strconv.ParseInt(xtv, 10, 64)");
@@ -172,7 +172,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
      * @param r     A runnable that runs after the value has been parsed, before the scope closes.
      */
     private void handleNumber(Shape shape, Runnable r) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         writer.addUseImports(SmithyGoDependency.FMT);
         consumeToken(shape);
 
@@ -184,14 +184,14 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
 
     @Override
     public Void floatShape(FloatShape shape) {
-        handleFloat(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
+        handleFloat(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter().get(),
                 pointableIndex, member, "float32(f64)"));
         return null;
     }
 
     @Override
     public Void doubleShape(DoubleShape shape) {
-        handleFloat(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
+        handleFloat(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter().get(),
                 pointableIndex, member, "f64"));
         return null;
     }
@@ -204,7 +204,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
      * @param cast  A wrapping of {@code f64} to cast it to the proper type.
      */
     private void handleFloat(Shape shape, String cast) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         handleNumber(shape, () -> {
             writer.write("f64, err := strconv.ParseFloat(xtv, 64)");
             writer.write("if err != nil { return err }");
@@ -214,14 +214,14 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
 
     @Override
     public Void stringShape(StringShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Symbol symbol = context.getSymbolProvider().toSymbol(shape);
 
         if (shape.hasTrait(EnumTrait.class)) {
             handleString(shape, () -> writer.write("$L = $P(xtv)", dataDest, symbol));
         } else {
             handleString(shape, () -> writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(
-                    context.getModel(), context.getWriter(), pointableIndex, member, "xtv")));
+                    context.getModel(), context.getWriter().get(), pointableIndex, member, "xtv")));
         }
 
         return null;
@@ -235,7 +235,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
      * @param r     A runnable that runs after the value has been parsed, before the scope closes.
      */
     private void handleString(Shape shape, Runnable r) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         writer.addUseImports(SmithyGoDependency.FMT);
         consumeToken(shape);
 
@@ -247,7 +247,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
 
     @Override
     public Void timestampShape(TimestampShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         writer.addUseImports(SmithyGoDependency.SMITHY_TIME);
 
         switch (timestampFormat) {
@@ -256,7 +256,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
                     writer.write("t, err := smithytime.ParseDateTime(xtv)");
                     writer.write("if err != nil { return err }");
                     writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(context.getModel(),
-                            context.getWriter(), pointableIndex, member, "t"));
+                            context.getWriter().get(), pointableIndex, member, "t"));
                 });
                 break;
             case HTTP_DATE:
@@ -264,7 +264,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
                     writer.write("t, err := smithytime.ParseHTTPDate(xtv)");
                     writer.write("if err != nil { return err }");
                     writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(context.getModel(),
-                            context.getWriter(), pointableIndex, member, "t"));
+                            context.getWriter().get(), pointableIndex, member, "t"));
                 });
                 break;
             case EPOCH_SECONDS:
@@ -366,7 +366,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
 
     private void writeDelegateFunction(Shape shape) {
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(), context.getProtocolName());
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         writer.write("nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)");
 
         ProtocolUtils.writeDeserDelegateFunction(context, writer, member, dataDest, (destVar) -> {
@@ -382,7 +382,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
 
     private void writeUnwrappedDelegateFunction(Shape shape) {
         final String functionName = getUnwrappedDelegateFunctionName(shape);
-        final GoWriter writer = context.getWriter();
+        final GoWriter writer = context.getWriter().get();
 
         writer.write("nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)");
 

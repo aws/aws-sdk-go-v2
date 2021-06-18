@@ -83,7 +83,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
     // generates code to define and initialize output variable for an aggregate shape
     private void generatesInitializerForOutputVariable(GenerationContext context, Shape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Symbol shapeSymbol = context.getSymbolProvider().toSymbol(shape);
 
         writer.write("var sv $P", shapeSymbol);
@@ -137,7 +137,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
      */
     @Override
     protected void deserializeCollection(GenerationContext context, CollectionShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
 
         // initialize the output member variable
         generatesInitializerForOutputVariable(context, shape);
@@ -181,7 +181,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
     // Generates deserializer function for collection shapes with xml flattened trait.
     public void generateFlattenedCollectionDeserializer(GenerationContext context, CollectionShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol symbol = symbolProvider.toSymbol(shape);
 
@@ -208,7 +208,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
     @Override
     protected void deserializeMap(GenerationContext context, MapShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
 
         // initialize the output member variable
         generatesInitializerForOutputVariable(context, shape);
@@ -244,7 +244,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
     // Generates deserializer function for flattened maps.
     protected void generateFlattenedMapDeserializer(GenerationContext context, MapShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol symbol = symbolProvider.toSymbol(shape);
 
@@ -316,7 +316,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
     @Override
     protected void deserializeStructure(GenerationContext context, StructureShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Model model = context.getModel();
 
@@ -411,7 +411,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
     @Override
     protected void deserializeDocument(GenerationContext context, DocumentShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         LOGGER.warning("The document type is unsupported for XML protocols.");
         writer.addUseImports(SmithyGoDependency.SMITHY);
         writer.write("return &smithy.DeserializationError{Err: fmt.Errorf("
@@ -420,7 +420,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
     @Override
     protected void deserializeUnion(GenerationContext context, UnionShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol symbol = symbolProvider.toSymbol(shape);
         Model model = context.getModel();

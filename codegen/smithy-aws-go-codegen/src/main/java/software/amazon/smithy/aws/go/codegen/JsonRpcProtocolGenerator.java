@@ -62,7 +62,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
 
     @Override
     protected void serializeInputDocument(GenerationContext context, OperationShape operation) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
 
         // Stub synthetic clone inputs mean there never was an input modeled, always serialize empty JSON object
         // as place holder.
@@ -99,7 +99,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
 
     @Override
     protected void deserializeOutputDocument(GenerationContext context, OperationShape operation) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         StructureShape output = ProtocolUtils.expectOutput(context.getModel(), operation);
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(output, context.getService(), getProtocolName());
         initializeJsonDecoder(writer, "response.Body");
@@ -118,7 +118,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
 
     @Override
     protected void deserializeError(GenerationContext context, StructureShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Symbol symbol = context.getSymbolProvider().toSymbol(shape);
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(), getProtocolName());
 
@@ -140,5 +140,25 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     @Override
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
         writeJsonErrorMessageCodeDeserializer(context);
+    }
+
+    @Override
+    public void generateProtocolDocumentMarshalerUnmarshalDocument(GenerationContext context) {
+        JsonProtocolDocumentUtils.generateProtocolDocumentMarshalerUnmarshalDocument(context);
+    }
+
+    @Override
+    public void generateProtocolDocumentMarshalerMarshalDocument(GenerationContext context) {
+        JsonProtocolDocumentUtils.generateProtocolDocumentMarshalerMarshalDocument(context);
+    }
+
+    @Override
+    public void generateProtocolDocumentUnmarshalerUnmarshalDocument(GenerationContext context) {
+        JsonProtocolDocumentUtils.generateProtocolDocumentUnmarshalerUnmarshalDocument(context);
+    }
+
+    @Override
+    public void generateProtocolDocumentUnmarshalerMarshalDocument(GenerationContext context) {
+        JsonProtocolDocumentUtils.generateProtocolDocumentUnmarshalerMarshalDocument(context);
     }
 }

@@ -26,6 +26,7 @@ import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ProtocolDocumentGenerator;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.UnionGenerator;
@@ -89,7 +90,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
     @Override
     protected void deserializeCollection(GenerationContext context, CollectionShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         MemberShape member = shape.getMember();
         Shape target = context.getModel().expectShape(member.getTarget());
         writeJsonTypeAssertStub(writer, shape);
@@ -120,16 +121,20 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
     @Override
     protected void deserializeDocument(GenerationContext context, DocumentShape shape) {
-        GoWriter writer = context.getWriter();
-        // TODO: implement document deserialization
-        LOGGER.warning("Document type is currently unsupported for JSON deserialization.");
-        writer.writeDocs("TODO: implement document serialization.");
+        GoWriter writer = context.getWriter().get();
+
+        Symbol newUnmarshaler = ProtocolDocumentGenerator.Utilities.getInternalDocumentSymbolBuilder(
+                context.getSettings(), ProtocolDocumentGenerator.INTERNAL_NEW_DOCUMENT_UNMARSHALER_FUNC)
+                .build();
+
+        writer.write("*v = $T(value)", newUnmarshaler);
+
         writer.write("return nil");
     }
 
     @Override
     protected void deserializeMap(GenerationContext context, MapShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol symbol = symbolProvider.toSymbol(shape);
         MemberShape member = shape.getValue();
@@ -161,7 +166,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
     @Override
     protected void deserializeStructure(GenerationContext context, StructureShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol symbol = symbolProvider.toSymbol(shape);
 
@@ -204,7 +209,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
     @Override
     protected void deserializeUnion(GenerationContext context, UnionShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol symbol = symbolProvider.toSymbol(shape);
         writeJsonTypeAssertStub(writer, shape);

@@ -57,7 +57,7 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
 
     @Override
     protected void serializeCollection(GenerationContext context, CollectionShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Shape target = context.getModel().expectShape(shape.getMember().getTarget());
         MemberShape member = shape.getMember();
         writer.write("var array *smithyxml.Array");
@@ -90,7 +90,7 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
 
     @Override
     protected void serializeMap(GenerationContext context, MapShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Shape targetKey = context.getModel().expectShape(shape.getKey().getTarget());
         Shape targetValue = context.getModel().expectShape(shape.getValue().getTarget());
 
@@ -133,7 +133,7 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
 
     @Override
     protected void serializeStructure(GenerationContext context, StructureShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
 
         // defer close xml.value
         writer.write("defer value.Close()");
@@ -171,7 +171,7 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
 
     @Override
     protected void serializeUnion(GenerationContext context, UnionShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol symbol = symbolProvider.toSymbol(shape);
         writer.addUseImports(SmithyGoDependency.FMT);
@@ -210,7 +210,7 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
     protected void serializeDocument(GenerationContext context, DocumentShape shape) {
         // TODO: implement document serialization
         LOGGER.warning("Document type is currently unsupported for XML serialization.");
-        context.getWriter().writeDocs("TODO: implement document serialization.");
-        context.getWriter().write("return nil");
+        context.getWriter().get().writeDocs("TODO: implement document serialization.");
+        context.getWriter().get().write("return nil");
     }
 }

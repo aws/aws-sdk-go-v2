@@ -1,6 +1,8 @@
 package attributevalue
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -913,7 +915,7 @@ func TestEmptyCollectionsSpecialCases(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expected no err got %v", err)
 	}
-	if diff := cmp.Diff(expectedEncode, actualEncode); len(diff) != 0 {
+	if diff := cmp.Diff(expectedEncode, actualEncode, cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
 		t.Errorf("expected encode match\n%s", diff)
 	}
 

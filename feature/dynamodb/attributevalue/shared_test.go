@@ -1,6 +1,8 @@
 package attributevalue
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"reflect"
 	"strings"
 	"testing"
@@ -388,7 +390,8 @@ func assertConvertTest(t *testing.T, actual, expected interface{}, err, expected
 	} else if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	} else {
-		if diff := cmp.Diff(ptrToValue(expected), ptrToValue(actual)); len(diff) != 0 {
+		if diff := cmp.Diff(ptrToValue(expected), ptrToValue(actual),
+			cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
 			t.Errorf("expect match\n%s", diff)
 		}
 	}

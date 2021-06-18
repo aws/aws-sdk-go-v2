@@ -33,7 +33,10 @@ func ExampleCopy() {
 	// Output:
 	// {
 	//   A: 1,
-	//   B: ["hello","bye bye"]
+	//   B: [
+	//     "hello",
+	//     "bye bye"
+	//   ]
 	// }
 }
 
@@ -346,8 +349,11 @@ func ExampleCopyOf() {
 	fmt.Println(awsutil.Prettify(f2))
 
 	// Output:
-	// {
+	// &{
 	//   A: 1,
-	//   B: ["hello","bye bye"]
+	//   B: [
+	//     "hello",
+	//     "bye bye"
+	//   ]
 	// }
 }

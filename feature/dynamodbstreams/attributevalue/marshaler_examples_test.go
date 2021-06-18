@@ -31,24 +31,42 @@ func ExampleMarshal() {
 	fmt.Println("Letters", awsutil.Prettify(m.Value["Letters"]))
 	fmt.Println("Numbers", awsutil.Prettify(m.Value["Numbers"]))
 
-	// Output:
+	// output:
 	// err <nil>
-	// Bytes {
+	// Bytes &{
 	//   Value: <binary> len 2
 	// }
-	// MyField {
+	// MyField &{
 	//   Value: "MyFieldValue"
 	// }
-	// Letters {
+	// Letters &{
 	//   Value: [
-	//     &{a},
-	//     &{b},
-	//     &{c},
-	//     &{d}
+	//     &{
+	//       Value: "a"
+	//     },
+	//     &{
+	//       Value: "b"
+	//     },
+	//     &{
+	//       Value: "c"
+	//     },
+	//     &{
+	//       Value: "d"
+	//     }
 	//   ]
 	// }
-	// Numbers {
-	//   Value: [&{1},&{2},&{3}]
+	// Numbers &{
+	//   Value: [
+	//     &{
+	//       Value: "1"
+	//     },
+	//     &{
+	//       Value: "2"
+	//     },
+	//     &{
+	//       Value: "3"
+	//     }
+	//   ]
 	// }
 }
 

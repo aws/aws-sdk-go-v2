@@ -40,7 +40,7 @@ public final class XmlProtocolUtils {
     public static void generateXMLStartElement(
             ProtocolGenerator.GenerationContext context, Shape shape, String dst, String inputSrc
     ) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         String attrName = dst + "Attr";
         generateXmlNamespaceAndAttributes(context, shape, attrName, inputSrc);
 
@@ -63,7 +63,7 @@ public final class XmlProtocolUtils {
     public static void generatePayloadAsDocumentXMLStartElement(
             ProtocolGenerator.GenerationContext context, MemberShape memberShape, String dst, String inputSrc
     ) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         String attrName = dst + "Attr";
         Shape targetShape = context.getModel().expectShape(memberShape.getTarget());
 
@@ -99,7 +99,7 @@ public final class XmlProtocolUtils {
     private static void generateXmlNamespaceAndAttributes(
             ProtocolGenerator.GenerationContext context, Shape shape, String dst, String inputSrc
     ) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         writer.write("$L := []smithyxml.Attr{}", dst);
 
         Optional<XmlNamespaceTrait> xmlNamespaceTrait = shape.getTrait(XmlNamespaceTrait.class);
@@ -129,7 +129,7 @@ public final class XmlProtocolUtils {
             String inputSrc,
             String dst
     ) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         members.forEach(memberShape -> {
             if (memberShape.hasTrait(XmlAttributeTrait.class)) {
                 GoValueAccessUtils.writeIfNonZeroValueMember(context.getModel(), context.getSymbolProvider(),
@@ -150,7 +150,7 @@ public final class XmlProtocolUtils {
             ProtocolGenerator.GenerationContext context,
             MemberShape member, String src, String dest
     ) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Shape target = context.getModel().expectShape(member.getTarget());
 
         // declare destination variable
@@ -352,7 +352,7 @@ public final class XmlProtocolUtils {
      * @see <a href="https://awslabs.github.io/smithy/1.0/spec/aws/aws-restxml-protocol.html#operation-error-serialization">Rest-XML operation error serialization.</a>
      */
     public static void writeXmlErrorMessageCodeDeserializer(ProtocolGenerator.GenerationContext context) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
 
         // Check if service uses isNoErrorWrapping setting
         boolean isNoErrorWrapping = context.getService().getTrait(RestXmlTrait.class).map(
