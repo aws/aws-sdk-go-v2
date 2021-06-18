@@ -18,6 +18,7 @@ import software.amazon.smithy.utils.ListUtils;
 
 /**
  * Registers additional client specific configuration fields
+ * TODO: This needs to refactored so that we aren't defining "pseudo-config fields"
  */
 public class ResolveClientConfigFromSources implements GoIntegration {
     private static final Logger LOGGER = Logger.getLogger(AddAwsConfigFields.class.getName());
@@ -38,6 +39,11 @@ public class ResolveClientConfigFromSources implements GoIntegration {
     private static final String ENABLE_ENDPOINT_DISCOVERY_CONFIG_RESOLVER = "resolveEnableEndpointDiscoveryFromConfigSources";
     private static final String RESOLVE_ENABLE_ENDPOINT_DISCOVERY = "ResolveEnableEndpointDiscovery";
 
+    // UseDualStack
+    private static final String DUAL_STACK_ENDPOINT_CONFIG_RESOLVER = "resolveUseDualStackEndpoint";
+    private static final String RESOLVE_USE_DUAL_STACK_ENDPOINT = "ResolveUseDualStackEndpoint";
+    private static final String USE_FIPS_ENDPOINT_CONFIG_RESOLVER = "resolveUseFIPSEndpoint";
+    private static final String RESOLVE_USE_FIPS_ENDPOINT = "ResolveUseFIPSEndpoint";
 
     public static final List<AddAwsConfigFields.AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AddAwsConfigFields.AwsConfigField.builder()
@@ -55,6 +61,21 @@ public class ResolveClientConfigFromSources implements GoIntegration {
                     .servicePredicate(ResolveClientConfigFromSources::supportsEndpointDiscovery)
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(ENABLE_ENDPOINT_DISCOVERY_CONFIG_RESOLVER)
                             .build())
+                    .build(),
+            // All Clients Except S3 and S3 Control
+            AddAwsConfigFields.AwsConfigField.builder()
+                    .name("EndpointOptions.UseDualStackEndpoint")
+                    .type(SymbolUtils.createPointableSymbolBuilder("bool").build())
+                    .generatedOnClient(false)
+                    .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(DUAL_STACK_ENDPOINT_CONFIG_RESOLVER)
+                            .build())
+                    .build(),
+            AddAwsConfigFields.AwsConfigField.builder()
+                    .name("EndpointOptions.UseFIPSEndpoint")
+                    .type(SymbolUtils.createPointableSymbolBuilder("bool").build())
+                    .generatedOnClient(false)
+                    .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(USE_FIPS_ENDPOINT_CONFIG_RESOLVER)
+                            .build())
                     .build()
     );
 
@@ -70,6 +91,8 @@ public class ResolveClientConfigFromSources implements GoIntegration {
         goDelegator.useShapeWriter(serviceShape, writer -> {
             generateUseARNRegionResolver(model, serviceShape, writer);
             generateEnableEndpointDiscoveryResolver(model, serviceShape, writer);
+            generateUseUseDualStackResolver(model, serviceShape, writer);
+            generateUseUseFIPSEndpointResolver(model, serviceShape, writer);
         });
     }
 
@@ -106,22 +129,62 @@ public class ResolveClientConfigFromSources implements GoIntegration {
         writer.write("");
     }
 
-    private static void generateEnableEndpointDiscoveryResolver(Model model, ServiceShape serviceShape, GoWriter writer) {
+    private static void generateEnableEndpointDiscoveryResolver(
+            Model model,
+            ServiceShape serviceShape,
+            GoWriter writer
+    ) {
         if (!supportsEndpointDiscovery(model, serviceShape)) {
             return;
         }
 
         generatedResolverFunction(writer, ENABLE_ENDPOINT_DISCOVERY_CONFIG_RESOLVER,
                 "resolves EnableEndpointDiscovery configuration", () -> {
-            writer.addUseImports(SmithyGoDependency.CONTEXT);
-            Symbol resolverFunc = SymbolUtils.createValueSymbolBuilder(RESOLVE_ENABLE_ENDPOINT_DISCOVERY,
-                    AwsGoDependency.SERVICE_INTERNAL_CONFIG).build();
-            writer.write("value, found, err := $T(context.Background(), cfg.$L)", resolverFunc,
-                    CONFIG_SOURCE_CONFIG_NAME);
-            writer.write("if err != nil { return err }");
-            writer.write("if found { o.$L.$L = value }", ENDPOINT_DISCOVERY_OPTION, ENABLE_ENDPOINT_DISCOVERY_OPTION);
-        });
+                    writer.addUseImports(SmithyGoDependency.CONTEXT);
+                    Symbol resolverFunc = SymbolUtils.createValueSymbolBuilder(RESOLVE_ENABLE_ENDPOINT_DISCOVERY,
+                            AwsGoDependency.SERVICE_INTERNAL_CONFIG).build();
+                    writer.write("value, found, err := $T(context.Background(), cfg.$L)", resolverFunc,
+                            CONFIG_SOURCE_CONFIG_NAME);
+                    writer.write("if err != nil { return err }");
+                    writer.write("if found { o.$L.$L = value }", ENDPOINT_DISCOVERY_OPTION, ENABLE_ENDPOINT_DISCOVERY_OPTION);
+                });
         writer.write("");
+    }
+
+    private void generateUseUseDualStackResolver(Model model, ServiceShape serviceShape, GoWriter writer) {
+        writer.addUseImports(AwsGoDependency.AWS_CORE);
+
+        generatedResolverFunction(writer, DUAL_STACK_ENDPOINT_CONFIG_RESOLVER,
+                "resolves dual-stack endpoint configuration", () -> {
+                    writer.addUseImports(SmithyGoDependency.CONTEXT);
+                    var resolverFunc = SymbolUtils.createValueSymbolBuilder(RESOLVE_USE_DUAL_STACK_ENDPOINT,
+                            AwsGoDependency.SERVICE_INTERNAL_CONFIG).build();
+                    writer.write("value, found, err := $T(context.Background(), cfg.$L)", resolverFunc,
+                            CONFIG_SOURCE_CONFIG_NAME);
+                    writer.write("if err != nil { return err }");
+
+                    writer.openBlock("if found {", "}", () -> {
+                        writer.write("o.EndpointOptions.$L = value", EndpointGenerator.DUAL_STACK_ENDPOINT_OPTION);
+                    });
+                });
+    }
+
+    private void generateUseUseFIPSEndpointResolver(Model model, ServiceShape serviceShape, GoWriter writer) {
+        writer.addUseImports(AwsGoDependency.AWS_CORE);
+
+        generatedResolverFunction(writer, USE_FIPS_ENDPOINT_CONFIG_RESOLVER,
+                "resolves FIPS endpoint configuration", () -> {
+                    writer.addUseImports(SmithyGoDependency.CONTEXT);
+                    var resolverFunc = SymbolUtils.createValueSymbolBuilder(RESOLVE_USE_FIPS_ENDPOINT,
+                            AwsGoDependency.SERVICE_INTERNAL_CONFIG).build();
+                    writer.write("value, found, err := $T(context.Background(), cfg.$L)", resolverFunc,
+                            CONFIG_SOURCE_CONFIG_NAME);
+                    writer.write("if err != nil { return err }");
+
+                    writer.openBlock("if found {", "}", () -> {
+                        writer.write("o.EndpointOptions.$L = value", EndpointGenerator.USE_FIPS_ENDPOINT_OPTION);
+                    });
+                });
     }
 
     private static Symbol getUniversalSymbol(String symbolName) {

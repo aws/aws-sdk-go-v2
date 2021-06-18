@@ -58,6 +58,14 @@ type UpdateEndpointOptions struct {
 	EndpointResolverOptions EndpointResolverOptions
 }
 
+// IsUseDualStack returns whether dual-stack endpoint resolution is enabled
+func (o UpdateEndpointOptions) IsUseDualStack() bool {
+	if o.EndpointResolverOptions.UseDualStackEndpoint != aws.DualStackEndpointStateUnset {
+		return o.EndpointResolverOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled
+	}
+	return o.UseDualstack
+}
+
 // UpdateEndpoint adds the middleware to the middleware stack based on the UpdateEndpointOptions.
 func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err error) {
 	// validate and backfill account id from ARN
@@ -82,7 +90,7 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 		CopyInput:               options.Accessor.CopyInput,
 		UpdateARNField:          options.Accessor.UpdateARNField,
 		UseARNRegion:            options.UseARNRegion,
-		UseDualstack:            options.UseDualstack,
+		UseDualstack:            options.IsUseDualStack(),
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointResolverOptions,
 	}, "OperationSerializer", middleware.Before)
@@ -92,18 +100,11 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 
 	// outpostID middleware
 	err = stack.Serialize.Insert(&processOutpostIDMiddleware{
-		GetOutpostID: options.Accessor.GetOutpostIDInput,
-		UseDualstack: options.UseDualstack,
+		GetOutpostID:            options.Accessor.GetOutpostIDInput,
+		UseDualstack:            options.IsUseDualStack(),
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointResolverOptions,
 	}, (*processARNResource)(nil).ID(), middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	// enable dual stack support
-	err = stack.Serialize.Insert(&s3shared.EnableDualstack{
-		UseDualstack:     options.UseDualstack,
-		DefaultServiceID: "s3-control",
-	}, "OperationSerializer", middleware.After)
 	if err != nil {
 		return err
 	}

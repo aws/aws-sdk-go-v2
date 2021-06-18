@@ -15,6 +15,7 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
+import java.io.ObjectInputFilter;
 import java.util.List;
 import java.util.function.Consumer;
 import software.amazon.smithy.aws.traits.ServiceTrait;
@@ -72,7 +73,7 @@ public final class AwsEndpointGenerator implements GoIntegration {
                                 .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_OPTIONS)
                                         .build())
                                 .documentation("The endpoint options to be used when attempting "
-                                        + "to resolve an endpoint.")
+                                               + "to resolve an endpoint.")
                                 .build()
                 ))
                 .addConfigFieldResolver(ConfigFieldResolver.builder()
@@ -80,6 +81,12 @@ public final class AwsEndpointGenerator implements GoIntegration {
                         .target(ConfigFieldResolver.Target.INITIALIZATION)
                         .resolver(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.CLIENT_CONFIG_RESOLVER)
                                 .build())
+                        .build())
+                .addConfigFieldResolver(ConfigFieldResolver.builder()
+                        .location(ConfigFieldResolver.Location.OPERATION)
+                        .target(ConfigFieldResolver.Target.FINALIZATION)
+                        .resolver(SymbolUtils.createValueSymbolBuilder(
+                                EndpointGenerator.SET_RESOLVED_REGION_ENDPOINT_OPTION).build())
                         .build())
                 .build());
     }

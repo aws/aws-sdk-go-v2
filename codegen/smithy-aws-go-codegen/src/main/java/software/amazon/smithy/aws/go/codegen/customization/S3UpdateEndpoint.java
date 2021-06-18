@@ -164,8 +164,11 @@ public class S3UpdateEndpoint implements GoIntegration {
                                         .type(SymbolUtils.createValueSymbolBuilder("bool")
                                                 .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
                                                 .build())
-                                        .documentation(
-                                                "Allows you to enable Dualstack endpoint support for the service.")
+                                        .documentation("Allows you to enable dual-stack endpoint support for the "
+                                                + "service.")
+                                        .deprecated("Set dual-stack by setting DualStackEndpoint on "
+                                                + "EndpointResolverOptions. When EndpointResolverOptions' UseDualStack "
+                                                + "field is set it overrides this field value.")
                                         .build(),
                                 ConfigField.builder()
                                         .name(USE_ARNREGION_OPTION)

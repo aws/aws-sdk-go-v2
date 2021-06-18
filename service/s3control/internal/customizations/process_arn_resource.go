@@ -111,12 +111,6 @@ func (m *processARNResource) HandleSerialize(
 				resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 		}
 
-		// check if resource arn region is FIPS
-		if resourceRequest.UseFips() {
-			return out, metadata, s3shared.NewFIPSConfigurationError(tv, resourceRequest.PartitionID,
-				resourceRequest.RequestRegion, nil)
-		}
-
 		// Disable endpoint host prefix for s3-control
 		ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)
 
@@ -151,12 +145,6 @@ func (m *processARNResource) HandleSerialize(
 		if m.UseDualstack {
 			return out, metadata, s3shared.NewClientConfiguredForDualStackError(tv,
 				resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
-		}
-
-		// check if resource arn region is FIPS
-		if resourceRequest.UseFips() {
-			return out, metadata, s3shared.NewFIPSConfigurationError(tv, resourceRequest.PartitionID,
-				resourceRequest.RequestRegion, nil)
 		}
 
 		// Disable endpoint host prefix for s3-control
@@ -266,13 +254,18 @@ func buildOutpostAccessPointRequest(ctx context.Context, options outpostAccessPo
 	var endpoint aws.Endpoint
 	var err error
 	endpointSource := awsmiddleware.GetEndpointSource(ctx)
+	eo := options.EndpointResolverOptions
+	eo.ResolvedRegion = ""
+
 	if endpointsID == "s3" && endpointSource == aws.EndpointSourceServiceMetadata {
 		// use s3 endpoint resolver
 		endpoint, err = s3endpoints.New().ResolveEndpoint(resolveRegion, s3endpoints.Options{
-			DisableHTTPS: options.EndpointResolverOptions.DisableHTTPS,
+			DisableHTTPS:         eo.DisableHTTPS,
+			UseFIPSEndpoint:      eo.UseFIPSEndpoint,
+			UseDualStackEndpoint: eo.UseDualStackEndpoint,
 		})
 	} else {
-		endpoint, err = options.EndpointResolver.ResolveEndpoint(resolveRegion, options.EndpointResolverOptions)
+		endpoint, err = options.EndpointResolver.ResolveEndpoint(resolveRegion, eo)
 	}
 
 	if err != nil {
@@ -349,7 +342,10 @@ func buildOutpostBucketRequest(ctx context.Context, options outpostBucketOptions
 	endpointsID := "s3-control"
 
 	// resolve regional endpoint for resolved region.
-	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, options.EndpointResolverOptions)
+	eo := options.EndpointResolverOptions
+	eo.ResolvedRegion = ""
+
+	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, eo)
 	if err != nil {
 		return ctx, s3shared.NewFailedToResolveEndpointError(
 			tv,

@@ -324,6 +324,38 @@ func TestNewEnvConfig(t *testing.T) {
 				S3DisableMultiRegionAccessPoints: ptr.Bool(true),
 			},
 		},
+		25: {
+			Env: map[string]string{
+				"AWS_USE_DUALSTACK_ENDPOINT": "true",
+			},
+			Config: EnvConfig{
+				UseDualStackEndpoint: aws.DualStackEndpointStateEnabled,
+			},
+		},
+		26: {
+			Env: map[string]string{
+				"AWS_USE_DUALSTACK_ENDPOINT": "false",
+			},
+			Config: EnvConfig{
+				UseDualStackEndpoint: aws.DualStackEndpointStateDisabled,
+			},
+		},
+		27: {
+			Env: map[string]string{
+				"AWS_USE_FIPS_ENDPOINT": "true",
+			},
+			Config: EnvConfig{
+				UseFIPSEndpoint: aws.FIPSEndpointStateEnabled,
+			},
+		},
+		28: {
+			Env: map[string]string{
+				"AWS_USE_FIPS_ENDPOINT": "false",
+			},
+			Config: EnvConfig{
+				UseFIPSEndpoint: aws.FIPSEndpointStateDisabled,
+			},
+		},
 	}
 
 	for i, c := range cases {

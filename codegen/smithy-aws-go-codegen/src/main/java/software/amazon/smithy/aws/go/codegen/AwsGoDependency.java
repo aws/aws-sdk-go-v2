@@ -31,11 +31,12 @@ public class AwsGoDependency {
     public static final GoDependency AWS_MIDDLEWARE = aws("aws/middleware", "awsmiddleware");
     public static final GoDependency AWS_RETRY = aws("aws/retry");
     public static final GoDependency AWS_SIGNER_V4 = aws("aws/signer/v4");
-    public static final GoDependency AWS_ENDPOINTS = aws("internal/endpoints");
     public static final GoDependency AWS_XML = aws("aws/protocol/xml", "awsxml");
     public static final GoDependency AWS_HTTP_TRANSPORT = aws("aws/transport/http", "awshttp");
     public static final GoDependency AWSTESTING_UNIT = aws("internal/awstesting/unit");
 
+    public static final GoDependency INTERNAL_ENDPOINTS_V2 = awsModuleDep("internal/endpoints/v2", null,
+            Versions.INTERNAL_ENDPOINTS_V2, "endpoints");
     public static final GoDependency S3_SHARED_CONFIG = aws("service/internal/s3shared/config", "s3sharedconfig");
     public static final GoDependency SERVICE_INTERNAL_CONFIG = awsModuleDep("internal/configsources",
             null, Versions.SERVICE_INTERNAL_CONFIG, "internalConfig");
@@ -91,5 +92,6 @@ public class AwsGoDependency {
         private static final String AWS_SDK = "v1.4.0";
         private static final String SERVICE_INTERNAL_CONFIG = "v0.0.0-00010101000000-000000000000";
         private static final String SERVICE_INTERNAL_ENDPOINT_DISCOVERY = "v0.0.0-00010101000000-000000000000";
+        private static final String INTERNAL_ENDPOINTS_V2 = "v2.0.0-00010101000000-000000000000";
     }
 }

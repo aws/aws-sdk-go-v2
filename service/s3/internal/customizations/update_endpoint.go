@@ -3,19 +3,17 @@ package customizations
 import (
 	"context"
 	"fmt"
-	"github.com/aws/smithy-go/encoding/httpbinding"
 	"log"
 	"net/url"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
-
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
-
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/s3/internal/endpoints"
+	"github.com/aws/smithy-go/encoding/httpbinding"
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // EndpointResolver interface for resolving service endpoints.
@@ -70,8 +68,18 @@ type UpdateEndpointOptions struct {
 	DisableMultiRegionAccessPoints bool
 }
 
+// IsUseDualStack returns whether dual-stack endpoint resolution is enabled
+func (o UpdateEndpointOptions) IsUseDualStack() bool {
+	if o.EndpointResolverOptions.UseDualStackEndpoint != aws.DualStackEndpointStateUnset {
+		return o.EndpointResolverOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled
+	}
+	return o.UseDualstack
+}
+
 // UpdateEndpoint adds the middleware to the middleware stack based on the UpdateEndpointOptions.
 func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err error) {
+	const serializerID = "OperationSerializer"
+
 	// initial arn look up middleware
 	err = stack.Initialize.Add(&s3shared.ARNLookup{
 		GetARNValue: options.Accessor.GetBucketFromInput,
@@ -84,11 +92,11 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 	err = stack.Serialize.Insert(&processARNResource{
 		UseARNRegion:                   options.UseARNRegion,
 		UseAccelerate:                  options.UseAccelerate,
-		UseDualstack:                   options.UseDualstack,
+		UseDualstack:                   options.IsUseDualStack(),
 		EndpointResolver:               options.EndpointResolver,
 		EndpointResolverOptions:        options.EndpointResolverOptions,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
-	}, "OperationSerializer", middleware.Before)
+	}, serializerID, middleware.Before)
 	if err != nil {
 		return err
 	}
@@ -99,25 +107,16 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 	err = stack.Serialize.Insert(&s3ObjectLambdaEndpoint{
 		UseEndpoint:             options.TargetS3ObjectLambda,
 		UseAccelerate:           options.UseAccelerate,
-		UseDualstack:            options.UseDualstack,
+		UseDualstack:            options.IsUseDualStack(),
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointResolverOptions,
-	}, "OperationSerializer", middleware.Before)
+	}, serializerID, middleware.Before)
 	if err != nil {
 		return err
 	}
 
 	// remove bucket arn middleware
-	err = stack.Serialize.Insert(&removeBucketFromPathMiddleware{}, "OperationSerializer", middleware.After)
-	if err != nil {
-		return err
-	}
-
-	// enable dual stack support
-	err = stack.Serialize.Insert(&s3shared.EnableDualstack{
-		UseDualstack:     options.UseDualstack,
-		DefaultServiceID: "s3",
-	}, "OperationSerializer", middleware.After)
+	err = stack.Serialize.Insert(&removeBucketFromPathMiddleware{}, serializerID, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -128,7 +127,7 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 		getBucketFromInput: options.Accessor.GetBucketFromInput,
 		useAccelerate:      options.UseAccelerate,
 		supportsAccelerate: options.SupportsAccelerate,
-	}, (*s3shared.EnableDualstack)(nil).ID(), middleware.After)
+	}, serializerID, middleware.After)
 	if err != nil {
 		return err
 	}

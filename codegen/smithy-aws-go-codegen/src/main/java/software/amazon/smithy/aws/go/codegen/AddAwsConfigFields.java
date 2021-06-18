@@ -48,6 +48,7 @@ public class AddAwsConfigFields implements GoIntegration {
     public static final String REGION_CONFIG_NAME = "Region";
     public static final String CREDENTIALS_CONFIG_NAME = "Credentials";
     public static final String ENDPOINT_RESOLVER_CONFIG_NAME = "EndpointResolver";
+    public static final String AWS_ENDPOINT_RESOLVER_WITH_OPTIONS = "EndpointResolverWithOptions";
     public static final String HTTP_CLIENT_CONFIG_NAME = "HTTPClient";
     public static final String RETRYER_CONFIG_NAME = "Retryer";
     public static final String API_OPTIONS_CONFIG_NAME = "APIOptions";
@@ -69,8 +70,8 @@ public class AddAwsConfigFields implements GoIntegration {
                     .name(RETRYER_CONFIG_NAME)
                     .type(getAwsCoreSymbol("Retryer"))
                     .documentation("Retryer guides how HTTP requests should be retried in case of\n"
-                            + "recoverable failures. When nil the API client will use a default\n"
-                            + "retryer.")
+                                   + "recoverable failures. When nil the API client will use a default\n"
+                                   + "retryer.")
                     .addConfigFieldResolvers(getClientInitializationResolver(
                             SymbolUtils.createValueSymbolBuilder(RESOLVE_RETRYER).build())
                             .build()
@@ -204,8 +205,9 @@ public class AddAwsConfigFields implements GoIntegration {
     private void writeAwsConfigEndpointResolver(GoWriter writer) {
         writer.openBlock("func $L(cfg aws.Config, o *Options) {", "}", RESOLVE_AWS_CONFIG_ENDPOINT_RESOLVER, () -> {
             writer.openBlock("if cfg.$L == nil {", "}", ENDPOINT_RESOLVER_CONFIG_NAME, () -> writer.write("return"));
-            writer.write("o.$L = $L(cfg.$L, $L())", ENDPOINT_RESOLVER_CONFIG_NAME,
+            writer.write("o.$L = $L(cfg.$L, cfg.$L, $L())", ENDPOINT_RESOLVER_CONFIG_NAME,
                     EndpointGenerator.AWS_ENDPOINT_RESOLVER_HELPER, ENDPOINT_RESOLVER_CONFIG_NAME,
+                    AWS_ENDPOINT_RESOLVER_WITH_OPTIONS,
                     EndpointGenerator.RESOLVER_CONSTRUCTOR_NAME);
         });
     }
