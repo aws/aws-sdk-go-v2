@@ -1,0 +1,8 @@
+{
+    "id": "4b776031-a695-41ca-a111-950fd7dbe4fa",
+    "type": "bugfix",
+    "description": "Keep Object-Lock headers a header when presigning Sigv4 signing requests",
+    "modules": [
+        "."
+    ]
+}
