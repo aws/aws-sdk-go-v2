@@ -134,21 +134,19 @@ if err != nil {
 ### {{% alias service=S3 %}} Request Identifiers
 
 {{% alias service=S3 %}} requests contain additional identifiers that can be used to assist AWS Support with
-troubleshooting your request. {{% alias service=S3 %}} requests can contain a `RequestId` and `HostId` pair that can be
-retrieved from {{% alias service=S3 %}} operation errors if available.
+troubleshooting your request. You can use [s3.ResponseError]({{<apiref "service/s3#ResponseError" >}}) and call
+`ServiceRequestID()` and `ServiceHostID()` to retrieve the request ID and host ID.
 
 For example:
 
 ```go
 import "log"
+import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 // ...
 
 if err != nil {
-	var re interface {
-		ServiceHostID()    string
-		ServiceRequestID() string
-	}
+	var re *s3.ResponseError
 	if errors.As(err, &re) {
 		log.Printf("requestID: %s, hostID: %s request failure", re.ServiceRequestID(), re.ServiceHostID());
 	}
