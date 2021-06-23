@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds/internal/config"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -16,25 +18,59 @@ import (
 
 func TestClientEndpoint(t *testing.T) {
 	cases := map[string]struct {
-		Endpoint       string
-		EndpointEnvVar string
-		Expect         string
+		Endpoint     string
+		EndpointMode EndpointMode
+		EnvVar       map[string]string
+		Expect       string
+		WantErr      bool
 	}{
 		"default": {
-			Expect: defaultEndpoint,
+			Expect: defaultIPv4Endpoint,
 		},
-		"from option": {
+		"options endpoint mode IPv4": {
+			EndpointMode: EndpointModeIPv4,
+			Expect:       defaultIPv4Endpoint,
+		},
+		"options endpoint mode IPv6": {
+			EndpointMode: EndpointModeIPv6,
+			Expect:       defaultIPv6Endpoint,
+		},
+		"options endpoint mode IPv6 AND options endpoint": {
+			Endpoint:     "http://endpoint.localhost",
+			EndpointMode: EndpointModeIPv6,
+			Expect:       "http://endpoint.localhost",
+		},
+		"options endpoint mode IPv4 AND options endpoint": {
+			Endpoint:     "http://endpoint.localhost",
+			EndpointMode: EndpointModeIPv4,
+			Expect:       "http://endpoint.localhost",
+		},
+		"options endpoint": {
 			Endpoint: "http://endpoint.localhost",
 			Expect:   "http://endpoint.localhost",
 		},
-		"from option with environment": {
-			Endpoint:       "http://endpoint.localhost",
-			EndpointEnvVar: "http://[::1]",
-			Expect:         "http://endpoint.localhost",
+		"options endpoint AND env endpoint": {
+			Endpoint: "http://endpoint.localhost",
+			EnvVar: map[string]string{
+				endpointEnvVar: "http://[::1]",
+			},
+			Expect: "http://endpoint.localhost",
 		},
-		"from environment": {
-			EndpointEnvVar: "http://[::1]",
-			Expect:         "http://[::1]",
+		"env endpoint": {
+			EnvVar: map[string]string{
+				endpointEnvVar: "http://[::1]",
+			},
+			Expect: "http://[::1]",
+		},
+		"env endpoint missing scheme": {
+			EnvVar: map[string]string{
+				endpointEnvVar: "[::1]",
+			},
+			WantErr: true,
+		},
+		"options endpoint missing scheme": {
+			Endpoint: "[::1]",
+			WantErr:  true,
 		},
 	}
 
@@ -43,14 +79,17 @@ func TestClientEndpoint(t *testing.T) {
 			envs := awstesting.StashEnv()
 			defer awstesting.PopEnv(envs)
 
-			if v := c.EndpointEnvVar; len(v) != 0 {
-				os.Setenv(endpointEnvVar, v)
+			if v := c.EnvVar; len(v) != 0 {
+				for k, v := range c.EnvVar {
+					if err := os.Setenv(k, v); err != nil {
+						t.Errorf("expect no error, got %v", err)
+					}
+				}
 			}
-			endpoint := c.Endpoint
-
 			client := New(Options{
 				disableAPIToken: true,
-				Endpoint:        endpoint,
+				Endpoint:        c.Endpoint,
+				EndpointMode:    c.EndpointMode,
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
 					if e, a := c.Expect+getMetadataPath, r.URL.String(); e != a {
 						return nil, fmt.Errorf("expect %v endpoint, got %v", e, a)
@@ -61,8 +100,8 @@ func TestClientEndpoint(t *testing.T) {
 			})
 
 			_, err := client.GetMetadata(context.Background(), nil)
-			if err != nil {
-				t.Fatal(err)
+			if (err != nil) != c.WantErr {
+				t.Fatalf("WantErr=%v, got err=%v", c.WantErr, err)
 			}
 		})
 	}
@@ -121,6 +160,93 @@ func TestClientEnableState(t *testing.T) {
 			}
 			if err != nil {
 				t.Fatalf("expect no error, got %v", err)
+			}
+		})
+	}
+}
+
+type WithEndpointModeSource EndpointMode
+
+func (w WithEndpointModeSource) GetEC2IMDSEndpointMode() (config.EndpointMode, bool, error) {
+	return config.EndpointMode(w), true, nil
+}
+
+type WithEndpoint string
+
+func (w WithEndpoint) GetEC2IMDSEndpoint() (string, bool, error) {
+	return string(w), true, nil
+}
+
+func TestNewFromConfig(t *testing.T) {
+	cases := map[string]struct {
+		Sources []interface{}
+		Expect  string
+	}{
+		"default": {
+			Expect: defaultIPv4Endpoint,
+		},
+		"non-implementing sources": {
+			Sources: []interface{}{
+				struct{}{},
+			},
+			Expect: defaultIPv4Endpoint,
+		},
+		"endpoint mode IPv6": {
+			Sources: []interface{}{
+				WithEndpointModeSource(EndpointModeIPv6),
+			},
+			Expect: defaultIPv6Endpoint,
+		},
+		"endpoint mode IPv4": {
+			Sources: []interface{}{
+				WithEndpointModeSource(EndpointModeIPv4),
+			},
+			Expect: defaultIPv4Endpoint,
+		},
+		"endpoint mode unknown": {
+			Sources: []interface{}{
+				WithEndpointModeSource(func() (v EndpointMode) {
+					v.SetFromString("foobar")
+					return v
+				}()),
+			},
+			Expect: defaultIPv4Endpoint,
+		},
+		"endpoint": {
+			Sources: []interface{}{
+				WithEndpoint("http://endpoint.localhost"),
+			},
+			Expect: "http://endpoint.localhost",
+		},
+		"endpoint mode && endpoint": {
+			Sources: []interface{}{
+				WithEndpointModeSource(EndpointModeIPv6),
+				WithEndpoint("http://endpoint.localhost"),
+			},
+			Expect: "http://endpoint.localhost",
+		},
+	}
+
+	for name, tt := range cases {
+		t.Run(name, func(t *testing.T) {
+			envs := awstesting.StashEnv()
+			defer awstesting.PopEnv(envs)
+
+			client := NewFromConfig(aws.Config{
+				ConfigSources: tt.Sources,
+			}, func(options *Options) {
+				options.disableAPIToken = true
+				options.HTTPClient = smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					if e, a := tt.Expect+getMetadataPath, r.URL.String(); e != a {
+						return nil, fmt.Errorf("expect %v endpoint, got %v", e, a)
+					}
+					return newMockResponse(), nil
+				})
+			})
+
+			_, err := client.GetMetadata(context.Background(), nil)
+			if err != nil {
+				t.Fatal(err)
 			}
 		})
 	}

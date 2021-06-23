@@ -182,3 +182,19 @@ duration_seconds = 1800
 [profile AssumeWithDoNotNormalize]
 role_arn = AssumeWithDoNotNormalize_role_arn
 source_profile = DoNotNormalize
+
+[profile EC2MetadataServiceEndpoint]
+ec2_metadata_service_endpoint = http://endpoint.localhost
+
+[profile EC2MetadataServiceEndpointModeIPv6]
+ec2_metadata_service_endpoint_mode = IPv6
+
+[profile EC2MetadataServiceEndpointModeIPv4]
+ec2_metadata_service_endpoint_mode = IPv4
+
+[profile EC2MetadataServiceEndpointModeUnknown]
+ec2_metadata_service_endpoint_mode = foobar
+
+[profile EC2MetadataServiceEndpointAndModeMixed]
+ec2_metadata_service_endpoint = http://endpoint.localhost
+ec2_metadata_service_endpoint_mode = IPv6

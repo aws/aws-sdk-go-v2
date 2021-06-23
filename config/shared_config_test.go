@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"path/filepath"
 	"reflect"
 	"strconv"
@@ -393,6 +394,52 @@ func TestNewSharedConfig(t *testing.T) {
 					RoleDurationSeconds: func() *time.Duration { d := time.Minute * 20; return &d }(),
 					Region:              "eu-west-1",
 				},
+			},
+		},
+		"profile with ec2_metadata_service_endpoint": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "EC2MetadataServiceEndpoint",
+			Expected: SharedConfig{
+				Profile:         "EC2MetadataServiceEndpoint",
+				EC2IMDSEndpoint: "http://endpoint.localhost",
+			},
+		},
+		"profile with ec2_metadata_service_endpoint_mode as IPv6": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "EC2MetadataServiceEndpointModeIPv6",
+			Expected: SharedConfig{
+				Profile:             "EC2MetadataServiceEndpointModeIPv6",
+				EC2IMDSEndpointMode: imds.EndpointModeIPv6,
+			},
+		},
+		"profile with ec2_metadata_service_endpoint_mode as IPv4": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "EC2MetadataServiceEndpointModeIPv4",
+			Expected: SharedConfig{
+				Profile:             "EC2MetadataServiceEndpointModeIPv4",
+				EC2IMDSEndpointMode: imds.EndpointModeIPv4,
+			},
+		},
+		"profile with ec2_metadata_service_endpoint_mode is unknown": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "EC2MetadataServiceEndpointModeUnknown",
+			Expected: SharedConfig{
+				Profile: "EC2MetadataServiceEndpointModeUnknown",
+			},
+			Err: fmt.Errorf("unknown EC2 IMDS endpoint mode"),
+		},
+		"profile with ec2_metadata_service_endpoint and ec2_metadata_service_endpoint_mode": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "EC2MetadataServiceEndpointAndModeMixed",
+			Expected: SharedConfig{
+				Profile:             "EC2MetadataServiceEndpointAndModeMixed",
+				EC2IMDSEndpoint:     "http://endpoint.localhost",
+				EC2IMDSEndpointMode: imds.EndpointModeIPv6,
 			},
 		},
 	}
