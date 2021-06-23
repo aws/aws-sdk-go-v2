@@ -146,7 +146,7 @@ import "github.com/aws/aws-sdk-go-v2/service/s3"
 // ...
 
 if err != nil {
-	var re *s3.ResponseError
+	var re s3.ResponseError
 	if errors.As(err, &re) {
 		log.Printf("requestID: %s, hostID: %s request failure", re.ServiceRequestID(), re.ServiceHostID());
 	}
