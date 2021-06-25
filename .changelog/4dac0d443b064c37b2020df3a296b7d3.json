@@ -1,8 +1,0 @@
-{
-    "id": "4dac0d44-3b06-4c37-b202-0df3a296b7d3",
-    "type": "feature",
-    "description": "Module supporting endpoint-discovery across all service clients.",
-    "modules": [
-        "service/internal/endpoint-discovery"
-    ]
-}

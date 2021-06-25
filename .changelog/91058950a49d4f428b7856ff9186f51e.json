@@ -1,8 +1,0 @@
-{
-    "id": "91058950-a49d-4f42-8b78-56ff9186f51e",
-    "type": "feature",
-    "description": "Adds configuration values for enabling endpoint discovery.",
-    "modules": [
-        "."
-    ]
-}

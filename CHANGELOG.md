@@ -1,3 +1,149 @@
+# Release (2021-06-25)
+
+## General Highlights
+* **Feature**: Updated `github.com/aws/smithy-go` to latest version
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.7.0
+  * **Feature**: Adds configuration values for enabling endpoint discovery.
+  * **Bug Fix**: Keep Object-Lock headers a header when presigning Sigv4 signing requests
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.4.0](config/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: Adds configuration setting for enabling endpoint discovery.
+* `github.com/aws/aws-sdk-go-v2/credentials`: [v1.3.0](credentials/CHANGELOG.md#v130-2021-06-25)
+  * **Bug Fix**: Fixed example usages of aws.CredentialsCache ([#1275](https://github.com/aws/aws-sdk-go-v2/pull/1275))
+* `github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign`: [v1.2.0](feature/cloudfront/sign/CHANGELOG.md#v120-2021-06-25)
+  * **Feature**: Add UnmarshalJSON for AWSEpochTime to correctly unmarshal AWSEpochTime, ([#1298](https://github.com/aws/aws-sdk-go-v2/pull/1298))
+* `github.com/aws/aws-sdk-go-v2/internal/configsources`: [v1.0.0](internal/configsources/CHANGELOG.md#v100-2021-06-25)
+  * **Release**: Release new modules
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.2.0](service/amp/CHANGELOG.md#v120-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.3.0](service/amplify/CHANGELOG.md#v130-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/amplifybackend`: [v1.2.0](service/amplifybackend/CHANGELOG.md#v120-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.5.0](service/appflow/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/appmesh`: [v1.4.0](service/appmesh/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.5.0](service/chime/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.5.0](service/cloud9/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.6.0](service/cloudformation/CHANGELOG.md#v160-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.6.0](service/cloudfront/CHANGELOG.md#v160-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearch`: [v1.4.0](service/cloudsearch/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.5.0](service/cloudwatch/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchevents`: [v1.5.0](service/cloudwatchevents/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.5.0](service/codebuild/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/codegurureviewer`: [v1.5.0](service/codegurureviewer/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentity`: [v1.4.0](service/cognitoidentity/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.4.0](service/cognitoidentityprovider/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.5.0](service/connect/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/dax`: [v1.3.0](service/dax/CHANGELOG.md#v130-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.7.0](service/docdb/CHANGELOG.md#v170-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.4.0](service/dynamodb/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: Adds support for endpoint discovery.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.10.0](service/ec2/CHANGELOG.md#v1100-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.7.0](service/elasticache/CHANGELOG.md#v170-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.4.0](service/elasticbeanstalk/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing`: [v1.4.0](service/elasticloadbalancing/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.4.0](service/elasticloadbalancingv2/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.5.0](service/eventbridge/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/greengrass`: [v1.5.0](service/greengrass/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.4.0](service/greengrassv2/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.6.0](service/iam/CHANGELOG.md#v160-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery`: [v1.0.0](service/internal/endpoint-discovery/CHANGELOG.md#v100-2021-06-25)
+  * **Release**: Release new modules
+  * **Feature**: Module supporting endpoint-discovery across all service clients.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.7.0](service/iot/CHANGELOG.md#v170-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/iotanalytics`: [v1.3.0](service/iotanalytics/CHANGELOG.md#v130-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.7.0](service/kendra/CHANGELOG.md#v170-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.4.0](service/kms/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.3.0](service/lexmodelsv2/CHANGELOG.md#v130-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.2.0](service/lexruntimev2/CHANGELOG.md#v120-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.5.0](service/licensemanager/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/lookoutmetrics`: [v1.2.0](service/lookoutmetrics/CHANGELOG.md#v120-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.4.0](service/managedblockchain/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.6.0](service/mediaconnect/CHANGELOG.md#v160-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.7.0](service/medialive/CHANGELOG.md#v170-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.4.0](service/mediatailor/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.6.0](service/neptune/CHANGELOG.md#v160-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.1.0](service/proton/CHANGELOG.md#v110-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.6.0](service/quicksight/CHANGELOG.md#v160-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.5.0](service/ram/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.5.0](service/rds/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.7.0](service/redshift/CHANGELOG.md#v170-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.4.0](service/redshiftdata/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.7.0](service/route53/CHANGELOG.md#v170-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.8.0](service/sagemaker/CHANGELOG.md#v180-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.4.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.7.0](service/securityhub/CHANGELOG.md#v170-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.4.0](service/ses/CHANGELOG.md#v140-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.5.0](service/snowball/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.6.0](service/sns/CHANGELOG.md#v160-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.5.0](service/sqs/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.5.0](service/sts/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.3.0](service/timestreamquery/CHANGELOG.md#v130-2021-06-25)
+  * **Feature**: Adds support for endpoint discovery.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.3.0](service/timestreamwrite/CHANGELOG.md#v130-2021-06-25)
+  * **Feature**: Adds support for endpoint discovery.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.5.0](service/transfer/CHANGELOG.md#v150-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/waf`: [v1.3.0](service/waf/CHANGELOG.md#v130-2021-06-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.6.0](service/wafv2/CHANGELOG.md#v160-2021-06-25)
+  * **Feature**: API client updated
+
 # Release (2021-06-11)
 
 ## Module Highlights

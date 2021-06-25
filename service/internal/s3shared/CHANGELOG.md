@@ -1,3 +1,8 @@
+# v1.5.0 (2021-06-25)
+
+* **Feature**: Updated `github.com/aws/smithy-go` to latest version
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.0 (2021-06-04)
 
 * **Feature**: The handling of AccessPoint and Outpost ARNs have been updated.

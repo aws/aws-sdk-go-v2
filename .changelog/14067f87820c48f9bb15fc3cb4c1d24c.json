@@ -1,8 +1,0 @@
-{
-    "id": "14067f87-820c-48f9-bb15-fc3cb4c1d24c",
-    "type": "bugfix",
-    "description": "Fixed example usages of aws.CredentialsCache ([#1275](https://github.com/aws/aws-sdk-go-v2/pull/1275))",
-    "modules": [
-        "credentials"
-    ]
-}
