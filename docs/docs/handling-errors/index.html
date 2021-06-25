@@ -22,12 +22,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/handling-errors/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2020-11-12T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-01-15T09:43:09-08:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
+<meta property="article:modified_time" content="2021-06-23T15:45:17-07:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
 
 <meta itemprop="name" content="Handling Errors in the AWS SDK for Go V2">
 <meta itemprop="description" content="Use the Error interface to handle errors from the AWS SDK for Go V2 or AWS service."><meta itemprop="datePublished" content="2020-11-12T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2021-01-15T09:43:09-08:00" />
-<meta itemprop="wordCount" content="606">
+<meta itemprop="dateModified" content="2021-06-23T15:45:17-07:00" />
+<meta itemprop="wordCount" content="598">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Handling Errors in the AWS SDK for Go V2"/>
 <meta name="twitter:description" content="Use the Error interface to handle errors from the AWS SDK for Go V2 or AWS service."/>
@@ -108,7 +108,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.fc9094308469853e19bfaaf4c054f444.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c03c80021b62c5ed18b74aec659cbb07.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -140,7 +140,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.fc9094308469853e19bfaaf4c054f444.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c03c80021b62c5ed18b74aec659cbb07.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -2698,18 +2698,16 @@ and use the <code>ServiceRequestID()</code> method to retrieve the request ident
 <span style="color:#000;font-weight:bold">}</span>
 </code></pre></div><h3 id="amazon-s3-request-identifiers">Amazon S3 Request Identifiers</h3>
 <p>Amazon S3 requests contain additional identifiers that can be used to assist AWS Support with
-troubleshooting your request. Amazon S3 requests can contain a <code>RequestId</code> and <code>HostId</code> pair that can be
-retrieved from Amazon S3 operation errors if available.</p>
+troubleshooting your request. You can use <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3#ResponseError">s3.ResponseError</a> and call
+<code>ServiceRequestID()</code> and <code>ServiceHostID()</code> to retrieve the request ID and host ID.</p>
 <p>For example:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;log&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
 
 <span style="color:#8f5902;font-style:italic">// ...
 </span><span style="color:#8f5902;font-style:italic"></span>
 <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
-	<span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">re</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000;font-weight:bold">{</span>
-		<span style="color:#000">ServiceHostID</span><span style="color:#000;font-weight:bold">()</span>    <span style="color:#204a87;font-weight:bold">string</span>
-		<span style="color:#000">ServiceRequestID</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#204a87;font-weight:bold">string</span>
-	<span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#204a87;font-weight:bold">var</span> <span style="color:#000">re</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ResponseError</span>
 	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">errors</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">As</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">re</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
 		<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;requestID: %s, hostID: %s request failure&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">re</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ServiceRequestID</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">re</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ServiceHostID</span><span style="color:#000;font-weight:bold">());</span>
 	<span style="color:#000;font-weight:bold">}</span>
@@ -2718,7 +2716,7 @@ retrieved from Amazon S3 operation errors if available.</p>
 </code></pre></div>
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified January 15, 2021: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/418e7ccc4fa98c51e7987d136c7b1de6718bbc85">updates documentation for fixes and wording (#1046) (418e7ccc4)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified June 23, 2021: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/71c774a758eb3b20fea8d869ec2fdb2cc258b28b">Reference `s3.ResponseError` in documentation (#1311) (71c774a758)</a>
 </div>
 </div>
 
