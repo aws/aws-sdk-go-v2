@@ -1,5 +1,5 @@
 /*
-Endpoint discovery is a feature implemented in the AWS SDK for Go V2 that
+Package endpointdiscovery provides a feature implemented in the AWS SDK for Go V2 that
 allows client to fetch a valid endpoint to serve an API request. Discovered
 endpoints are stored in an internal thread-safe cache to reduce the number
 of calls made to fetch the endpoint.
