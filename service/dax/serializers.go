@@ -1172,6 +1172,11 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
+	if len(v.ClusterEndpointEncryptionType) > 0 {
+		ok := object.Key("ClusterEndpointEncryptionType")
+		ok.String(string(v.ClusterEndpointEncryptionType))
+	}
+
 	if v.ClusterName != nil {
 		ok := object.Key("ClusterName")
 		ok.String(*v.ClusterName)

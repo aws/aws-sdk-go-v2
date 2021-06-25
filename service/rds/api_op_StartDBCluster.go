@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an Amazon Aurora DB cluster that was stopped using the AWS console, the
-// stop-db-cluster AWS CLI command, or the StopDBCluster action. For more
-// information, see
+// Starts an Amazon Aurora DB cluster that was stopped using the Amazon Web
+// Services console, the stop-db-cluster CLI command, or the StopDBCluster action.
+// For more information, see
 //
 // Stopping and Starting an Aurora Cluster
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html)

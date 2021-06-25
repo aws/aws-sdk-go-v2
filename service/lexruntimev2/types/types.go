@@ -3,12 +3,21 @@
 package types
 
 // Contains information about the contexts that a user is using in a session. You
-// can configure Amazon Lex to set a context when an intent is fulfilled, or you
+// can configure Amazon Lex V2 to set a context when an intent is fulfilled, or you
 // can set a context using the , , or operations. Use a context to indicate to
-// Amazon Lex intents that should be used as follow-up intents. For example, if the
-// active context is order-fulfilled, only intents that have order-fulfilled
+// Amazon Lex V2 intents that should be used as follow-up intents. For example, if
+// the active context is order-fulfilled, only intents that have order-fulfilled
 // configured as a trigger are considered for follow up.
 type ActiveContext struct {
+
+	// A lis tof contexts active for the request. A context can be activated when a
+	// previous intent is fulfilled, or by including the context in the request. If you
+	// don't specify a list of contexts, Amazon Lex will use the current list of
+	// contexts for the session. If you specify an empty list, all contexts for the
+	// session are cleared.
+	//
+	// This member is required.
+	ContextAttributes map[string]string
 
 	// The name of the context.
 	//
@@ -20,13 +29,6 @@ type ActiveContext struct {
 	//
 	// This member is required.
 	TimeToLive *ActiveContextTimeToLive
-
-	// A lis tof contexts active for the request. A context can be activated when a
-	// previous intent is fulfilled, or by including the context in the request. If you
-	// don't specify a list of contexts, Amazon Lex will use the current list of
-	// contexts for the session. If you specify an empty list, all contexts for the
-	// session are cleared.
-	ContextAttributes map[string]string
 }
 
 // The time that a context is active. You can specify the time to live in seconds
@@ -54,23 +56,23 @@ type Button struct {
 	// This member is required.
 	Text *string
 
-	// The value returned to Amazon Lex when a user chooses the button.
+	// The value returned to Amazon Lex V2 when a user chooses the button.
 	//
 	// This member is required.
 	Value *string
 }
 
-// Provides a score that indicates the confidence that Amazon Lex has that an
+// Provides a score that indicates the confidence that Amazon Lex V2 has that an
 // intent is the one that satisfies the user's intent.
 type ConfidenceScore struct {
 
-	// A score that indicates how confident Amazon Lex is that an intent satisfies the
-	// user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher
+	// A score that indicates how confident Amazon Lex V2 is that an intent satisfies
+	// the user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher
 	// confidence.
 	Score float64
 }
 
-// The next action that Amazon Lex should take.
+// The next action that Amazon Lex V2 should take.
 type DialogAction struct {
 
 	// The next action that the bot should take in its interaction with the user. The
@@ -84,10 +86,10 @@ type DialogAction struct {
 	// intent is complete and ready to be fulfilled. This is a yes/no question such as
 	// "Place the order?"
 	//
-	// * Delegate - The next action is determined by Amazon Lex.
+	// * Delegate - The next action is determined by Amazon Lex
+	// V2.
 	//
-	// *
-	// ElicitSlot - The next action is to elicit a slot value from the user.
+	// * ElicitSlot - The next action is to elicit a slot value from the user.
 	//
 	// This member is required.
 	Type DialogActionType
@@ -122,7 +124,7 @@ type ImageResponseCard struct {
 	Subtitle *string
 }
 
-// The current intent that Amazon Lex is attempting to fulfill.
+// The current intent that Amazon Lex V2 is attempting to fulfill.
 type Intent struct {
 
 	// The name of the intent.
@@ -141,7 +143,7 @@ type Intent struct {
 	State IntentState
 }
 
-// An intent that Amazon Lex determined might satisfy the user's utterance. The
+// An intent that Amazon Lex V2 determined might satisfy the user's utterance. The
 // intents are ordered by the confidence score.
 type Interpretation struct {
 
@@ -149,10 +151,10 @@ type Interpretation struct {
 	// ordered by the confidence score.
 	Intent *Intent
 
-	// Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent,
-	// AMAZON.KendraSearchIntent, or both when returning alternative intents in a
-	// response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted
-	// if they are configured for the bot.
+	// Determines the threshold where Amazon Lex V2 will insert the
+	// AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning
+	// alternative intents in a response. AMAZON.FallbackIntent and
+	// AMAZON.KendraSearchIntent are only inserted if they are configured for the bot.
 	NluConfidence *ConfidenceScore
 
 	// The sentiment expressed in an utterance. When the bot is configured to send
@@ -164,11 +166,13 @@ type Interpretation struct {
 // Container for text that is returned to the customer..
 type Message struct {
 
+	// Indicates the type of response.
+	//
+	// This member is required.
+	ContentType MessageContentType
+
 	// The text of the message.
 	Content *string
-
-	// Indicates the type of response.
-	ContentType MessageContentType
 
 	// A card that is shown to the user by a messaging platform. You define the
 	// contents of the card, the card is displayed by the platform. When you use a
@@ -213,43 +217,53 @@ type SentimentScore struct {
 	Positive float64
 }
 
-// The state of the user's session with Amazon Lex.
+// The state of the user's session with Amazon Lex V2.
 type SessionState struct {
 
-	// One or more contexts that indicate to Amazon Lex the context of a request. When
-	// a context is active, Amazon Lex considers intents with the matching context as a
-	// trigger as the next intent in a session.
+	// One or more contexts that indicate to Amazon Lex V2 the context of a request.
+	// When a context is active, Amazon Lex V2 considers intents with the matching
+	// context as a trigger as the next intent in a session.
 	ActiveContexts []ActiveContext
 
-	// The next step that Amazon Lex should take in the conversation with a user.
+	// The next step that Amazon Lex V2 should take in the conversation with a user.
 	DialogAction *DialogAction
 
-	// The active intent that Amazon Lex is processing.
+	// The active intent that Amazon Lex V2 is processing.
 	Intent *Intent
 
 	//
 	OriginatingRequestId *string
 
 	// Map of key/value pairs representing session-specific context information. It
-	// contains application information passed between Amazon Lex and a client
+	// contains application information passed between Amazon Lex V2 and a client
 	// application.
 	SessionAttributes map[string]string
 }
 
-// A value that Amazon Lex uses to fulfill an intent.
+// A value that Amazon Lex V2 uses to fulfill an intent.
 type Slot struct {
+
+	// When the shape value is List, it indicates that the values field contains a list
+	// of slot values. When the value is Scalar, it indicates that the value field
+	// contains a single value.
+	Shape Shape
 
 	// The current value of the slot.
 	Value *Value
+
+	// A list of one or more values that the user provided for the slot. For example,
+	// if a for a slot that elicits pizza toppings, the values might be "pepperoni" and
+	// "pineapple."
+	Values []Slot
 }
 
 // The value of a slot.
 type Value struct {
 
-	// The value that Amazon Lex determines for the slot. The actual value depends on
-	// the setting of the value selection strategy for the bot. You can choose to use
-	// the value entered by the user, or you can have Amazon Lex choose the first value
-	// in the resolvedValues list.
+	// The value that Amazon Lex V2 determines for the slot. The actual value depends
+	// on the setting of the value selection strategy for the bot. You can choose to
+	// use the value entered by the user, or you can have Amazon Lex V2 choose the
+	// first value in the resolvedValues list.
 	//
 	// This member is required.
 	InterpretedValue *string

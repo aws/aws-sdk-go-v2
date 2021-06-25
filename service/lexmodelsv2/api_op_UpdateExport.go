@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Updates the password used to encrypt an export zip archive.
+// Updates the password used to protect an export zip archive. The password is not
+// required. If you don't supply a password, Amazon Lex generates a zip file that
+// is not protected by a password. This is the archive that is available at the
+// pre-signed S3 URL provided by the operation.
 func (c *Client) UpdateExport(ctx context.Context, params *UpdateExportInput, optFns ...func(*Options)) (*UpdateExportOutput, error) {
 	if params == nil {
 		params = &UpdateExportInput{}

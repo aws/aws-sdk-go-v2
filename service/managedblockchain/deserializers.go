@@ -4131,6 +4131,15 @@ func awsRestjson1_deserializeDocumentMember(v **types.Member, value interface{})
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
 		case "LogPublishingConfiguration":
 			if err := awsRestjson1_deserializeDocumentMemberLogPublishingConfiguration(&sv.LogPublishingConfiguration, value); err != nil {
 				return err
@@ -4942,6 +4951,15 @@ func awsRestjson1_deserializeDocumentNode(v **types.Node, value interface{}) err
 					return fmt.Errorf("expected InstanceTypeString to be of type string, got %T instead", value)
 				}
 				sv.InstanceType = ptr.String(jtv)
+			}
+
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
 			}
 
 		case "LogPublishingConfiguration":

@@ -130,6 +130,46 @@ func (m *validateOpCreateDataSource) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateFolder struct {
+}
+
+func (*validateOpCreateFolder) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFolder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFolderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFolderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateFolderMembership struct {
+}
+
+func (*validateOpCreateFolderMembership) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFolderMembership) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFolderMembershipInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFolderMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateGroup struct {
 }
 
@@ -405,6 +445,46 @@ func (m *validateOpDeleteDataSource) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFolder struct {
+}
+
+func (*validateOpDeleteFolder) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFolder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFolderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFolderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFolderMembership struct {
+}
+
+func (*validateOpDeleteFolderMembership) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFolderMembership) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFolderMembershipInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFolderMembershipInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -810,6 +890,66 @@ func (m *validateOpDescribeDataSourcePermissions) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeFolder struct {
+}
+
+func (*validateOpDescribeFolder) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFolder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFolderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFolderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeFolderPermissions struct {
+}
+
+func (*validateOpDescribeFolderPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFolderPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFolderPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFolderPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeFolderResolvedPermissions struct {
+}
+
+func (*validateOpDescribeFolderResolvedPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFolderResolvedPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFolderResolvedPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFolderResolvedPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeGroup struct {
 }
 
@@ -1165,6 +1305,46 @@ func (m *validateOpListDataSources) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDataSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListFolderMembers struct {
+}
+
+func (*validateOpListFolderMembers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFolderMembers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFolderMembersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFolderMembersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListFolders struct {
+}
+
+func (*validateOpListFolders) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFolders) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFoldersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFoldersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1550,6 +1730,26 @@ func (m *validateOpSearchDashboards) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchFolders struct {
+}
+
+func (*validateOpSearchFolders) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchFolders) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchFoldersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchFoldersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1810,6 +2010,46 @@ func (m *validateOpUpdateDataSourcePermissions) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFolder struct {
+}
+
+func (*validateOpUpdateFolder) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFolder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFolderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFolderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateFolderPermissions struct {
+}
+
+func (*validateOpUpdateFolderPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFolderPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFolderPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFolderPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateGroup struct {
 }
 
@@ -2014,6 +2254,14 @@ func addOpCreateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataSource{}, middleware.After)
 }
 
+func addOpCreateFolderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFolder{}, middleware.After)
+}
+
+func addOpCreateFolderMembershipValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFolderMembership{}, middleware.After)
+}
+
 func addOpCreateGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGroup{}, middleware.After)
 }
@@ -2068,6 +2316,14 @@ func addOpDeleteDataSetValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataSource{}, middleware.After)
+}
+
+func addOpDeleteFolderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFolder{}, middleware.After)
+}
+
+func addOpDeleteFolderMembershipValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFolderMembership{}, middleware.After)
 }
 
 func addOpDeleteGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -2150,6 +2406,18 @@ func addOpDescribeDataSourcePermissionsValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDescribeDataSourcePermissions{}, middleware.After)
 }
 
+func addOpDescribeFolderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFolder{}, middleware.After)
+}
+
+func addOpDescribeFolderPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFolderPermissions{}, middleware.After)
+}
+
+func addOpDescribeFolderResolvedPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFolderResolvedPermissions{}, middleware.After)
+}
+
 func addOpDescribeGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeGroup{}, middleware.After)
 }
@@ -2220,6 +2488,14 @@ func addOpListDataSetsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDataSources{}, middleware.After)
+}
+
+func addOpListFolderMembersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFolderMembers{}, middleware.After)
+}
+
+func addOpListFoldersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFolders{}, middleware.After)
 }
 
 func addOpListGroupMembershipsValidationMiddleware(stack *middleware.Stack) error {
@@ -2298,6 +2574,10 @@ func addOpSearchDashboardsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchDashboards{}, middleware.After)
 }
 
+func addOpSearchFoldersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchFolders{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -2348,6 +2628,14 @@ func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateDataSourcePermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDataSourcePermissions{}, middleware.After)
+}
+
+func addOpUpdateFolderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFolder{}, middleware.After)
+}
+
+func addOpUpdateFolderPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFolderPermissions{}, middleware.After)
 }
 
 func addOpUpdateGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -4123,6 +4411,58 @@ func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 	}
 }
 
+func validateOpCreateFolderInput(v *CreateFolderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFolderInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FolderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FolderId"))
+	}
+	if v.Permissions != nil {
+		if err := validateResourcePermissionList(v.Permissions); err != nil {
+			invalidParams.AddNested("Permissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFolderMembershipInput(v *CreateFolderMembershipInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFolderMembershipInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FolderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FolderId"))
+	}
+	if v.MemberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
+	}
+	if len(v.MemberType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateGroupInput(v *CreateGroupInput) error {
 	if v == nil {
 		return nil
@@ -4438,6 +4778,48 @@ func validateOpDeleteDataSourceInput(v *DeleteDataSourceInput) error {
 	}
 	if v.DataSourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFolderInput(v *DeleteFolderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFolderInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FolderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FolderId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFolderMembershipInput(v *DeleteFolderMembershipInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFolderMembershipInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FolderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FolderId"))
+	}
+	if v.MemberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
+	}
+	if len(v.MemberType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4824,6 +5206,60 @@ func validateOpDescribeDataSourcePermissionsInput(v *DescribeDataSourcePermissio
 	}
 }
 
+func validateOpDescribeFolderInput(v *DescribeFolderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFolderInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FolderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FolderId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFolderPermissionsInput(v *DescribeFolderPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFolderPermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FolderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FolderId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFolderResolvedPermissionsInput(v *DescribeFolderResolvedPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFolderResolvedPermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FolderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FolderId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeGroupInput(v *DescribeGroupInput) error {
 	if v == nil {
 		return nil
@@ -5144,6 +5580,39 @@ func validateOpListDataSourcesInput(v *ListDataSourcesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListDataSourcesInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFolderMembersInput(v *ListFolderMembersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFolderMembersInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FolderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FolderId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFoldersInput(v *ListFoldersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFoldersInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
@@ -5506,6 +5975,24 @@ func validateOpSearchDashboardsInput(v *SearchDashboardsInput) error {
 	}
 }
 
+func validateOpSearchFoldersInput(v *SearchFoldersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchFoldersInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -5845,6 +6332,55 @@ func validateOpUpdateDataSourcePermissionsInput(v *UpdateDataSourcePermissionsIn
 	}
 	if v.DataSourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
+	}
+	if v.GrantPermissions != nil {
+		if err := validateResourcePermissionList(v.GrantPermissions); err != nil {
+			invalidParams.AddNested("GrantPermissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RevokePermissions != nil {
+		if err := validateResourcePermissionList(v.RevokePermissions); err != nil {
+			invalidParams.AddNested("RevokePermissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFolderInput(v *UpdateFolderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFolderInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FolderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FolderId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFolderPermissionsInput(v *UpdateFolderPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFolderPermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FolderId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FolderId"))
 	}
 	if v.GrantPermissions != nil {
 		if err := validateResourcePermissionList(v.GrantPermissions); err != nil {

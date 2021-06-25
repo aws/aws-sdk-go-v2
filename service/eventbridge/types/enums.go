@@ -198,6 +198,60 @@ func (LaunchType) Values() []LaunchType {
 	}
 }
 
+type PlacementConstraintType string
+
+// Enum values for PlacementConstraintType
+const (
+	PlacementConstraintTypeDistinctInstance PlacementConstraintType = "distinctInstance"
+	PlacementConstraintTypeMemberOf         PlacementConstraintType = "memberOf"
+)
+
+// Values returns all known values for PlacementConstraintType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PlacementConstraintType) Values() []PlacementConstraintType {
+	return []PlacementConstraintType{
+		"distinctInstance",
+		"memberOf",
+	}
+}
+
+type PlacementStrategyType string
+
+// Enum values for PlacementStrategyType
+const (
+	PlacementStrategyTypeRandom  PlacementStrategyType = "random"
+	PlacementStrategyTypeSpread  PlacementStrategyType = "spread"
+	PlacementStrategyTypeBinpack PlacementStrategyType = "binpack"
+)
+
+// Values returns all known values for PlacementStrategyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PlacementStrategyType) Values() []PlacementStrategyType {
+	return []PlacementStrategyType{
+		"random",
+		"spread",
+		"binpack",
+	}
+}
+
+type PropagateTags string
+
+// Enum values for PropagateTags
+const (
+	PropagateTagsTaskDefinition PropagateTags = "TASK_DEFINITION"
+)
+
+// Values returns all known values for PropagateTags. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PropagateTags) Values() []PropagateTags {
+	return []PropagateTags{
+		"TASK_DEFINITION",
+	}
+}
+
 type ReplayState string
 
 // Enum values for ReplayState

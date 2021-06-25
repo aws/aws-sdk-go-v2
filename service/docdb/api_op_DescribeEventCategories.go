@@ -35,7 +35,7 @@ type DescribeEventCategoriesInput struct {
 	Filters []types.Filter
 
 	// The type of source that is generating the events. Valid values: db-instance,
-	// db-parameter-group, db-security-group, db-snapshot
+	// db-parameter-group, db-security-group
 	SourceType *string
 }
 

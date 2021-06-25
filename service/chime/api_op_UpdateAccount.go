@@ -12,7 +12,7 @@ import (
 )
 
 // Updates account details for the specified Amazon Chime account. Currently, only
-// account name updates are supported for this action.
+// account name and default license updates are supported for this action.
 func (c *Client) UpdateAccount(ctx context.Context, params *UpdateAccountInput, optFns ...func(*Options)) (*UpdateAccountOutput, error) {
 	if params == nil {
 		params = &UpdateAccountInput{}
@@ -34,6 +34,9 @@ type UpdateAccountInput struct {
 	//
 	// This member is required.
 	AccountId *string
+
+	// The default license applied when you add users to an Amazon Chime account.
+	DefaultLicense types.License
 
 	// The new name for the specified Amazon Chime account.
 	Name *string

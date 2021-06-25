@@ -65,6 +65,37 @@ func ExampleClientTlsCertificate_outputUsage() {
 var _ *types.ListenerTlsSdsCertificate
 var _ *types.ListenerTlsFileCertificate
 
+func ExampleGrpcMetadataMatchMethod_outputUsage() {
+	var union types.GrpcMetadataMatchMethod
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GrpcMetadataMatchMethodMemberExact:
+		_ = v.Value // Value is string
+
+	case *types.GrpcMetadataMatchMethodMemberPrefix:
+		_ = v.Value // Value is string
+
+	case *types.GrpcMetadataMatchMethodMemberRange:
+		_ = v.Value // Value is types.MatchRange
+
+	case *types.GrpcMetadataMatchMethodMemberRegex:
+		_ = v.Value // Value is string
+
+	case *types.GrpcMetadataMatchMethodMemberSuffix:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MatchRange
+var _ *string
+
 func ExampleGrpcRouteMetadataMatchMethod_outputUsage() {
 	var union types.GrpcRouteMetadataMatchMethod
 	// type switches can be used to check the union value

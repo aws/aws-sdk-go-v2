@@ -117,13 +117,13 @@ func awsAwsquery_deserializeOpErrorAddTags(response *smithyhttp.Response, metada
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("DuplicateTagKeysException", errorCode):
+	case strings.EqualFold("DuplicateTagKeys", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateTagKeysException(response, errorBody)
 
-	case strings.EqualFold("TooManyTagsException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyTags", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTagsException(response, errorBody)
 
 	default:
@@ -231,14 +231,14 @@ func awsAwsquery_deserializeOpErrorApplySecurityGroupsToLoadBalancer(response *s
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("InvalidSecurityGroupException", errorCode):
+	case strings.EqualFold("InvalidSecurityGroup", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSecurityGroupException(response, errorBody)
+
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -345,16 +345,16 @@ func awsAwsquery_deserializeOpErrorAttachLoadBalancerToSubnets(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("InvalidSubnetException", errorCode):
+	case strings.EqualFold("InvalidSubnet", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSubnetException(response, errorBody)
 
-	case strings.EqualFold("SubnetNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
+
+	case strings.EqualFold("SubnetNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubnetNotFoundException(response, errorBody)
 
 	default:
@@ -462,7 +462,7 @@ func awsAwsquery_deserializeOpErrorConfigureHealthCheck(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
@@ -570,16 +570,16 @@ func awsAwsquery_deserializeOpErrorCreateAppCookieStickinessPolicy(response *smi
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("DuplicatePolicyNameException", errorCode):
+	case strings.EqualFold("DuplicatePolicyName", errorCode):
 		return awsAwsquery_deserializeErrorDuplicatePolicyNameException(response, errorBody)
 
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("TooManyPoliciesException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyPolicies", errorCode):
 		return awsAwsquery_deserializeErrorTooManyPoliciesException(response, errorBody)
 
 	default:
@@ -687,16 +687,16 @@ func awsAwsquery_deserializeOpErrorCreateLBCookieStickinessPolicy(response *smit
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("DuplicatePolicyNameException", errorCode):
+	case strings.EqualFold("DuplicatePolicyName", errorCode):
 		return awsAwsquery_deserializeErrorDuplicatePolicyNameException(response, errorBody)
 
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("TooManyPoliciesException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyPolicies", errorCode):
 		return awsAwsquery_deserializeErrorTooManyPoliciesException(response, errorBody)
 
 	default:
@@ -804,40 +804,40 @@ func awsAwsquery_deserializeOpErrorCreateLoadBalancer(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CertificateNotFoundException", errorCode):
+	case strings.EqualFold("CertificateNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCertificateNotFoundException(response, errorBody)
 
-	case strings.EqualFold("DuplicateAccessPointNameException", errorCode):
+	case strings.EqualFold("DuplicateLoadBalancerName", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateAccessPointNameException(response, errorBody)
 
-	case strings.EqualFold("DuplicateTagKeysException", errorCode):
+	case strings.EqualFold("DuplicateTagKeys", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateTagKeysException(response, errorBody)
 
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("InvalidSchemeException", errorCode):
+	case strings.EqualFold("InvalidScheme", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSchemeException(response, errorBody)
 
-	case strings.EqualFold("InvalidSecurityGroupException", errorCode):
+	case strings.EqualFold("InvalidSecurityGroup", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSecurityGroupException(response, errorBody)
 
-	case strings.EqualFold("InvalidSubnetException", errorCode):
+	case strings.EqualFold("InvalidSubnet", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSubnetException(response, errorBody)
 
-	case strings.EqualFold("OperationNotPermittedException", errorCode):
+	case strings.EqualFold("OperationNotPermitted", errorCode):
 		return awsAwsquery_deserializeErrorOperationNotPermittedException(response, errorBody)
 
-	case strings.EqualFold("SubnetNotFoundException", errorCode):
+	case strings.EqualFold("SubnetNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubnetNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TooManyAccessPointsException", errorCode):
+	case strings.EqualFold("TooManyLoadBalancers", errorCode):
 		return awsAwsquery_deserializeErrorTooManyAccessPointsException(response, errorBody)
 
-	case strings.EqualFold("TooManyTagsException", errorCode):
+	case strings.EqualFold("TooManyTags", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTagsException(response, errorBody)
 
-	case strings.EqualFold("UnsupportedProtocolException", errorCode):
+	case strings.EqualFold("UnsupportedProtocol", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedProtocolException(response, errorBody)
 
 	default:
@@ -945,19 +945,19 @@ func awsAwsquery_deserializeOpErrorCreateLoadBalancerListeners(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("CertificateNotFoundException", errorCode):
+	case strings.EqualFold("CertificateNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCertificateNotFoundException(response, errorBody)
 
-	case strings.EqualFold("DuplicateListenerException", errorCode):
+	case strings.EqualFold("DuplicateListener", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateListenerException(response, errorBody)
 
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("UnsupportedProtocolException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedProtocol", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedProtocolException(response, errorBody)
 
 	default:
@@ -1065,19 +1065,19 @@ func awsAwsquery_deserializeOpErrorCreateLoadBalancerPolicy(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("DuplicatePolicyNameException", errorCode):
+	case strings.EqualFold("DuplicatePolicyName", errorCode):
 		return awsAwsquery_deserializeErrorDuplicatePolicyNameException(response, errorBody)
 
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("PolicyTypeNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
+
+	case strings.EqualFold("PolicyTypeNotFound", errorCode):
 		return awsAwsquery_deserializeErrorPolicyTypeNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TooManyPoliciesException", errorCode):
+	case strings.EqualFold("TooManyPolicies", errorCode):
 		return awsAwsquery_deserializeErrorTooManyPoliciesException(response, errorBody)
 
 	default:
@@ -1290,7 +1290,7 @@ func awsAwsquery_deserializeOpErrorDeleteLoadBalancerListeners(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
@@ -1398,11 +1398,11 @@ func awsAwsquery_deserializeOpErrorDeleteLoadBalancerPolicy(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
+
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1509,11 +1509,11 @@ func awsAwsquery_deserializeOpErrorDeregisterInstancesFromLoadBalancer(response 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("InvalidEndPointException", errorCode):
+	case strings.EqualFold("InvalidInstance", errorCode):
 		return awsAwsquery_deserializeErrorInvalidEndPointException(response, errorBody)
+
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1725,11 +1725,11 @@ func awsAwsquery_deserializeOpErrorDescribeInstanceHealth(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("InvalidEndPointException", errorCode):
+	case strings.EqualFold("InvalidInstance", errorCode):
 		return awsAwsquery_deserializeErrorInvalidEndPointException(response, errorBody)
+
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1836,11 +1836,11 @@ func awsAwsquery_deserializeOpErrorDescribeLoadBalancerAttributes(response *smit
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("LoadBalancerAttributeNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerAttributeNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerAttributeNotFoundException(response, errorBody)
+
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1947,10 +1947,10 @@ func awsAwsquery_deserializeOpErrorDescribeLoadBalancerPolicies(response *smithy
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
-	case strings.EqualFold("PolicyNotFoundException", errorCode):
+	case strings.EqualFold("PolicyNotFound", errorCode):
 		return awsAwsquery_deserializeErrorPolicyNotFoundException(response, errorBody)
 
 	default:
@@ -2058,7 +2058,7 @@ func awsAwsquery_deserializeOpErrorDescribeLoadBalancerPolicyTypes(response *smi
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("PolicyTypeNotFoundException", errorCode):
+	case strings.EqualFold("PolicyTypeNotFound", errorCode):
 		return awsAwsquery_deserializeErrorPolicyTypeNotFoundException(response, errorBody)
 
 	default:
@@ -2166,11 +2166,11 @@ func awsAwsquery_deserializeOpErrorDescribeLoadBalancers(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("DependencyThrottleException", errorCode):
+	case strings.EqualFold("DependencyThrottle", errorCode):
 		return awsAwsquery_deserializeErrorDependencyThrottleException(response, errorBody)
+
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -2277,7 +2277,7 @@ func awsAwsquery_deserializeOpErrorDescribeTags(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
@@ -2385,11 +2385,11 @@ func awsAwsquery_deserializeOpErrorDetachLoadBalancerFromSubnets(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
+
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -2496,11 +2496,11 @@ func awsAwsquery_deserializeOpErrorDisableAvailabilityZonesForLoadBalancer(respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
+
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -2607,7 +2607,7 @@ func awsAwsquery_deserializeOpErrorEnableAvailabilityZonesForLoadBalancer(respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
@@ -2715,14 +2715,14 @@ func awsAwsquery_deserializeOpErrorModifyLoadBalancerAttributes(response *smithy
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("LoadBalancerAttributeNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerAttributeNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerAttributeNotFoundException(response, errorBody)
+
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -2829,11 +2829,11 @@ func awsAwsquery_deserializeOpErrorRegisterInstancesWithLoadBalancer(response *s
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("InvalidEndPointException", errorCode):
+	case strings.EqualFold("InvalidInstance", errorCode):
 		return awsAwsquery_deserializeErrorInvalidEndPointException(response, errorBody)
+
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -2940,7 +2940,7 @@ func awsAwsquery_deserializeOpErrorRemoveTags(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
 
 	default:
@@ -3048,19 +3048,19 @@ func awsAwsquery_deserializeOpErrorSetLoadBalancerListenerSSLCertificate(respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("CertificateNotFoundException", errorCode):
+	case strings.EqualFold("CertificateNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCertificateNotFoundException(response, errorBody)
 
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("ListenerNotFoundException", errorCode):
+	case strings.EqualFold("ListenerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorListenerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("UnsupportedProtocolException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedProtocol", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedProtocolException(response, errorBody)
 
 	default:
@@ -3168,13 +3168,13 @@ func awsAwsquery_deserializeOpErrorSetLoadBalancerPoliciesForBackendServer(respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("PolicyNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
+
+	case strings.EqualFold("PolicyNotFound", errorCode):
 		return awsAwsquery_deserializeErrorPolicyNotFoundException(response, errorBody)
 
 	default:
@@ -3282,16 +3282,16 @@ func awsAwsquery_deserializeOpErrorSetLoadBalancerPoliciesOfListener(response *s
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessPointNotFoundException", errorCode):
-		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
-
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("ListenerNotFoundException", errorCode):
+	case strings.EqualFold("ListenerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorListenerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("PolicyNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorAccessPointNotFoundException(response, errorBody)
+
+	case strings.EqualFold("PolicyNotFound", errorCode):
 		return awsAwsquery_deserializeErrorPolicyNotFoundException(response, errorBody)
 
 	default:

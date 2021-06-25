@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a data store, which is a repository for messages.
+// Creates a data store, which is a repository for messages. Only data stores that
+// are used to save pipeline data can be configured with ParquetConfiguration.
 func (c *Client) CreateDatastore(ctx context.Context, params *CreateDatastoreInput, optFns ...func(*Options)) (*CreateDatastoreOutput, error) {
 	if params == nil {
 		params = &CreateDatastoreInput{}
@@ -33,6 +34,9 @@ type CreateDatastoreInput struct {
 	//
 	// This member is required.
 	DatastoreName *string
+
+	// Contains information about the partitions in a data store.
+	DatastorePartitions *types.DatastorePartitions
 
 	// Where data store data is stored. You can choose one of serviceManagedS3 or
 	// customerManagedS3 storage. If not specified, the default is serviceManagedS3.

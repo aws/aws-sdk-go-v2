@@ -73,6 +73,14 @@ type CreateClusterInput struct {
 	// spread the nodes across Availability Zones for the highest availability.
 	AvailabilityZones []string
 
+	// The type of encryption the cluster's endpoint should support. Values are:
+	//
+	// *
+	// NONE for no encryption
+	//
+	// * TLS for Transport Layer Security
+	ClusterEndpointEncryptionType types.ClusterEndpointEncryptionType
+
 	// A description of the cluster.
 	Description *string
 

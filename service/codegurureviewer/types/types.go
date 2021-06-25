@@ -6,6 +6,47 @@ import (
 	"time"
 )
 
+// A type of SourceCodeType
+// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
+// that specifies a code diff between a source and destination branch in an
+// associated repository.
+type BranchDiffSourceCodeType struct {
+
+	// The destination branch for a diff in an associated repository.
+	//
+	// This member is required.
+	DestinationBranchName *string
+
+	// The source branch for a diff in an associated repository.
+	//
+	// This member is required.
+	SourceBranchName *string
+}
+
+// Code artifacts are source code artifacts and build artifacts used in a
+// repository analysis or a pull request review.
+//
+// * Source code artifacts are
+// source code files in a Git repository that are compressed into a .zip file.
+//
+// *
+// Build artifacts are .jar or .class files that are compressed in a .zip file.
+type CodeArtifacts struct {
+
+	// The S3 object key for a source code .zip file. This is required for all code
+	// reviews.
+	//
+	// This member is required.
+	SourceCodeArtifactsObjectKey *string
+
+	// The S3 object key for a build artifacts .zip file that contains .jar or .class
+	// files. This is required for a code review with security analysis. For more
+	// information, see Create code reviews with security analysis
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/code-review-security.html)
+	// in the Amazon CodeGuru Reviewer User Guide.
+	BuildArtifactsObjectKey *string
+}
+
 // Information about an AWS CodeCommit repository. The CodeCommit repository must
 // be in the same AWS Region and AWS account where its CodeGuru Reviewer code
 // reviews are configured.
@@ -23,6 +64,10 @@ type CodeCommitRepository struct {
 // Information about a code review. A code review belongs to the associated
 // repository that contains the reviewed code.
 type CodeReview struct {
+
+	// They types of analysis performed during a repository analysis or a pull request
+	// review. You can specify either Security, CodeQuality, or both.
+	AnalysisTypes []AnalysisType
 
 	// The Amazon Resource Name (ARN) of the RepositoryAssociation
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
@@ -52,7 +97,8 @@ type CodeReview struct {
 	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
 	// account ID of the account that owns the repository. For a GitHub, GitHub
 	// Enterprise Server, or Bitbucket repository, this is the username for the account
-	// that owns the repository.
+	// that owns the repository. For an S3 repository, it can be the username or AWS
+	// account ID.
 	Owner *string
 
 	// The type of repository that contains the reviewed code (for example, GitHub or
@@ -112,7 +158,8 @@ type CodeReviewSummary struct {
 	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
 	// account ID of the account that owns the repository. For a GitHub, GitHub
 	// Enterprise Server, or Bitbucket repository, this is the username for the account
-	// that owns the repository.
+	// that owns the repository. For an S3 repository, it can be the username or AWS
+	// account ID.
 	Owner *string
 
 	// The provider type of the repository association.
@@ -123,6 +170,9 @@ type CodeReviewSummary struct {
 
 	// The name of the repository.
 	RepositoryName *string
+
+	// Specifies the source code that is analyzed in a code review.
+	SourceCodeType *SourceCodeType
 
 	// The state of the code review. The valid code review states are:
 	//
@@ -146,14 +196,11 @@ type CodeReviewSummary struct {
 //
 // * PullRequest - A
 // code review that is automatically triggered by a pull request on an associated
-// repository. Because this type of code review is automatically generated, you
-// cannot specify this code review type using CreateCodeReview
-// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview).
+// repository.
 //
-// *
-// RepositoryAnalysis - A code review that analyzes all code under a specified
-// branch in an associated repository. The associated repository is specified using
-// its ARN in CreateCodeReview
+// * RepositoryAnalysis - A code review that analyzes all code under a
+// specified branch in an associated repository. The associated repository is
+// specified using its ARN in CreateCodeReview
 // (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview).
 type CodeReviewType struct {
 
@@ -164,18 +211,41 @@ type CodeReviewType struct {
 	//
 	// This member is required.
 	RepositoryAnalysis *RepositoryAnalysis
+
+	// They types of analysis performed during a repository analysis or a pull request
+	// review. You can specify either Security, CodeQuality, or both.
+	AnalysisTypes []AnalysisType
 }
 
 // A type of SourceCodeType
 // (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
 // that specifies the commit diff for a pull request on an associated repository.
+// The SourceCommit and DestinationCommit fields are required to do a pull request
+// code review.
 type CommitDiffSourceCodeType struct {
 
-	// The SHA of the destination commit used to generate a commit diff.
+	// The SHA of the destination commit used to generate a commit diff. This field is
+	// required for a pull request code review.
 	DestinationCommit *string
 
-	// The SHA of the source commit used to generate a commit diff.
+	// The SHA of the merge base of a commit.
+	MergeBaseCommit *string
+
+	// The SHA of the source commit used to generate a commit diff. This field is
+	// required for a pull request code review.
 	SourceCommit *string
+}
+
+// Information about an event. The event might be a push, pull request, scheduled
+// request, or another type of event.
+type EventInfo struct {
+
+	// The name of the event. The possible names are pull_request, workflow_dispatch,
+	// schedule, and push
+	Name *string
+
+	// The state of an event. The state might be open, closed, or another state.
+	State *string
 }
 
 // An object that contains:
@@ -300,6 +370,9 @@ type RecommendationSummary struct {
 	// Name of the file on which a recommendation is provided.
 	FilePath *string
 
+	// The type of a recommendation.
+	RecommendationCategory RecommendationCategory
+
 	// The recommendation ID that can be used to track the provided recommendations.
 	// Later on it can be used to collect the feedback.
 	RecommendationId *string
@@ -323,6 +396,9 @@ type Repository struct {
 
 	// Information about a GitHub Enterprise Server repository.
 	GitHubEnterpriseServer *ThirdPartySourceRepository
+
+	// Information about a repository in an S3 bucket.
+	S3Bucket *S3Repository
 }
 
 // A code review type that analyzes all code under a specified branch in an
@@ -334,9 +410,10 @@ type RepositoryAnalysis struct {
 	// A SourceCodeType
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
 	// that specifies the tip of a branch in an associated repository.
-	//
-	// This member is required.
 	RepositoryHead *RepositoryHeadSourceCodeType
+
+	// Specifies the source code that is analyzed in a code review.
+	SourceCodeType *SourceCodeType
 }
 
 // Information about a repository association. The DescribeRepositoryAssociation
@@ -382,11 +459,17 @@ type RepositoryAssociation struct {
 	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
 	// account ID of the account that owns the repository. For a GitHub, GitHub
 	// Enterprise Server, or Bitbucket repository, this is the username for the account
-	// that owns the repository.
+	// that owns the repository. For an S3 repository, it can be the username or AWS
+	// account ID.
 	Owner *string
 
 	// The provider type of the repository association.
 	ProviderType ProviderType
+
+	// Specifies the name of an S3 bucket and a CodeArtifacts object that contains the
+	// S3 object keys for a source code .zip file and for a build artifacts .zip file
+	// that contains .jar or .class files.
+	S3RepositoryDetails *S3RepositoryDetails
 
 	// The state of the repository association. The valid repository association states
 	// are:
@@ -459,7 +542,8 @@ type RepositoryAssociationSummary struct {
 	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
 	// account ID of the account that owns the repository. For a GitHub, GitHub
 	// Enterprise Server, or Bitbucket repository, this is the username for the account
-	// that owns the repository.
+	// that owns the repository. For an S3 repository, it can be the username or AWS
+	// account ID.
 	Owner *string
 
 	// The provider type of the repository association.
@@ -512,10 +596,85 @@ type RepositoryHeadSourceCodeType struct {
 	BranchName *string
 }
 
-// Specifies the source code that is analyzed in a code review. A code review can
-// analyze the source code that is specified using a pull request diff or a branch
-// in an associated repository.
+// Metadata that is associated with a code review. This applies to both pull
+// request and repository analysis code reviews.
+type RequestMetadata struct {
+
+	// Information about the event associated with a code review.
+	EventInfo *EventInfo
+
+	// The ID of the request. This is required for a pull request code review.
+	RequestId *string
+
+	// An identifier, such as a name or account ID, that is associated with the
+	// requester. The Requester is used to capture the author/actor name of the event
+	// request.
+	Requester *string
+
+	// The name of the repository vendor used to upload code to an S3 bucket for a
+	// CI/CD code review. For example, if code and artifacts are uploaded to an S3
+	// bucket for a CI/CD code review by GitHub scripts from a GitHub repository, then
+	// the repository association's ProviderType is S3Bucket and the CI/CD repository
+	// vendor name is GitHub. For more information, see the definition for ProviderType
+	// in RepositoryAssociation
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html).
+	VendorName VendorName
+}
+
+// Information about an associated repository in an S3 bucket. The associated
+// repository contains a source code .zip file and a build artifacts .zip file that
+// contains .jar or .class files.
+type S3BucketRepository struct {
+
+	// The name of the repository when the ProviderType is S3Bucket.
+	//
+	// This member is required.
+	Name *string
+
+	// An S3RepositoryDetails object that specifies the name of an S3 bucket and a
+	// CodeArtifacts object. The CodeArtifacts object includes the S3 object keys for a
+	// source code .zip file and for a build artifacts .zip file.
+	Details *S3RepositoryDetails
+}
+
+// Information about a repository in an S3 bucket.
+type S3Repository struct {
+
+	// The name of the S3 bucket used for associating a new S3 repository. It must
+	// begin with codeguru-reviewer-.
+	//
+	// This member is required.
+	BucketName *string
+
+	// The name of the repository in the S3 bucket.
+	//
+	// This member is required.
+	Name *string
+}
+
+// Specifies the name of an S3 bucket and a CodeArtifacts object that contains the
+// S3 object keys for a source code .zip file and for a build artifacts .zip file
+// that contains .jar or .class files.
+type S3RepositoryDetails struct {
+
+	// The name of the S3 bucket used for associating a new S3 repository. It must
+	// begin with codeguru-reviewer-.
+	BucketName *string
+
+	// A CodeArtifacts object. The CodeArtifacts object includes the S3 object key for
+	// a source code .zip file and for a build artifacts .zip file that contains .jar
+	// or .class files.
+	CodeArtifacts *CodeArtifacts
+}
+
+// Specifies the source code that is analyzed in a code review.
 type SourceCodeType struct {
+
+	// A type of SourceCodeType
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
+	// that specifies a source branch name and a destination branch name in an
+	// associated repository.
+	BranchDiff *BranchDiffSourceCodeType
 
 	// A SourceCodeType
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
@@ -527,6 +686,21 @@ type SourceCodeType struct {
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
 	// that specifies the tip of a branch in an associated repository.
 	RepositoryHead *RepositoryHeadSourceCodeType
+
+	// Metadata that is associated with a code review. This applies to any type of code
+	// review supported by CodeGuru Reviewer. The RequestMetadaa field captures any
+	// event metadata. For example, it might capture metadata associated with an event
+	// trigger, such as a push or a pull request.
+	RequestMetadata *RequestMetadata
+
+	// Information about an associated repository in an S3 bucket that includes its
+	// name and an S3RepositoryDetails object. The S3RepositoryDetails object includes
+	// the name of an S3 bucket, an S3 key for a source code .zip file, and an S3 key
+	// for a build artifacts .zip file. S3BucketRepository is required in
+	// SourceCodeType
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
+	// for S3BucketRepository based code reviews.
+	S3BucketRepository *S3BucketRepository
 }
 
 // Information about a third-party source repository connected to CodeGuru
@@ -549,7 +723,8 @@ type ThirdPartySourceRepository struct {
 	Name *string
 
 	// The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket
-	// repository, this is the username for the account that owns the repository.
+	// repository, this is the username for the account that owns the repository. For
+	// an S3 repository, this can be the username or AWS account ID.
 	//
 	// This member is required.
 	Owner *string

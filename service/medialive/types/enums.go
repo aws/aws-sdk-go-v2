@@ -921,6 +921,32 @@ func (DvbSubDestinationTeletextGridControl) Values() []DvbSubDestinationTeletext
 	}
 }
 
+type DvbSubOcrLanguage string
+
+// Enum values for DvbSubOcrLanguage
+const (
+	DvbSubOcrLanguageDeu DvbSubOcrLanguage = "DEU"
+	DvbSubOcrLanguageEng DvbSubOcrLanguage = "ENG"
+	DvbSubOcrLanguageFra DvbSubOcrLanguage = "FRA"
+	DvbSubOcrLanguageNld DvbSubOcrLanguage = "NLD"
+	DvbSubOcrLanguagePor DvbSubOcrLanguage = "POR"
+	DvbSubOcrLanguageSpa DvbSubOcrLanguage = "SPA"
+)
+
+// Values returns all known values for DvbSubOcrLanguage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DvbSubOcrLanguage) Values() []DvbSubOcrLanguage {
+	return []DvbSubOcrLanguage{
+		"DEU",
+		"ENG",
+		"FRA",
+		"NLD",
+		"POR",
+		"SPA",
+	}
+}
+
 type Eac3AttenuationControl string
 
 // Enum values for Eac3AttenuationControl
@@ -2570,6 +2596,24 @@ func (HlsRedundantManifest) Values() []HlsRedundantManifest {
 	}
 }
 
+type HlsScte35SourceType string
+
+// Enum values for HlsScte35SourceType
+const (
+	HlsScte35SourceTypeManifest HlsScte35SourceType = "MANIFEST"
+	HlsScte35SourceTypeSegments HlsScte35SourceType = "SEGMENTS"
+)
+
+// Values returns all known values for HlsScte35SourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsScte35SourceType) Values() []HlsScte35SourceType {
+	return []HlsScte35SourceType{
+		"MANIFEST",
+		"SEGMENTS",
+	}
+}
+
 type HlsSegmentationMode string
 
 // Enum values for HlsSegmentationMode
@@ -4120,6 +4164,8 @@ type ReservationSpecialFeature string
 const (
 	ReservationSpecialFeatureAdvancedAudio      ReservationSpecialFeature = "ADVANCED_AUDIO"
 	ReservationSpecialFeatureAudioNormalization ReservationSpecialFeature = "AUDIO_NORMALIZATION"
+	ReservationSpecialFeatureMghd               ReservationSpecialFeature = "MGHD"
+	ReservationSpecialFeatureMguhd              ReservationSpecialFeature = "MGUHD"
 )
 
 // Values returns all known values for ReservationSpecialFeature. Note that this
@@ -4129,6 +4175,8 @@ func (ReservationSpecialFeature) Values() []ReservationSpecialFeature {
 	return []ReservationSpecialFeature{
 		"ADVANCED_AUDIO",
 		"AUDIO_NORMALIZATION",
+		"MGHD",
+		"MGUHD",
 	}
 }
 
@@ -4283,6 +4331,32 @@ func (Scte20Convert608To708) Values() []Scte20Convert608To708 {
 	return []Scte20Convert608To708{
 		"DISABLED",
 		"UPCONVERT",
+	}
+}
+
+type Scte27OcrLanguage string
+
+// Enum values for Scte27OcrLanguage
+const (
+	Scte27OcrLanguageDeu Scte27OcrLanguage = "DEU"
+	Scte27OcrLanguageEng Scte27OcrLanguage = "ENG"
+	Scte27OcrLanguageFra Scte27OcrLanguage = "FRA"
+	Scte27OcrLanguageNld Scte27OcrLanguage = "NLD"
+	Scte27OcrLanguagePor Scte27OcrLanguage = "POR"
+	Scte27OcrLanguageSpa Scte27OcrLanguage = "SPA"
+)
+
+// Values returns all known values for Scte27OcrLanguage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Scte27OcrLanguage) Values() []Scte27OcrLanguage {
+	return []Scte27OcrLanguage{
+		"DEU",
+		"ENG",
+		"FRA",
+		"NLD",
+		"POR",
+		"SPA",
 	}
 }
 

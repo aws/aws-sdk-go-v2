@@ -10,8 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified alias. Because an alias is not a property of a CMK, you
-// can delete and change the aliases of a CMK without affecting the CMK. Also,
+// Deletes the specified alias. Adding, deleting, or updating an alias can allow or
+// deny permission to the CMK. For details, see Using ABAC in AWS KMS
+// (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the AWS Key
+// Management Service Developer Guide. Because an alias is not a property of a CMK,
+// you can delete and change the aliases of a CMK without affecting the CMK. Also,
 // aliases do not appear in the response from the DescribeKey operation. To get the
 // aliases of all CMKs, use the ListAliases operation. Each CMK can have multiple
 // aliases. To change the alias of a CMK, use DeleteAlias to delete the current

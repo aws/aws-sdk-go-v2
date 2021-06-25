@@ -15468,6 +15468,15 @@ func awsRestjson1_deserializeDocumentDvbSubSourceSettings(v **types.DvbSubSource
 
 	for key, value := range shape {
 		switch key {
+		case "ocrLanguage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DvbSubOcrLanguage to be of type string, got %T instead", value)
+				}
+				sv.OcrLanguage = types.DvbSubOcrLanguage(jtv)
+			}
+
 		case "pid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18601,6 +18610,15 @@ func awsRestjson1_deserializeDocumentHlsInputSettings(v **types.HlsInputSettings
 					return err
 				}
 				sv.RetryInterval = int32(i64)
+			}
+
+		case "scte35Source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsScte35SourceType to be of type string, got %T instead", value)
+				}
+				sv.Scte35Source = types.HlsScte35SourceType(jtv)
 			}
 
 		default:
@@ -25191,6 +25209,15 @@ func awsRestjson1_deserializeDocumentScte27SourceSettings(v **types.Scte27Source
 
 	for key, value := range shape {
 		switch key {
+		case "ocrLanguage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Scte27OcrLanguage to be of type string, got %T instead", value)
+				}
+				sv.OcrLanguage = types.Scte27OcrLanguage(jtv)
+			}
+
 		case "pid":
 			if value != nil {
 				jtv, ok := value.(json.Number)

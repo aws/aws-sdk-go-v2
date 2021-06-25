@@ -77,7 +77,8 @@ type ModifyDBInstanceInput struct {
 	// available, and RDS has enabled auto patching for that engine version.
 	AutoMinorVersionUpgrade *bool
 
-	// The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
+	// The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services
+	// Backup.
 	AwsBackupRecoveryPointArn *string
 
 	// The number of days to retain automated backups. Setting this parameter to a
@@ -141,9 +142,9 @@ type ModifyDBInstanceInput struct {
 	CopyTagsToSnapshot *bool
 
 	// The new compute and memory capacity of the DB instance, for example,
-	// db.m4.large. Not all DB instance classes are available in all AWS Regions, or
-	// for all database engines. For the full list of DB instance classes, and
-	// availability for your engine, see DB Instance Class
+	// db.m4.large. Not all DB instance classes are available in all Amazon Web
+	// Services Regions, or for all database engines. For the full list of DB instance
+	// classes, and availability for your engine, see DB Instance Class
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
 	// in the Amazon RDS User Guide. If you modify the DB instance class, an outage
 	// occurs during the change. The change is applied during the next maintenance
@@ -215,20 +216,21 @@ type ModifyDBInstanceInput struct {
 	// to resources in your Outpost subnets through your on-premises network. For some
 	// use cases, a CoIP can provide lower latency for connections to the DB instance
 	// from outside of its virtual private cloud (VPC) on your local network. For more
-	// information about RDS on Outposts, see Working with Amazon RDS on AWS Outposts
+	// information about RDS on Outposts, see Working with Amazon RDS on Amazon Web
+	// Services Outposts
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
 	// the Amazon RDS User Guide. For more information about CoIPs, see Customer-owned
 	// IP addresses
 	// (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing)
-	// in the AWS Outposts User Guide.
+	// in the Amazon Web Services Outposts User Guide.
 	EnableCustomerOwnedIp *bool
 
-	// A value that indicates whether to enable mapping of AWS Identity and Access
-	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// This setting doesn't apply to Amazon Aurora. Mapping AWS IAM accounts to
-	// database accounts is managed by the DB cluster. For more information about IAM
-	// database authentication, see  IAM Database Authentication for MySQL and
-	// PostgreSQL
+	// A value that indicates whether to enable mapping of Amazon Web Services Identity
+	// and Access Management (IAM) accounts to database accounts. By default, mapping
+	// is disabled. This setting doesn't apply to Amazon Aurora. Mapping Amazon Web
+	// Services IAM accounts to database accounts is managed by the DB cluster. For
+	// more information about IAM database authentication, see  IAM Database
+	// Authentication for MySQL and PostgreSQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool
@@ -355,12 +357,13 @@ type ModifyDBInstanceInput struct {
 	// with a DB instance
 	OptionGroupName *string
 
-	// The AWS KMS key identifier for encryption of Performance Insights data. The AWS
-	// KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS
-	// KMS customer master key (CMK). If you do not specify a value for
-	// PerformanceInsightsKMSKeyId, then Amazon RDS uses your default CMK. There is a
-	// default CMK for your AWS account. Your AWS account has a different default CMK
-	// for each AWS Region.
+	// The Amazon Web Services KMS key identifier for encryption of Performance
+	// Insights data. The Amazon Web Services KMS key identifier is the key ARN, key
+	// ID, alias ARN, or alias name for the Amazon Web Services KMS customer master key
+	// (CMK). If you do not specify a value for PerformanceInsightsKMSKeyId, then
+	// Amazon RDS uses your default CMK. There is a default CMK for your Amazon Web
+	// Services account. Your Amazon Web Services account has a different default CMK
+	// for each Amazon Web Services Region.
 	PerformanceInsightsKMSKeyId *string
 
 	// The amount of time, in days, to retain Performance Insights data. Valid values
@@ -371,8 +374,8 @@ type ModifyDBInstanceInput struct {
 	// backups are enabled, as determined by the BackupRetentionPeriod parameter.
 	// Changing this parameter doesn't result in an outage and the change is
 	// asynchronously applied as soon as possible. The default is a 30-minute window
-	// selected at random from an 8-hour block of time for each AWS Region. For more
-	// information, see Backup window
+	// selected at random from an 8-hour block of time for each Amazon Web Services
+	// Region. For more information, see Backup window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
 	// in the Amazon RDS User Guide. Amazon Aurora Not applicable. The daily time range
 	// for creating automated backups is managed by the DB cluster. For more

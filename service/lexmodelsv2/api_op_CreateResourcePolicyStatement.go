@@ -13,7 +13,7 @@ import (
 
 // Adds a new resource policy statement to a bot or bot alias. If a resource policy
 // exists, the statement is added to the current resource policy. If a policy
-// doesn't exist, a new policy is created. You can create a resource policy
+// doesn't exist, a new policy is created. You can't create a resource policy
 // statement that allows cross-account access.
 func (c *Client) CreateResourcePolicyStatement(ctx context.Context, params *CreateResourcePolicyStatementInput, optFns ...func(*Options)) (*CreateResourcePolicyStatementOutput, error) {
 	if params == nil {

@@ -122,22 +122,22 @@ func awsAwsquery_deserializeOpErrorAcceptReservedNodeExchange(response *smithyht
 	case strings.EqualFold("DependentServiceUnavailableFault", errorCode):
 		return awsAwsquery_deserializeErrorDependentServiceUnavailableFault(response, errorBody)
 
-	case strings.EqualFold("InvalidReservedNodeStateFault", errorCode):
+	case strings.EqualFold("InvalidReservedNodeState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReservedNodeStateFault(response, errorBody)
 
-	case strings.EqualFold("ReservedNodeAlreadyExistsFault", errorCode):
+	case strings.EqualFold("ReservedNodeAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorReservedNodeAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("ReservedNodeAlreadyMigratedFault", errorCode):
+	case strings.EqualFold("ReservedNodeAlreadyMigrated", errorCode):
 		return awsAwsquery_deserializeErrorReservedNodeAlreadyMigratedFault(response, errorBody)
 
-	case strings.EqualFold("ReservedNodeNotFoundFault", errorCode):
+	case strings.EqualFold("ReservedNodeNotFound", errorCode):
 		return awsAwsquery_deserializeErrorReservedNodeNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ReservedNodeOfferingNotFoundFault", errorCode):
+	case strings.EqualFold("ReservedNodeOfferingNotFound", errorCode):
 		return awsAwsquery_deserializeErrorReservedNodeOfferingNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
@@ -245,13 +245,13 @@ func awsAwsquery_deserializeOpErrorAddPartner(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("PartnerNotFoundFault", errorCode):
+	case strings.EqualFold("PartnerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorPartnerNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UnauthorizedPartnerIntegrationFault", errorCode):
+	case strings.EqualFold("UnauthorizedPartnerIntegration", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedPartnerIntegrationFault(response, errorBody)
 
 	default:
@@ -359,16 +359,16 @@ func awsAwsquery_deserializeOpErrorAuthorizeClusterSecurityGroupIngress(response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationAlreadyExistsFault", errorCode):
+	case strings.EqualFold("AuthorizationAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("AuthorizationQuotaExceededFault", errorCode):
+	case strings.EqualFold("AuthorizationQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSecurityGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSecurityGroupStateFault(response, errorBody)
 
 	default:
@@ -476,22 +476,22 @@ func awsAwsquery_deserializeOpErrorAuthorizeEndpointAccess(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("EndpointAuthorizationAlreadyExistsFault", errorCode):
+	case strings.EqualFold("EndpointAuthorizationAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEndpointAuthorizationAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("EndpointAuthorizationsPerClusterLimitExceededFault", errorCode):
+	case strings.EqualFold("EndpointAuthorizationsPerClusterLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorEndpointAuthorizationsPerClusterLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("InvalidAuthorizationStateFault", errorCode):
+	case strings.EqualFold("InvalidAuthorizationState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidAuthorizationStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
@@ -599,19 +599,19 @@ func awsAwsquery_deserializeOpErrorAuthorizeSnapshotAccess(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationAlreadyExistsFault", errorCode):
+	case strings.EqualFold("AuthorizationAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("AuthorizationQuotaExceededFault", errorCode):
+	case strings.EqualFold("AuthorizationQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSnapshotNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DependentServiceRequestThrottlingFault", errorCode):
 		return awsAwsquery_deserializeErrorDependentServiceRequestThrottlingFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSnapshotStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSnapshotState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSnapshotStateFault(response, errorBody)
 
 	case strings.EqualFold("LimitExceededFault", errorCode):
@@ -722,7 +722,7 @@ func awsAwsquery_deserializeOpErrorBatchDeleteClusterSnapshots(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("BatchDeleteRequestSizeExceededFault", errorCode):
+	case strings.EqualFold("BatchDeleteRequestSizeExceeded", errorCode):
 		return awsAwsquery_deserializeErrorBatchDeleteRequestSizeExceededFault(response, errorBody)
 
 	default:
@@ -941,16 +941,16 @@ func awsAwsquery_deserializeOpErrorCancelResize(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("ResizeNotFoundFault", errorCode):
+	case strings.EqualFold("ResizeNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResizeNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
@@ -1058,16 +1058,16 @@ func awsAwsquery_deserializeOpErrorCopyClusterSnapshot(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterSnapshotAlreadyExistsFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSnapshotNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSnapshotQuotaExceededFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSnapshotStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSnapshotState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSnapshotStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidRetentionPeriodFault", errorCode):
@@ -1178,16 +1178,16 @@ func awsAwsquery_deserializeOpErrorCreateCluster(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterAlreadyExistsFault", errorCode):
+	case strings.EqualFold("ClusterAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorClusterAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("ClusterParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterQuotaExceededFault", errorCode):
+	case strings.EqualFold("ClusterQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorClusterQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSecurityGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("ClusterSubnetGroupNotFoundFault", errorCode):
@@ -1202,13 +1202,13 @@ func awsAwsquery_deserializeOpErrorCreateCluster(response *smithyhttp.Response, 
 	case strings.EqualFold("HsmConfigurationNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorHsmConfigurationNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientClusterCapacityFault(response, errorBody)
 
 	case strings.EqualFold("InvalidClusterSubnetGroupStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSubnetGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterTrackFault", errorCode):
+	case strings.EqualFold("InvalidClusterTrack", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterTrackFault(response, errorBody)
 
 	case strings.EqualFold("InvalidElasticIpFault", errorCode):
@@ -1229,13 +1229,13 @@ func awsAwsquery_deserializeOpErrorCreateCluster(response *smithyhttp.Response, 
 	case strings.EqualFold("LimitExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("NumberOfNodesPerClusterLimitExceededFault", errorCode):
+	case strings.EqualFold("NumberOfNodesPerClusterLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNumberOfNodesPerClusterLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("NumberOfNodesQuotaExceededFault", errorCode):
+	case strings.EqualFold("NumberOfNodesQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNumberOfNodesQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("SnapshotScheduleNotFoundFault", errorCode):
+	case strings.EqualFold("SnapshotScheduleNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotScheduleNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("TagLimitExceededFault", errorCode):
@@ -1349,10 +1349,10 @@ func awsAwsquery_deserializeOpErrorCreateClusterParameterGroup(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterParameterGroupAlreadyExistsFault", errorCode):
+	case strings.EqualFold("ClusterParameterGroupAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorClusterParameterGroupAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("ClusterParameterGroupQuotaExceededFault", errorCode):
+	case strings.EqualFold("ClusterParameterGroupQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorClusterParameterGroupQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("InvalidTagFault", errorCode):
@@ -1466,14 +1466,14 @@ func awsAwsquery_deserializeOpErrorCreateClusterSecurityGroup(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterSecurityGroupAlreadyExistsFault", errorCode):
+	case strings.EqualFold("ClusterSecurityGroupAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorClusterSecurityGroupAlreadyExistsFault(response, errorBody)
-
-	case strings.EqualFold("ClusterSecurityGroupQuotaExceededFault", errorCode):
-		return awsAwsquery_deserializeErrorClusterSecurityGroupQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("InvalidTagFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTagFault(response, errorBody)
+
+	case strings.EqualFold("QuotaExceeded.ClusterSecurityGroup", errorCode):
+		return awsAwsquery_deserializeErrorClusterSecurityGroupQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("TagLimitExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorTagLimitExceededFault(response, errorBody)
@@ -1583,16 +1583,16 @@ func awsAwsquery_deserializeOpErrorCreateClusterSnapshot(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSnapshotAlreadyExistsFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSnapshotQuotaExceededFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidRetentionPeriodFault", errorCode):
@@ -1709,10 +1709,10 @@ func awsAwsquery_deserializeOpErrorCreateClusterSubnetGroup(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterSubnetGroupAlreadyExistsFault", errorCode):
+	case strings.EqualFold("ClusterSubnetGroupAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorClusterSubnetGroupAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSubnetGroupQuotaExceededFault", errorCode):
+	case strings.EqualFold("ClusterSubnetGroupQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorClusterSubnetGroupQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("ClusterSubnetQuotaExceededFault", errorCode):
@@ -1838,34 +1838,34 @@ func awsAwsquery_deserializeOpErrorCreateEndpointAccess(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessToClusterDeniedFault", errorCode):
+	case strings.EqualFold("AccessToClusterDenied", errorCode):
 		return awsAwsquery_deserializeErrorAccessToClusterDeniedFault(response, errorBody)
 
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("ClusterSubnetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorClusterSubnetGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("EndpointAlreadyExistsFault", errorCode):
+	case strings.EqualFold("EndpointAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEndpointAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("EndpointsPerAuthorizationLimitExceededFault", errorCode):
+	case strings.EqualFold("EndpointsPerAuthorizationLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorEndpointsPerAuthorizationLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("EndpointsPerClusterLimitExceededFault", errorCode):
+	case strings.EqualFold("EndpointsPerClusterLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorEndpointsPerClusterLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSecurityGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedOperation(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
@@ -1973,34 +1973,34 @@ func awsAwsquery_deserializeOpErrorCreateEventSubscription(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("EventSubscriptionQuotaExceededFault", errorCode):
+	case strings.EqualFold("EventSubscriptionQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorEventSubscriptionQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("InvalidTagFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTagFault(response, errorBody)
 
-	case strings.EqualFold("SNSInvalidTopicFault", errorCode):
+	case strings.EqualFold("SNSInvalidTopic", errorCode):
 		return awsAwsquery_deserializeErrorSNSInvalidTopicFault(response, errorBody)
 
-	case strings.EqualFold("SNSNoAuthorizationFault", errorCode):
+	case strings.EqualFold("SNSNoAuthorization", errorCode):
 		return awsAwsquery_deserializeErrorSNSNoAuthorizationFault(response, errorBody)
 
-	case strings.EqualFold("SNSTopicArnNotFoundFault", errorCode):
+	case strings.EqualFold("SNSTopicArnNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSNSTopicArnNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SourceNotFoundFault", errorCode):
+	case strings.EqualFold("SourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSourceNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionAlreadyExistFault", errorCode):
+	case strings.EqualFold("SubscriptionAlreadyExist", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionAlreadyExistFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionCategoryNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionCategoryNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionCategoryNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionEventIdNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionEventIdNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionEventIdNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionSeverityNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionSeverityNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionSeverityNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("TagLimitExceededFault", errorCode):
@@ -2345,19 +2345,19 @@ func awsAwsquery_deserializeOpErrorCreateScheduledAction(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidScheduleFault", errorCode):
+	case strings.EqualFold("InvalidSchedule", errorCode):
 		return awsAwsquery_deserializeErrorInvalidScheduleFault(response, errorBody)
 
-	case strings.EqualFold("InvalidScheduledActionFault", errorCode):
+	case strings.EqualFold("InvalidScheduledAction", errorCode):
 		return awsAwsquery_deserializeErrorInvalidScheduledActionFault(response, errorBody)
 
-	case strings.EqualFold("ScheduledActionAlreadyExistsFault", errorCode):
+	case strings.EqualFold("ScheduledActionAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorScheduledActionAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("ScheduledActionQuotaExceededFault", errorCode):
+	case strings.EqualFold("ScheduledActionQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorScheduledActionQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("ScheduledActionTypeUnsupportedFault", errorCode):
+	case strings.EqualFold("ScheduledActionTypeUnsupported", errorCode):
 		return awsAwsquery_deserializeErrorScheduledActionTypeUnsupportedFault(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
@@ -2591,19 +2591,19 @@ func awsAwsquery_deserializeOpErrorCreateSnapshotSchedule(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidScheduleFault", errorCode):
+	case strings.EqualFold("InvalidSchedule", errorCode):
 		return awsAwsquery_deserializeErrorInvalidScheduleFault(response, errorBody)
 
 	case strings.EqualFold("InvalidTagFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTagFault(response, errorBody)
 
-	case strings.EqualFold("ScheduleDefinitionTypeUnsupportedFault", errorCode):
+	case strings.EqualFold("ScheduleDefinitionTypeUnsupported", errorCode):
 		return awsAwsquery_deserializeErrorScheduleDefinitionTypeUnsupportedFault(response, errorBody)
 
-	case strings.EqualFold("SnapshotScheduleAlreadyExistsFault", errorCode):
+	case strings.EqualFold("SnapshotScheduleAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotScheduleAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("SnapshotScheduleQuotaExceededFault", errorCode):
+	case strings.EqualFold("SnapshotScheduleQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotScheduleQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("TagLimitExceededFault", errorCode):
@@ -2679,7 +2679,7 @@ func awsAwsquery_deserializeOpErrorCreateTags(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidTagFault", errorCode):
@@ -2796,13 +2796,13 @@ func awsAwsquery_deserializeOpErrorCreateUsageLimit(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidUsageLimitFault", errorCode):
+	case strings.EqualFold("InvalidUsageLimit", errorCode):
 		return awsAwsquery_deserializeErrorInvalidUsageLimitFault(response, errorBody)
 
 	case strings.EqualFold("LimitExceededFault", errorCode):
@@ -2811,10 +2811,10 @@ func awsAwsquery_deserializeOpErrorCreateUsageLimit(response *smithyhttp.Respons
 	case strings.EqualFold("TagLimitExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorTagLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
-	case strings.EqualFold("UsageLimitAlreadyExistsFault", errorCode):
+	case strings.EqualFold("UsageLimitAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorUsageLimitAlreadyExistsFault(response, errorBody)
 
 	default:
@@ -2922,16 +2922,16 @@ func awsAwsquery_deserializeOpErrorDeleteCluster(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSnapshotAlreadyExistsFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSnapshotQuotaExceededFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidRetentionPeriodFault", errorCode):
@@ -3007,10 +3007,10 @@ func awsAwsquery_deserializeOpErrorDeleteClusterParameterGroup(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterParameterGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterParameterGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterParameterGroupStateFault(response, errorBody)
 
 	default:
@@ -3083,10 +3083,10 @@ func awsAwsquery_deserializeOpErrorDeleteClusterSecurityGroup(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSecurityGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSecurityGroupStateFault(response, errorBody)
 
 	default:
@@ -3194,10 +3194,10 @@ func awsAwsquery_deserializeOpErrorDeleteClusterSnapshot(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterSnapshotNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSnapshotStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSnapshotState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSnapshotStateFault(response, errorBody)
 
 	default:
@@ -3384,19 +3384,19 @@ func awsAwsquery_deserializeOpErrorDeleteEndpointAccess(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("EndpointNotFoundFault", errorCode):
+	case strings.EqualFold("EndpointNotFound", errorCode):
 		return awsAwsquery_deserializeErrorEndpointNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSecurityGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidEndpointStateFault", errorCode):
+	case strings.EqualFold("InvalidEndpointState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidEndpointStateFault(response, errorBody)
 
 	default:
@@ -3472,7 +3472,7 @@ func awsAwsquery_deserializeOpErrorDeleteEventSubscription(response *smithyhttp.
 	case strings.EqualFold("InvalidSubscriptionStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSubscriptionStateFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionNotFoundFault(response, errorBody)
 
 	default:
@@ -3732,13 +3732,13 @@ func awsAwsquery_deserializeOpErrorDeletePartner(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("PartnerNotFoundFault", errorCode):
+	case strings.EqualFold("PartnerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorPartnerNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UnauthorizedPartnerIntegrationFault", errorCode):
+	case strings.EqualFold("UnauthorizedPartnerIntegration", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedPartnerIntegrationFault(response, errorBody)
 
 	default:
@@ -3811,7 +3811,7 @@ func awsAwsquery_deserializeOpErrorDeleteScheduledAction(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ScheduledActionNotFoundFault", errorCode):
+	case strings.EqualFold("ScheduledActionNotFound", errorCode):
 		return awsAwsquery_deserializeErrorScheduledActionNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
@@ -3963,10 +3963,10 @@ func awsAwsquery_deserializeOpErrorDeleteSnapshotSchedule(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidClusterSnapshotScheduleStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSnapshotScheduleState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSnapshotScheduleStateFault(response, errorBody)
 
-	case strings.EqualFold("SnapshotScheduleNotFoundFault", errorCode):
+	case strings.EqualFold("SnapshotScheduleNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotScheduleNotFoundFault(response, errorBody)
 
 	default:
@@ -4115,10 +4115,10 @@ func awsAwsquery_deserializeOpErrorDeleteUsageLimit(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
-	case strings.EqualFold("UsageLimitNotFoundFault", errorCode):
+	case strings.EqualFold("UsageLimitNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUsageLimitNotFoundFault(response, errorBody)
 
 	default:
@@ -4331,10 +4331,10 @@ func awsAwsquery_deserializeOpErrorDescribeClusterDbRevisions(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	default:
@@ -4442,7 +4442,7 @@ func awsAwsquery_deserializeOpErrorDescribeClusterParameterGroups(response *smit
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterParameterGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("InvalidTagFault", errorCode):
@@ -4553,7 +4553,7 @@ func awsAwsquery_deserializeOpErrorDescribeClusterParameters(response *smithyhtt
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterParameterGroupNotFoundFault(response, errorBody)
 
 	default:
@@ -4661,7 +4661,7 @@ func awsAwsquery_deserializeOpErrorDescribeClusters(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("InvalidTagFault", errorCode):
@@ -4772,7 +4772,7 @@ func awsAwsquery_deserializeOpErrorDescribeClusterSecurityGroups(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSecurityGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("InvalidTagFault", errorCode):
@@ -4883,10 +4883,10 @@ func awsAwsquery_deserializeOpErrorDescribeClusterSnapshots(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSnapshotNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("InvalidTagFault", errorCode):
@@ -5108,7 +5108,7 @@ func awsAwsquery_deserializeOpErrorDescribeClusterTracks(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidClusterTrackFault", errorCode):
+	case strings.EqualFold("InvalidClusterTrack", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterTrackFault(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
@@ -5429,13 +5429,13 @@ func awsAwsquery_deserializeOpErrorDescribeEndpointAccess(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("EndpointNotFoundFault", errorCode):
+	case strings.EqualFold("EndpointNotFound", errorCode):
 		return awsAwsquery_deserializeErrorEndpointNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	default:
@@ -5543,10 +5543,10 @@ func awsAwsquery_deserializeOpErrorDescribeEndpointAuthorization(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
@@ -5867,7 +5867,7 @@ func awsAwsquery_deserializeOpErrorDescribeEventSubscriptions(response *smithyht
 	case strings.EqualFold("InvalidTagFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTagFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionNotFoundFault(response, errorBody)
 
 	default:
@@ -6197,7 +6197,7 @@ func awsAwsquery_deserializeOpErrorDescribeLoggingStatus(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
 	default:
@@ -6305,16 +6305,16 @@ func awsAwsquery_deserializeOpErrorDescribeNodeConfigurationOptions(response *sm
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessToSnapshotDeniedFault", errorCode):
+	case strings.EqualFold("AccessToSnapshotDenied", errorCode):
 		return awsAwsquery_deserializeErrorAccessToSnapshotDeniedFault(response, errorBody)
 
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSnapshotNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSnapshotStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSnapshotState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSnapshotStateFault(response, errorBody)
 
 	default:
@@ -6527,10 +6527,10 @@ func awsAwsquery_deserializeOpErrorDescribePartners(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UnauthorizedPartnerIntegrationFault", errorCode):
+	case strings.EqualFold("UnauthorizedPartnerIntegration", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedPartnerIntegrationFault(response, errorBody)
 
 	default:
@@ -6641,10 +6641,10 @@ func awsAwsquery_deserializeOpErrorDescribeReservedNodeOfferings(response *smith
 	case strings.EqualFold("DependentServiceUnavailableFault", errorCode):
 		return awsAwsquery_deserializeErrorDependentServiceUnavailableFault(response, errorBody)
 
-	case strings.EqualFold("ReservedNodeOfferingNotFoundFault", errorCode):
+	case strings.EqualFold("ReservedNodeOfferingNotFound", errorCode):
 		return awsAwsquery_deserializeErrorReservedNodeOfferingNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
@@ -6755,7 +6755,7 @@ func awsAwsquery_deserializeOpErrorDescribeReservedNodes(response *smithyhttp.Re
 	case strings.EqualFold("DependentServiceUnavailableFault", errorCode):
 		return awsAwsquery_deserializeErrorDependentServiceUnavailableFault(response, errorBody)
 
-	case strings.EqualFold("ReservedNodeNotFoundFault", errorCode):
+	case strings.EqualFold("ReservedNodeNotFound", errorCode):
 		return awsAwsquery_deserializeErrorReservedNodeNotFoundFault(response, errorBody)
 
 	default:
@@ -6863,10 +6863,10 @@ func awsAwsquery_deserializeOpErrorDescribeResize(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ResizeNotFoundFault", errorCode):
+	case strings.EqualFold("ResizeNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResizeNotFoundFault(response, errorBody)
 
 	default:
@@ -6974,7 +6974,7 @@ func awsAwsquery_deserializeOpErrorDescribeScheduledActions(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ScheduledActionNotFoundFault", errorCode):
+	case strings.EqualFold("ScheduledActionNotFound", errorCode):
 		return awsAwsquery_deserializeErrorScheduledActionNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
@@ -7406,7 +7406,7 @@ func awsAwsquery_deserializeOpErrorDescribeTableRestoreStatus(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("TableRestoreNotFoundFault", errorCode):
@@ -7628,10 +7628,10 @@ func awsAwsquery_deserializeOpErrorDescribeUsageLimits(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
@@ -7739,7 +7739,7 @@ func awsAwsquery_deserializeOpErrorDisableLogging(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
 	default:
@@ -7847,10 +7847,10 @@ func awsAwsquery_deserializeOpErrorDisableSnapshotCopy(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	case strings.EqualFold("SnapshotCopyAlreadyDisabledFault", errorCode):
@@ -7967,13 +7967,13 @@ func awsAwsquery_deserializeOpErrorEnableLogging(response *smithyhttp.Response, 
 	case strings.EqualFold("BucketNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorBucketNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("InsufficientS3BucketPolicyFault", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientS3BucketPolicyFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidS3BucketNameFault", errorCode):
@@ -8087,7 +8087,7 @@ func awsAwsquery_deserializeOpErrorEnableSnapshotCopy(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("CopyToRegionDisabledFault", errorCode):
@@ -8099,7 +8099,7 @@ func awsAwsquery_deserializeOpErrorEnableSnapshotCopy(response *smithyhttp.Respo
 	case strings.EqualFold("IncompatibleOrderableOptions", errorCode):
 		return awsAwsquery_deserializeErrorIncompatibleOrderableOptions(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidRetentionPeriodFault", errorCode):
@@ -8225,10 +8225,10 @@ func awsAwsquery_deserializeOpErrorGetClusterCredentials(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
@@ -8339,19 +8339,19 @@ func awsAwsquery_deserializeOpErrorGetReservedNodeExchangeOfferings(response *sm
 	case strings.EqualFold("DependentServiceUnavailableFault", errorCode):
 		return awsAwsquery_deserializeErrorDependentServiceUnavailableFault(response, errorBody)
 
-	case strings.EqualFold("InvalidReservedNodeStateFault", errorCode):
+	case strings.EqualFold("InvalidReservedNodeState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReservedNodeStateFault(response, errorBody)
 
-	case strings.EqualFold("ReservedNodeAlreadyMigratedFault", errorCode):
+	case strings.EqualFold("ReservedNodeAlreadyMigrated", errorCode):
 		return awsAwsquery_deserializeErrorReservedNodeAlreadyMigratedFault(response, errorBody)
 
-	case strings.EqualFold("ReservedNodeNotFoundFault", errorCode):
+	case strings.EqualFold("ReservedNodeNotFound", errorCode):
 		return awsAwsquery_deserializeErrorReservedNodeNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ReservedNodeOfferingNotFoundFault", errorCode):
+	case strings.EqualFold("ReservedNodeOfferingNotFound", errorCode):
 		return awsAwsquery_deserializeErrorReservedNodeOfferingNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
@@ -8459,10 +8459,13 @@ func awsAwsquery_deserializeOpErrorModifyAquaConfiguration(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
@@ -8570,16 +8573,16 @@ func awsAwsquery_deserializeOpErrorModifyCluster(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterAlreadyExistsFault", errorCode):
+	case strings.EqualFold("ClusterAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorClusterAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSecurityGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DependentServiceRequestThrottlingFault", errorCode):
@@ -8591,16 +8594,16 @@ func awsAwsquery_deserializeOpErrorModifyCluster(response *smithyhttp.Response, 
 	case strings.EqualFold("HsmConfigurationNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorHsmConfigurationNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientClusterCapacityFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSecurityGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterTrackFault", errorCode):
+	case strings.EqualFold("InvalidClusterTrack", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterTrackFault(response, errorBody)
 
 	case strings.EqualFold("InvalidElasticIpFault", errorCode):
@@ -8612,13 +8615,13 @@ func awsAwsquery_deserializeOpErrorModifyCluster(response *smithyhttp.Response, 
 	case strings.EqualFold("LimitExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("NumberOfNodesPerClusterLimitExceededFault", errorCode):
+	case strings.EqualFold("NumberOfNodesPerClusterLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNumberOfNodesPerClusterLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("NumberOfNodesQuotaExceededFault", errorCode):
+	case strings.EqualFold("NumberOfNodesQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNumberOfNodesQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("TableLimitExceededFault", errorCode):
+	case strings.EqualFold("TableLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTableLimitExceededFault(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
@@ -8732,13 +8735,13 @@ func awsAwsquery_deserializeOpErrorModifyClusterDbRevision(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterOnLatestRevisionFault", errorCode):
+	case strings.EqualFold("ClusterOnLatestRevision", errorCode):
 		return awsAwsquery_deserializeErrorClusterOnLatestRevisionFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	default:
@@ -8846,10 +8849,10 @@ func awsAwsquery_deserializeOpErrorModifyClusterIamRoles(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	default:
@@ -8957,10 +8960,10 @@ func awsAwsquery_deserializeOpErrorModifyClusterMaintenance(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	default:
@@ -9068,10 +9071,10 @@ func awsAwsquery_deserializeOpErrorModifyClusterParameterGroup(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterParameterGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterParameterGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterParameterGroupStateFault(response, errorBody)
 
 	default:
@@ -9179,10 +9182,10 @@ func awsAwsquery_deserializeOpErrorModifyClusterSnapshot(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterSnapshotNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSnapshotStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSnapshotState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSnapshotStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidRetentionPeriodFault", errorCode):
@@ -9258,13 +9261,13 @@ func awsAwsquery_deserializeOpErrorModifyClusterSnapshotSchedule(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSnapshotScheduleStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSnapshotScheduleState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSnapshotScheduleStateFault(response, errorBody)
 
-	case strings.EqualFold("SnapshotScheduleNotFoundFault", errorCode):
+	case strings.EqualFold("SnapshotScheduleNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotScheduleNotFoundFault(response, errorBody)
 
 	default:
@@ -9495,19 +9498,19 @@ func awsAwsquery_deserializeOpErrorModifyEndpointAccess(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("EndpointNotFoundFault", errorCode):
+	case strings.EqualFold("EndpointNotFound", errorCode):
 		return awsAwsquery_deserializeErrorEndpointNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSecurityGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidEndpointStateFault", errorCode):
+	case strings.EqualFold("InvalidEndpointState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidEndpointStateFault(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
@@ -9621,28 +9624,28 @@ func awsAwsquery_deserializeOpErrorModifyEventSubscription(response *smithyhttp.
 	case strings.EqualFold("InvalidSubscriptionStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSubscriptionStateFault(response, errorBody)
 
-	case strings.EqualFold("SNSInvalidTopicFault", errorCode):
+	case strings.EqualFold("SNSInvalidTopic", errorCode):
 		return awsAwsquery_deserializeErrorSNSInvalidTopicFault(response, errorBody)
 
-	case strings.EqualFold("SNSNoAuthorizationFault", errorCode):
+	case strings.EqualFold("SNSNoAuthorization", errorCode):
 		return awsAwsquery_deserializeErrorSNSNoAuthorizationFault(response, errorBody)
 
-	case strings.EqualFold("SNSTopicArnNotFoundFault", errorCode):
+	case strings.EqualFold("SNSTopicArnNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSNSTopicArnNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SourceNotFoundFault", errorCode):
+	case strings.EqualFold("SourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSourceNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionCategoryNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionCategoryNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionCategoryNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionEventIdNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionEventIdNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionEventIdNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionSeverityNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionSeverityNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionSeverityNotFoundFault(response, errorBody)
 
 	default:
@@ -9750,16 +9753,16 @@ func awsAwsquery_deserializeOpErrorModifyScheduledAction(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidScheduleFault", errorCode):
+	case strings.EqualFold("InvalidSchedule", errorCode):
 		return awsAwsquery_deserializeErrorInvalidScheduleFault(response, errorBody)
 
-	case strings.EqualFold("InvalidScheduledActionFault", errorCode):
+	case strings.EqualFold("InvalidScheduledAction", errorCode):
 		return awsAwsquery_deserializeErrorInvalidScheduledActionFault(response, errorBody)
 
-	case strings.EqualFold("ScheduledActionNotFoundFault", errorCode):
+	case strings.EqualFold("ScheduledActionNotFound", errorCode):
 		return awsAwsquery_deserializeErrorScheduledActionNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ScheduledActionTypeUnsupportedFault", errorCode):
+	case strings.EqualFold("ScheduledActionTypeUnsupported", errorCode):
 		return awsAwsquery_deserializeErrorScheduledActionTypeUnsupportedFault(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
@@ -9870,10 +9873,10 @@ func awsAwsquery_deserializeOpErrorModifySnapshotCopyRetentionPeriod(response *s
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidRetentionPeriodFault", errorCode):
@@ -9990,13 +9993,13 @@ func awsAwsquery_deserializeOpErrorModifySnapshotSchedule(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidScheduleFault", errorCode):
+	case strings.EqualFold("InvalidSchedule", errorCode):
 		return awsAwsquery_deserializeErrorInvalidScheduleFault(response, errorBody)
 
-	case strings.EqualFold("SnapshotScheduleNotFoundFault", errorCode):
+	case strings.EqualFold("SnapshotScheduleNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotScheduleNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SnapshotScheduleUpdateInProgressFault", errorCode):
+	case strings.EqualFold("SnapshotScheduleUpdateInProgress", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotScheduleUpdateInProgressFault(response, errorBody)
 
 	default:
@@ -10104,13 +10107,13 @@ func awsAwsquery_deserializeOpErrorModifyUsageLimit(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidUsageLimitFault", errorCode):
+	case strings.EqualFold("InvalidUsageLimit", errorCode):
 		return awsAwsquery_deserializeErrorInvalidUsageLimitFault(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
-	case strings.EqualFold("UsageLimitNotFoundFault", errorCode):
+	case strings.EqualFold("UsageLimitNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUsageLimitNotFoundFault(response, errorBody)
 
 	default:
@@ -10218,10 +10221,10 @@ func awsAwsquery_deserializeOpErrorPauseCluster(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	default:
@@ -10329,16 +10332,16 @@ func awsAwsquery_deserializeOpErrorPurchaseReservedNodeOffering(response *smithy
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ReservedNodeAlreadyExistsFault", errorCode):
+	case strings.EqualFold("ReservedNodeAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorReservedNodeAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("ReservedNodeOfferingNotFoundFault", errorCode):
+	case strings.EqualFold("ReservedNodeOfferingNotFound", errorCode):
 		return awsAwsquery_deserializeErrorReservedNodeOfferingNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ReservedNodeQuotaExceededFault", errorCode):
+	case strings.EqualFold("ReservedNodeQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorReservedNodeQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
@@ -10446,10 +10449,10 @@ func awsAwsquery_deserializeOpErrorRebootCluster(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	default:
@@ -10557,10 +10560,10 @@ func awsAwsquery_deserializeOpErrorResetClusterParameterGroup(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterParameterGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterParameterGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterParameterGroupStateFault(response, errorBody)
 
 	default:
@@ -10668,28 +10671,28 @@ func awsAwsquery_deserializeOpErrorResizeCluster(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientClusterCapacityFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	case strings.EqualFold("LimitExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("NumberOfNodesPerClusterLimitExceededFault", errorCode):
+	case strings.EqualFold("NumberOfNodesPerClusterLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNumberOfNodesPerClusterLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("NumberOfNodesQuotaExceededFault", errorCode):
+	case strings.EqualFold("NumberOfNodesQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNumberOfNodesQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedOperation(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	case strings.EqualFold("UnsupportedOptionFault", errorCode):
@@ -10800,22 +10803,22 @@ func awsAwsquery_deserializeOpErrorRestoreFromClusterSnapshot(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessToSnapshotDeniedFault", errorCode):
+	case strings.EqualFold("AccessToSnapshotDenied", errorCode):
 		return awsAwsquery_deserializeErrorAccessToSnapshotDeniedFault(response, errorBody)
 
-	case strings.EqualFold("ClusterAlreadyExistsFault", errorCode):
+	case strings.EqualFold("ClusterAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorClusterAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("ClusterParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterQuotaExceededFault", errorCode):
+	case strings.EqualFold("ClusterQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorClusterQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSecurityGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSnapshotNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("ClusterSubnetGroupNotFoundFault", errorCode):
@@ -10830,22 +10833,22 @@ func awsAwsquery_deserializeOpErrorRestoreFromClusterSnapshot(response *smithyht
 	case strings.EqualFold("HsmConfigurationNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorHsmConfigurationNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientClusterCapacityFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSnapshotStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSnapshotState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSnapshotStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidClusterSubnetGroupStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSubnetGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterTrackFault", errorCode):
+	case strings.EqualFold("InvalidClusterTrack", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterTrackFault(response, errorBody)
 
 	case strings.EqualFold("InvalidElasticIpFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidElasticIpFault(response, errorBody)
 
-	case strings.EqualFold("InvalidRestoreFault", errorCode):
+	case strings.EqualFold("InvalidRestore", errorCode):
 		return awsAwsquery_deserializeErrorInvalidRestoreFault(response, errorBody)
 
 	case strings.EqualFold("InvalidSubnet", errorCode):
@@ -10860,13 +10863,13 @@ func awsAwsquery_deserializeOpErrorRestoreFromClusterSnapshot(response *smithyht
 	case strings.EqualFold("LimitExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("NumberOfNodesPerClusterLimitExceededFault", errorCode):
+	case strings.EqualFold("NumberOfNodesPerClusterLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNumberOfNodesPerClusterLimitExceededFault(response, errorBody)
 
-	case strings.EqualFold("NumberOfNodesQuotaExceededFault", errorCode):
+	case strings.EqualFold("NumberOfNodesQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNumberOfNodesQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("SnapshotScheduleNotFoundFault", errorCode):
+	case strings.EqualFold("SnapshotScheduleNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotScheduleNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("TagLimitExceededFault", errorCode):
@@ -10980,25 +10983,25 @@ func awsAwsquery_deserializeOpErrorRestoreTableFromClusterSnapshot(response *smi
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSnapshotNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("InProgressTableRestoreQuotaExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorInProgressTableRestoreQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSnapshotStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSnapshotState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSnapshotStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidTableRestoreArgumentFault", errorCode):
+	case strings.EqualFold("InvalidTableRestoreArgument", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTableRestoreArgumentFault(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperationFault", errorCode):
+	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
@@ -11106,13 +11109,13 @@ func awsAwsquery_deserializeOpErrorResumeCluster(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientClusterCapacityFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	default:
@@ -11220,13 +11223,13 @@ func awsAwsquery_deserializeOpErrorRevokeClusterSecurityGroupIngress(response *s
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationNotFoundFault", errorCode):
+	case strings.EqualFold("AuthorizationNotFound", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSecurityGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSecurityGroupStateFault(response, errorBody)
 
 	default:
@@ -11334,25 +11337,25 @@ func awsAwsquery_deserializeOpErrorRevokeEndpointAccess(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("EndpointAuthorizationNotFoundFault", errorCode):
+	case strings.EqualFold("EndpointAuthorizationNotFound", errorCode):
 		return awsAwsquery_deserializeErrorEndpointAuthorizationNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("EndpointNotFoundFault", errorCode):
+	case strings.EqualFold("EndpointNotFound", errorCode):
 		return awsAwsquery_deserializeErrorEndpointNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidAuthorizationStateFault", errorCode):
+	case strings.EqualFold("InvalidAuthorizationState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidAuthorizationStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSecurityGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidEndpointStateFault", errorCode):
+	case strings.EqualFold("InvalidEndpointState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidEndpointStateFault(response, errorBody)
 
 	default:
@@ -11460,13 +11463,13 @@ func awsAwsquery_deserializeOpErrorRevokeSnapshotAccess(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AccessToSnapshotDeniedFault", errorCode):
+	case strings.EqualFold("AccessToSnapshotDenied", errorCode):
 		return awsAwsquery_deserializeErrorAccessToSnapshotDeniedFault(response, errorBody)
 
-	case strings.EqualFold("AuthorizationNotFoundFault", errorCode):
+	case strings.EqualFold("AuthorizationNotFound", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterSnapshotNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotNotFoundFault(response, errorBody)
 
 	default:
@@ -11574,13 +11577,13 @@ func awsAwsquery_deserializeOpErrorRotateEncryptionKey(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DependentServiceRequestThrottlingFault", errorCode):
 		return awsAwsquery_deserializeErrorDependentServiceRequestThrottlingFault(response, errorBody)
 
-	case strings.EqualFold("InvalidClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
 
 	default:
@@ -11688,13 +11691,13 @@ func awsAwsquery_deserializeOpErrorUpdatePartnerStatus(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterNotFoundFault", errorCode):
+	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("PartnerNotFoundFault", errorCode):
+	case strings.EqualFold("PartnerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorPartnerNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UnauthorizedPartnerIntegrationFault", errorCode):
+	case strings.EqualFold("UnauthorizedPartnerIntegration", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedPartnerIntegrationFault(response, errorBody)
 
 	default:

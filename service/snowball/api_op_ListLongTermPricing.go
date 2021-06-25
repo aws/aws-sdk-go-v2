@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all long term pricing types.
+// Lists all long-term pricing types.
 func (c *Client) ListLongTermPricing(ctx context.Context, params *ListLongTermPricingInput, optFns ...func(*Options)) (*ListLongTermPricingOutput, error) {
 	if params == nil {
 		params = &ListLongTermPricingInput{}

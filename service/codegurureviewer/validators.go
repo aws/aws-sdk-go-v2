@@ -322,6 +322,39 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func validateBranchDiffSourceCodeType(v *types.BranchDiffSourceCodeType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BranchDiffSourceCodeType"}
+	if v.SourceBranchName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceBranchName"))
+	}
+	if v.DestinationBranchName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationBranchName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodeArtifacts(v *types.CodeArtifacts) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodeArtifacts"}
+	if v.SourceCodeArtifactsObjectKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceCodeArtifactsObjectKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCodeCommitRepository(v *types.CodeCommitRepository) error {
 	if v == nil {
 		return nil
@@ -376,6 +409,11 @@ func validateRepository(v *types.Repository) error {
 			invalidParams.AddNested("GitHubEnterpriseServer", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.S3Bucket != nil {
+		if err := validateS3Repository(v.S3Bucket); err != nil {
+			invalidParams.AddNested("S3Bucket", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -388,11 +426,14 @@ func validateRepositoryAnalysis(v *types.RepositoryAnalysis) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RepositoryAnalysis"}
-	if v.RepositoryHead == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryHead"))
-	} else if v.RepositoryHead != nil {
+	if v.RepositoryHead != nil {
 		if err := validateRepositoryHeadSourceCodeType(v.RepositoryHead); err != nil {
 			invalidParams.AddNested("RepositoryHead", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceCodeType != nil {
+		if err := validateSourceCodeType(v.SourceCodeType); err != nil {
+			invalidParams.AddNested("SourceCodeType", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -409,6 +450,88 @@ func validateRepositoryHeadSourceCodeType(v *types.RepositoryHeadSourceCodeType)
 	invalidParams := smithy.InvalidParamsError{Context: "RepositoryHeadSourceCodeType"}
 	if v.BranchName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3BucketRepository(v *types.S3BucketRepository) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3BucketRepository"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Details != nil {
+		if err := validateS3RepositoryDetails(v.Details); err != nil {
+			invalidParams.AddNested("Details", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3Repository(v *types.S3Repository) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Repository"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3RepositoryDetails(v *types.S3RepositoryDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3RepositoryDetails"}
+	if v.CodeArtifacts != nil {
+		if err := validateCodeArtifacts(v.CodeArtifacts); err != nil {
+			invalidParams.AddNested("CodeArtifacts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceCodeType(v *types.SourceCodeType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceCodeType"}
+	if v.RepositoryHead != nil {
+		if err := validateRepositoryHeadSourceCodeType(v.RepositoryHead); err != nil {
+			invalidParams.AddNested("RepositoryHead", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BranchDiff != nil {
+		if err := validateBranchDiffSourceCodeType(v.BranchDiff); err != nil {
+			invalidParams.AddNested("BranchDiff", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3BucketRepository != nil {
+		if err := validateS3BucketRepository(v.S3BucketRepository); err != nil {
+			invalidParams.AddNested("S3BucketRepository", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

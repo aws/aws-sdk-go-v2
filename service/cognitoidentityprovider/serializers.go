@@ -3727,6 +3727,53 @@ func (m *awsAwsjson11_serializeOpRespondToAuthChallenge) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpRevokeToken struct {
+}
+
+func (*awsAwsjson11_serializeOpRevokeToken) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpRevokeToken) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RevokeTokenInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.RevokeToken")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentRevokeTokenInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpSetRiskConfiguration struct {
 }
 
@@ -7068,6 +7115,11 @@ func awsAwsjson11_serializeOpDocumentCreateUserPoolClientInput(v *CreateUserPool
 		ok.String(*v.DefaultRedirectURI)
 	}
 
+	if v.EnableTokenRevocation != nil {
+		ok := object.Key("EnableTokenRevocation")
+		ok.Boolean(*v.EnableTokenRevocation)
+	}
+
 	if v.ExplicitAuthFlows != nil {
 		ok := object.Key("ExplicitAuthFlows")
 		if err := awsAwsjson11_serializeDocumentExplicitAuthFlowsListType(v.ExplicitAuthFlows, ok); err != nil {
@@ -8113,6 +8165,28 @@ func awsAwsjson11_serializeOpDocumentRespondToAuthChallengeInput(v *RespondToAut
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentRevokeTokenInput(v *RevokeTokenInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientId != nil {
+		ok := object.Key("ClientId")
+		ok.String(*v.ClientId)
+	}
+
+	if v.ClientSecret != nil {
+		ok := object.Key("ClientSecret")
+		ok.String(*v.ClientSecret)
+	}
+
+	if v.Token != nil {
+		ok := object.Key("Token")
+		ok.String(*v.Token)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentSetRiskConfigurationInput(v *SetRiskConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8622,6 +8696,11 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolClientInput(v *UpdateUserPool
 	if v.DefaultRedirectURI != nil {
 		ok := object.Key("DefaultRedirectURI")
 		ok.String(*v.DefaultRedirectURI)
+	}
+
+	if v.EnableTokenRevocation != nil {
+		ok := object.Key("EnableTokenRevocation")
+		ok.Boolean(*v.EnableTokenRevocation)
 	}
 
 	if v.ExplicitAuthFlows != nil {

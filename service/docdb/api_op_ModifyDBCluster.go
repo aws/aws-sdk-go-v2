@@ -101,7 +101,7 @@ type ModifyDBClusterInput struct {
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled, using the BackupRetentionPeriod parameter. The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
+	// 30-minute window selected at random from an 8-hour block of time for each
 	// Region. Constraints:
 	//
 	// * Must be in the format hh24:mi-hh24:mi.
@@ -117,7 +117,7 @@ type ModifyDBClusterInput struct {
 
 	// The weekly time range during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
+	// 30-minute window selected at random from an 8-hour block of time for each
 	// Region, occurring on a random day of the week. Valid days: Mon, Tue, Wed, Thu,
 	// Fri, Sat, Sun Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string

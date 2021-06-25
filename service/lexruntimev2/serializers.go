@@ -804,9 +804,21 @@ func awsRestjson1_serializeDocumentSlot(v *types.Slot, value smithyjson.Value) e
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.Shape) > 0 {
+		ok := object.Key("shape")
+		ok.String(string(v.Shape))
+	}
+
 	if v.Value != nil {
 		ok := object.Key("value")
 		if err := awsRestjson1_serializeDocumentValue(v.Value, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsRestjson1_serializeDocumentValues(v.Values, ok); err != nil {
 			return err
 		}
 	}
@@ -871,5 +883,18 @@ func awsRestjson1_serializeDocumentValue(v *types.Value, value smithyjson.Value)
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentValues(v []types.Slot, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSlot(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }

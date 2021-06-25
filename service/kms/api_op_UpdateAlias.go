@@ -13,19 +13,22 @@ import (
 // Associates an existing AWS KMS alias with a different customer master key (CMK).
 // Each alias is associated with only one CMK at a time, although a CMK can have
 // multiple aliases. The alias and the CMK must be in the same AWS account and
-// region. The current and new CMK must be the same type (both symmetric or both
-// asymmetric), and they must have the same key usage (ENCRYPT_DECRYPT or
-// SIGN_VERIFY). This restriction prevents errors in code that uses aliases. If you
-// must assign an alias to a different type of CMK, use DeleteAlias to delete the
-// old alias and CreateAlias to create a new alias. You cannot use UpdateAlias to
-// change an alias name. To change an alias name, use DeleteAlias to delete the old
-// alias and CreateAlias to create a new alias. Because an alias is not a property
-// of a CMK, you can create, update, and delete the aliases of a CMK without
-// affecting the CMK. Also, aliases do not appear in the response from the
-// DescribeKey operation. To get the aliases of all CMKs in the account, use the
-// ListAliases operation. The CMK that you use for this operation must be in a
-// compatible key state. For details, see How Key State Affects Use of a Customer
-// Master Key
+// Region. Adding, deleting, or updating an alias can allow or deny permission to
+// the CMK. For details, see Using ABAC in AWS KMS
+// (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the AWS Key
+// Management Service Developer Guide. The current and new CMK must be the same
+// type (both symmetric or both asymmetric), and they must have the same key usage
+// (ENCRYPT_DECRYPT or SIGN_VERIFY). This restriction prevents errors in code that
+// uses aliases. If you must assign an alias to a different type of CMK, use
+// DeleteAlias to delete the old alias and CreateAlias to create a new alias. You
+// cannot use UpdateAlias to change an alias name. To change an alias name, use
+// DeleteAlias to delete the old alias and CreateAlias to create a new alias.
+// Because an alias is not a property of a CMK, you can create, update, and delete
+// the aliases of a CMK without affecting the CMK. Also, aliases do not appear in
+// the response from the DescribeKey operation. To get the aliases of all CMKs in
+// the account, use the ListAliases operation. The CMK that you use for this
+// operation must be in a compatible key state. For details, see Key state: Effect
+// on your CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a CMK in a different AWS account. Required
@@ -85,7 +88,7 @@ type UpdateAliasInput struct {
 	// The CMK must be in the same AWS account and Region as the alias. Also, the new
 	// target CMK must be the same type as the current target CMK (both symmetric or
 	// both asymmetric) and they must have the same key usage. Specify the key ID or
-	// the Amazon Resource Name (ARN) of the CMK. For example:
+	// key ARN of the CMK. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab

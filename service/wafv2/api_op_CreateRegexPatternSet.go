@@ -12,8 +12,8 @@ import (
 )
 
 // Creates a RegexPatternSet, which you reference in a
-// RegexPatternSetReferenceStatement, to have AWS WAF inspect a web request
-// component for the specified patterns.
+// RegexPatternSetReferenceStatement, to have WAF inspect a web request component
+// for the specified patterns.
 func (c *Client) CreateRegexPatternSet(ctx context.Context, params *CreateRegexPatternSetInput, optFns ...func(*Options)) (*CreateRegexPatternSetOutput, error) {
 	if params == nil {
 		params = &CreateRegexPatternSetInput{}
@@ -41,17 +41,17 @@ type CreateRegexPatternSetInput struct {
 	// This member is required.
 	RegularExpressionList []types.Regex
 
-	// Specifies whether this is for an AWS CloudFront distribution or for a regional
-	// application. A regional application can be an Application Load Balancer (ALB),
-	// an API Gateway REST API, or an AppSync GraphQL API. To work with CloudFront, you
-	// must also specify the Region US East (N. Virginia) as follows:
+	// Specifies whether this is for an Amazon CloudFront distribution or for a
+	// regional application. A regional application can be an Application Load Balancer
+	// (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. To work with
+	// CloudFront, you must also specify the Region US East (N. Virginia) as
+	// follows:
 	//
-	// * CLI - Specify
-	// the Region when you use the CloudFront scope: --scope=CLOUDFRONT
-	// --region=us-east-1.
+	// * CLI - Specify the Region when you use the CloudFront scope:
+	// --scope=CLOUDFRONT --region=us-east-1.
 	//
-	// * API and SDKs - For all calls, use the Region endpoint
-	// us-east-1.
+	// * API and SDKs - For all calls, use the
+	// Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope

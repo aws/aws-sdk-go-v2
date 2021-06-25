@@ -145,6 +145,9 @@ func validateActiveContext(v *types.ActiveContext) error {
 			invalidParams.AddNested("TimeToLive", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ContextAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextAttributes"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -282,6 +285,9 @@ func validateMessage(v *types.Message) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Message"}
+	if len(v.ContentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
 	if v.ImageResponseCard != nil {
 		if err := validateImageResponseCard(v.ImageResponseCard); err != nil {
 			invalidParams.AddNested("ImageResponseCard", err.(smithy.InvalidParamsError))
@@ -348,6 +354,11 @@ func validateSlot(v *types.Slot) error {
 			invalidParams.AddNested("Value", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Values != nil {
+		if err := validateValues(v.Values); err != nil {
+			invalidParams.AddNested("Values", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -380,6 +391,23 @@ func validateValue(v *types.Value) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Value"}
 	if v.InterpretedValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InterpretedValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateValues(v []types.Slot) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Values"}
+	for i := range v {
+		if err := validateSlot(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -381,7 +381,8 @@ type Instance struct {
 	// When the instance was created.
 	CreatedTime *time.Time
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
 	Id *string
 
 	// The identity management type.
@@ -472,7 +473,8 @@ type InstanceSummary struct {
 // Contains summary information about the associated AppIntegrations.
 type IntegrationAssociationSummary struct {
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
 	InstanceId *string
 
 	// The Amazon Resource Name (ARN) for the AppIntegration.
@@ -546,6 +548,23 @@ type LexBot struct {
 	Name *string
 }
 
+// Configuration information of an Amazon Lex or Amazon Lex V2 bot.
+type LexBotConfig struct {
+
+	// Configuration information of an Amazon Lex bot.
+	LexBot *LexBot
+
+	// Configuration information of an Amazon Lex V2 bot.
+	LexV2Bot *LexV2Bot
+}
+
+// Configuration information of an Amazon Lex V2 bot.
+type LexV2Bot struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Lex V2 bot.
+	AliasArn *string
+}
+
 // Contains information about which channels are supported, and how many contacts
 // an agent can have on a channel simultaneously.
 type MediaConcurrency struct {
@@ -557,7 +576,7 @@ type MediaConcurrency struct {
 
 	// The number of contacts an agent can have on a channel simultaneously. Valid
 	// Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT:
-	// Minimum value of 1. Maximum value of 5. Valid Range for TASK: Minimum value of
+	// Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of
 	// 1. Maximum value of 10.
 	//
 	// This member is required.
@@ -792,7 +811,8 @@ type RoutingProfile struct {
 	// The description of the routing profile.
 	Description *string
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
 	InstanceId *string
 
 	// The channels agents can handle in the Contact Control Panel (CCP) for this

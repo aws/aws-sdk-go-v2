@@ -13,12 +13,12 @@ import (
 // Sets the state of a customer master key (CMK) to disabled. This change
 // temporarily prevents use of the CMK for cryptographic operations
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations).
-// For more information about how key state affects the use of a CMK, see How Key
-// State Affects the Use of a Customer Master Key
+// For more information about how key state affects the use of a CMK, see Key
+// state: Effect on your CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide . The CMK that you use for this
-// operation must be in a compatible key state. For details, see How Key State
-// Affects Use of a Customer Master Key
+// operation must be in a compatible key state. For details, see Key state: Effect
+// on your CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a CMK in a different AWS account. Required
@@ -42,13 +42,13 @@ func (c *Client) DisableKey(ctx context.Context, params *DisableKeyInput, optFns
 
 type DisableKeyInput struct {
 
-	// A unique identifier for the customer master key (CMK). Specify the key ID or the
-	// Amazon Resource Name (ARN) of the CMK. For example:
+	// Identifies the customer master key (CMK) to disable. Specify the key ID or key
+	// ARN of the CMK. For example:
 	//
-	// * Key ID:
-	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	// * Key ARN:
+	// *
+	// Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

@@ -84,16 +84,16 @@ func awsAwsquery_deserializeOpErrorAddClientIDToOpenIDConnectProvider(response *
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -166,19 +166,19 @@ func awsAwsquery_deserializeOpErrorAddRoleToInstanceProfile(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
-	case strings.EqualFold("UnmodifiableEntityException", errorCode):
+	case strings.EqualFold("UnmodifiableEntity", errorCode):
 		return awsAwsquery_deserializeErrorUnmodifiableEntityException(response, errorBody)
 
 	default:
@@ -251,13 +251,13 @@ func awsAwsquery_deserializeOpErrorAddUserToGroup(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -330,19 +330,19 @@ func awsAwsquery_deserializeOpErrorAttachGroupPolicy(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("PolicyNotAttachableException", errorCode):
+	case strings.EqualFold("PolicyNotAttachable", errorCode):
 		return awsAwsquery_deserializeErrorPolicyNotAttachableException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -415,22 +415,22 @@ func awsAwsquery_deserializeOpErrorAttachRolePolicy(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("PolicyNotAttachableException", errorCode):
+	case strings.EqualFold("PolicyNotAttachable", errorCode):
 		return awsAwsquery_deserializeErrorPolicyNotAttachableException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
-	case strings.EqualFold("UnmodifiableEntityException", errorCode):
+	case strings.EqualFold("UnmodifiableEntity", errorCode):
 		return awsAwsquery_deserializeErrorUnmodifiableEntityException(response, errorBody)
 
 	default:
@@ -503,19 +503,19 @@ func awsAwsquery_deserializeOpErrorAttachUserPolicy(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("PolicyNotAttachableException", errorCode):
+	case strings.EqualFold("PolicyNotAttachable", errorCode):
 		return awsAwsquery_deserializeErrorPolicyNotAttachableException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -588,22 +588,22 @@ func awsAwsquery_deserializeOpErrorChangePassword(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("EntityTemporarilyUnmodifiableException", errorCode):
+	case strings.EqualFold("EntityTemporarilyUnmodifiable", errorCode):
 		return awsAwsquery_deserializeErrorEntityTemporarilyUnmodifiableException(response, errorBody)
 
-	case strings.EqualFold("InvalidUserTypeException", errorCode):
+	case strings.EqualFold("InvalidUserType", errorCode):
 		return awsAwsquery_deserializeErrorInvalidUserTypeException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("PasswordPolicyViolationException", errorCode):
+	case strings.EqualFold("PasswordPolicyViolation", errorCode):
 		return awsAwsquery_deserializeErrorPasswordPolicyViolationException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -711,13 +711,13 @@ func awsAwsquery_deserializeOpErrorCreateAccessKey(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -790,13 +790,13 @@ func awsAwsquery_deserializeOpErrorCreateAccountAlias(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -904,16 +904,16 @@ func awsAwsquery_deserializeOpErrorCreateGroup(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -1021,19 +1021,19 @@ func awsAwsquery_deserializeOpErrorCreateInstanceProfile(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -1141,19 +1141,19 @@ func awsAwsquery_deserializeOpErrorCreateLoginProfile(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("PasswordPolicyViolationException", errorCode):
+	case strings.EqualFold("PasswordPolicyViolation", errorCode):
 		return awsAwsquery_deserializeErrorPasswordPolicyViolationException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -1261,19 +1261,19 @@ func awsAwsquery_deserializeOpErrorCreateOpenIDConnectProvider(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -1381,22 +1381,22 @@ func awsAwsquery_deserializeOpErrorCreatePolicy(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("MalformedPolicyDocumentException", errorCode):
+	case strings.EqualFold("MalformedPolicyDocument", errorCode):
 		return awsAwsquery_deserializeErrorMalformedPolicyDocumentException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -1504,19 +1504,19 @@ func awsAwsquery_deserializeOpErrorCreatePolicyVersion(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("MalformedPolicyDocumentException", errorCode):
+	case strings.EqualFold("MalformedPolicyDocument", errorCode):
 		return awsAwsquery_deserializeErrorMalformedPolicyDocumentException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -1624,22 +1624,22 @@ func awsAwsquery_deserializeOpErrorCreateRole(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("MalformedPolicyDocumentException", errorCode):
+	case strings.EqualFold("MalformedPolicyDocument", errorCode):
 		return awsAwsquery_deserializeErrorMalformedPolicyDocumentException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -1747,19 +1747,19 @@ func awsAwsquery_deserializeOpErrorCreateSAMLProvider(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -1867,16 +1867,16 @@ func awsAwsquery_deserializeOpErrorCreateServiceLinkedRole(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -1984,13 +1984,13 @@ func awsAwsquery_deserializeOpErrorCreateServiceSpecificCredential(response *smi
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceNotSupportedException", errorCode):
+	case strings.EqualFold("NotSupportedService", errorCode):
 		return awsAwsquery_deserializeErrorServiceNotSupportedException(response, errorBody)
 
 	default:
@@ -2098,22 +2098,22 @@ func awsAwsquery_deserializeOpErrorCreateUser(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -2221,19 +2221,19 @@ func awsAwsquery_deserializeOpErrorCreateVirtualMFADevice(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -2306,16 +2306,16 @@ func awsAwsquery_deserializeOpErrorDeactivateMFADevice(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("EntityTemporarilyUnmodifiableException", errorCode):
+	case strings.EqualFold("EntityTemporarilyUnmodifiable", errorCode):
 		return awsAwsquery_deserializeErrorEntityTemporarilyUnmodifiableException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -2388,13 +2388,13 @@ func awsAwsquery_deserializeOpErrorDeleteAccessKey(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -2467,13 +2467,13 @@ func awsAwsquery_deserializeOpErrorDeleteAccountAlias(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -2546,13 +2546,13 @@ func awsAwsquery_deserializeOpErrorDeleteAccountPasswordPolicy(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -2625,16 +2625,16 @@ func awsAwsquery_deserializeOpErrorDeleteGroup(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DeleteConflictException", errorCode):
+	case strings.EqualFold("DeleteConflict", errorCode):
 		return awsAwsquery_deserializeErrorDeleteConflictException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -2707,13 +2707,13 @@ func awsAwsquery_deserializeOpErrorDeleteGroupPolicy(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -2786,16 +2786,16 @@ func awsAwsquery_deserializeOpErrorDeleteInstanceProfile(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DeleteConflictException", errorCode):
+	case strings.EqualFold("DeleteConflict", errorCode):
 		return awsAwsquery_deserializeErrorDeleteConflictException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -2868,16 +2868,16 @@ func awsAwsquery_deserializeOpErrorDeleteLoginProfile(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("EntityTemporarilyUnmodifiableException", errorCode):
+	case strings.EqualFold("EntityTemporarilyUnmodifiable", errorCode):
 		return awsAwsquery_deserializeErrorEntityTemporarilyUnmodifiableException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -2950,13 +2950,13 @@ func awsAwsquery_deserializeOpErrorDeleteOpenIDConnectProvider(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -3029,19 +3029,19 @@ func awsAwsquery_deserializeOpErrorDeletePolicy(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DeleteConflictException", errorCode):
+	case strings.EqualFold("DeleteConflict", errorCode):
 		return awsAwsquery_deserializeErrorDeleteConflictException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -3114,19 +3114,19 @@ func awsAwsquery_deserializeOpErrorDeletePolicyVersion(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DeleteConflictException", errorCode):
+	case strings.EqualFold("DeleteConflict", errorCode):
 		return awsAwsquery_deserializeErrorDeleteConflictException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -3199,22 +3199,22 @@ func awsAwsquery_deserializeOpErrorDeleteRole(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("DeleteConflictException", errorCode):
+	case strings.EqualFold("DeleteConflict", errorCode):
 		return awsAwsquery_deserializeErrorDeleteConflictException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
-	case strings.EqualFold("UnmodifiableEntityException", errorCode):
+	case strings.EqualFold("UnmodifiableEntity", errorCode):
 		return awsAwsquery_deserializeErrorUnmodifiableEntityException(response, errorBody)
 
 	default:
@@ -3287,13 +3287,13 @@ func awsAwsquery_deserializeOpErrorDeleteRolePermissionsBoundary(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
-	case strings.EqualFold("UnmodifiableEntityException", errorCode):
+	case strings.EqualFold("UnmodifiableEntity", errorCode):
 		return awsAwsquery_deserializeErrorUnmodifiableEntityException(response, errorBody)
 
 	default:
@@ -3366,16 +3366,16 @@ func awsAwsquery_deserializeOpErrorDeleteRolePolicy(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
-	case strings.EqualFold("UnmodifiableEntityException", errorCode):
+	case strings.EqualFold("UnmodifiableEntity", errorCode):
 		return awsAwsquery_deserializeErrorUnmodifiableEntityException(response, errorBody)
 
 	default:
@@ -3448,16 +3448,16 @@ func awsAwsquery_deserializeOpErrorDeleteSAMLProvider(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -3530,16 +3530,16 @@ func awsAwsquery_deserializeOpErrorDeleteServerCertificate(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DeleteConflictException", errorCode):
+	case strings.EqualFold("DeleteConflict", errorCode):
 		return awsAwsquery_deserializeErrorDeleteConflictException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -3647,13 +3647,13 @@ func awsAwsquery_deserializeOpErrorDeleteServiceLinkedRole(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -3726,7 +3726,7 @@ func awsAwsquery_deserializeOpErrorDeleteServiceSpecificCredential(response *smi
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
 	default:
@@ -3799,13 +3799,13 @@ func awsAwsquery_deserializeOpErrorDeleteSigningCertificate(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -3878,7 +3878,7 @@ func awsAwsquery_deserializeOpErrorDeleteSSHPublicKey(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
 	default:
@@ -3951,19 +3951,19 @@ func awsAwsquery_deserializeOpErrorDeleteUser(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("DeleteConflictException", errorCode):
+	case strings.EqualFold("DeleteConflict", errorCode):
 		return awsAwsquery_deserializeErrorDeleteConflictException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -4036,10 +4036,10 @@ func awsAwsquery_deserializeOpErrorDeleteUserPermissionsBoundary(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -4112,13 +4112,13 @@ func awsAwsquery_deserializeOpErrorDeleteUserPolicy(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -4191,16 +4191,16 @@ func awsAwsquery_deserializeOpErrorDeleteVirtualMFADevice(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DeleteConflictException", errorCode):
+	case strings.EqualFold("DeleteConflict", errorCode):
 		return awsAwsquery_deserializeErrorDeleteConflictException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -4273,16 +4273,16 @@ func awsAwsquery_deserializeOpErrorDetachGroupPolicy(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -4355,19 +4355,19 @@ func awsAwsquery_deserializeOpErrorDetachRolePolicy(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
-	case strings.EqualFold("UnmodifiableEntityException", errorCode):
+	case strings.EqualFold("UnmodifiableEntity", errorCode):
 		return awsAwsquery_deserializeErrorUnmodifiableEntityException(response, errorBody)
 
 	default:
@@ -4440,16 +4440,16 @@ func awsAwsquery_deserializeOpErrorDetachUserPolicy(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -4522,22 +4522,22 @@ func awsAwsquery_deserializeOpErrorEnableMFADevice(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("EntityTemporarilyUnmodifiableException", errorCode):
+	case strings.EqualFold("EntityTemporarilyUnmodifiable", errorCode):
 		return awsAwsquery_deserializeErrorEntityTemporarilyUnmodifiableException(response, errorBody)
 
-	case strings.EqualFold("InvalidAuthenticationCodeException", errorCode):
+	case strings.EqualFold("InvalidAuthenticationCode", errorCode):
 		return awsAwsquery_deserializeErrorInvalidAuthenticationCodeException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -4645,10 +4645,10 @@ func awsAwsquery_deserializeOpErrorGenerateCredentialReport(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -4756,7 +4756,7 @@ func awsAwsquery_deserializeOpErrorGenerateOrganizationsAccessReport(response *s
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ReportGenerationLimitExceededException", errorCode):
+	case strings.EqualFold("ReportGenerationLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorReportGenerationLimitExceededException(response, errorBody)
 
 	default:
@@ -4864,10 +4864,10 @@ func awsAwsquery_deserializeOpErrorGenerateServiceLastAccessedDetails(response *
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
 	default:
@@ -4975,7 +4975,7 @@ func awsAwsquery_deserializeOpErrorGetAccessKeyLastUsed(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
 	default:
@@ -5083,7 +5083,7 @@ func awsAwsquery_deserializeOpErrorGetAccountAuthorizationDetails(response *smit
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -5191,10 +5191,10 @@ func awsAwsquery_deserializeOpErrorGetAccountPasswordPolicy(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -5302,7 +5302,7 @@ func awsAwsquery_deserializeOpErrorGetAccountSummary(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -5410,7 +5410,7 @@ func awsAwsquery_deserializeOpErrorGetContextKeysForCustomPolicy(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
 	default:
@@ -5518,10 +5518,10 @@ func awsAwsquery_deserializeOpErrorGetContextKeysForPrincipalPolicy(response *sm
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
 	default:
@@ -5629,16 +5629,16 @@ func awsAwsquery_deserializeOpErrorGetCredentialReport(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CredentialReportExpiredException", errorCode):
+	case strings.EqualFold("ReportExpired", errorCode):
 		return awsAwsquery_deserializeErrorCredentialReportExpiredException(response, errorBody)
 
-	case strings.EqualFold("CredentialReportNotPresentException", errorCode):
-		return awsAwsquery_deserializeErrorCredentialReportNotPresentException(response, errorBody)
-
-	case strings.EqualFold("CredentialReportNotReadyException", errorCode):
+	case strings.EqualFold("ReportInProgress", errorCode):
 		return awsAwsquery_deserializeErrorCredentialReportNotReadyException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ReportNotPresent", errorCode):
+		return awsAwsquery_deserializeErrorCredentialReportNotPresentException(response, errorBody)
+
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -5746,10 +5746,10 @@ func awsAwsquery_deserializeOpErrorGetGroup(response *smithyhttp.Response, metad
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -5857,10 +5857,10 @@ func awsAwsquery_deserializeOpErrorGetGroupPolicy(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -5968,10 +5968,10 @@ func awsAwsquery_deserializeOpErrorGetInstanceProfile(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -6079,10 +6079,10 @@ func awsAwsquery_deserializeOpErrorGetLoginProfile(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -6190,13 +6190,13 @@ func awsAwsquery_deserializeOpErrorGetOpenIDConnectProvider(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -6304,7 +6304,7 @@ func awsAwsquery_deserializeOpErrorGetOrganizationsAccessReport(response *smithy
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
 	default:
@@ -6412,13 +6412,13 @@ func awsAwsquery_deserializeOpErrorGetPolicy(response *smithyhttp.Response, meta
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -6526,13 +6526,13 @@ func awsAwsquery_deserializeOpErrorGetPolicyVersion(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -6640,10 +6640,10 @@ func awsAwsquery_deserializeOpErrorGetRole(response *smithyhttp.Response, metada
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -6751,10 +6751,10 @@ func awsAwsquery_deserializeOpErrorGetRolePolicy(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -6862,13 +6862,13 @@ func awsAwsquery_deserializeOpErrorGetSAMLProvider(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -6976,10 +6976,10 @@ func awsAwsquery_deserializeOpErrorGetServerCertificate(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -7087,10 +7087,10 @@ func awsAwsquery_deserializeOpErrorGetServiceLastAccessedDetails(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
 	default:
@@ -7198,10 +7198,10 @@ func awsAwsquery_deserializeOpErrorGetServiceLastAccessedDetailsWithEntities(res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
 	default:
@@ -7309,13 +7309,13 @@ func awsAwsquery_deserializeOpErrorGetServiceLinkedRoleDeletionStatus(response *
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -7423,10 +7423,10 @@ func awsAwsquery_deserializeOpErrorGetSSHPublicKey(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("UnrecognizedPublicKeyEncodingException", errorCode):
+	case strings.EqualFold("UnrecognizedPublicKeyEncoding", errorCode):
 		return awsAwsquery_deserializeErrorUnrecognizedPublicKeyEncodingException(response, errorBody)
 
 	default:
@@ -7534,10 +7534,10 @@ func awsAwsquery_deserializeOpErrorGetUser(response *smithyhttp.Response, metada
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -7645,10 +7645,10 @@ func awsAwsquery_deserializeOpErrorGetUserPolicy(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -7756,10 +7756,10 @@ func awsAwsquery_deserializeOpErrorListAccessKeys(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -7867,7 +7867,7 @@ func awsAwsquery_deserializeOpErrorListAccountAliases(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -7975,13 +7975,13 @@ func awsAwsquery_deserializeOpErrorListAttachedGroupPolicies(response *smithyhtt
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -8089,13 +8089,13 @@ func awsAwsquery_deserializeOpErrorListAttachedRolePolicies(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -8203,13 +8203,13 @@ func awsAwsquery_deserializeOpErrorListAttachedUserPolicies(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -8317,13 +8317,13 @@ func awsAwsquery_deserializeOpErrorListEntitiesForPolicy(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -8431,10 +8431,10 @@ func awsAwsquery_deserializeOpErrorListGroupPolicies(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -8542,7 +8542,7 @@ func awsAwsquery_deserializeOpErrorListGroups(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -8650,10 +8650,10 @@ func awsAwsquery_deserializeOpErrorListGroupsForUser(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -8761,7 +8761,7 @@ func awsAwsquery_deserializeOpErrorListInstanceProfiles(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -8869,10 +8869,10 @@ func awsAwsquery_deserializeOpErrorListInstanceProfilesForRole(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -8980,10 +8980,10 @@ func awsAwsquery_deserializeOpErrorListInstanceProfileTags(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -9091,10 +9091,10 @@ func awsAwsquery_deserializeOpErrorListMFADevices(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -9202,13 +9202,13 @@ func awsAwsquery_deserializeOpErrorListMFADeviceTags(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -9316,7 +9316,7 @@ func awsAwsquery_deserializeOpErrorListOpenIDConnectProviders(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -9424,13 +9424,13 @@ func awsAwsquery_deserializeOpErrorListOpenIDConnectProviderTags(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -9538,7 +9538,7 @@ func awsAwsquery_deserializeOpErrorListPolicies(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -9646,10 +9646,10 @@ func awsAwsquery_deserializeOpErrorListPoliciesGrantingServiceAccess(response *s
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
 	default:
@@ -9757,13 +9757,13 @@ func awsAwsquery_deserializeOpErrorListPolicyTags(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -9871,13 +9871,13 @@ func awsAwsquery_deserializeOpErrorListPolicyVersions(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -9985,10 +9985,10 @@ func awsAwsquery_deserializeOpErrorListRolePolicies(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -10096,7 +10096,7 @@ func awsAwsquery_deserializeOpErrorListRoles(response *smithyhttp.Response, meta
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -10204,10 +10204,10 @@ func awsAwsquery_deserializeOpErrorListRoleTags(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -10315,7 +10315,7 @@ func awsAwsquery_deserializeOpErrorListSAMLProviders(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -10423,13 +10423,13 @@ func awsAwsquery_deserializeOpErrorListSAMLProviderTags(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -10537,7 +10537,7 @@ func awsAwsquery_deserializeOpErrorListServerCertificates(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -10645,10 +10645,10 @@ func awsAwsquery_deserializeOpErrorListServerCertificateTags(response *smithyhtt
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -10756,10 +10756,10 @@ func awsAwsquery_deserializeOpErrorListServiceSpecificCredentials(response *smit
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceNotSupportedException", errorCode):
+	case strings.EqualFold("NotSupportedService", errorCode):
 		return awsAwsquery_deserializeErrorServiceNotSupportedException(response, errorBody)
 
 	default:
@@ -10867,10 +10867,10 @@ func awsAwsquery_deserializeOpErrorListSigningCertificates(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -10978,7 +10978,7 @@ func awsAwsquery_deserializeOpErrorListSSHPublicKeys(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
 	default:
@@ -11086,10 +11086,10 @@ func awsAwsquery_deserializeOpErrorListUserPolicies(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -11197,7 +11197,7 @@ func awsAwsquery_deserializeOpErrorListUsers(response *smithyhttp.Response, meta
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -11305,10 +11305,10 @@ func awsAwsquery_deserializeOpErrorListUserTags(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -11486,16 +11486,16 @@ func awsAwsquery_deserializeOpErrorPutGroupPolicy(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("MalformedPolicyDocumentException", errorCode):
+	case strings.EqualFold("MalformedPolicyDocument", errorCode):
 		return awsAwsquery_deserializeErrorMalformedPolicyDocumentException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -11568,19 +11568,19 @@ func awsAwsquery_deserializeOpErrorPutRolePermissionsBoundary(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("PolicyNotAttachableException", errorCode):
+	case strings.EqualFold("PolicyNotAttachable", errorCode):
 		return awsAwsquery_deserializeErrorPolicyNotAttachableException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
-	case strings.EqualFold("UnmodifiableEntityException", errorCode):
+	case strings.EqualFold("UnmodifiableEntity", errorCode):
 		return awsAwsquery_deserializeErrorUnmodifiableEntityException(response, errorBody)
 
 	default:
@@ -11653,19 +11653,19 @@ func awsAwsquery_deserializeOpErrorPutRolePolicy(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("MalformedPolicyDocumentException", errorCode):
+	case strings.EqualFold("MalformedPolicyDocument", errorCode):
 		return awsAwsquery_deserializeErrorMalformedPolicyDocumentException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
-	case strings.EqualFold("UnmodifiableEntityException", errorCode):
+	case strings.EqualFold("UnmodifiableEntity", errorCode):
 		return awsAwsquery_deserializeErrorUnmodifiableEntityException(response, errorBody)
 
 	default:
@@ -11738,16 +11738,16 @@ func awsAwsquery_deserializeOpErrorPutUserPermissionsBoundary(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("PolicyNotAttachableException", errorCode):
+	case strings.EqualFold("PolicyNotAttachable", errorCode):
 		return awsAwsquery_deserializeErrorPolicyNotAttachableException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -11820,16 +11820,16 @@ func awsAwsquery_deserializeOpErrorPutUserPolicy(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("MalformedPolicyDocumentException", errorCode):
+	case strings.EqualFold("MalformedPolicyDocument", errorCode):
 		return awsAwsquery_deserializeErrorMalformedPolicyDocumentException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -11902,13 +11902,13 @@ func awsAwsquery_deserializeOpErrorRemoveClientIDFromOpenIDConnectProvider(respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -11981,16 +11981,16 @@ func awsAwsquery_deserializeOpErrorRemoveRoleFromInstanceProfile(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
-	case strings.EqualFold("UnmodifiableEntityException", errorCode):
+	case strings.EqualFold("UnmodifiableEntity", errorCode):
 		return awsAwsquery_deserializeErrorUnmodifiableEntityException(response, errorBody)
 
 	default:
@@ -12063,13 +12063,13 @@ func awsAwsquery_deserializeOpErrorRemoveUserFromGroup(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -12177,7 +12177,7 @@ func awsAwsquery_deserializeOpErrorResetServiceSpecificCredential(response *smit
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
 	default:
@@ -12250,16 +12250,16 @@ func awsAwsquery_deserializeOpErrorResyncMFADevice(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidAuthenticationCodeException", errorCode):
+	case strings.EqualFold("InvalidAuthenticationCode", errorCode):
 		return awsAwsquery_deserializeErrorInvalidAuthenticationCodeException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -12332,16 +12332,16 @@ func awsAwsquery_deserializeOpErrorSetDefaultPolicyVersion(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -12414,7 +12414,7 @@ func awsAwsquery_deserializeOpErrorSetSecurityTokenServicePreferences(response *
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -12522,10 +12522,10 @@ func awsAwsquery_deserializeOpErrorSimulateCustomPolicy(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("PolicyEvaluationException", errorCode):
+	case strings.EqualFold("PolicyEvaluation", errorCode):
 		return awsAwsquery_deserializeErrorPolicyEvaluationException(response, errorBody)
 
 	default:
@@ -12633,13 +12633,13 @@ func awsAwsquery_deserializeOpErrorSimulatePrincipalPolicy(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("PolicyEvaluationException", errorCode):
+	case strings.EqualFold("PolicyEvaluation", errorCode):
 		return awsAwsquery_deserializeErrorPolicyEvaluationException(response, errorBody)
 
 	default:
@@ -12712,19 +12712,19 @@ func awsAwsquery_deserializeOpErrorTagInstanceProfile(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -12797,19 +12797,19 @@ func awsAwsquery_deserializeOpErrorTagMFADevice(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -12882,19 +12882,19 @@ func awsAwsquery_deserializeOpErrorTagOpenIDConnectProvider(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -12967,19 +12967,19 @@ func awsAwsquery_deserializeOpErrorTagPolicy(response *smithyhttp.Response, meta
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -13052,19 +13052,19 @@ func awsAwsquery_deserializeOpErrorTagRole(response *smithyhttp.Response, metada
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -13137,19 +13137,19 @@ func awsAwsquery_deserializeOpErrorTagSAMLProvider(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -13222,19 +13222,19 @@ func awsAwsquery_deserializeOpErrorTagServerCertificate(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -13307,19 +13307,19 @@ func awsAwsquery_deserializeOpErrorTagUser(response *smithyhttp.Response, metada
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -13392,16 +13392,16 @@ func awsAwsquery_deserializeOpErrorUntagInstanceProfile(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -13474,16 +13474,16 @@ func awsAwsquery_deserializeOpErrorUntagMFADevice(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -13556,16 +13556,16 @@ func awsAwsquery_deserializeOpErrorUntagOpenIDConnectProvider(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -13638,16 +13638,16 @@ func awsAwsquery_deserializeOpErrorUntagPolicy(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -13720,13 +13720,13 @@ func awsAwsquery_deserializeOpErrorUntagRole(response *smithyhttp.Response, meta
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -13799,16 +13799,16 @@ func awsAwsquery_deserializeOpErrorUntagSAMLProvider(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -13881,16 +13881,16 @@ func awsAwsquery_deserializeOpErrorUntagServerCertificate(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -13963,13 +13963,13 @@ func awsAwsquery_deserializeOpErrorUntagUser(response *smithyhttp.Response, meta
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -14042,13 +14042,13 @@ func awsAwsquery_deserializeOpErrorUpdateAccessKey(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -14121,16 +14121,16 @@ func awsAwsquery_deserializeOpErrorUpdateAccountPasswordPolicy(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("MalformedPolicyDocumentException", errorCode):
+	case strings.EqualFold("MalformedPolicyDocument", errorCode):
 		return awsAwsquery_deserializeErrorMalformedPolicyDocumentException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -14203,19 +14203,19 @@ func awsAwsquery_deserializeOpErrorUpdateAssumeRolePolicy(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("MalformedPolicyDocumentException", errorCode):
+	case strings.EqualFold("MalformedPolicyDocument", errorCode):
 		return awsAwsquery_deserializeErrorMalformedPolicyDocumentException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
-	case strings.EqualFold("UnmodifiableEntityException", errorCode):
+	case strings.EqualFold("UnmodifiableEntity", errorCode):
 		return awsAwsquery_deserializeErrorUnmodifiableEntityException(response, errorBody)
 
 	default:
@@ -14288,16 +14288,16 @@ func awsAwsquery_deserializeOpErrorUpdateGroup(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -14370,19 +14370,19 @@ func awsAwsquery_deserializeOpErrorUpdateLoginProfile(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("EntityTemporarilyUnmodifiableException", errorCode):
+	case strings.EqualFold("EntityTemporarilyUnmodifiable", errorCode):
 		return awsAwsquery_deserializeErrorEntityTemporarilyUnmodifiableException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("PasswordPolicyViolationException", errorCode):
+	case strings.EqualFold("PasswordPolicyViolation", errorCode):
 		return awsAwsquery_deserializeErrorPasswordPolicyViolationException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -14455,13 +14455,13 @@ func awsAwsquery_deserializeOpErrorUpdateOpenIDConnectProviderThumbprint(respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -14569,13 +14569,13 @@ func awsAwsquery_deserializeOpErrorUpdateRole(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
-	case strings.EqualFold("UnmodifiableEntityException", errorCode):
+	case strings.EqualFold("UnmodifiableEntity", errorCode):
 		return awsAwsquery_deserializeErrorUnmodifiableEntityException(response, errorBody)
 
 	default:
@@ -14683,13 +14683,13 @@ func awsAwsquery_deserializeOpErrorUpdateRoleDescription(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
-	case strings.EqualFold("UnmodifiableEntityException", errorCode):
+	case strings.EqualFold("UnmodifiableEntity", errorCode):
 		return awsAwsquery_deserializeErrorUnmodifiableEntityException(response, errorBody)
 
 	default:
@@ -14797,16 +14797,16 @@ func awsAwsquery_deserializeOpErrorUpdateSAMLProvider(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -14879,16 +14879,16 @@ func awsAwsquery_deserializeOpErrorUpdateServerCertificate(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -14961,7 +14961,7 @@ func awsAwsquery_deserializeOpErrorUpdateServiceSpecificCredential(response *smi
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
 	default:
@@ -15034,13 +15034,13 @@ func awsAwsquery_deserializeOpErrorUpdateSigningCertificate(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -15113,7 +15113,7 @@ func awsAwsquery_deserializeOpErrorUpdateSSHPublicKey(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
 	default:
@@ -15186,22 +15186,22 @@ func awsAwsquery_deserializeOpErrorUpdateUser(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("EntityTemporarilyUnmodifiableException", errorCode):
+	case strings.EqualFold("EntityTemporarilyUnmodifiable", errorCode):
 		return awsAwsquery_deserializeErrorEntityTemporarilyUnmodifiableException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -15309,25 +15309,25 @@ func awsAwsquery_deserializeOpErrorUploadServerCertificate(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConcurrentModificationException", errorCode):
+	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("InvalidInputException", errorCode):
+	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsquery_deserializeErrorInvalidInputException(response, errorBody)
 
-	case strings.EqualFold("KeyPairMismatchException", errorCode):
+	case strings.EqualFold("KeyPairMismatch", errorCode):
 		return awsAwsquery_deserializeErrorKeyPairMismatchException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("MalformedCertificateException", errorCode):
+	case strings.EqualFold("MalformedCertificate", errorCode):
 		return awsAwsquery_deserializeErrorMalformedCertificateException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -15435,25 +15435,25 @@ func awsAwsquery_deserializeOpErrorUploadSigningCertificate(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DuplicateCertificateException", errorCode):
+	case strings.EqualFold("DuplicateCertificate", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateCertificateException(response, errorBody)
 
-	case strings.EqualFold("EntityAlreadyExistsException", errorCode):
+	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("InvalidCertificateException", errorCode):
+	case strings.EqualFold("InvalidCertificate", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCertificateException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("MalformedCertificateException", errorCode):
+	case strings.EqualFold("MalformedCertificate", errorCode):
 		return awsAwsquery_deserializeErrorMalformedCertificateException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("ServiceFailureException", errorCode):
+	case strings.EqualFold("ServiceFailure", errorCode):
 		return awsAwsquery_deserializeErrorServiceFailureException(response, errorBody)
 
 	default:
@@ -15561,19 +15561,19 @@ func awsAwsquery_deserializeOpErrorUploadSSHPublicKey(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DuplicateSSHPublicKeyException", errorCode):
+	case strings.EqualFold("DuplicateSSHPublicKey", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateSSHPublicKeyException(response, errorBody)
 
-	case strings.EqualFold("InvalidPublicKeyException", errorCode):
+	case strings.EqualFold("InvalidPublicKey", errorCode):
 		return awsAwsquery_deserializeErrorInvalidPublicKeyException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("NoSuchEntityException", errorCode):
+	case strings.EqualFold("NoSuchEntity", errorCode):
 		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
 
-	case strings.EqualFold("UnrecognizedPublicKeyEncodingException", errorCode):
+	case strings.EqualFold("UnrecognizedPublicKeyEncoding", errorCode):
 		return awsAwsquery_deserializeErrorUnrecognizedPublicKeyEncodingException(response, errorBody)
 
 	default:

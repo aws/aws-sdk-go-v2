@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon DocumentDB global cluster that can span multiple multiple AWS
+// Creates an Amazon DocumentDB global cluster that can span multiple multiple
 // Regions. The global cluster contains one primary cluster with read-write
 // capability, and up-to give read-only secondary clusters. Global clusters uses
 // storage-based fast replication across regions with latencies less than one

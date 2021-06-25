@@ -78,6 +78,12 @@ type CreateSlotInput struct {
 	// A description of the slot. Use this to help identify the slot in lists.
 	Description *string
 
+	// Indicates whether the slot returns multiple values in one response. Multi-value
+	// slots are only available in the en-US locale. If you set this value to true in
+	// any other locale, Amazon Lex throws a ValidationException. If the
+	// multipleValuesSetting is not set, the default value is false.
+	MultipleValuesSetting *types.MultipleValuesSetting
+
 	// Determines how slot values are used in Amazon CloudWatch logs. If the value of
 	// the obfuscationSetting parameter is DefaultObfuscation, slot values are
 	// obfuscated in the log output. If the value is None, the actual value is present
@@ -104,6 +110,9 @@ type CreateSlotOutput struct {
 
 	// The language and local specified for the slot.
 	LocaleId *string
+
+	// Indicates whether the slot returns multiple values in one response.
+	MultipleValuesSetting *types.MultipleValuesSetting
 
 	// Indicates whether the slot is configured to obfuscate values in Amazon
 	// CloudWatch logs.

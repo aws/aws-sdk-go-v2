@@ -2734,9 +2734,21 @@ func awsRestjson1_serializeDocumentFailoverConfig(v *types.FailoverConfig, value
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.FailoverMode) > 0 {
+		ok := object.Key("failoverMode")
+		ok.String(string(v.FailoverMode))
+	}
+
 	if v.RecoveryWindow != 0 {
 		ok := object.Key("recoveryWindow")
 		ok.Integer(v.RecoveryWindow)
+	}
+
+	if v.SourcePriority != nil {
+		ok := object.Key("sourcePriority")
+		if err := awsRestjson1_serializeDocumentSourcePriority(v.SourcePriority, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.State) > 0 {
@@ -3016,6 +3028,18 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSourcePriority(v *types.SourcePriority, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PrimarySource != nil {
+		ok := object.Key("primarySource")
+		ok.String(*v.PrimarySource)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentUpdateEncryption(v *types.UpdateEncryption, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3072,9 +3096,21 @@ func awsRestjson1_serializeDocumentUpdateFailoverConfig(v *types.UpdateFailoverC
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.FailoverMode) > 0 {
+		ok := object.Key("failoverMode")
+		ok.String(string(v.FailoverMode))
+	}
+
 	if v.RecoveryWindow != 0 {
 		ok := object.Key("recoveryWindow")
 		ok.Integer(v.RecoveryWindow)
+	}
+
+	if v.SourcePriority != nil {
+		ok := object.Key("sourcePriority")
+		if err := awsRestjson1_serializeDocumentSourcePriority(v.SourcePriority, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.State) > 0 {

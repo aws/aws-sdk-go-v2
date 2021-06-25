@@ -6712,6 +6712,106 @@ func awsAwsjson11_deserializeDocumentBatchRetryStrategy(v **types.BatchRetryStra
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCapacityProviderStrategy(v *[]types.CapacityProviderStrategyItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CapacityProviderStrategyItem
+	if *v == nil {
+		cv = []types.CapacityProviderStrategyItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CapacityProviderStrategyItem
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentCapacityProviderStrategyItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCapacityProviderStrategyItem(v **types.CapacityProviderStrategyItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CapacityProviderStrategyItem
+	if *v == nil {
+		sv = &types.CapacityProviderStrategyItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "base":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CapacityProviderStrategyItemBase to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Base = int32(i64)
+			}
+
+		case "capacityProvider":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapacityProvider to be of type string, got %T instead", value)
+				}
+				sv.CapacityProvider = ptr.String(jtv)
+			}
+
+		case "weight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CapacityProviderStrategyItemWeight to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Weight = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.ConcurrentModificationException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7515,6 +7615,29 @@ func awsAwsjson11_deserializeDocumentEcsParameters(v **types.EcsParameters, valu
 
 	for key, value := range shape {
 		switch key {
+		case "CapacityProviderStrategy":
+			if err := awsAwsjson11_deserializeDocumentCapacityProviderStrategy(&sv.CapacityProviderStrategy, value); err != nil {
+				return err
+			}
+
+		case "EnableECSManagedTags":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableECSManagedTags = jtv
+			}
+
+		case "EnableExecuteCommand":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableExecuteCommand = jtv
+			}
+
 		case "Group":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7538,6 +7661,16 @@ func awsAwsjson11_deserializeDocumentEcsParameters(v **types.EcsParameters, valu
 				return err
 			}
 
+		case "PlacementConstraints":
+			if err := awsAwsjson11_deserializeDocumentPlacementConstraints(&sv.PlacementConstraints, value); err != nil {
+				return err
+			}
+
+		case "PlacementStrategy":
+			if err := awsAwsjson11_deserializeDocumentPlacementStrategies(&sv.PlacementStrategy, value); err != nil {
+				return err
+			}
+
 		case "PlatformVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7545,6 +7678,29 @@ func awsAwsjson11_deserializeDocumentEcsParameters(v **types.EcsParameters, valu
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.PlatformVersion = ptr.String(jtv)
+			}
+
+		case "PropagateTags":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PropagateTags to be of type string, got %T instead", value)
+				}
+				sv.PropagateTags = types.PropagateTags(jtv)
+			}
+
+		case "ReferenceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReferenceId to be of type string, got %T instead", value)
+				}
+				sv.ReferenceId = ptr.String(jtv)
+			}
+
+		case "Tags":
+			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		case "TaskCount":
@@ -8505,6 +8661,172 @@ func awsAwsjson11_deserializeDocumentPathParameterList(v *[]string, value interf
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPlacementConstraint(v **types.PlacementConstraint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PlacementConstraint
+	if *v == nil {
+		sv = &types.PlacementConstraint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "expression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlacementConstraintExpression to be of type string, got %T instead", value)
+				}
+				sv.Expression = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlacementConstraintType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.PlacementConstraintType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPlacementConstraints(v *[]types.PlacementConstraint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PlacementConstraint
+	if *v == nil {
+		cv = []types.PlacementConstraint{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PlacementConstraint
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPlacementConstraint(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPlacementStrategies(v *[]types.PlacementStrategy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PlacementStrategy
+	if *v == nil {
+		cv = []types.PlacementStrategy{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PlacementStrategy
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPlacementStrategy(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPlacementStrategy(v **types.PlacementStrategy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PlacementStrategy
+	if *v == nil {
+		sv = &types.PlacementStrategy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "field":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlacementStrategyField to be of type string, got %T instead", value)
+				}
+				sv.Field = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlacementStrategyType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.PlacementStrategyType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -46,7 +46,11 @@ type GetResourceSharesInput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// The Amazon Resource Names (ARN) of the resource shares.
+	// The Amazon Resource Name (ARN) of the AWS RAM permission that is associated with
+	// the resource share.
+	PermissionArn *string
+
+	// The ARNs of the resource shares.
 	ResourceShareArns []string
 
 	// The status of the resource share.

@@ -29,7 +29,8 @@ func (c *Client) DescribeUserHierarchyStructure(ctx context.Context, params *Des
 
 type DescribeUserHierarchyStructureInput struct {
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
 	//
 	// This member is required.
 	InstanceId *string

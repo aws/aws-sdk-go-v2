@@ -10,7 +10,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
 // Deletes a quick connect.
 func (c *Client) DeleteQuickConnect(ctx context.Context, params *DeleteQuickConnectInput, optFns ...func(*Options)) (*DeleteQuickConnectOutput, error) {
 	if params == nil {
@@ -29,7 +28,8 @@ func (c *Client) DeleteQuickConnect(ctx context.Context, params *DeleteQuickConn
 
 type DeleteQuickConnectInput struct {
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
 	//
 	// This member is required.
 	InstanceId *string

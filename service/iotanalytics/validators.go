@@ -1024,6 +1024,45 @@ func validateDatastoreActivity(v *types.DatastoreActivity) error {
 	}
 }
 
+func validateDatastorePartition(v *types.DatastorePartition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatastorePartition"}
+	if v.AttributePartition != nil {
+		if err := validatePartition(v.AttributePartition); err != nil {
+			invalidParams.AddNested("AttributePartition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TimestampPartition != nil {
+		if err := validateTimestampPartition(v.TimestampPartition); err != nil {
+			invalidParams.AddNested("TimestampPartition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDatastorePartitions(v *types.DatastorePartitions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatastorePartitions"}
+	if v.Partitions != nil {
+		if err := validatePartitions(v.Partitions); err != nil {
+			invalidParams.AddNested("Partitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDatastoreStorage(v types.DatastoreStorage) error {
 	if v == nil {
 		return nil
@@ -1375,6 +1414,38 @@ func validateParquetConfiguration(v *types.ParquetConfiguration) error {
 	}
 }
 
+func validatePartition(v *types.Partition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Partition"}
+	if v.AttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePartitions(v []types.DatastorePartition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Partitions"}
+	for i := range v {
+		if err := validateDatastorePartition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePipelineActivities(v []types.PipelineActivity) error {
 	if v == nil {
 		return nil
@@ -1637,6 +1708,21 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateTimestampPartition(v *types.TimestampPartition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimestampPartition"}
+	if v.AttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTriggeringDataset(v *types.TriggeringDataset) error {
 	if v == nil {
 		return nil
@@ -1837,6 +1923,11 @@ func validateOpCreateDatastoreInput(v *CreateDatastoreInput) error {
 	if v.FileFormatConfiguration != nil {
 		if err := validateFileFormatConfiguration(v.FileFormatConfiguration); err != nil {
 			invalidParams.AddNested("FileFormatConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DatastorePartitions != nil {
+		if err := validateDatastorePartitions(v.DatastorePartitions); err != nil {
+			invalidParams.AddNested("DatastorePartitions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

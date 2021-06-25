@@ -95,7 +95,9 @@ type ChannelActivity struct {
 type ChannelMessages struct {
 
 	// Specifies one or more keys that identify the Amazon Simple Storage Service
-	// (Amazon S3) objects that save your channel messages.
+	// (Amazon S3) objects that save your channel messages. You must use the full path
+	// for the key. Example path: channel/mychannel/__dt=2020-02-29
+	// 00:00:00/1582940490000_1582940520000_123456789012_mychannel_0_2118.0.json.gz
 	S3Paths []string
 }
 
@@ -481,6 +483,9 @@ type Datastore struct {
 	// When the data store was created.
 	CreationTime *time.Time
 
+	// Contains information about the partitions in a data store.
+	DatastorePartitions *DatastorePartitions
+
 	// Contains the configuration information of file formats. AWS IoT Analytics data
 	// stores support JSON and Parquet (https://parquet.apache.org/). The default file
 	// format is JSON. You can specify only one format. You can't change the file
@@ -526,6 +531,23 @@ type DatastoreActivity struct {
 	//
 	// This member is required.
 	Name *string
+}
+
+// A single partition in a data store.
+type DatastorePartition struct {
+
+	// A partition defined by an attributeName.
+	AttributePartition *Partition
+
+	// A partition defined by an attributeName and a timestamp format.
+	TimestampPartition *TimestampPartition
+}
+
+// Contains information about partitions in a data store.
+type DatastorePartitions struct {
+
+	// A list of partitions in a data store.
+	Partitions []DatastorePartition
 }
 
 // Statistical information about the data store.
@@ -583,6 +605,9 @@ type DatastoreSummary struct {
 
 	// The name of the data store.
 	DatastoreName *string
+
+	// Contains information about the partitions in a data store.
+	DatastorePartitions *DatastorePartitions
 
 	// Where data store data is stored.
 	DatastoreStorage *DatastoreStorageSummary
@@ -904,6 +929,15 @@ type ParquetConfiguration struct {
 	SchemaDefinition *SchemaDefinition
 }
 
+// A single partition.
+type Partition struct {
+
+	// The attribute name of the partition.
+	//
+	// This member is required.
+	AttributeName *string
+}
+
 // Contains information about a pipeline.
 type Pipeline struct {
 
@@ -1102,7 +1136,7 @@ type Schedule struct {
 type SchemaDefinition struct {
 
 	// Specifies one or more columns that store your data. Each schema can have up to
-	// 100 columns. Each column can have up to 100 nested types
+	// 100 columns. Each column can have up to 100 nested types.
 	Columns []Column
 }
 
@@ -1168,6 +1202,18 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+}
+
+// A partition defined by a timestamp.
+type TimestampPartition struct {
+
+	// The attribute name of the partition defined by a timestamp.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The timestamp format of a partition defined by a timestamp.
+	TimestampFormat *string
 }
 
 // Information about the dataset whose content generation triggers the new dataset

@@ -30,7 +30,8 @@ func (c *Client) ListRoutingProfileQueues(ctx context.Context, params *ListRouti
 
 type ListRoutingProfileQueuesInput struct {
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
 	//
 	// This member is required.
 	InstanceId *string

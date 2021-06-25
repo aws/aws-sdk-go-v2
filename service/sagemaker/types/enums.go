@@ -979,6 +979,40 @@ func (EdgePackagingJobStatus) Values() []EdgePackagingJobStatus {
 	}
 }
 
+type EdgePresetDeploymentStatus string
+
+// Enum values for EdgePresetDeploymentStatus
+const (
+	EdgePresetDeploymentStatusCompleted EdgePresetDeploymentStatus = "COMPLETED"
+	EdgePresetDeploymentStatusFailed    EdgePresetDeploymentStatus = "FAILED"
+)
+
+// Values returns all known values for EdgePresetDeploymentStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EdgePresetDeploymentStatus) Values() []EdgePresetDeploymentStatus {
+	return []EdgePresetDeploymentStatus{
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
+type EdgePresetDeploymentType string
+
+// Enum values for EdgePresetDeploymentType
+const (
+	EdgePresetDeploymentTypeGreengrassV2Component EdgePresetDeploymentType = "GreengrassV2Component"
+)
+
+// Values returns all known values for EdgePresetDeploymentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EdgePresetDeploymentType) Values() []EdgePresetDeploymentType {
+	return []EdgePresetDeploymentType{
+		"GreengrassV2Component",
+	}
+}
+
 type EndpointConfigSortKey string
 
 // Enum values for EndpointConfigSortKey
@@ -2399,44 +2433,50 @@ type ProcessingInstanceType string
 
 // Enum values for ProcessingInstanceType
 const (
-	ProcessingInstanceTypeMlT3Medium   ProcessingInstanceType = "ml.t3.medium"
-	ProcessingInstanceTypeMlT3Large    ProcessingInstanceType = "ml.t3.large"
-	ProcessingInstanceTypeMlT3Xlarge   ProcessingInstanceType = "ml.t3.xlarge"
-	ProcessingInstanceTypeMlT32xlarge  ProcessingInstanceType = "ml.t3.2xlarge"
-	ProcessingInstanceTypeMlM4Xlarge   ProcessingInstanceType = "ml.m4.xlarge"
-	ProcessingInstanceTypeMlM42xlarge  ProcessingInstanceType = "ml.m4.2xlarge"
-	ProcessingInstanceTypeMlM44xlarge  ProcessingInstanceType = "ml.m4.4xlarge"
-	ProcessingInstanceTypeMlM410xlarge ProcessingInstanceType = "ml.m4.10xlarge"
-	ProcessingInstanceTypeMlM416xlarge ProcessingInstanceType = "ml.m4.16xlarge"
-	ProcessingInstanceTypeMlC4Xlarge   ProcessingInstanceType = "ml.c4.xlarge"
-	ProcessingInstanceTypeMlC42xlarge  ProcessingInstanceType = "ml.c4.2xlarge"
-	ProcessingInstanceTypeMlC44xlarge  ProcessingInstanceType = "ml.c4.4xlarge"
-	ProcessingInstanceTypeMlC48xlarge  ProcessingInstanceType = "ml.c4.8xlarge"
-	ProcessingInstanceTypeMlP2Xlarge   ProcessingInstanceType = "ml.p2.xlarge"
-	ProcessingInstanceTypeMlP28xlarge  ProcessingInstanceType = "ml.p2.8xlarge"
-	ProcessingInstanceTypeMlP216xlarge ProcessingInstanceType = "ml.p2.16xlarge"
-	ProcessingInstanceTypeMlP32xlarge  ProcessingInstanceType = "ml.p3.2xlarge"
-	ProcessingInstanceTypeMlP38xlarge  ProcessingInstanceType = "ml.p3.8xlarge"
-	ProcessingInstanceTypeMlP316xlarge ProcessingInstanceType = "ml.p3.16xlarge"
-	ProcessingInstanceTypeMlC5Xlarge   ProcessingInstanceType = "ml.c5.xlarge"
-	ProcessingInstanceTypeMlC52xlarge  ProcessingInstanceType = "ml.c5.2xlarge"
-	ProcessingInstanceTypeMlC54xlarge  ProcessingInstanceType = "ml.c5.4xlarge"
-	ProcessingInstanceTypeMlC59xlarge  ProcessingInstanceType = "ml.c5.9xlarge"
-	ProcessingInstanceTypeMlC518xlarge ProcessingInstanceType = "ml.c5.18xlarge"
-	ProcessingInstanceTypeMlM5Large    ProcessingInstanceType = "ml.m5.large"
-	ProcessingInstanceTypeMlM5Xlarge   ProcessingInstanceType = "ml.m5.xlarge"
-	ProcessingInstanceTypeMlM52xlarge  ProcessingInstanceType = "ml.m5.2xlarge"
-	ProcessingInstanceTypeMlM54xlarge  ProcessingInstanceType = "ml.m5.4xlarge"
-	ProcessingInstanceTypeMlM512xlarge ProcessingInstanceType = "ml.m5.12xlarge"
-	ProcessingInstanceTypeMlM524xlarge ProcessingInstanceType = "ml.m5.24xlarge"
-	ProcessingInstanceTypeMlR5Large    ProcessingInstanceType = "ml.r5.large"
-	ProcessingInstanceTypeMlR5Xlarge   ProcessingInstanceType = "ml.r5.xlarge"
-	ProcessingInstanceTypeMlR52xlarge  ProcessingInstanceType = "ml.r5.2xlarge"
-	ProcessingInstanceTypeMlR54xlarge  ProcessingInstanceType = "ml.r5.4xlarge"
-	ProcessingInstanceTypeMlR58xlarge  ProcessingInstanceType = "ml.r5.8xlarge"
-	ProcessingInstanceTypeMlR512xlarge ProcessingInstanceType = "ml.r5.12xlarge"
-	ProcessingInstanceTypeMlR516xlarge ProcessingInstanceType = "ml.r5.16xlarge"
-	ProcessingInstanceTypeMlR524xlarge ProcessingInstanceType = "ml.r5.24xlarge"
+	ProcessingInstanceTypeMlT3Medium     ProcessingInstanceType = "ml.t3.medium"
+	ProcessingInstanceTypeMlT3Large      ProcessingInstanceType = "ml.t3.large"
+	ProcessingInstanceTypeMlT3Xlarge     ProcessingInstanceType = "ml.t3.xlarge"
+	ProcessingInstanceTypeMlT32xlarge    ProcessingInstanceType = "ml.t3.2xlarge"
+	ProcessingInstanceTypeMlM4Xlarge     ProcessingInstanceType = "ml.m4.xlarge"
+	ProcessingInstanceTypeMlM42xlarge    ProcessingInstanceType = "ml.m4.2xlarge"
+	ProcessingInstanceTypeMlM44xlarge    ProcessingInstanceType = "ml.m4.4xlarge"
+	ProcessingInstanceTypeMlM410xlarge   ProcessingInstanceType = "ml.m4.10xlarge"
+	ProcessingInstanceTypeMlM416xlarge   ProcessingInstanceType = "ml.m4.16xlarge"
+	ProcessingInstanceTypeMlC4Xlarge     ProcessingInstanceType = "ml.c4.xlarge"
+	ProcessingInstanceTypeMlC42xlarge    ProcessingInstanceType = "ml.c4.2xlarge"
+	ProcessingInstanceTypeMlC44xlarge    ProcessingInstanceType = "ml.c4.4xlarge"
+	ProcessingInstanceTypeMlC48xlarge    ProcessingInstanceType = "ml.c4.8xlarge"
+	ProcessingInstanceTypeMlP2Xlarge     ProcessingInstanceType = "ml.p2.xlarge"
+	ProcessingInstanceTypeMlP28xlarge    ProcessingInstanceType = "ml.p2.8xlarge"
+	ProcessingInstanceTypeMlP216xlarge   ProcessingInstanceType = "ml.p2.16xlarge"
+	ProcessingInstanceTypeMlP32xlarge    ProcessingInstanceType = "ml.p3.2xlarge"
+	ProcessingInstanceTypeMlP38xlarge    ProcessingInstanceType = "ml.p3.8xlarge"
+	ProcessingInstanceTypeMlP316xlarge   ProcessingInstanceType = "ml.p3.16xlarge"
+	ProcessingInstanceTypeMlC5Xlarge     ProcessingInstanceType = "ml.c5.xlarge"
+	ProcessingInstanceTypeMlC52xlarge    ProcessingInstanceType = "ml.c5.2xlarge"
+	ProcessingInstanceTypeMlC54xlarge    ProcessingInstanceType = "ml.c5.4xlarge"
+	ProcessingInstanceTypeMlC59xlarge    ProcessingInstanceType = "ml.c5.9xlarge"
+	ProcessingInstanceTypeMlC518xlarge   ProcessingInstanceType = "ml.c5.18xlarge"
+	ProcessingInstanceTypeMlM5Large      ProcessingInstanceType = "ml.m5.large"
+	ProcessingInstanceTypeMlM5Xlarge     ProcessingInstanceType = "ml.m5.xlarge"
+	ProcessingInstanceTypeMlM52xlarge    ProcessingInstanceType = "ml.m5.2xlarge"
+	ProcessingInstanceTypeMlM54xlarge    ProcessingInstanceType = "ml.m5.4xlarge"
+	ProcessingInstanceTypeMlM512xlarge   ProcessingInstanceType = "ml.m5.12xlarge"
+	ProcessingInstanceTypeMlM524xlarge   ProcessingInstanceType = "ml.m5.24xlarge"
+	ProcessingInstanceTypeMlR5Large      ProcessingInstanceType = "ml.r5.large"
+	ProcessingInstanceTypeMlR5Xlarge     ProcessingInstanceType = "ml.r5.xlarge"
+	ProcessingInstanceTypeMlR52xlarge    ProcessingInstanceType = "ml.r5.2xlarge"
+	ProcessingInstanceTypeMlR54xlarge    ProcessingInstanceType = "ml.r5.4xlarge"
+	ProcessingInstanceTypeMlR58xlarge    ProcessingInstanceType = "ml.r5.8xlarge"
+	ProcessingInstanceTypeMlR512xlarge   ProcessingInstanceType = "ml.r5.12xlarge"
+	ProcessingInstanceTypeMlR516xlarge   ProcessingInstanceType = "ml.r5.16xlarge"
+	ProcessingInstanceTypeMlR524xlarge   ProcessingInstanceType = "ml.r5.24xlarge"
+	ProcessingInstanceTypeMlG4dnXlarge   ProcessingInstanceType = "ml.g4dn.xlarge"
+	ProcessingInstanceTypeMlG4dn2xlarge  ProcessingInstanceType = "ml.g4dn.2xlarge"
+	ProcessingInstanceTypeMlG4dn4xlarge  ProcessingInstanceType = "ml.g4dn.4xlarge"
+	ProcessingInstanceTypeMlG4dn8xlarge  ProcessingInstanceType = "ml.g4dn.8xlarge"
+	ProcessingInstanceTypeMlG4dn12xlarge ProcessingInstanceType = "ml.g4dn.12xlarge"
+	ProcessingInstanceTypeMlG4dn16xlarge ProcessingInstanceType = "ml.g4dn.16xlarge"
 )
 
 // Values returns all known values for ProcessingInstanceType. Note that this can
@@ -2482,6 +2522,12 @@ func (ProcessingInstanceType) Values() []ProcessingInstanceType {
 		"ml.r5.12xlarge",
 		"ml.r5.16xlarge",
 		"ml.r5.24xlarge",
+		"ml.g4dn.xlarge",
+		"ml.g4dn.2xlarge",
+		"ml.g4dn.4xlarge",
+		"ml.g4dn.8xlarge",
+		"ml.g4dn.12xlarge",
+		"ml.g4dn.16xlarge",
 	}
 }
 
@@ -3756,32 +3802,38 @@ type TransformInstanceType string
 
 // Enum values for TransformInstanceType
 const (
-	TransformInstanceTypeMlM4Xlarge   TransformInstanceType = "ml.m4.xlarge"
-	TransformInstanceTypeMlM42xlarge  TransformInstanceType = "ml.m4.2xlarge"
-	TransformInstanceTypeMlM44xlarge  TransformInstanceType = "ml.m4.4xlarge"
-	TransformInstanceTypeMlM410xlarge TransformInstanceType = "ml.m4.10xlarge"
-	TransformInstanceTypeMlM416xlarge TransformInstanceType = "ml.m4.16xlarge"
-	TransformInstanceTypeMlC4Xlarge   TransformInstanceType = "ml.c4.xlarge"
-	TransformInstanceTypeMlC42xlarge  TransformInstanceType = "ml.c4.2xlarge"
-	TransformInstanceTypeMlC44xlarge  TransformInstanceType = "ml.c4.4xlarge"
-	TransformInstanceTypeMlC48xlarge  TransformInstanceType = "ml.c4.8xlarge"
-	TransformInstanceTypeMlP2Xlarge   TransformInstanceType = "ml.p2.xlarge"
-	TransformInstanceTypeMlP28xlarge  TransformInstanceType = "ml.p2.8xlarge"
-	TransformInstanceTypeMlP216xlarge TransformInstanceType = "ml.p2.16xlarge"
-	TransformInstanceTypeMlP32xlarge  TransformInstanceType = "ml.p3.2xlarge"
-	TransformInstanceTypeMlP38xlarge  TransformInstanceType = "ml.p3.8xlarge"
-	TransformInstanceTypeMlP316xlarge TransformInstanceType = "ml.p3.16xlarge"
-	TransformInstanceTypeMlC5Xlarge   TransformInstanceType = "ml.c5.xlarge"
-	TransformInstanceTypeMlC52xlarge  TransformInstanceType = "ml.c5.2xlarge"
-	TransformInstanceTypeMlC54xlarge  TransformInstanceType = "ml.c5.4xlarge"
-	TransformInstanceTypeMlC59xlarge  TransformInstanceType = "ml.c5.9xlarge"
-	TransformInstanceTypeMlC518xlarge TransformInstanceType = "ml.c5.18xlarge"
-	TransformInstanceTypeMlM5Large    TransformInstanceType = "ml.m5.large"
-	TransformInstanceTypeMlM5Xlarge   TransformInstanceType = "ml.m5.xlarge"
-	TransformInstanceTypeMlM52xlarge  TransformInstanceType = "ml.m5.2xlarge"
-	TransformInstanceTypeMlM54xlarge  TransformInstanceType = "ml.m5.4xlarge"
-	TransformInstanceTypeMlM512xlarge TransformInstanceType = "ml.m5.12xlarge"
-	TransformInstanceTypeMlM524xlarge TransformInstanceType = "ml.m5.24xlarge"
+	TransformInstanceTypeMlM4Xlarge     TransformInstanceType = "ml.m4.xlarge"
+	TransformInstanceTypeMlM42xlarge    TransformInstanceType = "ml.m4.2xlarge"
+	TransformInstanceTypeMlM44xlarge    TransformInstanceType = "ml.m4.4xlarge"
+	TransformInstanceTypeMlM410xlarge   TransformInstanceType = "ml.m4.10xlarge"
+	TransformInstanceTypeMlM416xlarge   TransformInstanceType = "ml.m4.16xlarge"
+	TransformInstanceTypeMlC4Xlarge     TransformInstanceType = "ml.c4.xlarge"
+	TransformInstanceTypeMlC42xlarge    TransformInstanceType = "ml.c4.2xlarge"
+	TransformInstanceTypeMlC44xlarge    TransformInstanceType = "ml.c4.4xlarge"
+	TransformInstanceTypeMlC48xlarge    TransformInstanceType = "ml.c4.8xlarge"
+	TransformInstanceTypeMlP2Xlarge     TransformInstanceType = "ml.p2.xlarge"
+	TransformInstanceTypeMlP28xlarge    TransformInstanceType = "ml.p2.8xlarge"
+	TransformInstanceTypeMlP216xlarge   TransformInstanceType = "ml.p2.16xlarge"
+	TransformInstanceTypeMlP32xlarge    TransformInstanceType = "ml.p3.2xlarge"
+	TransformInstanceTypeMlP38xlarge    TransformInstanceType = "ml.p3.8xlarge"
+	TransformInstanceTypeMlP316xlarge   TransformInstanceType = "ml.p3.16xlarge"
+	TransformInstanceTypeMlC5Xlarge     TransformInstanceType = "ml.c5.xlarge"
+	TransformInstanceTypeMlC52xlarge    TransformInstanceType = "ml.c5.2xlarge"
+	TransformInstanceTypeMlC54xlarge    TransformInstanceType = "ml.c5.4xlarge"
+	TransformInstanceTypeMlC59xlarge    TransformInstanceType = "ml.c5.9xlarge"
+	TransformInstanceTypeMlC518xlarge   TransformInstanceType = "ml.c5.18xlarge"
+	TransformInstanceTypeMlM5Large      TransformInstanceType = "ml.m5.large"
+	TransformInstanceTypeMlM5Xlarge     TransformInstanceType = "ml.m5.xlarge"
+	TransformInstanceTypeMlM52xlarge    TransformInstanceType = "ml.m5.2xlarge"
+	TransformInstanceTypeMlM54xlarge    TransformInstanceType = "ml.m5.4xlarge"
+	TransformInstanceTypeMlM512xlarge   TransformInstanceType = "ml.m5.12xlarge"
+	TransformInstanceTypeMlM524xlarge   TransformInstanceType = "ml.m5.24xlarge"
+	TransformInstanceTypeMlG4dnXlarge   TransformInstanceType = "ml.g4dn.xlarge"
+	TransformInstanceTypeMlG4dn2xlarge  TransformInstanceType = "ml.g4dn.2xlarge"
+	TransformInstanceTypeMlG4dn4xlarge  TransformInstanceType = "ml.g4dn.4xlarge"
+	TransformInstanceTypeMlG4dn8xlarge  TransformInstanceType = "ml.g4dn.8xlarge"
+	TransformInstanceTypeMlG4dn12xlarge TransformInstanceType = "ml.g4dn.12xlarge"
+	TransformInstanceTypeMlG4dn16xlarge TransformInstanceType = "ml.g4dn.16xlarge"
 )
 
 // Values returns all known values for TransformInstanceType. Note that this can be
@@ -3815,6 +3867,12 @@ func (TransformInstanceType) Values() []TransformInstanceType {
 		"ml.m5.4xlarge",
 		"ml.m5.12xlarge",
 		"ml.m5.24xlarge",
+		"ml.g4dn.xlarge",
+		"ml.g4dn.2xlarge",
+		"ml.g4dn.4xlarge",
+		"ml.g4dn.8xlarge",
+		"ml.g4dn.12xlarge",
+		"ml.g4dn.16xlarge",
 	}
 }
 

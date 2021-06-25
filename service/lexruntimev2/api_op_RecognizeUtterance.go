@@ -11,9 +11,35 @@ import (
 	"io"
 )
 
-// Sends user input to Amazon Lex. You can send text or speech. Clients use this
-// API to send text and audio requests to Amazon Lex at runtime. Amazon Lex
+// Sends user input to Amazon Lex V2. You can send text or speech. Clients use this
+// API to send text and audio requests to Amazon Lex V2 at runtime. Amazon Lex V2
 // interprets the user input using the machine learning model built for the bot.
+// The following request fields must be compressed with gzip and then base64
+// encoded before you send them to Amazon Lex V2.
+//
+// * requestAttributes
+//
+// *
+// sessionState
+//
+// The following response fields are compressed using gzip and then
+// base64 encoded by Amazon Lex V2. Before you can use these fields, you must
+// decode and decompress them.
+//
+// * inputTranscript
+//
+// * interpretations
+//
+// * messages
+//
+// *
+// requestAttributes
+//
+// * sessionState
+//
+// The example contains a Java application that
+// compresses and encodes a Java object to send to Amazon Lex V2, and a second that
+// decodes and decompresses a response from Amazon Lex V2.
 func (c *Client) RecognizeUtterance(ctx context.Context, params *RecognizeUtteranceInput, optFns ...func(*Options)) (*RecognizeUtteranceOutput, error) {
 	if params == nil {
 		params = &RecognizeUtteranceInput{}
@@ -83,24 +109,26 @@ type RecognizeUtteranceInput struct {
 	InputStream io.Reader
 
 	// Request-specific information passed between the client application and Amazon
-	// Lex The namespace x-amz-lex: is reserved for special attributes. Don't create
-	// any request attributes for prefix x-amz-lex:.
+	// Lex V2 The namespace x-amz-lex: is reserved for special attributes. Don't create
+	// any request attributes for prefix x-amz-lex:. The requestAttributes field must
+	// be compressed using gzip and then base64 encoded before sending to Amazon Lex
+	// V2.
 	RequestAttributes *string
 
-	// The message that Amazon Lex returns in the response can be either text or speech
-	// based on the responseContentType value.
+	// The message that Amazon Lex V2 returns in the response can be either text or
+	// speech based on the responseContentType value.
 	//
 	// * If the value is
-	// text/plain;charset=utf-8, Amazon Lex returns text in the response.
+	// text/plain;charset=utf-8, Amazon Lex V2 returns text in the response.
 	//
 	// * If the
-	// value begins with audio/, Amazon Lex returns speech in the response. Amazon Lex
-	// uses Amazon Polly to generate the speech using the configuration that you
+	// value begins with audio/, Amazon Lex V2 returns speech in the response. Amazon
+	// Lex V2 uses Amazon Polly to generate the speech using the configuration that you
 	// specified in the requestContentType parameter. For example, if you specify
-	// audio/mpeg as the value, Amazon Lex returns speech in the MPEG format.
+	// audio/mpeg as the value, Amazon Lex V2 returns speech in the MPEG format.
 	//
-	// * If the
-	// value is audio/pcm, the speech returned is audio/pcm at 16 KHz in 16-bit,
+	// * If
+	// the value is audio/pcm, the speech returned is audio/pcm at 16 KHz in 16-bit,
 	// little-endian format.
 	//
 	// * The following are the accepted values:
@@ -120,20 +148,21 @@ type RecognizeUtteranceInput struct {
 
 	// Sets the state of the session with the user. You can use this to set the current
 	// intent, attributes, context, and dialog action. Use the dialog action to
-	// determine the next step that Amazon Lex should use in the conversation with the
-	// user.
+	// determine the next step that Amazon Lex V2 should use in the conversation with
+	// the user. The sessionState field must be compressed using gzip and then base64
+	// encoded before sending to Amazon Lex V2.
 	SessionState *string
 }
 
 type RecognizeUtteranceOutput struct {
 
 	// The prompt or statement to send to the user. This is based on the bot
-	// configuration and context. For example, if Amazon Lex did not understand the
+	// configuration and context. For example, if Amazon Lex V2 did not understand the
 	// user intent, it sends the clarificationPrompt configured for the bot. If the
 	// intent requires confirmation before taking the fulfillment action, it sends the
 	// confirmationPrompt. Another example: Suppose that the Lambda function
 	// successfully fulfilled the intent, and sent a message to convey to the user.
-	// Then Amazon Lex sends that message in the response.
+	// Then Amazon Lex V2 sends that message in the response.
 	AudioStream io.ReadCloser
 
 	// Content type as specified in the responseContentType in the request.
@@ -145,22 +174,34 @@ type RecognizeUtteranceOutput struct {
 	// The text used to process the request. If the input was an audio stream, the
 	// inputTranscript field contains the text extracted from the audio stream. This is
 	// the text that is actually processed to recognize intents and slot values. You
-	// can use this information to determine if Amazon Lex is correctly processing the
-	// audio that you send.
+	// can use this information to determine if Amazon Lex V2 is correctly processing
+	// the audio that you send. The inputTranscript field is compressed with gzip and
+	// then base64 encoded. Before you can use the contents of the field, you must
+	// decode and decompress the contents. See the example for a simple function to
+	// decode and decompress the contents.
 	InputTranscript *string
 
-	// A list of intents that Amazon Lex determined might satisfy the user's utterance.
-	// Each interpretation includes the intent, a score that indicates how confident
-	// Amazon Lex is that the interpretation is the correct one, and an optional
-	// sentiment response that indicates the sentiment expressed in the utterance.
+	// A list of intents that Amazon Lex V2 determined might satisfy the user's
+	// utterance. Each interpretation includes the intent, a score that indicates how
+	// confident Amazon Lex V2 is that the interpretation is the correct one, and an
+	// optional sentiment response that indicates the sentiment expressed in the
+	// utterance. The interpretations field is compressed with gzip and then base64
+	// encoded. Before you can use the contents of the field, you must decode and
+	// decompress the contents. See the example for a simple function to decode and
+	// decompress the contents.
 	Interpretations *string
 
 	// A list of messages that were last sent to the user. The messages are ordered
 	// based on the order that you returned the messages from your Lambda function or
-	// the order that the messages are defined in the bot.
+	// the order that the messages are defined in the bot. The messages field is
+	// compressed with gzip and then base64 encoded. Before you can use the contents of
+	// the field, you must decode and decompress the contents. See the example for a
+	// simple function to decode and decompress the contents.
 	Messages *string
 
-	// The attributes sent in the request.
+	// The attributes sent in the request. The requestAttributes field is compressed
+	// with gzip and then base64 encoded. Before you can use the contents of the field,
+	// you must decode and decompress the contents.
 	RequestAttributes *string
 
 	// The identifier of the session in use.
@@ -168,7 +209,10 @@ type RecognizeUtteranceOutput struct {
 
 	// Represents the current state of the dialog between the user and the bot. Use
 	// this to determine the progress of the conversation and what the next action
-	// might be.
+	// might be. The sessionState field is compressed with gzip and then base64
+	// encoded. Before you can use the contents of the field, you must decode and
+	// decompress the contents. See the example for a simple function to decode and
+	// decompress the contents.
 	SessionState *string
 
 	// Metadata pertaining to the operation's result.

@@ -12,14 +12,14 @@ import (
 )
 
 // Returns a list of DB snapshot attribute names and values for a manual DB
-// snapshot. When sharing snapshots with other AWS accounts,
+// snapshot. When sharing snapshots with other Amazon Web Services accounts,
 // DescribeDBSnapshotAttributes returns the restore attribute and a list of IDs for
-// the AWS accounts that are authorized to copy or restore the manual DB snapshot.
-// If all is included in the list of values for the restore attribute, then the
-// manual DB snapshot is public and can be copied or restored by all AWS accounts.
-// To add or remove access for an AWS account to copy or restore a manual DB
-// snapshot, or to make the manual DB snapshot public or private, use the
-// ModifyDBSnapshotAttribute API action.
+// the Amazon Web Services accounts that are authorized to copy or restore the
+// manual DB snapshot. If all is included in the list of values for the restore
+// attribute, then the manual DB snapshot is public and can be copied or restored
+// by all Amazon Web Services accounts. To add or remove access for an Amazon Web
+// Services account to copy or restore a manual DB snapshot, or to make the manual
+// DB snapshot public or private, use the ModifyDBSnapshotAttribute API action.
 func (c *Client) DescribeDBSnapshotAttributes(ctx context.Context, params *DescribeDBSnapshotAttributesInput, optFns ...func(*Options)) (*DescribeDBSnapshotAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeDBSnapshotAttributesInput{}
@@ -47,9 +47,9 @@ type DescribeDBSnapshotAttributesInput struct {
 type DescribeDBSnapshotAttributesOutput struct {
 
 	// Contains the results of a successful call to the DescribeDBSnapshotAttributes
-	// API action. Manual DB snapshot attributes are used to authorize other AWS
-	// accounts to copy or restore a manual DB snapshot. For more information, see the
-	// ModifyDBSnapshotAttribute API action.
+	// API action. Manual DB snapshot attributes are used to authorize other Amazon Web
+	// Services accounts to copy or restore a manual DB snapshot. For more information,
+	// see the ModifyDBSnapshotAttribute API action.
 	DBSnapshotAttributesResult *types.DBSnapshotAttributesResult
 
 	// Metadata pertaining to the operation's result.

@@ -1206,6 +1206,10 @@ func validateGrpcGatewayRoute(v *types.GrpcGatewayRoute) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GrpcGatewayRoute"}
 	if v.Match == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Match"))
+	} else if v.Match != nil {
+		if err := validateGrpcGatewayRouteMatch(v.Match); err != nil {
+			invalidParams.AddNested("Match", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Action == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Action"))
@@ -1232,6 +1236,79 @@ func validateGrpcGatewayRouteAction(v *types.GrpcGatewayRouteAction) error {
 		if err := validateGatewayRouteTarget(v.Target); err != nil {
 			invalidParams.AddNested("Target", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGrpcGatewayRouteMatch(v *types.GrpcGatewayRouteMatch) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GrpcGatewayRouteMatch"}
+	if v.Metadata != nil {
+		if err := validateGrpcGatewayRouteMetadataList(v.Metadata); err != nil {
+			invalidParams.AddNested("Metadata", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGrpcGatewayRouteMetadata(v *types.GrpcGatewayRouteMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GrpcGatewayRouteMetadata"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Match != nil {
+		if err := validateGrpcMetadataMatchMethod(v.Match); err != nil {
+			invalidParams.AddNested("Match", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGrpcGatewayRouteMetadataList(v []types.GrpcGatewayRouteMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GrpcGatewayRouteMetadataList"}
+	for i := range v {
+		if err := validateGrpcGatewayRouteMetadata(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGrpcMetadataMatchMethod(v types.GrpcMetadataMatchMethod) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GrpcMetadataMatchMethod"}
+	switch uv := v.(type) {
+	case *types.GrpcMetadataMatchMethodMemberRange:
+		if err := validateMatchRange(&uv.Value); err != nil {
+			invalidParams.AddNested("[range]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1466,13 +1543,89 @@ func validateHttpGatewayRouteAction(v *types.HttpGatewayRouteAction) error {
 	}
 }
 
+func validateHttpGatewayRouteHeader(v *types.HttpGatewayRouteHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpGatewayRouteHeader"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Match != nil {
+		if err := validateHeaderMatchMethod(v.Match); err != nil {
+			invalidParams.AddNested("Match", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHttpGatewayRouteHeaders(v []types.HttpGatewayRouteHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpGatewayRouteHeaders"}
+	for i := range v {
+		if err := validateHttpGatewayRouteHeader(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHttpGatewayRouteMatch(v *types.HttpGatewayRouteMatch) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HttpGatewayRouteMatch"}
-	if v.Prefix == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Prefix"))
+	if v.QueryParameters != nil {
+		if err := validateHttpQueryParameters(v.QueryParameters); err != nil {
+			invalidParams.AddNested("QueryParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Headers != nil {
+		if err := validateHttpGatewayRouteHeaders(v.Headers); err != nil {
+			invalidParams.AddNested("Headers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHttpQueryParameter(v *types.HttpQueryParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpQueryParameter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHttpQueryParameters(v []types.HttpQueryParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpQueryParameters"}
+	for i := range v {
+		if err := validateHttpQueryParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1591,8 +1744,10 @@ func validateHttpRouteMatch(v *types.HttpRouteMatch) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HttpRouteMatch"}
-	if v.Prefix == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Prefix"))
+	if v.QueryParameters != nil {
+		if err := validateHttpQueryParameters(v.QueryParameters); err != nil {
+			invalidParams.AddNested("QueryParameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Headers != nil {
 		if err := validateHttpRouteHeaders(v.Headers); err != nil {

@@ -26,6 +26,9 @@ type AccessConfiguration struct {
 	// permissions to read all top level manifests referenced by your MediaTailor
 	// VodSource packaging configurations.
 	AccessType AccessType
+
+	// AWS Secrets Manager access token configuration parameters.
+	SecretsManagerAccessTokenConfiguration *SecretsManagerAccessTokenConfiguration
 }
 
 // Ad break configuration parameters.
@@ -443,6 +446,22 @@ type ResponseOutputItem struct {
 	HlsPlaylistSettings *HlsPlaylistSettings
 }
 
+// The schedule's ad break properties.
+type ScheduleAdBreak struct {
+
+	// The approximate duration of the ad break, in seconds.
+	ApproximateDurationSeconds int64
+
+	// The approximate time that the ad will start playing.
+	ApproximateStartTime *time.Time
+
+	// The name of the source location containing the VOD source used for the ad break.
+	SourceLocationName *string
+
+	// The name of the VOD source used for the ad break.
+	VodSourceName *string
+}
+
 // Schedule configuration parameters. A channel must be stopped before changes can
 // be made to the schedule.
 type ScheduleConfiguration struct {
@@ -486,6 +505,30 @@ type ScheduleEntry struct {
 
 	// The approximate time that the program will start playing.
 	ApproximateStartTime *time.Time
+
+	// The schedule's ad break properties.
+	ScheduleAdBreaks []ScheduleAdBreak
+}
+
+// AWS Secrets Manager access token configuration parameters. For information about
+// Secrets Manager access token authentication, see Working with AWS Secrets
+// Manager access token authentication
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-access-configuration-access-token.html).
+type SecretsManagerAccessTokenConfiguration struct {
+
+	// The name of the HTTP header used to supply the access token in requests to the
+	// source location.
+	HeaderName *string
+
+	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains
+	// the access token.
+	SecretArn *string
+
+	// The AWS Secrets Manager SecretString
+	// (https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html#SecretsManager-CreateSecret-request-SecretString.html)
+	// key associated with the access token. MediaTailor uses the key to look up
+	// SecretString key and value pair containing the access token.
+	SecretStringKey *string
 }
 
 // Slate VOD source configuration.

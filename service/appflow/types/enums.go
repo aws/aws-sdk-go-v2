@@ -465,6 +465,7 @@ const (
 	OperatorPropertiesKeysMathOperationFieldsOrder OperatorPropertiesKeys = "MATH_OPERATION_FIELDS_ORDER"
 	OperatorPropertiesKeysConcatFormat             OperatorPropertiesKeys = "CONCAT_FORMAT"
 	OperatorPropertiesKeysSubfieldCategoryMap      OperatorPropertiesKeys = "SUBFIELD_CATEGORY_MAP"
+	OperatorPropertiesKeysExcludeSourceFieldsList  OperatorPropertiesKeys = "EXCLUDE_SOURCE_FIELDS_LIST"
 )
 
 // Values returns all known values for OperatorPropertiesKeys. Note that this can
@@ -486,6 +487,7 @@ func (OperatorPropertiesKeys) Values() []OperatorPropertiesKeys {
 		"MATH_OPERATION_FIELDS_ORDER",
 		"CONCAT_FORMAT",
 		"SUBFIELD_CATEGORY_MAP",
+		"EXCLUDE_SOURCE_FIELDS_LIST",
 	}
 }
 
@@ -826,6 +828,7 @@ const (
 	TaskTypeArithmetic TaskType = "Arithmetic"
 	TaskTypeFilter     TaskType = "Filter"
 	TaskTypeMap        TaskType = "Map"
+	TaskTypeMapAll     TaskType = "Map_all"
 	TaskTypeMask       TaskType = "Mask"
 	TaskTypeMerge      TaskType = "Merge"
 	TaskTypeTruncate   TaskType = "Truncate"
@@ -840,6 +843,7 @@ func (TaskType) Values() []TaskType {
 		"Arithmetic",
 		"Filter",
 		"Map",
+		"Map_all",
 		"Mask",
 		"Merge",
 		"Truncate",

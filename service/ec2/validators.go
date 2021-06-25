@@ -310,6 +310,26 @@ func (m *validateOpAssociateTransitGatewayRouteTable) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateTrunkInterface struct {
+}
+
+func (*validateOpAssociateTrunkInterface) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateTrunkInterface) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateTrunkInterfaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateTrunkInterfaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateVpcCidrBlock struct {
 }
 
@@ -3370,6 +3390,26 @@ func (m *validateOpDisableFastSnapshotRestores) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisableImageDeprecation struct {
+}
+
+func (*validateOpDisableImageDeprecation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableImageDeprecation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableImageDeprecationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableImageDeprecationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisableTransitGatewayRouteTablePropagation struct {
 }
 
@@ -3530,6 +3570,26 @@ func (m *validateOpDisassociateTransitGatewayRouteTable) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateTrunkInterface struct {
+}
+
+func (*validateOpDisassociateTrunkInterface) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateTrunkInterface) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateTrunkInterfaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateTrunkInterfaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateVpcCidrBlock struct {
 }
 
@@ -3565,6 +3625,26 @@ func (m *validateOpEnableFastSnapshotRestores) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpEnableFastSnapshotRestoresInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableImageDeprecation struct {
+}
+
+func (*validateOpEnableImageDeprecation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableImageDeprecation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableImageDeprecationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableImageDeprecationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6070,6 +6150,10 @@ func addOpAssociateTransitGatewayRouteTableValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpAssociateTransitGatewayRouteTable{}, middleware.After)
 }
 
+func addOpAssociateTrunkInterfaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateTrunkInterface{}, middleware.After)
+}
+
 func addOpAssociateVpcCidrBlockValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateVpcCidrBlock{}, middleware.After)
 }
@@ -6682,6 +6766,10 @@ func addOpDisableFastSnapshotRestoresValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDisableFastSnapshotRestores{}, middleware.After)
 }
 
+func addOpDisableImageDeprecationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableImageDeprecation{}, middleware.After)
+}
+
 func addOpDisableTransitGatewayRouteTablePropagationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableTransitGatewayRouteTablePropagation{}, middleware.After)
 }
@@ -6714,12 +6802,20 @@ func addOpDisassociateTransitGatewayRouteTableValidationMiddleware(stack *middle
 	return stack.Initialize.Add(&validateOpDisassociateTransitGatewayRouteTable{}, middleware.After)
 }
 
+func addOpDisassociateTrunkInterfaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateTrunkInterface{}, middleware.After)
+}
+
 func addOpDisassociateVpcCidrBlockValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateVpcCidrBlock{}, middleware.After)
 }
 
 func addOpEnableFastSnapshotRestoresValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableFastSnapshotRestores{}, middleware.After)
+}
+
+func addOpEnableImageDeprecationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableImageDeprecation{}, middleware.After)
 }
 
 func addOpEnableTransitGatewayRouteTablePropagationValidationMiddleware(stack *middleware.Stack) error {
@@ -8026,6 +8122,24 @@ func validateOpAssociateTransitGatewayRouteTableInput(v *AssociateTransitGateway
 	}
 }
 
+func validateOpAssociateTrunkInterfaceInput(v *AssociateTrunkInterfaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateTrunkInterfaceInput"}
+	if v.BranchInterfaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BranchInterfaceId"))
+	}
+	if v.TrunkInterfaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrunkInterfaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateVpcCidrBlockInput(v *AssociateVpcCidrBlockInput) error {
 	if v == nil {
 		return nil
@@ -8743,9 +8857,6 @@ func validateOpCreateNatGatewayInput(v *CreateNatGatewayInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateNatGatewayInput"}
 	if v.SubnetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
-	}
-	if v.AllocationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AllocationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10634,6 +10745,21 @@ func validateOpDisableFastSnapshotRestoresInput(v *DisableFastSnapshotRestoresIn
 	}
 }
 
+func validateOpDisableImageDeprecationInput(v *DisableImageDeprecationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableImageDeprecationInput"}
+	if v.ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisableTransitGatewayRouteTablePropagationInput(v *DisableTransitGatewayRouteTablePropagationInput) error {
 	if v == nil {
 		return nil
@@ -10766,6 +10892,21 @@ func validateOpDisassociateTransitGatewayRouteTableInput(v *DisassociateTransitG
 	}
 }
 
+func validateOpDisassociateTrunkInterfaceInput(v *DisassociateTrunkInterfaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateTrunkInterfaceInput"}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateVpcCidrBlockInput(v *DisassociateVpcCidrBlockInput) error {
 	if v == nil {
 		return nil
@@ -10791,6 +10932,24 @@ func validateOpEnableFastSnapshotRestoresInput(v *EnableFastSnapshotRestoresInpu
 	}
 	if v.SourceSnapshotIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceSnapshotIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableImageDeprecationInput(v *EnableImageDeprecationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableImageDeprecationInput"}
+	if v.ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
+	}
+	if v.DeprecateAt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeprecateAt"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

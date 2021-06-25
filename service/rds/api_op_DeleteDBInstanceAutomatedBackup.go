@@ -36,7 +36,7 @@ type DeleteDBInstanceAutomatedBackupInput struct {
 	DBInstanceAutomatedBackupsArn *string
 
 	// The identifier for the source DB instance, which can't be changed and which is
-	// unique to an AWS Region.
+	// unique to an Amazon Web Services Region.
 	DbiResourceId *string
 }
 

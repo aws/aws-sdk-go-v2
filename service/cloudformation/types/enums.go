@@ -60,6 +60,28 @@ func (Capability) Values() []Capability {
 	}
 }
 
+type Category string
+
+// Enum values for Category
+const (
+	CategoryRegistered Category = "REGISTERED"
+	CategoryActivated  Category = "ACTIVATED"
+	CategoryThirdParty Category = "THIRD_PARTY"
+	CategoryAwsTypes   Category = "AWS_TYPES"
+)
+
+// Values returns all known values for Category. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Category) Values() []Category {
+	return []Category{
+		"REGISTERED",
+		"ACTIVATED",
+		"THIRD_PARTY",
+		"AWS_TYPES",
+	}
+}
+
 type ChangeAction string
 
 // Enum values for ChangeAction
@@ -260,20 +282,21 @@ type HandlerErrorCode string
 
 // Enum values for HandlerErrorCode
 const (
-	HandlerErrorCodeNotUpdatable            HandlerErrorCode = "NotUpdatable"
-	HandlerErrorCodeInvalidRequest          HandlerErrorCode = "InvalidRequest"
-	HandlerErrorCodeAccessDenied            HandlerErrorCode = "AccessDenied"
-	HandlerErrorCodeInvalidCredentials      HandlerErrorCode = "InvalidCredentials"
-	HandlerErrorCodeAlreadyExists           HandlerErrorCode = "AlreadyExists"
-	HandlerErrorCodeNotFound                HandlerErrorCode = "NotFound"
-	HandlerErrorCodeResourceConflict        HandlerErrorCode = "ResourceConflict"
-	HandlerErrorCodeThrottling              HandlerErrorCode = "Throttling"
-	HandlerErrorCodeServiceLimitExceeded    HandlerErrorCode = "ServiceLimitExceeded"
-	HandlerErrorCodeServiceTimeout          HandlerErrorCode = "NotStabilized"
-	HandlerErrorCodeGeneralServiceException HandlerErrorCode = "GeneralServiceException"
-	HandlerErrorCodeServiceInternalError    HandlerErrorCode = "ServiceInternalError"
-	HandlerErrorCodeNetworkFailure          HandlerErrorCode = "NetworkFailure"
-	HandlerErrorCodeInternalFailure         HandlerErrorCode = "InternalFailure"
+	HandlerErrorCodeNotUpdatable             HandlerErrorCode = "NotUpdatable"
+	HandlerErrorCodeInvalidRequest           HandlerErrorCode = "InvalidRequest"
+	HandlerErrorCodeAccessDenied             HandlerErrorCode = "AccessDenied"
+	HandlerErrorCodeInvalidCredentials       HandlerErrorCode = "InvalidCredentials"
+	HandlerErrorCodeAlreadyExists            HandlerErrorCode = "AlreadyExists"
+	HandlerErrorCodeNotFound                 HandlerErrorCode = "NotFound"
+	HandlerErrorCodeResourceConflict         HandlerErrorCode = "ResourceConflict"
+	HandlerErrorCodeThrottling               HandlerErrorCode = "Throttling"
+	HandlerErrorCodeServiceLimitExceeded     HandlerErrorCode = "ServiceLimitExceeded"
+	HandlerErrorCodeServiceTimeout           HandlerErrorCode = "NotStabilized"
+	HandlerErrorCodeGeneralServiceException  HandlerErrorCode = "GeneralServiceException"
+	HandlerErrorCodeServiceInternalError     HandlerErrorCode = "ServiceInternalError"
+	HandlerErrorCodeNetworkFailure           HandlerErrorCode = "NetworkFailure"
+	HandlerErrorCodeInternalFailure          HandlerErrorCode = "InternalFailure"
+	HandlerErrorCodeInvalidTypeConfiguration HandlerErrorCode = "InvalidTypeConfiguration"
 )
 
 // Values returns all known values for HandlerErrorCode. Note that this can be
@@ -295,6 +318,27 @@ func (HandlerErrorCode) Values() []HandlerErrorCode {
 		"ServiceInternalError",
 		"NetworkFailure",
 		"InternalFailure",
+		"InvalidTypeConfiguration",
+	}
+}
+
+type IdentityProvider string
+
+// Enum values for IdentityProvider
+const (
+	IdentityProviderAwsMarketplace IdentityProvider = "AWS_Marketplace"
+	IdentityProviderGitHub         IdentityProvider = "GitHub"
+	IdentityProviderBitbucket      IdentityProvider = "Bitbucket"
+)
+
+// Values returns all known values for IdentityProvider. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IdentityProvider) Values() []IdentityProvider {
+	return []IdentityProvider{
+		"AWS_Marketplace",
+		"GitHub",
+		"Bitbucket",
 	}
 }
 
@@ -375,6 +419,24 @@ func (ProvisioningType) Values() []ProvisioningType {
 		"NON_PROVISIONABLE",
 		"IMMUTABLE",
 		"FULLY_MUTABLE",
+	}
+}
+
+type PublisherStatus string
+
+// Enum values for PublisherStatus
+const (
+	PublisherStatusVerified   PublisherStatus = "VERIFIED"
+	PublisherStatusUnverified PublisherStatus = "UNVERIFIED"
+)
+
+// Values returns all known values for PublisherStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PublisherStatus) Values() []PublisherStatus {
+	return []PublisherStatus{
+		"VERIFIED",
+		"UNVERIFIED",
 	}
 }
 
@@ -898,6 +960,64 @@ func (TemplateStage) Values() []TemplateStage {
 	return []TemplateStage{
 		"Original",
 		"Processed",
+	}
+}
+
+type ThirdPartyType string
+
+// Enum values for ThirdPartyType
+const (
+	ThirdPartyTypeResource ThirdPartyType = "RESOURCE"
+	ThirdPartyTypeModule   ThirdPartyType = "MODULE"
+)
+
+// Values returns all known values for ThirdPartyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThirdPartyType) Values() []ThirdPartyType {
+	return []ThirdPartyType{
+		"RESOURCE",
+		"MODULE",
+	}
+}
+
+type TypeTestsStatus string
+
+// Enum values for TypeTestsStatus
+const (
+	TypeTestsStatusPassed     TypeTestsStatus = "PASSED"
+	TypeTestsStatusFailed     TypeTestsStatus = "FAILED"
+	TypeTestsStatusInProgress TypeTestsStatus = "IN_PROGRESS"
+	TypeTestsStatusNotTested  TypeTestsStatus = "NOT_TESTED"
+)
+
+// Values returns all known values for TypeTestsStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TypeTestsStatus) Values() []TypeTestsStatus {
+	return []TypeTestsStatus{
+		"PASSED",
+		"FAILED",
+		"IN_PROGRESS",
+		"NOT_TESTED",
+	}
+}
+
+type VersionBump string
+
+// Enum values for VersionBump
+const (
+	VersionBumpMajor VersionBump = "MAJOR"
+	VersionBumpMinor VersionBump = "MINOR"
+)
+
+// Values returns all known values for VersionBump. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (VersionBump) Values() []VersionBump {
+	return []VersionBump{
+		"MAJOR",
+		"MINOR",
 	}
 }
 

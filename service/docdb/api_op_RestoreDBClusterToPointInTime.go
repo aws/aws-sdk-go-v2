@@ -69,26 +69,26 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Logs.
 	EnableCloudwatchLogsExports []string
 
-	// The AWS KMS key identifier to use when restoring an encrypted cluster from an
-	// encrypted cluster. The AWS KMS key identifier is the Amazon Resource Name (ARN)
-	// for the AWS KMS encryption key. If you are restoring a cluster with the same AWS
-	// account that owns the AWS KMS encryption key used to encrypt the new cluster,
-	// then you can use the AWS KMS key alias instead of the ARN for the AWS KMS
-	// encryption key. You can restore to a new cluster and encrypt the new cluster
-	// with an AWS KMS key that is different from the AWS KMS key used to encrypt the
-	// source cluster. The new DB cluster is encrypted with the AWS KMS key identified
-	// by the KmsKeyId parameter. If you do not specify a value for the KmsKeyId
-	// parameter, then the following occurs:
+	// The KMS key identifier to use when restoring an encrypted cluster from an
+	// encrypted cluster. The KMS key identifier is the Amazon Resource Name (ARN) for
+	// the KMS encryption key. If you are restoring a cluster with the same account
+	// that owns the KMS encryption key used to encrypt the new cluster, then you can
+	// use the KMS key alias instead of the ARN for the KMS encryption key. You can
+	// restore to a new cluster and encrypt the new cluster with an KMS key that is
+	// different from the KMS key used to encrypt the source cluster. The new DB
+	// cluster is encrypted with the KMS key identified by the KmsKeyId parameter. If
+	// you do not specify a value for the KmsKeyId parameter, then the following
+	// occurs:
 	//
-	// * If the cluster is encrypted, then the
-	// restored cluster is encrypted using the AWS KMS key that was used to encrypt the
-	// source cluster.
+	// * If the cluster is encrypted, then the restored cluster is encrypted
+	// using the KMS key that was used to encrypt the source cluster.
 	//
-	// * If the cluster is not encrypted, then the restored cluster is
-	// not encrypted.
+	// * If the cluster
+	// is not encrypted, then the restored cluster is not encrypted.
 	//
-	// If DBClusterIdentifier refers to a cluster that is not
-	// encrypted, then the restore request is rejected.
+	// If
+	// DBClusterIdentifier refers to a cluster that is not encrypted, then the restore
+	// request is rejected.
 	KmsKeyId *string
 
 	// The port number on which the new cluster accepts connections. Constraints: Must

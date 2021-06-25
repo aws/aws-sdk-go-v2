@@ -31,7 +31,7 @@ func (c *Client) DescribeDBProxies(ctx context.Context, params *DescribeDBProxie
 type DescribeDBProxiesInput struct {
 
 	// The name of the DB proxy. If you omit this parameter, the output includes
-	// information about all DB proxies owned by your AWS account ID.
+	// information about all DB proxies owned by your Amazon Web Services account ID.
 	DBProxyName *string
 
 	// This parameter is not currently supported.

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the state when a the shipment states changes to a different state.
+// Updates the state when a shipment state changes to a different state.
 func (c *Client) UpdateJobShipmentState(ctx context.Context, params *UpdateJobShipmentStateInput, optFns ...func(*Options)) (*UpdateJobShipmentStateOutput, error) {
 	if params == nil {
 		params = &UpdateJobShipmentStateInput{}

@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a paginated list of all versions for a component.
+// Retrieves a paginated list of all versions for a component. Greater versions are
+// listed first.
 func (c *Client) ListComponentVersions(ctx context.Context, params *ListComponentVersionsInput, optFns ...func(*Options)) (*ListComponentVersionsOutput, error) {
 	if params == nil {
 		params = &ListComponentVersionsInput{}

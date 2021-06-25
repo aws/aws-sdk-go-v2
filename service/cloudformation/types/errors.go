@@ -357,7 +357,28 @@ func (e *TokenAlreadyExistsException) ErrorMessage() string {
 func (e *TokenAlreadyExistsException) ErrorCode() string             { return "TokenAlreadyExistsException" }
 func (e *TokenAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified type does not exist in the CloudFormation registry.
+// The specified extension configuration cannot be found.
+type TypeConfigurationNotFoundException struct {
+	Message *string
+}
+
+func (e *TypeConfigurationNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TypeConfigurationNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TypeConfigurationNotFoundException) ErrorCode() string {
+	return "TypeConfigurationNotFoundException"
+}
+func (e *TypeConfigurationNotFoundException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The specified extension does not exist in the CloudFormation registry.
 type TypeNotFoundException struct {
 	Message *string
 }

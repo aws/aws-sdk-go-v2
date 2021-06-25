@@ -35,12 +35,13 @@ type CreateActionTargetInput struct {
 	// This member is required.
 	Description *string
 
-	// The ID for the custom action target.
+	// The ID for the custom action target. Can contain up to 20 alphanumeric
+	// characters.
 	//
 	// This member is required.
 	Id *string
 
-	// The name of the custom action target.
+	// The name of the custom action target. Can contain up to 20 characters.
 	//
 	// This member is required.
 	Name *string

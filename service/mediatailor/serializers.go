@@ -2316,6 +2316,13 @@ func awsRestjson1_serializeDocumentAccessConfiguration(v *types.AccessConfigurat
 		ok.String(string(v.AccessType))
 	}
 
+	if v.SecretsManagerAccessTokenConfiguration != nil {
+		ok := object.Key("SecretsManagerAccessTokenConfiguration")
+		if err := awsRestjson1_serializeDocumentSecretsManagerAccessTokenConfiguration(v.SecretsManagerAccessTokenConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2628,6 +2635,28 @@ func awsRestjson1_serializeDocumentScheduleConfiguration(v *types.ScheduleConfig
 		if err := awsRestjson1_serializeDocumentTransition(v.Transition, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSecretsManagerAccessTokenConfiguration(v *types.SecretsManagerAccessTokenConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HeaderName != nil {
+		ok := object.Key("HeaderName")
+		ok.String(*v.HeaderName)
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	if v.SecretStringKey != nil {
+		ok := object.Key("SecretStringKey")
+		ok.String(*v.SecretStringKey)
 	}
 
 	return nil

@@ -272,8 +272,17 @@ type Entitlement struct {
 // The settings for source failover
 type FailoverConfig struct {
 
+	// The type of failover you choose for this flow. MERGE combines the source streams
+	// into a single stream, allowing graceful recovery from any single-source loss.
+	// FAILOVER allows switching between different streams.
+	FailoverMode FailoverMode
+
 	// Search window time to look for dash-7 packets
 	RecoveryWindow int32
+
+	// The priority you want to assign to a source. You can have a primary stream and a
+	// backup stream or two equally prioritized streams.
+	SourcePriority *SourcePriority
 
 	State State
 }
@@ -1002,6 +1011,14 @@ type Source struct {
 	WhitelistCidr *string
 }
 
+// The priority you want to assign to a source. You can have a primary stream and a
+// backup stream or two equally prioritized streams.
+type SourcePriority struct {
+
+	// The name of the source you choose as the primary source for this flow.
+	PrimarySource *string
+}
+
 // Attributes related to the transport stream that are used in a source or output.
 type Transport struct {
 
@@ -1093,8 +1110,17 @@ type UpdateEncryption struct {
 // The settings for source failover
 type UpdateFailoverConfig struct {
 
+	// The type of failover you choose for this flow. MERGE combines the source streams
+	// into a single stream, allowing graceful recovery from any single-source loss.
+	// FAILOVER allows switching between different streams.
+	FailoverMode FailoverMode
+
 	// Recovery window time to look for dash-7 packets
 	RecoveryWindow int32
+
+	// The priority you want to assign to a source. You can have a primary stream and a
+	// backup stream or two equally prioritized streams.
+	SourcePriority *SourcePriority
 
 	State State
 }

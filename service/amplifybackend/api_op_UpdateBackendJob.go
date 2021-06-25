@@ -44,7 +44,7 @@ type UpdateBackendJobInput struct {
 	// This member is required.
 	JobId *string
 
-	// Filters the list of response objects to include only those with the specified
+	// Filters the list of response objects to only include those with the specified
 	// operation name.
 	Operation *string
 
@@ -64,7 +64,7 @@ type UpdateBackendJobOutput struct {
 	// The time when the job was created.
 	CreateTime *string
 
-	// If the request failed, this is the returned error.
+	// If the request fails, this error is returned.
 	Error *string
 
 	// The ID for the job.

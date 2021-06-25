@@ -62,6 +62,10 @@ type ListTypeVersionsInput struct {
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string
 
+	// The publisher ID of the extension publisher. Extensions published by Amazon are
+	// not assigned a publisher ID.
+	PublisherId *string
+
 	// The kind of the extension. Conditional: You must specify either TypeName and
 	// Type, or Arn.
 	Type types.RegistryType

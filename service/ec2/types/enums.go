@@ -869,6 +869,24 @@ func (ConnectionNotificationType) Values() []ConnectionNotificationType {
 	}
 }
 
+type ConnectivityType string
+
+// Enum values for ConnectivityType
+const (
+	ConnectivityTypePrivate ConnectivityType = "private"
+	ConnectivityTypePublic  ConnectivityType = "public"
+)
+
+// Values returns all known values for ConnectivityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectivityType) Values() []ConnectivityType {
+	return []ConnectivityType{
+		"private",
+		"public",
+	}
+}
+
 type ContainerFormat string
 
 // Enum values for ContainerFormat
@@ -2430,6 +2448,7 @@ const (
 	InstanceTypeM5dn12xlarge    InstanceType = "m5dn.12xlarge"
 	InstanceTypeM5dn16xlarge    InstanceType = "m5dn.16xlarge"
 	InstanceTypeM5dn24xlarge    InstanceType = "m5dn.24xlarge"
+	InstanceTypeM5dnMetal       InstanceType = "m5dn.metal"
 	InstanceTypeM5nLarge        InstanceType = "m5n.large"
 	InstanceTypeM5nXlarge       InstanceType = "m5n.xlarge"
 	InstanceTypeM5n2xlarge      InstanceType = "m5n.2xlarge"
@@ -2438,6 +2457,7 @@ const (
 	InstanceTypeM5n12xlarge     InstanceType = "m5n.12xlarge"
 	InstanceTypeM5n16xlarge     InstanceType = "m5n.16xlarge"
 	InstanceTypeM5n24xlarge     InstanceType = "m5n.24xlarge"
+	InstanceTypeM5nMetal        InstanceType = "m5n.metal"
 	InstanceTypeR5dnLarge       InstanceType = "r5dn.large"
 	InstanceTypeR5dnXlarge      InstanceType = "r5dn.xlarge"
 	InstanceTypeR5dn2xlarge     InstanceType = "r5dn.2xlarge"
@@ -2446,6 +2466,7 @@ const (
 	InstanceTypeR5dn12xlarge    InstanceType = "r5dn.12xlarge"
 	InstanceTypeR5dn16xlarge    InstanceType = "r5dn.16xlarge"
 	InstanceTypeR5dn24xlarge    InstanceType = "r5dn.24xlarge"
+	InstanceTypeR5dnMetal       InstanceType = "r5dn.metal"
 	InstanceTypeR5nLarge        InstanceType = "r5n.large"
 	InstanceTypeR5nXlarge       InstanceType = "r5n.xlarge"
 	InstanceTypeR5n2xlarge      InstanceType = "r5n.2xlarge"
@@ -2454,6 +2475,7 @@ const (
 	InstanceTypeR5n12xlarge     InstanceType = "r5n.12xlarge"
 	InstanceTypeR5n16xlarge     InstanceType = "r5n.16xlarge"
 	InstanceTypeR5n24xlarge     InstanceType = "r5n.24xlarge"
+	InstanceTypeR5nMetal        InstanceType = "r5n.metal"
 	InstanceTypeInf1Xlarge      InstanceType = "inf1.xlarge"
 	InstanceTypeInf12xlarge     InstanceType = "inf1.2xlarge"
 	InstanceTypeInf16xlarge     InstanceType = "inf1.6xlarge"
@@ -2839,6 +2861,7 @@ func (InstanceType) Values() []InstanceType {
 		"m5dn.12xlarge",
 		"m5dn.16xlarge",
 		"m5dn.24xlarge",
+		"m5dn.metal",
 		"m5n.large",
 		"m5n.xlarge",
 		"m5n.2xlarge",
@@ -2847,6 +2870,7 @@ func (InstanceType) Values() []InstanceType {
 		"m5n.12xlarge",
 		"m5n.16xlarge",
 		"m5n.24xlarge",
+		"m5n.metal",
 		"r5dn.large",
 		"r5dn.xlarge",
 		"r5dn.2xlarge",
@@ -2855,6 +2879,7 @@ func (InstanceType) Values() []InstanceType {
 		"r5dn.12xlarge",
 		"r5dn.16xlarge",
 		"r5dn.24xlarge",
+		"r5dn.metal",
 		"r5n.large",
 		"r5n.xlarge",
 		"r5n.2xlarge",
@@ -2863,6 +2888,7 @@ func (InstanceType) Values() []InstanceType {
 		"r5n.12xlarge",
 		"r5n.16xlarge",
 		"r5n.24xlarge",
+		"r5n.metal",
 		"inf1.xlarge",
 		"inf1.2xlarge",
 		"inf1.6xlarge",
@@ -2931,6 +2957,24 @@ func (InterfacePermissionType) Values() []InterfacePermissionType {
 	return []InterfacePermissionType{
 		"INSTANCE-ATTACH",
 		"EIP-ASSOCIATE",
+	}
+}
+
+type InterfaceProtocolType string
+
+// Enum values for InterfaceProtocolType
+const (
+	InterfaceProtocolTypeVlan InterfaceProtocolType = "VLAN"
+	InterfaceProtocolTypeGre  InterfaceProtocolType = "GRE"
+)
+
+// Values returns all known values for InterfaceProtocolType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InterfaceProtocolType) Values() []InterfaceProtocolType {
+	return []InterfaceProtocolType{
+		"VLAN",
+		"GRE",
 	}
 }
 
@@ -3320,7 +3364,9 @@ type NetworkInterfaceCreationType string
 
 // Enum values for NetworkInterfaceCreationType
 const (
-	NetworkInterfaceCreationTypeEfa NetworkInterfaceCreationType = "efa"
+	NetworkInterfaceCreationTypeEfa    NetworkInterfaceCreationType = "efa"
+	NetworkInterfaceCreationTypeBranch NetworkInterfaceCreationType = "branch"
+	NetworkInterfaceCreationTypeTrunk  NetworkInterfaceCreationType = "trunk"
 )
 
 // Values returns all known values for NetworkInterfaceCreationType. Note that this
@@ -3329,6 +3375,8 @@ const (
 func (NetworkInterfaceCreationType) Values() []NetworkInterfaceCreationType {
 	return []NetworkInterfaceCreationType{
 		"efa",
+		"branch",
+		"trunk",
 	}
 }
 
@@ -3386,6 +3434,7 @@ const (
 	NetworkInterfaceTypeInterface  NetworkInterfaceType = "interface"
 	NetworkInterfaceTypeNatGateway NetworkInterfaceType = "natGateway"
 	NetworkInterfaceTypeEfa        NetworkInterfaceType = "efa"
+	NetworkInterfaceTypeTrunk      NetworkInterfaceType = "trunk"
 )
 
 // Values returns all known values for NetworkInterfaceType. Note that this can be
@@ -3396,6 +3445,7 @@ func (NetworkInterfaceType) Values() []NetworkInterfaceType {
 		"interface",
 		"natGateway",
 		"efa",
+		"trunk",
 	}
 }
 

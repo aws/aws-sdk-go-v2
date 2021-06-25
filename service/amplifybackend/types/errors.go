@@ -60,7 +60,7 @@ func (e *NotFoundException) ErrorMessage() string {
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error that is returned when a limit of a specific type is exceeded.
+// An error that is returned when a limit of a specific type has been exceeded.
 type TooManyRequestsException struct {
 	Message *string
 

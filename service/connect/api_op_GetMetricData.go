@@ -56,17 +56,18 @@ type GetMetricDataInput struct {
 	// The following historical metrics are available. For a description of each
 	// metric, see Historical Metrics Definitions
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
-	// in the Amazon Connect Administrator Guide. ABANDON_TIME Unit: SECONDS Statistic:
-	// AVG AFTER_CONTACT_WORK_TIME Unit: SECONDS Statistic: AVG API_CONTACTS_HANDLED
-	// Unit: COUNT Statistic: SUM CALLBACK_CONTACTS_HANDLED Unit: COUNT Statistic: SUM
-	// CONTACTS_ABANDONED Unit: COUNT Statistic: SUM CONTACTS_AGENT_HUNG_UP_FIRST Unit:
-	// COUNT Statistic: SUM CONTACTS_CONSULTED Unit: COUNT Statistic: SUM
-	// CONTACTS_HANDLED Unit: COUNT Statistic: SUM CONTACTS_HANDLED_INCOMING Unit:
-	// COUNT Statistic: SUM CONTACTS_HANDLED_OUTBOUND Unit: COUNT Statistic: SUM
-	// CONTACTS_HOLD_ABANDONS Unit: COUNT Statistic: SUM CONTACTS_MISSED Unit: COUNT
-	// Statistic: SUM CONTACTS_QUEUED Unit: COUNT Statistic: SUM
-	// CONTACTS_TRANSFERRED_IN Unit: COUNT Statistic: SUM
-	// CONTACTS_TRANSFERRED_IN_FROM_QUEUE Unit: COUNT Statistic: SUM
+	// in the Amazon Connect Administrator Guide. This API does not support a contacts
+	// incoming metric (there's no CONTACTS_INCOMING metric missing from the documented
+	// list). ABANDON_TIME Unit: SECONDS Statistic: AVG AFTER_CONTACT_WORK_TIME Unit:
+	// SECONDS Statistic: AVG API_CONTACTS_HANDLED Unit: COUNT Statistic: SUM
+	// CALLBACK_CONTACTS_HANDLED Unit: COUNT Statistic: SUM CONTACTS_ABANDONED Unit:
+	// COUNT Statistic: SUM CONTACTS_AGENT_HUNG_UP_FIRST Unit: COUNT Statistic: SUM
+	// CONTACTS_CONSULTED Unit: COUNT Statistic: SUM CONTACTS_HANDLED Unit: COUNT
+	// Statistic: SUM CONTACTS_HANDLED_INCOMING Unit: COUNT Statistic: SUM
+	// CONTACTS_HANDLED_OUTBOUND Unit: COUNT Statistic: SUM CONTACTS_HOLD_ABANDONS
+	// Unit: COUNT Statistic: SUM CONTACTS_MISSED Unit: COUNT Statistic: SUM
+	// CONTACTS_QUEUED Unit: COUNT Statistic: SUM CONTACTS_TRANSFERRED_IN Unit: COUNT
+	// Statistic: SUM CONTACTS_TRANSFERRED_IN_FROM_QUEUE Unit: COUNT Statistic: SUM
 	// CONTACTS_TRANSFERRED_OUT Unit: COUNT Statistic: SUM
 	// CONTACTS_TRANSFERRED_OUT_FROM_QUEUE Unit: COUNT Statistic: SUM HANDLE_TIME Unit:
 	// SECONDS Statistic: AVG HOLD_TIME Unit: SECONDS Statistic: AVG
@@ -81,7 +82,8 @@ type GetMetricDataInput struct {
 	// This member is required.
 	HistoricalMetrics []types.HistoricalMetric
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
 	//
 	// This member is required.
 	InstanceId *string

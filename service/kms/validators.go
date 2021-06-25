@@ -650,6 +650,26 @@ func (m *validateOpReEncrypt) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpReplicateKey struct {
+}
+
+func (*validateOpReplicateKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpReplicateKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ReplicateKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpReplicateKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRevokeGrant struct {
 }
 
@@ -810,6 +830,26 @@ func (m *validateOpUpdateKeyDescription) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePrimaryRegion struct {
+}
+
+func (*validateOpUpdatePrimaryRegion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePrimaryRegion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePrimaryRegionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePrimaryRegionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpVerify struct {
 }
 
@@ -958,6 +998,10 @@ func addOpReEncryptValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpReEncrypt{}, middleware.After)
 }
 
+func addOpReplicateKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpReplicateKey{}, middleware.After)
+}
+
 func addOpRevokeGrantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRevokeGrant{}, middleware.After)
 }
@@ -988,6 +1032,10 @@ func addOpUpdateCustomKeyStoreValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpUpdateKeyDescriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateKeyDescription{}, middleware.After)
+}
+
+func addOpUpdatePrimaryRegionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePrimaryRegion{}, middleware.After)
 }
 
 func addOpVerifyValidationMiddleware(stack *middleware.Stack) error {
@@ -1562,6 +1610,29 @@ func validateOpReEncryptInput(v *ReEncryptInput) error {
 	}
 }
 
+func validateOpReplicateKeyInput(v *ReplicateKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicateKeyInput"}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	}
+	if v.ReplicaRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicaRegion"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRevokeGrantInput(v *RevokeGrantInput) error {
 	if v == nil {
 		return nil
@@ -1699,6 +1770,24 @@ func validateOpUpdateKeyDescriptionInput(v *UpdateKeyDescriptionInput) error {
 	}
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePrimaryRegionInput(v *UpdatePrimaryRegionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePrimaryRegionInput"}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	}
+	if v.PrimaryRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryRegion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -2863,6 +2863,11 @@ func awsAwsjson11_serializeOpDocumentCreateGrantVersionInput(v *CreateGrantVersi
 		ok.String(string(v.Status))
 	}
 
+	if v.StatusReason != nil {
+		ok := object.Key("StatusReason")
+		ok.String(*v.StatusReason)
+	}
+
 	return nil
 }
 
@@ -3166,6 +3171,11 @@ func awsAwsjson11_serializeOpDocumentDeleteGrantInput(v *DeleteGrantInput, value
 	if v.GrantArn != nil {
 		ok := object.Key("GrantArn")
 		ok.String(*v.GrantArn)
+	}
+
+	if v.StatusReason != nil {
+		ok := object.Key("StatusReason")
+		ok.String(*v.StatusReason)
 	}
 
 	if v.Version != nil {

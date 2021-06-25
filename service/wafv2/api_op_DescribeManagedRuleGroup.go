@@ -36,17 +36,17 @@ type DescribeManagedRuleGroupInput struct {
 	// This member is required.
 	Name *string
 
-	// Specifies whether this is for an AWS CloudFront distribution or for a regional
-	// application. A regional application can be an Application Load Balancer (ALB),
-	// an API Gateway REST API, or an AppSync GraphQL API. To work with CloudFront, you
-	// must also specify the Region US East (N. Virginia) as follows:
+	// Specifies whether this is for an Amazon CloudFront distribution or for a
+	// regional application. A regional application can be an Application Load Balancer
+	// (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. To work with
+	// CloudFront, you must also specify the Region US East (N. Virginia) as
+	// follows:
 	//
-	// * CLI - Specify
-	// the Region when you use the CloudFront scope: --scope=CLOUDFRONT
-	// --region=us-east-1.
+	// * CLI - Specify the Region when you use the CloudFront scope:
+	// --scope=CLOUDFRONT --region=us-east-1.
 	//
-	// * API and SDKs - For all calls, use the Region endpoint
-	// us-east-1.
+	// * API and SDKs - For all calls, use the
+	// Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -60,16 +60,16 @@ type DescribeManagedRuleGroupInput struct {
 
 type DescribeManagedRuleGroupOutput struct {
 
-	// The labels that one or more rules in this rule group add to matching web ACLs.
-	// These labels are defined in the RuleLabels for a Rule.
+	// The labels that one or more rules in this rule group add to matching web
+	// requests. These labels are defined in the RuleLabels for a Rule.
 	AvailableLabels []types.LabelSummary
 
-	// The web ACL capacity units (WCUs) required for this rule group. AWS WAF uses web
-	// ACL capacity units (WCU) to calculate and control the operating resources that
-	// are used to run your rules, rule groups, and web ACLs. AWS WAF calculates
-	// capacity differently for each rule type, to reflect each rule's relative cost.
-	// Rule group capacity is fixed at creation, so users can plan their web ACL WCU
-	// usage when they use a rule group. The WCU limit for web ACLs is 1,500.
+	// The web ACL capacity units (WCUs) required for this rule group. WAF uses web ACL
+	// capacity units (WCU) to calculate and control the operating resources that are
+	// used to run your rules, rule groups, and web ACLs. WAF calculates capacity
+	// differently for each rule type, to reflect each rule's relative cost. Rule group
+	// capacity is fixed at creation, so users can plan their web ACL WCU usage when
+	// they use a rule group. The WCU limit for web ACLs is 1,500.
 	Capacity int64
 
 	// The labels that one or more rules in this rule group match against in label
@@ -84,7 +84,7 @@ type DescribeManagedRuleGroupOutput struct {
 	// for a managed rule group is the following: awswaf:managed:::
 	//
 	// * When a rule with
-	// a label matches a web request, AWS WAF adds the fully qualified label to the
+	// a label matches a web request, WAF adds the fully qualified label to the
 	// request. A fully qualified label is made up of the label namespace from the rule
 	// group or web ACL where the rule is defined and the label from the rule,
 	// separated by a colon: :

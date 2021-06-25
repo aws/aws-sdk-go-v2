@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a Web ACL with a regional application resource, to protect the
+// Associates a web ACL with a regional application resource, to protect the
 // resource. A regional application can be an Application Load Balancer (ALB), an
-// API Gateway REST API, or an AppSync GraphQL API. For AWS CloudFront, don't use
-// this call. Instead, use your CloudFront distribution configuration. To associate
-// a Web ACL, in the CloudFront call UpdateDistribution, set the web ACL ID to the
-// Amazon Resource Name (ARN) of the Web ACL. For information, see
+// Amazon API Gateway REST API, or an AppSync GraphQL API. For Amazon CloudFront,
+// don't use this call. Instead, use your CloudFront distribution configuration. To
+// associate a web ACL, in the CloudFront call UpdateDistribution, set the web ACL
+// ID to the Amazon Resource Name (ARN) of the web ACL. For information, see
 // UpdateDistribution
 // (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
 func (c *Client) AssociateWebACL(ctx context.Context, params *AssociateWebACLInput, optFns ...func(*Options)) (*AssociateWebACLOutput, error) {
@@ -43,7 +43,7 @@ type AssociateWebACLInput struct {
 	// arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
 	//
 	// *
-	// For an API Gateway REST API:
+	// For an Amazon API Gateway REST API:
 	// arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
 	//
 	// * For an AppSync
@@ -52,7 +52,7 @@ type AssociateWebACLInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The Amazon Resource Name (ARN) of the Web ACL that you want to associate with
+	// The Amazon Resource Name (ARN) of the web ACL that you want to associate with
 	// the resource.
 	//
 	// This member is required.

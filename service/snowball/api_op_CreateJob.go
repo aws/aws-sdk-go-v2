@@ -18,7 +18,7 @@ import (
 // attributes are inherited from the cluster. Only the Snowball; Edge device type
 // is supported when ordering clustered jobs. The device capacity is optional.
 // Availability of device types differ by AWS Region. For more information about
-// region availability, see AWS Regional Services
+// Region availability, see AWS Regional Services
 // (https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4).
 // AWS Snow Family device types and their capacities.
 //
@@ -119,7 +119,7 @@ type CreateJobInput struct {
 	DeviceConfiguration *types.DeviceConfiguration
 
 	// The forwarding address ID for a job. This field is not supported in most
-	// regions.
+	// Regions.
 	ForwardingAddressId *string
 
 	// Defines the type of job that you're creating.
@@ -131,12 +131,23 @@ type CreateJobInput struct {
 	// Management Service (KMS) API action.
 	KmsKeyARN *string
 
-	// The ID of the long term pricing type for the device.
+	// The ID of the long-term pricing type for the device.
 	LongTermPricingId *string
 
 	// Defines the Amazon Simple Notification Service (Amazon SNS) notification
 	// settings for this job.
 	Notification *types.Notification
+
+	// Specifies the service or services on the Snow Family device that your
+	// transferred data will be exported from or imported into. AWS Snow Family
+	// supports Amazon S3 and NFS (Network File System).
+	OnDeviceServiceConfiguration *types.OnDeviceServiceConfiguration
+
+	// Allows you to securely operate and manage Snowcone devices remotely from outside
+	// of your internal network. When set to INSTALLED_AUTOSTART, remote management
+	// will automatically be available when the device arrives at your location.
+	// Otherwise, you need to use the Snowball Client to manage the device.
+	RemoteManagement types.RemoteManagement
 
 	// Defines the Amazon S3 buckets associated with this job. With IMPORT jobs, you
 	// specify the bucket or buckets that your transferred data will be imported into.

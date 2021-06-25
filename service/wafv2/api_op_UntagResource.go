@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates tags from an AWS resource. Tags are key:value pairs that you can
-// associate with AWS resources. For example, the tag key might be "customer" and
-// the tag value might be "companyA." You can specify one or more tags to add to
-// each container. You can add up to 50 tags to each AWS resource.
+// Disassociates tags from an Amazon Web Services resource. Tags are key:value
+// pairs that you can associate with Amazon Web Services resources. For example,
+// the tag key might be "customer" and the tag value might be "companyA." You can
+// specify one or more tags to add to each container. You can add up to 50 tags to
+// each Amazon Web Services resource.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

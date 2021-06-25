@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the AWS resources that are required to access the Amplify Admin UI.
+// Updates the AWS resources required to access the Amplify Admin UI.
 func (c *Client) UpdateBackendConfig(ctx context.Context, params *UpdateBackendConfigInput, optFns ...func(*Options)) (*UpdateBackendConfigOutput, error) {
 	if params == nil {
 		params = &UpdateBackendConfigInput{}
@@ -47,7 +47,7 @@ type UpdateBackendConfigOutput struct {
 	// The app ID for the backend manager.
 	BackendManagerAppId *string
 
-	// If the request failed, this is the returned error.
+	// If the request fails, this error is returned.
 	Error *string
 
 	// Describes the Amazon Cognito configurations for the Admin UI auth resource to

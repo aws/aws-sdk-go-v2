@@ -31,12 +31,13 @@ func (c *Client) AssociateLexBot(ctx context.Context, params *AssociateLexBotInp
 
 type AssociateLexBotInput struct {
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The Amazon Lex box to associate with the instance.
+	// The Amazon Lex bot to associate with the instance.
 	//
 	// This member is required.
 	LexBot *types.LexBot

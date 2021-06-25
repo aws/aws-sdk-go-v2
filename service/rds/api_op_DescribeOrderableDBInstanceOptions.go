@@ -48,11 +48,11 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// * oracle-ee
 	//
 	// *
-	// oracle-se2
+	// oracle-ee-cdb
 	//
-	// * oracle-se1
+	// * oracle-se2
 	//
-	// * oracle-se
+	// * oracle-se2-cdb
 	//
 	// * postgres
 	//
@@ -70,7 +70,8 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 
 	// The Availability Zone group associated with a Local Zone. Specify this parameter
 	// to retrieve available offerings for the Local Zones in the group. Omit this
-	// parameter to show the available offerings in the specified AWS Region.
+	// parameter to show the available offerings in the specified Amazon Web Services
+	// Region.
 	AvailabilityZoneGroup *string
 
 	// The DB instance class filter value. Specify this parameter to show only the

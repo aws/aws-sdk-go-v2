@@ -410,26 +410,6 @@ func (m *validateOpGetRegexPatternSet) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpGetRuleGroup struct {
-}
-
-func (*validateOpGetRuleGroup) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGetRuleGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GetRuleGroupInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGetRuleGroupInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpGetSampledRequests struct {
 }
 
@@ -868,10 +848,6 @@ func addOpGetRateBasedStatementManagedKeysValidationMiddleware(stack *middleware
 
 func addOpGetRegexPatternSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRegexPatternSet{}, middleware.After)
-}
-
-func addOpGetRuleGroupValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGetRuleGroup{}, middleware.After)
 }
 
 func addOpGetSampledRequestsValidationMiddleware(stack *middleware.Stack) error {
@@ -2558,27 +2534,6 @@ func validateOpGetRegexPatternSetInput(v *GetRegexPatternSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetRegexPatternSetInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if len(v.Scope) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpGetRuleGroupInput(v *GetRuleGroupInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GetRuleGroupInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}

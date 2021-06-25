@@ -1237,7 +1237,7 @@ func awsAwsquery_deserializeOpErrorDeleteApplication(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("OperationInProgressException", errorCode):
+	case strings.EqualFold("OperationInProgressFailure", errorCode):
 		return awsAwsquery_deserializeErrorOperationInProgressException(response, errorBody)
 
 	default:
@@ -1313,13 +1313,13 @@ func awsAwsquery_deserializeOpErrorDeleteApplicationVersion(response *smithyhttp
 	case strings.EqualFold("InsufficientPrivilegesException", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientPrivilegesException(response, errorBody)
 
-	case strings.EqualFold("OperationInProgressException", errorCode):
+	case strings.EqualFold("OperationInProgressFailure", errorCode):
 		return awsAwsquery_deserializeErrorOperationInProgressException(response, errorBody)
 
 	case strings.EqualFold("S3LocationNotInServiceRegionException", errorCode):
 		return awsAwsquery_deserializeErrorS3LocationNotInServiceRegionException(response, errorBody)
 
-	case strings.EqualFold("SourceBundleDeletionException", errorCode):
+	case strings.EqualFold("SourceBundleDeletionFailure", errorCode):
 		return awsAwsquery_deserializeErrorSourceBundleDeletionException(response, errorBody)
 
 	default:
@@ -1392,7 +1392,7 @@ func awsAwsquery_deserializeOpErrorDeleteConfigurationTemplate(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("OperationInProgressException", errorCode):
+	case strings.EqualFold("OperationInProgressFailure", errorCode):
 		return awsAwsquery_deserializeErrorOperationInProgressException(response, errorBody)
 
 	default:
@@ -1576,7 +1576,7 @@ func awsAwsquery_deserializeOpErrorDeletePlatformVersion(response *smithyhttp.Re
 	case strings.EqualFold("InsufficientPrivilegesException", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientPrivilegesException(response, errorBody)
 
-	case strings.EqualFold("OperationInProgressException", errorCode):
+	case strings.EqualFold("OperationInProgressFailure", errorCode):
 		return awsAwsquery_deserializeErrorOperationInProgressException(response, errorBody)
 
 	case strings.EqualFold("PlatformVersionStillReferencedException", errorCode):
@@ -4600,7 +4600,7 @@ func awsAwsquery_deserializeOpErrorUpdateTagsForResource(response *smithyhttp.Re
 	case strings.EqualFold("InsufficientPrivilegesException", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientPrivilegesException(response, errorBody)
 
-	case strings.EqualFold("OperationInProgressException", errorCode):
+	case strings.EqualFold("OperationInProgressFailure", errorCode):
 		return awsAwsquery_deserializeErrorOperationInProgressException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):

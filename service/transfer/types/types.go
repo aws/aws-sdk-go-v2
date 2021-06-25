@@ -11,30 +11,32 @@ type DescribedAccess struct {
 
 	// A unique identifier that is required to identify specific groups within your
 	// directory. The users of the group that you associate have access to your Amazon
-	// S3 or Amazon EFS resources over the enabled protocols using AWS Transfer Family.
-	// If you know the group name, you can view the SID values by running the following
-	// command using Windows PowerShell. Get-ADGroup -Filter {samAccountName -like
-	// "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSid In that
-	// command, replace YourGroupName with the name of your Active Directory group. The
-	// regex used to validate this parameter is a string of characters consisting of
-	// uppercase and lowercase alphanumeric characters with no spaces. You can also
-	// include underscores or any of the following characters: =,.@:/-
+	// S3 or Amazon EFS resources over the enabled protocols using Amazon Web Services
+	// Transfer Family. If you know the group name, you can view the SID values by
+	// running the following command using Windows PowerShell. Get-ADGroup -Filter
+	// {samAccountName -like "YourGroupName*"} -Properties * | Select
+	// SamAccountName,ObjectSid In that command, replace YourGroupName with the name of
+	// your Active Directory group. The regex used to validate this parameter is a
+	// string of characters consisting of uppercase and lowercase alphanumeric
+	// characters with no spaces. You can also include underscores or any of the
+	// following characters: =,.@:/-
 	ExternalId *string
 
 	// The landing directory (folder) for a user when they log in to the server using
 	// the client. A HomeDirectory example is /bucket_name/home/mydirectory.
 	HomeDirectory *string
 
-	// Specifies the logical directory mappings that specify what Amazon S3 or Amazon
-	// EFS paths and keys should be visible to the associated access and how you want
-	// to make them visible. You must specify the "Entry" and "Target" pair, where
-	// Entry shows how the path is made visible and Target is the actual Amazon S3 or
-	// EFS path. If you only specify a target, it will be displayed as is. You also
-	// must ensure that your AWS Identity and Access Management (IAM) role provides
-	// access to paths in Target. In most cases, you can use this value instead of the
-	// scope-down policy to lock down the associated access to the designated home
-	// directory ("chroot"). To do this, you can set Entry to '/' and set Target to the
-	// HomeDirectory parameter value.
+	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and
+	// keys should be visible to your user and how you want to make them visible. You
+	// must specify the Entry and Target pair, where Entry shows how the path is made
+	// visible and Target is the actual Amazon S3 or Amazon EFS path. If you only
+	// specify a target, it is displayed as is. You also must ensure that your Amazon
+	// Web Services Identity and Access Management (IAM) role provides access to paths
+	// in Target. This value can only be set when HomeDirectoryType is set to LOGICAL.
+	// In most cases, you can use this value instead of the scope-down policy to lock
+	// down the associated access to the designated home directory ("chroot"). To do
+	// this, you can set Entry to '/' and set Target to the HomeDirectory parameter
+	// value.
 	HomeDirectoryMappings []HomeDirectoryMapEntry
 
 	// The type of landing directory (folder) you want your users' home directory to be
@@ -107,15 +109,18 @@ type DescribedServer struct {
 	// This member is required.
 	Arn *string
 
-	// Specifies the ARN of the AWS Certificate Manager (ACM) certificate. Required
-	// when Protocols is set to FTPS.
+	// Specifies the ARN of the Amazon Web ServicesCertificate Manager (ACM)
+	// certificate. Required when Protocols is set to FTPS.
 	Certificate *string
 
 	// Specifies the domain of the storage system that is used for file transfers.
 	Domain Domain
 
-	// Specifies the virtual private cloud (VPC) endpoint settings that you configured
-	// for your server.
+	// The virtual private cloud (VPC) endpoint settings that are configured for your
+	// server. When you host your endpoint within your VPC, you can make it accessible
+	// only to resources within your VPC, or you can attach Elastic IP addresses and
+	// make it accessible to clients over the internet. Your VPC's default security
+	// groups are automatically assigned to your endpoint.
 	EndpointDetails *EndpointDetails
 
 	// Defines the type of endpoint that your server is connected to. If your server is
@@ -133,20 +138,28 @@ type DescribedServer struct {
 	// AWS_DIRECTORY_SERVICE or SERVICE_MANAGED.
 	IdentityProviderDetails *IdentityProviderDetails
 
-	// Specifies the mode of authentication method enabled for this service. A value of
-	// AWS_DIRECTORY_SERVICE means that you are providing access to Active Directory
-	// groups in AWS Managed Active Directory or Microsoft Active Directory in your
-	// on-premises environment or in AWS using AD Connectors. A value of
-	// SERVICE_MANAGED means that you are using this server to store and access user
-	// credentials within the service. A value of API_GATEWAY indicates that you have
-	// integrated an API Gateway endpoint that will be invoked for authenticating your
-	// user into the service.
+	// Specifies the mode of authentication for a server. The default value is
+	// SERVICE_MANAGED, which allows you to store and access user credentials within
+	// the Amazon Web Services Transfer Family service. Use AWS_DIRECTORY_SERVICE to
+	// provide access to Active Directory groups in Amazon Web Services Managed Active
+	// Directory or Microsoft Active Directory in your on-premises environment or in
+	// Amazon Web Services using AD Connectors. This option also requires you to
+	// provide a Directory ID using the IdentityProviderDetails parameter. Use the
+	// API_GATEWAY value to integrate with an identity provider of your choosing. The
+	// API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call
+	// for authentication using the IdentityProviderDetails parameter.
 	IdentityProviderType IdentityProviderType
 
-	// Specifies the AWS Identity and Access Management (IAM) role that allows a server
-	// to turn on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When
-	// set, user activity can be viewed in your CloudWatch logs.
+	// Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and
+	// Access Management (IAM) role that allows a server to turn on Amazon CloudWatch
+	// logging for Amazon S3 or Amazon EFS events. When set, user activity can be
+	// viewed in your CloudWatch logs.
 	LoggingRole *string
+
+	// The protocol settings that are configured for your server. Use the PassiveIp
+	// parameter to indicate passive mode. Enter a single dotted-quad IPv4 address,
+	// such as the external IP address of a firewall, router, or load balancer.
+	ProtocolDetails *ProtocolDetails
 
 	// Specifies the file transfer protocol or protocols over which your file transfer
 	// protocol client can connect to your server's endpoint. The available protocols
@@ -198,16 +211,16 @@ type DescribedUser struct {
 	// the client. A HomeDirectory example is /bucket_name/home/mydirectory.
 	HomeDirectory *string
 
-	// Specifies the logical directory mappings that specify what Amazon S3 or EFS
-	// paths and keys should be visible to your user and how you want to make them
-	// visible. You will need to specify the "Entry" and "Target" pair, where Entry
-	// shows how the path is made visible and Target is the actual Amazon S3 or EFS
-	// path. If you only specify a target, it will be displayed as is. You will need to
-	// also make sure that your AWS Identity and Access Management (IAM) role provides
-	// access to paths in Target. In most cases, you can use this value instead of the
-	// scope-down policy to lock your user down to the designated home directory
-	// ("chroot"). To do this, you can set Entry to '/' and set Target to the
-	// HomeDirectory parameter value.
+	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and
+	// keys should be visible to your user and how you want to make them visible. You
+	// must specify the Entry and Target pair, where Entry shows how the path is made
+	// visible and Target is the actual Amazon S3 or Amazon EFS path. If you only
+	// specify a target, it is displayed as is. You also must ensure that your Amazon
+	// Web Services Identity and Access Management (IAM) role provides access to paths
+	// in Target. This value can only be set when HomeDirectoryType is set to LOGICAL.
+	// In most cases, you can use this value instead of the scope-down policy to lock
+	// your user down to the designated home directory ("chroot"). To do this, you can
+	// set Entry to '/' and set Target to the HomeDirectory parameter value.
 	HomeDirectoryMappings []HomeDirectoryMapEntry
 
 	// The type of landing directory (folder) you want your users' home directory to be
@@ -259,11 +272,11 @@ type DescribedUser struct {
 // access to your server and resources only within your VPC. To control incoming
 // internet traffic, invoke the UpdateServer API and attach an Elastic IP address
 // to your server's endpoint. After May 19, 2021, you won't be able to create a
-// server using EndpointType=VPC_ENDPOINT in your AWS account if your account
-// hasn't already done so before May 19, 2021. If you have already created servers
-// with EndpointType=VPC_ENDPOINT in your AWS account on or before May 19, 2021,
-// you will not be affected. After this date, use EndpointType=VPC. For more
-// information, see
+// server using EndpointType=VPC_ENDPOINT in your Amazon Web Servicesaccount if
+// your account hasn't already done so before May 19, 2021. If you have already
+// created servers with EndpointType=VPC_ENDPOINT in your Amazon Web
+// Servicesaccount on or before May 19, 2021, you will not be affected. After this
+// date, use EndpointType=VPC. For more information, see
 // https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
 type EndpointDetails struct {
 
@@ -298,10 +311,18 @@ type EndpointDetails struct {
 }
 
 // Represents an object that contains entries and targets for
-// HomeDirectoryMappings.
+// HomeDirectoryMappings. The following is an Entry and Target pair example for
+// chroot. [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ] If the
+// target of a logical directory entry does not exist in Amazon S3 or EFS, the
+// entry is ignored. As a workaround, you can use the Amazon S3 API or EFS API to
+// create 0 byte objects as place holders for your directory. If using the CLI, use
+// the s3api or efsapi call instead of s3 or efs so you can use the put-object
+// operation. For example, you use the following: aws s3api put-object --bucket
+// bucketname --key path/to/folder/. Make sure that the end of the key name ends in
+// a / for it to be considered a folder.
 type HomeDirectoryMapEntry struct {
 
-	// Represents an entry and a target for HomeDirectoryMappings.
+	// Represents an entry for HomeDirectoryMappings.
 	//
 	// This member is required.
 	Entry *string
@@ -317,8 +338,8 @@ type HomeDirectoryMapEntry struct {
 // method of authentication.
 type IdentityProviderDetails struct {
 
-	// The identifier of the AWS Directory Service directory that you want to stop
-	// sharing.
+	// The identifier of the Amazon Web ServicesDirectory Service directory that you
+	// want to stop sharing.
 	DirectoryId *string
 
 	// Provides the type of InvocationRole used to authenticate the user account.
@@ -333,14 +354,15 @@ type ListedAccess struct {
 
 	// A unique identifier that is required to identify specific groups within your
 	// directory. The users of the group that you associate have access to your Amazon
-	// S3 or Amazon EFS resources over the enabled protocols using AWS Transfer Family.
-	// If you know the group name, you can view the SID values by running the following
-	// command using Windows PowerShell. Get-ADGroup -Filter {samAccountName -like
-	// "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSid In that
-	// command, replace YourGroupName with the name of your Active Directory group. The
-	// regex used to validate this parameter is a string of characters consisting of
-	// uppercase and lowercase alphanumeric characters with no spaces. You can also
-	// include underscores or any of the following characters: =,.@:/-
+	// S3 or Amazon EFS resources over the enabled protocols using Amazon Web Services
+	// Transfer Family. If you know the group name, you can view the SID values by
+	// running the following command using Windows PowerShell. Get-ADGroup -Filter
+	// {samAccountName -like "YourGroupName*"} -Properties * | Select
+	// SamAccountName,ObjectSid In that command, replace YourGroupName with the name of
+	// your Active Directory group. The regex used to validate this parameter is a
+	// string of characters consisting of uppercase and lowercase alphanumeric
+	// characters with no spaces. You can also include underscores or any of the
+	// following characters: =,.@:/-
 	ExternalId *string
 
 	// The landing directory (folder) for a user when they log in to the server using
@@ -381,13 +403,22 @@ type ListedServer struct {
 	// public internet.
 	EndpointType EndpointType
 
-	// Specifies the authentication method used to validate a user for a server that
-	// was specified. This can include Secure Shell (SSH), Active Directory groups,
-	// user name and password combinations, or your own custom authentication method.
+	// Specifies the mode of authentication for a server. The default value is
+	// SERVICE_MANAGED, which allows you to store and access user credentials within
+	// the Amazon Web Services Transfer Family service. Use AWS_DIRECTORY_SERVICE to
+	// provide access to Active Directory groups in Amazon Web Services Managed Active
+	// Directory or Microsoft Active Directory in your on-premises environment or in
+	// Amazon Web Services using AD Connectors. This option also requires you to
+	// provide a Directory ID using the IdentityProviderDetails parameter. Use the
+	// API_GATEWAY value to integrate with an identity provider of your choosing. The
+	// API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call
+	// for authentication using the IdentityProviderDetails parameter.
 	IdentityProviderType IdentityProviderType
 
-	// Specifies the AWS Identity and Access Management (IAM) role that allows a server
-	// to turn on Amazon CloudWatch logging.
+	// Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and
+	// Access Management (IAM) role that allows a server to turn on Amazon CloudWatch
+	// logging for Amazon S3 or Amazon EFS events. When set, user activity can be
+	// viewed in your CloudWatch logs.
 	LoggingRole *string
 
 	// Specifies the unique system assigned identifier for the servers that were
@@ -468,6 +499,18 @@ type PosixProfile struct {
 
 	// The secondary POSIX group IDs used for all EFS operations by this user.
 	SecondaryGids []int64
+}
+
+// The protocol settings that are configured for your server. This type is only
+// valid in the UpdateServer API.
+type ProtocolDetails struct {
+
+	// Indicates passive mode, for FTP and FTPS protocols. Enter a single dotted-quad
+	// IPv4 address, such as the external IP address of a firewall, router, or load
+	// balancer. For example:  aws transfer update-server --protocol-details
+	// PassiveIp=0.0.0.0  Replace  0.0.0.0  in the example above with the actual IP
+	// address you want to use.
+	PassiveIp *string
 }
 
 // Provides information about the public Secure Shell (SSH) key that is associated

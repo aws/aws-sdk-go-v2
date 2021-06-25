@@ -4,6 +4,7 @@ package ram
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
@@ -108,6 +109,93 @@ func (c *Client) addOperationListResourceTypesMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+// ListResourceTypesAPIClient is a client that implements the ListResourceTypes
+// operation.
+type ListResourceTypesAPIClient interface {
+	ListResourceTypes(context.Context, *ListResourceTypesInput, ...func(*Options)) (*ListResourceTypesOutput, error)
+}
+
+var _ ListResourceTypesAPIClient = (*Client)(nil)
+
+// ListResourceTypesPaginatorOptions is the paginator options for ListResourceTypes
+type ListResourceTypesPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListResourceTypesPaginator is a paginator for ListResourceTypes
+type ListResourceTypesPaginator struct {
+	options   ListResourceTypesPaginatorOptions
+	client    ListResourceTypesAPIClient
+	params    *ListResourceTypesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListResourceTypesPaginator returns a new ListResourceTypesPaginator
+func NewListResourceTypesPaginator(client ListResourceTypesAPIClient, params *ListResourceTypesInput, optFns ...func(*ListResourceTypesPaginatorOptions)) *ListResourceTypesPaginator {
+	if params == nil {
+		params = &ListResourceTypesInput{}
+	}
+
+	options := ListResourceTypesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListResourceTypesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListResourceTypesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListResourceTypes page.
+func (p *ListResourceTypesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListResourceTypesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListResourceTypes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListResourceTypes(region string) *awsmiddleware.RegisterServiceMetadata {

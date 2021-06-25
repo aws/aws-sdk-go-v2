@@ -118,28 +118,28 @@ func awsAwsquery_deserializeOpErrorAddTagsToResource(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
+	case strings.EqualFold("CacheClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CacheSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheSecurityGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("CacheSubnetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorCacheSubnetGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidARNFault", errorCode):
+	case strings.EqualFold("InvalidARN", errorCode):
 		return awsAwsquery_deserializeErrorInvalidARNFault(response, errorBody)
 
-	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorReplicationGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ReservedCacheNodeNotFoundFault", errorCode):
+	case strings.EqualFold("ReservedCacheNodeNotFound", errorCode):
 		return awsAwsquery_deserializeErrorReservedCacheNodeNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("SnapshotNotFoundFault", errorCode):
@@ -148,10 +148,10 @@ func awsAwsquery_deserializeOpErrorAddTagsToResource(response *smithyhttp.Respon
 	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
 
-	case strings.EqualFold("UserGroupNotFoundFault", errorCode):
+	case strings.EqualFold("UserGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UserNotFoundFault", errorCode):
+	case strings.EqualFold("UserNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserNotFoundFault(response, errorBody)
 
 	default:
@@ -259,19 +259,19 @@ func awsAwsquery_deserializeOpErrorAuthorizeCacheSecurityGroupIngress(response *
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationAlreadyExistsFault", errorCode):
+	case strings.EqualFold("AuthorizationAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("CacheSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheSecurityGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheSecurityGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -379,7 +379,7 @@ func awsAwsquery_deserializeOpErrorBatchApplyUpdateAction(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("ServiceUpdateNotFoundFault", errorCode):
@@ -490,7 +490,7 @@ func awsAwsquery_deserializeOpErrorBatchStopUpdateAction(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("ServiceUpdateNotFoundFault", errorCode):
@@ -601,7 +601,7 @@ func awsAwsquery_deserializeOpErrorCompleteMigration(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
@@ -715,13 +715,13 @@ func awsAwsquery_deserializeOpErrorCopySnapshot(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidSnapshotStateFault", errorCode):
+	case strings.EqualFold("InvalidSnapshotState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSnapshotStateFault(response, errorBody)
 
 	case strings.EqualFold("SnapshotAlreadyExistsFault", errorCode):
@@ -841,40 +841,40 @@ func awsAwsquery_deserializeOpErrorCreateCacheCluster(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheClusterAlreadyExistsFault", errorCode):
+	case strings.EqualFold("CacheClusterAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CacheSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheSecurityGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("CacheSubnetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorCacheSubnetGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterQuotaForCustomerExceededFault", errorCode):
+	case strings.EqualFold("ClusterQuotaForCustomerExceeded", errorCode):
 		return awsAwsquery_deserializeErrorClusterQuotaForCustomerExceededFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientCacheClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientCacheClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientCacheClusterCapacityFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
 
-	case strings.EqualFold("NodeQuotaForClusterExceededFault", errorCode):
+	case strings.EqualFold("NodeQuotaForClusterExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeQuotaForClusterExceededFault(response, errorBody)
 
-	case strings.EqualFold("NodeQuotaForCustomerExceededFault", errorCode):
+	case strings.EqualFold("NodeQuotaForCustomerExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeQuotaForCustomerExceededFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
@@ -988,19 +988,19 @@ func awsAwsquery_deserializeOpErrorCreateCacheParameterGroup(response *smithyhtt
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheParameterGroupAlreadyExistsFault", errorCode):
+	case strings.EqualFold("CacheParameterGroupAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorCacheParameterGroupAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("CacheParameterGroupQuotaExceededFault", errorCode):
+	case strings.EqualFold("CacheParameterGroupQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorCacheParameterGroupQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheParameterGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheParameterGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheParameterGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
@@ -1111,17 +1111,17 @@ func awsAwsquery_deserializeOpErrorCreateCacheSecurityGroup(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheSecurityGroupAlreadyExistsFault", errorCode):
+	case strings.EqualFold("CacheSecurityGroupAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorCacheSecurityGroupAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("CacheSecurityGroupQuotaExceededFault", errorCode):
-		return awsAwsquery_deserializeErrorCacheSecurityGroupQuotaExceededFault(response, errorBody)
-
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("QuotaExceeded.CacheSecurityGroup", errorCode):
+		return awsAwsquery_deserializeErrorCacheSecurityGroupQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
@@ -1231,10 +1231,10 @@ func awsAwsquery_deserializeOpErrorCreateCacheSubnetGroup(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheSubnetGroupAlreadyExistsFault", errorCode):
+	case strings.EqualFold("CacheSubnetGroupAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorCacheSubnetGroupAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("CacheSubnetGroupQuotaExceededFault", errorCode):
+	case strings.EqualFold("CacheSubnetGroupQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorCacheSubnetGroupQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("CacheSubnetQuotaExceededFault", errorCode):
@@ -1357,10 +1357,10 @@ func awsAwsquery_deserializeOpErrorCreateGlobalReplicationGroup(response *smithy
 	case strings.EqualFold("GlobalReplicationGroupAlreadyExistsFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalReplicationGroupAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
@@ -1474,61 +1474,61 @@ func awsAwsquery_deserializeOpErrorCreateReplicationGroup(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
+	case strings.EqualFold("CacheClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CacheSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheSecurityGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("CacheSubnetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorCacheSubnetGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ClusterQuotaForCustomerExceededFault", errorCode):
+	case strings.EqualFold("ClusterQuotaForCustomerExceeded", errorCode):
 		return awsAwsquery_deserializeErrorClusterQuotaForCustomerExceededFault(response, errorBody)
 
 	case strings.EqualFold("GlobalReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalReplicationGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientCacheClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientCacheClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientCacheClusterCapacityFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidGlobalReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidGlobalReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidGlobalReplicationGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidUserGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidUserGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidUserGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
 
-	case strings.EqualFold("NodeGroupsPerReplicationGroupQuotaExceededFault", errorCode):
+	case strings.EqualFold("NodeGroupsPerReplicationGroupQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeGroupsPerReplicationGroupQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("NodeQuotaForClusterExceededFault", errorCode):
+	case strings.EqualFold("NodeQuotaForClusterExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeQuotaForClusterExceededFault(response, errorBody)
 
-	case strings.EqualFold("NodeQuotaForCustomerExceededFault", errorCode):
+	case strings.EqualFold("NodeQuotaForCustomerExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeQuotaForCustomerExceededFault(response, errorBody)
 
-	case strings.EqualFold("ReplicationGroupAlreadyExistsFault", errorCode):
+	case strings.EqualFold("ReplicationGroupAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorReplicationGroupAlreadyExistsFault(response, errorBody)
 
 	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
 
-	case strings.EqualFold("UserGroupNotFoundFault", errorCode):
+	case strings.EqualFold("UserGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserGroupNotFoundFault(response, errorBody)
 
 	default:
@@ -1636,19 +1636,19 @@ func awsAwsquery_deserializeOpErrorCreateSnapshot(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
+	case strings.EqualFold("CacheClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
@@ -1771,22 +1771,22 @@ func awsAwsquery_deserializeOpErrorCreateUser(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DuplicateUserNameFault", errorCode):
+	case strings.EqualFold("DuplicateUserName", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateUserNameFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
 
-	case strings.EqualFold("UserAlreadyExistsFault", errorCode):
+	case strings.EqualFold("UserAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorUserAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("UserQuotaExceededFault", errorCode):
+	case strings.EqualFold("UserQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorUserQuotaExceededFault(response, errorBody)
 
 	default:
@@ -1897,22 +1897,22 @@ func awsAwsquery_deserializeOpErrorCreateUserGroup(response *smithyhttp.Response
 	case strings.EqualFold("DefaultUserRequired", errorCode):
 		return awsAwsquery_deserializeErrorDefaultUserRequired(response, errorBody)
 
-	case strings.EqualFold("DuplicateUserNameFault", errorCode):
+	case strings.EqualFold("DuplicateUserName", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateUserNameFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
 
-	case strings.EqualFold("UserGroupAlreadyExistsFault", errorCode):
+	case strings.EqualFold("UserGroupAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorUserGroupAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("UserGroupQuotaExceededFault", errorCode):
+	case strings.EqualFold("UserGroupQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorUserGroupQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("UserNotFoundFault", errorCode):
+	case strings.EqualFold("UserNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserNotFoundFault(response, errorBody)
 
 	default:
@@ -2023,13 +2023,13 @@ func awsAwsquery_deserializeOpErrorDecreaseNodeGroupsInGlobalReplicationGroup(re
 	case strings.EqualFold("GlobalReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalReplicationGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidGlobalReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidGlobalReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidGlobalReplicationGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -2137,22 +2137,22 @@ func awsAwsquery_deserializeOpErrorDecreaseReplicaCount(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterQuotaForCustomerExceededFault", errorCode):
+	case strings.EqualFold("ClusterQuotaForCustomerExceeded", errorCode):
 		return awsAwsquery_deserializeErrorClusterQuotaForCustomerExceededFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientCacheClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientCacheClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientCacheClusterCapacityFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
@@ -2161,10 +2161,10 @@ func awsAwsquery_deserializeOpErrorDecreaseReplicaCount(response *smithyhttp.Res
 	case strings.EqualFold("NoOperationFault", errorCode):
 		return awsAwsquery_deserializeErrorNoOperationFault(response, errorBody)
 
-	case strings.EqualFold("NodeGroupsPerReplicationGroupQuotaExceededFault", errorCode):
+	case strings.EqualFold("NodeGroupsPerReplicationGroupQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeGroupsPerReplicationGroupQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("NodeQuotaForCustomerExceededFault", errorCode):
+	case strings.EqualFold("NodeQuotaForCustomerExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeQuotaForCustomerExceededFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
@@ -2278,16 +2278,16 @@ func awsAwsquery_deserializeOpErrorDeleteCacheCluster(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
+	case strings.EqualFold("CacheClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("SnapshotAlreadyExistsFault", errorCode):
@@ -2369,16 +2369,16 @@ func awsAwsquery_deserializeOpErrorDeleteCacheParameterGroup(response *smithyhtt
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheParameterGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheParameterGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheParameterGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -2451,16 +2451,16 @@ func awsAwsquery_deserializeOpErrorDeleteCacheSecurityGroup(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheSecurityGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheSecurityGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -2647,10 +2647,10 @@ func awsAwsquery_deserializeOpErrorDeleteGlobalReplicationGroup(response *smithy
 	case strings.EqualFold("GlobalReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalReplicationGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidGlobalReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidGlobalReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidGlobalReplicationGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -2758,13 +2758,13 @@ func awsAwsquery_deserializeOpErrorDeleteReplicationGroup(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
@@ -2884,13 +2884,13 @@ func awsAwsquery_deserializeOpErrorDeleteSnapshot(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidSnapshotStateFault", errorCode):
+	case strings.EqualFold("InvalidSnapshotState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSnapshotStateFault(response, errorBody)
 
 	case strings.EqualFold("SnapshotNotFoundFault", errorCode):
@@ -3001,16 +3001,16 @@ func awsAwsquery_deserializeOpErrorDeleteUser(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DefaultUserAssociatedToUserGroupFault", errorCode):
+	case strings.EqualFold("DefaultUserAssociatedToUserGroup", errorCode):
 		return awsAwsquery_deserializeErrorDefaultUserAssociatedToUserGroupFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidUserStateFault", errorCode):
+	case strings.EqualFold("InvalidUserState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidUserStateFault(response, errorBody)
 
-	case strings.EqualFold("UserNotFoundFault", errorCode):
+	case strings.EqualFold("UserNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserNotFoundFault(response, errorBody)
 
 	default:
@@ -3118,13 +3118,13 @@ func awsAwsquery_deserializeOpErrorDeleteUserGroup(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidUserGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidUserGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidUserGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("UserGroupNotFoundFault", errorCode):
+	case strings.EqualFold("UserGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserGroupNotFoundFault(response, errorBody)
 
 	default:
@@ -3232,13 +3232,13 @@ func awsAwsquery_deserializeOpErrorDescribeCacheClusters(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
+	case strings.EqualFold("CacheClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -3451,13 +3451,13 @@ func awsAwsquery_deserializeOpErrorDescribeCacheParameterGroups(response *smithy
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -3565,13 +3565,13 @@ func awsAwsquery_deserializeOpErrorDescribeCacheParameters(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -3679,13 +3679,13 @@ func awsAwsquery_deserializeOpErrorDescribeCacheSecurityGroups(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheSecurityGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -3901,10 +3901,10 @@ func awsAwsquery_deserializeOpErrorDescribeEngineDefaultParameters(response *smi
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -4012,10 +4012,10 @@ func awsAwsquery_deserializeOpErrorDescribeEvents(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -4126,10 +4126,10 @@ func awsAwsquery_deserializeOpErrorDescribeGlobalReplicationGroups(response *smi
 	case strings.EqualFold("GlobalReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalReplicationGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -4237,10 +4237,10 @@ func awsAwsquery_deserializeOpErrorDescribeReplicationGroups(response *smithyhtt
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
@@ -4351,13 +4351,13 @@ func awsAwsquery_deserializeOpErrorDescribeReservedCacheNodes(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("ReservedCacheNodeNotFoundFault", errorCode):
+	case strings.EqualFold("ReservedCacheNodeNotFound", errorCode):
 		return awsAwsquery_deserializeErrorReservedCacheNodeNotFoundFault(response, errorBody)
 
 	default:
@@ -4465,13 +4465,13 @@ func awsAwsquery_deserializeOpErrorDescribeReservedCacheNodesOfferings(response 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("ReservedCacheNodesOfferingNotFoundFault", errorCode):
+	case strings.EqualFold("ReservedCacheNodesOfferingNotFound", errorCode):
 		return awsAwsquery_deserializeErrorReservedCacheNodesOfferingNotFoundFault(response, errorBody)
 
 	default:
@@ -4579,10 +4579,10 @@ func awsAwsquery_deserializeOpErrorDescribeServiceUpdates(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("ServiceUpdateNotFoundFault", errorCode):
@@ -4693,13 +4693,13 @@ func awsAwsquery_deserializeOpErrorDescribeSnapshots(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
+	case strings.EqualFold("CacheClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("SnapshotNotFoundFault", errorCode):
@@ -4810,10 +4810,10 @@ func awsAwsquery_deserializeOpErrorDescribeUpdateActions(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -4921,10 +4921,10 @@ func awsAwsquery_deserializeOpErrorDescribeUserGroups(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("UserGroupNotFoundFault", errorCode):
+	case strings.EqualFold("UserGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserGroupNotFoundFault(response, errorBody)
 
 	default:
@@ -5032,10 +5032,10 @@ func awsAwsquery_deserializeOpErrorDescribeUsers(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("UserNotFoundFault", errorCode):
+	case strings.EqualFold("UserNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserNotFoundFault(response, errorBody)
 
 	default:
@@ -5146,13 +5146,13 @@ func awsAwsquery_deserializeOpErrorDisassociateGlobalReplicationGroup(response *
 	case strings.EqualFold("GlobalReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalReplicationGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidGlobalReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidGlobalReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidGlobalReplicationGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -5263,13 +5263,13 @@ func awsAwsquery_deserializeOpErrorFailoverGlobalReplicationGroup(response *smit
 	case strings.EqualFold("GlobalReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalReplicationGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidGlobalReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidGlobalReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidGlobalReplicationGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -5380,10 +5380,10 @@ func awsAwsquery_deserializeOpErrorIncreaseNodeGroupsInGlobalReplicationGroup(re
 	case strings.EqualFold("GlobalReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalReplicationGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidGlobalReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidGlobalReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidGlobalReplicationGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -5491,25 +5491,25 @@ func awsAwsquery_deserializeOpErrorIncreaseReplicaCount(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ClusterQuotaForCustomerExceededFault", errorCode):
+	case strings.EqualFold("ClusterQuotaForCustomerExceeded", errorCode):
 		return awsAwsquery_deserializeErrorClusterQuotaForCustomerExceededFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientCacheClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientCacheClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientCacheClusterCapacityFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheClusterStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidKMSKeyFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidKMSKeyFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
@@ -5518,10 +5518,10 @@ func awsAwsquery_deserializeOpErrorIncreaseReplicaCount(response *smithyhttp.Res
 	case strings.EqualFold("NoOperationFault", errorCode):
 		return awsAwsquery_deserializeErrorNoOperationFault(response, errorBody)
 
-	case strings.EqualFold("NodeGroupsPerReplicationGroupQuotaExceededFault", errorCode):
+	case strings.EqualFold("NodeGroupsPerReplicationGroupQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeGroupsPerReplicationGroupQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("NodeQuotaForCustomerExceededFault", errorCode):
+	case strings.EqualFold("NodeQuotaForCustomerExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeQuotaForCustomerExceededFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
@@ -5632,13 +5632,13 @@ func awsAwsquery_deserializeOpErrorListAllowedNodeTypeModifications(response *sm
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
+	case strings.EqualFold("CacheClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
@@ -5749,37 +5749,37 @@ func awsAwsquery_deserializeOpErrorListTagsForResource(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
+	case strings.EqualFold("CacheClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CacheSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheSecurityGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("CacheSubnetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorCacheSubnetGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidARNFault", errorCode):
+	case strings.EqualFold("InvalidARN", errorCode):
 		return awsAwsquery_deserializeErrorInvalidARNFault(response, errorBody)
 
-	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorReplicationGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ReservedCacheNodeNotFoundFault", errorCode):
+	case strings.EqualFold("ReservedCacheNodeNotFound", errorCode):
 		return awsAwsquery_deserializeErrorReservedCacheNodeNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("SnapshotNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UserGroupNotFoundFault", errorCode):
+	case strings.EqualFold("UserGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UserNotFoundFault", errorCode):
+	case strings.EqualFold("UserNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserNotFoundFault(response, errorBody)
 
 	default:
@@ -5887,37 +5887,37 @@ func awsAwsquery_deserializeOpErrorModifyCacheCluster(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
+	case strings.EqualFold("CacheClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CacheSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheSecurityGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientCacheClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientCacheClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientCacheClusterCapacityFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheSecurityGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
 
-	case strings.EqualFold("NodeQuotaForClusterExceededFault", errorCode):
+	case strings.EqualFold("NodeQuotaForClusterExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeQuotaForClusterExceededFault(response, errorBody)
 
-	case strings.EqualFold("NodeQuotaForCustomerExceededFault", errorCode):
+	case strings.EqualFold("NodeQuotaForCustomerExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeQuotaForCustomerExceededFault(response, errorBody)
 
 	default:
@@ -6025,19 +6025,19 @@ func awsAwsquery_deserializeOpErrorModifyCacheParameterGroup(response *smithyhtt
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheParameterGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheParameterGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheParameterGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidGlobalReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidGlobalReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidGlobalReplicationGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -6268,10 +6268,10 @@ func awsAwsquery_deserializeOpErrorModifyGlobalReplicationGroup(response *smithy
 	case strings.EqualFold("GlobalReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalReplicationGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidGlobalReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidGlobalReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidGlobalReplicationGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -6379,52 +6379,52 @@ func awsAwsquery_deserializeOpErrorModifyReplicationGroup(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
+	case strings.EqualFold("CacheClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CacheSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheSecurityGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientCacheClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientCacheClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientCacheClusterCapacityFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheSecurityGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidKMSKeyFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidKMSKeyFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidUserGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidUserGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidUserGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
 
-	case strings.EqualFold("NodeQuotaForClusterExceededFault", errorCode):
+	case strings.EqualFold("NodeQuotaForClusterExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeQuotaForClusterExceededFault(response, errorBody)
 
-	case strings.EqualFold("NodeQuotaForCustomerExceededFault", errorCode):
+	case strings.EqualFold("NodeQuotaForCustomerExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeQuotaForCustomerExceededFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorReplicationGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UserGroupNotFoundFault", errorCode):
+	case strings.EqualFold("UserGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserGroupNotFoundFault(response, errorBody)
 
 	default:
@@ -6532,31 +6532,31 @@ func awsAwsquery_deserializeOpErrorModifyReplicationGroupShardConfiguration(resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InsufficientCacheClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientCacheClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientCacheClusterCapacityFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheClusterStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidKMSKeyFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidKMSKeyFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
 
-	case strings.EqualFold("NodeGroupsPerReplicationGroupQuotaExceededFault", errorCode):
+	case strings.EqualFold("NodeGroupsPerReplicationGroupQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeGroupsPerReplicationGroupQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("NodeQuotaForCustomerExceededFault", errorCode):
+	case strings.EqualFold("NodeQuotaForCustomerExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNodeQuotaForCustomerExceededFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
@@ -6667,16 +6667,16 @@ func awsAwsquery_deserializeOpErrorModifyUser(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidUserStateFault", errorCode):
+	case strings.EqualFold("InvalidUserState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidUserStateFault(response, errorBody)
 
-	case strings.EqualFold("UserNotFoundFault", errorCode):
+	case strings.EqualFold("UserNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserNotFoundFault(response, errorBody)
 
 	default:
@@ -6787,22 +6787,22 @@ func awsAwsquery_deserializeOpErrorModifyUserGroup(response *smithyhttp.Response
 	case strings.EqualFold("DefaultUserRequired", errorCode):
 		return awsAwsquery_deserializeErrorDefaultUserRequired(response, errorBody)
 
-	case strings.EqualFold("DuplicateUserNameFault", errorCode):
+	case strings.EqualFold("DuplicateUserName", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateUserNameFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidUserGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidUserGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidUserGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("UserGroupNotFoundFault", errorCode):
+	case strings.EqualFold("UserGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UserNotFoundFault", errorCode):
+	case strings.EqualFold("UserNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserNotFoundFault(response, errorBody)
 
 	default:
@@ -6910,19 +6910,19 @@ func awsAwsquery_deserializeOpErrorPurchaseReservedCacheNodesOffering(response *
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("ReservedCacheNodeAlreadyExistsFault", errorCode):
+	case strings.EqualFold("ReservedCacheNodeAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorReservedCacheNodeAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("ReservedCacheNodeQuotaExceededFault", errorCode):
+	case strings.EqualFold("ReservedCacheNodeQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorReservedCacheNodeQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("ReservedCacheNodesOfferingNotFoundFault", errorCode):
+	case strings.EqualFold("ReservedCacheNodesOfferingNotFound", errorCode):
 		return awsAwsquery_deserializeErrorReservedCacheNodesOfferingNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
@@ -7036,10 +7036,10 @@ func awsAwsquery_deserializeOpErrorRebalanceSlotsInGlobalReplicationGroup(respon
 	case strings.EqualFold("GlobalReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalReplicationGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidGlobalReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidGlobalReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidGlobalReplicationGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -7147,10 +7147,10 @@ func awsAwsquery_deserializeOpErrorRebootCacheCluster(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
+	case strings.EqualFold("CacheClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheClusterStateFault(response, errorBody)
 
 	default:
@@ -7258,40 +7258,40 @@ func awsAwsquery_deserializeOpErrorRemoveTagsFromResource(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
+	case strings.EqualFold("CacheClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CacheSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheSecurityGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("CacheSubnetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorCacheSubnetGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidARNFault", errorCode):
+	case strings.EqualFold("InvalidARN", errorCode):
 		return awsAwsquery_deserializeErrorInvalidARNFault(response, errorBody)
 
-	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorReplicationGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("ReservedCacheNodeNotFoundFault", errorCode):
+	case strings.EqualFold("ReservedCacheNodeNotFound", errorCode):
 		return awsAwsquery_deserializeErrorReservedCacheNodeNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("SnapshotNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("TagNotFoundFault", errorCode):
+	case strings.EqualFold("TagNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTagNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UserGroupNotFoundFault", errorCode):
+	case strings.EqualFold("UserGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("UserNotFoundFault", errorCode):
+	case strings.EqualFold("UserNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserNotFoundFault(response, errorBody)
 
 	default:
@@ -7399,19 +7399,19 @@ func awsAwsquery_deserializeOpErrorResetCacheParameterGroup(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheParameterGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheParameterGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheParameterGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidGlobalReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidGlobalReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidGlobalReplicationGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -7519,19 +7519,19 @@ func awsAwsquery_deserializeOpErrorRevokeCacheSecurityGroupIngress(response *smi
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationNotFoundFault", errorCode):
+	case strings.EqualFold("AuthorizationNotFound", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CacheSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("CacheSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCacheSecurityGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheSecurityGroupStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -7639,10 +7639,10 @@ func awsAwsquery_deserializeOpErrorStartMigration(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupAlreadyUnderMigrationFault", errorCode):
@@ -7756,22 +7756,22 @@ func awsAwsquery_deserializeOpErrorTestFailover(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("APICallRateForCustomerExceededFault", errorCode):
+	case strings.EqualFold("APICallRateForCustomerExceeded", errorCode):
 		return awsAwsquery_deserializeErrorAPICallRateForCustomerExceededFault(response, errorBody)
 
-	case strings.EqualFold("InvalidCacheClusterStateFault", errorCode):
+	case strings.EqualFold("InvalidCacheClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCacheClusterStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidKMSKeyFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidKMSKeyFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("NodeGroupNotFoundFault", errorCode):

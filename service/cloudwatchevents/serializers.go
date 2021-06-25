@@ -2492,6 +2492,41 @@ func awsAwsjson11_serializeDocumentBatchRetryStrategy(v *types.BatchRetryStrateg
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCapacityProviderStrategy(v []types.CapacityProviderStrategyItem, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentCapacityProviderStrategyItem(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCapacityProviderStrategyItem(v *types.CapacityProviderStrategyItem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Base != 0 {
+		ok := object.Key("base")
+		ok.Integer(v.Base)
+	}
+
+	if v.CapacityProvider != nil {
+		ok := object.Key("capacityProvider")
+		ok.String(*v.CapacityProvider)
+	}
+
+	if v.Weight != 0 {
+		ok := object.Key("weight")
+		ok.Integer(v.Weight)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCondition(v *types.Condition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2780,6 +2815,23 @@ func awsAwsjson11_serializeDocumentEcsParameters(v *types.EcsParameters, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.CapacityProviderStrategy != nil {
+		ok := object.Key("CapacityProviderStrategy")
+		if err := awsAwsjson11_serializeDocumentCapacityProviderStrategy(v.CapacityProviderStrategy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EnableECSManagedTags {
+		ok := object.Key("EnableECSManagedTags")
+		ok.Boolean(v.EnableECSManagedTags)
+	}
+
+	if v.EnableExecuteCommand {
+		ok := object.Key("EnableExecuteCommand")
+		ok.Boolean(v.EnableExecuteCommand)
+	}
+
 	if v.Group != nil {
 		ok := object.Key("Group")
 		ok.String(*v.Group)
@@ -2797,9 +2849,40 @@ func awsAwsjson11_serializeDocumentEcsParameters(v *types.EcsParameters, value s
 		}
 	}
 
+	if v.PlacementConstraints != nil {
+		ok := object.Key("PlacementConstraints")
+		if err := awsAwsjson11_serializeDocumentPlacementConstraints(v.PlacementConstraints, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PlacementStrategy != nil {
+		ok := object.Key("PlacementStrategy")
+		if err := awsAwsjson11_serializeDocumentPlacementStrategies(v.PlacementStrategy, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PlatformVersion != nil {
 		ok := object.Key("PlatformVersion")
 		ok.String(*v.PlatformVersion)
+	}
+
+	if len(v.PropagateTags) > 0 {
+		ok := object.Key("PropagateTags")
+		ok.String(string(v.PropagateTags))
+	}
+
+	if v.ReferenceId != nil {
+		ok := object.Key("ReferenceId")
+		ok.String(*v.ReferenceId)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.TaskCount != nil {
@@ -2918,6 +3001,66 @@ func awsAwsjson11_serializeDocumentPathParameterList(v []string, value smithyjso
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPlacementConstraint(v *types.PlacementConstraint, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Expression != nil {
+		ok := object.Key("expression")
+		ok.String(*v.Expression)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPlacementConstraints(v []types.PlacementConstraint, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPlacementConstraint(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPlacementStrategies(v []types.PlacementStrategy, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPlacementStrategy(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPlacementStrategy(v *types.PlacementStrategy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Field != nil {
+		ok := object.Key("field")
+		ok.String(*v.Field)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }
 

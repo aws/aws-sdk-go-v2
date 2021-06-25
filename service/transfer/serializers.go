@@ -1313,6 +1313,18 @@ func awsAwsjson11_serializeDocumentPosixProfile(v *types.PosixProfile, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentProtocolDetails(v *types.ProtocolDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PassiveIp != nil {
+		ok := object.Key("PassiveIp")
+		ok.String(*v.PassiveIp)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentProtocols(v []types.Protocol, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2011,6 +2023,13 @@ func awsAwsjson11_serializeOpDocumentUpdateServerInput(v *UpdateServerInput, val
 	if v.LoggingRole != nil {
 		ok := object.Key("LoggingRole")
 		ok.String(*v.LoggingRole)
+	}
+
+	if v.ProtocolDetails != nil {
+		ok := object.Key("ProtocolDetails")
+		if err := awsAwsjson11_serializeDocumentProtocolDetails(v.ProtocolDetails, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Protocols != nil {

@@ -12,14 +12,15 @@ import (
 )
 
 // Gets detailed information about a specified number of requests--a sample--that
-// AWS WAF randomly selects from among the first 5,000 requests that your AWS
-// resource received during a time range that you choose. You can specify a sample
-// size of up to 500 requests, and you can specify any time range in the previous
-// three hours. GetSampledRequests returns a time range, which is usually the time
-// range that you specified. However, if your resource (such as a CloudFront
-// distribution) received 5,000 requests before the specified time range elapsed,
-// GetSampledRequests returns an updated time range. This new time range indicates
-// the actual period during which AWS WAF selected the requests in the sample.
+// WAF randomly selects from among the first 5,000 requests that your Amazon Web
+// Services resource received during a time range that you choose. You can specify
+// a sample size of up to 500 requests, and you can specify any time range in the
+// previous three hours. GetSampledRequests returns a time range, which is usually
+// the time range that you specified. However, if your resource (such as a
+// CloudFront distribution) received 5,000 requests before the specified time range
+// elapsed, GetSampledRequests returns an updated time range. This new time range
+// indicates the actual period during which WAF selected the requests in the
+// sample.
 func (c *Client) GetSampledRequests(ctx context.Context, params *GetSampledRequestsInput, optFns ...func(*Options)) (*GetSampledRequestsOutput, error) {
 	if params == nil {
 		params = &GetSampledRequestsInput{}
@@ -37,10 +38,10 @@ func (c *Client) GetSampledRequests(ctx context.Context, params *GetSampledReque
 
 type GetSampledRequestsInput struct {
 
-	// The number of requests that you want AWS WAF to return from among the first
-	// 5,000 requests that your AWS resource received during the time range. If your
-	// resource received fewer requests than the value of MaxItems, GetSampledRequests
-	// returns information about all of them.
+	// The number of requests that you want WAF to return from among the first 5,000
+	// requests that your Amazon Web Services resource received during the time range.
+	// If your resource received fewer requests than the value of MaxItems,
+	// GetSampledRequests returns information about all of them.
 	//
 	// This member is required.
 	MaxItems int64
@@ -51,17 +52,17 @@ type GetSampledRequestsInput struct {
 	// This member is required.
 	RuleMetricName *string
 
-	// Specifies whether this is for an AWS CloudFront distribution or for a regional
-	// application. A regional application can be an Application Load Balancer (ALB),
-	// an API Gateway REST API, or an AppSync GraphQL API. To work with CloudFront, you
-	// must also specify the Region US East (N. Virginia) as follows:
+	// Specifies whether this is for an Amazon CloudFront distribution or for a
+	// regional application. A regional application can be an Application Load Balancer
+	// (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. To work with
+	// CloudFront, you must also specify the Region US East (N. Virginia) as
+	// follows:
 	//
-	// * CLI - Specify
-	// the Region when you use the CloudFront scope: --scope=CLOUDFRONT
-	// --region=us-east-1.
+	// * CLI - Specify the Region when you use the CloudFront scope:
+	// --scope=CLOUDFRONT --region=us-east-1.
 	//
-	// * API and SDKs - For all calls, use the Region endpoint
-	// us-east-1.
+	// * API and SDKs - For all calls, use the
+	// Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -71,7 +72,7 @@ type GetSampledRequestsInput struct {
 	// times in Coordinated Universal Time (UTC) format. UTC format includes the
 	// special designator, Z. For example, "2016-09-27T14:50Z". You can specify any
 	// time range in the previous three hours. If you specify a start time that's
-	// earlier than three hours ago, AWS WAF sets it to three hours ago.
+	// earlier than three hours ago, WAF sets it to three hours ago.
 	//
 	// This member is required.
 	TimeWindow *types.TimeWindow
@@ -87,7 +88,8 @@ type GetSampledRequestsOutput struct {
 
 	// The total number of requests from which GetSampledRequests got a sample of
 	// MaxItems requests. If PopulationSize is less than MaxItems, the sample includes
-	// every request that your AWS resource received during the specified time range.
+	// every request that your Amazon Web Services resource received during the
+	// specified time range.
 	PopulationSize int64
 
 	// A complex type that contains detailed information about each of the requests in
@@ -95,10 +97,10 @@ type GetSampledRequestsOutput struct {
 	SampledRequests []types.SampledHTTPRequest
 
 	// Usually, TimeWindow is the time range that you specified in the
-	// GetSampledRequests request. However, if your AWS resource received more than
-	// 5,000 requests during the time range that you specified in the request,
-	// GetSampledRequests returns the time range for the first 5,000 requests. Times
-	// are in Coordinated Universal Time (UTC) format.
+	// GetSampledRequests request. However, if your Amazon Web Services resource
+	// received more than 5,000 requests during the time range that you specified in
+	// the request, GetSampledRequests returns the time range for the first 5,000
+	// requests. Times are in Coordinated Universal Time (UTC) format.
 	TimeWindow *types.TimeWindow
 
 	// Metadata pertaining to the operation's result.

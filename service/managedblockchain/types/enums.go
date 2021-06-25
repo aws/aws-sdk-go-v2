@@ -66,12 +66,13 @@ type MemberStatus string
 
 // Enum values for MemberStatus
 const (
-	MemberStatusCreating     MemberStatus = "CREATING"
-	MemberStatusAvailable    MemberStatus = "AVAILABLE"
-	MemberStatusCreateFailed MemberStatus = "CREATE_FAILED"
-	MemberStatusUpdating     MemberStatus = "UPDATING"
-	MemberStatusDeleting     MemberStatus = "DELETING"
-	MemberStatusDeleted      MemberStatus = "DELETED"
+	MemberStatusCreating                  MemberStatus = "CREATING"
+	MemberStatusAvailable                 MemberStatus = "AVAILABLE"
+	MemberStatusCreateFailed              MemberStatus = "CREATE_FAILED"
+	MemberStatusUpdating                  MemberStatus = "UPDATING"
+	MemberStatusDeleting                  MemberStatus = "DELETING"
+	MemberStatusDeleted                   MemberStatus = "DELETED"
+	MemberStatusInaccessibleEncryptionKey MemberStatus = "INACCESSIBLE_ENCRYPTION_KEY"
 )
 
 // Values returns all known values for MemberStatus. Note that this can be expanded
@@ -85,6 +86,7 @@ func (MemberStatus) Values() []MemberStatus {
 		"UPDATING",
 		"DELETING",
 		"DELETED",
+		"INACCESSIBLE_ENCRYPTION_KEY",
 	}
 }
 
@@ -116,14 +118,15 @@ type NodeStatus string
 
 // Enum values for NodeStatus
 const (
-	NodeStatusCreating     NodeStatus = "CREATING"
-	NodeStatusAvailable    NodeStatus = "AVAILABLE"
-	NodeStatusUnhealthy    NodeStatus = "UNHEALTHY"
-	NodeStatusCreateFailed NodeStatus = "CREATE_FAILED"
-	NodeStatusUpdating     NodeStatus = "UPDATING"
-	NodeStatusDeleting     NodeStatus = "DELETING"
-	NodeStatusDeleted      NodeStatus = "DELETED"
-	NodeStatusFailed       NodeStatus = "FAILED"
+	NodeStatusCreating                  NodeStatus = "CREATING"
+	NodeStatusAvailable                 NodeStatus = "AVAILABLE"
+	NodeStatusUnhealthy                 NodeStatus = "UNHEALTHY"
+	NodeStatusCreateFailed              NodeStatus = "CREATE_FAILED"
+	NodeStatusUpdating                  NodeStatus = "UPDATING"
+	NodeStatusDeleting                  NodeStatus = "DELETING"
+	NodeStatusDeleted                   NodeStatus = "DELETED"
+	NodeStatusFailed                    NodeStatus = "FAILED"
+	NodeStatusInaccessibleEncryptionKey NodeStatus = "INACCESSIBLE_ENCRYPTION_KEY"
 )
 
 // Values returns all known values for NodeStatus. Note that this can be expanded
@@ -139,6 +142,7 @@ func (NodeStatus) Values() []NodeStatus {
 		"DELETING",
 		"DELETED",
 		"FAILED",
+		"INACCESSIBLE_ENCRYPTION_KEY",
 	}
 }
 

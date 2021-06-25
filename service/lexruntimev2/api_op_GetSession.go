@@ -14,8 +14,9 @@ import (
 // Returns session information for a specified bot, alias, and user. For example,
 // you can use this operation to retrieve session information for a user that has
 // left a long-running session in use. If the bot, alias, or session identifier
-// doesn't exist, Amazon Lex returns a BadRequestException. If the locale doesn't
-// exist or is not enabled for the alias, you receive a BadRequestException.
+// doesn't exist, Amazon Lex V2 returns a BadRequestException. If the locale
+// doesn't exist or is not enabled for the alias, you receive a
+// BadRequestException.
 func (c *Client) GetSession(ctx context.Context, params *GetSessionInput, optFns ...func(*Options)) (*GetSessionOutput, error) {
 	if params == nil {
 		params = &GetSessionInput{}
@@ -56,10 +57,11 @@ type GetSessionInput struct {
 
 type GetSessionOutput struct {
 
-	// A list of intents that Amazon Lex determined might satisfy the user's utterance.
-	// Each interpretation includes the intent, a score that indicates how confident
-	// Amazon Lex is that the interpretation is the correct one, and an optional
-	// sentiment response that indicates the sentiment expressed in the utterance.
+	// A list of intents that Amazon Lex V2 determined might satisfy the user's
+	// utterance. Each interpretation includes the intent, a score that indicates how
+	// confident Amazon Lex V2 is that the interpretation is the correct one, and an
+	// optional sentiment response that indicates the sentiment expressed in the
+	// utterance.
 	Interpretations []types.Interpretation
 
 	// A list of messages that were last sent to the user. The messages are ordered

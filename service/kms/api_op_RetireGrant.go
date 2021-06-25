@@ -10,34 +10,33 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retires a grant. To clean up, you can retire a grant when you're done using it.
-// You should revoke a grant when you intend to actively deny operations that
-// depend on it. The following are permitted to call this API:
-//
-// * The AWS account
-// (root user) under which the grant was created
-//
-// * The RetiringPrincipal, if
-// present in the grant
-//
-// * The GranteePrincipal, if RetireGrant is an operation
-// specified in the grant
-//
-// You must identify the grant to retire by its grant token
-// or by a combination of the grant ID and the Amazon Resource Name (ARN) of the
-// customer master key (CMK). A grant token is a unique variable-length
-// base64-encoded string. A grant ID is a 64 character unique identifier of a
-// grant. The CreateGrant operation returns both. Cross-account use: Yes. You can
-// retire a grant on a CMK in a different AWS account. Required permissions::
-// Permission to retire a grant is specified in the grant. You cannot control
-// access to this operation in a policy. For more information, see Using grants
+// Deletes a grant. Typically, you retire a grant when you no longer need its
+// permissions. To identify the grant to retire, use a grant token
+// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token),
+// or both the grant ID and a key identifier (key ID or key ARN) of the customer
+// master key (CMK). The CreateGrant operation returns both values. This operation
+// can be called by the retiring principal for a grant, by the grantee principal if
+// the grant allows the RetireGrant operation, and by the AWS account (root user)
+// in which the grant is created. It can also be called by principals to whom
+// permission for retiring a grant is delegated. For details, see Retiring and
+// revoking grants
+// (https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#grant-delete)
+// in the AWS Key Management Service Developer Guide. For detailed information
+// about grants, including grant terminology, see Using grants
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in the AWS
-// Key Management Service Developer Guide. Related operations:
-//
-// * CreateGrant
+// Key Management Service Developer Guide . For examples of working with grants in
+// several programming languages, see Programming grants
+// (https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html).
+// Cross-account use: Yes. You can retire a grant on a CMK in a different AWS
+// account. Required permissions::Permission to retire a grant is determined
+// primarily by the grant. For details, see Retiring and revoking grants
+// (https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#grant-delete)
+// in the AWS Key Management Service Developer Guide. Related operations:
 //
 // *
-// ListGrants
+// CreateGrant
+//
+// * ListGrants
 //
 // * ListRetirableGrants
 //
@@ -59,18 +58,24 @@ func (c *Client) RetireGrant(ctx context.Context, params *RetireGrantInput, optF
 
 type RetireGrantInput struct {
 
-	// Unique identifier of the grant to retire. The grant ID is returned in the
-	// response to a CreateGrant operation.
+	// Identifies the grant to retire. To get the grant ID, use CreateGrant,
+	// ListGrants, or ListRetirableGrants.
 	//
 	// * Grant ID Example -
 	// 0123456789012345678901234567890123456789012345678901234567890123
 	GrantId *string
 
-	// Token that identifies the grant to be retired.
+	// Identifies the grant to be retired. You can use a grant token to identify a new
+	// grant even before it has achieved eventual consistency. Only the CreateGrant
+	// operation returns a grant token. For details, see Grant token
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token)
+	// and Eventual consistency
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-eventual-consistency)
+	// in the AWS Key Management Service Developer Guide.
 	GrantToken *string
 
-	// The Amazon Resource Name (ARN) of the CMK associated with the grant. For
-	// example:
+	// The key ARN CMK associated with the grant. To find the key ARN, use the ListKeys
+	// operation. For example:
 	// arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	KeyId *string
 }

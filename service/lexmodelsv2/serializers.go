@@ -1050,6 +1050,13 @@ func awsRestjson1_serializeOpDocumentCreateSlotInput(v *CreateSlotInput, value s
 		ok.String(*v.Description)
 	}
 
+	if v.MultipleValuesSetting != nil {
+		ok := object.Key("multipleValuesSetting")
+		if err := awsRestjson1_serializeDocumentMultipleValuesSetting(v.MultipleValuesSetting, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ObfuscationSetting != nil {
 		ok := object.Key("obfuscationSetting")
 		if err := awsRestjson1_serializeDocumentObfuscationSetting(v.ObfuscationSetting, ok); err != nil {
@@ -4952,6 +4959,13 @@ func awsRestjson1_serializeOpDocumentUpdateSlotInput(v *UpdateSlotInput, value s
 		ok.String(*v.Description)
 	}
 
+	if v.MultipleValuesSetting != nil {
+		ok := object.Key("multipleValuesSetting")
+		if err := awsRestjson1_serializeDocumentMultipleValuesSetting(v.MultipleValuesSetting, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ObfuscationSetting != nil {
 		ok := object.Key("obfuscationSetting")
 		if err := awsRestjson1_serializeDocumentObfuscationSetting(v.ObfuscationSetting, ok); err != nil {
@@ -6070,6 +6084,18 @@ func awsRestjson1_serializeDocumentMessageVariationsList(v []types.Message, valu
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultipleValuesSetting(v *types.MultipleValuesSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowMultipleValues {
+		ok := object.Key("allowMultipleValues")
+		ok.Boolean(v.AllowMultipleValues)
+	}
+
 	return nil
 }
 

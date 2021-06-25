@@ -7157,6 +7157,15 @@ func awsRestjson1_deserializeDocumentDnsServiceDiscovery(v **types.DnsServiceDis
 				sv.Hostname = ptr.String(jtv)
 			}
 
+		case "responseType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DnsResponseType to be of type string, got %T instead", value)
+				}
+				sv.ResponseType = types.DnsResponseType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7412,6 +7421,95 @@ func awsRestjson1_deserializeDocumentGatewayRouteData(v **types.GatewayRouteData
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGatewayRouteHostnameMatch(v **types.GatewayRouteHostnameMatch, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GatewayRouteHostnameMatch
+	if *v == nil {
+		sv = &types.GatewayRouteHostnameMatch{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "exact":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExactHostName to be of type string, got %T instead", value)
+				}
+				sv.Exact = ptr.String(jtv)
+			}
+
+		case "suffix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SuffixHostname to be of type string, got %T instead", value)
+				}
+				sv.Suffix = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGatewayRouteHostnameRewrite(v **types.GatewayRouteHostnameRewrite, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GatewayRouteHostnameRewrite
+	if *v == nil {
+		sv = &types.GatewayRouteHostnameRewrite{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "defaultTargetHostname":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DefaultGatewayRouteRewrite to be of type string, got %T instead", value)
+				}
+				sv.DefaultTargetHostname = types.DefaultGatewayRouteRewrite(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGatewayRouteList(v *[]types.GatewayRouteRef, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7607,6 +7705,19 @@ func awsRestjson1_deserializeDocumentGatewayRouteSpec(v **types.GatewayRouteSpec
 				return err
 			}
 
+		case "priority":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GatewayRoutePriority to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Priority = ptr.Int32(int32(i64))
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7795,6 +7906,11 @@ func awsRestjson1_deserializeDocumentGrpcGatewayRouteAction(v **types.GrpcGatewa
 
 	for key, value := range shape {
 		switch key {
+		case "rewrite":
+			if err := awsRestjson1_deserializeDocumentGrpcGatewayRouteRewrite(&sv.Rewrite, value); err != nil {
+				return err
+			}
+
 		case "target":
 			if err := awsRestjson1_deserializeDocumentGatewayRouteTarget(&sv.Target, value); err != nil {
 				return err
@@ -7831,6 +7947,16 @@ func awsRestjson1_deserializeDocumentGrpcGatewayRouteMatch(v **types.GrpcGateway
 
 	for key, value := range shape {
 		switch key {
+		case "hostname":
+			if err := awsRestjson1_deserializeDocumentGatewayRouteHostnameMatch(&sv.Hostname, value); err != nil {
+				return err
+			}
+
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentGrpcGatewayRouteMetadataList(&sv.Metadata, value); err != nil {
+				return err
+			}
+
 		case "serviceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7846,6 +7972,218 @@ func awsRestjson1_deserializeDocumentGrpcGatewayRouteMatch(v **types.GrpcGateway
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGrpcGatewayRouteMetadata(v **types.GrpcGatewayRouteMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GrpcGatewayRouteMetadata
+	if *v == nil {
+		sv = &types.GrpcGatewayRouteMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "invert":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Invert = ptr.Bool(jtv)
+			}
+
+		case "match":
+			if err := awsRestjson1_deserializeDocumentGrpcMetadataMatchMethod(&sv.Match, value); err != nil {
+				return err
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HeaderName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGrpcGatewayRouteMetadataList(v *[]types.GrpcGatewayRouteMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GrpcGatewayRouteMetadata
+	if *v == nil {
+		cv = []types.GrpcGatewayRouteMetadata{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GrpcGatewayRouteMetadata
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentGrpcGatewayRouteMetadata(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGrpcGatewayRouteRewrite(v **types.GrpcGatewayRouteRewrite, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GrpcGatewayRouteRewrite
+	if *v == nil {
+		sv = &types.GrpcGatewayRouteRewrite{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "hostname":
+			if err := awsRestjson1_deserializeDocumentGatewayRouteHostnameRewrite(&sv.Hostname, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGrpcMetadataMatchMethod(v *types.GrpcMetadataMatchMethod, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.GrpcMetadataMatchMethod
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "exact":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HeaderMatch to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.GrpcMetadataMatchMethodMemberExact{Value: mv}
+			break loop
+
+		case "prefix":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HeaderMatch to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.GrpcMetadataMatchMethodMemberPrefix{Value: mv}
+			break loop
+
+		case "range":
+			var mv types.MatchRange
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentMatchRange(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.GrpcMetadataMatchMethodMemberRange{Value: mv}
+			break loop
+
+		case "regex":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HeaderMatch to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.GrpcMetadataMatchMethodMemberRegex{Value: mv}
+			break loop
+
+		case "suffix":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HeaderMatch to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.GrpcMetadataMatchMethodMemberSuffix{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -8572,6 +8910,11 @@ func awsRestjson1_deserializeDocumentHttpGatewayRouteAction(v **types.HttpGatewa
 
 	for key, value := range shape {
 		switch key {
+		case "rewrite":
+			if err := awsRestjson1_deserializeDocumentHttpGatewayRouteRewrite(&sv.Rewrite, value); err != nil {
+				return err
+			}
+
 		case "target":
 			if err := awsRestjson1_deserializeDocumentGatewayRouteTarget(&sv.Target, value); err != nil {
 				return err
@@ -8583,6 +8926,94 @@ func awsRestjson1_deserializeDocumentHttpGatewayRouteAction(v **types.HttpGatewa
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHttpGatewayRouteHeader(v **types.HttpGatewayRouteHeader, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HttpGatewayRouteHeader
+	if *v == nil {
+		sv = &types.HttpGatewayRouteHeader{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "invert":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Invert = ptr.Bool(jtv)
+			}
+
+		case "match":
+			if err := awsRestjson1_deserializeDocumentHeaderMatchMethod(&sv.Match, value); err != nil {
+				return err
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HeaderName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHttpGatewayRouteHeaders(v *[]types.HttpGatewayRouteHeader, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.HttpGatewayRouteHeader
+	if *v == nil {
+		cv = []types.HttpGatewayRouteHeader{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.HttpGatewayRouteHeader
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentHttpGatewayRouteHeader(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -8608,6 +9039,30 @@ func awsRestjson1_deserializeDocumentHttpGatewayRouteMatch(v **types.HttpGateway
 
 	for key, value := range shape {
 		switch key {
+		case "headers":
+			if err := awsRestjson1_deserializeDocumentHttpGatewayRouteHeaders(&sv.Headers, value); err != nil {
+				return err
+			}
+
+		case "hostname":
+			if err := awsRestjson1_deserializeDocumentGatewayRouteHostnameMatch(&sv.Hostname, value); err != nil {
+				return err
+			}
+
+		case "method":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HttpMethod to be of type string, got %T instead", value)
+				}
+				sv.Method = types.HttpMethod(jtv)
+			}
+
+		case "path":
+			if err := awsRestjson1_deserializeDocumentHttpPathMatch(&sv.Path, value); err != nil {
+				return err
+			}
+
 		case "prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8617,12 +9072,280 @@ func awsRestjson1_deserializeDocumentHttpGatewayRouteMatch(v **types.HttpGateway
 				sv.Prefix = ptr.String(jtv)
 			}
 
+		case "queryParameters":
+			if err := awsRestjson1_deserializeDocumentHttpQueryParameters(&sv.QueryParameters, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHttpGatewayRoutePathRewrite(v **types.HttpGatewayRoutePathRewrite, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HttpGatewayRoutePathRewrite
+	if *v == nil {
+		sv = &types.HttpGatewayRoutePathRewrite{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "exact":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HttpPathExact to be of type string, got %T instead", value)
+				}
+				sv.Exact = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHttpGatewayRoutePrefixRewrite(v **types.HttpGatewayRoutePrefixRewrite, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HttpGatewayRoutePrefixRewrite
+	if *v == nil {
+		sv = &types.HttpGatewayRoutePrefixRewrite{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "defaultPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DefaultGatewayRouteRewrite to be of type string, got %T instead", value)
+				}
+				sv.DefaultPrefix = types.DefaultGatewayRouteRewrite(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HttpGatewayRoutePrefix to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHttpGatewayRouteRewrite(v **types.HttpGatewayRouteRewrite, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HttpGatewayRouteRewrite
+	if *v == nil {
+		sv = &types.HttpGatewayRouteRewrite{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "hostname":
+			if err := awsRestjson1_deserializeDocumentGatewayRouteHostnameRewrite(&sv.Hostname, value); err != nil {
+				return err
+			}
+
+		case "path":
+			if err := awsRestjson1_deserializeDocumentHttpGatewayRoutePathRewrite(&sv.Path, value); err != nil {
+				return err
+			}
+
+		case "prefix":
+			if err := awsRestjson1_deserializeDocumentHttpGatewayRoutePrefixRewrite(&sv.Prefix, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHttpPathMatch(v **types.HttpPathMatch, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HttpPathMatch
+	if *v == nil {
+		sv = &types.HttpPathMatch{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "exact":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HttpPathExact to be of type string, got %T instead", value)
+				}
+				sv.Exact = ptr.String(jtv)
+			}
+
+		case "regex":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HttpPathRegex to be of type string, got %T instead", value)
+				}
+				sv.Regex = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHttpQueryParameter(v **types.HttpQueryParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HttpQueryParameter
+	if *v == nil {
+		sv = &types.HttpQueryParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "match":
+			if err := awsRestjson1_deserializeDocumentQueryParameterMatch(&sv.Match, value); err != nil {
+				return err
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueryParameterName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHttpQueryParameters(v *[]types.HttpQueryParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.HttpQueryParameter
+	if *v == nil {
+		cv = []types.HttpQueryParameter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.HttpQueryParameter
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentHttpQueryParameter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -8932,6 +9655,11 @@ func awsRestjson1_deserializeDocumentHttpRouteMatch(v **types.HttpRouteMatch, va
 				sv.Method = types.HttpMethod(jtv)
 			}
 
+		case "path":
+			if err := awsRestjson1_deserializeDocumentHttpPathMatch(&sv.Path, value); err != nil {
+				return err
+			}
+
 		case "prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8939,6 +9667,11 @@ func awsRestjson1_deserializeDocumentHttpRouteMatch(v **types.HttpRouteMatch, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Prefix = ptr.String(jtv)
+			}
+
+		case "queryParameters":
+			if err := awsRestjson1_deserializeDocumentHttpQueryParameters(&sv.QueryParameters, value); err != nil {
+				return err
 			}
 
 		case "scheme":
@@ -10136,6 +10869,46 @@ func awsRestjson1_deserializeDocumentPortSet(v *[]int32, value interface{}) erro
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentQueryParameterMatch(v **types.QueryParameterMatch, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QueryParameterMatch
+	if *v == nil {
+		sv = &types.QueryParameterMatch{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "exact":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Exact = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -6,6 +6,7 @@
     "files": [
         "api_client.go",
         "api_op_AssociateApprovedOrigin.go",
+        "api_op_AssociateBot.go",
         "api_op_AssociateInstanceStorageConfig.go",
         "api_op_AssociateLambdaFunction.go",
         "api_op_AssociateLexBot.go",
@@ -39,6 +40,7 @@
         "api_op_DescribeUserHierarchyGroup.go",
         "api_op_DescribeUserHierarchyStructure.go",
         "api_op_DisassociateApprovedOrigin.go",
+        "api_op_DisassociateBot.go",
         "api_op_DisassociateInstanceStorageConfig.go",
         "api_op_DisassociateLambdaFunction.go",
         "api_op_DisassociateLexBot.go",
@@ -50,6 +52,7 @@
         "api_op_GetFederationToken.go",
         "api_op_GetMetricData.go",
         "api_op_ListApprovedOrigins.go",
+        "api_op_ListBots.go",
         "api_op_ListContactFlows.go",
         "api_op_ListHoursOfOperations.go",
         "api_op_ListInstanceAttributes.go",

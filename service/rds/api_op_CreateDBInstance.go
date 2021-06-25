@@ -31,9 +31,9 @@ func (c *Client) CreateDBInstance(ctx context.Context, params *CreateDBInstanceI
 type CreateDBInstanceInput struct {
 
 	// The compute and memory capacity of the DB instance, for example, db.m4.large.
-	// Not all DB instance classes are available in all AWS Regions, or for all
-	// database engines. For the full list of DB instance classes, and availability for
-	// your engine, see DB Instance Class
+	// Not all DB instance classes are available in all Amazon Web Services Regions, or
+	// for all database engines. For the full list of DB instance classes, and
+	// availability for your engine, see DB Instance Class
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
 	// in the Amazon RDS User Guide.
 	//
@@ -57,15 +57,15 @@ type CreateDBInstanceInput struct {
 	DBInstanceIdentifier *string
 
 	// The name of the database engine to be used for this instance. Not every database
-	// engine is available for every AWS Region. Valid Values:
-	//
-	// * aurora (for MySQL
-	// 5.6-compatible Aurora)
-	//
-	// * aurora-mysql (for MySQL 5.7-compatible Aurora)
+	// engine is available for every Amazon Web Services Region. Valid Values:
 	//
 	// *
-	// aurora-postgresql
+	// aurora (for MySQL 5.6-compatible Aurora)
+	//
+	// * aurora-mysql (for MySQL
+	// 5.7-compatible Aurora)
+	//
+	// * aurora-postgresql
 	//
 	// * mariadb
 	//
@@ -73,21 +73,21 @@ type CreateDBInstanceInput struct {
 	//
 	// * oracle-ee
 	//
+	// *
+	// oracle-ee-cdb
+	//
 	// * oracle-se2
 	//
-	// *
-	// oracle-se1
-	//
-	// * oracle-se
+	// * oracle-se2-cdb
 	//
 	// * postgres
 	//
 	// * sqlserver-ee
 	//
-	// * sqlserver-se
-	//
 	// *
-	// sqlserver-ex
+	// sqlserver-se
+	//
+	// * sqlserver-ex
 	//
 	// * sqlserver-web
 	//
@@ -180,15 +180,16 @@ type CreateDBInstanceInput struct {
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone (AZ) where the database will be created. For information
-	// on AWS Regions and Availability Zones, see Regions and Availability Zones
+	// on Amazon Web Services Regions and Availability Zones, see Regions and
+	// Availability Zones
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
-	// Default: A random, system-chosen Availability Zone in the endpoint's AWS Region.
-	// Example: us-east-1d Constraint: The AvailabilityZone parameter can't be
-	// specified if the DB instance is a Multi-AZ deployment. The specified
-	// Availability Zone must be in the same AWS Region as the current endpoint. If
-	// you're creating a DB instance in an RDS on VMware environment, specify the
-	// identifier of the custom Availability Zone to create the DB instance in. For
-	// more information about RDS on VMware, see the  RDS on VMware User Guide.
+	// Default: A random, system-chosen Availability Zone in the endpoint's Amazon Web
+	// Services Region. Example: us-east-1d Constraint: The AvailabilityZone parameter
+	// can't be specified if the DB instance is a Multi-AZ deployment. The specified
+	// Availability Zone must be in the same Amazon Web Services Region as the current
+	// endpoint. If you're creating a DB instance in an RDS on VMware environment,
+	// specify the identifier of the custom Availability Zone to create the DB instance
+	// in. For more information about RDS on VMware, see the  RDS on VMware User Guide.
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html)
 	AvailabilityZone *string
 
@@ -352,19 +353,20 @@ type CreateDBInstanceInput struct {
 	// to resources in your Outpost subnets through your on-premises network. For some
 	// use cases, a CoIP can provide lower latency for connections to the DB instance
 	// from outside of its virtual private cloud (VPC) on your local network. For more
-	// information about RDS on Outposts, see Working with Amazon RDS on AWS Outposts
+	// information about RDS on Outposts, see Working with Amazon RDS on Amazon Web
+	// Services Outposts
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
 	// the Amazon RDS User Guide. For more information about CoIPs, see Customer-owned
 	// IP addresses
 	// (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing)
-	// in the AWS Outposts User Guide.
+	// in the Amazon Web Services Outposts User Guide.
 	EnableCustomerOwnedIp *bool
 
-	// A value that indicates whether to enable mapping of AWS Identity and Access
-	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// This setting doesn't apply to Amazon Aurora. Mapping AWS IAM accounts to
-	// database accounts is managed by the DB cluster. For more information, see  IAM
-	// Database Authentication for MySQL and PostgreSQL
+	// A value that indicates whether to enable mapping of Amazon Web Services Identity
+	// and Access Management (IAM) accounts to database accounts. By default, mapping
+	// is disabled. This setting doesn't apply to Amazon Aurora. Mapping Amazon Web
+	// Services IAM accounts to database accounts is managed by the DB cluster. For
+	// more information, see  IAM Database Authentication for MySQL and PostgreSQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool
@@ -379,9 +381,9 @@ type CreateDBInstanceInput struct {
 	// versions, use the DescribeDBEngineVersions action. The following are the
 	// database engines and links to information about the major and minor versions
 	// that are available with Amazon RDS. Not every database engine is available for
-	// every AWS Region. Amazon Aurora Not applicable. The version number of the
-	// database engine to be used by the DB instance is managed by the DB cluster.
-	// MariaDB See MariaDB on Amazon RDS Versions
+	// every Amazon Web Services Region. Amazon Aurora Not applicable. The version
+	// number of the database engine to be used by the DB instance is managed by the DB
+	// cluster. MariaDB See MariaDB on Amazon RDS Versions
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt)
 	// in the Amazon RDS User Guide. Microsoft SQL Server See Microsoft SQL Server
 	// Versions on Amazon RDS
@@ -406,15 +408,16 @@ type CreateDBInstanceInput struct {
 	// between 1 and 50 of the storage amount for the DB instance.
 	Iops *int32
 
-	// The AWS KMS key identifier for an encrypted DB instance. The AWS KMS key
-	// identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS
-	// customer master key (CMK). To use a CMK in a different AWS account, specify the
-	// key ARN or alias ARN. Amazon Aurora Not applicable. The AWS KMS key identifier
-	// is managed by the DB cluster. For more information, see CreateDBCluster. If
+	// The Amazon Web Services KMS key identifier for an encrypted DB instance. The
+	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or
+	// alias name for the Amazon Web Services KMS customer master key (CMK). To use a
+	// CMK in a different Amazon Web Services account, specify the key ARN or alias
+	// ARN. Amazon Aurora Not applicable. The Amazon Web Services KMS key identifier is
+	// managed by the DB cluster. For more information, see CreateDBCluster. If
 	// StorageEncrypted is enabled, and you do not specify a value for the KmsKeyId
 	// parameter, then Amazon RDS uses your default CMK. There is a default CMK for
-	// your AWS account. Your AWS account has a different default CMK for each AWS
-	// Region.
+	// your Amazon Web Services account. Your Amazon Web Services account has a
+	// different default CMK for each Amazon Web Services Region.
 	KmsKeyId *string
 
 	// License model information for this DB instance. Valid values: license-included |
@@ -530,12 +533,13 @@ type CreateDBInstanceInput struct {
 	// instance
 	OptionGroupName *string
 
-	// The AWS KMS key identifier for encryption of Performance Insights data. The AWS
-	// KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS
-	// KMS customer master key (CMK). If you do not specify a value for
-	// PerformanceInsightsKMSKeyId, then Amazon RDS uses your default CMK. There is a
-	// default CMK for your AWS account. Your AWS account has a different default CMK
-	// for each AWS Region.
+	// The Amazon Web Services KMS key identifier for encryption of Performance
+	// Insights data. The Amazon Web Services KMS key identifier is the key ARN, key
+	// ID, alias ARN, or alias name for the Amazon Web Services KMS customer master key
+	// (CMK). If you do not specify a value for PerformanceInsightsKMSKeyId, then
+	// Amazon RDS uses your default CMK. There is a default CMK for your Amazon Web
+	// Services account. Your Amazon Web Services account has a different default CMK
+	// for each Amazon Web Services Region.
 	PerformanceInsightsKMSKeyId *string
 
 	// The amount of time, in days, to retain Performance Insights data. Valid values
@@ -552,8 +556,8 @@ type CreateDBInstanceInput struct {
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled, using the BackupRetentionPeriod parameter. The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
-	// Region. For more information, see Backup window
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
+	// Web Services Region. For more information, see Backup window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
 	// in the Amazon RDS User Guide. Amazon Aurora Not applicable. The daily time range
 	// for creating automated backups is managed by the DB cluster. Constraints:
@@ -574,9 +578,9 @@ type CreateDBInstanceInput struct {
 	// Coordinated Time (UTC). For more information, see Amazon RDS Maintenance Window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance).
 	// Format: ddd:hh24:mi-ddd:hh24:mi The default is a 30-minute window selected at
-	// random from an 8-hour block of time for each AWS Region, occurring on a random
-	// day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Constraints:
-	// Minimum 30-minute window.
+	// random from an 8-hour block of time for each Amazon Web Services Region,
+	// occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat,
+	// Sun. Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
 	// The number of CPU cores and the number of threads per core for the DB instance

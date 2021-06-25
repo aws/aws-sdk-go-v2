@@ -472,6 +472,10 @@ type AwsApiGatewayV2StageDetails struct {
 	// Indicates whether updates to an API automatically trigger a new deployment.
 	AutoDeploy bool
 
+	// The identifier of a client certificate for a stage. Supported only for WebSocket
+	// API calls.
+	ClientCertificateId *string
+
 	// Indicates when the stage was created. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
@@ -985,9 +989,8 @@ type AwsCloudTrailTrailDetails struct {
 type AwsCodeBuildProjectDetails struct {
 
 	// The AWS Key Management Service (AWS KMS) customer master key (CMK) used to
-	// encrypt the build output artifacts. You can specify either the Amazon Resource
-	// Name (ARN) of the CMK or, if available, the CMK alias (using the format
-	// alias/alias-name).
+	// encrypt the build output artifacts. You can specify either the ARN of the CMK
+	// or, if available, the CMK alias (using the format alias/alias-name).
 	EncryptionKey *string
 
 	// Information about the build environment for this build project.
@@ -1052,9 +1055,9 @@ type AwsCodeBuildProjectEnvironment struct {
 // The credentials for access to a private registry.
 type AwsCodeBuildProjectEnvironmentRegistryCredential struct {
 
-	// The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets
-	// Manager. The credential can use the name of the credentials only if they exist
-	// in your current AWS Region.
+	// The ARN or name of credentials created using AWS Secrets Manager. The credential
+	// can use the name of the credentials only if they exist in your current AWS
+	// Region.
 	Credential *string
 
 	// The service that created the credentials to access a private Docker registry.
@@ -1480,7 +1483,7 @@ type AwsEc2EipDetails struct {
 	PublicIpv4Pool *string
 }
 
-// The details of an Amazon EC2 instance.
+// The details of an EC2 instance.
 type AwsEc2InstanceDetails struct {
 
 	// The IAM profile ARN of the instance.
@@ -1504,6 +1507,11 @@ type AwsEc2InstanceDetails struct {
 	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	LaunchedAt *string
 
+	// The identifiers of the network interfaces for the EC2 instance. The details for
+	// each network interface are in a corresponding AwsEc2NetworkInterfacesDetails
+	// object.
+	NetworkInterfaces []AwsEc2InstanceNetworkInterfacesDetails
+
 	// The identifier of the subnet that the instance was launched in.
 	SubnetId *string
 
@@ -1512,6 +1520,14 @@ type AwsEc2InstanceDetails struct {
 
 	// The identifier of the VPC that the instance was launched in.
 	VpcId *string
+}
+
+// Identifies a network interface for the EC2 instance.
+type AwsEc2InstanceNetworkInterfacesDetails struct {
+
+	// The identifier of the network interface. The details are in a corresponding
+	// AwsEc2NetworkInterfacesDetails object.
+	NetworkInterfaceId *string
 }
 
 // An association between the network ACL and a subnet.
@@ -1766,7 +1782,7 @@ type AwsEc2SecurityGroupUserIdGroupPair struct {
 	// account ID of the referenced security group is returned in the response. If the
 	// referenced security group is deleted, this value is not returned. [EC2-Classic]
 	// Required when adding or removing rules that reference a security group in
-	// another AWS.
+	// another VPC.
 	UserId *string
 
 	// The ID of the VPC for the referenced security group, if applicable.
@@ -1882,6 +1898,692 @@ type AwsEc2VpcDetails struct {
 
 	// The current state of the VPC.
 	State *string
+}
+
+// Indicates whether to enable CloudWatch Container Insights for the ECS cluster.
+type AwsEcsClusterClusterSettingsDetails struct {
+
+	// The name of the setting.
+	Name *string
+
+	// The value of the setting.
+	Value *string
+}
+
+// The run command configuration for the cluster.
+type AwsEcsClusterConfigurationDetails struct {
+
+	// Contains the run command configuration for the cluster.
+	ExecuteCommandConfiguration *AwsEcsClusterConfigurationExecuteCommandConfigurationDetails
+}
+
+// Contains the run command configuration for the cluster.
+type AwsEcsClusterConfigurationExecuteCommandConfigurationDetails struct {
+
+	// The identifier of the KMS key that is used to encrypt the data between the local
+	// client and the container.
+	KmsKeyId *string
+
+	// The log configuration for the results of the run command actions. Required if
+	// Logging is NONE.
+	LogConfiguration *AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails
+
+	// The log setting to use for redirecting logs for run command results.
+	Logging *string
+}
+
+// The log configuration for the results of the run command actions.
+type AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails struct {
+
+	// Whether to enable encryption on the CloudWatch logs.
+	CloudWatchEncryptionEnabled bool
+
+	// The name of the CloudWatch log group to send the logs to.
+	CloudWatchLogGroupName *string
+
+	// The name of the S3 bucket to send logs to.
+	S3BucketName *string
+
+	// Whether to encrypt the logs that are sent to the S3 bucket.
+	S3EncryptionEnabled bool
+
+	// Identifies the folder in the S3 bucket to send the logs to.
+	S3KeyPrefix *string
+}
+
+// The default capacity provider strategy for the cluster. The default capacity
+// provider strategy is used when services or tasks are run without a specified
+// launch type or capacity provider strategy.
+type AwsEcsClusterDefaultCapacityProviderStrategyDetails struct {
+
+	// The minimum number of tasks to run on the specified capacity provider.
+	Base int32
+
+	// The name of the capacity provider.
+	CapacityProvider *string
+
+	// The relative percentage of the total number of tasks launched that should use
+	// the capacity provider.
+	Weight int32
+}
+
+// provides details about an ECS cluster.
+type AwsEcsClusterDetails struct {
+
+	// The short name of one or more capacity providers to associate with the cluster.
+	CapacityProviders []string
+
+	// The setting to use to create the cluster. Specifically used to configure whether
+	// to enable CloudWatch Container Insights for the cluster.
+	ClusterSettings []AwsEcsClusterClusterSettingsDetails
+
+	// The run command configuration for the cluster.
+	Configuration *AwsEcsClusterConfigurationDetails
+
+	// The default capacity provider strategy for the cluster. The default capacity
+	// provider strategy is used when services or tasks are run without a specified
+	// launch type or capacity provider strategy.
+	DefaultCapacityProviderStrategy []AwsEcsClusterDefaultCapacityProviderStrategyDetails
+}
+
+// A dependency that is defined for container startup and shutdown.
+type AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails struct {
+
+	// The dependency condition of the dependent container. Indicates the required
+	// status of the dependent container before the current container can start.
+	Condition *string
+
+	// The name of the dependent container.
+	ContainerName *string
+}
+
+// A container definition that describes a container in the task.
+type AwsEcsTaskDefinitionContainerDefinitionsDetails struct {
+
+	// The command that is passed to the container.
+	Command []string
+
+	// The number of CPU units reserved for the container.
+	Cpu int32
+
+	// The dependencies that are defined for container startup and shutdown.
+	DependsOn []AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails
+
+	// Whether to disable networking within the container.
+	DisableNetworking bool
+
+	// A list of DNS search domains that are presented to the container.
+	DnsSearchDomains []string
+
+	// A list of DNS servers that are presented to the container.
+	DnsServers []string
+
+	// A key-value map of labels to add to the container.
+	DockerLabels map[string]string
+
+	// A list of strings to provide custom labels for SELinux and AppArmor multi-level
+	// security systems.
+	DockerSecurityOptions []string
+
+	// The entry point that is passed to the container.
+	EntryPoint []string
+
+	// The environment variables to pass to a container.
+	Environment []AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails
+
+	// A list of files containing the environment variables to pass to a container.
+	EnvironmentFiles []AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails
+
+	// Whether the container is essential. All tasks must have at least one essential
+	// container.
+	Essential bool
+
+	// A list of hostnames and IP address mappings to append to the /etc/hosts file on
+	// the container.
+	ExtraHosts []AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails
+
+	// The FireLens configuration for the container. Specifies and configures a log
+	// router for container logs.
+	FirelensConfiguration *AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails
+
+	// The container health check command and associated configuration parameters for
+	// the container.
+	HealthCheck *AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails
+
+	// The hostname to use for the container.
+	Hostname *string
+
+	// The image used to start the container.
+	Image *string
+
+	// If set to true, then containerized applications can be deployed that require
+	// stdin or a tty to be allocated.
+	Interactive bool
+
+	// A list of links for the container in the form  container_name:alias . Allows
+	// containers to communicate with each other without the need for port mappings.
+	Links []string
+
+	// Linux-specific modifications that are applied to the container, such as Linux
+	// kernel capabilities.
+	LinuxParameters *AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails
+
+	// The log configuration specification for the container.
+	LogConfiguration *AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails
+
+	// The amount (in MiB) of memory to present to the container. If the container
+	// attempts to exceed the memory specified here, the container is shut down. The
+	// total amount of memory reserved for all containers within a task must be lower
+	// than the task memory value, if one is specified.
+	Memory int32
+
+	// The soft limit (in MiB) of memory to reserve for the container.
+	MemoryReservation int32
+
+	// The mount points for the data volumes in the container.
+	MountPoints []AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails
+
+	// The name of the container.
+	Name *string
+
+	// The list of port mappings for the container.
+	PortMappings []AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails
+
+	// Whether the container is given elevated privileges on the host container
+	// instance. The elevated privileges are similar to the root user.
+	Privileged bool
+
+	// Whether to allocate a TTY to the container.
+	PseudoTerminal bool
+
+	// Whether the container is given read-only access to its root file system.
+	ReadonlyRootFilesystem bool
+
+	// The private repository authentication credentials to use.
+	RepositoryCredentials *AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails
+
+	// The type and amount of a resource to assign to a container. The only supported
+	// resource is a GPU.
+	ResourceRequirements []AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails
+
+	// The secrets to pass to the container.
+	Secrets []AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails
+
+	// The number of seconds to wait before giving up on resolving dependencies for a
+	// container.
+	StartTimeout int32
+
+	// The number of seconds to wait before the container is stopped if it doesn't shut
+	// down normally on its own.
+	StopTimeout int32
+
+	// A list of namespaced kernel parameters to set in the container.
+	SystemControls []AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails
+
+	// A list of ulimits to set in the container.
+	Ulimits []AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails
+
+	// The user to use inside the container. The value can use one of the following
+	// formats.
+	//
+	// * user
+	//
+	// * user : group
+	//
+	// * uid
+	//
+	// * uid : gid
+	//
+	// * user : gid
+	//
+	// * uid :
+	// group
+	User *string
+
+	// Data volumes to mount from another container.
+	VolumesFrom []AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails
+
+	// The working directory in which to run commands inside the container.
+	WorkingDirectory *string
+}
+
+// An environment variable to pass to the container.
+type AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails struct {
+
+	// The name of the environment variable.
+	Name *string
+
+	// The value of the environment variable.
+	Value *string
+}
+
+// A file that contain environment variables to pass to a container.
+type AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails struct {
+
+	// The type of environment file.
+	Type *string
+
+	// The ARN of the S3 object that contains the environment variable file.
+	Value *string
+}
+
+// A hostname and IP address mapping to append to the /etc/hosts file on the
+// container.
+type AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails struct {
+
+	// The hostname to use in the /etc/hosts entry.
+	Hostname *string
+
+	// The IP address to use in the /etc/hosts entry.
+	IpAddress *string
+}
+
+// The FireLens configuration for the container. The configuration specifies and
+// configures a log router for container logs.
+type AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails struct {
+
+	// The options to use to configure the log router. The valid option keys are as
+	// follows:
+	//
+	// * enable-ecs-log-metadata. The value can be true or false.
+	//
+	// *
+	// config-file-type. The value can be s3 or file.
+	//
+	// * config-file-value. The value
+	// is either an S3 ARN or a file path.
+	Options map[string]string
+
+	// The log router to use.
+	Type *string
+}
+
+// The container health check command and associated configuration parameters for
+// the container.
+type AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails struct {
+
+	// The command that the container runs to determine whether it is healthy.
+	Command []string
+
+	// The time period in seconds between each health check execution. The default
+	// value is 30 seconds.
+	Interval int32
+
+	// The number of times to retry a failed health check before the container is
+	// considered unhealthy. The default value is 3.
+	Retries int32
+
+	// The optional grace period in seconds that allows containers time to bootstrap
+	// before failed health checks count towards the maximum number of retries.
+	StartPeriod int32
+
+	// The time period in seconds to wait for a health check to succeed before it is
+	// considered a failure. The default value is 5.
+	Timeout int32
+}
+
+// The Linux capabilities for the container that are added to or dropped from the
+// default configuration provided by Docker.
+type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails struct {
+
+	// The Linux capabilities for the container that are added to the default
+	// configuration provided by Docker.
+	Add []string
+
+	// The Linux capabilities for the container that are dropped from the default
+	// configuration provided by Docker.
+	Drop []string
+}
+
+// >Linux-specific modifications that are applied to the container, such as Linux
+// kernel capabilities.
+type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails struct {
+
+	// The Linux capabilities for the container that are added to or dropped from the
+	// default configuration provided by Docker.
+	Capabilities *AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails
+
+	// The host devices to expose to the container.
+	Devices []AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails
+
+	// Whether to run an init process inside the container that forwards signals and
+	// reaps processes.
+	InitProcessEnabled bool
+
+	// The total amount of swap memory (in MiB) that a container can use.
+	MaxSwap int32
+
+	// The value for the size (in MiB) of the /dev/shm volume.
+	SharedMemorySize int32
+
+	// Configures the container's memory swappiness behavior. Determines how
+	// aggressively pages are swapped. The higher the value, the more aggressive the
+	// swappiness. The default is 60.
+	Swappiness int32
+
+	// The container path, mount options, and size (in MiB) of the tmpfs mount.
+	Tmpfs []AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails
+}
+
+// A host device to expose to the container.
+type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails struct {
+
+	// The path inside the container at which to expose the host device.
+	ContainerPath *string
+
+	// The path for the device on the host container instance.
+	HostPath *string
+
+	// The explicit permissions to provide to the container for the device. By default,
+	// the container has permissions for read, write, and mknod for the device.
+	Permissions []string
+}
+
+// The container path, mount options, and size (in MiB) of a tmpfs mount.
+type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails struct {
+
+	// The absolute file path where the tmpfs volume is to be mounted.
+	ContainerPath *string
+
+	// The list of tmpfs volume mount options.
+	MountOptions []string
+
+	// The maximum size (in MiB) of the tmpfs volume.
+	Size int32
+}
+
+// The log configuration specification for the container.
+type AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails struct {
+
+	// The log driver to use for the container.
+	LogDriver *string
+
+	// The configuration options to send to the log driver. Requires version 1.19 of
+	// the Docker Remote API or greater on your container instance.
+	Options map[string]string
+
+	// The secrets to pass to the log configuration.
+	SecretOptions []AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails
+}
+
+// A secret to pass to the log configuration.
+type AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails struct {
+
+	// The name of the secret.
+	Name *string
+
+	// The secret to expose to the container. The value is either the full ARN of the
+	// Secrets Manager secret or the full ARN of the parameter in the Systems Manager
+	// Parameter Store.
+	ValueFrom *string
+}
+
+// A mount point for the data volumes in the container.
+type AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails struct {
+
+	// The path on the container to mount the host volume at.
+	ContainerPath *string
+
+	// Whether the container has read-only access to the volume.
+	ReadOnly bool
+
+	// The name of the volume to mount. Must match the name of a volume listed in
+	// VolumeDetails for the task definition.
+	SourceVolume *string
+}
+
+// A port mapping for the container.
+type AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails struct {
+
+	// The port number on the container that is bound to the user-specified or
+	// automatically assigned host port.
+	ContainerPort int32
+
+	// The port number on the container instance to reserve for the container.
+	HostPort int32
+
+	// The protocol used for the port mapping. The default is tcp.
+	Protocol *string
+}
+
+// The private repository authentication credentials to use.
+type AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails struct {
+
+	// The ARN of the secret that contains the private repository credentials.
+	CredentialsParameter *string
+}
+
+// A resource to assign to a container.
+type AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails struct {
+
+	// The type of resource to assign to a container.
+	Type *string
+
+	// The value for the specified resource type. For GPU, the value is the number of
+	// physical GPUs the Amazon ECS container agent reserves for the container. For
+	// InferenceAccelerator, the value should match the DeviceName attribute of an
+	// entry in InferenceAccelerators.
+	Value *string
+}
+
+// A secret to pass to the container.
+type AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails struct {
+
+	// The name of the secret.
+	Name *string
+
+	// The secret to expose to the container. The value is either the full ARN of the
+	// Secrets Manager secret or the full ARN of the parameter in the Systems Manager
+	// Parameter Store.
+	ValueFrom *string
+}
+
+// A namespaced kernel parameter to set in the container.
+type AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails struct {
+
+	// The namespaced kernel parameter for which to set a value.
+	Namespace *string
+
+	// The value of the parameter.
+	Value *string
+}
+
+// A ulimit to set in the container.
+type AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails struct {
+
+	// The hard limit for the ulimit type.
+	HardLimit int32
+
+	// The type of the ulimit.
+	Name *string
+
+	// The soft limit for the ulimit type.
+	SoftLimit int32
+}
+
+// A data volume to mount from another container.
+type AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails struct {
+
+	// Whether the container has read-only access to the volume.
+	ReadOnly bool
+
+	// The name of another container within the same task definition from which to
+	// mount volumes.
+	SourceContainer *string
+}
+
+// details about a task definition. A task definition describes the container and
+// volume definitions of an Amazon Elastic Container Service task.
+type AwsEcsTaskDefinitionDetails struct {
+
+	// The container definitions that describe the containers that make up the task.
+	ContainerDefinitions []AwsEcsTaskDefinitionContainerDefinitionsDetails
+
+	// The number of CPU units used by the task.
+	Cpu *string
+
+	// The ARN of the task execution role that grants the container agent permission to
+	// make API calls on behalf of the container user.
+	ExecutionRoleArn *string
+
+	// The name of a family that this task definition is registered to.
+	Family *string
+
+	// The Elastic Inference accelerators to use for the containers in the task.
+	InferenceAccelerators []AwsEcsTaskDefinitionInferenceAcceleratorsDetails
+
+	// The IPC resource namespace to use for the containers in the task.
+	IpcMode *string
+
+	// The amount (in MiB) of memory used by the task.
+	Memory *string
+
+	// The Docker networking mode to use for the containers in the task.
+	NetworkMode *string
+
+	// The process namespace to use for the containers in the task.
+	PidMode *string
+
+	// The placement constraint objects to use for tasks.
+	PlacementConstraints []AwsEcsTaskDefinitionPlacementConstraintsDetails
+
+	// The configuration details for the App Mesh proxy.
+	ProxyConfiguration *AwsEcsTaskDefinitionProxyConfigurationDetails
+
+	// The task launch types that the task definition was validated against.
+	RequiresCompatibilities []string
+
+	// The short name or ARN of the IAM role that grants containers in the task
+	// permission to call AWS API operations on your behalf.
+	TaskRoleArn *string
+
+	// The data volume definitions for the task.
+	Volumes []AwsEcsTaskDefinitionVolumesDetails
+}
+
+// An Elastic Inference accelerator to use for the containers in the task.
+type AwsEcsTaskDefinitionInferenceAcceleratorsDetails struct {
+
+	// The Elastic Inference accelerator device name.
+	DeviceName *string
+
+	// The Elastic Inference accelerator type to use.
+	DeviceType *string
+}
+
+// A placement constraint object to use for tasks.
+type AwsEcsTaskDefinitionPlacementConstraintsDetails struct {
+
+	// A cluster query language expression to apply to the constraint.
+	Expression *string
+
+	// The type of constraint.
+	Type *string
+}
+
+// The configuration details for the App Mesh proxy.
+type AwsEcsTaskDefinitionProxyConfigurationDetails struct {
+
+	// The name of the container that will serve as the App Mesh proxy.
+	ContainerName *string
+
+	// The set of network configuration parameters to provide to the Container Network
+	// Interface (CNI) plugin, specified as key-value pairs.
+	ProxyConfigurationProperties []AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails
+
+	// The proxy type.
+	Type *string
+}
+
+// A network configuration parameter to provide to the Container Network Interface
+// (CNI) plugin.
+type AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails struct {
+
+	// The name of the property.
+	Name *string
+
+	// The value of the property.
+	Value *string
+}
+
+// A data volume to mount from another container.
+type AwsEcsTaskDefinitionVolumesDetails struct {
+
+	// Information about a Docker volume.
+	DockerVolumeConfiguration *AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails
+
+	// Information about the Amazon Elastic File System file system that is used for
+	// task storage.
+	EfsVolumeConfiguration *AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails
+
+	// Information about a bind mount host volume.
+	Host *AwsEcsTaskDefinitionVolumesHostDetails
+
+	// The name of the data volume.
+	Name *string
+}
+
+// Information about a Docker volume.
+type AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails struct {
+
+	// Whether to create the Docker volume automatically if it does not already exist.
+	Autoprovision bool
+
+	// The Docker volume driver to use.
+	Driver *string
+
+	// A map of Docker driver-specific options that are passed through.
+	DriverOpts map[string]string
+
+	// Custom metadata to add to the Docker volume.
+	Labels map[string]string
+
+	// The scope for the Docker volume that determines its lifecycle. Docker volumes
+	// that are scoped to a task are provisioned automatically when the task starts and
+	// destroyed when the task stops. Docker volumes that are shared persist after the
+	// task stops.
+	Scope *string
+}
+
+//
+type AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails struct {
+
+	// The Amazon EFS access point identifier to use.
+	AccessPointId *string
+
+	// Whether to use the Amazon ECS task IAM role defined in a task definition when
+	// mounting the Amazon EFS file system.
+	Iam *string
+}
+
+// Information about the Amazon Elastic File System file system that is used for
+// task storage.
+type AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails struct {
+
+	// The authorization configuration details for the Amazon EFS file system.
+	AuthorizationConfig *AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails
+
+	// The Amazon EFS file system identifier to use.
+	FilesystemId *string
+
+	// The directory within the Amazon EFS file system to mount as the root directory
+	// inside the host.
+	RootDirectory *string
+
+	// Whether to enable encryption for Amazon EFS data in transit between the Amazon
+	// ECS host and the Amazon EFS server.
+	TransitEncryption *string
+
+	// The port to use when sending encrypted data between the Amazon ECS host and the
+	// Amazon EFS server.
+	TransitEncryptionPort int32
+}
+
+// Information about a bind mount host volume.
+type AwsEcsTaskDefinitionVolumesHostDetails struct {
+
+	// The path on the host container instance that is presented to the container.
+	SourcePath *string
 }
 
 // Contains details about an Elastic Beanstalk environment.
@@ -2008,8 +2710,15 @@ type AwsElasticsearchDomainDetails struct {
 	// The key-value pair that exists if the Amazon ES domain uses VPC endpoints.
 	Endpoints map[string]string
 
+	// Configures the CloudWatch Logs to publish for the Elasticsearch domain.
+	LogPublishingOptions *AwsElasticsearchDomainLogPublishingOptions
+
 	// Details about the configuration for node-to-node encryption.
 	NodeToNodeEncryptionOptions *AwsElasticsearchDomainNodeToNodeEncryptionOptions
+
+	// Information about the status of a domain relative to the latest service
+	// software.
+	ServiceSoftwareOptions *AwsElasticsearchDomainServiceSoftwareOptions
 
 	// Information that Amazon ES derives based on VPCOptions for the domain.
 	VPCOptions *AwsElasticsearchDomainVPCOptions
@@ -2042,11 +2751,59 @@ type AwsElasticsearchDomainEncryptionAtRestOptions struct {
 	KmsKeyId *string
 }
 
+// configures the CloudWatch Logs to publish for the Elasticsearch domain.
+type AwsElasticsearchDomainLogPublishingOptions struct {
+
+	// Configures the Elasticsearch index logs publishing.
+	IndexSlowLogs *AwsElasticsearchDomainLogPublishingOptionsLogConfig
+
+	// Configures the Elasticsearch search slow log publishing.
+	SearchSlowLogs *AwsElasticsearchDomainLogPublishingOptionsLogConfig
+}
+
+// The log configuration.
+type AwsElasticsearchDomainLogPublishingOptionsLogConfig struct {
+
+	// The ARN of the CloudWatch Logs group to publish the logs to.
+	CloudWatchLogsLogGroupArn *string
+
+	// Whether the log publishing is enabled.
+	Enabled bool
+}
+
 // Details about the configuration for node-to-node encryption.
 type AwsElasticsearchDomainNodeToNodeEncryptionOptions struct {
 
 	// Whether node-to-node encryption is enabled.
 	Enabled bool
+}
+
+// Information about the state of the domain relative to the latest service
+// software.
+type AwsElasticsearchDomainServiceSoftwareOptions struct {
+
+	// The epoch time when the deployment window closes for required updates. After
+	// this time, Amazon Elasticsearch Service schedules the software upgrade
+	// automatically.
+	AutomatedUpdateDate *string
+
+	// Whether a request to update the domain can be canceled.
+	Cancellable bool
+
+	// The version of the service software that is currently installed on the domain.
+	CurrentVersion *string
+
+	// A more detailed description of the service software status.
+	Description *string
+
+	// The most recent version of the service software.
+	NewVersion *string
+
+	// Whether a service software update is available for the domain.
+	UpdateAvailable bool
+
+	// The status of the service software update.
+	UpdateStatus *string
 }
 
 // Information that Amazon ES derives based on VPCOptions for the domain.
@@ -2400,7 +3157,7 @@ type AwsIamAccessKeyDetails struct {
 	// parameter has been replaced with the PrincipalName parameter because access keys
 	// can also be assigned to principals that are not IAM users.
 	//
-	// Deprecated: This field is deprecated, use PrincipalName instead.
+	// Deprecated: This filter is deprecated. Instead, use PrincipalName.
 	UserName *string
 }
 
@@ -2749,7 +3506,7 @@ type AwsLambdaFunctionCode struct {
 // The dead-letter queue for failed asynchronous invocations.
 type AwsLambdaFunctionDeadLetterConfig struct {
 
-	// The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
+	// The ARN of an Amazon SQS queue or Amazon SNS topic.
 	TargetArn *string
 }
 
@@ -2790,7 +3547,7 @@ type AwsLambdaFunctionDetails struct {
 	// For Lambda@Edge functions, the ARN of the master function.
 	MasterArn *string
 
-	// The memory that's allocated to the function.
+	// The memory that is allocated to the function.
 	MemorySize int32
 
 	// The latest updated revision of the function or alias.
@@ -2825,7 +3582,7 @@ type AwsLambdaFunctionEnvironment struct {
 	Variables map[string]string
 }
 
-// Error messages for environment variables that couldn't be applied.
+// Error messages for environment variables that could not be applied.
 type AwsLambdaFunctionEnvironmentError struct {
 
 	// The error code.
@@ -2838,7 +3595,7 @@ type AwsLambdaFunctionEnvironmentError struct {
 // An AWS Lambda layer.
 type AwsLambdaFunctionLayer struct {
 
-	// The Amazon Resource Name (ARN) of the function layer.
+	// The ARN of the function layer.
 	Arn *string
 
 	// The size of the layer archive in bytes.
@@ -2852,8 +3609,7 @@ type AwsLambdaFunctionTracingConfig struct {
 	Mode *string
 }
 
-// The VPC security groups and subnets that are attached to a Lambda function. For
-// more information, see VPC Settings.
+// The VPC security groups and subnets that are attached to a Lambda function.
 type AwsLambdaFunctionVpcConfig struct {
 
 	// A list of VPC security groups IDs.
@@ -3141,8 +3897,7 @@ type AwsRdsDbInstanceAssociatedRole struct {
 	// The name of the feature associated with the IAM)role.
 	FeatureName *string
 
-	// The Amazon Resource Name (ARN) of the IAM role that is associated with the DB
-	// instance.
+	// The ARN of the IAM role that is associated with the DB instance.
 	RoleArn *string
 
 	// Describes the state of the association between the IAM role and the DB instance.
@@ -4083,8 +4838,160 @@ type AwsS3AccountPublicAccessBlockDetails struct {
 	RestrictPublicBuckets bool
 }
 
+// The lifecycle configuration for the objects in the S3 bucket.
+type AwsS3BucketBucketLifecycleConfigurationDetails struct {
+
+	// The lifecycle rules.
+	Rules []AwsS3BucketBucketLifecycleConfigurationRulesDetails
+}
+
+// Information about what Amazon S3 does when a multipart upload is incomplete.
+type AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails struct {
+
+	// The number of days after which Amazon S3 cancels an incomplete multipart upload.
+	DaysAfterInitiation int32
+}
+
+// Configuration for a lifecycle rule.
+type AwsS3BucketBucketLifecycleConfigurationRulesDetails struct {
+
+	// How Amazon S3 responds when a multipart upload is incomplete. Specifically,
+	// provides a number of days before Amazon S3 cancels the entire upload.
+	AbortIncompleteMultipartUpload *AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails
+
+	// The date when objects are moved or deleted. Uses the date-time format specified
+	// in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	ExpirationDate *string
+
+	// The length in days of the lifetime for objects that are subject to the rule.
+	ExpirationInDays int32
+
+	// Whether Amazon S3 removes a delete marker that has no noncurrent versions. If
+	// set to true, the delete marker is expired. If set to false, the policy takes no
+	// action. If you provide ExpiredObjectDeleteMarker, you cannot provide
+	// ExpirationInDays or ExpirationDate.
+	ExpiredObjectDeleteMarker bool
+
+	// Identifies the objects that a rule applies to.
+	Filter *AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails
+
+	// The unique identifier of the rule.
+	ID *string
+
+	// The number of days that an object is noncurrent before Amazon S3 can perform the
+	// associated action.
+	NoncurrentVersionExpirationInDays int32
+
+	// Transition rules that describe when noncurrent objects transition to a specified
+	// storage class.
+	NoncurrentVersionTransitions []AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails
+
+	// A prefix that identifies one or more objects that the rule applies to.
+	Prefix *string
+
+	// The current status of the rule. Indicates whether the rule is currently being
+	// applied.
+	Status *string
+
+	// Transition rules that indicate when objects transition to a specified storage
+	// class.
+	Transitions []AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails
+}
+
+// Identifies the objects that a rule applies to.
+type AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails struct {
+
+	// The configuration for the filter.
+	Predicate *AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails
+}
+
+// The configuration for the filter.
+type AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails struct {
+
+	// The values to use for the filter.
+	Operands []AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails
+
+	// A prefix filter.
+	Prefix *string
+
+	// A tag filter.
+	Tag *AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails
+
+	// Whether to use AND or OR to join the operands.
+	Type *string
+}
+
+// A value to use for the filter.
+type AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails struct {
+
+	// Prefix text for matching objects.
+	Prefix *string
+
+	// A tag that is assigned to matching objects.
+	Tag *AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails
+
+	// The type of filter value.
+	Type *string
+}
+
+// A tag that is assigned to matching objects.
+type AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails struct {
+
+	// The tag key.
+	Key *string
+
+	// The tag value.
+	Value *string
+}
+
+// A tag filter.
+type AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails struct {
+
+	// The tag key.
+	Key *string
+
+	// The tag value
+	Value *string
+}
+
+// A transition rule that describes when noncurrent objects transition to a
+// specified storage class.
+type AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails struct {
+
+	// The number of days that an object is noncurrent before Amazon S3 can perform the
+	// associated action.
+	Days int32
+
+	// The class of storage to change the object to after the object is noncurrent for
+	// the specified number of days.
+	StorageClass *string
+}
+
+// A rule for when objects transition to specific storage classes.
+type AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails struct {
+
+	// A date on which to transition objects to the specified storage class. If you
+	// provide Date, you cannot provide Days. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	Date *string
+
+	// The number of days after which to transition the object to the specified storage
+	// class. If you provide Days, you cannot provide Date.
+	Days int32
+
+	// The storage class to transition the object to.
+	StorageClass *string
+}
+
 // The details of an Amazon S3 bucket.
 type AwsS3BucketDetails struct {
+
+	// The lifecycle configuration for objects in the S3 bucket.
+	BucketLifecycleConfiguration *AwsS3BucketBucketLifecycleConfigurationDetails
 
 	// Indicates when the S3 bucket was created. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
@@ -4369,7 +5276,8 @@ type AwsSecurityFinding struct {
 
 	// The workflow state of a finding.
 	//
-	// Deprecated: This field is deprecated, use Workflow.Status instead.
+	// Deprecated: This filter is deprecated. Instead, use SeverityLabel or
+	// FindingProviderFieldsSeverityLabel.
 	WorkflowState WorkflowState
 }
 
@@ -4455,6 +5363,8 @@ type AwsSecurityFindingFilters struct {
 	Id []StringFilter
 
 	// A keyword for a finding.
+	//
+	// Deprecated: The Keyword property is deprecated.
 	Keyword []KeywordFilter
 
 	// An ISO8601-formatted timestamp that indicates when the security-findings
@@ -4735,7 +5645,7 @@ type AwsSecurityFindingIdentifier struct {
 	ProductArn *string
 }
 
-// A wrapper type for the topic's Amazon Resource Name (ARN).
+// A wrapper type for the topic's ARN.
 type AwsSnsTopicDetails struct {
 
 	// The ID of an AWS managed customer master key (CMK) for Amazon SNS or a custom
@@ -4766,8 +5676,8 @@ type AwsSnsTopicSubscription struct {
 // Data about a queue.
 type AwsSqsQueueDetails struct {
 
-	// The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon SQS
-	// moves messages after the value of maxReceiveCount is exceeded.
+	// The ARN of the dead-letter queue to which Amazon SQS moves messages after the
+	// value of maxReceiveCount is exceeded.
 	DeadLetterTargetArn *string
 
 	// The length of time, in seconds, for which Amazon SQS can reuse a data key to
@@ -6001,7 +6911,7 @@ type ResourceDetails struct {
 	// Details about an Elastic IP address.
 	AwsEc2Eip *AwsEc2EipDetails
 
-	// Details about an Amazon EC2 instance related to a finding.
+	// Details about an EC2 instance related to a finding.
 	AwsEc2Instance *AwsEc2InstanceDetails
 
 	// Details about an EC2 network access control list (ACL).
@@ -6021,6 +6931,13 @@ type ResourceDetails struct {
 
 	// Details for an EC2 VPC.
 	AwsEc2Vpc *AwsEc2VpcDetails
+
+	// Details about an ECS cluster.
+	AwsEcsCluster *AwsEcsClusterDetails
+
+	// Details about a task definition. A task definition describes the container and
+	// volume definitions of an Amazon Elastic Container Service task.
+	AwsEcsTaskDefinition *AwsEcsTaskDefinitionDetails
 
 	// Details about an Elastic Beanstalk environment.
 	AwsElasticBeanstalkEnvironment *AwsElasticBeanstalkEnvironmentDetails

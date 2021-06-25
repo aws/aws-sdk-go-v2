@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a Web ACL from a regional application resource. A regional
-// application can be an Application Load Balancer (ALB), an API Gateway REST API,
-// or an AppSync GraphQL API. For AWS CloudFront, don't use this call. Instead, use
-// your CloudFront distribution configuration. To disassociate a Web ACL, provide
-// an empty web ACL ID in the CloudFront call UpdateDistribution. For information,
-// see UpdateDistribution
+// Disassociates a web ACL from a regional application resource. A regional
+// application can be an Application Load Balancer (ALB), an Amazon API Gateway
+// REST API, or an AppSync GraphQL API. For Amazon CloudFront, don't use this call.
+// Instead, use your CloudFront distribution configuration. To disassociate a web
+// ACL, provide an empty web ACL ID in the CloudFront call UpdateDistribution. For
+// information, see UpdateDistribution
 // (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
 func (c *Client) DisassociateWebACL(ctx context.Context, params *DisassociateWebACLInput, optFns ...func(*Options)) (*DisassociateWebACLOutput, error) {
 	if params == nil {
@@ -42,7 +42,7 @@ type DisassociateWebACLInput struct {
 	// arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
 	//
 	// *
-	// For an API Gateway REST API:
+	// For an Amazon API Gateway REST API:
 	// arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
 	//
 	// * For an AppSync

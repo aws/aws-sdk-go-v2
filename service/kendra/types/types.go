@@ -100,6 +100,43 @@ type AttributeFilter struct {
 	OrAllFilters []AttributeFilter
 }
 
+// Provides the configuration information to connect to websites that require user
+// authentication.
+type AuthenticationConfiguration struct {
+
+	// The list of configuration information that's required to connect to and crawl a
+	// website host using basic authentication credentials. The list includes the name
+	// and port number of the website host.
+	BasicAuthentication []BasicAuthenticationConfiguration
+}
+
+// Provides the configuration information to connect to websites that require basic
+// user authentication.
+type BasicAuthenticationConfiguration struct {
+
+	// Your secret ARN, which you can create in AWS Secrets Manager
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) You use
+	// a secret if basic authentication credentials are required to connect to a
+	// website. The secret stores your credentials of user name and password.
+	//
+	// This member is required.
+	Credentials *string
+
+	// The name of the website host you want to connect to using authentication
+	// credentials. For example, the host name of https://a.example.com/page1.html is
+	// "a.example.com".
+	//
+	// This member is required.
+	Host *string
+
+	// The port number of the website host you want to connect to using authentication
+	// credentials. For example, the port for https://a.example.com/page1.html is 443,
+	// the standard port for HTTPS.
+	//
+	// This member is required.
+	Port *int32
+}
+
 // Provides information about documents that could not be removed from an index by
 // the BatchDeleteDocument operation.
 type BatchDeleteDocumentResponseFailedDocument struct {
@@ -141,18 +178,26 @@ type BatchPutDocumentResponseFailedDocument struct {
 	Id *string
 }
 
-// Specifies capacity units configured for your index. You can add and remove
-// capacity units to tune an index to your requirements.
+// Specifies capacity units configured for your enterprise edition index. You can
+// add and remove capacity units to tune an index to your requirements.
 type CapacityUnitsConfiguration struct {
 
-	// The amount of extra query capacity for an index. Each capacity unit provides 0.5
-	// queries per second and 40,000 queries per day.
+	// The amount of extra query capacity for an index and GetQuerySuggestions
+	// (https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html)
+	// capacity. A single extra capacity unit for an index provides 0.5 queries per
+	// second or approximately 40,000 queries per day. GetQuerySuggestions capacity is
+	// 5 times the provisioned query capacity for an index. For example, the base
+	// capacity for an index is 0.5 queries per second, so GetQuerySuggestions capacity
+	// is 2.5 calls per second. If adding another 0.5 queries per second to total 1
+	// queries per second for an index, the GetQuerySuggestions capacity is 5 calls per
+	// second.
 	//
 	// This member is required.
 	QueryCapacityUnits *int32
 
-	// The amount of extra storage capacity for an index. Each capacity unit provides
-	// 150 Gb of storage space or 500,000 documents, whichever is reached first.
+	// The amount of extra storage capacity for an index. A single capacity unit for an
+	// index provides 150 GB of storage space or 500,000 documents, whichever is
+	// reached first.
 	//
 	// This member is required.
 	StorageCapacityUnits *int32
@@ -502,6 +547,9 @@ type DataSourceConfiguration struct {
 	// Provides information necessary to create a data source connector for a Microsoft
 	// SharePoint site.
 	SharePointConfiguration *SharePointConfiguration
+
+	// Provides the configuration information required for Amazon Kendra web crawler.
+	WebCrawlerConfiguration *WebCrawlerConfiguration
 }
 
 // Summary information for a Amazon Kendra data source. Returned in a call to the
@@ -1114,6 +1162,32 @@ type Principal struct {
 	Type PrincipalType
 }
 
+// Provides the configuration information for a web proxy to connect to website
+// hosts.
+type ProxyConfiguration struct {
+
+	// The name of the website host you want to connect to via a web proxy server. For
+	// example, the host name of https://a.example.com/page1.html is "a.example.com".
+	//
+	// This member is required.
+	Host *string
+
+	// The port number of the website host you want to connect to via a web proxy
+	// server. For example, the port for https://a.example.com/page1.html is 443, the
+	// standard port for HTTPS.
+	//
+	// This member is required.
+	Port *int32
+
+	// Your secret ARN, which you can create in AWS Secrets Manager
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) The
+	// credentials are optional. You use a secret if web proxy credentials are required
+	// to connect to a website host. Amazon Kendra currently support basic
+	// authentication to connect to a web proxy server. The secret stores your
+	// credentials.
+	Credentials *string
+}
+
 // A single query result. A query result contains information about a document
 // returned by the query. This includes the original location of the document, a
 // list of attributes assigned to the document, and relevant text from the document
@@ -1538,6 +1612,37 @@ type Search struct {
 	Sortable bool
 }
 
+// Provides the configuration information of the seed or starting point URLs to
+// crawl. When selecting websites to index, you must adhere to the Amazon
+// Acceptable Use Policy (https://aws.amazon.com/aup/) and all other Amazon terms.
+// Remember that you must only use the Amazon Kendra web crawler to index your own
+// webpages, or webpages that you have authorization to index.
+type SeedUrlConfiguration struct {
+
+	// The list of seed or starting point URLs of the websites you want to crawl. The
+	// list can include a maximum of 100 seed URLs.
+	//
+	// This member is required.
+	SeedUrls []string
+
+	// You can choose one of the following modes:
+	//
+	// * HOST_ONLY – crawl only the website
+	// host names. For example, if the seed URL is "abc.example.com", then only URLs
+	// with host name "abc.example.com" are crawled.
+	//
+	// * SUBDOMAINS – crawl the website
+	// host names with subdomains. For example, if the seed URL is "abc.example.com",
+	// then "a.abc.example.com" and "b.abc.example.com" are also crawled.
+	//
+	// * EVERYTHING
+	// – crawl the website host names with subdomains and other domains that the
+	// webpages link to.
+	//
+	// The default mode is set to HOST_ONLY.
+	WebCrawlerMode WebCrawlerMode
+}
+
 // Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt
 // data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
 type ServerSideEncryptionConfiguration struct {
@@ -1671,8 +1776,9 @@ type ServiceNowServiceCatalogConfiguration struct {
 type SharePointConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The
-	// credentials should be a user/password pair. For more information, see Using a
-	// Microsoft SharePoint Data Source
+	// credentials should be a user/password pair. If you use SharePoint Sever, you
+	// also need to provide the sever domain name as part of the credentials. For more
+	// information, see Using a Microsoft SharePoint Data Source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html). For
 	// more information about AWS Secrets Manager, see  What Is AWS Secrets Manager
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the
@@ -1725,6 +1831,9 @@ type SharePointConfiguration struct {
 	// display URL of the SharePoint document.
 	InclusionPatterns []string
 
+	// Information required to find a specific file in an Amazon S3 bucket.
+	SslCertificateS3Path *S3Path
+
 	// Set to TRUE to use the Microsoft SharePoint change log to determine the
 	// documents that need to be updated in the index. Depending on the size of the
 	// SharePoint change log, it may take longer for Amazon Kendra to use the change
@@ -1734,6 +1843,20 @@ type SharePointConfiguration struct {
 
 	// Provides information for connecting to an Amazon VPC.
 	VpcConfiguration *DataSourceVpcConfiguration
+}
+
+// Provides the configuration information of the sitemap URLs to crawl. When
+// selecting websites to index, you must adhere to the Amazon Acceptable Use Policy
+// (https://aws.amazon.com/aup/) and all other Amazon terms. Remember that you must
+// only use the Amazon Kendra web crawler to index your own webpages, or webpages
+// that you have authorization to index.
+type SiteMapsConfiguration struct {
+
+	// The list of sitemap URLs of the websites you want to crawl. The list can include
+	// a maximum of three sitemap URLs.
+	//
+	// This member is required.
+	SiteMaps []string
 }
 
 // Specifies the document attribute to use to sort the response to a Amazon Kendra
@@ -1924,6 +2047,25 @@ type TimeRange struct {
 	StartTime *time.Time
 }
 
+// Provides the configuration information of the URLs to crawl. When selecting
+// websites to index, you must adhere to the Amazon Acceptable Use Policy
+// (https://aws.amazon.com/aup/) and all other Amazon terms. Remember that you must
+// only use the Amazon Kendra web crawler to index your own webpages, or webpages
+// that you have authorization to index.
+type Urls struct {
+
+	// Provides the configuration of the seed or starting point URLs of the websites
+	// you want to crawl. You can choose to crawl only the website host names, or the
+	// website host names with subdomains, or the website host names with subdomains
+	// and other domains that the webpages link to. You can list up to 100 seed URLs.
+	SeedUrlConfiguration *SeedUrlConfiguration
+
+	// Provides the configuration of the sitemap URLs of the websites you want to
+	// crawl. Only URLs belonging to the same website host names are crawled. You can
+	// list up to three sitemap URLs.
+	SiteMapsConfiguration *SiteMapsConfiguration
+}
+
 // Provides information about the user context for a Amazon Kendra index.
 type UserContext struct {
 
@@ -1939,6 +2081,75 @@ type UserTokenConfiguration struct {
 
 	// Information about the JWT token type configuration.
 	JwtTokenTypeConfiguration *JwtTokenTypeConfiguration
+}
+
+// Provides the configuration information required for Amazon Kendra web crawler.
+type WebCrawlerConfiguration struct {
+
+	// Specifies the seed or starting point URLs of the websites or the sitemap URLs of
+	// the websites you want to crawl. You can include website subdomains. You can list
+	// up to 100 seed URLs and up to three sitemap URLs. When selecting websites to
+	// index, you must adhere to the Amazon Acceptable Use Policy
+	// (https://aws.amazon.com/aup/) and all other Amazon terms. Remember that you must
+	// only use the Amazon Kendra web crawler to index your own webpages, or webpages
+	// that you have authorization to index.
+	//
+	// This member is required.
+	Urls *Urls
+
+	// Provides configuration information required to connect to websites using
+	// authentication. You can connect to websites using basic authentication of user
+	// name and password. You must provide the website host name and port number. For
+	// example, the host name of https://a.example.com/page1.html is "a.example.com"
+	// and the port is 443, the standard port for HTTPS. You use a secret in AWS
+	// Secrets Manager
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) to
+	// store your authentication credentials.
+	AuthenticationConfiguration *AuthenticationConfiguration
+
+	// Specifies the number of levels in a website that you want to crawl. The first
+	// level begins from the website seed or starting point URL. For example, if a
+	// website has 3 levels – index level (i.e. seed in this example), sections level,
+	// and subsections level – and you are only interested in crawling information up
+	// to the sections level (i.e. levels 0-1), you can set your depth to 1. The
+	// default crawl depth is set to 2.
+	CrawlDepth *int32
+
+	// The maximum size (in MB) of a webpage or attachment to crawl. Files larger than
+	// this size (in MB) are skipped/not crawled. The default maximum size of a webpage
+	// or attachment is set to 50 MB.
+	MaxContentSizePerPageInMegaBytes *float32
+
+	// The maximum number of URLs on a webpage to include when crawling a website. This
+	// number is per webpage. As a website’s webpages are crawled, any URLs the
+	// webpages link to are also crawled. URLs on a webpage are crawled in order of
+	// appearance. The default maximum links per page is 100.
+	MaxLinksPerPage *int32
+
+	// The maximum number of URLs crawled per website host per minute. A minimum of one
+	// URL is required. The default maximum number of URLs crawled per website host per
+	// minute is 300.
+	MaxUrlsPerMinuteCrawlRate *int32
+
+	// Provides configuration information required to connect to your internal websites
+	// via a web proxy. You must provide the website host name and port number. For
+	// example, the host name of https://a.example.com/page1.html is "a.example.com"
+	// and the port is 443, the standard port for HTTPS. Web proxy credentials are
+	// optional and you can use them to connect to a web proxy server that requires
+	// basic authentication. To store web proxy credentials, you use a secret in AWS
+	// Secrets Manager
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html).
+	ProxyConfiguration *ProxyConfiguration
+
+	// The regular expression pattern to exclude certain URLs to crawl. If there is a
+	// regular expression pattern to include certain URLs that conflicts with the
+	// exclude pattern, the exclude pattern takes precedence.
+	UrlExclusionPatterns []string
+
+	// The regular expression pattern to include certain URLs to crawl. If there is a
+	// regular expression pattern to exclude certain URLs that conflicts with the
+	// include pattern, the exclude pattern takes precedence.
+	UrlInclusionPatterns []string
 }
 
 // UnknownUnionMember is returned when a union member is returned over the wire,

@@ -32,9 +32,10 @@ func (c *Client) StartActivityStream(ctx context.Context, params *StartActivityS
 
 type StartActivityStreamInput struct {
 
-	// The AWS KMS key identifier for encrypting messages in the database activity
-	// stream. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-	// name for the AWS KMS customer master key (CMK).
+	// The Amazon Web Services KMS key identifier for encrypting messages in the
+	// database activity stream. The Amazon Web Services KMS key identifier is the key
+	// ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS customer
+	// master key (CMK).
 	//
 	// This member is required.
 	KmsKeyId *string
@@ -55,6 +56,11 @@ type StartActivityStreamInput struct {
 	// Specifies whether or not the database activity stream is to start as soon as
 	// possible, regardless of the maintenance window for the database.
 	ApplyImmediately *bool
+
+	// Specifies whether the database activity stream includes engine-native audit
+	// fields. This option only applies to an Oracle DB instance. By default, no
+	// engine-native audit fields are included.
+	EngineNativeAuditFieldsIncluded *bool
 }
 
 type StartActivityStreamOutput struct {
@@ -63,12 +69,16 @@ type StartActivityStreamOutput struct {
 	// possible, regardless of the maintenance window for the database.
 	ApplyImmediately bool
 
+	// Indicates whether engine-native audit fields are included in the database
+	// activity stream.
+	EngineNativeAuditFieldsIncluded *bool
+
 	// The name of the Amazon Kinesis data stream to be used for the database activity
 	// stream.
 	KinesisStreamName *string
 
-	// The AWS KMS key identifier for encryption of messages in the database activity
-	// stream.
+	// The Amazon Web Services KMS key identifier for encryption of messages in the
+	// database activity stream.
 	KmsKeyId *string
 
 	// The mode of the database activity stream.

@@ -104,6 +104,23 @@ type FieldMemberBlobValue struct {
 
 func (*FieldMemberBlobValue) isField() {}
 
+// A parameter used in a SQL statement.
+type SqlParameter struct {
+
+	// The name of the parameter.
+	//
+	// This member is required.
+	Name *string
+
+	// The value of the parameter. Amazon Redshift implicitly converts to the proper
+	// data type. For more inforation, see Data types
+	// (https://docs.aws.amazon.com/redshift/latest/dg/c_Supported_data_types.html) in
+	// the Amazon Redshift Database Developer Guide.
+	//
+	// This member is required.
+	Value *string
+}
+
 // The SQL statement to run.
 type StatementData struct {
 
@@ -115,6 +132,9 @@ type StatementData struct {
 
 	// The date and time (UTC) the statement was created.
 	CreatedAt *time.Time
+
+	// The parameters used in a SQL statement.
+	QueryParameters []SqlParameter
 
 	// The SQL statement.
 	QueryString *string

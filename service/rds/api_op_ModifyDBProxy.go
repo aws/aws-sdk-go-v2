@@ -62,7 +62,7 @@ type ModifyDBProxyInput struct {
 	RequireTLS *bool
 
 	// The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access
-	// secrets in AWS Secrets Manager.
+	// secrets in Amazon Web Services Secrets Manager.
 	RoleArn *string
 
 	// The new list of security groups for the DBProxy.

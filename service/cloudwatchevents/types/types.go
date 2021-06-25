@@ -138,6 +138,29 @@ type BatchRetryStrategy struct {
 	Attempts int32
 }
 
+// The details of a capacity provider strategy. To learn more, see
+// CapacityProviderStrategyItem
+// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html)
+// in the Amazon ECS API Reference.
+type CapacityProviderStrategyItem struct {
+
+	// The short name of the capacity provider.
+	//
+	// This member is required.
+	CapacityProvider *string
+
+	// The base value designates how many tasks, at a minimum, to run on the specified
+	// capacity provider. Only one capacity provider in a capacity provider strategy
+	// can have a base defined. If no value is specified, the default value of 0 is
+	// used.
+	Base int32
+
+	// The weight value designates the relative percentage of the total number of tasks
+	// launched that should use the specified capacity provider. The weight value is
+	// taken into consideration after the base value, if defined, is satisfied.
+	Weight int32
+}
+
 // A JSON string which you can use to limit the event bus permissions you are
 // granting to only accounts that fulfill the condition. Currently, the only
 // supported condition is membership in a certain AWS organization. The string must
@@ -414,6 +437,23 @@ type EcsParameters struct {
 	// This member is required.
 	TaskDefinitionArn *string
 
+	// The capacity provider strategy to use for the task. If a
+	// capacityProviderStrategy is specified, the launchType parameter must be omitted.
+	// If no capacityProviderStrategy or launchType is specified, the
+	// defaultCapacityProviderStrategy for the cluster is used.
+	CapacityProviderStrategy []CapacityProviderStrategyItem
+
+	// Specifies whether to enable Amazon ECS managed tags for the task. For more
+	// information, see Tagging Your Amazon ECS Resources
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	EnableECSManagedTags bool
+
+	// Whether or not to enable the execute command functionality for the containers in
+	// this task. If true, this enables execute command functionality on all containers
+	// in the task.
+	EnableExecuteCommand bool
+
 	// Specifies an ECS task group for the task. The maximum length is 255 characters.
 	Group *string
 
@@ -434,6 +474,15 @@ type EcsParameters struct {
 	// awsvpc network mode, the task fails.
 	NetworkConfiguration *NetworkConfiguration
 
+	// An array of placement constraint objects to use for the task. You can specify up
+	// to 10 constraints per task (including constraints in the task definition and
+	// those specified at runtime).
+	PlacementConstraints []PlacementConstraint
+
+	// The placement strategy objects to use for the task. You can specify a maximum of
+	// five strategy rules per task.
+	PlacementStrategy []PlacementStrategy
+
 	// Specifies the platform version for the task. Specify only the numeric portion of
 	// the platform version, such as 1.1.0. This structure is used only if LaunchType
 	// is FARGATE. For more information about valid platform versions, see AWS Fargate
@@ -442,16 +491,32 @@ type EcsParameters struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
 
+	// Specifies whether to propagate the tags from the task definition to the task. If
+	// no value is specified, the tags are not propagated. Tags can only be propagated
+	// to the task during task creation. To add tags to a task after task creation, use
+	// the TagResource API action.
+	PropagateTags PropagateTags
+
+	// The reference ID to use for the task.
+	ReferenceId *string
+
+	// The metadata that you apply to the task to help you categorize and organize
+	// them. Each tag consists of a key and an optional value, both of which you
+	// define. To learn more, see RunTask
+	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags)
+	// in the Amazon ECS API Reference.
+	Tags []Tag
+
 	// The number of tasks to create based on TaskDefinition. The default is 1.
 	TaskCount *int32
 }
 
 // An event bus receives events from a source and routes them to rules associated
-// with that event bus. Your account's default event bus receives rules from AWS
-// services. A custom event bus can receive rules from AWS services as well as your
-// custom applications and services. A partner event bus receives events from an
-// event source created by an SaaS partner. These events come from the partners
-// services or applications.
+// with that event bus. Your account's default event bus receives events from AWS
+// services. A custom event bus can receive events from your custom applications
+// and services. A partner event bus receives events from an event source created
+// by an SaaS partner. These events come from the partners services or
+// applications.
 type EventBus struct {
 
 	// The ARN of the event bus.
@@ -626,6 +691,49 @@ type PartnerEventSourceAccount struct {
 	// is deactivated. If it is DELETED, you have created a matching event bus, but the
 	// event source has since been deleted.
 	State EventSourceState
+}
+
+// An object representing a constraint on task placement. To learn more, see Task
+// Placement Constraints
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
+// in the Amazon Elastic Container Service Developer Guide.
+type PlacementConstraint struct {
+
+	// A cluster query language expression to apply to the constraint. You cannot
+	// specify an expression if the constraint type is distinctInstance. To learn more,
+	// see Cluster Query Language
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	Expression *string
+
+	// The type of constraint. Use distinctInstance to ensure that each task in a
+	// particular group is running on a different container instance. Use memberOf to
+	// restrict the selection to a group of valid candidates.
+	Type PlacementConstraintType
+}
+
+// The task placement strategy for a task or service. To learn more, see Task
+// Placement Strategies
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html)
+// in the Amazon Elastic Container Service Developer Guide.
+type PlacementStrategy struct {
+
+	// The field to apply the placement strategy against. For the spread placement
+	// strategy, valid values are instanceId (or host, which has the same effect), or
+	// any platform or custom attribute that is applied to a container instance, such
+	// as attribute:ecs.availability-zone. For the binpack placement strategy, valid
+	// values are cpu and memory. For the random placement strategy, this field is not
+	// used.
+	Field *string
+
+	// The type of placement strategy. The random placement strategy randomly places
+	// tasks on available candidates. The spread placement strategy spreads placement
+	// across available candidates evenly based on the field parameter. The binpack
+	// strategy places tasks on available candidates that have the least available
+	// amount of the resource that is specified with the field parameter. For example,
+	// if you binpack on memory, a task is placed on the instance with the least amount
+	// of remaining memory (but still enough to run the task).
+	Type PlacementStrategyType
 }
 
 // Represents an event to be submitted.

@@ -2,6 +2,42 @@
 
 package types
 
+type DefaultGatewayRouteRewrite string
+
+// Enum values for DefaultGatewayRouteRewrite
+const (
+	DefaultGatewayRouteRewriteEnabled  DefaultGatewayRouteRewrite = "ENABLED"
+	DefaultGatewayRouteRewriteDisabled DefaultGatewayRouteRewrite = "DISABLED"
+)
+
+// Values returns all known values for DefaultGatewayRouteRewrite. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultGatewayRouteRewrite) Values() []DefaultGatewayRouteRewrite {
+	return []DefaultGatewayRouteRewrite{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type DnsResponseType string
+
+// Enum values for DnsResponseType
+const (
+	DnsResponseTypeLoadbalancer DnsResponseType = "LOADBALANCER"
+	DnsResponseTypeEndpoints    DnsResponseType = "ENDPOINTS"
+)
+
+// Values returns all known values for DnsResponseType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DnsResponseType) Values() []DnsResponseType {
+	return []DnsResponseType{
+		"LOADBALANCER",
+		"ENDPOINTS",
+	}
+}
+
 type DurationUnit string
 
 // Enum values for DurationUnit

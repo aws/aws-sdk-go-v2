@@ -57,7 +57,7 @@ type UpdateBackendAPIOutput struct {
 	// The name of the backend environment.
 	BackendEnvironmentName *string
 
-	// If the request failed, this is the returned error.
+	// If the request fails, this error is returned.
 	Error *string
 
 	// The ID for the job.

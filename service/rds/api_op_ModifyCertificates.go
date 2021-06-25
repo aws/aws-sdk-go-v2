@@ -22,16 +22,16 @@ import (
 // * You already
 // migrated your applications to support the latest certificate authority (CA)
 // certificate, but the new CA certificate is not yet the RDS default CA
-// certificate for the specified AWS Region.
+// certificate for the specified Amazon Web Services Region.
 //
-// * RDS has already moved to a new
-// default CA certificate for the specified AWS Region, but you are still in the
-// process of supporting the new CA certificate. In this case, you temporarily need
-// additional time to finish your application changes.
+// * RDS has already
+// moved to a new default CA certificate for the specified Amazon Web Services
+// Region, but you are still in the process of supporting the new CA certificate.
+// In this case, you temporarily need additional time to finish your application
+// changes.
 //
-// For more information about
-// rotating your SSL/TLS certificate for RDS DB engines, see  Rotating Your SSL/TLS
-// Certificate
+// For more information about rotating your SSL/TLS certificate for RDS
+// DB engines, see  Rotating Your SSL/TLS Certificate
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html)
 // in the Amazon RDS User Guide. For more information about rotating your SSL/TLS
 // certificate for Aurora DB engines, see  Rotating Your SSL/TLS Certificate
@@ -55,7 +55,7 @@ func (c *Client) ModifyCertificates(ctx context.Context, params *ModifyCertifica
 type ModifyCertificatesInput struct {
 
 	// The new default certificate identifier to override the current one with. To
-	// determine the valid values, use the describe-certificates AWS CLI command or the
+	// determine the valid values, use the describe-certificates CLI command or the
 	// DescribeCertificates API operation.
 	CertificateIdentifier *string
 
@@ -67,7 +67,7 @@ type ModifyCertificatesInput struct {
 
 type ModifyCertificatesOutput struct {
 
-	// A CA certificate for an AWS account.
+	// A CA certificate for an Amazon Web Services account.
 	Certificate *types.Certificate
 
 	// Metadata pertaining to the operation's result.

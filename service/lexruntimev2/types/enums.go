@@ -113,3 +113,21 @@ func (SentimentType) Values() []SentimentType {
 		"POSITIVE",
 	}
 }
+
+type Shape string
+
+// Enum values for Shape
+const (
+	ShapeScalar Shape = "Scalar"
+	ShapeList   Shape = "List"
+)
+
+// Values returns all known values for Shape. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Shape) Values() []Shape {
+	return []Shape{
+		"Scalar",
+		"List",
+	}
+}

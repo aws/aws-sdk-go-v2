@@ -10,7 +10,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
 // Updates the name and description of a quick connect. The request accepts the
 // following data in JSON format. At least Name or Description must be provided.
 func (c *Client) UpdateQuickConnectName(ctx context.Context, params *UpdateQuickConnectNameInput, optFns ...func(*Options)) (*UpdateQuickConnectNameOutput, error) {
@@ -30,7 +29,8 @@ func (c *Client) UpdateQuickConnectName(ctx context.Context, params *UpdateQuick
 
 type UpdateQuickConnectNameInput struct {
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
 	//
 	// This member is required.
 	InstanceId *string

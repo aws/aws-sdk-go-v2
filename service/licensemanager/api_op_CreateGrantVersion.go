@@ -51,6 +51,8 @@ type CreateGrantVersionInput struct {
 
 	// Grant status.
 	Status types.GrantStatus
+
+	StatusReason *string
 }
 
 type CreateGrantVersionOutput struct {

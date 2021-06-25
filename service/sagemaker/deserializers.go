@@ -32021,6 +32021,24 @@ func awsAwsjson11_deserializeDocumentEdgeOutputConfig(v **types.EdgeOutputConfig
 				sv.KmsKeyId = ptr.String(jtv)
 			}
 
+		case "PresetDeploymentConfig":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PresetDeploymentConfig = ptr.String(jtv)
+			}
+
+		case "PresetDeploymentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EdgePresetDeploymentType to be of type string, got %T instead", value)
+				}
+				sv.PresetDeploymentType = types.EdgePresetDeploymentType(jtv)
+			}
+
 		case "S3OutputLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -32173,6 +32191,73 @@ func awsAwsjson11_deserializeDocumentEdgePackagingJobSummary(v **types.EdgePacka
 					return fmt.Errorf("expected EdgeVersion to be of type string, got %T instead", value)
 				}
 				sv.ModelVersion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEdgePresetDeploymentOutput(v **types.EdgePresetDeploymentOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EdgePresetDeploymentOutput
+	if *v == nil {
+		sv = &types.EdgePresetDeploymentOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Artifact":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EdgePresetDeploymentArtifact to be of type string, got %T instead", value)
+				}
+				sv.Artifact = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EdgePresetDeploymentStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.EdgePresetDeploymentStatus(jtv)
+			}
+
+		case "StatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EdgePresetDeploymentType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.EdgePresetDeploymentType(jtv)
 			}
 
 		default:
@@ -55141,6 +55226,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeEdgePackagingJobOutput(v **Descri
 
 		case "OutputConfig":
 			if err := awsAwsjson11_deserializeDocumentEdgeOutputConfig(&sv.OutputConfig, value); err != nil {
+				return err
+			}
+
+		case "PresetDeploymentOutput":
+			if err := awsAwsjson11_deserializeDocumentEdgePresetDeploymentOutput(&sv.PresetDeploymentOutput, value); err != nil {
 				return err
 			}
 

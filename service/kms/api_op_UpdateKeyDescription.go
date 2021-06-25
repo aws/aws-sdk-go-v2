@@ -12,8 +12,7 @@ import (
 
 // Updates the description of a customer master key (CMK). To see the description
 // of a CMK, use DescribeKey. The CMK that you use for this operation must be in a
-// compatible key state. For details, see How Key State Affects Use of a Customer
-// Master Key
+// compatible key state. For details, see Key state: Effect on your CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a CMK in a different AWS account. Required
@@ -46,8 +45,8 @@ type UpdateKeyDescriptionInput struct {
 	// This member is required.
 	Description *string
 
-	// A unique identifier for the customer master key (CMK). Specify the key ID or the
-	// Amazon Resource Name (ARN) of the CMK. For example:
+	// Updates the description of the specified customer master key (CMK). Specify the
+	// key ID or key ARN of the CMK. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab

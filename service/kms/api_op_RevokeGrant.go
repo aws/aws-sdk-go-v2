@@ -10,13 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Revokes the specified grant for the specified customer master key (CMK). You can
-// revoke a grant to actively deny operations that depend on it. Cross-account use:
-// Yes. To perform this operation on a CMK in a different AWS account, specify the
-// key ARN in the value of the KeyId parameter. Required permissions:
-// kms:RevokeGrant
+// Deletes the specified grant. You revoke a grant to terminate the permissions
+// that the grant allows. For more information, see Retiring and revoking grants
+// (https://docs.aws.amazon.com/kms/latest/developerguide/managing-grants.html#grant-delete)
+// in the AWS Key Management Service Developer Guide . When you create, retire, or
+// revoke a grant, there might be a brief delay, usually less than five minutes,
+// until the grant is available throughout AWS KMS. This state is known as eventual
+// consistency. For details, see Eventual consistency
+// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-eventual-consistency)
+// in the AWS Key Management Service Developer Guide . Cross-account use: Yes. To
+// perform this operation on a CMK in a different AWS account, specify the key ARN
+// in the value of the KeyId parameter. Required permissions: kms:RevokeGrant
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
-// (key policy) Related operations:
+// (key policy). Related operations:
 //
 // * CreateGrant
 //
@@ -43,17 +49,19 @@ func (c *Client) RevokeGrant(ctx context.Context, params *RevokeGrantInput, optF
 
 type RevokeGrantInput struct {
 
-	// Identifier of the grant to be revoked.
+	// Identifies the grant to revoke. To get the grant ID, use CreateGrant,
+	// ListGrants, or ListRetirableGrants.
 	//
 	// This member is required.
 	GrantId *string
 
-	// A unique identifier for the customer master key associated with the grant.
-	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a
-	// CMK in a different AWS account, you must use the key ARN. For example:
+	// A unique identifier for the customer master key (CMK) associated with the grant.
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey. Specify
+	// the key ID or key ARN of the CMK. To specify a CMK in a different AWS account,
+	// you must use the key ARN. For example:
 	//
-	// * Key
-	// ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID:
+	// 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab

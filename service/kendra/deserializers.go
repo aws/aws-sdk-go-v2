@@ -5228,6 +5228,138 @@ func awsAwsjson11_deserializeDocumentAdditionalResultAttributeValue(v **types.Ad
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAuthenticationConfiguration(v **types.AuthenticationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AuthenticationConfiguration
+	if *v == nil {
+		sv = &types.AuthenticationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BasicAuthentication":
+			if err := awsAwsjson11_deserializeDocumentBasicAuthenticationConfigurationList(&sv.BasicAuthentication, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentBasicAuthenticationConfiguration(v **types.BasicAuthenticationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BasicAuthenticationConfiguration
+	if *v == nil {
+		sv = &types.BasicAuthenticationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Credentials":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.Credentials = ptr.String(jtv)
+			}
+
+		case "Host":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Host to be of type string, got %T instead", value)
+				}
+				sv.Host = ptr.String(jtv)
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Port to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentBasicAuthenticationConfigurationList(v *[]types.BasicAuthenticationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BasicAuthenticationConfiguration
+	if *v == nil {
+		cv = []types.BasicAuthenticationConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BasicAuthenticationConfiguration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentBasicAuthenticationConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBatchDeleteDocumentResponseFailedDocument(v **types.BatchDeleteDocumentResponseFailedDocument, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6587,6 +6719,11 @@ func awsAwsjson11_deserializeDocumentDataSourceConfiguration(v **types.DataSourc
 
 		case "SharePointConfiguration":
 			if err := awsAwsjson11_deserializeDocumentSharePointConfiguration(&sv.SharePointConfiguration, value); err != nil {
+				return err
+			}
+
+		case "WebCrawlerConfiguration":
+			if err := awsAwsjson11_deserializeDocumentWebCrawlerConfiguration(&sv.WebCrawlerConfiguration, value); err != nil {
 				return err
 			}
 
@@ -8611,6 +8748,68 @@ func awsAwsjson11_deserializeDocumentOneDriveUsers(v **types.OneDriveUsers, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentProxyConfiguration(v **types.ProxyConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProxyConfiguration
+	if *v == nil {
+		sv = &types.ProxyConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Credentials":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.Credentials = ptr.String(jtv)
+			}
+
+		case "Host":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Host to be of type string, got %T instead", value)
+				}
+				sv.Host = ptr.String(jtv)
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Port to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentQueryResultItem(v **types.QueryResultItem, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9928,6 +10127,87 @@ func awsAwsjson11_deserializeDocumentSecurityGroupIdList(v *[]string, value inte
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSeedUrlConfiguration(v **types.SeedUrlConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SeedUrlConfiguration
+	if *v == nil {
+		sv = &types.SeedUrlConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SeedUrls":
+			if err := awsAwsjson11_deserializeDocumentSeedUrlList(&sv.SeedUrls, value); err != nil {
+				return err
+			}
+
+		case "WebCrawlerMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WebCrawlerMode to be of type string, got %T instead", value)
+				}
+				sv.WebCrawlerMode = types.WebCrawlerMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSeedUrlList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SeedUrl to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentServerSideEncryptionConfiguration(v **types.ServerSideEncryptionConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10322,6 +10602,11 @@ func awsAwsjson11_deserializeDocumentSharePointConfiguration(v **types.SharePoin
 				sv.SharePointVersion = types.SharePointVersion(jtv)
 			}
 
+		case "SslCertificateS3Path":
+			if err := awsAwsjson11_deserializeDocumentS3Path(&sv.SslCertificateS3Path, value); err != nil {
+				return err
+			}
+
 		case "Urls":
 			if err := awsAwsjson11_deserializeDocumentSharePointUrlList(&sv.Urls, value); err != nil {
 				return err
@@ -10376,6 +10661,78 @@ func awsAwsjson11_deserializeDocumentSharePointUrlList(v *[]string, value interf
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSiteMapsConfiguration(v **types.SiteMapsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SiteMapsConfiguration
+	if *v == nil {
+		sv = &types.SiteMapsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SiteMaps":
+			if err := awsAwsjson11_deserializeDocumentSiteMapsList(&sv.SiteMaps, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSiteMapsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SiteMap to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -11123,6 +11480,47 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentUrls(v **types.Urls, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Urls
+	if *v == nil {
+		sv = &types.Urls{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SeedUrlConfiguration":
+			if err := awsAwsjson11_deserializeDocumentSeedUrlConfiguration(&sv.SeedUrlConfiguration, value); err != nil {
+				return err
+			}
+
+		case "SiteMapsConfiguration":
+			if err := awsAwsjson11_deserializeDocumentSiteMapsConfiguration(&sv.SiteMapsConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentUserTokenConfiguration(v **types.UserTokenConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11275,6 +11673,114 @@ func awsAwsjson11_deserializeDocumentValueImportanceMap(v *map[string]int32, val
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWebCrawlerConfiguration(v **types.WebCrawlerConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WebCrawlerConfiguration
+	if *v == nil {
+		sv = &types.WebCrawlerConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AuthenticationConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAuthenticationConfiguration(&sv.AuthenticationConfiguration, value); err != nil {
+				return err
+			}
+
+		case "CrawlDepth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CrawlDepth to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CrawlDepth = ptr.Int32(int32(i64))
+			}
+
+		case "MaxContentSizePerPageInMegaBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxContentSizePerPageInMegaBytes to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.MaxContentSizePerPageInMegaBytes = ptr.Float32(float32(f64))
+			}
+
+		case "MaxLinksPerPage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxLinksPerPage to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxLinksPerPage = ptr.Int32(int32(i64))
+			}
+
+		case "MaxUrlsPerMinuteCrawlRate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxUrlsPerMinuteCrawlRate to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxUrlsPerMinuteCrawlRate = ptr.Int32(int32(i64))
+			}
+
+		case "ProxyConfiguration":
+			if err := awsAwsjson11_deserializeDocumentProxyConfiguration(&sv.ProxyConfiguration, value); err != nil {
+				return err
+			}
+
+		case "UrlExclusionPatterns":
+			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.UrlExclusionPatterns, value); err != nil {
+				return err
+			}
+
+		case "UrlInclusionPatterns":
+			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.UrlInclusionPatterns, value); err != nil {
+				return err
+			}
+
+		case "Urls":
+			if err := awsAwsjson11_deserializeDocumentUrls(&sv.Urls, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

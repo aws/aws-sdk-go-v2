@@ -1895,6 +1895,11 @@ func awsRestjson1_serializeDocumentMemberConfiguration(v *types.MemberConfigurat
 		}
 	}
 
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
 	if v.LogPublishingConfiguration != nil {
 		ok := object.Key("LogPublishingConfiguration")
 		if err := awsRestjson1_serializeDocumentMemberLogPublishingConfiguration(v.LogPublishingConfiguration, ok); err != nil {

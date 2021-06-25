@@ -5,6 +5,8 @@
     },
     "files": [
         "api_client.go",
+        "api_op_BatchAssociateClientDeviceWithCoreDevice.go",
+        "api_op_BatchDisassociateClientDeviceFromCoreDevice.go",
         "api_op_CancelDeployment.go",
         "api_op_CreateComponentVersion.go",
         "api_op_CreateDeployment.go",
@@ -15,6 +17,7 @@
         "api_op_GetComponentVersionArtifact.go",
         "api_op_GetCoreDevice.go",
         "api_op_GetDeployment.go",
+        "api_op_ListClientDevicesAssociatedWithCoreDevice.go",
         "api_op_ListComponentVersions.go",
         "api_op_ListComponents.go",
         "api_op_ListCoreDevices.go",

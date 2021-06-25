@@ -121,32 +121,42 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []string
 
-	// A value that indicates whether to enable mapping of AWS Identity and Access
-	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// For more information, see  IAM Database Authentication
+	// A value that indicates whether to enable mapping of Amazon Web Services Identity
+	// and Access Management (IAM) accounts to database accounts. By default, mapping
+	// is disabled. For more information, see  IAM Database Authentication
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon Aurora User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
-	// The AWS KMS key identifier to use when restoring an encrypted DB cluster from an
-	// encrypted DB cluster. The AWS KMS key identifier is the key ARN, key ID, alias
-	// ARN, or alias name for the AWS KMS customer master key (CMK). To use a CMK in a
-	// different AWS account, specify the key ARN or alias ARN. You can restore to a
-	// new DB cluster and encrypt the new DB cluster with a AWS KMS CMK that is
-	// different than the AWS KMS key used to encrypt the source DB cluster. The new DB
-	// cluster is encrypted with the AWS KMS CMK identified by the KmsKeyId parameter.
-	// If you don't specify a value for the KmsKeyId parameter, then the following
-	// occurs:
+	// The engine mode of the new cluster. Specify provisioned or serverless, depending
+	// on the type of the cluster you are creating. You can create an Aurora Serverless
+	// clone from a provisioned cluster, or a provisioned clone from an Aurora
+	// Serverless cluster. To create a clone that is an Aurora Serverless cluster, the
+	// original cluster must be an Aurora Serverless cluster or an encrypted
+	// provisioned cluster.
+	EngineMode *string
+
+	// The Amazon Web Services KMS key identifier to use when restoring an encrypted DB
+	// cluster from an encrypted DB cluster. The Amazon Web Services KMS key identifier
+	// is the key ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS
+	// customer master key (CMK). To use a CMK in a different Amazon Web Services
+	// account, specify the key ARN or alias ARN. You can restore to a new DB cluster
+	// and encrypt the new DB cluster with a Amazon Web Services KMS CMK that is
+	// different than the Amazon Web Services KMS key used to encrypt the source DB
+	// cluster. The new DB cluster is encrypted with the Amazon Web Services KMS CMK
+	// identified by the KmsKeyId parameter. If you don't specify a value for the
+	// KmsKeyId parameter, then the following occurs:
 	//
-	// * If the DB cluster is encrypted, then the restored DB cluster is
-	// encrypted using the AWS KMS CMK that was used to encrypt the source DB
-	// cluster.
+	// * If the DB cluster is
+	// encrypted, then the restored DB cluster is encrypted using the Amazon Web
+	// Services KMS CMK that was used to encrypt the source DB cluster.
 	//
-	// * If the DB cluster isn't encrypted, then the restored DB cluster
-	// isn't encrypted.
+	// * If the DB
+	// cluster isn't encrypted, then the restored DB cluster isn't encrypted.
 	//
-	// If DBClusterIdentifier refers to a DB cluster that isn't
-	// encrypted, then the restore request is rejected.
+	// If
+	// DBClusterIdentifier refers to a DB cluster that isn't encrypted, then the
+	// restore request is rejected.
 	KmsKeyId *string
 
 	// The name of the option group for the new DB cluster.
@@ -188,6 +198,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// specify a RestoreType value, then the new DB cluster is restored as a full copy
 	// of the source DB cluster.
 	RestoreType *string
+
+	// For DB clusters in serverless DB engine mode, the scaling properties of the DB
+	// cluster.
+	ScalingConfiguration *types.ScalingConfiguration
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in

@@ -118,13 +118,13 @@ func awsAwsquery_deserializeOpErrorCloneReceiptRuleSet(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AlreadyExistsException", errorCode):
+	case strings.EqualFold("AlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("RuleSetDoesNotExistException", errorCode):
+	case strings.EqualFold("RuleSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorRuleSetDoesNotExistException(response, errorBody)
 
 	default:
@@ -232,13 +232,13 @@ func awsAwsquery_deserializeOpErrorCreateConfigurationSet(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConfigurationSetAlreadyExistsException", errorCode):
+	case strings.EqualFold("ConfigurationSetAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("InvalidConfigurationSetException", errorCode):
+	case strings.EqualFold("InvalidConfigurationSet", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationSetException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
 	default:
@@ -346,22 +346,22 @@ func awsAwsquery_deserializeOpErrorCreateConfigurationSetEventDestination(respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("EventDestinationAlreadyExistsException", errorCode):
+	case strings.EqualFold("EventDestinationAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEventDestinationAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("InvalidCloudWatchDestinationException", errorCode):
+	case strings.EqualFold("InvalidCloudWatchDestination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCloudWatchDestinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidFirehoseDestinationException", errorCode):
+	case strings.EqualFold("InvalidFirehoseDestination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidFirehoseDestinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidSNSDestinationException", errorCode):
+	case strings.EqualFold("InvalidSNSDestination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSNSDestinationException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
 	default:
@@ -469,10 +469,10 @@ func awsAwsquery_deserializeOpErrorCreateConfigurationSetTrackingOptions(respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("InvalidTrackingOptionsException", errorCode):
+	case strings.EqualFold("InvalidTrackingOptions", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTrackingOptionsException(response, errorBody)
 
 	case strings.EqualFold("TrackingOptionsAlreadyExistsException", errorCode):
@@ -548,16 +548,16 @@ func awsAwsquery_deserializeOpErrorCreateCustomVerificationEmailTemplate(respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CustomVerificationEmailInvalidContentException", errorCode):
+	case strings.EqualFold("CustomVerificationEmailInvalidContent", errorCode):
 		return awsAwsquery_deserializeErrorCustomVerificationEmailInvalidContentException(response, errorBody)
 
-	case strings.EqualFold("CustomVerificationEmailTemplateAlreadyExistsException", errorCode):
+	case strings.EqualFold("CustomVerificationEmailTemplateAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorCustomVerificationEmailTemplateAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("FromEmailAddressNotVerifiedException", errorCode):
+	case strings.EqualFold("FromEmailAddressNotVerified", errorCode):
 		return awsAwsquery_deserializeErrorFromEmailAddressNotVerifiedException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
 	default:
@@ -665,10 +665,10 @@ func awsAwsquery_deserializeOpErrorCreateReceiptFilter(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AlreadyExistsException", errorCode):
+	case strings.EqualFold("AlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
 	default:
@@ -776,25 +776,25 @@ func awsAwsquery_deserializeOpErrorCreateReceiptRule(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AlreadyExistsException", errorCode):
+	case strings.EqualFold("AlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("InvalidLambdaFunctionException", errorCode):
+	case strings.EqualFold("InvalidLambdaFunction", errorCode):
 		return awsAwsquery_deserializeErrorInvalidLambdaFunctionException(response, errorBody)
 
-	case strings.EqualFold("InvalidS3ConfigurationException", errorCode):
+	case strings.EqualFold("InvalidS3Configuration", errorCode):
 		return awsAwsquery_deserializeErrorInvalidS3ConfigurationException(response, errorBody)
 
-	case strings.EqualFold("InvalidSnsTopicException", errorCode):
+	case strings.EqualFold("InvalidSnsTopic", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSnsTopicException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("RuleDoesNotExistException", errorCode):
+	case strings.EqualFold("RuleDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorRuleDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("RuleSetDoesNotExistException", errorCode):
+	case strings.EqualFold("RuleSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorRuleSetDoesNotExistException(response, errorBody)
 
 	default:
@@ -902,10 +902,10 @@ func awsAwsquery_deserializeOpErrorCreateReceiptRuleSet(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AlreadyExistsException", errorCode):
+	case strings.EqualFold("AlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
 	default:
@@ -1013,13 +1013,13 @@ func awsAwsquery_deserializeOpErrorCreateTemplate(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AlreadyExistsException", errorCode):
+	case strings.EqualFold("AlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorAlreadyExistsException(response, errorBody)
 
-	case strings.EqualFold("InvalidTemplateException", errorCode):
+	case strings.EqualFold("InvalidTemplate", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTemplateException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
 	default:
@@ -1127,7 +1127,7 @@ func awsAwsquery_deserializeOpErrorDeleteConfigurationSet(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
 	default:
@@ -1235,10 +1235,10 @@ func awsAwsquery_deserializeOpErrorDeleteConfigurationSetEventDestination(respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("EventDestinationDoesNotExistException", errorCode):
+	case strings.EqualFold("EventDestinationDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorEventDestinationDoesNotExistException(response, errorBody)
 
 	default:
@@ -1346,7 +1346,7 @@ func awsAwsquery_deserializeOpErrorDeleteConfigurationSetTrackingOptions(respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
 	case strings.EqualFold("TrackingOptionsDoesNotExistException", errorCode):
@@ -1842,7 +1842,7 @@ func awsAwsquery_deserializeOpErrorDeleteReceiptRule(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("RuleSetDoesNotExistException", errorCode):
+	case strings.EqualFold("RuleSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorRuleSetDoesNotExistException(response, errorBody)
 
 	default:
@@ -1950,7 +1950,7 @@ func awsAwsquery_deserializeOpErrorDeleteReceiptRuleSet(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CannotDeleteException", errorCode):
+	case strings.EqualFold("CannotDelete", errorCode):
 		return awsAwsquery_deserializeErrorCannotDeleteException(response, errorBody)
 
 	default:
@@ -2338,7 +2338,7 @@ func awsAwsquery_deserializeOpErrorDescribeConfigurationSet(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
 	default:
@@ -2446,10 +2446,10 @@ func awsAwsquery_deserializeOpErrorDescribeReceiptRule(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("RuleDoesNotExistException", errorCode):
+	case strings.EqualFold("RuleDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorRuleDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("RuleSetDoesNotExistException", errorCode):
+	case strings.EqualFold("RuleSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorRuleSetDoesNotExistException(response, errorBody)
 
 	default:
@@ -2557,7 +2557,7 @@ func awsAwsquery_deserializeOpErrorDescribeReceiptRuleSet(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("RuleSetDoesNotExistException", errorCode):
+	case strings.EqualFold("RuleSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorRuleSetDoesNotExistException(response, errorBody)
 
 	default:
@@ -2770,7 +2770,7 @@ func awsAwsquery_deserializeOpErrorGetCustomVerificationEmailTemplate(response *
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CustomVerificationEmailTemplateDoesNotExistException", errorCode):
+	case strings.EqualFold("CustomVerificationEmailTemplateDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorCustomVerificationEmailTemplateDoesNotExistException(response, errorBody)
 
 	default:
@@ -3613,7 +3613,7 @@ func awsAwsquery_deserializeOpErrorGetTemplate(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("TemplateDoesNotExistException", errorCode):
+	case strings.EqualFold("TemplateDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorTemplateDoesNotExistException(response, errorBody)
 
 	default:
@@ -4561,10 +4561,10 @@ func awsAwsquery_deserializeOpErrorPutConfigurationSetDeliveryOptions(response *
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("InvalidDeliveryOptionsException", errorCode):
+	case strings.EqualFold("InvalidDeliveryOptions", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDeliveryOptionsException(response, errorBody)
 
 	default:
@@ -4672,7 +4672,7 @@ func awsAwsquery_deserializeOpErrorPutIdentityPolicy(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidPolicyException", errorCode):
+	case strings.EqualFold("InvalidPolicy", errorCode):
 		return awsAwsquery_deserializeErrorInvalidPolicyException(response, errorBody)
 
 	default:
@@ -4780,10 +4780,10 @@ func awsAwsquery_deserializeOpErrorReorderReceiptRuleSet(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("RuleDoesNotExistException", errorCode):
+	case strings.EqualFold("RuleDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorRuleDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("RuleSetDoesNotExistException", errorCode):
+	case strings.EqualFold("RuleSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorRuleSetDoesNotExistException(response, errorBody)
 
 	default:
@@ -5002,7 +5002,7 @@ func awsAwsquery_deserializeOpErrorSendBulkTemplatedEmail(response *smithyhttp.R
 	case strings.EqualFold("AccountSendingPausedException", errorCode):
 		return awsAwsquery_deserializeErrorAccountSendingPausedException(response, errorBody)
 
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
 	case strings.EqualFold("ConfigurationSetSendingPausedException", errorCode):
@@ -5014,7 +5014,7 @@ func awsAwsquery_deserializeOpErrorSendBulkTemplatedEmail(response *smithyhttp.R
 	case strings.EqualFold("MessageRejected", errorCode):
 		return awsAwsquery_deserializeErrorMessageRejected(response, errorBody)
 
-	case strings.EqualFold("TemplateDoesNotExistException", errorCode):
+	case strings.EqualFold("TemplateDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorTemplateDoesNotExistException(response, errorBody)
 
 	default:
@@ -5122,19 +5122,19 @@ func awsAwsquery_deserializeOpErrorSendCustomVerificationEmail(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("CustomVerificationEmailTemplateDoesNotExistException", errorCode):
+	case strings.EqualFold("CustomVerificationEmailTemplateDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorCustomVerificationEmailTemplateDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("FromEmailAddressNotVerifiedException", errorCode):
+	case strings.EqualFold("FromEmailAddressNotVerified", errorCode):
 		return awsAwsquery_deserializeErrorFromEmailAddressNotVerifiedException(response, errorBody)
 
 	case strings.EqualFold("MessageRejected", errorCode):
 		return awsAwsquery_deserializeErrorMessageRejected(response, errorBody)
 
-	case strings.EqualFold("ProductionAccessNotGrantedException", errorCode):
+	case strings.EqualFold("ProductionAccessNotGranted", errorCode):
 		return awsAwsquery_deserializeErrorProductionAccessNotGrantedException(response, errorBody)
 
 	default:
@@ -5245,7 +5245,7 @@ func awsAwsquery_deserializeOpErrorSendEmail(response *smithyhttp.Response, meta
 	case strings.EqualFold("AccountSendingPausedException", errorCode):
 		return awsAwsquery_deserializeErrorAccountSendingPausedException(response, errorBody)
 
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
 	case strings.EqualFold("ConfigurationSetSendingPausedException", errorCode):
@@ -5365,7 +5365,7 @@ func awsAwsquery_deserializeOpErrorSendRawEmail(response *smithyhttp.Response, m
 	case strings.EqualFold("AccountSendingPausedException", errorCode):
 		return awsAwsquery_deserializeErrorAccountSendingPausedException(response, errorBody)
 
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
 	case strings.EqualFold("ConfigurationSetSendingPausedException", errorCode):
@@ -5485,7 +5485,7 @@ func awsAwsquery_deserializeOpErrorSendTemplatedEmail(response *smithyhttp.Respo
 	case strings.EqualFold("AccountSendingPausedException", errorCode):
 		return awsAwsquery_deserializeErrorAccountSendingPausedException(response, errorBody)
 
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
 	case strings.EqualFold("ConfigurationSetSendingPausedException", errorCode):
@@ -5497,7 +5497,7 @@ func awsAwsquery_deserializeOpErrorSendTemplatedEmail(response *smithyhttp.Respo
 	case strings.EqualFold("MessageRejected", errorCode):
 		return awsAwsquery_deserializeErrorMessageRejected(response, errorBody)
 
-	case strings.EqualFold("TemplateDoesNotExistException", errorCode):
+	case strings.EqualFold("TemplateDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorTemplateDoesNotExistException(response, errorBody)
 
 	default:
@@ -5605,7 +5605,7 @@ func awsAwsquery_deserializeOpErrorSetActiveReceiptRuleSet(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("RuleSetDoesNotExistException", errorCode):
+	case strings.EqualFold("RuleSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorRuleSetDoesNotExistException(response, errorBody)
 
 	default:
@@ -6238,10 +6238,10 @@ func awsAwsquery_deserializeOpErrorSetReceiptRulePosition(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("RuleDoesNotExistException", errorCode):
+	case strings.EqualFold("RuleDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorRuleDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("RuleSetDoesNotExistException", errorCode):
+	case strings.EqualFold("RuleSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorRuleSetDoesNotExistException(response, errorBody)
 
 	default:
@@ -6349,13 +6349,13 @@ func awsAwsquery_deserializeOpErrorTestRenderTemplate(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidRenderingParameterException", errorCode):
+	case strings.EqualFold("InvalidRenderingParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidRenderingParameterException(response, errorBody)
 
-	case strings.EqualFold("MissingRenderingAttributeException", errorCode):
+	case strings.EqualFold("MissingRenderingAttribute", errorCode):
 		return awsAwsquery_deserializeErrorMissingRenderingAttributeException(response, errorBody)
 
-	case strings.EqualFold("TemplateDoesNotExistException", errorCode):
+	case strings.EqualFold("TemplateDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorTemplateDoesNotExistException(response, errorBody)
 
 	default:
@@ -6533,19 +6533,19 @@ func awsAwsquery_deserializeOpErrorUpdateConfigurationSetEventDestination(respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("EventDestinationDoesNotExistException", errorCode):
+	case strings.EqualFold("EventDestinationDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorEventDestinationDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("InvalidCloudWatchDestinationException", errorCode):
+	case strings.EqualFold("InvalidCloudWatchDestination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidCloudWatchDestinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidFirehoseDestinationException", errorCode):
+	case strings.EqualFold("InvalidFirehoseDestination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidFirehoseDestinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidSNSDestinationException", errorCode):
+	case strings.EqualFold("InvalidSNSDestination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSNSDestinationException(response, errorBody)
 
 	default:
@@ -6618,7 +6618,7 @@ func awsAwsquery_deserializeOpErrorUpdateConfigurationSetReputationMetricsEnable
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
 	default:
@@ -6691,7 +6691,7 @@ func awsAwsquery_deserializeOpErrorUpdateConfigurationSetSendingEnabled(response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
 	default:
@@ -6799,10 +6799,10 @@ func awsAwsquery_deserializeOpErrorUpdateConfigurationSetTrackingOptions(respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ConfigurationSetDoesNotExistException", errorCode):
+	case strings.EqualFold("ConfigurationSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorConfigurationSetDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("InvalidTrackingOptionsException", errorCode):
+	case strings.EqualFold("InvalidTrackingOptions", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTrackingOptionsException(response, errorBody)
 
 	case strings.EqualFold("TrackingOptionsDoesNotExistException", errorCode):
@@ -6878,13 +6878,13 @@ func awsAwsquery_deserializeOpErrorUpdateCustomVerificationEmailTemplate(respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CustomVerificationEmailInvalidContentException", errorCode):
+	case strings.EqualFold("CustomVerificationEmailInvalidContent", errorCode):
 		return awsAwsquery_deserializeErrorCustomVerificationEmailInvalidContentException(response, errorBody)
 
-	case strings.EqualFold("CustomVerificationEmailTemplateDoesNotExistException", errorCode):
+	case strings.EqualFold("CustomVerificationEmailTemplateDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorCustomVerificationEmailTemplateDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("FromEmailAddressNotVerifiedException", errorCode):
+	case strings.EqualFold("FromEmailAddressNotVerified", errorCode):
 		return awsAwsquery_deserializeErrorFromEmailAddressNotVerifiedException(response, errorBody)
 
 	default:
@@ -6992,22 +6992,22 @@ func awsAwsquery_deserializeOpErrorUpdateReceiptRule(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidLambdaFunctionException", errorCode):
+	case strings.EqualFold("InvalidLambdaFunction", errorCode):
 		return awsAwsquery_deserializeErrorInvalidLambdaFunctionException(response, errorBody)
 
-	case strings.EqualFold("InvalidS3ConfigurationException", errorCode):
+	case strings.EqualFold("InvalidS3Configuration", errorCode):
 		return awsAwsquery_deserializeErrorInvalidS3ConfigurationException(response, errorBody)
 
-	case strings.EqualFold("InvalidSnsTopicException", errorCode):
+	case strings.EqualFold("InvalidSnsTopic", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSnsTopicException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("RuleDoesNotExistException", errorCode):
+	case strings.EqualFold("RuleDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorRuleDoesNotExistException(response, errorBody)
 
-	case strings.EqualFold("RuleSetDoesNotExistException", errorCode):
+	case strings.EqualFold("RuleSetDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorRuleSetDoesNotExistException(response, errorBody)
 
 	default:
@@ -7115,10 +7115,10 @@ func awsAwsquery_deserializeOpErrorUpdateTemplate(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidTemplateException", errorCode):
+	case strings.EqualFold("InvalidTemplate", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTemplateException(response, errorBody)
 
-	case strings.EqualFold("TemplateDoesNotExistException", errorCode):
+	case strings.EqualFold("TemplateDoesNotExist", errorCode):
 		return awsAwsquery_deserializeErrorTemplateDoesNotExistException(response, errorBody)
 
 	default:

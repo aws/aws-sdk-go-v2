@@ -55,7 +55,8 @@ type StartOutboundVoiceContactInput struct {
 	// This member is required.
 	DestinationPhoneNumber *string
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
 	//
 	// This member is required.
 	InstanceId *string
@@ -69,8 +70,7 @@ type StartOutboundVoiceContactInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. The token is valid for 7 days after creation. If a contact is
-	// already started, the contact ID is returned. If the contact is disconnected, a
-	// new contact is started.
+	// already started, the contact ID is returned.
 	ClientToken *string
 
 	// The queue for the call. If you specify a queue, the phone displayed for caller

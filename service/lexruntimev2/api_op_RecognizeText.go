@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends user input to Amazon Lex. Client applications use this API to send
-// requests to Amazon Lex at runtime. Amazon Lex then interprets the user input
-// using the machine learning model that it build for the bot. In response, Amazon
-// Lex returns the next message to convey to the user and an optional response card
-// to display.
+// Sends user input to Amazon Lex V2. Client applications use this API to send
+// requests to Amazon Lex V2 at runtime. Amazon Lex V2 then interprets the user
+// input using the machine learning model that it build for the bot. In response,
+// Amazon Lex V2 returns the next message to convey to the user and an optional
+// response card to display.
 func (c *Client) RecognizeText(ctx context.Context, params *RecognizeTextInput, optFns ...func(*Options)) (*RecognizeTextOutput, error) {
 	if params == nil {
 		params = &RecognizeTextInput{}
@@ -53,13 +53,13 @@ type RecognizeTextInput struct {
 	// This member is required.
 	SessionId *string
 
-	// The text that the user entered. Amazon Lex interprets this text.
+	// The text that the user entered. Amazon Lex V2 interprets this text.
 	//
 	// This member is required.
 	Text *string
 
 	// Request-specific information passed between the client application and Amazon
-	// Lex The namespace x-amz-lex: is reserved for special attributes. Don't create
+	// Lex V2 The namespace x-amz-lex: is reserved for special attributes. Don't create
 	// any request attributes with the prefix x-amz-lex:.
 	RequestAttributes map[string]string
 
@@ -69,10 +69,11 @@ type RecognizeTextInput struct {
 
 type RecognizeTextOutput struct {
 
-	// A list of intents that Amazon Lex determined might satisfy the user's utterance.
-	// Each interpretation includes the intent, a score that indicates now confident
-	// Amazon Lex is that the interpretation is the correct one, and an optional
-	// sentiment response that indicates the sentiment expressed in the utterance.
+	// A list of intents that Amazon Lex V2 determined might satisfy the user's
+	// utterance. Each interpretation includes the intent, a score that indicates now
+	// confident Amazon Lex V2 is that the interpretation is the correct one, and an
+	// optional sentiment response that indicates the sentiment expressed in the
+	// utterance.
 	Interpretations []types.Interpretation
 
 	// A list of messages last sent to the user. The messages are ordered based on the

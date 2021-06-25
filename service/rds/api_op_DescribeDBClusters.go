@@ -52,7 +52,7 @@ type DescribeDBClustersInput struct {
 	Filters []types.Filter
 
 	// Optional Boolean parameter that specifies whether the output includes
-	// information about clusters shared from other AWS accounts.
+	// information about clusters shared from other Amazon Web Services accounts.
 	IncludeShared bool
 
 	// An optional pagination token provided by a previous DescribeDBClusters request.

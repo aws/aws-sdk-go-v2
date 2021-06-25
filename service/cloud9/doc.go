@@ -3,24 +3,24 @@
 // Package cloud9 provides the API client, operations, and parameter types for AWS
 // Cloud9.
 //
-// AWS Cloud9 AWS Cloud9 is a collection of tools that you can use to code, build,
-// run, test, debug, and release software in the cloud. For more information about
-// AWS Cloud9, see the AWS Cloud9 User Guide
-// (https://docs.aws.amazon.com/cloud9/latest/user-guide). AWS Cloud9 supports
-// these operations:
+// Cloud9 Cloud9 is a collection of tools that you can use to code, build, run,
+// test, debug, and release software in the cloud. For more information about
+// Cloud9, see the Cloud9 User Guide
+// (https://docs.aws.amazon.com/cloud9/latest/user-guide). Cloud9 supports these
+// operations:
 //
-// * CreateEnvironmentEC2: Creates an AWS Cloud9 development
-// environment, launches an Amazon EC2 instance, and then connects from the
-// instance to the environment.
+// * CreateEnvironmentEC2: Creates an Cloud9 development environment,
+// launches an Amazon EC2 instance, and then connects from the instance to the
+// environment.
 //
-// * CreateEnvironmentMembership: Adds an environment
-// member to an environment.
+// * CreateEnvironmentMembership: Adds an environment member to an
+// environment.
 //
-// * DeleteEnvironment: Deletes an environment. If an
-// Amazon EC2 instance is connected to the environment, also terminates the
-// instance.
+// * DeleteEnvironment: Deletes an environment. If an Amazon EC2
+// instance is connected to the environment, also terminates the instance.
 //
-// * DeleteEnvironmentMembership: Deletes an environment member from an
+// *
+// DeleteEnvironmentMembership: Deletes an environment member from an
 // environment.
 //
 // * DescribeEnvironmentMemberships: Gets information about

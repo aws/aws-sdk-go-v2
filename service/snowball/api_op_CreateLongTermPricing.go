@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a job with long term usage option for a device. The long term usage is a
-// one year or three year long term pricing type for the device. You are billed
-// upfront and AWS give discounts for long term pricing. For detailed information
-// see XXXXXXXX
+// Creates a job with the long-term usage option for a device. The long-term usage
+// is a 1-year or 3-year long-term pricing type for the device. You are billed
+// upfront, and AWS provides discounts for long-term pricing.
 func (c *Client) CreateLongTermPricing(ctx context.Context, params *CreateLongTermPricingInput, optFns ...func(*Options)) (*CreateLongTermPricingOutput, error) {
 	if params == nil {
 		params = &CreateLongTermPricingInput{}
@@ -32,23 +31,23 @@ func (c *Client) CreateLongTermPricing(ctx context.Context, params *CreateLongTe
 
 type CreateLongTermPricingInput struct {
 
-	// The type of long term pricing option you want for the device - one year or three
-	// year long term pricing.
+	// The type of long-term pricing option you want for the device, either 1-year or
+	// 3-year long-term pricing.
 	//
 	// This member is required.
 	LongTermPricingType types.LongTermPricingType
 
-	// Specifies whether the current long term pricing type for the device should be
+	// Specifies whether the current long-term pricing type for the device should be
 	// renewed.
 	IsLongTermPricingAutoRenew *bool
 
-	// The type of AWS Snow Family device to use for the long term pricing job.
+	// The type of AWS Snow Family device to use for the long-term pricing job.
 	SnowballType types.SnowballType
 }
 
 type CreateLongTermPricingOutput struct {
 
-	// The ID of the long term pricing type for the device.
+	// The ID of the long-term pricing type for the device.
 	LongTermPricingId *string
 
 	// Metadata pertaining to the operation's result.

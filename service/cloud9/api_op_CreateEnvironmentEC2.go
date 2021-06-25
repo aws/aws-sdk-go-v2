@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an AWS Cloud9 development environment, launches an Amazon Elastic
-// Compute Cloud (Amazon EC2) instance, and then connects from the instance to the
+// Creates an Cloud9 development environment, launches an Amazon Elastic Compute
+// Cloud (Amazon EC2) instance, and then connects from the instance to the
 // environment.
 func (c *Client) CreateEnvironmentEC2(ctx context.Context, params *CreateEnvironmentEC2Input, optFns ...func(*Options)) (*CreateEnvironmentEC2Output, error) {
 	if params == nil {
@@ -36,8 +36,8 @@ type CreateEnvironmentEC2Input struct {
 	// This member is required.
 	InstanceType *string
 
-	// The name of the environment to create. This name is visible to other AWS IAM
-	// users in the same AWS account.
+	// The name of the environment to create. This name is visible to other IAM users
+	// in the same Amazon Web Services account.
 	//
 	// This member is required.
 	Name *string
@@ -46,17 +46,17 @@ type CreateEnvironmentEC2Input struct {
 	// environment has last been used.
 	AutomaticStopTimeMinutes *int32
 
-	// A unique, case-sensitive string that helps AWS Cloud9 to ensure this operation
+	// A unique, case-sensitive string that helps Cloud9 to ensure this operation
 	// completes no more than one time. For more information, see Client Tokens
-	// (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
 	// in the Amazon EC2 API Reference.
 	ClientRequestToken *string
 
 	// The connection type used for connecting to an Amazon EC2 environment. Valid
-	// values are CONNECT_SSH (default) and CONNECT_SSM (connected through AWS Systems
-	// Manager). For more information, see Accessing no-ingress EC2 instances with AWS
-	// Systems Manager
-	// (https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html) in the AWS
+	// values are CONNECT_SSH (default) and CONNECT_SSM (connected through Amazon EC2
+	// Systems Manager). For more information, see Accessing no-ingress EC2 instances
+	// with Amazon EC2 Systems Manager
+	// (https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html) in the
 	// Cloud9 User Guide.
 	ConnectionType types.ConnectionType
 
@@ -65,8 +65,10 @@ type CreateEnvironmentEC2Input struct {
 
 	// The identifier for the Amazon Machine Image (AMI) that's used to create the EC2
 	// instance. To choose an AMI for the instance, you must specify a valid AMI alias
-	// or a valid AWS Systems Manager (SSM) path. The default AMI is used if the
-	// parameter isn't explicitly assigned a value in the request. AMI aliases
+	// or a valid Amazon EC2 Systems Manager (SSM) path. The default AMI is used if the
+	// parameter isn't explicitly assigned a value in the request. Because Amazon Linux
+	// AMI has ended standard support as of December 31, 2020, we recommend you choose
+	// Amazon Linux 2, which includes long term support through 2023. AMI aliases
 	//
 	// *
 	// Amazon Linux (default): amazonlinux-1-x86_64
@@ -89,15 +91,15 @@ type CreateEnvironmentEC2Input struct {
 	ImageId *string
 
 	// The Amazon Resource Name (ARN) of the environment owner. This ARN can be the ARN
-	// of any AWS IAM principal. If this value is not specified, the ARN defaults to
-	// this environment's creator.
+	// of any IAM principal. If this value is not specified, the ARN defaults to this
+	// environment's creator.
 	OwnerArn *string
 
-	// The ID of the subnet in Amazon VPC that AWS Cloud9 will use to communicate with
-	// the Amazon EC2 instance.
+	// The ID of the subnet in Amazon VPC that Cloud9 will use to communicate with the
+	// Amazon EC2 instance.
 	SubnetId *string
 
-	// An array of key-value pairs that will be associated with the new AWS Cloud9
+	// An array of key-value pairs that will be associated with the new Cloud9
 	// development environment.
 	Tags []types.Tag
 }

@@ -202,14 +202,15 @@ type GrantStatus string
 
 // Enum values for GrantStatus
 const (
-	GrantStatusPendingWorkflow GrantStatus = "PENDING_WORKFLOW"
-	GrantStatusPendingAccept   GrantStatus = "PENDING_ACCEPT"
-	GrantStatusRejected        GrantStatus = "REJECTED"
-	GrantStatusActive          GrantStatus = "ACTIVE"
-	GrantStatusFailedWorkflow  GrantStatus = "FAILED_WORKFLOW"
-	GrantStatusDeleted         GrantStatus = "DELETED"
-	GrantStatusPendingDelete   GrantStatus = "PENDING_DELETE"
-	GrantStatusDisabled        GrantStatus = "DISABLED"
+	GrantStatusPendingWorkflow   GrantStatus = "PENDING_WORKFLOW"
+	GrantStatusPendingAccept     GrantStatus = "PENDING_ACCEPT"
+	GrantStatusRejected          GrantStatus = "REJECTED"
+	GrantStatusActive            GrantStatus = "ACTIVE"
+	GrantStatusFailedWorkflow    GrantStatus = "FAILED_WORKFLOW"
+	GrantStatusDeleted           GrantStatus = "DELETED"
+	GrantStatusPendingDelete     GrantStatus = "PENDING_DELETE"
+	GrantStatusDisabled          GrantStatus = "DISABLED"
+	GrantStatusWorkflowCompleted GrantStatus = "WORKFLOW_COMPLETED"
 )
 
 // Values returns all known values for GrantStatus. Note that this can be expanded
@@ -225,6 +226,7 @@ func (GrantStatus) Values() []GrantStatus {
 		"DELETED",
 		"PENDING_DELETE",
 		"DISABLED",
+		"WORKFLOW_COMPLETED",
 	}
 }
 
@@ -340,13 +342,14 @@ type ReceivedStatus string
 
 // Enum values for ReceivedStatus
 const (
-	ReceivedStatusPendingWorkflow ReceivedStatus = "PENDING_WORKFLOW"
-	ReceivedStatusPendingAccept   ReceivedStatus = "PENDING_ACCEPT"
-	ReceivedStatusRejected        ReceivedStatus = "REJECTED"
-	ReceivedStatusActive          ReceivedStatus = "ACTIVE"
-	ReceivedStatusFailedWorkflow  ReceivedStatus = "FAILED_WORKFLOW"
-	ReceivedStatusDeleted         ReceivedStatus = "DELETED"
-	ReceivedStatusDisabled        ReceivedStatus = "DISABLED"
+	ReceivedStatusPendingWorkflow   ReceivedStatus = "PENDING_WORKFLOW"
+	ReceivedStatusPendingAccept     ReceivedStatus = "PENDING_ACCEPT"
+	ReceivedStatusRejected          ReceivedStatus = "REJECTED"
+	ReceivedStatusActive            ReceivedStatus = "ACTIVE"
+	ReceivedStatusFailedWorkflow    ReceivedStatus = "FAILED_WORKFLOW"
+	ReceivedStatusDeleted           ReceivedStatus = "DELETED"
+	ReceivedStatusDisabled          ReceivedStatus = "DISABLED"
+	ReceivedStatusWorkflowCompleted ReceivedStatus = "WORKFLOW_COMPLETED"
 )
 
 // Values returns all known values for ReceivedStatus. Note that this can be
@@ -361,6 +364,7 @@ func (ReceivedStatus) Values() []ReceivedStatus {
 		"FAILED_WORKFLOW",
 		"DELETED",
 		"DISABLED",
+		"WORKFLOW_COMPLETED",
 	}
 }
 

@@ -170,19 +170,23 @@ type PartitionInstanceType string
 
 // Enum values for PartitionInstanceType
 const (
-	PartitionInstanceTypeSearchM1Small   PartitionInstanceType = "search.m1.small"
-	PartitionInstanceTypeSearchM1Large   PartitionInstanceType = "search.m1.large"
-	PartitionInstanceTypeSearchM2Xlarge  PartitionInstanceType = "search.m2.xlarge"
-	PartitionInstanceTypeSearchM22xlarge PartitionInstanceType = "search.m2.2xlarge"
-	PartitionInstanceTypeSearchM3Medium  PartitionInstanceType = "search.m3.medium"
-	PartitionInstanceTypeSearchM3Large   PartitionInstanceType = "search.m3.large"
-	PartitionInstanceTypeSearchM3Xlarge  PartitionInstanceType = "search.m3.xlarge"
-	PartitionInstanceTypeSearchM32xlarge PartitionInstanceType = "search.m3.2xlarge"
-	PartitionInstanceTypeSearchSmall     PartitionInstanceType = "search.small"
-	PartitionInstanceTypeSearchMedium    PartitionInstanceType = "search.medium"
-	PartitionInstanceTypeSearchLarge     PartitionInstanceType = "search.large"
-	PartitionInstanceTypeSearchXlarge    PartitionInstanceType = "search.xlarge"
-	PartitionInstanceTypeSearch2xlarge   PartitionInstanceType = "search.2xlarge"
+	PartitionInstanceTypeSearchM1Small                   PartitionInstanceType = "search.m1.small"
+	PartitionInstanceTypeSearchM1Large                   PartitionInstanceType = "search.m1.large"
+	PartitionInstanceTypeSearchM2Xlarge                  PartitionInstanceType = "search.m2.xlarge"
+	PartitionInstanceTypeSearchM22xlarge                 PartitionInstanceType = "search.m2.2xlarge"
+	PartitionInstanceTypeSearchM3Medium                  PartitionInstanceType = "search.m3.medium"
+	PartitionInstanceTypeSearchM3Large                   PartitionInstanceType = "search.m3.large"
+	PartitionInstanceTypeSearchM3Xlarge                  PartitionInstanceType = "search.m3.xlarge"
+	PartitionInstanceTypeSearchM32xlarge                 PartitionInstanceType = "search.m3.2xlarge"
+	PartitionInstanceTypeSearchSmall                     PartitionInstanceType = "search.small"
+	PartitionInstanceTypeSearchMedium                    PartitionInstanceType = "search.medium"
+	PartitionInstanceTypeSearchLarge                     PartitionInstanceType = "search.large"
+	PartitionInstanceTypeSearchXlarge                    PartitionInstanceType = "search.xlarge"
+	PartitionInstanceTypeSearch2xlarge                   PartitionInstanceType = "search.2xlarge"
+	PartitionInstanceTypeSearchPreviousgenerationSmall   PartitionInstanceType = "search.previousgeneration.small"
+	PartitionInstanceTypeSearchPreviousgenerationLarge   PartitionInstanceType = "search.previousgeneration.large"
+	PartitionInstanceTypeSearchPreviousgenerationXlarge  PartitionInstanceType = "search.previousgeneration.xlarge"
+	PartitionInstanceTypeSearchPreviousgeneration2xlarge PartitionInstanceType = "search.previousgeneration.2xlarge"
 )
 
 // Values returns all known values for PartitionInstanceType. Note that this can be
@@ -203,6 +207,10 @@ func (PartitionInstanceType) Values() []PartitionInstanceType {
 		"search.large",
 		"search.xlarge",
 		"search.2xlarge",
+		"search.previousgeneration.small",
+		"search.previousgeneration.large",
+		"search.previousgeneration.xlarge",
+		"search.previousgeneration.2xlarge",
 	}
 }
 

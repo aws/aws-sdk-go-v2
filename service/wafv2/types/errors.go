@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// AWS WAF couldn’t perform the operation because your resource is being used by
+// WAF couldn’t perform the operation because your resource is being used by
 // another resource or it’s associated with another resource.
 type WAFAssociatedItemException struct {
 	Message *string
@@ -25,8 +25,8 @@ func (e *WAFAssociatedItemException) ErrorMessage() string {
 func (e *WAFAssociatedItemException) ErrorCode() string             { return "WAFAssociatedItemException" }
 func (e *WAFAssociatedItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS WAF couldn’t perform the operation because the resource that you tried to
-// save is a duplicate of an existing one.
+// WAF couldn’t perform the operation because the resource that you tried to save
+// is a duplicate of an existing one.
 type WAFDuplicateItemException struct {
 	Message *string
 }
@@ -43,7 +43,7 @@ func (e *WAFDuplicateItemException) ErrorMessage() string {
 func (e *WAFDuplicateItemException) ErrorCode() string             { return "WAFDuplicateItemException" }
 func (e *WAFDuplicateItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Your request is valid, but AWS WAF couldn’t perform the operation because of a
+// Your request is valid, but WAF couldn’t perform the operation because of a
 // system problem. Retry your request.
 type WAFInternalErrorException struct {
 	Message *string
@@ -78,10 +78,10 @@ func (e *WAFInvalidOperationException) ErrorMessage() string {
 func (e *WAFInvalidOperationException) ErrorCode() string             { return "WAFInvalidOperationException" }
 func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation failed because AWS WAF didn't recognize a parameter in the
-// request. For example:
+// The operation failed because WAF didn't recognize a parameter in the request.
+// For example:
 //
-// * You specified an invalid parameter name or value.
+// * You specified a parameter name or value that isn't valid.
 //
 // *
 // Your nested statement isn't valid. You might have tried to nest a statement that
@@ -91,7 +91,7 @@ func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return s
 // among the types available at DefaultAction.
 //
 // * Your request references an ARN
-// that is malformed, or corresponds to a resource with which a Web ACL cannot be
+// that is malformed, or corresponds to a resource with which a web ACL can't be
 // associated.
 type WAFInvalidParameterException struct {
 	Message *string
@@ -126,7 +126,7 @@ func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return s
 // must specify Allow.
 //
 // * Action must specify wafv2:CreateWebACL,
-// wafv2:UpdateWebACL, and wafv2:PutFirewallManagerRuleGroups. AWS WAF rejects any
+// wafv2:UpdateWebACL, and wafv2:PutFirewallManagerRuleGroups. WAF rejects any
 // extra actions or wildcard actions in the policy.
 //
 // * The policy must not include
@@ -154,8 +154,8 @@ func (e *WAFInvalidPermissionPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// AWS WAF couldn’t perform the operation because the resource that you requested
-// isn’t valid. Check the resource, and try again.
+// WAF couldn’t perform the operation because the resource that you requested isn’t
+// valid. Check the resource, and try again.
 type WAFInvalidResourceException struct {
 	Message *string
 }
@@ -172,11 +172,11 @@ func (e *WAFInvalidResourceException) ErrorMessage() string {
 func (e *WAFInvalidResourceException) ErrorCode() string             { return "WAFInvalidResourceException" }
 func (e *WAFInvalidResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS WAF couldn’t perform the operation because you exceeded your resource limit.
-// For example, the maximum number of WebACL objects that you can create for an AWS
+// WAF couldn’t perform the operation because you exceeded your resource limit. For
+// example, the maximum number of WebACL objects that you can create for an
 // account. For more information, see Limits
-// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the AWS
-// WAF Developer Guide.
+// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the WAF
+// Developer Guide.
 type WAFLimitsExceededException struct {
 	Message *string
 }
@@ -193,7 +193,7 @@ func (e *WAFLimitsExceededException) ErrorMessage() string {
 func (e *WAFLimitsExceededException) ErrorCode() string             { return "WAFLimitsExceededException" }
 func (e *WAFLimitsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS WAF couldn’t perform the operation because your resource doesn’t exist.
+// WAF couldn’t perform the operation because your resource doesn’t exist.
 type WAFNonexistentItemException struct {
 	Message *string
 }
@@ -210,9 +210,9 @@ func (e *WAFNonexistentItemException) ErrorMessage() string {
 func (e *WAFNonexistentItemException) ErrorCode() string             { return "WAFNonexistentItemException" }
 func (e *WAFNonexistentItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS WAF couldn’t save your changes because you tried to update or delete a
-// resource that has changed since you last retrieved it. Get the resource again,
-// make any changes you need to make to the new copy, and retry your operation.
+// WAF couldn’t save your changes because you tried to update or delete a resource
+// that has changed since you last retrieved it. Get the resource again, make any
+// changes you need to make to the new copy, and retry your operation.
 type WAFOptimisticLockException struct {
 	Message *string
 }
@@ -229,7 +229,7 @@ func (e *WAFOptimisticLockException) ErrorMessage() string {
 func (e *WAFOptimisticLockException) ErrorCode() string             { return "WAFOptimisticLockException" }
 func (e *WAFOptimisticLockException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS WAF is not able to access the service linked role. This can be caused by a
+// WAF is not able to access the service linked role. This can be caused by a
 // previous PutLoggingConfiguration request, which can lock the service linked role
 // for about 20 seconds. Please try your request again. The service linked role can
 // also be locked by a previous DeleteServiceLinkedRole request, which can lock the
@@ -294,8 +294,8 @@ func (e *WAFTagOperationException) ErrorMessage() string {
 func (e *WAFTagOperationException) ErrorCode() string             { return "WAFTagOperationException" }
 func (e *WAFTagOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS WAF couldn’t perform your tagging operation because of an internal error.
-// Retry your request.
+// WAF couldn’t perform your tagging operation because of an internal error. Retry
+// your request.
 type WAFTagOperationInternalErrorException struct {
 	Message *string
 }
@@ -316,7 +316,7 @@ func (e *WAFTagOperationInternalErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
 
-// AWS WAF couldn’t retrieve the resource that you requested. Retry your request.
+// WAF couldn’t retrieve the resource that you requested. Retry your request.
 type WAFUnavailableEntityException struct {
 	Message *string
 }

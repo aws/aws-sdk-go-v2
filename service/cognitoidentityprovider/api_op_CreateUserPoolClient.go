@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates the user pool client.
+// Creates the user pool client. When you create a new user pool client, token
+// revocation is automatically enabled. For more information about revoking tokens,
+// see RevokeToken
+// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html).
 func (c *Client) CreateUserPoolClient(ctx context.Context, params *CreateUserPoolClientInput, optFns ...func(*Options)) (*CreateUserPoolClientOutput, error) {
 	if params == nil {
 		params = &CreateUserPoolClientInput{}
@@ -102,6 +105,13 @@ type CreateUserPoolClientInput struct {
 	// HTTPS over HTTP except for http://localhost for testing purposes only. App
 	// callback URLs such as myapp://example are also supported.
 	DefaultRedirectURI *string
+
+	// Enables or disables token revocation. For more information about revoking
+	// tokens, see RevokeToken
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html).
+	// If you don't include this parameter, token revocation is automatically enabled
+	// for the new user pool client.
+	EnableTokenRevocation *bool
 
 	// The authentication flows that are supported by the user pool clients. Flow names
 	// without the ALLOW_ prefix are deprecated in favor of new names with the ALLOW_

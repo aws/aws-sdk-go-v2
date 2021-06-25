@@ -1961,6 +1961,55 @@ func awsAwsjson11_serializeDocumentAttributeFilterList(v []types.AttributeFilter
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAuthenticationConfiguration(v *types.AuthenticationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BasicAuthentication != nil {
+		ok := object.Key("BasicAuthentication")
+		if err := awsAwsjson11_serializeDocumentBasicAuthenticationConfigurationList(v.BasicAuthentication, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentBasicAuthenticationConfiguration(v *types.BasicAuthenticationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Credentials != nil {
+		ok := object.Key("Credentials")
+		ok.String(*v.Credentials)
+	}
+
+	if v.Host != nil {
+		ok := object.Key("Host")
+		ok.String(*v.Host)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("Port")
+		ok.Integer(*v.Port)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentBasicAuthenticationConfigurationList(v []types.BasicAuthenticationConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentBasicAuthenticationConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCapacityUnitsConfiguration(v *types.CapacityUnitsConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2497,6 +2546,13 @@ func awsAwsjson11_serializeDocumentDataSourceConfiguration(v *types.DataSourceCo
 	if v.SharePointConfiguration != nil {
 		ok := object.Key("SharePointConfiguration")
 		if err := awsAwsjson11_serializeDocumentSharePointConfiguration(v.SharePointConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WebCrawlerConfiguration != nil {
+		ok := object.Key("WebCrawlerConfiguration")
+		if err := awsAwsjson11_serializeDocumentWebCrawlerConfiguration(v.WebCrawlerConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -3152,6 +3208,28 @@ func awsAwsjson11_serializeDocumentPrincipalList(v []types.Principal, value smit
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentProxyConfiguration(v *types.ProxyConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Credentials != nil {
+		ok := object.Key("Credentials")
+		ok.String(*v.Credentials)
+	}
+
+	if v.Host != nil {
+		ok := object.Key("Host")
+		ok.String(*v.Host)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("Port")
+		ok.Integer(*v.Port)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRelevance(v *types.Relevance, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3590,6 +3668,36 @@ func awsAwsjson11_serializeDocumentSecurityGroupIdList(v []string, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSeedUrlConfiguration(v *types.SeedUrlConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SeedUrls != nil {
+		ok := object.Key("SeedUrls")
+		if err := awsAwsjson11_serializeDocumentSeedUrlList(v.SeedUrls, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.WebCrawlerMode) > 0 {
+		ok := object.Key("WebCrawlerMode")
+		ok.String(string(v.WebCrawlerMode))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSeedUrlList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentServerSideEncryptionConfiguration(v *types.ServerSideEncryptionConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3784,6 +3892,13 @@ func awsAwsjson11_serializeDocumentSharePointConfiguration(v *types.SharePointCo
 		ok.String(string(v.SharePointVersion))
 	}
 
+	if v.SslCertificateS3Path != nil {
+		ok := object.Key("SslCertificateS3Path")
+		if err := awsAwsjson11_serializeDocumentS3Path(v.SslCertificateS3Path, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Urls != nil {
 		ok := object.Key("Urls")
 		if err := awsAwsjson11_serializeDocumentSharePointUrlList(v.Urls, ok); err != nil {
@@ -3807,6 +3922,31 @@ func awsAwsjson11_serializeDocumentSharePointConfiguration(v *types.SharePointCo
 }
 
 func awsAwsjson11_serializeDocumentSharePointUrlList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSiteMapsConfiguration(v *types.SiteMapsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SiteMaps != nil {
+		ok := object.Key("SiteMaps")
+		if err := awsAwsjson11_serializeDocumentSiteMapsList(v.SiteMaps, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSiteMapsList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -3915,6 +4055,27 @@ func awsAwsjson11_serializeDocumentTimeRange(v *types.TimeRange, value smithyjso
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentUrls(v *types.Urls, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SeedUrlConfiguration != nil {
+		ok := object.Key("SeedUrlConfiguration")
+		if err := awsAwsjson11_serializeDocumentSeedUrlConfiguration(v.SeedUrlConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SiteMapsConfiguration != nil {
+		ok := object.Key("SiteMapsConfiguration")
+		if err := awsAwsjson11_serializeDocumentSiteMapsConfiguration(v.SiteMapsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentUserContext(v *types.UserContext, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3969,6 +4130,68 @@ func awsAwsjson11_serializeDocumentValueImportanceMap(v map[string]int32, value 
 		om := object.Key(key)
 		om.Integer(v[key])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentWebCrawlerConfiguration(v *types.WebCrawlerConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthenticationConfiguration != nil {
+		ok := object.Key("AuthenticationConfiguration")
+		if err := awsAwsjson11_serializeDocumentAuthenticationConfiguration(v.AuthenticationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CrawlDepth != nil {
+		ok := object.Key("CrawlDepth")
+		ok.Integer(*v.CrawlDepth)
+	}
+
+	if v.MaxContentSizePerPageInMegaBytes != nil {
+		ok := object.Key("MaxContentSizePerPageInMegaBytes")
+		ok.Float(*v.MaxContentSizePerPageInMegaBytes)
+	}
+
+	if v.MaxLinksPerPage != nil {
+		ok := object.Key("MaxLinksPerPage")
+		ok.Integer(*v.MaxLinksPerPage)
+	}
+
+	if v.MaxUrlsPerMinuteCrawlRate != nil {
+		ok := object.Key("MaxUrlsPerMinuteCrawlRate")
+		ok.Integer(*v.MaxUrlsPerMinuteCrawlRate)
+	}
+
+	if v.ProxyConfiguration != nil {
+		ok := object.Key("ProxyConfiguration")
+		if err := awsAwsjson11_serializeDocumentProxyConfiguration(v.ProxyConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UrlExclusionPatterns != nil {
+		ok := object.Key("UrlExclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.UrlExclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UrlInclusionPatterns != nil {
+		ok := object.Key("UrlInclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.UrlInclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Urls != nil {
+		ok := object.Key("Urls")
+		if err := awsAwsjson11_serializeDocumentUrls(v.Urls, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

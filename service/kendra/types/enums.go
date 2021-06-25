@@ -277,6 +277,7 @@ const (
 	DataSourceTypeCustom      DataSourceType = "CUSTOM"
 	DataSourceTypeConfluence  DataSourceType = "CONFLUENCE"
 	DataSourceTypeGoogledrive DataSourceType = "GOOGLEDRIVE"
+	DataSourceTypeWebcrawler  DataSourceType = "WEBCRAWLER"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -293,6 +294,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"CUSTOM",
 		"CONFLUENCE",
 		"GOOGLEDRIVE",
+		"WEBCRAWLER",
 	}
 }
 
@@ -810,6 +812,8 @@ type SharePointVersion string
 
 // Enum values for SharePointVersion
 const (
+	SharePointVersionSharepoint2013   SharePointVersion = "SHAREPOINT_2013"
+	SharePointVersionSharepoint2016   SharePointVersion = "SHAREPOINT_2016"
 	SharePointVersionSharepointOnline SharePointVersion = "SHAREPOINT_ONLINE"
 )
 
@@ -818,6 +822,8 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SharePointVersion) Values() []SharePointVersion {
 	return []SharePointVersion{
+		"SHAREPOINT_2013",
+		"SHAREPOINT_2016",
 		"SHAREPOINT_ONLINE",
 	}
 }
@@ -881,5 +887,25 @@ func (UserContextPolicy) Values() []UserContextPolicy {
 	return []UserContextPolicy{
 		"ATTRIBUTE_FILTER",
 		"USER_TOKEN",
+	}
+}
+
+type WebCrawlerMode string
+
+// Enum values for WebCrawlerMode
+const (
+	WebCrawlerModeHostOnly   WebCrawlerMode = "HOST_ONLY"
+	WebCrawlerModeSubdomains WebCrawlerMode = "SUBDOMAINS"
+	WebCrawlerModeEverything WebCrawlerMode = "EVERYTHING"
+)
+
+// Values returns all known values for WebCrawlerMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WebCrawlerMode) Values() []WebCrawlerMode {
+	return []WebCrawlerMode{
+		"HOST_ONLY",
+		"SUBDOMAINS",
+		"EVERYTHING",
 	}
 }

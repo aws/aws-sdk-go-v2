@@ -138,9 +138,9 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []string
 
-	// A value that indicates whether to enable mapping of AWS Identity and Access
-	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// For more information, see  IAM Database Authentication
+	// A value that indicates whether to enable mapping of Amazon Web Services Identity
+	// and Access Management (IAM) accounts to database accounts. By default, mapping
+	// is disabled. For more information, see  IAM Database Authentication
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon Aurora User Guide.
 	EnableIAMDatabaseAuthentication *bool
@@ -166,19 +166,20 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// PostgreSQL Example: 9.6.3, 10.7
 	EngineVersion *string
 
-	// The AWS KMS key identifier to use when restoring an encrypted DB cluster from a
-	// DB snapshot or DB cluster snapshot. The AWS KMS key identifier is the key ARN,
-	// key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). To
-	// use a CMK in a different AWS account, specify the key ARN or alias ARN. When you
-	// don't specify a value for the KmsKeyId parameter, then the following occurs:
+	// The Amazon Web Services KMS key identifier to use when restoring an encrypted DB
+	// cluster from a DB snapshot or DB cluster snapshot. The Amazon Web Services KMS
+	// key identifier is the key ARN, key ID, alias ARN, or alias name for the Amazon
+	// Web Services KMS customer master key (CMK). To use a CMK in a different Amazon
+	// Web Services account, specify the key ARN or alias ARN. When you don't specify a
+	// value for the KmsKeyId parameter, then the following occurs:
 	//
-	// *
-	// If the DB snapshot or DB cluster snapshot in SnapshotIdentifier is encrypted,
-	// then the restored DB cluster is encrypted using the AWS KMS CMK that was used to
-	// encrypt the DB snapshot or DB cluster snapshot.
+	// * If the DB
+	// snapshot or DB cluster snapshot in SnapshotIdentifier is encrypted, then the
+	// restored DB cluster is encrypted using the Amazon Web Services KMS CMK that was
+	// used to encrypt the DB snapshot or DB cluster snapshot.
 	//
-	// * If the DB snapshot or DB
-	// cluster snapshot in SnapshotIdentifier isn't encrypted, then the restored DB
+	// * If the DB snapshot or
+	// DB cluster snapshot in SnapshotIdentifier isn't encrypted, then the restored DB
 	// cluster isn't encrypted.
 	KmsKeyId *string
 

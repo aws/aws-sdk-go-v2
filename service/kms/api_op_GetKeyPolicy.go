@@ -32,8 +32,8 @@ func (c *Client) GetKeyPolicy(ctx context.Context, params *GetKeyPolicyInput, op
 
 type GetKeyPolicyInput struct {
 
-	// A unique identifier for the customer master key (CMK). Specify the key ID or the
-	// Amazon Resource Name (ARN) of the CMK. For example:
+	// Gets the key policy for the specified customer master key (CMK). Specify the key
+	// ID or key ARN of the CMK. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab

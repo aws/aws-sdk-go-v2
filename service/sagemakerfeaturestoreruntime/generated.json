@@ -5,6 +5,7 @@
     },
     "files": [
         "api_client.go",
+        "api_op_BatchGetRecord.go",
         "api_op_DeleteRecord.go",
         "api_op_GetRecord.go",
         "api_op_PutRecord.go",

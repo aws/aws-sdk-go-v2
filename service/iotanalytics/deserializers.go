@@ -7004,6 +7004,11 @@ func awsRestjson1_deserializeDocumentDatastore(v **types.Datastore, value interf
 				sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
+		case "datastorePartitions":
+			if err := awsRestjson1_deserializeDocumentDatastorePartitions(&sv.DatastorePartitions, value); err != nil {
+				return err
+			}
+
 		case "fileFormatConfiguration":
 			if err := awsRestjson1_deserializeDocumentFileFormatConfiguration(&sv.FileFormatConfiguration, value); err != nil {
 				return err
@@ -7110,6 +7115,83 @@ func awsRestjson1_deserializeDocumentDatastoreActivity(v **types.DatastoreActivi
 					return fmt.Errorf("expected ActivityName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDatastorePartition(v **types.DatastorePartition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatastorePartition
+	if *v == nil {
+		sv = &types.DatastorePartition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "attributePartition":
+			if err := awsRestjson1_deserializeDocumentPartition(&sv.AttributePartition, value); err != nil {
+				return err
+			}
+
+		case "timestampPartition":
+			if err := awsRestjson1_deserializeDocumentTimestampPartition(&sv.TimestampPartition, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDatastorePartitions(v **types.DatastorePartitions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatastorePartitions
+	if *v == nil {
+		sv = &types.DatastorePartitions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "partitions":
+			if err := awsRestjson1_deserializeDocumentPartitions(&sv.Partitions, value); err != nil {
+				return err
 			}
 
 		default:
@@ -7324,6 +7406,11 @@ func awsRestjson1_deserializeDocumentDatastoreSummary(v **types.DatastoreSummary
 					return fmt.Errorf("expected DatastoreName to be of type string, got %T instead", value)
 				}
 				sv.DatastoreName = ptr.String(jtv)
+			}
+
+		case "datastorePartitions":
+			if err := awsRestjson1_deserializeDocumentDatastorePartitions(&sv.DatastorePartitions, value); err != nil {
+				return err
 			}
 
 		case "datastoreStorage":
@@ -8462,6 +8549,80 @@ func awsRestjson1_deserializeDocumentParquetConfiguration(v **types.ParquetConfi
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPartition(v **types.Partition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Partition
+	if *v == nil {
+		sv = &types.Partition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "attributeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PartitionAttributeName to be of type string, got %T instead", value)
+				}
+				sv.AttributeName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPartitions(v *[]types.DatastorePartition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DatastorePartition
+	if *v == nil {
+		cv = []types.DatastorePartition{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DatastorePartition
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDatastorePartition(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -9708,6 +9869,55 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTimestampPartition(v **types.TimestampPartition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimestampPartition
+	if *v == nil {
+		sv = &types.TimestampPartition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "attributeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PartitionAttributeName to be of type string, got %T instead", value)
+				}
+				sv.AttributeName = ptr.String(jtv)
+			}
+
+		case "timestampFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimestampFormat to be of type string, got %T instead", value)
+				}
+				sv.TimestampFormat = ptr.String(jtv)
 			}
 
 		default:

@@ -12862,6 +12862,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 		objectKey.Boolean(*v.EnableIAMDatabaseAuthentication)
 	}
 
+	if v.EngineMode != nil {
+		objectKey := object.Key("EngineMode")
+		objectKey.String(*v.EngineMode)
+	}
+
 	if v.KmsKeyId != nil {
 		objectKey := object.Key("KmsKeyId")
 		objectKey.String(*v.KmsKeyId)
@@ -12885,6 +12890,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 	if v.RestoreType != nil {
 		objectKey := object.Key("RestoreType")
 		objectKey.String(*v.RestoreType)
+	}
+
+	if v.ScalingConfiguration != nil {
+		objectKey := object.Key("ScalingConfiguration")
+		if err := awsAwsquery_serializeDocumentScalingConfiguration(v.ScalingConfiguration, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.SourceDBClusterIdentifier != nil {
@@ -13535,6 +13547,11 @@ func awsAwsquery_serializeOpDocumentStartActivityStreamInput(v *StartActivityStr
 	if v.ApplyImmediately != nil {
 		objectKey := object.Key("ApplyImmediately")
 		objectKey.Boolean(*v.ApplyImmediately)
+	}
+
+	if v.EngineNativeAuditFieldsIncluded != nil {
+		objectKey := object.Key("EngineNativeAuditFieldsIncluded")
+		objectKey.Boolean(*v.EngineNativeAuditFieldsIncluded)
 	}
 
 	if v.KmsKeyId != nil {

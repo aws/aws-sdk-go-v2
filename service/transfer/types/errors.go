@@ -43,8 +43,8 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when an error occurs in the AWS Transfer Family
-// service.
+// This exception is thrown when an error occurs in the Amazon Web ServicesTransfer
+// Family service.
 type InternalServiceError struct {
 	Message *string
 }
@@ -115,8 +115,8 @@ func (e *ResourceExistsException) ErrorMessage() string {
 func (e *ResourceExistsException) ErrorCode() string             { return "ResourceExistsException" }
 func (e *ResourceExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when a resource is not found by the AWS Transfer Family
-// service.
+// This exception is thrown when a resource is not found by the Amazon Web
+// ServicesTransfer Family service.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -136,7 +136,8 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request has failed because the AWS Transfer Family service is not available.
+// The request has failed because the Amazon Web ServicesTransfer Family service is
+// not available.
 type ServiceUnavailableException struct {
 	Message *string
 }

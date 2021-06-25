@@ -599,6 +599,8 @@ type ReceivedMetadata struct {
 
 	// Received status.
 	ReceivedStatus ReceivedStatus
+
+	ReceivedStatusReason *string
 }
 
 // Details of the license configuration that this generator reports on.

@@ -6,11 +6,11 @@ import (
 	"time"
 )
 
-// Describes a quota for an AWS account. The following are account quotas:
+// Describes a quota for an Amazon Web Services account. The following are account
+// quotas:
 //
-// *
-// AllocatedStorage - The total allocated storage per account, in GiB. The used
-// value is the total allocated storage in the account, in GiB.
+// * AllocatedStorage - The total allocated storage per account, in GiB.
+// The used value is the total allocated storage in the account, in GiB.
 //
 // *
 // AuthorizationsPerDBSecurityGroup - The number of ingress rules per DB security
@@ -28,9 +28,9 @@ import (
 // groups. The used value is the count of nondefault DB cluster parameter groups in
 // the account.
 //
-// * DBClusterRoles - The number of associated AWS Identity and
-// Access Management (IAM) roles per DB cluster. The used value is the highest
-// number of associated IAM roles for a DB cluster in the account. Other DB
+// * DBClusterRoles - The number of associated Amazon Web Services
+// Identity and Access Management (IAM) roles per DB cluster. The used value is the
+// highest number of associated IAM roles for a DB cluster in the account. Other DB
 // clusters in the account might have a lower number of associated IAM roles.
 //
 // *
@@ -98,7 +98,7 @@ import (
 // in the Amazon Aurora User Guide.
 type AccountQuota struct {
 
-	// The name of the Amazon RDS quota for this AWS account.
+	// The name of the Amazon RDS quota for this Amazon Web Services account.
 	AccountQuotaName *string
 
 	// The maximum allowed value for the quota.
@@ -133,7 +133,7 @@ type AvailableProcessorFeature struct {
 	Name *string
 }
 
-// A CA certificate for an AWS account.
+// A CA certificate for an Amazon Web Services account.
 type Certificate struct {
 
 	// The Amazon Resource Name (ARN) for the certificate.
@@ -204,8 +204,8 @@ type ClusterPendingModifiedValues struct {
 	// The database engine version.
 	EngineVersion *string
 
-	// A value that indicates whether mapping of AWS Identity and Access Management
-	// (IAM) accounts to database accounts is enabled.
+	// A value that indicates whether mapping of Amazon Web Services Identity and
+	// Access Management (IAM) accounts to database accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool
 
 	// The master credentials for the DB cluster.
@@ -311,7 +311,7 @@ type CustomAvailabilityZone struct {
 	CustomAvailabilityZoneStatus *string
 
 	// Information about the virtual private network (VPN) between the VMware vSphere
-	// cluster and the AWS website.
+	// cluster and the Amazon Web Services website.
 	VpnDetails *VpnDetails
 }
 
@@ -324,9 +324,10 @@ type DBCluster struct {
 	// stream.
 	ActivityStreamKinesisStreamName *string
 
-	// The AWS KMS key identifier used for encrypting messages in the database activity
-	// stream. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-	// name for the AWS KMS customer master key (CMK).
+	// The Amazon Web Services KMS key identifier used for encrypting messages in the
+	// database activity stream. The Amazon Web Services KMS key identifier is the key
+	// ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS customer
+	// master key (CMK).
 	ActivityStreamKmsKeyId *string
 
 	// The mode of the database activity stream. Database events such as a change or
@@ -343,9 +344,10 @@ type DBCluster struct {
 	// automatically adjusts as needed.
 	AllocatedStorage *int32
 
-	// Provides a list of the AWS Identity and Access Management (IAM) roles that are
-	// associated with the DB cluster. IAM roles that are associated with a DB cluster
-	// grant permission for the DB cluster to access other AWS services on your behalf.
+	// Provides a list of the Amazon Web Services Identity and Access Management (IAM)
+	// roles that are associated with the DB cluster. IAM roles that are associated
+	// with a DB cluster grant permission for the DB cluster to access other Amazon Web
+	// Services on your behalf.
 	AssociatedRoles []DBClusterRole
 
 	// Provides the list of Availability Zones (AZs) where instances in the DB cluster
@@ -385,7 +387,7 @@ type DBCluster struct {
 	CopyTagsToSnapshot *bool
 
 	// Specifies whether the DB cluster is a clone of a DB cluster owned by a different
-	// AWS account.
+	// Amazon Web Services account.
 	CrossAccountClone *bool
 
 	// Identifies all custom endpoints associated with the cluster.
@@ -416,9 +418,9 @@ type DBCluster struct {
 	// name is returned for the life of the DB cluster.
 	DatabaseName *string
 
-	// The AWS Region-unique, immutable identifier for the DB cluster. This identifier
-	// is found in AWS CloudTrail log entries whenever the AWS KMS CMK for the DB
-	// cluster is accessed.
+	// The Amazon Web Services Region-unique, immutable identifier for the DB cluster.
+	// This identifier is found in Amazon Web Services CloudTrail log entries whenever
+	// the Amazon Web Services KMS CMK for the DB cluster is accessed.
 	DbClusterResourceId *string
 
 	// Indicates if the DB cluster has deletion protection enabled. The database can't
@@ -480,13 +482,14 @@ type DBCluster struct {
 	// the Amazon Aurora User Guide.
 	HttpEndpointEnabled *bool
 
-	// A value that indicates whether the mapping of AWS Identity and Access Management
-	// (IAM) accounts to database accounts is enabled.
+	// A value that indicates whether the mapping of Amazon Web Services Identity and
+	// Access Management (IAM) accounts to database accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool
 
-	// If StorageEncrypted is enabled, the AWS KMS key identifier for the encrypted DB
-	// cluster. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-	// name for the AWS KMS customer master key (CMK).
+	// If StorageEncrypted is enabled, the Amazon Web Services KMS key identifier for
+	// the encrypted DB cluster. The Amazon Web Services KMS key identifier is the key
+	// ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS customer
+	// master key (CMK).
 	KmsKeyId *string
 
 	// Specifies the latest time to which a database can be restored with point-in-time
@@ -701,12 +704,13 @@ type DBClusterParameterGroup struct {
 	Description *string
 }
 
-// Describes an AWS Identity and Access Management (IAM) role that is associated
-// with a DB cluster.
+// Describes an Amazon Web Services Identity and Access Management (IAM) role that
+// is associated with a DB cluster.
 type DBClusterRole struct {
 
-	// The name of the feature associated with the AWS Identity and Access Management
-	// (IAM) role. For the list of supported feature names, see DBEngineVersion.
+	// The name of the feature associated with the Amazon Web Services Identity and
+	// Access Management (IAM) role. For the list of supported feature names, see
+	// DBEngineVersion.
 	FeatureName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that is associated with the DB
@@ -717,15 +721,15 @@ type DBClusterRole struct {
 	// Status property returns one of the following values:
 	//
 	// * ACTIVE - the IAM role
-	// ARN is associated with the DB cluster and can be used to access other AWS
-	// services on your behalf.
+	// ARN is associated with the DB cluster and can be used to access other Amazon Web
+	// Services on your behalf.
 	//
 	// * PENDING - the IAM role ARN is being associated with
 	// the DB cluster.
 	//
 	// * INVALID - the IAM role ARN is associated with the DB cluster,
-	// but the DB cluster is unable to assume the IAM role in order to access other AWS
-	// services on your behalf.
+	// but the DB cluster is unable to assume the IAM role in order to access other
+	// Amazon Web Services on your behalf.
 	Status *string
 }
 
@@ -763,13 +767,14 @@ type DBClusterSnapshot struct {
 	// Provides the version of the database engine for this DB cluster snapshot.
 	EngineVersion *string
 
-	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
-	// accounts is enabled, and otherwise false.
+	// True if mapping of Amazon Web Services Identity and Access Management (IAM)
+	// accounts to database accounts is enabled, and otherwise false.
 	IAMDatabaseAuthenticationEnabled bool
 
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
-	// cluster snapshot. The AWS KMS key identifier is the key ARN, key ID, alias ARN,
-	// or alias name for the AWS KMS customer master key (CMK).
+	// If StorageEncrypted is true, the Amazon Web Services KMS key identifier for the
+	// encrypted DB cluster snapshot. The Amazon Web Services KMS key identifier is the
+	// key ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS
+	// customer master key (CMK).
 	KmsKeyId *string
 
 	// Provides the license model information for this DB cluster snapshot.
@@ -813,29 +818,30 @@ type DBClusterSnapshot struct {
 }
 
 // Contains the name and values of a manual DB cluster snapshot attribute. Manual
-// DB cluster snapshot attributes are used to authorize other AWS accounts to
-// restore a manual DB cluster snapshot. For more information, see the
+// DB cluster snapshot attributes are used to authorize other Amazon Web Services
+// accounts to restore a manual DB cluster snapshot. For more information, see the
 // ModifyDBClusterSnapshotAttribute API action.
 type DBClusterSnapshotAttribute struct {
 
 	// The name of the manual DB cluster snapshot attribute. The attribute named
-	// restore refers to the list of AWS accounts that have permission to copy or
-	// restore the manual DB cluster snapshot. For more information, see the
+	// restore refers to the list of Amazon Web Services accounts that have permission
+	// to copy or restore the manual DB cluster snapshot. For more information, see the
 	// ModifyDBClusterSnapshotAttribute API action.
 	AttributeName *string
 
 	// The value(s) for the manual DB cluster snapshot attribute. If the AttributeName
-	// field is set to restore, then this element returns a list of IDs of the AWS
-	// accounts that are authorized to copy or restore the manual DB cluster snapshot.
-	// If a value of all is in the list, then the manual DB cluster snapshot is public
-	// and available for any AWS account to copy or restore.
+	// field is set to restore, then this element returns a list of IDs of the Amazon
+	// Web Services accounts that are authorized to copy or restore the manual DB
+	// cluster snapshot. If a value of all is in the list, then the manual DB cluster
+	// snapshot is public and available for any Amazon Web Services account to copy or
+	// restore.
 	AttributeValues []string
 }
 
 // Contains the results of a successful call to the
 // DescribeDBClusterSnapshotAttributes API action. Manual DB cluster snapshot
-// attributes are used to authorize other AWS accounts to copy or restore a manual
-// DB cluster snapshot. For more information, see the
+// attributes are used to authorize other Amazon Web Services accounts to copy or
+// restore a manual DB cluster snapshot. For more information, see the
 // ModifyDBClusterSnapshotAttribute API action.
 type DBClusterSnapshotAttributesResult struct {
 
@@ -920,11 +926,33 @@ type DBEngineVersion struct {
 // response element in the DescribeDBInstances action.
 type DBInstance struct {
 
+	// Indicates whether engine-native audit fields are included in the database
+	// activity stream.
+	ActivityStreamEngineNativeAuditFieldsIncluded *bool
+
+	// The name of the Amazon Kinesis data stream used for the database activity
+	// stream.
+	ActivityStreamKinesisStreamName *string
+
+	// The Amazon Web Services KMS key identifier used for encrypting messages in the
+	// database activity stream. The Amazon Web Services KMS key identifier is the key
+	// ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS customer
+	// master key (CMK).
+	ActivityStreamKmsKeyId *string
+
+	// The mode of the database activity stream. Database events such as a change or
+	// access generate an activity stream event. RDS for Oracle always handles these
+	// events asynchronously.
+	ActivityStreamMode ActivityStreamMode
+
+	// The status of the database activity stream.
+	ActivityStreamStatus ActivityStreamStatus
+
 	// Specifies the allocated storage size specified in gibibytes.
 	AllocatedStorage int32
 
-	// The AWS Identity and Access Management (IAM) roles associated with the DB
-	// instance.
+	// The Amazon Web Services Identity and Access Management (IAM) roles associated
+	// with the DB instance.
 	AssociatedRoles []DBInstanceRole
 
 	// A value that indicates that minor version patches are applied automatically.
@@ -933,7 +961,8 @@ type DBInstance struct {
 	// Specifies the name of the Availability Zone the DB instance is located in.
 	AvailabilityZone *string
 
-	// The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
+	// The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services
+	// Backup.
 	AwsBackupRecoveryPointArn *string
 
 	// Specifies the number of days for which automatic DB snapshots are retained.
@@ -957,12 +986,13 @@ type DBInstance struct {
 	// resources in your Outpost subnets through your on-premises network. For some use
 	// cases, a CoIP can provide lower latency for connections to the DB instance from
 	// outside of its virtual private cloud (VPC) on your local network. For more
-	// information about RDS on Outposts, see Working with Amazon RDS on AWS Outposts
+	// information about RDS on Outposts, see Working with Amazon RDS on Amazon Web
+	// Services Outposts
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
 	// the Amazon RDS User Guide. For more information about CoIPs, see Customer-owned
 	// IP addresses
 	// (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing)
-	// in the AWS Outposts User Guide.
+	// in the Amazon Web Services Outposts User Guide.
 	CustomerOwnedIpEnabled *bool
 
 	// If the DB instance is a member of a DB cluster, contains the name of the DB
@@ -1012,9 +1042,10 @@ type DBInstance struct {
 	// of a DB cluster, this can be a different port than the DB cluster port.
 	DbInstancePort int32
 
-	// The AWS Region-unique, immutable identifier for the DB instance. This identifier
-	// is found in AWS CloudTrail log entries whenever the AWS KMS customer master key
-	// (CMK) for the DB instance is accessed.
+	// The Amazon Web Services Region-unique, immutable identifier for the DB instance.
+	// This identifier is found in Amazon Web Services CloudTrail log entries whenever
+	// the Amazon Web Services KMS customer master key (CMK) for the DB instance is
+	// accessed.
 	DbiResourceId *string
 
 	// Indicates if the DB instance has deletion protection enabled. The database can't
@@ -1046,17 +1077,18 @@ type DBInstance struct {
 	// receives the Enhanced Monitoring metrics data for the DB instance.
 	EnhancedMonitoringResourceArn *string
 
-	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
-	// accounts is enabled, and otherwise false. IAM database authentication can be
-	// enabled for the following database engines
+	// True if mapping of Amazon Web Services Identity and Access Management (IAM)
+	// accounts to database accounts is enabled, and otherwise false. IAM database
+	// authentication can be enabled for the following database engines
 	//
-	// * For MySQL 5.6, minor version
-	// 5.6.34 or higher
+	// * For MySQL
+	// 5.6, minor version 5.6.34 or higher
 	//
-	// * For MySQL 5.7, minor version 5.7.16 or higher
+	// * For MySQL 5.7, minor version 5.7.16 or
+	// higher
 	//
-	// * Aurora 5.6
-	// or higher. To enable IAM database authentication for Aurora, see DBCluster Type.
+	// * Aurora 5.6 or higher. To enable IAM database authentication for
+	// Aurora, see DBCluster Type.
 	IAMDatabaseAuthenticationEnabled bool
 
 	// Provides the date and time the DB instance was created.
@@ -1065,9 +1097,10 @@ type DBInstance struct {
 	// Specifies the Provisioned IOPS (I/O operations per second) value.
 	Iops *int32
 
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
-	// instance. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-	// name for the AWS KMS customer master key (CMK).
+	// If StorageEncrypted is true, the Amazon Web Services KMS key identifier for the
+	// encrypted DB instance. The Amazon Web Services KMS key identifier is the key
+	// ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS customer
+	// master key (CMK).
 	KmsKeyId *string
 
 	// Specifies the latest time to which a database can be restored with point-in-time
@@ -1115,9 +1148,10 @@ type DBInstance struct {
 	// false.
 	PerformanceInsightsEnabled *bool
 
-	// The AWS KMS key identifier for encryption of Performance Insights data. The AWS
-	// KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS
-	// KMS customer master key (CMK).
+	// The Amazon Web Services KMS key identifier for encryption of Performance
+	// Insights data. The Amazon Web Services KMS key identifier is the key ARN, key
+	// ID, alias ARN, or alias name for the Amazon Web Services KMS customer master key
+	// (CMK).
 	PerformanceInsightsKMSKeyId *string
 
 	// The amount of time, in days, to retain Performance Insights data. Valid values
@@ -1217,7 +1251,8 @@ type DBInstanceAutomatedBackup struct {
 	AllocatedStorage int32
 
 	// The Availability Zone that the automated backup was created in. For information
-	// on AWS Regions and Availability Zones, see Regions and Availability Zones
+	// on Amazon Web Services Regions and Availability Zones, see Regions and
+	// Availability Zones
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
 	AvailabilityZone *string
 
@@ -1230,8 +1265,8 @@ type DBInstanceAutomatedBackup struct {
 	// The Amazon Resource Name (ARN) for the replicated automated backups.
 	DBInstanceAutomatedBackupsArn *string
 
-	// The list of replications to different AWS Regions associated with the automated
-	// backup.
+	// The list of replications to different Amazon Web Services Regions associated
+	// with the automated backup.
 	DBInstanceAutomatedBackupsReplications []DBInstanceAutomatedBackupsReplication
 
 	// The customer id of the instance that is/was associated with the automated
@@ -1239,7 +1274,7 @@ type DBInstanceAutomatedBackup struct {
 	DBInstanceIdentifier *string
 
 	// The identifier for the source DB instance, which can't be changed and which is
-	// unique to an AWS Region.
+	// unique to an Amazon Web Services Region.
 	DbiResourceId *string
 
 	// Specifies whether the automated backup is encrypted.
@@ -1251,8 +1286,8 @@ type DBInstanceAutomatedBackup struct {
 	// The version of the database engine for the automated backup.
 	EngineVersion *string
 
-	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
-	// accounts is enabled, and otherwise false.
+	// True if mapping of Amazon Web Services Identity and Access Management (IAM)
+	// accounts to database accounts is enabled, and otherwise false.
 	IAMDatabaseAuthenticationEnabled bool
 
 	// Provides the date and time that the DB instance was created.
@@ -1261,9 +1296,9 @@ type DBInstanceAutomatedBackup struct {
 	// The IOPS (I/O operations per second) value for the automated backup.
 	Iops *int32
 
-	// The AWS KMS key ID for an automated backup. The AWS KMS key identifier is the
-	// key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key
-	// (CMK).
+	// The Amazon Web Services KMS key ID for an automated backup. The Amazon Web
+	// Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for
+	// the Amazon Web Services KMS customer master key (CMK).
 	KmsKeyId *string
 
 	// License model information for the automated backup.
@@ -1280,7 +1315,7 @@ type DBInstanceAutomatedBackup struct {
 	// Inherits from the source DB instance Valid Values: 1150-65535
 	Port int32
 
-	// The AWS Region associated with the automated backup.
+	// The Amazon Web Services Region associated with the automated backup.
 	Region *string
 
 	// Earliest and latest time an instance can be restored to.
@@ -1314,20 +1349,22 @@ type DBInstanceAutomatedBackup struct {
 	VpcId *string
 }
 
-// Automated backups of a DB instance replicated to another AWS Region. They
-// consist of system backups, transaction logs, and database instance properties.
+// Automated backups of a DB instance replicated to another Amazon Web Services
+// Region. They consist of system backups, transaction logs, and database instance
+// properties.
 type DBInstanceAutomatedBackupsReplication struct {
 
 	// The Amazon Resource Name (ARN) of the replicated automated backups.
 	DBInstanceAutomatedBackupsArn *string
 }
 
-// Describes an AWS Identity and Access Management (IAM) role that is associated
-// with a DB instance.
+// Describes an Amazon Web Services Identity and Access Management (IAM) role that
+// is associated with a DB instance.
 type DBInstanceRole struct {
 
-	// The name of the feature associated with the AWS Identity and Access Management
-	// (IAM) role. For the list of supported feature names, see DBEngineVersion.
+	// The name of the feature associated with the Amazon Web Services Identity and
+	// Access Management (IAM) role. For the list of supported feature names, see
+	// DBEngineVersion.
 	FeatureName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that is associated with the DB
@@ -1338,15 +1375,15 @@ type DBInstanceRole struct {
 	// Status property returns one of the following values:
 	//
 	// * ACTIVE - the IAM role
-	// ARN is associated with the DB instance and can be used to access other AWS
-	// services on your behalf.
+	// ARN is associated with the DB instance and can be used to access other Amazon
+	// Web Services services on your behalf.
 	//
-	// * PENDING - the IAM role ARN is being associated with
-	// the DB instance.
+	// * PENDING - the IAM role ARN is being
+	// associated with the DB instance.
 	//
-	// * INVALID - the IAM role ARN is associated with the DB
-	// instance, but the DB instance is unable to assume the IAM role in order to
-	// access other AWS services on your behalf.
+	// * INVALID - the IAM role ARN is associated
+	// with the DB instance, but the DB instance is unable to assume the IAM role in
+	// order to access other Amazon Web Services services on your behalf.
 	Status *string
 }
 
@@ -1428,7 +1465,7 @@ type DBProxy struct {
 	DBProxyArn *string
 
 	// The identifier for the proxy. This name must be unique for all proxies owned by
-	// your AWS account in the specified AWS Region.
+	// your Amazon Web Services account in the specified Amazon Web Services Region.
 	DBProxyName *string
 
 	// Whether the proxy includes detailed information about SQL statements in its
@@ -1597,7 +1634,8 @@ type DBProxyTargetGroup struct {
 	TargetGroupArn *string
 
 	// The identifier for the target group. This name must be unique for all target
-	// groups owned by your AWS account in the specified AWS Region.
+	// groups owned by your Amazon Web Services account in the specified Amazon Web
+	// Services Region.
 	TargetGroupName *string
 
 	// The date and time when the target group was last updated.
@@ -1623,7 +1661,8 @@ type DBSecurityGroup struct {
 	// Contains a list of IPRange elements.
 	IPRanges []IPRange
 
-	// Provides the AWS ID of the owner of a specific DB security group.
+	// Provides the Amazon Web Services ID of the owner of a specific DB security
+	// group.
 	OwnerId *string
 
 	// Provides the VpcId of the DB security group.
@@ -1672,7 +1711,7 @@ type DBSnapshot struct {
 	DBSnapshotIdentifier *string
 
 	// The identifier for the source DB instance, which can't be changed and which is
-	// unique to an AWS Region.
+	// unique to an Amazon Web Services Region.
 	DbiResourceId *string
 
 	// Specifies whether the DB snapshot is encrypted.
@@ -1684,8 +1723,8 @@ type DBSnapshot struct {
 	// Specifies the version of the database engine.
 	EngineVersion *string
 
-	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
-	// accounts is enabled, and otherwise false.
+	// True if mapping of Amazon Web Services Identity and Access Management (IAM)
+	// accounts to database accounts is enabled, and otherwise false.
 	IAMDatabaseAuthenticationEnabled bool
 
 	// Specifies the time in Coordinated Universal Time (UTC) when the DB instance,
@@ -1696,9 +1735,10 @@ type DBSnapshot struct {
 	// instance at the time of the snapshot.
 	Iops *int32
 
-	// If Encrypted is true, the AWS KMS key identifier for the encrypted DB snapshot.
-	// The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for
-	// the AWS KMS customer master key (CMK).
+	// If Encrypted is true, the Amazon Web Services KMS key identifier for the
+	// encrypted DB snapshot. The Amazon Web Services KMS key identifier is the key
+	// ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS customer
+	// master key (CMK).
 	KmsKeyId *string
 
 	// License model information for the restored DB instance.
@@ -1731,7 +1771,8 @@ type DBSnapshot struct {
 	// It only has value in case of cross-customer or cross-region copy.
 	SourceDBSnapshotIdentifier *string
 
-	// The AWS Region that the DB snapshot was created in or copied from.
+	// The Amazon Web Services Region that the DB snapshot was created in or copied
+	// from.
 	SourceRegion *string
 
 	// Specifies the status of this DB snapshot.
@@ -1759,28 +1800,29 @@ type DBSnapshot struct {
 }
 
 // Contains the name and values of a manual DB snapshot attribute Manual DB
-// snapshot attributes are used to authorize other AWS accounts to restore a manual
-// DB snapshot. For more information, see the ModifyDBSnapshotAttribute API.
+// snapshot attributes are used to authorize other Amazon Web Services accounts to
+// restore a manual DB snapshot. For more information, see the
+// ModifyDBSnapshotAttribute API.
 type DBSnapshotAttribute struct {
 
 	// The name of the manual DB snapshot attribute. The attribute named restore refers
-	// to the list of AWS accounts that have permission to copy or restore the manual
-	// DB cluster snapshot. For more information, see the ModifyDBSnapshotAttribute API
-	// action.
+	// to the list of Amazon Web Services accounts that have permission to copy or
+	// restore the manual DB cluster snapshot. For more information, see the
+	// ModifyDBSnapshotAttribute API action.
 	AttributeName *string
 
 	// The value or values for the manual DB snapshot attribute. If the AttributeName
-	// field is set to restore, then this element returns a list of IDs of the AWS
-	// accounts that are authorized to copy or restore the manual DB snapshot. If a
-	// value of all is in the list, then the manual DB snapshot is public and available
-	// for any AWS account to copy or restore.
+	// field is set to restore, then this element returns a list of IDs of the Amazon
+	// Web Services accounts that are authorized to copy or restore the manual DB
+	// snapshot. If a value of all is in the list, then the manual DB snapshot is
+	// public and available for any Amazon Web Services account to copy or restore.
 	AttributeValues []string
 }
 
 // Contains the results of a successful call to the DescribeDBSnapshotAttributes
-// API action. Manual DB snapshot attributes are used to authorize other AWS
-// accounts to copy or restore a manual DB snapshot. For more information, see the
-// ModifyDBSnapshotAttribute API action.
+// API action. Manual DB snapshot attributes are used to authorize other Amazon Web
+// Services accounts to copy or restore a manual DB snapshot. For more information,
+// see the ModifyDBSnapshotAttribute API action.
 type DBSnapshotAttributesResult struct {
 
 	// The list of attributes and values for the manual DB snapshot.
@@ -1872,8 +1914,8 @@ type EC2SecurityGroup struct {
 	// Specifies the name of the EC2 security group.
 	EC2SecurityGroupName *string
 
-	// Specifies the AWS ID of the owner of the EC2 security group specified in the
-	// EC2SecurityGroupName field.
+	// Specifies the Amazon Web Services ID of the owner of the EC2 security group
+	// specified in the EC2SecurityGroupName field.
 	EC2SecurityGroupOwnerId *string
 
 	// Provides the status of the EC2 security group. Status can be "authorizing",
@@ -1963,8 +2005,8 @@ type EventSubscription struct {
 	// The RDS event notification subscription Id.
 	CustSubscriptionId *string
 
-	// The AWS customer account associated with the RDS event notification
-	// subscription.
+	// The Amazon Web Services customer account associated with the RDS event
+	// notification subscription.
 	CustomerAwsId *string
 
 	// A Boolean value indicating if the subscription is enabled. True indicates the
@@ -2030,11 +2072,11 @@ type ExportTask struct {
 	// snapshot.
 	IamRoleArn *string
 
-	// The key identifier of the AWS KMS customer master key (CMK) that is used to
-	// encrypt the snapshot when it's exported to Amazon S3. The AWS KMS CMK identifier
-	// is its key ARN, key ID, alias ARN, or alias name. The IAM role used for the
-	// snapshot export must have encryption and decryption permissions to use this AWS
-	// KMS CMK.
+	// The key identifier of the Amazon Web Services KMS customer master key (CMK) that
+	// is used to encrypt the snapshot when it's exported to Amazon S3. The Amazon Web
+	// Services KMS CMK identifier is its key ARN, key ID, alias ARN, or alias name.
+	// The IAM role used for the snapshot export must have encryption and decryption
+	// permissions to use this Amazon Web Services KMS CMK.
 	KmsKeyId *string
 
 	// The progress of the snapshot export task as a percentage.
@@ -2164,9 +2206,10 @@ type GlobalCluster struct {
 	// cluster. Currently limited to 1 item.
 	GlobalClusterMembers []GlobalClusterMember
 
-	// The AWS Region-unique, immutable identifier for the global database cluster.
-	// This identifier is found in AWS CloudTrail log entries whenever the AWS KMS
-	// customer master key (CMK) for the DB cluster is accessed.
+	// The Amazon Web Services Region-unique, immutable identifier for the global
+	// database cluster. This identifier is found in Amazon Web Services CloudTrail log
+	// entries whenever the Amazon Web Services KMS customer master key (CMK) for the
+	// DB cluster is accessed.
 	GlobalClusterResourceId *string
 
 	// Specifies the current state of this global database cluster.
@@ -2549,7 +2592,7 @@ type OrderableDBInstanceOption struct {
 	MultiAZCapable bool
 
 	// Whether a DB instance supports RDS on Outposts. For more information about RDS
-	// on Outposts, see Amazon RDS on AWS Outposts
+	// on Outposts, see Amazon RDS on Amazon Web Services Outposts
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
 	// the Amazon RDS User Guide.
 	OutpostCapable bool
@@ -2559,6 +2602,12 @@ type OrderableDBInstanceOption struct {
 
 	// Indicates the storage type for a DB instance.
 	StorageType *string
+
+	// The list of supported modes for Database Activity Streams. Aurora PostgreSQL
+	// returns the value [sync, async]. Aurora MySQL and RDS for Oracle return [async]
+	// only. If Database Activity Streams isn't supported, the return value is an empty
+	// list.
+	SupportedActivityStreamModes []string
 
 	// A list of the supported DB engine modes.
 	SupportedEngineModes []string
@@ -2595,7 +2644,7 @@ type OrderableDBInstanceOption struct {
 }
 
 // A data type that represents an Outpost. For more information about RDS on
-// Outposts, see Amazon RDS on AWS Outposts
+// Outposts, see Amazon RDS on Amazon Web Services Outposts
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
 // the Amazon RDS User Guide.
 type Outpost struct {
@@ -2716,8 +2765,8 @@ type PendingModifiedValues struct {
 	// The database engine version.
 	EngineVersion *string
 
-	// Whether mapping of AWS Identity and Access Management (IAM) accounts to database
-	// accounts is enabled.
+	// Whether mapping of Amazon Web Services Identity and Access Management (IAM)
+	// accounts to database accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool
 
 	// The Provisioned IOPS value for the DB instance.
@@ -2853,8 +2902,8 @@ type ReservedDBInstance struct {
 	FixedPrice float64
 
 	// The unique identifier for the lease associated with the reserved DB instance.
-	// AWS Support might request the lease ID for an issue related to a reserved DB
-	// instance.
+	// Amazon Web Services Support might request the lease ID for an issue related to a
+	// reserved DB instance.
 	LeaseId *string
 
 	// Indicates if the reservation applies to Multi-AZ deployments.
@@ -3012,21 +3061,21 @@ type ScalingConfigurationInfo struct {
 	TimeoutAction *string
 }
 
-// Contains an AWS Region name as the result of a successful call to the
-// DescribeSourceRegions action.
+// Contains an Amazon Web Services Region name as the result of a successful call
+// to the DescribeSourceRegions action.
 type SourceRegion struct {
 
-	// The endpoint for the source AWS Region endpoint.
+	// The endpoint for the source Amazon Web Services Region endpoint.
 	Endpoint *string
 
-	// The name of the source AWS Region.
+	// The name of the source Amazon Web Services Region.
 	RegionName *string
 
-	// The status of the source AWS Region.
+	// The status of the source Amazon Web Services Region.
 	Status *string
 
-	// Whether the source AWS Region supports replicating automated backups to the
-	// current AWS Region.
+	// Whether the source Amazon Web Services Region supports replicating automated
+	// backups to the current Amazon Web Services Region.
 	SupportsDBInstanceAutomatedBackupsReplication bool
 }
 
@@ -3042,7 +3091,8 @@ type Subnet struct {
 	SubnetIdentifier *string
 
 	// If the subnet is associated with an Outpost, this value specifies the Outpost.
-	// For more information about RDS on Outposts, see Amazon RDS on AWS Outposts
+	// For more information about RDS on Outposts, see Amazon RDS on Amazon Web
+	// Services Outposts
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
 	// the Amazon RDS User Guide.
 	SubnetOutpost *Outpost
@@ -3055,16 +3105,16 @@ type Subnet struct {
 type Tag struct {
 
 	// A key is the required name of the tag. The string value can be from 1 to 128
-	// Unicode characters in length and can't be prefixed with "aws:" or "rds:". The
-	// string can only contain only the set of Unicode letters, digits, white-space,
-	// '_', '.', ':', '/', '=', '+', '-', '@' (Java regex:
+	// Unicode characters in length and can't be prefixed with aws: or rds:. The string
+	// can only contain only the set of Unicode letters, digits, white-space, '_', '.',
+	// ':', '/', '=', '+', '-', '@' (Java regex:
 	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
 	Key *string
 
 	// A value is the optional value of the tag. The string value can be from 1 to 256
-	// Unicode characters in length and can't be prefixed with "aws:" or "rds:". The
-	// string can only contain only the set of Unicode letters, digits, white-space,
-	// '_', '.', ':', '/', '=', '+', '-', '@' (Java regex:
+	// Unicode characters in length and can't be prefixed with aws: or rds:. The string
+	// can only contain only the set of Unicode letters, digits, white-space, '_', '.',
+	// ':', '/', '=', '+', '-', '@' (Java regex:
 	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
 	Value *string
 }
@@ -3138,8 +3188,8 @@ type UserAuthConfig struct {
 	// as a specific database user.
 	Description *string
 
-	// Whether to require or disallow AWS Identity and Access Management (IAM)
-	// authentication for connections to the proxy.
+	// Whether to require or disallow Amazon Web Services Identity and Access
+	// Management (IAM) authentication for connections to the proxy.
 	IAMAuth IAMAuthMode
 
 	// The Amazon Resource Name (ARN) representing the secret that the proxy uses to
@@ -3163,8 +3213,8 @@ type UserAuthConfigInfo struct {
 	// as a specific database user.
 	Description *string
 
-	// Whether to require or disallow AWS Identity and Access Management (IAM)
-	// authentication for connections to the proxy.
+	// Whether to require or disallow Amazon Web Services Identity and Access
+	// Management (IAM) authentication for connections to the proxy.
 	IAMAuth IAMAuthMode
 
 	// The Amazon Resource Name (ARN) representing the secret that the proxy uses to
@@ -3225,12 +3275,13 @@ type VpcSecurityGroupMembership struct {
 }
 
 // Information about the virtual private network (VPN) between the VMware vSphere
-// cluster and the AWS website. For more information about RDS on VMware, see the
-// RDS on VMware User Guide.
+// cluster and the Amazon Web Services website. For more information about RDS on
+// VMware, see the  RDS on VMware User Guide.
 // (https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html)
 type VpnDetails struct {
 
-	// The IP address of network traffic from AWS to your on-premises data center.
+	// The IP address of network traffic from Amazon Web Services to your on-premises
+	// data center.
 	VpnGatewayIp *string
 
 	// The ID of the VPN.

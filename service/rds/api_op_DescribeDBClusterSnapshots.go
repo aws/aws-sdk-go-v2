@@ -75,16 +75,18 @@ type DescribeDBClusterSnapshotsInput struct {
 	Filters []types.Filter
 
 	// A value that indicates whether to include manual DB cluster snapshots that are
-	// public and can be copied or restored by any AWS account. By default, the public
-	// snapshots are not included. You can share a manual DB cluster snapshot as public
-	// by using the ModifyDBClusterSnapshotAttribute API action.
+	// public and can be copied or restored by any Amazon Web Services account. By
+	// default, the public snapshots are not included. You can share a manual DB
+	// cluster snapshot as public by using the ModifyDBClusterSnapshotAttribute API
+	// action.
 	IncludePublic bool
 
 	// A value that indicates whether to include shared manual DB cluster snapshots
-	// from other AWS accounts that this AWS account has been given permission to copy
-	// or restore. By default, these snapshots are not included. You can give an AWS
-	// account permission to restore a manual DB cluster snapshot from another AWS
-	// account by the ModifyDBClusterSnapshotAttribute API action.
+	// from other Amazon Web Services accounts that this Amazon Web Services account
+	// has been given permission to copy or restore. By default, these snapshots are
+	// not included. You can give an Amazon Web Services account permission to restore
+	// a manual DB cluster snapshot from another Amazon Web Services account by the
+	// ModifyDBClusterSnapshotAttribute API action.
 	IncludeShared bool
 
 	// An optional pagination token provided by a previous DescribeDBClusterSnapshots
@@ -102,26 +104,27 @@ type DescribeDBClusterSnapshotsInput struct {
 	// following values:
 	//
 	// * automated - Return all DB cluster snapshots that have been
-	// automatically taken by Amazon RDS for my AWS account.
+	// automatically taken by Amazon RDS for my Amazon Web Services account.
 	//
-	// * manual - Return all DB
-	// cluster snapshots that have been taken by my AWS account.
+	// * manual
+	// - Return all DB cluster snapshots that have been taken by my Amazon Web Services
+	// account.
 	//
-	// * shared - Return all
-	// manual DB cluster snapshots that have been shared to my AWS account.
+	// * shared - Return all manual DB cluster snapshots that have been
+	// shared to my Amazon Web Services account.
 	//
-	// * public -
-	// Return all DB cluster snapshots that have been marked as public.
+	// * public - Return all DB cluster
+	// snapshots that have been marked as public.
 	//
-	// If you don't
-	// specify a SnapshotType value, then both automated and manual DB cluster
-	// snapshots are returned. You can include shared DB cluster snapshots with these
-	// results by enabling the IncludeShared parameter. You can include public DB
-	// cluster snapshots with these results by enabling the IncludePublic parameter.
-	// The IncludeShared and IncludePublic parameters don't apply for SnapshotType
-	// values of manual or automated. The IncludePublic parameter doesn't apply when
-	// SnapshotType is set to shared. The IncludeShared parameter doesn't apply when
-	// SnapshotType is set to public.
+	// If you don't specify a SnapshotType
+	// value, then both automated and manual DB cluster snapshots are returned. You can
+	// include shared DB cluster snapshots with these results by enabling the
+	// IncludeShared parameter. You can include public DB cluster snapshots with these
+	// results by enabling the IncludePublic parameter. The IncludeShared and
+	// IncludePublic parameters don't apply for SnapshotType values of manual or
+	// automated. The IncludePublic parameter doesn't apply when SnapshotType is set to
+	// shared. The IncludeShared parameter doesn't apply when SnapshotType is set to
+	// public.
 	SnapshotType *string
 }
 

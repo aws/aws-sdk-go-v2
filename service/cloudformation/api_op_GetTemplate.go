@@ -54,7 +54,7 @@ type GetTemplateInput struct {
 	// CloudFormation returns. To get the user-submitted template, specify Original. To
 	// get the template after AWS CloudFormation has processed all transforms, specify
 	// Processed. If the template doesn't include transforms, Original and Processed
-	// return the same template. By default, AWS CloudFormation specifies Original.
+	// return the same template. By default, AWS CloudFormation specifies Processed.
 	TemplateStage types.TemplateStage
 }
 
