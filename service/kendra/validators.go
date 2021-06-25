@@ -1016,6 +1016,61 @@ func validateAttributeFilterList(v []types.AttributeFilter) error {
 	}
 }
 
+func validateAuthenticationConfiguration(v *types.AuthenticationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthenticationConfiguration"}
+	if v.BasicAuthentication != nil {
+		if err := validateBasicAuthenticationConfigurationList(v.BasicAuthentication); err != nil {
+			invalidParams.AddNested("BasicAuthentication", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBasicAuthenticationConfiguration(v *types.BasicAuthenticationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BasicAuthenticationConfiguration"}
+	if v.Host == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if v.Credentials == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Credentials"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBasicAuthenticationConfigurationList(v []types.BasicAuthenticationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BasicAuthenticationConfigurationList"}
+	for i := range v {
+		if err := validateBasicAuthenticationConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCapacityUnitsConfiguration(v *types.CapacityUnitsConfiguration) error {
 	if v == nil {
 		return nil
@@ -1230,6 +1285,11 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 	if v.GoogleDriveConfiguration != nil {
 		if err := validateGoogleDriveConfiguration(v.GoogleDriveConfiguration); err != nil {
 			invalidParams.AddNested("GoogleDriveConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WebCrawlerConfiguration != nil {
+		if err := validateWebCrawlerConfiguration(v.WebCrawlerConfiguration); err != nil {
+			invalidParams.AddNested("WebCrawlerConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1634,6 +1694,24 @@ func validatePrincipalList(v []types.Principal) error {
 	}
 }
 
+func validateProxyConfiguration(v *types.ProxyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProxyConfiguration"}
+	if v.Host == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRelevanceFeedback(v *types.RelevanceFeedback) error {
 	if v == nil {
 		return nil
@@ -1902,6 +1980,21 @@ func validateSalesforceStandardObjectConfigurationList(v []types.SalesforceStand
 	}
 }
 
+func validateSeedUrlConfiguration(v *types.SeedUrlConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SeedUrlConfiguration"}
+	if v.SeedUrls == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SeedUrls"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateServiceNowConfiguration(v *types.ServiceNowConfiguration) error {
 	if v == nil {
 		return nil
@@ -1997,6 +2090,26 @@ func validateSharePointConfiguration(v *types.SharePointConfiguration) error {
 			invalidParams.AddNested("FieldMappings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SslCertificateS3Path != nil {
+		if err := validateS3Path(v.SslCertificateS3Path); err != nil {
+			invalidParams.AddNested("SslCertificateS3Path", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSiteMapsConfiguration(v *types.SiteMapsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SiteMapsConfiguration"}
+	if v.SiteMaps == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SiteMaps"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2057,6 +2170,28 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateUrls(v *types.Urls) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Urls"}
+	if v.SeedUrlConfiguration != nil {
+		if err := validateSeedUrlConfiguration(v.SeedUrlConfiguration); err != nil {
+			invalidParams.AddNested("SeedUrlConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SiteMapsConfiguration != nil {
+		if err := validateSiteMapsConfiguration(v.SiteMapsConfiguration); err != nil {
+			invalidParams.AddNested("SiteMapsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUserTokenConfiguration(v *types.UserTokenConfiguration) error {
 	if v == nil {
 		return nil
@@ -2087,6 +2222,35 @@ func validateUserTokenConfigurationList(v []types.UserTokenConfiguration) error 
 	for i := range v {
 		if err := validateUserTokenConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWebCrawlerConfiguration(v *types.WebCrawlerConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WebCrawlerConfiguration"}
+	if v.Urls == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Urls"))
+	} else if v.Urls != nil {
+		if err := validateUrls(v.Urls); err != nil {
+			invalidParams.AddNested("Urls", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProxyConfiguration != nil {
+		if err := validateProxyConfiguration(v.ProxyConfiguration); err != nil {
+			invalidParams.AddNested("ProxyConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AuthenticationConfiguration != nil {
+		if err := validateAuthenticationConfiguration(v.AuthenticationConfiguration); err != nil {
+			invalidParams.AddNested("AuthenticationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

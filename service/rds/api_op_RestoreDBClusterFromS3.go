@@ -93,8 +93,9 @@ type RestoreDBClusterFromS3Input struct {
 	// This member is required.
 	S3BucketName *string
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that authorizes Amazon RDS to access the Amazon S3 bucket on your behalf.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) role that authorizes Amazon RDS to access the Amazon S3 bucket
+	// on your behalf.
 	//
 	// This member is required.
 	S3IngestionRoleArn *string
@@ -177,9 +178,9 @@ type RestoreDBClusterFromS3Input struct {
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []string
 
-	// A value that indicates whether to enable mapping of AWS Identity and Access
-	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// For more information, see  IAM Database Authentication
+	// A value that indicates whether to enable mapping of Amazon Web Services Identity
+	// and Access Management (IAM) accounts to database accounts. By default, mapping
+	// is disabled. For more information, see  IAM Database Authentication
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon Aurora User Guide.
 	EnableIAMDatabaseAuthentication *bool
@@ -198,13 +199,15 @@ type RestoreDBClusterFromS3Input struct {
 	// Example: 9.6.3, 10.7
 	EngineVersion *string
 
-	// The AWS KMS key identifier for an encrypted DB cluster. The AWS KMS key
-	// identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS
-	// customer master key (CMK). To use a CMK in a different AWS account, specify the
-	// key ARN or alias ARN. If the StorageEncrypted parameter is enabled, and you do
-	// not specify a value for the KmsKeyId parameter, then Amazon RDS will use your
-	// default CMK. There is a default CMK for your AWS account. Your AWS account has a
-	// different default CMK for each AWS Region.
+	// The Amazon Web Services KMS key identifier for an encrypted DB cluster. The
+	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or
+	// alias name for the Amazon Web Services KMS customer master key (CMK). To use a
+	// CMK in a different Amazon Web Services account, specify the key ARN or alias
+	// ARN. If the StorageEncrypted parameter is enabled, and you do not specify a
+	// value for the KmsKeyId parameter, then Amazon RDS will use your default CMK.
+	// There is a default CMK for your Amazon Web Services account. Your Amazon Web
+	// Services account has a different default CMK for each Amazon Web Services
+	// Region.
 	KmsKeyId *string
 
 	// A value that indicates that the restored DB cluster should be associated with
@@ -219,8 +222,8 @@ type RestoreDBClusterFromS3Input struct {
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled using the BackupRetentionPeriod parameter. The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
-	// Region. To view the time blocks available, see  Backup window
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
+	// Web Services Region. To view the time blocks available, see  Backup window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow)
 	// in the Amazon Aurora User Guide. Constraints:
 	//
@@ -237,9 +240,9 @@ type RestoreDBClusterFromS3Input struct {
 
 	// The weekly time range during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
-	// Region, occurring on a random day of the week. To see the time blocks available,
-	// see  Adjusting the Preferred Maintenance Window
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
+	// Web Services Region, occurring on a random day of the week. To see the time
+	// blocks available, see  Adjusting the Preferred Maintenance Window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora)
 	// in the Amazon Aurora User Guide. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
 	// Constraints: Minimum 30-minute window.

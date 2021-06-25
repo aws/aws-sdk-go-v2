@@ -14,6 +14,172 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+type awsRestjson1_serializeOpBatchAssociateClientDeviceWithCoreDevice struct {
+}
+
+func (*awsRestjson1_serializeOpBatchAssociateClientDeviceWithCoreDevice) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchAssociateClientDeviceWithCoreDevice) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchAssociateClientDeviceWithCoreDeviceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/greengrass/v2/coreDevices/{coreDeviceThingName}/associateClientDevices")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsBatchAssociateClientDeviceWithCoreDeviceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentBatchAssociateClientDeviceWithCoreDeviceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchAssociateClientDeviceWithCoreDeviceInput(v *BatchAssociateClientDeviceWithCoreDeviceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CoreDeviceThingName == nil || len(*v.CoreDeviceThingName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member coreDeviceThingName must not be empty")}
+	}
+	if v.CoreDeviceThingName != nil {
+		if err := encoder.SetURI("coreDeviceThingName").String(*v.CoreDeviceThingName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentBatchAssociateClientDeviceWithCoreDeviceInput(v *BatchAssociateClientDeviceWithCoreDeviceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Entries != nil {
+		ok := object.Key("entries")
+		if err := awsRestjson1_serializeDocumentAssociateClientDeviceWithCoreDeviceEntryList(v.Entries, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpBatchDisassociateClientDeviceFromCoreDevice struct {
+}
+
+func (*awsRestjson1_serializeOpBatchDisassociateClientDeviceFromCoreDevice) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchDisassociateClientDeviceFromCoreDevice) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchDisassociateClientDeviceFromCoreDeviceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/greengrass/v2/coreDevices/{coreDeviceThingName}/disassociateClientDevices")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsBatchDisassociateClientDeviceFromCoreDeviceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentBatchDisassociateClientDeviceFromCoreDeviceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchDisassociateClientDeviceFromCoreDeviceInput(v *BatchDisassociateClientDeviceFromCoreDeviceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CoreDeviceThingName == nil || len(*v.CoreDeviceThingName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member coreDeviceThingName must not be empty")}
+	}
+	if v.CoreDeviceThingName != nil {
+		if err := encoder.SetURI("coreDeviceThingName").String(*v.CoreDeviceThingName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentBatchDisassociateClientDeviceFromCoreDeviceInput(v *BatchDisassociateClientDeviceFromCoreDeviceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Entries != nil {
+		ok := object.Key("entries")
+		if err := awsRestjson1_serializeDocumentDisassociateClientDeviceFromCoreDeviceEntryList(v.Entries, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCancelDeployment struct {
 }
 
@@ -669,6 +835,72 @@ func awsRestjson1_serializeOpHttpBindingsGetDeploymentInput(v *GetDeploymentInpu
 		if err := encoder.SetURI("deploymentId").String(*v.DeploymentId); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListClientDevicesAssociatedWithCoreDevice struct {
+}
+
+func (*awsRestjson1_serializeOpListClientDevicesAssociatedWithCoreDevice) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListClientDevicesAssociatedWithCoreDevice) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListClientDevicesAssociatedWithCoreDeviceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/greengrass/v2/coreDevices/{coreDeviceThingName}/associatedClientDevices")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListClientDevicesAssociatedWithCoreDeviceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListClientDevicesAssociatedWithCoreDeviceInput(v *ListClientDevicesAssociatedWithCoreDeviceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CoreDeviceThingName == nil || len(*v.CoreDeviceThingName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member coreDeviceThingName must not be empty")}
+	}
+	if v.CoreDeviceThingName != nil {
+		if err := encoder.SetURI("coreDeviceThingName").String(*v.CoreDeviceThingName); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
 	return nil
@@ -1345,6 +1577,31 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAssociateClientDeviceWithCoreDeviceEntry(v *types.AssociateClientDeviceWithCoreDeviceEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ThingName != nil {
+		ok := object.Key("thingName")
+		ok.String(*v.ThingName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssociateClientDeviceWithCoreDeviceEntryList(v []types.AssociateClientDeviceWithCoreDeviceEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssociateClientDeviceWithCoreDeviceEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentComponentCandidate(v *types.ComponentCandidate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1618,6 +1875,31 @@ func awsRestjson1_serializeDocumentDeploymentPolicies(v *types.DeploymentPolicie
 		ok.String(string(v.FailureHandlingPolicy))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDisassociateClientDeviceFromCoreDeviceEntry(v *types.DisassociateClientDeviceFromCoreDeviceEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ThingName != nil {
+		ok := object.Key("thingName")
+		ok.String(*v.ThingName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDisassociateClientDeviceFromCoreDeviceEntryList(v []types.DisassociateClientDeviceFromCoreDeviceEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDisassociateClientDeviceFromCoreDeviceEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

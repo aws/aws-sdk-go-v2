@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates an AWS Identity and Access Management (IAM) role from a DB
-// instance.
+// Disassociates an Amazon Web Services Identity and Access Management (IAM) role
+// from a DB instance.
 func (c *Client) RemoveRoleFromDBInstance(ctx context.Context, params *RemoveRoleFromDBInstanceInput, optFns ...func(*Options)) (*RemoveRoleFromDBInstanceOutput, error) {
 	if params == nil {
 		params = &RemoveRoleFromDBInstanceInput{}

@@ -14,10 +14,11 @@ import (
 // Retrieves the TagInfoForResource for the specified resource. Tags are key:value
 // pairs that you can use to categorize and manage your resources, for purposes
 // like billing. For example, you might set the tag key to "customer" and the value
-// to the customer name or ID. You can specify one or more tags to add to each AWS
-// resource, up to 50 tags for a resource. You can tag the AWS resources that you
-// manage through AWS WAF: web ACLs, rule groups, IP sets, and regex pattern sets.
-// You can't manage or view tags through the AWS WAF console.
+// to the customer name or ID. You can specify one or more tags to add to each
+// Amazon Web Services resource, up to 50 tags for a resource. You can tag the
+// Amazon Web Services resources that you manage through WAF: web ACLs, rule
+// groups, IP sets, and regex pattern sets. You can't manage or view tags through
+// the WAF console.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -40,24 +41,24 @@ type ListTagsForResourceInput struct {
 	// This member is required.
 	ResourceARN *string
 
-	// The maximum number of objects that you want AWS WAF to return for this request.
-	// If more objects are available, in the response, AWS WAF provides a NextMarker
-	// value that you can use in a subsequent call to get the next batch of objects.
+	// The maximum number of objects that you want WAF to return for this request. If
+	// more objects are available, in the response, WAF provides a NextMarker value
+	// that you can use in a subsequent call to get the next batch of objects.
 	Limit *int32
 
 	// When you request a list of objects with a Limit setting, if the number of
-	// objects that are still available for retrieval exceeds the limit, AWS WAF
-	// returns a NextMarker value in the response. To retrieve the next batch of
-	// objects, provide the marker from the prior call in your next request.
+	// objects that are still available for retrieval exceeds the limit, WAF returns a
+	// NextMarker value in the response. To retrieve the next batch of objects, provide
+	// the marker from the prior call in your next request.
 	NextMarker *string
 }
 
 type ListTagsForResourceOutput struct {
 
 	// When you request a list of objects with a Limit setting, if the number of
-	// objects that are still available for retrieval exceeds the limit, AWS WAF
-	// returns a NextMarker value in the response. To retrieve the next batch of
-	// objects, provide the marker from the prior call in your next request.
+	// objects that are still available for retrieval exceeds the limit, WAF returns a
+	// NextMarker value in the response. To retrieve the next batch of objects, provide
+	// the marker from the prior call in your next request.
 	NextMarker *string
 
 	// The collection of tagging definitions for the resource.

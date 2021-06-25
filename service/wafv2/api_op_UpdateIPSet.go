@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified IPSet. This operation completely replaces any IP address
-// specifications that you already have in the IP set with the ones that you
-// provide to this call. If you want to add to or modify the addresses that are
-// already in the IP set, retrieve those by calling GetIPSet, update them, and
-// provide the complete updated array of IP addresses to this call.
+// Updates the specified IPSet. This operation completely replaces the mutable
+// specifications that you already have for the IP set with the ones that you
+// provide to this call. To modify the IP set, retrieve it by calling GetIPSet,
+// update the settings as needed, and then provide the complete IP set
+// specification to this call.
 func (c *Client) UpdateIPSet(ctx context.Context, params *UpdateIPSetInput, optFns ...func(*Options)) (*UpdateIPSetOutput, error) {
 	if params == nil {
 		params = &UpdateIPSetInput{}
@@ -34,23 +34,23 @@ func (c *Client) UpdateIPSet(ctx context.Context, params *UpdateIPSetInput, optF
 type UpdateIPSetInput struct {
 
 	// Contains an array of strings that specify one or more IP addresses or blocks of
-	// IP addresses in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports
-	// all IPv4 and IPv6 CIDR ranges except for /0. Examples:
+	// IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports all
+	// IPv4 and IPv6 CIDR ranges except for /0. Examples:
 	//
-	// * To configure AWS WAF
-	// to allow, block, or count requests that originated from the IP address
-	// 192.0.2.44, specify 192.0.2.44/32.
+	// * To configure WAF to allow,
+	// block, or count requests that originated from the IP address 192.0.2.44, specify
+	// 192.0.2.44/32.
 	//
-	// * To configure AWS WAF to allow, block, or
-	// count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255,
-	// specify 192.0.2.0/24.
+	// * To configure WAF to allow, block, or count requests that
+	// originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify
+	// 192.0.2.0/24.
 	//
-	// * To configure AWS WAF to allow, block, or count requests
-	// that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111,
-	// specify 1111:0000:0000:0000:0000:0000:0000:0111/128.
+	// * To configure WAF to allow, block, or count requests that
+	// originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify
+	// 1111:0000:0000:0000:0000:0000:0000:0111/128.
 	//
-	// * To configure AWS WAF to
-	// allow, block, or count requests that originated from IP addresses
+	// * To configure WAF to allow,
+	// block, or count requests that originated from IP addresses
 	// 1111:0000:0000:0000:0000:0000:0000:0000 to
 	// 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
 	// 1111:0000:0000:0000:0000:0000:0000:0000/64.
@@ -68,13 +68,13 @@ type UpdateIPSetInput struct {
 	// This member is required.
 	Id *string
 
-	// A token used for optimistic locking. AWS WAF returns a token to your get and
-	// list requests, to mark the state of the entity at the time of the request. To
-	// make changes to the entity associated with the token, you provide the token to
-	// operations like update and delete. AWS WAF uses the token to ensure that no
-	// changes have been made to the entity since you last retrieved it. If a change
-	// has been made, the update fails with a WAFOptimisticLockException. If this
-	// happens, perform another get, and use the new token returned by that operation.
+	// A token used for optimistic locking. WAF returns a token to your get and list
+	// requests, to mark the state of the entity at the time of the request. To make
+	// changes to the entity associated with the token, you provide the token to
+	// operations like update and delete. WAF uses the token to ensure that no changes
+	// have been made to the entity since you last retrieved it. If a change has been
+	// made, the update fails with a WAFOptimisticLockException. If this happens,
+	// perform another get, and use the new token returned by that operation.
 	//
 	// This member is required.
 	LockToken *string
@@ -85,17 +85,17 @@ type UpdateIPSetInput struct {
 	// This member is required.
 	Name *string
 
-	// Specifies whether this is for an AWS CloudFront distribution or for a regional
-	// application. A regional application can be an Application Load Balancer (ALB),
-	// an API Gateway REST API, or an AppSync GraphQL API. To work with CloudFront, you
-	// must also specify the Region US East (N. Virginia) as follows:
+	// Specifies whether this is for an Amazon CloudFront distribution or for a
+	// regional application. A regional application can be an Application Load Balancer
+	// (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. To work with
+	// CloudFront, you must also specify the Region US East (N. Virginia) as
+	// follows:
 	//
-	// * CLI - Specify
-	// the Region when you use the CloudFront scope: --scope=CLOUDFRONT
-	// --region=us-east-1.
+	// * CLI - Specify the Region when you use the CloudFront scope:
+	// --scope=CLOUDFRONT --region=us-east-1.
 	//
-	// * API and SDKs - For all calls, use the Region endpoint
-	// us-east-1.
+	// * API and SDKs - For all calls, use the
+	// Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -106,7 +106,7 @@ type UpdateIPSetInput struct {
 
 type UpdateIPSetOutput struct {
 
-	// A token used for optimistic locking. AWS WAF returns this token to your update
+	// A token used for optimistic locking. WAF returns this token to your update
 	// requests. You use NextLockToken in the same manner as you use LockToken.
 	NextLockToken *string
 

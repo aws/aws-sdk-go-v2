@@ -31,14 +31,15 @@ type DeleteAccessInput struct {
 
 	// A unique identifier that is required to identify specific groups within your
 	// directory. The users of the group that you associate have access to your Amazon
-	// S3 or Amazon EFS resources over the enabled protocols using AWS Transfer Family.
-	// If you know the group name, you can view the SID values by running the following
-	// command using Windows PowerShell. Get-ADGroup -Filter {samAccountName -like
-	// "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSid In that
-	// command, replace YourGroupName with the name of your Active Directory group. The
-	// regex used to validate this parameter is a string of characters consisting of
-	// uppercase and lowercase alphanumeric characters with no spaces. You can also
-	// include underscores or any of the following characters: =,.@:/-
+	// S3 or Amazon EFS resources over the enabled protocols using Amazon Web Services
+	// Transfer Family. If you know the group name, you can view the SID values by
+	// running the following command using Windows PowerShell. Get-ADGroup -Filter
+	// {samAccountName -like "YourGroupName*"} -Properties * | Select
+	// SamAccountName,ObjectSid In that command, replace YourGroupName with the name of
+	// your Active Directory group. The regex used to validate this parameter is a
+	// string of characters consisting of uppercase and lowercase alphanumeric
+	// characters with no spaces. You can also include underscores or any of the
+	// following characters: =,.@:/-
 	//
 	// This member is required.
 	ExternalId *string

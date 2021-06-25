@@ -13,14 +13,19 @@ import (
 // Enables automatic rotation of the key material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) for the
 // specified symmetric customer master key (CMK). You cannot enable automatic
-// rotation of asymmetric CMKs, CMKs with imported key material, or CMKs in a
-// custom key store
+// rotation of asymmetric CMKs
+// (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#asymmetric-cmks),
+// CMKs with imported key material
+// (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html), or
+// CMKs in a custom key store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
-// The CMK that you use for this operation must be in a compatible key state. For
-// details, see How Key State Affects Use of a Customer Master Key
-// (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
-// perform this operation on a CMK in a different AWS account. Required
+// To enable or disable automatic rotation of a set of related multi-Region keys
+// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-replica-key),
+// set the property on the primary key. The CMK that you use for this operation
+// must be in a compatible key state. For details, see Key state: Effect on your
+// CMK (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in
+// the AWS Key Management Service Developer Guide. Cross-account use: No. You
+// cannot perform this operation on a CMK in a different AWS account. Required
 // permissions: kms:EnableKeyRotation
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
@@ -46,13 +51,18 @@ func (c *Client) EnableKeyRotation(ctx context.Context, params *EnableKeyRotatio
 type EnableKeyRotationInput struct {
 
 	// Identifies a symmetric customer master key (CMK). You cannot enable automatic
-	// rotation of asymmetric CMKs, CMKs with imported key material, or CMKs in a
-	// custom key store
+	// rotation of asymmetric CMKs
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#asymmetric-cmks),
+	// CMKs with imported key material
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html), or
+	// CMKs in a custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
-	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK. For example:
+	// To enable or disable automatic rotation of a set of related multi-Region keys
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-replica-key),
+	// set the property on the primary key. Specify the key ID or key ARN of the CMK.
+	// For example:
 	//
-	// *
-	// Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab

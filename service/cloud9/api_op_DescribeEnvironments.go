@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about AWS Cloud9 development environments.
+// Gets information about Cloud9 development environments.
 func (c *Client) DescribeEnvironments(ctx context.Context, params *DescribeEnvironmentsInput, optFns ...func(*Options)) (*DescribeEnvironmentsOutput, error) {
 	if params == nil {
 		params = &DescribeEnvironmentsInput{}

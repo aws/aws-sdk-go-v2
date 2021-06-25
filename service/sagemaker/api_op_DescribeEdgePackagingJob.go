@@ -81,6 +81,9 @@ type DescribeEdgePackagingJobOutput struct {
 	// The output configuration for the edge packaging job.
 	OutputConfig *types.EdgeOutputConfig
 
+	// The output of a SageMaker Edge Manager deployable resource.
+	PresetDeploymentOutput *types.EdgePresetDeploymentOutput
+
 	// The CMK to use when encrypting the EBS volume the job run on.
 	ResourceKey *string
 

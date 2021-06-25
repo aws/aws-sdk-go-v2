@@ -37,6 +37,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "APICallRateForCustomerExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The customer has exceeded the allowed rate of API calls.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -60,7 +64,7 @@
         "com.amazonaws.elasticache#AccessString": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.elasticache#AddTagsToResource": {
@@ -142,7 +146,7 @@
                     "min": 1,
                     "max": 4
                 },
-                "smithy.api#pattern": "\\d+"
+                "smithy.api#pattern": "^\\d+$"
             }
         },
         "com.amazonaws.elasticache#AllowedNodeTypeModificationsMessage": {
@@ -461,6 +465,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AuthorizationAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified Amazon EC2 security group is already authorized for the specified cache security group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -474,6 +482,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AuthorizationNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified Amazon EC2 security group is not authorized for the specified cache security group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -884,6 +896,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CacheClusterAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You already have a cluster with the given identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -938,6 +954,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CacheClusterNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The requested cluster ID does not refer to an existing cluster.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -1295,6 +1315,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CacheParameterGroupAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A cache parameter group with the requested name already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1357,6 +1381,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CacheParameterGroupNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The requested cache parameter group name does not refer to an existing cache parameter group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -1370,6 +1398,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CacheParameterGroupQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the maximum number of cache security groups.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1467,6 +1499,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CacheSecurityGroupAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A cache security group with the specified name already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1538,6 +1574,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CacheSecurityGroupNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The requested cache security group name does not refer to an existing cache security group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -1551,6 +1591,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "QuotaExceeded.CacheSecurityGroup",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the allowed number of cache security groups.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1611,6 +1655,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CacheSubnetGroupAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested cache subnet group name is already in use by an existing cache subnet group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1624,6 +1672,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CacheSubnetGroupInUse",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested cache subnet group is currently in use.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1657,6 +1709,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CacheSubnetGroupNotFoundFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested cache subnet group name does not refer to an existing cache subnet group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1670,6 +1726,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CacheSubnetGroupQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the allowed number of cache subnet groups.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1692,6 +1752,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CacheSubnetQuotaExceededFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the allowed number of subnets in a cache subnet group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1743,6 +1807,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterQuotaForCustomerExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the allowed number of clusters per customer.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3154,6 +3222,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DefaultUserAssociatedToUserGroup",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3167,6 +3239,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DefaultUserRequired",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You must add default user to a user group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -4986,6 +5062,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DuplicateUserName",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A user with this username already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5081,7 +5161,7 @@
         "com.amazonaws.elasticache#EngineType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-zA-Z]*"
+                "smithy.api#pattern": "^[a-zA-Z]*$"
             }
         },
         "com.amazonaws.elasticache#Event": {
@@ -5239,13 +5319,13 @@
         "com.amazonaws.elasticache#FilterName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.elasticache#FilterValue": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.elasticache#FilterValueList": {
@@ -5391,6 +5471,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "GlobalReplicationGroupAlreadyExistsFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The Global datastore name already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5480,6 +5564,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "GlobalReplicationGroupNotFoundFault",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The Global datastore does not exist</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -5645,6 +5733,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InsufficientCacheClusterCapacity",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested cache node type is not available in the specified Availability Zone.\n            For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ErrorMessages.html#ErrorMessages.INSUFFICIENT_CACHE_CLUSTER_CAPACITY\">InsufficientCacheClusterCapacity</a> in the ElastiCache User Guide.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5667,6 +5759,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidARN",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested Amazon Resource Name (ARN) does not refer to an existing resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5680,6 +5776,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidCacheClusterState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested cluster is not in the <code>available</code> state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5693,6 +5793,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidCacheParameterGroupState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The current state of the cache parameter group does not allow the requested operation to occur.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5706,6 +5810,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidCacheSecurityGroupState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The current state of the cache security group does not allow deletion.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5719,6 +5827,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidGlobalReplicationGroupState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The Global datastore is not available or in primary-only state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5732,6 +5844,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidKMSKeyFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The KMS key supplied is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5748,6 +5864,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidParameterCombination",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Two or more incompatible parameters were specified.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5764,6 +5884,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidParameterValue",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The value for a parameter is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5777,6 +5901,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidReplicationGroupState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested replication group is not in the <code>available</code> state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5790,6 +5918,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidSnapshotState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The current state of the snapshot does not allow the requested operation to occur.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5803,6 +5935,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidSubnet",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>An invalid subnet identifier was specified.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5816,6 +5952,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidUserGroupState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The user group is not in an active state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5829,6 +5969,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidUserState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The user is not in active state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5842,6 +5986,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidVPCNetworkStateFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The VPC network is in an invalid state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -6980,6 +7128,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NoOperationFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The operation was not performed because no changes were required.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7229,6 +7381,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NodeGroupNotFoundFault",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The node group specified by the <code>NodeGroupId</code> parameter could not be found.\n            Please verify that the node group exists and that you spelled the <code>NodeGroupId</code> value correctly.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -7271,6 +7427,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NodeGroupsPerReplicationGroupQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the maximum allowed number\n            of node groups (shards) in a single replication group. The default maximum is 90</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7302,6 +7462,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NodeQuotaForClusterExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the allowed number of cache nodes in a single cluster.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7315,6 +7479,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NodeQuotaForCustomerExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the allowed number of cache nodes per customer.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8229,6 +8397,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReplicationGroupAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified replication group already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8242,6 +8414,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReplicationGroupAlreadyUnderMigrationFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The targeted replication group is not available. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8296,6 +8472,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReplicationGroupNotFoundFault",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified replication group does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -8309,6 +8489,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReplicationGroupNotUnderMigrationFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The designated replication group is not available for data migration.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8461,6 +8645,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReservedCacheNodeAlreadyExists",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>You already have a reservation with the given identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -8503,6 +8691,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReservedCacheNodeNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The requested reserved cache node was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -8516,6 +8708,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReservedCacheNodeQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the user's cache node quota.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8614,6 +8810,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReservedCacheNodesOfferingNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The requested cache node offering does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -8827,6 +9027,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ServiceLinkedRoleNotFoundFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified service linked role (SLR) was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8929,6 +9133,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ServiceUpdateNotFoundFault",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The service update doesn't exist</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -9227,6 +9435,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotAlreadyExistsFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You already have a snapshot with the given name.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -9249,6 +9461,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotFeatureNotSupportedFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You attempted one of the following operations:</p>\n        <ul>\n            <li>\n               <p>Creating a snapshot of a Redis cluster running on a <code>cache.t1.micro</code> cache\n                    node.</p>\n            </li>\n            <li>\n               <p>Creating a snapshot of a cluster that is running Memcached rather than Redis.</p>\n            </li>\n         </ul>\n        <p>Neither of these are supported by ElastiCache.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -9271,6 +9487,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotNotFoundFault",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The requested snapshot name does not refer to an existing snapshot.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -9284,6 +9504,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotQuotaExceededFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request cannot be processed because it would exceed the maximum number of snapshots.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -9423,6 +9647,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SubnetInUse",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested subnet is being used by another cache subnet group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -9445,6 +9673,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SubnetNotAllowedFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>At least one subnet ID does not match the other subnet IDs. This mismatch typically occurs when a\n            user sets one subnet ID to a regional Availability Zone and a different one to an outpost. Or when a user sets the subnet ID to an Outpost when not subscribed on this service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -9518,6 +9750,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TagNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The requested tag was not found on this resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -9531,6 +9767,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TagQuotaPerResourceExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request cannot be processed because it would cause the resource to have more than the allowed number of tags. The maximum number of tags permitted on a resource is 50.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -9604,6 +9844,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TestFailoverNotAvailableFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The <code>TestFailover</code> action is not available.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -9959,6 +10203,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UserAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A user with this ID already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -10019,6 +10267,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UserGroupAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The user group with this ID already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -10030,7 +10282,7 @@
                 "smithy.api#length": {
                     "min": 1
                 },
-                "smithy.api#pattern": "[a-zA-Z][a-zA-Z0-9\\-]*"
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9\\-]*$"
             }
         },
         "com.amazonaws.elasticache#UserGroupIdList": {
@@ -10064,6 +10316,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UserGroupNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The user group was not found or does not exist</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -10097,6 +10353,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UserGroupQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The number of users exceeds the user group limit.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -10128,7 +10388,7 @@
                 "smithy.api#length": {
                     "min": 1
                 },
-                "smithy.api#pattern": "[a-zA-Z][a-zA-Z0-9\\-]*"
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9\\-]*$"
             }
         },
         "com.amazonaws.elasticache#UserIdList": {
@@ -10170,6 +10430,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UserNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The user does not exist or could not be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -10183,6 +10447,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UserQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The quota of users has been exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400

@@ -2290,11 +2290,6 @@ func awsAwsjson11_serializeDocumentProjectArtifacts(v *types.ProjectArtifacts, v
 		ok.String(*v.ArtifactIdentifier)
 	}
 
-	if len(v.BucketOwnerAccess) > 0 {
-		ok := object.Key("bucketOwnerAccess")
-		ok.String(string(v.BucketOwnerAccess))
-	}
-
 	if v.EncryptionDisabled != nil {
 		ok := object.Key("encryptionDisabled")
 		ok.Boolean(*v.EncryptionDisabled)
@@ -2701,11 +2696,6 @@ func awsAwsjson11_serializeDocumentReportGroupArns(v []string, value smithyjson.
 func awsAwsjson11_serializeDocumentS3LogsConfig(v *types.S3LogsConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
-
-	if len(v.BucketOwnerAccess) > 0 {
-		ok := object.Key("bucketOwnerAccess")
-		ok.String(string(v.BucketOwnerAccess))
-	}
 
 	if v.EncryptionDisabled != nil {
 		ok := object.Key("encryptionDisabled")

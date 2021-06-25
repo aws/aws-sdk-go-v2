@@ -653,6 +653,9 @@ type MediaPlacement struct {
 	// The audio host URL.
 	AudioHostUrl *string
 
+	// The event ingestion URL.
+	EventIngestionUrl *string
+
 	// The screen data URL.
 	ScreenDataUrl *string
 

@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified RuleGroup. A rule group defines a collection of rules to
+// Updates the specified RuleGroup. This operation completely replaces the mutable
+// specifications that you already have for the rule group with the ones that you
+// provide to this call. To modify the rule group, retrieve it by calling
+// GetRuleGroup, update the settings as needed, and then provide the complete rule
+// group specification to this call. A rule group defines a collection of rules to
 // inspect and control web requests that you can use in a WebACL. When you create a
 // rule group, you define an immutable capacity limit. If you update a rule group,
 // you must stay within the capacity. This allows others to reuse the rule group
@@ -39,13 +43,13 @@ type UpdateRuleGroupInput struct {
 	// This member is required.
 	Id *string
 
-	// A token used for optimistic locking. AWS WAF returns a token to your get and
-	// list requests, to mark the state of the entity at the time of the request. To
-	// make changes to the entity associated with the token, you provide the token to
-	// operations like update and delete. AWS WAF uses the token to ensure that no
-	// changes have been made to the entity since you last retrieved it. If a change
-	// has been made, the update fails with a WAFOptimisticLockException. If this
-	// happens, perform another get, and use the new token returned by that operation.
+	// A token used for optimistic locking. WAF returns a token to your get and list
+	// requests, to mark the state of the entity at the time of the request. To make
+	// changes to the entity associated with the token, you provide the token to
+	// operations like update and delete. WAF uses the token to ensure that no changes
+	// have been made to the entity since you last retrieved it. If a change has been
+	// made, the update fails with a WAFOptimisticLockException. If this happens,
+	// perform another get, and use the new token returned by that operation.
 	//
 	// This member is required.
 	LockToken *string
@@ -56,17 +60,17 @@ type UpdateRuleGroupInput struct {
 	// This member is required.
 	Name *string
 
-	// Specifies whether this is for an AWS CloudFront distribution or for a regional
-	// application. A regional application can be an Application Load Balancer (ALB),
-	// an API Gateway REST API, or an AppSync GraphQL API. To work with CloudFront, you
-	// must also specify the Region US East (N. Virginia) as follows:
+	// Specifies whether this is for an Amazon CloudFront distribution or for a
+	// regional application. A regional application can be an Application Load Balancer
+	// (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. To work with
+	// CloudFront, you must also specify the Region US East (N. Virginia) as
+	// follows:
 	//
-	// * CLI - Specify
-	// the Region when you use the CloudFront scope: --scope=CLOUDFRONT
-	// --region=us-east-1.
+	// * CLI - Specify the Region when you use the CloudFront scope:
+	// --scope=CLOUDFRONT --region=us-east-1.
 	//
-	// * API and SDKs - For all calls, use the Region endpoint
-	// us-east-1.
+	// * API and SDKs - For all calls, use the
+	// Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -80,14 +84,14 @@ type UpdateRuleGroupInput struct {
 	// block action, you can send a custom response to the web request. You define
 	// these for the rule group, and then use them in the rules that you define in the
 	// rule group. For information about customizing web requests and responses, see
-	// Customizing web requests and responses in AWS WAF
+	// Customizing web requests and responses in WAF
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the AWS WAF Developer Guide
+	// in the WAF Developer Guide
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). For
 	// information about the limits on count and size for custom request and response
-	// settings, see AWS WAF quotas
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the AWS
-	// WAF Developer Guide
+	// settings, see WAF quotas
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the WAF
+	// Developer Guide
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 	CustomResponseBodies map[string]types.CustomResponseBody
 
@@ -95,15 +99,14 @@ type UpdateRuleGroupInput struct {
 	Description *string
 
 	// The Rule statements used to identify the web requests that you want to allow,
-	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
-	// identify matching web requests, and parameters that govern how AWS WAF handles
-	// them.
+	// block, or count. Each rule includes one top-level statement that WAF uses to
+	// identify matching web requests, and parameters that govern how WAF handles them.
 	Rules []types.Rule
 }
 
 type UpdateRuleGroupOutput struct {
 
-	// A token used for optimistic locking. AWS WAF returns this token to your update
+	// A token used for optimistic locking. WAF returns this token to your update
 	// requests. You use NextLockToken in the same manner as you use LockToken.
 	NextLockToken *string
 

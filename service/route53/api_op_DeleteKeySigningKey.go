@@ -12,8 +12,8 @@ import (
 )
 
 // Deletes a key-signing key (KSK). Before you can delete a KSK, you must
-// deactivate it. The KSK must be deactived before you can delete it regardless of
-// whether the hosted zone is enabled for DNSSEC signing.
+// deactivate it. The KSK must be deactivated before you can delete it regardless
+// of whether the hosted zone is enabled for DNSSEC signing.
 func (c *Client) DeleteKeySigningKey(ctx context.Context, params *DeleteKeySigningKeyInput, optFns ...func(*Options)) (*DeleteKeySigningKeyOutput, error) {
 	if params == nil {
 		params = &DeleteKeySigningKeyInput{}

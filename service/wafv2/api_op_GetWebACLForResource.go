@@ -37,8 +37,8 @@ type GetWebACLForResourceInput struct {
 
 type GetWebACLForResourceOutput struct {
 
-	// The Web ACL that is associated with the resource. If there is no associated
-	// resource, AWS WAF returns a null Web ACL.
+	// The web ACL that is associated with the resource. If there is no associated
+	// resource, WAF returns a null web ACL.
 	WebACL *types.WebACL
 
 	// Metadata pertaining to the operation's result.

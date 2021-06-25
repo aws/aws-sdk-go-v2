@@ -51,6 +51,11 @@ type UpdateClusterInput struct {
 	// The new or updated Notification object.
 	Notification *types.Notification
 
+	// Specifies the service or services on the Snow Family device that your
+	// transferred data will be exported from or imported into. AWS Snow Family
+	// supports Amazon S3 and NFS (Network File System).
+	OnDeviceServiceConfiguration *types.OnDeviceServiceConfiguration
+
 	// The updated arrays of JobResource objects that can include updated S3Resource
 	// objects or LambdaResource objects.
 	Resources *types.JobResource

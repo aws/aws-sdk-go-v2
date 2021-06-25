@@ -2,6 +2,24 @@
 
 package types
 
+type AnalysisType string
+
+// Enum values for AnalysisType
+const (
+	AnalysisTypeSecurity    AnalysisType = "Security"
+	AnalysisTypeCodeQuality AnalysisType = "CodeQuality"
+)
+
+// Values returns all known values for AnalysisType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AnalysisType) Values() []AnalysisType {
+	return []AnalysisType{
+		"Security",
+		"CodeQuality",
+	}
+}
+
 type EncryptionOption string
 
 // Enum values for EncryptionOption
@@ -50,6 +68,7 @@ const (
 	ProviderTypeGitHub                 ProviderType = "GitHub"
 	ProviderTypeBitbucket              ProviderType = "Bitbucket"
 	ProviderTypeGitHubEnterpriseServer ProviderType = "GitHubEnterpriseServer"
+	ProviderTypeS3Bucket               ProviderType = "S3Bucket"
 )
 
 // Values returns all known values for ProviderType. Note that this can be expanded
@@ -61,6 +80,7 @@ func (ProviderType) Values() []ProviderType {
 		"GitHub",
 		"Bitbucket",
 		"GitHubEnterpriseServer",
+		"S3Bucket",
 	}
 }
 
@@ -79,6 +99,40 @@ func (Reaction) Values() []Reaction {
 	return []Reaction{
 		"ThumbsUp",
 		"ThumbsDown",
+	}
+}
+
+type RecommendationCategory string
+
+// Enum values for RecommendationCategory
+const (
+	RecommendationCategoryAwsBestPractices        RecommendationCategory = "AWSBestPractices"
+	RecommendationCategoryAwsCloudformationIssues RecommendationCategory = "AWSCloudFormationIssues"
+	RecommendationCategoryDuplicateCode           RecommendationCategory = "DuplicateCode"
+	RecommendationCategoryCodeMaintenanceIssues   RecommendationCategory = "CodeMaintenanceIssues"
+	RecommendationCategoryConcurrencyIssues       RecommendationCategory = "ConcurrencyIssues"
+	RecommendationCategoryInputValidations        RecommendationCategory = "InputValidations"
+	RecommendationCategoryPythonBestPractices     RecommendationCategory = "PythonBestPractices"
+	RecommendationCategoryJavaBestPractices       RecommendationCategory = "JavaBestPractices"
+	RecommendationCategoryResourceLeaks           RecommendationCategory = "ResourceLeaks"
+	RecommendationCategorySecurityIssues          RecommendationCategory = "SecurityIssues"
+)
+
+// Values returns all known values for RecommendationCategory. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationCategory) Values() []RecommendationCategory {
+	return []RecommendationCategory{
+		"AWSBestPractices",
+		"AWSCloudFormationIssues",
+		"DuplicateCode",
+		"CodeMaintenanceIssues",
+		"ConcurrencyIssues",
+		"InputValidations",
+		"PythonBestPractices",
+		"JavaBestPractices",
+		"ResourceLeaks",
+		"SecurityIssues",
 	}
 }
 
@@ -121,5 +175,25 @@ func (Type) Values() []Type {
 	return []Type{
 		"PullRequest",
 		"RepositoryAnalysis",
+	}
+}
+
+type VendorName string
+
+// Enum values for VendorName
+const (
+	VendorNameGithub   VendorName = "GitHub"
+	VendorNameGitlab   VendorName = "GitLab"
+	VendorNameNativeS3 VendorName = "NativeS3"
+)
+
+// Values returns all known values for VendorName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (VendorName) Values() []VendorName {
+	return []VendorName{
+		"GitHub",
+		"GitLab",
+		"NativeS3",
 	}
 }

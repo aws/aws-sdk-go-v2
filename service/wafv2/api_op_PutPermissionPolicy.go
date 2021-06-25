@@ -19,7 +19,7 @@ import (
 //
 // * The ARN in the
 // request must be a valid WAF RuleGroup ARN and the rule group must exist in the
-// same region.
+// same Region.
 //
 // * The user making the request must be the owner of the rule group.
 func (c *Client) PutPermissionPolicy(ctx context.Context, params *PutPermissionPolicyInput, optFns ...func(*Options)) (*PutPermissionPolicyOutput, error) {
@@ -52,13 +52,13 @@ type PutPermissionPolicyInput struct {
 	// Allow.
 	//
 	// * Action must specify wafv2:CreateWebACL, wafv2:UpdateWebACL, and
-	// wafv2:PutFirewallManagerRuleGroups. AWS WAF rejects any extra actions or
-	// wildcard actions in the policy.
+	// wafv2:PutFirewallManagerRuleGroups. WAF rejects any extra actions or wildcard
+	// actions in the policy.
 	//
-	// * The policy must not include a Resource
-	// parameter.
+	// * The policy must not include a Resource parameter.
 	//
-	// For more information, see IAM Policies
+	// For
+	// more information, see IAM Policies
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html).
 	//
 	// This member is required.

@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an AWS Identity and Access Management (IAM) role with a DB instance.
-// To add a role to a DB instance, the status of the DB instance must be available.
+// Associates an Amazon Web Services Identity and Access Management (IAM) role with
+// a DB instance. To add a role to a DB instance, the status of the DB instance
+// must be available.
 func (c *Client) AddRoleToDBInstance(ctx context.Context, params *AddRoleToDBInstanceInput, optFns ...func(*Options)) (*AddRoleToDBInstanceOutput, error) {
 	if params == nil {
 		params = &AddRoleToDBInstanceInput{}

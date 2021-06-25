@@ -76,16 +76,17 @@ type DescribeDBSnapshotsInput struct {
 	Filters []types.Filter
 
 	// A value that indicates whether to include manual DB cluster snapshots that are
-	// public and can be copied or restored by any AWS account. By default, the public
-	// snapshots are not included. You can share a manual DB snapshot as public by
-	// using the ModifyDBSnapshotAttribute API.
+	// public and can be copied or restored by any Amazon Web Services account. By
+	// default, the public snapshots are not included. You can share a manual DB
+	// snapshot as public by using the ModifyDBSnapshotAttribute API.
 	IncludePublic bool
 
 	// A value that indicates whether to include shared manual DB cluster snapshots
-	// from other AWS accounts that this AWS account has been given permission to copy
-	// or restore. By default, these snapshots are not included. You can give an AWS
-	// account permission to restore a manual DB snapshot from another AWS account by
-	// using the ModifyDBSnapshotAttribute API action.
+	// from other Amazon Web Services accounts that this Amazon Web Services account
+	// has been given permission to copy or restore. By default, these snapshots are
+	// not included. You can give an Amazon Web Services account permission to restore
+	// a manual DB snapshot from another Amazon Web Services account by using the
+	// ModifyDBSnapshotAttribute API action.
 	IncludeShared bool
 
 	// An optional pagination token provided by a previous DescribeDBSnapshots request.
@@ -103,20 +104,21 @@ type DescribeDBSnapshotsInput struct {
 	// values:
 	//
 	// * automated - Return all DB snapshots that have been automatically
-	// taken by Amazon RDS for my AWS account.
+	// taken by Amazon RDS for my Amazon Web Services account.
 	//
-	// * manual - Return all DB snapshots that
-	// have been taken by my AWS account.
+	// * manual - Return all
+	// DB snapshots that have been taken by my Amazon Web Services account.
 	//
-	// * shared - Return all manual DB snapshots
-	// that have been shared to my AWS account.
+	// * shared -
+	// Return all manual DB snapshots that have been shared to my Amazon Web Services
+	// account.
 	//
-	// * public - Return all DB snapshots
-	// that have been marked as public.
+	// * public - Return all DB snapshots that have been marked as public.
 	//
-	// * awsbackup - Return the DB snapshots managed
-	// by the AWS Backup service. For information about AWS Backup, see the  AWS Backup
-	// Developer Guide.
+	// *
+	// awsbackup - Return the DB snapshots managed by the Amazon Web Services Backup
+	// service. For information about Amazon Web Services Backup, see the  Amazon Web
+	// Services Backup Developer Guide.
 	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html) The
 	// awsbackup type does not apply to Aurora.
 	//

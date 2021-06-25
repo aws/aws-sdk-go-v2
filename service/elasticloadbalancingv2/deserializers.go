@@ -117,13 +117,13 @@ func awsAwsquery_deserializeOpErrorAddListenerCertificates(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CertificateNotFoundException", errorCode):
+	case strings.EqualFold("CertificateNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCertificateNotFoundException(response, errorBody)
 
-	case strings.EqualFold("ListenerNotFoundException", errorCode):
+	case strings.EqualFold("ListenerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorListenerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TooManyCertificatesException", errorCode):
+	case strings.EqualFold("TooManyCertificates", errorCode):
 		return awsAwsquery_deserializeErrorTooManyCertificatesException(response, errorBody)
 
 	default:
@@ -231,16 +231,16 @@ func awsAwsquery_deserializeOpErrorAddTags(response *smithyhttp.Response, metada
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DuplicateTagKeysException", errorCode):
+	case strings.EqualFold("DuplicateTagKeys", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateTagKeysException(response, errorBody)
 
-	case strings.EqualFold("LoadBalancerNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupNotFoundException", errorCode):
+	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TooManyTagsException", errorCode):
+	case strings.EqualFold("TooManyTags", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTagsException(response, errorBody)
 
 	default:
@@ -348,58 +348,58 @@ func awsAwsquery_deserializeOpErrorCreateListener(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ALPNPolicyNotSupportedException", errorCode):
+	case strings.EqualFold("ALPNPolicyNotFound", errorCode):
 		return awsAwsquery_deserializeErrorALPNPolicyNotSupportedException(response, errorBody)
 
-	case strings.EqualFold("CertificateNotFoundException", errorCode):
+	case strings.EqualFold("CertificateNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCertificateNotFoundException(response, errorBody)
 
-	case strings.EqualFold("DuplicateListenerException", errorCode):
+	case strings.EqualFold("DuplicateListener", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateListenerException(response, errorBody)
 
-	case strings.EqualFold("IncompatibleProtocolsException", errorCode):
+	case strings.EqualFold("IncompatibleProtocols", errorCode):
 		return awsAwsquery_deserializeErrorIncompatibleProtocolsException(response, errorBody)
 
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("InvalidLoadBalancerActionException", errorCode):
+	case strings.EqualFold("InvalidLoadBalancerAction", errorCode):
 		return awsAwsquery_deserializeErrorInvalidLoadBalancerActionException(response, errorBody)
 
-	case strings.EqualFold("LoadBalancerNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("SSLPolicyNotFoundException", errorCode):
+	case strings.EqualFold("SSLPolicyNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSSLPolicyNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupAssociationLimitException", errorCode):
+	case strings.EqualFold("TargetGroupAssociationLimit", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupAssociationLimitException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupNotFoundException", errorCode):
+	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TooManyActionsException", errorCode):
+	case strings.EqualFold("TooManyActions", errorCode):
 		return awsAwsquery_deserializeErrorTooManyActionsException(response, errorBody)
 
-	case strings.EqualFold("TooManyCertificatesException", errorCode):
+	case strings.EqualFold("TooManyCertificates", errorCode):
 		return awsAwsquery_deserializeErrorTooManyCertificatesException(response, errorBody)
 
-	case strings.EqualFold("TooManyListenersException", errorCode):
+	case strings.EqualFold("TooManyListeners", errorCode):
 		return awsAwsquery_deserializeErrorTooManyListenersException(response, errorBody)
 
-	case strings.EqualFold("TooManyRegistrationsForTargetIdException", errorCode):
+	case strings.EqualFold("TooManyRegistrationsForTargetId", errorCode):
 		return awsAwsquery_deserializeErrorTooManyRegistrationsForTargetIdException(response, errorBody)
 
-	case strings.EqualFold("TooManyTagsException", errorCode):
+	case strings.EqualFold("TooManyTags", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTagsException(response, errorBody)
 
-	case strings.EqualFold("TooManyTargetsException", errorCode):
+	case strings.EqualFold("TooManyTargets", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTargetsException(response, errorBody)
 
-	case strings.EqualFold("TooManyUniqueTargetGroupsPerLoadBalancerException", errorCode):
+	case strings.EqualFold("TooManyUniqueTargetGroupsPerLoadBalancer", errorCode):
 		return awsAwsquery_deserializeErrorTooManyUniqueTargetGroupsPerLoadBalancerException(response, errorBody)
 
-	case strings.EqualFold("UnsupportedProtocolException", errorCode):
+	case strings.EqualFold("UnsupportedProtocol", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedProtocolException(response, errorBody)
 
 	default:
@@ -507,43 +507,43 @@ func awsAwsquery_deserializeOpErrorCreateLoadBalancer(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AllocationIdNotFoundException", errorCode):
+	case strings.EqualFold("AllocationIdNotFound", errorCode):
 		return awsAwsquery_deserializeErrorAllocationIdNotFoundException(response, errorBody)
 
-	case strings.EqualFold("AvailabilityZoneNotSupportedException", errorCode):
+	case strings.EqualFold("AvailabilityZoneNotSupported", errorCode):
 		return awsAwsquery_deserializeErrorAvailabilityZoneNotSupportedException(response, errorBody)
 
-	case strings.EqualFold("DuplicateLoadBalancerNameException", errorCode):
+	case strings.EqualFold("DuplicateLoadBalancerName", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateLoadBalancerNameException(response, errorBody)
 
-	case strings.EqualFold("DuplicateTagKeysException", errorCode):
+	case strings.EqualFold("DuplicateTagKeys", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateTagKeysException(response, errorBody)
 
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("InvalidSchemeException", errorCode):
+	case strings.EqualFold("InvalidScheme", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSchemeException(response, errorBody)
 
-	case strings.EqualFold("InvalidSecurityGroupException", errorCode):
+	case strings.EqualFold("InvalidSecurityGroup", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSecurityGroupException(response, errorBody)
 
-	case strings.EqualFold("InvalidSubnetException", errorCode):
+	case strings.EqualFold("InvalidSubnet", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSubnetException(response, errorBody)
 
-	case strings.EqualFold("OperationNotPermittedException", errorCode):
+	case strings.EqualFold("OperationNotPermitted", errorCode):
 		return awsAwsquery_deserializeErrorOperationNotPermittedException(response, errorBody)
 
-	case strings.EqualFold("ResourceInUseException", errorCode):
+	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsquery_deserializeErrorResourceInUseException(response, errorBody)
 
-	case strings.EqualFold("SubnetNotFoundException", errorCode):
+	case strings.EqualFold("SubnetNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubnetNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TooManyLoadBalancersException", errorCode):
+	case strings.EqualFold("TooManyLoadBalancers", errorCode):
 		return awsAwsquery_deserializeErrorTooManyLoadBalancersException(response, errorBody)
 
-	case strings.EqualFold("TooManyTagsException", errorCode):
+	case strings.EqualFold("TooManyTags", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTagsException(response, errorBody)
 
 	default:
@@ -651,49 +651,49 @@ func awsAwsquery_deserializeOpErrorCreateRule(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("IncompatibleProtocolsException", errorCode):
+	case strings.EqualFold("IncompatibleProtocols", errorCode):
 		return awsAwsquery_deserializeErrorIncompatibleProtocolsException(response, errorBody)
 
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("InvalidLoadBalancerActionException", errorCode):
+	case strings.EqualFold("InvalidLoadBalancerAction", errorCode):
 		return awsAwsquery_deserializeErrorInvalidLoadBalancerActionException(response, errorBody)
 
-	case strings.EqualFold("ListenerNotFoundException", errorCode):
+	case strings.EqualFold("ListenerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorListenerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("PriorityInUseException", errorCode):
+	case strings.EqualFold("PriorityInUse", errorCode):
 		return awsAwsquery_deserializeErrorPriorityInUseException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupAssociationLimitException", errorCode):
+	case strings.EqualFold("TargetGroupAssociationLimit", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupAssociationLimitException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupNotFoundException", errorCode):
+	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TooManyActionsException", errorCode):
+	case strings.EqualFold("TooManyActions", errorCode):
 		return awsAwsquery_deserializeErrorTooManyActionsException(response, errorBody)
 
-	case strings.EqualFold("TooManyRegistrationsForTargetIdException", errorCode):
+	case strings.EqualFold("TooManyRegistrationsForTargetId", errorCode):
 		return awsAwsquery_deserializeErrorTooManyRegistrationsForTargetIdException(response, errorBody)
 
-	case strings.EqualFold("TooManyRulesException", errorCode):
+	case strings.EqualFold("TooManyRules", errorCode):
 		return awsAwsquery_deserializeErrorTooManyRulesException(response, errorBody)
 
-	case strings.EqualFold("TooManyTagsException", errorCode):
+	case strings.EqualFold("TooManyTags", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTagsException(response, errorBody)
 
-	case strings.EqualFold("TooManyTargetGroupsException", errorCode):
+	case strings.EqualFold("TooManyTargetGroups", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTargetGroupsException(response, errorBody)
 
-	case strings.EqualFold("TooManyTargetsException", errorCode):
+	case strings.EqualFold("TooManyTargets", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTargetsException(response, errorBody)
 
-	case strings.EqualFold("TooManyUniqueTargetGroupsPerLoadBalancerException", errorCode):
+	case strings.EqualFold("TooManyUniqueTargetGroupsPerLoadBalancer", errorCode):
 		return awsAwsquery_deserializeErrorTooManyUniqueTargetGroupsPerLoadBalancerException(response, errorBody)
 
-	case strings.EqualFold("UnsupportedProtocolException", errorCode):
+	case strings.EqualFold("UnsupportedProtocol", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedProtocolException(response, errorBody)
 
 	default:
@@ -801,16 +801,16 @@ func awsAwsquery_deserializeOpErrorCreateTargetGroup(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DuplicateTargetGroupNameException", errorCode):
+	case strings.EqualFold("DuplicateTargetGroupName", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateTargetGroupNameException(response, errorBody)
 
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("TooManyTagsException", errorCode):
+	case strings.EqualFold("TooManyTags", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTagsException(response, errorBody)
 
-	case strings.EqualFold("TooManyTargetGroupsException", errorCode):
+	case strings.EqualFold("TooManyTargetGroups", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTargetGroupsException(response, errorBody)
 
 	default:
@@ -918,7 +918,7 @@ func awsAwsquery_deserializeOpErrorDeleteListener(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ListenerNotFoundException", errorCode):
+	case strings.EqualFold("ListenerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorListenerNotFoundException(response, errorBody)
 
 	default:
@@ -1026,13 +1026,13 @@ func awsAwsquery_deserializeOpErrorDeleteLoadBalancer(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LoadBalancerNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("OperationNotPermittedException", errorCode):
+	case strings.EqualFold("OperationNotPermitted", errorCode):
 		return awsAwsquery_deserializeErrorOperationNotPermittedException(response, errorBody)
 
-	case strings.EqualFold("ResourceInUseException", errorCode):
+	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsquery_deserializeErrorResourceInUseException(response, errorBody)
 
 	default:
@@ -1140,10 +1140,10 @@ func awsAwsquery_deserializeOpErrorDeleteRule(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("OperationNotPermittedException", errorCode):
+	case strings.EqualFold("OperationNotPermitted", errorCode):
 		return awsAwsquery_deserializeErrorOperationNotPermittedException(response, errorBody)
 
-	case strings.EqualFold("RuleNotFoundException", errorCode):
+	case strings.EqualFold("RuleNotFound", errorCode):
 		return awsAwsquery_deserializeErrorRuleNotFoundException(response, errorBody)
 
 	default:
@@ -1251,7 +1251,7 @@ func awsAwsquery_deserializeOpErrorDeleteTargetGroup(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ResourceInUseException", errorCode):
+	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsquery_deserializeErrorResourceInUseException(response, errorBody)
 
 	default:
@@ -1359,10 +1359,10 @@ func awsAwsquery_deserializeOpErrorDeregisterTargets(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidTargetException", errorCode):
+	case strings.EqualFold("InvalidTarget", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTargetException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupNotFoundException", errorCode):
+	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
 
 	default:
@@ -1575,7 +1575,7 @@ func awsAwsquery_deserializeOpErrorDescribeListenerCertificates(response *smithy
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ListenerNotFoundException", errorCode):
+	case strings.EqualFold("ListenerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorListenerNotFoundException(response, errorBody)
 
 	default:
@@ -1683,13 +1683,13 @@ func awsAwsquery_deserializeOpErrorDescribeListeners(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ListenerNotFoundException", errorCode):
+	case strings.EqualFold("ListenerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorListenerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("LoadBalancerNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("UnsupportedProtocolException", errorCode):
+	case strings.EqualFold("UnsupportedProtocol", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedProtocolException(response, errorBody)
 
 	default:
@@ -1797,7 +1797,7 @@ func awsAwsquery_deserializeOpErrorDescribeLoadBalancerAttributes(response *smit
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LoadBalancerNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerNotFoundException(response, errorBody)
 
 	default:
@@ -1905,7 +1905,7 @@ func awsAwsquery_deserializeOpErrorDescribeLoadBalancers(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LoadBalancerNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerNotFoundException(response, errorBody)
 
 	default:
@@ -2013,13 +2013,13 @@ func awsAwsquery_deserializeOpErrorDescribeRules(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ListenerNotFoundException", errorCode):
+	case strings.EqualFold("ListenerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorListenerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("RuleNotFoundException", errorCode):
+	case strings.EqualFold("RuleNotFound", errorCode):
 		return awsAwsquery_deserializeErrorRuleNotFoundException(response, errorBody)
 
-	case strings.EqualFold("UnsupportedProtocolException", errorCode):
+	case strings.EqualFold("UnsupportedProtocol", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedProtocolException(response, errorBody)
 
 	default:
@@ -2127,7 +2127,7 @@ func awsAwsquery_deserializeOpErrorDescribeSSLPolicies(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("SSLPolicyNotFoundException", errorCode):
+	case strings.EqualFold("SSLPolicyNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSSLPolicyNotFoundException(response, errorBody)
 
 	default:
@@ -2235,16 +2235,16 @@ func awsAwsquery_deserializeOpErrorDescribeTags(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ListenerNotFoundException", errorCode):
+	case strings.EqualFold("ListenerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorListenerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("LoadBalancerNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("RuleNotFoundException", errorCode):
+	case strings.EqualFold("RuleNotFound", errorCode):
 		return awsAwsquery_deserializeErrorRuleNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupNotFoundException", errorCode):
+	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
 
 	default:
@@ -2352,7 +2352,7 @@ func awsAwsquery_deserializeOpErrorDescribeTargetGroupAttributes(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("TargetGroupNotFoundException", errorCode):
+	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
 
 	default:
@@ -2460,10 +2460,10 @@ func awsAwsquery_deserializeOpErrorDescribeTargetGroups(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LoadBalancerNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupNotFoundException", errorCode):
+	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
 
 	default:
@@ -2571,13 +2571,13 @@ func awsAwsquery_deserializeOpErrorDescribeTargetHealth(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("HealthUnavailableException", errorCode):
+	case strings.EqualFold("HealthUnavailable", errorCode):
 		return awsAwsquery_deserializeErrorHealthUnavailableException(response, errorBody)
 
-	case strings.EqualFold("InvalidTargetException", errorCode):
+	case strings.EqualFold("InvalidTarget", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTargetException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupNotFoundException", errorCode):
+	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
 
 	default:
@@ -2685,55 +2685,55 @@ func awsAwsquery_deserializeOpErrorModifyListener(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ALPNPolicyNotSupportedException", errorCode):
+	case strings.EqualFold("ALPNPolicyNotFound", errorCode):
 		return awsAwsquery_deserializeErrorALPNPolicyNotSupportedException(response, errorBody)
 
-	case strings.EqualFold("CertificateNotFoundException", errorCode):
+	case strings.EqualFold("CertificateNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCertificateNotFoundException(response, errorBody)
 
-	case strings.EqualFold("DuplicateListenerException", errorCode):
+	case strings.EqualFold("DuplicateListener", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateListenerException(response, errorBody)
 
-	case strings.EqualFold("IncompatibleProtocolsException", errorCode):
+	case strings.EqualFold("IncompatibleProtocols", errorCode):
 		return awsAwsquery_deserializeErrorIncompatibleProtocolsException(response, errorBody)
 
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("InvalidLoadBalancerActionException", errorCode):
+	case strings.EqualFold("InvalidLoadBalancerAction", errorCode):
 		return awsAwsquery_deserializeErrorInvalidLoadBalancerActionException(response, errorBody)
 
-	case strings.EqualFold("ListenerNotFoundException", errorCode):
+	case strings.EqualFold("ListenerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorListenerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("SSLPolicyNotFoundException", errorCode):
+	case strings.EqualFold("SSLPolicyNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSSLPolicyNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupAssociationLimitException", errorCode):
+	case strings.EqualFold("TargetGroupAssociationLimit", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupAssociationLimitException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupNotFoundException", errorCode):
+	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TooManyActionsException", errorCode):
+	case strings.EqualFold("TooManyActions", errorCode):
 		return awsAwsquery_deserializeErrorTooManyActionsException(response, errorBody)
 
-	case strings.EqualFold("TooManyCertificatesException", errorCode):
+	case strings.EqualFold("TooManyCertificates", errorCode):
 		return awsAwsquery_deserializeErrorTooManyCertificatesException(response, errorBody)
 
-	case strings.EqualFold("TooManyListenersException", errorCode):
+	case strings.EqualFold("TooManyListeners", errorCode):
 		return awsAwsquery_deserializeErrorTooManyListenersException(response, errorBody)
 
-	case strings.EqualFold("TooManyRegistrationsForTargetIdException", errorCode):
+	case strings.EqualFold("TooManyRegistrationsForTargetId", errorCode):
 		return awsAwsquery_deserializeErrorTooManyRegistrationsForTargetIdException(response, errorBody)
 
-	case strings.EqualFold("TooManyTargetsException", errorCode):
+	case strings.EqualFold("TooManyTargets", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTargetsException(response, errorBody)
 
-	case strings.EqualFold("TooManyUniqueTargetGroupsPerLoadBalancerException", errorCode):
+	case strings.EqualFold("TooManyUniqueTargetGroupsPerLoadBalancer", errorCode):
 		return awsAwsquery_deserializeErrorTooManyUniqueTargetGroupsPerLoadBalancerException(response, errorBody)
 
-	case strings.EqualFold("UnsupportedProtocolException", errorCode):
+	case strings.EqualFold("UnsupportedProtocol", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedProtocolException(response, errorBody)
 
 	default:
@@ -2841,10 +2841,10 @@ func awsAwsquery_deserializeOpErrorModifyLoadBalancerAttributes(response *smithy
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("LoadBalancerNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerNotFoundException(response, errorBody)
 
 	default:
@@ -2952,37 +2952,37 @@ func awsAwsquery_deserializeOpErrorModifyRule(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("IncompatibleProtocolsException", errorCode):
+	case strings.EqualFold("IncompatibleProtocols", errorCode):
 		return awsAwsquery_deserializeErrorIncompatibleProtocolsException(response, errorBody)
 
-	case strings.EqualFold("InvalidLoadBalancerActionException", errorCode):
+	case strings.EqualFold("InvalidLoadBalancerAction", errorCode):
 		return awsAwsquery_deserializeErrorInvalidLoadBalancerActionException(response, errorBody)
 
-	case strings.EqualFold("OperationNotPermittedException", errorCode):
+	case strings.EqualFold("OperationNotPermitted", errorCode):
 		return awsAwsquery_deserializeErrorOperationNotPermittedException(response, errorBody)
 
-	case strings.EqualFold("RuleNotFoundException", errorCode):
+	case strings.EqualFold("RuleNotFound", errorCode):
 		return awsAwsquery_deserializeErrorRuleNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupAssociationLimitException", errorCode):
+	case strings.EqualFold("TargetGroupAssociationLimit", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupAssociationLimitException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupNotFoundException", errorCode):
+	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TooManyActionsException", errorCode):
+	case strings.EqualFold("TooManyActions", errorCode):
 		return awsAwsquery_deserializeErrorTooManyActionsException(response, errorBody)
 
-	case strings.EqualFold("TooManyRegistrationsForTargetIdException", errorCode):
+	case strings.EqualFold("TooManyRegistrationsForTargetId", errorCode):
 		return awsAwsquery_deserializeErrorTooManyRegistrationsForTargetIdException(response, errorBody)
 
-	case strings.EqualFold("TooManyTargetsException", errorCode):
+	case strings.EqualFold("TooManyTargets", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTargetsException(response, errorBody)
 
-	case strings.EqualFold("TooManyUniqueTargetGroupsPerLoadBalancerException", errorCode):
+	case strings.EqualFold("TooManyUniqueTargetGroupsPerLoadBalancer", errorCode):
 		return awsAwsquery_deserializeErrorTooManyUniqueTargetGroupsPerLoadBalancerException(response, errorBody)
 
-	case strings.EqualFold("UnsupportedProtocolException", errorCode):
+	case strings.EqualFold("UnsupportedProtocol", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedProtocolException(response, errorBody)
 
 	default:
@@ -3090,10 +3090,10 @@ func awsAwsquery_deserializeOpErrorModifyTargetGroup(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupNotFoundException", errorCode):
+	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
 
 	default:
@@ -3201,10 +3201,10 @@ func awsAwsquery_deserializeOpErrorModifyTargetGroupAttributes(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupNotFoundException", errorCode):
+	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
 
 	default:
@@ -3312,16 +3312,16 @@ func awsAwsquery_deserializeOpErrorRegisterTargets(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidTargetException", errorCode):
+	case strings.EqualFold("InvalidTarget", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTargetException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupNotFoundException", errorCode):
+	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TooManyRegistrationsForTargetIdException", errorCode):
+	case strings.EqualFold("TooManyRegistrationsForTargetId", errorCode):
 		return awsAwsquery_deserializeErrorTooManyRegistrationsForTargetIdException(response, errorBody)
 
-	case strings.EqualFold("TooManyTargetsException", errorCode):
+	case strings.EqualFold("TooManyTargets", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTargetsException(response, errorBody)
 
 	default:
@@ -3429,10 +3429,10 @@ func awsAwsquery_deserializeOpErrorRemoveListenerCertificates(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ListenerNotFoundException", errorCode):
+	case strings.EqualFold("ListenerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorListenerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("OperationNotPermittedException", errorCode):
+	case strings.EqualFold("OperationNotPermitted", errorCode):
 		return awsAwsquery_deserializeErrorOperationNotPermittedException(response, errorBody)
 
 	default:
@@ -3540,19 +3540,19 @@ func awsAwsquery_deserializeOpErrorRemoveTags(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("ListenerNotFoundException", errorCode):
+	case strings.EqualFold("ListenerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorListenerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("LoadBalancerNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("RuleNotFoundException", errorCode):
+	case strings.EqualFold("RuleNotFound", errorCode):
 		return awsAwsquery_deserializeErrorRuleNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TargetGroupNotFoundException", errorCode):
+	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TooManyTagsException", errorCode):
+	case strings.EqualFold("TooManyTags", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTagsException(response, errorBody)
 
 	default:
@@ -3660,13 +3660,13 @@ func awsAwsquery_deserializeOpErrorSetIpAddressType(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("InvalidSubnetException", errorCode):
+	case strings.EqualFold("InvalidSubnet", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSubnetException(response, errorBody)
 
-	case strings.EqualFold("LoadBalancerNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerNotFoundException(response, errorBody)
 
 	default:
@@ -3774,13 +3774,13 @@ func awsAwsquery_deserializeOpErrorSetRulePriorities(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("OperationNotPermittedException", errorCode):
+	case strings.EqualFold("OperationNotPermitted", errorCode):
 		return awsAwsquery_deserializeErrorOperationNotPermittedException(response, errorBody)
 
-	case strings.EqualFold("PriorityInUseException", errorCode):
+	case strings.EqualFold("PriorityInUse", errorCode):
 		return awsAwsquery_deserializeErrorPriorityInUseException(response, errorBody)
 
-	case strings.EqualFold("RuleNotFoundException", errorCode):
+	case strings.EqualFold("RuleNotFound", errorCode):
 		return awsAwsquery_deserializeErrorRuleNotFoundException(response, errorBody)
 
 	default:
@@ -3888,13 +3888,13 @@ func awsAwsquery_deserializeOpErrorSetSecurityGroups(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("InvalidSecurityGroupException", errorCode):
+	case strings.EqualFold("InvalidSecurityGroup", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSecurityGroupException(response, errorBody)
 
-	case strings.EqualFold("LoadBalancerNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerNotFoundException(response, errorBody)
 
 	default:
@@ -4002,22 +4002,22 @@ func awsAwsquery_deserializeOpErrorSetSubnets(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AllocationIdNotFoundException", errorCode):
+	case strings.EqualFold("AllocationIdNotFound", errorCode):
 		return awsAwsquery_deserializeErrorAllocationIdNotFoundException(response, errorBody)
 
-	case strings.EqualFold("AvailabilityZoneNotSupportedException", errorCode):
+	case strings.EqualFold("AvailabilityZoneNotSupported", errorCode):
 		return awsAwsquery_deserializeErrorAvailabilityZoneNotSupportedException(response, errorBody)
 
-	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
+	case strings.EqualFold("InvalidConfigurationRequest", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
 
-	case strings.EqualFold("InvalidSubnetException", errorCode):
+	case strings.EqualFold("InvalidSubnet", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSubnetException(response, errorBody)
 
-	case strings.EqualFold("LoadBalancerNotFoundException", errorCode):
+	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerNotFoundException(response, errorBody)
 
-	case strings.EqualFold("SubnetNotFoundException", errorCode):
+	case strings.EqualFold("SubnetNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubnetNotFoundException(response, errorBody)
 
 	default:

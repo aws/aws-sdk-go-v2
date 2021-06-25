@@ -45,8 +45,8 @@ type DescribeReservedDBInstancesInput struct {
 	Filters []types.Filter
 
 	// The lease identifier filter value. Specify this parameter to show only the
-	// reservation that matches the specified lease ID. AWS Support might request the
-	// lease ID for an issue related to a reserved DB instance.
+	// reservation that matches the specified lease ID. Amazon Web Services Support
+	// might request the lease ID for an issue related to a reserved DB instance.
 	LeaseId *string
 
 	// An optional pagination token provided by a previous request. If this parameter

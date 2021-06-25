@@ -266,6 +266,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ServiceAccessDenied",
+                    "httpResponseCode": 401
+                },
                 "smithy.api#documentation": "<p>Access to resource denied.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 401
@@ -342,6 +346,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AuthorizationFailure",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>The AWS user account does not have permission to perform the action. Check the IAM\n         policy associated with this account.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -423,6 +431,9 @@
                     "target": "com.amazonaws.licensemanager#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.licensemanager#InvalidParameterValueException"
+                },
+                {
                     "target": "com.amazonaws.licensemanager#RateLimitExceededException"
                 },
                 {
@@ -478,6 +489,9 @@
                 },
                 {
                     "target": "com.amazonaws.licensemanager#EntitlementNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#InvalidParameterValueException"
                 },
                 {
                     "target": "com.amazonaws.licensemanager#NoEntitlementsAllowedException"
@@ -617,6 +631,9 @@
                 },
                 {
                     "target": "com.amazonaws.licensemanager#AuthorizationException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#InvalidParameterValueException"
                 },
                 {
                     "target": "com.amazonaws.licensemanager#NoEntitlementsAllowedException"
@@ -768,9 +785,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 64
+                    "max": 2048
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9]*"
+                "smithy.api#pattern": "^\\S+$"
             }
         },
         "com.amazonaws.licensemanager#ConflictException": {
@@ -781,6 +798,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConflictException",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>There was a conflict processing the request. Try your request again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -877,7 +898,7 @@
             "type": "structure",
             "members": {
                 "ClientToken": {
-                    "target": "com.amazonaws.licensemanager#String",
+                    "target": "com.amazonaws.licensemanager#ClientToken",
                     "traits": {
                         "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
                         "smithy.api#required": {}
@@ -982,7 +1003,7 @@
             "type": "structure",
             "members": {
                 "ClientToken": {
-                    "target": "com.amazonaws.licensemanager#String",
+                    "target": "com.amazonaws.licensemanager#ClientToken",
                     "traits": {
                         "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
                         "smithy.api#required": {}
@@ -1012,6 +1033,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Grant status.</p>"
                     }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.licensemanager#StatusReasonMessage"
                 },
                 "SourceVersion": {
                     "target": "com.amazonaws.licensemanager#String",
@@ -1357,7 +1381,7 @@
                     }
                 },
                 "ClientToken": {
-                    "target": "com.amazonaws.licensemanager#String",
+                    "target": "com.amazonaws.licensemanager#ClientToken",
                     "traits": {
                         "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
                         "smithy.api#required": {}
@@ -1499,7 +1523,7 @@
                     }
                 },
                 "ClientToken": {
-                    "target": "com.amazonaws.licensemanager#String",
+                    "target": "com.amazonaws.licensemanager#ClientToken",
                     "traits": {
                         "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
                         "smithy.api#required": {}
@@ -1603,7 +1627,7 @@
                     }
                 },
                 "ClientToken": {
-                    "target": "com.amazonaws.licensemanager#IdempotencyToken",
+                    "target": "com.amazonaws.licensemanager#ClientToken",
                     "traits": {
                         "smithy.api#documentation": "<p>Idempotency token, valid for 10 minutes.</p>",
                         "smithy.api#required": {}
@@ -1702,6 +1726,9 @@
                         "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the grant.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.licensemanager#StatusReasonMessage"
                 },
                 "Version": {
                     "target": "com.amazonaws.licensemanager#String",
@@ -2421,6 +2448,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "FailedDependency",
+                    "httpResponseCode": 424
+                },
                 "smithy.api#documentation": "<p>A dependency required to run the API is missing.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 424
@@ -2454,6 +2485,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "FilterLimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request uses too many filters or too many filter values.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3054,7 +3089,7 @@
                     }
                 },
                 "StatusReason": {
-                    "target": "com.amazonaws.licensemanager#String",
+                    "target": "com.amazonaws.licensemanager#StatusReasonMessage",
                     "traits": {
                         "smithy.api#documentation": "<p>Grant status reason.</p>"
                     }
@@ -3119,6 +3154,10 @@
                     {
                         "value": "DISABLED",
                         "name": "DISABLED"
+                    },
+                    {
+                        "value": "WORKFLOW_COMPLETED",
+                        "name": "WORKFLOW_COMPLETED"
                     }
                 ]
             }
@@ -3237,16 +3276,6 @@
                 "smithy.api#pattern": "^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z|[+-](?:2[ 0-3]|[0-1][0-9]):[0-5][0-9])+$"
             }
         },
-        "com.amazonaws.licensemanager#IdempotencyToken": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 60
-                },
-                "smithy.api#pattern": "\\S+"
-            }
-        },
         "com.amazonaws.licensemanager#Integer": {
             "type": "integer",
             "traits": {
@@ -3261,6 +3290,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidParameterValueProvided",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>One or more parameter values are not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3274,6 +3307,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidResourceState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>License Manager cannot allocate a license to a resource because of its state. </p>\n         <p>For example, you cannot allocate a license to an instance in the process of shutting\n         down.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3884,6 +3921,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "LicenseUsageFailure",
+                    "httpResponseCode": 412
+                },
                 "smithy.api#documentation": "<p>You do not have enough licenses available to support a new resource launch.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 412
@@ -5141,6 +5182,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "RateLimitExceeded",
+                    "httpResponseCode": 429
+                },
                 "smithy.api#documentation": "<p>Too many requests have been submitted. Try again after a brief wait.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
@@ -5154,6 +5199,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Received status.</p>"
                     }
+                },
+                "ReceivedStatusReason": {
+                    "target": "com.amazonaws.licensemanager#StatusReasonMessage"
                 },
                 "AllowedOperations": {
                     "target": "com.amazonaws.licensemanager#AllowedOperationList",
@@ -5197,6 +5245,10 @@
                     {
                         "value": "DISABLED",
                         "name": "DISABLED"
+                    },
+                    {
+                        "value": "WORKFLOW_COMPLETED",
+                        "name": "WORKFLOW_COMPLETED"
                     }
                 ]
             }
@@ -5543,6 +5595,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceLimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Your resource limits have been exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5556,6 +5612,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidResource.NotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The resource cannot be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5616,6 +5676,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InternalError",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>The server experienced an internal error. Try again.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -5627,6 +5691,16 @@
                 "smithy.api#length": {
                     "min": 4096
                 }
+            }
+        },
+        "com.amazonaws.licensemanager#StatusReasonMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 400
+                },
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
         "com.amazonaws.licensemanager#String": {
@@ -5785,7 +5859,7 @@
                     "min": 0,
                     "max": 4096
                 },
-                "smithy.api#pattern": "\\S+"
+                "smithy.api#pattern": "^\\S+$"
             }
         },
         "com.amazonaws.licensemanager#TokenType": {

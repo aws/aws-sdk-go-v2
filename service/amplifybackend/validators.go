@@ -350,6 +350,26 @@ func (m *validateOpGetToken) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpImportBackendAuth struct {
+}
+
+func (*validateOpImportBackendAuth) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportBackendAuth) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportBackendAuthInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportBackendAuthInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListBackendJobs struct {
 }
 
@@ -556,6 +576,10 @@ func addOpGetBackendJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetToken{}, middleware.After)
+}
+
+func addOpImportBackendAuthValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportBackendAuth{}, middleware.After)
 }
 
 func addOpListBackendJobsValidationMiddleware(stack *middleware.Stack) error {
@@ -1091,6 +1115,33 @@ func validateOpGetTokenInput(v *GetTokenInput) error {
 	}
 	if v.SessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpImportBackendAuthInput(v *ImportBackendAuthInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportBackendAuthInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.BackendEnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackendEnvironmentName"))
+	}
+	if v.NativeClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NativeClientId"))
+	}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.WebClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WebClientId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

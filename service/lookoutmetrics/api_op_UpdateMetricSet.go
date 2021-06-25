@@ -49,8 +49,8 @@ type UpdateMetricSetInput struct {
 	// Contains information about source data used to generate a metric.
 	MetricSource *types.MetricSource
 
-	// After an interval ends, the amount of time that the detector waits before
-	// importing data.
+	// After an interval ends, the amount of seconds that the detector waits before
+	// importing data. Offset is only supported for S3 and Redshift datasources.
 	Offset int32
 
 	// The timestamp column.

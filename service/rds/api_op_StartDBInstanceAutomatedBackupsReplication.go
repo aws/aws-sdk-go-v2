@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables replication of automated backups to a different AWS Region. For more
-// information, see  Replicating Automated Backups to Another AWS Region
+// Enables replication of automated backups to a different Amazon Web Services
+// Region. For more information, see  Replicating Automated Backups to Another
+// Amazon Web Services Region
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html)
 // in the Amazon RDS User Guide.
 func (c *Client) StartDBInstanceAutomatedBackupsReplication(ctx context.Context, params *StartDBInstanceAutomatedBackupsReplicationInput, optFns ...func(*Options)) (*StartDBInstanceAutomatedBackupsReplicationOutput, error) {
@@ -42,17 +43,18 @@ type StartDBInstanceAutomatedBackupsReplicationInput struct {
 	// The retention period for the replicated automated backups.
 	BackupRetentionPeriod *int32
 
-	// The AWS KMS key identifier for encryption of the replicated automated backups.
-	// The KMS key ID is the Amazon Resource Name (ARN) for the KMS encryption key in
-	// the destination AWS Region, for example,
+	// The Amazon Web Services KMS key identifier for encryption of the replicated
+	// automated backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS
+	// encryption key in the destination Amazon Web Services Region, for example,
 	// arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE.
 	KmsKeyId *string
 
 	// A URL that contains a Signature Version 4 signed request for the
-	// StartDBInstanceAutomatedBackupsReplication action to be called in the AWS Region
-	// of the source DB instance. The presigned URL must be a valid request for the
-	// StartDBInstanceAutomatedBackupsReplication API action that can be executed in
-	// the AWS Region that contains the source DB instance.
+	// StartDBInstanceAutomatedBackupsReplication action to be called in the Amazon Web
+	// Services Region of the source DB instance. The presigned URL must be a valid
+	// request for the StartDBInstanceAutomatedBackupsReplication API action that can
+	// be executed in the Amazon Web Services Region that contains the source DB
+	// instance.
 	PreSignedUrl *string
 }
 

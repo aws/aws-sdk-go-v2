@@ -55,13 +55,12 @@ type DescribeDBClusterSnapshotsInput struct {
 	Filters []types.Filter
 
 	// Set to true to include manual cluster snapshots that are public and can be
-	// copied or restored by any AWS account, and otherwise false. The default is
-	// false.
+	// copied or restored by any account, and otherwise false. The default is false.
 	IncludePublic bool
 
-	// Set to true to include shared manual cluster snapshots from other AWS accounts
-	// that this AWS account has been given permission to copy or restore, and
-	// otherwise false. The default is false.
+	// Set to true to include shared manual cluster snapshots from other accounts that
+	// this account has been given permission to copy or restore, and otherwise false.
+	// The default is false.
 	IncludeShared bool
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -79,26 +78,26 @@ type DescribeDBClusterSnapshotsInput struct {
 	// following values:
 	//
 	// * automated - Return all cluster snapshots that Amazon
-	// DocumentDB has automatically created for your AWS account.
+	// DocumentDB has automatically created for your account.
 	//
-	// * manual - Return
-	// all cluster snapshots that you have manually created for your AWS account.
+	// * manual - Return all
+	// cluster snapshots that you have manually created for your account.
+	//
+	// * shared -
+	// Return all manual cluster snapshots that have been shared to your account.
 	//
 	// *
-	// shared - Return all manual cluster snapshots that have been shared to your AWS
-	// account.
+	// public - Return all cluster snapshots that have been marked as public.
 	//
-	// * public - Return all cluster snapshots that have been marked as
-	// public.
-	//
-	// If you don't specify a SnapshotType value, then both automated and
-	// manual cluster snapshots are returned. You can include shared cluster snapshots
-	// with these results by setting the IncludeShared parameter to true. You can
-	// include public cluster snapshots with these results by setting theIncludePublic
-	// parameter to true. The IncludeShared and IncludePublic parameters don't apply
-	// for SnapshotType values of manual or automated. The IncludePublic parameter
-	// doesn't apply when SnapshotType is set to shared. The IncludeShared parameter
-	// doesn't apply when SnapshotType is set to public.
+	// If you
+	// don't specify a SnapshotType value, then both automated and manual cluster
+	// snapshots are returned. You can include shared cluster snapshots with these
+	// results by setting the IncludeShared parameter to true. You can include public
+	// cluster snapshots with these results by setting theIncludePublic parameter to
+	// true. The IncludeShared and IncludePublic parameters don't apply for
+	// SnapshotType values of manual or automated. The IncludePublic parameter doesn't
+	// apply when SnapshotType is set to shared. The IncludeShared parameter doesn't
+	// apply when SnapshotType is set to public.
 	SnapshotType *string
 }
 

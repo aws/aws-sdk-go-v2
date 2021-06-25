@@ -1017,6 +1017,51 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAnalysisTypes(v []types.AnalysisType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBranchDiffSourceCodeType(v *types.BranchDiffSourceCodeType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationBranchName != nil {
+		ok := object.Key("DestinationBranchName")
+		ok.String(*v.DestinationBranchName)
+	}
+
+	if v.SourceBranchName != nil {
+		ok := object.Key("SourceBranchName")
+		ok.String(*v.SourceBranchName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodeArtifacts(v *types.CodeArtifacts, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BuildArtifactsObjectKey != nil {
+		ok := object.Key("BuildArtifactsObjectKey")
+		ok.String(*v.BuildArtifactsObjectKey)
+	}
+
+	if v.SourceCodeArtifactsObjectKey != nil {
+		ok := object.Key("SourceCodeArtifactsObjectKey")
+		ok.String(*v.SourceCodeArtifactsObjectKey)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCodeCommitRepository(v *types.CodeCommitRepository, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1033,11 +1078,57 @@ func awsRestjson1_serializeDocumentCodeReviewType(v *types.CodeReviewType, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.AnalysisTypes != nil {
+		ok := object.Key("AnalysisTypes")
+		if err := awsRestjson1_serializeDocumentAnalysisTypes(v.AnalysisTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RepositoryAnalysis != nil {
 		ok := object.Key("RepositoryAnalysis")
 		if err := awsRestjson1_serializeDocumentRepositoryAnalysis(v.RepositoryAnalysis, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCommitDiffSourceCodeType(v *types.CommitDiffSourceCodeType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationCommit != nil {
+		ok := object.Key("DestinationCommit")
+		ok.String(*v.DestinationCommit)
+	}
+
+	if v.MergeBaseCommit != nil {
+		ok := object.Key("MergeBaseCommit")
+		ok.String(*v.MergeBaseCommit)
+	}
+
+	if v.SourceCommit != nil {
+		ok := object.Key("SourceCommit")
+		ok.String(*v.SourceCommit)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEventInfo(v *types.EventInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.State != nil {
+		ok := object.Key("State")
+		ok.String(*v.State)
 	}
 
 	return nil
@@ -1096,6 +1187,13 @@ func awsRestjson1_serializeDocumentRepository(v *types.Repository, value smithyj
 		}
 	}
 
+	if v.S3Bucket != nil {
+		ok := object.Key("S3Bucket")
+		if err := awsRestjson1_serializeDocumentS3Repository(v.S3Bucket, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1110,6 +1208,13 @@ func awsRestjson1_serializeDocumentRepositoryAnalysis(v *types.RepositoryAnalysi
 		}
 	}
 
+	if v.SourceCodeType != nil {
+		ok := object.Key("SourceCodeType")
+		if err := awsRestjson1_serializeDocumentSourceCodeType(v.SourceCodeType, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1120,6 +1225,132 @@ func awsRestjson1_serializeDocumentRepositoryHeadSourceCodeType(v *types.Reposit
 	if v.BranchName != nil {
 		ok := object.Key("BranchName")
 		ok.String(*v.BranchName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRequestMetadata(v *types.RequestMetadata, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventInfo != nil {
+		ok := object.Key("EventInfo")
+		if err := awsRestjson1_serializeDocumentEventInfo(v.EventInfo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Requester != nil {
+		ok := object.Key("Requester")
+		ok.String(*v.Requester)
+	}
+
+	if v.RequestId != nil {
+		ok := object.Key("RequestId")
+		ok.String(*v.RequestId)
+	}
+
+	if len(v.VendorName) > 0 {
+		ok := object.Key("VendorName")
+		ok.String(string(v.VendorName))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3BucketRepository(v *types.S3BucketRepository, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Details != nil {
+		ok := object.Key("Details")
+		if err := awsRestjson1_serializeDocumentS3RepositoryDetails(v.Details, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3Repository(v *types.S3Repository, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketName != nil {
+		ok := object.Key("BucketName")
+		ok.String(*v.BucketName)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3RepositoryDetails(v *types.S3RepositoryDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketName != nil {
+		ok := object.Key("BucketName")
+		ok.String(*v.BucketName)
+	}
+
+	if v.CodeArtifacts != nil {
+		ok := object.Key("CodeArtifacts")
+		if err := awsRestjson1_serializeDocumentCodeArtifacts(v.CodeArtifacts, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSourceCodeType(v *types.SourceCodeType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BranchDiff != nil {
+		ok := object.Key("BranchDiff")
+		if err := awsRestjson1_serializeDocumentBranchDiffSourceCodeType(v.BranchDiff, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CommitDiff != nil {
+		ok := object.Key("CommitDiff")
+		if err := awsRestjson1_serializeDocumentCommitDiffSourceCodeType(v.CommitDiff, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RepositoryHead != nil {
+		ok := object.Key("RepositoryHead")
+		if err := awsRestjson1_serializeDocumentRepositoryHeadSourceCodeType(v.RepositoryHead, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RequestMetadata != nil {
+		ok := object.Key("RequestMetadata")
+		if err := awsRestjson1_serializeDocumentRequestMetadata(v.RequestMetadata, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3BucketRepository != nil {
+		ok := object.Key("S3BucketRepository")
+		if err := awsRestjson1_serializeDocumentS3BucketRepository(v.S3BucketRepository, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

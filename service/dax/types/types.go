@@ -16,11 +16,16 @@ type Cluster struct {
 	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
 	ClusterArn *string
 
-	// The configuration endpoint for this DAX cluster, consisting of a DNS name and a
-	// port number. Client applications can specify this endpoint, rather than an
-	// individual node endpoint, and allow the DAX client software to intelligently
-	// route requests and responses to nodes in the DAX cluster.
+	// The endpoint for this DAX cluster, consisting of a DNS name, a port number, and
+	// a URL. Applications should use the URL to configure the DAX client to find their
+	// cluster.
 	ClusterDiscoveryEndpoint *Endpoint
+
+	// The type of encryption supported by the cluster's endpoint. Values are:
+	//
+	// * NONE
+	// for no encryption TLS for Transport Layer Security
+	ClusterEndpointEncryptionType ClusterEndpointEncryptionType
 
 	// The name of the DAX cluster.
 	ClusterName *string
@@ -74,8 +79,7 @@ type Cluster struct {
 }
 
 // Represents the information required for client programs to connect to the
-// configuration endpoint for a DAX cluster, or to an individual node within the
-// cluster.
+// endpoint for a DAX cluster.
 type Endpoint struct {
 
 	// The DNS hostname of the endpoint.
@@ -83,6 +87,10 @@ type Endpoint struct {
 
 	// The port number that applications should use to connect to the endpoint.
 	Port int32
+
+	// The URL that applications should use to connect to the endpoint. The default
+	// ports are 8111 for the "dax" protocol and 9111 for the "daxs" protocol.
+	URL *string
 }
 
 // Represents a single occurrence of something interesting within the system. Some
@@ -149,7 +157,9 @@ type NotificationConfiguration struct {
 	// The Amazon Resource Name (ARN) that identifies the topic.
 	TopicArn *string
 
-	// The current state of the topic.
+	// The current state of the topic. A value of “active” means that notifications
+	// will be sent to the topic. A value of “inactive” means that notifications will
+	// not be sent to the topic.
 	TopicStatus *string
 }
 

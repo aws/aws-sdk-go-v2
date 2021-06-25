@@ -40,7 +40,7 @@ type GetBackendInput struct {
 
 type GetBackendOutput struct {
 
-	// A stringified version of the current configurations for your Amplify project.
+	// A stringified version of the current configs for your Amplify project.
 	AmplifyMetaConfig *string
 
 	// The app ID.

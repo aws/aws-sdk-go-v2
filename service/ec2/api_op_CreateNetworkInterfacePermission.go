@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants an AWS-authorized account permission to attach the specified network
-// interface to an instance in their account. You can grant permission to a single
-// AWS account only, and only one account at a time.
+// Grants an Amazon Web Services-authorized account permission to attach the
+// specified network interface to an instance in their account. You can grant
+// permission to a single account only, and only one account at a time.
 func (c *Client) CreateNetworkInterfacePermission(ctx context.Context, params *CreateNetworkInterfacePermissionInput, optFns ...func(*Options)) (*CreateNetworkInterfacePermissionOutput, error) {
 	if params == nil {
 		params = &CreateNetworkInterfacePermissionInput{}
@@ -42,10 +42,10 @@ type CreateNetworkInterfacePermissionInput struct {
 	// This member is required.
 	Permission types.InterfacePermissionType
 
-	// The AWS account ID.
+	// The account ID.
 	AwsAccountId *string
 
-	// The AWS service. Currently not supported.
+	// The Amazon Web Service. Currently not supported.
 	AwsService *string
 
 	// Checks whether you have the required permissions for the action, without

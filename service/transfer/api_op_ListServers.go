@@ -13,7 +13,7 @@ import (
 )
 
 // Lists the file transfer protocol-enabled servers that are associated with your
-// AWS account.
+// Amazon Web Services account.
 func (c *Client) ListServers(ctx context.Context, params *ListServersInput, optFns ...func(*Options)) (*ListServersOutput, error) {
 	if params == nil {
 		params = &ListServersInput{}

@@ -48,7 +48,7 @@ type GetBackendAPIModelsInput struct {
 
 type GetBackendAPIModelsOutput struct {
 
-	// Stringified JSON of the DataStore model.
+	// Stringified JSON of the datastore model.
 	Models *string
 
 	// The current status of the request.

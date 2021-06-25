@@ -4906,6 +4906,40 @@ func awsRestjson1_deserializeDocument__listOfPlaybackConfiguration(v *[]types.Pl
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfScheduleAdBreak(v *[]types.ScheduleAdBreak, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ScheduleAdBreak
+	if *v == nil {
+		cv = []types.ScheduleAdBreak{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ScheduleAdBreak
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentScheduleAdBreak(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfScheduleEntry(v *[]types.ScheduleEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5073,6 +5107,11 @@ func awsRestjson1_deserializeDocumentAccessConfiguration(v **types.AccessConfigu
 					return fmt.Errorf("expected AccessType to be of type string, got %T instead", value)
 				}
 				sv.AccessType = types.AccessType(jtv)
+			}
+
+		case "SecretsManagerAccessTokenConfiguration":
+			if err := awsRestjson1_deserializeDocumentSecretsManagerAccessTokenConfiguration(&sv.SecretsManagerAccessTokenConfiguration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -6260,6 +6299,81 @@ func awsRestjson1_deserializeDocumentResponseOutputs(v *[]types.ResponseOutputIt
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentScheduleAdBreak(v **types.ScheduleAdBreak, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScheduleAdBreak
+	if *v == nil {
+		sv = &types.ScheduleAdBreak{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ApproximateDurationSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ApproximateDurationSeconds = i64
+			}
+
+		case "ApproximateStartTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __timestampUnix to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.ApproximateStartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "SourceLocationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SourceLocationName = ptr.String(jtv)
+			}
+
+		case "VodSourceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.VodSourceName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6335,6 +6449,11 @@ func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, valu
 				sv.ProgramName = ptr.String(jtv)
 			}
 
+		case "ScheduleAdBreaks":
+			if err := awsRestjson1_deserializeDocument__listOfScheduleAdBreak(&sv.ScheduleAdBreaks, value); err != nil {
+				return err
+			}
+
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6351,6 +6470,64 @@ func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, valu
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.VodSourceName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSecretsManagerAccessTokenConfiguration(v **types.SecretsManagerAccessTokenConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SecretsManagerAccessTokenConfiguration
+	if *v == nil {
+		sv = &types.SecretsManagerAccessTokenConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HeaderName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.HeaderName = ptr.String(jtv)
+			}
+
+		case "SecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		case "SecretStringKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SecretStringKey = ptr.String(jtv)
 			}
 
 		default:

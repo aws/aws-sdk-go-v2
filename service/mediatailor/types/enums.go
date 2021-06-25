@@ -6,7 +6,8 @@ type AccessType string
 
 // Enum values for AccessType
 const (
-	AccessTypeS3Sigv4 AccessType = "S3_SIGV4"
+	AccessTypeS3Sigv4                   AccessType = "S3_SIGV4"
+	AccessTypeSecretsManagerAccessToken AccessType = "SECRETS_MANAGER_ACCESS_TOKEN"
 )
 
 // Values returns all known values for AccessType. Note that this can be expanded
@@ -15,6 +16,7 @@ const (
 func (AccessType) Values() []AccessType {
 	return []AccessType{
 		"S3_SIGV4",
+		"SECRETS_MANAGER_ACCESS_TOKEN",
 	}
 }
 

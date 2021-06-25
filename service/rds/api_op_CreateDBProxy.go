@@ -35,9 +35,9 @@ type CreateDBProxyInput struct {
 	Auth []types.UserAuthConfig
 
 	// The identifier for the proxy. This name must be unique for all proxies owned by
-	// your AWS account in the specified AWS Region. An identifier must begin with a
-	// letter and must contain only ASCII letters, digits, and hyphens; it can't end
-	// with a hyphen or contain two consecutive hyphens.
+	// your Amazon Web Services account in the specified Amazon Web Services Region. An
+	// identifier must begin with a letter and must contain only ASCII letters, digits,
+	// and hyphens; it can't end with a hyphen or contain two consecutive hyphens.
 	//
 	// This member is required.
 	DBProxyName *string
@@ -51,7 +51,7 @@ type CreateDBProxyInput struct {
 	EngineFamily types.EngineFamily
 
 	// The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access
-	// secrets in AWS Secrets Manager.
+	// secrets in Amazon Web Services Secrets Manager.
 	//
 	// This member is required.
 	RoleArn *string

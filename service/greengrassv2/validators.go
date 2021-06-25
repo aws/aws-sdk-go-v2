@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchAssociateClientDeviceWithCoreDevice struct {
+}
+
+func (*validateOpBatchAssociateClientDeviceWithCoreDevice) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchAssociateClientDeviceWithCoreDevice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchAssociateClientDeviceWithCoreDeviceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchAssociateClientDeviceWithCoreDeviceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchDisassociateClientDeviceFromCoreDevice struct {
+}
+
+func (*validateOpBatchDisassociateClientDeviceFromCoreDevice) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDisassociateClientDeviceFromCoreDevice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDisassociateClientDeviceFromCoreDeviceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDisassociateClientDeviceFromCoreDeviceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelDeployment struct {
 }
 
@@ -210,6 +250,26 @@ func (m *validateOpGetDeployment) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListClientDevicesAssociatedWithCoreDevice struct {
+}
+
+func (*validateOpListClientDevicesAssociatedWithCoreDevice) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListClientDevicesAssociatedWithCoreDevice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListClientDevicesAssociatedWithCoreDeviceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListClientDevicesAssociatedWithCoreDeviceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListComponentVersions struct {
 }
 
@@ -350,6 +410,14 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchAssociateClientDeviceWithCoreDeviceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchAssociateClientDeviceWithCoreDevice{}, middleware.After)
+}
+
+func addOpBatchDisassociateClientDeviceFromCoreDeviceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDisassociateClientDeviceFromCoreDevice{}, middleware.After)
+}
+
 func addOpCancelDeploymentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelDeployment{}, middleware.After)
 }
@@ -390,6 +458,10 @@ func addOpGetDeploymentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDeployment{}, middleware.After)
 }
 
+func addOpListClientDevicesAssociatedWithCoreDeviceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListClientDevicesAssociatedWithCoreDevice{}, middleware.After)
+}
+
 func addOpListComponentVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListComponentVersions{}, middleware.After)
 }
@@ -418,6 +490,38 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func validateAssociateClientDeviceWithCoreDeviceEntry(v *types.AssociateClientDeviceWithCoreDeviceEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateClientDeviceWithCoreDeviceEntry"}
+	if v.ThingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssociateClientDeviceWithCoreDeviceEntryList(v []types.AssociateClientDeviceWithCoreDeviceEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateClientDeviceWithCoreDeviceEntryList"}
+	for i := range v {
+		if err := validateAssociateClientDeviceWithCoreDeviceEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDeploymentIoTJobConfiguration(v *types.DeploymentIoTJobConfiguration) error {
 	if v == nil {
 		return nil
@@ -431,6 +535,38 @@ func validateDeploymentIoTJobConfiguration(v *types.DeploymentIoTJobConfiguratio
 	if v.AbortConfig != nil {
 		if err := validateIoTJobAbortConfig(v.AbortConfig); err != nil {
 			invalidParams.AddNested("AbortConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDisassociateClientDeviceFromCoreDeviceEntry(v *types.DisassociateClientDeviceFromCoreDeviceEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateClientDeviceFromCoreDeviceEntry"}
+	if v.ThingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDisassociateClientDeviceFromCoreDeviceEntryList(v []types.DisassociateClientDeviceFromCoreDeviceEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateClientDeviceFromCoreDeviceEntryList"}
+	for i := range v {
+		if err := validateDisassociateClientDeviceFromCoreDeviceEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -709,6 +845,46 @@ func validateLambdaVolumeMount(v *types.LambdaVolumeMount) error {
 	}
 }
 
+func validateOpBatchAssociateClientDeviceWithCoreDeviceInput(v *BatchAssociateClientDeviceWithCoreDeviceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchAssociateClientDeviceWithCoreDeviceInput"}
+	if v.Entries != nil {
+		if err := validateAssociateClientDeviceWithCoreDeviceEntryList(v.Entries); err != nil {
+			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CoreDeviceThingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreDeviceThingName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDisassociateClientDeviceFromCoreDeviceInput(v *BatchDisassociateClientDeviceFromCoreDeviceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDisassociateClientDeviceFromCoreDeviceInput"}
+	if v.Entries != nil {
+		if err := validateDisassociateClientDeviceFromCoreDeviceEntryList(v.Entries); err != nil {
+			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CoreDeviceThingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreDeviceThingName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelDeploymentInput(v *CancelDeploymentInput) error {
 	if v == nil {
 		return nil
@@ -861,6 +1037,21 @@ func validateOpGetDeploymentInput(v *GetDeploymentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetDeploymentInput"}
 	if v.DeploymentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListClientDevicesAssociatedWithCoreDeviceInput(v *ListClientDevicesAssociatedWithCoreDeviceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListClientDevicesAssociatedWithCoreDeviceInput"}
+	if v.CoreDeviceThingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreDeviceThingName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

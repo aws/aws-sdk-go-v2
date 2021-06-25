@@ -29,29 +29,29 @@ func (c *Client) GetWebACL(ctx context.Context, params *GetWebACLInput, optFns .
 
 type GetWebACLInput struct {
 
-	// The unique identifier for the Web ACL. This ID is returned in the responses to
+	// The unique identifier for the web ACL. This ID is returned in the responses to
 	// create and list commands. You provide it to operations like update and delete.
 	//
 	// This member is required.
 	Id *string
 
-	// The name of the Web ACL. You cannot change the name of a Web ACL after you
+	// The name of the web ACL. You cannot change the name of a web ACL after you
 	// create it.
 	//
 	// This member is required.
 	Name *string
 
-	// Specifies whether this is for an AWS CloudFront distribution or for a regional
-	// application. A regional application can be an Application Load Balancer (ALB),
-	// an API Gateway REST API, or an AppSync GraphQL API. To work with CloudFront, you
-	// must also specify the Region US East (N. Virginia) as follows:
+	// Specifies whether this is for an Amazon CloudFront distribution or for a
+	// regional application. A regional application can be an Application Load Balancer
+	// (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. To work with
+	// CloudFront, you must also specify the Region US East (N. Virginia) as
+	// follows:
 	//
-	// * CLI - Specify
-	// the Region when you use the CloudFront scope: --scope=CLOUDFRONT
-	// --region=us-east-1.
+	// * CLI - Specify the Region when you use the CloudFront scope:
+	// --scope=CLOUDFRONT --region=us-east-1.
 	//
-	// * API and SDKs - For all calls, use the Region endpoint
-	// us-east-1.
+	// * API and SDKs - For all calls, use the
+	// Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
@@ -59,17 +59,17 @@ type GetWebACLInput struct {
 
 type GetWebACLOutput struct {
 
-	// A token used for optimistic locking. AWS WAF returns a token to your get and
-	// list requests, to mark the state of the entity at the time of the request. To
-	// make changes to the entity associated with the token, you provide the token to
-	// operations like update and delete. AWS WAF uses the token to ensure that no
-	// changes have been made to the entity since you last retrieved it. If a change
-	// has been made, the update fails with a WAFOptimisticLockException. If this
-	// happens, perform another get, and use the new token returned by that operation.
+	// A token used for optimistic locking. WAF returns a token to your get and list
+	// requests, to mark the state of the entity at the time of the request. To make
+	// changes to the entity associated with the token, you provide the token to
+	// operations like update and delete. WAF uses the token to ensure that no changes
+	// have been made to the entity since you last retrieved it. If a change has been
+	// made, the update fails with a WAFOptimisticLockException. If this happens,
+	// perform another get, and use the new token returned by that operation.
 	LockToken *string
 
-	// The Web ACL specification. You can modify the settings in this Web ACL and use
-	// it to update this Web ACL or create a new one.
+	// The web ACL specification. You can modify the settings in this web ACL and use
+	// it to update this web ACL or create a new one.
 	WebACL *types.WebACL
 
 	// Metadata pertaining to the operation's result.

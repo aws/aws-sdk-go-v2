@@ -29,7 +29,7 @@ func (c *Client) DeleteVirtualNode(ctx context.Context, params *DeleteVirtualNod
 	return out, nil
 }
 
-//
+// Deletes a virtual node input.
 type DeleteVirtualNodeInput struct {
 
 	// The name of the service mesh to delete the virtual node in.

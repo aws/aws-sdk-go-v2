@@ -244,6 +244,11 @@ func awsRestjson1_serializeOpDocumentAssociateResourceSharePermissionInput(v *As
 		ok.String(*v.PermissionArn)
 	}
 
+	if v.PermissionVersion != nil {
+		ok := object.Key("permissionVersion")
+		ok.Integer(*v.PermissionVersion)
+	}
+
 	if v.Replace != nil {
 		ok := object.Key("replace")
 		ok.Boolean(*v.Replace)
@@ -1048,6 +1053,11 @@ func awsRestjson1_serializeOpDocumentGetResourceSharesInput(v *GetResourceShares
 	if v.NextToken != nil {
 		ok := object.Key("nextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.PermissionArn != nil {
+		ok := object.Key("permissionArn")
+		ok.String(*v.PermissionArn)
 	}
 
 	if len(v.ResourceOwner) > 0 {

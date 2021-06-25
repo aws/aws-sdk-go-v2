@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the source AWS Regions where the current AWS Region can create
-// a read replica, copy a DB snapshot from, or replicate automated backups from.
-// This API action supports pagination.
+// Returns a list of the source Amazon Web Services Regions where the current
+// Amazon Web Services Region can create a read replica, copy a DB snapshot from,
+// or replicate automated backups from. This API action supports pagination.
 func (c *Client) DescribeSourceRegions(ctx context.Context, params *DescribeSourceRegionsInput, optFns ...func(*Options)) (*DescribeSourceRegionsOutput, error) {
 	if params == nil {
 		params = &DescribeSourceRegionsInput{}
@@ -47,10 +47,10 @@ type DescribeSourceRegionsInput struct {
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
-	// The source AWS Region name. For example, us-east-1. Constraints:
+	// The source Amazon Web Services Region name. For example, us-east-1.
+	// Constraints:
 	//
-	// * Must specify
-	// a valid AWS Region name.
+	// * Must specify a valid Amazon Web Services Region name.
 	RegionName *string
 }
 
@@ -63,8 +63,9 @@ type DescribeSourceRegionsOutput struct {
 	// value specified by MaxRecords.
 	Marker *string
 
-	// A list of SourceRegion instances that contains each source AWS Region that the
-	// current AWS Region can get a read replica or a DB snapshot from.
+	// A list of SourceRegion instances that contains each source Amazon Web Services
+	// Region that the current Amazon Web Services Region can get a read replica or a
+	// DB snapshot from.
 	SourceRegions []types.SourceRegion
 
 	// Metadata pertaining to the operation's result.

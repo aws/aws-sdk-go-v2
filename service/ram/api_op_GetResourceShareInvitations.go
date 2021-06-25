@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the invitations for resource sharing that you've received.
+// Gets the invitations that you have received for resource shares.
 func (c *Client) GetResourceShareInvitations(ctx context.Context, params *GetResourceShareInvitationsInput, optFns ...func(*Options)) (*GetResourceShareInvitationsOutput, error) {
 	if params == nil {
 		params = &GetResourceShareInvitationsInput{}

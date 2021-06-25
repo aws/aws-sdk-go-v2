@@ -2729,6 +2729,37 @@ type EdgeOutputConfig struct {
 	// KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your
 	// role's account.
 	KmsKeyId *string
+
+	// The configuration used to create deployment artifacts. Specify configuration
+	// options with a JSON string. The available configuration options for each type
+	// are:
+	//
+	// * ComponentName (optional) - Name of the GreenGrass V2 component. If not
+	// specified, the default name generated consists of "SagemakerEdgeManager" and the
+	// name of your SageMaker Edge Manager packaging job.
+	//
+	// * ComponentDescription
+	// (optional) - Description of the component.
+	//
+	// * ComponentVersion (optional) - The
+	// version of the component. AWS IoT Greengrass uses semantic versions for
+	// components. Semantic versions follow a major.minor.patch number system. For
+	// example, version 1.0.0 represents the first major release for a component. For
+	// more information, see the semantic version specification
+	// (https://semver.org/).
+	//
+	// * PlatformOS (optional) - The name of the operating
+	// system for the platform. Supported platforms include Windows and Linux.
+	//
+	// *
+	// PlatformArchitecture (optional) - The processor architecture for the platform.
+	// Supported architectures Windows include: Windows32_x86, Windows64_x64. Supported
+	// architectures for Linux include: Linux x86_64, Linux ARMV8.
+	PresetDeploymentConfig *string
+
+	// The deployment type SageMaker Edge Manager will create. Currently only supports
+	// AWS IoT Greengrass Version 2 components.
+	PresetDeploymentType EdgePresetDeploymentType
 }
 
 // Summary of edge packaging job.
@@ -2763,6 +2794,25 @@ type EdgePackagingJobSummary struct {
 
 	// The version of the model.
 	ModelVersion *string
+}
+
+// The output of a SageMaker Edge Manager deployable resource.
+type EdgePresetDeploymentOutput struct {
+
+	// The deployment type created by SageMaker Edge Manager. Currently only supports
+	// AWS IoT Greengrass Version 2 components.
+	//
+	// This member is required.
+	Type EdgePresetDeploymentType
+
+	// The Amazon Resource Name (ARN) of the generated deployable resource.
+	Artifact *string
+
+	// The status of the deployable resource.
+	Status EdgePresetDeploymentStatus
+
+	// Returns a message describing the status of the deployed resource.
+	StatusMessage *string
 }
 
 // A hosted endpoint for real-time inference.
@@ -5949,7 +5999,7 @@ type MetricData struct {
 	Value float32
 }
 
-// Specifies a metric that the training algorithm writes to stderr or stdout .
+// Specifies a metric that the training algorithm writes to stderr or stdout.
 // Amazon SageMakerhyperparameter tuning captures all defined metrics. You specify
 // one metric that a hyperparameter tuning job uses as its objective metric to
 // choose the best training job.
@@ -7823,14 +7873,29 @@ type ProcessingClusterConfig struct {
 	InstanceType ProcessingInstanceType
 
 	// The size of the ML storage volume in gigabytes that you want to provision. You
-	// must specify sufficient ML storage for your scenario.
+	// must specify sufficient ML storage for your scenario. Certain Nitro-based
+	// instances include local storage with a fixed total size, dependent on the
+	// instance type. When using these instances for processing, Amazon SageMaker
+	// mounts the local instance storage instead of Amazon EBS gp2 storage. You can't
+	// request a VolumeSizeInGB greater than the total size of the local instance
+	// storage. For a list of instance types that support local instance storage,
+	// including the total size per instance type, see Instance Store Volumes
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
 	//
 	// This member is required.
 	VolumeSizeInGB *int32
 
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// run the processing job.
+	// run the processing job. Certain Nitro-based instances include local storage,
+	// dependent on the instance type. Local storage volumes are encrypted using a
+	// hardware module on the instance. You can't request a VolumeKmsKeyId when using
+	// an instance type with local storage. For a list of instance types that support
+	// local instance storage, see Instance Store Volumes
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
+	// For more information about local instance storage encryption, see SSD Instance
+	// Store Volumes
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html).
 	VolumeKmsKeyId *string
 }
 
@@ -10206,17 +10271,26 @@ type TransformResources struct {
 
 	// The ML compute instance type for the transform job. If you are using built-in
 	// algorithms to transform moderately sized datasets, we recommend using
-	// ml.m4.xlarge or ml.m5.large instance types.
+	// ml.m4.xlarge or ml.m5.largeinstance types.
 	//
 	// This member is required.
 	InstanceType TransformInstanceType
 
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
 	// encrypt model data on the storage volume attached to the ML compute instance(s)
-	// that run the batch transform job. The VolumeKmsKeyId can be any of the following
-	// formats:
+	// that run the batch transform job. Certain Nitro-based instances include local
+	// storage, dependent on the instance type. Local storage volumes are encrypted
+	// using a hardware module on the instance. You can't request a VolumeKmsKeyId when
+	// using an instance type with local storage. For a list of instance types that
+	// support local instance storage, see Instance Store Volumes
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
+	// For more information about local instance storage encryption, see SSD Instance
+	// Store Volumes
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html).
+	// The VolumeKmsKeyId can be any of the following formats:
 	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID:
+	// 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// * Key ARN:
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab

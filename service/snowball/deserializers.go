@@ -3720,6 +3720,11 @@ func awsAwsjson11_deserializeDocumentClusterMetadata(v **types.ClusterMetadata, 
 				return err
 			}
 
+		case "OnDeviceServiceConfiguration":
+			if err := awsAwsjson11_deserializeDocumentOnDeviceServiceConfiguration(&sv.OnDeviceServiceConfiguration, value); err != nil {
+				return err
+			}
+
 		case "Resources":
 			if err := awsAwsjson11_deserializeDocumentJobResource(&sv.Resources, value); err != nil {
 				return err
@@ -4789,6 +4794,20 @@ func awsAwsjson11_deserializeDocumentJobMetadata(v **types.JobMetadata, value in
 				return err
 			}
 
+		case "OnDeviceServiceConfiguration":
+			if err := awsAwsjson11_deserializeDocumentOnDeviceServiceConfiguration(&sv.OnDeviceServiceConfiguration, value); err != nil {
+				return err
+			}
+
+		case "RemoteManagement":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RemoteManagement to be of type string, got %T instead", value)
+				}
+				sv.RemoteManagement = types.RemoteManagement(jtv)
+			}
+
 		case "Resources":
 			if err := awsAwsjson11_deserializeDocumentJobResource(&sv.Resources, value); err != nil {
 				return err
@@ -5319,6 +5338,59 @@ func awsAwsjson11_deserializeDocumentLongTermPricingListEntry(v **types.LongTerm
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentNFSOnDeviceServiceConfiguration(v **types.NFSOnDeviceServiceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NFSOnDeviceServiceConfiguration
+	if *v == nil {
+		sv = &types.NFSOnDeviceServiceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StorageLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StorageLimit to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StorageLimit = int32(i64)
+			}
+
+		case "StorageUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageUnit to be of type string, got %T instead", value)
+				}
+				sv.StorageUnit = types.StorageUnit(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentNotification(v **types.Notification, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5362,6 +5434,42 @@ func awsAwsjson11_deserializeDocumentNotification(v **types.Notification, value 
 					return fmt.Errorf("expected SnsTopicARN to be of type string, got %T instead", value)
 				}
 				sv.SnsTopicARN = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOnDeviceServiceConfiguration(v **types.OnDeviceServiceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OnDeviceServiceConfiguration
+	if *v == nil {
+		sv = &types.OnDeviceServiceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NFSOnDeviceService":
+			if err := awsAwsjson11_deserializeDocumentNFSOnDeviceServiceConfiguration(&sv.NFSOnDeviceService, value); err != nil {
+				return err
 			}
 
 		default:
@@ -5446,6 +5554,11 @@ func awsAwsjson11_deserializeDocumentS3Resource(v **types.S3Resource, value inte
 
 		case "KeyRange":
 			if err := awsAwsjson11_deserializeDocumentKeyRange(&sv.KeyRange, value); err != nil {
+				return err
+			}
+
+		case "TargetOnDeviceServices":
+			if err := awsAwsjson11_deserializeDocumentTargetOnDeviceServiceList(&sv.TargetOnDeviceServices, value); err != nil {
 				return err
 			}
 
@@ -5624,6 +5737,89 @@ func awsAwsjson11_deserializeDocumentSnowconeDeviceConfiguration(v **types.Snowc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTargetOnDeviceService(v **types.TargetOnDeviceService, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TargetOnDeviceService
+	if *v == nil {
+		sv = &types.TargetOnDeviceService{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ServiceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeviceServiceName to be of type string, got %T instead", value)
+				}
+				sv.ServiceName = types.DeviceServiceName(jtv)
+			}
+
+		case "TransferOption":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TransferOption to be of type string, got %T instead", value)
+				}
+				sv.TransferOption = types.TransferOption(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTargetOnDeviceServiceList(v *[]types.TargetOnDeviceService, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TargetOnDeviceService
+	if *v == nil {
+		cv = []types.TargetOnDeviceService{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TargetOnDeviceService
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTargetOnDeviceService(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

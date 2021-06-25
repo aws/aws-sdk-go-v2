@@ -335,6 +335,25 @@ func (e *ServiceLinkedRoleNotFoundFault) ErrorMessage() string {
 func (e *ServiceLinkedRoleNotFoundFault) ErrorCode() string             { return "ServiceLinkedRoleNotFoundFault" }
 func (e *ServiceLinkedRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You have reached the maximum number of x509 certificates that can be created for
+// encrypted clusters in a 30 day period. Contact AWS customer support to discuss
+// options for continuing to create encrypted clusters.
+type ServiceQuotaExceededException struct {
+	Message *string
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified subnet group already exists.
 type SubnetGroupAlreadyExistsFault struct {
 	Message *string

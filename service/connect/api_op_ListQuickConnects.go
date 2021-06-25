@@ -12,7 +12,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
 // Provides information about the quick connects for the specified Amazon Connect
 // instance.
 func (c *Client) ListQuickConnects(ctx context.Context, params *ListQuickConnectsInput, optFns ...func(*Options)) (*ListQuickConnectsOutput, error) {
@@ -32,7 +31,8 @@ func (c *Client) ListQuickConnects(ctx context.Context, params *ListQuickConnect
 
 type ListQuickConnectsInput struct {
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
 	//
 	// This member is required.
 	InstanceId *string

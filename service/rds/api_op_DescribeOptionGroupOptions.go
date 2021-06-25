@@ -40,12 +40,12 @@ type DescribeOptionGroupOptionsInput struct {
 	//
 	// * oracle-ee
 	//
+	// * oracle-ee-cdb
+	//
 	// * oracle-se2
 	//
-	// * oracle-se1
-	//
 	// *
-	// oracle-se
+	// oracle-se2-cdb
 	//
 	// * postgres
 	//

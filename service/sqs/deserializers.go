@@ -156,7 +156,7 @@ func awsAwsquery_deserializeOpErrorChangeMessageVisibility(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("MessageNotInflight", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.MessageNotInflight", errorCode):
 		return awsAwsquery_deserializeErrorMessageNotInflight(response, errorBody)
 
 	case strings.EqualFold("ReceiptHandleIsInvalid", errorCode):
@@ -267,16 +267,16 @@ func awsAwsquery_deserializeOpErrorChangeMessageVisibilityBatch(response *smithy
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("BatchEntryIdsNotDistinct", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.BatchEntryIdsNotDistinct", errorCode):
 		return awsAwsquery_deserializeErrorBatchEntryIdsNotDistinct(response, errorBody)
 
-	case strings.EqualFold("EmptyBatchRequest", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.EmptyBatchRequest", errorCode):
 		return awsAwsquery_deserializeErrorEmptyBatchRequest(response, errorBody)
 
-	case strings.EqualFold("InvalidBatchEntryId", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.InvalidBatchEntryId", errorCode):
 		return awsAwsquery_deserializeErrorInvalidBatchEntryId(response, errorBody)
 
-	case strings.EqualFold("TooManyEntriesInBatchRequest", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.TooManyEntriesInBatchRequest", errorCode):
 		return awsAwsquery_deserializeErrorTooManyEntriesInBatchRequest(response, errorBody)
 
 	default:
@@ -384,10 +384,10 @@ func awsAwsquery_deserializeOpErrorCreateQueue(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("QueueDeletedRecently", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.QueueDeletedRecently", errorCode):
 		return awsAwsquery_deserializeErrorQueueDeletedRecently(response, errorBody)
 
-	case strings.EqualFold("QueueNameExists", errorCode):
+	case strings.EqualFold("QueueAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorQueueNameExists(response, errorBody)
 
 	default:
@@ -571,16 +571,16 @@ func awsAwsquery_deserializeOpErrorDeleteMessageBatch(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("BatchEntryIdsNotDistinct", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.BatchEntryIdsNotDistinct", errorCode):
 		return awsAwsquery_deserializeErrorBatchEntryIdsNotDistinct(response, errorBody)
 
-	case strings.EqualFold("EmptyBatchRequest", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.EmptyBatchRequest", errorCode):
 		return awsAwsquery_deserializeErrorEmptyBatchRequest(response, errorBody)
 
-	case strings.EqualFold("InvalidBatchEntryId", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.InvalidBatchEntryId", errorCode):
 		return awsAwsquery_deserializeErrorInvalidBatchEntryId(response, errorBody)
 
-	case strings.EqualFold("TooManyEntriesInBatchRequest", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.TooManyEntriesInBatchRequest", errorCode):
 		return awsAwsquery_deserializeErrorTooManyEntriesInBatchRequest(response, errorBody)
 
 	default:
@@ -866,7 +866,7 @@ func awsAwsquery_deserializeOpErrorGetQueueUrl(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("QueueDoesNotExist", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.NonExistentQueue", errorCode):
 		return awsAwsquery_deserializeErrorQueueDoesNotExist(response, errorBody)
 
 	default:
@@ -974,7 +974,7 @@ func awsAwsquery_deserializeOpErrorListDeadLetterSourceQueues(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("QueueDoesNotExist", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.NonExistentQueue", errorCode):
 		return awsAwsquery_deserializeErrorQueueDoesNotExist(response, errorBody)
 
 	default:
@@ -1257,11 +1257,11 @@ func awsAwsquery_deserializeOpErrorPurgeQueue(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("PurgeQueueInProgress", errorCode):
-		return awsAwsquery_deserializeErrorPurgeQueueInProgress(response, errorBody)
-
-	case strings.EqualFold("QueueDoesNotExist", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.NonExistentQueue", errorCode):
 		return awsAwsquery_deserializeErrorQueueDoesNotExist(response, errorBody)
+
+	case strings.EqualFold("AWS.SimpleQueueService.PurgeQueueInProgress", errorCode):
+		return awsAwsquery_deserializeErrorPurgeQueueInProgress(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1546,11 +1546,11 @@ func awsAwsquery_deserializeOpErrorSendMessage(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("AWS.SimpleQueueService.UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperation(response, errorBody)
+
 	case strings.EqualFold("InvalidMessageContents", errorCode):
 		return awsAwsquery_deserializeErrorInvalidMessageContents(response, errorBody)
-
-	case strings.EqualFold("UnsupportedOperation", errorCode):
-		return awsAwsquery_deserializeErrorUnsupportedOperation(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1657,22 +1657,22 @@ func awsAwsquery_deserializeOpErrorSendMessageBatch(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("BatchEntryIdsNotDistinct", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.BatchEntryIdsNotDistinct", errorCode):
 		return awsAwsquery_deserializeErrorBatchEntryIdsNotDistinct(response, errorBody)
 
-	case strings.EqualFold("BatchRequestTooLong", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.BatchRequestTooLong", errorCode):
 		return awsAwsquery_deserializeErrorBatchRequestTooLong(response, errorBody)
 
-	case strings.EqualFold("EmptyBatchRequest", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.EmptyBatchRequest", errorCode):
 		return awsAwsquery_deserializeErrorEmptyBatchRequest(response, errorBody)
 
-	case strings.EqualFold("InvalidBatchEntryId", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.InvalidBatchEntryId", errorCode):
 		return awsAwsquery_deserializeErrorInvalidBatchEntryId(response, errorBody)
 
-	case strings.EqualFold("TooManyEntriesInBatchRequest", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.TooManyEntriesInBatchRequest", errorCode):
 		return awsAwsquery_deserializeErrorTooManyEntriesInBatchRequest(response, errorBody)
 
-	case strings.EqualFold("UnsupportedOperation", errorCode):
+	case strings.EqualFold("AWS.SimpleQueueService.UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperation(response, errorBody)
 
 	default:

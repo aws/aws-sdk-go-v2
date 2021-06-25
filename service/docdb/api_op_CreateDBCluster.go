@@ -92,19 +92,18 @@ type CreateDBClusterInput struct {
 	// The cluster identifier of the new global cluster.
 	GlobalClusterIdentifier *string
 
-	// The AWS KMS key identifier for an encrypted cluster. The AWS KMS key identifier
-	// is the Amazon Resource Name (ARN) for the AWS KMS encryption key. If you are
-	// creating a cluster using the same AWS account that owns the AWS KMS encryption
-	// key that is used to encrypt the new cluster, you can use the AWS KMS key alias
-	// instead of the ARN for the AWS KMS encryption key. If an encryption key is not
-	// specified in KmsKeyId:
+	// The KMS key identifier for an encrypted cluster. The KMS key identifier is the
+	// Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a
+	// cluster using the same account that owns the KMS encryption key that is used to
+	// encrypt the new cluster, you can use the KMS key alias instead of the ARN for
+	// the KMS encryption key. If an encryption key is not specified in KmsKeyId:
 	//
-	// * If the StorageEncrypted parameter is true, Amazon
-	// DocumentDB uses your default encryption key.
+	// * If
+	// the StorageEncrypted parameter is true, Amazon DocumentDB uses your default
+	// encryption key.
 	//
-	// AWS KMS creates the default
-	// encryption key for your AWS account. Your AWS account has a different default
-	// encryption key for each AWS Region.
+	// KMS creates the default encryption key for your account. Your
+	// account has a different default encryption key for each Regions.
 	KmsKeyId *string
 
 	// The password for the master database user. This password can contain any
@@ -131,7 +130,7 @@ type CreateDBClusterInput struct {
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled using the BackupRetentionPeriod parameter. The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
+	// 30-minute window selected at random from an 8-hour block of time for each
 	// Region. Constraints:
 	//
 	// * Must be in the format hh24:mi-hh24:mi.
@@ -147,7 +146,7 @@ type CreateDBClusterInput struct {
 
 	// The weekly time range during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
+	// 30-minute window selected at random from an 8-hour block of time for each
 	// Region, occurring on a random day of the week. Valid days: Mon, Tue, Wed, Thu,
 	// Fri, Sat, Sun Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string

@@ -78,26 +78,6 @@ func (AuthType) Values() []AuthType {
 	}
 }
 
-type BucketOwnerAccess string
-
-// Enum values for BucketOwnerAccess
-const (
-	BucketOwnerAccessNone     BucketOwnerAccess = "NONE"
-	BucketOwnerAccessReadOnly BucketOwnerAccess = "READ_ONLY"
-	BucketOwnerAccessFull     BucketOwnerAccess = "FULL"
-)
-
-// Values returns all known values for BucketOwnerAccess. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
-func (BucketOwnerAccess) Values() []BucketOwnerAccess {
-	return []BucketOwnerAccess{
-		"NONE",
-		"READ_ONLY",
-		"FULL",
-	}
-}
-
 type BuildBatchPhaseType string
 
 // Enum values for BuildBatchPhaseType

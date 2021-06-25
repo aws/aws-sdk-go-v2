@@ -7,7 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// An AWS service limit was exceeded for the calling AWS account.
+// An Amazon Web Services service limit was exceeded for the calling Amazon Web
+// Services account.
 type AccountLimitExceededException struct {
 	Message *string
 }
@@ -58,8 +59,8 @@ func (e *OAuthProviderException) ErrorMessage() string {
 func (e *OAuthProviderException) ErrorCode() string             { return "OAuthProviderException" }
 func (e *OAuthProviderException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified AWS resource cannot be created, because an AWS resource with the
-// same settings already exists.
+// The specified Amazon Web Services resource cannot be created, because an Amazon
+// Web Services resource with the same settings already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
 }
@@ -76,7 +77,7 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified AWS resource cannot be found.
+// The specified Amazon Web Services resource cannot be found.
 type ResourceNotFoundException struct {
 	Message *string
 }

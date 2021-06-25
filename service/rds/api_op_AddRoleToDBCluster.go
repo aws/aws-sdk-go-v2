@@ -12,7 +12,7 @@ import (
 
 // Associates an Identity and Access Management (IAM) role from an Amazon Aurora DB
 // cluster. For more information, see Authorizing Amazon Aurora MySQL to Access
-// Other AWS Services on Your Behalf
+// Other Amazon Web Services Services on Your Behalf
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html)
 // in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
 func (c *Client) AddRoleToDBCluster(ctx context.Context, params *AddRoleToDBClusterInput, optFns ...func(*Options)) (*AddRoleToDBClusterOutput, error) {

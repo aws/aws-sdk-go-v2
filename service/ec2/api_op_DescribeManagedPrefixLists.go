@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes your managed prefix lists and any AWS-managed prefix lists. To view
-// the entries for your prefix list, use GetManagedPrefixListEntries.
+// Describes your managed prefix lists and any Amazon Web Services-managed prefix
+// lists. To view the entries for your prefix list, use
+// GetManagedPrefixListEntries.
 func (c *Client) DescribeManagedPrefixLists(ctx context.Context, params *DescribeManagedPrefixListsInput, optFns ...func(*Options)) (*DescribeManagedPrefixListsOutput, error) {
 	if params == nil {
 		params = &DescribeManagedPrefixListsInput{}

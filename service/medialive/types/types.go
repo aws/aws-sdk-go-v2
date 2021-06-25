@@ -1082,6 +1082,11 @@ type DvbSubDestinationSettings struct {
 // Dvb Sub Source Settings
 type DvbSubSourceSettings struct {
 
+	// If you will configure a WebVTT caption description that references this caption
+	// selector, use this field to provide the language to consider when translating
+	// the image-based source to text.
+	OcrLanguage DvbSubOcrLanguage
+
 	// When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source
 	// content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through,
 	// regardless of selectors.
@@ -2259,6 +2264,12 @@ type HlsInputSettings struct {
 	// The number of seconds between retries when an attempt to read a manifest or
 	// segment fails.
 	RetryInterval int32
+
+	// Identifies the source for the SCTE-35 messages that MediaLive will ingest.
+	// Messages can be ingested from the content segments (in the stream) or from tags
+	// in the playlist (the HLS manifest). MediaLive ignores SCTE-35 information in the
+	// source that is not selected.
+	Scte35Source HlsScte35SourceType
 }
 
 // Hls Media Store Settings
@@ -4342,6 +4353,11 @@ type Scte27DestinationSettings struct {
 
 // Scte27 Source Settings
 type Scte27SourceSettings struct {
+
+	// If you will configure a WebVTT caption description that references this caption
+	// selector, use this field to provide the language to consider when translating
+	// the image-based source to text.
+	OcrLanguage Scte27OcrLanguage
 
 	// The pid field is used in conjunction with the caption selector languageCode
 	// field as follows:

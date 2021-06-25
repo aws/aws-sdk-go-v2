@@ -1051,6 +1051,38 @@ func validateBatchParameters(v *types.BatchParameters) error {
 	}
 }
 
+func validateCapacityProviderStrategy(v []types.CapacityProviderStrategyItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CapacityProviderStrategy"}
+	for i := range v {
+		if err := validateCapacityProviderStrategyItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCapacityProviderStrategyItem(v *types.CapacityProviderStrategyItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CapacityProviderStrategyItem"}
+	if v.CapacityProvider == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityProvider"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCondition(v *types.Condition) error {
 	if v == nil {
 		return nil
@@ -1189,6 +1221,16 @@ func validateEcsParameters(v *types.EcsParameters) error {
 	if v.NetworkConfiguration != nil {
 		if err := validateNetworkConfiguration(v.NetworkConfiguration); err != nil {
 			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CapacityProviderStrategy != nil {
+		if err := validateCapacityProviderStrategy(v.CapacityProviderStrategy); err != nil {
+			invalidParams.AddNested("CapacityProviderStrategy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

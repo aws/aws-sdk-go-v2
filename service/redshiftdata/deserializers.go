@@ -1858,6 +1858,89 @@ func awsAwsjson11_deserializeDocumentSchemaList(v *[]string, value interface{}) 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSqlParameter(v **types.SqlParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SqlParameter
+	if *v == nil {
+		sv = &types.SqlParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParameterName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParameterValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSqlParametersList(v *[]types.SqlParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SqlParameter
+	if *v == nil {
+		cv = []types.SqlParameter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SqlParameter
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentSqlParameter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSqlRecords(v *[][]types.Field, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1932,6 +2015,11 @@ func awsAwsjson11_deserializeDocumentStatementData(v **types.StatementData, valu
 					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "QueryParameters":
+			if err := awsAwsjson11_deserializeDocumentSqlParametersList(&sv.QueryParameters, value); err != nil {
+				return err
 			}
 
 		case "QueryString":
@@ -2298,6 +2386,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeStatementOutput(v **DescribeState
 					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "QueryParameters":
+			if err := awsAwsjson11_deserializeDocumentSqlParametersList(&sv.QueryParameters, value); err != nil {
+				return err
 			}
 
 		case "QueryString":

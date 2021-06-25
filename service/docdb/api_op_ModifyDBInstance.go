@@ -48,19 +48,15 @@ type ModifyDBInstanceInput struct {
 	// Default: false
 	ApplyImmediately bool
 
-	// Indicates that minor version upgrades are applied automatically to the instance
-	// during the maintenance window. Changing this parameter doesn't result in an
-	// outage except in the following case, and the change is asynchronously applied as
-	// soon as possible. An outage results if this parameter is set to true during the
-	// maintenance window, and a newer minor version is available, and Amazon
-	// DocumentDB has enabled automatic patching for that engine version.
+	// This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not
+	// perform minor version upgrades regardless of the value set.
 	AutoMinorVersionUpgrade *bool
 
 	// Indicates the certificate that needs to be associated with the instance.
 	CACertificateIdentifier *string
 
 	// The new compute and memory capacity of the instance; for example, db.r5.large.
-	// Not all instance classes are available in all AWS Regions. If you modify the
+	// Not all instance classes are available in all Regions. If you modify the
 	// instance class, an outage occurs during the change. The change is applied during
 	// the next maintenance window, unless ApplyImmediately is specified as true for
 	// this request. Default: Uses existing setting.

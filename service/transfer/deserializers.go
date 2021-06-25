@@ -3579,6 +3579,11 @@ func awsAwsjson11_deserializeDocumentDescribedServer(v **types.DescribedServer, 
 				sv.LoggingRole = ptr.String(jtv)
 			}
 
+		case "ProtocolDetails":
+			if err := awsAwsjson11_deserializeDocumentProtocolDetails(&sv.ProtocolDetails, value); err != nil {
+				return err
+			}
+
 		case "Protocols":
 			if err := awsAwsjson11_deserializeDocumentProtocols(&sv.Protocols, value); err != nil {
 				return err
@@ -4484,6 +4489,46 @@ func awsAwsjson11_deserializeDocumentPosixProfile(v **types.PosixProfile, value 
 					return err
 				}
 				sv.Uid = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentProtocolDetails(v **types.ProtocolDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProtocolDetails
+	if *v == nil {
+		sv = &types.ProtocolDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PassiveIp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PassiveIp to be of type string, got %T instead", value)
+				}
+				sv.PassiveIp = ptr.String(jtv)
 			}
 
 		default:

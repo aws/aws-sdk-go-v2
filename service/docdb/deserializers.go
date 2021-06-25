@@ -118,10 +118,10 @@ func awsAwsquery_deserializeOpErrorAddSourceIdentifierToSubscription(response *s
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("SourceNotFoundFault", errorCode):
+	case strings.EqualFold("SourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSourceNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionNotFoundFault(response, errorBody)
 
 	default:
@@ -197,10 +197,10 @@ func awsAwsquery_deserializeOpErrorAddTagsToResource(response *smithyhttp.Respon
 	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBInstanceNotFoundFault", errorCode):
+	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBSnapshotNotFoundFault", errorCode):
+	case strings.EqualFold("DBSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBSnapshotNotFoundFault(response, errorBody)
 
 	default:
@@ -311,7 +311,7 @@ func awsAwsquery_deserializeOpErrorApplyPendingMaintenanceAction(response *smith
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBInstanceStateFault", errorCode):
+	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundFault", errorCode):
@@ -422,13 +422,13 @@ func awsAwsquery_deserializeOpErrorCopyDBClusterParameterGroup(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DBParameterGroupAlreadyExistsFault", errorCode):
+	case strings.EqualFold("DBParameterGroupAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorDBParameterGroupAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("DBParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("DBParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBParameterGroupQuotaExceededFault", errorCode):
+	case strings.EqualFold("DBParameterGroupQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorDBParameterGroupQuotaExceededFault(response, errorBody)
 
 	default:
@@ -551,7 +551,7 @@ func awsAwsquery_deserializeOpErrorCopyDBClusterSnapshot(response *smithyhttp.Re
 	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
 		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
 
-	case strings.EqualFold("SnapshotQuotaExceededFault", errorCode):
+	case strings.EqualFold("SnapshotQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotQuotaExceededFault(response, errorBody)
 
 	default:
@@ -665,13 +665,13 @@ func awsAwsquery_deserializeOpErrorCreateDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBClusterParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("DBClusterParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterParameterGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DBClusterQuotaExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("DBInstanceNotFoundFault", errorCode):
+	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DBSubnetGroupDoesNotCoverEnoughAZs", errorCode):
@@ -683,13 +683,13 @@ func awsAwsquery_deserializeOpErrorCreateDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("GlobalClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientStorageClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientStorageClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientStorageClusterCapacityFault(response, errorBody)
 
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBInstanceStateFault", errorCode):
+	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidDBSubnetGroupStateFault", errorCode):
@@ -707,7 +707,7 @@ func awsAwsquery_deserializeOpErrorCreateDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
 		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
 
-	case strings.EqualFold("StorageQuotaExceededFault", errorCode):
+	case strings.EqualFold("StorageQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorStorageQuotaExceededFault(response, errorBody)
 
 	default:
@@ -815,10 +815,10 @@ func awsAwsquery_deserializeOpErrorCreateDBClusterParameterGroup(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DBParameterGroupAlreadyExistsFault", errorCode):
+	case strings.EqualFold("DBParameterGroupAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorDBParameterGroupAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("DBParameterGroupQuotaExceededFault", errorCode):
+	case strings.EqualFold("DBParameterGroupQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorDBParameterGroupQuotaExceededFault(response, errorBody)
 
 	default:
@@ -938,7 +938,7 @@ func awsAwsquery_deserializeOpErrorCreateDBClusterSnapshot(response *smithyhttp.
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("SnapshotQuotaExceededFault", errorCode):
+	case strings.EqualFold("SnapshotQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotQuotaExceededFault(response, errorBody)
 
 	default:
@@ -1046,19 +1046,19 @@ func awsAwsquery_deserializeOpErrorCreateDBInstance(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationNotFoundFault", errorCode):
+	case strings.EqualFold("AuthorizationNotFound", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBInstanceAlreadyExistsFault", errorCode):
+	case strings.EqualFold("DBInstanceAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("DBParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("DBParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("DBSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBSecurityGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DBSubnetGroupDoesNotCoverEnoughAZs", errorCode):
@@ -1067,10 +1067,10 @@ func awsAwsquery_deserializeOpErrorCreateDBInstance(response *smithyhttp.Respons
 	case strings.EqualFold("DBSubnetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBSubnetGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InstanceQuotaExceededFault", errorCode):
+	case strings.EqualFold("InstanceQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorInstanceQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientDBInstanceCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientDBInstanceCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientDBInstanceCapacityFault(response, errorBody)
 
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
@@ -1085,10 +1085,10 @@ func awsAwsquery_deserializeOpErrorCreateDBInstance(response *smithyhttp.Respons
 	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
 		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
 
-	case strings.EqualFold("StorageQuotaExceededFault", errorCode):
+	case strings.EqualFold("StorageQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorStorageQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("StorageTypeNotSupportedFault", errorCode):
+	case strings.EqualFold("StorageTypeNotSupported", errorCode):
 		return awsAwsquery_deserializeErrorStorageTypeNotSupportedFault(response, errorBody)
 
 	default:
@@ -1196,13 +1196,13 @@ func awsAwsquery_deserializeOpErrorCreateDBSubnetGroup(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DBSubnetGroupAlreadyExistsFault", errorCode):
+	case strings.EqualFold("DBSubnetGroupAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorDBSubnetGroupAlreadyExistsFault(response, errorBody)
 
 	case strings.EqualFold("DBSubnetGroupDoesNotCoverEnoughAZs", errorCode):
 		return awsAwsquery_deserializeErrorDBSubnetGroupDoesNotCoverEnoughAZs(response, errorBody)
 
-	case strings.EqualFold("DBSubnetGroupQuotaExceededFault", errorCode):
+	case strings.EqualFold("DBSubnetGroupQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorDBSubnetGroupQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("DBSubnetQuotaExceededFault", errorCode):
@@ -1316,25 +1316,25 @@ func awsAwsquery_deserializeOpErrorCreateEventSubscription(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("EventSubscriptionQuotaExceededFault", errorCode):
+	case strings.EqualFold("EventSubscriptionQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorEventSubscriptionQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("SNSInvalidTopicFault", errorCode):
+	case strings.EqualFold("SNSInvalidTopic", errorCode):
 		return awsAwsquery_deserializeErrorSNSInvalidTopicFault(response, errorBody)
 
-	case strings.EqualFold("SNSNoAuthorizationFault", errorCode):
+	case strings.EqualFold("SNSNoAuthorization", errorCode):
 		return awsAwsquery_deserializeErrorSNSNoAuthorizationFault(response, errorBody)
 
-	case strings.EqualFold("SNSTopicArnNotFoundFault", errorCode):
+	case strings.EqualFold("SNSTopicArnNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSNSTopicArnNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SourceNotFoundFault", errorCode):
+	case strings.EqualFold("SourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSourceNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionAlreadyExistFault", errorCode):
+	case strings.EqualFold("SubscriptionAlreadyExist", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionAlreadyExistFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionCategoryNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionCategoryNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionCategoryNotFoundFault(response, errorBody)
 
 	default:
@@ -1571,7 +1571,7 @@ func awsAwsquery_deserializeOpErrorDeleteDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("SnapshotQuotaExceededFault", errorCode):
+	case strings.EqualFold("SnapshotQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotQuotaExceededFault(response, errorBody)
 
 	default:
@@ -1644,10 +1644,10 @@ func awsAwsquery_deserializeOpErrorDeleteDBClusterParameterGroup(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DBParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("DBParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBParameterGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidDBParameterGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBParameterGroupStateFault(response, errorBody)
 
 	default:
@@ -1866,19 +1866,19 @@ func awsAwsquery_deserializeOpErrorDeleteDBInstance(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DBInstanceNotFoundFault", errorCode):
+	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBSnapshotAlreadyExistsFault", errorCode):
+	case strings.EqualFold("DBSnapshotAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorDBSnapshotAlreadyExistsFault(response, errorBody)
 
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBInstanceStateFault", errorCode):
+	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
 
-	case strings.EqualFold("SnapshotQuotaExceededFault", errorCode):
+	case strings.EqualFold("SnapshotQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotQuotaExceededFault(response, errorBody)
 
 	default:
@@ -2065,10 +2065,10 @@ func awsAwsquery_deserializeOpErrorDeleteEventSubscription(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidEventSubscriptionStateFault", errorCode):
+	case strings.EqualFold("InvalidEventSubscriptionState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidEventSubscriptionStateFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionNotFoundFault(response, errorBody)
 
 	default:
@@ -2287,7 +2287,7 @@ func awsAwsquery_deserializeOpErrorDescribeCertificates(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("CertificateNotFoundFault", errorCode):
+	case strings.EqualFold("CertificateNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCertificateNotFoundFault(response, errorBody)
 
 	default:
@@ -2395,7 +2395,7 @@ func awsAwsquery_deserializeOpErrorDescribeDBClusterParameterGroups(response *sm
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DBParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("DBParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBParameterGroupNotFoundFault(response, errorBody)
 
 	default:
@@ -2503,7 +2503,7 @@ func awsAwsquery_deserializeOpErrorDescribeDBClusterParameters(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DBParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("DBParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBParameterGroupNotFoundFault(response, errorBody)
 
 	default:
@@ -3040,7 +3040,7 @@ func awsAwsquery_deserializeOpErrorDescribeDBInstances(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DBInstanceNotFoundFault", errorCode):
+	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
 
 	default:
@@ -3571,7 +3571,7 @@ func awsAwsquery_deserializeOpErrorDescribeEventSubscriptions(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("SubscriptionNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionNotFoundFault(response, errorBody)
 
 	default:
@@ -4006,7 +4006,7 @@ func awsAwsquery_deserializeOpErrorFailoverDBCluster(response *smithyhttp.Respon
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBInstanceStateFault", errorCode):
+	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
 
 	default:
@@ -4117,10 +4117,10 @@ func awsAwsquery_deserializeOpErrorListTagsForResource(response *smithyhttp.Resp
 	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBInstanceNotFoundFault", errorCode):
+	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBSnapshotNotFoundFault", errorCode):
+	case strings.EqualFold("DBSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBSnapshotNotFoundFault(response, errorBody)
 
 	default:
@@ -4234,7 +4234,7 @@ func awsAwsquery_deserializeOpErrorModifyDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBClusterParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("DBClusterParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterParameterGroupNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DBSubnetGroupNotFoundFault", errorCode):
@@ -4243,10 +4243,10 @@ func awsAwsquery_deserializeOpErrorModifyDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBInstanceStateFault", errorCode):
+	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidDBSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBSecurityGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidDBSubnetGroupStateFault", errorCode):
@@ -4258,7 +4258,7 @@ func awsAwsquery_deserializeOpErrorModifyDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
 
-	case strings.EqualFold("StorageQuotaExceededFault", errorCode):
+	case strings.EqualFold("StorageQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorStorageQuotaExceededFault(response, errorBody)
 
 	default:
@@ -4366,10 +4366,10 @@ func awsAwsquery_deserializeOpErrorModifyDBClusterParameterGroup(response *smith
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DBParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("DBParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBParameterGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidDBParameterGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBParameterGroupStateFault(response, errorBody)
 
 	default:
@@ -4483,7 +4483,7 @@ func awsAwsquery_deserializeOpErrorModifyDBClusterSnapshotAttribute(response *sm
 	case strings.EqualFold("InvalidDBClusterSnapshotStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterSnapshotStateFault(response, errorBody)
 
-	case strings.EqualFold("SharedSnapshotQuotaExceededFault", errorCode):
+	case strings.EqualFold("SharedSnapshotQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorSharedSnapshotQuotaExceededFault(response, errorBody)
 
 	default:
@@ -4591,43 +4591,43 @@ func awsAwsquery_deserializeOpErrorModifyDBInstance(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationNotFoundFault", errorCode):
+	case strings.EqualFold("AuthorizationNotFound", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("CertificateNotFoundFault", errorCode):
+	case strings.EqualFold("CertificateNotFound", errorCode):
 		return awsAwsquery_deserializeErrorCertificateNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBInstanceAlreadyExistsFault", errorCode):
+	case strings.EqualFold("DBInstanceAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceAlreadyExistsFault(response, errorBody)
 
-	case strings.EqualFold("DBInstanceNotFoundFault", errorCode):
+	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("DBParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBSecurityGroupNotFoundFault", errorCode):
+	case strings.EqualFold("DBSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBSecurityGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBUpgradeDependencyFailureFault", errorCode):
+	case strings.EqualFold("DBUpgradeDependencyFailure", errorCode):
 		return awsAwsquery_deserializeErrorDBUpgradeDependencyFailureFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientDBInstanceCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientDBInstanceCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientDBInstanceCapacityFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBInstanceStateFault", errorCode):
+	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBSecurityGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidDBSecurityGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBSecurityGroupStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
 
-	case strings.EqualFold("StorageQuotaExceededFault", errorCode):
+	case strings.EqualFold("StorageQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorStorageQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("StorageTypeNotSupportedFault", errorCode):
+	case strings.EqualFold("StorageTypeNotSupported", errorCode):
 		return awsAwsquery_deserializeErrorStorageTypeNotSupportedFault(response, errorBody)
 
 	default:
@@ -4855,22 +4855,22 @@ func awsAwsquery_deserializeOpErrorModifyEventSubscription(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("EventSubscriptionQuotaExceededFault", errorCode):
+	case strings.EqualFold("EventSubscriptionQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorEventSubscriptionQuotaExceededFault(response, errorBody)
 
-	case strings.EqualFold("SNSInvalidTopicFault", errorCode):
+	case strings.EqualFold("SNSInvalidTopic", errorCode):
 		return awsAwsquery_deserializeErrorSNSInvalidTopicFault(response, errorBody)
 
-	case strings.EqualFold("SNSNoAuthorizationFault", errorCode):
+	case strings.EqualFold("SNSNoAuthorization", errorCode):
 		return awsAwsquery_deserializeErrorSNSNoAuthorizationFault(response, errorBody)
 
-	case strings.EqualFold("SNSTopicArnNotFoundFault", errorCode):
+	case strings.EqualFold("SNSTopicArnNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSNSTopicArnNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionCategoryNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionCategoryNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionCategoryNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionNotFoundFault(response, errorBody)
 
 	default:
@@ -5089,10 +5089,10 @@ func awsAwsquery_deserializeOpErrorRebootDBInstance(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DBInstanceNotFoundFault", errorCode):
+	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBInstanceStateFault", errorCode):
+	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
 
 	default:
@@ -5314,10 +5314,10 @@ func awsAwsquery_deserializeOpErrorRemoveSourceIdentifierFromSubscription(respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("SourceNotFoundFault", errorCode):
+	case strings.EqualFold("SourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSourceNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("SubscriptionNotFoundFault", errorCode):
+	case strings.EqualFold("SubscriptionNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionNotFoundFault(response, errorBody)
 
 	default:
@@ -5393,10 +5393,10 @@ func awsAwsquery_deserializeOpErrorRemoveTagsFromResource(response *smithyhttp.R
 	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBInstanceNotFoundFault", errorCode):
+	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBSnapshotNotFoundFault", errorCode):
+	case strings.EqualFold("DBSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBSnapshotNotFoundFault(response, errorBody)
 
 	default:
@@ -5504,10 +5504,10 @@ func awsAwsquery_deserializeOpErrorResetDBClusterParameterGroup(response *smithy
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DBParameterGroupNotFoundFault", errorCode):
+	case strings.EqualFold("DBParameterGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBParameterGroupNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBParameterGroupStateFault", errorCode):
+	case strings.EqualFold("InvalidDBParameterGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBParameterGroupStateFault(response, errorBody)
 
 	default:
@@ -5624,7 +5624,7 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterFromSnapshot(response *smithy
 	case strings.EqualFold("DBClusterSnapshotNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterSnapshotNotFoundFault(response, errorBody)
 
-	case strings.EqualFold("DBSnapshotNotFoundFault", errorCode):
+	case strings.EqualFold("DBSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBSnapshotNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("DBSubnetGroupNotFoundFault", errorCode):
@@ -5633,13 +5633,13 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterFromSnapshot(response *smithy
 	case strings.EqualFold("InsufficientDBClusterCapacityFault", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientDBClusterCapacityFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientStorageClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientStorageClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientStorageClusterCapacityFault(response, errorBody)
 
 	case strings.EqualFold("InvalidDBClusterSnapshotStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterSnapshotStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBSnapshotStateFault", errorCode):
+	case strings.EqualFold("InvalidDBSnapshotState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBSnapshotStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidRestoreFault", errorCode):
@@ -5654,7 +5654,7 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterFromSnapshot(response *smithy
 	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
 		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
 
-	case strings.EqualFold("StorageQuotaExceededFault", errorCode):
+	case strings.EqualFold("StorageQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorStorageQuotaExceededFault(response, errorBody)
 
 	default:
@@ -5780,7 +5780,7 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterToPointInTime(response *smith
 	case strings.EqualFold("InsufficientDBClusterCapacityFault", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientDBClusterCapacityFault(response, errorBody)
 
-	case strings.EqualFold("InsufficientStorageClusterCapacityFault", errorCode):
+	case strings.EqualFold("InsufficientStorageClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientStorageClusterCapacityFault(response, errorBody)
 
 	case strings.EqualFold("InvalidDBClusterSnapshotStateFault", errorCode):
@@ -5789,7 +5789,7 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterToPointInTime(response *smith
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBSnapshotStateFault", errorCode):
+	case strings.EqualFold("InvalidDBSnapshotState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBSnapshotStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidRestoreFault", errorCode):
@@ -5804,7 +5804,7 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterToPointInTime(response *smith
 	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
 		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
 
-	case strings.EqualFold("StorageQuotaExceededFault", errorCode):
+	case strings.EqualFold("StorageQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorStorageQuotaExceededFault(response, errorBody)
 
 	default:
@@ -5918,7 +5918,7 @@ func awsAwsquery_deserializeOpErrorStartDBCluster(response *smithyhttp.Response,
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBInstanceStateFault", errorCode):
+	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
 
 	default:
@@ -6032,7 +6032,7 @@ func awsAwsquery_deserializeOpErrorStopDBCluster(response *smithyhttp.Response, 
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidDBInstanceStateFault", errorCode):
+	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
 
 	default:

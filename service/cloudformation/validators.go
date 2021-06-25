@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpActivateType struct {
+}
+
+func (*validateOpActivateType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpActivateType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ActivateTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpActivateTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchDescribeTypeConfigurations struct {
+}
+
+func (*validateOpBatchDescribeTypeConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDescribeTypeConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDescribeTypeConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDescribeTypeConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelUpdateStack struct {
 }
 
@@ -650,6 +690,26 @@ func (m *validateOpSetStackPolicy) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSetTypeConfiguration struct {
+}
+
+func (*validateOpSetTypeConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetTypeConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetTypeConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetTypeConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSignalResource struct {
 }
 
@@ -768,6 +828,14 @@ func (m *validateOpUpdateTerminationProtection) HandleInitialize(ctx context.Con
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
+}
+
+func addOpActivateTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpActivateType{}, middleware.After)
+}
+
+func addOpBatchDescribeTypeConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDescribeTypeConfigurations{}, middleware.After)
 }
 
 func addOpCancelUpdateStackValidationMiddleware(stack *middleware.Stack) error {
@@ -896,6 +964,10 @@ func addOpRegisterTypeValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSetStackPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetStackPolicy{}, middleware.After)
+}
+
+func addOpSetTypeConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetTypeConfiguration{}, middleware.After)
 }
 
 func addOpSignalResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1057,6 +1129,38 @@ func validateTags(v []types.Tag) error {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpActivateTypeInput(v *ActivateTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActivateTypeInput"}
+	if v.LoggingConfig != nil {
+		if err := validateLoggingConfig(v.LoggingConfig); err != nil {
+			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDescribeTypeConfigurationsInput(v *BatchDescribeTypeConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDescribeTypeConfigurationsInput"}
+	if v.TypeConfigurationIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TypeConfigurationIdentifiers"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1605,6 +1709,21 @@ func validateOpSetStackPolicyInput(v *SetStackPolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SetStackPolicyInput"}
 	if v.StackName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetTypeConfigurationInput(v *SetTypeConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetTypeConfigurationInput"}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

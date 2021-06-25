@@ -32,8 +32,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 type ListTagsForResourceInput struct {
 
 	// Requests the tags associated with a particular Amazon Resource Name (ARN). An
-	// ARN is an identifier for a specific AWS resource, such as a server, user, or
-	// role.
+	// ARN is an identifier for a specific Amazon Web Services resource, such as a
+	// server, user, or role.
 	//
 	// This member is required.
 	Arn *string

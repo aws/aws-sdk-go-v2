@@ -6,33 +6,33 @@ package types
 // Amplify project.
 type BackendAPIAppSyncAuthSettings struct {
 
-	// The Amazon Cognito user pool ID, if Amazon Cognito is used as an authentication
+	// The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication
 	// setting to access your data models.
 	CognitoUserPoolId *string
 
-	// The API key description for API_KEY, if it is used as an authentication
+	// The API key description for API_KEY, if it was used as an authentication
 	// mechanism to access your data models.
 	Description *string
 
-	// The API key expiration time for API_KEY, if it is used as an authentication
+	// The API key expiration time for API_KEY, if it was used as an authentication
 	// mechanism to access your data models.
 	ExpirationTime float64
 
 	// The expiry time for the OpenID authentication mechanism.
 	OpenIDAuthTTL *string
 
-	// The clientID for openID, if openID is used as an authentication setting to
+	// The clientID for openID, if openID was used as an authentication setting to
 	// access your data models.
 	OpenIDClientId *string
 
 	// The expiry time for the OpenID authentication mechanism.
 	OpenIDIatTTL *string
 
-	// The openID issuer URL, if openID is used as an authentication setting to access
+	// The openID issuer URL, if openID was used as an authentication setting to access
 	// your data models.
 	OpenIDIssueURL *string
 
-	// The openID provider name, if openID is used as an authentication mechanism to
+	// The OpenID provider name, if OpenID was used as an authentication mechanism to
 	// access your data models.
 	OpenIDProviderName *string
 }
@@ -47,23 +47,23 @@ type BackendAPIAuthType struct {
 	Settings *BackendAPIAppSyncAuthSettings
 }
 
-// Describes the conflict resolution configuration for the data model configured in
-// your Amplify project.
+// Describes the conflict resolution configuration for your data model configured
+// in your Amplify project.
 type BackendAPIConflictResolution struct {
 
 	// The strategy for conflict resolution.
 	ResolutionStrategy ResolutionStrategy
 }
 
-// The resource configuration for the data model, configured as a part of the
-// Amplify project.
+// The resource config for the data model, configured as a part of the Amplify
+// project.
 type BackendAPIResourceConfig struct {
 
 	// Additional authentication methods used to interact with your data models.
 	AdditionalAuthTypes []BackendAPIAuthType
 
 	// The API name used to interact with the data model, configured as a part of the
-	// Amplify project.
+	// amplify project.
 	ApiName *string
 
 	// The conflict resolution strategy for your data stored in the data models.
@@ -85,11 +85,11 @@ type BackendAPIResourceConfig struct {
 // users to sign in using OAuth.
 type BackendAuthSocialProviderConfig struct {
 
-	// Describes the client_id that can be obtained from the third-party social
+	// Describes the client_id which can be obtained from the third-party social
 	// federation provider.
 	ClientId *string
 
-	// Describes the client_secret that can be obtained from third-party social
+	// Describes the client_secret which can be obtained from third-party social
 	// federation providers.
 	ClientSecret *string
 }
@@ -110,7 +110,7 @@ type BackendJobRespObj struct {
 	// The time when the job was created.
 	CreateTime *string
 
-	// If the request failed, this is the returned error.
+	// If the request fails, this error is returned.
 	Error *string
 
 	// The ID for the job.
@@ -129,7 +129,7 @@ type BackendJobRespObj struct {
 // Describes the forgot password policy for authenticating into the Amplify app.
 type CreateBackendAuthForgotPasswordConfig struct {
 
-	// Describes which method to use (either SMS or email) to deliver messages to app
+	// Describes which mode to use (either SMS or email) to deliver messages to app
 	// users that want to recover their password.
 	//
 	// This member is required.
@@ -147,7 +147,7 @@ type CreateBackendAuthForgotPasswordConfig struct {
 // part of your Amplify project.
 type CreateBackendAuthIdentityPoolConfig struct {
 
-	// Name of the identity pool used for authorization.
+	// Name of the Amazon Cognito identity pool used for authorization.
 	//
 	// This member is required.
 	IdentityPoolName *string
@@ -159,12 +159,12 @@ type CreateBackendAuthIdentityPoolConfig struct {
 	UnauthenticatedLogin bool
 }
 
-// Describes whether to apply multi-factor authentication (MFA) policies for your
-// Amazon Cognito user pool that's configured as a part of your Amplify project.
+// Describes whether multi-factor authentication policies should be applied for
+// your Amazon Cognito user pool configured as a part of your Amplify project.
 type CreateBackendAuthMFAConfig struct {
 
-	// Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in
-	// your Amplify project.
+	// Describes whether MFA should be [ON, OFF, OPTIONAL] for authentication in your
+	// Amplify project.
 	//
 	// This member is required.
 	MFAMode MFAMode
@@ -183,8 +183,8 @@ type CreateBackendAuthOAuthConfig struct {
 	// This member is required.
 	OAuthGrantType OAuthGrantType
 
-	// List of OAuth-related flows that allow your app users to authenticate from your
-	// Amplify app.
+	// List of OAuth-related flows used to allow your app users to authenticate from
+	// your Amplify app.
 	//
 	// This member is required.
 	OAuthScopes []OAuthScopesElement
@@ -194,7 +194,7 @@ type CreateBackendAuthOAuthConfig struct {
 	// This member is required.
 	RedirectSignInURIs []string
 
-	// Redirect URLs that OAuth uses when a user signs out of an Amplify app.
+	// Redirect URLs used by OAuth when a user signs out of an Amplify app.
 	//
 	// This member is required.
 	RedirectSignOutURIs []string
@@ -202,11 +202,11 @@ type CreateBackendAuthOAuthConfig struct {
 	// The domain prefix for your Amplify app.
 	DomainPrefix *string
 
-	// The settings for using social identity providers for access to your Amplify app.
+	// The settings for using social providers to access your Amplify app.
 	SocialProviderSettings *SocialProviderSettings
 }
 
-// The password policy configuration for the backend of your Amplify project.
+// The password policy configuration for the backend to your Amplify project.
 type CreateBackendAuthPasswordPolicyConfig struct {
 
 	// The minimum length of the password used to access the backend of your Amplify
@@ -236,14 +236,14 @@ type CreateBackendAuthResourceConfig struct {
 	// This member is required.
 	Service Service
 
-	// Describes the authentication configuration for the Amazon Cognito user pool,
-	// provisioned as a part of the auth resource in your Amplify project.
+	// Describes authentication configuration for the Amazon Cognito user pool,
+	// provisioned as a part of your auth resource in the Amplify project.
 	//
 	// This member is required.
 	UserPoolConfigs *CreateBackendAuthUserPoolConfig
 
 	// Describes the authorization configuration for the Amazon Cognito identity pool,
-	// provisioned as a part of the auth resource in your Amplify project.
+	// provisioned as a part of your auth resource in the Amplify project.
 	IdentityPoolConfigs *CreateBackendAuthIdentityPoolConfig
 }
 
@@ -251,13 +251,13 @@ type CreateBackendAuthResourceConfig struct {
 // configured for your Amplify project.
 type CreateBackendAuthUserPoolConfig struct {
 
-	// The required attributes to sign up new users in the Amazon Cognito user pool.
+	// The required attributes to sign up new users in the user pool.
 	//
 	// This member is required.
 	RequiredSignUpAttributes []RequiredSignUpAttributesElement
 
-	// Describes the sign-in methods that your Amplify app users to log in using the
-	// Amazon Cognito user pool that's configured as a part of your Amplify project.
+	// Describes the sign-in methods that your Amplify app users use to log in using
+	// the Amazon Cognito user pool, configured as a part of your Amplify project.
 	//
 	// This member is required.
 	SignInMethod SignInMethod
@@ -271,8 +271,8 @@ type CreateBackendAuthUserPoolConfig struct {
 	// configured as a part of your Amplify project.
 	ForgotPassword *CreateBackendAuthForgotPasswordConfig
 
-	// Describes whether to apply multi-factor authentication (MFA) policies for your
-	// Amazon Cognito user pool that's configured as a part of your Amplify project.
+	// Describes whether multi-factor authentication policies should be applied for
+	// your Amazon Cognito user pool configured as a part of your Amplify project.
 	Mfa *CreateBackendAuthMFAConfig
 
 	// Describes the OAuth policy and rules for your Amazon Cognito user pool,
@@ -297,7 +297,7 @@ type EmailSettings struct {
 // The request object for this operation.
 type LoginAuthConfigReqObj struct {
 
-	// The Amazon Cognito identity pool ID used for Amplify Admin UI login
+	// The Amazon Cognito identity pool ID used for the Amplify Admin UI login
 	// authorization.
 	AwsCognitoIdentityPoolId *string
 
@@ -352,7 +352,7 @@ type SocialProviderSettings struct {
 // Describes the forgot password policy for authenticating into the Amplify app.
 type UpdateBackendAuthForgotPasswordConfig struct {
 
-	// Describes which method to use (either SMS or email) to deliver messages to app
+	// Describes which mode to use (either SMS or email) to deliver messages to app
 	// users that want to recover their password.
 	DeliveryMethod DeliveryMethod
 
@@ -368,7 +368,7 @@ type UpdateBackendAuthForgotPasswordConfig struct {
 // provisioned as a part of your auth resource in the Amplify project.
 type UpdateBackendAuthIdentityPoolConfig struct {
 
-	// A Boolean value that you can set to allow or disallow guest-level authorization
+	// A boolean value which can be set to allow or disallow guest-level authorization
 	// into your Amplify app.
 	UnauthenticatedLogin bool
 }
@@ -397,10 +397,10 @@ type UpdateBackendAuthOAuthConfig struct {
 	// Amplify app.
 	OAuthScopes []OAuthScopesElement
 
-	// Redirect URLs that OAuth uses when a user signs in to an Amplify app.
+	// Redirect URLs used by OAuth when a user signs in to an Amplify app.
 	RedirectSignInURIs []string
 
-	// Redirect URLs that OAuth uses when a user signs out of an Amplify app.
+	// Redirect URLs used by OAuth when a user signs out of an Amplify app.
 	RedirectSignOutURIs []string
 
 	// Describes third-party social federation configurations for allowing your users
@@ -408,12 +408,12 @@ type UpdateBackendAuthOAuthConfig struct {
 	SocialProviderSettings *SocialProviderSettings
 }
 
-// Describes the password policy for your Amazon Cognito user pool that's
-// configured as a part of your Amplify project.
+// Describes the password policy for your Amazon Cognito user pool configured as a
+// part of your Amplify project.
 type UpdateBackendAuthPasswordPolicyConfig struct {
 
-	// Describes additional constrains on the password requirements to sign in to the
-	// auth resource, configured as a part of your Amplify project.
+	// Describes additional constraints on password requirements to sign in to the auth
+	// resource, configured as a part of your Amplify project.
 	AdditionalConstraints []AdditionalConstraintsElement
 
 	// Describes the minimum length of the password required to sign in to the auth
@@ -438,26 +438,26 @@ type UpdateBackendAuthResourceConfig struct {
 	Service Service
 
 	// Describes the authentication configuration for the Amazon Cognito user pool,
-	// provisioned as a part of the auth resource in your Amplify project.
+	// provisioned as a part of your auth resource in the Amplify project.
 	//
 	// This member is required.
 	UserPoolConfigs *UpdateBackendAuthUserPoolConfig
 
 	// Describes the authorization configuration for the Amazon Cognito identity pool,
-	// provisioned as a part of the auth resource in your Amplify project.
+	// provisioned as a part of your auth resource in the Amplify project.
 	IdentityPoolConfigs *UpdateBackendAuthIdentityPoolConfig
 }
 
-// Describes the Amazon Cognito user pool configuration to configure the
-// authorization resource for your Amplify project on an update.
+// Describes the Amazon Cognito user pool configuration for the authorization
+// resource to be configured for your Amplify project on an update.
 type UpdateBackendAuthUserPoolConfig struct {
 
 	// Describes the forgot password policy for your Amazon Cognito user pool,
 	// configured as a part of your Amplify project.
 	ForgotPassword *UpdateBackendAuthForgotPasswordConfig
 
-	// Describes whether to apply multi-factor authentication (MFA) policies for your
-	// Amazon Cognito user pool that's configured as a part of your Amplify project.
+	// Describes whether multi-factor authentication policies should be applied for
+	// your Amazon Cognito user pool configured as a part of your Amplify project.
 	Mfa *UpdateBackendAuthMFAConfig
 
 	// Describes the OAuth policy and rules for your Amazon Cognito user pool,

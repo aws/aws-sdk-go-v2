@@ -510,6 +510,24 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This exception is thrown when the request is not authorized. This can happen due
+// to an invalid access token in the request.
+type UnauthorizedException struct {
+	Message *string
+}
+
+func (e *UnauthorizedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnauthorizedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
+func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown when the Amazon Cognito service encounters an
 // unexpected exception with the AWS Lambda service.
 type UnexpectedLambdaException struct {
@@ -548,6 +566,41 @@ func (e *UnsupportedIdentityProviderException) ErrorCode() string {
 func (e *UnsupportedIdentityProviderException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// This exception is thrown when you attempt to perform an operation that is not
+// enabled for the user pool client.
+type UnsupportedOperationException struct {
+	Message *string
+}
+
+func (e *UnsupportedOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnsupportedOperationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnsupportedOperationException) ErrorCode() string             { return "UnsupportedOperationException" }
+func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when an unsupported token is passed to an operation.
+type UnsupportedTokenTypeException struct {
+	Message *string
+}
+
+func (e *UnsupportedTokenTypeException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnsupportedTokenTypeException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnsupportedTokenTypeException) ErrorCode() string             { return "UnsupportedTokenTypeException" }
+func (e *UnsupportedTokenTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request failed because the user is in an unsupported state.
 type UnsupportedUserStateException struct {

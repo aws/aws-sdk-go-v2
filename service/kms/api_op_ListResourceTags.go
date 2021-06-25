@@ -22,9 +22,14 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
 //
+// * CreateKey
+//
+// * ReplicateKey
+//
 // * TagResource
 //
-// * UntagResource
+// *
+// UntagResource
 func (c *Client) ListResourceTags(ctx context.Context, params *ListResourceTagsInput, optFns ...func(*Options)) (*ListResourceTagsOutput, error) {
 	if params == nil {
 		params = &ListResourceTagsInput{}
@@ -42,13 +47,13 @@ func (c *Client) ListResourceTags(ctx context.Context, params *ListResourceTagsI
 
 type ListResourceTagsInput struct {
 
-	// A unique identifier for the customer master key (CMK). Specify the key ID or the
-	// Amazon Resource Name (ARN) of the CMK. For example:
+	// Gets tags on the specified customer master key (CMK). Specify the key ID or key
+	// ARN of the CMK. For example:
 	//
-	// * Key ID:
-	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	// * Key ARN:
+	// *
+	// Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
@@ -78,7 +83,11 @@ type ListResourceTagsOutput struct {
 	// information from this value.
 	NextMarker *string
 
-	// A list of tags. Each tag consists of a tag key and a tag value.
+	// A list of tags. Each tag consists of a tag key and a tag value. Tagging or
+	// untagging a CMK can allow or deny permission to the CMK. For details, see Using
+	// ABAC in AWS KMS
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the AWS Key
+	// Management Service Developer Guide.
 	Tags []types.Tag
 
 	// A flag that indicates whether there are more items in the list. When this value

@@ -19,7 +19,7 @@ import (
 // recommendations using the CodeGuru Reviewer console. For more information, see
 // Recommendations in Amazon CodeGuru Reviewer
 // (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html)
-// in the Amazon CodeGuru Reviewer User Guide. If you associate a CodeCommit
+// in the Amazon CodeGuru Reviewer User Guide. If you associate a CodeCommit or S3
 // repository, it must be in the same AWS Region and AWS account where its CodeGuru
 // Reviewer code reviews are configured. Bitbucket and GitHub Enterprise Server
 // repositories are managed by AWS CodeStar Connections to connect to CodeGuru

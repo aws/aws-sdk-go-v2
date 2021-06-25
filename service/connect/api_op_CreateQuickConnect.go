@@ -11,7 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
 // Creates a quick connect for the specified Amazon Connect instance.
 func (c *Client) CreateQuickConnect(ctx context.Context, params *CreateQuickConnectInput, optFns ...func(*Options)) (*CreateQuickConnectOutput, error) {
 	if params == nil {
@@ -30,7 +29,8 @@ func (c *Client) CreateQuickConnect(ctx context.Context, params *CreateQuickConn
 
 type CreateQuickConnectInput struct {
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
 	//
 	// This member is required.
 	InstanceId *string

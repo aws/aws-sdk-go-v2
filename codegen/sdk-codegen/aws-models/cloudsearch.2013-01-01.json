@@ -531,6 +531,12 @@
                 },
                 {
                     "target": "com.amazonaws.cloudsearch#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudsearch#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudsearch#ValidationException"
                 }
             ],
             "traits": {
@@ -1749,6 +1755,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DisabledAction",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The request was rejected because it attempted an operation which is not enabled.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -1841,7 +1851,7 @@
                     "min": 3,
                     "max": 28
                 },
-                "smithy.api#pattern": "[a-z][a-z0-9\\-]+"
+                "smithy.api#pattern": "^[a-z][a-z0-9\\-]+$"
             }
         },
         "com.amazonaws.cloudsearch#DomainNameList": {
@@ -2050,7 +2060,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "([a-z][a-z0-9_]*\\*?|\\*[a-z0-9_]*)"
+                "smithy.api#pattern": "^([a-z][a-z0-9_]*\\*?|\\*[a-z0-9_]*)$"
             }
         },
         "com.amazonaws.cloudsearch#DynamicFieldNameList": {
@@ -2139,13 +2149,13 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-z][a-z0-9_]*"
+                "smithy.api#pattern": "^[a-z][a-z0-9_]*$"
             }
         },
         "com.amazonaws.cloudsearch#FieldNameCommaList": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "\\s*[a-z*][a-z0-9_]*\\*?\\s*(,\\s*[a-z*][a-z0-9_]*\\*?\\s*)*"
+                "smithy.api#pattern": "^\\s*[a-z*][a-z0-9_]*\\*?\\s*(,\\s*[a-z*][a-z0-9_]*\\*?\\s*)*$"
             }
         },
         "com.amazonaws.cloudsearch#FieldNameList": {
@@ -2454,6 +2464,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InternalException",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>An internal error occurred while processing the request. If this problem persists,\n      report an issue from the <a href=\"http://status.aws.amazon.com/\" target=\"_blank\">Service Health Dashboard</a>.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -2470,6 +2484,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidType",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The request was rejected because it specified an invalid type definition.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -2527,6 +2545,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "LimitExceeded",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The request was rejected because a resource limit has already been met.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -2811,6 +2833,22 @@
                     {
                         "value": "search.2xlarge",
                         "name": "search_2xlarge"
+                    },
+                    {
+                        "value": "search.previousgeneration.small",
+                        "name": "search_previousgeneration_small"
+                    },
+                    {
+                        "value": "search.previousgeneration.large",
+                        "name": "search_previousgeneration_large"
+                    },
+                    {
+                        "value": "search.previousgeneration.xlarge",
+                        "name": "search_previousgeneration_xlarge"
+                    },
+                    {
+                        "value": "search.previousgeneration.2xlarge",
+                        "name": "search_previousgeneration_2xlarge"
                     }
                 ]
             }
@@ -2819,6 +2857,26 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>Access rules for a domain's document or search service endpoints. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html\" target=\"_blank\">Configuring Access for a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>. The maximum size of a policy document is 100 KB.</p>"
+            }
+        },
+        "com.amazonaws.cloudsearch#ResourceAlreadyExistsException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.cloudsearch#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.cloudsearch#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceAlreadyExists",
+                    "httpResponseCode": 409
+                },
+                "smithy.api#documentation": "<p>The request was rejected because it attempted to create a resource that already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.cloudsearch#ResourceNotFoundException": {
@@ -2832,6 +2890,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceNotFound",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The request was rejected because it attempted to reference a resource that does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -2914,7 +2976,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-z][a-z0-9_]*"
+                "smithy.api#pattern": "^[a-z][a-z0-9_]*$"
             }
         },
         "com.amazonaws.cloudsearch#StandardNameList": {
@@ -3388,7 +3450,7 @@
         "com.amazonaws.cloudsearch#Word": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[\\S]+"
+                "smithy.api#pattern": "^[\\S]+$"
             }
         }
     }

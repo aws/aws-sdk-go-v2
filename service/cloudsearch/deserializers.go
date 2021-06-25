@@ -123,7 +123,7 @@ func awsAwsquery_deserializeOpErrorBuildSuggesters(response *smithyhttp.Response
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -237,8 +237,14 @@ func awsAwsquery_deserializeOpErrorCreateDomain(response *smithyhttp.Response, m
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("ResourceAlreadyExists", errorCode):
+		return awsAwsquery_deserializeErrorResourceAlreadyExistsException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsquery_deserializeErrorValidationException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -351,13 +357,13 @@ func awsAwsquery_deserializeOpErrorDefineAnalysisScheme(response *smithyhttp.Res
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("InvalidTypeException", errorCode):
+	case strings.EqualFold("InvalidType", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTypeException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -471,13 +477,13 @@ func awsAwsquery_deserializeOpErrorDefineExpression(response *smithyhttp.Respons
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("InvalidTypeException", errorCode):
+	case strings.EqualFold("InvalidType", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTypeException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -591,13 +597,13 @@ func awsAwsquery_deserializeOpErrorDefineIndexField(response *smithyhttp.Respons
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("InvalidTypeException", errorCode):
+	case strings.EqualFold("InvalidType", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTypeException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -711,13 +717,13 @@ func awsAwsquery_deserializeOpErrorDefineSuggester(response *smithyhttp.Response
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("InvalidTypeException", errorCode):
+	case strings.EqualFold("InvalidType", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTypeException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -831,10 +837,10 @@ func awsAwsquery_deserializeOpErrorDeleteAnalysisScheme(response *smithyhttp.Res
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("InvalidTypeException", errorCode):
+	case strings.EqualFold("InvalidType", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTypeException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -1059,10 +1065,10 @@ func awsAwsquery_deserializeOpErrorDeleteExpression(response *smithyhttp.Respons
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("InvalidTypeException", errorCode):
+	case strings.EqualFold("InvalidType", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTypeException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -1176,10 +1182,10 @@ func awsAwsquery_deserializeOpErrorDeleteIndexField(response *smithyhttp.Respons
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("InvalidTypeException", errorCode):
+	case strings.EqualFold("InvalidType", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTypeException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -1293,10 +1299,10 @@ func awsAwsquery_deserializeOpErrorDeleteSuggester(response *smithyhttp.Response
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("InvalidTypeException", errorCode):
+	case strings.EqualFold("InvalidType", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTypeException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -1410,7 +1416,7 @@ func awsAwsquery_deserializeOpErrorDescribeAnalysisSchemes(response *smithyhttp.
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -1521,19 +1527,19 @@ func awsAwsquery_deserializeOpErrorDescribeAvailabilityOptions(response *smithyh
 	case strings.EqualFold("BaseException", errorCode):
 		return awsAwsquery_deserializeErrorBaseException(response, errorBody)
 
-	case strings.EqualFold("DisabledOperationException", errorCode):
+	case strings.EqualFold("DisabledAction", errorCode):
 		return awsAwsquery_deserializeErrorDisabledOperationException(response, errorBody)
 
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("InvalidTypeException", errorCode):
+	case strings.EqualFold("InvalidType", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTypeException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -1644,16 +1650,16 @@ func awsAwsquery_deserializeOpErrorDescribeDomainEndpointOptions(response *smith
 	case strings.EqualFold("BaseException", errorCode):
 		return awsAwsquery_deserializeErrorBaseException(response, errorBody)
 
-	case strings.EqualFold("DisabledOperationException", errorCode):
+	case strings.EqualFold("DisabledAction", errorCode):
 		return awsAwsquery_deserializeErrorDisabledOperationException(response, errorBody)
 
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -1878,7 +1884,7 @@ func awsAwsquery_deserializeOpErrorDescribeExpressions(response *smithyhttp.Resp
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -1992,7 +1998,7 @@ func awsAwsquery_deserializeOpErrorDescribeIndexFields(response *smithyhttp.Resp
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -2106,7 +2112,7 @@ func awsAwsquery_deserializeOpErrorDescribeScalingParameters(response *smithyhtt
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -2220,7 +2226,7 @@ func awsAwsquery_deserializeOpErrorDescribeServiceAccessPolicies(response *smith
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -2334,7 +2340,7 @@ func awsAwsquery_deserializeOpErrorDescribeSuggesters(response *smithyhttp.Respo
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -2448,7 +2454,7 @@ func awsAwsquery_deserializeOpErrorIndexDocuments(response *smithyhttp.Response,
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -2667,19 +2673,19 @@ func awsAwsquery_deserializeOpErrorUpdateAvailabilityOptions(response *smithyhtt
 	case strings.EqualFold("BaseException", errorCode):
 		return awsAwsquery_deserializeErrorBaseException(response, errorBody)
 
-	case strings.EqualFold("DisabledOperationException", errorCode):
+	case strings.EqualFold("DisabledAction", errorCode):
 		return awsAwsquery_deserializeErrorDisabledOperationException(response, errorBody)
 
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("InvalidTypeException", errorCode):
+	case strings.EqualFold("InvalidType", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTypeException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
@@ -2793,19 +2799,19 @@ func awsAwsquery_deserializeOpErrorUpdateDomainEndpointOptions(response *smithyh
 	case strings.EqualFold("BaseException", errorCode):
 		return awsAwsquery_deserializeErrorBaseException(response, errorBody)
 
-	case strings.EqualFold("DisabledOperationException", errorCode):
+	case strings.EqualFold("DisabledAction", errorCode):
 		return awsAwsquery_deserializeErrorDisabledOperationException(response, errorBody)
 
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("InvalidTypeException", errorCode):
+	case strings.EqualFold("InvalidType", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTypeException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
@@ -2922,13 +2928,13 @@ func awsAwsquery_deserializeOpErrorUpdateScalingParameters(response *smithyhttp.
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("InvalidTypeException", errorCode):
+	case strings.EqualFold("InvalidType", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTypeException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -3042,13 +3048,13 @@ func awsAwsquery_deserializeOpErrorUpdateServiceAccessPolicies(response *smithyh
 	case strings.EqualFold("InternalException", errorCode):
 		return awsAwsquery_deserializeErrorInternalException(response, errorBody)
 
-	case strings.EqualFold("InvalidTypeException", errorCode):
+	case strings.EqualFold("InvalidType", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTypeException(response, errorBody)
 
-	case strings.EqualFold("LimitExceededException", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -3269,6 +3275,50 @@ func awsAwsquery_deserializeErrorLimitExceededException(response *smithyhttp.Res
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentLimitExceededException(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorResourceAlreadyExistsException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ResourceAlreadyExistsException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentResourceAlreadyExistsException(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6393,6 +6443,68 @@ func awsAwsquery_deserializeDocumentOptionStatus(v **types.OptionStatus, decoder
 					return err
 				}
 				sv.UpdateVersion = int32(i64)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentResourceAlreadyExistsException(v **types.ResourceAlreadyExistsException, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ResourceAlreadyExistsException
+	if *v == nil {
+		sv = &types.ResourceAlreadyExistsException{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Code", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Code = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:

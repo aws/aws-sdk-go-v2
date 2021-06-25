@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a database activity stream that was started using the AWS console, the
-// start-activity-stream AWS CLI command, or the StartActivityStream action. For
-// more information, see Database Activity Streams
+// Stops a database activity stream that was started using the Amazon Web Services
+// console, the start-activity-stream CLI command, or the StartActivityStream
+// action. For more information, see Database Activity Streams
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)
 // in the Amazon Aurora User Guide.
 func (c *Client) StopActivityStream(ctx context.Context, params *StopActivityStreamInput, optFns ...func(*Options)) (*StopActivityStreamOutput, error) {
@@ -50,9 +50,10 @@ type StopActivityStreamOutput struct {
 	// stream.
 	KinesisStreamName *string
 
-	// The AWS KMS key identifier used for encrypting messages in the database activity
-	// stream. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-	// name for the AWS KMS customer master key (CMK).
+	// The Amazon Web Services KMS key identifier used for encrypting messages in the
+	// database activity stream. The Amazon Web Services KMS key identifier is the key
+	// ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS customer
+	// master key (CMK).
 	KmsKeyId *string
 
 	// The status of the database activity stream.

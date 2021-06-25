@@ -256,11 +256,14 @@ type KeyState string
 
 // Enum values for KeyState
 const (
-	KeyStateEnabled         KeyState = "Enabled"
-	KeyStateDisabled        KeyState = "Disabled"
-	KeyStatePendingDeletion KeyState = "PendingDeletion"
-	KeyStatePendingImport   KeyState = "PendingImport"
-	KeyStateUnavailable     KeyState = "Unavailable"
+	KeyStateCreating               KeyState = "Creating"
+	KeyStateEnabled                KeyState = "Enabled"
+	KeyStateDisabled               KeyState = "Disabled"
+	KeyStatePendingDeletion        KeyState = "PendingDeletion"
+	KeyStatePendingImport          KeyState = "PendingImport"
+	KeyStatePendingReplicaDeletion KeyState = "PendingReplicaDeletion"
+	KeyStateUnavailable            KeyState = "Unavailable"
+	KeyStateUpdating               KeyState = "Updating"
 )
 
 // Values returns all known values for KeyState. Note that this can be expanded in
@@ -268,11 +271,14 @@ const (
 // slice is not guaranteed to be stable across updates.
 func (KeyState) Values() []KeyState {
 	return []KeyState{
+		"Creating",
 		"Enabled",
 		"Disabled",
 		"PendingDeletion",
 		"PendingImport",
+		"PendingReplicaDeletion",
 		"Unavailable",
+		"Updating",
 	}
 }
 
@@ -309,6 +315,24 @@ func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"RAW",
 		"DIGEST",
+	}
+}
+
+type MultiRegionKeyType string
+
+// Enum values for MultiRegionKeyType
+const (
+	MultiRegionKeyTypePrimary MultiRegionKeyType = "PRIMARY"
+	MultiRegionKeyTypeReplica MultiRegionKeyType = "REPLICA"
+)
+
+// Values returns all known values for MultiRegionKeyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MultiRegionKeyType) Values() []MultiRegionKeyType {
+	return []MultiRegionKeyType{
+		"PRIMARY",
+		"REPLICA",
 	}
 }
 

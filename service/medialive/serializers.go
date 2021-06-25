@@ -5720,6 +5720,11 @@ func awsRestjson1_serializeDocumentDvbSubSourceSettings(v *types.DvbSubSourceSet
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.OcrLanguage) > 0 {
+		ok := object.Key("ocrLanguage")
+		ok.String(string(v.OcrLanguage))
+	}
+
 	if v.Pid != 0 {
 		ok := object.Key("pid")
 		ok.Integer(v.Pid)
@@ -7107,6 +7112,11 @@ func awsRestjson1_serializeDocumentHlsInputSettings(v *types.HlsInputSettings, v
 	if v.RetryInterval != 0 {
 		ok := object.Key("retryInterval")
 		ok.Integer(v.RetryInterval)
+	}
+
+	if len(v.Scte35Source) > 0 {
+		ok := object.Key("scte35Source")
+		ok.String(string(v.Scte35Source))
 	}
 
 	return nil
@@ -9168,6 +9178,11 @@ func awsRestjson1_serializeDocumentScte27DestinationSettings(v *types.Scte27Dest
 func awsRestjson1_serializeDocumentScte27SourceSettings(v *types.Scte27SourceSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.OcrLanguage) > 0 {
+		ok := object.Key("ocrLanguage")
+		ok.String(string(v.OcrLanguage))
+	}
 
 	if v.Pid != 0 {
 		ok := object.Key("pid")

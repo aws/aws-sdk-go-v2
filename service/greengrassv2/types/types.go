@@ -6,6 +6,45 @@ import (
 	"time"
 )
 
+// Contains a request to associate a client device with a core device. The
+// BatchAssociateClientDeviceWithCoreDevice
+// (https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html)
+// operation consumes a list of these requests.
+type AssociateClientDeviceWithCoreDeviceEntry struct {
+
+	// The name of the AWS IoT thing that represents the client device to associate.
+	//
+	// This member is required.
+	ThingName *string
+}
+
+// Contains an error that occurs from a request to associate a client device with a
+// core device. The BatchAssociateClientDeviceWithCoreDevice
+// (https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html)
+// operation returns a list of these errors.
+type AssociateClientDeviceWithCoreDeviceErrorEntry struct {
+
+	// The error code for the request.
+	Code *string
+
+	// A message that provides additional information about the error.
+	Message *string
+
+	// The name of the AWS IoT thing whose associate request failed.
+	ThingName *string
+}
+
+// Contains information about a client device that is associated to a core device
+// for cloud discovery.
+type AssociatedClientDevice struct {
+
+	// The time that the client device was associated, expressed in ISO 8601 format.
+	AssociationTimestamp *time.Time
+
+	// The name of the AWS IoT thing that represents the associated client device.
+	ThingName *string
+}
+
 // Contains the status of a component in the AWS IoT Greengrass service.
 type CloudComponentStatus struct {
 
@@ -339,6 +378,34 @@ type DeploymentPolicies struct {
 	// The failure handling policy for the configuration deployment. This policy
 	// defines what to do if the deployment fails. Default: ROLLBACK
 	FailureHandlingPolicy DeploymentFailureHandlingPolicy
+}
+
+// Contains a request to disassociate a client device from a core device. The
+// BatchDisassociateClientDeviceWithCoreDevice
+// (https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html)
+// operation consumes a list of these requests.
+type DisassociateClientDeviceFromCoreDeviceEntry struct {
+
+	// The name of the AWS IoT thing that represents the client device to disassociate.
+	//
+	// This member is required.
+	ThingName *string
+}
+
+// Contains an error that occurs from a request to disassociate a client device
+// from a core device. The BatchDisassociateClientDeviceWithCoreDevice
+// (https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html)
+// operation returns a list of these errors.
+type DisassociateClientDeviceFromCoreDeviceErrorEntry struct {
+
+	// The error code for the request.
+	Code *string
+
+	// A message that provides additional information about the error.
+	Message *string
+
+	// The name of the AWS IoT thing whose disassociate request failed.
+	ThingName *string
 }
 
 // Contains information about a deployment job that AWS IoT Greengrass sends to a

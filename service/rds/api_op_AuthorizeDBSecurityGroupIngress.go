@@ -18,10 +18,10 @@ import (
 // the Internet. Required parameters for this API are one of CIDR range,
 // EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either
 // EC2SecurityGroupName or EC2SecurityGroupId for non-VPC). You can't authorize
-// ingress from an EC2 security group in one AWS Region to an Amazon RDS DB
-// instance in another. You can't authorize ingress from a VPC security group in
-// one VPC to an Amazon RDS DB instance in another. For an overview of CIDR ranges,
-// go to the Wikipedia Tutorial
+// ingress from an EC2 security group in one Amazon Web Services Region to an
+// Amazon RDS DB instance in another. You can't authorize ingress from a VPC
+// security group in one VPC to an Amazon RDS DB instance in another. For an
+// overview of CIDR ranges, go to the Wikipedia Tutorial
 // (http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
 func (c *Client) AuthorizeDBSecurityGroupIngress(ctx context.Context, params *AuthorizeDBSecurityGroupIngressInput, optFns ...func(*Options)) (*AuthorizeDBSecurityGroupIngressOutput, error) {
 	if params == nil {
@@ -59,11 +59,11 @@ type AuthorizeDBSecurityGroupIngressInput struct {
 	// either EC2SecurityGroupName or EC2SecurityGroupId must be provided.
 	EC2SecurityGroupName *string
 
-	// AWS account number of the owner of the EC2 security group specified in the
-	// EC2SecurityGroupName parameter. The AWS access key ID isn't an acceptable value.
-	// For VPC DB security groups, EC2SecurityGroupId must be provided. Otherwise,
-	// EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId
-	// must be provided.
+	// Amazon Web Services account number of the owner of the EC2 security group
+	// specified in the EC2SecurityGroupName parameter. The Amazon Web Services access
+	// key ID isn't an acceptable value. For VPC DB security groups, EC2SecurityGroupId
+	// must be provided. Otherwise, EC2SecurityGroupOwnerId and either
+	// EC2SecurityGroupName or EC2SecurityGroupId must be provided.
 	EC2SecurityGroupOwnerId *string
 }
 

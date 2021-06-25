@@ -400,6 +400,38 @@ func (FilterOperator) Values() []FilterOperator {
 	}
 }
 
+type FolderFilterAttribute string
+
+// Enum values for FolderFilterAttribute
+const (
+	FolderFilterAttributeParentFolderArn FolderFilterAttribute = "PARENT_FOLDER_ARN"
+)
+
+// Values returns all known values for FolderFilterAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FolderFilterAttribute) Values() []FolderFilterAttribute {
+	return []FolderFilterAttribute{
+		"PARENT_FOLDER_ARN",
+	}
+}
+
+type FolderType string
+
+// Enum values for FolderType
+const (
+	FolderTypeShared FolderType = "SHARED"
+)
+
+// Values returns all known values for FolderType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FolderType) Values() []FolderType {
+	return []FolderType{
+		"SHARED",
+	}
+}
+
 type GeoSpatialCountryCode string
 
 // Enum values for GeoSpatialCountryCode
@@ -685,6 +717,26 @@ func (JoinType) Values() []JoinType {
 		"OUTER",
 		"LEFT",
 		"RIGHT",
+	}
+}
+
+type MemberType string
+
+// Enum values for MemberType
+const (
+	MemberTypeDashboard MemberType = "DASHBOARD"
+	MemberTypeAnalysis  MemberType = "ANALYSIS"
+	MemberTypeDataset   MemberType = "DATASET"
+)
+
+// Values returns all known values for MemberType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MemberType) Values() []MemberType {
+	return []MemberType{
+		"DASHBOARD",
+		"ANALYSIS",
+		"DATASET",
 	}
 }
 

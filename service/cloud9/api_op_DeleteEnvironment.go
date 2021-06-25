@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an AWS Cloud9 development environment. If an Amazon EC2 instance is
+// Deletes an Cloud9 development environment. If an Amazon EC2 instance is
 // connected to the environment, also terminates the instance.
 func (c *Client) DeleteEnvironment(ctx context.Context, params *DeleteEnvironmentInput, optFns ...func(*Options)) (*DeleteEnvironmentOutput, error) {
 	if params == nil {

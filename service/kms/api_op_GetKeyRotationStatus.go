@@ -14,12 +14,17 @@ import (
 // material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) is
 // enabled for the specified customer master key (CMK). You cannot enable automatic
-// rotation of asymmetric CMKs, CMKs with imported key material, or CMKs in a
-// custom key store
+// rotation of asymmetric CMKs
+// (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#asymmetric-cmks),
+// CMKs with imported key material
+// (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html), or
+// CMKs in a custom key store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
-// The key rotation status for these CMKs is always false. The CMK that you use for
-// this operation must be in a compatible key state. For details, see How Key State
-// Affects Use of a Customer Master Key
+// To enable or disable automatic rotation of a set of related multi-Region keys
+// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-replica-key),
+// set the property on the primary key. The key rotation status for these CMKs is
+// always false. The CMK that you use for this operation must be in a compatible
+// key state. For details, see Key state: Effect on your CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide.
 //
@@ -58,9 +63,9 @@ func (c *Client) GetKeyRotationStatus(ctx context.Context, params *GetKeyRotatio
 
 type GetKeyRotationStatusInput struct {
 
-	// A unique identifier for the customer master key (CMK). Specify the key ID or the
-	// Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS
-	// account, you must use the key ARN. For example:
+	// Gets the rotation status for the specified customer master key (CMK). Specify
+	// the key ID or key ARN of the CMK. To specify a CMK in a different AWS account,
+	// you must use the key ARN. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab

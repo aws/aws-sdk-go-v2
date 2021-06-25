@@ -11758,6 +11758,11 @@ func awsRestjson1_serializeOpDocumentUpdateAccountInput(v *UpdateAccountInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.DefaultLicense) > 0 {
+		ok := object.Key("DefaultLicense")
+		ok.String(string(v.DefaultLicense))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -12975,6 +12980,98 @@ func awsRestjson1_serializeOpDocumentUpdateSipMediaApplicationInput(v *UpdateSip
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateSipMediaApplicationCall struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateSipMediaApplicationCall) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateSipMediaApplicationCall) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateSipMediaApplicationCallInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/sip-media-applications/{SipMediaApplicationId}/calls/{TransactionId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateSipMediaApplicationCallInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateSipMediaApplicationCallInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateSipMediaApplicationCallInput(v *UpdateSipMediaApplicationCallInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.SipMediaApplicationId == nil || len(*v.SipMediaApplicationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SipMediaApplicationId must not be empty")}
+	}
+	if v.SipMediaApplicationId != nil {
+		if err := encoder.SetURI("SipMediaApplicationId").String(*v.SipMediaApplicationId); err != nil {
+			return err
+		}
+	}
+
+	if v.TransactionId == nil || len(*v.TransactionId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TransactionId must not be empty")}
+	}
+	if v.TransactionId != nil {
+		if err := encoder.SetURI("TransactionId").String(*v.TransactionId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateSipMediaApplicationCallInput(v *UpdateSipMediaApplicationCallInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arguments != nil {
+		ok := object.Key("Arguments")
+		if err := awsRestjson1_serializeDocumentSMAUpdateCallArgumentsMap(v.Arguments, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateSipRule struct {
 }
 
@@ -14076,6 +14173,17 @@ func awsRestjson1_serializeDocumentSipRuleTargetApplicationList(v []types.SipRul
 		if err := awsRestjson1_serializeDocumentSipRuleTargetApplication(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSMAUpdateCallArgumentsMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

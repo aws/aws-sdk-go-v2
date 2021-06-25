@@ -44,8 +44,9 @@ type CreateProjectInput struct {
 	// This member is required.
 	Name *string
 
-	// The ARN of the AWS Identity and Access Management (IAM) role that enables AWS
-	// CodeBuild to interact with dependent AWS services on behalf of the AWS account.
+	// The ARN of the Identity and Access Management role that enables CodeBuild to
+	// interact with dependent Amazon Web Services services on behalf of the Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	ServiceRole *string
@@ -76,11 +77,11 @@ type CreateProjectInput struct {
 	// A description that makes the build project easy to identify.
 	Description *string
 
-	// The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used
-	// for encrypting the build output artifacts. You can use a cross-account KMS key
-	// to encrypt the build output artifacts if your service role has permission to
-	// that key. You can specify either the Amazon Resource Name (ARN) of the CMK or,
-	// if available, the CMK's alias (using the format alias/).
+	// The Key Management Service customer master key (CMK) to be used for encrypting
+	// the build output artifacts. You can use a cross-account KMS key to encrypt the
+	// build output artifacts if your service role has permission to that key. You can
+	// specify either the Amazon Resource Name (ARN) of the CMK or, if available, the
+	// CMK's alias (using the format alias/).
 	EncryptionKey *string
 
 	// An array of ProjectFileSystemLocation objects for a CodeBuild build project. A
@@ -89,8 +90,8 @@ type CreateProjectInput struct {
 	// File System.
 	FileSystemLocations []types.ProjectFileSystemLocation
 
-	// Information about logs for the build project. These can be logs in Amazon
-	// CloudWatch Logs, logs uploaded to a specified S3 bucket, or both.
+	// Information about logs for the build project. These can be logs in CloudWatch
+	// Logs, logs uploaded to a specified S3 bucket, or both.
 	LogsConfig *types.LogsConfig
 
 	// The number of minutes a build is allowed to be queued before it times out.
@@ -110,43 +111,43 @@ type CreateProjectInput struct {
 	// A version of the build input to be built for this project. If not specified, the
 	// latest version is used. If specified, it must be one of:
 	//
-	// * For AWS CodeCommit:
-	// the commit ID, branch, or Git tag to use.
+	// * For CodeCommit: the
+	// commit ID, branch, or Git tag to use.
 	//
-	// * For GitHub: the commit ID, pull
-	// request ID, branch name, or tag name that corresponds to the version of the
-	// source code you want to build. If a pull request ID is specified, it must use
-	// the format pr/pull-request-ID (for example pr/25). If a branch name is
-	// specified, the branch's HEAD commit ID is used. If not specified, the default
-	// branch's HEAD commit ID is used.
+	// * For GitHub: the commit ID, pull request
+	// ID, branch name, or tag name that corresponds to the version of the source code
+	// you want to build. If a pull request ID is specified, it must use the format
+	// pr/pull-request-ID (for example pr/25). If a branch name is specified, the
+	// branch's HEAD commit ID is used. If not specified, the default branch's HEAD
+	// commit ID is used.
 	//
-	// * For Bitbucket: the commit ID, branch name,
-	// or tag name that corresponds to the version of the source code you want to
-	// build. If a branch name is specified, the branch's HEAD commit ID is used. If
-	// not specified, the default branch's HEAD commit ID is used.
+	// * For Bitbucket: the commit ID, branch name, or tag name
+	// that corresponds to the version of the source code you want to build. If a
+	// branch name is specified, the branch's HEAD commit ID is used. If not specified,
+	// the default branch's HEAD commit ID is used.
 	//
-	// * For Amazon S3:
-	// the version ID of the object that represents the build input ZIP file to
-	// use.
+	// * For Amazon S3: the version ID of
+	// the object that represents the build input ZIP file to use.
 	//
-	// If sourceVersion is specified at the build level, then that version takes
-	// precedence over this sourceVersion (at the project level). For more information,
-	// see Source Version Sample with CodeBuild
+	// If sourceVersion is
+	// specified at the build level, then that version takes precedence over this
+	// sourceVersion (at the project level). For more information, see Source Version
+	// Sample with CodeBuild
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
-	// in the AWS CodeBuild User Guide.
+	// in the CodeBuild User Guide.
 	SourceVersion *string
 
 	// A list of tag key and value pairs associated with this build project. These tags
-	// are available for use by AWS services that support AWS CodeBuild build project
-	// tags.
+	// are available for use by Amazon Web Services services that support CodeBuild
+	// build project tags.
 	Tags []types.Tag
 
-	// How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before
-	// it times out any build that has not been marked as completed. The default is 60
+	// How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before it
+	// times out any build that has not been marked as completed. The default is 60
 	// minutes.
 	TimeoutInMinutes *int32
 
-	// VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
+	// VpcConfig enables CodeBuild to access resources in an Amazon VPC.
 	VpcConfig *types.VpcConfig
 }
 

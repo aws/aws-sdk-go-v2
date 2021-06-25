@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets backend auth details.
+// Gets a backend auth details.
 func (c *Client) GetBackendAuth(ctx context.Context, params *GetBackendAuthInput, optFns ...func(*Options)) (*GetBackendAuthOutput, error) {
 	if params == nil {
 		params = &GetBackendAuthInput{}
@@ -54,7 +54,7 @@ type GetBackendAuthOutput struct {
 	// The name of the backend environment.
 	BackendEnvironmentName *string
 
-	// If the request failed, this is the returned error.
+	// If the request fails, this error is returned.
 	Error *string
 
 	// The resource configuration for authorization requests to the backend of your

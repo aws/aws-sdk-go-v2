@@ -37,28 +37,28 @@ type GetRateBasedStatementManagedKeysInput struct {
 	// This member is required.
 	RuleName *string
 
-	// Specifies whether this is for an AWS CloudFront distribution or for a regional
-	// application. A regional application can be an Application Load Balancer (ALB),
-	// an API Gateway REST API, or an AppSync GraphQL API. To work with CloudFront, you
-	// must also specify the Region US East (N. Virginia) as follows:
+	// Specifies whether this is for an Amazon CloudFront distribution or for a
+	// regional application. A regional application can be an Application Load Balancer
+	// (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. To work with
+	// CloudFront, you must also specify the Region US East (N. Virginia) as
+	// follows:
 	//
-	// * CLI - Specify
-	// the Region when you use the CloudFront scope: --scope=CLOUDFRONT
-	// --region=us-east-1.
+	// * CLI - Specify the Region when you use the CloudFront scope:
+	// --scope=CLOUDFRONT --region=us-east-1.
 	//
-	// * API and SDKs - For all calls, use the Region endpoint
-	// us-east-1.
+	// * API and SDKs - For all calls, use the
+	// Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
 
-	// The unique identifier for the Web ACL. This ID is returned in the responses to
+	// The unique identifier for the web ACL. This ID is returned in the responses to
 	// create and list commands. You provide it to operations like update and delete.
 	//
 	// This member is required.
 	WebACLId *string
 
-	// The name of the Web ACL. You cannot change the name of a Web ACL after you
+	// The name of the web ACL. You cannot change the name of a web ACL after you
 	// create it.
 	//
 	// This member is required.

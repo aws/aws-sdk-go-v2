@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets status information for an AWS Cloud9 development environment.
+// Gets status information for an Cloud9 development environment.
 func (c *Client) DescribeEnvironmentStatus(ctx context.Context, params *DescribeEnvironmentStatusInput, optFns ...func(*Options)) (*DescribeEnvironmentStatusOutput, error) {
 	if params == nil {
 		params = &DescribeEnvironmentStatusInput{}

@@ -255,6 +255,9 @@ func awsAwsjson11_deserializeOpErrorCheckInLicense(response *smithyhttp.Response
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
 
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterValueException(response, errorBody)
+
 	case strings.EqualFold("RateLimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorRateLimitExceededException(response, errorBody)
 
@@ -383,6 +386,9 @@ func awsAwsjson11_deserializeOpErrorCheckoutBorrowLicense(response *smithyhttp.R
 
 	case strings.EqualFold("EntitlementNotAllowedException", errorCode):
 		return awsAwsjson11_deserializeErrorEntitlementNotAllowedException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("NoEntitlementsAllowedException", errorCode):
 		return awsAwsjson11_deserializeErrorNoEntitlementsAllowedException(response, errorBody)
@@ -518,6 +524,9 @@ func awsAwsjson11_deserializeOpErrorCheckoutLicense(response *smithyhttp.Respons
 
 	case strings.EqualFold("AuthorizationException", errorCode):
 		return awsAwsjson11_deserializeErrorAuthorizationException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("NoEntitlementsAllowedException", errorCode):
 		return awsAwsjson11_deserializeErrorNoEntitlementsAllowedException(response, errorBody)
@@ -7373,7 +7382,7 @@ func awsAwsjson11_deserializeDocumentGrant(v **types.Grant, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected StatusReasonMessage to be of type string, got %T instead", value)
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
@@ -9220,6 +9229,15 @@ func awsAwsjson11_deserializeDocumentReceivedMetadata(v **types.ReceivedMetadata
 					return fmt.Errorf("expected ReceivedStatus to be of type string, got %T instead", value)
 				}
 				sv.ReceivedStatus = types.ReceivedStatus(jtv)
+			}
+
+		case "ReceivedStatusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatusReasonMessage to be of type string, got %T instead", value)
+				}
+				sv.ReceivedStatusReason = ptr.String(jtv)
 			}
 
 		default:

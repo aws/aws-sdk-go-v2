@@ -11,15 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all grants in which the specified principal is the RetiringPrincipal in
-// the grant. You can specify any principal in your AWS account. The grants that
-// are returned include grants for CMKs in your AWS account and other AWS accounts.
-// You might use this operation to determine which grants you may retire. To retire
-// a grant, use the RetireGrant operation. Cross-account use: You must specify a
-// principal in your AWS account. However, this operation can return grants in any
-// AWS account. You do not need kms:ListRetirableGrants permission (or any other
-// additional permission) in any AWS account other than your own. Required
-// permissions: kms:ListRetirableGrants
+// Returns information about all grants in the AWS account and Region that have the
+// specified retiring principal. For more information about grants, see Grants
+// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in the AWS
+// Key Management Service Developer Guide . You can specify any principal in your
+// AWS account. The grants that are returned include grants for CMKs in your AWS
+// account and other AWS accounts. You might use this operation to determine which
+// grants you may retire. To retire a grant, use the RetireGrant operation.
+// Cross-account use: You must specify a principal in your AWS account. However,
+// this operation can return grants in any AWS account. You do not need
+// kms:ListRetirableGrants permission (or any other additional permission) in any
+// AWS account other than your own. Required permissions: kms:ListRetirableGrants
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy) in your AWS account. Related operations:
 //

@@ -213,7 +213,7 @@
                     "min": 12,
                     "max": 12
                 },
-                "smithy.api#pattern": "\\d{12}"
+                "smithy.api#pattern": "^\\d{12}$"
             }
         },
         "com.amazonaws.cloudwatchevents#Action": {
@@ -223,7 +223,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "events:[a-zA-Z]+"
+                "smithy.api#pattern": "^events:[a-zA-Z]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#ActivateEventSource": {
@@ -397,7 +397,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\.\\-_A-Za-z0-9]+"
+                "smithy.api#pattern": "^[\\.\\-_A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#ApiDestinationResponseList": {
@@ -504,7 +504,7 @@
                     "min": 1,
                     "max": 48
                 },
-                "smithy.api#pattern": "[\\.\\-_A-Za-z0-9]+"
+                "smithy.api#pattern": "^[\\.\\-_A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#ArchiveResponseList": {
@@ -741,6 +741,72 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatchevents#CapacityProvider": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchevents#CapacityProviderStrategy": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchevents#CapacityProviderStrategyItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchevents#CapacityProviderStrategyItem": {
+            "type": "structure",
+            "members": {
+                "capacityProvider": {
+                    "target": "com.amazonaws.cloudwatchevents#CapacityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short name of the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "weight": {
+                    "target": "com.amazonaws.cloudwatchevents#CapacityProviderStrategyItemWeight",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weight value designates the relative percentage of the total number of tasks launched\n      that should use the specified capacity provider. The weight value is taken into consideration\n      after the base value, if defined, is satisfied.</p>"
+                    }
+                },
+                "base": {
+                    "target": "com.amazonaws.cloudwatchevents#CapacityProviderStrategyItemBase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base value designates how many tasks, at a minimum, to run on the specified capacity\n      provider. Only one capacity provider in a capacity provider strategy can have a base defined.\n      If no value is specified, the default value of 0 is used. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a capacity provider strategy. To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html\">CapacityProviderStrategyItem</a> in the Amazon ECS API Reference.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchevents#CapacityProviderStrategyItemBase": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100000
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchevents#CapacityProviderStrategyItemWeight": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.cloudwatchevents#ConcurrentModificationException": {
             "type": "structure",
             "members": {
@@ -844,7 +910,7 @@
                 "ApiKeyName": {
                     "target": "com.amazonaws.cloudwatchevents#AuthHeaderParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the header to use for the <code>APIKeyValue</code> used for authorization.</p>"
+                        "smithy.api#documentation": "<p>The name of the header to use for the <code>APIKeyValue</code> used for\n      authorization.</p>"
                     }
                 }
             },
@@ -1046,7 +1112,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\.\\-_A-Za-z0-9]+"
+                "smithy.api#pattern": "^[\\.\\-_A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#ConnectionOAuthClientResponseParameters": {
@@ -1470,7 +1536,7 @@
                 "InvocationHttpParameters": {
                     "target": "com.amazonaws.cloudwatchevents#ConnectionHttpParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A <code>ConnectionHttpParameters</code> object that contains the API key authorization\n      parameters to use for the connection. Note that if you include additional parameters for\n      the target of a rule via <code>HttpParameters</code>, including query strings, the parameters\n      added for the connection take precedence.</p>"
+                        "smithy.api#documentation": "<p>A <code>ConnectionHttpParameters</code> object that contains the API key authorization\n      parameters to use for the connection. Note that if you include additional parameters for the\n      target of a rule via <code>HttpParameters</code>, including query strings, the parameters\n      added for the connection take precedence.</p>"
                     }
                 }
             },
@@ -2132,7 +2198,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified rule.</p>\n         <p>Before you can delete the rule, you must remove all targets, using <a>RemoveTargets</a>.</p>\n\n         <p>When you delete a rule, incoming events might continue to match to the deleted rule. Allow\n      a short period of time for changes to take effect.</p>\n\n         <p>Managed rules are rules created and managed by another AWS service on your behalf. These\n      rules are created by those other AWS services to support functionality in those services. You\n      can delete these rules using the <code>Force</code> option, but you should do so only if you\n      are sure the other service is not still using that rule.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified rule.</p>\n         <p>Before you can delete the rule, you must remove all targets, using <a>RemoveTargets</a>.</p>\n\n         <p>When you delete a rule, incoming events might continue to match to the deleted rule. Allow\n      a short period of time for changes to take effect.</p>\n\n         <p>If you call delete rule multiple times for the same rule, all calls will succeed. When you\n      call delete rule for a non-existent custom eventbus, <code>ResourceNotFoundException</code> is\n      returned.</p>\n\n         <p>Managed rules are rules created and managed by another AWS service on your behalf. These\n      rules are created by those other AWS services to support functionality in those services. You\n      can delete these rules using the <code>Force</code> option, but you should do so only if you\n      are sure the other service is not still using that rule.</p>"
             }
         },
         "com.amazonaws.cloudwatchevents#DeleteRuleRequest": {
@@ -2939,6 +3005,54 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies an ECS task group for the task. The maximum length is 255 characters.</p>"
                     }
+                },
+                "CapacityProviderStrategy": {
+                    "target": "com.amazonaws.cloudwatchevents#CapacityProviderStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity provider strategy to use for the task.</p>\n         <p>If a <code>capacityProviderStrategy</code> is specified, the <code>launchType</code>\n      parameter must be omitted. If no <code>capacityProviderStrategy</code> or launchType is\n      specified, the <code>defaultCapacityProviderStrategy</code> for the cluster is used. </p>"
+                    }
+                },
+                "EnableECSManagedTags": {
+                    "target": "com.amazonaws.cloudwatchevents#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable Amazon ECS managed tags for the task. For more information,\n      see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging Your Amazon ECS Resources</a> in the Amazon Elastic Container Service Developer\n      Guide. </p>"
+                    }
+                },
+                "EnableExecuteCommand": {
+                    "target": "com.amazonaws.cloudwatchevents#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether or not to enable the execute command functionality for the containers in this\n      task. If true, this enables execute command functionality on all containers in the\n      task.</p>"
+                    }
+                },
+                "PlacementConstraints": {
+                    "target": "com.amazonaws.cloudwatchevents#PlacementConstraints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of placement constraint objects to use for the task. You can specify up to 10\n      constraints per task (including constraints in the task definition and those specified at\n      runtime).</p>"
+                    }
+                },
+                "PlacementStrategy": {
+                    "target": "com.amazonaws.cloudwatchevents#PlacementStrategies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The placement strategy objects to use for the task. You can specify a maximum of five\n      strategy rules per task. </p>"
+                    }
+                },
+                "PropagateTags": {
+                    "target": "com.amazonaws.cloudwatchevents#PropagateTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to propagate the tags from the task definition to the task. If no value\n      is specified, the tags are not propagated. Tags can only be propagated to the task during task\n      creation. To add tags to a task after task creation, use the TagResource API action. </p>"
+                    }
+                },
+                "ReferenceId": {
+                    "target": "com.amazonaws.cloudwatchevents#ReferenceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference ID to use for the task.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.cloudwatchevents#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata that you apply to the task to help you categorize and organize them. Each tag\n      consists of a key and an optional value, both of which you define. To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags\">RunTask</a> in the Amazon ECS API Reference.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3015,7 +3129,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An event bus receives events from a source and routes them to rules associated with that\n      event bus. Your account's default event bus receives rules from AWS services. A custom event\n      bus can receive rules from AWS services as well as your custom applications and services. A\n      partner event bus receives events from an event source created by an SaaS partner. These\n      events come from the partners services or applications.</p>"
+                "smithy.api#documentation": "<p>An event bus receives events from a source and routes them to rules associated with that\n      event bus. Your account's default event bus receives events from AWS services. A custom event\n      bus can receive events from your custom applications and services. A partner event bus\n      receives events from an event source created by an SaaS partner. These events come from the\n      partners services or applications.</p>"
             }
         },
         "com.amazonaws.cloudwatchevents#EventBusList": {
@@ -3031,7 +3145,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[/\\.\\-_A-Za-z0-9]+"
+                "smithy.api#pattern": "^[/\\.\\-_A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#EventBusNameOrArn": {
@@ -3041,7 +3155,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "(arn:aws[\\w-]*:events:[a-z]{2}-[a-z]+-[\\w-]+:[0-9]{12}:event-bus\\/)?[/\\.\\-_A-Za-z0-9]+"
+                "smithy.api#pattern": "^(arn:aws[\\w-]*:events:[a-z]{2}-[a-z]+-[\\w-]+:[0-9]{12}:event-bus\\/)?[/\\.\\-_A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#EventId": {
@@ -3116,7 +3230,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "aws\\.partner(/[\\.\\-_A-Za-z0-9]+){2,}"
+                "smithy.api#pattern": "^aws\\.partner(/[\\.\\-_A-Za-z0-9]+){2,}$"
             }
         },
         "com.amazonaws.cloudwatchevents#EventSourceNamePrefix": {
@@ -3126,7 +3240,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[/\\.\\-_A-Za-z0-9]+"
+                "smithy.api#pattern": "^[/\\.\\-_A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#EventSourceState": {
@@ -3186,13 +3300,13 @@
                 "PathParameterValues": {
                     "target": "com.amazonaws.cloudwatchevents#PathParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path parameter values to be used to populate API Gateway REST API or \n      EventBridge ApiDestination path wildcards (\"*\").</p>"
+                        "smithy.api#documentation": "<p>The path parameter values to be used to populate API Gateway REST API or EventBridge\n      ApiDestination path wildcards (\"*\").</p>"
                     }
                 },
                 "HeaderParameters": {
                     "target": "com.amazonaws.cloudwatchevents#HeaderParametersMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The headers that need to be sent as part of request invoking the API Gateway REST\n      API or EventBridge ApiDestination.</p>"
+                        "smithy.api#documentation": "<p>The headers that need to be sent as part of request invoking the API Gateway REST API or\n      EventBridge ApiDestination.</p>"
                     }
                 },
                 "QueryStringParameters": {
@@ -3203,7 +3317,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These are custom parameter to be used when the target is an API Gateway REST APIs\n      or EventBridge ApiDestinations. In the latter case, these are merged with any InvocationParameters\n      specified on the Connection, with any values from the Connection taking precedence.</p>"
+                "smithy.api#documentation": "<p>These are custom parameter to be used when the target is an API Gateway REST APIs or\n      EventBridge ApiDestinations. In the latter case, these are merged with any\n      InvocationParameters specified on the Connection, with any values from the Connection taking\n      precedence.</p>"
             }
         },
         "com.amazonaws.cloudwatchevents#HttpsEndpoint": {
@@ -3240,7 +3354,7 @@
                 "InputTemplate": {
                     "target": "com.amazonaws.cloudwatchevents#TransformerInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Input template where you specify placeholders that will be filled with the values of the\n      keys from <code>InputPathsMap</code> to customize the data sent to the target. Enclose each\n        <code>InputPathsMaps</code> value in brackets: <<i>value</i>> The\n      InputTemplate must be valid JSON.</p>\n\n         <p>If <code>InputTemplate</code> is a JSON object (surrounded by curly braces), the following\n      restrictions apply:</p>\n         <ul>\n            <li>\n               <p>The placeholder cannot be used as an object key.</p>\n            </li>\n         </ul>\n         <p>The following example shows the syntax for using <code>InputPathsMap</code> and\n        <code>InputTemplate</code>.</p>\n         <p>\n            <code> \"InputTransformer\":</code>\n         </p>\n         <p>\n            <code>{</code>\n         </p>\n         <p>\n            <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\":\n        \"$.detail.status\"},</code>\n         </p>\n         <p>\n            <code>\"InputTemplate\": \"<instance> is in state <status>\"</code>\n         </p>\n         <p>\n            <code>}</code>\n         </p>\n         <p>To have the <code>InputTemplate</code> include quote marks within a JSON string, escape\n      each quote marks with a slash, as in the following example:</p>\n         <p>\n            <code> \"InputTransformer\":</code>\n         </p>\n         <p>\n            <code>{</code>\n         </p>\n         <p>\n            <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\":\n        \"$.detail.status\"},</code>\n         </p>\n         <p>\n            <code>\"InputTemplate\": \"<instance> is in state \\\"<status>\\\"\"</code>\n         </p>\n         <p>\n            <code>}</code>\n         </p>\n         <p>The <code>InputTemplate</code> can also be valid JSON with varibles in quotes or out,\n      as in the following example:</p>\n         <p>\n            <code> \"InputTransformer\":</code>\n         </p>\n         <p>\n            <code>{</code>\n         </p>\n         <p>\n            <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\":\n        \"$.detail.status\"},</code>\n         </p>\n         <p>\n            <code>\"InputTemplate\": '{\"myInstance\": <instance>,\"myStatus\":\n        \"<instance> is in state \\\"<status>\\\"\"}'</code>\n         </p>\n         <p>\n            <code>}</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Input template where you specify placeholders that will be filled with the values of the\n      keys from <code>InputPathsMap</code> to customize the data sent to the target. Enclose each\n        <code>InputPathsMaps</code> value in brackets: <<i>value</i>> The\n      InputTemplate must be valid JSON.</p>\n\n         <p>If <code>InputTemplate</code> is a JSON object (surrounded by curly braces), the following\n      restrictions apply:</p>\n         <ul>\n            <li>\n               <p>The placeholder cannot be used as an object key.</p>\n            </li>\n         </ul>\n         <p>The following example shows the syntax for using <code>InputPathsMap</code> and\n        <code>InputTemplate</code>.</p>\n         <p>\n            <code> \"InputTransformer\":</code>\n         </p>\n         <p>\n            <code>{</code>\n         </p>\n         <p>\n            <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\":\n        \"$.detail.status\"},</code>\n         </p>\n         <p>\n            <code>\"InputTemplate\": \"<instance> is in state <status>\"</code>\n         </p>\n         <p>\n            <code>}</code>\n         </p>\n         <p>To have the <code>InputTemplate</code> include quote marks within a JSON string, escape\n      each quote marks with a slash, as in the following example:</p>\n         <p>\n            <code> \"InputTransformer\":</code>\n         </p>\n         <p>\n            <code>{</code>\n         </p>\n         <p>\n            <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\":\n        \"$.detail.status\"},</code>\n         </p>\n         <p>\n            <code>\"InputTemplate\": \"<instance> is in state \\\"<status>\\\"\"</code>\n         </p>\n         <p>\n            <code>}</code>\n         </p>\n         <p>The <code>InputTemplate</code> can also be valid JSON with varibles in quotes or out, as\n      in the following example:</p>\n         <p>\n            <code> \"InputTransformer\":</code>\n         </p>\n         <p>\n            <code>{</code>\n         </p>\n         <p>\n            <code>\"InputPathsMap\": {\"instance\": \"$.detail.instance\",\"status\":\n        \"$.detail.status\"},</code>\n         </p>\n         <p>\n            <code>\"InputTemplate\": '{\"myInstance\": <instance>,\"myStatus\": \"<instance> is\n        in state \\\"<status>\\\"\"}'</code>\n         </p>\n         <p>\n            <code>}</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3256,7 +3370,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[A-Za-z0-9\\_\\-]+"
+                "smithy.api#pattern": "^[A-Za-z0-9\\_\\-]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#Integer": {
@@ -4188,7 +4302,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\.\\-_A-Za-z0-9]+"
+                "smithy.api#pattern": "^[\\.\\-_A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#NonPartnerEventBusNameOrArn": {
@@ -4198,7 +4312,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "(arn:aws[\\w-]*:events:[a-z]{2}-[a-z]+-[\\w-]+:[0-9]{12}:event-bus\\/)?[\\.\\-_A-Za-z0-9]+"
+                "smithy.api#pattern": "^(arn:aws[\\w-]*:events:[a-z]{2}-[a-z]+-[\\w-]+:[0-9]{12}:event-bus\\/)?[\\.\\-_A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#OperationDisabledException": {
@@ -4284,19 +4398,135 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "aws\\.partner/[\\.\\-_A-Za-z0-9]+/[/\\.\\-_A-Za-z0-9]*"
+                "smithy.api#pattern": "^aws\\.partner/[\\.\\-_A-Za-z0-9]+/[/\\.\\-_A-Za-z0-9]*$"
             }
         },
         "com.amazonaws.cloudwatchevents#PathParameter": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?!\\s*$).+"
+                "smithy.api#pattern": "^(?!\\s*$).+$"
             }
         },
         "com.amazonaws.cloudwatchevents#PathParameterList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudwatchevents#PathParameter"
+            }
+        },
+        "com.amazonaws.cloudwatchevents#PlacementConstraint": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.cloudwatchevents#PlacementConstraintType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of constraint. Use distinctInstance to ensure that each task in a particular\n      group is running on a different container instance. Use memberOf to restrict the selection to\n      a group of valid candidates. </p>"
+                    }
+                },
+                "expression": {
+                    "target": "com.amazonaws.cloudwatchevents#PlacementConstraintExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A cluster query language expression to apply to the constraint. You cannot specify an\n      expression if the constraint type is <code>distinctInstance</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html\">Cluster Query Language</a> in the Amazon Elastic Container Service Developer Guide.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing a constraint on task placement. To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html\">Task Placement Constraints</a> in the Amazon Elastic Container Service Developer\n      Guide.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchevents#PlacementConstraintExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2000
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchevents#PlacementConstraintType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "distinctInstance",
+                        "name": "DISTINCT_INSTANCE"
+                    },
+                    {
+                        "value": "memberOf",
+                        "name": "MEMBER_OF"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudwatchevents#PlacementConstraints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchevents#PlacementConstraint"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchevents#PlacementStrategies": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchevents#PlacementStrategy"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchevents#PlacementStrategy": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.cloudwatchevents#PlacementStrategyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of placement strategy. The random placement strategy randomly places tasks on\n      available candidates. The spread placement strategy spreads placement across available\n      candidates evenly based on the field parameter. The binpack strategy places tasks on available\n      candidates that have the least available amount of the resource that is specified with the\n      field parameter. For example, if you binpack on memory, a task is placed on the instance with\n      the least amount of remaining memory (but still enough to run the task). </p>"
+                    }
+                },
+                "field": {
+                    "target": "com.amazonaws.cloudwatchevents#PlacementStrategyField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to apply the placement strategy against. For the spread placement strategy,\n      valid values are instanceId (or host, which has the same effect), or any platform or custom\n      attribute that is applied to a container instance, such as attribute:ecs.availability-zone.\n      For the binpack placement strategy, valid values are cpu and memory. For the random placement\n      strategy, this field is not used. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The task placement strategy for a task or service. To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html\">Task Placement Strategies</a> in the Amazon Elastic Container Service Developer\n      Guide.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchevents#PlacementStrategyField": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchevents#PlacementStrategyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "random",
+                        "name": "RANDOM"
+                    },
+                    {
+                        "value": "spread",
+                        "name": "SPREAD"
+                    },
+                    {
+                        "value": "binpack",
+                        "name": "BINPACK"
+                    }
+                ]
             }
         },
         "com.amazonaws.cloudwatchevents#PolicyLengthExceededException": {
@@ -4318,7 +4548,18 @@
                     "min": 1,
                     "max": 12
                 },
-                "smithy.api#pattern": "(\\d{12}|\\*)"
+                "smithy.api#pattern": "^(\\d{12}|\\*)$"
+            }
+        },
+        "com.amazonaws.cloudwatchevents#PropagateTags": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TASK_DEFINITION",
+                        "name": "TASK_DEFINITION"
+                    }
+                ]
             }
         },
         "com.amazonaws.cloudwatchevents#PutEvents": {
@@ -4392,7 +4633,7 @@
                 "TraceHeader": {
                     "target": "com.amazonaws.cloudwatchevents#TraceHeader",
                     "traits": {
-                        "smithy.api#documentation": "<p>An AWS X-Ray trade header, which is an http header (X-Amzn-Trace-Id) that contains the trace-id associated with the event.</p>\n         <p>To learn more about X-Ray trace headers, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader\">Tracing header</a> in the AWS X-Ray Developer Guide.</p>"
+                        "smithy.api#documentation": "<p>An AWS X-Ray trade header, which is an http header (X-Amzn-Trace-Id) that contains the\n      trace-id associated with the event.</p>\n         <p>To learn more about X-Ray trace headers, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader\">Tracing header</a> in the AWS X-Ray Developer Guide.</p>"
                     }
                 }
             },
@@ -4782,7 +5023,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified targets to the specified rule, or updates the targets if they are\n      already associated with the rule.</p>\n         <p>Targets are the resources that are invoked when a rule is triggered.</p>\n         <p>You can configure the following as targets for Events:</p>\n\n         <ul>\n            <li>\n               <p>EC2 instances</p>\n            </li>\n            <li>\n               <p>SSM Run Command</p>\n            </li>\n            <li>\n               <p>SSM Automation</p>\n            </li>\n            <li>\n               <p>AWS Lambda functions</p>\n            </li>\n            <li>\n               <p>Data streams in Amazon Kinesis Data Streams</p>\n            </li>\n            <li>\n               <p>Data delivery streams in Amazon Kinesis Data Firehose</p>\n            </li>\n            <li>\n               <p>Amazon ECS tasks</p>\n            </li>\n            <li>\n               <p>AWS Step Functions state machines</p>\n            </li>\n            <li>\n               <p>AWS Batch jobs</p>\n            </li>\n            <li>\n               <p>AWS CodeBuild projects</p>\n            </li>\n            <li>\n               <p>Pipelines in AWS CodePipeline</p>\n            </li>\n            <li>\n               <p>Amazon Inspector assessment templates</p>\n            </li>\n            <li>\n               <p>Amazon SNS topics</p>\n            </li>\n            <li>\n               <p>Amazon SQS queues, including FIFO queues</p>\n            </li>\n            <li>\n               <p>The default event bus of another AWS account</p>\n            </li>\n            <li>\n               <p>Amazon API Gateway REST APIs</p>\n            </li>\n            <li>\n               <p>Redshift Clusters to invoke Data API ExecuteStatement on</p>\n            </li>\n            <li>\n               <p>Custom/SaaS HTTPS APIs via EventBridge API Destinations</p>\n            </li>\n            <li>\n               <p>Amazon SageMaker Model Building Pipelines</p>\n            </li>\n         </ul>\n\n\n\n         <p>Creating rules with built-in targets is supported only in the AWS Management Console. The\n      built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2 RebootInstances API\n        call</code>, <code>EC2 StopInstances API call</code>, and <code>EC2 TerminateInstances API\n        call</code>. </p>\n\n         <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the\n      target is a Kinesis data stream, you can optionally specify which shard the event goes to by\n      using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2\n      instances with one rule, you can use the <code>RunCommandParameters</code> field.</p>\n\n         <p>To be able to make API calls against the resources that you own, Amazon EventBridge\n      (CloudWatch Events) needs the appropriate permissions. For AWS Lambda and Amazon SNS\n      resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis data\n      streams, AWS Step Functions state machines and API Gateway REST APIs, EventBridge relies on\n      IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>.\n      For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html\">Authentication\n        and Access Control</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n\n         <p>If another AWS account is in the same region and has granted you permission (using\n        <code>PutPermission</code>), you can send events to that account. Set that account's event\n      bus as a target of the rules in your account. To send the matched events to the other account,\n      specify that account's event bus as the <code>Arn</code> value when you run\n        <code>PutTargets</code>. If your account sends events to another account, your account is\n      charged for each sent event. Each event sent to another account is charged as a custom event.\n      The account receiving the event is not charged. For more information, see <a href=\"https://aws.amazon.com/eventbridge/pricing/\">Amazon EventBridge (CloudWatch Events)\n        Pricing</a>.</p>\n\n         <note>\n            <p>\n               <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are not\n        available with <code>PutTarget</code> if the target is an event bus of a different AWS\n        account.</p>\n         </note>\n\n         <p>If you are setting the event bus of another account as the target, and that account\n      granted permission to your account through an organization instead of directly by the account\n      ID, then you must specify a <code>RoleArn</code> with proper permissions in the\n        <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and\n        Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User\n        Guide</i>.</p>\n\n         <p>For more information about enabling cross-account events, see <a>PutPermission</a>.</p>\n\n         <p>\n            <b>Input</b>, <b>InputPath</b>, and\n        <b>InputTransformer</b> are mutually exclusive and optional\n      parameters of a target. When a rule is triggered due to a matched event:</p>\n\n         <ul>\n            <li>\n               <p>If none of the following arguments are specified for a target, then the entire event\n          is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or\n          Amazon ECS task, in which case nothing from the event is passed to the target).</p>\n            </li>\n            <li>\n               <p>If <b>Input</b> is specified in the form of valid JSON, then\n          the matched event is overridden with this constant.</p>\n            </li>\n            <li>\n               <p>If <b>InputPath</b> is specified in the form of JSONPath\n          (for example, <code>$.detail</code>), then only the part of the event specified in the\n          path is passed to the target (for example, only the detail part of the event is\n          passed).</p>\n            </li>\n            <li>\n               <p>If <b>InputTransformer</b> is specified, then one or more\n          specified JSONPaths are extracted from the event and used as values in a template that you\n          specify as the input to the target.</p>\n            </li>\n         </ul>\n\n         <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must use\n      JSON dot notation, not bracket notation.</p>\n\n         <p>When you add targets to a rule and the associated rule triggers soon after, new or updated\n      targets might not be immediately invoked. Allow a short period of time for changes to take\n      effect.</p>\n\n         <p>This action can partially fail if too many requests are made at the same time. If that\n      happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in\n        <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
+                "smithy.api#documentation": "<p>Adds the specified targets to the specified rule, or updates the targets if they are\n      already associated with the rule.</p>\n         <p>Targets are the resources that are invoked when a rule is triggered.</p>\n         <p>You can configure the following as targets for Events:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html\">API\n          destination</a>\n               </p>\n            </li>\n            <li>\n               <p>Amazon API Gateway REST API endpoints</p>\n            </li>\n            <li>\n               <p>API Gateway</p>\n            </li>\n            <li>\n               <p>AWS Batch job queue</p>\n            </li>\n            <li>\n               <p>CloudWatch Logs group</p>\n            </li>\n            <li>\n               <p>CodeBuild project</p>\n            </li>\n            <li>\n               <p>CodePineline</p>\n            </li>\n            <li>\n               <p>Amazon EC2 <code>CreateSnapshot</code> API call</p>\n            </li>\n            <li>\n               <p>Amazon EC2 <code>RebootInstances</code> API call</p>\n            </li>\n            <li>\n               <p>Amazon EC2 <code>StopInstances</code> API call</p>\n            </li>\n            <li>\n               <p>Amazon EC2 <code>TerminateInstances</code> API call</p>\n            </li>\n            <li>\n               <p>Amazon ECS tasks</p>\n            </li>\n            <li>\n               <p>Event bus in a different AWS account or Region.</p>\n               <p>You can use an event bus in the US East (N. Virginia) us-east-1, US West (Oregon)\n          us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a rule.</p>\n            </li>\n            <li>\n               <p>Firehose delivery stream (Kinesis Data Firehose)</p>\n            </li>\n            <li>\n               <p>Inspector assessment template (Amazon Inspector)</p>\n            </li>\n            <li>\n               <p>Kinesis stream (Kinesis Data Stream)</p>\n            </li>\n            <li>\n               <p>AWS Lambda function</p>\n            </li>\n            <li>\n               <p>Redshift clusters (Data API statement execution)</p>\n            </li>\n            <li>\n               <p>Amazon SNS topic</p>\n            </li>\n            <li>\n               <p>Amazon SQS queues (includes FIFO queues</p>\n            </li>\n            <li>\n               <p>SSM Automation</p>\n            </li>\n            <li>\n               <p>SSM OpsItem</p>\n            </li>\n            <li>\n               <p>SSM Run Command</p>\n            </li>\n            <li>\n               <p>Step Functions state machines</p>\n            </li>\n         </ul>\n\n         <p>Creating rules with built-in targets is supported only in the AWS Management Console. The\n      built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2 RebootInstances API\n        call</code>, <code>EC2 StopInstances API call</code>, and <code>EC2 TerminateInstances API\n        call</code>. </p>\n\n         <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the\n      target is a Kinesis data stream, you can optionally specify which shard the event goes to by\n      using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2\n      instances with one rule, you can use the <code>RunCommandParameters</code> field.</p>\n\n         <p>To be able to make API calls against the resources that you own, Amazon EventBridge\n      (CloudWatch Events) needs the appropriate permissions. For AWS Lambda and Amazon SNS\n      resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis data\n      streams, AWS Step Functions state machines and API Gateway REST APIs, EventBridge relies on\n      IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>.\n      For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html\">Authentication\n        and Access Control</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n\n         <p>If another AWS account is in the same region and has granted you permission (using\n        <code>PutPermission</code>), you can send events to that account. Set that account's event\n      bus as a target of the rules in your account. To send the matched events to the other account,\n      specify that account's event bus as the <code>Arn</code> value when you run\n        <code>PutTargets</code>. If your account sends events to another account, your account is\n      charged for each sent event. Each event sent to another account is charged as a custom event.\n      The account receiving the event is not charged. For more information, see <a href=\"https://aws.amazon.com/eventbridge/pricing/\">Amazon EventBridge (CloudWatch Events)\n        Pricing</a>.</p>\n\n         <note>\n            <p>\n               <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are not\n        available with <code>PutTarget</code> if the target is an event bus of a different AWS\n        account.</p>\n         </note>\n\n         <p>If you are setting the event bus of another account as the target, and that account\n      granted permission to your account through an organization instead of directly by the account\n      ID, then you must specify a <code>RoleArn</code> with proper permissions in the\n        <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and\n        Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User\n        Guide</i>.</p>\n\n         <p>For more information about enabling cross-account events, see <a>PutPermission</a>.</p>\n\n         <p>\n            <b>Input</b>, <b>InputPath</b>, and\n        <b>InputTransformer</b> are mutually exclusive and optional\n      parameters of a target. When a rule is triggered due to a matched event:</p>\n\n         <ul>\n            <li>\n               <p>If none of the following arguments are specified for a target, then the entire event\n          is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or\n          Amazon ECS task, in which case nothing from the event is passed to the target).</p>\n            </li>\n            <li>\n               <p>If <b>Input</b> is specified in the form of valid JSON, then\n          the matched event is overridden with this constant.</p>\n            </li>\n            <li>\n               <p>If <b>InputPath</b> is specified in the form of JSONPath\n          (for example, <code>$.detail</code>), then only the part of the event specified in the\n          path is passed to the target (for example, only the detail part of the event is\n          passed).</p>\n            </li>\n            <li>\n               <p>If <b>InputTransformer</b> is specified, then one or more\n          specified JSONPaths are extracted from the event and used as values in a template that you\n          specify as the input to the target.</p>\n            </li>\n         </ul>\n\n         <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must use\n      JSON dot notation, not bracket notation.</p>\n\n         <p>When you add targets to a rule and the associated rule triggers soon after, new or updated\n      targets might not be immediately invoked. Allow a short period of time for changes to take\n      effect.</p>\n\n         <p>This action can partially fail if too many requests are made at the same time. If that\n      happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in\n        <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
             }
         },
         "com.amazonaws.cloudwatchevents#PutTargetsRequest": {
@@ -4866,7 +5107,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "[^\\x00-\\x1F\\x7F]+"
+                "smithy.api#pattern": "^[^\\x00-\\x1F\\x7F]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#QueryStringParametersMap": {
@@ -4885,7 +5126,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+"
+                "smithy.api#pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#RedshiftDataParameters": {
@@ -4941,7 +5182,16 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)"
+                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"
+            }
+        },
+        "com.amazonaws.cloudwatchevents#ReferenceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
             }
         },
         "com.amazonaws.cloudwatchevents#RemovePermission": {
@@ -5218,7 +5468,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\.\\-_A-Za-z0-9]+"
+                "smithy.api#pattern": "^[\\.\\-_A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#ReplayState": {
@@ -5420,7 +5670,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\.\\-_A-Za-z0-9]+"
+                "smithy.api#pattern": "^[\\.\\-_A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#RuleNameList": {
@@ -5750,7 +6000,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-_]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#StatementName": {
@@ -5946,7 +6196,7 @@
                 "HttpParameters": {
                     "target": "com.amazonaws.cloudwatchevents#HttpParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the HTTP parameters to use when the target is a API Gateway REST endpoint \n      or EventBridge ApiDestination.</p>\n         <p>If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you \n      can use this parameter to specify headers, path parameters, and query string keys/values \n      as part of your target invoking request. If you're using ApiDestinations, the corresponding\n      Connection can also have these values configured. In case of any conflicting keys, values\n      from the Connection take precedence.</p>"
+                        "smithy.api#documentation": "<p>Contains the HTTP parameters to use when the target is a API Gateway REST endpoint or\n      EventBridge ApiDestination.</p>\n         <p>If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you can\n      use this parameter to specify headers, path parameters, and query string keys/values as part\n      of your target invoking request. If you're using ApiDestinations, the corresponding Connection\n      can also have these values configured. In case of any conflicting keys, values from the\n      Connection take precedence.</p>"
                     }
                 },
                 "RedshiftDataParameters": {
@@ -5994,7 +6244,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\.\\-_A-Za-z0-9]+"
+                "smithy.api#pattern": "^[\\.\\-_A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.cloudwatchevents#TargetIdList": {
@@ -6157,7 +6407,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes one or more tags from the specified EventBridge resource. In Amazon EventBridge\n      (CloudWatch Events, rules and event buses can be tagged.</p>"
+                "smithy.api#documentation": "<p>Removes one or more tags from the specified EventBridge resource. In Amazon EventBridge\n      (CloudWatch Events), rules and event buses can be tagged.</p>"
             }
         },
         "com.amazonaws.cloudwatchevents#UntagResourceRequest": {

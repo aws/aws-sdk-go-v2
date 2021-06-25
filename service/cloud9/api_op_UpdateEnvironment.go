@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Changes the settings of an existing AWS Cloud9 development environment.
+// Changes the settings of an existing Cloud9 development environment.
 func (c *Client) UpdateEnvironment(ctx context.Context, params *UpdateEnvironmentInput, optFns ...func(*Options)) (*UpdateEnvironmentOutput, error) {
 	if params == nil {
 		params = &UpdateEnvironmentInput{}

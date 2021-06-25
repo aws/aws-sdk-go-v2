@@ -11,7 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
 // Updates the configuration settings for the specified quick connect.
 func (c *Client) UpdateQuickConnectConfig(ctx context.Context, params *UpdateQuickConnectConfigInput, optFns ...func(*Options)) (*UpdateQuickConnectConfigOutput, error) {
 	if params == nil {
@@ -30,7 +29,8 @@ func (c *Client) UpdateQuickConnectConfig(ctx context.Context, params *UpdateQui
 
 type UpdateQuickConnectConfigInput struct {
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// the ARN of the instance.
 	//
 	// This member is required.
 	InstanceId *string

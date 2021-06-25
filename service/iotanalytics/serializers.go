@@ -509,6 +509,13 @@ func awsRestjson1_serializeOpDocumentCreateDatastoreInput(v *CreateDatastoreInpu
 		ok.String(*v.DatastoreName)
 	}
 
+	if v.DatastorePartitions != nil {
+		ok := object.Key("datastorePartitions")
+		if err := awsRestjson1_serializeDocumentDatastorePartitions(v.DatastorePartitions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DatastoreStorage != nil {
 		ok := object.Key("datastoreStorage")
 		if err := awsRestjson1_serializeDocumentDatastoreStorage(v.DatastoreStorage, ok); err != nil {
@@ -2816,6 +2823,41 @@ func awsRestjson1_serializeDocumentDatastoreActivity(v *types.DatastoreActivity,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDatastorePartition(v *types.DatastorePartition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttributePartition != nil {
+		ok := object.Key("attributePartition")
+		if err := awsRestjson1_serializeDocumentPartition(v.AttributePartition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimestampPartition != nil {
+		ok := object.Key("timestampPartition")
+		if err := awsRestjson1_serializeDocumentTimestampPartition(v.TimestampPartition, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDatastorePartitions(v *types.DatastorePartitions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Partitions != nil {
+		ok := object.Key("partitions")
+		if err := awsRestjson1_serializeDocumentPartitions(v.Partitions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDatastoreStorage(v types.DatastoreStorage, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3209,6 +3251,31 @@ func awsRestjson1_serializeDocumentParquetConfiguration(v *types.ParquetConfigur
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPartition(v *types.Partition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttributeName != nil {
+		ok := object.Key("attributeName")
+		ok.String(*v.AttributeName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPartitions(v []types.DatastorePartition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDatastorePartition(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPipelineActivities(v []types.PipelineActivity, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3534,6 +3601,23 @@ func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTimestampPartition(v *types.TimestampPartition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttributeName != nil {
+		ok := object.Key("attributeName")
+		ok.String(*v.AttributeName)
+	}
+
+	if v.TimestampFormat != nil {
+		ok := object.Key("timestampFormat")
+		ok.String(*v.TimestampFormat)
+	}
+
 	return nil
 }
 

@@ -87,7 +87,7 @@ type Address struct {
 	// The ID of the network interface.
 	NetworkInterfaceId *string
 
-	// The ID of the AWS account that owns the network interface.
+	// The ID of the account that owns the network interface.
 	NetworkInterfaceOwnerId *string
 
 	// The private IP address associated with the Elastic IP address.
@@ -526,8 +526,8 @@ type BundleTaskError struct {
 	Message *string
 }
 
-// Information about an address range that is provisioned for use with your AWS
-// resources through bring your own IP addresses (BYOIP).
+// Information about an address range that is provisioned for use with your Amazon
+// Web Services resources through bring your own IP addresses (BYOIP).
 type ByoipCidr struct {
 
 	// The address range, in CIDR notation.
@@ -874,8 +874,8 @@ type CertificateAuthenticationRequest struct {
 }
 
 // Provides authorization for Amazon to bring a specific IP address range to a
-// specific AWS account using bring your own IP addresses (BYOIP). For more
-// information, see Prepare to Bring Your Address Range to Your AWS Account
+// specific account using bring your own IP addresses (BYOIP). For more
+// information, see Configuring your BYOIP address range
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#prepare-for-byoip)
 // in the Amazon Elastic Compute Cloud User Guide.
 type CidrAuthorizationContext struct {
@@ -3561,6 +3561,11 @@ type Image struct {
 	// The date and time the image was created.
 	CreationDate *string
 
+	// The date and time to deprecate the AMI, in UTC, in the following format:
+	// YYYY-MM-DDTHH:MM:SSZ. If you specified a value for seconds, Amazon EC2 rounds
+	// the seconds to the nearest minute.
+	DeprecationTime *string
+
 	// The description of the AMI that was provided during image creation.
 	Description *string
 
@@ -4255,7 +4260,7 @@ type InstanceNetworkInterface struct {
 	// One or more security groups.
 	Groups []GroupIdentifier
 
-	// Describes the type of network interface. Valid values: interface | efa
+	// Describes the type of network interface. Valid values: interface | efa | trunk
 	InterfaceType *string
 
 	// One or more IPv6 addresses associated with the network interface.
@@ -4267,7 +4272,7 @@ type InstanceNetworkInterface struct {
 	// The ID of the network interface.
 	NetworkInterfaceId *string
 
-	// The ID of the AWS account that created the network interface.
+	// The ID of the account that created the network interface.
 	OwnerId *string
 
 	// The private DNS name.
@@ -4337,7 +4342,7 @@ type InstanceNetworkInterfaceSpecification struct {
 	// Indicates whether to assign a carrier IP address to the network interface. You
 	// can only assign a carrier IP address to a network interface that is in a subnet
 	// in a Wavelength Zone. For more information about carrier IP addresses, see
-	// Carrier IP addresses in the AWS Wavelength Developer Guide.
+	// Carrier IP addresses in the Amazon Web Services Wavelength Developer Guide.
 	AssociateCarrierIpAddress *bool
 
 	// Indicates whether to assign a public IPv4 address to an instance you launch in a
@@ -4368,8 +4373,7 @@ type InstanceNetworkInterfaceSpecification struct {
 	// The type of network interface. To create an Elastic Fabric Adapter (EFA),
 	// specify efa. For more information, see Elastic Fabric Adapter
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html) in the Amazon
-	// Elastic Compute Cloud User Guide. If you are not creating an EFA, specify
-	// interface or omit this parameter. Valid values: interface | efa
+	// Elastic Compute Cloud User Guide. Valid values: interface | efa
 	InterfaceType *string
 
 	// A number of IPv6 addresses to assign to the network interface. Amazon EC2
@@ -6154,6 +6158,9 @@ type MovingAddressStatus struct {
 // Describes a NAT gateway.
 type NatGateway struct {
 
+	// Indicates whether the NAT gateway supports public or private connectivity.
+	ConnectivityType ConnectivityType
+
 	// The date and time the NAT gateway was created.
 	CreateTime *time.Time
 
@@ -6236,17 +6243,18 @@ type NatGateway struct {
 // Describes the IP addresses and network interface associated with a NAT gateway.
 type NatGatewayAddress struct {
 
-	// The allocation ID of the Elastic IP address that's associated with the NAT
-	// gateway.
+	// [Public NAT gateway only] The allocation ID of the Elastic IP address that's
+	// associated with the NAT gateway.
 	AllocationId *string
 
 	// The ID of the network interface associated with the NAT gateway.
 	NetworkInterfaceId *string
 
-	// The private IP address associated with the Elastic IP address.
+	// The private IP address associated with the NAT gateway.
 	PrivateIp *string
 
-	// The Elastic IP address associated with the NAT gateway.
+	// [Public NAT gateway only] The Elastic IP address associated with the NAT
+	// gateway.
 	PublicIp *string
 }
 
@@ -6483,7 +6491,7 @@ type NetworkInterface struct {
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
-	// The AWS account ID of the owner of the network interface.
+	// The account ID of the owner of the network interface.
 	OwnerId *string
 
 	// The private DNS name.
@@ -6495,11 +6503,11 @@ type NetworkInterface struct {
 	// The private IPv4 addresses associated with the network interface.
 	PrivateIpAddresses []NetworkInterfacePrivateIpAddress
 
-	// The alias or AWS account ID of the principal or service that created the network
+	// The alias or account ID of the principal or service that created the network
 	// interface.
 	RequesterId *string
 
-	// Indicates whether the network interface is being managed by AWS.
+	// Indicates whether the network interface is being managed by Amazon Web Services.
 	RequesterManaged *bool
 
 	// Indicates whether source/destination checking is enabled.
@@ -6566,7 +6574,7 @@ type NetworkInterfaceAttachment struct {
 	// The ID of the instance.
 	InstanceId *string
 
-	// The AWS account ID of the owner of the instance.
+	// The account ID of the owner of the instance.
 	InstanceOwnerId *string
 
 	// The index of the network card.
@@ -6597,10 +6605,10 @@ type NetworkInterfaceIpv6Address struct {
 // Describes a permission for a network interface.
 type NetworkInterfacePermission struct {
 
-	// The AWS account ID.
+	// The account ID.
 	AwsAccountId *string
 
-	// The AWS service.
+	// The Amazon Web Service.
 	AwsService *string
 
 	// The ID of the network interface.
@@ -7018,10 +7026,10 @@ type PortRange struct {
 	To *int32
 }
 
-// Describes prefixes for AWS services.
+// Describes prefixes for Amazon Web Services services.
 type PrefixList struct {
 
-	// The IP address range of the AWS service.
+	// The IP address range of the Amazon Web Service.
 	Cidrs []string
 
 	// The ID of the prefix.
@@ -7242,8 +7250,8 @@ type PublicIpv4Pool struct {
 	Description *string
 
 	// The name of the location from which the address pool is advertised. A network
-	// border group is a unique set of Availability Zones or Local Zones from where AWS
-	// advertises public IP addresses.
+	// border group is a unique set of Availability Zones or Local Zones from where
+	// Amazon Web Services advertises public IP addresses.
 	NetworkBorderGroup *string
 
 	// The address ranges.
@@ -10808,6 +10816,32 @@ type TransitGatewayVpcAttachmentOptions struct {
 
 	// Indicates whether IPv6 support is disabled.
 	Ipv6Support Ipv6SupportValue
+}
+
+// Information about an association between a branch network interface with a trunk
+// network interface.
+type TrunkInterfaceAssociation struct {
+
+	// The ID of the association.
+	AssociationId *string
+
+	// The ID of the branch network interface.
+	BranchInterfaceId *string
+
+	// The application key when you use the GRE protocol.
+	GreKey *int32
+
+	// The interface protocol. Valid values are VLAN and GRE.
+	InterfaceProtocol InterfaceProtocolType
+
+	// The tags.
+	Tags []Tag
+
+	// The ID of the trunk network interface.
+	TrunkInterfaceId *string
+
+	// The ID of the VLAN when you use the VLAN protocol.
+	VlanId *int32
 }
 
 // The VPN tunnel options.

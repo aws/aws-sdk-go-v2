@@ -1220,6 +1220,9 @@ func awsRestjson1_deserializeOpErrorDisassociateResourceSharePermission(response
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("InvalidStateTransitionException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidStateTransitionException(response, errorBody)
+
 	case strings.EqualFold("MalformedArnException", errorCode):
 		return awsRestjson1_deserializeErrorMalformedArnException(response, errorBody)
 
@@ -3448,6 +3451,9 @@ func awsRestjson1_deserializeOpErrorPromoteResourceShareCreatedFromPolicy(respon
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsRestjson1_deserializeErrorOperationNotPermittedException(response, errorBody)
 
+	case strings.EqualFold("ResourceShareLimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorResourceShareLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ServerInternalException", errorCode):
 		return awsRestjson1_deserializeErrorServerInternalException(response, errorBody)
 
@@ -3780,6 +3786,9 @@ func awsRestjson1_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 
 	case strings.EqualFold("TagPolicyViolationException", errorCode):
 		return awsRestjson1_deserializeErrorTagPolicyViolationException(response, errorBody)
+
+	case strings.EqualFold("UnknownResourceException", errorCode):
+		return awsRestjson1_deserializeErrorUnknownResourceException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -5878,6 +5887,15 @@ func awsRestjson1_deserializeDocumentResourceShareInvitation(v **types.ResourceS
 				sv.ReceiverAccountId = ptr.String(jtv)
 			}
 
+		case "receiverArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ReceiverArn = ptr.String(jtv)
+			}
+
 		case "resourceShareArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6258,6 +6276,15 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 				sv.DefaultVersion = ptr.Bool(jtv)
 			}
 
+		case "isResourceTypeDefault":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsResourceTypeDefault = ptr.Bool(jtv)
+			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6401,6 +6428,15 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.DefaultVersion = ptr.Bool(jtv)
+			}
+
+		case "isResourceTypeDefault":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsResourceTypeDefault = ptr.Bool(jtv)
 			}
 
 		case "lastUpdatedTime":

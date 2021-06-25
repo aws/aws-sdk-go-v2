@@ -488,6 +488,7 @@ type DestinationConnectorProperties struct {
 	// The properties required to query Upsolver.
 	Upsolver *UpsolverDestinationProperties
 
+	// The properties required to query Zendesk.
 	Zendesk *ZendeskDestinationProperties
 }
 
@@ -1638,8 +1639,11 @@ type ZendeskConnectorProfileProperties struct {
 	InstanceUrl *string
 }
 
+// The properties that are applied when Zendesk is used as a destination.
 type ZendeskDestinationProperties struct {
 
+	// The object specified in the Zendesk flow destination.
+	//
 	// This member is required.
 	Object *string
 

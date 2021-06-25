@@ -13,7 +13,7 @@ type AvailabilityZone struct {
 	Name *string
 }
 
-// A certificate authority (CA) certificate for an AWS account.
+// A certificate authority (CA) certificate for an account.
 type Certificate struct {
 
 	// The Amazon Resource Name (ARN) for the certificate. Example:
@@ -55,9 +55,10 @@ type CloudwatchLogsExportConfiguration struct {
 // Detailed information about a cluster.
 type DBCluster struct {
 
-	// Provides a list of the AWS Identity and Access Management (IAM) roles that are
-	// associated with the cluster. IAM roles that are associated with a cluster grant
-	// permission for the cluster to access other AWS services on your behalf.
+	// Provides a list of the Identity and Access Management (IAM) roles that are
+	// associated with the cluster. (IAM) roles that are associated with a cluster
+	// grant permission for the cluster to access other Amazon Web Services services on
+	// your behalf.
 	AssociatedRoles []DBClusterRole
 
 	// Provides the list of Amazon EC2 Availability Zones that instances in the cluster
@@ -88,8 +89,8 @@ type DBCluster struct {
 	// including the name, description, and subnets in the subnet group.
 	DBSubnetGroup *string
 
-	// The AWS Region-unique, immutable identifier for the cluster. This identifier is
-	// found in AWS CloudTrail log entries whenever the AWS KMS key for the cluster is
+	// The Region-unique, immutable identifier for the cluster. This identifier is
+	// found in CloudTrail log entries whenever the KMS key for the cluster is
 	// accessed.
 	DbClusterResourceId *string
 
@@ -118,8 +119,7 @@ type DBCluster struct {
 	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneId *string
 
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted
-	// cluster.
+	// If StorageEncrypted is true, the KMS key identifier for the encrypted cluster.
 	KmsKeyId *string
 
 	// Specifies the latest time to which a database can be restored with point-in-time
@@ -214,26 +214,27 @@ type DBClusterParameterGroup struct {
 	Description *string
 }
 
-// Describes an AWS Identity and Access Management (IAM) role that is associated
-// with a cluster.
+// Describes an Identity and Access Management (IAM) role that is associated with a
+// cluster.
 type DBClusterRole struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role that is associated with the DB
+	// The Amazon Resource Name (ARN) of the IAMrole that is associated with the DB
 	// cluster.
 	RoleArn *string
 
-	// Describes the state of association between the IAM role and the cluster. The
+	// Describes the state of association between the IAMrole and the cluster. The
 	// Status property returns one of the following values:
 	//
-	// * ACTIVE - The IAM role
-	// ARN is associated with the cluster and can be used to access other AWS services
-	// on your behalf.
+	// * ACTIVE - The IAMrole ARN
+	// is associated with the cluster and can be used to access other Amazon Web
+	// Services services on your behalf.
 	//
-	// * PENDING - The IAM role ARN is being associated with the DB
-	// cluster.
+	// * PENDING - The IAMrole ARN is being
+	// associated with the cluster.
 	//
-	// * INVALID - The IAM role ARN is associated with the cluster, but the
-	// cluster cannot assume the IAM role to access other AWS services on your behalf.
+	// * INVALID - The IAMrole ARN is associated with the
+	// cluster, but the cluster cannot assume the IAMrole to access other Amazon Web
+	// Services services on your behalf.
 	Status *string
 }
 
@@ -264,8 +265,8 @@ type DBClusterSnapshot struct {
 	// Provides the version of the database engine for this cluster snapshot.
 	EngineVersion *string
 
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted
-	// cluster snapshot.
+	// If StorageEncrypted is true, the KMS key identifier for the encrypted cluster
+	// snapshot.
 	KmsKeyId *string
 
 	// Provides the master user name for the cluster snapshot.
@@ -300,20 +301,20 @@ type DBClusterSnapshot struct {
 }
 
 // Contains the name and values of a manual cluster snapshot attribute. Manual
-// cluster snapshot attributes are used to authorize other AWS accounts to restore
-// a manual cluster snapshot.
+// cluster snapshot attributes are used to authorize other accounts to restore a
+// manual cluster snapshot.
 type DBClusterSnapshotAttribute struct {
 
 	// The name of the manual cluster snapshot attribute. The attribute named restore
-	// refers to the list of AWS accounts that have permission to copy or restore the
+	// refers to the list of accounts that have permission to copy or restore the
 	// manual cluster snapshot.
 	AttributeName *string
 
 	// The values for the manual cluster snapshot attribute. If the AttributeName field
-	// is set to restore, then this element returns a list of IDs of the AWS accounts
-	// that are authorized to copy or restore the manual cluster snapshot. If a value
-	// of all is in the list, then the manual cluster snapshot is public and available
-	// for any AWS account to copy or restore.
+	// is set to restore, then this element returns a list of IDs of the accounts that
+	// are authorized to copy or restore the manual cluster snapshot. If a value of all
+	// is in the list, then the manual cluster snapshot is public and available for any
+	// account to copy or restore.
 	AttributeValues []string
 }
 
@@ -361,7 +362,8 @@ type DBEngineVersion struct {
 // Detailed information about an instance.
 type DBInstance struct {
 
-	// Indicates that minor version patches are applied automatically.
+	// Does not apply. This parameter does not apply to Amazon DocumentDB. Amazon
+	// DocumentDB does not perform minor version upgrades regardless of the value set.
 	AutoMinorVersionUpgrade bool
 
 	// Specifies the name of the Availability Zone that the instance is located in.
@@ -394,13 +396,13 @@ type DBInstance struct {
 	// including the name, description, and subnets in the subnet group.
 	DBSubnetGroup *DBSubnetGroup
 
-	// The AWS Region-unique, immutable identifier for the instance. This identifier is
-	// found in AWS CloudTrail log entries whenever the AWS KMS key for the instance is
+	// The Region-unique, immutable identifier for the instance. This identifier is
+	// found in CloudTrail log entries whenever the KMS key for the instance is
 	// accessed.
 	DbiResourceId *string
 
-	// A list of log types that this instance is configured to export to Amazon
-	// CloudWatch Logs.
+	// A list of log types that this instance is configured to export to CloudWatch
+	// Logs.
 	EnabledCloudwatchLogsExports []string
 
 	// Specifies the connection endpoint.
@@ -415,8 +417,7 @@ type DBInstance struct {
 	// Provides the date and time that the instance was created.
 	InstanceCreateTime *time.Time
 
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted
-	// instance.
+	// If StorageEncrypted is true, the KMS key identifier for the encrypted instance.
 	KmsKeyId *string
 
 	// Specifies the latest time to which a database can be restored with point-in-time
@@ -565,8 +566,8 @@ type EventSubscription struct {
 	// The Amazon DocumentDB event notification subscription ID.
 	CustSubscriptionId *string
 
-	// The AWS customer account that is associated with the Amazon DocumentDB event
-	// notification subscription.
+	// The Amazon Web Services customer account that is associated with the Amazon
+	// DocumentDB event notification subscription.
 	CustomerAwsId *string
 
 	// A Boolean value indicating whether the subscription is enabled. A value of true
@@ -644,9 +645,9 @@ type GlobalCluster struct {
 	// Currently limited to one item.
 	GlobalClusterMembers []GlobalClusterMember
 
-	// The AWS Region-unique, immutable identifier for the global database cluster.
-	// This identifier is found in AWS CloudTrail log entries whenever the AWS KMS
-	// customer master key (CMK) for the cluster is accessed.
+	// The Region-unique, immutable identifier for the global database cluster. This
+	// identifier is found in AWS CloudTrail log entries whenever the AWS KMS customer
+	// master key (CMK) for the cluster is accessed.
 	GlobalClusterResourceId *string
 
 	// Specifies the current state of this global cluster.

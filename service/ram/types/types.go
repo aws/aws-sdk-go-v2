@@ -147,6 +147,10 @@ type ResourceShareInvitation struct {
 	// The ID of the AWS account that received the invitation.
 	ReceiverAccountId *string
 
+	// The Amazon Resource Name (ARN) of the IAM user or IAM role that received the
+	// invitation.
+	ReceiverArn *string
+
 	// The Amazon Resource Name (ARN) of the resource share.
 	ResourceShareArn *string
 
@@ -179,9 +183,13 @@ type ResourceSharePermissionDetail struct {
 	// The date and time when the permission was created.
 	CreationTime *time.Time
 
-	// The identifier for the version of the permission that is set as the default
-	// version.
+	// Specifies whether the version of the permission is set to the default version
+	// for this permission.
 	DefaultVersion *bool
+
+	// Specifies whether the version of the permission is set to the default version
+	// for this resource type.
+	IsResourceTypeDefault *bool
 
 	// The date and time when the permission was last updated.
 	LastUpdatedTime *time.Time
@@ -210,9 +218,13 @@ type ResourceSharePermissionSummary struct {
 	// The date and time when the permission was created.
 	CreationTime *time.Time
 
-	// The identifier for the version of the permission that is set as the default
-	// version.
+	// Specifies whether the version of the permission is set to the default version
+	// for this permission.
 	DefaultVersion *bool
+
+	// Specifies whether the version of the permission is set to the default version
+	// for this resource type.
+	IsResourceTypeDefault *bool
 
 	// The date and time when the permission was last updated.
 	LastUpdatedTime *time.Time

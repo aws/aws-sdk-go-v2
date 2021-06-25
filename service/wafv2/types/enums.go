@@ -941,6 +941,21 @@ const (
 	TextTransformationTypeLowercase          TextTransformationType = "LOWERCASE"
 	TextTransformationTypeCmdLine            TextTransformationType = "CMD_LINE"
 	TextTransformationTypeUrlDecode          TextTransformationType = "URL_DECODE"
+	TextTransformationTypeBase64Decode       TextTransformationType = "BASE64_DECODE"
+	TextTransformationTypeHexDecode          TextTransformationType = "HEX_DECODE"
+	TextTransformationTypeMd5                TextTransformationType = "MD5"
+	TextTransformationTypeReplaceComments    TextTransformationType = "REPLACE_COMMENTS"
+	TextTransformationTypeEscapeSeqDecode    TextTransformationType = "ESCAPE_SEQ_DECODE"
+	TextTransformationTypeSqlHexDecode       TextTransformationType = "SQL_HEX_DECODE"
+	TextTransformationTypeCssDecode          TextTransformationType = "CSS_DECODE"
+	TextTransformationTypeJsDecode           TextTransformationType = "JS_DECODE"
+	TextTransformationTypeNormalizePath      TextTransformationType = "NORMALIZE_PATH"
+	TextTransformationTypeNormalizePathWin   TextTransformationType = "NORMALIZE_PATH_WIN"
+	TextTransformationTypeRemoveNulls        TextTransformationType = "REMOVE_NULLS"
+	TextTransformationTypeReplaceNulls       TextTransformationType = "REPLACE_NULLS"
+	TextTransformationTypeBase64DecodeExt    TextTransformationType = "BASE64_DECODE_EXT"
+	TextTransformationTypeUrlDecodeUni       TextTransformationType = "URL_DECODE_UNI"
+	TextTransformationTypeUtf8ToUnicode      TextTransformationType = "UTF8_TO_UNICODE"
 )
 
 // Values returns all known values for TextTransformationType. Note that this can
@@ -954,5 +969,20 @@ func (TextTransformationType) Values() []TextTransformationType {
 		"LOWERCASE",
 		"CMD_LINE",
 		"URL_DECODE",
+		"BASE64_DECODE",
+		"HEX_DECODE",
+		"MD5",
+		"REPLACE_COMMENTS",
+		"ESCAPE_SEQ_DECODE",
+		"SQL_HEX_DECODE",
+		"CSS_DECODE",
+		"JS_DECODE",
+		"NORMALIZE_PATH",
+		"NORMALIZE_PATH_WIN",
+		"REMOVE_NULLS",
+		"REPLACE_NULLS",
+		"BASE64_DECODE_EXT",
+		"URL_DECODE_UNI",
+		"UTF8_TO_UNICODE",
 	}
 }

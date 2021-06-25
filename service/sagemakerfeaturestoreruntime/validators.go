@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchGetRecord struct {
+}
+
+func (*validateOpBatchGetRecord) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetRecord) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetRecordInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetRecordInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteRecord struct {
 }
 
@@ -70,6 +90,10 @@ func (m *validateOpPutRecord) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchGetRecordValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetRecord{}, middleware.After)
+}
+
 func addOpDeleteRecordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRecord{}, middleware.After)
 }
@@ -80,6 +104,41 @@ func addOpGetRecordValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutRecordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutRecord{}, middleware.After)
+}
+
+func validateBatchGetRecordIdentifier(v *types.BatchGetRecordIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetRecordIdentifier"}
+	if v.FeatureGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureGroupName"))
+	}
+	if v.RecordIdentifiersValueAsString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordIdentifiersValueAsString"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetRecordIdentifiers(v []types.BatchGetRecordIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetRecordIdentifiers"}
+	for i := range v {
+		if err := validateBatchGetRecordIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateFeatureValue(v *types.FeatureValue) error {
@@ -108,6 +167,25 @@ func validateRecord(v []types.FeatureValue) error {
 	for i := range v {
 		if err := validateFeatureValue(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetRecordInput(v *BatchGetRecordInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetRecordInput"}
+	if v.Identifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifiers"))
+	} else if v.Identifiers != nil {
+		if err := validateBatchGetRecordIdentifiers(v.Identifiers); err != nil {
+			invalidParams.AddNested("Identifiers", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

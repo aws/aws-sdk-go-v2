@@ -1005,6 +1005,80 @@ type FilterOperation struct {
 	ConditionExpression *string
 }
 
+// A folder.
+type Folder struct {
+
+	// The folder Amazon Resource Name (ARN).
+	Arn *string
+
+	// The time that the folder was created.
+	CreatedTime *time.Time
+
+	// The folder ID.
+	FolderId *string
+
+	// An array of ancestor folder ARN strings.
+	FolderPath []string
+
+	// The type of the folder.
+	FolderType FolderType
+
+	// The time that the folder was last updated.
+	LastUpdatedTime *time.Time
+
+	// A display name for the folder.
+	Name *string
+}
+
+// An asset in a folder, such as a dashboard, analysis, or dataset.
+type FolderMember struct {
+
+	// The ID of the asset.
+	MemberId *string
+
+	// The type of the asset.
+	MemberType MemberType
+}
+
+// Searches a folder by a filter.
+type FolderSearchFilter struct {
+
+	// The name of the value that you want to use as a filter. For example, "Name":
+	// "PARENT_FOLDER_ARN".
+	Name FolderFilterAttribute
+
+	// The comparison operator that you want to use as a filter. For example,
+	// "Operator": "StringEquals".
+	Operator FilterOperator
+
+	// The value of the named item (in this example, PARENT_FOLDER_ARN), that you want
+	// to use as a filter. For example, "Value":
+	// "arn:aws:quicksight:us-east-1:1:folder/folderId".
+	Value *string
+}
+
+// A summary of the folder.
+type FolderSummary struct {
+
+	// The Amazon Resource Name (ARN).
+	Arn *string
+
+	// The time that the folder was created.
+	CreatedTime *time.Time
+
+	// The folder ID.
+	FolderId *string
+
+	// The type of folder.
+	FolderType FolderType
+
+	// The time that the folder was last updated.
+	LastUpdatedTime *time.Time
+
+	// The display name of the folder.
+	Name *string
+}
+
 // Geospatial column group that denotes a hierarchy.
 type GeoSpatialColumnGroup struct {
 
@@ -1280,6 +1354,16 @@ type MariaDbParameters struct {
 	//
 	// This member is required.
 	Port int32
+}
+
+// An object that consists of the member Amazon Resource Name (ARN) and member ID.
+type MemberIdArnPair struct {
+
+	// The Amazon Resource Name (ARN) of the member.
+	MemberArn *string
+
+	// The ID of the member.
+	MemberId *string
 }
 
 // MySQL parameters.
@@ -1625,7 +1709,7 @@ type S3Parameters struct {
 	ManifestFileLocation *ManifestFileLocation
 }
 
-// A physical table type for as S3 data source.
+// A physical table type for an S3 data source.
 type S3Source struct {
 
 	// The Amazon Resource Name (ARN) for the data source.
@@ -1633,7 +1717,8 @@ type S3Source struct {
 	// This member is required.
 	DataSourceArn *string
 
-	// A physical table type for as S3 data source.
+	// A physical table type for an S3 data source. For non-JSON files, only STRING
+	// data types are supported in input columns.
 	//
 	// This member is required.
 	InputColumns []InputColumn

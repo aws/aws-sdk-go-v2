@@ -346,6 +346,24 @@ func (IntegrationType) Values() []IntegrationType {
 	}
 }
 
+type LexVersion string
+
+// Enum values for LexVersion
+const (
+	LexVersionV1 LexVersion = "V1"
+	LexVersionV2 LexVersion = "V2"
+)
+
+// Values returns all known values for LexVersion. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LexVersion) Values() []LexVersion {
+	return []LexVersion{
+		"V1",
+		"V2",
+	}
+}
+
 type PhoneNumberCountryCode string
 
 // Enum values for PhoneNumberCountryCode

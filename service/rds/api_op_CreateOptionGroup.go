@@ -39,12 +39,12 @@ type CreateOptionGroupInput struct {
 	//
 	// * oracle-ee
 	//
-	// * oracle-se2
+	// * oracle-ee-cdb
 	//
 	// *
-	// oracle-se1
+	// oracle-se2
 	//
-	// * oracle-se
+	// * oracle-se2-cdb
 	//
 	// * postgres
 	//

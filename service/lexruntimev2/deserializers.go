@@ -2291,8 +2291,22 @@ func awsRestjson1_deserializeDocumentSlot(v **types.Slot, value interface{}) err
 
 	for key, value := range shape {
 		switch key {
+		case "shape":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Shape to be of type string, got %T instead", value)
+				}
+				sv.Shape = types.Shape(jtv)
+			}
+
 		case "value":
 			if err := awsRestjson1_deserializeDocumentValue(&sv.Value, value); err != nil {
+				return err
+			}
+
+		case "values":
+			if err := awsRestjson1_deserializeDocumentValues(&sv.Values, value); err != nil {
 				return err
 			}
 
@@ -2543,5 +2557,39 @@ func awsRestjson1_deserializeDocumentValue(v **types.Value, value interface{}) e
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentValues(v *[]types.Slot, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Slot
+	if *v == nil {
+		cv = []types.Slot{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Slot
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSlot(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }

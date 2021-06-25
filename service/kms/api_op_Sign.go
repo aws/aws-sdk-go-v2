@@ -45,7 +45,7 @@ import (
 // use the Verify operation. Or use the GetPublicKey operation to download the
 // public key and then use the public key to verify the signature outside of AWS
 // KMS. The CMK that you use for this operation must be in a compatible key state.
-// For details, see How Key State Affects Use of a Customer Master Key
+// For details, see Key state: Effect on your CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide. Cross-account use: Yes. To perform
 // this operation with a CMK in a different AWS account, specify the key ARN or
@@ -72,9 +72,9 @@ type SignInput struct {
 	// Identifies an asymmetric CMK. AWS KMS uses the private key in the asymmetric CMK
 	// to sign the message. The KeyUsage type of the CMK must be SIGN_VERIFY. To find
 	// the KeyUsage of a CMK, use the DescribeKey operation. To specify a CMK, use its
-	// key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an
-	// alias name, prefix it with "alias/". To specify a CMK in a different AWS
-	// account, you must use the key ARN or alias ARN. For example:
+	// key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix it
+	// with "alias/". To specify a CMK in a different AWS account, you must use the key
+	// ARN or alias ARN. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -109,7 +109,9 @@ type SignInput struct {
 	// This member is required.
 	SigningAlgorithm types.SigningAlgorithmSpec
 
-	// A list of grant tokens. For more information, see Grant Tokens
+	// A list of grant tokens. Use a grant token when your permission to call this
+	// operation comes from a new grant that has not yet achieved eventual consistency.
+	// For more information, see Grant token
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []string

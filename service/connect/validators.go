@@ -30,6 +30,26 @@ func (m *validateOpAssociateApprovedOrigin) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateBot struct {
+}
+
+func (*validateOpAssociateBot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateBot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateBotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateBotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateInstanceStorageConfig struct {
 }
 
@@ -690,6 +710,26 @@ func (m *validateOpDisassociateApprovedOrigin) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateBot struct {
+}
+
+func (*validateOpDisassociateBot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateBot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateBotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateBotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateInstanceStorageConfig struct {
 }
 
@@ -905,6 +945,26 @@ func (m *validateOpListApprovedOrigins) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListApprovedOriginsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListBots struct {
+}
+
+func (*validateOpListBots) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListBots) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListBotsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListBotsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1974,6 +2034,10 @@ func addOpAssociateApprovedOriginValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpAssociateApprovedOrigin{}, middleware.After)
 }
 
+func addOpAssociateBotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateBot{}, middleware.After)
+}
+
 func addOpAssociateInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateInstanceStorageConfig{}, middleware.After)
 }
@@ -2106,6 +2170,10 @@ func addOpDisassociateApprovedOriginValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpDisassociateApprovedOrigin{}, middleware.After)
 }
 
+func addOpDisassociateBotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateBot{}, middleware.After)
+}
+
 func addOpDisassociateInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateInstanceStorageConfig{}, middleware.After)
 }
@@ -2148,6 +2216,10 @@ func addOpGetMetricDataValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListApprovedOriginsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListApprovedOrigins{}, middleware.After)
+}
+
+func addOpListBotsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListBots{}, middleware.After)
 }
 
 func addOpListContactFlowsValidationMiddleware(stack *middleware.Stack) error {
@@ -2820,6 +2892,21 @@ func validateOpAssociateApprovedOriginInput(v *AssociateApprovedOriginInput) err
 	}
 	if v.Origin == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Origin"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateBotInput(v *AssociateBotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateBotInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3501,6 +3588,21 @@ func validateOpDisassociateApprovedOriginInput(v *DisassociateApprovedOriginInpu
 	}
 }
 
+func validateOpDisassociateBotInput(v *DisassociateBotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateBotInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateInstanceStorageConfigInput(v *DisassociateInstanceStorageConfigInput) error {
 	if v == nil {
 		return nil
@@ -3713,6 +3815,24 @@ func validateOpListApprovedOriginsInput(v *ListApprovedOriginsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListApprovedOriginsInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListBotsInput(v *ListBotsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListBotsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if len(v.LexVersion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LexVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

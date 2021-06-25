@@ -58,8 +58,8 @@ type CreateMetricSetInput struct {
 	// The frequency with which the source data will be analyzed for anomalies.
 	MetricSetFrequency types.Frequency
 
-	// After an interval ends, the amount of time that the detector waits before
-	// importing data.
+	// After an interval ends, the amount of seconds that the detector waits before
+	// importing data. Offset is only supported for S3 and Redshift datasources.
 	Offset int32
 
 	// A list of tags

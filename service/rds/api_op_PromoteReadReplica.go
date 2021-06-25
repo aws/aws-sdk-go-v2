@@ -65,9 +65,9 @@ type PromoteReadReplicaInput struct {
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled, using the BackupRetentionPeriod parameter. The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
-	// Region. To see the time blocks available, see  Adjusting the Preferred
-	// Maintenance Window
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
+	// Web Services Region. To see the time blocks available, see  Adjusting the
+	// Preferred Maintenance Window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
 	// in the Amazon RDS User Guide. Constraints:
 	//

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the AWS resources that are required to access the Amplify Admin UI.
+// Removes the AWS resources required to access the Amplify Admin UI.
 func (c *Client) RemoveBackendConfig(ctx context.Context, params *RemoveBackendConfigInput, optFns ...func(*Options)) (*RemoveBackendConfigOutput, error) {
 	if params == nil {
 		params = &RemoveBackendConfigInput{}
@@ -36,7 +36,7 @@ type RemoveBackendConfigInput struct {
 
 type RemoveBackendConfigOutput struct {
 
-	// If the request failed, this is the returned error.
+	// If the request fails, this error is returned.
 	Error *string
 
 	// Metadata pertaining to the operation's result.

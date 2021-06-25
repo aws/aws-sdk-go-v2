@@ -1325,6 +1325,12 @@ type UserPoolClientType struct {
 	// callback URLs such as myapp://example are also supported.
 	DefaultRedirectURI *string
 
+	// Indicates whether token revocation is enabled for the user pool client. When you
+	// create a new user pool client, token revocation is enabled by default. For more
+	// information about revoking tokens, see RevokeToken
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html).
+	EnableTokenRevocation *bool
+
 	// The authentication flows that are supported by the user pool clients. Flow names
 	// without the ALLOW_ prefix are deprecated in favor of new names with the ALLOW_
 	// prefix. Note that values with ALLOW_ prefix cannot be used along with values

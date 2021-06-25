@@ -1471,11 +1471,25 @@
         "com.amazonaws.mediaconnect#FailoverConfig": {
             "type": "structure",
             "members": {
+                "FailoverMode": {
+                    "target": "com.amazonaws.mediaconnect#FailoverMode",
+                    "traits": {
+                        "smithy.api#documentation": "The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.",
+                        "smithy.api#jsonName": "failoverMode"
+                    }
+                },
                 "RecoveryWindow": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
                         "smithy.api#documentation": "Search window time to look for dash-7 packets",
                         "smithy.api#jsonName": "recoveryWindow"
+                    }
+                },
+                "SourcePriority": {
+                    "target": "com.amazonaws.mediaconnect#SourcePriority",
+                    "traits": {
+                        "smithy.api#documentation": "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.",
+                        "smithy.api#jsonName": "sourcePriority"
                     }
                 },
                 "State": {
@@ -1487,6 +1501,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "The settings for source failover"
+            }
+        },
+        "com.amazonaws.mediaconnect#FailoverMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MERGE",
+                        "name": "MERGE"
+                    },
+                    {
+                        "value": "FAILOVER",
+                        "name": "FAILOVER"
+                    }
+                ]
             }
         },
         "com.amazonaws.mediaconnect#Flow": {
@@ -4002,6 +4031,21 @@
                 "smithy.api#documentation": "The settings for the source of the flow."
             }
         },
+        "com.amazonaws.mediaconnect#SourcePriority": {
+            "type": "structure",
+            "members": {
+                "PrimarySource": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the source you choose as the primary source for this flow.",
+                        "smithy.api#jsonName": "primarySource"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams."
+            }
+        },
         "com.amazonaws.mediaconnect#SourceType": {
             "type": "string",
             "traits": {
@@ -4509,11 +4553,25 @@
         "com.amazonaws.mediaconnect#UpdateFailoverConfig": {
             "type": "structure",
             "members": {
+                "FailoverMode": {
+                    "target": "com.amazonaws.mediaconnect#FailoverMode",
+                    "traits": {
+                        "smithy.api#documentation": "The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.",
+                        "smithy.api#jsonName": "failoverMode"
+                    }
+                },
                 "RecoveryWindow": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
                         "smithy.api#documentation": "Recovery window time to look for dash-7 packets",
                         "smithy.api#jsonName": "recoveryWindow"
+                    }
+                },
+                "SourcePriority": {
+                    "target": "com.amazonaws.mediaconnect#SourcePriority",
+                    "traits": {
+                        "smithy.api#documentation": "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.",
+                        "smithy.api#jsonName": "sourcePriority"
                     }
                 },
                 "State": {

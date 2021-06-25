@@ -527,8 +527,8 @@ func (e *DBInstanceRoleNotFoundFault) ErrorMessage() string {
 func (e *DBInstanceRoleNotFoundFault) ErrorCode() string             { return "DBInstanceRoleNotFoundFault" }
 func (e *DBInstanceRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You can't associate any more AWS Identity and Access Management (IAM) roles with
-// the DB instance because the quota has been reached.
+// You can't associate any more Amazon Web Services Identity and Access Management
+// (IAM) roles with the DB instance because the quota has been reached.
 type DBInstanceRoleQuotaExceededFault struct {
 	Message *string
 }
@@ -624,8 +624,8 @@ func (e *DBParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The specified proxy name must be unique for all proxies owned by your AWS
-// account in the specified AWS Region.
+// The specified proxy name must be unique for all proxies owned by your Amazon Web
+// Services account in the specified Amazon Web Services Region.
 type DBProxyAlreadyExistsFault struct {
 	Message *string
 }
@@ -643,7 +643,8 @@ func (e *DBProxyAlreadyExistsFault) ErrorCode() string             { return "DBP
 func (e *DBProxyAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified DB proxy endpoint name must be unique for all DB proxy endpoints
-// owned by your AWS account in the specified AWS Region.
+// owned by your Amazon Web Services account in the specified Amazon Web Services
+// Region.
 type DBProxyEndpointAlreadyExistsFault struct {
 	Message *string
 }
@@ -698,8 +699,8 @@ func (e *DBProxyEndpointQuotaExceededFault) ErrorCode() string {
 }
 func (e *DBProxyEndpointQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified proxy name doesn't correspond to a proxy owned by your AWS account
-// in the specified AWS Region.
+// The specified proxy name doesn't correspond to a proxy owned by your Amazon Web
+// Services account in the specified Amazon Web Services Region.
 type DBProxyNotFoundFault struct {
 	Message *string
 }
@@ -716,8 +717,8 @@ func (e *DBProxyNotFoundFault) ErrorMessage() string {
 func (e *DBProxyNotFoundFault) ErrorCode() string             { return "DBProxyNotFoundFault" }
 func (e *DBProxyNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Your AWS account already has the maximum number of proxies in the specified AWS
-// Region.
+// Your Amazon Web Services account already has the maximum number of proxies in
+// the specified Amazon Web Services Region.
 type DBProxyQuotaExceededFault struct {
 	Message *string
 }
@@ -756,8 +757,8 @@ func (e *DBProxyTargetAlreadyRegisteredFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The specified target group isn't available for a proxy owned by your AWS account
-// in the specified AWS Region.
+// The specified target group isn't available for a proxy owned by your Amazon Web
+// Services account in the specified Amazon Web Services Region.
 type DBProxyTargetGroupNotFoundFault struct {
 	Message *string
 }
@@ -777,7 +778,8 @@ func (e *DBProxyTargetGroupNotFoundFault) ErrorCode() string {
 func (e *DBProxyTargetGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified RDS DB instance or Aurora DB cluster isn't available for a proxy
-// owned by your AWS account in the specified AWS Region.
+// owned by your Amazon Web Services account in the specified Amazon Web Services
+// Region.
 type DBProxyTargetNotFoundFault struct {
 	Message *string
 }
@@ -1790,7 +1792,7 @@ func (e *InvalidVPCNetworkStateFault) ErrorMessage() string {
 func (e *InvalidVPCNetworkStateFault) ErrorCode() string             { return "InvalidVPCNetworkStateFault" }
 func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error occurred accessing an AWS KMS key.
+// An error occurred accessing an Amazon Web Services KMS key.
 type KMSKeyNotAccessibleFault struct {
 	Message *string
 }
@@ -1841,7 +1843,7 @@ func (e *OptionGroupNotFoundFault) ErrorMessage() string {
 func (e *OptionGroupNotFoundFault) ErrorCode() string             { return "OptionGroupNotFoundFault" }
 func (e *OptionGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The quota of 20 option groups was exceeded for this AWS account.
+// The quota of 20 option groups was exceeded for this Amazon Web Services account.
 type OptionGroupQuotaExceededFault struct {
 	Message *string
 }

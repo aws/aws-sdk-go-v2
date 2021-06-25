@@ -2388,7 +2388,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a new resource policy statement to a bot or bot alias. If a\n         resource policy exists, the statement is added to the current resource\n         policy. If a policy doesn't exist, a new policy is created.</p>\n         <p>You can create a resource policy statement that allows cross-account\n         access.</p>",
+                "smithy.api#documentation": "<p>Adds a new resource policy statement to a bot or bot alias. If a\n         resource policy exists, the statement is added to the current resource\n         policy. If a policy doesn't exist, a new policy is created.</p>\n         <p>You can't create a resource policy statement that allows\n         cross-account access.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/policy/{resourceArn}/statements",
@@ -2571,6 +2571,12 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "multipleValuesSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#MultipleValuesSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the slot returns multiple values in one response.\n         Multi-value slots are only available in the en-US locale. If you set\n         this value to <code>true</code> in any other locale, Amazon Lex throws a\n            <code>ValidationException</code>. </p>\n         <p>If the <code>multipleValuesSetting</code> is not set, the default\n      value is <code>false</code>.</p>"
+                    }
                 }
             }
         },
@@ -2641,6 +2647,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of the date and time that the slot was created.</p>"
+                    }
+                },
+                "multipleValuesSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#MultipleValuesSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the slot returns multiple values in one\n         response.</p>"
                     }
                 }
             }
@@ -4861,6 +4873,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the date and time that the slot was last\n         updated.</p>"
                     }
+                },
+                "multipleValuesSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#MultipleValuesSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the slot accepts multiple values in a\n         single utterance.</p>\n         <p>If the <code>multipleValuesSetting</code> is not set, the default\n         value is <code>false</code>.</p>"
+                    }
                 }
             }
         },
@@ -6644,7 +6662,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the exports for a bot or bot locale. Exports are kept in the list for 7\n         days.</p>",
+                "smithy.api#documentation": "<p>Lists the exports for a bot or bot locale. Exports are kept in the\n         list for 7 days.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/exports",
@@ -6747,7 +6765,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the imports for a bot or bot locale. Imports are kept in the list for 7\n         days.</p>",
+                "smithy.api#documentation": "<p>Lists the imports for a bot or bot locale. Imports are kept in the\n         list for 7 days.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/imports",
@@ -7386,6 +7404,20 @@
                     "min": 0,
                     "max": 2
                 }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#MultipleValuesSetting": {
+            "type": "structure",
+            "members": {
+                "allowMultipleValues": {
+                    "target": "com.amazonaws.lexmodelsv2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether a slot can return multiple values. When\n            <code>true</code>, the slot may return more than one value in a\n         response. When <code>false</code>, the slot returns only a single\n         value.</p>\n         <p>Multi-value slots are only available in the en-US locale. If you\n         set this value to <code>true</code> in any other locale, Amazon Lex throws a\n         <code>ValidationException</code>.</p>      \n         <p>If the <code>allowMutlipleValues</code> is not set, the default\n            value is <code>false</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates whether a slot can return multiple values.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#Name": {
@@ -9290,7 +9322,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the password used to encrypt an export zip archive.</p>",
+                "smithy.api#documentation": "<p>Updates the password used to protect an export zip archive.</p>\n         <p>The password is not required. If you don't supply a password, Amazon Lex\n         generates a zip file that is not protected by a password. This is the\n         archive that is available at the pre-signed S3 URL provided by the\n             operation.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/exports/{exportId}",
@@ -9811,6 +9843,12 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "multipleValuesSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#MultipleValuesSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the slot accepts multiple values in one response.\n         Multiple value slots are only available in the en-US locale. If you set\n         this value to <code>true</code> in any other locale, Amazon Lex throws a\n            <code>ValidationException</code>.</p>\n         <p>If the <code>multipleValuesSetting</code> is not set, the default\n         value is <code>false</code>.</p>"
+                    }
                 }
             }
         },
@@ -9887,6 +9925,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of the date and time that the slot was last\n         updated.</p>"
+                    }
+                },
+                "multipleValuesSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#MultipleValuesSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the slot accepts multiple values in one\n         response.</p>"
                     }
                 }
             }

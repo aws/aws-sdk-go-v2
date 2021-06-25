@@ -1,0 +1,9 @@
+{
+    "id": "cc1281b3-2995-40b2-8a2a-328ab02c9cbe",
+    "type": "release",
+    "description": "Release new modules",
+    "modules": [
+        "service/internal/endpoint-discovery",
+        "internal/configsources"
+    ]
+}

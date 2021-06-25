@@ -104,6 +104,26 @@ func (e *LimitExceededException) ErrorMessage() string {
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request was rejected because it attempted to create a resource that already
+// exists.
+type ResourceAlreadyExistsException struct {
+	Message *string
+
+	Code *string
+}
+
+func (e *ResourceAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceAlreadyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
+func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request was rejected because it attempted to reference a resource that does
 // not exist.
 type ResourceNotFoundException struct {

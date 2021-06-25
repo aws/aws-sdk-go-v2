@@ -29,8 +29,8 @@ func (c *Client) CreateReturnShippingLabel(ctx context.Context, params *CreateRe
 
 type CreateReturnShippingLabelInput struct {
 
-	// The ID for a job that you want to create the return shipping label for. For
-	// example JID123e4567-e89b-12d3-a456-426655440000.
+	// The ID for a job that you want to create the return shipping label for; for
+	// example, JID123e4567-e89b-12d3-a456-426655440000.
 	//
 	// This member is required.
 	JobId *string

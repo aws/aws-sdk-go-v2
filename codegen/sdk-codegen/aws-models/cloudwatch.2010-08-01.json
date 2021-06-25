@@ -254,7 +254,7 @@
         "com.amazonaws.cloudwatch#AnomalyDetectorMetricStat": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(SampleCount|Average|Sum|Minimum|Maximum|p(\\d{1,2}|100)(\\.\\d{0,2})?|[ou]\\d+(\\.\\d*)?)(_E|_L|_H)?"
+                "smithy.api#pattern": "^(SampleCount|Average|Sum|Minimum|Maximum|p(\\d{1,2}|100)(\\.\\d{0,2})?|[ou]\\d+(\\.\\d*)?)(_E|_L|_H)?$"
             }
         },
         "com.amazonaws.cloudwatch#AnomalyDetectorMetricTimezone": {
@@ -436,6 +436,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConcurrentModificationException",
+                    "httpResponseCode": 429
+                },
                 "smithy.api#documentation": "<p>More than one process tried to modify a resource at the same time.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
@@ -505,6 +509,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidParameterInput",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Some part of the dashboard data is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -530,6 +538,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified dashboard does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -1546,7 +1558,7 @@
         "com.amazonaws.cloudwatch#ExtendedStatistic": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "p(\\d{1,2}(\\.\\d{0,2})?|100)"
+                "smithy.api#pattern": "^p(\\d{1,2}(\\.\\d{0,2})?|100)$"
             }
         },
         "com.amazonaws.cloudwatch#ExtendedStatistics": {
@@ -2400,7 +2412,7 @@
                     "min": 1,
                     "max": 8192
                 },
-                "smithy.api#pattern": "[\\x00-\\x7F]+"
+                "smithy.api#pattern": "^[\\x00-\\x7F]+$"
             }
         },
         "com.amazonaws.cloudwatch#InsightRuleMaxResults": {
@@ -2489,7 +2501,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "[\\x20-\\x7E]+"
+                "smithy.api#pattern": "^[\\x20-\\x7E]+$"
             }
         },
         "com.amazonaws.cloudwatch#InsightRuleName": {
@@ -2499,7 +2511,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\x20-\\x7E]+"
+                "smithy.api#pattern": "^[\\x20-\\x7E]+$"
             }
         },
         "com.amazonaws.cloudwatch#InsightRuleNames": {
@@ -2515,7 +2527,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "[\\x20-\\x7E]+"
+                "smithy.api#pattern": "^[\\x20-\\x7E]+$"
             }
         },
         "com.amazonaws.cloudwatch#InsightRuleSchema": {
@@ -2528,7 +2540,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "[\\x20-\\x7E]+"
+                "smithy.api#pattern": "^[\\x20-\\x7E]+$"
             }
         },
         "com.amazonaws.cloudwatch#InsightRuleUnboundDouble": {
@@ -2566,6 +2578,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InternalServiceError",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>Request processing has failed due to some unknown error, exception, or failure.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -2582,6 +2598,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidFormat",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Data was not syntactically valid JSON.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2598,6 +2618,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidNextToken",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The next token specified is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2614,6 +2638,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidParameterCombination",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Parameters were used together that cannot be used together.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2630,6 +2658,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidParameterValue",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The value of an input parameter is bad or out-of-range.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2660,6 +2692,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "LimitExceededException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The operation exceeded one or more limits.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2676,6 +2712,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "LimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The quota for alarms for this customer has already been reached.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3565,6 +3605,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "MissingParameter",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>An input parameter that is required is missing.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3577,7 +3621,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[^:].*"
+                "smithy.api#pattern": "^[^:]"
             }
         },
         "com.amazonaws.cloudwatch#NextToken": {
@@ -4227,6 +4271,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The named resource does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -4246,6 +4294,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceNotFoundException",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The named resource does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404

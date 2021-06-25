@@ -60,8 +60,8 @@ type ListPrincipalsInput struct {
 	// glue:Catalog | glue:Database | glue:Table | license-manager:LicenseConfiguration
 	// I network-firewall:FirewallPolicy | network-firewall:StatefulRuleGroup |
 	// network-firewall:StatelessRuleGroup | outposts:Outpost | resource-groups:Group |
-	// rds:Cluster | route53resolver:FirewallRuleGroup
-	// |route53resolver:ResolverQueryLogConfig | route53resolver:ResolverRule
+	// rds:Cluster | route53resolver:ResolverQueryLogConfig |
+	// route53resolver:ResolverRule
 	ResourceType *string
 }
 

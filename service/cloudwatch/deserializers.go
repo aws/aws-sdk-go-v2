@@ -193,13 +193,13 @@ func awsAwsquery_deserializeOpErrorDeleteAnomalyDetector(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
@@ -310,14 +310,14 @@ func awsAwsquery_deserializeOpErrorDeleteDashboards(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DashboardNotFoundError", errorCode):
-		return awsAwsquery_deserializeErrorDashboardNotFoundError(response, errorBody)
-
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFound", errorCode):
+		return awsAwsquery_deserializeErrorDashboardNotFoundError(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -424,10 +424,10 @@ func awsAwsquery_deserializeOpErrorDeleteInsightRules(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	default:
@@ -535,13 +535,13 @@ func awsAwsquery_deserializeOpErrorDeleteMetricStream(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	default:
@@ -970,13 +970,13 @@ func awsAwsquery_deserializeOpErrorDescribeAnomalyDetectors(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
 	case strings.EqualFold("InvalidNextToken", errorCode):
 		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -1262,10 +1262,10 @@ func awsAwsquery_deserializeOpErrorDisableInsightRules(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	default:
@@ -1443,13 +1443,13 @@ func awsAwsquery_deserializeOpErrorEnableInsightRules(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	default:
@@ -1557,14 +1557,14 @@ func awsAwsquery_deserializeOpErrorGetDashboard(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DashboardNotFoundError", errorCode):
-		return awsAwsquery_deserializeErrorDashboardNotFoundError(response, errorBody)
-
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFound", errorCode):
+		return awsAwsquery_deserializeErrorDashboardNotFoundError(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1671,10 +1671,10 @@ func awsAwsquery_deserializeOpErrorGetInsightRuleReport(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
@@ -1893,16 +1893,16 @@ func awsAwsquery_deserializeOpErrorGetMetricStatistics(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	default:
@@ -2010,16 +2010,16 @@ func awsAwsquery_deserializeOpErrorGetMetricStream(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
@@ -2235,10 +2235,10 @@ func awsAwsquery_deserializeOpErrorListDashboards(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -2346,10 +2346,10 @@ func awsAwsquery_deserializeOpErrorListMetrics(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	default:
@@ -2457,16 +2457,16 @@ func awsAwsquery_deserializeOpErrorListMetricStreams(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
 	case strings.EqualFold("InvalidNextToken", errorCode):
 		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	default:
@@ -2574,10 +2574,10 @@ func awsAwsquery_deserializeOpErrorListTagsForResource(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
@@ -2688,16 +2688,16 @@ func awsAwsquery_deserializeOpErrorPutAnomalyDetector(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	default:
@@ -2770,7 +2770,7 @@ func awsAwsquery_deserializeOpErrorPutCompositeAlarm(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
 	default:
@@ -2878,11 +2878,11 @@ func awsAwsquery_deserializeOpErrorPutDashboard(response *smithyhttp.Response, m
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("DashboardInvalidInputError", errorCode):
-		return awsAwsquery_deserializeErrorDashboardInvalidInputError(response, errorBody)
-
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterInput", errorCode):
+		return awsAwsquery_deserializeErrorDashboardInvalidInputError(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -2989,13 +2989,13 @@ func awsAwsquery_deserializeOpErrorPutInsightRule(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	default:
@@ -3068,7 +3068,7 @@ func awsAwsquery_deserializeOpErrorPutMetricAlarm(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("LimitExceededFault", errorCode):
+	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
 	default:
@@ -3141,16 +3141,16 @@ func awsAwsquery_deserializeOpErrorPutMetricData(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	default:
@@ -3261,16 +3261,16 @@ func awsAwsquery_deserializeOpErrorPutMetricStream(response *smithyhttp.Response
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	default:
@@ -3343,7 +3343,7 @@ func awsAwsquery_deserializeOpErrorSetAlarmState(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidFormatFault", errorCode):
+	case strings.EqualFold("InvalidFormat", errorCode):
 		return awsAwsquery_deserializeErrorInvalidFormatFault(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFound", errorCode):
@@ -3454,13 +3454,13 @@ func awsAwsquery_deserializeOpErrorStartMetricStreams(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	default:
@@ -3568,13 +3568,13 @@ func awsAwsquery_deserializeOpErrorStopMetricStreams(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
-	case strings.EqualFold("MissingRequiredParameterException", errorCode):
+	case strings.EqualFold("MissingParameter", errorCode):
 		return awsAwsquery_deserializeErrorMissingRequiredParameterException(response, errorBody)
 
 	default:
@@ -3685,10 +3685,10 @@ func awsAwsquery_deserializeOpErrorTagResource(response *smithyhttp.Response, me
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
@@ -3802,10 +3802,10 @@ func awsAwsquery_deserializeOpErrorUntagResource(response *smithyhttp.Response, 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
 
-	case strings.EqualFold("InternalServiceFault", errorCode):
+	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
+	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):

@@ -1434,6 +1434,23 @@ func awsAwsjson11_serializeDocumentLambdaResourceList(v []types.LambdaResource, 
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentNFSOnDeviceServiceConfiguration(v *types.NFSOnDeviceServiceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StorageLimit != 0 {
+		ok := object.Key("StorageLimit")
+		ok.Integer(v.StorageLimit)
+	}
+
+	if len(v.StorageUnit) > 0 {
+		ok := object.Key("StorageUnit")
+		ok.String(string(v.StorageUnit))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentNotification(v *types.Notification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1458,6 +1475,20 @@ func awsAwsjson11_serializeDocumentNotification(v *types.Notification, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v *types.OnDeviceServiceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NFSOnDeviceService != nil {
+		ok := object.Key("NFSOnDeviceService")
+		if err := awsAwsjson11_serializeDocumentNFSOnDeviceServiceConfiguration(v.NFSOnDeviceService, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentS3Resource(v *types.S3Resource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1470,6 +1501,13 @@ func awsAwsjson11_serializeDocumentS3Resource(v *types.S3Resource, value smithyj
 	if v.KeyRange != nil {
 		ok := object.Key("KeyRange")
 		if err := awsAwsjson11_serializeDocumentKeyRange(v.KeyRange, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetOnDeviceServices != nil {
+		ok := object.Key("TargetOnDeviceServices")
+		if err := awsAwsjson11_serializeDocumentTargetOnDeviceServiceList(v.TargetOnDeviceServices, ok); err != nil {
 			return err
 		}
 	}
@@ -1501,6 +1539,36 @@ func awsAwsjson11_serializeDocumentSnowconeDeviceConfiguration(v *types.Snowcone
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTargetOnDeviceService(v *types.TargetOnDeviceService, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ServiceName) > 0 {
+		ok := object.Key("ServiceName")
+		ok.String(string(v.ServiceName))
+	}
+
+	if len(v.TransferOption) > 0 {
+		ok := object.Key("TransferOption")
+		ok.String(string(v.TransferOption))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTargetOnDeviceServiceList(v []types.TargetOnDeviceService, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentTargetOnDeviceService(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -1604,6 +1672,18 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
+	if v.OnDeviceServiceConfiguration != nil {
+		ok := object.Key("OnDeviceServiceConfiguration")
+		if err := awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v.OnDeviceServiceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.RemoteManagement) > 0 {
+		ok := object.Key("RemoteManagement")
+		ok.String(string(v.RemoteManagement))
+	}
+
 	if v.Resources != nil {
 		ok := object.Key("Resources")
 		if err := awsAwsjson11_serializeDocumentJobResource(v.Resources, ok); err != nil {
@@ -1687,6 +1767,18 @@ func awsAwsjson11_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		if err := awsAwsjson11_serializeDocumentNotification(v.Notification, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.OnDeviceServiceConfiguration != nil {
+		ok := object.Key("OnDeviceServiceConfiguration")
+		if err := awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v.OnDeviceServiceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.RemoteManagement) > 0 {
+		ok := object.Key("RemoteManagement")
+		ok.String(string(v.RemoteManagement))
 	}
 
 	if v.Resources != nil {
@@ -1994,6 +2086,13 @@ func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 		}
 	}
 
+	if v.OnDeviceServiceConfiguration != nil {
+		ok := object.Key("OnDeviceServiceConfiguration")
+		if err := awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v.OnDeviceServiceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Resources != nil {
 		ok := object.Key("Resources")
 		if err := awsAwsjson11_serializeDocumentJobResource(v.Resources, ok); err != nil {
@@ -2041,6 +2140,13 @@ func awsAwsjson11_serializeOpDocumentUpdateJobInput(v *UpdateJobInput, value smi
 	if v.Notification != nil {
 		ok := object.Key("Notification")
 		if err := awsAwsjson11_serializeDocumentNotification(v.Notification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OnDeviceServiceConfiguration != nil {
+		ok := object.Key("OnDeviceServiceConfiguration")
+		if err := awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v.OnDeviceServiceConfiguration, ok); err != nil {
 			return err
 		}
 	}

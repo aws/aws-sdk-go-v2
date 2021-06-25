@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of the tags associated with an AWS Cloud9 development environment.
+// Gets a list of the tags associated with an Cloud9 development environment.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -29,8 +29,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Cloud9 development environment to get
-	// the tags for.
+	// The Amazon Resource Name (ARN) of the Cloud9 development environment to get the
+	// tags for.
 	//
 	// This member is required.
 	ResourceARN *string
@@ -38,7 +38,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The list of tags associated with the AWS Cloud9 development environment.
+	// The list of tags associated with the Cloud9 development environment.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

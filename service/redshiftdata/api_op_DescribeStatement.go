@@ -72,6 +72,9 @@ type DescribeStatementOutput struct {
 	// can be empty.
 	HasResultSet *bool
 
+	// The parameters for the SQL statement.
+	QueryParameters []types.SqlParameter
+
 	// The SQL statement text.
 	QueryString *string
 

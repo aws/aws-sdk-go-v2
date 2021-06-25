@@ -41,6 +41,11 @@ type ListTypesInput struct {
 	// and can no longer be used in CloudFormation operations.
 	DeprecatedStatus types.DeprecatedStatus
 
+	// Filter criteria to use in determining which extensions to return. If you specify
+	// a filter, CloudFormation ignores any specified Visibility value when returning
+	// the list of types.
+	Filters *types.TypeFilters
+
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
 	// value that you can assign to the NextToken request parameter to get the next set
@@ -54,37 +59,47 @@ type ListTypesInput struct {
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string
 
-	// The provisioning behavior of the type. AWS CloudFormation determines the
-	// provisioning type during registration, based on the types of handlers in the
-	// schema handler package submitted. Valid values include:
+	// For resource types, the provisioning behavior of the resource type. AWS
+	// CloudFormation determines the provisioning type during registration, based on
+	// the types of handlers in the schema handler package submitted. Valid values
+	// include:
 	//
-	// * FULLY_MUTABLE: The
-	// extension includes an update handler to process updates to the extension during
-	// stack update operations.
+	// * FULLY_MUTABLE: The resource type includes an update handler to
+	// process updates to the type during stack update operations.
 	//
-	// * IMMUTABLE: The extension does not include an update
-	// handler, so the extension cannot be updated and must instead be replaced during
-	// stack update operations.
+	// * IMMUTABLE: The
+	// resource type does not include an update handler, so the type cannot be updated
+	// and must instead be replaced during stack update operations.
 	//
-	// * NON_PROVISIONABLE: The extension does not include
-	// create, read, and delete handlers, and therefore cannot actually be provisioned.
+	// *
+	// NON_PROVISIONABLE: The resource type does not include create, read, and delete
+	// handlers, and therefore cannot actually be provisioned.
+	//
+	// The default is
+	// FULLY_MUTABLE.
 	ProvisioningType types.ProvisioningType
 
 	// The type of extension.
 	Type types.RegistryType
 
-	// The scope at which the extension is visible and usable in CloudFormation
+	// The scope at which the extensions are visible and usable in CloudFormation
 	// operations. Valid values include:
 	//
-	// * PRIVATE: The extension is only visible and
-	// usable within the account in which it is registered. Currently, AWS
-	// CloudFormation marks any extension you create as PRIVATE.
+	// * PRIVATE: Extensions that are visible and
+	// usable within this account and region. This includes:
 	//
-	// * PUBLIC: The
-	// extension is publically visible and usable within any Amazon account.
+	// * Private extensions you
+	// have registered in this account and region.
 	//
-	// The
-	// default is PRIVATE.
+	// * Public extensions that you have
+	// activated in this account and region.
+	//
+	// * PUBLIC: Extensions that are publicly
+	// visible and available to be activated within any Amazon account. This includes
+	// extensions from Amazon, as well as third-party publishers.
+	//
+	// The default is
+	// PRIVATE.
 	Visibility types.Visibility
 }
 

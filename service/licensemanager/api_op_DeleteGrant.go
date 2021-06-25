@@ -38,6 +38,8 @@ type DeleteGrantInput struct {
 	//
 	// This member is required.
 	Version *string
+
+	StatusReason *string
 }
 
 type DeleteGrantOutput struct {

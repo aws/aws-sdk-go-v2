@@ -3386,6 +3386,11 @@ func awsRestjson1_serializeDocumentDnsServiceDiscovery(v *types.DnsServiceDiscov
 		ok.String(*v.Hostname)
 	}
 
+	if len(v.ResponseType) > 0 {
+		ok := object.Key("responseType")
+		ok.String(string(v.ResponseType))
+	}
+
 	return nil
 }
 
@@ -3430,6 +3435,35 @@ func awsRestjson1_serializeDocumentFileAccessLog(v *types.FileAccessLog, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGatewayRouteHostnameMatch(v *types.GatewayRouteHostnameMatch, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Exact != nil {
+		ok := object.Key("exact")
+		ok.String(*v.Exact)
+	}
+
+	if v.Suffix != nil {
+		ok := object.Key("suffix")
+		ok.String(*v.Suffix)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGatewayRouteHostnameRewrite(v *types.GatewayRouteHostnameRewrite, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DefaultTargetHostname) > 0 {
+		ok := object.Key("defaultTargetHostname")
+		ok.String(string(v.DefaultTargetHostname))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGatewayRouteSpec(v *types.GatewayRouteSpec, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3453,6 +3487,11 @@ func awsRestjson1_serializeDocumentGatewayRouteSpec(v *types.GatewayRouteSpec, v
 		if err := awsRestjson1_serializeDocumentHttpGatewayRoute(v.HttpRoute, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Priority != nil {
+		ok := object.Key("priority")
+		ok.Integer(*v.Priority)
 	}
 
 	return nil
@@ -3509,6 +3548,13 @@ func awsRestjson1_serializeDocumentGrpcGatewayRouteAction(v *types.GrpcGatewayRo
 	object := value.Object()
 	defer object.Close()
 
+	if v.Rewrite != nil {
+		ok := object.Key("rewrite")
+		if err := awsRestjson1_serializeDocumentGrpcGatewayRouteRewrite(v.Rewrite, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Target != nil {
 		ok := object.Key("target")
 		if err := awsRestjson1_serializeDocumentGatewayRouteTarget(v.Target, ok); err != nil {
@@ -3523,11 +3569,110 @@ func awsRestjson1_serializeDocumentGrpcGatewayRouteMatch(v *types.GrpcGatewayRou
 	object := value.Object()
 	defer object.Close()
 
+	if v.Hostname != nil {
+		ok := object.Key("hostname")
+		if err := awsRestjson1_serializeDocumentGatewayRouteHostnameMatch(v.Hostname, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Metadata != nil {
+		ok := object.Key("metadata")
+		if err := awsRestjson1_serializeDocumentGrpcGatewayRouteMetadataList(v.Metadata, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ServiceName != nil {
 		ok := object.Key("serviceName")
 		ok.String(*v.ServiceName)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGrpcGatewayRouteMetadata(v *types.GrpcGatewayRouteMetadata, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Invert != nil {
+		ok := object.Key("invert")
+		ok.Boolean(*v.Invert)
+	}
+
+	if v.Match != nil {
+		ok := object.Key("match")
+		if err := awsRestjson1_serializeDocumentGrpcMetadataMatchMethod(v.Match, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGrpcGatewayRouteMetadataList(v []types.GrpcGatewayRouteMetadata, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentGrpcGatewayRouteMetadata(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGrpcGatewayRouteRewrite(v *types.GrpcGatewayRouteRewrite, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Hostname != nil {
+		ok := object.Key("hostname")
+		if err := awsRestjson1_serializeDocumentGatewayRouteHostnameRewrite(v.Hostname, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGrpcMetadataMatchMethod(v types.GrpcMetadataMatchMethod, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.GrpcMetadataMatchMethodMemberExact:
+		av := object.Key("exact")
+		av.String(uv.Value)
+
+	case *types.GrpcMetadataMatchMethodMemberPrefix:
+		av := object.Key("prefix")
+		av.String(uv.Value)
+
+	case *types.GrpcMetadataMatchMethodMemberRange:
+		av := object.Key("range")
+		if err := awsRestjson1_serializeDocumentMatchRange(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.GrpcMetadataMatchMethodMemberRegex:
+		av := object.Key("regex")
+		av.String(uv.Value)
+
+	case *types.GrpcMetadataMatchMethodMemberSuffix:
+		av := object.Key("suffix")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -3848,6 +3993,13 @@ func awsRestjson1_serializeDocumentHttpGatewayRouteAction(v *types.HttpGatewayRo
 	object := value.Object()
 	defer object.Close()
 
+	if v.Rewrite != nil {
+		ok := object.Key("rewrite")
+		if err := awsRestjson1_serializeDocumentHttpGatewayRouteRewrite(v.Rewrite, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Target != nil {
 		ok := object.Key("target")
 		if err := awsRestjson1_serializeDocumentGatewayRouteTarget(v.Target, ok); err != nil {
@@ -3858,15 +4010,191 @@ func awsRestjson1_serializeDocumentHttpGatewayRouteAction(v *types.HttpGatewayRo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHttpGatewayRouteHeader(v *types.HttpGatewayRouteHeader, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Invert != nil {
+		ok := object.Key("invert")
+		ok.Boolean(*v.Invert)
+	}
+
+	if v.Match != nil {
+		ok := object.Key("match")
+		if err := awsRestjson1_serializeDocumentHeaderMatchMethod(v.Match, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHttpGatewayRouteHeaders(v []types.HttpGatewayRouteHeader, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentHttpGatewayRouteHeader(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentHttpGatewayRouteMatch(v *types.HttpGatewayRouteMatch, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Headers != nil {
+		ok := object.Key("headers")
+		if err := awsRestjson1_serializeDocumentHttpGatewayRouteHeaders(v.Headers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Hostname != nil {
+		ok := object.Key("hostname")
+		if err := awsRestjson1_serializeDocumentGatewayRouteHostnameMatch(v.Hostname, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Method) > 0 {
+		ok := object.Key("method")
+		ok.String(string(v.Method))
+	}
+
+	if v.Path != nil {
+		ok := object.Key("path")
+		if err := awsRestjson1_serializeDocumentHttpPathMatch(v.Path, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Prefix != nil {
 		ok := object.Key("prefix")
 		ok.String(*v.Prefix)
 	}
 
+	if v.QueryParameters != nil {
+		ok := object.Key("queryParameters")
+		if err := awsRestjson1_serializeDocumentHttpQueryParameters(v.QueryParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHttpGatewayRoutePathRewrite(v *types.HttpGatewayRoutePathRewrite, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Exact != nil {
+		ok := object.Key("exact")
+		ok.String(*v.Exact)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHttpGatewayRoutePrefixRewrite(v *types.HttpGatewayRoutePrefixRewrite, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DefaultPrefix) > 0 {
+		ok := object.Key("defaultPrefix")
+		ok.String(string(v.DefaultPrefix))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHttpGatewayRouteRewrite(v *types.HttpGatewayRouteRewrite, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Hostname != nil {
+		ok := object.Key("hostname")
+		if err := awsRestjson1_serializeDocumentGatewayRouteHostnameRewrite(v.Hostname, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Path != nil {
+		ok := object.Key("path")
+		if err := awsRestjson1_serializeDocumentHttpGatewayRoutePathRewrite(v.Path, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Prefix != nil {
+		ok := object.Key("prefix")
+		if err := awsRestjson1_serializeDocumentHttpGatewayRoutePrefixRewrite(v.Prefix, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHttpPathMatch(v *types.HttpPathMatch, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Exact != nil {
+		ok := object.Key("exact")
+		ok.String(*v.Exact)
+	}
+
+	if v.Regex != nil {
+		ok := object.Key("regex")
+		ok.String(*v.Regex)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHttpQueryParameter(v *types.HttpQueryParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Match != nil {
+		ok := object.Key("match")
+		if err := awsRestjson1_serializeDocumentQueryParameterMatch(v.Match, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHttpQueryParameters(v []types.HttpQueryParameter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentHttpQueryParameter(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -4016,9 +4344,23 @@ func awsRestjson1_serializeDocumentHttpRouteMatch(v *types.HttpRouteMatch, value
 		ok.String(string(v.Method))
 	}
 
+	if v.Path != nil {
+		ok := object.Key("path")
+		if err := awsRestjson1_serializeDocumentHttpPathMatch(v.Path, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Prefix != nil {
 		ok := object.Key("prefix")
 		ok.String(*v.Prefix)
+	}
+
+	if v.QueryParameters != nil {
+		ok := object.Key("queryParameters")
+		if err := awsRestjson1_serializeDocumentHttpQueryParameters(v.QueryParameters, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.Scheme) > 0 {
@@ -4391,6 +4733,18 @@ func awsRestjson1_serializeDocumentPortSet(v []int32, value smithyjson.Value) er
 		av := array.Value()
 		av.Integer(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQueryParameterMatch(v *types.QueryParameterMatch, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Exact != nil {
+		ok := object.Key("exact")
+		ok.String(*v.Exact)
+	}
+
 	return nil
 }
 

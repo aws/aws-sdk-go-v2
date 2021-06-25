@@ -12,7 +12,7 @@ import (
 	"io"
 )
 
-// Creates a new session or modifies an existing session with an Amazon Lex bot.
+// Creates a new session or modifies an existing session with an Amazon Lex V2 bot.
 // Use this operation to enable your application to set the state of the bot.
 func (c *Client) PutSession(ctx context.Context, params *PutSessionInput, optFns ...func(*Options)) (*PutSessionOutput, error) {
 	if params == nil {
@@ -53,8 +53,8 @@ type PutSessionInput struct {
 
 	// Sets the state of the session with the user. You can use this to set the current
 	// intent, attributes, context, and dialog action. Use the dialog action to
-	// determine the next step that Amazon Lex should use in the conversation with the
-	// user.
+	// determine the next step that Amazon Lex V2 should use in the conversation with
+	// the user.
 	//
 	// This member is required.
 	SessionState *types.SessionState
@@ -63,16 +63,16 @@ type PutSessionInput struct {
 	// are defined in the list.
 	Messages []types.Message
 
-	// Request-specific information passed between Amazon Lex and the client
+	// Request-specific information passed between Amazon Lex V2 and the client
 	// application. The namespace x-amz-lex: is reserved for special attributes. Don't
 	// create any request attributes with the prefix x-amz-lex:.
 	RequestAttributes map[string]string
 
-	// The message that Amazon Lex returns in the response can be either text or speech
-	// depending on the value of this parameter.
+	// The message that Amazon Lex V2 returns in the response can be either text or
+	// speech depending on the value of this parameter.
 	//
 	// * If the value is text/plain;
-	// charset=utf-8, Amazon Lex returns text in the response.
+	// charset=utf-8, Amazon Lex V2 returns text in the response.
 	ResponseContentType *string
 }
 
@@ -92,7 +92,7 @@ type PutSessionOutput struct {
 	Messages *string
 
 	// Request-specific information passed between the client application and Amazon
-	// Lex. These are the same as the requestAttribute parameter in the call to the
+	// Lex V2. These are the same as the requestAttribute parameter in the call to the
 	// PutSession operation.
 	RequestAttributes *string
 

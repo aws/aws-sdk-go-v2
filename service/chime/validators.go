@@ -3250,6 +3250,26 @@ func (m *validateOpUpdateRoomMembership) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSipMediaApplicationCall struct {
+}
+
+func (*validateOpUpdateSipMediaApplicationCall) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSipMediaApplicationCall) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSipMediaApplicationCallInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSipMediaApplicationCallInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSipMediaApplication struct {
 }
 
@@ -4016,6 +4036,10 @@ func addOpUpdateRoomValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateRoomMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRoomMembership{}, middleware.After)
+}
+
+func addOpUpdateSipMediaApplicationCallValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSipMediaApplicationCall{}, middleware.After)
 }
 
 func addOpUpdateSipMediaApplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -7321,6 +7345,27 @@ func validateOpUpdateRoomMembershipInput(v *UpdateRoomMembershipInput) error {
 	}
 	if v.MemberId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSipMediaApplicationCallInput(v *UpdateSipMediaApplicationCallInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSipMediaApplicationCallInput"}
+	if v.SipMediaApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SipMediaApplicationId"))
+	}
+	if v.TransactionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransactionId"))
+	}
+	if v.Arguments == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arguments"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

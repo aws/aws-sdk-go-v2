@@ -21,33 +21,33 @@ type AccessLogMemberFile struct {
 
 func (*AccessLogMemberFile) isAccessLog() {}
 
-// An object that represents the AWS Cloud Map attribute information for your
-// virtual node. AWS Cloud Map is not available in the eu-south-1 Region.
+// An object that represents the Cloud Map attribute information for your virtual
+// node. AWS Cloud Map is not available in the eu-south-1 Region.
 type AwsCloudMapInstanceAttribute struct {
 
-	// The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map
-	// service instance that contains the specified key and value is returned.
+	// The name of an Cloud Map service instance attribute key. Any Cloud Map service
+	// instance that contains the specified key and value is returned.
 	//
 	// This member is required.
 	Key *string
 
-	// The value of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map
-	// service instance that contains the specified key and value is returned.
+	// The value of an Cloud Map service instance attribute key. Any Cloud Map service
+	// instance that contains the specified key and value is returned.
 	//
 	// This member is required.
 	Value *string
 }
 
-// An object that represents the AWS Cloud Map service discovery information for
-// your virtual node. AWS Cloud Map is not available in the eu-south-1 Region.
+// An object that represents the Cloud Map service discovery information for your
+// virtual node. Cloud Map is not available in the eu-south-1 Region.
 type AwsCloudMapServiceDiscovery struct {
 
-	// The name of the AWS Cloud Map namespace to use.
+	// The name of the Cloud Map namespace to use.
 	//
 	// This member is required.
 	NamespaceName *string
 
-	// The name of the AWS Cloud Map service to use.
+	// The name of the Cloud Map service to use.
 	//
 	// This member is required.
 	ServiceName *string
@@ -121,7 +121,7 @@ type ClientTlsCertificate interface {
 // An object that represents a local file certificate. The certificate must meet
 // specific requirements and you must have proxy authorization enabled. For more
 // information, see Transport Layer Security (TLS)
-// (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites).
+// (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html).
 type ClientTlsCertificateMemberFile struct {
 	Value ListenerTlsFileCertificate
 }
@@ -144,6 +144,9 @@ type DnsServiceDiscovery struct {
 	//
 	// This member is required.
 	Hostname *string
+
+	// Specifies the DNS response type for the virtual node.
+	ResponseType DnsResponseType
 }
 
 // An object that represents a duration of time.
@@ -161,9 +164,9 @@ type EgressFilter struct {
 
 	// The egress filter type. By default, the type is DROP_ALL, which allows egress
 	// only from virtual nodes to other defined resources in the service mesh (and any
-	// traffic to *.amazonaws.com for AWS API calls). You can set the egress filter
-	// type to ALLOW_ALL to allow egress to any endpoint inside or outside of the
-	// service mesh.
+	// traffic to *.amazonaws.com for Amazon Web Services API calls). You can set the
+	// egress filter type to ALLOW_ALL to allow egress to any endpoint inside or
+	// outside of the service mesh.
 	//
 	// This member is required.
 	Type EgressFilterType
@@ -216,6 +219,23 @@ type GatewayRouteData struct {
 	//
 	// This member is required.
 	VirtualGatewayName *string
+}
+
+// An object representing the gateway route host name to match.
+type GatewayRouteHostnameMatch struct {
+
+	// The exact host name to match on.
+	Exact *string
+
+	// The specified ending characters of the host name to match on.
+	Suffix *string
+}
+
+// An object representing the gateway route host name to rewrite.
+type GatewayRouteHostnameRewrite struct {
+
+	// The default target host name to write to.
+	DefaultTargetHostname DefaultGatewayRouteRewrite
 }
 
 // An object that represents a gateway route returned by a list operation.
@@ -286,6 +306,9 @@ type GatewayRouteSpec struct {
 
 	// An object that represents the specification of an HTTP gateway route.
 	HttpRoute *HttpGatewayRoute
+
+	// The ordering of the gateway routes spec.
+	Priority *int32
 }
 
 // An object that represents the current status of a gateway route.
@@ -337,18 +360,102 @@ type GrpcGatewayRouteAction struct {
 	//
 	// This member is required.
 	Target *GatewayRouteTarget
+
+	// The gateway route action to rewrite.
+	Rewrite *GrpcGatewayRouteRewrite
 }
 
 // An object that represents the criteria for determining a request match.
 type GrpcGatewayRouteMatch struct {
 
+	// The gateway route host name to be matched on.
+	Hostname *GatewayRouteHostnameMatch
+
+	// The gateway route metadata to be matched on.
+	Metadata []GrpcGatewayRouteMetadata
+
 	// The fully qualified domain name for the service to match from the request.
 	ServiceName *string
 }
 
+// An object representing the metadata of the gateway route.
+type GrpcGatewayRouteMetadata struct {
+
+	// A name for the gateway route metadata.
+	//
+	// This member is required.
+	Name *string
+
+	// Specify True to match anything except the match criteria. The default value is
+	// False.
+	Invert *bool
+
+	// The criteria for determining a metadata match.
+	Match GrpcMetadataMatchMethod
+}
+
+// An object that represents the gateway route to rewrite.
+type GrpcGatewayRouteRewrite struct {
+
+	// The host name of the gateway route to rewrite.
+	Hostname *GatewayRouteHostnameRewrite
+}
+
+// An object representing the method header to be matched.
+//
+// The following types satisfy this interface:
+//  GrpcMetadataMatchMethodMemberExact
+//  GrpcMetadataMatchMethodMemberRegex
+//  GrpcMetadataMatchMethodMemberRange
+//  GrpcMetadataMatchMethodMemberPrefix
+//  GrpcMetadataMatchMethodMemberSuffix
+type GrpcMetadataMatchMethod interface {
+	isGrpcMetadataMatchMethod()
+}
+
+// The exact method header to be matched on.
+type GrpcMetadataMatchMethodMemberExact struct {
+	Value string
+}
+
+func (*GrpcMetadataMatchMethodMemberExact) isGrpcMetadataMatchMethod() {}
+
+// The regex used to match the method header.
+type GrpcMetadataMatchMethodMemberRegex struct {
+	Value string
+}
+
+func (*GrpcMetadataMatchMethodMemberRegex) isGrpcMetadataMatchMethod() {}
+
+// An object that represents the range of values to match on. The first character
+// of the range is included in the range, though the last character is not. For
+// example, if the range specified were 1-100, only values 1-99 would be matched.
+type GrpcMetadataMatchMethodMemberRange struct {
+	Value MatchRange
+}
+
+func (*GrpcMetadataMatchMethodMemberRange) isGrpcMetadataMatchMethod() {}
+
+// The specified beginning characters of the method header to be matched on.
+type GrpcMetadataMatchMethodMemberPrefix struct {
+	Value string
+}
+
+func (*GrpcMetadataMatchMethodMemberPrefix) isGrpcMetadataMatchMethod() {}
+
+// The specified ending characters of the method header to match on.
+type GrpcMetadataMatchMethodMemberSuffix struct {
+	Value string
+}
+
+func (*GrpcMetadataMatchMethodMemberSuffix) isGrpcMetadataMatchMethod() {}
+
 // An object that represents a retry policy. Specify at least one value for at
 // least one of the types of RetryEvents, a value for maxRetries, and a value for
-// perRetryTimeout.
+// perRetryTimeout. Both server-error and gateway-error under httpRetryEvents
+// include the Envoy reset policy. For more information on the reset policy, see
+// the Envoy documentation
+// (https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on).
 type GrpcRetryPolicy struct {
 
 	// The maximum number of retry attempts.
@@ -620,24 +727,112 @@ type HttpGatewayRouteAction struct {
 	//
 	// This member is required.
 	Target *GatewayRouteTarget
+
+	// The gateway route action to rewrite.
+	Rewrite *HttpGatewayRouteRewrite
+}
+
+// An object that represents the HTTP header in the gateway route.
+type HttpGatewayRouteHeader struct {
+
+	// A name for the HTTP header in the gateway route that will be matched on.
+	//
+	// This member is required.
+	Name *string
+
+	// Specify True to match anything except the match criteria. The default value is
+	// False.
+	Invert *bool
+
+	// An object that represents the method and value to match with the header value
+	// sent in a request. Specify one match method.
+	Match HeaderMatchMethod
 }
 
 // An object that represents the criteria for determining a request match.
 type HttpGatewayRouteMatch struct {
+
+	// The client request headers to match on.
+	Headers []HttpGatewayRouteHeader
+
+	// The host name to match on.
+	Hostname *GatewayRouteHostnameMatch
+
+	// The method to match on.
+	Method HttpMethod
+
+	// The path to match on.
+	Path *HttpPathMatch
 
 	// Specifies the path to match requests with. This parameter must always start with
 	// /, which by itself matches all requests to the virtual service name. You can
 	// also match for path-based routing of requests. For example, if your virtual
 	// service name is my-service.local and you want the route to match requests to
 	// my-service.local/metrics, your prefix should be /metrics.
+	Prefix *string
+
+	// The query parameter to match on.
+	QueryParameters []HttpQueryParameter
+}
+
+// An object that represents the path to rewrite.
+type HttpGatewayRoutePathRewrite struct {
+
+	// The exact path to rewrite.
+	Exact *string
+}
+
+// An object representing the beginning characters of the route to rewrite.
+type HttpGatewayRoutePrefixRewrite struct {
+
+	// The default prefix used to replace the incoming route prefix when rewritten.
+	DefaultPrefix DefaultGatewayRouteRewrite
+
+	// The value used to replace the incoming route prefix when rewritten.
+	Value *string
+}
+
+// An object representing the gateway route to rewrite.
+type HttpGatewayRouteRewrite struct {
+
+	// The host name to rewrite.
+	Hostname *GatewayRouteHostnameRewrite
+
+	// The path to rewrite.
+	Path *HttpGatewayRoutePathRewrite
+
+	// The specified beginning characters to rewrite.
+	Prefix *HttpGatewayRoutePrefixRewrite
+}
+
+// An object representing the path to match in the request.
+type HttpPathMatch struct {
+
+	// The exact path to match on.
+	Exact *string
+
+	// The regex used to match the path.
+	Regex *string
+}
+
+// An object that represents the query parameter in the request.
+type HttpQueryParameter struct {
+
+	// A name for the query parameter that will be matched on.
 	//
 	// This member is required.
-	Prefix *string
+	Name *string
+
+	// The query parameter to match on.
+	Match *QueryParameterMatch
 }
 
 // An object that represents a retry policy. Specify at least one value for at
 // least one of the types of RetryEvents, a value for maxRetries, and a value for
-// perRetryTimeout.
+// perRetryTimeout. Both server-error and gateway-error under httpRetryEvents
+// include the Envoy reset policy. For more information on the reset policy, see
+// the Envoy documentation
+// (https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on).
 type HttpRetryPolicy struct {
 
 	// The maximum number of retry attempts.
@@ -720,22 +915,27 @@ type HttpRouteHeader struct {
 // for a virtual router.
 type HttpRouteMatch struct {
 
-	// Specifies the path to match requests with. This parameter must always start with
-	// /, which by itself matches all requests to the virtual service name. You can
-	// also match for path-based routing of requests. For example, if your virtual
-	// service name is my-service.local and you want the route to match requests to
-	// my-service.local/metrics, your prefix should be /metrics.
-	//
-	// This member is required.
-	Prefix *string
-
-	// An object that represents the client request headers to match on.
+	// The client request headers to match on.
 	Headers []HttpRouteHeader
 
 	// The client request method to match on. Specify only one.
 	Method HttpMethod
 
-	// The client request scheme to match on. Specify only one.
+	// The client request path to match on.
+	Path *HttpPathMatch
+
+	// Specifies the path to match requests with. This parameter must always start with
+	// /, which by itself matches all requests to the virtual service name. You can
+	// also match for path-based routing of requests. For example, if your virtual
+	// service name is my-service.local and you want the route to match requests to
+	// my-service.local/metrics, your prefix should be /metrics.
+	Prefix *string
+
+	// The client request query parameters to match on.
+	QueryParameters []HttpQueryParameter
+
+	// The client request scheme to match on. Specify only one. Applicable only for
+	// HTTP2 routes.
 	Scheme HttpScheme
 }
 
@@ -1113,6 +1313,13 @@ type PortMapping struct {
 	Protocol PortProtocol
 }
 
+// An object representing the query parameter to match.
+type QueryParameterMatch struct {
+
+	// The exact query parameter to match on.
+	Exact *string
+}
+
 // An object that represents metadata for a resource.
 type ResourceMetadata struct {
 
@@ -1294,7 +1501,7 @@ type ServiceDiscoveryMemberDns struct {
 
 func (*ServiceDiscoveryMemberDns) isServiceDiscovery() {}
 
-// Specifies any AWS Cloud Map information for the virtual node.
+// Specifies any Cloud Map information for the virtual node.
 type ServiceDiscoveryMemberAwsCloudMap struct {
 	Value AwsCloudMapServiceDiscovery
 }
@@ -1386,7 +1593,7 @@ type TlsValidationContext struct {
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context
-// trust for an AWS Certicate Manager (ACM) certificate.
+// trust for an Certificate Manager certificate.
 type TlsValidationContextAcmTrust struct {
 
 	// One or more ACM Amazon Resource Name (ARN)s.
@@ -1431,7 +1638,7 @@ type TlsValidationContextTrust interface {
 }
 
 // A reference to an object that represents a Transport Layer Security (TLS)
-// validation context trust for an AWS Certicate Manager (ACM) certificate.
+// validation context trust for an Certificate Manager certificate.
 type TlsValidationContextTrustMemberAcm struct {
 	Value TlsValidationContextAcmTrust
 }
@@ -1516,8 +1723,8 @@ type VirtualGatewayClientTlsCertificate interface {
 
 // An object that represents a local file certificate. The certificate must meet
 // specific requirements and you must have proxy authorization enabled. For more
-// information, see Transport Layer Security (TLS)
-// (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites).
+// information, see  Transport Layer Security (TLS)
+// (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html).
 type VirtualGatewayClientTlsCertificateMemberFile struct {
 	Value VirtualGatewayListenerTlsFileCertificate
 }
@@ -1733,7 +1940,7 @@ type VirtualGatewayListenerTls struct {
 	Validation *VirtualGatewayListenerTlsValidationContext
 }
 
-// An object that represents an AWS Certicate Manager (ACM) certificate.
+// An object that represents an Certificate Manager certificate.
 type VirtualGatewayListenerTlsAcmCertificate struct {
 
 	// The Amazon Resource Name (ARN) for the certificate. The certificate must meet
@@ -1756,8 +1963,7 @@ type VirtualGatewayListenerTlsCertificate interface {
 	isVirtualGatewayListenerTlsCertificate()
 }
 
-// A reference to an object that represents an AWS Certicate Manager (ACM)
-// certificate.
+// A reference to an object that represents an Certificate Manager certificate.
 type VirtualGatewayListenerTlsCertificateMemberAcm struct {
 	Value VirtualGatewayListenerTlsAcmCertificate
 }
@@ -1799,7 +2005,7 @@ type VirtualGatewayListenerTlsFileCertificate struct {
 
 // An object that represents the virtual gateway's listener's Secret Discovery
 // Service certificate.The proxy must be configured with a local SDS provider via a
-// Unix Domain Socket. See App Mesh TLS documentation
+// Unix Domain Socket. See App MeshTLS documentation
 // (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html) for more info.
 type VirtualGatewayListenerTlsSdsCertificate struct {
 
@@ -1967,7 +2173,7 @@ type VirtualGatewayTlsValidationContext struct {
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context
-// trust for an AWS Certicate Manager (ACM) certificate.
+// trust for an Certificate Manager certificate.
 type VirtualGatewayTlsValidationContextAcmTrust struct {
 
 	// One or more ACM Amazon Resource Name (ARN)s.
@@ -2014,7 +2220,7 @@ type VirtualGatewayTlsValidationContextTrust interface {
 }
 
 // A reference to an object that represents a Transport Layer Security (TLS)
-// validation context trust for an AWS Certicate Manager (ACM) certificate.
+// validation context trust for an Certificate Manager certificate.
 type VirtualGatewayTlsValidationContextTrustMemberAcm struct {
 	Value VirtualGatewayTlsValidationContextAcmTrust
 }
@@ -2521,6 +2727,7 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAccessLog()                                       {}
 func (*UnknownUnionMember) isBackend()                                         {}
 func (*UnknownUnionMember) isClientTlsCertificate()                            {}
+func (*UnknownUnionMember) isGrpcMetadataMatchMethod()                         {}
 func (*UnknownUnionMember) isGrpcRouteMetadataMatchMethod()                    {}
 func (*UnknownUnionMember) isHeaderMatchMethod()                               {}
 func (*UnknownUnionMember) isListenerTimeout()                                 {}

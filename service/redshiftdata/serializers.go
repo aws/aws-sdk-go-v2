@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
@@ -435,6 +436,36 @@ func (m *awsAwsjson11_serializeOpListTables) HandleSerialize(ctx context.Context
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentSqlParameter(v *types.SqlParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSqlParametersList(v []types.SqlParameter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentSqlParameter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCancelStatementInput(v *CancelStatementInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -528,6 +559,13 @@ func awsAwsjson11_serializeOpDocumentExecuteStatementInput(v *ExecuteStatementIn
 	if v.DbUser != nil {
 		ok := object.Key("DbUser")
 		ok.String(*v.DbUser)
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("Parameters")
+		if err := awsAwsjson11_serializeDocumentSqlParametersList(v.Parameters, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SecretArn != nil {

@@ -55,7 +55,7 @@ type GetBackendJobOutput struct {
 	// The time when the job was created.
 	CreateTime *string
 
-	// If the request failed, this is the returned error.
+	// If the request fails, this error is returned.
 	Error *string
 
 	// The ID for the job.

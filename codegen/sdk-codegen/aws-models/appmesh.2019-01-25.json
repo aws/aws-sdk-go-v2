@@ -24,6 +24,42 @@
                 }
             }
         },
+        "com.amazonaws.appmesh#AppMesh": {
+            "type": "service",
+            "version": "2019-01-25",
+            "operations": [
+                {
+                    "target": "com.amazonaws.appmesh#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.appmesh#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.appmesh#UntagResource"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.appmesh#Mesh"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "App Mesh",
+                    "arnNamespace": "appmesh",
+                    "cloudFormationName": "AppMesh",
+                    "cloudTrailEventSource": "appmesh.amazonaws.com",
+                    "endpointPrefix": "appmesh"
+                },
+                "aws.auth#sigv4": {
+                    "name": "appmesh"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and\n         control microservices. App Mesh standardizes how your microservices communicate, giving you\n         end-to-end visibility and helping to ensure high availability for your applications.</p>\n         <p>App Mesh gives you consistent visibility and network traffic controls for every\n         microservice in an application. You can use App Mesh with Amazon Web Services Fargate, Amazon ECS, Amazon EKS,\n         Kubernetes on Amazon Web Services, and Amazon EC2.</p>\n         <note>\n            <p>App Mesh supports microservice applications that use service discovery naming for their\n            components. For more information about service discovery on Amazon ECS, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes\n               <code>kube-dns</code> and <code>coredns</code> are supported. For more information,\n            see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS\n               for Services and Pods</a> in the Kubernetes documentation.</p>\n         </note>",
+                "smithy.api#title": "AWS App Mesh"
+            }
+        },
         "com.amazonaws.appmesh#Arn": {
             "type": "string"
         },
@@ -33,20 +69,20 @@
                 "key": {
                     "target": "com.amazonaws.appmesh#AwsCloudMapInstanceAttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service\n         instance that contains the specified key and value is returned.</p>",
+                        "smithy.api#documentation": "<p>The name of an Cloud Map service instance attribute key. Any Cloud Map service\n         instance that contains the specified key and value is returned.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "value": {
                     "target": "com.amazonaws.appmesh#AwsCloudMapInstanceAttributeValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service\n         instance that contains the specified key and value is returned.</p>",
+                        "smithy.api#documentation": "<p>The value of an Cloud Map service instance attribute key. Any Cloud Map service\n         instance that contains the specified key and value is returned.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents the AWS Cloud Map attribute information for your virtual\n         node.</p>\n         <note>\n            <p>AWS Cloud Map is not available in the eu-south-1 Region.</p>\n         </note>"
+                "smithy.api#documentation": "<p>An object that represents the Cloud Map attribute information for your virtual\n         node.</p>\n         <note>\n            <p>AWS Cloud Map is not available in the eu-south-1 Region.</p>\n         </note>"
             }
         },
         "com.amazonaws.appmesh#AwsCloudMapInstanceAttributeKey": {
@@ -90,14 +126,14 @@
                 "namespaceName": {
                     "target": "com.amazonaws.appmesh#AwsCloudMapName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the AWS Cloud Map namespace to use.</p>",
+                        "smithy.api#documentation": "<p>The name of the Cloud Map namespace to use.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "serviceName": {
                     "target": "com.amazonaws.appmesh#AwsCloudMapName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the AWS Cloud Map service to use.</p>",
+                        "smithy.api#documentation": "<p>The name of the Cloud Map service to use.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -109,43 +145,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents the AWS Cloud Map service discovery information for your virtual\n         node.</p>\n         <note>\n            <p>AWS Cloud Map is not available in the eu-south-1 Region.</p>\n         </note>"
-            }
-        },
-        "com.amazonaws.appmesh#AppMesh": {
-            "type": "service",
-            "version": "2019-01-25",
-            "operations": [
-                {
-                    "target": "com.amazonaws.appmesh#ListTagsForResource"
-                },
-                {
-                    "target": "com.amazonaws.appmesh#TagResource"
-                },
-                {
-                    "target": "com.amazonaws.appmesh#UntagResource"
-                }
-            ],
-            "resources": [
-                {
-                    "target": "com.amazonaws.appmesh#Mesh"
-                }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "App Mesh",
-                    "arnNamespace": "appmesh",
-                    "cloudFormationName": "AppMesh",
-                    "cloudTrailEventSource": "appmesh.amazonaws.com",
-                    "endpointPrefix": "appmesh"
-                },
-                "aws.auth#sigv4": {
-                    "name": "appmesh"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>AWS App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and\n         control microservices. App Mesh standardizes how your microservices communicate, giving you\n         end-to-end visibility and helping to ensure high availability for your applications.</p>\n         <p>App Mesh gives you consistent visibility and network traffic controls for every\n         microservice in an application. You can use App Mesh with AWS Fargate, Amazon ECS, Amazon EKS,\n         Kubernetes on AWS, and Amazon EC2.</p>\n         <note>\n            <p>App Mesh supports microservice applications that use service discovery naming for their\n            components. For more information about service discovery on Amazon ECS, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes\n               <code>kube-dns</code> and <code>coredns</code> are supported. For more information,\n            see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS\n               for Services and Pods</a> in the Kubernetes documentation.</p>\n         </note>",
-                "smithy.api#title": "AWS App Mesh"
+                "smithy.api#documentation": "<p>An object that represents the Cloud Map service discovery information for your virtual\n         node.</p>\n         <note>\n            <p>Cloud Map is not available in the eu-south-1 Region.</p>\n         </note>"
             }
         },
         "com.amazonaws.appmesh#Backend": {
@@ -259,7 +259,10 @@
             "type": "union",
             "members": {
                 "file": {
-                    "target": "com.amazonaws.appmesh#ListenerTlsFileCertificate"
+                    "target": "com.amazonaws.appmesh#ListenerTlsFileCertificate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that represents a local file certificate. The certificate must meet specific\n         requirements and you must have proxy authorization enabled. For more information, see\n            <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">Transport Layer Security (TLS)</a>.</p>"
+                    }
                 },
                 "sds": {
                     "target": "com.amazonaws.appmesh#ListenerTlsSdsCertificate",
@@ -754,7 +757,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a virtual node within a service mesh.</p>\n         <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS\n         service or a Kubernetes deployment. When you create a virtual node, you can specify the\n         service discovery information for your task group, and whether the proxy running in a task\n         group will communicate with other proxies using Transport Layer Security (TLS).</p>\n         <p>You define a <code>listener</code> for any inbound traffic that your virtual node\n         expects. Any virtual service that your virtual node expects to communicate to is specified\n         as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value to the full ARN; for example,\n            <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>)\n         as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>By default, App Mesh uses the name of the resource you specified in\n               <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and\n            traces. You can override this behavior by setting the\n               <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p>\n            <p>AWS Cloud Map is not available in the eu-south-1 Region.</p>\n         </note>\n         <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when\n         setting these variables. For more information about App Mesh Envoy variables, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html\">Envoy image</a> in\n         the AWS App Mesh User Guide.</p>",
+                "smithy.api#documentation": "<p>Creates a virtual node within a service mesh.</p>\n         <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS\n         service or a Kubernetes deployment. When you create a virtual node, you can specify the\n         service discovery information for your task group, and whether the proxy running in a task\n         group will communicate with other proxies using Transport Layer Security (TLS).</p>\n         <p>You define a <code>listener</code> for any inbound traffic that your virtual node\n         expects. Any virtual service that your virtual node expects to communicate to is specified\n         as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value to the full ARN; for example,\n            <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>)\n         as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>By default, App Mesh uses the name of the resource you specified in\n               <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and\n            traces. You can override this behavior by setting the\n               <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p>\n         </note>\n         <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when\n         setting these variables. For more information aboutApp Mesh Envoy variables, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html\">Envoy image</a> in\n         the AWS App Mesh User Guide.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualNodes",
@@ -1056,6 +1059,21 @@
             },
             "traits": {
                 "smithy.api#documentation": ""
+            }
+        },
+        "com.amazonaws.appmesh#DefaultGatewayRouteRewrite": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
             }
         },
         "com.amazonaws.appmesh#DeleteGatewayRoute": {
@@ -1468,7 +1486,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": ""
+                "smithy.api#documentation": "<p>Deletes a virtual node input.</p>"
             }
         },
         "com.amazonaws.appmesh#DeleteVirtualNodeOutput": {
@@ -2254,6 +2272,21 @@
                 "smithy.api#documentation": ""
             }
         },
+        "com.amazonaws.appmesh#DnsResponseType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LOADBALANCER",
+                        "name": "LOADBALANCER"
+                    },
+                    {
+                        "value": "ENDPOINTS",
+                        "name": "ENDPOINTS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.appmesh#DnsServiceDiscovery": {
             "type": "structure",
             "members": {
@@ -2262,6 +2295,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the DNS service discovery hostname for the virtual node. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "responseType": {
+                    "target": "com.amazonaws.appmesh#DnsResponseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DNS response type for the virtual node.</p>"
                     }
                 }
             },
@@ -2319,7 +2358,7 @@
                 "type": {
                     "target": "com.amazonaws.appmesh#EgressFilterType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows\n         egress only from virtual nodes to other defined resources in the service mesh (and any\n         traffic to <code>*.amazonaws.com</code> for AWS API calls). You can set the egress filter\n         type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the\n         service mesh.</p>",
+                        "smithy.api#documentation": "<p>The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows\n         egress only from virtual nodes to other defined resources in the service mesh (and any\n         traffic to <code>*.amazonaws.com</code> for Amazon Web Services API calls). You can set the egress filter\n         type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the\n         service mesh.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2341,6 +2380,15 @@
                         "name": "DROP_ALL"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.appmesh#ExactHostName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 253
+                }
             }
         },
         "com.amazonaws.appmesh#FileAccessLog": {
@@ -2471,10 +2519,54 @@
                 ]
             }
         },
+        "com.amazonaws.appmesh#GatewayRouteHostnameMatch": {
+            "type": "structure",
+            "members": {
+                "exact": {
+                    "target": "com.amazonaws.appmesh#ExactHostName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exact host name to match on.</p>"
+                    }
+                },
+                "suffix": {
+                    "target": "com.amazonaws.appmesh#SuffixHostname",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified ending characters of the host name to match on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the gateway route host name to match.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#GatewayRouteHostnameRewrite": {
+            "type": "structure",
+            "members": {
+                "defaultTargetHostname": {
+                    "target": "com.amazonaws.appmesh#DefaultGatewayRouteRewrite",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default target host name to write to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the gateway route host name to rewrite.</p>"
+            }
+        },
         "com.amazonaws.appmesh#GatewayRouteList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.appmesh#GatewayRouteRef"
+            }
+        },
+        "com.amazonaws.appmesh#GatewayRoutePriority": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1000
+                }
             }
         },
         "com.amazonaws.appmesh#GatewayRouteRef": {
@@ -2551,6 +2643,12 @@
         "com.amazonaws.appmesh#GatewayRouteSpec": {
             "type": "structure",
             "members": {
+                "priority": {
+                    "target": "com.amazonaws.appmesh#GatewayRoutePriority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ordering of the gateway routes spec.</p>"
+                    }
+                },
                 "httpRoute": {
                     "target": "com.amazonaws.appmesh#HttpGatewayRoute",
                     "traits": {
@@ -2669,6 +2767,12 @@
                         "smithy.api#documentation": "<p>An object that represents the target that traffic is routed to when a request matches the gateway route.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "rewrite": {
+                    "target": "com.amazonaws.appmesh#GrpcGatewayRouteRewrite",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway route action to rewrite.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2683,10 +2787,110 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The fully qualified domain name for the service to match from the request.</p>"
                     }
+                },
+                "hostname": {
+                    "target": "com.amazonaws.appmesh#GatewayRouteHostnameMatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway route host name to be matched on.</p>"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.appmesh#GrpcGatewayRouteMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway route metadata to be matched on.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that represents the criteria for determining a request match.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#GrpcGatewayRouteMetadata": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.appmesh#HeaderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the gateway route metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invert": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
+                    }
+                },
+                "match": {
+                    "target": "com.amazonaws.appmesh#GrpcMetadataMatchMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria for determining a metadata match.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the metadata of the gateway route.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#GrpcGatewayRouteMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appmesh#GrpcGatewayRouteMetadata"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.appmesh#GrpcGatewayRouteRewrite": {
+            "type": "structure",
+            "members": {
+                "hostname": {
+                    "target": "com.amazonaws.appmesh#GatewayRouteHostnameRewrite",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The host name of the gateway route to rewrite.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the gateway route to rewrite.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#GrpcMetadataMatchMethod": {
+            "type": "union",
+            "members": {
+                "exact": {
+                    "target": "com.amazonaws.appmesh#HeaderMatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exact method header to be matched on.</p>"
+                    }
+                },
+                "regex": {
+                    "target": "com.amazonaws.appmesh#HeaderMatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regex used to match the method header.</p>"
+                    }
+                },
+                "range": {
+                    "target": "com.amazonaws.appmesh#MatchRange"
+                },
+                "prefix": {
+                    "target": "com.amazonaws.appmesh#HeaderMatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified beginning characters of the method header to be matched on.</p>"
+                    }
+                },
+                "suffix": {
+                    "target": "com.amazonaws.appmesh#HeaderMatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified ending characters of the method header to match on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the method header to be matched.</p>"
             }
         },
         "com.amazonaws.appmesh#GrpcRetryPolicy": {
@@ -2726,7 +2930,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>.</p>"
+                "smithy.api#documentation": "<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>. \n               Both <code>server-error</code> and <code>gateway-error</code> under <code>httpRetryEvents</code> include the Envoy <code>reset</code> policy. For more information on the \n               <code>reset</code> policy, see the <a href=\"https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on\">Envoy documentation</a>.</p>"
             }
         },
         "com.amazonaws.appmesh#GrpcRetryPolicyEvent": {
@@ -3114,10 +3318,52 @@
                         "smithy.api#documentation": "<p>An object that represents the target that traffic is routed to when a request matches the gateway route.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "rewrite": {
+                    "target": "com.amazonaws.appmesh#HttpGatewayRouteRewrite",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway route action to rewrite.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that represents the action to take if a match is determined.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#HttpGatewayRouteHeader": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.appmesh#HeaderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the HTTP header in the gateway route that will be matched on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invert": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
+                    }
+                },
+                "match": {
+                    "target": "com.amazonaws.appmesh#HeaderMatchMethod"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the HTTP header in the gateway route.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#HttpGatewayRouteHeaders": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appmesh#HttpGatewayRouteHeader"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.appmesh#HttpGatewayRouteMatch": {
@@ -3126,13 +3372,111 @@
                 "prefix": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the path to match requests with. This parameter must always start with\n            <code>/</code>, which by itself matches all requests to the virtual service name. You\n         can also match for path-based routing of requests. For example, if your virtual service\n         name is <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies the path to match requests with. This parameter must always start with\n            <code>/</code>, which by itself matches all requests to the virtual service name. You\n         can also match for path-based routing of requests. For example, if your virtual service\n         name is <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>"
+                    }
+                },
+                "path": {
+                    "target": "com.amazonaws.appmesh#HttpPathMatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to match on.</p>"
+                    }
+                },
+                "queryParameters": {
+                    "target": "com.amazonaws.appmesh#HttpQueryParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query parameter to match on.</p>"
+                    }
+                },
+                "method": {
+                    "target": "com.amazonaws.appmesh#HttpMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method to match on.</p>"
+                    }
+                },
+                "hostname": {
+                    "target": "com.amazonaws.appmesh#GatewayRouteHostnameMatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The host name to match on.</p>"
+                    }
+                },
+                "headers": {
+                    "target": "com.amazonaws.appmesh#HttpGatewayRouteHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client request headers to match on.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that represents the criteria for determining a request match.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#HttpGatewayRoutePathRewrite": {
+            "type": "structure",
+            "members": {
+                "exact": {
+                    "target": "com.amazonaws.appmesh#HttpPathExact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exact path to rewrite.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the path to rewrite.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#HttpGatewayRoutePrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.appmesh#HttpGatewayRoutePrefixRewrite": {
+            "type": "structure",
+            "members": {
+                "defaultPrefix": {
+                    "target": "com.amazonaws.appmesh#DefaultGatewayRouteRewrite",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default prefix used to replace the incoming route prefix when rewritten.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.appmesh#HttpGatewayRoutePrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value used to replace the incoming route prefix when rewritten.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the beginning characters of the route to rewrite.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#HttpGatewayRouteRewrite": {
+            "type": "structure",
+            "members": {
+                "prefix": {
+                    "target": "com.amazonaws.appmesh#HttpGatewayRoutePrefixRewrite",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified beginning characters to rewrite.</p>"
+                    }
+                },
+                "path": {
+                    "target": "com.amazonaws.appmesh#HttpGatewayRoutePathRewrite",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to rewrite.</p>"
+                    }
+                },
+                "hostname": {
+                    "target": "com.amazonaws.appmesh#GatewayRouteHostnameRewrite",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The host name to rewrite.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the gateway route to rewrite.</p>"
             }
         },
         "com.amazonaws.appmesh#HttpMethod": {
@@ -3178,6 +3522,77 @@
                 ]
             }
         },
+        "com.amazonaws.appmesh#HttpPathExact": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.appmesh#HttpPathMatch": {
+            "type": "structure",
+            "members": {
+                "exact": {
+                    "target": "com.amazonaws.appmesh#HttpPathExact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exact path to match on.</p>"
+                    }
+                },
+                "regex": {
+                    "target": "com.amazonaws.appmesh#HttpPathRegex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regex used to match the path.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the path to match in the request.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#HttpPathRegex": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.appmesh#HttpQueryParameter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.appmesh#QueryParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the query parameter that will be matched on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "match": {
+                    "target": "com.amazonaws.appmesh#QueryParameterMatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query parameter to match on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the query parameter in the request.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#HttpQueryParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appmesh#HttpQueryParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.appmesh#HttpRetryPolicy": {
             "type": "structure",
             "members": {
@@ -3209,7 +3624,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>.</p>"
+                "smithy.api#documentation": "<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>. \n               Both <code>server-error</code> and <code>gateway-error</code> under <code>httpRetryEvents</code> include the Envoy <code>reset</code> policy. For more information on the \n               <code>reset</code> policy, see the <a href=\"https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on\">Envoy documentation</a>.</p>"
             }
         },
         "com.amazonaws.appmesh#HttpRetryPolicyEvent": {
@@ -3327,8 +3742,19 @@
                 "prefix": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the path to match requests with. This parameter must always start with\n            <code>/</code>, which by itself matches all requests to the virtual service name. You\n         can also match for path-based routing of requests. For example, if your virtual service\n         name is <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies the path to match requests with. This parameter must always start with\n            <code>/</code>, which by itself matches all requests to the virtual service name. You\n         can also match for path-based routing of requests. For example, if your virtual service\n         name is <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>"
+                    }
+                },
+                "path": {
+                    "target": "com.amazonaws.appmesh#HttpPathMatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client request path to match on.</p>"
+                    }
+                },
+                "queryParameters": {
+                    "target": "com.amazonaws.appmesh#HttpQueryParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client request query parameters to match on.</p>"
                     }
                 },
                 "method": {
@@ -3340,13 +3766,13 @@
                 "scheme": {
                     "target": "com.amazonaws.appmesh#HttpScheme",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client request scheme to match on. Specify only one.</p>"
+                        "smithy.api#documentation": "<p>The client request scheme to match on. Specify only one. Applicable only for HTTP2\n         routes.</p>"
                     }
                 },
                 "headers": {
                     "target": "com.amazonaws.appmesh#HttpRouteHeaders",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that represents the client request headers to match on.</p>"
+                        "smithy.api#documentation": "<p>The client request headers to match on.</p>"
                     }
                 }
             },
@@ -4354,7 +4780,10 @@
                     }
                 },
                 "grpc": {
-                    "target": "com.amazonaws.appmesh#GrpcTimeout"
+                    "target": "com.amazonaws.appmesh#GrpcTimeout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that represents types of timeouts. </p>"
+                    }
                 }
             },
             "traits": {
@@ -4483,7 +4912,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents the listener's Secret Discovery Service certificate. The proxy\n         must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS\n            documentation</a> for more info.</p>"
+                "smithy.api#documentation": "<p>An object that represents the listener's Secret Discovery Service certificate. The proxy\n         must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS documentation</a>\n         for more info.</p>"
             }
         },
         "com.amazonaws.appmesh#ListenerTlsValidationContext": {
@@ -4511,7 +4940,10 @@
             "type": "union",
             "members": {
                 "file": {
-                    "target": "com.amazonaws.appmesh#TlsValidationContextFileTrust"
+                    "target": "com.amazonaws.appmesh#TlsValidationContextFileTrust",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>"
+                    }
                 },
                 "sds": {
                     "target": "com.amazonaws.appmesh#TlsValidationContextSdsTrust",
@@ -4947,6 +5379,23 @@
                 "target": "com.amazonaws.appmesh#PortNumber"
             }
         },
+        "com.amazonaws.appmesh#QueryParameterMatch": {
+            "type": "structure",
+            "members": {
+                "exact": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exact query parameter to match on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the query parameter to match.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#QueryParameterName": {
+            "type": "string"
+        },
         "com.amazonaws.appmesh#ResourceInUseException": {
             "type": "structure",
             "members": {
@@ -5292,7 +5741,7 @@
                 "awsCloudMap": {
                     "target": "com.amazonaws.appmesh#AwsCloudMapServiceDiscovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies any AWS Cloud Map information for the virtual node.</p>"
+                        "smithy.api#documentation": "<p>Specifies any Cloud Map information for the virtual node.</p>"
                     }
                 }
             },
@@ -5360,6 +5809,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that represents the subject alternative names secured by the\n         certificate.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#SuffixHostname": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 253
+                }
             }
         },
         "com.amazonaws.appmesh#TagKey": {
@@ -5616,7 +6074,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM)\n         certificate.</p>"
+                "smithy.api#documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager\n         certificate.</p>"
             }
         },
         "com.amazonaws.appmesh#TlsValidationContextFileTrust": {
@@ -5655,7 +6113,7 @@
                 "acm": {
                     "target": "com.amazonaws.appmesh#TlsValidationContextAcmTrust",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an\n         AWS Certicate Manager (ACM) certificate.</p>"
+                        "smithy.api#documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an\n         Certificate Manager certificate.</p>"
                     }
                 },
                 "file": {
@@ -6625,7 +7083,10 @@
             "type": "union",
             "members": {
                 "file": {
-                    "target": "com.amazonaws.appmesh#VirtualGatewayListenerTlsFileCertificate"
+                    "target": "com.amazonaws.appmesh#VirtualGatewayListenerTlsFileCertificate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that represents a local file certificate. The certificate must meet specific\n         requirements and you must have proxy authorization enabled. For more information, see\n            <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\"> Transport Layer Security (TLS)\n         </a>.</p>"
+                    }
                 },
                 "sds": {
                     "target": "com.amazonaws.appmesh#VirtualGatewayListenerTlsSdsCertificate",
@@ -6941,7 +7402,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents an AWS Certicate Manager (ACM) certificate.</p>"
+                "smithy.api#documentation": "<p>An object that represents an Certificate Manager certificate.</p>"
             }
         },
         "com.amazonaws.appmesh#VirtualGatewayListenerTlsCertificate": {
@@ -6950,7 +7411,7 @@
                 "acm": {
                     "target": "com.amazonaws.appmesh#VirtualGatewayListenerTlsAcmCertificate",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to an object that represents an AWS Certicate Manager (ACM) certificate.</p>"
+                        "smithy.api#documentation": "<p>A reference to an object that represents an Certificate Manager certificate.</p>"
                     }
                 },
                 "file": {
@@ -7023,7 +7484,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents the virtual gateway's listener's Secret Discovery Service\n         certificate.The proxy must be configured with a local SDS provider via a Unix Domain\n         Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS\n            documentation</a> for more info. </p>"
+                "smithy.api#documentation": "<p>An object that represents the virtual gateway's listener's Secret Discovery Service\n         certificate.The proxy must be configured with a local SDS provider via a Unix Domain\n         Socket. See App Mesh<a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS\n            documentation</a> for more info. </p>"
             }
         },
         "com.amazonaws.appmesh#VirtualGatewayListenerTlsValidationContext": {
@@ -7051,7 +7512,10 @@
             "type": "union",
             "members": {
                 "file": {
-                    "target": "com.amazonaws.appmesh#VirtualGatewayTlsValidationContextFileTrust"
+                    "target": "com.amazonaws.appmesh#VirtualGatewayTlsValidationContextFileTrust",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>"
+                    }
                 },
                 "sds": {
                     "target": "com.amazonaws.appmesh#VirtualGatewayTlsValidationContextSdsTrust",
@@ -7289,7 +7753,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM)\n         certificate.</p>"
+                "smithy.api#documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager\n         certificate.</p>"
             }
         },
         "com.amazonaws.appmesh#VirtualGatewayTlsValidationContextFileTrust": {
@@ -7319,7 +7783,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents a virtual gateway's listener's Transport Layer Security (TLS) Secret Discovery Service\n         validation context trust. The proxy must be configured with a local SDS provider via a Unix\n         Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS\n            documentation</a> for more info.</p>"
+                "smithy.api#documentation": "<p>An object that represents a virtual gateway's listener's Transport Layer Security (TLS) Secret Discovery Service\n         validation context trust. The proxy must be configured with a local SDS provider via a Unix\n         Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS documentation</a> for more info.</p>"
             }
         },
         "com.amazonaws.appmesh#VirtualGatewayTlsValidationContextTrust": {
@@ -7328,7 +7792,7 @@
                 "acm": {
                     "target": "com.amazonaws.appmesh#VirtualGatewayTlsValidationContextAcmTrust",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an\n         AWS Certicate Manager (ACM) certificate.</p>"
+                        "smithy.api#documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an\n         Certificate Manager certificate.</p>"
                     }
                 },
                 "file": {

@@ -14,7 +14,7 @@ import (
 // use the CMK for cryptographic operations
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations).
 // The CMK that you use for this operation must be in a compatible key state. For
-// details, see How Key State Affects Use of a Customer Master Key
+// details, see Key state: Effect on your CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a CMK in a different AWS account. Required
@@ -38,13 +38,13 @@ func (c *Client) EnableKey(ctx context.Context, params *EnableKeyInput, optFns .
 
 type EnableKeyInput struct {
 
-	// A unique identifier for the customer master key (CMK). Specify the key ID or the
-	// Amazon Resource Name (ARN) of the CMK. For example:
+	// Identifies the customer master key (CMK) to enable. Specify the key ID or key
+	// ARN of the CMK. For example:
 	//
-	// * Key ID:
-	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	// * Key ARN:
+	// *
+	// Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

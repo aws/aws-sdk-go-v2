@@ -13,7 +13,7 @@ import (
 
 // Retrieves an array of the Amazon Resource Names (ARNs) for the regional
 // resources that are associated with the specified web ACL. If you want the list
-// of AWS CloudFront resources, use the AWS CloudFront call
+// of Amazon CloudFront resources, use the CloudFront call
 // ListDistributionsByWebACLId.
 func (c *Client) ListResourcesForWebACL(ctx context.Context, params *ListResourcesForWebACLInput, optFns ...func(*Options)) (*ListResourcesForWebACLOutput, error) {
 	if params == nil {
@@ -32,14 +32,14 @@ func (c *Client) ListResourcesForWebACL(ctx context.Context, params *ListResourc
 
 type ListResourcesForWebACLInput struct {
 
-	// The Amazon Resource Name (ARN) of the Web ACL.
+	// The Amazon Resource Name (ARN) of the web ACL.
 	//
 	// This member is required.
 	WebACLArn *string
 
 	// Used for web ACLs that are scoped for regional applications. A regional
-	// application can be an Application Load Balancer (ALB), an API Gateway REST API,
-	// or an AppSync GraphQL API.
+	// application can be an Application Load Balancer (ALB), an Amazon API Gateway
+	// REST API, or an AppSync GraphQL API.
 	ResourceType types.ResourceType
 }
 

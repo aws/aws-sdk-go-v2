@@ -59,13 +59,13 @@ type ListAliasesInput struct {
 
 	// Lists only aliases that are associated with the specified CMK. Enter a CMK in
 	// your AWS account. This parameter is optional. If you omit it, ListAliases
-	// returns all aliases in the account and Region. Specify the key ID or the Amazon
-	// Resource Name (ARN) of the CMK. For example:
+	// returns all aliases in the account and Region. Specify the key ID or key ARN of
+	// the CMK. For example:
 	//
-	// * Key ID:
-	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	// * Key ARN:
+	// * Key
+	// ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

@@ -249,6 +249,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AuthorizationError",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>Indicates that the user has been denied access to the requested resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -320,6 +324,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConcurrentAccess",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Can't perform multiple operations on a tag simultaneously. Perform the operations\n            sequentially.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -877,6 +885,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EndpointDisabled",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Exception error indicating endpoint disabled.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -890,6 +902,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "FilterPolicyLimitExceeded",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>Indicates that the number of filter polices in your AWS account exceeds the limit. To\n            add more filter polices, submit an SNS Limit Increase case in the AWS Support\n            Center.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -1219,6 +1235,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InternalError",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>Indicates an internal service error.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -1232,6 +1252,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidParameter",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Indicates that a request parameter does not comply with the associated\n            constraints.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1248,6 +1272,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ParameterValueInvalid",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Indicates that a request parameter does not comply with the associated\n            constraints.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1261,6 +1289,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidSecurity",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>The credential signature isn't valid. You must use an HTTPS endpoint and sign your\n            request using Signature Version 4.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -1285,6 +1317,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "KMSAccessDenied",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The ciphertext references a key that doesn't exist or that you don't have access\n            to.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1298,6 +1334,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "KMSDisabled",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the specified customer master key (CMK) isn't\n            enabled.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1311,6 +1351,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "KMSInvalidState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the state of the specified resource isn't valid for\n            this request. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">How Key State Affects Use of a\n                Customer Master Key</a> in the <i>AWS Key Management Service Developer\n                Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1324,6 +1368,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "KMSNotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the specified entity or resource can't be\n            found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1337,6 +1385,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "KMSOptInRequired",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>The AWS access key ID needs a subscription for the service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -1350,6 +1402,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "KMSThrottling",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was denied due to request throttling. For more information about\n            throttling, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second\">Limits</a> in\n            the <i>AWS Key Management Service Developer Guide.</i>\n         </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2089,6 +2145,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>Indicates that the requested resource does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -2190,6 +2250,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "OptedOut",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Indicates that the specified phone number opted out of receiving SMS messages from\n            your AWS account. You can't send SMS messages to phone numbers that opt out.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2298,6 +2362,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "PlatformApplicationDisabled",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Exception error indicating platform application disabled.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2495,6 +2563,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>Can’t perform the action on the specified resource. Make sure that the resource\n            exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -2816,6 +2888,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "StaleTag",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A tag has been added to a resource with the same ARN as a deleted resource. Wait a\n            short while and then retry the operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2968,6 +3044,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SubscriptionLimitExceeded",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>Indicates that the customer already owns the maximum allowed number of\n            subscriptions.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -3024,6 +3104,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TagLimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Can't add more than 50 tags to a topic.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3043,6 +3127,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TagPolicy",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request doesn't comply with the IAM tag policy. Correct your request and then\n            retry it.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3126,6 +3214,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "Throttled",
+                    "httpResponseCode": 429
+                },
                 "smithy.api#documentation": "<p>Indicates that the rate at which requests have been submitted for this action exceeds\n            the limit for your account.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
@@ -3165,6 +3257,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TopicLimitExceeded",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>Indicates that the customer already owns the maximum allowed number of topics.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -3283,6 +3379,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UserError",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Indicates that a request parameter does not comply with the associated\n            constraints.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3299,6 +3399,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ValidationException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Indicates that a parameter in the request is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400

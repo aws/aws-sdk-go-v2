@@ -75,7 +75,7 @@
                     "min": 1,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:.+:.+:.+:.+:.+"
+                "smithy.api#pattern": "^arn:.+:.+:.+:.+:.+$"
             }
         },
         "com.amazonaws.managedblockchain#AvailabilityZoneString": {
@@ -1767,7 +1767,7 @@
                 "Status": {
                     "target": "com.amazonaws.managedblockchain#MemberStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of a member.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The AWS account is in the process of creating a member.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The member has been created and can participate in the network.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> - The AWS account attempted to create a member and creation failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> \n                  <code>PROPOSAL</code> to remove the member.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> \n                  <code>PROPOSAL</code> to remove the member.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of a member.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The AWS account is in the process of creating a member.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The member has been created and can participate in the network.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> - The AWS account attempted to create a member and creation failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - The member is in the process of being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> \n                  <code>PROPOSAL</code> to remove the member.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> \n                  <code>PROPOSAL</code> to remove the member.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACCESSIBLE_ENCRYPTION_KEY</code> - The member is impaired and might not function as expected because it cannot access the specified customer managed key in AWS KMS for encryption at rest. Either the KMS key was disabled or deleted, or the grants on the key were revoked.</p>\n               <p>The effect of disabling or deleting a key, or revoking a grant is not immediate. The member resource might take some time to find that the key is inaccessible. When a resource is in this state, we recommend deleting and recreating the resource.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CreationDate": {
@@ -1786,6 +1786,12 @@
                     "target": "com.amazonaws.managedblockchain#ArnString",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the member. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.managedblockchain#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer managed key in AWS Key Management Service (AWS KMS) that the member uses for encryption at rest. If the value of this parameter is <code>\"AWS Owned KMS Key\"</code>, the member uses an AWS owned KMS key for encryption. This parameter is inherited by the nodes that this member owns.</p>"
                     }
                 }
             },
@@ -1826,6 +1832,12 @@
                     "target": "com.amazonaws.managedblockchain#InputTagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Tags assigned to the member. Tags consist of a key and optional value. For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>\n         <p>When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource.</p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer managed key in AWS Key Management Service (AWS KMS) to use for encryption at rest in the member. This parameter is inherited by any nodes that this member creates.</p>\n         <p>Use one of the following options to specify this parameter:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Undefined or empty string</b> - The member uses an AWS owned KMS key for encryption by default.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A valid symmetric customer managed KMS key</b> - The member uses the specified key for encryption.</p>\n               <p>Amazon Managed Blockchain doesn't support asymmetric keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and asymmetric keys</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>\n               <p>The following is an example of a KMS key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1968,6 +1980,10 @@
                     {
                         "value": "DELETED",
                         "name": "DELETED"
+                    },
+                    {
+                        "value": "INACCESSIBLE_ENCRYPTION_KEY",
+                        "name": "INACCESSIBLE_ENCRYPTION_KEY"
                     }
                 ]
             }
@@ -1996,7 +2012,7 @@
                 "Status": {
                     "target": "com.amazonaws.managedblockchain#MemberStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the member.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The AWS account is in the process of creating a member.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The member has been created and can participate in the network.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> - The AWS account attempted to create a member and creation failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> \n                  <code>PROPOSAL</code> to remove the member.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> \n                  <code>PROPOSAL</code> to remove the member.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the member.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The AWS account is in the process of creating a member.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The member has been created and can participate in the network.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> - The AWS account attempted to create a member and creation failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - The member is in the process of being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> \n                  <code>PROPOSAL</code> to remove the member.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> \n                  <code>PROPOSAL</code> to remove the member.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACCESSIBLE_ENCRYPTION_KEY</code> - The member is impaired and might not function as expected because it cannot access the specified customer managed key in AWS Key Management Service (AWS KMS) for encryption at rest. Either the KMS key was disabled or deleted, or the grants on the key were revoked.</p>\n               <p>The effect of disabling or deleting a key, or revoking a grant is not immediate. The member resource might take some time to find that the key is inaccessible. When a resource is in this state, we recommend deleting and recreating the resource.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CreationDate": {
@@ -2035,7 +2051,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.managedblockchain#Network": {
@@ -2364,7 +2380,7 @@
                 "Status": {
                     "target": "com.amazonaws.managedblockchain#NodeStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the node.</p>"
+                        "smithy.api#documentation": "<p>The status of the node.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The AWS account is in the process of creating a node.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The node has been created and can participate in the network.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNHEALTHY</code> - The node is impaired and might not function as expected. Amazon Managed Blockchain automatically finds nodes in this state and tries to recover them. If a node is recoverable, it returns to <code>AVAILABLE</code>. Otherwise, it moves to <code>FAILED</code> status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> - The AWS account attempted to create a node and creation failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - The node is in the process of being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The node is in the process of being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - The node can no longer participate on the network.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The node is no longer functional, cannot be recovered, and must be deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACCESSIBLE_ENCRYPTION_KEY</code> - The node is impaired and might not function as expected because it cannot access the specified customer managed key in AWS KMS for encryption at rest. Either the KMS key was disabled or deleted, or the grants on the key were revoked.</p>\n               <p>The effect of disabling or deleting a key, or revoking a grant is not immediate. The node resource might take some time to find that the key is inaccessible. When a resource is in this state, we recommend deleting and recreating the resource.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CreationDate": {
@@ -2383,6 +2399,12 @@
                     "target": "com.amazonaws.managedblockchain#ArnString",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the node. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.managedblockchain#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer managed key in AWS Key Management Service (AWS KMS) that the node uses for encryption at rest. If the value of this parameter is <code>\"AWS Owned KMS Key\"</code>, the node uses an AWS owned KMS key for encryption. The node inherits this parameter from the member that it belongs to.</p>\n         <p>Applies only to Hyperledger Fabric.</p>"
                     }
                 }
             },
@@ -2562,6 +2584,10 @@
                     {
                         "value": "FAILED",
                         "name": "FAILED"
+                    },
+                    {
+                        "value": "INACCESSIBLE_ENCRYPTION_KEY",
+                        "name": "INACCESSIBLE_ENCRYPTION_KEY"
                     }
                 ]
             }

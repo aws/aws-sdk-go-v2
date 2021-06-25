@@ -183,6 +183,7 @@
         "api_op_UpdateRoom.go",
         "api_op_UpdateRoomMembership.go",
         "api_op_UpdateSipMediaApplication.go",
+        "api_op_UpdateSipMediaApplicationCall.go",
         "api_op_UpdateSipRule.go",
         "api_op_UpdateUser.go",
         "api_op_UpdateUserSettings.go",

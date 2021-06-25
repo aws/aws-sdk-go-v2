@@ -1570,6 +1570,26 @@ func (m *validateOpRespondToAuthChallenge) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRevokeToken struct {
+}
+
+func (*validateOpRevokeToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRevokeToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RevokeTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRevokeTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSetRiskConfiguration struct {
 }
 
@@ -2300,6 +2320,10 @@ func addOpResendConfirmationCodeValidationMiddleware(stack *middleware.Stack) er
 
 func addOpRespondToAuthChallengeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRespondToAuthChallenge{}, middleware.After)
+}
+
+func addOpRevokeTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRevokeToken{}, middleware.After)
 }
 
 func addOpSetRiskConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -4255,6 +4279,24 @@ func validateOpRespondToAuthChallengeInput(v *RespondToAuthChallengeInput) error
 	}
 	if len(v.ChallengeName) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ChallengeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRevokeTokenInput(v *RevokeTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevokeTokenInput"}
+	if v.Token == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Token"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about environment members for an AWS Cloud9 development
+// Gets information about environment members for an Cloud9 development
 // environment.
 func (c *Client) DescribeEnvironmentMemberships(ctx context.Context, params *DescribeEnvironmentMembershipsInput, optFns ...func(*Options)) (*DescribeEnvironmentMembershipsOutput, error) {
 	if params == nil {

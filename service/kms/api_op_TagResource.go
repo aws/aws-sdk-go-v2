@@ -13,23 +13,31 @@ import (
 
 // Adds or edits tags on a customer managed CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk).
-// Each tag consists of a tag key and a tag value, both of which are case-sensitive
-// strings. The tag value can be an empty (null) string. To add a tag, specify a
-// new tag key and a tag value. To edit a tag, specify an existing tag key and a
-// new tag value. You can use this operation to tag a customer managed CMK
+// Tagging or untagging a CMK can allow or deny permission to the CMK. For details,
+// see Using ABAC in AWS KMS
+// (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the AWS Key
+// Management Service Developer Guide. Each tag consists of a tag key and a tag
+// value, both of which are case-sensitive strings. The tag value can be an empty
+// (null) string. To add a tag, specify a new tag key and a tag value. To edit a
+// tag, specify an existing tag key and a new tag value. You can use this operation
+// to tag a customer managed CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk),
 // but you cannot tag an AWS managed CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk),
 // an AWS owned CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk),
-// or an alias. For general information about tags, including the format and
-// syntax, see Tagging AWS resources
-// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-// Web Services General Reference. For information about using tags in AWS KMS, see
-// Tagging keys
-// (https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html). The
-// CMK that you use for this operation must be in a compatible key state. For
-// details, see How Key State Affects Use of a Customer Master Key
+// a custom key store
+// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#keystore-concept),
+// or an alias
+// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#alias-concept).
+// You can also add tags to a CMK while creating it (CreateKey) or replicating it
+// (ReplicateKey). For information about using tags in AWS KMS, see Tagging keys
+// (https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html). For
+// general information about tags, including the format and syntax, see Tagging AWS
+// resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
+// the Amazon Web Services General Reference. The CMK that you use for this
+// operation must be in a compatible key state. For details, see Key state: Effect
+// on your CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a CMK in a different AWS account. Required
@@ -37,9 +45,14 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations
 //
-// * UntagResource
+// * CreateKey
 //
 // * ListResourceTags
+//
+// *
+// ReplicateKey
+//
+// * UntagResource
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -58,7 +71,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 type TagResourceInput struct {
 
 	// Identifies a customer managed CMK in the account and Region. Specify the key ID
-	// or the Amazon Resource Name (ARN) of the CMK. For example:
+	// or key ARN of the CMK. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab

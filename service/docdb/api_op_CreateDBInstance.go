@@ -61,18 +61,18 @@ type CreateDBInstanceInput struct {
 	// This member is required.
 	Engine *string
 
-	// Indicates that minor engine upgrades are applied automatically to the instance
-	// during the maintenance window. Default: true
+	// This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not
+	// perform minor version upgrades regardless of the value set. Default: false
 	AutoMinorVersionUpgrade *bool
 
 	// The Amazon EC2 Availability Zone that the instance is created in. Default: A
-	// random, system-chosen Availability Zone in the endpoint's AWS Region. Example:
+	// random, system-chosen Availability Zone in the endpoint's Region. Example:
 	// us-east-1d
 	AvailabilityZone *string
 
 	// The time range each week during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
+	// 30-minute window selected at random from an 8-hour block of time for each
 	// Region, occurring on a random day of the week. Valid days: Mon, Tue, Wed, Thu,
 	// Fri, Sat, Sun Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string

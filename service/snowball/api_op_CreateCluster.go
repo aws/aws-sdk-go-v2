@@ -74,7 +74,7 @@ type CreateClusterInput struct {
 	// access to standard shipping, which typically takes less than a week, one way.
 	//
 	// *
-	// In India, Snow device are delivered in one to seven days.
+	// In India, Snow devices are delivered in one to seven days.
 	//
 	// * In the United
 	// States of America (US), you have access to one-day shipping and two-day
@@ -89,10 +89,10 @@ type CreateClusterInput struct {
 	// access to standard shipping, which typically takes less than a week, one way.
 	//
 	// *
-	// In India, Snow device are delivered in one to seven days.
+	// In India, Snow devices are delivered in one to seven days.
 	//
-	// * In the US, you have
-	// access to one-day shipping and two-day shipping.
+	// * In the US, you
+	// have access to one-day shipping and two-day shipping.
 	//
 	// This member is required.
 	ShippingOption types.ShippingOption
@@ -125,6 +125,17 @@ type CreateClusterInput struct {
 	// The Amazon Simple Notification Service (Amazon SNS) notification settings for
 	// this cluster.
 	Notification *types.Notification
+
+	// Specifies the service or services on the Snow Family device that your
+	// transferred data will be exported from or imported into. AWS Snow Family
+	// supports Amazon S3 and NFS (Network File System).
+	OnDeviceServiceConfiguration *types.OnDeviceServiceConfiguration
+
+	// Allows you to securely operate and manage Snow devices in a cluster remotely
+	// from outside of your internal network. When set to INSTALLED_AUTOSTART, remote
+	// management will automatically be available when the device arrives at your
+	// location. Otherwise, you need to use the Snowball Client to manage the device.
+	RemoteManagement types.RemoteManagement
 
 	// The tax documents required in your AWS Region.
 	TaxDocuments *types.TaxDocuments

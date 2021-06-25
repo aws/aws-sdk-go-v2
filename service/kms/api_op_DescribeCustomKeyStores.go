@@ -13,13 +13,13 @@ import (
 
 // Gets information about custom key stores
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
-// in the account and region. This operation is part of the Custom Key Store
+// in the account and Region. This operation is part of the Custom Key Store
 // feature
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // feature in AWS KMS, which combines the convenience and extensive integration of
 // AWS KMS with the isolation and control of a single-tenant key store. By default,
 // this operation returns information about all custom key stores in the account
-// and region. To get only information about a particular custom key store, use
+// and Region. To get only information about a particular custom key store, use
 // either the CustomKeyStoreName or CustomKeyStoreId parameter (but not both). To
 // determine whether the custom key store is connected to its AWS CloudHSM cluster,
 // use the ConnectionState element in the response. If an attempt to connect the
@@ -69,14 +69,14 @@ type DescribeCustomKeyStoresInput struct {
 
 	// Gets only information about the specified custom key store. Enter the key store
 	// ID. By default, this operation gets information about all custom key stores in
-	// the account and region. To limit the output to a particular custom key store,
+	// the account and Region. To limit the output to a particular custom key store,
 	// you can use either the CustomKeyStoreId or CustomKeyStoreName parameter, but not
 	// both.
 	CustomKeyStoreId *string
 
 	// Gets only information about the specified custom key store. Enter the friendly
 	// name of the custom key store. By default, this operation gets information about
-	// all custom key stores in the account and region. To limit the output to a
+	// all custom key stores in the account and Region. To limit the output to a
 	// particular custom key store, you can use either the CustomKeyStoreId or
 	// CustomKeyStoreName parameter, but not both.
 	CustomKeyStoreName *string

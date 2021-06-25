@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes tags from an AWS Cloud9 development environment.
+// Removes tags from an Cloud9 development environment.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -28,13 +28,13 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Cloud9 development environment to
-	// remove tags from.
+	// The Amazon Resource Name (ARN) of the Cloud9 development environment to remove
+	// tags from.
 	//
 	// This member is required.
 	ResourceARN *string
 
-	// The tag names of the tags to remove from the given AWS Cloud9 development
+	// The tag names of the tags to remove from the given Cloud9 development
 	// environment.
 	//
 	// This member is required.

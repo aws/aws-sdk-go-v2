@@ -76,6 +76,12 @@ type UpdateSlotInput struct {
 	// The new description for the slot.
 	Description *string
 
+	// Determines whether the slot accepts multiple values in one response. Multiple
+	// value slots are only available in the en-US locale. If you set this value to
+	// true in any other locale, Amazon Lex throws a ValidationException. If the
+	// multipleValuesSetting is not set, the default value is false.
+	MultipleValuesSetting *types.MultipleValuesSetting
+
 	// New settings that determine how slot values are formatted in Amazon CloudWatch
 	// logs.
 	ObfuscationSetting *types.ObfuscationSetting
@@ -103,6 +109,9 @@ type UpdateSlotOutput struct {
 
 	// The locale that contains the slot.
 	LocaleId *string
+
+	// Indicates whether the slot accepts multiple values in one response.
+	MultipleValuesSetting *types.MultipleValuesSetting
 
 	// The updated setting that determines whether the slot value is obfuscated in the
 	// Amazon CloudWatch logs.

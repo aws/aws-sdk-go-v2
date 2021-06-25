@@ -2201,6 +2201,11 @@ func awsRestjson1_deserializeOpDocumentCreateSlotOutput(v **CreateSlotOutput, va
 				sv.LocaleId = ptr.String(jtv)
 			}
 
+		case "multipleValuesSetting":
+			if err := awsRestjson1_deserializeDocumentMultipleValuesSetting(&sv.MultipleValuesSetting, value); err != nil {
+				return err
+			}
+
 		case "obfuscationSetting":
 			if err := awsRestjson1_deserializeDocumentObfuscationSetting(&sv.ObfuscationSetting, value); err != nil {
 				return err
@@ -6566,6 +6571,11 @@ func awsRestjson1_deserializeOpDocumentDescribeSlotOutput(v **DescribeSlotOutput
 					return fmt.Errorf("expected LocaleId to be of type string, got %T instead", value)
 				}
 				sv.LocaleId = ptr.String(jtv)
+			}
+
+		case "multipleValuesSetting":
+			if err := awsRestjson1_deserializeDocumentMultipleValuesSetting(&sv.MultipleValuesSetting, value); err != nil {
+				return err
 			}
 
 		case "obfuscationSetting":
@@ -11056,6 +11066,11 @@ func awsRestjson1_deserializeOpDocumentUpdateSlotOutput(v **UpdateSlotOutput, va
 				sv.LocaleId = ptr.String(jtv)
 			}
 
+		case "multipleValuesSetting":
+			if err := awsRestjson1_deserializeDocumentMultipleValuesSetting(&sv.MultipleValuesSetting, value); err != nil {
+				return err
+			}
+
 		case "obfuscationSetting":
 			if err := awsRestjson1_deserializeDocumentObfuscationSetting(&sv.ObfuscationSetting, value); err != nil {
 				return err
@@ -14441,6 +14456,46 @@ func awsRestjson1_deserializeDocumentMessageVariationsList(v *[]types.Message, v
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMultipleValuesSetting(v **types.MultipleValuesSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MultipleValuesSetting
+	if *v == nil {
+		sv = &types.MultipleValuesSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowMultipleValues":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowMultipleValues = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

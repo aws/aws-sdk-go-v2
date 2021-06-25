@@ -55,7 +55,7 @@ type DescribeCustomAvailabilityZonesInput struct {
 
 type DescribeCustomAvailabilityZonesOutput struct {
 
-	// The list of CustomAvailabilityZone objects for the AWS account.
+	// The list of CustomAvailabilityZone objects for the Amazon Web Services account.
 	CustomAvailabilityZones []types.CustomAvailabilityZone
 
 	// An optional pagination token provided by a previous

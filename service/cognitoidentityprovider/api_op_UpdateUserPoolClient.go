@@ -16,7 +16,9 @@ import (
 // DescribeUserPoolClient
 // (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPoolClient.html).
 // If you don't provide a value for an attribute, it will be set to the default
-// value.
+// value. You can also use this operation to enable token revocation for user pool
+// clients. For more information about revoking tokens, see RevokeToken
+// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html).
 func (c *Client) UpdateUserPoolClient(ctx context.Context, params *UpdateUserPoolClientInput, optFns ...func(*Options)) (*UpdateUserPoolClientOutput, error) {
 	if params == nil {
 		params = &UpdateUserPoolClientInput{}
@@ -110,6 +112,11 @@ type UpdateUserPoolClientInput struct {
 	// HTTPS over HTTP except for http://localhost for testing purposes only. App
 	// callback URLs such as myapp://example are also supported.
 	DefaultRedirectURI *string
+
+	// Enables or disables token revocation. For more information about revoking
+	// tokens, see RevokeToken
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html).
+	EnableTokenRevocation *bool
 
 	// The authentication flows that are supported by the user pool clients. Flow names
 	// without the ALLOW_ prefix are deprecated in favor of new names with the ALLOW_

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds an environment member to an AWS Cloud9 development environment.
+// Adds an environment member to an Cloud9 development environment.
 func (c *Client) CreateEnvironmentMembership(ctx context.Context, params *CreateEnvironmentMembershipInput, optFns ...func(*Options)) (*CreateEnvironmentMembershipOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentMembershipInput{}

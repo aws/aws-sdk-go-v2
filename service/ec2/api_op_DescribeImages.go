@@ -22,8 +22,8 @@ import (
 // which you have explicit launch permissions. Recently deregistered images appear
 // in the returned results for a short interval and then return empty results.
 // After all instances that reference a deregistered AMI are terminated, specifying
-// the ID of the image results in an error indicating that the AMI ID cannot be
-// found.
+// the ID of the image will eventually return an error indicating that the AMI ID
+// cannot be found.
 func (c *Client) DescribeImages(ctx context.Context, params *DescribeImagesInput, optFns ...func(*Options)) (*DescribeImagesOutput, error) {
 	if params == nil {
 		params = &DescribeImagesInput{}
@@ -155,6 +155,13 @@ type DescribeImagesInput struct {
 
 	// The image IDs. Default: Describes all images available to you.
 	ImageIds []string
+
+	// If true, all deprecated AMIs are included in the response. If false, no
+	// deprecated AMIs are included in the response. If no value is specified, the
+	// default value is false. If you are the AMI owner, all deprecated AMIs appear in
+	// the response regardless of the value (true or false) that you set for this
+	// parameter.
+	IncludeDeprecated *bool
 
 	// Scopes the results to images with the specified owners. You can specify a
 	// combination of AWS account IDs, self, amazon, and aws-marketplace. If you omit

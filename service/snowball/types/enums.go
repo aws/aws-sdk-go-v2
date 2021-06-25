@@ -26,6 +26,24 @@ func (ClusterState) Values() []ClusterState {
 	}
 }
 
+type DeviceServiceName string
+
+// Enum values for DeviceServiceName
+const (
+	DeviceServiceNameNfsOnDeviceService DeviceServiceName = "NFS_ON_DEVICE_SERVICE"
+	DeviceServiceNameS3OnDeviceService  DeviceServiceName = "S3_ON_DEVICE_SERVICE"
+)
+
+// Values returns all known values for DeviceServiceName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceServiceName) Values() []DeviceServiceName {
+	return []DeviceServiceName{
+		"NFS_ON_DEVICE_SERVICE",
+		"S3_ON_DEVICE_SERVICE",
+	}
+}
+
 type JobState string
 
 // Enum values for JobState
@@ -101,6 +119,24 @@ func (LongTermPricingType) Values() []LongTermPricingType {
 	return []LongTermPricingType{
 		"OneYear",
 		"ThreeYear",
+	}
+}
+
+type RemoteManagement string
+
+// Enum values for RemoteManagement
+const (
+	RemoteManagementInstalledOnly      RemoteManagement = "INSTALLED_ONLY"
+	RemoteManagementInstalledAutostart RemoteManagement = "INSTALLED_AUTOSTART"
+)
+
+// Values returns all known values for RemoteManagement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RemoteManagement) Values() []RemoteManagement {
+	return []RemoteManagement{
+		"INSTALLED_ONLY",
+		"INSTALLED_AUTOSTART",
 	}
 }
 
@@ -221,5 +257,41 @@ func (SnowballType) Values() []SnowballType {
 		"EDGE_S",
 		"SNC1_HDD",
 		"SNC1_SSD",
+	}
+}
+
+type StorageUnit string
+
+// Enum values for StorageUnit
+const (
+	StorageUnitTb StorageUnit = "TB"
+)
+
+// Values returns all known values for StorageUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StorageUnit) Values() []StorageUnit {
+	return []StorageUnit{
+		"TB",
+	}
+}
+
+type TransferOption string
+
+// Enum values for TransferOption
+const (
+	TransferOptionImport   TransferOption = "IMPORT"
+	TransferOptionExport   TransferOption = "EXPORT"
+	TransferOptionLocalUse TransferOption = "LOCAL_USE"
+)
+
+// Values returns all known values for TransferOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TransferOption) Values() []TransferOption {
+	return []TransferOption{
+		"IMPORT",
+		"EXPORT",
+		"LOCAL_USE",
 	}
 }

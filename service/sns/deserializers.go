@@ -83,16 +83,16 @@ func awsAwsquery_deserializeOpErrorAddPermission(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -200,16 +200,16 @@ func awsAwsquery_deserializeOpErrorCheckIfPhoneNumberIsOptedOut(response *smithy
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("ThrottledException", errorCode):
+	case strings.EqualFold("Throttled", errorCode):
 		return awsAwsquery_deserializeErrorThrottledException(response, errorBody)
 
 	default:
@@ -317,22 +317,22 @@ func awsAwsquery_deserializeOpErrorConfirmSubscription(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("FilterPolicyLimitExceededException", errorCode):
+	case strings.EqualFold("FilterPolicyLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorFilterPolicyLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
-	case strings.EqualFold("SubscriptionLimitExceededException", errorCode):
+	case strings.EqualFold("SubscriptionLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionLimitExceededException(response, errorBody)
 
 	default:
@@ -440,13 +440,13 @@ func awsAwsquery_deserializeOpErrorCreatePlatformApplication(response *smithyhtt
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
 	default:
@@ -554,16 +554,16 @@ func awsAwsquery_deserializeOpErrorCreatePlatformEndpoint(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -671,22 +671,22 @@ func awsAwsquery_deserializeOpErrorCreateSMSSandboxPhoneNumber(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("OptedOutException", errorCode):
+	case strings.EqualFold("OptedOut", errorCode):
 		return awsAwsquery_deserializeErrorOptedOutException(response, errorBody)
 
-	case strings.EqualFold("ThrottledException", errorCode):
+	case strings.EqualFold("Throttled", errorCode):
 		return awsAwsquery_deserializeErrorThrottledException(response, errorBody)
 
-	case strings.EqualFold("UserErrorException", errorCode):
+	case strings.EqualFold("UserError", errorCode):
 		return awsAwsquery_deserializeErrorUserErrorException(response, errorBody)
 
 	default:
@@ -794,31 +794,31 @@ func awsAwsquery_deserializeOpErrorCreateTopic(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("ConcurrentAccessException", errorCode):
+	case strings.EqualFold("ConcurrentAccess", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentAccessException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("InvalidSecurityException", errorCode):
+	case strings.EqualFold("InvalidSecurity", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSecurityException(response, errorBody)
 
-	case strings.EqualFold("StaleTagException", errorCode):
+	case strings.EqualFold("StaleTag", errorCode):
 		return awsAwsquery_deserializeErrorStaleTagException(response, errorBody)
 
-	case strings.EqualFold("TagLimitExceededException", errorCode):
+	case strings.EqualFold("TagLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTagLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("TagPolicyException", errorCode):
+	case strings.EqualFold("TagPolicy", errorCode):
 		return awsAwsquery_deserializeErrorTagPolicyException(response, errorBody)
 
-	case strings.EqualFold("TopicLimitExceededException", errorCode):
+	case strings.EqualFold("TopicLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTopicLimitExceededException(response, errorBody)
 
 	default:
@@ -891,13 +891,13 @@ func awsAwsquery_deserializeOpErrorDeleteEndpoint(response *smithyhttp.Response,
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
 	default:
@@ -970,13 +970,13 @@ func awsAwsquery_deserializeOpErrorDeletePlatformApplication(response *smithyhtt
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
 	default:
@@ -1084,22 +1084,22 @@ func awsAwsquery_deserializeOpErrorDeleteSMSSandboxPhoneNumber(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
-	case strings.EqualFold("ThrottledException", errorCode):
+	case strings.EqualFold("Throttled", errorCode):
 		return awsAwsquery_deserializeErrorThrottledException(response, errorBody)
 
-	case strings.EqualFold("UserErrorException", errorCode):
+	case strings.EqualFold("UserError", errorCode):
 		return awsAwsquery_deserializeErrorUserErrorException(response, errorBody)
 
 	default:
@@ -1172,25 +1172,25 @@ func awsAwsquery_deserializeOpErrorDeleteTopic(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("ConcurrentAccessException", errorCode):
+	case strings.EqualFold("ConcurrentAccess", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentAccessException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
-	case strings.EqualFold("StaleTagException", errorCode):
+	case strings.EqualFold("StaleTag", errorCode):
 		return awsAwsquery_deserializeErrorStaleTagException(response, errorBody)
 
-	case strings.EqualFold("TagPolicyException", errorCode):
+	case strings.EqualFold("TagPolicy", errorCode):
 		return awsAwsquery_deserializeErrorTagPolicyException(response, errorBody)
 
 	default:
@@ -1298,16 +1298,16 @@ func awsAwsquery_deserializeOpErrorGetEndpointAttributes(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -1415,16 +1415,16 @@ func awsAwsquery_deserializeOpErrorGetPlatformApplicationAttributes(response *sm
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -1532,16 +1532,16 @@ func awsAwsquery_deserializeOpErrorGetSMSAttributes(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("ThrottledException", errorCode):
+	case strings.EqualFold("Throttled", errorCode):
 		return awsAwsquery_deserializeErrorThrottledException(response, errorBody)
 
 	default:
@@ -1649,13 +1649,13 @@ func awsAwsquery_deserializeOpErrorGetSMSSandboxAccountStatus(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("ThrottledException", errorCode):
+	case strings.EqualFold("Throttled", errorCode):
 		return awsAwsquery_deserializeErrorThrottledException(response, errorBody)
 
 	default:
@@ -1763,16 +1763,16 @@ func awsAwsquery_deserializeOpErrorGetSubscriptionAttributes(response *smithyhtt
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -1880,19 +1880,19 @@ func awsAwsquery_deserializeOpErrorGetTopicAttributes(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("InvalidSecurityException", errorCode):
+	case strings.EqualFold("InvalidSecurity", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSecurityException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -2000,16 +2000,16 @@ func awsAwsquery_deserializeOpErrorListEndpointsByPlatformApplication(response *
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -2117,16 +2117,16 @@ func awsAwsquery_deserializeOpErrorListOriginationNumbers(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("ThrottledException", errorCode):
+	case strings.EqualFold("Throttled", errorCode):
 		return awsAwsquery_deserializeErrorThrottledException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
@@ -2237,16 +2237,16 @@ func awsAwsquery_deserializeOpErrorListPhoneNumbersOptedOut(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("ThrottledException", errorCode):
+	case strings.EqualFold("Throttled", errorCode):
 		return awsAwsquery_deserializeErrorThrottledException(response, errorBody)
 
 	default:
@@ -2354,13 +2354,13 @@ func awsAwsquery_deserializeOpErrorListPlatformApplications(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
 	default:
@@ -2468,19 +2468,19 @@ func awsAwsquery_deserializeOpErrorListSMSSandboxPhoneNumbers(response *smithyht
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
-	case strings.EqualFold("ThrottledException", errorCode):
+	case strings.EqualFold("Throttled", errorCode):
 		return awsAwsquery_deserializeErrorThrottledException(response, errorBody)
 
 	default:
@@ -2588,13 +2588,13 @@ func awsAwsquery_deserializeOpErrorListSubscriptions(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
 	default:
@@ -2702,16 +2702,16 @@ func awsAwsquery_deserializeOpErrorListSubscriptionsByTopic(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -2819,19 +2819,19 @@ func awsAwsquery_deserializeOpErrorListTagsForResource(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("ConcurrentAccessException", errorCode):
+	case strings.EqualFold("ConcurrentAccess", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentAccessException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
-	case strings.EqualFold("TagPolicyException", errorCode):
+	case strings.EqualFold("TagPolicy", errorCode):
 		return awsAwsquery_deserializeErrorTagPolicyException(response, errorBody)
 
 	default:
@@ -2939,13 +2939,13 @@ func awsAwsquery_deserializeOpErrorListTopics(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
 	default:
@@ -3053,16 +3053,16 @@ func awsAwsquery_deserializeOpErrorOptInPhoneNumber(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("ThrottledException", errorCode):
+	case strings.EqualFold("Throttled", errorCode):
 		return awsAwsquery_deserializeErrorThrottledException(response, errorBody)
 
 	default:
@@ -3170,46 +3170,46 @@ func awsAwsquery_deserializeOpErrorPublish(response *smithyhttp.Response, metada
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("EndpointDisabledException", errorCode):
+	case strings.EqualFold("EndpointDisabled", errorCode):
 		return awsAwsquery_deserializeErrorEndpointDisabledException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterValueException", errorCode):
-		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
-
-	case strings.EqualFold("InvalidSecurityException", errorCode):
+	case strings.EqualFold("InvalidSecurity", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSecurityException(response, errorBody)
 
-	case strings.EqualFold("KMSAccessDeniedException", errorCode):
+	case strings.EqualFold("KMSAccessDenied", errorCode):
 		return awsAwsquery_deserializeErrorKMSAccessDeniedException(response, errorBody)
 
-	case strings.EqualFold("KMSDisabledException", errorCode):
+	case strings.EqualFold("KMSDisabled", errorCode):
 		return awsAwsquery_deserializeErrorKMSDisabledException(response, errorBody)
 
-	case strings.EqualFold("KMSInvalidStateException", errorCode):
+	case strings.EqualFold("KMSInvalidState", errorCode):
 		return awsAwsquery_deserializeErrorKMSInvalidStateException(response, errorBody)
 
-	case strings.EqualFold("KMSNotFoundException", errorCode):
+	case strings.EqualFold("KMSNotFound", errorCode):
 		return awsAwsquery_deserializeErrorKMSNotFoundException(response, errorBody)
 
 	case strings.EqualFold("KMSOptInRequired", errorCode):
 		return awsAwsquery_deserializeErrorKMSOptInRequired(response, errorBody)
 
-	case strings.EqualFold("KMSThrottlingException", errorCode):
+	case strings.EqualFold("KMSThrottling", errorCode):
 		return awsAwsquery_deserializeErrorKMSThrottlingException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
-	case strings.EqualFold("PlatformApplicationDisabledException", errorCode):
+	case strings.EqualFold("ParameterValueInvalid", errorCode):
+		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("PlatformApplicationDisabled", errorCode):
 		return awsAwsquery_deserializeErrorPlatformApplicationDisabledException(response, errorBody)
 
 	default:
@@ -3282,16 +3282,16 @@ func awsAwsquery_deserializeOpErrorRemovePermission(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -3364,16 +3364,16 @@ func awsAwsquery_deserializeOpErrorSetEndpointAttributes(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -3446,16 +3446,16 @@ func awsAwsquery_deserializeOpErrorSetPlatformApplicationAttributes(response *sm
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -3563,16 +3563,16 @@ func awsAwsquery_deserializeOpErrorSetSMSAttributes(response *smithyhttp.Respons
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("ThrottledException", errorCode):
+	case strings.EqualFold("Throttled", errorCode):
 		return awsAwsquery_deserializeErrorThrottledException(response, errorBody)
 
 	default:
@@ -3645,19 +3645,19 @@ func awsAwsquery_deserializeOpErrorSetSubscriptionAttributes(response *smithyhtt
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("FilterPolicyLimitExceededException", errorCode):
+	case strings.EqualFold("FilterPolicyLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorFilterPolicyLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -3730,19 +3730,19 @@ func awsAwsquery_deserializeOpErrorSetTopicAttributes(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("InvalidSecurityException", errorCode):
+	case strings.EqualFold("InvalidSecurity", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSecurityException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -3850,25 +3850,25 @@ func awsAwsquery_deserializeOpErrorSubscribe(response *smithyhttp.Response, meta
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("FilterPolicyLimitExceededException", errorCode):
+	case strings.EqualFold("FilterPolicyLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorFilterPolicyLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("InvalidSecurityException", errorCode):
+	case strings.EqualFold("InvalidSecurity", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSecurityException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
-	case strings.EqualFold("SubscriptionLimitExceededException", errorCode):
+	case strings.EqualFold("SubscriptionLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionLimitExceededException(response, errorBody)
 
 	default:
@@ -3976,25 +3976,25 @@ func awsAwsquery_deserializeOpErrorTagResource(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("ConcurrentAccessException", errorCode):
+	case strings.EqualFold("ConcurrentAccess", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentAccessException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
-	case strings.EqualFold("StaleTagException", errorCode):
+	case strings.EqualFold("StaleTag", errorCode):
 		return awsAwsquery_deserializeErrorStaleTagException(response, errorBody)
 
-	case strings.EqualFold("TagLimitExceededException", errorCode):
+	case strings.EqualFold("TagLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTagLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("TagPolicyException", errorCode):
+	case strings.EqualFold("TagPolicy", errorCode):
 		return awsAwsquery_deserializeErrorTagPolicyException(response, errorBody)
 
 	default:
@@ -4067,19 +4067,19 @@ func awsAwsquery_deserializeOpErrorUnsubscribe(response *smithyhttp.Response, me
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("InvalidSecurityException", errorCode):
+	case strings.EqualFold("InvalidSecurity", errorCode):
 		return awsAwsquery_deserializeErrorInvalidSecurityException(response, errorBody)
 
-	case strings.EqualFold("NotFoundException", errorCode):
+	case strings.EqualFold("NotFound", errorCode):
 		return awsAwsquery_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -4187,25 +4187,25 @@ func awsAwsquery_deserializeOpErrorUntagResource(response *smithyhttp.Response, 
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("ConcurrentAccessException", errorCode):
+	case strings.EqualFold("ConcurrentAccess", errorCode):
 		return awsAwsquery_deserializeErrorConcurrentAccessException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
-	case strings.EqualFold("StaleTagException", errorCode):
+	case strings.EqualFold("StaleTag", errorCode):
 		return awsAwsquery_deserializeErrorStaleTagException(response, errorBody)
 
-	case strings.EqualFold("TagLimitExceededException", errorCode):
+	case strings.EqualFold("TagLimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTagLimitExceededException(response, errorBody)
 
-	case strings.EqualFold("TagPolicyException", errorCode):
+	case strings.EqualFold("TagPolicy", errorCode):
 		return awsAwsquery_deserializeErrorTagPolicyException(response, errorBody)
 
 	default:
@@ -4313,19 +4313,19 @@ func awsAwsquery_deserializeOpErrorVerifySMSSandboxPhoneNumber(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("AuthorizationErrorException", errorCode):
+	case strings.EqualFold("AuthorizationError", errorCode):
 		return awsAwsquery_deserializeErrorAuthorizationErrorException(response, errorBody)
 
-	case strings.EqualFold("InternalErrorException", errorCode):
+	case strings.EqualFold("InternalError", errorCode):
 		return awsAwsquery_deserializeErrorInternalErrorException(response, errorBody)
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
+	case strings.EqualFold("InvalidParameter", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("ResourceNotFoundException", errorCode):
+	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
-	case strings.EqualFold("ThrottledException", errorCode):
+	case strings.EqualFold("Throttled", errorCode):
 		return awsAwsquery_deserializeErrorThrottledException(response, errorBody)
 
 	case strings.EqualFold("VerificationException", errorCode):

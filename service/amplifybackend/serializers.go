@@ -1431,6 +1431,111 @@ func awsRestjson1_serializeOpHttpBindingsGetTokenInput(v *GetTokenInput, encoder
 	return nil
 }
 
+type awsRestjson1_serializeOpImportBackendAuth struct {
+}
+
+func (*awsRestjson1_serializeOpImportBackendAuth) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpImportBackendAuth) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ImportBackendAuthInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/backend/{AppId}/auth/{BackendEnvironmentName}/import")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsImportBackendAuthInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentImportBackendAuthInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsImportBackendAuthInput(v *ImportBackendAuthInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppId == nil || len(*v.AppId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AppId must not be empty")}
+	}
+	if v.AppId != nil {
+		if err := encoder.SetURI("AppId").String(*v.AppId); err != nil {
+			return err
+		}
+	}
+
+	if v.BackendEnvironmentName == nil || len(*v.BackendEnvironmentName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BackendEnvironmentName must not be empty")}
+	}
+	if v.BackendEnvironmentName != nil {
+		if err := encoder.SetURI("BackendEnvironmentName").String(*v.BackendEnvironmentName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentImportBackendAuthInput(v *ImportBackendAuthInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdentityPoolId != nil {
+		ok := object.Key("identityPoolId")
+		ok.String(*v.IdentityPoolId)
+	}
+
+	if v.NativeClientId != nil {
+		ok := object.Key("nativeClientId")
+		ok.String(*v.NativeClientId)
+	}
+
+	if v.UserPoolId != nil {
+		ok := object.Key("userPoolId")
+		ok.String(*v.UserPoolId)
+	}
+
+	if v.WebClientId != nil {
+		ok := object.Key("webClientId")
+		ok.String(*v.WebClientId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListBackendJobs struct {
 }
 

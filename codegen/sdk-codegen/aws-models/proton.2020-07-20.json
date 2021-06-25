@@ -2707,7 +2707,36 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Get detail data for an environment.</p>",
-                "smithy.api#readonly": {}
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "EnvironmentDeployed": {
+                        "documentation": "Wait until an Environment is deployed. Use this after invoking CreateEnvironment or UpdateEnvironment",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "environment.deploymentStatus",
+                                        "expected": "SUCCEEDED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "environment.deploymentStatus",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 5,
+                        "maxDelay": 4999
+                    }
+                }
             }
         },
         "com.amazonaws.proton#GetEnvironmentAccountConnection": {
@@ -2883,7 +2912,45 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>View detail data for a major or minor version of an environment template.</p>",
-                "smithy.api#readonly": {}
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "EnvironmentTemplateVersionRegistered": {
+                        "documentation": "Wait until an EnvironmentTemplateVersion is registered. Use this after invoking CreateEnvironmentTemplateVersion",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "environmentTemplateVersion.status",
+                                        "expected": "DRAFT",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "environmentTemplateVersion.status",
+                                        "expected": "PUBLISHED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "environmentTemplateVersion.status",
+                                        "expected": "REGISTRATION_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "maxDelay": 300
+                    }
+                }
             }
         },
         "com.amazonaws.proton#GetEnvironmentTemplateVersionInput": {
@@ -2958,7 +3025,163 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Get detail data for a service.</p>",
-                "smithy.api#readonly": {}
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "ServiceCreated": {
+                        "documentation": "Wait until an Service has deployed its instances and possibly pipeline. Use this after invoking CreateService",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "service.status",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "service.status",
+                                        "expected": "CREATE_FAILED_CLEANUP_COMPLETE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "service.status",
+                                        "expected": "CREATE_FAILED_CLEANUP_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "service.status",
+                                        "expected": "CREATE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 5,
+                        "maxDelay": 4999
+                    },
+                    "ServiceUpdated": {
+                        "documentation": "Wait until a Service, its instances, and possibly pipeline have been deployed after UpdateService is invoked",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "service.status",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "service.status",
+                                        "expected": "UPDATE_FAILED_CLEANUP_COMPLETE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "service.status",
+                                        "expected": "UPDATE_FAILED_CLEANUP_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "service.status",
+                                        "expected": "UPDATE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "service.status",
+                                        "expected": "UPDATE_COMPLETE_CLEANUP_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 5,
+                        "maxDelay": 4999
+                    },
+                    "ServiceDeleted": {
+                        "documentation": "Wait until a Service, its instances, and possibly pipeline have been deleted after DeleteService is invoked",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "service.status",
+                                        "expected": "DELETE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 5,
+                        "maxDelay": 4999
+                    },
+                    "ServicePipelineDeployed": {
+                        "documentation": "Wait until an ServicePipeline is deployed. Use this after invoking CreateService or UpdateServicePipeline",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "service.pipeline.deploymentStatus",
+                                        "expected": "SUCCEEDED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "service.pipeline.deploymentStatus",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10,
+                        "maxDelay": 3600
+                    }
+                }
             }
         },
         "com.amazonaws.proton#GetServiceInput": {
@@ -3007,7 +3230,36 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Get detail data for a service instance. A service instance is an instantiation of service template, which is running in a specific\n            environment.</p>",
-                "smithy.api#readonly": {}
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "ServiceInstanceDeployed": {
+                        "documentation": "Wait until a ServiceInstance is deployed. Use this after invoking CreateService or UpdateServiceInstance",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "serviceInstance.deploymentStatus",
+                                        "expected": "SUCCEEDED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "serviceInstance.deploymentStatus",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 5,
+                        "maxDelay": 4999
+                    }
+                }
             }
         },
         "com.amazonaws.proton#GetServiceInstanceInput": {
@@ -3147,7 +3399,45 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>View detail data for a major or minor version of a service template.</p>",
-                "smithy.api#readonly": {}
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "ServiceTemplateVersionRegistered": {
+                        "documentation": "Wait until a ServiceTemplateVersion is registered. Use this after invoking CreateServiceTemplateVersion",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "serviceTemplateVersion.status",
+                                        "expected": "DRAFT",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "serviceTemplateVersion.status",
+                                        "expected": "PUBLISHED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "serviceTemplateVersion.status",
+                                        "expected": "REGISTRATION_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "maxDelay": 300
+                    }
+                }
             }
         },
         "com.amazonaws.proton#GetServiceTemplateVersionInput": {

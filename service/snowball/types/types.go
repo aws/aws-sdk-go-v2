@@ -113,6 +113,10 @@ type ClusterMetadata struct {
 	// this cluster.
 	Notification *Notification
 
+	// Represents metadata and configuration settings for services on an AWS Snow
+	// Family device.
+	OnDeviceServiceConfiguration *OnDeviceServiceConfiguration
+
 	// The arrays of JobResource objects that can include updated S3Resource objects or
 	// LambdaResource objects.
 	Resources *JobResource
@@ -334,13 +338,23 @@ type JobMetadata struct {
 	// action in AWS KMS.
 	KmsKeyARN *string
 
-	// The ID of the long term pricing type for the device.
+	// The ID of the long-term pricing type for the device.
 	LongTermPricingId *string
 
 	// The Amazon Simple Notification Service (Amazon SNS) notification settings
 	// associated with a specific job. The Notification object is returned as a part of
 	// the response syntax of the DescribeJob action in the JobMetadata data type.
 	Notification *Notification
+
+	// Represents metadata and configuration settings for services on an AWS Snow
+	// Family device.
+	OnDeviceServiceConfiguration *OnDeviceServiceConfiguration
+
+	// Allows you to securely operate and manage Snowcone devices remotely from outside
+	// of your internal network. When set to INSTALLED_AUTOSTART, remote management
+	// will automatically be available when the device arrives at your location.
+	// Otherwise, you need to use the Snowball Client to manage the device.
+	RemoteManagement RemoteManagement
 
 	// An array of S3Resource objects. Each S3Resource object represents an Amazon S3
 	// bucket that your transferred data will be exported from or imported into.
@@ -413,40 +427,51 @@ type LambdaResource struct {
 	LambdaArn *string
 }
 
-// Each LongTermPricingListEntry object contains information about a long term
+// Each LongTermPricingListEntry object contains information about a long-term
 // pricing type.
 type LongTermPricingListEntry struct {
 
-	// The current active jobs on the device the long term pricing type.
+	// The current active jobs on the device the long-term pricing type.
 	CurrentActiveJob *string
 
-	// If set to true, specifies that the current long term pricing type for the device
-	// should be automatically renewed before the long term pricing contract expires.
+	// If set to true, specifies that the current long-term pricing type for the device
+	// should be automatically renewed before the long-term pricing contract expires.
 	IsLongTermPricingAutoRenew *bool
 
-	// The IDs of the jobs that are associated with a long term pricing type.
+	// The IDs of the jobs that are associated with a long-term pricing type.
 	JobIds []string
 
-	// The end date the long term pricing contract.
+	// The end date the long-term pricing contract.
 	LongTermPricingEndDate *time.Time
 
-	// The ID of the long term pricing type for the device.
+	// The ID of the long-term pricing type for the device.
 	LongTermPricingId *string
 
-	// The start date of the long term pricing contract.
+	// The start date of the long-term pricing contract.
 	LongTermPricingStartDate *time.Time
 
-	// The status of the long term pricing type.
+	// The status of the long-term pricing type.
 	LongTermPricingStatus *string
 
-	// The type of long term pricing that was selected for the device.
+	// The type of long-term pricing that was selected for the device.
 	LongTermPricingType LongTermPricingType
 
-	// A new device that replaces a device that is ordered with long term pricing.
+	// A new device that replaces a device that is ordered with long-term pricing.
 	ReplacementJob *string
 
-	// The type of AWS Snow Family device associated with this long term pricing job.
+	// The type of AWS Snow Family device associated with this long-term pricing job.
 	SnowballType SnowballType
+}
+
+// An object that represents metadata and configuration settings for NFS service on
+// an AWS Snow Family device.
+type NFSOnDeviceServiceConfiguration struct {
+
+	// The maximum NFS storage for one Snowball Family device.
+	StorageLimit int32
+
+	// The scale unit of the NFS storage on the device. Valid values: TB.
+	StorageUnit StorageUnit
 }
 
 // The Amazon Simple Notification Service (Amazon SNS) notification settings
@@ -469,9 +494,17 @@ type Notification struct {
 	// (https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html) Amazon SNS API
 	// action. You can subscribe email addresses to an Amazon SNS topic through the AWS
 	// Management Console, or by using the Subscribe
-	// (https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html) AWS Simple
-	// Notification Service (SNS) API action.
+	// (https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html) Amazon Simple
+	// Notification Service (Amazon SNS) API action.
 	SnsTopicARN *string
+}
+
+// An object that represents metadata and configuration settings for services on an
+// AWS Snow Family device.
+type OnDeviceServiceConfiguration struct {
+
+	// Represents the NFS service on a Snow Family device.
+	NFSOnDeviceService *NFSOnDeviceServiceConfiguration
 }
 
 // Each S3Resource object represents an Amazon S3 bucket that your transferred data
@@ -489,6 +522,11 @@ type S3Resource struct {
 	// inclusive BeginMarker, an inclusive EndMarker, or both. Ranges are UTF-8 binary
 	// sorted.
 	KeyRange *KeyRange
+
+	// Specifies the service or services on the Snow Family device that your
+	// transferred data will be exported from or imported into. AWS Snow Family
+	// supports Amazon S3 and NFS (Network File System).
+	TargetOnDeviceServices []TargetOnDeviceService
 }
 
 // The Status and TrackingNumber information for an inbound or outbound shipment.
@@ -530,7 +568,7 @@ type ShippingDetails struct {
 	// countries in the EU have access to standard shipping, which typically takes less
 	// than a week, one way.
 	//
-	// * In India, Snow device are delivered in one to seven
+	// * In India, Snow devices are delivered in one to seven
 	// days.
 	//
 	// * In the United States of America (US), you have access to one-day
@@ -543,6 +581,20 @@ type SnowconeDeviceConfiguration struct {
 
 	// Configures the wireless connection for the AWS Snowcone device.
 	WirelessConnection *WirelessConnection
+}
+
+// An object that represents the service or services on the Snow Family device that
+// your transferred data will be exported from or imported into. AWS Snow Family
+// supports Amazon S3 and NFS (Network File System).
+type TargetOnDeviceService struct {
+
+	// Specifies the name of the service on the Snow Family device that your
+	// transferred data will be exported from or imported into.
+	ServiceName DeviceServiceName
+
+	// Specifies whether the data is being imported or exported. You can import or
+	// export the data, or use it locally on the device.
+	TransferOption TransferOption
 }
 
 // The tax documents required in your AWS Region.

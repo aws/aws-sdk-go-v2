@@ -31,8 +31,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 type UntagResourceInput struct {
 
 	// The value of the resource that will have the tag removed. An Amazon Resource
-	// Name (ARN) is an identifier for a specific AWS resource, such as a server, user,
-	// or role.
+	// Name (ARN) is an identifier for a specific Amazon Web Services resource, such as
+	// a server, user, or role.
 	//
 	// This member is required.
 	Arn *string

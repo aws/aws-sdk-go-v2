@@ -22,6 +22,7 @@
         "api_op_GetBackendAuth.go",
         "api_op_GetBackendJob.go",
         "api_op_GetToken.go",
+        "api_op_ImportBackendAuth.go",
         "api_op_ListBackendJobs.go",
         "api_op_RemoveAllBackends.go",
         "api_op_RemoveBackendConfig.go",

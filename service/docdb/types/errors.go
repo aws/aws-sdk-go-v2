@@ -812,7 +812,7 @@ func (e *InvalidVPCNetworkStateFault) ErrorMessage() string {
 func (e *InvalidVPCNetworkStateFault) ErrorCode() string             { return "InvalidVPCNetworkStateFault" }
 func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error occurred when accessing an AWS KMS key.
+// An error occurred when accessing an KMS key.
 type KMSKeyNotAccessibleFault struct {
 	Message *string
 }

@@ -89,6 +89,7 @@ const (
 	AnomalyDetectorStatusDeleting           AnomalyDetectorStatus = "DELETING"
 	AnomalyDetectorStatusFailed             AnomalyDetectorStatus = "FAILED"
 	AnomalyDetectorStatusInactive           AnomalyDetectorStatus = "INACTIVE"
+	AnomalyDetectorStatusLearning           AnomalyDetectorStatus = "LEARNING"
 	AnomalyDetectorStatusBackTestActivating AnomalyDetectorStatus = "BACK_TEST_ACTIVATING"
 	AnomalyDetectorStatusBackTestActive     AnomalyDetectorStatus = "BACK_TEST_ACTIVE"
 	AnomalyDetectorStatusBackTestComplete   AnomalyDetectorStatus = "BACK_TEST_COMPLETE"
@@ -104,6 +105,7 @@ func (AnomalyDetectorStatus) Values() []AnomalyDetectorStatus {
 		"DELETING",
 		"FAILED",
 		"INACTIVE",
+		"LEARNING",
 		"BACK_TEST_ACTIVATING",
 		"BACK_TEST_ACTIVE",
 		"BACK_TEST_COMPLETE",

@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -58,6 +59,9 @@ type ExecuteStatementInput struct {
 	// The database user name. This parameter is required when authenticating using
 	// temporary credentials.
 	DbUser *string
+
+	// The parameters for the SQL statement.
+	Parameters []types.SqlParameter
 
 	// The name or ARN of the secret that enables access to the database. This
 	// parameter is required when authenticating using AWS Secrets Manager.

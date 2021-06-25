@@ -125,6 +125,12 @@ type Member struct {
 	// The unique identifier of the member.
 	Id *string
 
+	// The Amazon Resource Name (ARN) of the customer managed key in AWS Key Management
+	// Service (AWS KMS) that the member uses for encryption at rest. If the value of
+	// this parameter is "AWS Owned KMS Key", the member uses an AWS owned KMS key for
+	// encryption. This parameter is inherited by the nodes that this member owns.
+	KmsKeyArn *string
+
 	// Configuration properties for logging events associated with a member.
 	LogPublishingConfiguration *MemberLogPublishingConfiguration
 
@@ -145,15 +151,26 @@ type Member struct {
 	// * CREATE_FAILED - The AWS account attempted to
 	// create a member and creation failed.
 	//
-	// * DELETING - The member and all associated
-	// resources are in the process of being deleted. Either the AWS account that owns
-	// the member deleted it, or the member is being deleted as the result of an
+	// * UPDATING - The member is in the process
+	// of being updated.
+	//
+	// * DELETING - The member and all associated resources are in
+	// the process of being deleted. Either the AWS account that owns the member
+	// deleted it, or the member is being deleted as the result of an APPROVEDPROPOSAL
+	// to remove the member.
+	//
+	// * DELETED - The member can no longer participate on the
+	// network and all associated resources are deleted. Either the AWS account that
+	// owns the member deleted it, or the member is being deleted as the result of an
 	// APPROVEDPROPOSAL to remove the member.
 	//
-	// * DELETED - The member can no longer
-	// participate on the network and all associated resources are deleted. Either the
-	// AWS account that owns the member deleted it, or the member is being deleted as
-	// the result of an APPROVEDPROPOSAL to remove the member.
+	// * INACCESSIBLE_ENCRYPTION_KEY - The
+	// member is impaired and might not function as expected because it cannot access
+	// the specified customer managed key in AWS KMS for encryption at rest. Either the
+	// KMS key was disabled or deleted, or the grants on the key were revoked. The
+	// effect of disabling or deleting a key, or revoking a grant is not immediate. The
+	// member resource might take some time to find that the key is inaccessible. When
+	// a resource is in this state, we recommend deleting and recreating the resource.
 	Status MemberStatus
 
 	// Tags assigned to the member. Tags consist of a key and optional value. For more
@@ -178,6 +195,24 @@ type MemberConfiguration struct {
 
 	// An optional description of the member.
 	Description *string
+
+	// The Amazon Resource Name (ARN) of the customer managed key in AWS Key Management
+	// Service (AWS KMS) to use for encryption at rest in the member. This parameter is
+	// inherited by any nodes that this member creates. Use one of the following
+	// options to specify this parameter:
+	//
+	// * Undefined or empty string - The member
+	// uses an AWS owned KMS key for encryption by default.
+	//
+	// * A valid symmetric
+	// customer managed KMS key - The member uses the specified key for encryption.
+	// Amazon Managed Blockchain doesn't support asymmetric keys. For more information,
+	// see Using symmetric and asymmetric keys
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+	// in the AWS Key Management Service Developer Guide. The following is an example
+	// of a KMS key ARN:
+	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	KmsKeyArn *string
 
 	// Configuration properties for logging events associated with a member of a
 	// Managed Blockchain network.
@@ -296,15 +331,27 @@ type MemberSummary struct {
 	// * CREATE_FAILED - The AWS account attempted to
 	// create a member and creation failed.
 	//
-	// * DELETING - The member and all associated
-	// resources are in the process of being deleted. Either the AWS account that owns
-	// the member deleted it, or the member is being deleted as the result of an
+	// * UPDATING - The member is in the process
+	// of being updated.
+	//
+	// * DELETING - The member and all associated resources are in
+	// the process of being deleted. Either the AWS account that owns the member
+	// deleted it, or the member is being deleted as the result of an APPROVEDPROPOSAL
+	// to remove the member.
+	//
+	// * DELETED - The member can no longer participate on the
+	// network and all associated resources are deleted. Either the AWS account that
+	// owns the member deleted it, or the member is being deleted as the result of an
 	// APPROVEDPROPOSAL to remove the member.
 	//
-	// * DELETED - The member can no longer
-	// participate on the network and all associated resources are deleted. Either the
-	// AWS account that owns the member deleted it, or the member is being deleted as
-	// the result of an APPROVEDPROPOSAL to remove the member.
+	// * INACCESSIBLE_ENCRYPTION_KEY - The
+	// member is impaired and might not function as expected because it cannot access
+	// the specified customer managed key in AWS Key Management Service (AWS KMS) for
+	// encryption at rest. Either the KMS key was disabled or deleted, or the grants on
+	// the key were revoked. The effect of disabling or deleting a key, or revoking a
+	// grant is not immediate. The member resource might take some time to find that
+	// the key is inaccessible. When a resource is in this state, we recommend deleting
+	// and recreating the resource.
 	Status MemberStatus
 }
 
@@ -472,6 +519,13 @@ type Node struct {
 	// The instance type of the node.
 	InstanceType *string
 
+	// The Amazon Resource Name (ARN) of the customer managed key in AWS Key Management
+	// Service (AWS KMS) that the node uses for encryption at rest. If the value of
+	// this parameter is "AWS Owned KMS Key", the node uses an AWS owned KMS key for
+	// encryption. The node inherits this parameter from the member that it belongs to.
+	// Applies only to Hyperledger Fabric.
+	KmsKeyArn *string
+
 	// Configuration properties for logging events associated with a peer node on a
 	// Hyperledger Fabric network on Managed Blockchain.
 	LogPublishingConfiguration *NodeLogPublishingConfiguration
@@ -488,6 +542,40 @@ type Node struct {
 	StateDB StateDBType
 
 	// The status of the node.
+	//
+	// * CREATING - The AWS account is in the process of
+	// creating a node.
+	//
+	// * AVAILABLE - The node has been created and can participate in
+	// the network.
+	//
+	// * UNHEALTHY - The node is impaired and might not function as
+	// expected. Amazon Managed Blockchain automatically finds nodes in this state and
+	// tries to recover them. If a node is recoverable, it returns to AVAILABLE.
+	// Otherwise, it moves to FAILED status.
+	//
+	// * CREATE_FAILED - The AWS account
+	// attempted to create a node and creation failed.
+	//
+	// * UPDATING - The node is in the
+	// process of being updated.
+	//
+	// * DELETING - The node is in the process of being
+	// deleted.
+	//
+	// * DELETED - The node can no longer participate on the network.
+	//
+	// *
+	// FAILED - The node is no longer functional, cannot be recovered, and must be
+	// deleted.
+	//
+	// * INACCESSIBLE_ENCRYPTION_KEY - The node is impaired and might not
+	// function as expected because it cannot access the specified customer managed key
+	// in AWS KMS for encryption at rest. Either the KMS key was disabled or deleted,
+	// or the grants on the key were revoked. The effect of disabling or deleting a
+	// key, or revoking a grant is not immediate. The node resource might take some
+	// time to find that the key is inaccessible. When a resource is in this state, we
+	// recommend deleting and recreating the resource.
 	Status NodeStatus
 
 	// Tags assigned to the node. Each tag consists of a key and optional value. For

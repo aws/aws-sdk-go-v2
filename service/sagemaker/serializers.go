@@ -12561,6 +12561,16 @@ func awsAwsjson11_serializeDocumentEdgeOutputConfig(v *types.EdgeOutputConfig, v
 		ok.String(*v.KmsKeyId)
 	}
 
+	if v.PresetDeploymentConfig != nil {
+		ok := object.Key("PresetDeploymentConfig")
+		ok.String(*v.PresetDeploymentConfig)
+	}
+
+	if len(v.PresetDeploymentType) > 0 {
+		ok := object.Key("PresetDeploymentType")
+		ok.String(string(v.PresetDeploymentType))
+	}
+
 	if v.S3OutputLocation != nil {
 		ok := object.Key("S3OutputLocation")
 		ok.String(*v.S3OutputLocation)
@@ -17392,6 +17402,11 @@ func awsAwsjson11_serializeOpDocumentCreateDeviceFleetInput(v *CreateDeviceFleet
 	if v.DeviceFleetName != nil {
 		ok := object.Key("DeviceFleetName")
 		ok.String(*v.DeviceFleetName)
+	}
+
+	if v.EnableIotRoleAlias != nil {
+		ok := object.Key("EnableIotRoleAlias")
+		ok.Boolean(*v.EnableIotRoleAlias)
 	}
 
 	if v.OutputConfig != nil {
@@ -23259,6 +23274,11 @@ func awsAwsjson11_serializeOpDocumentUpdateDeviceFleetInput(v *UpdateDeviceFleet
 	if v.DeviceFleetName != nil {
 		ok := object.Key("DeviceFleetName")
 		ok.String(*v.DeviceFleetName)
+	}
+
+	if v.EnableIotRoleAlias != nil {
+		ok := object.Key("EnableIotRoleAlias")
+		ok.Boolean(*v.EnableIotRoleAlias)
 	}
 
 	if v.OutputConfig != nil {

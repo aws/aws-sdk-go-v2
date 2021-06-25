@@ -564,7 +564,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "NetworkInterfaceOwnerId",
-                        "smithy.api#documentation": "<p>The ID of the AWS account that owns the network interface.</p>",
+                        "smithy.api#documentation": "<p>The ID of the account that owns the network interface.</p>",
                         "smithy.api#xmlName": "networkInterfaceOwnerId"
                     }
                 },
@@ -716,7 +716,7 @@
                 "target": "com.amazonaws.ec2#AdvertiseByoipCidrResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Advertises an IPv4 or IPv6 address range that is provisioned for use with your AWS resources through \n         bring your own IP addresses (BYOIP).</p> \n         <p>You can perform this operation at most once every 10 seconds, even if you specify different \n         address ranges each time.</p>\n         <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise\n         it from AWS. To minimize down time, you can configure your AWS resources to use an address from a\n         BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current \n         location and start advertising it through AWS.</p>\n         <p>It can take a few minutes before traffic to the specified addresses starts routing to AWS\n         because of BGP propagation delays.</p>\n         <p>To stop advertising the BYOIP CIDR, use <a>WithdrawByoipCidr</a>.</p>"
+                "smithy.api#documentation": "<p>Advertises an IPv4 or IPv6 address range that is provisioned for use with your Amazon Web Services resources through \n         bring your own IP addresses (BYOIP).</p> \n         <p>You can perform this operation at most once every 10 seconds, even if you specify different \n         address ranges each time.</p>\n         <p>We recommend that you stop advertising the BYOIP CIDR from other locations when you advertise\n          it from Amazon Web Services. To minimize down time, you can configure your Amazon Web Services resources to use an address from a\n         BYOIP CIDR before it is advertised, and then simultaneously stop advertising it from the current \n         location and start advertising it through Amazon Web Services.</p>\n         <p>It can take a few minutes before traffic to the specified addresses starts routing to Amazon Web Services\n         because of BGP propagation delays.</p>\n         <p>To stop advertising the BYOIP CIDR, use <a>WithdrawByoipCidr</a>.</p>"
             }
         },
         "com.amazonaws.ec2#AdvertiseByoipCidrRequest": {
@@ -774,7 +774,7 @@
                 "target": "com.amazonaws.ec2#AllocateAddressResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate  \n         it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address \n         pool and can be allocated to a different AWS account.</p>\n         <p>You can allocate an Elastic IP address from an address pool owned by AWS or from an address pool created \n         from a public IPv4 address range that you have brought to AWS for use with your AWS resources using bring your own \n         IP addresses (BYOIP). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>[EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an \n         Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP\n         address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation.</p>\n         <p>An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate\n         5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance). </p>"
+                "smithy.api#documentation": "<p>Allocates an Elastic IP address to your account. After you allocate the Elastic IP address you can associate  \n         it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address \n         pool and can be allocated to a different account.</p>\n         <p>You can allocate an Elastic IP address from an address pool owned by Amazon Web Services or from an address pool created \n       from a public IPv4 address range that you have brought to Amazon Web Services for use with your Amazon Web Services resources using bring your own \n         IP addresses (BYOIP). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>[EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an \n       Elastic IP address that you released after it is allocated to another account. You cannot recover an Elastic IP\n         address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation.</p>\n         <p>An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate\n         5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance). </p>"
             }
         },
         "com.amazonaws.ec2#AllocateAddressRequest": {
@@ -842,7 +842,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AllocationId",
-                        "smithy.api#documentation": "<p>[EC2-VPC] The ID that AWS assigns to represent the allocation of the Elastic IP address for use with instances in a VPC.</p>",
+                        "smithy.api#documentation": "<p>[EC2-VPC] The ID that Amazon Web Services assigns to represent the allocation of the Elastic IP address for use with instances in a VPC.</p>",
                         "smithy.api#xmlName": "allocationId"
                     }
                 },
@@ -1212,6 +1212,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#AssociateTransitGatewayRouteTable"
+                },
+                {
+                    "target": "com.amazonaws.ec2#AssociateTrunkInterface"
                 },
                 {
                     "target": "com.amazonaws.ec2#AssociateVpcCidrBlock"
@@ -1958,6 +1961,9 @@
                     "target": "com.amazonaws.ec2#DescribeTransitGatewayVpcAttachments"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DescribeTrunkInterfaceAssociations"
+                },
+                {
                     "target": "com.amazonaws.ec2#DescribeVolumeAttribute"
                 },
                 {
@@ -2030,6 +2036,9 @@
                     "target": "com.amazonaws.ec2#DisableFastSnapshotRestores"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DisableImageDeprecation"
+                },
+                {
                     "target": "com.amazonaws.ec2#DisableSerialConsoleAccess"
                 },
                 {
@@ -2069,6 +2078,9 @@
                     "target": "com.amazonaws.ec2#DisassociateTransitGatewayRouteTable"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DisassociateTrunkInterface"
+                },
+                {
                     "target": "com.amazonaws.ec2#DisassociateVpcCidrBlock"
                 },
                 {
@@ -2076,6 +2088,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#EnableFastSnapshotRestores"
+                },
+                {
+                    "target": "com.amazonaws.ec2#EnableImageDeprecation"
                 },
                 {
                     "target": "com.amazonaws.ec2#EnableSerialConsoleAccess"
@@ -3686,6 +3701,83 @@
                         "aws.protocols#ec2QueryName": "Association",
                         "smithy.api#documentation": "<p>The ID of the association.</p>",
                         "smithy.api#xmlName": "association"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#AssociateTrunkInterface": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#AssociateTrunkInterfaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#AssociateTrunkInterfaceResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a branch network interface with a trunk network interface.</p>\n        <p>Before you create the association, run the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">create-network-interface</a> command and set\n            <code>--interface-type</code> to <code>trunk</code>. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/eni-trunking.html\">\n            Network interface trunking</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AssociateTrunkInterfaceRequest": {
+            "type": "structure",
+            "members": {
+                "BranchInterfaceId": {
+                    "target": "com.amazonaws.ec2#NetworkInterfaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the branch network interface.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrunkInterfaceId": {
+                    "target": "com.amazonaws.ec2#NetworkInterfaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the trunk network interface.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VlanId": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VLAN. This applies to the VLAN protocol.</p>"
+                    }
+                },
+                "GreKey": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application key. This applies to the GRE protocol.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure\n                Idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#AssociateTrunkInterfaceResult": {
+            "type": "structure",
+            "members": {
+                "InterfaceAssociation": {
+                    "target": "com.amazonaws.ec2#TrunkInterfaceAssociation",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InterfaceAssociation",
+                        "smithy.api#documentation": "<p>Information about the association between the trunk network interface and branch network interface.</p>",
+                        "smithy.api#xmlName": "interfaceAssociation"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ClientToken",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure\n                Idempotency</a>.</p>",
+                        "smithy.api#xmlName": "clientToken"
                     }
                 }
             }
@@ -5346,7 +5438,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an address range that is provisioned for use with your AWS resources \n         through bring your own IP addresses (BYOIP).</p>"
+                "smithy.api#documentation": "<p>Information about an address range that is provisioned for use with your Amazon Web Services resources \n         through bring your own IP addresses (BYOIP).</p>"
             }
         },
         "com.amazonaws.ec2#ByoipCidrSet": {
@@ -6560,7 +6652,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides authorization for Amazon to bring a specific IP address range to a specific\n         AWS account using bring your own IP addresses (BYOIP). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#prepare-for-byoip\">Prepare to Bring Your Address Range to Your AWS Account</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Provides authorization for Amazon to bring a specific IP address range to a specific\n          account using bring your own IP addresses (BYOIP). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#prepare-for-byoip\">Configuring your BYOIP address range</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CidrBlock": {
@@ -7924,6 +8016,21 @@
                     {
                         "value": "Topic",
                         "name": "Topic"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#ConnectivityType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "private",
+                        "name": "PRIVATE"
+                    },
+                    {
+                        "value": "public",
+                        "name": "PUBLIC"
                     }
                 ]
             }
@@ -9514,7 +9621,7 @@
                 "target": "com.amazonaws.ec2#CreateImageResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance \n     \tthat is either running or stopped.</p>\n     \n     \n      \n   \t\n   \t     <p>If you customized your instance with instance store volumes or EBS volumes in addition to the root device volume, the \n     \tnew AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, \n     \tthe instance automatically launches with those additional volumes.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">Creating Amazon EBS-Backed Linux AMIs</a> \n\t\t\t\tin the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance \n     \tthat is either running or stopped.</p>\n     \n     \n   \n   \t\n   \t     <p>If you customized your instance with instance store volumes or EBS volumes in addition to the root device volume, the \n     \tnew AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, \n     \tthe instance automatically launches with those additional volumes.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">Creating Amazon EBS-Backed Linux AMIs</a> \n\t\t\t\tin the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateImageRequest": {
@@ -10107,12 +10214,18 @@
                 "target": "com.amazonaws.ec2#CreateNatGatewayResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a NAT gateway in the specified public subnet. This action creates a network\n            interface in the specified subnet with a private IP address from the IP address range of\n            the subnet. Internet-bound traffic from a private subnet can be routed to the NAT\n            gateway, therefore enabling instances in the private subnet to connect to the internet.\n            For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">NAT Gateways</a> in the\n                <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a NAT gateway in the specified subnet. This action creates a network interface\n          in the specified subnet with a private IP address from the IP address range of the\n          subnet. You can create either a public NAT gateway or a private NAT gateway.</p>\n         <p>With a public NAT gateway, internet-bound traffic from a private subnet can be routed\n          to the NAT gateway, so that instances in a private subnet can connect to the internet.</p>\n         <p>With a private NAT gateway, private communication is routed across VPCs and on-premises\n            networks through a transit gateway or virtual private gateway. Common use cases include\n            running large workloads behind a small pool of allowlisted IPv4 addresses, preserving\n            private IPv4 addresses, and communicating between overlapping networks.</p> \n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">NAT Gateways</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateNatGatewayRequest": {
             "type": "structure",
             "members": {
+                "AllocationId": {
+                    "target": "com.amazonaws.ec2#AllocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Public NAT gateways only] The allocation ID of an Elastic IP address to associate \n          with the NAT gateway. You cannot specify an Elastic IP address with a private NAT gateway.\n          If the Elastic IP address is associated with another resource, you must first disassociate it.</p>"
+                    }
+                },
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
@@ -10140,11 +10253,10 @@
                         "smithy.api#xmlName": "TagSpecification"
                     }
                 },
-                "AllocationId": {
-                    "target": "com.amazonaws.ec2#AllocationId",
+                "ConnectivityType": {
+                    "target": "com.amazonaws.ec2#ConnectivityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Indicates whether the NAT gateway supports public or private connectivity. \n          The default is public connectivity.</p>"
                     }
                 }
             }
@@ -10433,7 +10545,7 @@
                 "target": "com.amazonaws.ec2#CreateNetworkInterfacePermissionResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Grants an AWS-authorized account permission to attach the specified network interface to\n            an instance in their account.</p>\n\t\t       <p>You can grant permission to a single AWS account only, and only one account at a time.</p>"
+                "smithy.api#documentation": "<p>Grants an Amazon Web Services-authorized account permission to attach the specified network interface to\n            an instance in their account.</p>\n\t        <p>You can grant permission to a single account only, and only one account at a time.</p>"
             }
         },
         "com.amazonaws.ec2#CreateNetworkInterfacePermissionRequest": {
@@ -10449,13 +10561,13 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>"
+                        "smithy.api#documentation": "<p>The account ID.</p>"
                     }
                 },
                 "AwsService": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS service. Currently not supported.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Service. Currently not supported.</p>"
                     }
                 },
                 "Permission": {
@@ -10561,7 +10673,7 @@
                 "InterfaceType": {
                     "target": "com.amazonaws.ec2#NetworkInterfaceCreationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify \n\t\t\t<code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\">\n\t\t    Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify \n\t\t\t<code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\">\n\t\t\t    Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. To create a trunk network interface, specify \n\t\t    <code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/eni-trunking.html\">\n\t\t        Network interface trunking</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
                     }
                 },
                 "SubnetId": {
@@ -14429,7 +14541,7 @@
                 "target": "com.amazonaws.ec2#DeleteNatGatewayResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified NAT gateway. Deleting a NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified NAT gateway. Deleting a public NAT gateway disassociates its Elastic IP address, \n          but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway \n          routes in your route tables.</p>"
             }
         },
         "com.amazonaws.ec2#DeleteNatGatewayRequest": {
@@ -16020,7 +16132,7 @@
                 "target": "com.amazonaws.ec2#DeprovisionByoipCidrResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Releases the specified address range that you provisioned for use with your AWS resources\n         through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.</p>\n         <p>Before you can release an address range, you must stop advertising it using <a>WithdrawByoipCidr</a> and you must not have any IP addresses allocated from its\n         address range.</p>"
+                "smithy.api#documentation": "<p>Releases the specified address range that you provisioned for use with your Amazon Web Services resources\n         through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.</p>\n         <p>Before you can release an address range, you must stop advertising it using <a>WithdrawByoipCidr</a> and you must not have any IP addresses allocated from its\n         address range.</p>"
             }
         },
         "com.amazonaws.ec2#DeprovisionByoipCidrRequest": {
@@ -16396,7 +16508,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>allocation-id</code> - [EC2-VPC] The allocation ID for the address.</p>\n            </li>\n            <li>\n               <p>\n                  <code>association-id</code> - [EC2-VPC] The association ID for the address.</p>\n            </li>\n            <li>\n               <p>\n                  <code>domain</code> - Indicates whether the address is for use in EC2-Classic (<code>standard</code>) \n              or in a VPC (<code>vpc</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-id</code> - The ID of the instance the address is associated with, if any.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-border-group</code> -  A unique set of Availability Zones, Local Zones,\n          or Wavelength Zones from where AWS advertises IP addresses. </p>\n            </li>\n            <li>\n               <p>\n                  <code>network-interface-id</code> - [EC2-VPC] The ID of the network interface that the address is associated with, if any.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-interface-owner-id</code> - The AWS account ID of the owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>private-ip-address</code> - [EC2-VPC] The private IP address associated with the Elastic IP address.</p>\n            </li>\n            <li>\n               <p>\n                  <code>public-ip</code> - The Elastic IP address, or the carrier IP address.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>allocation-id</code> - [EC2-VPC] The allocation ID for the address.</p>\n            </li>\n            <li>\n               <p>\n                  <code>association-id</code> - [EC2-VPC] The association ID for the address.</p>\n            </li>\n            <li>\n               <p>\n                  <code>domain</code> - Indicates whether the address is for use in EC2-Classic (<code>standard</code>) \n              or in a VPC (<code>vpc</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-id</code> - The ID of the instance the address is associated with, if any.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-border-group</code> -  A unique set of Availability Zones, Local Zones,\n           or Wavelength Zones from where Amazon Web Services advertises IP addresses. </p>\n            </li>\n            <li>\n               <p>\n                  <code>network-interface-id</code> - [EC2-VPC] The ID of the network interface that the address is associated with, if any.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-interface-owner-id</code> - The account ID of the owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>private-ip-address</code> - [EC2-VPC] The private IP address associated with the Elastic IP address.</p>\n            </li>\n            <li>\n               <p>\n                  <code>public-ip</code> - The Elastic IP address, or the carrier IP address.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -19301,7 +19413,7 @@
                 "target": "com.amazonaws.ec2#DescribeImagesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you.</p> \n         <p>The images available to you include public images, private images that you own, and private images owned by other AWS accounts for which you have explicit launch permissions.</p>\n         <p>Recently deregistered images appear in the returned results for a short interval and then return empty results. \n        After all instances that reference a deregistered AMI are terminated, specifying the ID of the image results\n        in an error indicating that the AMI ID cannot be found.</p>",
+                "smithy.api#documentation": "<p>Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you.</p> \n         <p>The images available to you include public images, private images that you own, and private images owned by other AWS accounts for which you have explicit launch permissions.</p>\n         <p>Recently deregistered images appear in the returned results for a short interval and then\n      return empty results. After all instances that reference a deregistered AMI are terminated,\n      specifying the ID of the image will eventually return an error indicating that the AMI ID\n      cannot be found.</p>",
                 "smithy.waiters#waitable": {
                     "ImageAvailable": {
                         "acceptors": [
@@ -19360,6 +19472,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Scopes the results to images with the specified owners. You can specify a combination of  \n      AWS account IDs, <code>self</code>, <code>amazon</code>, and <code>aws-marketplace</code>. \n      If you omit this parameter, the results include all images for which you have launch permissions, \n      regardless of ownership.</p>",
                         "smithy.api#xmlName": "Owner"
+                    }
+                },
+                "IncludeDeprecated": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, all deprecated AMIs are included in the response. If\n        <code>false</code>, no deprecated AMIs are included in the response. If no value is\n      specified, the default value is <code>false</code>.</p>\n         <note>\n            <p>If you are the AMI owner, all deprecated AMIs appear in the response regardless of the value (<code>true</code> or <code>false</code>) that you set for this parameter.</p>\n         </note>"
                     }
                 },
                 "DryRun": {
@@ -20989,7 +21107,7 @@
                 "target": "com.amazonaws.ec2#DescribeManagedPrefixListsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes your managed prefix lists and any AWS-managed prefix lists.</p>\n        <p>To view the entries for your prefix list, use <a>GetManagedPrefixListEntries</a>.</p>",
+                "smithy.api#documentation": "<p>Describes your managed prefix lists and any Amazon Web Services-managed prefix lists.</p>\n        <p>To view the entries for your prefix list, use <a>GetManagedPrefixListEntries</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -21623,7 +21741,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters.</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>network-interface-permission.network-interface-permission-id</code> - The ID of the\n\t\t\t\tpermission.</p>\n            </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>network-interface-permission.network-interface-id</code> - The ID of\n\t\t\t\t\tthe network interface.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>network-interface-permission.aws-account-id</code> - The AWS account\n\t\t\t\t\tID.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>network-interface-permission.aws-service</code> - The AWS\n\t\t\t\t\tservice.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>network-interface-permission.permission</code> - The type of\n\t\t\t\t\tpermission (<code>INSTANCE-ATTACH</code> |\n\t\t\t\t\t<code>EIP-ASSOCIATE</code>).</p>\n\t\t\t         </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters.</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>network-interface-permission.network-interface-permission-id</code> - The ID of the\n\t\t\t\tpermission.</p>\n            </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>network-interface-permission.network-interface-id</code> - The ID of\n\t\t\t\t\tthe network interface.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t            <p>\n                  <code>network-interface-permission.aws-account-id</code> - The account ID.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t            <p>\n                  <code>network-interface-permission.aws-service</code> - The Amazon Web Service.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>network-interface-permission.permission</code> - The type of\n\t\t\t\t\tpermission (<code>INSTANCE-ATTACH</code> |\n\t\t\t\t\t<code>EIP-ASSOCIATE</code>).</p>\n\t\t\t         </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -21702,7 +21820,7 @@
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Filter",
-                        "smithy.api#documentation": "<p>One or more filters.</p>\n\t\t       <ul>\n            <li>\n\t\t             <p>\n                  <code>addresses.private-ip-address</code> - The private IPv4 addresses\n                    associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>addresses.primary</code> - Whether the private IPv4 address is the primary\n                    IP address associated with the network interface. </p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>addresses.association.public-ip</code> - The association ID returned when\n                    the network interface was associated with the Elastic IP address\n                    (IPv4).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>addresses.association.owner-id</code> - The owner ID of the addresses associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.association-id</code> - The association ID returned when the\n                    network interface was associated with an IPv4 address.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.allocation-id</code> - The allocation ID returned when you\n                    allocated the Elastic IP address (IPv4) for your network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.ip-owner-id</code> - The owner of the Elastic IP address\n                    (IPv4) associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.public-ip</code> - The address of the Elastic IP address\n                    (IPv4) bound to the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t \t\t          <p>\n                  <code>association.public-dns-name</code> - The public DNS name for the network\n                    interface (IPv4).</p>\n\t\t \t        </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.attachment-id</code> - The ID of the interface attachment.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.attach-time</code> - The time that the network interface was attached to an instance.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.delete-on-termination</code> - Indicates whether the attachment is deleted when an instance is terminated.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.device-index</code> - The device index to which the network interface is attached.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>availability-zone</code> - The Availability Zone of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>description</code> - The description of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>group-id</code> - The ID of a security group associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>group-name</code> - The name of a security group associated with the network interface.</p>\n\t\t          </li>\n            <li>\n                  <p>\n                  <code>ipv6-addresses.ipv6-address</code> - An IPv6 address associated with\n                    the network interface.</p>\n               </li>\n            <li>\n\t\t             <p>\n                  <code>mac-address</code> - The MAC address of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>network-interface-id</code> - The ID of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>owner-id</code> - The AWS account ID of the network interface owner.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>private-ip-address</code> - The private IPv4 address or addresses of the\n                    network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>private-dns-name</code> - The private DNS name of the network interface (IPv4).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>requester-id</code> - The alias or AWS account ID of the principal or service that created the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>requester-managed</code> - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>source-dest-check</code> - Indicates whether the network interface performs source/destination checking. \n\t\t            A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. \n\t\t            The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC. </p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>status</code> - The status of the network interface. If the network interface is not attached to an instance, the status is <code>available</code>; \n\t\t            if a network interface is attached to an instance the status is <code>in-use</code>.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>subnet-id</code> - The ID of the subnet for the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>vpc-id</code> - The ID of the VPC for the network interface.</p>\n\t\t          </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters.</p>\n\t\t       <ul>\n            <li>\n\t\t             <p>\n                  <code>addresses.private-ip-address</code> - The private IPv4 addresses\n                    associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>addresses.primary</code> - Whether the private IPv4 address is the primary\n                    IP address associated with the network interface. </p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>addresses.association.public-ip</code> - The association ID returned when\n                    the network interface was associated with the Elastic IP address\n                    (IPv4).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>addresses.association.owner-id</code> - The owner ID of the addresses associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.association-id</code> - The association ID returned when the\n                    network interface was associated with an IPv4 address.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.allocation-id</code> - The allocation ID returned when you\n                    allocated the Elastic IP address (IPv4) for your network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.ip-owner-id</code> - The owner of the Elastic IP address\n                    (IPv4) associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.public-ip</code> - The address of the Elastic IP address\n                    (IPv4) bound to the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t \t\t          <p>\n                  <code>association.public-dns-name</code> - The public DNS name for the network\n                    interface (IPv4).</p>\n\t\t \t        </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.attachment-id</code> - The ID of the interface attachment.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.attach-time</code> - The time that the network interface was attached to an instance.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.delete-on-termination</code> - Indicates whether the attachment is deleted when an instance is terminated.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.device-index</code> - The device index to which the network interface is attached.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>availability-zone</code> - The Availability Zone of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>description</code> - The description of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>group-id</code> - The ID of a security group associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>group-name</code> - The name of a security group associated with the network interface.</p>\n\t\t          </li>\n            <li>\n                  <p>\n                  <code>ipv6-addresses.ipv6-address</code> - An IPv6 address associated with\n                    the network interface.</p>\n               </li>\n            <li>\n\t\t             <p>\n                  <code>mac-address</code> - The MAC address of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>network-interface-id</code> - The ID of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>owner-id</code> - The account ID of the network interface owner.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>private-ip-address</code> - The private IPv4 address or addresses of the\n                    network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>private-dns-name</code> - The private DNS name of the network interface (IPv4).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>requester-id</code> - The alias or account ID of the principal or service that created the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>requester-managed</code> - Indicates whether the network interface is being managed by an Amazon Web Service \n\t\t               (for example, Management Console, Auto Scaling, and so on).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>source-dest-check</code> - Indicates whether the network interface performs source/destination checking. \n\t\t            A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. \n\t\t            The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC. </p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>status</code> - The status of the network interface. If the network interface is not attached to an instance, the status is <code>available</code>; \n\t\t            if a network interface is attached to an instance the status is <code>in-use</code>.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>subnet-id</code> - The ID of the subnet for the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>vpc-id</code> - The ID of the VPC for the network interface.</p>\n\t\t          </li>\n         </ul>",
                         "smithy.api#xmlName": "filter"
                     }
                 },
@@ -21831,7 +21949,7 @@
                 "target": "com.amazonaws.ec2#DescribePrefixListsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes available AWS services in a prefix list format, which includes the prefix list\n            name and prefix list ID of the service and the IP address range for the service.</p>\n        <p>We recommend that you use <a>DescribeManagedPrefixLists</a> instead.</p>",
+                "smithy.api#documentation": "<p>Describes available Amazon Web Services services in a prefix list format, which includes the prefix list\n            name and prefix list ID of the service and the IP address range for the service.</p>\n        <p>We recommend that you use <a>DescribeManagedPrefixLists</a> instead.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -24874,6 +24992,85 @@
                 }
             }
         },
+        "com.amazonaws.ec2#DescribeTrunkInterfaceAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeTrunkInterfaceAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeTrunkInterfaceAssociationsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one or more network interface trunk associations.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DescribeTrunkInterfaceAssociationsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeTrunkInterfaceAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "AssociationIds": {
+                    "target": "com.amazonaws.ec2#TrunkInterfaceAssociationIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the associations.</p>",
+                        "smithy.api#xmlName": "AssociationId"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>gre-key</code> - The ID of a trunk interface association.</p>\n            </li>\n            <li>\n                <p>\n                  <code>interface-protocol</code> - The interface protocol. Valid values are <code>VLAN</code> and <code>GRE</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeTrunkInterfaceAssociationsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n            To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeTrunkInterfaceAssociationsResult": {
+            "type": "structure",
+            "members": {
+                "InterfaceAssociations": {
+                    "target": "com.amazonaws.ec2#TrunkInterfaceAssociationList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InterfaceAssociationSet",
+                        "smithy.api#documentation": "<p>Information about the trunk associations.</p>",
+                        "smithy.api#xmlName": "interfaceAssociationSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#DescribeVolumeAttribute": {
             "type": "operation",
             "input": {
@@ -26932,6 +27129,49 @@
                 }
             }
         },
+        "com.amazonaws.ec2#DisableImageDeprecation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DisableImageDeprecationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DisableImageDeprecationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels the deprecation of the specified AMI.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html\">Deprecate an AMI</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DisableImageDeprecationRequest": {
+            "type": "structure",
+            "members": {
+                "ImageId": {
+                    "target": "com.amazonaws.ec2#ImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AMI.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n      Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#DisableImageDeprecationResult": {
+            "type": "structure",
+            "members": {
+                "Return": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Return",
+                        "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+                        "smithy.api#xmlName": "return"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#DisableSerialConsoleAccess": {
             "type": "operation",
             "input": {
@@ -27494,6 +27734,64 @@
                         "aws.protocols#ec2QueryName": "Association",
                         "smithy.api#documentation": "<p>Information about the association.</p>",
                         "smithy.api#xmlName": "association"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#DisassociateTrunkInterface": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DisassociateTrunkInterfaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DisassociateTrunkInterfaceResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Removes an association between a branch network interface with a trunk network interface.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DisassociateTrunkInterfaceRequest": {
+            "type": "structure",
+            "members": {
+                "AssociationId": {
+                    "target": "com.amazonaws.ec2#TrunkInterfaceAssociationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID ofthe association</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure\n                Idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#DisassociateTrunkInterfaceResult": {
+            "type": "structure",
+            "members": {
+                "Return": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Return",
+                        "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+                        "smithy.api#xmlName": "return"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ClientToken",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure\n                Idempotency</a>.</p>",
+                        "smithy.api#xmlName": "clientToken"
                     }
                 }
             }
@@ -28873,6 +29171,56 @@
                         "aws.protocols#ec2QueryName": "Unsuccessful",
                         "smithy.api#documentation": "<p>Information about the snapshots for which fast snapshot restores could not be enabled.</p>",
                         "smithy.api#xmlName": "unsuccessful"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#EnableImageDeprecation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#EnableImageDeprecationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#EnableImageDeprecationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enables deprecation of the specified AMI at the specified date and time.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html\">Deprecate an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#EnableImageDeprecationRequest": {
+            "type": "structure",
+            "members": {
+                "ImageId": {
+                    "target": "com.amazonaws.ec2#ImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AMI.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeprecateAt": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time to deprecate the AMI, in UTC, in the following format:\n        <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z.\n      If you specify a value for seconds, Amazon EC2 rounds the seconds to the\n      nearest minute.</p>\n         <p>You can’t specify a date in the past. The upper limit for <code>DeprecateAt</code> is 10\n      years from now.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n      Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#EnableImageDeprecationResult": {
+            "type": "structure",
+            "members": {
+                "Return": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Return",
+                        "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+                        "smithy.api#xmlName": "return"
                     }
                 }
             }
@@ -34524,6 +34872,14 @@
                         "smithy.api#documentation": "<p>The boot mode of the image. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html\">Boot modes</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                         "smithy.api#xmlName": "bootMode"
                     }
+                },
+                "DeprecationTime": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DeprecationTime",
+                        "smithy.api#documentation": "<p>The date and time to deprecate the AMI, in UTC, in the following format: \n     <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z.\n      If you specified a value for seconds, Amazon EC2 rounds the seconds to the\n      nearest minute.</p>",
+                        "smithy.api#xmlName": "deprecationTime"
+                    }
                 }
             },
             "traits": {
@@ -37235,7 +37591,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p>The ID of the AWS account that created the network interface.</p>",
+                        "smithy.api#documentation": "<p>The ID of the account that created the network interface.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 },
@@ -37299,7 +37655,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "InterfaceType",
-                        "smithy.api#documentation": "<p>Describes the type of network interface.</p> \n\t\t       <p>Valid values: <code>interface</code> | <code>efa</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Describes the type of network interface.</p> \n\t        <p>Valid values: <code>interface</code> | <code>efa</code> | <code>trunk</code>\n         </p>",
                         "smithy.api#xmlName": "interfaceType"
                     }
                 }
@@ -37514,13 +37870,13 @@
                 "AssociateCarrierIpAddress": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to assign a carrier IP address to the network interface.</p>\n        <p>You can only assign a carrier IP address to a network interface that is in a subnet in a Wavelength Zone. For more information about carrier IP addresses, see Carrier IP addresses in the AWS Wavelength Developer Guide.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to assign a carrier IP address to the network interface.</p>\n        <p>You can only assign a carrier IP address to a network interface that is in a subnet in a Wavelength Zone. \n            For more information about carrier IP addresses, see Carrier IP addresses in the Amazon Web Services Wavelength Developer Guide.</p>"
                     }
                 },
                 "InterfaceType": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of network interface.</p>\n\t        <p>To create an Elastic Fabric Adapter (EFA), specify \n\t\t\t<code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\">Elastic Fabric Adapter</a> in the \n\t\t\t<i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n\t\t       <p>If you are not creating an EFA, specify <code>interface</code> or omit this parameter.</p>\n\t\t       <p>Valid values: <code>interface</code> | <code>efa</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The type of network interface.</p>\n\t        <p>To create an Elastic Fabric Adapter (EFA), specify \n\t\t\t<code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\">Elastic Fabric Adapter</a> in the \n\t\t\t<i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n\t\n\t        <p>Valid values: <code>interface</code> | <code>efa</code>\n         </p>"
                     }
                 },
                 "NetworkCardIndex": {
@@ -39371,6 +39727,10 @@
                         "name": "m5dn_24xlarge"
                     },
                     {
+                        "value": "m5dn.metal",
+                        "name": "m5dn_metal"
+                    },
+                    {
                         "value": "m5n.large",
                         "name": "m5n_large"
                     },
@@ -39401,6 +39761,10 @@
                     {
                         "value": "m5n.24xlarge",
                         "name": "m5n_24xlarge"
+                    },
+                    {
+                        "value": "m5n.metal",
+                        "name": "m5n_metal"
                     },
                     {
                         "value": "r5dn.large",
@@ -39435,6 +39799,10 @@
                         "name": "r5dn_24xlarge"
                     },
                     {
+                        "value": "r5dn.metal",
+                        "name": "r5dn_metal"
+                    },
+                    {
                         "value": "r5n.large",
                         "name": "r5n_large"
                     },
@@ -39465,6 +39833,10 @@
                     {
                         "value": "r5n.24xlarge",
                         "name": "r5n_24xlarge"
+                    },
+                    {
+                        "value": "r5n.metal",
+                        "name": "r5n_metal"
                     },
                     {
                         "value": "inf1.xlarge",
@@ -39930,6 +40302,21 @@
                     {
                         "value": "EIP-ASSOCIATE",
                         "name": "EIP_ASSOCIATE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#InterfaceProtocolType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VLAN",
+                        "name": "VLAN"
+                    },
+                    {
+                        "value": "GRE",
+                        "name": "GRE"
                     }
                 ]
             }
@@ -46745,6 +47132,14 @@
                         "smithy.api#documentation": "<p>The tags for the NAT gateway.</p>",
                         "smithy.api#xmlName": "tagSet"
                     }
+                },
+                "ConnectivityType": {
+                    "target": "com.amazonaws.ec2#ConnectivityType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ConnectivityType",
+                        "smithy.api#documentation": "<p>Indicates whether the NAT gateway supports public or private connectivity.</p>",
+                        "smithy.api#xmlName": "connectivityType"
+                    }
                 }
             },
             "traits": {
@@ -46758,7 +47153,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AllocationId",
-                        "smithy.api#documentation": "<p>The allocation ID of the Elastic IP address that's associated with the NAT gateway.</p>",
+                        "smithy.api#documentation": "<p>[Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway.</p>",
                         "smithy.api#xmlName": "allocationId"
                     }
                 },
@@ -46774,7 +47169,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "PrivateIp",
-                        "smithy.api#documentation": "<p>The private IP address associated with the Elastic IP address.</p>",
+                        "smithy.api#documentation": "<p>The private IP address associated with the NAT gateway.</p>",
                         "smithy.api#xmlName": "privateIp"
                     }
                 },
@@ -46782,7 +47177,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "PublicIp",
-                        "smithy.api#documentation": "<p>The Elastic IP address associated with the NAT gateway.</p>",
+                        "smithy.api#documentation": "<p>[Public NAT gateway only] The Elastic IP address associated with the NAT gateway.</p>",
                         "smithy.api#xmlName": "publicIp"
                     }
                 }
@@ -47539,7 +47934,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p>The AWS account ID of the owner of the network interface.</p>",
+                        "smithy.api#documentation": "<p>The account ID of the owner of the network interface.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 },
@@ -47571,7 +47966,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "RequesterId",
-                        "smithy.api#documentation": "<p>The alias or AWS account ID of the principal or service that created the network interface.</p>",
+                        "smithy.api#documentation": "<p>The alias or account ID of the principal or service that created the network interface.</p>",
                         "smithy.api#xmlName": "requesterId"
                     }
                 },
@@ -47579,7 +47974,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "RequesterManaged",
-                        "smithy.api#documentation": "<p>Indicates whether the network interface is being managed by AWS.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether the network interface is being managed by Amazon Web Services.</p>",
                         "smithy.api#xmlName": "requesterManaged"
                     }
                 },
@@ -47747,7 +48142,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "InstanceOwnerId",
-                        "smithy.api#documentation": "<p>The AWS account ID of the owner of the instance.</p>",
+                        "smithy.api#documentation": "<p>The account ID of the owner of the instance.</p>",
                         "smithy.api#xmlName": "instanceOwnerId"
                     }
                 },
@@ -47821,6 +48216,14 @@
                     {
                         "value": "efa",
                         "name": "efa"
+                    },
+                    {
+                        "value": "branch",
+                        "name": "branch"
+                    },
+                    {
+                        "value": "trunk",
+                        "name": "trunk"
                     }
                 ]
             }
@@ -47894,7 +48297,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AwsAccountId",
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The account ID.</p>",
                         "smithy.api#xmlName": "awsAccountId"
                     }
                 },
@@ -47902,7 +48305,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AwsService",
-                        "smithy.api#documentation": "<p>The AWS service.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Service.</p>",
                         "smithy.api#xmlName": "awsService"
                     }
                 },
@@ -48083,6 +48486,10 @@
                     {
                         "value": "efa",
                         "name": "efa"
+                    },
+                    {
+                        "value": "trunk",
+                        "name": "trunk"
                     }
                 ]
             }
@@ -49283,7 +49690,7 @@
                     "target": "com.amazonaws.ec2#ValueStringList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "CidrSet",
-                        "smithy.api#documentation": "<p>The IP address range of the AWS service.</p>",
+                        "smithy.api#documentation": "<p>The IP address range of the Amazon Web Service.</p>",
                         "smithy.api#xmlName": "cidrSet"
                     }
                 },
@@ -49305,7 +49712,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes prefixes for AWS services.</p>"
+                "smithy.api#documentation": "<p>Describes prefixes for Amazon Web Services services.</p>"
             }
         },
         "com.amazonaws.ec2#PrefixListAssociation": {
@@ -49957,7 +50364,7 @@
                 "target": "com.amazonaws.ec2#ProvisionByoipCidrResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provisions an IPv4 or IPv6 address range for use with your AWS resources through bring your own IP \n         addresses (BYOIP) and creates a corresponding address pool. After the address range is\n         provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p>\n         <p>AWS verifies that you own the address range and are authorized to advertise it. \n         You must ensure that the address range is registered to you and that you created an \n         RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. \n         For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring Your Own IP Addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>Provisioning an address range is an asynchronous operation, so the call returns immediately,\n         but the address range is not ready to use until its status changes from <code>pending-provision</code>\n         to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>. \n         To allocate an Elastic IP address from your IPv4 address pool, use <a>AllocateAddress</a> \n         with either the specific address from the address pool or the ID of the address pool.</p>"
+                "smithy.api#documentation": "<p>Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP \n         addresses (BYOIP) and creates a corresponding address pool. After the address range is\n         provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p>\n         <p>Amazon Web Services verifies that you own the address range and are authorized to advertise it. \n         You must ensure that the address range is registered to you and that you created an \n         RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. \n         For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring your own IP addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>Provisioning an address range is an asynchronous operation, so the call returns immediately,\n         but the address range is not ready to use until its status changes from <code>pending-provision</code>\n         to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>. \n         To allocate an Elastic IP address from your IPv4 address pool, use <a>AllocateAddress</a> \n         with either the specific address from the address pool or the ID of the address pool.</p>"
             }
         },
         "com.amazonaws.ec2#ProvisionByoipCidrRequest": {
@@ -49999,6 +50406,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to apply to the address pool.</p>",
                         "smithy.api#xmlName": "PoolTagSpecification"
+                    }
+                },
+                "MultiRegion": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<para>Reserved.</para>"
                     }
                 }
             }
@@ -50155,7 +50568,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "NetworkBorderGroup",
-                        "smithy.api#documentation": "<p>The name of the location from which the address pool is advertised. A network border group is a unique set of Availability Zones or Local Zones from where AWS advertises public IP addresses.</p>",
+                        "smithy.api#documentation": "<p>The name of the location from which the address pool is advertised. \n            A network border group is a unique set of Availability Zones or Local Zones \n            from where Amazon Web Services advertises public IP addresses.</p>",
                         "smithy.api#xmlName": "networkBorderGroup"
                     }
                 },
@@ -51307,7 +51720,7 @@
                 "target": "com.amazonaws.ec2#ReleaseAddressRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Releases the specified Elastic IP address.</p>\n         <p>[EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it\n\t\t\t\tfrom any instance that it's associated with. To disassociate an Elastic IP address without\n\t\t\t\treleasing it, use <a>DisassociateAddress</a>.</p>\n         <p>[Nondefault VPC] You must use <a>DisassociateAddress</a> to disassociate the Elastic IP address\n\t\t\t  before you can release it. Otherwise, Amazon EC2 returns an error (<code>InvalidIPAddress.InUse</code>).</p>\n         <p>After releasing an Elastic IP address, it is released to the IP address pool. \n        Be sure to update your DNS records and any servers or devices that communicate with the address. \n        If you attempt to release an Elastic IP address that you already released, you'll get an\n        <code>AuthFailure</code> error if the address is already allocated to another AWS account.</p>\n         <p>[EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be able to recover it.\n        For more information, see <a>AllocateAddress</a>.</p>"
+                "smithy.api#documentation": "<p>Releases the specified Elastic IP address.</p>\n         <p>[EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it\n\t\t\t\tfrom any instance that it's associated with. To disassociate an Elastic IP address without\n\t\t\t\treleasing it, use <a>DisassociateAddress</a>.</p>\n         <p>[Nondefault VPC] You must use <a>DisassociateAddress</a> to disassociate the Elastic IP address\n\t\t\t  before you can release it. Otherwise, Amazon EC2 returns an error (<code>InvalidIPAddress.InUse</code>).</p>\n         <p>After releasing an Elastic IP address, it is released to the IP address pool. \n        Be sure to update your DNS records and any servers or devices that communicate with the address. \n        If you attempt to release an Elastic IP address that you already released, you'll get an\n       <code>AuthFailure</code> error if the address is already allocated to another account.</p>\n         <p>[EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be able to recover it.\n        For more information, see <a>AllocateAddress</a>.</p>"
             }
         },
         "com.amazonaws.ec2#ReleaseAddressRequest": {
@@ -63103,6 +63516,91 @@
                 ]
             }
         },
+        "com.amazonaws.ec2#TrunkInterfaceAssociation": {
+            "type": "structure",
+            "members": {
+                "AssociationId": {
+                    "target": "com.amazonaws.ec2#TrunkInterfaceAssociationId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AssociationId",
+                        "smithy.api#documentation": "<p>The ID of the association.</p>",
+                        "smithy.api#xmlName": "associationId"
+                    }
+                },
+                "BranchInterfaceId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "BranchInterfaceId",
+                        "smithy.api#documentation": "<p>The ID of the branch network interface.</p>",
+                        "smithy.api#xmlName": "branchInterfaceId"
+                    }
+                },
+                "TrunkInterfaceId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TrunkInterfaceId",
+                        "smithy.api#documentation": "<p>The ID of the trunk network interface.</p>",
+                        "smithy.api#xmlName": "trunkInterfaceId"
+                    }
+                },
+                "InterfaceProtocol": {
+                    "target": "com.amazonaws.ec2#InterfaceProtocolType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InterfaceProtocol",
+                        "smithy.api#documentation": "<p>The interface protocol. Valid values are <code>VLAN</code> and <code>GRE</code>.</p>",
+                        "smithy.api#xmlName": "interfaceProtocol"
+                    }
+                },
+                "VlanId": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VlanId",
+                        "smithy.api#documentation": "<p>The ID of the VLAN when you use the VLAN protocol.</p>",
+                        "smithy.api#xmlName": "vlanId"
+                    }
+                },
+                "GreKey": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "GreKey",
+                        "smithy.api#documentation": "<p>The application key when you use the GRE protocol.</p>",
+                        "smithy.api#xmlName": "greKey"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p> The tags.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an association between a branch network interface with a trunk network interface.</p>"
+            }
+        },
+        "com.amazonaws.ec2#TrunkInterfaceAssociationId": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#TrunkInterfaceAssociationIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#TrunkInterfaceAssociationId",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#TrunkInterfaceAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#TrunkInterfaceAssociation",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#TunnelInsideIpVersion": {
             "type": "string",
             "traits": {
@@ -66439,7 +66937,7 @@
                 "target": "com.amazonaws.ec2#WithdrawByoipCidrResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Stops advertising an address range that is provisioned as an address pool.</p>\n         <p>You can perform this operation at most once every 10 seconds, even if you specify different \n         address ranges each time.</p>\n         <p>It can take a few minutes before traffic to the specified addresses stops routing to AWS\n          because of BGP propagation delays.</p>"
+                "smithy.api#documentation": "<p>Stops advertising an address range that is provisioned as an address pool.</p>\n         <p>You can perform this operation at most once every 10 seconds, even if you specify different \n         address ranges each time.</p>\n         <p>It can take a few minutes before traffic to the specified addresses stops routing to Amazon Web Services\n          because of BGP propagation delays.</p>"
             }
         },
         "com.amazonaws.ec2#WithdrawByoipCidrRequest": {

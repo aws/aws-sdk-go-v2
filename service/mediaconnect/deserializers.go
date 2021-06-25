@@ -6245,6 +6245,15 @@ func awsRestjson1_deserializeDocumentFailoverConfig(v **types.FailoverConfig, va
 
 	for key, value := range shape {
 		switch key {
+		case "failoverMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FailoverMode to be of type string, got %T instead", value)
+				}
+				sv.FailoverMode = types.FailoverMode(jtv)
+			}
+
 		case "recoveryWindow":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6256,6 +6265,11 @@ func awsRestjson1_deserializeDocumentFailoverConfig(v **types.FailoverConfig, va
 					return err
 				}
 				sv.RecoveryWindow = int32(i64)
+			}
+
+		case "sourcePriority":
+			if err := awsRestjson1_deserializeDocumentSourcePriority(&sv.SourcePriority, value); err != nil {
+				return err
 			}
 
 		case "state":
@@ -7808,6 +7822,46 @@ func awsRestjson1_deserializeDocumentSource(v **types.Source, value interface{})
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.WhitelistCidr = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSourcePriority(v **types.SourcePriority, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SourcePriority
+	if *v == nil {
+		sv = &types.SourcePriority{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "primarySource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.PrimarySource = ptr.String(jtv)
 			}
 
 		default:

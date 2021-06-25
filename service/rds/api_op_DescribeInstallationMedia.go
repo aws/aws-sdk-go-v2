@@ -60,7 +60,7 @@ type DescribeInstallationMediaInput struct {
 
 type DescribeInstallationMediaOutput struct {
 
-	// The list of InstallationMedia objects for the AWS account.
+	// The list of InstallationMedia objects for the Amazon Web Services account.
 	InstallationMedia []types.InstallationMedia
 
 	// An optional pagination token provided by a previous DescribeInstallationMedia

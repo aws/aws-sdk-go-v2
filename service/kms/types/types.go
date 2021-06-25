@@ -15,11 +15,15 @@ type AliasListEntry struct {
 	// String that contains the alias. This value begins with alias/.
 	AliasName *string
 
+	// Date and time that the alias was most recently created in the account and
+	// Region. Formatted as Unix time.
 	CreationDate *time.Time
 
+	// Date and time that the alias was most recently associated with a CMK in the
+	// account and Region. Formatted as Unix time.
 	LastUpdatedDate *time.Time
 
-	// String that contains the key identifier referred to by the alias.
+	// String that contains the key identifier of the CMK associated with the alias.
 	TargetKeyId *string
 }
 
@@ -250,8 +254,12 @@ type KeyMetadata struct {
 	// Describes the type of key material in the CMK.
 	CustomerMasterKeySpec CustomerMasterKeySpec
 
-	// The date and time after which AWS KMS deletes the CMK. This value is present
-	// only when KeyState is PendingDeletion.
+	// The date and time after which AWS KMS deletes this CMK. This value is present
+	// only when the CMK is scheduled for deletion, that is, when its KeyState is
+	// PendingDeletion. When the primary key in a multi-Region key is scheduled for
+	// deletion but still has replica keys, its key state is PendingReplicaDeletion and
+	// the length of its waiting period is displayed in the PendingDeletionWindowInDays
+	// field.
 	DeletionDate *time.Time
 
 	// The description of the CMK.
@@ -262,7 +270,7 @@ type KeyMetadata struct {
 	Enabled bool
 
 	// The encryption algorithms that the CMK supports. You cannot use the CMK with
-	// other encryption algorithms within AWS KMS. This field appears only when the
+	// other encryption algorithms within AWS KMS. This value is present only when the
 	// KeyUsage of the CMK is ENCRYPT_DECRYPT.
 	EncryptionAlgorithms []EncryptionAlgorithmSpec
 
@@ -287,12 +295,49 @@ type KeyMetadata struct {
 	// for which you can use the CMK.
 	KeyUsage KeyUsageType
 
+	// Indicates whether the CMK is a multi-Region (True) or regional (False) key. This
+	// value is True for multi-Region primary and replica CMKs and False for regional
+	// CMKs. For more information about multi-Region keys, see Using multi-Region keys
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
+	// in the AWS Key Management Service Developer Guide.
+	MultiRegion *bool
+
+	// Lists the primary and replica CMKs in same multi-Region CMK. This field is
+	// present only when the value of the MultiRegion field is True. For more
+	// information about any listed CMK, use the DescribeKey operation.
+	//
+	// *
+	// MultiRegionKeyType indicates whether the CMK is a PRIMARY or REPLICA key.
+	//
+	// *
+	// PrimaryKey displays the key ARN and Region of the primary key. This field
+	// displays the current CMK if it is the primary key.
+	//
+	// * ReplicaKeys displays the
+	// key ARNs and Regions of all replica keys. This field includes the current CMK if
+	// it is a replica key.
+	MultiRegionConfiguration *MultiRegionConfiguration
+
 	// The source of the CMK's key material. When this value is AWS_KMS, AWS KMS
 	// created the key material. When this value is EXTERNAL, the key material was
 	// imported from your existing key management infrastructure or the CMK lacks key
 	// material. When this value is AWS_CLOUDHSM, the key material was created in the
 	// AWS CloudHSM cluster associated with a custom key store.
 	Origin OriginType
+
+	// The waiting period before the primary key in a multi-Region key is deleted. This
+	// waiting period begins when the last of its replica keys is deleted. This value
+	// is present only when the KeyState of the CMK is PendingReplicaDeletion. That
+	// indicates that the CMK is the primary key in a multi-Region key, it is scheduled
+	// for deletion, and it still has existing replica keys. When a regional CMK or a
+	// replica key in a multi-Region key is scheduled for deletion, its deletion date
+	// is displayed in the DeletionDate field. However, when the primary key in a
+	// multi-Region key is scheduled for deletion, its waiting period doesn't begin
+	// until all of its replica keys are deleted. This value displays that waiting
+	// period. When the last replica key in the multi-Region key is deleted, the
+	// KeyState of the scheduled primary key changes from PendingReplicaDeletion to
+	// PendingDeletion and the deletion date appears in the DeletionDate field.
+	PendingDeletionWindowInDays *int32
 
 	// The signing algorithms that the CMK supports. You cannot use the CMK with other
 	// signing algorithms within AWS KMS. This field appears only when the KeyUsage of
@@ -304,6 +349,33 @@ type KeyMetadata struct {
 	// value is present only for CMKs whose Origin is EXTERNAL and whose
 	// ExpirationModel is KEY_MATERIAL_EXPIRES, otherwise this value is omitted.
 	ValidTo *time.Time
+}
+
+// Describes the configuration of this multi-Region CMK. This field appears only
+// when the CMK is a primary or replica of a multi-Region CMK. For more information
+// about any listed CMK, use the DescribeKey operation.
+type MultiRegionConfiguration struct {
+
+	// Indicates whether the CMK is a PRIMARY or REPLICA key.
+	MultiRegionKeyType MultiRegionKeyType
+
+	// Displays the key ARN and Region of the primary key. This field includes the
+	// current CMK if it is the primary key.
+	PrimaryKey *MultiRegionKey
+
+	// displays the key ARNs and Regions of all replica keys. This field includes the
+	// current CMK if it is a replica key.
+	ReplicaKeys []MultiRegionKey
+}
+
+// Describes the primary or replica key in a multi-Region key.
+type MultiRegionKey struct {
+
+	// Displays the key ARN of a primary or replica key of a multi-Region key.
+	Arn *string
+
+	// Displays the AWS Region of a primary or replica key in a multi-Region key.
+	Region *string
 }
 
 // A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag

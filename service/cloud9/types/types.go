@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// Information about an AWS Cloud9 development environment.
+// Information about an Cloud9 development environment.
 type Environment struct {
 
 	// The Amazon Resource Name (ARN) of the environment.
@@ -43,29 +43,30 @@ type Environment struct {
 	// The state of the environment in its creation or deletion lifecycle.
 	Lifecycle *EnvironmentLifecycle
 
-	// Describes the status of AWS managed temporary credentials for the AWS Cloud9
-	// environment. Available values are:
+	// Describes the status of Amazon Web Services managed temporary credentials for
+	// the Cloud9 environment. Available values are:
 	//
 	// * ENABLED_ON_CREATE
 	//
-	// * ENABLED_BY_OWNER
-	//
 	// *
-	// DISABLED_BY_DEFAULT
+	// ENABLED_BY_OWNER
+	//
+	// * DISABLED_BY_DEFAULT
 	//
 	// * DISABLED_BY_OWNER
 	//
-	// * DISABLED_BY_COLLABORATOR
+	// *
+	// DISABLED_BY_COLLABORATOR
+	//
+	// * PENDING_REMOVAL_BY_COLLABORATOR
 	//
 	// *
-	// PENDING_REMOVAL_BY_COLLABORATOR
+	// PENDING_REMOVAL_BY_OWNER
 	//
-	// * PENDING_REMOVAL_BY_OWNER
+	// * FAILED_REMOVAL_BY_COLLABORATOR
 	//
 	// *
-	// FAILED_REMOVAL_BY_COLLABORATOR
-	//
-	// * ENABLED_BY_OWNER
+	// ENABLED_BY_OWNER
 	//
 	// * DISABLED_BY_DEFAULT
 	ManagedCredentialsStatus ManagedCredentialsStatus
@@ -74,12 +75,12 @@ type Environment struct {
 	Name *string
 }
 
-// Information about the current creation or deletion lifecycle state of an AWS
-// Cloud9 development environment.
+// Information about the current creation or deletion lifecycle state of an Cloud9
+// development environment.
 type EnvironmentLifecycle struct {
 
 	// If the environment failed to delete, the Amazon Resource Name (ARN) of the
-	// related AWS resource.
+	// related Amazon Web Services resource.
 	FailureResource *string
 
 	// Any informational message about the lifecycle state of the environment.
@@ -103,8 +104,7 @@ type EnvironmentLifecycle struct {
 	Status EnvironmentLifecycleStatus
 }
 
-// Information about an environment member for an AWS Cloud9 development
-// environment.
+// Information about an environment member for an Cloud9 development environment.
 type EnvironmentMember struct {
 
 	// The ID of the environment for the environment member.
@@ -131,8 +131,7 @@ type EnvironmentMember struct {
 	// This member is required.
 	UserArn *string
 
-	// The user ID in AWS Identity and Access Management (AWS IAM) of the environment
-	// member.
+	// The user ID in Identity and Access Management (IAM) of the environment member.
 	//
 	// This member is required.
 	UserId *string
@@ -142,11 +141,11 @@ type EnvironmentMember struct {
 	LastAccess *time.Time
 }
 
-// Metadata that is associated with AWS resources. In particular, a name-value pair
-// that can be associated with an AWS Cloud9 development environment. There are two
-// types of tags: user tags and system tags. A user tag is created by the user. A
-// system tag is automatically created by AWS services. A system tag is prefixed
-// with "aws:" and cannot be modified by the user.
+// Metadata that is associated with Amazon Web Services resources. In particular, a
+// name-value pair that can be associated with an Cloud9 development environment.
+// There are two types of tags: user tags and system tags. A user tag is created by
+// the user. A system tag is automatically created by Amazon Web Services services.
+// A system tag is prefixed with "aws:" and cannot be modified by the user.
 type Tag struct {
 
 	// The name part of a tag.
