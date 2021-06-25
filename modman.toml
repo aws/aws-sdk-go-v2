@@ -12,6 +12,9 @@ no_tag = true
 [modules."example/service/s3/usingPrivateLink"]
 no_tag = true
 
+[modules."internal/configsources/configtesting"]
+no_tag = true
+
 [modules."internal/repotools"]
 no_tag = true
 
