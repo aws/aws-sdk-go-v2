@@ -85,6 +85,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "LoadBalancerNotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified load balancer does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -435,6 +439,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CertificateNotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified ARN does not refer to a valid SSL certificate in AWS Identity and Access Management (IAM) \n            or AWS Certificate Manager (ACM). Note that if you recently uploaded the certificate to IAM, this error might \n            indicate that the certificate is not fully available yet.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1079,6 +1087,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DependencyThrottle",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A request made by Elastic Load Balancing to another service exceeds the maximum request rate permitted for your account.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1610,6 +1622,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DuplicateLoadBalancerName",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified load balancer name already exists for this account.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1623,6 +1639,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DuplicateListener",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A listener already exists for the specified load balancer name and port, but with a different instance port, protocol, or SSL certificate.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1636,6 +1656,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DuplicatePolicyName",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A policy with the specified name already exists for this load balancer.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1649,6 +1673,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DuplicateTagKeys",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A tag key was specified more than once.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1952,6 +1980,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidConfigurationRequest",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The requested configuration change is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -1965,6 +1997,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidInstance",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified endpoint is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1978,6 +2014,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidScheme",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified value for the schema is not valid. You can only specify a scheme for load balancers in a VPC.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1991,6 +2031,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidSecurityGroup",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>One or more of the specified security groups do not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2004,6 +2048,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidSubnet",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified VPC has no associated Internet gateway.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2136,6 +2184,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ListenerNotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The load balancer does not have a listener configured at the specified port.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2155,6 +2207,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "LoadBalancerAttributeNotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified load balancer attribute does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2411,6 +2467,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "OperationNotPermitted",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This operation is not allowed.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2597,6 +2657,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "PolicyNotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>One or more of the specified policies do not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2651,6 +2715,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "PolicyTypeNotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>One or more of the specified policy types do not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3047,6 +3115,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SubnetNotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>One or more of the specified subnets do not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3169,6 +3241,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TooManyLoadBalancers",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The quota for the number of load balancers has been reached.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3182,6 +3258,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TooManyPolicies",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The quota for the number of policies for this load balancer has been reached.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3195,6 +3275,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TooManyTags",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The quota for the number of tags that can be assigned to a load balancer has been reached.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3217,6 +3301,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UnsupportedProtocol",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified protocol or signature version is not supported.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400

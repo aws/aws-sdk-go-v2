@@ -429,6 +429,10 @@
                         "name": "INACTIVE"
                     },
                     {
+                        "value": "LEARNING",
+                        "name": "LEARNING"
+                    },
+                    {
                         "value": "BACK_TEST_ACTIVATING",
                         "name": "BACK_TEST_ACTIVATING"
                     },
@@ -1098,7 +1102,7 @@
                     "target": "com.amazonaws.lookoutmetrics#Offset",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>After an interval ends, the amount of time that the detector waits before importing data.</p>"
+                        "smithy.api#documentation": "<p>After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.</p>"
                     }
                 },
                 "TimestampColumn": {
@@ -1678,7 +1682,7 @@
                     "target": "com.amazonaws.lookoutmetrics#Offset",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The offset for the dataset.</p>"
+                        "smithy.api#documentation": "<p>The offset in seconds. Only supported for S3 and Redshift datasources.</p>"
                     }
                 },
                 "MetricList": {
@@ -2692,7 +2696,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.lookoutmetrics#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a <code>NextToken</code>. To\n      retrieve the next set of results, use the token in the next request. Tokens expire after 24 hours.</p>"
+                        "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a\n        <code>NextToken</code>. To retrieve the next set of results, use the token in the next\n      request. Tokens expire after 24 hours.</p>"
                     }
                 }
             }
@@ -2709,7 +2713,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.lookoutmetrics#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response is truncated, the list call returns this token. To retrieve the next set of results, use the\n      token in the next list request. </p>"
+                        "smithy.api#documentation": "<p>If the response is truncated, the list call returns this token. To retrieve the next set\n      of results, use the token in the next list request. </p>"
                     }
                 }
             }
@@ -4054,7 +4058,7 @@
                     "target": "com.amazonaws.lookoutmetrics#Offset",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>After an interval ends, the amount of time that the detector waits before importing data.</p>"
+                        "smithy.api#documentation": "<p>After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.</p>"
                     }
                 },
                 "TimestampColumn": {

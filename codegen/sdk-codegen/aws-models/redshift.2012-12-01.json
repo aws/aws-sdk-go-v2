@@ -102,6 +102,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AccessToClusterDenied",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You are not authorized to access the cluster.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -115,6 +119,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AccessToSnapshotDenied",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The owner of the specified snapshot has not authorized your account to access the\n            snapshot.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -338,6 +346,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AuthorizationAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified CIDR block or EC2 security group is already authorized for the\n            specified cluster security group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -351,6 +363,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AuthorizationNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified CIDR IP range or EC2 security group is not authorized for the\n            specified cluster security group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -364,6 +380,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AuthorizationQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The authorization quota for the cluster security group has been reached.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -658,6 +678,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "BatchDeleteRequestSizeExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The maximum number for a batch delete of snapshots has been reached. The limit is\n            100. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -691,6 +715,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "BatchModifyClusterSnapshotsLimitExceededFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The maximum number for snapshot identifiers has been reached. The limit is 100.\n        </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -772,6 +800,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "BucketNotFoundFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Could not find the specified S3 bucket.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1131,6 +1163,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The account already has a cluster with the given identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1318,6 +1354,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.\n        </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -1331,6 +1371,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterOnLatestRevision",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Cluster is already on the latest database revision.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1376,6 +1420,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterParameterGroupAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A cluster parameter group with the same name already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1429,6 +1477,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterParameterGroupNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The parameter group name does not refer to an existing parameter group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -1442,6 +1494,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterParameterGroupQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request would result in the user exceeding the allowed number of cluster\n            parameter groups. \nFor information about increasing your quota, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.\n</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1542,6 +1598,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request would exceed the allowed number of cluster instances for this account.\n            \nFor information about increasing your quota, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.\n</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1593,6 +1653,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterSecurityGroupAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A cluster security group with the same name already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1664,6 +1728,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterSecurityGroupNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The cluster security group name does not refer to an existing cluster security\n            group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -1677,6 +1745,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "QuotaExceeded.ClusterSecurityGroup",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request would result in the user exceeding the allowed number of cluster\n            security groups. \nFor information about increasing your quota, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.\n</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1699,6 +1771,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterSnapshotAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The value specified as a snapshot identifier is already used by an existing\n            snapshot.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1744,6 +1820,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterSnapshotNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The snapshot identifier does not refer to an existing cluster snapshot.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -1757,6 +1837,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterSnapshotQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request would result in the user exceeding the allowed number of cluster\n            snapshots.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1814,6 +1898,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterSubnetGroupAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A <i>ClusterSubnetGroupName</i> is already used by an existing\n            cluster subnet group. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1847,6 +1935,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterSubnetGroupNotFoundFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The cluster subnet group name does not refer to an existing cluster subnet\n            group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1860,6 +1952,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterSubnetGroupQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request would result in user exceeding the allowed number of cluster subnet\n            groups. \nFor information about increasing your quota, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.\n</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1882,6 +1978,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClusterSubnetQuotaExceededFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request would result in user exceeding the allowed number of subnets in a\n            cluster subnet groups. \nFor information about increasing your quota, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.\n</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2041,6 +2141,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CopyToRegionDisabledFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Cross-region snapshot copy was temporarily disabled. Try your request\n            again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -4010,6 +4114,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DependentServiceRequestThrottlingFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request cannot be completed because a dependent service is throttling requests\n            made by Amazon Redshift on your behalf. Wait and retry the request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -4023,6 +4131,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DependentServiceUnavailableFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Your request cannot be completed because a dependent internal service is\n            temporarily unavailable. Wait 30 to 60 seconds and try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -6387,6 +6499,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EndpointAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The account already has a Redshift-managed VPC endpoint with the given identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -6462,6 +6578,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EndpointAuthorizationAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The authorization already exists for this endpoint.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -6492,6 +6612,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EndpointAuthorizationNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The authorization for this endpoint can't be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -6511,6 +6635,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EndpointAuthorizationsPerClusterLimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The number of endpoint authorizations per cluster has exceeded its limit.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -6524,6 +6652,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EndpointNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The endpoint name doesn't refer to an existing endpoint.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -6537,6 +6669,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EndpointsPerAuthorizationLimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The number of Redshift-managed VPC endpoints per authorization has exceeded its limit.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -6550,6 +6686,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EndpointsPerClusterLimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The number of Redshift-managed VPC endpoints per cluster has exceeded its limit.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -6789,6 +6929,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EventSubscriptionQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request would exceed the allowed number of event subscriptions for this\n            account. \nFor information about increasing your quota, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.\n</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7028,6 +7172,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "HsmClientCertificateAlreadyExistsFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>There is already an existing Amazon Redshift HSM client certificate with the specified\n            identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7070,6 +7218,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "HsmClientCertificateNotFoundFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>There is no Amazon Redshift HSM client certificate with the specified\n            identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7083,6 +7235,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "HsmClientCertificateQuotaExceededFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The quota for HSM client certificates has been reached. \nFor information about increasing your quota, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.\n</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7134,6 +7290,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "HsmConfigurationAlreadyExistsFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>There is already an existing Amazon Redshift HSM configuration with the specified\n            identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7176,6 +7336,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "HsmConfigurationNotFoundFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>There is no Amazon Redshift HSM configuration with the specified identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7189,6 +7353,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "HsmConfigurationQuotaExceededFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The quota for HSM configurations has been reached. \nFor information about increasing your quota, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.\n</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7290,6 +7458,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InProgressTableRestoreQuotaExceededFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You have exceeded the allowed number of table restore requests. Wait for your\n            current table restore requests to complete before making a new request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7303,6 +7475,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "IncompatibleOrderableOptions",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified options are incompatible.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7316,6 +7492,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InsufficientClusterCapacity",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The number of nodes specified exceeds the allotted capacity of the\n            cluster.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7329,6 +7509,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InsufficientS3BucketPolicyFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The cluster does not have read bucket or put object permissions on the S3 bucket\n            specified when enabling logging.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7351,6 +7535,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidAuthorizationState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The status of the authorization is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7364,6 +7552,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidClusterParameterGroupState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The cluster parameter group action can not be completed because another task is in\n            progress that involves the parameter group. Wait a few moments and try the operation\n            again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7377,6 +7569,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidClusterSecurityGroupState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The state of the cluster security group is not <code>available</code>. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7390,6 +7586,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidClusterSnapshotScheduleState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The cluster snapshot schedule state is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7403,6 +7603,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidClusterSnapshotState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified cluster snapshot is not in the <code>available</code> state, or other\n            accounts are authorized to access the snapshot. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7416,6 +7620,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidClusterState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified cluster is not in the <code>available</code> state. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7429,6 +7637,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidClusterSubnetGroupStateFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The cluster subnet group cannot be deleted because it is in use.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7442,6 +7654,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidClusterSubnetStateFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The state of the subnet is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7455,6 +7671,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidClusterTrack",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The provided cluster track name is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7468,6 +7688,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidElasticIpFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The Elastic IP (EIP) is invalid or cannot be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7481,6 +7705,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidEndpointState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The status of the endpoint is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7494,6 +7722,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidHsmClientCertificateStateFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified HSM client certificate is not in the <code>available</code> state, or\n            it is still in use by one or more Amazon Redshift clusters.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7507,6 +7739,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidHsmConfigurationStateFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified HSM configuration is not in the <code>available</code> state, or it\n            is still in use by one or more Amazon Redshift clusters.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7520,6 +7756,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidReservedNodeState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Indicates that the Reserved Node being exchanged is not in an active state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7533,6 +7773,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidRestore",
+                    "httpResponseCode": 406
+                },
                 "smithy.api#documentation": "<p>The restore is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 406
@@ -7546,6 +7790,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidRetentionPeriodFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The retention period specified is either in the past or is not a valid value.</p>\n        <p>The value must be either -1 or an integer between 1 and 3,653.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7559,6 +7807,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidS3BucketNameFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The S3 bucket name is invalid. For more information about naming rules, go to\n                <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html\">Bucket\n                Restrictions and Limitations</a> in the Amazon Simple Storage Service (S3)\n            Developer Guide.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7572,6 +7824,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidS3KeyPrefixFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The string specified for the logging S3 key prefix does not comply with the\n            documented constraints.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7585,6 +7841,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidSchedule",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The schedule you submitted isn't valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7598,6 +7858,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidScheduledAction",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The scheduled action is not valid. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7611,6 +7875,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidSnapshotCopyGrantStateFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The snapshot copy grant can't be deleted because it is used by one or more\n            clusters.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7624,6 +7892,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidSubnet",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested subnet is not valid, or not all of the subnets are in the same\n            VPC.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7637,6 +7909,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidSubscriptionStateFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The subscription request is invalid because it is a duplicate request. This\n            subscription request is already in progress.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7650,6 +7926,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidTableRestoreArgument",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The value specified for the <code>sourceDatabaseName</code>,\n                <code>sourceSchemaName</code>, or <code>sourceTableName</code> parameter, or a\n            combination of these, doesn't exist in the snapshot.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7663,6 +7943,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidTagFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The tag is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7676,6 +7960,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidUsageLimit",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The usage limit is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7689,6 +7977,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidVPCNetworkStateFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The cluster subnet group does not cover all Availability Zones.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7702,6 +7994,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "LimitExceededFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The encryption key has exceeded its grant limit in AWS KMS.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7812,6 +8108,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidClusterStateFault"
                 },
                 {
                     "target": "com.amazonaws.redshift#UnsupportedOperationFault"
@@ -9025,6 +9324,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NumberOfNodesPerClusterLimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The operation would exceed the number of nodes allowed for a cluster.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -9038,6 +9341,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NumberOfNodesQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The operation would exceed the number of nodes allotted to the account.\n            \nFor information about increasing your quota, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.\n</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -9418,6 +9725,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "PartnerNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The name of the partner was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -10103,6 +10414,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReservedNodeAlreadyExists",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>User already has a reservation with the given identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -10116,6 +10431,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReservedNodeAlreadyMigrated",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Indicates that the reserved node has already been exchanged.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -10138,6 +10457,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReservedNodeNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified reserved compute node not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -10222,6 +10545,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReservedNodeOfferingNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>Specified offering does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -10270,6 +10597,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReservedNodeQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Request would exceed the user's compute node quota. \nFor information about increasing your quota, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Limits in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.\n</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -10458,6 +10789,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResizeNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>A resize operation for the specified cluster is not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -10575,6 +10910,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceNotFoundFault",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The resource could not be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -11340,6 +11679,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SNSInvalidTopic",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Amazon SNS has responded that there is a problem with the specified Amazon SNS\n            topic.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -11353,6 +11696,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SNSNoAuthorization",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You do not have permission to publish to the specified Amazon SNS topic.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -11366,6 +11713,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SNSTopicArnNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>An Amazon SNS topic with the specified Amazon Resource Name (ARN) does not\n            exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -11388,6 +11739,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ScheduleDefinitionTypeUnsupported",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The definition you submitted is not supported.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -11482,6 +11837,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ScheduledActionAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The scheduled action already exists. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -11550,6 +11909,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ScheduledActionNotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The scheduled action cannot be found. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -11563,6 +11926,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ScheduledActionQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The quota for scheduled actions exceeded. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -11626,6 +11993,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ScheduledActionTypeUnsupported",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The action type specified for a scheduled action is not supported. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -11921,6 +12292,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotCopyAlreadyDisabledFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The cluster already has cross-region snapshot copy disabled.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -11934,6 +12309,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotCopyAlreadyEnabledFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The cluster already has cross-region snapshot copy enabled.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -11947,6 +12326,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotCopyDisabledFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Cross-region snapshot copy was temporarily disabled. Try your request\n            again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -11986,6 +12369,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotCopyGrantAlreadyExistsFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The snapshot copy grant can't be created because a grant with the same name already\n            exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -12028,6 +12415,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotCopyGrantNotFoundFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified snapshot copy grant can't be found. Make sure that the name is typed\n            correctly and that the grant exists in the destination region.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -12041,6 +12432,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotCopyGrantQuotaExceededFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The AWS account has exceeded the maximum number of snapshot copy grants in this\n            region.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -12174,6 +12569,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotScheduleAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified snapshot schedule already exists. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -12196,6 +12595,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotScheduleNotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>We could not find the specified snapshot schedule. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -12209,6 +12612,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotScheduleQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You have exceeded the quota of snapshot schedules. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -12222,6 +12629,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotScheduleUpdateInProgress",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified snapshot schedule is already being updated.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -12289,6 +12700,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SourceNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified Amazon Redshift event source could not be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -12364,6 +12779,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SubnetAlreadyInUse",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A specified subnet is already in use by another cluster.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -12395,6 +12814,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SubscriptionAlreadyExist",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>There is already an existing event notification subscription with the specified\n            name.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -12408,6 +12831,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SubscriptionCategoryNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The value specified for the event category was not one of the allowed values, or it\n            specified a category that does not apply to the specified source type. The allowed\n            values are Configuration, Management, Monitoring, and Security.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -12421,6 +12848,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SubscriptionEventIdNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>An Amazon Redshift event with the specified event ID does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -12434,6 +12865,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SubscriptionNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>An Amazon Redshift event notification subscription with the specified name does not\n            exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -12447,6 +12882,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SubscriptionSeverityNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The value specified for the event severity was not one of the allowed values, or it\n            specified a severity that does not apply to the specified source type. The allowed\n            values are ERROR and INFO.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -12509,6 +12948,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TableLimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The number of tables in the cluster exceeds the limit for the requested new cluster\n            node type. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -12522,6 +12965,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TableRestoreNotFoundFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified <code>TableRestoreRequestId</code> value was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -12712,6 +13159,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TagLimitExceededFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You have exceeded the number of tags allowed.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -12824,6 +13275,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UnauthorizedOperation",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Your account is not authorized to perform the requested operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -12837,6 +13292,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UnauthorizedPartnerIntegration",
+                    "httpResponseCode": 401
+                },
                 "smithy.api#documentation": "<p>The partner integration is not authorized.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 401
@@ -12850,6 +13309,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UnknownSnapshotCopyRegionFault",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified region is incorrect or does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -12863,6 +13326,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UnsupportedOperation",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested operation isn't supported.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -12876,6 +13343,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UnsupportedOptionFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A request option was specified that is not supported.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -13040,6 +13511,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UsageLimitAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The usage limit already exists. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -13119,6 +13594,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UsageLimitNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The usage limit identifier can't be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404

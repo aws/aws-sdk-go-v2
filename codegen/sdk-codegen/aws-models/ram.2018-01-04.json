@@ -308,7 +308,7 @@
                 "permissionArn": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the AWS RAM permission to associate with the resource share.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS RAM permissions to associate with the resource share.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -322,6 +322,12 @@
                     "target": "com.amazonaws.ram#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+                    }
+                },
+                "permissionVersion": {
+                    "target": "com.amazonaws.ram#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the AWS RAM permissions to associate with the resource share.</p>"
                     }
                 }
             }
@@ -663,6 +669,9 @@
                 },
                 {
                     "target": "com.amazonaws.ram#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ram#InvalidStateTransitionException"
                 },
                 {
                     "target": "com.amazonaws.ram#MalformedArnException"
@@ -1122,7 +1131,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the invitations for resource sharing that you've received.</p>",
+                "smithy.api#documentation": "<p>Gets the invitations that you have received for resource shares.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/getresourceshareinvitations",
@@ -1229,7 +1238,7 @@
                 "resourceShareArns": {
                     "target": "com.amazonaws.ram#ResourceShareArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARN) of the resource shares.</p>"
+                        "smithy.api#documentation": "<p>The ARNs of the resource shares.</p>"
                     }
                 },
                 "resourceShareStatus": {
@@ -1267,6 +1276,12 @@
                     "target": "com.amazonaws.ram#MaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n  To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "permissionArn": {
+                    "target": "com.amazonaws.ram#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS RAM permission that is associated with the resource share.</p>"
                     }
                 }
             }
@@ -1529,6 +1544,11 @@
                     "method": "POST",
                     "uri": "/listpermissions",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -1639,7 +1659,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type.</p>\n   \t     <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The resource type.</p>\n   \t     <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code>\n         </p>"
                     }
                 },
                 "resourceShareArns": {
@@ -1716,6 +1736,11 @@
                     "method": "POST",
                     "uri": "/listresourcesharepermissions",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -1788,6 +1813,11 @@
                     "method": "POST",
                     "uri": "/listresourcetypes",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             }
         },
@@ -1889,7 +1919,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type.</p>\n   \t     <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The resource type.</p>\n   \t     <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code>\n         </p>"
                     }
                 },
                 "resourceArns": {
@@ -2090,6 +2120,9 @@
                 },
                 {
                     "target": "com.amazonaws.ram#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.ram#ResourceShareLimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.ram#ServerInternalException"
@@ -2586,6 +2619,12 @@
                         },
                         "smithy.api#documentation": "<p>To view the resources associated with a pending resource share invitation, use \n      \t<a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html\">\n      \t\tListPendingInvitationResources</a>.</p>"
                     }
+                },
+                "receiverArn": {
+                    "target": "com.amazonaws.ram#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM user or IAM role that received the invitation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2740,7 +2779,7 @@
                 "defaultVersion": {
                     "target": "com.amazonaws.ram#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the version of the permission that is set as the \n    \t\tdefault version.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the version of the permission is set to the default version for this permission.</p>"
                     }
                 },
                 "name": {
@@ -2771,6 +2810,12 @@
                     "target": "com.amazonaws.ram#DateTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the permission was last updated.</p>"
+                    }
+                },
+                "isResourceTypeDefault": {
+                    "target": "com.amazonaws.ram#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the version of the permission is set to the default version for this resource type.</p>"
                     }
                 }
             },
@@ -2805,7 +2850,7 @@
                 "defaultVersion": {
                     "target": "com.amazonaws.ram#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the version of the permission that is set as the default version.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the version of the permission is set to the default version for this permission.</p>"
                     }
                 },
                 "name": {
@@ -2836,6 +2881,12 @@
                     "target": "com.amazonaws.ram#DateTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the permission was last updated.</p>"
+                    }
+                },
+                "isResourceTypeDefault": {
+                    "target": "com.amazonaws.ram#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the version of the permission is set to the default version for this resource type.</p>"
                     }
                 }
             },
@@ -3083,6 +3134,9 @@
                 },
                 {
                     "target": "com.amazonaws.ram#TagPolicyViolationException"
+                },
+                {
+                    "target": "com.amazonaws.ram#UnknownResourceException"
                 }
             ],
             "traits": {

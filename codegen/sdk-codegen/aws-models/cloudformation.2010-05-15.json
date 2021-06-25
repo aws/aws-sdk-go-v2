@@ -29,6 +29,12 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.cloudformation#AcceptTermsAndConditions": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.cloudformation#Account": {
             "type": "string",
             "traits": {
@@ -116,7 +122,101 @@
                     "min": 1,
                     "max": 5120
                 },
-                "smithy.api#pattern": "(s3://|http(s?)://).+"
+                "smithy.api#pattern": "^(s3://|http(s?)://).+$"
+            }
+        },
+        "com.amazonaws.cloudformation#ActivateType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#ActivateTypeInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#ActivateTypeOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#CFNRegistryException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#TypeNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Activates a public third-party extension, making it available for use in stack templates. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html\">Using public extensions</a> in the <i>CloudFormation User Guide</i>.</p>\n         <p>Once you have activated a public third-party extension in your account and region, use <a href=\"AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a> to specify configuration properties for the extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudformation#ActivateTypeInput": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.cloudformation#ThirdPartyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The extension type.</p>\n         <p>Conditional: You must specify <code>PublicTypeArn</code>, or <code>TypeName</code>, <code>Type</code>, and <code>PublisherId</code>.</p>"
+                    }
+                },
+                "PublicTypeArn": {
+                    "target": "com.amazonaws.cloudformation#ThirdPartyTypeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the public extension.</p>\n         <p>Conditional: You must specify <code>PublicTypeArn</code>, or <code>TypeName</code>, <code>Type</code>, and <code>PublisherId</code>.</p>"
+                    }
+                },
+                "PublisherId": {
+                    "target": "com.amazonaws.cloudformation#PublisherId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the extension publisher.</p>\n         <p>Conditional: You must specify <code>PublicTypeArn</code>, or <code>TypeName</code>, <code>Type</code>, and <code>PublisherId</code>.</p>"
+                    }
+                },
+                "TypeName": {
+                    "target": "com.amazonaws.cloudformation#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the extension.</p>\n         <p>Conditional: You must specify <code>PublicTypeArn</code>, or <code>TypeName</code>, <code>Type</code>, and <code>PublisherId</code>.</p>"
+                    }
+                },
+                "TypeNameAlias": {
+                    "target": "com.amazonaws.cloudformation#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alias to assign to the public extension, in this account and region. If you specify an alias for the extension, CloudFormation treats the alias as the extension type name within this account and region. You must use the alias to refer to the extension in your templates, API calls, and CloudFormation console.</p>\n         <p>An extension alias must be unique within a given account and region. You can activate the same public resource multiple times in the same account and region, using different type name aliases.</p>"
+                    }
+                },
+                "AutoUpdate": {
+                    "target": "com.amazonaws.cloudformation#AutoUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to automatically update the extension in this account and region when a new <i>minor</i> version is published by the extension publisher. Major versions released by the publisher must be manually updated.</p>\n         <p>The default is <code>true</code>.</p>"
+                    }
+                },
+                "LoggingConfig": {
+                    "target": "com.amazonaws.cloudformation#LoggingConfig"
+                },
+                "ExecutionRoleArn": {
+                    "target": "com.amazonaws.cloudformation#RoleARN2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the IAM execution role to use to activate the extension.</p>"
+                    }
+                },
+                "VersionBump": {
+                    "target": "com.amazonaws.cloudformation#VersionBump",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Manually updates a previously-activated type to a new major or minor version, if available. You can also use this parameter to update the value of <code>AutoUpdate</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MAJOR</code>: CloudFormation updates the extension to the newest major version, if one is available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MINOR</code>: CloudFormation updates the extension to the newest minor version, if one is available.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MajorVersion": {
+                    "target": "com.amazonaws.cloudformation#MajorVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The major version of this extension you want to activate, if multiple major versions are available. The default is the latest major version. CloudFormation uses the latest available <i>minor</i> version of the major version selected.</p>\n         <p>You can specify <code>MajorVersion</code> or <code>VersionBump</code>, but not both.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#ActivateTypeOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.cloudformation#PrivateTypeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the activated extension, in this account and region.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudformation#AllowedValue": {
@@ -136,6 +236,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AlreadyExistsException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The resource with the name requested already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -170,6 +274,96 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.cloudformation#AutoUpdate": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.cloudformation#BatchDescribeTypeConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#BatchDescribeTypeConfigurationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#BatchDescribeTypeConfigurationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#CFNRegistryException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#TypeConfigurationNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns configuration data for the specified CloudFormation extensions, from the CloudFormation registry for the account and region.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#BatchDescribeTypeConfigurationsError": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.cloudformation#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.cloudformation#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>"
+                    }
+                },
+                "TypeConfigurationIdentifier": {
+                    "target": "com.amazonaws.cloudformation#TypeConfigurationIdentifier"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed information concerning an error generated during the setting of configuration data for a CloudFormation extension.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#BatchDescribeTypeConfigurationsErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#BatchDescribeTypeConfigurationsError"
+            }
+        },
+        "com.amazonaws.cloudformation#BatchDescribeTypeConfigurationsInput": {
+            "type": "structure",
+            "members": {
+                "TypeConfigurationIdentifiers": {
+                    "target": "com.amazonaws.cloudformation#TypeConfigurationIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of identifiers for the desired extension configurations.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#BatchDescribeTypeConfigurationsOutput": {
+            "type": "structure",
+            "members": {
+                "Errors": {
+                    "target": "com.amazonaws.cloudformation#BatchDescribeTypeConfigurationsErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of information concerning any errors generated during the setting of the specified configurations.</p>"
+                    }
+                },
+                "UnprocessedTypeConfigurations": {
+                    "target": "com.amazonaws.cloudformation#UnprocessedTypeConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of any of the specified extension configurations that CloudFormation could not process for any reason.</p>"
+                    }
+                },
+                "TypeConfigurations": {
+                    "target": "com.amazonaws.cloudformation#TypeConfigurationDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of any of the specified extension configurations from the CloudFormation registry.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudformation#BoxedInteger": {
             "type": "integer",
             "traits": {
@@ -194,6 +388,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CFNRegistryException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>An error occurred during a CloudFormation registry operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -277,6 +475,29 @@
                 ]
             }
         },
+        "com.amazonaws.cloudformation#Category": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "REGISTERED",
+                        "name": "REGISTERED"
+                    },
+                    {
+                        "value": "ACTIVATED",
+                        "name": "ACTIVATED"
+                    },
+                    {
+                        "value": "THIRD_PARTY",
+                        "name": "THIRD_PARTY"
+                    },
+                    {
+                        "value": "AWS_TYPES",
+                        "name": "AWS_TYPES"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.cloudformation#CausingEntity": {
             "type": "string"
         },
@@ -333,7 +554,7 @@
                 "smithy.api#length": {
                     "min": 1
                 },
-                "smithy.api#pattern": "arn:[-a-zA-Z0-9:/]*"
+                "smithy.api#pattern": "^arn:[-a-zA-Z0-9:/]*$"
             }
         },
         "com.amazonaws.cloudformation#ChangeSetName": {
@@ -343,7 +564,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z][-a-zA-Z0-9]*"
+                "smithy.api#pattern": "^[a-zA-Z][-a-zA-Z0-9]*$"
             }
         },
         "com.amazonaws.cloudformation#ChangeSetNameOrId": {
@@ -353,7 +574,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "[a-zA-Z][-a-zA-Z0-9]*|arn:[-a-zA-Z0-9:/]*"
+                "smithy.api#pattern": "^[a-zA-Z][-a-zA-Z0-9]*|arn:[-a-zA-Z0-9:/]*$"
             }
         },
         "com.amazonaws.cloudformation#ChangeSetNotFoundException": {
@@ -364,6 +585,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ChangeSetNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified change set name or ID doesn't exit. To view valid change sets for a\n         stack, use the <code>ListChangeSets</code> action.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -567,7 +792,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][-a-zA-Z0-9]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*$"
             }
         },
         "com.amazonaws.cloudformation#ClientToken": {
@@ -583,6 +808,12 @@
             "type": "service",
             "version": "2010-05-15",
             "operations": [
+                {
+                    "target": "com.amazonaws.cloudformation#ActivateType"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#BatchDescribeTypeConfigurations"
+                },
                 {
                     "target": "com.amazonaws.cloudformation#CancelUpdateStack"
                 },
@@ -600,6 +831,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudformation#CreateStackSet"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#DeactivateType"
                 },
                 {
                     "target": "com.amazonaws.cloudformation#DeleteChangeSet"
@@ -621,6 +855,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudformation#DescribeChangeSet"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#DescribePublisher"
                 },
                 {
                     "target": "com.amazonaws.cloudformation#DescribeStackDriftDetectionStatus"
@@ -716,13 +953,22 @@
                     "target": "com.amazonaws.cloudformation#ListTypeVersions"
                 },
                 {
+                    "target": "com.amazonaws.cloudformation#PublishType"
+                },
+                {
                     "target": "com.amazonaws.cloudformation#RecordHandlerProgress"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#RegisterPublisher"
                 },
                 {
                     "target": "com.amazonaws.cloudformation#RegisterType"
                 },
                 {
                     "target": "com.amazonaws.cloudformation#SetStackPolicy"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#SetTypeConfiguration"
                 },
                 {
                     "target": "com.amazonaws.cloudformation#SetTypeDefaultVersion"
@@ -732,6 +978,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudformation#StopStackSetOperation"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#TestType"
                 },
                 {
                     "target": "com.amazonaws.cloudformation#UpdateStack"
@@ -766,6 +1015,26 @@
                 "smithy.api#xmlNamespace": {
                     "uri": "http://cloudformation.amazonaws.com/doc/2010-05-15/"
                 }
+            }
+        },
+        "com.amazonaws.cloudformation#ConfigurationSchema": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 60000
+                },
+                "smithy.api#pattern": "^[\\s\\S]+$"
+            }
+        },
+        "com.amazonaws.cloudformation#ConnectionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+$"
             }
         },
         "com.amazonaws.cloudformation#ContinueUpdateRollback": {
@@ -1357,6 +1626,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CreatedButModifiedException",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The specified resource exists, but has been changed.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -1364,6 +1637,54 @@
         },
         "com.amazonaws.cloudformation#CreationTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.cloudformation#DeactivateType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#DeactivateTypeInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#DeactivateTypeOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#CFNRegistryException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#TypeNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deactivates a public extension that was previously activated in this account and region.</p>\n         <p>Once deactivated, an extension cannot be used in any CloudFormation operation. This includes stack update operations where the stack template includes the extension, even if no updates are being made to the extension. In addition, deactivated extensions are not automatically updated if a new version of the extension is released.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudformation#DeactivateTypeInput": {
+            "type": "structure",
+            "members": {
+                "TypeName": {
+                    "target": "com.amazonaws.cloudformation#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type name of the extension, in this account and region. If you specified a type name alias when enabling the extension, use the type name alias.</p>\n         <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.cloudformation#ThirdPartyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The extension type.</p>\n         <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.cloudformation#PrivateTypeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and region.</p>\n         <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#DeactivateTypeOutput": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.cloudformation#DeleteChangeSet": {
             "type": "operation",
@@ -1909,6 +2230,64 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The output for the <a>DescribeChangeSet</a> action.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#DescribePublisher": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#DescribePublisherInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#DescribePublisherOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#CFNRegistryException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a CloudFormation extension publisher.</p>\n         <p>If you do not supply a <code>PublisherId</code>, and you have registered as an extension publisher, <code>DescribePublisher</code> returns information about your own publisher account. </p>\n         <p>For more information on registering as a publisher, see:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html\">RegisterPublisher</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html\">Publishing extensions to make them available for public use</a> in the <i>CloudFormation CLI User Guide</i>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudformation#DescribePublisherInput": {
+            "type": "structure",
+            "members": {
+                "PublisherId": {
+                    "target": "com.amazonaws.cloudformation#PublisherId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the extension publisher.</p>\n         <p>If you do not supply a <code>PublisherId</code>, and you have registered as an extension publisher, <code>DescribePublisher</code> returns information about your own publisher account.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#DescribePublisherOutput": {
+            "type": "structure",
+            "members": {
+                "PublisherId": {
+                    "target": "com.amazonaws.cloudformation#PublisherId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the extension publisher.</p>"
+                    }
+                },
+                "PublisherStatus": {
+                    "target": "com.amazonaws.cloudformation#PublisherStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the publisher is verified. Currently, all registered publishers are verified.</p>"
+                    }
+                },
+                "IdentityProvider": {
+                    "target": "com.amazonaws.cloudformation#IdentityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of account used as the identity provider when registering this publisher with CloudFormation.</p>"
+                    }
+                },
+                "PublisherProfile": {
+                    "target": "com.amazonaws.cloudformation#PublisherProfile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to the publisher's profile with the identity provider.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudformation#DescribeStackDriftDetectionStatus": {
@@ -2477,6 +2856,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered.</p>\n         <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific extension version. Otherwise, it returns information about the default extension version.</p>"
                     }
+                },
+                "PublisherId": {
+                    "target": "com.amazonaws.cloudformation#PublisherId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publisher ID of the extension publisher.</p>\n         <p>Extensions provided by Amazon are not assigned a publisher ID.</p>"
+                    }
+                },
+                "PublicVersionNumber": {
+                    "target": "com.amazonaws.cloudformation#PublicVersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of a public third-party extension.</p>"
+                    }
                 }
             }
         },
@@ -2498,25 +2889,37 @@
                 "TypeName": {
                     "target": "com.amazonaws.cloudformation#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the registered extension.</p>"
+                        "smithy.api#documentation": "<p>The name of the extension.</p>\n         <p>If the extension is a public third-party type you have activated with a type name alias, CloudFormation returns the type name alias. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">ActivateType</a>.</p>"
                     }
                 },
                 "DefaultVersionId": {
                     "target": "com.amazonaws.cloudformation#TypeVersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the default version of the extension. The default version is used when the extension version is not specified.</p>\n         <p>To set the default version of an extension, use <code>\n               <a>SetTypeDefaultVersion</a>\n            </code>. </p>"
+                        "smithy.api#documentation": "<p>The ID of the default version of the extension. The default version is used when the extension version is not specified.</p>\n         <p>This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon and published by third parties, CloudFormation returns <code>null</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p>\n         <p>To set the default version of an extension, use <code>\n               <a>SetTypeDefaultVersion</a>\n            </code>. </p>"
                     }
                 },
                 "IsDefaultVersion": {
                     "target": "com.amazonaws.cloudformation#IsDefaultVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the specified extension version is set as the default version.</p>"
+                        "smithy.api#documentation": "<p>Whether the specified extension version is set as the default version.</p>\n         <p>This applies only to private extensions you have registered in your account, and extensions published by Amazon. For public third-party extensions, whether or not they are activated in your account, CloudFormation returns <code>null</code>.</p>"
+                    }
+                },
+                "TypeTestsStatus": {
+                    "target": "com.amazonaws.cloudformation#TypeTestsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contract test status of the registered extension version. To return the extension test status of a specifc extension version, you must specify <code>VersionId</code>. </p>\n         <p>This applies only to registered private extension versions. CloudFormation does not return this information for public extensions, whether or not they are activated in your account.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PASSED</code>: The extension has passed all its contract tests.</p>\n               <p>An extension must have a test status of <code>PASSED</code> before it can be published. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html\">Publishing extensions to make them available for public use</a> in the <i>CloudFormation Command Line Interface User Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The extension has failed one or more contract tests.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: Contract tests are currently being performed on the extension.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_TESTED</code>: Contract tests have not been performed on the extension.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "TypeTestsStatusDescription": {
+                    "target": "com.amazonaws.cloudformation#TypeTestsStatusDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the test status. To return the extension test status of a specifc extension version, you must specify <code>VersionId</code>. </p>\n         <p>This applies only to registered private extension versions. CloudFormation does not return this information for public extensions, whether or not they are activated in your account.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.cloudformation#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the registered extension.</p>"
+                        "smithy.api#documentation": "<p>The description of the extension.</p>"
                     }
                 },
                 "Schema": {
@@ -2528,31 +2931,37 @@
                 "ProvisioningType": {
                     "target": "com.amazonaws.cloudformation#ProvisioningType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioning behavior of the extension. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FULLY_MUTABLE</code>: The extension includes an update handler to process updates to the extension during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMMUTABLE</code>: The extension does not include an update handler, so the extension cannot be updated and must instead be replaced during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_PROVISIONABLE</code>: The extension does not include all of the following handlers, and therefore cannot actually be provisioned.</p>\n               <ul>\n                  <li>\n                     <p>create</p>\n                  </li>\n                  <li>\n                     <p>read</p>\n                  </li>\n                  <li>\n                     <p>delete</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>For resource type extensions, the provisioning behavior of the resource type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FULLY_MUTABLE</code>: The resource type includes an update handler to process updates to the type during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMMUTABLE</code>: The resource type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_PROVISIONABLE</code>: The resource type does not include all of the following handlers, and therefore cannot actually be provisioned.</p>\n               <ul>\n                  <li>\n                     <p>create</p>\n                  </li>\n                  <li>\n                     <p>read</p>\n                  </li>\n                  <li>\n                     <p>delete</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "DeprecatedStatus": {
                     "target": "com.amazonaws.cloudformation#DeprecatedStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deprecation status of the extension version.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LIVE</code>: The extension is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPRECATED</code>: The extension has been deregistered and can no longer be used in CloudFormation operations. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The deprecation status of the extension version.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LIVE</code>: The extension is activated or registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPRECATED</code>: The extension has been deactivated or deregistered and can no longer be used in CloudFormation operations. </p>\n            </li>\n         </ul>\n         <p>For public third-party extensions, CloudFormation returns <code>null</code>.</p>"
                     }
                 },
                 "LoggingConfig": {
                     "target": "com.amazonaws.cloudformation#LoggingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains logging configuration information for an extension.</p>"
+                        "smithy.api#documentation": "<p>Contains logging configuration information for private extensions. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon and published by third parties, CloudFormation returns <code>null</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p>"
+                    }
+                },
+                "RequiredActivatedTypes": {
+                    "target": "com.amazonaws.cloudformation#RequiredActivatedTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For extensions that are modules, the public third-party extensions that must be activated in your account in order for the module itself to be activated.</p>"
                     }
                 },
                 "ExecutionRoleArn": {
                     "target": "com.amazonaws.cloudformation#RoleARN2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM execution role used to register the extension. If your resource type calls AWS APIs in any of its handlers, you must create an\n         <i>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution\n            role</a>\n            </i> that includes the necessary permissions to call those\n         AWS APIs, and provision that execution role in your account. CloudFormation then\n         assumes that execution role to provide your extension with the appropriate\n         credentials.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM execution role used to register the extension. This applies only to private extensions you have registered in your account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p>\n         <p></p>\n         <p>If the registered extension calls any AWS APIs, you must create an <i>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution\n         role</a>\n            </i> that includes the necessary permissions to call those\n         AWS APIs, and provision that execution role in your account. CloudFormation then\n         assumes that execution role to provide your extension with the appropriate\n         credentials.</p>"
                     }
                 },
                 "Visibility": {
                     "target": "com.amazonaws.cloudformation#Visibility",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scope at which the extension is visible and usable in CloudFormation operations.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRIVATE</code>: The extension is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as <code>PRIVATE</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLIC</code>: The extension is publically visible and usable within any Amazon account.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The scope at which the extension is visible and usable in CloudFormation operations.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRIVATE</code>: The extension is only visible and usable within the account in which it is registered. AWS CloudFormation marks any extensions you register as <code>PRIVATE</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLIC</code>: The extension is publically visible and usable within any Amazon account.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "SourceUrl": {
@@ -2570,13 +2979,61 @@
                 "LastUpdated": {
                     "target": "com.amazonaws.cloudformation#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the specified extension version was registered.</p>"
+                        "smithy.api#documentation": "<p>When the specified extension version was registered. This applies only to:</p>\n         <ul>\n            <li>\n               <p>Private extensions you have registered in your account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p>\n            </li>\n            <li>\n               <p>Public extensions you have activated in your account with auto-update specified. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">ActivateType</a>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "TimeCreated": {
                     "target": "com.amazonaws.cloudformation#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the specified extension version was registered.</p>"
+                        "smithy.api#documentation": "<p>When the specified private extension version was registered or activated in your account. </p>"
+                    }
+                },
+                "ConfigurationSchema": {
+                    "target": "com.amazonaws.cloudformation#ConfigurationSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON string that represent the current configuration data for the extension in this account and region.</p>\n         <p>To set the configuration data for an extension, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
+                    }
+                },
+                "PublisherId": {
+                    "target": "com.amazonaws.cloudformation#PublisherId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publisher ID of the extension publisher.</p>\n         <p>This applies only to public third-party extensions. For private registered extensions, and extensions provided by Amazon, CloudFormation returns <code>null</code>.</p>"
+                    }
+                },
+                "OriginalTypeName": {
+                    "target": "com.amazonaws.cloudformation#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For public extensions that have been activated for this account and region, the type name of the public extension.</p>\n         <p>If you specified a <code>TypeNameAlias</code> when enabling the extension in this account and region, CloudFormation treats that alias as the extension's type name within the account and region, not the type name of the public extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias\">Specifying aliases to refer to extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+                    }
+                },
+                "OriginalTypeArn": {
+                    "target": "com.amazonaws.cloudformation#TypeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For public extensions that have been activated for this account and region, the Amazon Resource Name (ARN) of the public extension.</p>"
+                    }
+                },
+                "PublicVersionNumber": {
+                    "target": "com.amazonaws.cloudformation#PublicVersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of a public third-party extension.</p>\n         <p>This applies only if you specify a public extension you have activated in your account, or specify a public extension without specifying a version. For all other extensions, CloudFormation returns <code>null</code>.</p>"
+                    }
+                },
+                "LatestPublicVersion": {
+                    "target": "com.amazonaws.cloudformation#PublicVersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest version of a public extension <i>that is available</i> for use.</p>\n         <p>This only applies if you specify a public extension, and you do not specify a version. For all other requests, CloudFormation returns <code>null</code>.</p>"
+                    }
+                },
+                "IsActivated": {
+                    "target": "com.amazonaws.cloudformation#IsActivated",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether or not the extension is activated in the account and region.</p>\n         <p>This only applies to public third-party extensions. For all other extensions, CloudFormation returns <code>null</code>.</p>"
+                    }
+                },
+                "AutoUpdate": {
+                    "target": "com.amazonaws.cloudformation#AutoUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether CloudFormation automatically updates the extension in this account and region when a new <i>minor</i> version is published by the extension publisher. Major versions released by the publisher must be manually updated. For more information, see <a href=\"AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable\">Activating public extensions for use in your account</a> in the <i>AWS CloudFormation User Guide</i>.</p>"
                     }
                 }
             }
@@ -2863,6 +3320,15 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.cloudformation#ErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.cloudformation#ErrorMessage": {
             "type": "string",
             "traits": {
@@ -3009,7 +3475,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-zA-Z_0-9+=,.@-]+"
+                "smithy.api#pattern": "^[a-zA-Z_0-9+=,.@-]+$"
             }
         },
         "com.amazonaws.cloudformation#ExecutionStatus": {
@@ -3184,7 +3650,7 @@
                 "TemplateStage": {
                     "target": "com.amazonaws.cloudformation#TemplateStage",
                     "traits": {
-                        "smithy.api#documentation": "<p>For templates that include transforms, the stage of the template that AWS\n         CloudFormation returns. To get the user-submitted template, specify <code>Original</code>.\n         To get the template after AWS CloudFormation has processed all transforms, specify\n            <code>Processed</code>. </p>\n         <p>If the template doesn't include transforms, <code>Original</code> and\n            <code>Processed</code> return the same template. By default, AWS CloudFormation\n         specifies <code>Original</code>. </p>"
+                        "smithy.api#documentation": "<p>For templates that include transforms, the stage of the template that AWS\n         CloudFormation returns. To get the user-submitted template, specify <code>Original</code>.\n         To get the template after AWS CloudFormation has processed all transforms, specify\n            <code>Processed</code>. </p>\n         <p>If the template doesn't include transforms, <code>Original</code> and\n            <code>Processed</code> return the same template. By default, AWS CloudFormation\n         specifies <code>Processed</code>.</p>"
                     }
                 }
             },
@@ -3388,6 +3854,29 @@
                     {
                         "value": "InternalFailure",
                         "name": "InternalFailure"
+                    },
+                    {
+                        "value": "InvalidTypeConfiguration",
+                        "name": "InvalidTypeConfiguration"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudformation#IdentityProvider": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWS_Marketplace",
+                        "name": "AWS_Marketplace"
+                    },
+                    {
+                        "value": "GitHub",
+                        "name": "GitHub"
+                    },
+                    {
+                        "value": "Bitbucket",
+                        "name": "Bitbucket"
                     }
                 ]
             }
@@ -3428,6 +3917,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InsufficientCapabilitiesException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The template contains resources with capabilities that weren't specified in the\n         Capabilities parameter.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3441,6 +3934,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidChangeSetStatus",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified change set can't be used to update the stack. For example, the change\n         set status might be <code>CREATE_IN_PROGRESS</code>, or the stack status might be\n            <code>UPDATE_IN_PROGRESS</code>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3454,6 +3951,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidOperationException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified operation isn't valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3467,9 +3968,25 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidStateTransition",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Error reserved for use by the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html\">CloudFormation CLI</a>. CloudFormation does not return this error to users.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudformation#IsActivated": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.cloudformation#IsDefaultConfiguration": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.cloudformation#IsDefaultVersion": {
@@ -3492,6 +4009,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "LimitExceededException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The quota for the resource has already been reached.</p>\n         <p>For information on resource and stack limitations, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html\">Limits</a> in\n         the <i>AWS CloudFormation User Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -4198,7 +4719,7 @@
                     }
                 },
                 "Arn": {
-                    "target": "com.amazonaws.cloudformation#PrivateTypeArn",
+                    "target": "com.amazonaws.cloudformation#TypeArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the extension for which you want version summary information.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
@@ -4219,6 +4740,12 @@
                     "target": "com.amazonaws.cloudformation#DeprecatedStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The deprecation status of the extension versions that you want to get summary information about.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LIVE</code>: The extension version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPRECATED</code>: The extension version has been deregistered and can no longer be used in CloudFormation operations. </p>\n            </li>\n         </ul>\n         <p>The default is <code>LIVE</code>.</p>"
+                    }
+                },
+                "PublisherId": {
+                    "target": "com.amazonaws.cloudformation#PublisherId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publisher ID of the extension publisher.</p>\n         <p>Extensions published by Amazon are not assigned a publisher ID.</p>"
                     }
                 }
             }
@@ -4259,6 +4786,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "TypeSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4269,13 +4797,13 @@
                 "Visibility": {
                     "target": "com.amazonaws.cloudformation#Visibility",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scope at which the extension is visible and usable in CloudFormation operations.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRIVATE</code>: The extension is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any extension you create as <code>PRIVATE</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLIC</code>: The extension is publically visible and usable within any Amazon account.</p>\n            </li>\n         </ul>\n         <p>The default is <code>PRIVATE</code>.</p>"
+                        "smithy.api#documentation": "<p>The scope at which the extensions are visible and usable in CloudFormation operations.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRIVATE</code>: Extensions that are visible and usable within this account and region. This includes:</p>\n               <ul>\n                  <li>\n                     <p>Private extensions you have registered in this account and region.</p>\n                  </li>\n                  <li>\n                     <p>Public extensions that you have activated in this account and region.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLIC</code>: Extensions that are publicly visible and available to be activated within any Amazon account. This includes extensions from Amazon, as well as third-party publishers.</p>\n            </li>\n         </ul>\n         <p>The default is <code>PRIVATE</code>.</p>"
                     }
                 },
                 "ProvisioningType": {
                     "target": "com.amazonaws.cloudformation#ProvisioningType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FULLY_MUTABLE</code>: The extension includes an update handler to process updates to the extension during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMMUTABLE</code>: The extension does not include an update handler, so the extension cannot be updated and must instead be replaced during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_PROVISIONABLE</code>: The extension does not include create, read, and delete handlers, and therefore cannot actually be provisioned.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>For resource types, the provisioning behavior of the resource type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FULLY_MUTABLE</code>: The resource type includes an update handler to process updates to the type during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMMUTABLE</code>: The resource type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_PROVISIONABLE</code>: The resource type does not include create, read, and delete handlers, and therefore cannot actually be provisioned.</p>\n            </li>\n         </ul>\n         <p>The default is <code>FULLY_MUTABLE</code>.</p>"
                     }
                 },
                 "DeprecatedStatus": {
@@ -4288,6 +4816,12 @@
                     "target": "com.amazonaws.cloudformation#RegistryType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of extension.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.cloudformation#TypeFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria to use in determining which extensions to return.</p>\n         <p>If you specify a filter, CloudFormation ignores any specified <code>Visibility</code> value when returning the list of types.</p>"
                     }
                 },
                 "MaxResults": {
@@ -4328,7 +4862,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "[\\.\\-_/#A-Za-z0-9]+"
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.cloudformation#LoggingConfig": {
@@ -4344,13 +4878,13 @@
                 "LogGroupName": {
                     "target": "com.amazonaws.cloudformation#LogGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.</p>",
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the extension's handlers.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains logging configuration information for a type.</p>"
+                "smithy.api#documentation": "<p>Contains logging configuration information for an extension.</p>"
             }
         },
         "com.amazonaws.cloudformation#LogicalIdHierarchy": {
@@ -4368,6 +4902,16 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#MajorVersion": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100000
                 }
             }
         },
@@ -4441,6 +4985,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NameAlreadyExistsException",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The specified name is already in use.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -4503,6 +5051,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "OperationIdAlreadyExistsException",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The specified operation ID already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -4516,6 +5068,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "OperationInProgressException",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>Another operation is currently in progress for this stack set. Only one operation can\n         be performed for a stack set at a given time.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -4529,6 +5085,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "OperationNotFoundException",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified ID refers to an operation that doesn't exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -4565,6 +5125,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConditionalCheckFailed",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Error reserved for use by the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html\">CloudFormation CLI</a>. CloudFormation does not return this error to users.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -4805,7 +5369,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+"
+                "smithy.api#pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+$"
             }
         },
         "com.amazonaws.cloudformation#Properties": {
@@ -4877,6 +5441,121 @@
                     {
                         "value": "FULLY_MUTABLE",
                         "name": "FULLY_MUTABLE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudformation#PublicVersionNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5
+                },
+                "smithy.api#pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(.*)$"
+            }
+        },
+        "com.amazonaws.cloudformation#PublishType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#PublishTypeInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#PublishTypeOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#CFNRegistryException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#TypeNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Publishes the specified extension to the CloudFormation registry as a public extension in this region. Public extensions are available for use by all CloudFormation users. For more information on publishing extensions, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html\">Publishing extensions to make them available for public use</a> in the <i>CloudFormation CLI User Guide</i>.</p>\n         <p>To publish an extension, you must be registered as a publisher with CloudFormation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html\">RegisterPublisher</a>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudformation#PublishTypeInput": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.cloudformation#ThirdPartyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the extension.</p>\n         <p>Conditional: You must specify <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.cloudformation#PrivateTypeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the extension.</p>\n         <p>Conditional: You must specify <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+                    }
+                },
+                "TypeName": {
+                    "target": "com.amazonaws.cloudformation#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the extension.</p>\n         <p>Conditional: You must specify <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+                    }
+                },
+                "PublicVersionNumber": {
+                    "target": "com.amazonaws.cloudformation#PublicVersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number to assign to this version of the extension.</p>\n         <p>Use the following format, and adhere to semantic versioning when assigning a version number to your extension: </p>\n         <p>\n            <code>MAJOR.MINOR.PATCH</code>\n         </p>\n         <p>For more information, see <a href=\"https://semver.org/\">Semantic Versioning 2.0.0</a>.</p>\n         <p>If you do not specify a version number, CloudFormation increments the version number by one minor version release.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#PublishTypeOutput": {
+            "type": "structure",
+            "members": {
+                "PublicTypeArn": {
+                    "target": "com.amazonaws.cloudformation#TypeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) assigned to the public extension upon publication.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#PublisherId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 40
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z]{12,40}$"
+            }
+        },
+        "com.amazonaws.cloudformation#PublisherName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[\\s\\S]+$"
+            }
+        },
+        "com.amazonaws.cloudformation#PublisherProfile": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^(http:|https:)+[^\\s]+[\\w]$"
+            }
+        },
+        "com.amazonaws.cloudformation#PublisherStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VERIFIED",
+                        "name": "VERIFIED"
+                    },
+                    {
+                        "value": "UNVERIFIED",
+                        "name": "UNVERIFIED"
                     }
                 ]
             }
@@ -4985,6 +5664,52 @@
                 "target": "com.amazonaws.cloudformation#Region"
             }
         },
+        "com.amazonaws.cloudformation#RegisterPublisher": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#RegisterPublisherInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#RegisterPublisherOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#CFNRegistryException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Registers your account as a publisher of public extensions in the CloudFormation registry. Public extensions are available for use by all CloudFormation users. This publisher ID applies to your account in all AWS regions.</p>\n         <p>For information on requirements for registering as a public extension publisher, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs\">Registering your account to publish CloudFormation extensions</a> in the <i>CloudFormation CLI User Guide</i>.</p> \n         <p></p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudformation#RegisterPublisherInput": {
+            "type": "structure",
+            "members": {
+                "AcceptTermsAndConditions": {
+                    "target": "com.amazonaws.cloudformation#AcceptTermsAndConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you accept the terms and conditions for publishing extensions in the CloudFormation registry. You must accept the terms and conditions in order to  register to publish public extensions to the CloudFormation registry.</p>\n         <p>The default is <code>false</code>.</p>"
+                    }
+                },
+                "ConnectionArn": {
+                    "target": "com.amazonaws.cloudformation#ConnectionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs\">Registering your account to publish CloudFormation extensions</a> in the <i>CloudFormation CLI User Guide</i>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#RegisterPublisherOutput": {
+            "type": "structure",
+            "members": {
+                "PublisherId": {
+                    "target": "com.amazonaws.cloudformation#PublisherId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID assigned this account by CloudFormation for publishing extensions.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudformation#RegisterType": {
             "type": "operation",
             "input": {
@@ -4999,7 +5724,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your AWS account, and includes:</p>\n         <ul>\n            <li>\n               <p>Validating the extension schema</p>\n            </li>\n            <li>\n               <p>Determining which handlers, if any, have been specified for the extension</p>\n            </li>\n            <li>\n               <p>Making the extension available for use in your account</p>\n            </li>\n         </ul>\n         <p>For more information on how to develop extensions and ready them for registeration, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html\">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p>\n         <p>You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use <a href=\"AWSCloudFormation/latest/APIReference/API_DeregisterType.html\">DeregisterType</a> to deregister specific extension versions if necessary.</p>\n         <p>Once you have initiated a registration request using <code>\n               <a>RegisterType</a>\n            </code>, you can use <code>\n               <a>DescribeTypeRegistration</a>\n            </code> to monitor the progress of the registration request.</p>",
+                "smithy.api#documentation": "<p>Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your AWS account, and includes:</p>\n         <ul>\n            <li>\n               <p>Validating the extension schema</p>\n            </li>\n            <li>\n               <p>Determining which handlers, if any, have been specified for the extension</p>\n            </li>\n            <li>\n               <p>Making the extension available for use in your account</p>\n            </li>\n         </ul>\n         <p>For more information on how to develop extensions and ready them for registeration, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html\">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p>\n         <p>You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use <a href=\"AWSCloudFormation/latest/APIReference/API_DeregisterType.html\">DeregisterType</a> to deregister specific extension versions if necessary.</p>\n         <p>Once you have initiated a registration request using <code>\n               <a>RegisterType</a>\n            </code>, you can use <code>\n               <a>DescribeTypeRegistration</a>\n            </code> to monitor the progress of the registration request.</p>\n         <p>Once you have registered a private extension in your account and region, use <a href=\"AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a> to specify configuration properties for the extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5015,7 +5740,7 @@
                 "TypeName": {
                     "target": "com.amazonaws.cloudformation#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the extension being registered.</p>\n      \n         <p>We recommend that extension names adhere to the following pattern: <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p>\n         <note>\n            <p>The following organization namespaces are reserved and cannot be used in your extension names:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>Alexa</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AMZN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Amazon</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Custom</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Dev</code>\n                  </p>\n               </li>\n            </ul>\n         </note>",
+                        "smithy.api#documentation": "<p>The name of the extension being registered.</p>\n         <p>We recommend that extension names adhere to the following patterns: </p>\n         <ul>\n            <li>\n               <p>For resource types, <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p>\n            </li>\n            <li>\n               <p>For modules, <i>company_or_organization</i>::<i>service</i>::<i>type</i>::MODULE.</p>\n            </li>\n         </ul>\n      \n         <note>\n            <p>The following organization namespaces are reserved and cannot be used in your extension names:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>Alexa</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AMZN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Amazon</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Custom</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Dev</code>\n                  </p>\n               </li>\n            </ul>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5035,7 +5760,7 @@
                 "ExecutionRoleArn": {
                     "target": "com.amazonaws.cloudformation#RoleARN2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension. If your extension calls AWS APIs in any of its handlers, you must create an\n         <i>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution\n            role</a>\n            </i> that includes the necessary permissions to call those\n         AWS APIs, and provision that execution role in your account. When CloudFormation needs to invoke the extension handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the extension handler, thereby supplying your extension with the appropriate credentials.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension.</p>\n         <p>For CloudFormation to assume the specified execution role, the role must contain a trust relationship with the CloudFormation service principle (<code>resources.cloudformation.amazonaws.com</code>). For more information on adding trust relationships, see <a href=\"IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy\">Modifying a role trust policy</a> in the <i>AWS Identity and Access Management User Guide</i>.</p>\n         <p>If your extension calls AWS APIs in any of its handlers, you must create an\n         <i>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution\n            role</a>\n            </i> that includes the necessary permissions to call those\n         AWS APIs, and provision that execution role in your account. When CloudFormation needs to invoke the resource type handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the resource type handler, thereby supplying your resource type with the appropriate credentials.</p>"
                     }
                 },
                 "ClientRequestToken": {
@@ -5083,7 +5808,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][-a-zA-Z0-9]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*$"
             }
         },
         "com.amazonaws.cloudformation#RegistrationTokenList": {
@@ -5133,7 +5858,45 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][-a-zA-Z0-9]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.cloudformation#RequiredActivatedType": {
+            "type": "structure",
+            "members": {
+                "TypeNameAlias": {
+                    "target": "com.amazonaws.cloudformation#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alias assigned to the public extension, in this account and region. If you specify an alias for the extension, CloudFormation treats the alias as the extension type name within this account and region. You must use the alias to refer to the extension in your templates, API calls, and CloudFormation console.</p>"
+                    }
+                },
+                "OriginalTypeName": {
+                    "target": "com.amazonaws.cloudformation#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type name of the public extension.</p>\n         <p>If you specified a <code>TypeNameAlias</code> when enabling the extension in this account and region, CloudFormation treats that alias as the extension's type name within the account and region, not the type name of the public extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias\">Specifying aliases to refer to extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+                    }
+                },
+                "PublisherId": {
+                    "target": "com.amazonaws.cloudformation#PublisherId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publisher ID of the extension publisher.</p>"
+                    }
+                },
+                "SupportedMajorVersions": {
+                    "target": "com.amazonaws.cloudformation#SupportedMajorVersions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the major versions of the extension type that the macro supports.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>For extensions that are modules, a public third-party extension that must be activated in your account in order for the module itself to be activated.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/modules.html#module-enabling\">Activating public modules for use in your account</a> in the <i>AWS CloudFormation User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#RequiredActivatedTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#RequiredActivatedType"
             }
         },
         "com.amazonaws.cloudformation#RequiresRecreation": {
@@ -5525,7 +6288,7 @@
         "com.amazonaws.cloudformation#ResourceToSkip": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-zA-Z0-9]+|[a-zA-Z][-a-zA-Z0-9]*\\.[a-zA-Z0-9]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9]+|[a-zA-Z][-a-zA-Z0-9]*\\.[a-zA-Z0-9]+$"
             }
         },
         "com.amazonaws.cloudformation#ResourceType": {
@@ -5598,7 +6361,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:.+:iam::[0-9]{12}:role/.+"
+                "smithy.api#pattern": "^arn:.+:iam::[0-9]{12}:role/.+$"
             }
         },
         "com.amazonaws.cloudformation#RollbackConfiguration": {
@@ -5655,6 +6418,16 @@
                 }
             }
         },
+        "com.amazonaws.cloudformation#S3Bucket": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[\\s\\S]+$"
+            }
+        },
         "com.amazonaws.cloudformation#S3Url": {
             "type": "string",
             "traits": {
@@ -5704,6 +6477,73 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The input for the <a>SetStackPolicy</a> action.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#SetTypeConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#SetTypeConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#SetTypeConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#CFNRegistryException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#TypeNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration data for a registered CloudFormation extension, in the given account and region.</p>\n         <p>To view the current configuration data for an extension, refer to the <code>ConfigurationSchema</code> element of <a href=\"AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>\n         <important>\n            <p>It is strongly recommended that you use dynamic references to restrict sensitive configuration definitions, such as third-party credentials. For more details on dynamic references, see <a href=\"https://docs.aws.amazon.com/\">Using dynamic references to specify template values</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n         </important>"
+            }
+        },
+        "com.amazonaws.cloudformation#SetTypeConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "TypeArn": {
+                    "target": "com.amazonaws.cloudformation#TypeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and region.</p>\n         <p>For public extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate the type</a> in this account and region. For private extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">register the type</a> in this account and region. </p>\n         <p>Do not include the extension versions suffix at the end of the ARN. You can set the configuration for an extension, but not for a specific extension version.</p>"
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.cloudformation#TypeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration data for the extension, in this account and region. </p>\n         <p>The configuration data must be formatted as JSON, and validate against the schema returned in the <code>ConfigurationSchema</code> response element of <a href=\"AWSCloudFormation/latest/APIReference/API_DescribeType.html\">API_DescribeType</a>. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration\">Defining account-level configuration data for an extension</a> in the <i>CloudFormation CLI User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigurationAlias": {
+                    "target": "com.amazonaws.cloudformation#TypeConfigurationAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alias by which to refer to this extension configuration data.</p>\n         <p>Conditional: Specifying a configuration alias is required when setting a configuration for a resource type extension.</p>"
+                    }
+                },
+                "TypeName": {
+                    "target": "com.amazonaws.cloudformation#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the extension.</p>\n         <p>Conditional: You must specify <code>ConfigurationArn</code>, or <code>Type</code> and <code>TypeName</code>.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.cloudformation#ThirdPartyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of extension.</p>\n         <p>Conditional: You must specify <code>ConfigurationArn</code>, or <code>Type</code> and <code>TypeName</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#SetTypeConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "ConfigurationArn": {
+                    "target": "com.amazonaws.cloudformation#TypeConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the configuration data, in this account and region.</p>\n         <p>Conditional: You must specify <code>ConfigurationArn</code>, or <code>Type</code> and <code>TypeName</code>.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudformation#SetTypeDefaultVersion": {
@@ -6310,6 +7150,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "StackInstanceNotFoundException",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified stack instance doesn't exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -6417,7 +7261,7 @@
                 "smithy.api#length": {
                     "min": 1
                 },
-                "smithy.api#pattern": "([a-zA-Z][-a-zA-Z0-9]*)|(arn:\\b(aws|aws-us-gov|aws-cn)\\b:[-a-zA-Z0-9:/._+]*)"
+                "smithy.api#pattern": "^([a-zA-Z][-a-zA-Z0-9]*)|(arn:\\b(aws|aws-us-gov|aws-cn)\\b:[-a-zA-Z0-9:/._+]*)$"
             }
         },
         "com.amazonaws.cloudformation#StackPolicyBody": {
@@ -7064,7 +7908,7 @@
         "com.amazonaws.cloudformation#StackSetNameOrId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-zA-Z][-a-zA-Z0-9]*(?::[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12})?"
+                "smithy.api#pattern": "^[a-zA-Z][-a-zA-Z0-9]*(?::[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12})?$"
             }
         },
         "com.amazonaws.cloudformation#StackSetNotEmptyException": {
@@ -7075,6 +7919,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "StackSetNotEmptyException",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>You can't yet delete this stack set, because it still contains one or more stack\n         instances. Delete all stack instances from the stack set before deleting the stack\n         set.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -7088,6 +7936,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "StackSetNotFoundException",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified stack set doesn't exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -7214,25 +8066,25 @@
                 "FailureToleranceCount": {
                     "target": "com.amazonaws.cloudformation#FailureToleranceCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of accounts, per Region, for which this operation can fail before AWS\n         CloudFormation stops the operation in that Region. If the operation is stopped in a Region,\n         AWS CloudFormation doesn't attempt the operation in any subsequent Regions.</p>\n         <p>Conditional: You must specify either <code>FailureToleranceCount</code> or\n            <code>FailureTolerancePercentage</code> (but not both).</p>"
+                        "smithy.api#documentation": "<p>The number of accounts, per Region, for which this operation can fail before AWS\n         CloudFormation stops the operation in that Region. If the operation is stopped in a Region,\n         AWS CloudFormation doesn't attempt the operation in any subsequent Regions.</p>\n         <p>Conditional: You must specify either <code>FailureToleranceCount</code> or\n            <code>FailureTolerancePercentage</code> (but not both).</p>\n         <p>By default, <code>0</code> is specified.</p>"
                     }
                 },
                 "FailureTolerancePercentage": {
                     "target": "com.amazonaws.cloudformation#FailureTolerancePercentage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The percentage of accounts, per Region, for which this stack operation can fail\n         before AWS CloudFormation stops the operation in that Region. If the operation is stopped\n         in a Region, AWS CloudFormation doesn't attempt the operation in any subsequent\n         Regions.</p>\n         <p>When calculating the number of accounts based on the specified percentage, AWS\n         CloudFormation rounds <i>down</i> to the next whole number.</p>\n         <p>Conditional: You must specify either <code>FailureToleranceCount</code> or\n            <code>FailureTolerancePercentage</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>The percentage of accounts, per Region, for which this stack operation can fail\n         before AWS CloudFormation stops the operation in that Region. If the operation is stopped\n         in a Region, AWS CloudFormation doesn't attempt the operation in any subsequent\n         Regions.</p>\n         <p>When calculating the number of accounts based on the specified percentage, AWS\n         CloudFormation rounds <i>down</i> to the next whole number.</p>\n         <p>Conditional: You must specify either <code>FailureToleranceCount</code> or\n            <code>FailureTolerancePercentage</code>, but not both.</p>\n         <p>By default, <code>0</code> is specified.</p>"
                     }
                 },
                 "MaxConcurrentCount": {
                     "target": "com.amazonaws.cloudformation#MaxConcurrentCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of accounts in which to perform this operation at one time. This\n         is dependent on the value of\n            <code>FailureToleranceCount</code>. <code>MaxConcurrentCount</code> is at most one more\n         than the <code>FailureToleranceCount</code>.</p>\n         <p>Note that this setting lets you specify the <i>maximum</i> for\n         operations. For large deployments, under certain circumstances the actual number of\n         accounts acted upon concurrently may be lower due to service throttling.</p>\n         <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or\n            <code>MaxConcurrentPercentage</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of accounts in which to perform this operation at one time. This\n         is dependent on the value of\n            <code>FailureToleranceCount</code>. <code>MaxConcurrentCount</code> is at most one more\n         than the <code>FailureToleranceCount</code>.</p>\n         <p>Note that this setting lets you specify the <i>maximum</i> for\n         operations. For large deployments, under certain circumstances the actual number of\n         accounts acted upon concurrently may be lower due to service throttling.</p>\n         <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or\n            <code>MaxConcurrentPercentage</code>, but not both.</p>\n         <p>By default, <code>1</code> is specified.</p>"
                     }
                 },
                 "MaxConcurrentPercentage": {
                     "target": "com.amazonaws.cloudformation#MaxConcurrentPercentage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum percentage of accounts in which to perform this operation at one\n         time.</p>\n         <p>When calculating the number of accounts based on the specified percentage, AWS\n         CloudFormation rounds down to the next whole number. This is true except in cases where\n         rounding down would result is zero. In this case, CloudFormation sets the number as one\n         instead.</p>\n         <p>Note that this setting lets you specify the <i>maximum</i> for\n         operations. For large deployments, under certain circumstances the actual number of\n         accounts acted upon concurrently may be lower due to service throttling.</p>\n         <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or\n            <code>MaxConcurrentPercentage</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>The maximum percentage of accounts in which to perform this operation at one\n         time.</p>\n         <p>When calculating the number of accounts based on the specified percentage, AWS\n         CloudFormation rounds down to the next whole number. This is true except in cases where\n         rounding down would result is zero. In this case, CloudFormation sets the number as one\n         instead.</p>\n         <p>Note that this setting lets you specify the <i>maximum</i> for\n         operations. For large deployments, under certain circumstances the actual number of\n         accounts acted upon concurrently may be lower due to service throttling.</p>\n         <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or\n            <code>MaxConcurrentPercentage</code>, but not both.</p>\n         <p>By default, <code>1</code> is specified.</p>"
                     }
                 }
             },
@@ -7676,6 +8528,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "StaleRequestException",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>Another operation has been performed on this stack set since the specified operation\n         was performed. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -7741,6 +8597,22 @@
         "com.amazonaws.cloudformation#StopStackSetOperationOutput": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.cloudformation#SupportedMajorVersion": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 65535
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#SupportedMajorVersions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#SupportedMajorVersion"
+            }
         },
         "com.amazonaws.cloudformation#Tag": {
             "type": "structure",
@@ -7867,6 +8739,98 @@
                 }
             }
         },
+        "com.amazonaws.cloudformation#TestType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#TestTypeInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#TestTypeOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#CFNRegistryException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#TypeNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.</p>\n         <ul>\n            <li>\n               <p>For resource types, this includes passing all contracts tests defined for the\n            type.</p>\n            </li>\n            <li>\n               <p>For modules, this includes determining if the module's model meets all necessary\n            requirements.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-testing\">Testing your public extension prior to publishing</a> in the <i>CloudFormation CLI User Guide</i>.</p>\n         <p>If you do not specify a version, CloudFormation uses the default version of the extension in your account and region for testing.</p>\n         <p>To perform testing, CloudFormation assumes the execution role specified when the test was registered. For more information, see <a href=\"AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p>\n         <p>Once you've initiated testing on an extension using <code>TestType</code>, you can use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a> to monitor the current test status and test status description for the extension.</p>\n         <p>An extension must have a test status of <code>PASSED</code> before it can be published. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html\">Publishing extensions to make them available for public use</a> in the <i>CloudFormation CLI User Guide</i>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudformation#TestTypeInput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.cloudformation#TypeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the extension.</p>\n         <p>Conditional: You must specify <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.cloudformation#ThirdPartyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the extension to test.</p>\n         <p>Conditional: You must specify <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+                    }
+                },
+                "TypeName": {
+                    "target": "com.amazonaws.cloudformation#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the extension to test.</p>\n         <p>Conditional: You must specify <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.cloudformation#TypeVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the extension to test.</p>\n         <p>You can specify the version id with either <code>Arn</code>, or with <code>TypeName</code> and <code>Type</code>.</p>\n         <p>If you do not specify a version, CloudFormation uses the default version of the extension in this account and region for testing.</p>"
+                    }
+                },
+                "LogDeliveryBucket": {
+                    "target": "com.amazonaws.cloudformation#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket to which CloudFormation delivers the contract test execution logs.</p>\n         <p>CloudFormation delivers the logs by the time contract testing has completed and the extension has been assigned a test type status of <code>PASSED</code> or <code>FAILED</code>.</p>\n         <p>The user calling <code>TestType</code> must be able to access items in the specified S3 bucket. Specifically, the user needs the following permissions:</p>\n         <ul>\n            <li>\n               <p>GetObject</p>\n            </li>\n            <li>\n               <p>PutObject</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html\">Actions, Resources, and Condition Keys for Amazon S3</a> in the <i>AWS Identity and Access Management User Guide</i>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#TestTypeOutput": {
+            "type": "structure",
+            "members": {
+                "TypeVersionArn": {
+                    "target": "com.amazonaws.cloudformation#TypeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the extension.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#ThirdPartyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RESOURCE",
+                        "name": "RESOURCE"
+                    },
+                    {
+                        "value": "MODULE",
+                        "name": "MODULE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudformation#ThirdPartyTypeArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}::type/.+/[0-9a-zA-Z]{12,40}/.+$"
+            }
+        },
         "com.amazonaws.cloudformation#TimeoutMinutes": {
             "type": "integer",
             "traits": {
@@ -7887,6 +8851,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TokenAlreadyExistsException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A client request token already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7919,7 +8887,185 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+"
+                "smithy.api#pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+$"
+            }
+        },
+        "com.amazonaws.cloudformation#TypeConfiguration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 204800
+                },
+                "smithy.api#pattern": "^[\\s\\S]+$"
+            }
+        },
+        "com.amazonaws.cloudformation#TypeConfigurationAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]{1,256}$"
+            }
+        },
+        "com.amazonaws.cloudformation#TypeConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type-configuration/.+$"
+            }
+        },
+        "com.amazonaws.cloudformation#TypeConfigurationDetails": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.cloudformation#TypeConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the configuration data, in this account and region.</p>"
+                    }
+                },
+                "Alias": {
+                    "target": "com.amazonaws.cloudformation#TypeConfigurationAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias specified for this configuration, if one was specified when the configuration was set.</p>"
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.cloudformation#TypeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON string specifying the configuration data for the extension, in this account and region. </p>\n         <p>If a configuration has not been set for a specified extension, CloudFormation returns <code>{}</code>.</p>"
+                    }
+                },
+                "LastUpdated": {
+                    "target": "com.amazonaws.cloudformation#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the configuration data was last updated for this extension.</p>\n         <p>If a configuration has not been set for a specified extension, CloudFormation returns <code>null</code>.</p>"
+                    }
+                },
+                "TypeArn": {
+                    "target": "com.amazonaws.cloudformation#TypeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and region.</p>\n         <p>For public extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate the type</a> in this account and region. For private extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">register the type</a> in this account and region. </p>"
+                    }
+                },
+                "TypeName": {
+                    "target": "com.amazonaws.cloudformation#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the extension.</p>"
+                    }
+                },
+                "IsDefaultConfiguration": {
+                    "target": "com.amazonaws.cloudformation#IsDefaultConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether or not this configuration data is the default configuration for the extension.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed information concerning the specification of a CloudFormation extension in a given account and region.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#TypeConfigurationDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#TypeConfigurationDetails"
+            }
+        },
+        "com.amazonaws.cloudformation#TypeConfigurationIdentifier": {
+            "type": "structure",
+            "members": {
+                "TypeArn": {
+                    "target": "com.amazonaws.cloudformation#TypeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and region.</p>\n         <p>For public extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate the type</a> in this account and region. For private extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">register the type</a> in this account and region. </p>"
+                    }
+                },
+                "TypeConfigurationAlias": {
+                    "target": "com.amazonaws.cloudformation#TypeConfigurationAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias specified for this configuration, if one was specified when the configuration was set.</p>"
+                    }
+                },
+                "TypeConfigurationArn": {
+                    "target": "com.amazonaws.cloudformation#TypeConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the configuration, in this account and region.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.cloudformation#ThirdPartyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of extension.</p>"
+                    }
+                },
+                "TypeName": {
+                    "target": "com.amazonaws.cloudformation#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the extension type to which this configuration applies.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifying information for the configuration of a CloudFormation extension.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#TypeConfigurationIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#TypeConfigurationIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#TypeConfigurationNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudformation#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TypeConfigurationNotFoundException",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The specified extension configuration cannot be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.cloudformation#TypeFilters": {
+            "type": "structure",
+            "members": {
+                "Category": {
+                    "target": "com.amazonaws.cloudformation#Category",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of extensions to return.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REGISTERED</code>: Private extensions that have been registered for this account and region.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVATED</code>: Public extensions that have been activated for this account and region.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THIRD-PARTY</code>: Extensions available for use from publishers other than Amazon. This includes:</p>\n               <ul>\n                  <li>\n                     <p>Private extensions registered in the account.</p>\n                  </li>\n                  <li>\n                     <p>Public extensions from publishers other than Amazon, whether activated or not.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>AWS-TYPES</code>: Extensions available for use from Amazon.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "PublisherId": {
+                    "target": "com.amazonaws.cloudformation#PublisherId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the publisher of the extension. </p>\n         <p>Extensions published by Amazon are not assigned a publisher ID. Use the <code>AWS-TYPES</code> category to specify a list of types published by Amazon.</p>"
+                    }
+                },
+                "TypeNamePrefix": {
+                    "target": "com.amazonaws.cloudformation#TypeNamePrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A prefix to use as a filter for results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filter criteria to use in determining which extensions to return.</p>"
             }
         },
         "com.amazonaws.cloudformation#TypeHierarchy": {
@@ -7932,7 +9078,17 @@
                     "min": 10,
                     "max": 204
                 },
-                "smithy.api#pattern": "[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}"
+                "smithy.api#pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}$"
+            }
+        },
+        "com.amazonaws.cloudformation#TypeNamePrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 204
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9]{2,64}::){0,2}([A-Za-z0-9]{2,64}:?){0,1}$"
             }
         },
         "com.amazonaws.cloudformation#TypeNotFoundException": {
@@ -7943,7 +9099,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified type does not exist in the CloudFormation registry.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "TypeNotFoundException",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The specified extension does not exist in the CloudFormation registry.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -7969,42 +9129,117 @@
                 "Type": {
                     "target": "com.amazonaws.cloudformation#RegistryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kind of type.</p>"
+                        "smithy.api#documentation": "<p>The kind of extension.</p>"
                     }
                 },
                 "TypeName": {
                     "target": "com.amazonaws.cloudformation#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the type.</p>"
+                        "smithy.api#documentation": "<p>The name of the extension.</p>\n         <p>If you specified a <code>TypeNameAlias</code> when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate this extension</a> in your account and region, CloudFormation considers that alias as the type name.</p>"
                     }
                 },
                 "DefaultVersionId": {
                     "target": "com.amazonaws.cloudformation#TypeVersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the default version of the type. The default version is used when the type version is not specified.</p>\n         <p>To set the default version of a type, use <code>\n               <a>SetTypeDefaultVersion</a>\n            </code>. </p>"
+                        "smithy.api#documentation": "<p>The ID of the default version of the extension. The default version is used when the extension version is not specified.</p>\n         <p>This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon and published by third parties, CloudFormation returns <code>null</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p>\n         <p>To set the default version of an extension, use <code>\n               <a>SetTypeDefaultVersion</a>\n            </code>. </p>"
                     }
                 },
                 "TypeArn": {
                     "target": "com.amazonaws.cloudformation#TypeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the type.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the extension.</p>"
                     }
                 },
                 "LastUpdated": {
                     "target": "com.amazonaws.cloudformation#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the current default version of the type was registered.</p>"
+                        "smithy.api#documentation": "<p>When the specified extension version was registered. This applies only to:</p>\n         <ul>\n            <li>\n               <p>Private extensions you have registered in your account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p>\n            </li>\n            <li>\n               <p>Public extensions you have activated in your account with auto-update specified. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">ActivateType</a>.</p>\n            </li>\n         </ul>\n         <p>For all other extension types, CloudFormation returns <code>null</code>.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.cloudformation#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the type.</p>"
+                        "smithy.api#documentation": "<p>The description of the extension.</p>"
+                    }
+                },
+                "PublisherId": {
+                    "target": "com.amazonaws.cloudformation#PublisherId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the extension publisher, if the extension is published by a third party. Extensions published by Amazon do not return a publisher ID.</p>"
+                    }
+                },
+                "OriginalTypeName": {
+                    "target": "com.amazonaws.cloudformation#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For public extensions that have been activated for this account and region, the type name of the public extension.</p>\n         <p>If you specified a <code>TypeNameAlias</code> when enabling the extension in this account and region, CloudFormation treats that alias as the extension's type name within the account and region, not the type name of the public extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias\">Specifying aliases to refer to extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+                    }
+                },
+                "PublicVersionNumber": {
+                    "target": "com.amazonaws.cloudformation#PublicVersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For public extensions that have been activated for this account and region, the version of the public extension to be used for CloudFormation operations in this account and region.</p>\n         <p>How you specified <code>AutoUpdate</code> when enabling the extension affects whether CloudFormation automatically updates the extention in this account and region when a new version is released. For more information, see  <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto\">Setting CloudFormation to automatically use new versions of extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+                    }
+                },
+                "LatestPublicVersion": {
+                    "target": "com.amazonaws.cloudformation#PublicVersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For public extensions that have been activated for this account and region, the latest version of the public extension <i>that is available</i>. For any extensions other than activated third-arty extensions, CloudFormation returns <code>null</code>.</p>\n         <p>How you specified <code>AutoUpdate</code> when enabling the extension affects whether CloudFormation automatically updates the extention in this account and region when a new version is released. For more information, see  <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto\">Setting CloudFormation to automatically use new versions of extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+                    }
+                },
+                "PublisherIdentity": {
+                    "target": "com.amazonaws.cloudformation#IdentityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service used to verify the publisher identity.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html\">Registering your account to publish CloudFormation extensions</a> in the <i> CFN-CLI User Guide for Extension Development</i>.</p>"
+                    }
+                },
+                "PublisherName": {
+                    "target": "com.amazonaws.cloudformation#PublisherName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publisher name, as defined in the public profile for that publisher in the service used to verify the publisher identity.</p>"
+                    }
+                },
+                "IsActivated": {
+                    "target": "com.amazonaws.cloudformation#IsActivated",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether or not the extension is activated for this account and region. </p>\n         <p>This applies only to third-party public extensions. Extensions published by Amazon are activated by default.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains summary information about the specified CloudFormation type.</p>"
+                "smithy.api#documentation": "<p>Contains summary information about the specified CloudFormation extension.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#TypeTestsStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PASSED",
+                        "name": "PASSED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "NOT_TESTED",
+                        "name": "NOT_TESTED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudformation#TypeTestsStatusDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
         "com.amazonaws.cloudformation#TypeVersionId": {
@@ -8014,7 +9249,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[A-Za-z0-9-]+"
+                "smithy.api#pattern": "^[A-Za-z0-9-]+$"
             }
         },
         "com.amazonaws.cloudformation#TypeVersionSummaries": {
@@ -8029,31 +9264,31 @@
                 "Type": {
                     "target": "com.amazonaws.cloudformation#RegistryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kind of type.</p>"
+                        "smithy.api#documentation": "<p>The kind of extension.</p>"
                     }
                 },
                 "TypeName": {
                     "target": "com.amazonaws.cloudformation#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the type.</p>"
+                        "smithy.api#documentation": "<p>The name of the extension.</p>"
                     }
                 },
                 "VersionId": {
                     "target": "com.amazonaws.cloudformation#TypeVersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p>"
+                        "smithy.api#documentation": "<p>The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered.</p>"
                     }
                 },
                 "IsDefaultVersion": {
                     "target": "com.amazonaws.cloudformation#IsDefaultVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the specified type version is set as the default version.</p>"
+                        "smithy.api#documentation": "<p>Whether the specified extension version is set as the default version.</p>\n         <p>This applies only to private extensions you have registered in your account, and extensions published by Amazon. For public third-party extensions, whether or not they are activated in your account, CloudFormation returns <code>null</code>.</p>"
                     }
                 },
                 "Arn": {
                     "target": "com.amazonaws.cloudformation#TypeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the type version.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the extension version.</p>"
                     }
                 },
                 "TimeCreated": {
@@ -8065,12 +9300,24 @@
                 "Description": {
                     "target": "com.amazonaws.cloudformation#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the type version.</p>"
+                        "smithy.api#documentation": "<p>The description of the extension version.</p>"
+                    }
+                },
+                "PublicVersionNumber": {
+                    "target": "com.amazonaws.cloudformation#PublicVersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For public extensions that have been activated for this account and region, the version of the public extension to be used for CloudFormation operations in this account and region. For any extensions other than activated third-arty extensions, CloudFormation returns <code>null</code>.</p>\n         <p>How you specified <code>AutoUpdate</code> when enabling the extension affects whether CloudFormation automatically updates the extention in this account and region when a new version is released. For more information, see  <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto\">Setting CloudFormation to automatically use new versions of extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains summary information about a specific version of a CloudFormation type.</p>"
+                "smithy.api#documentation": "<p>Contains summary information about a specific version of a CloudFormation extension.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#UnprocessedTypeConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#TypeConfigurationIdentifier"
             }
         },
         "com.amazonaws.cloudformation#UpdateStack": {
@@ -8601,6 +9848,21 @@
         },
         "com.amazonaws.cloudformation#Version": {
             "type": "string"
+        },
+        "com.amazonaws.cloudformation#VersionBump": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MAJOR",
+                        "name": "MAJOR"
+                    },
+                    {
+                        "value": "MINOR",
+                        "name": "MINOR"
+                    }
+                ]
+            }
         },
         "com.amazonaws.cloudformation#Visibility": {
             "type": "string",

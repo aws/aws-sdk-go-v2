@@ -188,7 +188,7 @@
                 "ClusterDiscoveryEndpoint": {
                     "target": "com.amazonaws.dax#Endpoint",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration endpoint for this DAX cluster, consisting of a DNS name and a\n            port number. Client applications can specify this endpoint, rather than an individual\n            node endpoint, and allow the DAX client software to intelligently route requests and\n            responses to nodes in the DAX cluster.</p>"
+                        "smithy.api#documentation": "<p>The endpoint for this DAX cluster, consisting of a DNS name, a port number,\n             and a URL. Applications should use the URL to configure the DAX client to find\n             their cluster.</p>"
                     }
                 },
                 "NodeIdsToRemove": {
@@ -244,6 +244,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the server-side encryption status on the specified DAX cluster.</p>"
                     }
+                },
+                "ClusterEndpointEncryptionType": {
+                    "target": "com.amazonaws.dax#ClusterEndpointEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption supported by the cluster's endpoint. Values are:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>NONE</code> for no encryption</p>\n                <p>\n                  <code>TLS</code> for Transport Layer Security</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -261,6 +267,21 @@
                 "smithy.api#documentation": "<p>You already have a DAX cluster with the given identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.dax#ClusterEndpointEncryptionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "TLS",
+                        "name": "TLS"
+                    }
+                ]
             }
         },
         "com.amazonaws.dax#ClusterList": {
@@ -345,6 +366,9 @@
                 },
                 {
                     "target": "com.amazonaws.dax#ServiceLinkedRoleNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.dax#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.dax#SubnetGroupNotFoundFault"
@@ -440,6 +464,12 @@
                     "target": "com.amazonaws.dax#SSESpecification",
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the settings used to enable server-side encryption on the cluster.</p>"
+                    }
+                },
+                "ClusterEndpointEncryptionType": {
+                    "target": "com.amazonaws.dax#ClusterEndpointEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption the cluster's endpoint should support. Values are:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>NONE</code> for no encryption</p>\n            </li>\n            <li>\n                <p>\n                  <code>TLS</code> for Transport Layer Security</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -1228,10 +1258,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The port number that applications should use to connect to the endpoint.</p>"
                     }
+                },
+                "URL": {
+                    "target": "com.amazonaws.dax#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL that applications should use to connect to the endpoint. The default\n            ports are 8111 for the \"dax\" protocol and 9111 for the \"daxs\" protocol.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the information required for client programs to connect to the\n            configuration endpoint for a DAX cluster, or to an individual node within the\n            cluster.</p>"
+                "smithy.api#documentation": "<p>Represents the information required for client programs to connect to the\n            endpoint for a DAX cluster.</p>"
             }
         },
         "com.amazonaws.dax#Event": {
@@ -1690,7 +1726,7 @@
                 "TopicStatus": {
                     "target": "com.amazonaws.dax#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the topic.</p>"
+                        "smithy.api#documentation": "<p>The current state of the topic. A value of “active” means that notifications will\n        be sent to the topic. A value of “inactive” means that notifications will not be sent to the\n        topic.</p>"
                     }
                 }
             },
@@ -2073,6 +2109,15 @@
                 "smithy.api#documentation": "<p>The specified service linked role (SLR) was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.dax#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>You have reached the maximum number of x509 certificates that can be created for\n            encrypted clusters in a 30 day period. Contact AWS customer support to discuss options\n            for continuing to create encrypted clusters.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
             }
         },
         "com.amazonaws.dax#SourceType": {
@@ -2502,7 +2547,7 @@
                 "NotificationTopicStatus": {
                     "target": "com.amazonaws.dax#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the topic.</p>"
+                        "smithy.api#documentation": "<p>The current state of the topic. A value of “active” means that notifications will\n        be sent to the topic. A value of “inactive” means that notifications will not be sent to the\n        topic.</p>"
                     }
                 },
                 "ParameterGroupName": {
@@ -2572,7 +2617,7 @@
                 "ParameterNameValues": {
                     "target": "com.amazonaws.dax#ParameterNameValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of name-value pairs for the parameters in the group. Each element in the\n            array represents a single parameter.</p>",
+                        "smithy.api#documentation": "<p>An array of name-value pairs for the parameters in the group. Each element in the\n            array represents a single parameter.</p>\n            <note>\n            <p>\n               <code>record-ttl-millis</code> and <code>query-ttl-millis</code> are the only supported parameter names. For more details, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl\">Configuring TTL Settings</a>.</p>\n        </note>",
                         "smithy.api#required": {}
                     }
                 }

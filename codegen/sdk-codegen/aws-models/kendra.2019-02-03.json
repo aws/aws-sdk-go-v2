@@ -352,6 +352,61 @@
                 "target": "com.amazonaws.kendra#AttributeFilter"
             }
         },
+        "com.amazonaws.kendra#AuthenticationConfiguration": {
+            "type": "structure",
+            "members": {
+                "BasicAuthentication": {
+                    "target": "com.amazonaws.kendra#BasicAuthenticationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of configuration information that's required to connect to and \n            crawl a website host using basic authentication credentials.</p>\n        <p>The list includes the name and port number of the website host.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to websites that require\n            user authentication.</p>"
+            }
+        },
+        "com.amazonaws.kendra#BasicAuthenticationConfiguration": {
+            "type": "structure",
+            "members": {
+                "Host": {
+                    "target": "com.amazonaws.kendra#Host",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the website host you want to connect to using \n            authentication credentials.</p>\n        <p>For example, the host name of https://a.example.com/page1.html is \n            \"a.example.com\".</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.kendra#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number of the website host you want to connect to using \n            authentication credentials.</p>\n        <p>For example, the port for https://a.example.com/page1.html is 443, \n            the standard port for HTTPS.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Credentials": {
+                    "target": "com.amazonaws.kendra#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Your secret ARN, which you can create in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a>\n         </p>\n        <p>You use a secret if basic authentication credentials are required to connect \n            to a website. The secret stores your credentials of user name and password.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to websites that require\n            basic user authentication.</p>"
+            }
+        },
+        "com.amazonaws.kendra#BasicAuthenticationConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#BasicAuthenticationConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.kendra#BatchDeleteDocument": {
             "type": "operation",
             "input": {
@@ -664,20 +719,20 @@
                 "StorageCapacityUnits": {
                     "target": "com.amazonaws.kendra#StorageCapacityUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of extra storage capacity for an index. Each capacity\n            unit provides 150 Gb of storage space or 500,000 documents,\n            whichever is reached first.</p>",
+                        "smithy.api#documentation": "<p>The amount of extra storage capacity for an index. A single capacity\n            unit for an index provides 150 GB of storage space or \n            500,000 documents, whichever is reached first.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "QueryCapacityUnits": {
                     "target": "com.amazonaws.kendra#QueryCapacityUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of extra query capacity for an index. Each capacity\n            unit provides 0.5 queries per second and 40,000 queries per\n            day.</p>",
+                        "smithy.api#documentation": "<p>The amount of extra query capacity for an index and \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a> \n            capacity.</p>\n        <p>A single extra capacity unit for an index provides 0.5 queries per second or \n            approximately 40,000 queries per day.</p>\n        <p>\n            <code>GetQuerySuggestions</code> capacity is 5 times the provisioned query \n            capacity for an index. For example, the base capacity for an index is 0.5 \n            queries per second, so GetQuerySuggestions capacity is 2.5 calls per second. \n            If adding another 0.5 queries per second to total 1 queries per second for an \n            index, the <code>GetQuerySuggestions</code> capacity is 5 calls per second.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies capacity units configured for your index. You can add\n            and remove capacity units to tune an index to your\n            requirements.</p>"
+                "smithy.api#documentation": "<p>Specifies capacity units configured for your enterprise edition index. \n            You can add and remove capacity units to tune an index to your\n            requirements.</p>"
             }
         },
         "com.amazonaws.kendra#ChangeDetectingColumns": {
@@ -1431,6 +1486,16 @@
                 ]
             }
         },
+        "com.amazonaws.kendra#CrawlDepth": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.kendra#CreateDataSource": {
             "type": "operation",
             "input": {
@@ -2002,6 +2067,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides configuration for data sources that connect to Google\n            Drive. </p>"
                     }
+                },
+                "WebCrawlerConfiguration": {
+                    "target": "com.amazonaws.kendra#WebCrawlerConfiguration"
                 }
             },
             "traits": {
@@ -2391,6 +2459,10 @@
                     {
                         "value": "GOOGLEDRIVE",
                         "name": "GOOGLEDRIVE"
+                    },
+                    {
+                        "value": "WEBCRAWLER",
+                        "name": "WEBCRAWLER"
                     }
                 ]
             }
@@ -4348,6 +4420,16 @@
                 ]
             }
         },
+        "com.amazonaws.kendra#Host": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^([^\\s]*)$"
+            }
+        },
         "com.amazonaws.kendra#Importance": {
             "type": "integer",
             "traits": {
@@ -5165,6 +5247,26 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.kendra#MaxContentSizePerPageInMegaBytes": {
+            "type": "float",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0.000001,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.kendra#MaxLinksPerPage": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.kendra#MaxResultsIntegerForListDataSourceSyncJobsRequest": {
             "type": "integer",
             "traits": {
@@ -5222,6 +5324,16 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.kendra#MaxUrlsPerMinuteCrawlRate": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 300
                 }
             }
         },
@@ -5401,6 +5513,16 @@
                 ]
             }
         },
+        "com.amazonaws.kendra#Port": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 65535
+                }
+            }
+        },
         "com.amazonaws.kendra#Principal": {
             "type": "structure",
             "members": {
@@ -5459,6 +5581,34 @@
                         "name": "GROUP"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.kendra#ProxyConfiguration": {
+            "type": "structure",
+            "members": {
+                "Host": {
+                    "target": "com.amazonaws.kendra#Host",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the website host you want to connect to \n            via a web proxy server.</p>\n        <p>For example, the host name of https://a.example.com/page1.html \n            is \"a.example.com\".</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.kendra#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number of the website host you want to connect \n            to via a web proxy server. </p>\n        <p>For example, the port for https://a.example.com/page1.html\n            is 443, the standard port for HTTPS.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Credentials": {
+                    "target": "com.amazonaws.kendra#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Your secret ARN, which you can create in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a>\n         </p>\n        <p>The credentials are optional. You use a secret if web proxy credentials \n            are required to connect to a website host. Amazon Kendra currently support basic \n            authentication to connect to a web proxy server. The secret stores your \n            credentials.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information for a web proxy to connect to \n            website hosts.</p>"
             }
         },
         "com.amazonaws.kendra#Query": {
@@ -6617,6 +6767,49 @@
                 }
             }
         },
+        "com.amazonaws.kendra#SeedUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(https?):\\/\\/([^\\s]*)$"
+            }
+        },
+        "com.amazonaws.kendra#SeedUrlConfiguration": {
+            "type": "structure",
+            "members": {
+                "SeedUrls": {
+                    "target": "com.amazonaws.kendra#SeedUrlList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of seed or starting point URLs of the \n            websites you want to crawl.</p>\n        <p>The list can include a maximum of 100 seed URLs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WebCrawlerMode": {
+                    "target": "com.amazonaws.kendra#WebCrawlerMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can choose one of the following modes:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>HOST_ONLY</code> – crawl only the website host names. \n                    For example, if the seed URL is \"abc.example.com\", \n                    then only URLs with host name \"abc.example.com\" are crawled.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SUBDOMAINS</code> – crawl the website host names with \n                    subdomains. For example, if the seed URL is  \"abc.example.com\", then \n                    \"a.abc.example.com\" and \"b.abc.example.com\" are also crawled.</p>\n            </li>\n            <li>\n                <p>\n                  <code>EVERYTHING</code> – crawl the website host names with \n                    subdomains and other domains that the webpages link to.</p>\n            </li>\n         </ul>\n        <p>The default mode is set to <code>HOST_ONLY</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information of the seed or starting point URLs to crawl.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use the Amazon Kendra web \n            crawler to index your own webpages, or webpages that you have authorization \n            to index.</i>\n         </p>"
+            }
+        },
+        "com.amazonaws.kendra#SeedUrlList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#SeedUrl"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.kendra#ServerSideEncryptionConfiguration": {
             "type": "structure",
             "members": {
@@ -6857,7 +7050,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in AWS\n            Secrets Manager. The credentials should be a user/password pair. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a\n                Microsoft SharePoint Data Source</a>. For more information\n            about AWS Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is AWS\n                Secrets Manager </a> in the <i>AWS Secrets\n                Manager</i> user guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in AWS\n            Secrets Manager. The credentials should be a user/password pair. \n            If you use SharePoint Sever, you also need to provide the sever \n            domain name as part of the credentials. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a\n                Microsoft SharePoint Data Source</a>. For more information\n            about AWS Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is AWS\n                Secrets Manager </a> in the <i>AWS Secrets\n                Manager</i> user guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6905,6 +7098,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A Boolean value that specifies whether local\n         groups are disabled (<code>True</code>) or enabled (<code>False</code>).\n      </p>"
                     }
+                },
+                "SslCertificateS3Path": {
+                    "target": "com.amazonaws.kendra#S3Path"
                 }
             },
             "traits": {
@@ -6928,6 +7124,14 @@
             "traits": {
                 "smithy.api#enum": [
                     {
+                        "value": "SHAREPOINT_2013",
+                        "name": "SHAREPOINT_2013"
+                    },
+                    {
+                        "value": "SHAREPOINT_2016",
+                        "name": "SHAREPOINT_2016"
+                    },
+                    {
                         "value": "SHAREPOINT_ONLINE",
                         "name": "SHAREPOINT_ONLINE"
                     }
@@ -6942,6 +7146,43 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendra#SiteMap": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(https?):\\/\\/([^\\s]*)$"
+            }
+        },
+        "com.amazonaws.kendra#SiteMapsConfiguration": {
+            "type": "structure",
+            "members": {
+                "SiteMaps": {
+                    "target": "com.amazonaws.kendra#SiteMapsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of sitemap URLs of the websites \n            you want to crawl.</p>\n        <p>The list can include a maximum of three sitemap URLs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information of the sitemap URLs to crawl.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use the Amazon Kendra web \n            crawler to index your own webpages, or webpages that you have authorization \n            to index.</i>\n         </p>"
+            }
+        },
+        "com.amazonaws.kendra#SiteMapsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#SiteMap"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
             }
         },
         "com.amazonaws.kendra#SortOrder": {
@@ -8086,6 +8327,26 @@
                 "smithy.api#pattern": "^(https?|ftp|file):\\/\\/([^\\s]*)$"
             }
         },
+        "com.amazonaws.kendra#Urls": {
+            "type": "structure",
+            "members": {
+                "SeedUrlConfiguration": {
+                    "target": "com.amazonaws.kendra#SeedUrlConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the configuration of the seed or starting point URLs of the websites \n            you want to crawl.</p>\n        <p>You can choose to crawl only the website host names, or the website host names \n            with subdomains, or the website host names with subdomains and other domains \n            that the webpages link to.</p>\n        <p>You can list up to 100 seed URLs.</p>"
+                    }
+                },
+                "SiteMapsConfiguration": {
+                    "target": "com.amazonaws.kendra#SiteMapsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the configuration of the sitemap URLs of the websites you want to crawl.</p>\n        <p>Only URLs belonging to the same website host names are crawled. You can list up to \n            three sitemap URLs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information of the URLs to crawl.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use the Amazon Kendra web \n            crawler to index your own webpages, or webpages that you have authorization to \n            index.</i>\n         </p>"
+            }
+        },
         "com.amazonaws.kendra#UserAccount": {
             "type": "string",
             "traits": {
@@ -8216,6 +8477,88 @@
                     "max": 200
                 },
                 "smithy.api#pattern": "^[-0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.kendra#WebCrawlerConfiguration": {
+            "type": "structure",
+            "members": {
+                "Urls": {
+                    "target": "com.amazonaws.kendra#Urls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the seed or starting point URLs of the \n            websites or the sitemap URLs of the websites you want to crawl.</p>\n        <p>You can include website subdomains. You can list up to 100 seed \n            URLs and up to three sitemap URLs.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use the Amazon Kendra \n            web crawler to index your own webpages, or webpages that you have \n            authorization to index.</i>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CrawlDepth": {
+                    "target": "com.amazonaws.kendra#CrawlDepth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of levels in a website that you want to crawl.</p>\n        <p>The first level begins from the website seed or starting point URL. \n            For example, if a website has 3 levels – index level (i.e. seed in this \n            example), sections level, and subsections level – and you are only \n            interested in crawling information up to the sections level (i.e. \n            levels 0-1), you can set your depth to 1.</p>\n        <p>The default crawl depth is set to 2.</p>"
+                    }
+                },
+                "MaxLinksPerPage": {
+                    "target": "com.amazonaws.kendra#MaxLinksPerPage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of URLs on a webpage to include when crawling a website. \n            This number is per webpage.</p>\n            <p>As a website’s webpages are crawled, any URLs the webpages link to are\n                also crawled. URLs on a webpage are crawled in order of appearance.</p>\n        <p>The default maximum links per page is 100.</p>"
+                    }
+                },
+                "MaxContentSizePerPageInMegaBytes": {
+                    "target": "com.amazonaws.kendra#MaxContentSizePerPageInMegaBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size (in MB) of a webpage or attachment to crawl.</p>\n        <p>Files larger than this size (in MB) are skipped/not crawled.</p>\n        <p>The default maximum size of a webpage or attachment is set to 50 MB.</p>"
+                    }
+                },
+                "MaxUrlsPerMinuteCrawlRate": {
+                    "target": "com.amazonaws.kendra#MaxUrlsPerMinuteCrawlRate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of URLs crawled per website host per minute.</p>\n        <p>A minimum of one URL is required.</p>\n        <p>The default maximum number of URLs crawled per website host per minute is 300.</p>"
+                    }
+                },
+                "UrlInclusionPatterns": {
+                    "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regular expression pattern to include certain URLs to crawl.</p>\n        <p>If there is a regular expression pattern to exclude certain URLs that \n            conflicts with the include pattern, the exclude pattern takes precedence.</p>"
+                    }
+                },
+                "UrlExclusionPatterns": {
+                    "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regular expression pattern to exclude certain URLs to crawl.</p>\n        <p>If there is a regular expression pattern to include certain URLs that \n            conflicts with the exclude pattern, the exclude pattern takes precedence.</p>"
+                    }
+                },
+                "ProxyConfiguration": {
+                    "target": "com.amazonaws.kendra#ProxyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides configuration information required to connect to your internal \n            websites via a web proxy.</p>\n        <p>You must provide the website host name and port number. For example, the \n            host name of https://a.example.com/page1.html is \"a.example.com\" and the \n            port is 443, the standard port for HTTPS.</p>\n        <p>Web proxy credentials are optional and you can use them to connect to a \n            web proxy server that requires basic authentication. To store web proxy \n            credentials, you use a secret in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a>.</p>"
+                    }
+                },
+                "AuthenticationConfiguration": {
+                    "target": "com.amazonaws.kendra#AuthenticationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides configuration information required to connect to websites using \n            authentication.</p>\n        <p>You can connect to websites using basic authentication of user name and password.</p>\n        <p>You must provide the website host name and port number. For example, the host name \n            of https://a.example.com/page1.html is \"a.example.com\" and the port is 443, the \n            standard port for HTTPS. You use a secret in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a> to store \n            your authentication credentials.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information required for Amazon Kendra \n            web crawler.</p>"
+            }
+        },
+        "com.amazonaws.kendra#WebCrawlerMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HOST_ONLY",
+                        "name": "HOST_ONLY"
+                    },
+                    {
+                        "value": "SUBDOMAINS",
+                        "name": "SUBDOMAINS"
+                    },
+                    {
+                        "value": "EVERYTHING",
+                        "name": "EVERYTHING"
+                    }
+                ]
             }
         }
     }

@@ -45,6 +45,231 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.greengrassv2#AssociateClientDeviceWithCoreDeviceEntry": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.greengrassv2#IoTThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AWS IoT thing that represents the client device to associate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a request to associate a client device with a core device. The <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html\">BatchAssociateClientDeviceWithCoreDevice</a> operation consumes a list of these\n      requests.</p>"
+            }
+        },
+        "com.amazonaws.greengrassv2#AssociateClientDeviceWithCoreDeviceEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.greengrassv2#AssociateClientDeviceWithCoreDeviceEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#AssociateClientDeviceWithCoreDeviceErrorEntry": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.greengrassv2#IoTThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AWS IoT thing whose associate request failed.</p>"
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.greengrassv2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the request.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.greengrassv2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that provides additional information about the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains an error that occurs from a request to associate a client device with a core\n      device. The <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html\">BatchAssociateClientDeviceWithCoreDevice</a> operation returns a list of these\n      errors.</p>"
+            }
+        },
+        "com.amazonaws.greengrassv2#AssociateClientDeviceWithCoreDeviceErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.greengrassv2#AssociateClientDeviceWithCoreDeviceErrorEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#AssociatedClientDevice": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.greengrassv2#IoTThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AWS IoT thing that represents the associated client device.</p>"
+                    }
+                },
+                "associationTimestamp": {
+                    "target": "com.amazonaws.greengrassv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the client device was associated, expressed in ISO 8601 format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a client device that is associated to a core device for cloud\n      discovery.</p>"
+            }
+        },
+        "com.amazonaws.greengrassv2#AssociatedClientDeviceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.greengrassv2#AssociatedClientDevice"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#BatchAssociateClientDeviceWithCoreDevice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.greengrassv2#BatchAssociateClientDeviceWithCoreDeviceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.greengrassv2#BatchAssociateClientDeviceWithCoreDeviceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.greengrassv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associate a list of client devices with a core device. Use this API operation to specify\n      which client devices can discover a core device through cloud discovery. With cloud discovery,\n      client devices connect to AWS IoT Greengrass to retrieve associated core devices' connectivity information\n      and certificates. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-cloud-discovery.html\">Configure cloud\n        discovery</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>\n    \n         <note>\n            <p>Client devices are local IoT devices that connect to and communicate with an AWS IoT Greengrass core\n        device over MQTT. You can connect client devices to a core device to sync MQTT messages and\n        data to AWS IoT Core and interact with client devices in AWS IoT Greengrass components. For more information,\n        see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-local-iot-devices.html\">Interact with\n          local IoT devices</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/greengrass/v2/coreDevices/{coreDeviceThingName}/associateClientDevices",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#BatchAssociateClientDeviceWithCoreDeviceRequest": {
+            "type": "structure",
+            "members": {
+                "entries": {
+                    "target": "com.amazonaws.greengrassv2#AssociateClientDeviceWithCoreDeviceEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of client devices to associate.</p>"
+                    }
+                },
+                "coreDeviceThingName": {
+                    "target": "com.amazonaws.greengrassv2#IoTThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the core device. This is also the name of the AWS IoT thing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#BatchAssociateClientDeviceWithCoreDeviceResponse": {
+            "type": "structure",
+            "members": {
+                "errorEntries": {
+                    "target": "com.amazonaws.greengrassv2#AssociateClientDeviceWithCoreDeviceErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of any errors for the entries in the request. Each error entry contains the name\n      of the AWS IoT thing that failed to associate.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#BatchDisassociateClientDeviceFromCoreDevice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.greengrassv2#BatchDisassociateClientDeviceFromCoreDeviceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.greengrassv2#BatchDisassociateClientDeviceFromCoreDeviceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.greengrassv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociate a list of client devices from a core device. After you disassociate a client\n      device from a core device, the client device won't be able to use cloud discovery to retrieve\n      the core device's connectivity information and certificates.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/greengrass/v2/coreDevices/{coreDeviceThingName}/disassociateClientDevices",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#BatchDisassociateClientDeviceFromCoreDeviceRequest": {
+            "type": "structure",
+            "members": {
+                "entries": {
+                    "target": "com.amazonaws.greengrassv2#DisassociateClientDeviceFromCoreDeviceEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of client devices to disassociate.</p>"
+                    }
+                },
+                "coreDeviceThingName": {
+                    "target": "com.amazonaws.greengrassv2#IoTThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the core device. This is also the name of the AWS IoT thing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#BatchDisassociateClientDeviceFromCoreDeviceResponse": {
+            "type": "structure",
+            "members": {
+                "errorEntries": {
+                    "target": "com.amazonaws.greengrassv2#DisassociateClientDeviceFromCoreDeviceErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of errors (if any) for the entries in the request. Each error entry contains the\n      name of the AWS IoT thing that failed to disassociate.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.greengrassv2#CancelDeployment": {
             "type": "operation",
             "input": {
@@ -1263,6 +1488,71 @@
         "com.amazonaws.greengrassv2#DescriptionString": {
             "type": "string"
         },
+        "com.amazonaws.greengrassv2#DisassociateClientDeviceFromCoreDeviceEntry": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.greengrassv2#IoTThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AWS IoT thing that represents the client device to disassociate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a request to disassociate a client device from a core device. The <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html\">BatchDisassociateClientDeviceWithCoreDevice</a> operation consumes a list of these\n      requests.</p>"
+            }
+        },
+        "com.amazonaws.greengrassv2#DisassociateClientDeviceFromCoreDeviceEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.greengrassv2#DisassociateClientDeviceFromCoreDeviceEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#DisassociateClientDeviceFromCoreDeviceErrorEntry": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.greengrassv2#IoTThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AWS IoT thing whose disassociate request failed.</p>"
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.greengrassv2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the request.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.greengrassv2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that provides additional information about the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains an error that occurs from a request to disassociate a client device from a core\n      device. The <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html\">BatchDisassociateClientDeviceWithCoreDevice</a> operation returns a list of these\n      errors.</p>"
+            }
+        },
+        "com.amazonaws.greengrassv2#DisassociateClientDeviceFromCoreDeviceErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.greengrassv2#DisassociateClientDeviceFromCoreDeviceErrorEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.greengrassv2#EffectiveDeployment": {
             "type": "structure",
             "members": {
@@ -1771,6 +2061,12 @@
             "version": "2020-11-30",
             "operations": [
                 {
+                    "target": "com.amazonaws.greengrassv2#BatchAssociateClientDeviceWithCoreDevice"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#BatchDisassociateClientDeviceFromCoreDevice"
+                },
+                {
                     "target": "com.amazonaws.greengrassv2#CancelDeployment"
                 },
                 {
@@ -1799,6 +2095,9 @@
                 },
                 {
                     "target": "com.amazonaws.greengrassv2#GetDeployment"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ListClientDevicesAssociatedWithCoreDevice"
                 },
                 {
                     "target": "com.amazonaws.greengrassv2#ListComponents"
@@ -2205,6 +2504,15 @@
                 "smithy.api#documentation": "<p>Contains information about the timeout configuration for a job.</p>"
             }
         },
+        "com.amazonaws.greengrassv2#IoTThingName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.greengrassv2#IsLatestForTarget": {
             "type": "boolean"
         },
@@ -2586,6 +2894,90 @@
                 }
             }
         },
+        "com.amazonaws.greengrassv2#ListClientDevicesAssociatedWithCoreDevice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.greengrassv2#ListClientDevicesAssociatedWithCoreDeviceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.greengrassv2#ListClientDevicesAssociatedWithCoreDeviceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.greengrassv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a paginated list of client devices that are associated with a core\n      device.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/greengrass/v2/coreDevices/{coreDeviceThingName}/associatedClientDevices",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#ListClientDevicesAssociatedWithCoreDeviceRequest": {
+            "type": "structure",
+            "members": {
+                "coreDeviceThingName": {
+                    "target": "com.amazonaws.greengrassv2#IoTThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the core device. This is also the name of the AWS IoT thing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.greengrassv2#NextTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#ListClientDevicesAssociatedWithCoreDeviceResponse": {
+            "type": "structure",
+            "members": {
+                "associatedClientDevices": {
+                    "target": "com.amazonaws.greengrassv2#AssociatedClientDeviceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that describes the client devices that are associated with the core device.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.greengrassv2#NextTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no additional results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.greengrassv2#ListComponentVersions": {
             "type": "operation",
             "input": {
@@ -2612,7 +3004,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a paginated list of all versions for a component.</p>",
+                "smithy.api#documentation": "<p>Retrieves a paginated list of all versions for a component. Greater versions are listed first.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/components/{arn}/versions",

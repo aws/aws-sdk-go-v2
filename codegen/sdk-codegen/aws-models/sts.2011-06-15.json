@@ -593,6 +593,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ExpiredTokenException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The web identity token that was passed is expired or is not valid. Get a new identity\n            token from the identity provider and then retry the request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -844,6 +848,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "IDPCommunicationError",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request could not be fulfilled because the identity provider (IDP) that\n            was asked to verify the incoming identity token could not be reached. This is often a\n            transient error caused by network conditions. Retry the request a limited number of\n            times so that you don't exceed the request rate. If the error persists, the\n            identity provider might be down or not responding.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -857,6 +865,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "IDPRejectedClaim",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>The identity provider (IdP) reported that authentication failed. This might be because\n            the claim is invalid.</p>\n        <p>If this error is returned for the <code>AssumeRoleWithWebIdentity</code> operation, it\n            can also mean that the claim has expired or has been explicitly revoked. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -870,6 +882,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidAuthorizationMessageException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The error returned if the message passed to <code>DecodeAuthorizationMessage</code>\n            was invalid. This can happen if the token contains invalid characters, such as\n            linebreaks. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -883,6 +899,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidIdentityToken",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The web identity token that was passed could not be validated by AWS. Get a new\n            identity token from the identity provider and then retry the request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -899,6 +919,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "MalformedPolicyDocument",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the policy document was malformed. The error message\n            describes the specific error.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -915,6 +939,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "PackedPolicyTooLarge",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the total packed size of the session policies and\n            session tags combined was too large. An AWS conversion compresses the session policy\n            document, session policy ARNs, and session tags into a packed binary format that has a\n            separate limit. The error message indicates by percentage how close the policies and\n            tags are to the upper size limit. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html\">Passing Session Tags in STS</a> in\n            the <i>IAM User Guide</i>.</p>\n        <p>You could receive this error even though you meet other defined session policy and\n            session tag limits. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">IAM and STS Entity\n                Character Limits</a> in the <i>IAM User Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -942,6 +970,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "RegionDisabledException",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>STS is not activated in the requested region for the account that is being asked to\n            generate credentials. The account administrator must use the IAM console to activate STS\n            in that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating AWS STS in an AWS Region</a> in the <i>IAM User\n                    Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -991,7 +1023,7 @@
                     "min": 16,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w]*"
+                "smithy.api#pattern": "^[\\w]*$"
             }
         },
         "com.amazonaws.sts#accessKeySecretType": {
@@ -1007,7 +1039,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]+"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]+$"
             }
         },
         "com.amazonaws.sts#assumedRoleIdType": {
@@ -1017,7 +1049,7 @@
                     "min": 2,
                     "max": 193
                 },
-                "smithy.api#pattern": "[\\w+=,.@:-]*"
+                "smithy.api#pattern": "^[\\w+=,.@:-]*$"
             }
         },
         "com.amazonaws.sts#clientTokenType": {
@@ -1064,7 +1096,7 @@
                     "min": 2,
                     "max": 1224
                 },
-                "smithy.api#pattern": "[\\w+=,.@:\\/-]*"
+                "smithy.api#pattern": "^[\\w+=,.@:\\/-]*$"
             }
         },
         "com.amazonaws.sts#federatedIdType": {
@@ -1074,7 +1106,7 @@
                     "min": 2,
                     "max": 193
                 },
-                "smithy.api#pattern": "[\\w+=,.@\\:-]*"
+                "smithy.api#pattern": "^[\\w+=,.@\\:-]*$"
             }
         },
         "com.amazonaws.sts#idpCommunicationErrorMessage": {
@@ -1130,7 +1162,7 @@
                     "min": 2,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\w+=,.@-]*"
+                "smithy.api#pattern": "^[\\w+=,.@-]*$"
             }
         },
         "com.amazonaws.sts#serialNumberType": {
@@ -1140,7 +1172,7 @@
                     "min": 9,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\w+=/:,.@-]*"
+                "smithy.api#pattern": "^[\\w+=/:,.@-]*$"
             }
         },
         "com.amazonaws.sts#sessionPolicyDocumentType": {
@@ -1150,7 +1182,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"
             }
         },
         "com.amazonaws.sts#sourceIdentityType": {
@@ -1160,7 +1192,7 @@
                     "min": 2,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\w+=,.@-]*"
+                "smithy.api#pattern": "^[\\w+=,.@-]*$"
             }
         },
         "com.amazonaws.sts#tagKeyListType": {
@@ -1182,7 +1214,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]+"
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]+$"
             }
         },
         "com.amazonaws.sts#tagListType": {
@@ -1204,7 +1236,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*"
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"
             }
         },
         "com.amazonaws.sts#tokenCodeType": {
@@ -1214,7 +1246,7 @@
                     "min": 6,
                     "max": 6
                 },
-                "smithy.api#pattern": "[\\d]*"
+                "smithy.api#pattern": "^[\\d]*$"
             }
         },
         "com.amazonaws.sts#tokenType": {
@@ -1239,7 +1271,7 @@
                     "min": 2,
                     "max": 32
                 },
-                "smithy.api#pattern": "[\\w+=,.@-]*"
+                "smithy.api#pattern": "^[\\w+=,.@-]*$"
             }
         },
         "com.amazonaws.sts#webIdentitySubjectType": {

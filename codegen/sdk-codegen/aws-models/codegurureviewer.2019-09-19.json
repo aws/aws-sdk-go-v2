@@ -88,7 +88,7 @@
                     "name": "codeguru-reviewer"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. CodeGuru Reviewer is a service\n         that uses program analysis and machine learning to detect potential defects that are difficult for developers to find and recommendations to \n         address them in your Java and Python code.</p>\n         \n         <p>By proactively detecting and providing recommendations for addressing code defects and implementing best practices, CodeGuru Reviewer\n            improves the overall quality and maintainability of your code base during the code review stage. For more information about CodeGuru Reviewer, see the \n            <i>\n               <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html\">Amazon CodeGuru Reviewer User Guide</a>.</i>\n         </p>\n      \n         <p>\n         To improve the security of your CodeGuru Reviewer API calls, you can establish a private connection between your VPC and CodeGuru Reviewer by \n         creating an <i>interface VPC endpoint</i>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html\">CodeGuru Reviewer and interface \n            VPC endpoints (AWS PrivateLink)</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.\n      </p>",
+                "smithy.api#documentation": "<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. CodeGuru Reviewer is a service\n         that uses program analysis and machine learning to detect potential defects that are difficult for developers to find and recommends\n         fixes in your Java and Python code.</p>\n         \n         <p>By proactively detecting and providing recommendations for addressing code defects and implementing best practices, CodeGuru Reviewer\n            improves the overall quality and maintainability of your code base during the code review stage. For more information about CodeGuru Reviewer, see the \n            <i>\n               <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html\">Amazon CodeGuru Reviewer User Guide</a>.</i>\n         </p>\n      \n         <p>\n         To improve the security of your CodeGuru Reviewer API calls, you can establish a private connection between your VPC and CodeGuru Reviewer by \n         creating an <i>interface VPC endpoint</i>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html\">CodeGuru Reviewer and interface \n            VPC endpoints (AWS PrivateLink)</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.\n      </p>",
                 "smithy.api#title": "Amazon CodeGuru Reviewer"
             }
         },
@@ -103,6 +103,27 @@
                 "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.codegurureviewer#AnalysisType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Security",
+                        "name": "SECURITY"
+                    },
+                    {
+                        "value": "CodeQuality",
+                        "name": "CODE_QUALITY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.codegurureviewer#AnalysisTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codegurureviewer#AnalysisType"
             }
         },
         "com.amazonaws.codegurureviewer#Arn": {
@@ -141,7 +162,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Use to associate an AWS CodeCommit repository or a repostory managed by \n         AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a \n        repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides \n        automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html\">Recommendations in \n            Amazon CodeGuru Reviewer</a> in the <i>Amazon CodeGuru Reviewer User Guide.</i> \n        </p>\n      \n         <p>If you associate a CodeCommit repository, it must be in the same \n         AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured.</p>\n      \n         <p>Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar\n         Connections to connect to CodeGuru Reviewer. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html\">Associate a repository</a> in\n         the <i>Amazon CodeGuru Reviewer User Guide.</i>\n         </p>\n      \n         <note>\n            <p>\n            You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate \n            a GitHub repository, use the console. For more information, see \n            <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html\">Getting \n            started with CodeGuru Reviewer</a> in the <i>CodeGuru Reviewer User Guide.</i>\n            </p>\n         </note>",
+                "smithy.api#documentation": "<p>\n         Use to associate an AWS CodeCommit repository or a repostory managed by \n         AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a \n        repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides \n        automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html\">Recommendations in \n            Amazon CodeGuru Reviewer</a> in the <i>Amazon CodeGuru Reviewer User Guide.</i> \n        </p>\n      \n         <p>If you associate a CodeCommit or S3 repository, it must be in the same \n         AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured.</p>\n      \n         <p>Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar\n         Connections to connect to CodeGuru Reviewer. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html\">Associate a repository</a> in\n         the <i>Amazon CodeGuru Reviewer User Guide.</i>\n         </p>\n      \n         <note>\n            <p>\n            You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate \n            a GitHub repository, use the console. For more information, see \n            <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html\">Getting \n            started with CodeGuru Reviewer</a> in the <i>CodeGuru Reviewer User Guide.</i>\n            </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/associations",
@@ -216,6 +237,28 @@
                 }
             }
         },
+        "com.amazonaws.codegurureviewer#BranchDiffSourceCodeType": {
+            "type": "structure",
+            "members": {
+                "SourceBranchName": {
+                    "target": "com.amazonaws.codegurureviewer#BranchName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source branch for a diff in an associated repository.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationBranchName": {
+                    "target": "com.amazonaws.codegurureviewer#BranchName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination branch for a diff in an associated repository.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         A type of <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType\">\n               <code>SourceCodeType</code>\n            </a> that \n         specifies a code diff between a source and destination branch in an associated repository.\n      </p>"
+            }
+        },
         "com.amazonaws.codegurureviewer#BranchName": {
             "type": "string",
             "traits": {
@@ -223,6 +266,16 @@
                     "min": 1,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.codegurureviewer#BuildArtifactsObjectKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^\\S(.*\\S)?$"
             }
         },
         "com.amazonaws.codegurureviewer#ClientRequestToken": {
@@ -233,6 +286,27 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[\\w-]+$"
+            }
+        },
+        "com.amazonaws.codegurureviewer#CodeArtifacts": {
+            "type": "structure",
+            "members": {
+                "SourceCodeArtifactsObjectKey": {
+                    "target": "com.amazonaws.codegurureviewer#SourceCodeArtifactsObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 object key for a source code .zip file. This is required for all code reviews.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BuildArtifactsObjectKey": {
+                    "target": "com.amazonaws.codegurureviewer#BuildArtifactsObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 object key for a build artifacts .zip file that \n         contains .jar or .class files. This is required for a code review with security analysis. For more \n         information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/code-review-security.html\">Create code reviews with security \n            analysis</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Code artifacts are source code artifacts and build artifacts used in a repository analysis or a pull request review.</p>\n         <ul>\n            <li>\n               <p>Source code artifacts are source code files in a Git repository that are \n            compressed into a .zip file.</p>\n            </li>\n            <li>\n               <p>Build artifacts are .jar or .class files that are compressed in a .zip file.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.codegurureviewer#CodeCommitRepository": {
@@ -247,7 +321,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an AWS CodeCommit repository. The CodeCommit repository must be in the same \n      AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured. </p>"
+                "smithy.api#documentation": "<p>Information about an AWS CodeCommit repository. The CodeCommit repository must be in the same \n      AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured.</p>"
             }
         },
         "com.amazonaws.codegurureviewer#CodeReview": {
@@ -274,7 +348,7 @@
                 "Owner": {
                     "target": "com.amazonaws.codegurureviewer#Owner",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.</p>"
+                        "smithy.api#documentation": "<p>The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.\n      For an S3 repository, it can be the username or AWS account ID.</p>"
                     }
                 },
                 "ProviderType": {
@@ -336,6 +410,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The statistics from the code review.\n      </p>"
                     }
+                },
+                "AnalysisTypes": {
+                    "target": "com.amazonaws.codegurureviewer#AnalysisTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>They types of analysis performed during a repository analysis or a pull request review. You can specify either \n         <code>Security</code>, <code>CodeQuality</code>, or both.</p>"
+                    }
                 }
             },
             "traits": {
@@ -349,7 +429,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-_]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]*$"
             }
         },
         "com.amazonaws.codegurureviewer#CodeReviewSummaries": {
@@ -382,7 +462,7 @@
                 "Owner": {
                     "target": "com.amazonaws.codegurureviewer#Owner",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.</p>"
+                        "smithy.api#documentation": "<p>The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.\n      For an S3 repository, it can be the username or AWS account ID.</p>"
                     }
                 },
                 "ProviderType": {
@@ -426,6 +506,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The statistics from the code review.\n      </p>"
                     }
+                },
+                "SourceCodeType": {
+                    "target": "com.amazonaws.codegurureviewer#SourceCodeType"
                 }
             },
             "traits": {
@@ -441,10 +524,16 @@
                         "smithy.api#documentation": "<p> A code review that analyzes all code under a specified branch in an associated\n\t\t\trepository. The associated repository is specified using its ARN in <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview\">\n               <code>CreateCodeReview</code>\n            </a>. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AnalysisTypes": {
+                    "target": "com.amazonaws.codegurureviewer#AnalysisTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>They types of analysis performed during a repository analysis or a pull request review. You can specify either \n         <code>Security</code>, <code>CodeQuality</code>, or both.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         The type of a code review. There are two code review types:         \n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PullRequest</code> - A code review that is automatically triggered by a pull request on an associated repository. Because this \n               type of code review is automatically generated, you cannot specify this code review type using <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview\">\n                     <code>CreateCodeReview</code>\n                  </a>.\n            </p>\n            </li>\n            <li>\n               <p>\n\t\t\t\t\t             <code>RepositoryAnalysis</code> - A code review that analyzes all code under a specified\n\t\t\t\t\tbranch in an associated repository. The associated repository is specified using its ARN\n\t\t\t\t\tin <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview\">\n                     <code>CreateCodeReview</code>\n                  </a>. </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>\n         The type of a code review. There are two code review types:         \n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PullRequest</code> - A code review that is automatically triggered by a pull request on an associated repository.\n            </p>\n            </li>\n            <li>\n               <p>\n\t\t\t\t\t             <code>RepositoryAnalysis</code> - A code review that analyzes all code under a specified\n\t\t\t\t\tbranch in an associated repository. The associated repository is specified using its ARN\n\t\t\t\t\tin <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview\">\n                     <code>CreateCodeReview</code>\n                  </a>. </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.codegurureviewer#CommitDiffSourceCodeType": {
@@ -453,18 +542,24 @@
                 "SourceCommit": {
                     "target": "com.amazonaws.codegurureviewer#CommitId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The SHA of the source commit used to generate a commit diff.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The SHA of the source commit used to generate a commit diff. This field is required for a pull request code review.\n      </p>"
                     }
                 },
                 "DestinationCommit": {
                     "target": "com.amazonaws.codegurureviewer#CommitId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The SHA of the destination commit used to generate a commit diff.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The SHA of the destination commit used to generate a commit diff. This field is required for a pull request code review.\n      </p>"
+                    }
+                },
+                "MergeBaseCommit": {
+                    "target": "com.amazonaws.codegurureviewer#CommitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA of the merge base of a commit.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         A type of <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType\">\n               <code>SourceCodeType</code>\n            </a> that \n         specifies the commit diff for a pull request on an associated repository.\n      </p>"
+                "smithy.api#documentation": "<p>\n         A type of <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType\">\n               <code>SourceCodeType</code>\n            </a> that \n         specifies the commit diff for a pull request on an associated repository. The <code>SourceCommit</code> \n         and <code>DestinationCommit</code> fields are required to do a pull request code review.\n      </p>"
             }
         },
         "com.amazonaws.codegurureviewer#CommitId": {
@@ -496,7 +591,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+"
+                "smithy.api#pattern": "^arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+$"
             }
         },
         "com.amazonaws.codegurureviewer#CreateCodeReview": {
@@ -528,7 +623,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Use to create a code review with a <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html\">\n               <code>CodeReviewType</code>\n            </a> \n         of <code>RepositoryAnalysis</code>. This type of code review analyzes all code under a specified branch in an associated repository. \n         <code>PullRequest</code> code reviews are automatically triggered by a pull request so cannot be created using this method.\n      </p>",
+                "smithy.api#documentation": "<p>\n         Use to create a code review with a <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html\">\n               <code>CodeReviewType</code>\n            </a> \n         of <code>RepositoryAnalysis</code>. This type of code review analyzes all code under a specified branch in an associated repository. \n         <code>PullRequest</code> code reviews are automatically triggered by a pull request.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/codereviews",
@@ -608,6 +703,34 @@
                     "method": "GET",
                     "uri": "/codereviews/{CodeReviewArn}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "CodeReviewCompleted": {
+                        "documentation": "Wait until a code review is complete.",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "CodeReview.State",
+                                        "expected": "Completed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "CodeReview.State",
+                                        "expected": "Pending",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    }
                 }
             }
         },
@@ -739,6 +862,34 @@
                     "method": "GET",
                     "uri": "/associations/{AssociationArn}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "RepositoryAssociationSucceeded": {
+                        "documentation": "Wait until a repository association is complete.",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "RepositoryAssociation.State",
+                                        "expected": "Associated",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "RepositoryAssociation.State",
+                                        "expected": "Associating",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    }
                 }
             }
         },
@@ -857,6 +1008,46 @@
         "com.amazonaws.codegurureviewer#ErrorMessage": {
             "type": "string"
         },
+        "com.amazonaws.codegurureviewer#EventInfo": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.codegurureviewer#EventName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event. The possible names are <code>pull_request</code>, <code>workflow_dispatch</code>, \n         <code>schedule</code>, and <code>push</code>\n         </p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.codegurureviewer#EventState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of an event. The state might be open, closed, or another state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an event. The event might be a push, pull request, scheduled request, or another type of event.</p>"
+            }
+        },
+        "com.amazonaws.codegurureviewer#EventName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[ \\-A-Z_a-z]+$"
+            }
+        },
+        "com.amazonaws.codegurureviewer#EventState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[ \\-A-Z_a-z]+$"
+            }
+        },
         "com.amazonaws.codegurureviewer#FilePath": {
             "type": "string",
             "traits": {
@@ -947,7 +1138,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.codegurureviewer#LineNumber": {
@@ -1537,6 +1728,10 @@
                     {
                         "value": "GitHubEnterpriseServer",
                         "name": "GIT_HUB_ENTERPRISE_SERVER"
+                    },
+                    {
+                        "value": "S3Bucket",
+                        "name": "S3_BUCKET"
                     }
                 ]
             }
@@ -1651,6 +1846,53 @@
                     "min": 0,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.codegurureviewer#RecommendationCategory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWSBestPractices",
+                        "name": "AWS_BEST_PRACTICES"
+                    },
+                    {
+                        "value": "AWSCloudFormationIssues",
+                        "name": "AWS_CLOUDFORMATION_ISSUES"
+                    },
+                    {
+                        "value": "DuplicateCode",
+                        "name": "DUPLICATE_CODE"
+                    },
+                    {
+                        "value": "CodeMaintenanceIssues",
+                        "name": "CODE_MAINTENANCE_ISSUES"
+                    },
+                    {
+                        "value": "ConcurrencyIssues",
+                        "name": "CONCURRENCY_ISSUES"
+                    },
+                    {
+                        "value": "InputValidations",
+                        "name": "INPUT_VALIDATIONS"
+                    },
+                    {
+                        "value": "PythonBestPractices",
+                        "name": "PYTHON_BEST_PRACTICES"
+                    },
+                    {
+                        "value": "JavaBestPractices",
+                        "name": "JAVA_BEST_PRACTICES"
+                    },
+                    {
+                        "value": "ResourceLeaks",
+                        "name": "RESOURCE_LEAKS"
+                    },
+                    {
+                        "value": "SecurityIssues",
+                        "name": "SECURITY_ISSUES"
+                    }
+                ]
             }
         },
         "com.amazonaws.codegurureviewer#RecommendationFeedback": {
@@ -1788,6 +2030,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n         A description of the recommendation generated by CodeGuru Reviewer for the lines of code between the start line and the end line.\n      </p>"
                     }
+                },
+                "RecommendationCategory": {
+                    "target": "com.amazonaws.codegurureviewer#RecommendationCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of a recommendation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1814,6 +2062,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n         Information about a GitHub Enterprise Server repository.\n      </p>"
                     }
+                },
+                "S3Bucket": {
+                    "target": "com.amazonaws.codegurureviewer#S3Repository"
                 }
             },
             "traits": {
@@ -1826,9 +2077,11 @@
                 "RepositoryHead": {
                     "target": "com.amazonaws.codegurureviewer#RepositoryHeadSourceCodeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType\">\n               <code>SourceCodeType</code>\n            </a> that \n         specifies the tip of a branch in an associated repository. \n      </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>\n         A <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType\">\n               <code>SourceCodeType</code>\n            </a> that \n         specifies the tip of a branch in an associated repository. \n      </p>"
                     }
+                },
+                "SourceCodeType": {
+                    "target": "com.amazonaws.codegurureviewer#SourceCodeType"
                 }
             },
             "traits": {
@@ -1865,7 +2118,7 @@
                 "Owner": {
                     "target": "com.amazonaws.codegurureviewer#Owner",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.</p>"
+                        "smithy.api#documentation": "<p>The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.\n      For an S3 repository, it can be the username or AWS account ID.</p>"
                     }
                 },
                 "ProviderType": {
@@ -1903,6 +2156,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A <code>KMSKeyDetails</code> object that contains:</p>\n         <ul>\n            <li>\n               <p>The encryption option for this repository association. It is either owned by AWS \n            Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p>\n            </li>\n            <li>\n               <p>The ID of the AWS KMS key that \n            is associated with this respository association.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "S3RepositoryDetails": {
+                    "target": "com.amazonaws.codegurureviewer#S3RepositoryDetails"
                 }
             },
             "traits": {
@@ -1990,7 +2246,7 @@
                 "Owner": {
                     "target": "com.amazonaws.codegurureviewer#Owner",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.</p>"
+                        "smithy.api#documentation": "<p>The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.\n      For an S3 repository, it can be the username or AWS account ID.</p>"
                     }
                 },
                 "ProviderType": {
@@ -2037,6 +2293,57 @@
                 }
             }
         },
+        "com.amazonaws.codegurureviewer#RequestId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.codegurureviewer#RequestMetadata": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.codegurureviewer#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the request. This is required for a pull request code review.</p>"
+                    }
+                },
+                "Requester": {
+                    "target": "com.amazonaws.codegurureviewer#Requester",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier, such as a name or account ID, that is associated with the requester. The \n      <code>Requester</code> is used to capture the <code>author/actor</code> name of the event request.</p>"
+                    }
+                },
+                "EventInfo": {
+                    "target": "com.amazonaws.codegurureviewer#EventInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the event associated with a code review.</p>"
+                    }
+                },
+                "VendorName": {
+                    "target": "com.amazonaws.codegurureviewer#VendorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the repository vendor used to upload code to an S3 bucket for a CI/CD code\n         review. For example, if code and artifacts are uploaded to an S3 bucket for a CI/CD code\n         review by GitHub scripts from a GitHub repository, then the repository association's <code>ProviderType</code> is\n            <code>S3Bucket</code> and the CI/CD repository vendor name is GitHub. For more\n         information, see the definition for <code>ProviderType</code> in <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html\">RepositoryAssociation</a>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata that is associated with a code review. This applies to both pull request \n         and repository analysis code reviews.</p>"
+            }
+        },
+        "com.amazonaws.codegurureviewer#Requester": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^\\S(.*\\S)?$"
+            }
+        },
         "com.amazonaws.codegurureviewer#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -2050,6 +2357,89 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.codegurureviewer#S3BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^\\S(.*\\S)?$"
+            }
+        },
+        "com.amazonaws.codegurureviewer#S3BucketRepository": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.codegurureviewer#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the repository when the <code>ProviderType</code> is <code>S3Bucket</code>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Details": {
+                    "target": "com.amazonaws.codegurureviewer#S3RepositoryDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn <code>S3RepositoryDetails</code> object that specifies the name of an S3 bucket and \n\t\t\ta <code>CodeArtifacts</code> object. The <code>CodeArtifacts</code> object includes the S3 \n\t\t\tobject keys for a source code .zip file and for a build artifacts .zip file.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Information about an associated repository in an S3 bucket. The associated repository contains a source code \n         .zip file and a build artifacts .zip file that contains .jar or .class files.\n      </p>"
+            }
+        },
+        "com.amazonaws.codegurureviewer#S3Repository": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.codegurureviewer#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the repository in the S3 bucket. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BucketName": {
+                    "target": "com.amazonaws.codegurureviewer#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket used for associating a new S3 repository. It must begin with \n         <code>codeguru-reviewer-</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Information about a repository in an S3 bucket. \n      </p>"
+            }
+        },
+        "com.amazonaws.codegurureviewer#S3RepositoryDetails": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.codegurureviewer#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket used for associating a new S3 repository. It must begin with \n         <code>codeguru-reviewer-</code>. </p>"
+                    }
+                },
+                "CodeArtifacts": {
+                    "target": "com.amazonaws.codegurureviewer#CodeArtifacts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A <code>CodeArtifacts</code> object. The <code>CodeArtifacts</code> object includes the S3 \n         object key for a source code .zip file and for a build artifacts .zip file that contains .jar or .class files.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Specifies the name of an S3 bucket and a <code>CodeArtifacts</code> object that contains the S3 \n         object keys for a source code .zip file and for a build artifacts .zip file that contains .jar or .class files.\n      </p>"
+            }
+        },
+        "com.amazonaws.codegurureviewer#SourceCodeArtifactsObjectKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^\\S(.*\\S)?$"
+            }
+        },
         "com.amazonaws.codegurureviewer#SourceCodeType": {
             "type": "structure",
             "members": {
@@ -2061,10 +2451,28 @@
                 },
                 "RepositoryHead": {
                     "target": "com.amazonaws.codegurureviewer#RepositoryHeadSourceCodeType"
+                },
+                "BranchDiff": {
+                    "target": "com.amazonaws.codegurureviewer#BranchDiffSourceCodeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A type of <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType\">\n               <code>SourceCodeType</code>\n            </a> that \n         specifies a source branch name and a destination branch name in an associated repository.\n      </p>"
+                    }
+                },
+                "S3BucketRepository": {
+                    "target": "com.amazonaws.codegurureviewer#S3BucketRepository",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tInformation about an associated repository in an S3 bucket that includes its name and an <code>S3RepositoryDetails</code> object. \n\t\t\tThe <code>S3RepositoryDetails</code> object includes the name of an S3 bucket, an S3 key for a source code .zip file, and \n\t\t\tan S3 key for a build artifacts .zip file. <code>S3BucketRepository</code> is required in <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType\">\n               <code>SourceCodeType</code>\n            </a> for \n         <code>S3BucketRepository</code> based code reviews.\n\t\t</p>"
+                    }
+                },
+                "RequestMetadata": {
+                    "target": "com.amazonaws.codegurureviewer#RequestMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that is associated with a code review. This applies to any type of code review supported by CodeGuru Reviewer. The \n      <code>RequestMetadaa</code> field captures any event metadata. For example, it might capture metadata associated with \n         an event trigger, such as a push or a pull request. </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         Specifies the source code that is analyzed in a code review. A code review can analyze the source code that is specified \n         using a pull request diff or a branch in an associated repository.\n      </p>"
+                "smithy.api#documentation": "<p>\n         Specifies the source code that is analyzed in a code review. \n      </p>"
             }
         },
         "com.amazonaws.codegurureviewer#StateReason": {
@@ -2202,7 +2610,7 @@
                 "Owner": {
                     "target": "com.amazonaws.codegurureviewer#Owner",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket repository, \n         this is the username for the account that owns the repository. \n      </p>",
+                        "smithy.api#documentation": "<p>\n         The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket repository, \n         this is the username for the account that owns the repository. For an S3 repository, \n         this can be the username or AWS account ID.\n      </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2327,6 +2735,25 @@
                 "smithy.api#documentation": "<p>The input fails to satisfy the specified constraints.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.codegurureviewer#VendorName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "GitHub",
+                        "name": "GITHUB"
+                    },
+                    {
+                        "value": "GitLab",
+                        "name": "GITLAB"
+                    },
+                    {
+                        "value": "NativeS3",
+                        "name": "NATIVE_S3"
+                    }
+                ]
             }
         }
     }

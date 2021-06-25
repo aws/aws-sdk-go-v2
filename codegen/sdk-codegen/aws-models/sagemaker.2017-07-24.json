@@ -4541,6 +4541,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Creates tags for the specified fleet.</p>"
                     }
+                },
+                "EnableIotRoleAlias": {
+                    "target": "com.amazonaws.sagemaker#EnableIotRoleAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to create an AWS IoT Role Alias during device fleet creation. \n     The name of the role alias generated will match this pattern: \n     \"SageMakerEdge-{DeviceFleetName}\".</p>\n         <p>For example, if your device fleet is called \"demo-fleet\", the name of \n     the role alias will be \"SageMakerEdge-demo-fleet\".</p>"
+                    }
                 }
             }
         },
@@ -6617,7 +6623,7 @@
                 "InputDataConfig": {
                     "target": "com.amazonaws.sagemaker#InputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>Channel</code> objects. Each channel is a named input source.\n                <code>InputDataConfig</code>\n         \n            describes the input data and its location. </p>\n        <p>Algorithms can accept input data from one or more channels. For example, an\n            algorithm might have two channels of input data, <code>training_data</code> and\n                <code>validation_data</code>. The configuration for each channel provides the S3,\n            EFS, or FSx location where the input data is stored. It also provides information about\n            the stored data: the MIME type, compression method, and whether the data is wrapped in\n            RecordIO format. </p>\n        <p>Depending on the input mode that the algorithm supports, Amazon SageMaker either copies input\n            data files from an S3 bucket to a local directory in the Docker container, or makes it\n            available as input streams. For example, if you specify an EFS location, input data\n            files will be made available as input streams. They do not need to be\n            downloaded.</p>"
+                        "smithy.api#documentation": "<p>An array of <code>Channel</code> objects. Each channel is a named input source.\n                <code>InputDataConfig</code>\n            describes the input data and its location. </p>\n        <p>Algorithms can accept input data from one or more channels. For example, an\n            algorithm might have two channels of input data, <code>training_data</code> and\n                <code>validation_data</code>. The configuration for each channel provides the S3,\n            EFS, or FSx location where the input data is stored. It also provides information about\n            the stored data: the MIME type, compression method, and whether the data is wrapped in\n            RecordIO format. </p>\n        <p>Depending on the input mode that the algorithm supports, Amazon SageMaker either copies input\n            data files from an S3 bucket to a local directory in the Docker container, or makes it\n            available as input streams. For example, if you specify an EFS location, input data\n            files will be made available as input streams. They do not need to be\n            downloaded.</p>"
                     }
                 },
                 "OutputDataConfig": {
@@ -10476,6 +10482,12 @@
                     "target": "com.amazonaws.sagemaker#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The signature document of files in the model artifact.</p>"
+                    }
+                },
+                "PresetDeploymentOutput": {
+                    "target": "com.amazonaws.sagemaker#EdgePresetDeploymentOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output of a SageMaker Edge Manager deployable resource.</p>"
                     }
                 }
             }
@@ -14507,6 +14519,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.</p>"
                     }
+                },
+                "PresetDeploymentType": {
+                    "target": "com.amazonaws.sagemaker#EdgePresetDeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment type SageMaker Edge Manager will create. \n      Currently only supports AWS IoT Greengrass Version 2 components.</p>"
+                    }
+                },
+                "PresetDeploymentConfig": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration used to create deployment artifacts. \n      Specify configuration options with a JSON string. The available configuration options for each type are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ComponentName</code> (optional) - Name of the GreenGrass V2 component. If not specified,\n     the default name generated consists of \"SagemakerEdgeManager\" and the name of your SageMaker Edge Manager\n     packaging job.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ComponentDescription</code> (optional) - Description of the component.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ComponentVersion</code> (optional) - The version of the component.</p>\n               <note>\n                  <p>AWS IoT Greengrass uses semantic versions for components. Semantic versions follow a<i>\n       major.minor.patch</i> number system. For example, version 1.0.0 represents the first\n        major release for a component. For more information, see the <a href=\"https://semver.org/\">semantic version specification</a>.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>PlatformOS</code> (optional) - The name of the operating system for the platform.\n     Supported platforms include Windows and Linux.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PlatformArchitecture</code> (optional) - The processor architecture for the platform. </p>\n               <p>Supported architectures Windows include: Windows32_x86, Windows64_x64.</p>\n               <p>Supported architectures for Linux include: Linux x86_64, Linux ARMV8.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -14619,6 +14643,74 @@
                 "smithy.api#documentation": "<p>Summary of edge packaging job.</p>"
             }
         },
+        "com.amazonaws.sagemaker#EdgePresetDeploymentArtifact": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#EdgePresetDeploymentOutput": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.sagemaker#EdgePresetDeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment type created by SageMaker Edge Manager. Currently only \n     supports AWS IoT Greengrass Version 2 components.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Artifact": {
+                    "target": "com.amazonaws.sagemaker#EdgePresetDeploymentArtifact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the generated deployable resource.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#EdgePresetDeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the deployable resource.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a message describing the status of the deployed resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output of a SageMaker Edge Manager deployable resource.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#EdgePresetDeploymentStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "COMPLETED",
+                        "name": "Completed"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "Failed"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemaker#EdgePresetDeploymentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "GreengrassV2Component",
+                        "name": "GreengrassV2Component"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.sagemaker#EdgeVersion": {
             "type": "string",
             "traits": {
@@ -14641,6 +14733,12 @@
         },
         "com.amazonaws.sagemaker#EnableCapture": {
             "type": "boolean"
+        },
+        "com.amazonaws.sagemaker#EnableIotRoleAlias": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
         },
         "com.amazonaws.sagemaker#EnableSagemakerServicecatalogPortfolio": {
             "type": "operation",
@@ -15782,7 +15880,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A conditional statement for a search expression that includes a resource property, a\n      Boolean operator, and a value. Resources that match the statement are returned in the\n      results from the <a>Search</a> API.</p>\n      \n         <p>If you specify a <code>Value</code>, but not an <code>Operator</code>, Amazon SageMaker uses the\n      equals operator.</p>\n         <p>In search, there are several property types:</p>\n         <dl>\n            <dt>Metrics</dt>\n            <dd>\n               <p>To define a metric filter, enter a value using the form\n            <code>\"Metrics.<name>\"</code>, where <code><name></code> is\n            a metric name. For example, the following filter searches for training jobs\n            with an <code>\"accuracy\"</code> metric greater than\n            <code>\"0.9\"</code>:</p>\n               <p>\n                  <code>{</code>\n               </p>\n               <p>\n                  <code>\"Name\": \"Metrics.accuracy\",</code>\n               </p>\n               <p>\n                  <code>\"Operator\": \"GreaterThan\",</code>\n               </p>\n               <p>\n                  <code>\"Value\": \"0.9\"</code>\n               </p>\n               <p>\n                  <code>}</code>\n               </p>\n            </dd>\n            <dt>HyperParameters</dt>\n            <dd>\n               <p>To define a hyperparameter filter, enter a value with the form\n            <code>\"HyperParameters.<name>\"</code>. Decimal hyperparameter\n            values are treated as a decimal in a comparison if the specified\n            <code>Value</code> is also a decimal value. If the specified\n            <code>Value</code> is an integer, the decimal hyperparameter values are\n            treated as integers. For example, the following filter is satisfied by\n            training jobs with a <code>\"learning_rate\"</code> hyperparameter that is\n            less than <code>\"0.5\"</code>:</p>\n               <p>\n                  <code> {</code>\n               </p>\n               <p>\n                  <code> \"Name\": \"HyperParameters.learning_rate\",</code>\n               </p>\n               <p>\n                  <code> \"Operator\": \"LessThan\",</code>\n               </p>\n               <p>\n                  <code> \"Value\": \"0.5\"</code>\n               </p>\n               <p>\n                  <code> }</code>\n               </p>\n            </dd>\n            <dt>Tags</dt>\n            <dd>\n               <p>To define a tag filter, enter a value with the form\n            <code>Tags.<key></code>.</p>\n            </dd>\n         </dl>"
+                "smithy.api#documentation": "<p>A conditional statement for a search expression that includes a resource property, a\n      Boolean operator, and a value. Resources that match the statement are returned in the\n      results from the <a>Search</a> API.</p>\n    \n         <p>If you specify a <code>Value</code>, but not an <code>Operator</code>, Amazon SageMaker uses the\n      equals operator.</p>\n         <p>In search, there are several property types:</p>\n         <dl>\n            <dt>Metrics</dt>\n            <dd>\n               <p>To define a metric filter, enter a value using the form\n            <code>\"Metrics.<name>\"</code>, where <code><name></code> is\n            a metric name. For example, the following filter searches for training jobs\n            with an <code>\"accuracy\"</code> metric greater than\n            <code>\"0.9\"</code>:</p>\n               <p>\n                  <code>{</code>\n               </p>\n               <p>\n                  <code>\"Name\": \"Metrics.accuracy\",</code>\n               </p>\n               <p>\n                  <code>\"Operator\": \"GreaterThan\",</code>\n               </p>\n               <p>\n                  <code>\"Value\": \"0.9\"</code>\n               </p>\n               <p>\n                  <code>}</code>\n               </p>\n            </dd>\n            <dt>HyperParameters</dt>\n            <dd>\n               <p>To define a hyperparameter filter, enter a value with the form\n            <code>\"HyperParameters.<name>\"</code>. Decimal hyperparameter\n            values are treated as a decimal in a comparison if the specified\n            <code>Value</code> is also a decimal value. If the specified\n            <code>Value</code> is an integer, the decimal hyperparameter values are\n            treated as integers. For example, the following filter is satisfied by\n            training jobs with a <code>\"learning_rate\"</code> hyperparameter that is\n            less than <code>\"0.5\"</code>:</p>\n               <p>\n                  <code> {</code>\n               </p>\n               <p>\n                  <code> \"Name\": \"HyperParameters.learning_rate\",</code>\n               </p>\n               <p>\n                  <code> \"Operator\": \"LessThan\",</code>\n               </p>\n               <p>\n                  <code> \"Value\": \"0.5\"</code>\n               </p>\n               <p>\n                  <code> }</code>\n               </p>\n            </dd>\n            <dt>Tags</dt>\n            <dd>\n               <p>To define a tag filter, enter a value with the form\n            <code>Tags.<key></code>.</p>\n            </dd>\n         </dl>"
             }
         },
         "com.amazonaws.sagemaker#FilterList": {
@@ -23909,7 +24007,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a metric that the training algorithm\n            writes\n            to <code>stderr</code> or <code>stdout</code>\n         . Amazon SageMakerhyperparameter\n            tuning captures\n            all\n            defined metrics.\n            You\n            specify one metric that a hyperparameter tuning job uses as its\n            objective metric to choose the best training job.</p>"
+                "smithy.api#documentation": "<p>Specifies a metric that the training algorithm\n            writes\n            to <code>stderr</code> or <code>stdout</code>. Amazon SageMakerhyperparameter\n            tuning captures\n            all\n            defined metrics.\n            You\n            specify one metric that a hyperparameter tuning job uses as its\n            objective metric to choose the best training job.</p>"
             }
         },
         "com.amazonaws.sagemaker#MetricDefinitionList": {
@@ -27660,14 +27758,14 @@
                 "VolumeSizeInGB": {
                     "target": "com.amazonaws.sagemaker#ProcessingVolumeSizeInGB",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the ML storage volume in gigabytes that you want to provision. You must\n            specify sufficient ML storage for your scenario.</p>",
+                        "smithy.api#documentation": "<p>The size of the ML storage volume in gigabytes that you want to provision. You must\n            specify sufficient ML storage for your scenario.</p>\n        <note>\n            <p>Certain Nitro-based instances include local storage with a fixed total size,\n                dependent on the instance type. When using these instances for processing, Amazon SageMaker mounts\n                the local instance storage instead of Amazon EBS gp2 storage. You can't request a\n                <code>VolumeSizeInGB</code> greater than the total size of the local instance\n                storage.</p>\n            <p>For a list of instance types that support local instance storage, including the\n                total size per instance type, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>\n        </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "VolumeKmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the\n            storage volume attached to the ML compute instance(s) that run the processing job.\n        </p>"
+                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the\n            storage volume attached to the ML compute instance(s) that run the processing job.\n        </p>\n        <note>\n            <p>Certain Nitro-based instances include local storage, dependent on the instance\n                type. Local storage volumes are encrypted using a hardware module on the instance.\n                You can't request a <code>VolumeKmsKeyId</code> when using an instance type with\n                local storage.</p>\n            <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>\n            <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD\n                Instance Store Volumes</a>.</p>\n        </note>"
                     }
                 }
             },
@@ -27935,6 +28033,30 @@
                     {
                         "value": "ml.r5.24xlarge",
                         "name": "ML_R5_24XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.xlarge",
+                        "name": "ML_G4DN_XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.2xlarge",
+                        "name": "ML_G4DN_2XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.4xlarge",
+                        "name": "ML_G4DN_4XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.8xlarge",
+                        "name": "ML_G4DN_8XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.12xlarge",
+                        "name": "ML_G4DN_12XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.16xlarge",
+                        "name": "ML_G4DN_16XLARGE"
                     }
                 ]
             }
@@ -34060,6 +34182,30 @@
                     {
                         "value": "ml.m5.24xlarge",
                         "name": "ML_M5_24XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.xlarge",
+                        "name": "ML_G4DN_XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.2xlarge",
+                        "name": "ML_G4DN_2XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.4xlarge",
+                        "name": "ML_G4DN_4XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.8xlarge",
+                        "name": "ML_G4DN_8XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.12xlarge",
+                        "name": "ML_G4DN_12XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.16xlarge",
+                        "name": "ML_G4DN_16XLARGE"
                     }
                 ]
             }
@@ -34390,7 +34536,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using\n            Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following\n            formats: </p>\n        <ul>\n            <li>\n                <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n                </p>\n            </li>\n            <li>\n                <p>Key ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n                </p>\n            </li>\n            <li>\n                <p>Alias name: <code>alias/ExampleAlias</code>\n                </p>\n            </li>\n            <li>\n                <p>Alias name ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>\n                </p>\n            </li>\n         </ul>\n        \n        \n        <p>If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your\n            role's account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the\n                <i>Amazon Simple Storage Service\n                Developer Guide.</i>\n         \n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <a>CreateModel</a> request. For more information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using\n                Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using\n            Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following\n            formats: </p>\n        <ul>\n            <li>\n                <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n                </p>\n            </li>\n            <li>\n                <p>Key ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n                </p>\n            </li>\n            <li>\n                <p>Alias name: <code>alias/ExampleAlias</code>\n                </p>\n            </li>\n            <li>\n                <p>Alias name ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>\n                </p>\n            </li>\n         </ul>\n        \n        \n        <p>If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your\n            role's account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the\n                <i>Amazon Simple Storage Service\n                Developer Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <a>CreateModel</a> request. For more information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using\n                Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer\n                Guide</i>.</p>"
                     }
                 }
             },
@@ -34404,7 +34550,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.sagemaker#TransformInstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ML compute instance type for the transform job. If you are using built-in\n            algorithms to\n            transform\n            moderately sized datasets, we recommend using ml.m4.xlarge or\n            <code>ml.m5.large</code>\n         instance types.</p>",
+                        "smithy.api#documentation": "<p>The ML compute instance type for the transform job. If you are using built-in\n            algorithms to\n            transform\n            moderately sized datasets, we recommend using ml.m4.xlarge or\n            <code>ml.m5.large</code>instance types.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -34418,7 +34564,7 @@
                 "VolumeKmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume\n            attached to the ML compute instance(s) that run the batch transform job. The\n                <code>VolumeKmsKeyId</code> can be any of the following formats:</p>\n        <ul>\n            <li>\n                <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n                </p>\n            </li>\n            <li>\n                <p>Key ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n                </p>\n            </li>\n            <li>\n                <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n                <p>Alias name ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume\n            attached to the ML compute instance(s) that run the batch transform job.</p>\n        <note>\n            <p>Certain Nitro-based instances include local storage, dependent on the instance\n                type. Local storage volumes are encrypted using a hardware module on the instance.\n                You can't request a <code>VolumeKmsKeyId</code> when using an instance type with\n                local storage.</p>\n            <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>\n            <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD\n                Instance Store Volumes</a>.</p>\n        </note>\n            <p>\n            The <code>VolumeKmsKeyId</code> can be any of the following formats:</p>\n        <ul>\n            <li>\n                <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n                </p>\n            </li>\n            <li>\n                <p>Key ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n                </p>\n            </li>\n            <li>\n                <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n                <p>Alias name ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -35542,6 +35688,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Output configuration  for storing sample data collected by the fleet.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "EnableIotRoleAlias": {
+                    "target": "com.amazonaws.sagemaker#EnableIotRoleAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to create an AWS IoT Role Alias during device fleet creation. \n      The name of the role alias generated will match this pattern: \n      \"SageMakerEdge-{DeviceFleetName}\".</p>\n         <p>For example, if your device fleet is called \"demo-fleet\", the name of \n      the role alias will be \"SageMakerEdge-demo-fleet\".</p>"
                     }
                 }
             }

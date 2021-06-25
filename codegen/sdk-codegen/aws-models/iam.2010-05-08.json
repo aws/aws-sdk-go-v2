@@ -1084,6 +1084,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConcurrentModification",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The request was rejected because multiple requests to change this object were submitted\n      simultaneously. Wait a few minutes and submit your request again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -2147,6 +2151,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReportExpired",
+                    "httpResponseCode": 410
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the most recent credential report has expired. To\n      generate a new credential report, use <a>GenerateCredentialReport</a>. For more\n      information about credential report expiration, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html\">Getting credential reports</a> in the\n        <i>IAM User Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 410
@@ -2160,6 +2168,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReportNotPresent",
+                    "httpResponseCode": 410
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the credential report does not exist. To generate a\n      credential report, use <a>GenerateCredentialReport</a>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 410
@@ -2173,6 +2185,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReportInProgress",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the credential report is still being generated.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -2315,6 +2331,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DeleteConflict",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The request was rejected because it attempted to delete a resource that has attached\n      subordinate entities. The error message describes these entities.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -3244,6 +3264,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DuplicateCertificate",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the same certificate is associated with an IAM user in\n      the account.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -3257,6 +3281,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DuplicateSSHPublicKey",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the SSH public key is already associated with the\n      specified IAM user.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3332,6 +3360,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EntityAlreadyExists",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The request was rejected because it attempted to create a resource that already\n      exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -3407,6 +3439,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EntityTemporarilyUnmodifiable",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The request was rejected because it referenced an entity that is temporarily unmodifiable,\n      such as a user name that was deleted and then recreated. The error indicates that the request\n      is likely to succeed if you try again after waiting several minutes. The error message\n      describes the entity.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -5370,6 +5406,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidAuthenticationCode",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the authentication code was not recognized. The error\n      message describes the specific error.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -5383,6 +5423,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidCertificate",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the certificate is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5396,6 +5440,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidInput",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because an invalid or out-of-range value was supplied for an\n      input parameter.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5409,6 +5457,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidPublicKey",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the public key is malformed or otherwise invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5422,6 +5474,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidUserType",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the type of user for the transaction was\n      incorrect.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5435,6 +5491,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "KeyPairMismatch",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the public key certificate and the private key do not\n      match.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5448,6 +5508,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "LimitExceeded",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The request was rejected because it attempted to create resources beyond the current AWS\n      account limits. The error message describes the limit exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -8007,6 +8071,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "MalformedCertificate",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the certificate was malformed or expired. The error\n      message describes the specific error.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8020,6 +8088,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "MalformedPolicyDocument",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the policy document was malformed. The error message\n      describes the specific error.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8116,6 +8188,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NoSuchEntity",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The request was rejected because it referenced a resource entity that does not exist. The\n      error message describes the resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -8241,6 +8317,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "PasswordPolicyViolation",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the provided password did not meet the requirements\n      imposed by the account password policy.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8395,6 +8475,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "PolicyEvaluation",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>The request failed because a provided policy could not be successfully evaluated. An\n      additional detailed message indicates the source of the failure.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -8474,6 +8558,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "PolicyNotAttachable",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request failed because AWS service role policies can only be attached to the\n      service-linked role for that service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -9031,6 +9119,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReportGenerationLimitExceeded",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>The request failed because the maximum number of concurrent requests for this account are\n      already running.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -9670,6 +9762,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ServiceFailure",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or\n      failure.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -9735,6 +9831,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NotSupportedService",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified service does not support service-specific credentials.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -10671,6 +10771,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UnmodifiableEntity",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because only the service that depends on the service-linked role\n      can modify or delete the role on your behalf. The error message includes the name of the\n      service that depends on this service-linked role. You must request the change through that\n      service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -10684,6 +10788,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UnrecognizedPublicKeyEncoding",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was rejected because the public key encoding format is unsupported or\n      unrecognized.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400

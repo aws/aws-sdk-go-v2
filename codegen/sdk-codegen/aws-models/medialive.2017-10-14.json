@@ -6615,9 +6615,48 @@
                 ]
             }
         },
+        "com.amazonaws.medialive#DvbSubOcrLanguage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Dvb Sub Ocr Language",
+                "smithy.api#enum": [
+                    {
+                        "value": "DEU",
+                        "name": "DEU"
+                    },
+                    {
+                        "value": "ENG",
+                        "name": "ENG"
+                    },
+                    {
+                        "value": "FRA",
+                        "name": "FRA"
+                    },
+                    {
+                        "value": "NLD",
+                        "name": "NLD"
+                    },
+                    {
+                        "value": "POR",
+                        "name": "POR"
+                    },
+                    {
+                        "value": "SPA",
+                        "name": "SPA"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.medialive#DvbSubSourceSettings": {
             "type": "structure",
             "members": {
+                "OcrLanguage": {
+                    "target": "com.amazonaws.medialive#DvbSubOcrLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "If you will configure a WebVTT caption description that references this caption selector, use this field to\nprovide the language to consider when translating the image-based source to text.",
+                        "smithy.api#jsonName": "ocrLanguage"
+                    }
+                },
                 "Pid": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
@@ -9879,6 +9918,13 @@
                         "smithy.api#documentation": "The number of seconds between retries when an attempt to read a manifest or segment fails.",
                         "smithy.api#jsonName": "retryInterval"
                     }
+                },
+                "Scte35Source": {
+                    "target": "com.amazonaws.medialive#HlsScte35SourceType",
+                    "traits": {
+                        "smithy.api#documentation": "Identifies the source for the SCTE-35 messages that MediaLive will ingest. Messages can be ingested from the content segments (in the stream) or from tags in the playlist (the HLS manifest). MediaLive ignores SCTE-35 information in the source that is not selected.",
+                        "smithy.api#jsonName": "scte35Source"
+                    }
                 }
             },
             "traits": {
@@ -10122,6 +10168,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "Hls S3 Settings"
+            }
+        },
+        "com.amazonaws.medialive#HlsScte35SourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Hls Scte35 Source Type",
+                "smithy.api#enum": [
+                    {
+                        "value": "MANIFEST",
+                        "name": "MANIFEST"
+                    },
+                    {
+                        "value": "SEGMENTS",
+                        "name": "SEGMENTS"
+                    }
+                ]
             }
         },
         "com.amazonaws.medialive#HlsSegmentationMode": {
@@ -16340,7 +16402,7 @@
         "com.amazonaws.medialive#ReservationSpecialFeature": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Special features, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'",
+                "smithy.api#documentation": "Special features, 'ADVANCED_AUDIO' 'AUDIO_NORMALIZATION' 'MGHD' or 'MGUHD'",
                 "smithy.api#enum": [
                     {
                         "value": "ADVANCED_AUDIO",
@@ -16349,6 +16411,14 @@
                     {
                         "value": "AUDIO_NORMALIZATION",
                         "name": "AUDIO_NORMALIZATION"
+                    },
+                    {
+                        "value": "MGHD",
+                        "name": "MGHD"
+                    },
+                    {
+                        "value": "MGUHD",
+                        "name": "MGUHD"
                     }
                 ]
             }
@@ -16791,9 +16861,48 @@
                 "smithy.api#documentation": "Scte27 Destination Settings"
             }
         },
+        "com.amazonaws.medialive#Scte27OcrLanguage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Scte27 Ocr Language",
+                "smithy.api#enum": [
+                    {
+                        "value": "DEU",
+                        "name": "DEU"
+                    },
+                    {
+                        "value": "ENG",
+                        "name": "ENG"
+                    },
+                    {
+                        "value": "FRA",
+                        "name": "FRA"
+                    },
+                    {
+                        "value": "NLD",
+                        "name": "NLD"
+                    },
+                    {
+                        "value": "POR",
+                        "name": "POR"
+                    },
+                    {
+                        "value": "SPA",
+                        "name": "SPA"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.medialive#Scte27SourceSettings": {
             "type": "structure",
             "members": {
+                "OcrLanguage": {
+                    "target": "com.amazonaws.medialive#Scte27OcrLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "If you will configure a WebVTT caption description that references this caption selector, use this field to\nprovide the language to consider when translating the image-based source to text.",
+                        "smithy.api#jsonName": "ocrLanguage"
+                    }
+                },
                 "Pid": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {

@@ -189,6 +189,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AWS.SimpleQueueService.BatchEntryIdsNotDistinct",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Two or more batch entries in the request have the same <code>Id</code>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -198,6 +202,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AWS.SimpleQueueService.BatchRequestTooLong",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The length of all the messages put together is more than the limit.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -696,6 +704,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AWS.SimpleQueueService.EmptyBatchRequest",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The batch request doesn't contain any entries.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -824,6 +836,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AWS.SimpleQueueService.InvalidBatchEntryId",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The <code>Id</code> of a batch entry in a batch request doesn't abide by the specification.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1167,6 +1183,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AWS.SimpleQueueService.MessageNotInflight",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified message isn't in flight.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1284,6 +1304,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "OverLimit",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>The specified action violates a limit. For example, <code>ReceiveMessage</code>\n            returns this error if the maximum number of inflight messages is reached and\n                <code>AddPermission</code> returns this error if the maximum number of permissions\n            for the queue is reached.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -1310,6 +1334,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AWS.SimpleQueueService.PurgeQueueInProgress",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>Indicates that the specified queue previously received a <code>PurgeQueue</code> request within the last 60 seconds (the time it can take to delete the messages in the queue).</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -1436,6 +1464,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AWS.SimpleQueueService.QueueDeletedRecently",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You must wait 60 seconds after deleting a queue before you can create another queue\n            with the same name.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1445,6 +1477,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AWS.SimpleQueueService.NonExistentQueue",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified queue doesn't exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1454,6 +1490,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "QueueAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A queue with this name already exists. Amazon SQS returns this error only if the request\n            includes attributes whose values differ from those of the existing queue.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2017,6 +2057,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AWS.SimpleQueueService.TooManyEntriesInBatchRequest",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The batch request contains more entries than permissible.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2026,6 +2070,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AWS.SimpleQueueService.UnsupportedOperation",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Error code 400. Unsupported operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400

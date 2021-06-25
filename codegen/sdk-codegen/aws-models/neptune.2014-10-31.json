@@ -462,6 +462,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AuthorizationNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>Specified CIDRIP or EC2 security group is not authorized for the specified DB security group.</p>\n         <p>Neptune may not also be authorized via IAM to perform necessary actions on your behalf.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -519,6 +523,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CertificateNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>\n            <i>CertificateIdentifier</i> does not refer to an existing certificate.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -2086,6 +2094,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBClusterAlreadyExistsFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>User already has a DB cluster with the given identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2170,6 +2182,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBClusterEndpointAlreadyExistsFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified custom endpoint cannot be created because it already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2212,6 +2228,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBClusterEndpointNotFoundFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified custom endpoint doesn't exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2228,6 +2248,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBClusterEndpointQuotaExceededFault",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>The cluster already has the maximum number of custom endpoints.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -2311,6 +2335,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBClusterNotFoundFault",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>\n            <i>DBClusterIdentifier</i> does not refer to an existing DB cluster.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -2425,6 +2453,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBClusterParameterGroupNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>\n            <i>DBClusterParameterGroupName</i> does not refer to an\n      existing DB Cluster parameter group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -2458,6 +2490,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBClusterQuotaExceededFault",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>User attempted to create a new DB cluster and the user has already reached the maximum allowed DB cluster quota.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -2500,6 +2536,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBClusterRoleAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified IAM role Amazon Resource Name (ARN) is already associated with the specified DB cluster.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2516,6 +2556,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBClusterRoleNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified IAM role Amazon Resource Name (ARN) is not associated with the specified DB cluster.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -2532,6 +2576,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBClusterRoleQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You have exceeded the maximum number of IAM roles that can be associated with the specified DB cluster.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2685,6 +2733,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBClusterSnapshotAlreadyExistsFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>User already has a DB cluster snapshot with the given identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2776,6 +2828,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBClusterSnapshotNotFoundFault",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>\n            <i>DBClusterSnapshotIdentifier</i> does not refer to an existing\n      DB cluster snapshot.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -3225,6 +3281,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBInstanceAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>User already has a DB instance with the given identifier.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3267,6 +3327,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBInstanceNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>\n            <i>DBInstanceIdentifier</i> does not refer to an existing DB instance.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -3356,6 +3420,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBParameterGroupAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A DB parameter group with the same name exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3409,6 +3477,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBParameterGroupNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>\n            <i>DBParameterGroupName</i> does not refer to an\n      existing DB parameter group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -3425,6 +3497,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBParameterGroupQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Request would result in user exceeding the allowed number of DB parameter groups.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3525,6 +3601,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBSecurityGroupNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>\n            <i>DBSecurityGroupName</i> does not refer\n      to an existing DB security group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -3541,6 +3621,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBSnapshotAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>\n            <i>DBSnapshotIdentifier</i> is already used by an existing snapshot.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3557,6 +3641,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBSnapshotNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>\n            <i>DBSnapshotIdentifier</i> does not refer to an existing DB snapshot.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -3617,6 +3705,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBSubnetGroupAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>\n            <i>DBSubnetGroupName</i> is already used by an existing DB subnet group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3633,6 +3725,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBSubnetGroupDoesNotCoverEnoughAZs",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Subnets in the DB subnet group should cover at least two Availability\n      Zones unless there is only one Availability Zone.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3666,6 +3762,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBSubnetGroupNotFoundFault",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>\n            <i>DBSubnetGroupName</i> does not refer to an\n      existing DB subnet group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -3682,6 +3782,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBSubnetGroupQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Request would result in user exceeding the allowed number of DB subnet groups.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3707,6 +3811,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBSubnetQuotaExceededFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Request would result in user exceeding the allowed number of subnets in a DB subnet groups.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3723,6 +3831,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBUpgradeDependencyFailure",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The DB upgrade failed because a resource the DB depends on could not be modified.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5296,6 +5408,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DomainNotFoundFault",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>\n            <i>Domain</i> does not refer to an existing Active Directory Domain.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -5572,6 +5688,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EventSubscriptionQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You have exceeded the number of events you can subscribe to.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5722,6 +5842,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InstanceQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Request would result in user exceeding the allowed number of DB instances.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5738,6 +5862,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InsufficientDBClusterCapacityFault",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>The DB cluster does not have enough capacity for the current operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -5754,6 +5882,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InsufficientDBInstanceCapacity",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Specified DB instance class is not available in the specified Availability Zone.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5770,6 +5902,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InsufficientStorageClusterCapacity",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>There is insufficient storage available for the current action. You may\n       be able to resolve this error by updating your subnet group to use different\n       Availability Zones that have more storage available.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5795,6 +5931,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidDBClusterEndpointStateFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested operation cannot be performed on the endpoint while the endpoint is in this state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5811,6 +5951,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidDBClusterSnapshotStateFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The supplied value is not a valid DB cluster snapshot state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5827,6 +5971,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidDBClusterStateFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The DB cluster is not in a valid state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5843,6 +5991,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidDBInstanceState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified DB instance is not in the <i>available</i> state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5859,6 +6011,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidDBParameterGroupState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The DB parameter group is in use or is in an invalid state. If you are attempting to\n      delete the parameter group, you cannot delete it when the parameter group is in this state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5875,6 +6031,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidDBSecurityGroupState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The state of the DB security group does not allow deletion.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5891,6 +6051,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidDBSnapshotState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The state of the DB snapshot does not allow deletion.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5907,6 +6071,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidDBSubnetGroupStateFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The DB subnet group cannot be deleted because it is in use.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5923,6 +6091,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidDBSubnetStateFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The DB subnet is not in the <i>available</i> state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5939,6 +6111,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidEventSubscriptionState",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The event subscription is in an invalid state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5955,6 +6131,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidRestoreFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Cannot restore from vpc backup to non-vpc DB instance.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5971,6 +6151,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidSubnet",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested subnet is invalid, or multiple subnets were requested that are\n      not all in a common VPC.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -5987,6 +6171,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidVPCNetworkStateFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>DB subnet group does not cover all Availability Zones after it is created\n      because users' change.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -6003,6 +6191,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "KMSKeyNotAccessibleFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Error accessing KMS key.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -6962,6 +7154,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "OptionGroupNotFoundFault",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The designated option group could not be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -7440,6 +7636,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ProvisionedIopsNotAvailableInAZFault",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Provisioned IOPS not available in the specified Availability Zone.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -7783,6 +7983,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceNotFoundFault",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified resource ID was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -8169,6 +8373,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SNSInvalidTopic",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The SNS topic is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8185,6 +8393,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SNSNoAuthorization",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>There is no SNS authorization.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8201,6 +8413,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SNSTopicArnNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The ARN of the SNS topic could not be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -8217,6 +8433,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SharedSnapshotQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>You have exceeded the maximum number of accounts that you can share a manual DB snapshot with.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8233,6 +8453,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SnapshotQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Request would result in user exceeding the allowed number of DB snapshots.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8258,6 +8482,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SourceNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The source could not be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -8391,6 +8619,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "StorageQuotaExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Request would result in user exceeding the allowed amount of storage available across all DB instances.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8407,6 +8639,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "StorageTypeNotSupported",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>\n            <i>StorageType</i> specified cannot be associated with the DB Instance.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8458,6 +8694,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SubnetAlreadyInUse",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The DB subnet is already in use in the Availability Zone.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8492,6 +8732,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SubscriptionAlreadyExist",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This subscription already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -8508,6 +8752,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SubscriptionCategoryNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The designated subscription category could not be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -8524,6 +8772,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "SubscriptionNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The designated subscription could not be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404

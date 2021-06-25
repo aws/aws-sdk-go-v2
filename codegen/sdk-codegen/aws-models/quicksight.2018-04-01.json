@@ -1479,7 +1479,7 @@
                 "Permissions": {
                     "target": "com.amazonaws.quicksight#ResourcePermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains the permissions of the dashboard. You can use this structure\n            for granting permissions by providing a list of IAM action information for each\n            principal ARN. </p>\n      \n        <p>To specify no permissions, omit the permissions list.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains the permissions of the dashboard. You can use this structure\n            for granting permissions by providing a list of IAM action information for each\n            principal ARN. </p>\n\n        <p>To specify no permissions, omit the permissions list.</p>"
                     }
                 },
                 "SourceEntity": {
@@ -1877,6 +1877,236 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#CreateFolder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#CreateFolderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#CreateFolderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an empty shared folder.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/folders/{FolderId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateFolderMembership": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#CreateFolderMembershipRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#CreateFolderMembershipResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds an asset, such as a dashboard, analysis, or dataset into a folder.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/folders/{FolderId}/members/{MemberType}/{MemberId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateFolderMembershipRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset (the dashboard, analysis, or dataset).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberType": {
+                    "target": "com.amazonaws.quicksight#MemberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the member, including <code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateFolderMembershipResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the folder membership. If succeeded, the status is <code>SC_OK (200)</code>.</p>"
+                    }
+                },
+                "FolderMember": {
+                    "target": "com.amazonaws.quicksight#FolderMember",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the member in the folder.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateFolderRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#FolderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the folder.</p>"
+                    }
+                },
+                "FolderType": {
+                    "target": "com.amazonaws.quicksight#FolderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of folder. By default, <code>folderType</code> is <code>SHARED</code>.</p>"
+                    }
+                },
+                "ParentFolderArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the parent folder.</p>\n\t        <p>\n            <code>ParentFolderArn</code> can be null. An empty <code>parentFolderArn</code> creates a root-level folder.</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that describes the principals and the resource-level permissions of a folder.</p>\n\t        <p>To specify no permissions, omit <code>Permissions</code>.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.quicksight#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags for the folder.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateFolderResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the newly created folder. If succeeded, the status is <code>SC_OK (200)</code>.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the newly created folder.</p>"
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID for the newly created folder.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID for the newly created folder.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#CreateGroup": {
             "type": "operation",
             "input": {
@@ -2255,7 +2485,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates and starts a new SPICE ingestion on a dataset</p>\n\t\t    \n\t\t       <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in\n\t\t\taccess control. For an example, see <a href=\"http://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/\">How do I create an IAM policy to control access to Amazon EC2 resources using\n\t\t\t\ttags?</a> in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>",
+                "smithy.api#documentation": "<p>Creates and starts a new SPICE ingestion on a dataset</p>\n\t\t\n\t\t       <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in\n\t\t\taccess control. For an example, see <a href=\"http://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/\">How do I create an IAM policy to control access to Amazon EC2 resources using\n\t\t\t\ttags?</a> in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}/ingestions/{IngestionId}",
@@ -4714,6 +4944,191 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#DeleteFolder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteFolderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteFolderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an empty folder.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/folders/{FolderId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteFolderMembership": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteFolderMembershipRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteFolderMembershipResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes an asset, such as a dashboard, analysis, or dataset, from a folder.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/folders/{FolderId}/members/{MemberType}/{MemberId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteFolderMembershipRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Folder ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset (the dashboard, analysis, or dataset) that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberType": {
+                    "target": "com.amazonaws.quicksight#MemberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the member, including <code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code>\n         </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteFolderMembershipResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of deleting the asset. If succeeded, the status is <code>SC_OK (200)</code>.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteFolderRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Account ID for the folder.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteFolderResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of deleting the folder. If succeeded, the status is <code>SC_OK (200)</code>.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the deleted folder.</p>"
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#DeleteGroup": {
             "type": "operation",
             "input": {
@@ -6531,6 +6946,276 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#DescribeFolder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeFolderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeFolderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a folder.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/folders/{FolderId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeFolderPermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeFolderPermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeFolderPermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes permissions for a folder.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/folders/{FolderId}/permissions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeFolderPermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeFolderPermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the folder.</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the permissions on the folder.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeFolderRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeFolderResolvedPermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeFolderResolvedPermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeFolderResolvedPermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the folder resolved permissions. Permissions consists of both folder direct permissions and the inherited permissions from the ancestor folders.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/folders/{FolderId}/resolved-permissions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeFolderResolvedPermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeFolderResolvedPermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>\n         </p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN).</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the permissions on the dashboard.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeFolderResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK (200)</code>.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "Folder": {
+                    "target": "com.amazonaws.quicksight#Folder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the folder.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#DescribeGroup": {
             "type": "operation",
             "input": {
@@ -7818,6 +8503,56 @@
                 ]
             }
         },
+        "com.amazonaws.quicksight#Folder": {
+            "type": "structure",
+            "members": {
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder Amazon Resource Name (ARN).</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#FolderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A display name for the folder.</p>"
+                    }
+                },
+                "FolderType": {
+                    "target": "com.amazonaws.quicksight#FolderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the folder.</p>"
+                    }
+                },
+                "FolderPath": {
+                    "target": "com.amazonaws.quicksight#Path",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of ancestor folder ARN strings.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the folder was created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the folder was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A folder.</p>"
+            }
+        },
         "com.amazonaws.quicksight#FolderColumnList": {
             "type": "list",
             "member": {
@@ -7828,6 +8563,163 @@
                     "min": 0,
                     "max": 5000
                 }
+            }
+        },
+        "com.amazonaws.quicksight#FolderFilterAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PARENT_FOLDER_ARN",
+                        "name": "PARENT_FOLDER_ARN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.quicksight#FolderMember": {
+            "type": "structure",
+            "members": {
+                "MemberId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset.</p>"
+                    }
+                },
+                "MemberType": {
+                    "target": "com.amazonaws.quicksight#MemberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the asset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An asset in a folder, such as a dashboard, analysis, or dataset.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#FolderMemberList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#MemberIdArnPair"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.quicksight#FolderName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#FolderSearchFilter": {
+            "type": "structure",
+            "members": {
+                "Operator": {
+                    "target": "com.amazonaws.quicksight#FilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator that you want to use as a filter. For example, <code>\"Operator\": \"StringEquals\"</code>.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#FolderFilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the value that you want to use as a filter. For example, <code>\"Name\": \"PARENT_FOLDER_ARN\"</code>.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the named item (in this example, <code>PARENT_FOLDER_ARN</code>), that you want to use as a filter. For example, <code>\"Value\": \"arn:aws:quicksight:us-east-1:1:folder/folderId\"</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Searches a folder by a filter.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#FolderSearchFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#FolderSearchFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.quicksight#FolderSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN).</p>"
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#FolderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the folder.</p>"
+                    }
+                },
+                "FolderType": {
+                    "target": "com.amazonaws.quicksight#FolderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of folder.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the folder was created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the folder was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the folder. </p>"
+            }
+        },
+        "com.amazonaws.quicksight#FolderSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#FolderSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.quicksight#FolderType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SHARED",
+                        "name": "SHARED"
+                    }
+                ]
             }
         },
         "com.amazonaws.quicksight#GeoSpatialColumnGroup": {
@@ -9554,6 +10446,210 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListFolderMembers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListFolderMembersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListFolderMembersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all assets (<code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code>) in a folder. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/folders/{FolderId}/members",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListFolderMembersRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListFolderMembersResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>\n         </p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "FolderMemberList": {
+                    "target": "com.amazonaws.quicksight#FolderMemberList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains all of the folder members (dashboards, analyses, and datasets) in the folder.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListFolders": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListFoldersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListFoldersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all folders in an account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/folders",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListFoldersRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListFoldersResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>\n         </p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "FolderSummaryList": {
+                    "target": "com.amazonaws.quicksight#FolderSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains all of the folders in your AWS account. This structure provides basic information about the folders.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID.</p>"
                     }
                 }
             }
@@ -11324,6 +12420,45 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#MemberIdArnPair": {
+            "type": "structure",
+            "members": {
+                "MemberId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the member.</p>"
+                    }
+                },
+                "MemberArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the member.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that consists of the member Amazon Resource Name (ARN) and member ID.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#MemberType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DASHBOARD",
+                        "name": "DASHBOARD"
+                    },
+                    {
+                        "value": "ANALYSIS",
+                        "name": "ANALYSIS"
+                    },
+                    {
+                        "value": "DATASET",
+                        "name": "DATASET"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.quicksight#MySqlParameters": {
             "type": "structure",
             "members": {
@@ -11601,6 +12736,18 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#Path": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.quicksight#PhysicalTable": {
             "type": "union",
             "members": {
@@ -11867,6 +13014,12 @@
                     "target": "com.amazonaws.quicksight#CreateDataSource"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#CreateFolder"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#CreateFolderMembership"
+                },
+                {
                     "target": "com.amazonaws.quicksight#CreateGroup"
                 },
                 {
@@ -11907,6 +13060,12 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteDataSource"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DeleteFolder"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DeleteFolderMembership"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteGroup"
@@ -11969,6 +13128,15 @@
                     "target": "com.amazonaws.quicksight#DescribeDataSourcePermissions"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeFolder"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeFolderPermissions"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeFolderResolvedPermissions"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeGroup"
                 },
                 {
@@ -12021,6 +13189,12 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListDataSources"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ListFolderMembers"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ListFolders"
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListGroupMemberships"
@@ -12080,6 +13254,9 @@
                     "target": "com.amazonaws.quicksight#SearchDashboards"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#SearchFolders"
+                },
+                {
                     "target": "com.amazonaws.quicksight#TagResource"
                 },
                 {
@@ -12117,6 +13294,12 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateDataSourcePermissions"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateFolder"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateFolderPermissions"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateGroup"
@@ -12889,13 +14072,13 @@
                 "InputColumns": {
                     "target": "com.amazonaws.quicksight#InputColumnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A physical table type for as S3 data source.</p>",
+                        "smithy.api#documentation": "<p>A physical table type for an S3 data source.</p>\n        <note>\n            <p>For non-JSON files, only <code>STRING</code> data types are supported in input columns.</p>\n        </note>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A physical table type for as S3 data source.</p>"
+                "smithy.api#documentation": "<p>A physical table type for an S3 data source.</p>"
             }
         },
         "com.amazonaws.quicksight#SearchAnalyses": {
@@ -13104,6 +14287,109 @@
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The AWS request ID for this operation.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SearchFolders": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#SearchFoldersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#SearchFoldersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches the subfolders in a folder.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/search/folders",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SearchFoldersRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.quicksight#FolderSearchFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters to apply to the search. Currently, you can search only by the parent folder ARN. For example, <code>\"Filters\": [ { \"Name\": \"PARENT_FOLDER_ARN\", \"Operator\": \"StringEquals\", \"Value\": \"arn:aws:quicksight:us-east-1:1:folder/folderId\" } ]</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SearchFoldersResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "FolderSummaryList": {
+                    "target": "com.amazonaws.quicksight#FolderSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains all of the folders in your AWS account. This structure provides basic information about the folders.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID.</p>"
                     }
                 }
             }
@@ -15894,6 +17180,215 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateFolder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateFolderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateFolderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the name of a folder.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/folders/{FolderId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateFolderPermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateFolderPermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateFolderPermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates permissions of a folder.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/folders/{FolderId}/permissions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateFolderPermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "GrantPermissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permissions that you want to grant on a resource.</p>"
+                    }
+                },
+                "RevokePermissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permissions that you want to revoke from a resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateFolderPermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN).</p>"
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the permissions on the dashboard.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateFolderRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#FolderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the folder.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateFolderResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN).</p>"
+                    }
+                },
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder ID.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID.</p>"
                     }
                 }
             }

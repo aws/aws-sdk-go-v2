@@ -317,6 +317,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A value that indicates whether the statement has a result set. The result set can be empty. </p>"
                     }
+                },
+                "QueryParameters": {
+                    "target": "com.amazonaws.redshiftdata#SqlParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for the SQL statement.</p>"
+                    }
                 }
             }
         },
@@ -523,6 +529,12 @@
                     "target": "com.amazonaws.redshiftdata#StatementNameString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the SQL statement. You can name the SQL statement when you create it to identify the query. </p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.redshiftdata#SqlParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for the SQL statement.</p>"
                     }
                 }
             }
@@ -1109,6 +1121,20 @@
                 }
             }
         },
+        "com.amazonaws.redshiftdata#ParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9a-zA-Z_]+$"
+            }
+        },
+        "com.amazonaws.redshiftdata#ParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.redshiftdata#RedshiftData": {
             "type": "service",
             "version": "2019-12-20",
@@ -1191,6 +1217,39 @@
         "com.amazonaws.redshiftdata#SecretArn": {
             "type": "string"
         },
+        "com.amazonaws.redshiftdata#SqlParameter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.redshiftdata#ParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.redshiftdata#ParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the parameter. \n    Amazon Redshift implicitly converts to the proper data type. For more inforation, see \n      <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/c_Supported_data_types.html\">Data types</a> in the \n      <i>Amazon Redshift Database Developer Guide</i>. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A parameter used in a SQL statement.</p>"
+            }
+        },
+        "com.amazonaws.redshiftdata#SqlParametersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftdata#SqlParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.redshiftdata#SqlRecords": {
             "type": "list",
             "member": {
@@ -1241,6 +1300,12 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time (UTC) that the statement metadata was last updated.</p>"
+                    }
+                },
+                "QueryParameters": {
+                    "target": "com.amazonaws.redshiftdata#SqlParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters used in a SQL statement.</p>"
                     }
                 }
             },
